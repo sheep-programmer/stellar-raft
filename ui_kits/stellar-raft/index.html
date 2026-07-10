@@ -1,0 +1,72 @@
+<!-- @dsCard group="Stellar Raft" viewport="1440x900" name="星图 App" subtitle="Interactive click-through: star map · list · editor · Feynman · ignite" -->
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>星图 · Stellar Raft</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../../styles.css?v=63">
+  <style>
+    html, body { margin: 0; height: 100%; background: var(--space-void); transition: background var(--dur-base); }
+    #root { width: 100vw; height: 100vh; font-family: var(--font-sans); }
+    .sr-stage { width: 100%; height: 100%; background: var(--bg-deepspace); }
+    ::-webkit-scrollbar { width: 9px; height: 9px; }
+    ::-webkit-scrollbar-thumb { background: rgba(159,198,255,0.16); border-radius: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    * { scrollbar-width: thin; scrollbar-color: rgba(159,198,255,0.16) transparent; }
+    [contenteditable]:empty:before { content: attr(data-ph); color: var(--text-3); pointer-events: none; }
+    [contenteditable] { caret-color: var(--star-blue); }
+    /* 设置页「动效」开关的落点：关闭动效收敛所有动画，关闭闪烁隐藏背景星场 */
+    html[data-motion="off"] *, html[data-motion="off"] *::before, html[data-motion="off"] *::after {
+      animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important;
+    }
+    html[data-twinkle="off"] sr-starfield { display: none; }
+  </style>
+</head>
+<body>
+  <div id="root" class="sr-stage"></div>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+  <script src="../../assets/starfield.js?v=6"></script>
+  <script src="codehl.js"></script>
+  <!-- The compiled bundle ships a self-rendering snapshot of this app and mounts it into
+       #root before its own design-system namespace is exported, so that built-in copy can
+       never render correctly. Swallow that first root; only the live source below mounts. -->
+  <script>
+    (function () {
+      var real = ReactDOM.createRoot, first = true;
+      ReactDOM.createRoot = function (c) {
+        if (first) { first = false; return { render: function () {}, unmount: function () {} }; }
+        ReactDOM.createRoot = real;
+        return real.call(ReactDOM, c);
+      };
+    })();
+  </script>
+  <script src="../../_ds_bundle.js"></script>
+  <script src="api.js?v=67"></script>
+  <script src="tip.js?v=3"></script>
+  <script src="data.js?v=69"></script>
+  <script type="text/babel" src="Sidebar.jsx?v=68"></script>
+  <script type="text/babel" src="StarMap.jsx?v=65"></script>
+  <script type="text/babel" src="AerialView.jsx?v=74"></script>
+  <script type="text/babel" src="FeynmanDrawer.jsx?v=65"></script>
+  <script type="text/babel" src="ListView.jsx?v=65"></script>
+  <script type="text/babel" src="EditorMenus.jsx?v=67"></script>
+  <script type="text/babel" src="Editor.jsx?v=68"></script>
+  <script type="text/babel" src="Inbox.jsx?v=65"></script>
+  <script type="text/babel" src="BlackHole.jsx?v=66"></script>
+  <script type="text/babel" src="VisitView.jsx?v=77"></script>
+  <script type="text/babel" src="Timeline.jsx?v=66"></script>
+  <script type="text/babel" src="CommandPalette.jsx?v=66"></script>
+  <script type="text/babel" src="Checkup.jsx?v=65"></script>
+  <script type="text/babel" src="Galaxy3D.jsx?v=68"></script>
+  <script type="text/babel" src="Settings.jsx?v=66"></script>
+  <script type="text/babel" src="AIConfig.jsx?v=65"></script>
+  <script type="text/babel" src="app.jsx?v=67"></script>
+</body>
+</html>

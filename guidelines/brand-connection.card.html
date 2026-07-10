@@ -1,0 +1,33 @@
+<!-- @dsCard group="Brand" viewport="700x220" name="Connection Spec" subtitle="Organic curves, never arrows · blue intra · gold 融会贯通" -->
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../styles.css">
+<style>
+  body{margin:0;font-family:var(--font-sans);background:var(--bg-deepspace);padding:0;}
+  svg{display:block;width:100%;height:220px;}
+  .lab{font-family:var(--font-mono);font-size:11px;fill:var(--text-3);}
+  .flow{stroke-dasharray:3 7;animation:sr-flow 1.6s linear infinite;}
+  @keyframes sr-flow{to{stroke-dashoffset:-20}}
+</style></head>
+<body>
+  <svg viewBox="0 0 700 220">
+    <defs>
+      <linearGradient id="blue" x1="0" x2="1"><stop offset="0" stop-color="#56689c"/><stop offset="1" stop-color="#9fc6ff"/></linearGradient>
+      <linearGradient id="gold" x1="0" x2="1"><stop offset="0" stop-color="#9fc6ff"/><stop offset="1" stop-color="#ffd98a"/></linearGradient>
+      <filter id="g"><feGaussianBlur stdDeviation="2.5"/></filter>
+    </defs>
+    <!-- intra-constellation blue -->
+    <path d="M70,70 C170,30 250,110 360,70" fill="none" stroke="url(#blue)" stroke-width="2.4" opacity=".55" filter="url(#g)"/>
+    <path d="M70,70 C170,30 250,110 360,70" fill="none" stroke="url(#blue)" stroke-width="1.4"/>
+    <path class="flow" d="M70,70 C170,30 250,110 360,70" fill="none" stroke="#cfe0ff" stroke-width="1.6"/>
+    <circle cx="70" cy="70" r="5" fill="#9fc6ff" filter="url(#g)"/><circle cx="70" cy="70" r="3" fill="#cfe0ff"/>
+    <circle cx="360" cy="70" r="5" fill="#9fc6ff" filter="url(#g)"/><circle cx="360" cy="70" r="3" fill="#cfe0ff"/>
+    <text class="lab" x="70" y="100">星座内连接 · star-blue</text>
+
+    <!-- cross-constellation gold -->
+    <path d="M70,165 C200,135 240,205 630,150" fill="none" stroke="url(#gold)" stroke-width="3" opacity=".6" filter="url(#g)"/>
+    <path d="M70,165 C200,135 240,205 630,150" fill="none" stroke="url(#gold)" stroke-width="1.6"/>
+    <path class="flow" d="M70,165 C200,135 240,205 630,150" fill="none" stroke="#fff4d6" stroke-width="1.8"/>
+    <circle cx="70" cy="165" r="5" fill="#9fc6ff" filter="url(#g)"/><circle cx="70" cy="165" r="3" fill="#cfe0ff"/>
+    <circle cx="630" cy="150" r="6" fill="#ffd98a" filter="url(#g)"/><circle cx="630" cy="150" r="3.5" fill="#fff4d6"/>
+    <text class="lab" x="70" y="195" fill="#ffd98a">跨星座「融会贯通」· gold</text>
+  </svg>
+</body></html>

@@ -1,0 +1,47 @@
+/* ===== 星图 Stellar Raft — Typography =====
+   CJK: modern sans (Noto Sans SC ≈ Source Han Sans / PingFang fallback).
+   Latin/display: Sora — clean geometric, dark-stage friendly.
+   HUD numbers & code: JetBrains Mono — tabular precision.
+   Weights stay restrained: titles thin→medium, never heavy. */
+
+:root {
+  /* ---- Families ---- */
+  --font-sans: "Sora", "Noto Sans SC", -apple-system, "PingFang SC",
+               "Microsoft YaHei", system-ui, sans-serif;
+  --font-cjk:  "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-mono: "JetBrains Mono", "SFMono-Regular", "Roboto Mono", monospace;
+
+  /* ---- Weights (restrained) ---- */
+  --w-thin:    200; /* @kind font */
+  --w-light:   300; /* @kind font */
+  --w-regular: 400; /* @kind font */
+  --w-medium:  500; /* @kind font */
+  --w-semi:    600; /* @kind font */
+
+  /* ---- Type scale (desktop, 1440 canvas) ---- */
+  --t-display:  44px; /* hero / light-up moment */
+  --t-h1:       30px; /* editor big title */
+  --t-h2:       23px; /* section / constellation name */
+  --t-h3:       18px;
+  --t-body-lg:  17px; /* editor reading body */
+  --t-body:     15px; /* UI default */
+  --t-sm:       13px; /* meta, captions */
+  --t-xs:       11px; /* HUD labels, badges */
+
+  /* ---- Line heights ---- */
+  --lh-tight:  1.15; /* @kind font */
+  --lh-snug:   1.35; /* @kind font */
+  --lh-body:   1.55; /* @kind font */
+  --lh-loose:  1.8;  /* @kind font */
+
+  /* ---- Letter spacing ---- */
+  --ls-tight:  -0.02em; /* @kind font */
+  --ls-normal: 0; /* @kind font */
+  --ls-wide:   0.04em; /* @kind font */
+  --ls-hud:    0.14em; /* @kind font */
+
+  /* ---- Semantic roles ---- */
+  --text-display-weight: var(--w-thin); /* @kind font */
+  --text-title-weight:   var(--w-light); /* @kind font */
+  --text-body-weight:    var(--w-regular); /* @kind font */
+}

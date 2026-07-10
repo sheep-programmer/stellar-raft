@@ -1,0 +1,72 @@
+/* ===== 星图 Stellar Raft — Color System =====
+   The only light source in this universe is knowledge.
+   Hue budget: deep-space blue/black · star-blue · warm gold. Nothing else.
+   Every color is semantic: brightness = memory strength, gold = reward. */
+
+:root {
+  /* ---- Deep space backdrop (pure black-blue → midnight) ---- */
+  --space-void:   #03040c; /* deepest, the empty sky */
+  --space-0:      #05060f;
+  --space-1:      #080a18;
+  --space-2:      #0b0e22; /* midnight deep blue */
+  --space-3:      #11152e; /* raised surfaces in space */
+  --space-4:      #181d3c; /* hover lift on dark surfaces */
+  --nebula:       #1a2350; /* faint nebula glow, used very low-opacity */
+
+  /* ---- Star blue — cold auxiliary: connections, strokes, default icons ---- */
+  --star-blue:    #9fc6ff;
+  --star-blue-dim:#7896cd; /* a cooling, dimming star (low memory) */
+  --star-blue-deep:#56689c;
+
+  /* ---- Warm gold — reward, ignition, mastery, active icons ---- */
+  --gold:         #ffd98a;
+  --gold-warm:    #ffb86b; /* the deeper end of ignition */
+  --gold-white:   #fff4d6; /* a fully-lit star core */
+
+  /* ---- Memory-strength temperature ramp (low → high) ----
+     Drives every knowledge star. Cold & dim when forgotten,
+     warm & bright when mastered. */
+  --mem-dead:     #2c3556; /* extinguished, nearly invisible */
+  --mem-faint:    #46527a; /* about to extinguish */
+  --mem-low:      #7896cd; /* dimming */
+  --mem-mid:      #9fc6ff; /* normal */
+  --mem-high:     #ffe096; /* strong */
+  --mem-full:     #fff4d6; /* mastered, blazing */
+
+  /* ---- Text on dark ---- */
+  --text-1: rgba(255, 255, 255, 0.93); /* primary */
+  --text-2: rgba(208, 220, 255, 0.66); /* secondary */
+  --text-3: rgba(159, 198, 255, 0.40); /* tertiary / meta */
+  --text-disabled: rgba(159, 198, 255, 0.22);
+  --text-on-gold: #1a1204; /* dark ink on a gold button */
+
+  /* ---- Glassmorphism (semi-transparent deep blue + blur + 1px stroke) ---- */
+  --glass-bg:        rgba(14, 19, 44, 0.55);
+  --glass-bg-strong: rgba(11, 14, 34, 0.78);
+  --glass-bg-faint:  rgba(20, 27, 60, 0.32);
+  --glass-border:    rgba(159, 198, 255, 0.14);
+  --glass-border-strong: rgba(159, 198, 255, 0.24);
+  --glass-blur: 14px;
+
+  /* ---- Hairlines & dividers ---- */
+  --line:        rgba(159, 198, 255, 0.10);
+  --line-strong: rgba(159, 198, 255, 0.18);
+
+  /* ---- Semantic state hues (kept within the cold/gold budget) ---- */
+  --ignite:  var(--gold);          /* light-up / success */
+  --fading:  var(--star-blue-dim); /* dimming / needs review */
+  --danger:  #e8917a;              /* rare destructive — warm, low-sat */
+
+  /* ---- Focus ring ---- */
+  --focus: rgba(159, 198, 255, 0.55);
+
+  /* ---- Inline control surfaces (inputs / segmented controls on glass) ---- */
+  --input-bg: rgba(3, 4, 12, 0.45);
+
+  /* ---- Star-map accents: domain sun label ink + connection flow dashes ---- */
+  --sun-label:     #ffe3b0;
+  --sun-label-dim: rgba(255, 200, 140, 0.62);
+  --sun-label-glow: 0 0 12px rgba(255, 150, 70, 0.55), 0 1px 8px rgba(0, 0, 0, 0.85);
+  --flow-dash-blue: #cfe0ff;
+  --flow-dash-gold: #fff4d6;
+}

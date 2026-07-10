@@ -1,0 +1,16 @@
+<!-- @dsCard group="Colors" viewport="700x140" name="Text on Dark" subtitle="Three legibility tiers + gold ink for buttons" -->
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../styles.css">
+<style>
+  body{margin:0;font-family:var(--font-sans);background:var(--bg-deepspace);padding:22px;}
+  .stack{display:flex;flex-direction:column;gap:10px;}
+  .line{display:flex;align-items:baseline;gap:14px;}
+  .tag{font-family:var(--font-mono);font-size:10px;color:var(--text-3);width:120px;}
+</style></head>
+<body>
+  <div class="stack">
+    <div class="line"><span class="tag">--text-1 · 93%</span><span style="color:var(--text-1);font-size:18px">主要文字 Primary — 标题与正文</span></div>
+    <div class="line"><span class="tag">--text-2 · 66%</span><span style="color:var(--text-2);font-size:15px">次要文字 Secondary — meta、说明</span></div>
+    <div class="line"><span class="tag">--text-3 · 40%</span><span style="color:var(--text-3);font-size:13px">三级文字 Tertiary — HUD 标签、提示</span></div>
+    <div class="line"><span class="tag">on-gold</span><span style="background:var(--gold);color:var(--text-on-gold);font-size:13px;padding:4px 12px;border-radius:var(--r-pill);font-weight:600">点亮这颗星</span></div>
+  </div>
+</body></html>

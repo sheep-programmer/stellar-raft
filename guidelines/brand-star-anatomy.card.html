@@ -1,0 +1,20 @@
+<!-- @dsCard group="Brand" viewport="700x230" name="Star Anatomy" subtitle="Core + glow + breathing — brightness encodes memory" -->
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../styles.css">
+<style>
+  body{margin:0;font-family:var(--font-sans);background:var(--bg-deepspace);overflow:hidden;}
+  .wrap{position:relative;height:230px;display:flex;align-items:center;justify-content:space-around;}
+  .cell{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:18px;}
+  .star{width:24px;height:24px;border-radius:50%;}
+  .lab{font-family:var(--font-mono);font-size:10px;color:var(--text-3);text-align:center;line-height:1.5;}
+  .big{width:40px;height:40px;}
+</style></head>
+<body>
+  <div class="wrap">
+    <sr-starfield density="1.1"></sr-starfield>
+    <div class="cell"><div class="star" style="background:var(--mem-faint)"></div><div class="lab">将熄灭<br>dim · cold</div></div>
+    <div class="cell"><div class="star sr-breathe" style="background:var(--mem-mid);box-shadow:var(--glow-blue)"></div><div class="lab">正常<br>star-blue · breathing</div></div>
+    <div class="cell"><div class="star big sr-breathe" style="background:var(--mem-high);box-shadow:var(--glow-gold)"></div><div class="lab">牢固 · 重要<br>large · warm · glow</div></div>
+    <div class="cell"><div class="star big" style="background:radial-gradient(circle at 38% 35%,#fff,var(--gold-white) 40%,var(--gold) 75%);box-shadow:var(--glow-gold)"></div><div class="lab">融会贯通<br>mastered core</div></div>
+  </div>
+  <script src="../assets/starfield.js"></script>
+</body></html>

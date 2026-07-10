@@ -1,0 +1,60 @@
+<!-- @dsCard group="Components" viewport="700x420" name="Core" subtitle="Buttons · icons · inputs · badges · tags on glass" -->
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../styles.css">
+<style>
+  body{margin:0;font-family:var(--font-sans);background:var(--bg-deepspace);padding:26px;}
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;background-image:
+    radial-gradient(1px 1px at 15% 20%,rgba(159,198,255,.6),transparent),
+    radial-gradient(1px 1px at 78% 44%,rgba(255,217,138,.5),transparent),
+    radial-gradient(1.4px 1.4px at 50% 75%,rgba(255,255,255,.6),transparent);}
+  .wrap{position:relative;display:flex;flex-direction:column;gap:20px;}
+  .row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+  .label{font-family:var(--font-mono);font-size:10px;letter-spacing:var(--ls-hud);text-transform:uppercase;color:var(--text-3);width:100%;margin-bottom:-6px;}
+</style></head>
+<body>
+  <div class="wrap" id="root"></div>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="../../_ds_bundle.js"></script>
+  <script type="text/babel">
+    const { Button, IconButton, Input, Badge, Tag, GlassPanel } = window.StellarRaftDesignSystem_2866af;
+    function Demo(){
+      return (
+        <React.Fragment>
+          <div className="label">Buttons</div>
+          <div className="row">
+            <Button variant="primary" icon="zap" glow>点亮这颗星</Button>
+            <Button icon="plus">新建星</Button>
+            <Button variant="ghost">取消</Button>
+            <Button variant="primary" disabled>已点亮</Button>
+          </div>
+          <div className="label">Icon buttons · star-blue → gold</div>
+          <div className="row">
+            <IconButton name="satellite" title="鸟瞰" />
+            <IconButton name="hourglass" title="模拟遗忘" />
+            <IconButton name="rotate-ccw" title="复位" />
+            <IconButton name="list" active title="列表视图" />
+            <IconButton name="search" title="搜索" />
+            <IconButton name="link" title="连接" />
+          </div>
+          <div className="label">Input</div>
+          <div className="row">
+            <div style={{width:300}}><Input icon="search" placeholder="搜索你的星空…" kbd="⌘K" /></div>
+          </div>
+          <div className="label">Badges · Tags</div>
+          <div className="row">
+            <Badge tone="gold">12</Badge>
+            <Badge tone="blue">5</Badge>
+            <Badge tone="fading">正变暗</Badge>
+            <span style={{display:'inline-flex',alignItems:'center',gap:6,color:'var(--text-3)',fontSize:12}}><Badge dot tone="gold"/>未读</span>
+            <Tag icon="hash">量子力学</Tag>
+            <Tag dot="var(--gold)" active>线性代数</Tag>
+            <Tag removable>待复习</Tag>
+          </div>
+        </React.Fragment>
+      );
+    }
+    ReactDOM.createRoot(document.getElementById('root')).render(<Demo/>);
+  </script>
+</body></html>

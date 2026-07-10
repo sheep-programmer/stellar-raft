@@ -1,0 +1,32 @@
+<!-- @dsCard group="Colors" viewport="700x150" name="Star Blue & Warm Gold" subtitle="Cold structure vs. warm reward — the only two accents" -->
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../styles.css">
+<style>
+  body{margin:0;font-family:var(--font-sans);background:var(--bg-deepspace);padding:20px;}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .group{}
+  .gl{color:var(--text-3);font-size:10px;letter-spacing:var(--ls-hud);text-transform:uppercase;margin-bottom:8px;}
+  .row{display:flex;gap:8px;}
+  .sw{flex:1;height:74px;border-radius:var(--r-md);border:1px solid var(--line);display:flex;flex-direction:column;justify-content:flex-end;padding:8px;box-sizing:border-box;}
+  .name{font-size:11px;font-weight:500;color:#0b0e22;}
+  .hex{font-size:10px;font-family:var(--font-mono);color:rgba(11,14,34,.6);}
+</style></head>
+<body>
+  <div class="grid">
+    <div class="group">
+      <div class="gl">Star Blue · 冷</div>
+      <div class="row">
+        <div class="sw" style="background:var(--star-blue-deep)"><div class="name" style="color:#fff">deep</div><div class="hex" style="color:rgba(255,255,255,.6)">#56689c</div></div>
+        <div class="sw" style="background:var(--star-blue-dim)"><div class="name">dim</div><div class="hex">#7896cd</div></div>
+        <div class="sw" style="background:var(--star-blue);box-shadow:var(--glow-blue)"><div class="name">blue</div><div class="hex">#9fc6ff</div></div>
+      </div>
+    </div>
+    <div class="group">
+      <div class="gl">Warm Gold · 暖</div>
+      <div class="row">
+        <div class="sw" style="background:var(--gold-warm)"><div class="name">warm</div><div class="hex">#ffb86b</div></div>
+        <div class="sw" style="background:var(--gold);box-shadow:var(--glow-gold)"><div class="name">gold</div><div class="hex">#ffd98a</div></div>
+        <div class="sw" style="background:var(--gold-white)"><div class="name">white</div><div class="hex">#fff4d6</div></div>
+      </div>
+    </div>
+  </div>
+</body></html>

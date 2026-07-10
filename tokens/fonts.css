@@ -1,0 +1,10 @@
+/* ===== 星图 Stellar Raft — Webfonts =====
+   Substituted from Google Fonts (see readme — pending real brand fonts):
+   · Sora        → Latin / display, geometric, dark-stage friendly
+   · Noto Sans SC→ Chinese, ≈ Source Han Sans / PingFang fallback
+   · JetBrains Mono → HUD numbers & code blocks
+   Shipped to consumers via these @import targets. */
+
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@200;300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');

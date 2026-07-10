@@ -1,0 +1,96 @@
+/* ===== 星图 Stellar Raft — Themes =====
+   The brand is dark-first (deep space). This adds an opt-in lighter theme.
+   Apply by setting   document.documentElement.dataset.theme = 'dawn'
+   ( <html data-theme="dawn"> ). All tokens below override the :root defaults.
+
+   黎明 Dawn — the sky a few minutes before sunrise: pale cool surfaces washed
+   with the faintest warm horizon, deep-navy ink. Same semantics (gold = reward,
+   star-blue = structure), tuned so glows give way to soft shadows and the dim
+   end of the memory ramp darkens enough to stay legible on a light field.
+   Surfaces stay off-white and low-saturation so the sky is calm, never glaring;
+   ink runs deep navy so text holds a clear three-step contrast. */
+
+:root[data-theme="dawn"] {
+  /* ---- Surfaces — soft cool dawn light, never pure white, never high-sat ----
+     Like the dark scale, low index = the open sky behind everything, high index
+     = a raised, slightly brighter sheet. Kept in a narrow, gentle range so the
+     stage reads as calm twilight rather than a glaring office page. */
+  --space-void: #dfe4ee; /* the open dawn sky behind everything */
+  --space-0:    #e4e8f0;
+  --space-1:    #eaedf3;
+  --space-2:    #eff2f7; /* card / panel base */
+  --space-3:    #f6f8fb; /* highest surface (a hair off white) */
+  --space-4:    #e7ebf3; /* hover lift */
+  --nebula:     #ccd6e8; /* faint horizon haze, used very low-opacity */
+
+  /* ---- Star blue — cold structure, deepened so it carries on light ---- */
+  --star-blue:     #3a62c0; /* UI strokes / default icons */
+  --star-blue-dim: #6a7fad; /* a cooling, dimming star (low memory) */
+  --star-blue-deep:#284795;
+
+  /* ---- Warm gold — reward / ignition / mastery, deep amber to read on light ---- */
+  --gold:       #b07d1c; /* deep amber — strong on a pale field */
+  --gold-warm:  #9c6a12; /* the deeper end of ignition */
+  --gold-white: #c79a39; /* a fully-lit star core, still saturated */
+
+  /* ---- Memory ramp: dim end darkened so forgetting stars stay visible ---- */
+  --mem-dead:  #6c799b; /* extinguished — faint, low contrast on purpose */
+  --mem-faint: #5c6c96;
+  --mem-low:   #4c6094; /* dimming */
+  --mem-mid:   #3a62c0; /* normal — star blue */
+  --mem-high:  #c0892a; /* strong */
+  --mem-full:  #9c6a12; /* mastered, blazing deep gold */
+
+  /* ---- Ink — deep navy, three clear steps of contrast on the pale field ---- */
+  --text-1: rgba(18, 26, 50, 0.95); /* primary */
+  --text-2: rgba(28, 39, 70, 0.74); /* secondary */
+  --text-3: rgba(40, 54, 92, 0.58); /* tertiary / meta */
+  --text-disabled: rgba(40, 54, 92, 0.34);
+  --text-on-gold: #fff6e6; /* light cream ink on deep-amber buttons */
+
+  /* ---- Glass — light and a touch opaque so text always wins over the canvas ---- */
+  --glass-bg:        rgba(244, 247, 251, 0.72);
+  --glass-bg-strong: rgba(248, 250, 253, 0.86);
+  --glass-bg-faint:  rgba(240, 244, 250, 0.50);
+  --glass-border:        rgba(40, 60, 110, 0.16);
+  --glass-border-strong: rgba(40, 60, 110, 0.28);
+
+  /* ---- Hairlines & dividers ---- */
+  --line:        rgba(40, 60, 110, 0.12);
+  --line-strong: rgba(40, 60, 110, 0.20);
+
+  --fading: var(--star-blue-dim);
+  --focus:  rgba(58, 98, 192, 0.50);
+
+  /* ---- Inline control surfaces: light, slightly opaque on dawn glass ---- */
+  --input-bg: rgba(255, 255, 255, 0.72);
+
+  /* ---- Star-map accents: deep amber ink + darkened flow dashes on light ---- */
+  --sun-label:     #7a4c10;
+  --sun-label-dim: rgba(122, 76, 16, 0.72);
+  --sun-label-glow: 0 1px 3px rgba(255, 255, 255, 0.92);
+  --flow-dash-blue: #35569c;
+  --flow-dash-gold: #8a5c12;
+
+  /* ---- Effects: glows shrink to a faint warmth, shadows carry elevation ---- */
+  --glow-blue:      0 0 14px rgba(58, 98, 192, 0.18);
+  --glow-gold:      0 0 16px rgba(176, 125, 28, 0.30);
+  --glow-gold-soft: 0 0 10px rgba(176, 125, 28, 0.18);
+  --glow-faint:     0 0 8px  rgba(106, 127, 173, 0.16);
+  --text-glow-cool: none;
+  --text-glow-warm: none;
+
+  /* ---- Shadows — soft, cool-tinted, low so panels float without bruising ---- */
+  --shadow-sm: 0 2px 8px  rgba(42, 58, 104, 0.08);
+  --shadow-md: 0 8px 28px rgba(42, 58, 104, 0.12);
+  --shadow-lg: 0 24px 64px rgba(42, 58, 104, 0.16);
+  --shadow-drawer: -20px 0 56px rgba(42, 58, 104, 0.16);
+  --inset-edge: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  --star-label-shadow: 0 1px 3px rgba(255, 255, 255, 0.92);
+
+  /* ---- The dawn backdrop: calm pale sky, the faintest warm horizon ---- */
+  --bg-deepspace:
+    radial-gradient(1200px 820px at 80% -14%, rgba(232, 214, 186, 0.30), transparent 62%),
+    radial-gradient(900px 720px at 10% 114%, rgba(186, 200, 228, 0.44), transparent 60%),
+    linear-gradient(180deg, #eaeef5 0%, #e3e8f1 56%, #e6ebf3 100%);
+}

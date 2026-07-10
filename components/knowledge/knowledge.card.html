@@ -1,0 +1,45 @@
+<!-- @dsCard group="Components" viewport="700x340" name="Knowledge" subtitle="Stars · memory bars · constellation rows" -->
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../styles.css">
+<style>
+  body{margin:0;font-family:var(--font-sans);background:var(--bg-deepspace);padding:26px;}
+  .wrap{position:relative;display:flex;gap:28px;align-items:stretch;}
+  .col{display:flex;flex-direction:column;gap:14px;}
+  .label{font-family:var(--font-mono);font-size:10px;letter-spacing:var(--ls-hud);text-transform:uppercase;color:var(--text-3);}
+  .stars{position:relative;flex:1;min-height:280px;border-radius:var(--r-lg);border:1px solid var(--glass-border);overflow:hidden;background:radial-gradient(120% 100% at 60% 30%,rgba(26,35,80,.4),transparent 60%);}
+</style></head>
+<body>
+  <div class="wrap" id="root"></div>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="../../assets/starfield.js"></script>
+  <script src="../../_ds_bundle.js"></script>
+  <script type="text/babel">
+    const { StarNode, MemoryBar, ConstellationItem } = window.StellarRaftDesignSystem_2866af;
+    function Demo(){
+      return (
+        <React.Fragment>
+          <div className="stars">
+            <sr-starfield density="1.2"></sr-starfield>
+            <StarNode strength={0.95} importance={1.5} label="贝尔不等式" selected style={{left:'34%',top:'40%'}}/>
+            <StarNode strength={0.62} importance={1.0} label="纠缠态" style={{left:'66%',top:'30%'}}/>
+            <StarNode strength={0.3} importance={0.8} label="退相干" style={{left:'58%',top:'70%'}}/>
+            <StarNode strength={0.12} importance={0.7} style={{left:'24%',top:'74%'}}/>
+          </div>
+          <div className="col" style={{width:240}}>
+            <div className="label">Memory bars</div>
+            <MemoryBar value={0.92} label="融会贯通" showPct/>
+            <MemoryBar value={0.58} label="正常" showPct/>
+            <MemoryBar value={0.26} label="正变暗" showPct fading/>
+            <div className="label" style={{marginTop:8}}>我的星座</div>
+            <ConstellationItem name="量子力学" color="var(--gold)" count={48} active/>
+            <ConstellationItem name="线性代数" color="var(--star-blue)" count={31}/>
+            <ConstellationItem name="数据结构" color="var(--star-blue-dim)" count={12}/>
+          </div>
+        </React.Fragment>
+      );
+    }
+    ReactDOM.createRoot(document.getElementById('root')).render(<Demo/>);
+  </script>
+</body></html>

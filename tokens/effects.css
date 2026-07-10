@@ -1,0 +1,93 @@
+/* ===== 星图 Stellar Raft — Effects =====
+   Glow, glass, shadows, motion. In deep space, light bleeds.
+   Everything here is reusable as var() or utility class. */
+
+:root {
+  /* ---- Star glow (radial bleed around a light source) ----
+     Use as box-shadow on a star, or layered radial-gradients. */
+  --glow-blue:  0 0 24px rgba(159, 198, 255, 0.45), 0 0 8px rgba(159, 198, 255, 0.65);
+  --glow-gold:  0 0 28px rgba(255, 217, 138, 0.55), 0 0 10px rgba(255, 217, 138, 0.8);
+  --glow-gold-soft: 0 0 18px rgba(255, 217, 138, 0.30);
+  --glow-faint: 0 0 12px rgba(120, 150, 205, 0.25);
+
+  /* ---- Text glow (titles, logo — faint, never neon) ---- */
+  --text-glow-cool: 0 0 14px rgba(159, 198, 255, 0.30);
+  --text-glow-warm: 0 0 16px rgba(255, 217, 138, 0.35);
+
+  /* ---- Elevation shadows (deep, soft — cards float in void) ---- */
+  --shadow-sm:  0 2px 10px rgba(0, 0, 0, 0.45);
+  --shadow-md:  0 8px 30px rgba(0, 0, 0, 0.55);
+  --shadow-lg:  0 24px 70px rgba(0, 0, 0, 0.65);
+  --shadow-drawer: -20px 0 60px rgba(0, 0, 0, 0.55);
+
+  /* ---- Inner stroke for glass (1px light edge) ---- */
+  --inset-edge: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+
+  /* ---- Star label shadow (dark halo on space; light halo on dawn) ---- */
+  --star-label-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
+
+  /* ---- Motion: soft, slow, deep-space calm ---- */
+  --ease-flight: cubic-bezier(0.2, 0.8, 0.2, 1); /* @kind other */
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1); /* @kind other */
+  --dur-fast:    160ms; /* @kind other */
+  --dur-base:    320ms; /* @kind other */
+  --dur-slow:    560ms; /* @kind other */
+  --dur-flight:  900ms;  /* @kind other */
+  --dur-ignite:  1300ms; /* @kind other */
+
+  /* ---- The deep-space backdrop gradient (reuse everywhere) ---- */
+  --bg-deepspace:
+    radial-gradient(1200px 800px at 78% -10%, rgba(26, 35, 80, 0.55), transparent 60%),
+    radial-gradient(900px 700px at 12% 110%, rgba(40, 30, 70, 0.35), transparent 60%),
+    radial-gradient(600px 600px at 50% 50%, rgba(11, 14, 34, 0.0), transparent 70%),
+    linear-gradient(180deg, #05060f 0%, #03040c 55%, #04050e 100%); /* @kind other */
+}
+
+/* ---- Reusable utility classes (consumers can apply directly) ---- */
+
+.sr-glass {
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.2);
+  backdrop-filter: blur(var(--glass-blur)) saturate(1.2);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-md), var(--inset-edge);
+}
+
+.sr-glass-strong {
+  background: var(--glass-bg-strong);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.2);
+  backdrop-filter: blur(var(--glass-blur)) saturate(1.2);
+  border: 1px solid var(--glass-border-strong);
+  box-shadow: var(--shadow-lg), var(--inset-edge);
+}
+
+.sr-deepspace { background: var(--bg-deepspace); }
+
+/* Star breathing — subtle scale pulse */
+@keyframes sr-breathe {
+  0%, 100% { transform: scale(1);    opacity: 0.92; }
+  50%      { transform: scale(1.06); opacity: 1; }
+}
+/* Background star twinkle */
+@keyframes sr-twinkle {
+  0%, 100% { opacity: 0.25; }
+  50%      { opacity: 0.9; }
+}
+/* Light flowing along a connection */
+@keyframes sr-flow {
+  from { stroke-dashoffset: 40; }
+  to   { stroke-dashoffset: 0; }
+}
+.sr-breathe { animation: sr-breathe 5.5s var(--ease-flight) infinite; }
+
+/* ---- Transitions used by overlays / the ignite moment ---- */
+@keyframes sr-cardin   { from { opacity: 0; transform: translateY(8px) scale(0.97); } to { opacity: 1; transform: none; } }
+@keyframes sr-drawerin { from { transform: translateX(40px); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes sr-toast    { 0% { opacity: 0; transform: translateX(-50%) translateY(-12px); } 12%,80% { opacity: 1; transform: translateX(-50%) translateY(0); } 100% { opacity: 0; transform: translateX(-50%) translateY(-12px); } }
+@keyframes sr-flash    { 0% { opacity: 0; transform: scale(0.2); } 24% { opacity: 1; transform: scale(1.1); } 100% { opacity: 0; transform: scale(1.5); } }
+@keyframes sr-ring     { 0% { opacity: 0.9; transform: scale(0.3); } 100% { opacity: 0; transform: scale(7); } }
+@keyframes sr-particle { 0% { opacity: 1; transform: translate(0, 0); } 100% { opacity: 0; transform: translate(var(--dx), var(--dy)); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .sr-breathe { animation: none; }
+}

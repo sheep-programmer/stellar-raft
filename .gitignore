@@ -1,0 +1,9 @@
+# 运行时数据
+server/stellar.db
+server/stellar.db-shm
+server/stellar.db-wal
+uploads/
+
+node_modules/
+*.log
+.env

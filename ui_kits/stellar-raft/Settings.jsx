@@ -1,0 +1,364 @@
+/* Settings — 用户设置覆盖层。居中玻璃 modal，左侧分区导航 + 右侧内容。
+   由左下角头像点击打开。Esc / 点遮罩关闭，保存有 toast 反馈，无浏览器原生弹窗。
+   props: { onClose, theme, onToggleTheme } */
+const { Button, GlassPanel, Icon, IconButton, Input } = window.StellarRaftDesignSystem_2866af;
+
+/* 头像预设：渐变色块，semantic 内仍走冷蓝/暖金的克制色域 */
+const SR_AVATARS = [
+  { id: 'nebula', grad: 'linear-gradient(140deg, #2a3566, #56689c)' },
+  { id: 'dawn',   grad: 'linear-gradient(140deg, #8ea2cc, #b6c3dc)' },
+  { id: 'gold',   grad: 'linear-gradient(140deg, #7a5a22, #ffd98a)' },
+  { id: 'deep',   grad: 'linear-gradient(140deg, #11152e, #2a3566)' },
+  { id: 'ice',    grad: 'linear-gradient(140deg, #3a4a7a, #9fc6ff)' },
+  { id: 'ember',  grad: 'linear-gradient(140deg, #5a2e26, #e8917a)' },
+];
+
+const SR_SHORTCUTS = [
+  { keys: ['⌘', 'K'], label: '全局搜索 · 跳转任意星' },
+  { keys: ['⌘', 'N'], label: '新建一颗知识星' },
+  { keys: ['⌘', 'E'], label: '打开 / 收起编辑器' },
+  { keys: ['F'],      label: '聚焦选中的星' },
+  { keys: ['Space'],  label: '亮度鸟瞰 / 退出' },
+  { keys: ['⌘', '\\'],label: '折叠 / 展开侧栏' },
+  { keys: ['Esc'],    label: '关闭当前弹窗 / 抽屉' },
+  { keys: ['/'],      label: '编辑器内唤起块菜单' },
+];
+
+const SR_SET_NAV = [
+  { id: 'profile', label: '个人资料', icon: 'user' },
+  { id: 'prefs',   label: '偏好',     icon: 'sliders-horizontal' },
+  { id: 'review',  label: '复习提醒', icon: 'bell' },
+  { id: 'keys',    label: '快捷键',   icon: 'keyboard' },
+  { id: 'account', label: '账户',     icon: 'shield' },
+];
+
+/* 玻璃开关 */
+function SRToggle({ on, onChange, disabled }) {
+  return (
+    <button type="button" disabled={disabled} onClick={() => !disabled && onChange(!on)}
+      style={{
+        width: 42, height: 24, flex: 'none', borderRadius: 'var(--r-pill)', position: 'relative',
+        border: '1px solid ' + (on ? 'rgba(255,217,138,0.5)' : 'var(--glass-border-strong)'),
+        background: on ? 'rgba(255,217,138,0.18)' : 'var(--input-bg, rgba(3,4,12,0.45))',
+        cursor: disabled ? 'not-allowed' : 'pointer', opacity: disabled ? 0.45 : 1,
+        transition: 'background var(--dur-fast), border-color var(--dur-fast)', padding: 0,
+      }}>
+      <span style={{
+        position: 'absolute', top: 2, left: on ? 20 : 2, width: 18, height: 18, borderRadius: '50%',
+        background: on ? 'var(--gold)' : 'var(--text-3)',
+        boxShadow: on ? '0 0 8px rgba(255,217,138,0.6)' : 'none',
+        transition: 'left var(--dur-base) var(--ease-flight), background var(--dur-fast)',
+      }} />
+    </button>
+  );
+}
+
+/* 设置行：标题 + 说明 + 右侧控件 */
+function SRRow({ title, hint, children, align }) {
+  return (
+    <div style={{ display: 'flex', alignItems: align || 'center', justifyContent: 'space-between', gap: 18, padding: '13px 0', borderBottom: '1px solid var(--line)' }}>
+      <div style={{ minWidth: 0 }}>
+        <div style={{ fontSize: 13.5, color: 'var(--text-1)' }}>{title}</div>
+        {hint && <div style={{ fontSize: 11.5, color: 'var(--text-3)', marginTop: 3, lineHeight: 1.55 }}>{hint}</div>}
+      </div>
+      <div style={{ flex: 'none' }}>{children}</div>
+    </div>
+  );
+}
+
+function SRSectionTitle({ children }) {
+  return <div style={{ fontSize: 10, letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: 'var(--text-3)', fontFamily: 'var(--font-mono)', marginBottom: 4 }}>{children}</div>;
+}
+
+/* 分段选择（如复习频率） */
+function SRSegment({ options, value, onChange }) {
+  return (
+    <div style={{ display: 'inline-flex', background: 'var(--input-bg, rgba(3,4,12,0.45))', border: '1px solid var(--line-strong)', borderRadius: 'var(--r-pill)', padding: 2 }}>
+      {options.map(o => {
+        const on = o.value === value;
+        return (
+          <button key={o.value} type="button" onClick={() => onChange(o.value)}
+            style={{
+              height: 26, padding: '0 14px', borderRadius: 'var(--r-pill)', border: 'none', cursor: 'pointer',
+              fontSize: 12.5, fontFamily: 'var(--font-sans)',
+              background: on ? 'rgba(159,198,255,0.16)' : 'transparent',
+              color: on ? 'var(--text-1)' : 'var(--text-3)',
+              transition: 'background var(--dur-fast), color var(--dur-fast)',
+            }}>{o.label}</button>
+        );
+      })}
+    </div>
+  );
+}
+
+function Settings({ onClose, theme, onToggleTheme }) {
+  const dawn = theme === 'dawn';
+  const [tab, setTab] = React.useState('profile');
+  const [toast, setToast] = React.useState(null);
+  const toastTimer = React.useRef(null);
+
+  // 已保存的设置（本机浏览器）；昵称等身份信息以 D.account 为单一来源
+  const D = window.SR_DATA;
+  const saved = React.useMemo(() => { try { return JSON.parse(localStorage.getItem('sr.settings')) || {}; } catch (e) { return {}; } }, []);
+
+  // 个人资料
+  const [nickname, setNickname] = React.useState(() => saved.nickname || D.account.name);
+  const [avatar, setAvatar] = React.useState(() => saved.avatar || 'nebula');
+  const [bio, setBio] = React.useState(() => saved.bio != null ? saved.bio : '在深空里慢慢点亮自己的星。物理 / 数学 / 一点点哲学。');
+
+  // 偏好
+  const [motion, setMotion] = React.useState(() => saved.motion !== false);
+  const [twinkle, setTwinkle] = React.useState(() => saved.twinkle !== false);
+
+  // 复习提醒
+  const [remind, setRemind] = React.useState(() => saved.remind !== false);
+  const [freq, setFreq] = React.useState(() => saved.freq || 'daily');
+  const [remindTime, setRemindTime] = React.useState(() => saved.remindTime || '21:00');
+  const [dimNudge, setDimNudge] = React.useState(() => saved.dimNudge !== false);
+  const [confirm, setConfirm] = React.useState(null); // {message, confirmLabel, onYes}
+
+  React.useEffect(() => {
+    const k = (e) => { if (e.key === 'Escape') { e.stopPropagation(); onClose(); } };
+    document.addEventListener('keydown', k);
+    return () => { document.removeEventListener('keydown', k); if (toastTimer.current) clearTimeout(toastTimer.current); };
+  }, [onClose]);
+
+  const flashToast = (msg) => {
+    setToast(msg);
+    if (toastTimer.current) clearTimeout(toastTimer.current);
+    toastTimer.current = setTimeout(() => setToast(null), 2400);
+  };
+
+  const avatarGrad = (SR_AVATARS.find(a => a.id === avatar) || SR_AVATARS[0]).grad;
+  const avatarLetter = (nickname.trim()[0] || '星');
+
+  const save = () => {
+    const name = nickname.trim();
+    if (name) { D.account.name = name; D.account.avatar = name[0]; }
+    try {
+      localStorage.setItem('sr.settings', JSON.stringify({ nickname: name || D.account.name, avatar, bio, motion, twinkle, remind, freq, remindTime, dimNudge }));
+    } catch (e) { }
+    // 动效偏好即刻生效（index.html 里有对应 CSS 钩子）
+    document.documentElement.dataset.motion = motion ? 'on' : 'off';
+    document.documentElement.dataset.twinkle = (twinkle && motion) ? 'on' : 'off';
+    flashToast('设置已保存 · 你的星空已更新');
+  };
+
+  const ink = dawn ? '#1a2238' : 'var(--text-1)';
+
+  return (
+    <div onMouseDown={onClose} onContextMenu={(e) => e.preventDefault()}
+      style={{ position: 'fixed', inset: 0, zIndex: 110, background: 'rgba(3,4,12,0.55)', backdropFilter: 'blur(4px)', WebkitBackdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
+      <div onMouseDown={(e) => e.stopPropagation()}
+        style={{ width: 760, maxWidth: '94vw', height: 560, maxHeight: '92vh', animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
+        <GlassPanel strong radius="lg" pad="none" glow style={{ height: '100%', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+
+          {/* header */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '15px 18px', borderBottom: '1px solid var(--line)', flex: 'none' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+              <Icon name="settings" size={18} color="var(--star-blue)" />
+              <span style={{ fontSize: 15, color: 'var(--text-1)', fontWeight: 300, letterSpacing: '0.02em' }}>设置</span>
+            </div>
+            <IconButton name="x" title="关闭" onClick={onClose} />
+          </div>
+
+          {/* body: nav + content */}
+          <div style={{ flex: 1, minHeight: 0, display: 'flex' }}>
+            {/* left nav */}
+            <nav style={{ width: 168, flex: 'none', borderRight: '1px solid var(--line)', padding: '12px 10px', display: 'flex', flexDirection: 'column', gap: 3, overflow: 'auto' }}>
+              {SR_SET_NAV.map(n => {
+                const on = tab === n.id;
+                return (
+                  <button key={n.id} type="button" onClick={() => setTab(n.id)}
+                    style={{
+                      display: 'flex', alignItems: 'center', gap: 10, height: 38, padding: '0 11px', width: '100%',
+                      borderRadius: 'var(--r-sm)', cursor: 'pointer', textAlign: 'left',
+                      border: '1px solid ' + (on ? 'var(--glass-border-strong)' : 'transparent'),
+                      background: on ? 'rgba(159,198,255,0.08)' : 'transparent',
+                      color: on ? 'var(--gold)' : 'var(--text-2)',
+                      transition: 'background var(--dur-fast), color var(--dur-fast)',
+                    }}>
+                    <Icon name={n.icon} size={17} color="currentColor" />
+                    <span style={{ fontSize: 13, color: on ? 'var(--text-1)' : 'inherit' }}>{n.label}</span>
+                  </button>
+                );
+              })}
+            </nav>
+
+            {/* content */}
+            <div style={{ flex: 1, minWidth: 0, overflow: 'auto', padding: '20px 24px' }}>
+
+              {tab === 'profile' && (
+                <div>
+                  <SRSectionTitle>头像</SRSectionTitle>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '10px 0 16px', borderBottom: '1px solid var(--line)' }}>
+                    <span style={{ width: 56, height: 56, flex: 'none', borderRadius: '50%', background: avatarGrad, border: '1px solid var(--glass-border-strong)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 22, color: ink, boxShadow: '0 0 18px rgba(159,198,255,0.18)' }}>{avatarLetter}</span>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 9 }}>
+                      {SR_AVATARS.map(a => {
+                        const on = a.id === avatar;
+                        return (
+                          <button key={a.id} type="button" onClick={() => setAvatar(a.id)} title={'头像 ' + a.id}
+                            style={{
+                              width: 34, height: 34, borderRadius: '50%', cursor: 'pointer', background: a.grad,
+                              border: '2px solid ' + (on ? 'var(--gold)' : 'transparent'),
+                              outline: on ? 'none' : '1px solid var(--glass-border)',
+                              boxShadow: on ? '0 0 10px rgba(255,217,138,0.45)' : 'none',
+                              transition: 'box-shadow var(--dur-fast), border-color var(--dur-fast)',
+                            }} />
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  <div style={{ paddingTop: 16 }}>
+                    <SRSectionTitle>昵称</SRSectionTitle>
+                    <Input value={nickname} onChange={(e) => setNickname(e.target.value)} placeholder="你的名字" icon="user" />
+                  </div>
+
+                  <div style={{ paddingTop: 16 }}>
+                    <SRSectionTitle>个人简介</SRSectionTitle>
+                    <textarea value={bio} onChange={(e) => setBio(e.target.value)} rows={3}
+                      placeholder="用一两句话描述你的星空…"
+                      onContextMenu={(e) => e.stopPropagation()}
+                      style={{
+                        width: '100%', boxSizing: 'border-box', resize: 'vertical', minHeight: 72,
+                        background: 'var(--input-bg, rgba(3,4,12,0.45))', border: '1px solid var(--glass-border-strong)', borderRadius: 'var(--r-sm)',
+                        color: 'var(--text-1)', fontSize: 13.5, lineHeight: 1.7, padding: '10px 12px', outline: 'none',
+                        fontFamily: 'var(--font-sans)',
+                      }} />
+                    <div style={{ fontSize: 11, color: 'var(--text-3)', marginTop: 6, textAlign: 'right', fontFamily: 'var(--font-mono)' }}>{bio.length} / 120</div>
+                  </div>
+                </div>
+              )}
+
+              {tab === 'prefs' && (
+                <div>
+                  <SRSectionTitle>外观</SRSectionTitle>
+                  <SRRow title="主题" hint={dawn ? '当前为「黎明」浅色 · 切回深空让星辰更亮' : '当前为「深空」暗场 · 知识是唯一的光'}>
+                    <SRSegment value={dawn ? 'dawn' : 'space'} onChange={(v) => { if ((v === 'dawn') !== dawn) onToggleTheme(); }}
+                      options={[{ value: 'space', label: '深空' }, { value: 'dawn', label: '黎明' }]} />
+                  </SRRow>
+                  <div style={{ height: 10 }} />
+                  <SRSectionTitle>动效</SRSectionTitle>
+                  <SRRow title="界面动效" hint="星辰呼吸、卡片浮起、点亮时的光爆。关闭后界面更安静。">
+                    <SRToggle on={motion} onChange={setMotion} />
+                  </SRRow>
+                  <SRRow title="背景星点闪烁" hint="远景星场的微弱明灭。">
+                    <SRToggle on={twinkle} onChange={setTwinkle} disabled={!motion} />
+                  </SRRow>
+                  <div style={{ marginTop: 14, display: 'flex', gap: 10, padding: '12px 14px', borderRadius: 'var(--r-md)', background: 'rgba(159,198,255,0.05)', border: '1px solid var(--line)' }}>
+                    <Icon name="accessibility" size={16} color="var(--star-blue)" />
+                    <div style={{ fontSize: 12, color: 'var(--text-2)', lineHeight: 1.7 }}>
+                      若系统已开启「减少动态效果」(prefers-reduced-motion)，星图会自动收敛所有动画；上面的开关保存后立即生效，可随时手动控制。
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {tab === 'review' && (
+                <div>
+                  <SRSectionTitle>复习提醒</SRSectionTitle>
+                  <SRRow title="开启提醒" hint="到点提醒你回来点亮正在变暗的星。">
+                    <SRToggle on={remind} onChange={setRemind} />
+                  </SRRow>
+                  <SRRow title="提醒频率">
+                    <SRSegment value={freq} onChange={setFreq}
+                      options={[{ value: 'daily', label: '每日' }, { value: 'weekly', label: '每周' }, { value: 'smart', label: '智能' }]} />
+                  </SRRow>
+                  <SRRow title="提醒时间" hint="安静的时刻，适合回望一天。">
+                    <input type="time" value={remindTime} onChange={(e) => setRemindTime(e.target.value)} disabled={!remind}
+                      style={{
+                        height: 30, padding: '0 10px', borderRadius: 'var(--r-sm)', outline: 'none',
+                        background: 'var(--input-bg, rgba(3,4,12,0.45))', border: '1px solid var(--glass-border-strong)',
+                        color: 'var(--text-1)', fontSize: 13, fontFamily: 'var(--font-mono)',
+                        opacity: remind ? 1 : 0.45, colorScheme: 'dark',
+                      }} />
+                  </SRRow>
+                  <SRRow title="星座变暗提醒" hint="当一片星座长期无人问津、整体变暗时，轻轻提醒你。" align="flex-start">
+                    <SRToggle on={dimNudge} onChange={setDimNudge} />
+                  </SRRow>
+                  <div style={{ marginTop: 14, fontSize: 11.5, color: 'var(--text-3)', lineHeight: 1.7 }}>
+                    提醒只在你点亮节奏放缓时出现，不会催促。你的星空，由你决定何时回来。
+                  </div>
+                </div>
+              )}
+
+              {tab === 'keys' && (
+                <div>
+                  <SRSectionTitle>快捷键一览</SRSectionTitle>
+                  <div style={{ marginTop: 8 }}>
+                    {SR_SHORTCUTS.map((s, i) => (
+                      <div key={i} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, padding: '11px 0', borderBottom: '1px solid var(--line)' }}>
+                        <span style={{ fontSize: 13, color: 'var(--text-2)' }}>{s.label}</span>
+                        <span style={{ display: 'flex', gap: 5, flex: 'none' }}>
+                          {s.keys.map((k, j) => (
+                            <kbd key={j} style={{
+                              fontFamily: 'var(--font-mono)', fontSize: 11.5, color: 'var(--text-1)', minWidth: 22, textAlign: 'center',
+                              border: '1px solid var(--line-strong)', borderRadius: 6, padding: '3px 7px', background: 'var(--input-bg, rgba(3,4,12,0.45))',
+                            }}>{k}</kbd>
+                          ))}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {tab === 'account' && (
+                <div>
+                  <SRSectionTitle>账户</SRSectionTitle>
+                  <SRRow title="邮箱"><span style={{ fontSize: 13, color: 'var(--text-2)', fontFamily: 'var(--font-mono)' }}>{D.account.email}</span></SRRow>
+                  <SRRow title="方案"><span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12.5, color: 'var(--gold)', border: '1px solid rgba(255,217,138,0.35)', borderRadius: 'var(--r-pill)', padding: '3px 11px', background: 'rgba(255,217,138,0.1)' }}><Icon name="sparkles" size={13} color="var(--gold)" />{D.account.plan}</span></SRRow>
+                  <SRRow title="加入于"><span style={{ fontSize: 13, color: 'var(--text-2)', fontFamily: 'var(--font-mono)' }}>{D.account.joined}</span></SRRow>
+                  <SRRow title="星辰总数"><span style={{ fontSize: 13, color: 'var(--text-2)', fontFamily: 'var(--font-mono)' }}>正发光 {D.stars.filter(s => s.strength >= 0.7).length} · 正变暗 {D.stars.filter(s => s.strength < 0.4).length} · 连接 {D.connections.length}</span></SRRow>
+                  <SRRow title="连续点亮"><span style={{ fontSize: 13, color: 'var(--text-2)', fontFamily: 'var(--font-mono)' }}>{D.account.streak} 天</span></SRRow>
+                  <div style={{ display: 'flex', gap: 10, marginTop: 18 }}>
+                    <Button size="sm" variant="ghost" icon="download" onClick={() => {
+                      const snap = window.SRNet && window.SRNet.snapshot();
+                      if (!snap) { flashToast('导出失败 · 数据尚未就绪'); return; }
+                      const blob = new Blob([JSON.stringify(snap, null, 2)], { type: 'application/json' });
+                      const a = document.createElement('a');
+                      a.href = URL.createObjectURL(blob);
+                      a.download = '星图-我的星空.json';
+                      a.click();
+                      setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+                      flashToast('已导出你的星图数据（JSON 文件）');
+                    }}>导出数据</Button>
+                    <Button size="sm" variant="ghost" icon="log-out" onClick={() => setConfirm({ message: '退出登录后，本设备上的星空将回到未登录状态。确定退出吗？', confirmLabel: '退出登录', onYes: () => flashToast('已退出当前设备') })}>退出登录</Button>
+                  </div>
+                </div>
+              )}
+
+            </div>
+          </div>
+
+          {/* footer */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 10, padding: '13px 18px', borderTop: '1px solid var(--line)', flex: 'none' }}>
+            <Button size="sm" onClick={onClose}>取消</Button>
+            <Button size="sm" variant="primary" icon="check" glow onClick={save}>保存更改</Button>
+          </div>
+        </GlassPanel>
+      </div>
+
+      {confirm && window.SRKit.ConfirmDialog && (
+        <window.SRKit.ConfirmDialog message={confirm.message} confirmLabel={confirm.confirmLabel}
+          onYes={() => { confirm.onYes(); setConfirm(null); }} onClose={() => setConfirm(null)} />
+      )}
+
+      {/* toast */}
+      {toast && (
+        <div onMouseDown={(e) => e.stopPropagation()}
+          style={{ position: 'fixed', bottom: 26, left: '50%', transform: 'translateX(-50%)', zIndex: 130, animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
+          <GlassPanel strong radius="pill" pad="sm" glow>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '2px 8px' }}>
+              <Icon name="check" size={16} color="var(--gold)" />
+              <span style={{ fontSize: 13.5, color: 'var(--text-1)' }}>{toast}</span>
+            </div>
+          </GlassPanel>
+        </div>
+      )}
+    </div>
+  );
+}
+
+window.SRKit = Object.assign(window.SRKit || {}, { Settings });

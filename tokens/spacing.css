@@ -1,0 +1,47 @@
+/* ===== 星图 Stellar Raft — Spacing & Radii =====
+   8px base rhythm. Low information density — space is the point.
+   Generous negative space (negative *black* space). */
+
+:root {
+  /* ---- Spacing scale ---- */
+  --s-0:  0px;
+  --s-1:  4px;
+  --s-2:  8px;
+  --s-3:  12px;
+  --s-4:  16px;
+  --s-5:  20px;
+  --s-6:  24px;
+  --s-8:  32px;
+  --s-10: 40px;
+  --s-12: 48px;
+  --s-16: 64px;
+  --s-20: 80px;
+  --s-24: 96px;
+
+  /* ---- Corner radii (soft, never sharp; capsules for tools) ---- */
+  --r-xs:   6px;
+  --r-sm:   10px;
+  --r-md:   14px;
+  --r-lg:   18px;
+  --r-xl:   24px;
+  --r-2xl:  32px;
+  --r-pill: 999px; /* tool capsules, chips */
+  --r-full: 50%;
+
+  /* ---- Layout dimensions ---- */
+  --sidebar-w:        260px;
+  --sidebar-collapsed: 64px;
+  --editor-col:       720px; /* comfortable reading width */
+  --rail-w:           320px; /* right knowledge rail / drawer */
+  --canvas-w:         1440px;
+
+  /* ---- Z layers ---- */
+  --z-canvas:   0; /* @kind other */
+  --z-conn:     1; /* @kind other */
+  --z-stars:    2; /* @kind other */
+  --z-hud:      40; /* @kind other */
+  --z-sidebar:  50; /* @kind other */
+  --z-drawer:   60; /* @kind other */
+  --z-overlay:  80; /* @kind other */
+  --z-toast:    90; /* @kind other */
+}

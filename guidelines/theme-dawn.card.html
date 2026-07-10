@@ -1,0 +1,25 @@
+<!-- @dsCard group="Colors" viewport="700x180" name="Theme · 黎明 Dawn" subtitle="Opt-in light theme — <html data-theme=\"dawn\"> · pale twilight, ink text" -->
+<!DOCTYPE html><html data-theme="dawn"><head><meta charset="utf-8"><link rel="stylesheet" href="../styles.css">
+<style>
+  body{margin:0;font-family:var(--font-sans);background:var(--bg-deepspace);padding:20px;}
+  .row{display:flex;gap:10px;margin-bottom:12px;}
+  .sw{flex:1;height:54px;border-radius:var(--r-md);border:1px solid var(--line);display:flex;flex-direction:column;justify-content:flex-end;padding:8px;box-sizing:border-box;}
+  .name{font-size:11px;font-weight:500;color:var(--text-1);}
+  .hex{font-size:10px;font-family:var(--font-mono);color:var(--text-3);}
+  .chips{display:flex;gap:10px;align-items:center;}
+  .pill{height:30px;display:inline-flex;align-items:center;padding:0 14px;border-radius:var(--r-pill);font-size:12.5px;}
+</style></head>
+<body>
+  <div class="row">
+    <div class="sw" style="background:var(--space-2)"><div class="name">surface</div><div class="hex">#dde2ed</div></div>
+    <div class="sw" style="background:var(--space-3)"><div class="name">raised</div><div class="hex">#e9edf4</div></div>
+    <div class="sw" style="background:var(--star-blue)"><div class="name" style="color:#fff">star-blue</div><div class="hex" style="color:rgba(255,255,255,.7)">#345fbe</div></div>
+    <div class="sw" style="background:var(--gold)"><div class="name" style="color:#fff6e6">gold</div><div class="hex" style="color:rgba(255,246,230,.7)">#b8801a</div></div>
+  </div>
+  <div class="chips">
+    <span class="pill" style="background:var(--gold);color:var(--text-on-gold);font-weight:600">点亮这颗星</span>
+    <span class="pill sr-glass">玻璃面板</span>
+    <span style="font-size:13px;color:var(--text-1)">深空墨字 Ink text</span>
+    <span style="font-size:13px;color:var(--text-3)">三级文字</span>
+  </div>
+</body></html>
