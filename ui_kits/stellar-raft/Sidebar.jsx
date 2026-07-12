@@ -34,12 +34,12 @@ function SRLogo({ collapsed, theme }) {
   );
 }
 
-function NavRow({ icon, label, active, badge, collapsed, onClick, dawn, tip }) {
+function NavRow({ icon, label, active, badge, collapsed, onClick, dawn, tip, dataTour }) {
   const [hover, setHover] = React.useState(false);
   const lit = active || hover;
   const idle = dawn ? 'rgba(22,30,56,0.82)' : 'rgba(159,198,255,0.72)';
   return (
-    <button type="button" className="sr-focus-ring" onClick={onClick} data-tip={collapsed ? label : undefined}
+    <button type="button" className="sr-focus-ring" onClick={onClick} data-tip={collapsed ? label : undefined} data-tour={dataTour}
       title={collapsed ? undefined : tip}
       onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
       style={{
@@ -143,7 +143,7 @@ function Sidebar({ collapsed, onToggle, view, onView, focus, onFocus, theme, onT
             /* 搜索入口：点击 / Enter / 直接开始输入 都打开命令面板。
                readOnly 让它保持可 Tab 聚焦（Input 自带聚焦发光），
                但不再吞字——键盘用户不会把「量子」打进一个死输入框 */
-            <div style={{ cursor: 'pointer' }} onClick={onSearch}>
+            <div data-tour="search" style={{ cursor: 'pointer' }} onClick={onSearch}>
               <Input icon="search" placeholder="搜索你的星空…" kbd="⌘K" size="sm"
                 readOnly value="" aria-label="搜索你的星空（打开命令面板）"
                 inputStyle={{ cursor: 'pointer' }}
@@ -162,7 +162,7 @@ function Sidebar({ collapsed, onToggle, view, onView, focus, onFocus, theme, onT
         <NavRow icon="list"    label="列表视图"   active={view === 'list'} collapsed={collapsed} dawn={dawn} onClick={() => onView('list')} />
         <NavRow icon="git-commit-horizontal" label="时间轴视图" active={view === 'timeline'} collapsed={collapsed} dawn={dawn} onClick={() => onView('timeline')} />
         <div style={{ height: 1, background: 'var(--line)', margin: '8px 4px' }} />
-        <NavRow icon="repeat"   label="复习"   badge={dueN || null} collapsed={collapsed} dawn={dawn} onClick={onReview} active={false} />
+        <NavRow icon="repeat"   label="复习"   badge={dueN || null} collapsed={collapsed} dawn={dawn} onClick={onReview} active={false} dataTour="review" />
         <NavRow icon="inbox"    label="收件箱" badge={inboxN || null} tip={`本地捕捉 ${D.inbox.length} 条 + 未领取来信 ${mailN} 封`} collapsed={collapsed} dawn={dawn} onClick={() => onView('inbox')} active={view === 'inbox'} />
         <NavRow icon="aperture" label="黑洞"   badge={D.trash.length || null} collapsed={collapsed} dawn={dawn} onClick={() => onView('blackhole')} active={view === 'blackhole'} />
         <NavRow icon="telescope" label="星际漫游" badge={(D.social && D.social.friends) || null} collapsed={collapsed} dawn={dawn} onClick={() => onView('visit')} active={view === 'visit'} />

@@ -117,7 +117,77 @@ function Onboarding({ onClose, onSpotlight }) {
   );
 }
 
-// OnboardingTour 占位（Task 3 实现）——先注册，避免 app.jsx 解构 undefined。
-function OnboardingTour({ onClose }) { return null; }
+// 聚光步骤——只指向星图主界面的稳定 chrome；找不到的目标优雅跳过。
+const SR_TOUR_STEPS = [
+  { target: '[data-tour="search"]', title: '随时跳转', body: '⌘K 或点这里，跳到任意一颗星、任意一个视图。' },
+  { target: '[data-tour="review"]', title: '到期复习', body: '角标是今天到期的星数。点它开始一轮复习，让星不熄灭。' },
+  { target: '[data-tour="tools"]',  title: '换个视角', body: '这里切换亮度鸟瞰与三维星系，也能缩放、复位画布。' },
+];
+
+function OnboardingTour({ onClose }) {
+  const [i, setI] = React.useState(0);
+  const [rect, setRect] = React.useState(null);
+  const reduce = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // 定位当前步目标；找不到则跳过到下一个可见目标，全部找不到就结束。
+  const locate = React.useCallback((from) => {
+    for (let j = from; j < SR_TOUR_STEPS.length; j++) {
+      const el = document.querySelector(SR_TOUR_STEPS[j].target);
+      if (el) {
+        const r = el.getBoundingClientRect();
+        if (r.width > 0 && r.height > 0) { setI(j); setRect(r); return true; }
+      }
+    }
+    return false;
+  }, []);
+
+  React.useEffect(() => { if (!locate(0)) onClose(); }, [locate, onClose]);
+
+  React.useEffect(() => {
+    const k = (e) => { if (e.key === 'Escape') { e.stopPropagation(); onClose(); } };
+    document.addEventListener('keydown', k);
+    return () => document.removeEventListener('keydown', k);
+  }, [onClose]);
+
+  if (!rect) return null;
+  const step = SR_TOUR_STEPS[i];
+  const last = i === SR_TOUR_STEPS.length - 1;
+  const next = () => { if (last) onClose(); else if (!locate(i + 1)) onClose(); };
+
+  const pad = 8;
+  const hole = { left: rect.left - pad, top: rect.top - pad, width: rect.width + pad * 2, height: rect.height + pad * 2 };
+  // 气泡放在光洞右侧；靠右则翻到左侧
+  const bubbleLeft = hole.left + hole.width + 14 > window.innerWidth - 300
+    ? Math.max(16, hole.left - 300 - 14) : hole.left + hole.width + 14;
+  const bubbleTop = Math.min(Math.max(16, hole.top), window.innerHeight - 160);
+
+  return (
+    <div onMouseDown={onClose} role="dialog" aria-modal="true" aria-label="实地导览"
+      style={{ position: 'fixed', inset: 0, zIndex: 140 }}>
+      {/* 挖光洞：目标处透明，四周暗化（超大 spread 阴影）+ 发光描边 */}
+      <div style={{ position: 'fixed', left: hole.left, top: hole.top, width: hole.width, height: hole.height,
+        borderRadius: 'var(--r-md)', boxShadow: '0 0 0 9999px rgba(3,4,12,0.66), 0 0 22px rgba(159,198,255,0.35)',
+        border: '1px solid rgba(159,198,255,0.6)', pointerEvents: 'none',
+        transition: reduce ? 'none' : 'left var(--dur-base) var(--ease-flight), top var(--dur-base) var(--ease-flight), width var(--dur-base) var(--ease-flight), height var(--dur-base) var(--ease-flight)' }} />
+      {/* 气泡 */}
+      <div onMouseDown={(e) => e.stopPropagation()}
+        style={{ position: 'fixed', left: bubbleLeft, top: bubbleTop, width: 280, animation: reduce ? 'none' : 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
+        <GlassPanel strong radius="md" pad="none" glow>
+          <div style={{ padding: '14px 16px' }}>
+            <div style={{ fontSize: 14.5, color: 'var(--text-1)', fontWeight: 300 }}>{step.title}</div>
+            <div style={{ fontSize: 12.5, color: 'var(--text-2)', lineHeight: 1.75, marginTop: 8 }}>{step.body}</div>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 14 }}>
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-3)' }}>{(i + 1)} / {SR_TOUR_STEPS.length}</span>
+              <div style={{ display: 'flex', gap: 8 }}>
+                <Button size="sm" variant="ghost" onClick={onClose}>结束</Button>
+                <Button size="sm" variant="primary" glow icon={last ? 'check' : 'chevron-right'} onClick={next}>{last ? '完成' : '下一步'}</Button>
+              </div>
+            </div>
+          </div>
+        </GlassPanel>
+      </div>
+    </div>
+  );
+}
 
 window.SRKit = Object.assign(window.SRKit || {}, { Onboarding, OnboardingTour });

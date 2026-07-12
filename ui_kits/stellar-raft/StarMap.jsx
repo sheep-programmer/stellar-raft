@@ -711,7 +711,7 @@ function StarMap({ selected, onSelect, onOpenEditor, onFeynman, onAerial, on3D, 
       </div>
 
       {/* zoom controls */}
-      <div onMouseDown={(e) => e.stopPropagation()} style={{ position: 'absolute', bottom: 26, right: 24, zIndex: 30 }}>
+      <div data-tour="tools" onMouseDown={(e) => e.stopPropagation()} style={{ position: 'absolute', bottom: 26, right: 24, zIndex: 30 }}>
         <GlassPanel radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', gap: 2, padding: '6px 8px' }}>
           <IconButton name="minus" size="sm" title="缩小" onClick={() => setView(v => ({ ...v, k: clamp(v.k * 0.85, 0.34, 2.6) }))} />
           <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--text-2)', minWidth: 42, textAlign: 'center' }}>{Math.round(view.k * 100)}%</span>
