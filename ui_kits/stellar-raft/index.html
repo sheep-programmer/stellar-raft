@@ -27,6 +27,63 @@
 <body>
   <div id="root" class="sr-stage"></div>
 
+  <!-- 静态启动帧：Babel 现场编译的几秒里不再是一块纯黑幕布。
+       app 挂载后（app.jsx）置 data-done 淡出；8s 未就绪则转为网络兜底提示。 -->
+  <div id="sr-boot" role="status">
+    <div class="sr-boot-stars" aria-hidden="true"></div>
+    <div class="sr-boot-center">
+      <div class="sr-boot-mark">星图</div>
+      <div class="sr-boot-sub">STELLAR RAFT</div>
+      <div class="sr-boot-msg" id="sr-boot-msg">正在点亮你的星空…</div>
+    </div>
+  </div>
+  <style>
+    #sr-boot { position: fixed; inset: 0; z-index: 999; display: flex; align-items: center; justify-content: center;
+      background:
+        radial-gradient(1200px 800px at 78% -10%, rgba(26,35,80,0.55), transparent 60%),
+        radial-gradient(900px 700px at 12% 110%, rgba(40,30,70,0.35), transparent 60%),
+        linear-gradient(180deg, #05060f 0%, #03040c 55%, #04050e 100%);
+      transition: opacity 560ms cubic-bezier(0.2, 0.8, 0.2, 1); }
+    #sr-boot[data-done] { opacity: 0; pointer-events: none; }
+    .sr-boot-center { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .sr-boot-mark { font: 300 36px/1.25 Sora, "Noto Sans SC", -apple-system, sans-serif; letter-spacing: 0.08em;
+      background: linear-gradient(176deg, #fff3da 0%, #ffffff 30%, #e9f0ff 62%, #b6cbf2 100%);
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 12px rgba(159,198,255,0.22)); }
+    .sr-boot-sub { font: 400 10px/1 "JetBrains Mono", monospace; letter-spacing: 0.3em; color: rgba(159,198,255,0.4); }
+    .sr-boot-msg { margin-top: 16px; font: 300 13px/1.6 Sora, "Noto Sans SC", -apple-system, sans-serif;
+      color: rgba(208,220,255,0.66); max-width: 340px; text-align: center;
+      animation: sr-boot-pulse 2.4s ease-in-out infinite; }
+    .sr-boot-stars { position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        radial-gradient(1.5px 1.5px at 18% 30%, rgba(214,230,255,0.8), transparent 60%),
+        radial-gradient(1px 1px at 72% 22%, rgba(159,198,255,0.7), transparent 60%),
+        radial-gradient(1.5px 1.5px at 84% 64%, rgba(255,231,176,0.6), transparent 60%),
+        radial-gradient(1px 1px at 30% 74%, rgba(214,230,255,0.55), transparent 60%),
+        radial-gradient(1px 1px at 56% 48%, rgba(159,198,255,0.5), transparent 60%),
+        radial-gradient(1.5px 1.5px at 8% 56%, rgba(159,198,255,0.4), transparent 60%),
+        radial-gradient(1px 1px at 44% 12%, rgba(214,230,255,0.45), transparent 60%),
+        radial-gradient(1px 1px at 92% 40%, rgba(159,198,255,0.5), transparent 60%);
+      animation: sr-boot-tw 3.6s ease-in-out infinite; }
+    @keyframes sr-boot-pulse { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
+    @keyframes sr-boot-tw { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) { .sr-boot-msg, .sr-boot-stars { animation: none; } }
+  </style>
+  <script>
+    // 兜底：CDN 断网 / 故障时不再是永远的黑幕
+    setTimeout(function () {
+      var b = document.getElementById('sr-boot');
+      if (b && !b.hasAttribute('data-done')) {
+        var m = document.getElementById('sr-boot-msg');
+        if (m) {
+          m.textContent = '网络不可达 — 星图需要联网加载运行时（React / Babel），请检查连接后刷新。';
+          m.style.animation = 'none';
+          m.style.opacity = '1';
+        }
+      }
+    }, 8000);
+  </script>
+
   <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
@@ -34,6 +91,8 @@
   <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
   <script src="../../assets/starfield.js?v=6"></script>
   <script src="codehl.js"></script>
+  <script src="sanitize.js?v=1"></script>
+  <script src="mdcore.js?v=1"></script>
   <!-- The compiled bundle ships a self-rendering snapshot of this app and mounts it into
        #root before its own design-system namespace is exported, so that built-in copy can
        never render correctly. Swallow that first root; only the live source below mounts. -->
@@ -48,25 +107,29 @@
     })();
   </script>
   <script src="../../_ds_bundle.js"></script>
-  <script src="api.js?v=67"></script>
-  <script src="tip.js?v=3"></script>
-  <script src="data.js?v=69"></script>
-  <script type="text/babel" src="Sidebar.jsx?v=68"></script>
-  <script type="text/babel" src="StarMap.jsx?v=65"></script>
-  <script type="text/babel" src="AerialView.jsx?v=74"></script>
-  <script type="text/babel" src="FeynmanDrawer.jsx?v=65"></script>
-  <script type="text/babel" src="ListView.jsx?v=65"></script>
-  <script type="text/babel" src="EditorMenus.jsx?v=67"></script>
-  <script type="text/babel" src="Editor.jsx?v=68"></script>
-  <script type="text/babel" src="Inbox.jsx?v=65"></script>
-  <script type="text/babel" src="BlackHole.jsx?v=66"></script>
-  <script type="text/babel" src="VisitView.jsx?v=77"></script>
-  <script type="text/babel" src="Timeline.jsx?v=66"></script>
+  <script src="api.js?v=70"></script>
+  <script src="tip.js?v=4"></script>
+  <script src="transition.js?v=2"></script>
+  <script src="undocore.js?v=1"></script>
+  <script src="data.js?v=74"></script>
+  <script type="text/babel" src="Sidebar.jsx?v=72"></script>
+  <script type="text/babel" src="StarMap.jsx?v=70"></script>
+  <script type="text/babel" src="AerialView.jsx?v=76"></script>
+  <script type="text/babel" src="FeynmanDrawer.jsx?v=68"></script>
+  <script type="text/babel" src="ListView.jsx?v=67"></script>
+  <script type="text/babel" src="EditorMenus.jsx?v=70"></script>
+  <script type="text/babel" src="Editor.jsx?v=74"></script>
+  <script type="text/babel" src="Inbox.jsx?v=68"></script>
+  <script type="text/babel" src="BlackHole.jsx?v=68"></script>
+  <script type="text/babel" src="VisitView.jsx?v=78"></script>
+  <script type="text/babel" src="Timeline.jsx?v=67"></script>
   <script type="text/babel" src="CommandPalette.jsx?v=66"></script>
-  <script type="text/babel" src="Checkup.jsx?v=65"></script>
-  <script type="text/babel" src="Galaxy3D.jsx?v=68"></script>
-  <script type="text/babel" src="Settings.jsx?v=66"></script>
+  <script type="text/babel" src="Checkup.jsx?v=68"></script>
+  <script type="text/babel" src="ReviewSession.jsx?v=3"></script>
+  <script type="text/babel" src="Galaxy3D.jsx?v=72"></script>
+  <script type="text/babel" src="Settings.jsx?v=67"></script>
+  <script type="text/babel" src="Onboarding.jsx?v=1"></script>
   <script type="text/babel" src="AIConfig.jsx?v=65"></script>
-  <script type="text/babel" src="app.jsx?v=67"></script>
+  <script type="text/babel" src="app.jsx?v=76"></script>
 </body>
 </html>
