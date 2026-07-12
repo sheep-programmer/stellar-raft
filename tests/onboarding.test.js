@@ -14,9 +14,12 @@ const read = (p) => readFileSync(join(ROOT, p), 'utf8');
 const ONB = read('ui_kits/stellar-raft/Onboarding.jsx');
 
 test('Onboarding 注册 Onboarding 与 OnboardingTour 到 SRKit', () => {
-  assert.match(ONB, /window\.SRKit\s*=\s*Object\.assign\(/);
-  assert.match(ONB, /\bOnboarding\b/);
-  assert.match(ONB, /\bOnboardingTour\b/);
+  // 锚定到实际的注册语句本身，而不是零散地匹配函数名——后者哪怕从
+  // Object.assign 的第二个参数里被删掉，函数声明依然存在，测试仍会通过。
+  assert.match(
+    ONB,
+    /window\.SRKit\s*=\s*Object\.assign\(\s*window\.SRKit\s*\|\|\s*\{\}\s*,\s*\{\s*Onboarding\s*,\s*OnboardingTour\s*\}\s*\)/
+  );
 });
 
 test('导览册恰好 11 页，每页字段完整', () => {
@@ -37,7 +40,7 @@ test('导览册恰好 11 页，每页字段完整', () => {
 
 test('无 emoji / 无杂色（品牌律）', () => {
   // 基本 emoji 区段扫描
-  assert.ok(!/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}]/u.test(ONB), 'Onboarding.jsx 含 emoji');
+  assert.ok(!/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{2B00}-\u{2BFF}]/u.test(ONB), 'Onboarding.jsx 含 emoji');
 });
 
 test('聚光锚点在源码中成对存在', () => {
