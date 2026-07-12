@@ -92,6 +92,10 @@ lit/ember 布尔与 litRatio，不泄露时间戳。
 - **启动帧**：`index.html` 内联静态启动帧（logo + 「正在点亮你的星空…」+ 微星点），app 挂载后淡出；8s 未就绪转为断网兜底提示。
 - **sr-data 事件**：删除/恢复/建星等写操作即时广播，侧栏「黑洞/复习」角标不再等每分钟心跳。
 
+## 新手引导（星图手册）
+
+首次打开自动弹出的分页导览册（`Onboarding.jsx`，11 页）——星图 / 记忆衰减 / 费曼点亮 / 复习 / 收件箱 / 编辑器 / 鸟瞰·3D / 黑洞 / 星际漫游 / 快捷键，逐页讲清。看过/跳过后写 `localStorage['sr.onboarded']`，不再自动弹。末页「实地看看」切到聚光实地导览（`OnboardingTour`，靠 `data-tour` 锚点高亮星图主界面的搜索 / 复习 / 工具胶囊）。随时可在设置「上手引导」里回看。
+
 ## Conventions
 - Components come from the DS bundle (`window.StellarRaftDesignSystem_2866af`): `StarNode`, `MemoryBar`, `GlassPanel`, `Button`, `IconButton`, `Icon`, `Input`, `Tag`, `Badge`, `ConstellationItem`.
 - Icons are Lucide via CDN. No emoji, no unicode glyph icons.
