@@ -2,13 +2,53 @@
    分页玻璃导览册（Onboarding）+ 末页聚光实地导览（OnboardingTour）。
    首次打开自动弹出（app.jsx 判 localStorage['sr.onboarded']），设置里可回看。
    props: Onboarding { onClose, onSpotlight } · OnboardingTour { onClose } */
-const { Button, GlassPanel, Icon, IconButton } = window.StellarRaftDesignSystem_2866af;
+const { Button, GlassPanel, Icon } = window.StellarRaftDesignSystem_2866af;
 
-// 11 页内容（Task 2 填满 body 与配图 icon）。此处先放 1 页占位，保证组件可渲染。
+// 11 页内容：欢迎 · 星图 · 记忆 · 点亮 · 复习 · 收件箱 · 编辑器 · 视角 · 黑洞 · 到访 · 快捷键。
 const SR_GUIDE_PAGES = [
-  { id: 'welcome', kicker: 'WELCOME', icon: 'sparkles', warm: true,
-    title: '知识是唯一的光', body: '别人的笔记堆在仓库里；你的笔记是一片活着的深空。' },
+  { id: 'welcome',  kicker: 'WELCOME',      icon: 'sparkles',  warm: true,
+    title: '知识是唯一的光',   body: '别人的笔记堆在仓库里；你的笔记是一片活着的深空。记得越牢，星越亮；久不回望，它会慢慢变暗。' },
+  { id: 'map',      kicker: 'STAR MAP',     icon: 'orbit',     warm: false,
+    title: '你的星图',         body: '拖空白平移，滚轮缩放就像飞行般靠近或远离。在空白处右键，建一片星域，或点亮一颗新的知识星。' },
+  { id: 'memory',   kicker: 'MEMORY',       icon: 'activity',  warm: false,
+    title: '会生长，也会遗忘', body: '每颗星的亮度就是你此刻的记忆强度，按真实时间衰减。放着不看，它会一天天冷下去——这是提醒，不是责备。' },
+  { id: 'ignite',   kicker: 'IGNITE',       icon: 'flame',     warm: true,
+    title: '点亮一颗星',       body: '在费曼内化模式里把这颗星讲透，它才被真正「点亮」——一次金色的时刻，记忆稳定度随之升起。' },
+  { id: 'review',   kicker: 'REVIEW',       icon: 'repeat',    warm: false,
+    title: '让星不熄灭',       body: '复习会话按到期先后取卡：忘了 · 模糊 · 记得。间隔重复让亮起来的星，不再悄悄熄灭。' },
+  { id: 'inbox',    kicker: 'INBOX',        icon: 'inbox',     warm: false,
+    title: '随手收，慢慢理',   body: '灵光一现先 ⌘Enter 收进收件箱，之后按建议一键归入星域。好友的星际来信也落在这里。' },
+  { id: 'editor',   kicker: 'EDITOR',       icon: 'pen-line',  warm: false,
+    title: '专业的编辑台',     body: '块编辑、markdown 快捷输入、⌘F 查找替换、导入导出——像主流笔记软件一样顺手，又始终安静好看。' },
+  { id: 'views',    kicker: 'AERIAL · 3D',  icon: 'satellite', warm: false,
+    title: '换一个视角',       body: '亮度鸟瞰把整片星空摊成一张热图，一眼看清哪里正亮、哪里正暗；三维星系则让你在星海里绕行。' },
+  { id: 'trash',    kicker: 'BLACK HOLE',   icon: 'aperture',  warm: false,
+    title: '删掉的去了哪',     body: '删除的星与星域坠入黑洞，绕着事件视界打转。想它回来，随时把它捞出，位置与连接都还在。' },
+  { id: 'visit',    kicker: 'VISIT',        icon: 'telescope', warm: true,
+    title: '星与星的相逢',     body: '用分享码邀请好友造访你的星系，也去看看别人的深空。遇到心动的星，把它收进自己的星域。' },
+  { id: 'shortcuts', kicker: 'SHORTCUTS',   icon: 'keyboard',  warm: true,
+    title: '就这些，去点亮吧', body: '⌘K 跳转任意星 · ⌘F 笔记内查找 · / 唤起块菜单 · Esc 收起浮层。想再看这份手册，去设置里找「上手引导」。' },
 ];
+
+/* 复用插画：Lucide 图标居中 + 同心发光环 + 星尘。冷蓝(结构)/暖金(奖励)二选一。 */
+function GuideArt({ icon, warm }) {
+  const c = warm ? '255,217,138' : '159,198,255';
+  const reduce = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  return (
+    <div aria-hidden="true" style={{ position: 'relative', width: 132, height: 132, flex: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <span style={{ position: 'absolute', width: 132, height: 132, borderRadius: '50%', border: '1px solid rgba(' + c + ',0.14)' }} />
+      <span style={{ position: 'absolute', width: 92, height: 92, borderRadius: '50%', border: '1px solid rgba(' + c + ',0.22)',
+        boxShadow: '0 0 22px rgba(' + c + ',0.16), inset 0 0 18px rgba(' + c + ',0.10)',
+        animation: reduce ? 'none' : 'sr-breathe 5.2s var(--ease-flight) infinite' }} />
+      <span style={{ position: 'absolute', width: 60, height: 60, borderRadius: '50%', background: 'rgba(' + c + ',0.06)', filter: 'blur(2px)' }} />
+      <Icon name={icon} size={30} color={warm ? 'var(--gold)' : 'var(--star-blue)'} />
+      {[[-46, -30, 1.6], [44, -20, 1.2], [30, 42, 1.4], [-38, 34, 1.1]].map((s, i) => (
+        <span key={i} style={{ position: 'absolute', left: '50%', top: '50%', width: s[2] * 2, height: s[2] * 2, borderRadius: '50%',
+          transform: 'translate(' + s[0] + 'px,' + s[1] + 'px)', background: 'rgba(' + c + ',0.8)', boxShadow: '0 0 6px rgba(' + c + ',0.7)' }} />
+      ))}
+    </div>
+  );
+}
 
 function Onboarding({ onClose, onSpotlight }) {
   const [page, setPage] = React.useState(0);
@@ -54,7 +94,7 @@ function Onboarding({ onClose, onSpotlight }) {
 
           {/* body: 插画 + 标题 + 短文（Task 2 接入 GuideArt） */}
           <div key={page} style={{ flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '8px 40px 20px', animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
-            <Icon name={p.icon} size={40} color={p.warm ? 'var(--gold)' : 'var(--star-blue)'} />
+            <GuideArt icon={p.icon} warm={p.warm} />
             <div style={{ fontSize: 22, fontWeight: 300, color: 'var(--text-1)', marginTop: 22, letterSpacing: '0.02em', textShadow: '0 0 16px rgba(159,198,255,0.18)' }}>{p.title}</div>
             <div style={{ fontSize: 14, color: 'var(--text-2)', lineHeight: 1.85, marginTop: 14, maxWidth: 420 }}>{p.body}</div>
           </div>
