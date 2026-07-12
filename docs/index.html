@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>星图 · Stellar Raft — 设计系统</title>
+  <meta name="description" content="星图 Stellar Raft 设计系统文档 —— 深空知识笔记应用的品牌、基础与组件库。">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26'%3E%3Crect x='.5' y='.5' width='25' height='25' rx='7.5' fill='%23080c1c' stroke='rgba(159,198,255,.28)'/%3E%3Cpath d='M7.5 9 L16.5 7 L19 16.5 L11 18.5' stroke='rgba(159,198,255,.5)' stroke-width='.8' fill='none' stroke-linejoin='round' stroke-linecap='round'/%3E%3Ccircle cx='7.5' cy='9' r='1.35' fill='%23d6e6ff'/%3E%3Ccircle cx='19' cy='16.5' r='1.15' fill='%239fc6ff'/%3E%3Ccircle cx='11' cy='18.5' r='1.1' fill='%239fc6ff'/%3E%3Ccircle cx='16.5' cy='7' r='3.4' fill='%23ffd98a' opacity='.22'/%3E%3Ccircle cx='16.5' cy='7' r='1.8' fill='%23ffe9b0'/%3E%3C/svg%3E">
+  <script>try{var m=location.search.match(/[?&]theme=(dawn|space)/);var t=m?m[1]:localStorage.getItem('sr.docs.theme');if(t==='dawn')document.documentElement.dataset.theme='dawn';if(m)localStorage.setItem('sr.docs.theme',m[1])}catch(e){}</script>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+  <sr-starfield class="docs-sky" style="position:fixed" density="0.7"></sr-starfield>
+
+  <header class="docs-header">
+    <div class="docs-header-inner">
+      <a class="docs-brand" href="index.html"><span class="zh">星图</span><span class="en">Stellar Raft</span></a>
+      <nav class="docs-nav" aria-label="文档导航">
+        <a href="index.html" aria-current="page">首页</a>
+        <a href="getting-started.html">开始使用</a>
+        <a href="foundations.html">基础</a>
+        <a href="components.html">组件</a>
+        <a href="showcase.html">应用复刻</a>
+      </nav>
+      <button class="theme-toggle" type="button" title="切换 深空 / 黎明" aria-label="切换 深空 / 黎明 主题">
+        <i data-lucide="sunrise" class="ic-space"></i>
+        <i data-lucide="moon-star" class="ic-dawn"></i>
+      </button>
+    </div>
+  </header>
+
+  <main class="docs-main">
+    <section class="hero">
+      <span class="mark">
+        <svg width="72" height="72" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+          <rect x="0.5" y="0.5" width="25" height="25" rx="7.5" fill="#080c1c" stroke="rgba(159,198,255,0.28)"/>
+          <path d="M7.5 9 L16.5 7 L19 16.5 L11 18.5" stroke="rgba(159,198,255,0.5)" stroke-width="0.8" stroke-linejoin="round" stroke-linecap="round"/>
+          <path d="M7.5 9 L11 18.5" stroke="rgba(255,217,138,0.55)" stroke-width="0.8" stroke-linecap="round"/>
+          <circle cx="7.5" cy="9" r="1.35" fill="#d6e6ff"/>
+          <circle cx="19" cy="16.5" r="1.15" fill="#9fc6ff"/>
+          <circle cx="11" cy="18.5" r="1.1" fill="#9fc6ff"/>
+          <circle cx="16.5" cy="7" r="3.4" fill="#ffd98a" opacity="0.22"/>
+          <circle cx="16.5" cy="7" r="1.8" fill="#ffe9b0"/>
+        </svg>
+      </span>
+      <h1 class="wordmark">星图</h1>
+      <div class="hud-label" style="margin-top:8px">STELLAR RAFT · DESIGN SYSTEM</div>
+      <p class="promise">别人的笔记是仓库，星图是一片活着的知识深空。<br>
+        记得，这颗星便发光；久不回望，它就冷却、变暗。<br>
+        这里是它的品牌法则、基础变量与组件库。</p>
+    </section>
+
+    <section class="card-grid" aria-label="文档入口">
+      <a class="nav-card" href="getting-started.html">
+        <i data-lucide="rocket" class="ic"></i>
+        <h3>开始使用</h3>
+        <p>一个 styles.css、一份组件 bundle、一段星场脚本 —— 五分钟接入整套系统。</p>
+        <span class="go">GETTING STARTED</span>
+      </a>
+      <a class="nav-card" href="foundations.html">
+        <i data-lucide="palette" class="ic"></i>
+        <h3>基础</h3>
+        <p>色彩与记忆温度梯、字体、间距、圆角、发光阴影 —— 全部 token 速查与 15 张规范卡。</p>
+        <span class="go">FOUNDATIONS</span>
+      </a>
+      <a class="nav-card" href="components.html">
+        <i data-lucide="layout-grid" class="ic"></i>
+        <h3>组件</h3>
+        <p>18 个可复用基元：从 GlassPanel、StarNode 到 Modal、Tabs，每个都带 props 表与用法要点。</p>
+        <span class="go">COMPONENTS</span>
+      </a>
+      <a class="nav-card" href="showcase.html">
+        <i data-lucide="telescope" class="ic"></i>
+        <h3>应用复刻</h3>
+        <p>8 屏桌面端交互复刻：星图画布、语义缩放、费曼内化、点亮时刻，可直接点开游走。</p>
+        <span class="go">SHOWCASE</span>
+      </a>
+    </section>
+
+    <hr class="docs-hr">
+
+    <section class="docs-section" style="margin-top:0">
+      <div class="hud-label">AESTHETIC LAWS</div>
+      <h2>四条美学法则</h2>
+      <ul class="usage-list" style="max-width:680px">
+        <li>每个视觉元素都携带信息，绝不只做装饰 —— 亮度 = 记忆强度 · 大小 = 重要度 · 距离 = 关联 · 色温 = 新旧。</li>
+        <li>少即是多：全站不超过 3–4 个色相。金色只留给奖励、点亮与掌握。</li>
+        <li>深色舞台优先，大胆的黑色负空间，低信息密度，留出呼吸。</li>
+        <li>编辑器先专业可用、后美 —— 但美从不缺席。</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="docs-footer">
+    <span>星图 · Stellar Raft 设计系统 —— 知识是唯一的光。</span>
+    <span class="mono">DEEP SPACE / DAWN · TOKENS FIRST · NO EMOJI</span>
+  </footer>
+
+  <script src="../assets/starfield.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="docs.js"></script>
+</body>
+</html>

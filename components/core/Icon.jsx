@@ -23,7 +23,7 @@ export function Icon({ name, size = 20, strokeWidth = 1.6, color, className, sty
       svg.setAttribute('height', size);
       svg.setAttribute('stroke-width', strokeWidth);
       svg.style.display = 'block';
-      if (title) svg.setAttribute('aria-label', title);
+      if (title) { svg.setAttribute('aria-label', title); svg.setAttribute('role', 'img'); }
     }
   }, [name, size, strokeWidth, title]);
 

@@ -1,0 +1,21 @@
+{
+  "name": "stellar-raft-design-system",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "星图 Stellar Raft — 深空知识笔记应用的品牌与组件库（design system + local server）",
+  "engines": {
+    "node": ">=22.5"
+  },
+  "scripts": {
+    "build": "node scripts/build-bundle.mjs",
+    "build:check": "node scripts/build-bundle.mjs --check",
+    "test": "node --test \"tests/**/*.test.js\"",
+    "serve": "node --no-warnings server/server.js",
+    "lint": "node scripts/lint.mjs"
+  },
+  "devDependencies": {
+    "@babel/standalone": "7.29.0",
+    "oxlint": "1.73.0"
+  }
+}

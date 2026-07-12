@@ -52,7 +52,7 @@ export function Input({
         {...rest}
       />
       {kbd && (
-        <span style={{
+        <span aria-hidden="true" style={{
           fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-3)',
           border: '1px solid var(--line)', borderRadius: 6, padding: '2px 6px', lineHeight: 1,
         }}>{kbd}</span>

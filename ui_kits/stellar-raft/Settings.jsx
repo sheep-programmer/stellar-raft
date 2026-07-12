@@ -13,15 +13,19 @@ const SR_AVATARS = [
   { id: 'ember',  grad: 'linear-gradient(140deg, #5a2e26, #e8917a)' },
 ];
 
+// 只列真实存在的快捷键——这页是承诺，不是愿望清单
 const SR_SHORTCUTS = [
-  { keys: ['⌘', 'K'], label: '全局搜索 · 跳转任意星' },
-  { keys: ['⌘', 'N'], label: '新建一颗知识星' },
-  { keys: ['⌘', 'E'], label: '打开 / 收起编辑器' },
-  { keys: ['F'],      label: '聚焦选中的星' },
-  { keys: ['Space'],  label: '亮度鸟瞰 / 退出' },
-  { keys: ['⌘', '\\'],label: '折叠 / 展开侧栏' },
-  { keys: ['Esc'],    label: '关闭当前弹窗 / 抽屉' },
-  { keys: ['/'],      label: '编辑器内唤起块菜单' },
+  { keys: ['⌘', 'K'],     label: '全局搜索 · 跳转任意星或视图' },
+  { keys: ['⌘', 'K'],     label: '编辑器内选中文字 · 添加链接' },
+  { keys: ['⌘', 'F'],     label: '编辑器 · 笔记内查找 / 替换' },
+  { keys: ['⌘', 'Z'],     label: '编辑器 · 撤销（加 ⇧ 重做）' },
+  { keys: ['/'],          label: '编辑器内唤起块菜单' },
+  { keys: ['⌥', '↑', '↓'], label: '编辑器 · 上下移动当前块' },
+  { keys: ['Tab'],        label: '编辑器 · 列表缩进（⇧Tab 减少）' },
+  { keys: ['⌘', 'Enter'], label: '收件箱 · 捕捉当前草稿' },
+  { keys: ['Space'],      label: '复习会话 · 翻开卡片' },
+  { keys: ['1', '2', '3'], label: '复习会话 · 忘了 / 模糊 / 记得' },
+  { keys: ['Esc'],        label: '关闭当前弹窗 / 抽屉' },
 ];
 
 const SR_SET_NAV = [
@@ -117,6 +121,11 @@ function Settings({ onClose, theme, onToggleTheme }) {
   const [dimNudge, setDimNudge] = React.useState(() => saved.dimNudge !== false);
   const [confirm, setConfirm] = React.useState(null); // {message, confirmLabel, onYes}
 
+  // 模态焦点管理：移焦入内 · Tab 圈禁 · 关闭还原焦点；打开期间吞掉 ⌘K，
+  // 命令面板不再叠在设置之上（同 DS Modal / ReviewSession 的语义）
+  const modalRef = React.useRef(null);
+  (window.SRKit && window.SRKit.useModalFocus ? window.SRKit.useModalFocus : () => { })(modalRef, { swallowCmdK: true });
+
   React.useEffect(() => {
     const k = (e) => { if (e.key === 'Escape') { e.stopPropagation(); onClose(); } };
     document.addEventListener('keydown', k);
@@ -147,7 +156,8 @@ function Settings({ onClose, theme, onToggleTheme }) {
   const ink = dawn ? '#1a2238' : 'var(--text-1)';
 
   return (
-    <div onMouseDown={onClose} onContextMenu={(e) => e.preventDefault()}
+    <div ref={modalRef} onMouseDown={onClose} onContextMenu={(e) => e.preventDefault()}
+      role="dialog" aria-modal="true" aria-label="设置"
       style={{ position: 'fixed', inset: 0, zIndex: 110, background: 'rgba(3,4,12,0.55)', backdropFilter: 'blur(4px)', WebkitBackdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
       <div onMouseDown={(e) => e.stopPropagation()}
         style={{ width: 760, maxWidth: '94vw', height: 560, maxHeight: '92vh', animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
@@ -274,7 +284,7 @@ function Settings({ onClose, theme, onToggleTheme }) {
                         opacity: remind ? 1 : 0.45, colorScheme: 'dark',
                       }} />
                   </SRRow>
-                  <SRRow title="星座变暗提醒" hint="当一片星座长期无人问津、整体变暗时，轻轻提醒你。" align="flex-start">
+                  <SRRow title="星域变暗提醒" hint="当一片星域长期无人问津、整体变暗时，轻轻提醒你。" align="flex-start">
                     <SRToggle on={dimNudge} onChange={setDimNudge} />
                   </SRRow>
                   <div style={{ marginTop: 14, fontSize: 11.5, color: 'var(--text-3)', lineHeight: 1.7 }}>
@@ -310,7 +320,7 @@ function Settings({ onClose, theme, onToggleTheme }) {
                   <SRRow title="邮箱"><span style={{ fontSize: 13, color: 'var(--text-2)', fontFamily: 'var(--font-mono)' }}>{D.account.email}</span></SRRow>
                   <SRRow title="方案"><span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12.5, color: 'var(--gold)', border: '1px solid rgba(255,217,138,0.35)', borderRadius: 'var(--r-pill)', padding: '3px 11px', background: 'rgba(255,217,138,0.1)' }}><Icon name="sparkles" size={13} color="var(--gold)" />{D.account.plan}</span></SRRow>
                   <SRRow title="加入于"><span style={{ fontSize: 13, color: 'var(--text-2)', fontFamily: 'var(--font-mono)' }}>{D.account.joined}</span></SRRow>
-                  <SRRow title="星辰总数"><span style={{ fontSize: 13, color: 'var(--text-2)', fontFamily: 'var(--font-mono)' }}>正发光 {D.stars.filter(s => s.strength >= 0.7).length} · 正变暗 {D.stars.filter(s => s.strength < 0.4).length} · 连接 {D.connections.length}</span></SRRow>
+                  <SRRow title="我的星空"><span style={{ fontSize: 13, color: 'var(--text-2)', fontFamily: 'var(--font-mono)' }}>共 {D.stars.length} 颗 · 正发光 {D.stars.filter(s => s.strength >= 0.7).length} · 正变暗 {D.stars.filter(s => s.strength < 0.4).length} · 连接 {D.connections.length}</span></SRRow>
                   <SRRow title="连续点亮"><span style={{ fontSize: 13, color: 'var(--text-2)', fontFamily: 'var(--font-mono)' }}>{D.account.streak} 天</span></SRRow>
                   <div style={{ display: 'flex', gap: 10, marginTop: 18 }}>
                     <Button size="sm" variant="ghost" icon="download" onClick={() => {

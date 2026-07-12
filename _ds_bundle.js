@@ -1,4 +1,4 @@
-/* @ds-bundle: {"format":3,"namespace":"StellarRaftDesignSystem_2866af","components":[{"name":"Badge","sourcePath":"components/core/Badge.jsx"},{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"GlassPanel","sourcePath":"components/core/GlassPanel.jsx"},{"name":"Icon","sourcePath":"components/core/Icon.jsx"},{"name":"IconButton","sourcePath":"components/core/IconButton.jsx"},{"name":"Input","sourcePath":"components/core/Input.jsx"},{"name":"Tag","sourcePath":"components/core/Tag.jsx"},{"name":"ConstellationItem","sourcePath":"components/knowledge/ConstellationItem.jsx"},{"name":"MemoryBar","sourcePath":"components/knowledge/MemoryBar.jsx"},{"name":"StarNode","sourcePath":"components/knowledge/StarNode.jsx"}],"sourceHashes":{"assets/starfield.js":"c884236415c6","components/core/Badge.jsx":"b0bd9735d638","components/core/Button.jsx":"05578fc5ddc2","components/core/GlassPanel.jsx":"299a19d8fbb4","components/core/Icon.jsx":"d6804e3d9da2","components/core/IconButton.jsx":"d0632940a8c1","components/core/Input.jsx":"b420e1dab922","components/core/Tag.jsx":"c2ef9d0e17f1","components/knowledge/ConstellationItem.jsx":"f30d67af5720","components/knowledge/MemoryBar.jsx":"995265dbdebe","components/knowledge/StarNode.jsx":"7bd6fa95be84","ui_kits/stellar-raft/AerialView.jsx":"b3b9e32d8bf2","ui_kits/stellar-raft/Editor.jsx":"cfc1adef888f","ui_kits/stellar-raft/EditorMenus.jsx":"c3e7b6fe7f5b","ui_kits/stellar-raft/FeynmanDrawer.jsx":"2918c4a811f5","ui_kits/stellar-raft/ListView.jsx":"163a7538365e","ui_kits/stellar-raft/Sidebar.jsx":"ad7caa24ddf5","ui_kits/stellar-raft/StarMap.jsx":"4f76d34c3735","ui_kits/stellar-raft/app.jsx":"7d0fa4db8540","ui_kits/stellar-raft/codehl.js":"258dd04b595f","ui_kits/stellar-raft/data.js":"0d8c5aea8065"},"inlinedExternals":[],"unexposedExports":[{"name":"memoryColor","sourcePath":"components/knowledge/MemoryBar.jsx"}]} */
+/* @ds-bundle: {"format":3,"namespace":"StellarRaftDesignSystem_2866af","components":[{"name":"Badge","sourcePath":"components/core/Badge.jsx"},{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"GlassPanel","sourcePath":"components/core/GlassPanel.jsx"},{"name":"Icon","sourcePath":"components/core/Icon.jsx"},{"name":"IconButton","sourcePath":"components/core/IconButton.jsx"},{"name":"Input","sourcePath":"components/core/Input.jsx"},{"name":"Tag","sourcePath":"components/core/Tag.jsx"},{"name":"Checkbox","sourcePath":"components/form/Checkbox.jsx"},{"name":"Select","sourcePath":"components/form/Select.jsx"},{"name":"Switch","sourcePath":"components/form/Switch.jsx"},{"name":"Tabs","sourcePath":"components/form/Tabs.jsx"},{"name":"ConstellationItem","sourcePath":"components/knowledge/ConstellationItem.jsx"},{"name":"MemoryBar","sourcePath":"components/knowledge/MemoryBar.jsx"},{"name":"StarNode","sourcePath":"components/knowledge/StarNode.jsx"},{"name":"ContextMenu","sourcePath":"components/overlay/ContextMenu.jsx"},{"name":"Modal","sourcePath":"components/overlay/Modal.jsx"},{"name":"Toast","sourcePath":"components/overlay/Toast.jsx"},{"name":"Tooltip","sourcePath":"components/overlay/Tooltip.jsx"}],"sourceHashes":{"assets/starfield.js":"d776d2b45dc4","components/core/Badge.jsx":"b0bd9735d638","components/core/Button.jsx":"a1c387a07e86","components/core/GlassPanel.jsx":"299a19d8fbb4","components/core/Icon.jsx":"7505f83ab03d","components/core/IconButton.jsx":"24052f4eed78","components/core/Input.jsx":"54a6c9af7e3f","components/core/Tag.jsx":"d8513c07ea96","components/form/Checkbox.jsx":"38aa593157dd","components/form/Select.jsx":"86b8c1c71e12","components/form/Switch.jsx":"938c62be0664","components/form/Tabs.jsx":"ede2dbff1963","components/knowledge/ConstellationItem.jsx":"d73e999469b6","components/knowledge/MemoryBar.jsx":"a54c928d5065","components/knowledge/StarNode.jsx":"1bedee49f0bf","components/overlay/ContextMenu.jsx":"11783420e876","components/overlay/Modal.jsx":"0906de457544","components/overlay/Toast.jsx":"d22ad40680a6","components/overlay/Tooltip.jsx":"a042caa8970d","ui_kits/stellar-raft/AIConfig.jsx":"ac3ebbc8c643","ui_kits/stellar-raft/AerialView.jsx":"c03956215464","ui_kits/stellar-raft/BlackHole.jsx":"17eb30e1a014","ui_kits/stellar-raft/Checkup.jsx":"432f59decbb5","ui_kits/stellar-raft/CommandPalette.jsx":"0e41e59f2e82","ui_kits/stellar-raft/Editor.jsx":"78bfb1224f72","ui_kits/stellar-raft/EditorMenus.jsx":"d1e43e13658d","ui_kits/stellar-raft/FeynmanDrawer.jsx":"22555e93116f","ui_kits/stellar-raft/Galaxy3D.jsx":"8e40ab3d2a66","ui_kits/stellar-raft/Inbox.jsx":"59cb0e9861d0","ui_kits/stellar-raft/ListView.jsx":"04333626cd62","ui_kits/stellar-raft/ReviewSession.jsx":"8e0b3ed9e247","ui_kits/stellar-raft/Settings.jsx":"4ca18ad86a8b","ui_kits/stellar-raft/Sidebar.jsx":"8319dcbb6c23","ui_kits/stellar-raft/StarMap.jsx":"3f007183d133","ui_kits/stellar-raft/Timeline.jsx":"56d938b8201e","ui_kits/stellar-raft/VisitView.jsx":"c59ff48bf477","ui_kits/stellar-raft/app.jsx":"33738d8d7032","ui_kits/stellar-raft/codehl.js":"6fbdd0100deb","ui_kits/stellar-raft/data.js":"85a8add5deee","ui_kits/stellar-raft/mdcore.js":"297534e398c8","ui_kits/stellar-raft/sanitize.js":"88e63cd63253","ui_kits/stellar-raft/transition.js":"3725d8982dc5","ui_kits/stellar-raft/undocore.js":"7f8c94da35f9"},"inlinedExternals":[],"unexposedExports":[{"name":"memoryColor","sourcePath":"components/knowledge/MemoryBar.jsx"}],"exposedHelpers":[{"name":"toast","sourcePath":"components/overlay/Toast.jsx"}]} */
 
 (() => {
 
@@ -11,17 +11,70 @@ const __ds_scope = {};
 // assets/starfield.js
 try { (() => {
 /* ===== 星图 Stellar Raft — Starfield helper =====
-   A self-registering web component <sr-starfield> that paints a slow,
-   twinkling deep-space background of small stars on a canvas.
-   Lightweight, respects prefers-reduced-motion, fills its parent.
+   A self-registering web component <sr-starfield> that paints a deep-space
+   background the way a long-exposure photograph reads:
+     · three parallax depth layers of stars, drifting almost imperceptibly
+     · star colors follow stellar temperature classes (blue-white → orange)
+     · a few bright stars carry a halo + 4-point diffraction spikes
+     · a faint diagonal Milky-Way band of unresolved star dust and nebula haze
+     · a rare meteor streak (never in prefers-reduced-motion)
+   Lightweight: the nebula band is pre-rendered once per resize; per frame we
+   blit it and repaint the twinkling stars only.
 
    Usage:  <sr-starfield density="1"></sr-starfield>   (position the host)
    Attributes:
      density  multiplier on star count (default 1)
-     warm     0..1 share of faint gold stars (default 0.12)
+     warm     0..1 bias toward warm-class stars (default 0.12)
+     nebula   0 to disable the Milky-Way band (default 1)
+     meteors  0 to disable meteor streaks (default 1)
 */
 (function () {
   if (customElements.get('sr-starfield')) return;
+
+  /* Stellar temperature classes, weighted roughly like the naked-eye sky. */
+  const SPECTRA = [{
+    w: 0.16,
+    c: [170, 196, 255]
+  },
+  // B — blue-white
+  {
+    w: 0.24,
+    c: [204, 218, 255]
+  },
+  // A — pale blue
+  {
+    w: 0.22,
+    c: [236, 240, 255]
+  },
+  // F — white
+  {
+    w: 0.20,
+    c: [255, 243, 216]
+  },
+  // G — yellow-white
+  {
+    w: 0.12,
+    c: [255, 224, 182]
+  },
+  // K — pale orange
+  {
+    w: 0.06,
+    c: [255, 202, 160]
+  } // M — orange-red
+  ];
+  function pickSpectrum(warmBias) {
+    // warmBias shifts probability mass toward the warm end of the sequence
+    let r = Math.random();
+    if (Math.random() < warmBias) r = 0.6 + Math.random() * 0.4;
+    let acc = 0;
+    for (const sp of SPECTRA) {
+      acc += sp.w;
+      if (r <= acc) return sp.c;
+    }
+    return SPECTRA[SPECTRA.length - 1].c;
+  }
+  const gauss = () => (Math.random() + Math.random() + Math.random()) / 1.5 - 1; // ~N(0,·) in [-1,1]
+
   class Starfield extends HTMLElement {
     connectedCallback() {
       this.canvas = document.createElement('canvas');
@@ -41,6 +94,7 @@ try { (() => {
       this.reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
       this._resize = this.resize.bind(this);
       window.addEventListener('resize', this._resize);
+      this.meteor = null;
       this.resize();
       this.t = 0;
       this.loop();
@@ -51,7 +105,10 @@ try { (() => {
     }
     resize() {
       const r = this.getBoundingClientRect();
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      // 画布必须与设备像素严格 1:1——任何 DPR 钳制都会引入非整数重采样，
+      // 在高缩放显示器上表现为贯穿画面的摩尔纹亮线
+      const dpr = Math.min(window.devicePixelRatio || 1, 3);
+      this.dpr = dpr;
       this.w = Math.max(1, r.width);
       this.h = Math.max(1, r.height);
       this.canvas.width = this.w * dpr;
@@ -62,32 +119,196 @@ try { (() => {
     build() {
       const density = parseFloat(this.getAttribute('density') || '1');
       const warm = parseFloat(this.getAttribute('warm') || '0.12');
-      const n = Math.round(this.w * this.h / 5200 * density);
+      const w = this.w,
+        h = this.h;
+
+      // Milky-Way band geometry: a diagonal through the canvas.
+      const ang = -0.42; // radians, gentle tilt
+      this.bandAng = ang;
+      const bandHalf = Math.max(90, Math.min(w, h) * 0.22);
+      const cx = w * 0.56,
+        cy = h * 0.42;
+      const distToBand = (x, y) => Math.abs(-Math.sin(ang) * (x - cx) + Math.cos(ang) * (y - cy));
+
+      // Three depth layers. Far stars are tiny and dense; near stars are few,
+      // larger, brighter, and twinkle harder. Star density rises inside the band.
+      const n = Math.round(w * h / 4300 * density);
       this.stars = Array.from({
         length: n
-      }, () => ({
-        x: Math.random() * this.w,
-        y: Math.random() * this.h,
-        r: Math.random() * 1.1 + 0.25,
-        base: Math.random() * 0.4 + 0.15,
-        amp: Math.random() * 0.45 + 0.1,
-        sp: Math.random() * 0.8 + 0.2,
-        ph: Math.random() * Math.PI * 2,
-        warm: Math.random() < warm
-      }));
+      }, () => {
+        // rejection-sample positions so ~40% of stars fall along the band
+        let x = Math.random() * w,
+          y = Math.random() * h;
+        if (Math.random() < 0.4) {
+          const along = Math.random() * Math.hypot(w, h) - Math.hypot(w, h) / 2;
+          const off = gauss() * bandHalf;
+          x = cx + Math.cos(ang) * along - Math.sin(ang) * off;
+          y = cy + Math.sin(ang) * along + Math.cos(ang) * off;
+          x = (x % w + w) % w;
+          y = (y % h + h) % h;
+        }
+        const depth = Math.random(); // 0 far … 1 near
+        const bright = Math.random() < 0.022 && depth > 0.5;
+        const col = pickSpectrum(warm);
+        return {
+          x,
+          y,
+          depth,
+          col,
+          bright,
+          colDawn: col.map(v => Math.round(v * 0.34 + 14)),
+          r: bright ? 1.5 + Math.random() * 1.0 : (0.22 + depth * 0.95) * (0.7 + Math.random() * 0.75),
+          base: 0.12 + depth * 0.3 + Math.random() * 0.22 + (bright ? 0.3 : 0),
+          amp: 0.08 + Math.random() * (0.18 + depth * 0.3),
+          sp: 0.2 + Math.random() * (bright ? 1.4 : 0.9),
+          ph: Math.random() * Math.PI * 2,
+          drift: (0.06 + depth * 0.5) * (Math.random() < 0.5 ? 1 : -1) * 0.14,
+          // px/s, parallax
+          inBand: distToBand(x, y) < bandHalf
+        };
+      });
+
+      // Pre-render the nebula haze + unresolved star dust once.
+      // 必须按设备像素 1:1 生成：任何非整数比例的重采样都会让星尘点阵
+      // 产生摩尔纹（Windows 125%/150% 缩放下表现为竖向亮线）。
+      this.nebula = null;
+      if ((this.getAttribute('nebula') || '1') !== '0') {
+        const nd = this.dpr || 1;
+        const nc = document.createElement('canvas');
+        nc.width = Math.max(1, Math.round(w * nd));
+        nc.height = Math.max(1, Math.round(h * nd));
+        const g = nc.getContext('2d');
+        g.scale(nd, nd);
+        const diag = Math.hypot(w, h);
+        // layered haze blobs along the band — cool blue-violet with a breath of warm
+        for (let i = 0; i < 30; i++) {
+          const along = (i / 30 - 0.5) * diag * 1.15 + gauss() * 60;
+          const off = gauss() * bandHalf * 0.75;
+          const bx = cx + Math.cos(ang) * along - Math.sin(ang) * off;
+          const by = cy + Math.sin(ang) * along + Math.cos(ang) * off;
+          const R = bandHalf * (0.7 + Math.random() * 0.9);
+          const warmCore = Math.random() < 0.18;
+          const rg = g.createRadialGradient(bx, by, 0, bx, by, R);
+          if (warmCore) {
+            rg.addColorStop(0, 'rgba(120,96,80,0.055)');
+            rg.addColorStop(0.5, 'rgba(70,62,96,0.035)');
+          } else {
+            const violet = Math.random() < 0.4;
+            rg.addColorStop(0, violet ? 'rgba(66,60,110,0.06)' : 'rgba(44,64,116,0.062)');
+            rg.addColorStop(0.55, 'rgba(30,40,80,0.032)');
+          }
+          rg.addColorStop(1, 'rgba(0,0,0,0)');
+          g.fillStyle = rg;
+          g.fillRect(bx - R, by - R, R * 2, R * 2);
+        }
+        // dark dust lane cutting the band — real galaxies are ragged, not smooth
+        for (let i = 0; i < 14; i++) {
+          const along = (i / 14 - 0.5) * diag + gauss() * 80;
+          const off = gauss() * bandHalf * 0.25;
+          const bx = cx + Math.cos(ang) * along - Math.sin(ang) * off;
+          const by = cy + Math.sin(ang) * along + Math.cos(ang) * off;
+          const R = bandHalf * (0.3 + Math.random() * 0.35);
+          const rg = g.createRadialGradient(bx, by, 0, bx, by, R);
+          rg.addColorStop(0, 'rgba(3,4,10,0.10)');
+          rg.addColorStop(1, 'rgba(0,0,0,0)');
+          g.fillStyle = rg;
+          g.fillRect(bx - R, by - R, R * 2, R * 2);
+        }
+        // unresolved star dust — thousands of sub-pixel points make the band glitter
+        const dust = Math.round(n * 2.2);
+        for (let i = 0; i < dust; i++) {
+          const along = Math.random() * diag - diag / 2;
+          const off = gauss() * bandHalf * 0.8;
+          const bx = cx + Math.cos(ang) * along - Math.sin(ang) * off;
+          const by = cy + Math.sin(ang) * along + Math.cos(ang) * off;
+          const c = pickSpectrum(0.1);
+          g.fillStyle = `rgba(${c[0]},${c[1]},${c[2]},${0.05 + Math.random() * 0.16})`;
+          g.fillRect(bx, by, 0.9, 0.9);
+        }
+        this.nebula = nc;
+      }
+    }
+    spawnMeteor() {
+      // enters near the top, drifts down-and-across — slow enough to admire
+      const fromLeft = Math.random() < 0.5;
+      const speed = 240 + Math.random() * 140;
+      const a = (fromLeft ? 0.3 : Math.PI - 0.3) + gauss() * 0.1;
+      this.meteor = {
+        x: this.w * (fromLeft ? 0.05 + Math.random() * 0.4 : 0.55 + Math.random() * 0.4),
+        y: this.h * (0.04 + Math.random() * 0.3),
+        vx: Math.cos(a) * speed,
+        vy: Math.abs(Math.sin(a)) * speed * 0.4,
+        life: 0,
+        ttl: 1.3 + Math.random() * 0.5
+      };
     }
     loop() {
       this._raf = requestAnimationFrame(() => this.loop());
-      this.t += this.reduced ? 0 : 0.012;
-      const c = this.ctx;
-      c.clearRect(0, 0, this.w, this.h);
+      const dt = this.reduced ? 0 : 1 / 60;
+      this.t += dt;
+      const c = this.ctx,
+        w = this.w,
+        h = this.h;
+      const dawn = document.documentElement.dataset.theme === 'dawn';
+      c.clearRect(0, 0, w, h);
+
+      // Milky-Way haze (skipped on the dawn theme — haze reads as dirt on light)
+      if (this.nebula && !dawn) c.drawImage(this.nebula, 0, 0, w, h);
       for (const s of this.stars) {
         const tw = this.reduced ? s.base + s.amp * 0.5 : s.base + s.amp * (0.5 + 0.5 * Math.sin(this.t * s.sp + s.ph));
+        const x = ((s.x + this.t * s.drift) % w + w) % w;
+        const col = dawn ? s.colDawn : s.col;
+        const a = dawn ? tw * 0.6 : tw;
         c.beginPath();
-        c.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-        const dawn = document.documentElement.dataset.theme === 'dawn';
-        c.fillStyle = dawn ? s.warm ? `rgba(196,140,40,${tw * 0.7})` : `rgba(70,98,168,${tw * 0.6})` : s.warm ? `rgba(255,225,170,${tw})` : `rgba(190,212,255,${tw})`;
+        c.arc(x, s.y, s.r, 0, Math.PI * 2);
+        c.fillStyle = `rgba(${col[0]},${col[1]},${col[2]},${a})`;
         c.fill();
+        // bright stars: soft halo + 4-point diffraction spikes (night only)
+        if (s.bright && !dawn) {
+          const R = s.r * 7;
+          const rg = c.createRadialGradient(x, s.y, 0, x, s.y, R);
+          rg.addColorStop(0, `rgba(${col[0]},${col[1]},${col[2]},${a * 0.32})`);
+          rg.addColorStop(1, 'rgba(0,0,0,0)');
+          c.fillStyle = rg;
+          c.fillRect(x - R, s.y - R, R * 2, R * 2);
+          const L = s.r * (5.5 + Math.sin(this.t * s.sp + s.ph) * 1.2);
+          c.strokeStyle = `rgba(${col[0]},${col[1]},${col[2]},${a * 0.5})`;
+          c.lineWidth = 0.8;
+          c.beginPath();
+          c.moveTo(x - L, s.y);
+          c.lineTo(x + L, s.y);
+          c.moveTo(x, s.y - L);
+          c.lineTo(x, s.y + L);
+          c.stroke();
+        }
+      }
+
+      // meteor
+      if (!this.reduced && !dawn && (this.getAttribute('meteors') || '1') !== '0') {
+        if (!this.meteor && Math.random() < dt / 22) this.spawnMeteor(); // ~1 per 22 s
+        const m = this.meteor;
+        if (m) {
+          m.life += dt;
+          m.x += m.vx * dt;
+          m.y += m.vy * dt;
+          const k = 1 - m.life / m.ttl;
+          if (k <= 0 || m.x < -60 || m.x > w + 60 || m.y > h + 60) this.meteor = null;else {
+            const tail = 90 * k + 26;
+            const nx = m.vx / Math.hypot(m.vx, m.vy),
+              ny = m.vy / Math.hypot(m.vx, m.vy);
+            const lg = c.createLinearGradient(m.x, m.y, m.x - nx * tail, m.y - ny * tail);
+            lg.addColorStop(0, `rgba(235,242,255,${0.85 * k})`);
+            lg.addColorStop(0.3, `rgba(180,206,255,${0.4 * k})`);
+            lg.addColorStop(1, 'rgba(0,0,0,0)');
+            c.strokeStyle = lg;
+            c.lineWidth = 1.4;
+            c.lineCap = 'round';
+            c.beginPath();
+            c.moveTo(m.x, m.y);
+            c.lineTo(m.x - nx * tail, m.y - ny * tail);
+            c.stroke();
+          }
+        }
       }
     }
   }
@@ -267,7 +488,10 @@ function Icon({
       svg.setAttribute('height', size);
       svg.setAttribute('stroke-width', strokeWidth);
       svg.style.display = 'block';
-      if (title) svg.setAttribute('aria-label', title);
+      if (title) {
+        svg.setAttribute('aria-label', title);
+        svg.setAttribute('role', 'img');
+      }
     }
   }, [name, size, strokeWidth, title]);
   return React.createElement('span', {
@@ -290,6 +514,13 @@ Object.assign(__ds_scope, { Icon });
 // components/core/Button.jsx
 try { (() => {
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
+if (typeof document !== 'undefined' && !document.getElementById('sr-focus-ring-css')) {
+  const s = document.createElement('style');
+  s.id = 'sr-focus-ring-css';
+  s.textContent = '.sr-focus-ring:focus{outline:none}.sr-focus-ring:focus-visible{outline:2px solid var(--focus);outline-offset:2px}';
+  document.head.appendChild(s);
+}
+
 /**
  * Button — text action. Three variants:
  *  · primary  : warm gold fill, dark ink — reward / ignition / confirm
@@ -327,8 +558,15 @@ function Button({
     lg: 16
   }[size] || 15;
   const palettes = {
-    primary: {
-      background: hover ? 'linear-gradient(180deg, var(--gold-white), var(--gold))' : 'linear-gradient(180deg, var(--gold), var(--gold-warm))',
+    primary: disabled ? {
+      // 不可点就不发光：收掉金色渐变与辉光，退成玻璃面 + 失效墨色
+      background: 'var(--glass-bg)',
+      color: 'var(--text-disabled)',
+      border: '1px solid var(--glass-border)',
+      boxShadow: 'none',
+      fontWeight: 600
+    } : {
+      background: hover ? 'linear-gradient(180deg, var(--gold-btn-hover-hi), var(--gold-btn-hover-lo))' : 'linear-gradient(180deg, var(--gold-btn-hi), var(--gold-btn-lo))',
       color: 'var(--text-on-gold)',
       border: '1px solid rgba(255,240,200,0.5)',
       boxShadow: glow || hover ? 'var(--glow-gold)' : 'var(--glow-gold-soft)',
@@ -374,14 +612,17 @@ function Button({
       fontSize: fs,
       letterSpacing: '0.01em',
       cursor: disabled ? 'not-allowed' : 'pointer',
-      opacity: disabled ? 0.45 : 1,
+      // primary 的禁用态已换成专门的哑光玻璃面，不再叠加整体降透明
+      opacity: disabled && variant !== 'primary' ? 0.45 : 1,
       transform: press ? 'scale(0.97)' : 'scale(1)',
       transition: 'transform var(--dur-fast), background var(--dur-base), box-shadow var(--dur-base), border-color var(--dur-base), color var(--dur-base)',
       whiteSpace: 'nowrap',
       ...p,
       ...style
     }
-  }, rest), icon && /*#__PURE__*/React.createElement(__ds_scope.Icon, {
+  }, rest, {
+    className: ['sr-focus-ring', rest.className].filter(Boolean).join(' ')
+  }), icon && /*#__PURE__*/React.createElement(__ds_scope.Icon, {
     name: icon,
     size: fs + 3,
     color: "currentColor"
@@ -397,10 +638,28 @@ Object.assign(__ds_scope, { Button });
 // components/core/IconButton.jsx
 try { (() => {
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
+if (typeof document !== 'undefined' && !document.getElementById('sr-focus-ring-css')) {
+  const s = document.createElement('style');
+  s.id = 'sr-focus-ring-css';
+  s.textContent = '.sr-focus-ring:focus{outline:none}.sr-focus-ring:focus-visible{outline:2px solid var(--focus);outline-offset:2px}';
+  document.head.appendChild(s);
+}
+
+/* Invisible hit-area extender: keeps the visual size untouched while
+   guaranteeing a ≥40px pointer target (touch/product baseline). */
+if (typeof document !== 'undefined' && !document.getElementById('sr-hit40-css')) {
+  const s = document.createElement('style');
+  s.id = 'sr-hit40-css';
+  s.textContent = '.sr-hit40{position:relative}.sr-hit40::after{content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:max(100%,40px);height:max(100%,40px)}';
+  document.head.appendChild(s);
+}
+
 /**
  * IconButton — a square, ghost-by-default icon control.
- * Default: star-blue at ~70%. Hover/active: warm gold + faint glow.
- * Press: gentle shrink. This is the canonical icon-tint behavior.
+ * Default: star-blue at ~70% (`--icon-idle`, theme-aware). Hover/active:
+ * warm gold + faint glow. Press: gentle shrink. Visual size follows `size`,
+ * but the pointer target is always ≥40px via an invisible hit extender.
+ * This is the canonical icon-tint behavior.
  */
 function IconButton({
   name,
@@ -448,7 +707,7 @@ function IconButton({
       border: '1px solid',
       borderColor: lit ? 'var(--glass-border-strong)' : 'transparent',
       background: lit ? 'rgba(159,198,255,0.06)' : 'transparent',
-      color: disabled ? 'var(--text-disabled)' : lit ? 'var(--gold)' : 'rgba(159,198,255,0.7)',
+      color: disabled ? 'var(--text-disabled)' : lit ? 'var(--gold)' : 'var(--icon-idle)',
       boxShadow: lit && !active ? 'none' : active ? 'var(--glow-gold-soft)' : 'none',
       cursor: disabled ? 'not-allowed' : 'pointer',
       transform: press ? 'scale(0.92)' : 'scale(1)',
@@ -456,7 +715,9 @@ function IconButton({
       padding: 0,
       ...style
     }
-  }, rest), /*#__PURE__*/React.createElement(__ds_scope.Icon, {
+  }, rest, {
+    className: ['sr-focus-ring', 'sr-hit40', rest.className].filter(Boolean).join(' ')
+  }), /*#__PURE__*/React.createElement(__ds_scope.Icon, {
     name: name,
     size: icon,
     title: title
@@ -533,6 +794,7 @@ function Input({
       ...inputStyle
     }
   }, rest)), kbd && /*#__PURE__*/React.createElement("span", {
+    "aria-hidden": "true",
     style: {
       fontFamily: 'var(--font-mono)',
       fontSize: 11,
@@ -550,9 +812,33 @@ Object.assign(__ds_scope, { Input });
 // components/core/Tag.jsx
 try { (() => {
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
+if (typeof document !== 'undefined' && !document.getElementById('sr-focus-ring-css')) {
+  const s = document.createElement('style');
+  s.id = 'sr-focus-ring-css';
+  s.textContent = '.sr-focus-ring:focus{outline:none}.sr-focus-ring:focus-visible{outline:2px solid var(--focus);outline-offset:2px}';
+  document.head.appendChild(s);
+}
+
+/* Vertical hit-area extender for chip-shaped controls: the capsule keeps its
+   quiet 26px visual height while the pointer target grows to ≥40px. Vertical
+   only — neighbouring chips in a row must not steal each other's clicks. */
+if (typeof document !== 'undefined' && !document.getElementById('sr-hit40v-css')) {
+  const s = document.createElement('style');
+  s.id = 'sr-hit40v-css';
+  s.textContent = '.sr-hit40v{position:relative}.sr-hit40v::after{content:"";position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);height:max(100%,40px)}';
+  document.head.appendChild(s);
+}
+
 /**
  * Tag — a metadata chip (note tags, filters). Quiet glass capsule with an
  * optional leading dot/icon. `removable` shows an x; `active` lights gold.
+ * Interactive tags extend their pointer target to ≥40px height invisibly.
+ *
+ * A11y: activation semantics (`role="button"`) are attached only when
+ * `onClick` exists. When the tag is both clickable *and* removable, the
+ * button role moves to an inner label span so the native remove <button>
+ * is a sibling, never a descendant, of a button role (WAI-ARIA legality);
+ * key/click events from the remove button never reach the tag action.
  */
 function Tag({
   children,
@@ -566,8 +852,37 @@ function Tag({
   ...rest
 }) {
   const [hover, setHover] = React.useState(false);
-  return /*#__PURE__*/React.createElement("span", _extends({
-    onClick: onClick,
+  const interactive = typeof onClick === 'function';
+  // Clickable + removable → the activation role must live on an inner span.
+  const split = interactive && removable;
+  const onActionKeyDown = e => {
+    if (e.target !== e.currentTarget) return; // ignore keys bubbling from descendants
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      onClick(e);
+    }
+  };
+  const actionProps = {
+    role: 'button',
+    tabIndex: 0,
+    className: 'sr-focus-ring sr-hit40v',
+    onClick,
+    onKeyDown: onActionKeyDown
+  };
+  const content = /*#__PURE__*/React.createElement(React.Fragment, null, dot && /*#__PURE__*/React.createElement("span", {
+    style: {
+      width: 6,
+      height: 6,
+      borderRadius: '50%',
+      background: typeof dot === 'string' ? dot : 'var(--star-blue)',
+      flex: 'none'
+    }
+  }), icon && /*#__PURE__*/React.createElement(__ds_scope.Icon, {
+    name: icon,
+    size: 13,
+    color: "currentColor"
+  }), children);
+  return /*#__PURE__*/React.createElement("span", _extends({}, interactive && !split ? actionProps : {}, {
     onMouseEnter: () => setHover(true),
     onMouseLeave: () => setHover(false),
     style: {
@@ -583,41 +898,661 @@ function Tag({
       background: active ? 'rgba(255,217,138,0.10)' : hover ? 'rgba(159,198,255,0.10)' : 'rgba(159,198,255,0.05)',
       border: '1px solid',
       borderColor: active ? 'rgba(255,217,138,0.30)' : 'var(--glass-border)',
-      cursor: onClick ? 'pointer' : 'default',
+      cursor: interactive ? 'pointer' : 'default',
       transition: 'background var(--dur-fast), color var(--dur-fast), border-color var(--dur-fast)',
       ...style
     }
-  }, rest), dot && /*#__PURE__*/React.createElement("span", {
+  }, rest), split ? /*#__PURE__*/React.createElement("span", _extends({}, actionProps, {
     style: {
-      width: 6,
-      height: 6,
-      borderRadius: '50%',
-      background: typeof dot === 'string' ? dot : 'var(--star-blue)',
-      flex: 'none'
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 6,
+      alignSelf: 'stretch',
+      cursor: 'pointer',
+      borderRadius: 'var(--r-pill)'
     }
-  }), icon && /*#__PURE__*/React.createElement(__ds_scope.Icon, {
-    name: icon,
-    size: 13,
-    color: "currentColor"
-  }), children, removable && /*#__PURE__*/React.createElement(__ds_scope.Icon, {
-    name: "x",
-    size: 13,
-    color: "currentColor",
-    style: {
-      opacity: 0.6,
-      cursor: 'pointer'
-    },
+  }), content) : content, removable && /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    "aria-label": "\u79FB\u9664",
+    className: "sr-focus-ring",
     onClick: e => {
       e.stopPropagation();
-      onRemove && onRemove();
+      if (onRemove) onRemove();
+    },
+    onKeyDown: e => {
+      if (e.key === 'Enter' || e.key === ' ') e.stopPropagation();
+    },
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      background: 'none',
+      border: 'none',
+      padding: 0,
+      margin: 0,
+      color: 'currentColor',
+      opacity: 0.6,
+      cursor: 'pointer',
+      borderRadius: 'var(--r-full)'
     }
-  }));
+  }, /*#__PURE__*/React.createElement(__ds_scope.Icon, {
+    name: "x",
+    size: 13,
+    color: "currentColor"
+  })));
 }
 Object.assign(__ds_scope, { Tag });
 })(); } catch (e) { __ds_ns.__errors.push({ path: "components/core/Tag.jsx", error: String((e && e.message) || e) }); }
 
+// components/form/Checkbox.jsx
+try { (() => {
+function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
+if (typeof document !== 'undefined' && !document.getElementById('sr-focus-ring-css')) {
+  const s = document.createElement('style');
+  s.id = 'sr-focus-ring-css';
+  s.textContent = '.sr-focus-ring:focus{outline:none}.sr-focus-ring:focus-visible{outline:2px solid var(--focus);outline-offset:2px}';
+  document.head.appendChild(s);
+}
+
+/**
+ * Checkbox — a soft-cornered box whose check is a self-drawn SVG stroke that
+ * draws itself in (dashoffset) when checked. Star-blue, never emoji or a
+ * unicode glyph. role="checkbox" + aria-checked on a native button.
+ */
+function Checkbox({
+  checked = false,
+  onChange,
+  disabled = false,
+  label,
+  children,
+  style,
+  ...rest
+}) {
+  const reduced = typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const text = label != null ? label : children;
+  return /*#__PURE__*/React.createElement("button", _extends({
+    type: "button",
+    role: "checkbox",
+    "aria-checked": checked,
+    disabled: disabled,
+    onClick: () => {
+      if (!disabled && onChange) onChange(!checked);
+    },
+    className: "sr-focus-ring",
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 9,
+      background: 'none',
+      border: 'none',
+      padding: 0,
+      fontFamily: 'var(--font-sans)',
+      cursor: disabled ? 'not-allowed' : 'pointer',
+      opacity: disabled ? 0.45 : 1,
+      ...style
+    }
+  }, rest), /*#__PURE__*/React.createElement("span", {
+    "aria-hidden": "true",
+    style: {
+      width: 18,
+      height: 18,
+      boxSizing: 'border-box',
+      flex: 'none',
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: 'var(--r-xs)',
+      background: checked ? 'rgba(159,198,255,0.20)' : 'var(--space-1)',
+      border: '1px solid ' + (checked ? 'var(--glass-border-strong)' : 'var(--glass-border)'),
+      boxShadow: checked ? 'var(--glow-faint), var(--inset-edge)' : 'var(--inset-edge)',
+      transition: 'background var(--dur-fast), border-color var(--dur-fast), box-shadow var(--dur-base)'
+    }
+  }, /*#__PURE__*/React.createElement("svg", {
+    width: "11",
+    height: "9",
+    viewBox: "0 0 12 10",
+    fill: "none",
+    style: {
+      display: 'block'
+    }
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M1.5 5.2 L4.6 8.2 L10.5 1.8",
+    stroke: "var(--star-blue)",
+    strokeWidth: "1.8",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    strokeDasharray: "14",
+    strokeDashoffset: checked ? 0 : 14,
+    style: {
+      transition: reduced ? 'none' : 'stroke-dashoffset var(--dur-base) var(--ease-flight)'
+    }
+  }))), text != null && /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 13.5,
+      color: checked ? 'var(--text-1)' : 'var(--text-2)',
+      transition: 'color var(--dur-fast)'
+    }
+  }, text));
+}
+Object.assign(__ds_scope, { Checkbox });
+})(); } catch (e) { __ds_ns.__errors.push({ path: "components/form/Checkbox.jsx", error: String((e && e.message) || e) }); }
+
+// components/form/Select.jsx
+try { (() => {
+function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
+if (typeof document !== 'undefined' && !document.getElementById('sr-focus-ring-css')) {
+  const s = document.createElement('style');
+  s.id = 'sr-focus-ring-css';
+  s.textContent = '.sr-focus-ring:focus{outline:none}.sr-focus-ring:focus-visible{outline:2px solid var(--focus);outline-offset:2px}';
+  document.head.appendChild(s);
+}
+
+/**
+ * Select — custom dropdown on the dark glass input surface. The list is a
+ * strong-glass panel; the selected option carries a star-blue check.
+ * Keyboard: ↑↓ move, Enter/Space pick, Esc closes, Home/End jump.
+ * ARIA combobox pattern with aria-activedescendant.
+ */
+function Select({
+  value,
+  onChange,
+  options = [],
+  placeholder = '请选择…',
+  size = 'md',
+  disabled = false,
+  style,
+  ...rest
+}) {
+  const [open, setOpen] = React.useState(false);
+  const [active, setActive] = React.useState(-1);
+  const id = React.useId();
+  const wrapRef = React.useRef(null);
+  const listRef = React.useRef(null);
+  const btnRef = React.useRef(null);
+  const reduced = typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const h = {
+    sm: 34,
+    md: 40,
+    lg: 46
+  }[size] || 40;
+  const fs = {
+    sm: 13,
+    md: 14.5,
+    lg: 16
+  }[size] || 14.5;
+  const selIdx = options.findIndex(o => o.value === value);
+  const selected = selIdx >= 0 ? options[selIdx] : null;
+  const enabledIdx = options.map((o, i) => o.disabled ? -1 : i).filter(i => i >= 0);
+  const openList = () => {
+    if (disabled) return;
+    setOpen(true);
+    setActive(selIdx >= 0 ? selIdx : enabledIdx[0] != null ? enabledIdx[0] : -1);
+  };
+  const closeList = refocus => {
+    setOpen(false);
+    if (refocus !== false && btnRef.current) btnRef.current.focus();
+  };
+  const pick = i => {
+    const o = options[i];
+    if (!o || o.disabled) return;
+    if (onChange) onChange(o.value, o);
+    closeList();
+  };
+  const move = d => {
+    if (!enabledIdx.length) return;
+    const cur = enabledIdx.indexOf(active);
+    if (cur < 0) {
+      setActive(d > 0 ? enabledIdx[0] : enabledIdx[enabledIdx.length - 1]);
+      return;
+    }
+    setActive(enabledIdx[(cur + d + enabledIdx.length) % enabledIdx.length]);
+  };
+  React.useEffect(() => {
+    if (!open) return;
+    const down = e => {
+      if (wrapRef.current && !wrapRef.current.contains(e.target)) closeList(false);
+    };
+    document.addEventListener('mousedown', down, true);
+    return () => document.removeEventListener('mousedown', down, true);
+  }, [open]);
+  React.useEffect(() => {
+    if (!open || !listRef.current || active < 0) return;
+    const el = listRef.current.querySelector('[data-active="1"]');
+    if (el && el.scrollIntoView) el.scrollIntoView({
+      block: 'nearest'
+    });
+  }, [open, active]);
+  const onKey = e => {
+    if (disabled) return;
+    if (!open) {
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp' || e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openList();
+      }
+      return;
+    }
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      closeList();
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      move(1);
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      move(-1);
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      if (enabledIdx.length) setActive(enabledIdx[0]);
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      if (enabledIdx.length) setActive(enabledIdx[enabledIdx.length - 1]);
+    } else if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      pick(active);
+    } else if (e.key === 'Tab') {
+      closeList(false);
+    }
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    ref: wrapRef,
+    style: {
+      position: 'relative',
+      ...style
+    }
+  }, /*#__PURE__*/React.createElement("button", _extends({
+    ref: btnRef,
+    type: "button",
+    role: "combobox",
+    "aria-haspopup": "listbox",
+    "aria-expanded": open,
+    "aria-controls": id + '-list',
+    "aria-activedescendant": open && active >= 0 ? id + '-opt-' + active : undefined,
+    disabled: disabled,
+    onClick: () => open ? closeList() : openList(),
+    onKeyDown: onKey,
+    className: "sr-focus-ring",
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 8,
+      width: '100%',
+      height: h,
+      padding: '0 12px',
+      boxSizing: 'border-box',
+      borderRadius: 'var(--r-md)',
+      background: 'var(--space-1)',
+      border: '1px solid',
+      borderColor: open ? 'var(--glass-border-strong)' : 'var(--glass-border)',
+      boxShadow: open ? '0 0 0 3px rgba(159,198,255,0.10), var(--glow-faint)' : 'none',
+      color: selected ? 'var(--text-1)' : 'var(--text-3)',
+      fontFamily: 'var(--font-sans)',
+      fontSize: fs,
+      textAlign: 'left',
+      cursor: disabled ? 'not-allowed' : 'pointer',
+      opacity: disabled ? 0.45 : 1,
+      transition: 'border-color var(--dur-fast), box-shadow var(--dur-base)'
+    }
+  }, rest), selected && selected.icon && /*#__PURE__*/React.createElement(__ds_scope.Icon, {
+    name: selected.icon,
+    size: 15,
+    color: "var(--star-blue)"
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      flex: 1,
+      minWidth: 0,
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap'
+    }
+  }, selected ? selected.label : placeholder), /*#__PURE__*/React.createElement(__ds_scope.Icon, {
+    name: "chevron-down",
+    size: 15,
+    color: open ? 'var(--star-blue)' : 'var(--text-3)',
+    style: {
+      transform: open ? 'rotate(180deg)' : 'none',
+      transition: reduced ? 'none' : 'transform var(--dur-base) var(--ease-flight)'
+    }
+  })), open && /*#__PURE__*/React.createElement("div", {
+    ref: listRef,
+    role: "listbox",
+    id: id + '-list',
+    style: {
+      position: 'absolute',
+      top: 'calc(100% + 6px)',
+      left: 0,
+      right: 0,
+      zIndex: 'var(--z-menu)',
+      background: 'var(--glass-bg-strong)',
+      WebkitBackdropFilter: 'blur(var(--glass-blur)) saturate(1.2)',
+      backdropFilter: 'blur(var(--glass-blur)) saturate(1.2)',
+      border: '1px solid var(--glass-border-strong)',
+      borderRadius: 'var(--r-md)',
+      boxShadow: 'var(--shadow-lg), var(--inset-edge)',
+      padding: 5,
+      maxHeight: 240,
+      overflowY: 'auto',
+      animation: reduced ? 'none' : 'sr-cardin var(--dur-fast) var(--ease-flight) both'
+    }
+  }, options.map((o, i) => {
+    const isSel = i === selIdx;
+    const isAct = i === active;
+    return /*#__PURE__*/React.createElement("div", {
+      key: o.value != null ? o.value : i,
+      id: id + '-opt-' + i,
+      role: "option",
+      "aria-selected": isSel,
+      "aria-disabled": o.disabled || undefined,
+      "data-active": isAct ? '1' : undefined,
+      onMouseEnter: o.disabled ? undefined : () => setActive(i),
+      onMouseDown: e => e.preventDefault(),
+      onClick: o.disabled ? undefined : () => pick(i),
+      style: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: 8,
+        height: 34,
+        padding: '0 10px',
+        borderRadius: 'var(--r-sm)',
+        fontSize: 13.5,
+        fontFamily: 'var(--font-sans)',
+        color: o.disabled ? 'var(--text-disabled)' : isSel || isAct ? 'var(--text-1)' : 'var(--text-2)',
+        background: isAct && !o.disabled ? 'rgba(159,198,255,0.10)' : 'transparent',
+        cursor: o.disabled ? 'not-allowed' : 'pointer',
+        transition: 'background var(--dur-fast), color var(--dur-fast)',
+        whiteSpace: 'nowrap'
+      }
+    }, o.icon && /*#__PURE__*/React.createElement(__ds_scope.Icon, {
+      name: o.icon,
+      size: 15,
+      color: "currentColor"
+    }), /*#__PURE__*/React.createElement("span", {
+      style: {
+        flex: 1,
+        minWidth: 0,
+        overflow: 'hidden',
+        textOverflow: 'ellipsis'
+      }
+    }, o.label), isSel && /*#__PURE__*/React.createElement(__ds_scope.Icon, {
+      name: "check",
+      size: 14,
+      color: "var(--star-blue)"
+    }));
+  })));
+}
+Object.assign(__ds_scope, { Select });
+})(); } catch (e) { __ds_ns.__errors.push({ path: "components/form/Select.jsx", error: String((e && e.message) || e) }); }
+
+// components/form/Switch.jsx
+try { (() => {
+function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
+if (typeof document !== 'undefined' && !document.getElementById('sr-focus-ring-css')) {
+  const s = document.createElement('style');
+  s.id = 'sr-focus-ring-css';
+  s.textContent = '.sr-focus-ring:focus{outline:none}.sr-focus-ring:focus-visible{outline:2px solid var(--focus);outline-offset:2px}';
+  document.head.appendChild(s);
+}
+
+/**
+ * Switch — an on/off toggle. On = the thumb warms to star-blue with a faint
+ * glow (a small light turned on, not a color celebration). Semantic
+ * role="switch" + aria-checked; Space/Enter toggle via the native button.
+ */
+function Switch({
+  checked = false,
+  onChange,
+  disabled = false,
+  label,
+  size = 'md',
+  style,
+  ...rest
+}) {
+  const [w, hh] = {
+    sm: [32, 18],
+    md: [40, 22]
+  }[size] || [40, 22];
+  const thumb = hh - 6;
+  const reduced = typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  return /*#__PURE__*/React.createElement("button", _extends({
+    type: "button",
+    role: "switch",
+    "aria-checked": checked,
+    disabled: disabled,
+    onClick: () => {
+      if (!disabled && onChange) onChange(!checked);
+    },
+    className: "sr-focus-ring",
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 10,
+      background: 'none',
+      border: 'none',
+      padding: 0,
+      fontFamily: 'var(--font-sans)',
+      cursor: disabled ? 'not-allowed' : 'pointer',
+      opacity: disabled ? 0.45 : 1,
+      ...style
+    }
+  }, rest), /*#__PURE__*/React.createElement("span", {
+    "aria-hidden": "true",
+    style: {
+      position: 'relative',
+      flex: 'none',
+      boxSizing: 'border-box',
+      width: w,
+      height: hh,
+      borderRadius: 'var(--r-pill)',
+      background: checked ? 'rgba(159,198,255,0.28)' : 'rgba(159,198,255,0.08)',
+      border: '1px solid ' + (checked ? 'var(--glass-border-strong)' : 'var(--glass-border)'),
+      boxShadow: 'var(--inset-edge)',
+      transition: 'background var(--dur-base) var(--ease-flight), border-color var(--dur-base)'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      position: 'absolute',
+      top: 2,
+      left: 2,
+      width: thumb,
+      height: thumb,
+      borderRadius: '50%',
+      background: checked ? 'var(--star-blue)' : 'var(--star-blue-dim)',
+      boxShadow: checked ? 'var(--glow-faint)' : 'none',
+      opacity: checked ? 1 : 0.75,
+      transform: checked ? 'translateX(' + (w - thumb - 6) + 'px)' : 'none',
+      transition: reduced ? 'none' : 'transform var(--dur-base) var(--ease-flight), background var(--dur-base), box-shadow var(--dur-base), opacity var(--dur-base)'
+    }
+  })), label && /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 13.5,
+      color: checked ? 'var(--text-1)' : 'var(--text-2)',
+      transition: 'color var(--dur-fast)'
+    }
+  }, label));
+}
+Object.assign(__ds_scope, { Switch });
+})(); } catch (e) { __ds_ns.__errors.push({ path: "components/form/Switch.jsx", error: String((e && e.message) || e) }); }
+
+// components/form/Tabs.jsx
+try { (() => {
+function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
+if (typeof document !== 'undefined' && !document.getElementById('sr-focus-ring-css')) {
+  const s = document.createElement('style');
+  s.id = 'sr-focus-ring-css';
+  s.textContent = '.sr-focus-ring:focus{outline:none}.sr-focus-ring:focus-visible{outline:2px solid var(--focus);outline-offset:2px}';
+  document.head.appendChild(s);
+}
+function TabButton({
+  tab,
+  selected,
+  tabId,
+  onPick,
+  refFn,
+  size
+}) {
+  const [hover, setHover] = React.useState(false);
+  const h = {
+    sm: 34,
+    md: 40
+  }[size] || 40;
+  return /*#__PURE__*/React.createElement("button", {
+    ref: refFn,
+    id: tabId,
+    type: "button",
+    role: "tab",
+    "aria-selected": selected,
+    "aria-controls": tab.panelId,
+    tabIndex: selected ? 0 : -1,
+    disabled: tab.disabled,
+    "data-tab": "1",
+    onClick: onPick,
+    onMouseEnter: () => setHover(true),
+    onMouseLeave: () => setHover(false),
+    className: "sr-focus-ring",
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 7,
+      height: h,
+      padding: '0 14px',
+      background: 'none',
+      border: 'none',
+      fontFamily: 'var(--font-sans)',
+      fontSize: size === 'sm' ? 13 : 13.5,
+      letterSpacing: '0.01em',
+      color: tab.disabled ? 'var(--text-disabled)' : selected ? 'var(--text-1)' : hover ? 'var(--text-1)' : 'var(--text-2)',
+      cursor: tab.disabled ? 'not-allowed' : 'pointer',
+      transition: 'color var(--dur-fast)',
+      whiteSpace: 'nowrap'
+    }
+  }, tab.icon && /*#__PURE__*/React.createElement(__ds_scope.Icon, {
+    name: tab.icon,
+    size: 15,
+    color: selected ? 'var(--star-blue)' : 'currentColor'
+  }), tab.label, tab.count != null && /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontFamily: 'var(--font-mono)',
+      fontSize: 11,
+      color: 'var(--text-3)'
+    }
+  }, tab.count));
+}
+
+/**
+ * Tabs — underline tabs over a hairline baseline. The selected tab carries a
+ * thin star-blue indicator with a faint glow that glides between tabs.
+ * role="tablist" with roving tabindex; ←→ Home End move and select.
+ */
+function Tabs({
+  tabs = [],
+  value,
+  onChange,
+  size = 'md',
+  style,
+  ...rest
+}) {
+  const id = React.useId();
+  const listRef = React.useRef(null);
+  const btnRefs = React.useRef({});
+  const [bar, setBar] = React.useState(null);
+  const reduced = typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const selIdx = tabs.findIndex(t => t.id === value);
+  const measure = React.useCallback(() => {
+    const list = listRef.current;
+    if (!list) return;
+    const el = list.querySelector('[data-tab][aria-selected="true"]');
+    if (!el) {
+      setBar(null);
+      return;
+    }
+    setBar({
+      left: el.offsetLeft,
+      width: el.offsetWidth
+    });
+  }, []);
+  React.useLayoutEffect(measure, [value, tabs.length, size, measure]);
+  React.useEffect(() => {
+    window.addEventListener('resize', measure);
+    return () => window.removeEventListener('resize', measure);
+  }, [measure]);
+  const goto = i => {
+    const t = tabs[i];
+    if (!t || t.disabled) return;
+    if (onChange) onChange(t.id, t);
+    const el = btnRefs.current[t.id];
+    if (el) el.focus();
+  };
+  const onKey = e => {
+    if (!tabs.length) return;
+    const enabled = tabs.map((t, i) => t.disabled ? -1 : i).filter(i => i >= 0);
+    if (!enabled.length) return;
+    const cur = enabled.indexOf(selIdx);
+    let next = null;
+    if (e.key === 'ArrowRight') next = enabled[(cur + 1) % enabled.length];else if (e.key === 'ArrowLeft') next = enabled[(cur - 1 + enabled.length) % enabled.length];else if (e.key === 'Home') next = enabled[0];else if (e.key === 'End') next = enabled[enabled.length - 1];
+    if (next == null) return;
+    e.preventDefault();
+    goto(next);
+  };
+  return /*#__PURE__*/React.createElement("div", _extends({
+    style: {
+      position: 'relative',
+      ...style
+    }
+  }, rest), /*#__PURE__*/React.createElement("div", {
+    ref: listRef,
+    role: "tablist",
+    onKeyDown: onKey,
+    style: {
+      display: 'flex',
+      alignItems: 'stretch',
+      gap: 'var(--s-1)'
+    }
+  }, tabs.map((t, i) => /*#__PURE__*/React.createElement(TabButton, {
+    key: t.id,
+    tab: t,
+    size: size,
+    selected: t.id === value,
+    tabId: id + '-tab-' + i,
+    refFn: el => {
+      btnRefs.current[t.id] = el;
+    },
+    onPick: () => goto(i)
+  }))), /*#__PURE__*/React.createElement("div", {
+    "aria-hidden": "true",
+    style: {
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      bottom: 0,
+      height: 1,
+      background: 'var(--line)'
+    }
+  }), bar && /*#__PURE__*/React.createElement("div", {
+    "aria-hidden": "true",
+    style: {
+      position: 'absolute',
+      bottom: 0,
+      height: 2,
+      borderRadius: 'var(--r-pill)',
+      left: bar.left + 12,
+      width: Math.max(16, bar.width - 24),
+      background: 'var(--star-blue)',
+      boxShadow: 'var(--glow-faint)',
+      transition: reduced ? 'none' : 'left var(--dur-base) var(--ease-flight), width var(--dur-base) var(--ease-flight)'
+    }
+  }));
+}
+Object.assign(__ds_scope, { Tabs });
+})(); } catch (e) { __ds_ns.__errors.push({ path: "components/form/Tabs.jsx", error: String((e && e.message) || e) }); }
+
 // components/knowledge/ConstellationItem.jsx
 try { (() => {
+if (typeof document !== 'undefined' && !document.getElementById('sr-focus-ring-css')) {
+  const s = document.createElement('style');
+  s.id = 'sr-focus-ring-css';
+  s.textContent = '.sr-focus-ring:focus{outline:none}.sr-focus-ring:focus-visible{outline:2px solid var(--focus);outline-offset:2px}';
+  document.head.appendChild(s);
+}
+
 /**
  * ConstellationItem — a sidebar row for one constellation (note group).
  * Shows a representative memory color (warm = solid, cold = dimming), name,
@@ -634,6 +1569,8 @@ function ConstellationItem({
   const [hover, setHover] = React.useState(false);
   return /*#__PURE__*/React.createElement("button", {
     type: "button",
+    "aria-current": active ? 'true' : undefined,
+    className: "sr-focus-ring",
     onClick: onClick,
     onMouseEnter: () => setHover(true),
     onMouseLeave: () => setHover(false),
@@ -654,6 +1591,7 @@ function ConstellationItem({
       ...style
     }
   }, /*#__PURE__*/React.createElement("span", {
+    "aria-hidden": "true",
     style: {
       width: 9,
       height: 9,
@@ -765,6 +1703,11 @@ function MemoryBar({
       color: warm ? 'var(--gold)' : 'var(--star-blue)'
     }
   }, Math.round(v * 100), "%")), /*#__PURE__*/React.createElement("div", {
+    role: "meter",
+    "aria-valuemin": 0,
+    "aria-valuemax": 100,
+    "aria-valuenow": Math.round(v * 100),
+    "aria-label": typeof label === 'string' ? label : '记忆强度',
     style: {
       height,
       borderRadius: 999,
@@ -788,6 +1731,13 @@ Object.assign(__ds_scope, { memoryColor, MemoryBar });
 
 // components/knowledge/StarNode.jsx
 try { (() => {
+if (typeof document !== 'undefined' && !document.getElementById('sr-focus-ring-css')) {
+  const s = document.createElement('style');
+  s.id = 'sr-focus-ring-css';
+  s.textContent = '.sr-focus-ring:focus{outline:none}.sr-focus-ring:focus-visible{outline:2px solid var(--focus);outline-offset:2px}';
+  document.head.appendChild(s);
+}
+
 /**
  * StarNode — a single knowledge star on the canvas.
  * Encodes meaning visually: brightness/color = memory strength,
@@ -812,16 +1762,28 @@ function StarNode({
   const warm = strength >= 0.82;
   // 黎明（浅底）：白核与奶油金辉光会融进背景，改用深琥珀核心 + 琥珀/藏蓝辉光
   const dawn = typeof document !== 'undefined' && document.documentElement.dataset.theme === 'dawn';
-  const glow = warm ? (dawn ? `0 0 ${14 * importance}px rgba(156,86,10,0.5), 0 0 ${5 * importance}px rgba(122,68,8,0.75)` : `0 0 ${18 * importance}px rgba(255,217,138,0.6), 0 0 ${7 * importance}px rgba(255,244,214,0.9)`) : (dawn ? `0 0 ${12 * importance}px rgba(58,98,192,${0.25 + strength * 0.35}), 0 0 ${4 * importance}px rgba(58,98,192,0.6)` : `0 0 ${14 * importance}px rgba(159,198,255,${0.25 + strength * 0.4}), 0 0 ${5 * importance}px rgba(159,198,255,0.7)`);
+  const glow = warm ? dawn ? `0 0 ${14 * importance}px rgba(156,86,10,0.5), 0 0 ${5 * importance}px rgba(122,68,8,0.75)` : `0 0 ${18 * importance}px rgba(255,217,138,0.6), 0 0 ${7 * importance}px rgba(255,244,214,0.9)` : dawn ? `0 0 ${12 * importance}px rgba(58,98,192,${0.25 + strength * 0.35}), 0 0 ${4 * importance}px rgba(58,98,192,0.6)` : `0 0 ${14 * importance}px rgba(159,198,255,${0.25 + strength * 0.4}), 0 0 ${5 * importance}px rgba(159,198,255,0.7)`;
   return /*#__PURE__*/React.createElement("div", {
     onClick: onClick,
+    role: onClick ? 'button' : undefined,
+    tabIndex: onClick ? 0 : undefined,
+    "aria-label": onClick ? label || '知识星' : undefined,
+    onKeyDown: onClick ? e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        onClick(e);
+      }
+    } : undefined,
+    className: onClick ? 'sr-focus-ring' : undefined,
+    onFocus: () => setHover(true),
+    onBlur: () => setHover(false),
     onMouseEnter: e => {
       setHover(true);
-      onMouseEnter && onMouseEnter(e);
+      if (onMouseEnter) onMouseEnter(e);
     },
     onMouseLeave: e => {
       setHover(false);
-      onMouseLeave && onMouseLeave(e);
+      if (onMouseLeave) onMouseLeave(e);
     },
     style: {
       position: 'absolute',
@@ -851,19 +1813,27 @@ function StarNode({
       width: core,
       height: core,
       borderRadius: '50%',
-      background: warm ? (dawn ? `radial-gradient(circle at 38% 35%, #ffc95c 0%, #b07d1c 30%, #6f4a08 100%)` : `radial-gradient(circle at 38% 35%, #fff, ${col} 55%, var(--gold-warm) 100%)`) : (dawn ? `radial-gradient(circle at 38% 35%, #b9cdf5, ${col} 70%)` : `radial-gradient(circle at 38% 35%, #eaf2ff, ${col} 70%)`),
+      background: warm ? dawn ? `radial-gradient(circle at 38% 35%, #ffc95c 0%, #b07d1c 30%, #6f4a08 100%)` : `radial-gradient(circle at 38% 35%, #fff, ${col} 55%, var(--gold-warm) 100%)` : dawn ? `radial-gradient(circle at 38% 35%, #b9cdf5, ${col} 70%)` : `radial-gradient(circle at 38% 35%, #eaf2ff, ${col} 70%)`,
       boxShadow: glow,
       transform: hover ? 'scale(1.25)' : 'scale(1)',
       transition: 'transform var(--dur-base) var(--ease-flight)'
     }
   }), label && /*#__PURE__*/React.createElement("span", {
+    title: label,
     style: {
       fontSize: 11.5,
       fontFamily: 'var(--font-sans)',
-      color: hover || selected ? 'var(--text-1)' : 'var(--text-3)',
+      // 寻路文字的地板抬到 --text-2：找星时还没 hover，也要能读
+      color: hover || selected ? 'var(--text-1)' : 'var(--text-2)',
       whiteSpace: 'nowrap',
       textShadow: 'var(--star-label-shadow)',
-      opacity: hover || selected || importance > 1.15 ? 1 : 0.7,
+      // 超长星名不横贯画布：截断给省略号，完整名走 title / 摘要卡
+      maxWidth: 180,
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      // 亮度层级仍随记忆强度呼吸，但只在可读区间 0.9–1 内浮动
+      // （地板 0.9 保证最暗星名在深空/黎明双主题下都 ≥4.5:1）
+      opacity: hover || selected || importance > 1.15 ? 1 : 0.9 + 0.1 * Math.max(0, Math.min(1, strength)),
       transition: 'color var(--dur-base), opacity var(--dur-base)'
     }
   }, label));
@@ -871,32 +1841,1934 @@ function StarNode({
 Object.assign(__ds_scope, { StarNode });
 })(); } catch (e) { __ds_ns.__errors.push({ path: "components/knowledge/StarNode.jsx", error: String((e && e.message) || e) }); }
 
+// components/overlay/ContextMenu.jsx
+try { (() => {
+function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
+if (typeof document !== 'undefined' && !document.getElementById('sr-focus-ring-css')) {
+  const s = document.createElement('style');
+  s.id = 'sr-focus-ring-css';
+  s.textContent = '.sr-focus-ring:focus{outline:none}.sr-focus-ring:focus-visible{outline:2px solid var(--focus);outline-offset:2px}';
+  document.head.appendChild(s);
+}
+function MenuRow({
+  id,
+  item,
+  active,
+  onHover,
+  onPick
+}) {
+  const disabled = !!item.disabled;
+  return /*#__PURE__*/React.createElement("div", {
+    id: id,
+    role: "menuitem",
+    "aria-disabled": disabled || undefined,
+    onMouseEnter: disabled ? undefined : onHover,
+    onClick: disabled ? undefined : onPick,
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 9,
+      height: 32,
+      padding: '0 10px',
+      borderRadius: 'var(--r-sm)',
+      fontSize: 13,
+      fontFamily: 'var(--font-sans)',
+      color: disabled ? 'var(--text-disabled)' : item.danger ? 'var(--danger)' : active ? 'var(--text-1)' : 'var(--text-2)',
+      background: active && !disabled
+      // danger 悬停底纹跟随主题里的 --danger（黎明下已 remap 为深赭）
+      ? item.danger ? 'color-mix(in srgb, var(--danger) 10%, transparent)' : 'rgba(159,198,255,0.10)' : 'transparent',
+      cursor: disabled ? 'not-allowed' : 'pointer',
+      transition: 'background var(--dur-fast), color var(--dur-fast)',
+      whiteSpace: 'nowrap'
+    }
+  }, item.icon && /*#__PURE__*/React.createElement(__ds_scope.Icon, {
+    name: item.icon,
+    size: 15,
+    color: "currentColor"
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      flex: 1,
+      minWidth: 0,
+      overflow: 'hidden',
+      textOverflow: 'ellipsis'
+    }
+  }, item.label), item.kbd && /*#__PURE__*/React.createElement("span", {
+    "aria-hidden": "true",
+    style: {
+      fontFamily: 'var(--font-mono)',
+      fontSize: 10.5,
+      color: 'var(--text-3)',
+      marginLeft: 12
+    }
+  }, item.kbd));
+}
+
+/**
+ * ContextMenu — right-click menu primitive. Wrap any target area; a glass
+ * panel opens at the cursor with hairline separators. Items:
+ *   { id, label, icon?, kbd?, danger?, disabled?, onSelect? } or { type: 'separator' }.
+ * Keyboard: ↑↓ Home End move, Enter picks, Esc closes. Focus returns to the
+ * previously focused element on close.
+ */
+function ContextMenu({
+  items = [],
+  onSelect,
+  disabled = false,
+  menuWidth = 200,
+  children,
+  style,
+  ...rest
+}) {
+  const [at, setAt] = React.useState(null); // { x, y }
+  const [active, setActive] = React.useState(-1);
+  const menuRef = React.useRef(null);
+  const prevFocus = React.useRef(null);
+  const baseId = React.useId();
+  const itemId = i => baseId + 'mi-' + i;
+  const reduced = typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const enabledIdx = items.map((it, i) => !it.type && !it.disabled ? i : -1).filter(i => i >= 0);
+  const close = React.useCallback(() => {
+    setAt(null);
+    setActive(-1);
+    const p = prevFocus.current;
+    if (p && p.focus) p.focus();
+  }, []);
+  const openAt = e => {
+    if (disabled) return;
+    e.preventDefault();
+    prevFocus.current = document.activeElement;
+    setAt({
+      x: e.clientX,
+      y: e.clientY
+    });
+    setActive(-1);
+  };
+  const pick = it => {
+    close();
+    if (it.onSelect) it.onSelect(it);
+    if (onSelect) onSelect(it);
+  };
+
+  // Clamp to the viewport, then take focus for keyboard use.
+  React.useLayoutEffect(() => {
+    if (!at || !menuRef.current) return;
+    const m = menuRef.current;
+    const r = m.getBoundingClientRect();
+    m.style.left = Math.max(8, Math.min(at.x, window.innerWidth - r.width - 8)) + 'px';
+    m.style.top = Math.max(8, Math.min(at.y, window.innerHeight - r.height - 8)) + 'px';
+    m.focus();
+  }, [at]);
+
+  // Keep the active row in view while navigating with the keyboard.
+  React.useEffect(() => {
+    if (!at || active < 0) return;
+    const row = document.getElementById(itemId(active));
+    if (row && row.scrollIntoView) row.scrollIntoView({
+      block: 'nearest'
+    });
+  }, [at, active]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Any press outside dismisses.
+  React.useEffect(() => {
+    if (!at) return;
+    const down = e => {
+      if (menuRef.current && !menuRef.current.contains(e.target)) close();
+    };
+    document.addEventListener('mousedown', down, true);
+    document.addEventListener('contextmenu', down, true);
+    window.addEventListener('blur', close);
+    return () => {
+      document.removeEventListener('mousedown', down, true);
+      document.removeEventListener('contextmenu', down, true);
+      window.removeEventListener('blur', close);
+    };
+  }, [at, close]);
+  const onKey = e => {
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      close();
+      return;
+    }
+    if (e.key === 'Tab') {
+      e.preventDefault();
+      return;
+    }
+    if (!enabledIdx.length) return;
+    const cur = enabledIdx.indexOf(active);
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setActive(enabledIdx[(cur + 1) % enabledIdx.length]);
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setActive(cur < 0 ? enabledIdx[enabledIdx.length - 1] : enabledIdx[(cur - 1 + enabledIdx.length) % enabledIdx.length]);
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      setActive(enabledIdx[0]);
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      setActive(enabledIdx[enabledIdx.length - 1]);
+    } else if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      const it = items[active];
+      if (it && !it.type && !it.disabled) pick(it);
+    }
+  };
+  return /*#__PURE__*/React.createElement("span", _extends({
+    onContextMenu: openAt,
+    style: {
+      display: 'contents'
+    }
+  }, rest), children, at && /*#__PURE__*/React.createElement("div", {
+    ref: menuRef,
+    role: "menu",
+    "aria-label": "\u4E0A\u4E0B\u6587\u83DC\u5355",
+    "aria-activedescendant": active >= 0 ? itemId(active) : undefined,
+    tabIndex: -1,
+    className: "sr-focus-ring",
+    onKeyDown: onKey,
+    style: {
+      position: 'fixed',
+      left: at.x,
+      top: at.y,
+      zIndex: 'var(--z-menu)',
+      minWidth: menuWidth,
+      background: 'var(--glass-bg-strong)',
+      WebkitBackdropFilter: 'blur(var(--glass-blur)) saturate(1.2)',
+      backdropFilter: 'blur(var(--glass-blur)) saturate(1.2)',
+      border: '1px solid var(--glass-border-strong)',
+      borderRadius: 'var(--r-md)',
+      boxShadow: 'var(--shadow-lg), var(--inset-edge)',
+      padding: 6,
+      animation: reduced ? 'none' : 'sr-cardin var(--dur-fast) var(--ease-flight) both',
+      outline: 'none',
+      ...style
+    }
+  }, items.map((it, i) => it.type === 'separator' ? /*#__PURE__*/React.createElement("div", {
+    key: 'sep-' + i,
+    role: "separator",
+    style: {
+      height: 1,
+      background: 'var(--line)',
+      margin: '5px 6px'
+    }
+  }) : /*#__PURE__*/React.createElement(MenuRow, {
+    key: it.id != null ? it.id : i,
+    id: itemId(i),
+    item: it,
+    active: active === i,
+    onHover: () => setActive(i),
+    onPick: () => pick(it)
+  }))));
+}
+Object.assign(__ds_scope, { ContextMenu });
+})(); } catch (e) { __ds_ns.__errors.push({ path: "components/overlay/ContextMenu.jsx", error: String((e && e.message) || e) }); }
+
+// components/overlay/Modal.jsx
+try { (() => {
+function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
+if (typeof document !== 'undefined' && !document.getElementById('sr-focus-ring-css')) {
+  const s = document.createElement('style');
+  s.id = 'sr-focus-ring-css';
+  s.textContent = '.sr-focus-ring:focus{outline:none}.sr-focus-ring:focus-visible{outline:2px solid var(--focus);outline-offset:2px}';
+  document.head.appendChild(s);
+}
+
+/**
+ * Modal — a floating glass dialog over a deep-space darkened, blurred mask
+ * (never flat black). Focus is trapped inside; Esc or the mask closes it.
+ * Body scrolls; header/footer stay pinned. Restores focus on close.
+ */
+function Modal({
+  open = false,
+  onClose,
+  title,
+  icon,
+  width = 480,
+  footer,
+  children,
+  closeOnMask = true,
+  style,
+  ...rest
+}) {
+  const panelRef = React.useRef(null);
+  const onCloseRef = React.useRef(onClose);
+  onCloseRef.current = onClose;
+  const titleId = React.useId();
+  const reduced = typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  React.useEffect(() => {
+    if (!open) return;
+    const prev = document.activeElement;
+    const root = panelRef.current;
+    const focusables = () => Array.from(root.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'));
+    const first = focusables()[0];
+    (first || root).focus();
+    const onKey = e => {
+      if (e.key === 'Escape') {
+        e.stopPropagation();
+        if (onCloseRef.current) onCloseRef.current();
+        return;
+      }
+      if (e.key !== 'Tab') return;
+      const list = focusables();
+      if (!list.length) {
+        e.preventDefault();
+        root.focus();
+        return;
+      }
+      const inside = root.contains(document.activeElement);
+      const i = list.indexOf(document.activeElement);
+      if (e.shiftKey && (i <= 0 || !inside)) {
+        e.preventDefault();
+        list[list.length - 1].focus();
+      } else if (!e.shiftKey && (i === list.length - 1 || !inside)) {
+        e.preventDefault();
+        list[0].focus();
+      }
+    };
+    document.addEventListener('keydown', onKey, true);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', onKey, true);
+      document.body.style.overflow = prevOverflow;
+      if (prev && prev.focus) prev.focus();
+    };
+  }, [open]);
+  if (!open) return null;
+  return /*#__PURE__*/React.createElement("div", {
+    onMouseDown: closeOnMask ? onClose : undefined,
+    style: {
+      position: 'fixed',
+      inset: 0,
+      zIndex: 'var(--z-modal)',
+      background: 'rgba(3,4,12,0.55)',
+      WebkitBackdropFilter: 'blur(6px)',
+      backdropFilter: 'blur(6px)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: 'var(--s-5)'
+    }
+  }, /*#__PURE__*/React.createElement("div", _extends({
+    ref: panelRef,
+    role: "dialog",
+    "aria-modal": "true",
+    "aria-labelledby": title ? titleId : undefined,
+    tabIndex: -1,
+    className: "sr-focus-ring",
+    onMouseDown: e => e.stopPropagation(),
+    style: {
+      width,
+      maxWidth: '94vw',
+      maxHeight: '90vh',
+      display: 'flex',
+      animation: reduced ? 'none' : 'sr-cardin var(--dur-base) var(--ease-flight) both',
+      ...style
+    }
+  }, rest), /*#__PURE__*/React.createElement(__ds_scope.GlassPanel, {
+    strong: true,
+    glow: true,
+    radius: "lg",
+    pad: "none",
+    style: {
+      flex: 1,
+      minWidth: 0,
+      display: 'flex',
+      flexDirection: 'column',
+      overflow: 'hidden'
+    }
+  }, (title || onClose) && /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      padding: '14px var(--s-4) 14px var(--s-5)',
+      borderBottom: '1px solid var(--line)',
+      flex: 'none'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 10,
+      minWidth: 0
+    }
+  }, icon && /*#__PURE__*/React.createElement(__ds_scope.Icon, {
+    name: icon,
+    size: 17,
+    color: "var(--star-blue)"
+  }), title && /*#__PURE__*/React.createElement("span", {
+    id: titleId,
+    style: {
+      fontSize: 15,
+      color: 'var(--text-1)',
+      fontWeight: 300,
+      letterSpacing: '0.02em',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap'
+    }
+  }, title)), onClose && /*#__PURE__*/React.createElement(__ds_scope.IconButton, {
+    name: "x",
+    size: "sm",
+    title: "\u5173\u95ED",
+    onClick: onClose
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1,
+      minHeight: 0,
+      overflow: 'auto',
+      padding: 'var(--s-5)'
+    }
+  }, children), footer && /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'flex-end',
+      gap: 'var(--s-2)',
+      padding: 'var(--s-4) var(--s-5)',
+      borderTop: '1px solid var(--line)',
+      flex: 'none'
+    }
+  }, footer))));
+}
+Object.assign(__ds_scope, { Modal });
+})(); } catch (e) { __ds_ns.__errors.push({ path: "components/overlay/Modal.jsx", error: String((e && e.message) || e) }); }
+
+// components/overlay/Toast.jsx
+try { (() => {
+function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
+/** Tone → icon tint. gold is reserved for the ignite / reward moment. */
+const SR_TOAST_TONES = {
+  blue: 'var(--star-blue)',
+  gold: 'var(--gold)',
+  danger: 'var(--danger)'
+};
+
+/**
+ * Toast — a quiet glass pill of feedback, floating bottom-center.
+ * Declarative form: render <Toast> yourself (position it however you like).
+ * Imperative form: call toast('点亮 +1 · 融会贯通', { tone: 'gold' }) and a
+ * self-dismissing pill appears in a shared aria-live stack. Gold tone = the
+ * ignite moment only; blue is the everyday voice.
+ */
+function Toast({
+  message,
+  children,
+  tone = 'blue',
+  icon = 'check',
+  style,
+  ...rest
+}) {
+  return /*#__PURE__*/React.createElement(__ds_scope.GlassPanel, _extends({
+    strong: true,
+    radius: "pill",
+    pad: "none",
+    role: "status",
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 9,
+      padding: '10px 18px',
+      boxShadow: tone === 'gold' ? 'var(--shadow-lg), var(--glow-gold-soft), var(--inset-edge)' : undefined,
+      ...style
+    }
+  }, rest), icon && /*#__PURE__*/React.createElement(__ds_scope.Icon, {
+    name: icon,
+    size: 15,
+    strokeWidth: 1.8,
+    color: SR_TOAST_TONES[tone] || SR_TOAST_TONES.blue
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 13.5,
+      fontFamily: 'var(--font-sans)',
+      color: 'var(--text-1)',
+      whiteSpace: 'nowrap'
+    }
+  }, message != null ? message : children));
+}
+let __srToastHost = null;
+function srToastHost() {
+  if (__srToastHost && document.body.contains(__srToastHost)) return __srToastHost;
+  const el = document.createElement('div');
+  el.setAttribute('role', 'status');
+  el.setAttribute('aria-live', 'polite');
+  Object.assign(el.style, {
+    position: 'fixed',
+    bottom: '26px',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    zIndex: 'var(--z-toast)',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    gap: '10px',
+    pointerEvents: 'none'
+  });
+  document.body.appendChild(el);
+  __srToastHost = el;
+  return el;
+}
+
+/**
+ * toast(message, opts?) — imperative command. Appends a glass pill to a shared
+ * fixed stack (bottom-center, aria-live polite) and removes it after
+ * `duration` ms. Returns a dismiss function.
+ *   toast('已移入「量子力学」');
+ *   toast('点亮 +1 · 融会贯通', { tone: 'gold', icon: 'zap' });
+ */
+function toast(message, opts = {}) {
+  if (typeof document === 'undefined') return () => {};
+  const {
+    tone = 'blue',
+    icon = 'check',
+    duration = 2400
+  } = opts;
+  const reduced = typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const host = srToastHost();
+  const pill = document.createElement('div');
+  pill.className = 'sr-glass-strong';
+  Object.assign(pill.style, {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '9px',
+    padding: '10px 18px',
+    borderRadius: 'var(--r-pill)',
+    color: 'var(--text-1)',
+    fontFamily: 'var(--font-sans)',
+    fontSize: '13.5px',
+    whiteSpace: 'nowrap',
+    animation: reduced ? 'none' : 'sr-cardin var(--dur-base) var(--ease-flight) both'
+  });
+  if (tone === 'gold') {
+    pill.style.boxShadow = 'var(--shadow-lg), var(--glow-gold-soft), var(--inset-edge)';
+  }
+  if (icon) {
+    const holder = document.createElement('span');
+    Object.assign(holder.style, {
+      display: 'inline-flex',
+      width: '15px',
+      height: '15px',
+      flex: 'none',
+      color: SR_TOAST_TONES[tone] || SR_TOAST_TONES.blue
+    });
+    holder.setAttribute('aria-hidden', 'true');
+    const i = document.createElement('i');
+    i.setAttribute('data-lucide', icon);
+    holder.appendChild(i);
+    pill.appendChild(holder);
+    if (window.lucide && window.lucide.createIcons) {
+      window.lucide.createIcons();
+      const svg = holder.querySelector('svg');
+      if (svg) {
+        svg.setAttribute('width', 15);
+        svg.setAttribute('height', 15);
+        svg.setAttribute('stroke-width', 1.8);
+        svg.style.display = 'block';
+      }
+    }
+  }
+  const text = document.createElement('span');
+  text.textContent = message == null ? '' : String(message);
+  pill.appendChild(text);
+  host.appendChild(pill);
+  let gone = false;
+  const dismiss = () => {
+    if (gone) return;
+    gone = true;
+    if (reduced) {
+      pill.remove();
+      return;
+    }
+    pill.style.animation = 'none';
+    pill.style.transition = 'opacity var(--dur-base) var(--ease-flight), transform var(--dur-base) var(--ease-flight)';
+    pill.style.opacity = '0';
+    pill.style.transform = 'translateY(8px)';
+    setTimeout(() => pill.remove(), 380);
+  };
+  const timer = setTimeout(dismiss, duration);
+  return () => {
+    clearTimeout(timer);
+    dismiss();
+  };
+}
+Object.assign(__ds_scope, { Toast, toast });
+})(); } catch (e) { __ds_ns.__errors.push({ path: "components/overlay/Toast.jsx", error: String((e && e.message) || e) }); }
+
+// components/overlay/Tooltip.jsx
+try { (() => {
+function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
+/**
+ * Tooltip — a small glass card that appears after a quiet delay, on hover or
+ * keyboard focus. Esc hides it. The child is described via aria-describedby.
+ * Content stays one short line; this is a whisper, not a panel.
+ */
+function Tooltip({
+  content,
+  children,
+  side = 'top',
+  delay = 450,
+  style,
+  ...rest
+}) {
+  const [show, setShow] = React.useState(false);
+  const timer = React.useRef(null);
+  const id = React.useId();
+  const reduced = typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const open = () => {
+    clearTimeout(timer.current);
+    timer.current = setTimeout(() => setShow(true), delay);
+  };
+  const close = () => {
+    clearTimeout(timer.current);
+    setShow(false);
+  };
+  React.useEffect(() => () => clearTimeout(timer.current), []);
+  React.useEffect(() => {
+    if (!show) return;
+    const onKey = e => {
+      if (e.key === 'Escape') setShow(false);
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [show]);
+  const pos = {
+    top: {
+      bottom: 'calc(100% + 8px)',
+      left: '50%',
+      transform: 'translateX(-50%)'
+    },
+    bottom: {
+      top: 'calc(100% + 8px)',
+      left: '50%',
+      transform: 'translateX(-50%)'
+    },
+    left: {
+      right: 'calc(100% + 8px)',
+      top: '50%',
+      transform: 'translateY(-50%)'
+    },
+    right: {
+      left: 'calc(100% + 8px)',
+      top: '50%',
+      transform: 'translateY(-50%)'
+    }
+  }[side] || {
+    bottom: 'calc(100% + 8px)',
+    left: '50%',
+    transform: 'translateX(-50%)'
+  };
+  const child = React.isValidElement(children) ? React.cloneElement(children, {
+    'aria-describedby': show ? id : children.props['aria-describedby']
+  }) : children;
+  return /*#__PURE__*/React.createElement("span", _extends({
+    onMouseEnter: open,
+    onMouseLeave: close,
+    onFocus: open,
+    onBlur: close,
+    style: {
+      position: 'relative',
+      display: 'inline-flex',
+      ...style
+    }
+  }, rest), child, show && content != null && /*#__PURE__*/React.createElement("span", {
+    style: {
+      position: 'absolute',
+      zIndex: 'var(--z-menu)',
+      pointerEvents: 'none',
+      ...pos
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    role: "tooltip",
+    id: id,
+    style: {
+      display: 'block',
+      background: 'var(--glass-bg-strong)',
+      WebkitBackdropFilter: 'blur(var(--glass-blur)) saturate(1.2)',
+      backdropFilter: 'blur(var(--glass-blur)) saturate(1.2)',
+      border: '1px solid var(--glass-border)',
+      borderRadius: 'var(--r-sm)',
+      boxShadow: 'var(--shadow-md), var(--inset-edge)',
+      padding: '5px 10px',
+      fontSize: 12,
+      fontFamily: 'var(--font-sans)',
+      color: 'var(--text-1)',
+      whiteSpace: 'nowrap',
+      lineHeight: 1.5,
+      animation: reduced ? 'none' : 'sr-cardin var(--dur-fast) var(--ease-flight) both'
+    }
+  }, content)));
+}
+Object.assign(__ds_scope, { Tooltip });
+})(); } catch (e) { __ds_ns.__errors.push({ path: "components/overlay/Tooltip.jsx", error: String((e && e.message) || e) }); }
+
+// ui_kits/stellar-raft/AIConfig.jsx
+try { (() => {
+/* AIConfig — AI 配置面板 (玻璃 modal)。
+   让"AI"变得可信、可设置：服务商接入（Base URL / API Key / 模型，默认 OpenAI）·
+   费曼学生性格/严格度 · 复习提醒策略 · 摘要与建议开关。
+   接入配置持久化到 localStorage，「测试连接」真实请求所配端点的 /models 校验密钥。
+   Esc / 点击遮罩关闭。props: { onClose }。 */
+const {
+  GlassPanel,
+  Button,
+  Icon,
+  IconButton,
+  Input,
+  Badge
+} = window.StellarRaftDesignSystem_2866af;
+
+// ——— 服务商预设。openai 为默认；custom 兼容 one-api / Ollama / vLLM 等自建网关 ———
+const PROVIDERS = [{
+  id: 'openai',
+  name: 'OpenAI',
+  icon: 'sparkles',
+  baseUrl: 'https://api.openai.com/v1',
+  keyPh: 'sk-...',
+  desc: 'OpenAI 官方接口，或任何遵循同一规范的服务',
+  models: [{
+    id: 'gpt-5.1',
+    name: 'GPT-5.1',
+    tier: '旗舰',
+    desc: '复杂推导、深度费曼对话，推理最强',
+    speed: '深思',
+    cost: '高'
+  }, {
+    id: 'gpt-5-mini',
+    name: 'GPT-5 mini',
+    tier: '均衡',
+    desc: '日常摘要与建议的默认选择',
+    speed: '迅捷',
+    cost: '中'
+  }, {
+    id: 'gpt-4.1-mini',
+    name: 'GPT-4.1 mini',
+    tier: '轻快',
+    desc: '即时补全、标签建议，几乎无延迟',
+    speed: '极速',
+    cost: '低'
+  }]
+}, {
+  id: 'anthropic',
+  name: 'Anthropic',
+  icon: 'moon-star',
+  baseUrl: 'https://api.anthropic.com/v1',
+  keyPh: 'sk-ant-...',
+  desc: 'Claude 系列模型的官方接口',
+  models: [{
+    id: 'claude-opus-4-8',
+    name: 'Claude Opus 4.8',
+    tier: '最强',
+    desc: '复杂推导、深度费曼对话，响应稍慢',
+    speed: '深思',
+    cost: '高'
+  }, {
+    id: 'claude-sonnet-5',
+    name: 'Claude Sonnet 5',
+    tier: '均衡',
+    desc: '日常摘要与建议的默认选择',
+    speed: '迅捷',
+    cost: '中'
+  }, {
+    id: 'claude-haiku-4-5',
+    name: 'Claude Haiku 4.5',
+    tier: '轻快',
+    desc: '即时补全、标签建议，几乎无延迟',
+    speed: '极速',
+    cost: '低'
+  }]
+}, {
+  id: 'custom',
+  name: '自定义',
+  icon: 'server',
+  baseUrl: '',
+  keyPh: 'sk-... 或网关令牌',
+  desc: 'OpenAI 兼容接口：one-api / new-api / Ollama / vLLM 等',
+  models: []
+}];
+const REVIEW_STRATEGIES = [{
+  id: 'cooling',
+  label: '随星变暗',
+  desc: '记忆温度下降到阈值时提醒，贴合遗忘曲线'
+}, {
+  id: 'sm2',
+  label: '间隔重复',
+  desc: '按 1·3·7·15 天的经典间隔安排复习'
+}, {
+  id: 'daily',
+  label: '每日固定',
+  desc: '每天傍晚汇总今日待回顾的星'
+}, {
+  id: 'off',
+  label: '不提醒',
+  desc: '只在你主动进入复习时才唤醒 AI'
+}];
+
+// ——— 配置持久化（仅存本机浏览器）———
+const CFG_KEY = 'sr.aiConfig';
+const CFG_DEFAULTS = {
+  provider: 'openai',
+  providers: {
+    openai: {
+      baseUrl: 'https://api.openai.com/v1',
+      key: '',
+      model: 'gpt-5.1'
+    },
+    anthropic: {
+      baseUrl: 'https://api.anthropic.com/v1',
+      key: '',
+      model: 'claude-sonnet-5'
+    },
+    custom: {
+      baseUrl: '',
+      key: '',
+      model: ''
+    }
+  },
+  persona: 45,
+  strictness: 60,
+  strategy: 'cooling',
+  autoSummary: true,
+  linkSuggest: true,
+  tagSuggest: false
+};
+function loadCfg() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(CFG_KEY));
+    if (!saved) return {
+      ...CFG_DEFAULTS
+    };
+    return {
+      ...CFG_DEFAULTS,
+      ...saved,
+      providers: Object.fromEntries(Object.keys(CFG_DEFAULTS.providers).map(k => [k, {
+        ...CFG_DEFAULTS.providers[k],
+        ...(saved.providers && saved.providers[k])
+      }]))
+    };
+  } catch {
+    return {
+      ...CFG_DEFAULTS
+    };
+  }
+}
+function saveCfg(cfg) {
+  try {
+    localStorage.setItem(CFG_KEY, JSON.stringify(cfg));
+  } catch {}
+}
+
+// ——— 受控开关 ———
+function Toggle({
+  on,
+  onChange,
+  label
+}) {
+  return /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    role: "switch",
+    "aria-checked": on,
+    "aria-label": label,
+    onClick: () => onChange(!on),
+    style: {
+      position: 'relative',
+      width: 42,
+      height: 24,
+      flex: '0 0 auto',
+      borderRadius: 'var(--r-pill)',
+      cursor: 'pointer',
+      padding: 0,
+      border: '1px solid',
+      borderColor: on ? 'rgba(255,217,138,0.45)' : 'var(--glass-border)',
+      background: on ? 'rgba(255,217,138,0.18)' : 'rgba(159,198,255,0.06)',
+      boxShadow: on ? 'var(--glow-gold-soft)' : 'none',
+      transition: 'background var(--dur-base), border-color var(--dur-base), box-shadow var(--dur-base)'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      position: 'absolute',
+      top: 2,
+      left: on ? 20 : 2,
+      width: 18,
+      height: 18,
+      borderRadius: '50%',
+      background: on ? 'var(--gold)' : 'var(--star-blue-dim)',
+      boxShadow: on ? '0 0 8px rgba(255,217,138,0.6)' : 'none',
+      transition: 'left var(--dur-base) var(--ease-flight), background var(--dur-base)'
+    }
+  }));
+}
+
+// ——— 受控滑块。track 用冷蓝结构色，已填充段用暖金 ———
+function Slider({
+  value,
+  onChange,
+  min = 0,
+  max = 100,
+  label,
+  leftHint,
+  rightHint
+}) {
+  const pct = (value - min) / (max - min) * 100;
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("input", {
+    type: "range",
+    min: min,
+    max: max,
+    value: value,
+    "aria-label": label,
+    onChange: e => onChange(Number(e.target.value)),
+    style: {
+      width: '100%',
+      height: 22,
+      cursor: 'pointer',
+      appearance: 'none',
+      WebkitAppearance: 'none',
+      background: `linear-gradient(90deg, var(--gold) 0%, var(--gold) ${pct}%, rgba(159,198,255,0.14) ${pct}%, rgba(159,198,255,0.14) 100%)`,
+      borderRadius: 'var(--r-pill)',
+      outline: 'none'
+    },
+    className: "sr-aicfg-range"
+  }), (leftHint || rightHint) && /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      marginTop: 4,
+      fontSize: 11,
+      color: 'var(--text-3)'
+    }
+  }, /*#__PURE__*/React.createElement("span", null, leftHint), /*#__PURE__*/React.createElement("span", null, rightHint)));
+}
+
+// ——— 区块标题 + 能力说明 ———
+function Section({
+  icon,
+  title,
+  hint,
+  children
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 12
+    }
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 8,
+      fontSize: 12,
+      letterSpacing: 'var(--ls-hud)',
+      textTransform: 'uppercase',
+      color: 'var(--text-3)',
+      fontFamily: 'var(--font-mono)'
+    }
+  }, icon && /*#__PURE__*/React.createElement(Icon, {
+    name: icon,
+    size: 15,
+    color: "var(--star-blue)"
+  }), title), hint && /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12.5,
+      lineHeight: 1.6,
+      color: 'var(--text-3)',
+      marginTop: 6,
+      maxWidth: 460
+    }
+  }, hint)), children);
+}
+function Divider() {
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      height: 1,
+      background: 'var(--line)',
+      margin: '4px 0'
+    }
+  });
+}
+
+// ——— 服务商切换（分段控件）———
+function ProviderTabs({
+  value,
+  onChange
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      gap: 4,
+      padding: 4,
+      borderRadius: 'var(--r-md)',
+      border: '1px solid var(--glass-border)',
+      background: 'rgba(3,4,12,0.35)'
+    }
+  }, PROVIDERS.map(p => {
+    const on = p.id === value;
+    return /*#__PURE__*/React.createElement("button", {
+      key: p.id,
+      type: "button",
+      onClick: () => onChange(p.id),
+      style: {
+        flex: 1,
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 7,
+        padding: '9px 10px',
+        cursor: 'pointer',
+        border: '1px solid',
+        borderColor: on ? 'rgba(255,217,138,0.4)' : 'transparent',
+        borderRadius: 'var(--r-sm)',
+        font: 'inherit',
+        fontSize: 13,
+        color: on ? 'var(--text-1)' : 'var(--text-3)',
+        background: on ? 'rgba(255,217,138,0.10)' : 'transparent',
+        transition: 'background var(--dur-fast), color var(--dur-fast), border-color var(--dur-fast)'
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: p.icon,
+      size: 15,
+      color: on ? 'var(--gold)' : 'var(--text-3)'
+    }), p.name);
+  }));
+}
+function ModelDropdown({
+  value,
+  onChange,
+  models
+}) {
+  const [open, setOpen] = React.useState(false);
+  const ref = React.useRef(null);
+  const customEntry = {
+    id: '__custom',
+    name: '自定义模型 ID',
+    tier: '自定义',
+    desc: '手动填写任意模型标识（如网关映射的模型名）',
+    speed: '—',
+    cost: '—'
+  };
+  const list = [...models, customEntry];
+  const isPreset = models.some(m => m.id === value);
+  const cur = models.find(m => m.id === value) || customEntry;
+  React.useEffect(() => {
+    if (!open) return;
+    const close = e => {
+      if (ref.current && !ref.current.contains(e.target)) setOpen(false);
+    };
+    document.addEventListener('mousedown', close);
+    return () => document.removeEventListener('mousedown', close);
+  }, [open]);
+  return /*#__PURE__*/React.createElement("div", {
+    ref: ref,
+    style: {
+      position: 'relative'
+    }
+  }, /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    onClick: () => setOpen(o => !o),
+    "aria-haspopup": "listbox",
+    "aria-expanded": open,
+    style: {
+      width: '100%',
+      textAlign: 'left',
+      cursor: 'pointer',
+      display: 'flex',
+      alignItems: 'center',
+      gap: 12,
+      padding: '12px 14px',
+      borderRadius: 'var(--r-md)',
+      background: 'rgba(159,198,255,0.06)',
+      border: '1px solid',
+      borderColor: open ? 'var(--glass-border-strong)' : 'var(--glass-border)',
+      transition: 'border-color var(--dur-fast)'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "sparkles",
+    size: 18,
+    color: "var(--gold)"
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      flex: 1
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 8
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 14.5,
+      color: 'var(--text-1)',
+      fontFamily: isPreset ? 'inherit' : 'var(--font-mono)'
+    }
+  }, isPreset ? cur.name : value || '自定义模型 ID'), /*#__PURE__*/React.createElement(Badge, {
+    tone: "gold"
+  }, cur.tier)), /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'block',
+      fontSize: 12,
+      color: 'var(--text-3)',
+      marginTop: 3
+    }
+  }, cur.desc)), /*#__PURE__*/React.createElement(Icon, {
+    name: open ? 'chevron-up' : 'chevron-down',
+    size: 16,
+    color: "var(--text-3)"
+  })), open && /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'absolute',
+      top: 'calc(100% + 6px)',
+      left: 0,
+      right: 0,
+      zIndex: 5,
+      animation: 'sr-cardin var(--dur-fast) var(--ease-flight) both'
+    }
+  }, /*#__PURE__*/React.createElement(GlassPanel, {
+    strong: true,
+    radius: "md",
+    pad: "none",
+    glow: true,
+    style: {
+      overflow: 'hidden'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    role: "listbox",
+    style: {
+      padding: 6
+    }
+  }, list.map(m => {
+    const on = m.id === '__custom' ? !isPreset : m.id === value;
+    return /*#__PURE__*/React.createElement("div", {
+      key: m.id,
+      role: "option",
+      "aria-selected": on,
+      onClick: () => {
+        onChange(m.id === '__custom' ? '' : m.id);
+        setOpen(false);
+      },
+      onMouseEnter: e => {
+        if (!on) e.currentTarget.style.background = 'rgba(159,198,255,0.08)';
+      },
+      onMouseLeave: e => {
+        if (!on) e.currentTarget.style.background = 'transparent';
+      },
+      style: {
+        display: 'flex',
+        alignItems: 'flex-start',
+        gap: 11,
+        padding: '10px 12px',
+        borderRadius: 'var(--r-sm)',
+        cursor: 'pointer',
+        background: on ? 'rgba(255,217,138,0.10)' : 'transparent'
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: m.id === '__custom' ? 'pen-line' : 'sparkles',
+      size: 16,
+      color: on ? 'var(--gold)' : 'var(--text-3)',
+      style: {
+        marginTop: 2
+      }
+    }), /*#__PURE__*/React.createElement("div", {
+      style: {
+        flex: 1
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: 8
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 13.5,
+        color: on ? 'var(--text-1)' : 'var(--text-2)'
+      }
+    }, m.name), /*#__PURE__*/React.createElement(Badge, {
+      tone: on ? 'gold' : 'neutral'
+    }, m.tier)), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 11.5,
+        color: 'var(--text-3)',
+        marginTop: 3
+      }
+    }, m.desc), m.id !== '__custom' && /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        gap: 14,
+        marginTop: 5,
+        fontSize: 10.5,
+        color: 'var(--text-3)',
+        fontFamily: 'var(--font-mono)'
+      }
+    }, /*#__PURE__*/React.createElement("span", null, "\u54CD\u5E94 \xB7 ", m.speed), /*#__PURE__*/React.createElement("span", null, "\u6D88\u8017 \xB7 ", m.cost))), on && /*#__PURE__*/React.createElement(Icon, {
+      name: "check",
+      size: 15,
+      color: "var(--gold)",
+      style: {
+        marginTop: 2
+      }
+    }));
+  })))));
+}
+function AIConfig({
+  onClose
+}) {
+  const [cfg, setCfg] = React.useState(loadCfg);
+  const [showKey, setShowKey] = React.useState(false);
+  const [saved, setSaved] = React.useState(false);
+  const [test, setTest] = React.useState({
+    state: 'idle',
+    msg: ''
+  });
+  const provider = PROVIDERS.find(p => p.id === cfg.provider) || PROVIDERS[0];
+  const prov = cfg.providers[provider.id];
+  const set = patch => {
+    setCfg(c => ({
+      ...c,
+      ...patch
+    }));
+    setSaved(false);
+  };
+  const setProv = patch => {
+    setCfg(c => ({
+      ...c,
+      providers: {
+        ...c.providers,
+        [provider.id]: {
+          ...c.providers[provider.id],
+          ...patch
+        }
+      }
+    }));
+    setSaved(false);
+    setTest({
+      state: 'idle',
+      msg: ''
+    });
+  };
+  const switchProvider = id => {
+    set({
+      provider: id
+    });
+    setTest({
+      state: 'idle',
+      msg: ''
+    });
+  };
+
+  // 模态焦点管理：移焦入内 · Tab 圈禁 · 关闭还原焦点；打开期间吞掉 ⌘K
+  const modalRef = React.useRef(null);
+  (window.SRKit && window.SRKit.useModalFocus ? window.SRKit.useModalFocus : () => {})(modalRef, {
+    swallowCmdK: true
+  });
+  React.useEffect(() => {
+    const onKey = e => {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        onClose && onClose();
+      }
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [onClose]);
+  const persist = () => {
+    saveCfg(cfg);
+    setSaved(true);
+    setTimeout(() => setSaved(false), 2400);
+  };
+  const applyAndClose = () => {
+    saveCfg(cfg);
+    onClose && onClose();
+  };
+
+  // 真实请求所配端点的模型列表，验证 Base URL 与密钥是否可用
+  const testConnection = async () => {
+    const base = (prov.baseUrl || '').trim().replace(/\/+$/, '');
+    if (!base) {
+      setTest({
+        state: 'err',
+        msg: '请先填写 Base URL'
+      });
+      return;
+    }
+    setTest({
+      state: 'testing',
+      msg: ''
+    });
+    const headers = provider.id === 'anthropic' ? {
+      'x-api-key': prov.key,
+      'anthropic-version': '2023-06-01',
+      'anthropic-dangerous-direct-browser-access': 'true'
+    } : {
+      Authorization: 'Bearer ' + prov.key
+    };
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 8000);
+    try {
+      const res = await fetch(base + '/models', {
+        headers,
+        signal: ctrl.signal
+      });
+      if (!res.ok) throw new Error('HTTP ' + res.status + (res.status === 401 ? ' · 密钥无效' : res.status === 404 ? ' · 路径不对，Base URL 通常以 /v1 结尾' : ''));
+      const data = await res.json();
+      const n = Array.isArray(data.data) ? data.data.length : 0;
+      setTest({
+        state: 'ok',
+        msg: n ? `连接成功 · ${n} 个可用模型` : '连接成功'
+      });
+    } catch (e) {
+      setTest({
+        state: 'err',
+        msg: e.name === 'AbortError' ? '连接超时（8s）' : e.message === 'Failed to fetch' ? '无法访问该地址（网络或 CORS）' : e.message || '网络错误'
+      });
+    } finally {
+      clearTimeout(timer);
+    }
+  };
+  const personaWord = cfg.persona < 33 ? '温和鼓励' : cfg.persona < 67 ? '好奇求知' : '刨根问底';
+  const strictWord = cfg.strictness < 33 ? '宽松' : cfg.strictness < 67 ? '适中' : '严格';
+  const baseUrlDirty = provider.baseUrl && prov.baseUrl !== provider.baseUrl;
+  return /*#__PURE__*/React.createElement("div", {
+    ref: modalRef,
+    onMouseDown: onClose,
+    onContextMenu: e => e.preventDefault(),
+    role: "dialog",
+    "aria-modal": "true",
+    "aria-label": "AI \u914D\u7F6E",
+    style: {
+      position: 'fixed',
+      inset: 0,
+      zIndex: 100,
+      background: 'rgba(3,4,12,0.58)',
+      backdropFilter: 'blur(3px)',
+      WebkitBackdropFilter: 'blur(3px)',
+      display: 'flex',
+      alignItems: 'flex-start',
+      justifyContent: 'center',
+      padding: '7vh 20px 5vh'
+    }
+  }, /*#__PURE__*/React.createElement("style", null, `
+        .sr-aicfg-range::-webkit-slider-thumb{ -webkit-appearance:none; appearance:none; width:18px; height:18px; border-radius:50%;
+          background:var(--gold-white); border:2px solid var(--gold); box-shadow:0 0 8px rgba(255,217,138,0.7); cursor:pointer; }
+        .sr-aicfg-range::-moz-range-thumb{ width:16px; height:16px; border-radius:50%;
+          background:var(--gold-white); border:2px solid var(--gold); box-shadow:0 0 8px rgba(255,217,138,0.7); cursor:pointer; }
+        .sr-aicfg-range{ scrollbar-width:none; }
+      `), /*#__PURE__*/React.createElement("div", {
+    onMouseDown: e => e.stopPropagation(),
+    style: {
+      width: 640,
+      maxWidth: '94vw',
+      maxHeight: '88vh',
+      display: 'flex',
+      animation: 'sr-cardin var(--dur-base) var(--ease-flight) both'
+    }
+  }, /*#__PURE__*/React.createElement(GlassPanel, {
+    strong: true,
+    radius: "xl",
+    pad: "none",
+    glow: true,
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      width: '100%',
+      overflow: 'hidden'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      padding: '20px 22px 16px',
+      borderBottom: '1px solid var(--line)'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 12
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: 38,
+      height: 38,
+      borderRadius: 12,
+      background: 'rgba(255,217,138,0.12)',
+      border: '1px solid rgba(255,217,138,0.28)',
+      boxShadow: 'var(--glow-gold-soft)'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "bot",
+    size: 20,
+    color: "var(--gold)"
+  })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 17,
+      fontWeight: 400,
+      color: 'var(--text-1)'
+    }
+  }, "AI \u914D\u7F6E"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: 'var(--text-3)',
+      marginTop: 2
+    }
+  }, "\u8BBE\u5B9A\u90A3\u4F4D\u966A\u4F60\u70B9\u4EAE\u661F\u7A7A\u7684\u667A\u80FD\u52A9\u624B"))), /*#__PURE__*/React.createElement(IconButton, {
+    name: "x",
+    title: "\u5173\u95ED",
+    onClick: onClose
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1,
+      overflow: 'auto',
+      padding: '20px 22px 8px',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 22
+    }
+  }, /*#__PURE__*/React.createElement(Section, {
+    icon: "plug-zap",
+    title: "\u670D\u52A1\u5546\u4E0E\u63A5\u5165",
+    hint: "\u9ED8\u8BA4\u4F7F\u7528 OpenAI \u63A5\u53E3\u89C4\u8303\u3002Base URL \u4E0E API Key \u53EA\u4FDD\u5B58\u5728\u672C\u673A\u6D4F\u89C8\u5668\uFF0C\u4E5F\u53EA\u4F1A\u53D1\u5F80\u4F60\u914D\u7F6E\u7684\u5730\u5740\u3002"
+  }, /*#__PURE__*/React.createElement(ProviderTabs, {
+    value: provider.id,
+    onChange: switchProvider
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: 'var(--text-3)',
+      margin: '-4px 2px 0'
+    }
+  }, provider.desc), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 10
+    }
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12.5,
+      color: 'var(--text-2)',
+      marginBottom: 6
+    }
+  }, "Base URL"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      gap: 10,
+      alignItems: 'center'
+    }
+  }, /*#__PURE__*/React.createElement(Input, {
+    value: prov.baseUrl,
+    onChange: e => setProv({
+      baseUrl: e.target.value
+    }),
+    placeholder: provider.baseUrl || 'https://your-gateway.example.com/v1',
+    icon: "globe",
+    size: "md",
+    style: {
+      flex: 1,
+      fontFamily: 'var(--font-mono)'
+    }
+  }), baseUrlDirty && /*#__PURE__*/React.createElement(IconButton, {
+    name: "rotate-ccw",
+    title: '恢复默认 ' + provider.baseUrl,
+    onClick: () => setProv({
+      baseUrl: provider.baseUrl
+    })
+  }))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12.5,
+      color: 'var(--text-2)',
+      marginBottom: 6
+    }
+  }, "API Key"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      gap: 10,
+      alignItems: 'center'
+    }
+  }, /*#__PURE__*/React.createElement(Input, {
+    value: prov.key,
+    onChange: e => setProv({
+      key: e.target.value
+    }),
+    placeholder: provider.keyPh,
+    icon: "lock",
+    type: showKey ? 'text' : 'password',
+    size: "md",
+    style: {
+      flex: 1
+    }
+  }), /*#__PURE__*/React.createElement(IconButton, {
+    name: showKey ? 'eye-off' : 'eye',
+    title: showKey ? '隐藏密钥' : '显示密钥',
+    onClick: () => setShowKey(s => !s)
+  }), /*#__PURE__*/React.createElement(Button, {
+    variant: saved ? 'primary' : 'secondary',
+    size: "md",
+    icon: saved ? 'check' : 'save',
+    disabled: !prov.key.trim() && !prov.baseUrl.trim(),
+    onClick: persist
+  }, saved ? '已保存' : '保存'))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 10,
+      marginTop: 2
+    }
+  }, /*#__PURE__*/React.createElement(Button, {
+    variant: "ghost",
+    size: "sm",
+    icon: test.state === 'testing' ? 'loader' : 'plug-zap',
+    disabled: test.state === 'testing',
+    onClick: testConnection
+  }, test.state === 'testing' ? '测试中…' : '测试连接'), test.state === 'ok' && /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 6,
+      fontSize: 12,
+      color: 'var(--gold)'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "circle-check",
+    size: 14,
+    color: "var(--gold)"
+  }), test.msg), test.state === 'err' && /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 6,
+      fontSize: 12,
+      color: 'var(--danger)'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "circle-alert",
+    size: 14,
+    color: "var(--danger)"
+  }), test.msg), saved && test.state === 'idle' && /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 6,
+      fontSize: 12,
+      color: 'var(--gold)'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "shield-check",
+    size: 14,
+    color: "var(--gold)"
+  }), "\u914D\u7F6E\u5DF2\u5B58\u4E8E\u672C\u5730\u6D4F\u89C8\u5668")))), /*#__PURE__*/React.createElement(Divider, null), /*#__PURE__*/React.createElement(Section, {
+    icon: "sparkles",
+    title: "\u5BF9\u8BDD\u6A21\u578B",
+    hint: "\u9009\u62E9\u9A71\u52A8\u6240\u6709 AI \u80FD\u529B\u7684\u5E95\u5C42\u6A21\u578B\u3002\u8D8A\u5F3A\u7684\u6A21\u578B\u63A8\u7406\u8D8A\u6DF1\u3001\u8D8A\u6162\u3001\u6D88\u8017\u8D8A\u591A\u3002"
+  }, /*#__PURE__*/React.createElement(ModelDropdown, {
+    value: prov.model,
+    onChange: m => setProv({
+      model: m
+    }),
+    models: provider.models
+  }), !provider.models.some(m => m.id === prov.model) && /*#__PURE__*/React.createElement(Input, {
+    value: prov.model,
+    onChange: e => setProv({
+      model: e.target.value
+    }),
+    placeholder: provider.id === 'custom' ? '例如 qwen3-32b / deepseek-v3 / llama4' : '填写模型 ID',
+    icon: "pen-line",
+    size: "md",
+    style: {
+      fontFamily: 'var(--font-mono)'
+    }
+  })), /*#__PURE__*/React.createElement(Divider, null), /*#__PURE__*/React.createElement(Section, {
+    icon: "graduation-cap",
+    title: "\u8D39\u66FC AI \u5B66\u751F",
+    hint: "\u8D39\u66FC\u5185\u5316\u65F6\uFF0CAI \u626E\u6F14\u4E00\u540D\u5B66\u751F\u542C\u4F60\u8BB2\u89E3\u3002\u5B83\u7684\u6027\u683C\u4E0E\u8F83\u771F\u7A0B\u5EA6\u51B3\u5B9A\u5B83\u4F1A\u600E\u6837\u8FFD\u95EE\u4F60\uFF0C\u628A\u6CA1\u8BB2\u900F\u7684\u5730\u65B9\u903C\u51FA\u6765\u3002"
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 16,
+      padding: '4px 2px'
+    }
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'baseline',
+      marginBottom: 8
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 13,
+      color: 'var(--text-2)'
+    }
+  }, "\u6027\u683C"), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 12,
+      color: 'var(--gold)',
+      fontFamily: 'var(--font-mono)'
+    }
+  }, personaWord)), /*#__PURE__*/React.createElement(Slider, {
+    value: cfg.persona,
+    onChange: v => set({
+      persona: v
+    }),
+    label: "\u5B66\u751F\u6027\u683C",
+    leftHint: "\u6E29\u548C\u9F13\u52B1",
+    rightHint: "\u5228\u6839\u95EE\u5E95"
+  })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'baseline',
+      marginBottom: 8
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 13,
+      color: 'var(--text-2)'
+    }
+  }, "\u4E25\u683C\u5EA6"), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 12,
+      color: 'var(--gold)',
+      fontFamily: 'var(--font-mono)'
+    }
+  }, strictWord)), /*#__PURE__*/React.createElement(Slider, {
+    value: cfg.strictness,
+    onChange: v => set({
+      strictness: v
+    }),
+    label: "\u5B66\u751F\u4E25\u683C\u5EA6",
+    leftHint: "\u542C\u61C2\u5373\u8FC7",
+    rightHint: "\u5FC5\u987B\u8BB2\u900F"
+  })))), /*#__PURE__*/React.createElement(Divider, null), /*#__PURE__*/React.createElement(Section, {
+    icon: "alarm-clock",
+    title: "\u590D\u4E60\u63D0\u9192\u7B56\u7565",
+    hint: "\u661F\u4F1A\u968F\u8BB0\u5FC6\u6E29\u5EA6\u53D8\u6697\u3002\u9009\u62E9 AI \u5728\u4F55\u65F6\u628A\u6B63\u5728\u53D8\u6697\u7684\u661F\u91CD\u65B0\u5E26\u56DE\u4F60\u773C\u524D\u3002"
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 8
+    }
+  }, REVIEW_STRATEGIES.map(s => {
+    const on = s.id === cfg.strategy;
+    return /*#__PURE__*/React.createElement("div", {
+      key: s.id,
+      role: "radio",
+      "aria-checked": on,
+      onClick: () => set({
+        strategy: s.id
+      }),
+      style: {
+        display: 'flex',
+        alignItems: 'flex-start',
+        gap: 11,
+        padding: '11px 13px',
+        cursor: 'pointer',
+        borderRadius: 'var(--r-md)',
+        border: '1px solid',
+        borderColor: on ? 'rgba(255,217,138,0.4)' : 'var(--glass-border)',
+        background: on ? 'rgba(255,217,138,0.08)' : 'rgba(159,198,255,0.04)',
+        transition: 'border-color var(--dur-fast), background var(--dur-fast)'
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        width: 16,
+        height: 16,
+        borderRadius: '50%',
+        marginTop: 1,
+        flex: '0 0 auto',
+        border: '1.5px solid',
+        borderColor: on ? 'var(--gold)' : 'var(--text-3)',
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }
+    }, on && /*#__PURE__*/React.createElement("span", {
+      style: {
+        width: 7,
+        height: 7,
+        borderRadius: '50%',
+        background: 'var(--gold)',
+        boxShadow: '0 0 6px var(--gold)'
+      }
+    })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 13.5,
+        color: on ? 'var(--text-1)' : 'var(--text-2)'
+      }
+    }, s.label), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 12,
+        color: 'var(--text-3)',
+        marginTop: 2
+      }
+    }, s.desc)));
+  }))), /*#__PURE__*/React.createElement(Divider, null), /*#__PURE__*/React.createElement(Section, {
+    icon: "wand-sparkles",
+    title: "\u667A\u80FD\u6458\u8981\u4E0E\u5EFA\u8BAE",
+    hint: "\u8BA9 AI \u5728\u4F60\u4E66\u5199\u65F6\u5B89\u9759\u5730\u5E2E\u5FD9\uFF1A\u63D0\u70BC\u6458\u8981\u3001\u53D1\u73B0\u53EF\u878D\u4F1A\u8D2F\u901A\u7684\u8FDE\u63A5\u3001\u63A8\u8350\u6807\u7B7E\u3002\u5B83\u53EA\u5728\u540E\u53F0\u5EFA\u8BAE\uFF0C\u6C38\u4E0D\u66FF\u4F60\u4E0B\u7B14\u3002"
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 4
+    }
+  }, /*#__PURE__*/React.createElement(ToggleRow, {
+    on: cfg.autoSummary,
+    onChange: v => set({
+      autoSummary: v
+    }),
+    title: "\u81EA\u52A8\u6458\u8981",
+    desc: "\u4FDD\u5B58\u957F\u7B14\u8BB0\u65F6\u751F\u6210\u4E00\u53E5\u8BDD\u6458\u8981\uFF0C\u4F5C\u4E3A\u8FD9\u9897\u661F\u7684\u60AC\u505C\u8BF4\u660E\u3002"
+  }), /*#__PURE__*/React.createElement(ToggleRow, {
+    on: cfg.linkSuggest,
+    onChange: v => set({
+      linkSuggest: v
+    }),
+    title: "\u8FDE\u63A5\u5EFA\u8BAE",
+    desc: "\u53D1\u73B0\u8DE8\u661F\u57DF\u7684\u6F5C\u5728\u5173\u8054\uFF0C\u63D0\u793A\u53EF\u70B9\u4EAE\u7684\u300C\u878D\u4F1A\u8D2F\u901A\u300D\u91D1\u8272\u8FDE\u7EBF\u3002"
+  }), /*#__PURE__*/React.createElement(ToggleRow, {
+    on: cfg.tagSuggest,
+    onChange: v => set({
+      tagSuggest: v
+    }),
+    title: "\u6807\u7B7E\u63A8\u8350",
+    desc: "\u6839\u636E\u6B63\u6587\u63A8\u8350\u5408\u9002\u7684\u6807\u7B7E\uFF0C\u6574\u7406\u6536\u4EF6\u7BB1\u65F6\u66F4\u7701\u529B\u3002"
+  })))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      gap: 12,
+      padding: '14px 22px',
+      borderTop: '1px solid var(--line)'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 11.5,
+      color: 'var(--text-3)',
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 6
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontFamily: 'var(--font-mono)',
+      fontSize: 10.5,
+      color: 'var(--text-3)',
+      border: '1px solid var(--line-strong)',
+      borderRadius: 6,
+      padding: '2px 6px'
+    }
+  }, "ESC"), "\u5173\u95ED"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      gap: 10
+    }
+  }, /*#__PURE__*/React.createElement(Button, {
+    variant: "ghost",
+    size: "md",
+    onClick: onClose
+  }, "\u53D6\u6D88"), /*#__PURE__*/React.createElement(Button, {
+    variant: "primary",
+    size: "md",
+    icon: "check",
+    glow: true,
+    onClick: applyAndClose
+  }, "\u5E94\u7528\u5E76\u5173\u95ED"))))));
+}
+function ToggleRow({
+  on,
+  onChange,
+  title,
+  desc
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'flex-start',
+      gap: 12,
+      padding: '11px 2px'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 13.5,
+      color: 'var(--text-1)'
+    }
+  }, title), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: 'var(--text-3)',
+      marginTop: 3,
+      lineHeight: 1.55
+    }
+  }, desc)), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 2
+    }
+  }, /*#__PURE__*/React.createElement(Toggle, {
+    on: on,
+    onChange: onChange,
+    label: title
+  })));
+}
+window.SRKit = Object.assign(window.SRKit || {}, {
+  AIConfig
+});
+})(); } catch (e) { __ds_ns.__errors.push({ path: "ui_kits/stellar-raft/AIConfig.jsx", error: String((e && e.message) || e) }); }
+
 // ui_kits/stellar-raft/AerialView.jsx
 try { (() => {
-/* AerialView — extreme far view: the whole universe as a brightness heat map.
-   Dark zones = needs review. Constellation names surface. */
+/* AerialView — 极远景俯瞰。与星图创作态是同一份编排：读取每颗星被拖拽后的
+   真实 wx/wy、按等比缩放整体收进一屏（不做任何轴向拉伸），星域光晕、恒星主星
+   与知识星沿用星图的视觉语言——它就是"从更高处看你自己的星空"。这个高度只看
+   亮度分布，不画连接线。知识星按记忆温度着色（冷蓝=正在变暗，暖金=融会贯通），
+   星域按平均记忆强度给出冷/暖星云。点击星域即飞入星图并聚焦该星座。 */
 const {
   GlassPanel,
   Icon,
   Button: SRButton
 } = window.StellarRaftDesignSystem_2866af;
+const A_WORLD = {
+  w: 1680,
+  h: 1040
+};
+
+/* 记忆温度色阶（镜像设计系统 memoryColor；bundle 未导出该函数，此处内联同一份色标） */
+function aMemoryColor(strength) {
+  const dawn = document.documentElement.dataset.theme === 'dawn';
+  const stops = dawn ? [[0.0, [108, 121, 155]], [0.25, [92, 108, 150]], [0.5, [76, 96, 148]], [0.7, [52, 95, 190]], [0.88, [184, 128, 26]], [1.0, [168, 109, 18]]] : [[0.0, [44, 53, 86]], [0.25, [70, 82, 122]], [0.5, [120, 150, 205]], [0.7, [159, 198, 255]], [0.88, [255, 224, 150]], [1.0, [255, 244, 214]]];
+  const s = Math.max(0, Math.min(1, strength));
+  for (let i = 1; i < stops.length; i++) {
+    if (s <= stops[i][0]) {
+      const [a, ca] = stops[i - 1],
+        [b, cb] = stops[i];
+      const t = (s - a) / (b - a || 1);
+      const c = ca.map((v, k) => Math.round(v + (cb[k] - v) * t));
+      return `rgb(${c[0]},${c[1]},${c[2]})`;
+    }
+  }
+  return 'rgb(255,244,214)';
+}
+function hexRgb(hex) {
+  const m = (hex || '').replace('#', '').match(/.{2}/g);
+  if (!m || m.length < 3) return '159,198,255';
+  return m.slice(0, 3).map(x => parseInt(x, 16)).join(',');
+}
 function AerialView({
-  onClose
+  onClose,
+  onOpenCon,
+  dataset
 }) {
-  const D = window.SR_DATA;
-  // centroid + brightness per constellation
-  const groups = D.constellations.map(c => {
-    const ss = D.stars.filter(s => s.con === c.id);
-    const cx = ss.reduce((a, s) => a + s.x, 0) / ss.length;
-    const cy = ss.reduce((a, s) => a + s.y, 0) / ss.length;
+  // dataset：造访好友星系时注入的只读数据；缺省用自己的
+  const D = dataset || window.SR_DATA;
+  // 认证态（点亮/待重燃）：自己的星走数据层派生函数（读共享 sr），
+  // 造访好友时 server sanitizeGalaxy 只透传 lit/ember 两个布尔（不泄露时间戳）
+  const litOf = s => D.isLit ? !!D.isLit(s) : !!s.lit;
+  const emberOf = s => D.isEmber ? !!D.isEmber(s) : !!s.ember;
+  const ref = React.useRef(null);
+  const [box, setBox] = React.useState(null); // 容器实际尺寸，用于等比换算
+  const [hoverCon, setHoverCon] = React.useState(null);
+  React.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const read = () => setBox({
+      w: el.clientWidth,
+      h: el.clientHeight
+    });
+    const ro = new ResizeObserver(read);
+    ro.observe(el);
+    read();
+    return () => ro.disconnect();
+  }, []);
+
+  // Esc = 返回星图：与其它浮层/沉浸视图同一词汇（费曼抽屉在 app 层捕获，永远先关）
+  React.useEffect(() => {
+    if (!onClose) return;
+    const h = e => {
+      if (e.key === 'Escape' && !e.defaultPrevented) {
+        e.preventDefault();
+        onClose();
+      }
+    };
+    document.addEventListener('keydown', h);
+    return () => document.removeEventListener('keydown', h);
+  }, [onClose]);
+
+  // 真实位置：优先星图写回的 wx/wy，否则用种子布局
+  const posOf = s => {
+    const d = D.byId[s.id] || s;
+    return {
+      x: d.wx != null ? d.wx : s.x / 100 * A_WORLD.w,
+      y: d.wy != null ? d.wy : s.y / 100 * A_WORLD.h
+    };
+  };
+  const sp = D.stars.map(s => ({
+    ...s,
+    ...posOf(s)
+  }));
+
+  // 星域几何：与 StarMap.domainGeom 同一套规则（质心 + 包裹全部成员的半径）
+  const doms = D.constellations.map(c => {
+    const ms = sp.filter(s => s.con === c.id);
+    if (!ms.length) return null;
+    const cx = ms.reduce((a, s) => a + s.x, 0) / ms.length;
+    let cy = ms.reduce((a, s) => a + s.y, 0) / ms.length;
+    if (ms.length === 1) cy -= 96; // 与星图一致：单星星域主星上移让位
+    const r = Math.max(150, ...ms.map(s => Math.hypot(s.x - cx, s.y - cy))) + 96;
+    const avg = ms.reduce((a, s) => a + s.strength, 0) / ms.length;
+    // 星域光环转金的新口径：过半点亮 ∧ 平均亮度不塌（litRatio ≥ 0.5 ∧ health ≥ 0.5）
+    const lit = ms.filter(litOf).length;
+    const gold = lit / ms.length >= 0.5 && avg >= 0.5;
     return {
       ...c,
       cx,
-      cy
+      cy,
+      r,
+      avg,
+      lit,
+      members: ms.length,
+      col: gold ? '#ffd98a' : c.color
     };
-  });
-  const weakest = groups.slice().sort((a, b) => a.health - b.health)[0];
+  }).filter(Boolean);
+
+  // 等比取景：把（含光晕的）整片星空收进一屏，只缩放、不变形
+  let X = () => 0,
+    Y = () => 0,
+    k = 1;
+  if (box && sp.length) {
+    const minX = Math.min(...doms.map(d => d.cx - d.r), ...sp.map(s => s.x));
+    const maxX = Math.max(...doms.map(d => d.cx + d.r), ...sp.map(s => s.x));
+    const minY = Math.min(...doms.map(d => d.cy - d.r), ...sp.map(s => s.y));
+    const maxY = Math.max(...doms.map(d => d.cy + d.r), ...sp.map(s => s.y));
+    const W = Math.max(1, maxX - minX),
+      H = Math.max(1, maxY - minY);
+    const padX = 70,
+      padTop = 92,
+      padBottom = 96;
+    k = Math.min((box.w - padX * 2) / W, (box.h - padTop - padBottom) / H);
+    const ox = (box.w - W * k) / 2 - minX * k;
+    const oy = padTop + (box.h - padTop - padBottom - H * k) / 2 - minY * k;
+    X = wx => ox + wx * k;
+    Y = wy => oy + wy * k;
+  }
+  const weakest = doms.slice().sort((a, b) => a.avg - b.avg)[0] || {
+    name: '—'
+  };
+  const litCount = sp.filter(litOf).length;
+  const emberCount = sp.filter(emberOf).length;
+  const dimming = sp.filter(s => s.strength < 0.4).length;
   return /*#__PURE__*/React.createElement("div", {
+    ref: ref,
     style: {
       position: 'relative',
       flex: 1,
@@ -904,72 +3776,158 @@ function AerialView({
       overflow: 'hidden'
     }
   }, /*#__PURE__*/React.createElement("sr-starfield", {
-    density: "1.6"
-  }), /*#__PURE__*/React.createElement("div", {
+    density: "1.7",
+    meteors: "0"
+  }), /*#__PURE__*/React.createElement(AerialStyle, null), box && /*#__PURE__*/React.createElement("div", {
+    className: "aer-scene",
     style: {
       position: 'absolute',
       inset: 0,
       zIndex: 1
     }
-  }, groups.map(g => {
-    const warm = g.health;
-    const color = warm > 0.7 ? '255,217,138' : warm > 0.45 ? '159,198,255' : '120,150,205';
-    const size = 240 + g.count * 4;
+  }, doms.map(g => {
+    const rgb = hexRgb(g.col);
+    // 光晕显示半径设上限：星少倍率高时（如造访好友的小星系）R 会被放大到
+    // 上千像素，巨型合成图层在 Windows GPU 分块光栅化时会沿瓦片边界漏缝，
+    // 表现为贯穿画面的细亮线
+    const R = Math.min(g.r * k, 520);
+    const hov = hoverCon === g.id;
     return /*#__PURE__*/React.createElement("div", {
       key: g.id,
+      onClick: () => onOpenCon && onOpenCon(g.id),
+      onMouseEnter: () => setHoverCon(g.id),
+      onMouseLeave: () => setHoverCon(null),
+      title: `飞入「${g.name}」`,
       style: {
         position: 'absolute',
-        left: `${g.cx}%`,
-        top: `${g.cy}%`,
-        transform: 'translate(-50%,-50%)'
+        left: X(g.cx),
+        top: Y(g.cy),
+        width: R * 2,
+        height: R * 2,
+        transform: 'translate(-50%,-50%)',
+        borderRadius: '50%',
+        cursor: 'pointer'
       }
     }, /*#__PURE__*/React.createElement("div", {
       style: {
-        width: size,
-        height: size,
-        borderRadius: '50%',
-        filter: 'blur(36px)',
-        background: `radial-gradient(circle, rgba(${color},${0.16 + warm * 0.4}) 0%, rgba(${color},0.06) 45%, transparent 70%)`
+        position: 'absolute',
+        inset: 0,
+        background: `radial-gradient(circle closest-side, rgba(${rgb},${hov ? 0.32 : 0.22}) 0%, rgba(${rgb},${hov ? 0.15 : 0.10}) 48%, rgba(${rgb},0.04) 72%, transparent 96%)`,
+        transition: 'background var(--dur-base)'
       }
     }), /*#__PURE__*/React.createElement("div", {
       style: {
         position: 'absolute',
-        top: '50%',
         left: '50%',
+        top: '50%',
+        width: R * 1.2,
+        height: R * 1.0,
         transform: 'translate(-50%,-50%)',
-        textAlign: 'center',
-        whiteSpace: 'nowrap'
+        background: `radial-gradient(circle closest-side at 46% 42%, rgba(${rgb},0.26), rgba(${rgb},0.10) 52%, transparent 92%)`
       }
-    }, /*#__PURE__*/React.createElement("div", {
+    }));
+  }), sp.map((s, i) => {
+    const col = aMemoryColor(s.strength);
+    const sz = 3 + (s.importance || 1) * 2.2 + s.strength * 2;
+    const lit = litOf(s),
+      ember = emberOf(s);
+    return /*#__PURE__*/React.createElement("span", {
+      key: s.id,
+      className: "aer-star",
+      "data-cert": lit ? 'lit' : ember ? 'ember' : undefined,
       style: {
-        fontSize: 17,
-        fontWeight: 300,
-        color: 'var(--text-1)',
-        letterSpacing: '0.04em',
-        textShadow: '0 2px 10px rgba(0,0,0,0.8)'
+        position: 'absolute',
+        left: X(s.x),
+        top: Y(s.y),
+        width: sz,
+        height: sz,
+        borderRadius: '50%',
+        transform: 'translate(-50%,-50%)',
+        background: col,
+        opacity: 0.4 + s.strength * 0.55,
+        boxShadow: `0 0 ${4 + s.strength * 8}px ${col}`,
+        pointerEvents: 'none',
+        // 认证环：已点亮 = 发丝金环；待重燃 = 低透明度暗金余烬环（冷暗星体 + 残迹）
+        outline: lit ? '1px solid var(--gold)' : ember ? '1px solid color-mix(in srgb, var(--gold-warm) 45%, transparent)' : 'none',
+        outlineOffset: 2,
+        animationDuration: `${3.4 + i % 5 * 0.9}s`,
+        animationDelay: `${i % 7 * 0.5}s`
       }
-    }, g.name), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontFamily: 'var(--font-mono)',
-        fontSize: 11,
-        color: warm > 0.6 ? 'var(--gold)' : 'var(--star-blue-dim)',
-        marginTop: 3
-      }
-    }, Math.round(warm * 100), "% \xB7 ", g.count, " \u661F")));
-  }), D.stars.map(s => /*#__PURE__*/React.createElement("span", {
-    key: s.id,
+    });
+  }), doms.map(g => /*#__PURE__*/React.createElement("div", {
+    key: 'n' + g.id,
+    onClick: () => onOpenCon && onOpenCon(g.id),
+    onMouseEnter: () => setHoverCon(g.id),
+    onMouseLeave: () => setHoverCon(null),
     style: {
       position: 'absolute',
-      left: `${s.x}%`,
-      top: `${s.y}%`,
-      width: 3,
-      height: 3,
-      borderRadius: '50%',
+      left: X(g.cx),
+      top: Y(g.cy),
       transform: 'translate(-50%,-50%)',
-      background: s.strength > 0.7 ? '#ffe096' : '#9fc6ff',
-      opacity: 0.3 + s.strength * 0.5
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      gap: 7,
+      cursor: 'pointer',
+      zIndex: 3
     }
-  }))), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "sr-breathe",
+    style: {
+      width: 15,
+      height: 15,
+      borderRadius: '50%',
+      flex: 'none',
+      background: 'radial-gradient(circle at 38% 34%, #fff6e0 0%, #ffd58a 32%, #ff9d52 64%, #e8623a 100%)',
+      boxShadow: '0 0 26px 5px rgba(255,128,60,0.5), 0 0 10px 2px rgba(255,196,120,0.85)'
+    }
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      textAlign: 'center',
+      whiteSpace: 'nowrap'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'block',
+      fontSize: 15,
+      fontWeight: 300,
+      color: 'var(--text-1)',
+      letterSpacing: '0.05em',
+      textShadow: 'var(--star-label-shadow)'
+    }
+  }, g.name), /*#__PURE__*/React.createElement("span", {
+    title: `健康度 ${Math.round(g.avg * 100)}% · 已点亮 ${g.lit} / 共 ${g.members} 颗`,
+    style: {
+      fontFamily: 'var(--font-mono)',
+      fontSize: 'var(--t-xs)',
+      color: g.avg > 0.6 ? 'var(--gold)' : 'var(--star-blue-dim)'
+    }
+  }, Math.round(g.avg * 100), "% \xB7 \u5DF2\u70B9\u4EAE ", g.lit, "/", g.members), /*#__PURE__*/React.createElement("span", {
+    className: "aer-flyhint",
+    style: {
+      display: 'block',
+      fontSize: 'var(--t-xs)',
+      color: 'var(--gold)',
+      letterSpacing: 'var(--ls-hud)',
+      marginTop: 3,
+      opacity: hoverCon === g.id ? 1 : 0,
+      transition: 'opacity var(--dur-base)'
+    }
+  }, "\u70B9\u51FB\u98DE\u5165"))))), !sp.length && /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'absolute',
+      inset: 0,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      zIndex: 5
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 14,
+      color: 'var(--text-2)'
+    }
+  }, "\u4F60\u7684\u661F\u7A7A\u8FD8\u5F88\u6697\u3002\u5199\u4E0B\u7B2C\u4E00\u9897\u661F\uFF0C\u8BA9\u5B83\u53D1\u5149\u3002")), /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'absolute',
       top: 18,
@@ -983,39 +3941,157 @@ function AerialView({
     style: {
       display: 'flex',
       alignItems: 'center',
-      gap: 26,
-      padding: '10px 26px'
+      gap: 'var(--s-6)',
+      padding: 'var(--s-2) var(--s-6)'
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
       display: 'inline-flex',
       alignItems: 'center',
-      gap: 8,
-      fontSize: 13,
+      gap: 'var(--s-2)',
+      fontSize: 'var(--t-sm)',
       color: 'var(--text-2)'
     }
   }, /*#__PURE__*/React.createElement(Icon, {
     name: "satellite",
     size: 17,
     color: "var(--gold)"
-  }), "\u4EAE\u5EA6\u9E1F\u77B0"), /*#__PURE__*/React.createElement(Sep, null), /*#__PURE__*/React.createElement(Stat, {
-    n: "12",
-    t: "\u672C\u5468\u65B0\u589E"
+  }), "\u4EAE\u5EA6\u9E1F\u77B0"), dataset && dataset.ownerName && /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 7,
+      fontSize: 'var(--t-sm)',
+      color: 'var(--gold)',
+      whiteSpace: 'nowrap'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "telescope",
+    size: 14,
+    color: "var(--gold)"
+  }), dataset.ownerName, " \xB7 \u53EA\u8BFB"), /*#__PURE__*/React.createElement(Sep, null), /*#__PURE__*/React.createElement(Stat, {
+    n: D.stars.length,
+    t: "\u77E5\u8BC6\u661F"
   }), /*#__PURE__*/React.createElement(Stat, {
-    n: "5",
-    t: "\u70B9\u4EAE",
+    n: litCount,
+    t: "\u5DF2\u70B9\u4EAE",
     tone: "var(--gold)"
+  }), emberCount > 0 && /*#__PURE__*/React.createElement(Stat, {
+    n: emberCount,
+    t: "\u5F85\u91CD\u71C3",
+    tone: "var(--gold-warm)"
+  }), /*#__PURE__*/React.createElement(Stat, {
+    n: dimming,
+    t: "\u6B63\u53D8\u6697",
+    tone: "var(--star-blue-dim)"
   }), /*#__PURE__*/React.createElement(Sep, null), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 12.5,
+      fontSize: 'var(--t-sm)',
       color: 'var(--text-2)'
     }
-  }, "\u6700\u8584\u5F31\u661F\u5EA7 ", /*#__PURE__*/React.createElement("b", {
+  }, "\u6700\u8584\u5F31\u661F\u57DF ", /*#__PURE__*/React.createElement("b", {
     style: {
       color: 'var(--star-blue-dim)',
       fontWeight: 500
     }
   }, weakest.name)))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'absolute',
+      bottom: 26,
+      left: 24,
+      zIndex: 30,
+      display: 'flex',
+      alignItems: 'center',
+      gap: 'var(--s-2)',
+      fontSize: 'var(--t-xs)',
+      color: 'var(--text-2)'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "map",
+    size: 14,
+    color: "currentColor"
+  }), dataset ? `${dataset.ownerName ? dataset.ownerName + ' 的星空编排' : '对方的星空编排'} · 点击星域返回星图` : '与你的星图同一编排 · 点击星域飞入'), /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'absolute',
+      bottom: 22,
+      right: 24,
+      zIndex: 30
+    }
+  }, /*#__PURE__*/React.createElement(GlassPanel, {
+    radius: "pill",
+    pad: "none",
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 'var(--s-3)',
+      padding: 'var(--s-2) var(--s-4)'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontFamily: 'var(--font-mono)',
+      fontSize: 'var(--t-xs)',
+      letterSpacing: 'var(--ls-hud)',
+      textTransform: 'uppercase',
+      color: 'var(--text-2)'
+    }
+  }, "\u8BB0\u5FC6\u6E29\u5EA6"), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 'var(--t-xs)',
+      color: 'var(--text-2)'
+    }
+  }, "\u6B63\u5728\u53D8\u6697"), /*#__PURE__*/React.createElement("span", {
+    style: {
+      width: 84,
+      height: 5,
+      borderRadius: 3,
+      background: 'linear-gradient(90deg, var(--mem-dead), var(--mem-low), var(--mem-mid), var(--mem-high), var(--mem-full))'
+    }
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 'var(--t-xs)',
+      color: 'var(--gold)'
+    }
+  }, "\u878D\u4F1A\u8D2F\u901A"), /*#__PURE__*/React.createElement("span", {
+    style: {
+      width: 1,
+      height: 14,
+      background: 'var(--line)'
+    }
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 5,
+      fontSize: 'var(--t-xs)',
+      color: 'var(--text-2)'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    "aria-hidden": "true",
+    style: {
+      width: 8,
+      height: 8,
+      borderRadius: '50%',
+      boxSizing: 'border-box',
+      border: '1px solid var(--gold)'
+    }
+  }), "\u91D1\u73AF = \u5DF2\u70B9\u4EAE"), /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 5,
+      fontSize: 'var(--t-xs)',
+      color: 'var(--text-2)'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    "aria-hidden": "true",
+    style: {
+      width: 8,
+      height: 8,
+      borderRadius: '50%',
+      boxSizing: 'border-box',
+      border: '1px solid color-mix(in srgb, var(--gold-warm) 55%, transparent)'
+    }
+  }), "\u6697\u91D1\u73AF = \u5F85\u91CD\u71C3"))), /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'absolute',
       bottom: 26,
@@ -1027,6 +4103,19 @@ function AerialView({
     icon: "corner-up-left",
     onClick: onClose
   }, "\u8FD4\u56DE\u661F\u56FE")));
+}
+function AerialStyle() {
+  return /*#__PURE__*/React.createElement("style", null, `
+    /* 入场：从星图"拔升"到高空——整片星空缩小落定，zoom = flight */
+    .aer-scene { animation: aer-ascend 760ms var(--ease-flight) both; transform-origin: 50% 46%; }
+    @keyframes aer-ascend { from { opacity: 0; transform: scale(1.45); } to { opacity: 1; transform: scale(1); } }
+    .aer-star { animation-name: aer-twinkle; animation-iteration-count: infinite; animation-timing-function: ease-in-out; }
+    @keyframes aer-twinkle { 0%, 100% { filter: brightness(0.85); } 50% { filter: brightness(1.35); } }
+    @media (prefers-reduced-motion: reduce) {
+      .aer-scene { animation: none; }
+      .aer-star { animation: none; }
+    }
+    `);
 }
 function Sep() {
   return /*#__PURE__*/React.createElement("span", {
@@ -1051,12 +4140,12 @@ function Stat({
   }, /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: 'var(--font-mono)',
-      fontSize: 17,
+      fontSize: 'var(--t-body-lg)',
       color: tone || 'var(--text-1)'
     }
   }, n), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 11.5,
+      fontSize: 'var(--t-xs)',
       color: 'var(--text-3)'
     }
   }, t));
@@ -1066,11 +4155,2354 @@ window.SRKit = Object.assign(window.SRKit || {}, {
 });
 })(); } catch (e) { __ds_ns.__errors.push({ path: "ui_kits/stellar-raft/AerialView.jsx", error: String((e && e.message) || e) }); }
 
+// ui_kits/stellar-raft/BlackHole.jsx
+try { (() => {
+/* BlackHole — 黑洞（回收站）。所有被删除的星域与知识星都坠入这里：
+   左侧是一座正俯视的 CSS 黑洞——纯黑事件视界 + 光子环 + 面向观察者旋转的
+   吸积盘漩涡（双层湍流条纹 + 静态多普勒增亮），被吞噬的条目化作碎屑沿
+   各自的圆轨道绕洞公转。公转不再用 CSS 动画，而是一台 rAF 引擎：每个碎屑
+   持有稳定的 { 半径, 角速度, 相位 }（全部由 t.id 哈希派生，与数组下标无关），
+   每帧推进角度后直接写 transform——销毁任何一颗只移除它自己的节点，
+   其余碎屑的运动在引擎里连续不断、绝不跳位。碎屑层底下叠一张 canvas 画
+   运动拖尾：常速绕行是淡淡的星蓝短尾，坠向奇点转为暗红长尾，逃逸恢复
+   转为金色长尾（金 = 奖励/恢复语义）；颜色全部取自 tokens 的运行时值，
+   黎明主题自动换色。prefers-reduced-motion / data-motion=off 时引擎不启动：
+   碎屑按各自相位静止排布、不画拖尾。碎屑本体是可聚焦的真按钮（Enter/点击
+   弹恢复/销毁卡，聚焦即显名），恢复/销毁反馈走 role=status。 */
+const {
+  GlassPanel,
+  Icon,
+  IconButton,
+  Button,
+  Badge
+} = window.StellarRaftDesignSystem_2866af;
+
+/* ---- 碎屑轨道引擎（独立于 React 渲染） ---- */
+
+const BH_TRAIL_PAD = 190; // 拖尾画布向舞台四周溢出，逃逸的长尾不被 520 框裁断
+const BH_TRAIL_SIZE = 520 + BH_TRAIL_PAD * 2;
+
+// FNV-1a：碎屑的轨道参数只由 id 决定——销毁别的碎屑不会改变自己的相位/周期
+const bhHash = s => {
+  let h = 2166136261;
+  for (let i = 0; i < s.length; i++) {
+    h ^= s.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return h >>> 0;
+};
+function bhMakeEngine(pausedRef) {
+  const bodies = new Map(); // id → { el, baseR, radius, omega, angle, mode, modeStart, trail }
+  let canvas = null,
+    ctx = null,
+    raf = 0,
+    last = 0,
+    running = false;
+  let colors = null,
+    colorTick = 0;
+  const reduced = () => window.srTransition && window.srTransition.reduced ? window.srTransition.reduced() : !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+  // 拖尾颜色全部读 tokens 的运行时值（绕行=--star-blue · 坠落=--danger · 逃逸=--gold），
+  // 定期重读，黎明/深空切换后自动跟上
+  const parseRgb = v => {
+    let m = /^#([0-9a-f]{6})$/i.exec(v);
+    if (m) {
+      const n = parseInt(m[1], 16);
+      return {
+        r: n >> 16 & 255,
+        g: n >> 8 & 255,
+        b: n & 255
+      };
+    }
+    m = /^#([0-9a-f]{3})$/i.exec(v);
+    if (m) {
+      const n = parseInt(m[1], 16);
+      const e = x => x | x << 4;
+      return {
+        r: e(n >> 8 & 15),
+        g: e(n >> 4 & 15),
+        b: e(n & 15)
+      };
+    }
+    m = /rgba?\(\s*([\d.]+)[,\s]+([\d.]+)[,\s]+([\d.]+)/.exec(v);
+    if (m) return {
+      r: +m[1],
+      g: +m[2],
+      b: +m[3]
+    };
+    return null;
+  };
+  const parseTokenColor = (cs, name, fallback) => parseRgb((cs.getPropertyValue(name) || '').trim()) || parseRgb(fallback);
+  const resolveColors = () => {
+    const cs = getComputedStyle(document.documentElement);
+    colors = {
+      orbit: parseTokenColor(cs, '--star-blue', '#9fc6ff'),
+      fall: parseTokenColor(cs, '--danger', '#e8917a'),
+      escape: parseTokenColor(cs, '--gold', '#ffd98a')
+    };
+  };
+  const place = b => {
+    if (!b.el) return;
+    const x = Math.cos(b.angle) * b.radius,
+      y = Math.sin(b.angle) * b.radius;
+    b.el.style.transform = `translate(${x}px, ${y}px)`;
+  };
+  const attach = (id, el) => {
+    let b = bodies.get(id);
+    if (!b) {
+      const h = bhHash(id);
+      const baseR = 170 + h % 4 * 26; // 全部在吸积盘外缘绕行（对齐轨道细线）
+      const period = 16 + (h >>> 2) % 5 * 5; // 16–36s 一圈
+      b = {
+        id,
+        el,
+        baseR,
+        radius: baseR,
+        omega: 2 * Math.PI / period,
+        angle: (h >>> 5) % 3600 / 3600 * 2 * Math.PI,
+        // 相位同样由 id 派生
+        mode: 'orbit',
+        modeStart: 0,
+        trail: []
+      };
+      bodies.set(id, b);
+    } else {
+      b.el = el; // React 重渲染只是换 ref 回调——角度/半径原样保留，运动连续
+    }
+    place(b); // 挂载当帧就放到位，不在圆心闪现
+  };
+  const detach = id => {
+    const b = bodies.get(id);
+    if (!b) return;
+    b.el = null; // 运行中交给下一帧 GC（重渲染的 detach→attach 会原样接回）
+    if (!running) bodies.delete(id); // reduced-motion 下没有帧循环，就地回收（参数由 id 派生，可无损重建）
+  };
+  const syncModes = (fallIds, escIds) => {
+    const now = performance.now();
+    for (const b of bodies.values()) {
+      const m = fallIds.indexOf(b.id) >= 0 ? 'fall' : escIds.indexOf(b.id) >= 0 ? 'escape' : 'orbit';
+      if (b.mode !== m) {
+        b.mode = m;
+        b.modeStart = now;
+      }
+    }
+  };
+  const draw = () => {
+    if (!ctx) return;
+    ctx.clearRect(0, 0, BH_TRAIL_SIZE, BH_TRAIL_SIZE);
+    ctx.globalCompositeOperation = 'lighter';
+    ctx.lineCap = 'round';
+    const C = BH_TRAIL_SIZE / 2;
+    for (const b of bodies.values()) {
+      const pts = b.trail;
+      if (pts.length < 2 || !colors) continue;
+      const col = b.mode === 'fall' ? colors.fall : b.mode === 'escape' ? colors.escape : colors.orbit;
+      const baseA = b.mode === 'orbit' ? 0.3 : b.mode === 'fall' ? 0.55 : 0.7;
+      const w = b.mode === 'orbit' ? 1.4 : 2.2;
+      for (let i = 1; i < pts.length; i++) {
+        const a = baseA * Math.pow(i / (pts.length - 1), 1.6); // 尾端渐隐、头部最亮
+        if (a <= 0.012) continue;
+        ctx.strokeStyle = `rgba(${col.r},${col.g},${col.b},${a})`;
+        ctx.lineWidth = w;
+        ctx.beginPath();
+        ctx.moveTo(C + pts[i - 1].x, C + pts[i - 1].y);
+        ctx.lineTo(C + pts[i].x, C + pts[i].y);
+        ctx.stroke();
+      }
+    }
+  };
+  const frame = t => {
+    raf = requestAnimationFrame(frame);
+    const dt = Math.min(Math.max((t - last) / 1000, 0), 0.05); // 后台回来不跳大步
+    last = t;
+    if (!colors || colorTick++ % 120 === 0) resolveColors();
+    const paused = pausedRef.current;
+    for (const [id, b] of bodies) {
+      if (!b.el) {
+        bodies.delete(id);
+        continue;
+      } // 已卸载 → 连拖尾一起湮灭
+      if (b.mode === 'fall') {
+        // 坠落：公转持续加速，半径收缩坠向奇点——轨迹自然成螺旋
+        const p = Math.min((t - b.modeStart) / 1450, 1);
+        b.angle += b.omega * dt * (1 + 2.4 * p);
+        b.radius = b.baseR + (6 - b.baseR) * p * p;
+      } else if (b.mode === 'escape') {
+        // 逃逸：冻结公转，沿当前半径背离中心加速飞出
+        const p = Math.min((t - b.modeStart) / 980, 1);
+        b.radius = b.baseR + (620 - b.baseR) * p * p * p;
+      } else {
+        if (!paused.has(id)) b.angle += b.omega * dt; // 悬停/选中即暂停，松开原地续行
+        b.radius = b.baseR;
+      }
+      place(b);
+      // 常速绕行留短尾；坠落/逃逸拉长采样窗（暂停时旧点照常滑出，尾巴自然收拢）
+      const cap = b.mode === 'orbit' ? 10 : 34;
+      b.trail.push({
+        x: Math.cos(b.angle) * b.radius,
+        y: Math.sin(b.angle) * b.radius
+      });
+      while (b.trail.length > cap) b.trail.shift();
+    }
+    draw();
+  };
+  const api = {
+    attach,
+    detach,
+    syncModes,
+    setCanvas(el) {
+      if (!el) {
+        canvas = null;
+        ctx = null;
+        return;
+      }
+      if (el === canvas && ctx) return;
+      canvas = el;
+      const dpr = window.devicePixelRatio || 1;
+      el.width = BH_TRAIL_SIZE * dpr;
+      el.height = BH_TRAIL_SIZE * dpr;
+      ctx = el.getContext('2d');
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      el.__srBhEngine = api; // 自测钩子：无头浏览器从 canvas 节点拿引擎内部状态
+    },
+    start() {
+      if (running || reduced()) return; // reduced-motion：不起 rAF——碎屑静止在各自相位上，不画拖尾
+      running = true;
+      last = performance.now();
+      raf = requestAnimationFrame(frame);
+    },
+    stop() {
+      running = false;
+      cancelAnimationFrame(raf);
+      bodies.clear();
+    },
+    isRunning: () => running,
+    bodies
+  };
+  return api;
+}
+function BlackHole({
+  onOpenCon
+}) {
+  const D = window.SR_DATA;
+  const [entries, setEntries] = React.useState(() => D.trash.slice());
+  const [confirm, setConfirm] = React.useState(null);
+  const [toast, setToast] = React.useState(null); // { msg, con }
+  const [hoverId, setHoverId] = React.useState(null);
+  const [picked, setPicked] = React.useState(null); // { id, x, y } — 点中的碎屑与弹出位置
+  const [falling, setFalling] = React.useState([]); // 正在坠向奇点的碎屑 id
+  const [escaping, setEscaping] = React.useState([]); // 正在飞离黑洞的碎屑 id（恢复动画）
+  const [zoom, setZoom] = React.useState(1); // 舞台缩放（滚轮 / 控件）
+  const stageBoxRef = React.useRef(null);
+  React.useEffect(() => {
+    const el = stageBoxRef.current;
+    if (!el) return;
+    const onWheel = e => {
+      e.preventDefault();
+      setZoom(z => Math.max(0.55, Math.min(1.9, z * (e.deltaY < 0 ? 1.12 : 0.89))));
+    };
+    el.addEventListener('wheel', onWheel, {
+      passive: false
+    });
+    return () => el.removeEventListener('wheel', onWheel);
+  }, []);
+
+  // ---- 轨道引擎：React 只负责挂载/卸载节点（key=t.id），运动全在引擎里 ----
+  const pausedRef = React.useRef(new Set());
+  pausedRef.current = new Set([hoverId, picked && picked.id].filter(Boolean));
+  const engineRef = React.useRef(null);
+  const getEngine = () => {
+    if (!engineRef.current) engineRef.current = bhMakeEngine(pausedRef);
+    return engineRef.current;
+  };
+  const trailRef = React.useCallback(el => {
+    getEngine().setCanvas(el);
+  }, []);
+  React.useEffect(() => {
+    const eng = getEngine();
+    eng.start();
+    return () => eng.stop();
+  }, []);
+  React.useEffect(() => {
+    if (engineRef.current) engineRef.current.syncModes(falling, escaping);
+  }, [falling, escaping]);
+  const toastTimer = React.useRef(null);
+  const fallTimers = React.useRef([]);
+  const flash = (msg, con) => {
+    clearTimeout(toastTimer.current);
+    setToast({
+      msg,
+      con
+    });
+    toastTimer.current = setTimeout(() => setToast(null), 2600);
+  };
+  React.useEffect(() => () => {
+    clearTimeout(toastTimer.current);
+    fallTimers.current.forEach(clearTimeout);
+  }, []);
+  const ConfirmDialog = window.SRKit && window.SRKit.ConfirmDialog;
+  const sync = () => setEntries(D.trash.slice());
+
+  // 彻底销毁的动画：碎屑先沿螺旋轨迹坠向奇点（半径收缩 + 缩小淡出），
+  // 落进中心后才真正从数据里湮灭
+  const startFall = (ids, doneMsg) => {
+    setFalling(f => [...f, ...ids.filter(id => !f.includes(id))]);
+    fallTimers.current.push(setTimeout(() => {
+      ids.forEach(id => D.purgeTrash(id));
+      window.dispatchEvent(new Event('sr-data')); // 侧栏角标即时刷新
+      setFalling(f => f.filter(x => !ids.includes(x)));
+      sync();
+      flash(doneMsg);
+    }, 1550));
+  };
+  const nameOf = t => t.kind === 'star' ? t.payload.star.label : t.payload.con.name;
+  const colorOf = t => t.kind === 'star' ? D.conColor(t.payload.star.con) || '#7896cd' : t.payload.con.color;
+  const restore = t => {
+    if (escaping.includes(t.id) || falling.includes(t.id)) return;
+    setPicked(null);
+    // 逃逸动画：暂停公转，沿当前半径背离中心加速飞出，然后才真正恢复
+    setEscaping(e => [...e, t.id]);
+    fallTimers.current.push(setTimeout(() => {
+      const r = D.restoreTrash(t.id);
+      window.dispatchEvent(new Event('sr-data')); // 侧栏角标即时刷新
+      setEscaping(e => e.filter(x => x !== t.id));
+      sync();
+      if (!r) {
+        flash('恢复失败 — 找不到可以安放它的星域');
+        return;
+      }
+      const con = t.kind === 'star' ? r.payload.star.con : r.payload.con.id;
+      flash(`「${nameOf(t)}」逃逸了黑洞`, con);
+    }, 980));
+  };
+  const purge = t => setConfirm({
+    message: t.kind === 'star' ? `彻底销毁「${nameOf(t)}」吗？它将永远湮灭在黑洞里，无法再恢复。` : `彻底销毁星域「${nameOf(t)}」和它的 ${t.payload.stars.length} 颗星吗？它们将永远湮灭，无法再恢复。`,
+    confirmLabel: '彻底销毁',
+    onYes: () => {
+      setPicked(null);
+      startFall([t.id], `「${nameOf(t)}」已湮灭于奇点`);
+    }
+  });
+  const purgeAll = () => setConfirm({
+    message: `清空黑洞吗？${entries.length} 个条目将全部永远湮灭，无法再恢复。`,
+    confirmLabel: '清空黑洞',
+    onYes: () => {
+      setPicked(null);
+      startFall(entries.map(t => t.id), '黑洞已清空');
+    }
+  });
+  return /*#__PURE__*/React.createElement("div", {
+    onContextMenu: e => e.preventDefault(),
+    style: {
+      position: 'relative',
+      flex: 1,
+      minWidth: 0,
+      overflow: 'hidden',
+      display: 'flex'
+    }
+  }, /*#__PURE__*/React.createElement("sr-starfield", {
+    density: "0.5",
+    warm: "0.05"
+  }), /*#__PURE__*/React.createElement(BlackHoleStyle, null), /*#__PURE__*/React.createElement("div", {
+    ref: stageBoxRef,
+    onClick: () => setPicked(null),
+    style: {
+      flex: 1,
+      minWidth: 0,
+      position: 'relative',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      zIndex: 1,
+      overflow: 'hidden'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "bh-stage",
+    style: {
+      transform: `scale(${zoom})`,
+      transition: 'transform 200ms var(--ease-flight)'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "bh-disk"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "bh-disk2"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "bh-beam"
+  }), [170, 196, 222, 248].map(r => /*#__PURE__*/React.createElement("span", {
+    key: r,
+    className: "bh-ring-guide",
+    style: {
+      width: r * 2,
+      height: r * 2
+    }
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "bh-photon"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "bh-core"
+  }), /*#__PURE__*/React.createElement("canvas", {
+    className: "bh-trails",
+    "aria-hidden": "true",
+    ref: trailRef,
+    style: {
+      width: BH_TRAIL_SIZE,
+      height: BH_TRAIL_SIZE
+    }
+  }), entries.slice(0, 12).map(t => {
+    const isFalling = falling.includes(t.id);
+    const isEscaping = escaping.includes(t.id);
+    const busy = isFalling || isEscaping;
+    const lit = !busy && (hoverId === t.id || picked && picked.id === t.id);
+    const size = t.kind === 'domain' ? 17 : 12;
+    return /*#__PURE__*/React.createElement("div", {
+      key: t.id,
+      className: "bh-body",
+      ref: el => {
+        if (el) getEngine().attach(t.id, el);else getEngine().detach(t.id);
+      }
+    }, /*#__PURE__*/React.createElement("button", {
+      type: "button",
+      className: "sr-focus-ring bh-chip-btn",
+      "aria-label": `${nameOf(t)} — 恢复或彻底销毁`,
+      disabled: busy,
+      onClick: e => {
+        e.stopPropagation();
+        const box = e.currentTarget.getBoundingClientRect();
+        setPicked({
+          id: t.id,
+          x: e.clientX || box.left + box.width / 2,
+          y: e.clientY || box.top + box.height / 2
+        });
+      },
+      onMouseEnter: () => setHoverId(t.id),
+      onMouseLeave: () => setHoverId(null),
+      onFocus: () => setHoverId(t.id),
+      onBlur: () => setHoverId(null),
+      style: {
+        // 坠落 = 引擎收缩半径成螺旋，这里只负责缩小淡出；逃逸 = 引擎拉出半径，这里放大淡出
+        opacity: busy ? 0 : 1,
+        transform: isFalling ? 'scale(0.15)' : isEscaping ? 'scale(1.25)' : 'none',
+        cursor: busy ? 'default' : 'pointer',
+        transition: isFalling ? 'opacity 0.5s ease 0.95s, transform 1.45s cubic-bezier(0.55, 0, 0.85, 0.4)' : isEscaping ? 'opacity 0.4s ease 0.6s, transform 0.98s ease-in' : 'opacity var(--dur-base)'
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      "aria-hidden": "true",
+      style: {
+        width: size,
+        height: size,
+        borderRadius: '50%',
+        display: 'block',
+        background: `radial-gradient(circle at 35% 32%, #fff 0%, ${colorOf(t)} 55%, ${colorOf(t)} 100%)`,
+        opacity: lit ? 1 : 0.95,
+        border: lit ? '1.5px solid var(--gold)' : '1.5px solid transparent',
+        boxShadow: `0 0 ${lit ? 18 : 12}px 2px ${colorOf(t)}`,
+        transition: 'opacity var(--dur-base), box-shadow var(--dur-base)'
+      }
+    })), /*#__PURE__*/React.createElement("span", {
+      className: "bh-chip-name",
+      style: {
+        opacity: lit ? 1 : 0
+      }
+    }, nameOf(t)));
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'absolute',
+      bottom: 26,
+      left: '50%',
+      transform: 'translateX(-50%)',
+      display: 'flex',
+      alignItems: 'center',
+      gap: 8,
+      fontSize: 11.5,
+      color: 'var(--text-3)',
+      whiteSpace: 'nowrap'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "mouse-pointer-click",
+    size: 13,
+    color: "currentColor"
+  }), "\u70B9\u51FB\u7ED5\u884C\u7684\u788E\u5C51\u53EF\u76F4\u63A5\u6062\u590D\u6216\u9500\u6BC1 \xB7 \u6EDA\u8F6E\u7F29\u653E \xB7 \u5F7B\u5E95\u9500\u6BC1\u524D\u90FD\u53EF\u968F\u65F6\u6062\u590D"), toast &&
+  /*#__PURE__*/
+  /* 定位层与动画层分离：sr-cardin 结束帧的 transform:none 会覆盖居中的 translateX。
+     role=status：恢复/销毁的反馈读屏也听得到；动作是真按钮，键盘可达 */
+  React.createElement("div", {
+    role: "status",
+    style: {
+      position: 'absolute',
+      bottom: 64,
+      left: '50%',
+      transform: 'translateX(-50%)',
+      zIndex: 95
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      animation: 'sr-cardin var(--dur-base) var(--ease-flight) both'
+    }
+  }, /*#__PURE__*/React.createElement(GlassPanel, {
+    strong: true,
+    radius: "pill",
+    pad: "none",
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 9,
+      padding: '10px 18px',
+      whiteSpace: 'nowrap'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "check",
+    size: 16,
+    color: "var(--gold)"
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 13.5,
+      color: 'var(--text-1)'
+    }
+  }, toast.msg), toast.con && onOpenCon && /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    className: "sr-focus-ring",
+    onClick: () => onOpenCon(toast.con),
+    style: {
+      background: 'none',
+      border: 'none',
+      padding: 0,
+      fontFamily: 'var(--font-sans)',
+      fontSize: 12.5,
+      color: 'var(--star-blue)',
+      cursor: 'pointer',
+      borderBottom: '1px dashed rgba(159,198,255,0.5)'
+    }
+  }, "\u5728\u661F\u56FE\u4E2D\u67E5\u770B")))), /*#__PURE__*/React.createElement("div", {
+    onClick: e => e.stopPropagation(),
+    style: {
+      position: 'absolute',
+      bottom: 22,
+      right: 20
+    }
+  }, /*#__PURE__*/React.createElement(GlassPanel, {
+    radius: "pill",
+    pad: "none",
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 2,
+      padding: '6px 8px'
+    }
+  }, /*#__PURE__*/React.createElement(IconButton, {
+    name: "minus",
+    size: "sm",
+    title: "\u7F29\u5C0F",
+    onClick: () => setZoom(z => Math.max(0.55, z * 0.85))
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontFamily: 'var(--font-mono)',
+      fontSize: 12,
+      color: 'var(--text-2)',
+      minWidth: 42,
+      textAlign: 'center'
+    }
+  }, Math.round(zoom * 100), "%"), /*#__PURE__*/React.createElement(IconButton, {
+    name: "plus",
+    size: "sm",
+    title: "\u653E\u5927",
+    onClick: () => setZoom(z => Math.min(1.9, z * 1.18))
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      width: 1,
+      height: 18,
+      background: 'var(--line)'
+    }
+  }), /*#__PURE__*/React.createElement(IconButton, {
+    name: "locate-fixed",
+    size: "sm",
+    title: "\u590D\u4F4D",
+    onClick: () => setZoom(1)
+  })))), /*#__PURE__*/React.createElement("aside", {
+    style: {
+      width: 404,
+      flex: 'none',
+      borderLeft: '1px solid var(--glass-border)',
+      background: 'var(--glass-bg)',
+      WebkitBackdropFilter: 'blur(var(--glass-blur))',
+      backdropFilter: 'blur(var(--glass-blur))',
+      overflow: 'auto',
+      position: 'relative',
+      zIndex: 2
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: 22,
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 14
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 10
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "aperture",
+    size: 18,
+    color: "var(--gold)"
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 17,
+      fontWeight: 300,
+      color: 'var(--text-1)'
+    }
+  }, "\u9ED1\u6D1E"), /*#__PURE__*/React.createElement(Badge, {
+    tone: "blue"
+  }, entries.length), /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1
+    }
+  }), entries.length > 0 && /*#__PURE__*/React.createElement(Button, {
+    size: "sm",
+    variant: "ghost",
+    icon: "flame",
+    onClick: purgeAll
+  }, "\u6E05\u7A7A")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      lineHeight: 1.7,
+      color: 'var(--text-3)'
+    }
+  }, "\u88AB\u5220\u9664\u7684\u661F\u57DF\u4E0E\u77E5\u8BC6\u661F\u5148\u5760\u843D\u5230\u8FD9\u91CC\u3002", /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: 'var(--text-2)'
+    }
+  }, "\u6062\u590D"), "\u4F1A\u5E26\u7740\u4F4D\u7F6E\u4E0E\u8FDE\u63A5\u4E00\u8D77\u56DE\u5230\u661F\u56FE\uFF1B", /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: 'var(--danger)'
+    }
+  }, "\u5F7B\u5E95\u9500\u6BC1"), "\u4E0D\u53EF\u9006\u3002"), entries.length === 0 ? /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      gap: 12,
+      padding: '46px 0',
+      color: 'var(--text-3)',
+      textAlign: 'center'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      width: 52,
+      height: 52,
+      borderRadius: '50%',
+      background: '#03040c',
+      border: '1px solid rgba(255,200,130,0.25)',
+      boxShadow: '0 0 24px rgba(255,170,90,0.12)'
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 14,
+      color: 'var(--text-2)'
+    }
+  }, "\u9ED1\u6D1E\u6B63\u5728\u6C89\u7761"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12
+    }
+  }, "\u6CA1\u6709\u4EFB\u4F55\u4E1C\u897F\u88AB\u541E\u566C\u3002")) : /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 10
+    }
+  }, entries.map(t => {
+    const star = t.kind === 'star' ? t.payload.star : null;
+    const conName = star ? D.conName(star.con) || '已消失的星域' : null;
+    return /*#__PURE__*/React.createElement(GlassPanel, {
+      key: t.id,
+      radius: "md",
+      pad: "none",
+      style: {
+        padding: '13px 15px',
+        opacity: falling.includes(t.id) || escaping.includes(t.id) ? 0.3 : 0.92,
+        pointerEvents: falling.includes(t.id) || escaping.includes(t.id) ? 'none' : 'auto',
+        transition: 'opacity var(--dur-slow)'
+      },
+      onMouseEnter: () => setHoverId(t.id),
+      onMouseLeave: () => setHoverId(null)
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        gap: 11
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        width: 30,
+        height: 30,
+        flex: 'none',
+        borderRadius: '50%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: 'rgba(159,198,255,0.06)',
+        border: '1px solid var(--glass-border)'
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: t.kind === 'domain' ? 'orbit' : 'star',
+      size: 15,
+      color: colorOf(t)
+    })), /*#__PURE__*/React.createElement("div", {
+      style: {
+        flex: 1,
+        minWidth: 0
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        alignItems: 'baseline',
+        gap: 8
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 14.5,
+        color: 'var(--text-1)',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        whiteSpace: 'nowrap'
+      }
+    }, nameOf(t)), t.kind === 'domain' && /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 10.5,
+        color: 'var(--gold)',
+        flex: 'none'
+      }
+    }, "\u6574\u4E2A\u661F\u57DF")), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: 10,
+        marginTop: 4,
+        fontSize: 11.5,
+        color: 'var(--text-3)'
+      }
+    }, star ? /*#__PURE__*/React.createElement("span", null, "\u6765\u81EA ", conName, " \xB7 \u8BB0\u5FC6 ", Math.round(star.strength * 100), "%") : /*#__PURE__*/React.createElement("span", null, t.payload.stars.length, " \u9897\u77E5\u8BC6\u661F \xB7 ", t.payload.connections.length, " \u6761\u8FDE\u63A5"), /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontFamily: 'var(--font-mono)',
+        fontSize: 10.5
+      }
+    }, t.ts ? D.ago(t.ts) : t.deletedAt, "\u5760\u5165")), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        gap: 8,
+        marginTop: 10
+      }
+    }, /*#__PURE__*/React.createElement(Button, {
+      size: "sm",
+      icon: "undo-2",
+      glow: true,
+      onClick: () => restore(t),
+      style: {
+        flex: 1
+      }
+    }, "\u6062\u590D"), /*#__PURE__*/React.createElement("button", {
+      type: "button",
+      className: "sr-focus-ring",
+      onClick: () => purge(t),
+      style: {
+        flex: 1,
+        height: 30,
+        borderRadius: 'var(--r-pill)',
+        border: '1px solid rgba(232,145,122,0.4)',
+        background: 'rgba(232,145,122,0.10)',
+        color: 'var(--danger)',
+        fontSize: 12.5,
+        cursor: 'pointer',
+        fontFamily: 'var(--font-sans)',
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 6
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "flame",
+      size: 13,
+      color: "currentColor"
+    }), "\u5F7B\u5E95\u9500\u6BC1")))));
+  })))), picked && (() => {
+    const t = entries.find(x => x.id === picked.id);
+    if (!t) return null;
+    const star = t.kind === 'star' ? t.payload.star : null;
+    const left = Math.max(12, Math.min(picked.x - 116, window.innerWidth - 250));
+    const top = Math.max(12, Math.min(picked.y + 18, window.innerHeight - 190));
+    return /*#__PURE__*/React.createElement("div", {
+      onClick: e => e.stopPropagation(),
+      style: {
+        position: 'fixed',
+        left,
+        top,
+        width: 232,
+        zIndex: 40,
+        animation: 'sr-cardin var(--dur-base) var(--ease-flight) both'
+      }
+    }, /*#__PURE__*/React.createElement(GlassPanel, {
+      strong: true,
+      radius: "md",
+      pad: "md",
+      glow: true
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: 8,
+        marginBottom: 6
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: t.kind === 'domain' ? 'orbit' : 'star',
+      size: 14,
+      color: colorOf(t)
+    }), /*#__PURE__*/React.createElement("span", {
+      style: {
+        flex: 1,
+        fontSize: 14.5,
+        color: 'var(--text-1)',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        whiteSpace: 'nowrap'
+      }
+    }, nameOf(t)), /*#__PURE__*/React.createElement(IconButton, {
+      name: "x",
+      size: "sm",
+      title: "\u5173\u95ED",
+      onClick: () => setPicked(null)
+    })), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 11.5,
+        color: 'var(--text-3)',
+        marginBottom: 12
+      }
+    }, star ? `来自 ${D.conName(star.con) || '已消失的星域'} · 记忆 ${Math.round(star.strength * 100)}%` : `整个星域 · ${t.payload.stars.length} 颗知识星`, " \xB7 ", t.ts ? D.ago(t.ts) : t.deletedAt, "\u5760\u5165"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        gap: 8
+      }
+    }, /*#__PURE__*/React.createElement(Button, {
+      size: "sm",
+      icon: "undo-2",
+      glow: true,
+      onClick: () => restore(t),
+      style: {
+        flex: 1
+      }
+    }, "\u6062\u590D"), /*#__PURE__*/React.createElement("button", {
+      type: "button",
+      className: "sr-focus-ring",
+      onClick: () => purge(t),
+      style: {
+        flex: 1,
+        height: 30,
+        borderRadius: 'var(--r-pill)',
+        border: '1px solid rgba(232,145,122,0.4)',
+        background: 'rgba(232,145,122,0.10)',
+        color: 'var(--danger)',
+        fontSize: 12.5,
+        cursor: 'pointer',
+        fontFamily: 'var(--font-sans)',
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 6
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "flame",
+      size: 13,
+      color: "currentColor"
+    }), "\u9500\u6BC1"))));
+  })(), confirm && ConfirmDialog && /*#__PURE__*/React.createElement(ConfirmDialog, {
+    message: confirm.message,
+    confirmLabel: confirm.confirmLabel,
+    onYes: () => {
+      confirm.onYes();
+      setConfirm(null);
+    },
+    onClose: () => setConfirm(null)
+  }));
+}
+function BlackHoleStyle() {
+  return /*#__PURE__*/React.createElement("style", null, `
+    .bh-stage { position: relative; width: 520px; height: 520px; flex: none; }
+    .bh-stage > * { position: absolute; left: 50%; top: 50%; }
+    /* 吸积盘（正俯视）：内缘炽热、外缘渐冷的暖色环，细密条纹旋转成漩涡 */
+    .bh-disk {
+      width: 520px; height: 520px; border-radius: 50%;
+      transform: translate(-50%,-50%);
+      background:
+        repeating-conic-gradient(from 0deg,
+          rgba(255,210,140,0) 0deg 2.1deg, rgba(255,214,148,0.22) 2.7deg 3.2deg,
+          rgba(255,210,140,0) 3.8deg 5.9deg, rgba(255,196,120,0.12) 6.3deg 6.7deg,
+          rgba(255,210,140,0) 7.2deg 9.4deg),
+        repeating-radial-gradient(circle,
+          rgba(255,196,124,0.10) 0px 2px, rgba(90,62,42,0.03) 4px 7px),
+        radial-gradient(circle,
+          transparent 100px, rgba(255,238,205,0.50) 116px, rgba(255,205,135,0.30) 142px,
+          rgba(220,150,88,0.12) 168px, transparent 198px);
+      -webkit-mask: radial-gradient(circle, transparent 102px, black 118px, black 152px, transparent 205px);
+      mask: radial-gradient(circle, transparent 102px, black 118px, black 152px, transparent 205px);
+      filter: blur(1.6px);
+      animation: bh-rot-center 46s linear infinite;
+    }
+    /* 内层湍流：贴着光子环的更亮、更快的细条纹 */
+    .bh-disk2 {
+      width: 340px; height: 340px; border-radius: 50%;
+      transform: translate(-50%,-50%);
+      background:
+        repeating-conic-gradient(from 0deg,
+          rgba(255,236,198,0) 0deg 1.6deg, rgba(255,238,202,0.28) 2.1deg 2.5deg,
+          rgba(255,236,198,0) 3.0deg 4.6deg),
+        radial-gradient(circle, transparent 98px, rgba(255,242,212,0.5) 112px, rgba(255,205,135,0.2) 144px, transparent 165px);
+      -webkit-mask: radial-gradient(circle, transparent 100px, black 112px, black 132px, transparent 162px);
+      mask: radial-gradient(circle, transparent 100px, black 112px, black 132px, transparent 162px);
+      filter: blur(1px);
+      animation: bh-rot-center 24s linear infinite;
+    }
+    /* 多普勒增亮：吸积盘朝向我们旋转的一侧更亮（静态，不随盘转） */
+    .bh-beam {
+      width: 480px; height: 480px; border-radius: 50%;
+      transform: translate(-50%,-50%);
+      background: radial-gradient(circle at 26% 50%, rgba(255,244,214,0.26) 0%, rgba(255,220,160,0.10) 24%, transparent 50%);
+      -webkit-mask: radial-gradient(circle, transparent 104px, black 124px, black 148px, transparent 198px);
+      mask: radial-gradient(circle, transparent 104px, black 124px, black 148px, transparent 198px);
+      filter: blur(3px);
+      pointer-events: none;
+    }
+    /* 轨道细线 */
+    .bh-ring-guide {
+      display: block; border-radius: 50%;
+      transform: translate(-50%,-50%);
+      border: 1px solid rgba(255,205,140,0.10);
+      pointer-events: none;
+    }
+    /* 光子环：视界外缘那圈最亮的细环 */
+    .bh-photon {
+      width: 212px; height: 212px; border-radius: 50%;
+      transform: translate(-50%,-50%);
+      border: 2px solid rgba(255,232,186,1);
+      box-shadow: 0 0 30px rgba(255,196,120,0.7), 0 0 8px rgba(255,232,186,0.8), inset 0 0 20px rgba(255,196,120,0.45);
+      pointer-events: none;
+    }
+    /* 事件视界：纯黑的球 */
+    .bh-core {
+      width: 202px; height: 202px; border-radius: 50%;
+      transform: translate(-50%,-50%);
+      background: radial-gradient(circle at 50% 46%, #000 0%, #000 80%, #0a0805 100%);
+      box-shadow: 0 0 80px 26px rgba(255,150,64,0.12);
+    }
+    /* 拖尾画布：盖在黑洞本体之上、碎屑之下；向四周溢出舞台，长尾不被裁断 */
+    .bh-trails {
+      left: ${-BH_TRAIL_PAD}px; top: ${-BH_TRAIL_PAD}px;
+      z-index: 4; pointer-events: none;
+    }
+    /* 碎屑：位置由 rAF 轨道引擎每帧写 transform（translate 不旋转，名字天然直立） */
+    .bh-body { width: 0; height: 0; z-index: 5; pointer-events: none; }
+    .bh-chip-btn {
+      position: absolute; left: -20px; top: -20px; width: 40px; height: 40px;
+      display: flex; align-items: center; justify-content: center;
+      background: transparent; border: none; padding: 0; margin: 0;
+      border-radius: 50%; pointer-events: auto; font: inherit;
+    }
+    .bh-chip-btn:disabled { pointer-events: none; }
+    .bh-chip-name {
+      position: absolute; left: 14px; top: 0; transform: translateY(-50%);
+      font-size: 11px; color: var(--text-1); white-space: nowrap;
+      text-shadow: var(--star-label-shadow); pointer-events: none;
+      transition: opacity var(--dur-base);
+    }
+    @keyframes bh-rot-center { from { transform: translate(-50%,-50%) rotate(0deg); } to { transform: translate(-50%,-50%) rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) {
+      .bh-disk, .bh-disk2 { animation: none; }
+    }
+    `);
+}
+window.SRKit = Object.assign(window.SRKit || {}, {
+  BlackHole
+});
+})(); } catch (e) { __ds_ns.__errors.push({ path: "ui_kits/stellar-raft/BlackHole.jsx", error: String((e && e.message) || e) }); }
+
+// ui_kits/stellar-raft/Checkup.jsx
+try { (() => {
+/* Checkup — 知识体检报告 (整页仪表盘): a full-stage dashboard that reads the whole
+   universe's memory health. Overall health, per-constellation bars, the memory
+   distribution (牢固 / 正常 / 正变暗 / 将熄灭), the stars most in need of review,
+   a recent ignite trend drawn from the timeline, and weak-constellation nudges.
+   Click a star to open it, click a constellation to fly there. */
+const {
+  GlassPanel,
+  Icon,
+  IconButton,
+  Button,
+  MemoryBar
+} = window.StellarRaftDesignSystem_2866af;
+
+// memory band — same thresholds the rest of the kit uses
+function band(s) {
+  if (s < 0.2) return {
+    key: 'dying',
+    t: '将熄灭',
+    c: 'var(--star-blue-deep)'
+  };
+  if (s < 0.4) return {
+    key: 'fading',
+    t: '正变暗',
+    c: 'var(--star-blue-dim)'
+  };
+  if (s < 0.7) return {
+    key: 'normal',
+    t: '正常',
+    c: 'var(--star-blue)'
+  };
+  return {
+    key: 'solid',
+    t: '牢固',
+    c: 'var(--gold)'
+  };
+}
+
+// parse a timeline delta string ("+0.12" / "−0.06") into a signed number
+function parseDelta(d) {
+  const neg = d.indexOf('−') === 0 || d.indexOf('-') === 0;
+  const n = parseFloat(d.replace('−', '').replace('+', '').replace('-', '')) || 0;
+  return neg ? -n : n;
+}
+const HUD = {
+  fontSize: 10,
+  letterSpacing: 'var(--ls-hud)',
+  textTransform: 'uppercase',
+  color: 'var(--text-3)',
+  fontFamily: 'var(--font-mono)'
+};
+function SectionTitle({
+  icon,
+  children,
+  hint
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 8,
+      marginBottom: 14
+    }
+  }, icon && /*#__PURE__*/React.createElement(Icon, {
+    name: icon,
+    size: 14,
+    color: "var(--star-blue)"
+  }), /*#__PURE__*/React.createElement("span", {
+    style: HUD
+  }, children), hint && /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 11.5,
+      color: 'var(--text-3)',
+      marginLeft: 'auto'
+    }
+  }, hint));
+}
+
+// 「去整理」直达收件箱：体检拿不到切视图的回调（app 层只下发了复习 / 费曼 / 星域），
+// 从侧栏唯一的收件箱入口接力——展开态匹配按钮文字，收起态匹配 data-tip。
+function goInbox() {
+  const btn = Array.from(document.querySelectorAll('button')).find(b => b.dataset && b.dataset.tip === '收件箱' || (b.textContent || '').trim().startsWith('收件箱'));
+  if (btn) btn.click();
+}
+
+/* 今日待办的一行：图标 + 类别（计数）+ 一句自解释 + 直达动作。
+   待重燃行用暗金发丝边——「曾获认证」的残迹属于点亮语义本身，其余保持冷色。 */
+function TodoRow({
+  icon,
+  iconColor,
+  title,
+  count,
+  desc,
+  action,
+  ember
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 12,
+      padding: '11px 13px',
+      borderRadius: 'var(--r-md)',
+      border: '1px solid ' + (ember ? 'color-mix(in srgb, var(--gold) 16%, transparent)' : 'var(--glass-border)'),
+      background: ember ? 'color-mix(in srgb, var(--gold) 4%, transparent)' : 'rgba(120,150,205,0.05)'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: icon,
+    size: 16,
+    color: iconColor,
+    style: {
+      flex: 'none'
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1,
+      minWidth: 0
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'baseline',
+      gap: 8
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 13.5,
+      color: 'var(--text-1)'
+    }
+  }, title), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontFamily: 'var(--font-mono)',
+      fontSize: 12,
+      color: ember ? 'color-mix(in srgb, var(--gold) 72%, var(--text-3))' : 'var(--star-blue)'
+    }
+  }, count)), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11.5,
+      color: 'var(--text-3)',
+      marginTop: 3,
+      lineHeight: 1.6
+    }
+  }, desc)), action && /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 'none'
+    }
+  }, action));
+}
+function Checkup({
+  onClose,
+  onOpenStar,
+  onFocusCon,
+  onFeynman,
+  onReview
+}) {
+  const D = window.SR_DATA;
+  // 待办与亮度都是活数据：费曼抽屉 / 复习会话在本视图之上操作后，就地读回新真相
+  const [, bump] = React.useReducer(x => x + 1, 0);
+  React.useEffect(() => {
+    const h = () => bump();
+    ['sr-memory', 'sr-data', 'sr-ignite'].forEach(ev => window.addEventListener(ev, h));
+    return () => ['sr-memory', 'sr-data', 'sr-ignite'].forEach(ev => window.removeEventListener(ev, h));
+  }, []);
+  const stars = D.stars;
+  const total = stars.length;
+  const dueN = D.dueStars ? D.dueStars().length : 0;
+  // 统一今日待办：到期复习 + 待重燃 + 收件箱待整理（due 与 ember 可重叠——重燃会同时清掉到期）
+  const todo = D.todayTodo ? D.todayTodo() : {
+    due: dueN,
+    ember: 0,
+    inbox: (D.inbox || []).length
+  };
+  const embers = D.emberStars ? D.emberStars() : [];
+  const todoEmpty = todo.due === 0 && todo.ember === 0 && todo.inbox === 0;
+
+  // overall memory health（0 颗星时为 0，不做除零）
+  const overall = total ? Math.round(stars.reduce((a, s) => a + s.strength, 0) / total * 100) : 0;
+  const overallCol = overall >= 70 ? 'var(--gold)' : overall >= 45 ? 'var(--star-blue)' : 'var(--star-blue-dim)';
+
+  // distribution by band
+  const bandDefs = [{
+    key: 'solid',
+    t: '牢固',
+    c: 'var(--gold)',
+    desc: '记忆稳固，无需打扰'
+  }, {
+    key: 'normal',
+    t: '正常',
+    c: 'var(--star-blue)',
+    desc: '光度平稳'
+  }, {
+    key: 'fading',
+    t: '正变暗',
+    c: 'var(--star-blue-dim)',
+    desc: '开始遗忘，宜复习'
+  }, {
+    key: 'dying',
+    t: '将熄灭',
+    c: 'var(--star-blue-deep)',
+    desc: '濒临熄灭，尽快回看'
+  }];
+  const counts = bandDefs.map(b => ({
+    ...b,
+    n: stars.filter(s => band(s.strength).key === b.key).length
+  }));
+  const fadingTotal = counts.filter(b => b.key === 'fading' || b.key === 'dying').reduce((a, b) => a + b.n, 0);
+
+  // per-constellation health, weakest first
+  const cons = D.constellations.map(c => {
+    const ss = stars.filter(s => s.con === c.id);
+    const avg = ss.length ? ss.reduce((a, s) => a + s.strength, 0) / ss.length : 0;
+    const weakest = ss.slice().sort((a, b) => a.strength - b.strength)[0];
+    return {
+      ...c,
+      avg,
+      members: ss.length,
+      weakStar: weakest,
+      dim: ss.filter(s => s.strength < 0.4).length
+    };
+  }).sort((a, b) => a.avg - b.avg);
+
+  // 复习队列：与侧栏角标、「开始复习」按钮同一口径（dueStars），
+  // 按真实到期时刻升序——逾期最久的排最前，列表只展示最需要的前 6 颗
+  const urgent = (D.dueStars ? D.dueStars() : []).slice(0, 6);
+  const topUrgent = urgent[0];
+
+  // weak-constellation nudges — the two coldest domains with dim members
+  const weakCons = cons.filter(c => c.avg < 0.6).slice(0, 2);
+
+  // recent ignite trend, oldest → newest, cumulative net light gained
+  //（只统计仍然存在的星：已销毁的星不该继续贡献假曲线）
+  const events = D.timeline.filter(ev => D.byId[ev.starId]).slice().reverse();
+  let acc = 0;
+  const series = events.map(ev => {
+    acc += parseDelta(ev.delta);
+    return {
+      ev,
+      v: acc
+    };
+  });
+  const netDelta = acc;
+  const igniteN = events.filter(t => t.kind === 'ignite').length;
+  const reviewN = events.filter(t => t.kind === 'review').length;
+  const dimN = events.filter(t => t.kind === 'dim').length;
+
+  // sparkline geometry
+  const SW = 320,
+    SH = 96,
+    PAD = 8;
+  const vals = series.map(p => p.v).concat([0]);
+  const vMin = Math.min(...vals),
+    vMax = Math.max(...vals);
+  const span = vMax - vMin || 1;
+  const px = i => PAD + (series.length <= 1 ? 0 : i / (series.length - 1)) * (SW - PAD * 2);
+  const py = v => SH - PAD - (v - vMin) / span * (SH - PAD * 2);
+  const linePts = series.map((p, i) => `${px(i).toFixed(1)},${py(p.v).toFixed(1)}`).join(' ');
+  const areaPts = series.length ? `${px(0).toFixed(1)},${(SH - PAD).toFixed(1)} ${linePts} ${px(series.length - 1).toFixed(1)},${(SH - PAD).toFixed(1)}` : '';
+  const card = {
+    borderRadius: 'var(--r-lg)',
+    border: '1px solid var(--glass-border)',
+    background: 'var(--glass-bg-faint)',
+    padding: 18
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    onContextMenu: e => e.preventDefault(),
+    style: {
+      position: 'relative',
+      flex: 1,
+      minWidth: 0,
+      overflow: 'auto',
+      padding: '22px 30px 56px'
+    }
+  }, /*#__PURE__*/React.createElement("sr-starfield", {
+    density: "0.55"
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'relative',
+      zIndex: 2,
+      maxWidth: 1080,
+      margin: '0 auto'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 12,
+      marginBottom: 22
+    }
+  }, /*#__PURE__*/React.createElement(Button, {
+    variant: "ghost",
+    size: "sm",
+    icon: "arrow-left",
+    onClick: onClose
+  }, "\u8FD4\u56DE"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1
+    }
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 7,
+      ...HUD
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "activity",
+    size: 13,
+    color: "var(--gold)"
+  }), "KNOWLEDGE CHECKUP")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginBottom: 22
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 25,
+      fontWeight: 300,
+      color: 'var(--text-1)'
+    }
+  }, "\u77E5\u8BC6\u4F53\u68C0\u62A5\u544A"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 13,
+      color: 'var(--text-3)',
+      marginTop: 4
+    }
+  }, "\u4E3A\u4F60\u7684\u6574\u7247\u661F\u7A7A\u505A\u4E00\u6B21\u8BB0\u5FC6\u4F53\u68C0 \u2014\u2014 \u54EA\u4E9B\u661F\u5728\u53D1\u5149\uFF0C\u54EA\u4E9B\u6B63\u5728\u53D8\u6697\uFF0C\u54EA\u4E9B\u8BE5\u56DE\u6765\u770B\u770B\u3002")), /*#__PURE__*/React.createElement(GlassPanel, {
+    strong: true,
+    radius: "lg",
+    pad: "none",
+    glow: true,
+    style: {
+      padding: 18,
+      marginBottom: 16
+    }
+  }, /*#__PURE__*/React.createElement(SectionTitle, {
+    icon: "list-todo",
+    hint: todoEmpty ? undefined : '到期与待重燃可能重叠'
+  }, "\u4ECA\u65E5\u5F85\u529E"), todoEmpty && /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 9,
+      padding: '10px 4px 4px',
+      color: 'var(--text-3)',
+      fontSize: 13
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "sparkles",
+    size: 15,
+    color: "var(--star-blue)"
+  }), "\u661F\u7A7A\u660E\u4EAE\uFF0C\u89C2\u6D4B\u53F0\u4ECA\u591C\u65E0\u4E8B\u3002"), !todoEmpty && /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 8
+    }
+  }, todo.due > 0 && /*#__PURE__*/React.createElement(TodoRow, {
+    icon: "repeat",
+    iconColor: "var(--star-blue)",
+    title: "\u5230\u671F\u590D\u4E60",
+    count: `${todo.due} 颗`,
+    desc: "\u5230\u671F\u7684\u661F\u6B63\u5728\u53D8\u6697\u2014\u2014\u590D\u4E60\u8D1F\u8D23\u4FDD\u6E29\uFF0C\u522B\u8BA9\u5149\u6E9C\u8D70\u3002",
+    action: onReview && /*#__PURE__*/React.createElement(Button, {
+      variant: "primary",
+      size: "sm",
+      icon: "repeat",
+      glow: true,
+      onClick: onReview
+    }, "\u5F00\u59CB\u590D\u4E60")
+  }), todo.ember > 0 && /*#__PURE__*/React.createElement(TodoRow, {
+    icon: "flame",
+    iconColor: "color-mix(in srgb, var(--gold) 60%, var(--text-3))",
+    ember: true,
+    title: "\u5F85\u91CD\u71C3",
+    count: `${todo.ember} 颗`,
+    desc: "\u66FE\u70B9\u4EAE\u7684\u661F\u7184\u706D\u540E\uFF0C\u4F1A\u5728\u8FD9\u91CC\u7B49\u4F60\u91CD\u71C3\u3002",
+    action: onFeynman && embers[0] && /*#__PURE__*/React.createElement(Button, {
+      size: "sm",
+      icon: "flame",
+      onClick: () => onFeynman(embers[0].id)
+    }, "\u53BB\u91CD\u71C3", embers[0] ? `「${embers[0].label}」` : '')
+  }), todo.inbox > 0 && /*#__PURE__*/React.createElement(TodoRow, {
+    icon: "inbox",
+    iconColor: "var(--star-blue)",
+    title: "\u6536\u4EF6\u7BB1",
+    count: `${todo.inbox} 条待整理`,
+    desc: "\u6355\u6349\u8FD8\u8EBA\u5728\u6536\u4EF6\u7BB1\u91CC\u2014\u2014\u5F52\u5165\u661F\u57DF\u3001\u5199\u4E0B\u5185\u5BB9\uFF0C\u624D\u4F1A\u6210\u4E3A\u661F\u3002",
+    action: /*#__PURE__*/React.createElement(Button, {
+      size: "sm",
+      icon: "folder-input",
+      onClick: goInbox
+    }, "\u53BB\u6574\u7406")
+  }))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'grid',
+      gridTemplateColumns: '300px 1fr',
+      gap: 16,
+      marginBottom: 16
+    }
+  }, /*#__PURE__*/React.createElement(GlassPanel, {
+    strong: true,
+    radius: "lg",
+    pad: "none",
+    glow: true,
+    style: {
+      padding: 22,
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'space-between'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: HUD
+  }, "\u6574\u4F53\u8BB0\u5FC6\u5065\u5EB7\u5EA6"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'baseline',
+      gap: 6,
+      margin: '10px 0 2px'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontFamily: 'var(--font-mono)',
+      fontSize: 64,
+      fontWeight: 200,
+      lineHeight: 1,
+      color: overallCol,
+      textShadow: overall >= 70 ? 'var(--text-glow-warm)' : 'var(--text-glow-cool)'
+    }
+  }, overall), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontFamily: 'var(--font-mono)',
+      fontSize: 22,
+      fontWeight: 200,
+      color: 'var(--text-3)'
+    }
+  }, "%")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 14
+    }
+  }, /*#__PURE__*/React.createElement(MemoryBar, {
+    value: overall / 100,
+    height: 6
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12.5,
+      color: 'var(--text-2)',
+      lineHeight: 1.7,
+      marginTop: 14
+    }
+  }, total === 0 ? /*#__PURE__*/React.createElement("span", null, "\u4F60\u7684\u661F\u7A7A\u8FD8\u5F88\u6697\u3002\u5199\u4E0B\u7B2C\u4E00\u9897\u661F\uFF0C\u8BA9\u5B83\u53D1\u5149\u3002") : /*#__PURE__*/React.createElement("span", null, "\u5171 ", /*#__PURE__*/React.createElement("b", {
+    style: {
+      fontFamily: 'var(--font-mono)',
+      color: 'var(--text-1)',
+      fontWeight: 500
+    }
+  }, total), " \u9897\u77E5\u8BC6\u661F\uFF0C\u5176\u4E2D", /*#__PURE__*/React.createElement("b", {
+    style: {
+      color: 'var(--star-blue-dim)',
+      fontWeight: 500
+    }
+  }, " ", fadingTotal, " "), "\u9897\u504F\u6697\uFF08\u6B63\u53D8\u6697\u6216\u5C06\u7184\u706D\uFF09\u3002", fadingTotal > 0 ? '该回来看看了。' : '星空明亮，保持节奏。'))), /*#__PURE__*/React.createElement(GlassPanel, {
+    radius: "lg",
+    pad: "none",
+    style: {
+      padding: 18
+    }
+  }, /*#__PURE__*/React.createElement(SectionTitle, {
+    icon: "layers",
+    hint: "\u6309\u8BB0\u5FC6\u5F3A\u5EA6\u5206\u5C42"
+  }, "\u8BB0\u5FC6\u5206\u5E03"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      height: 10,
+      borderRadius: 999,
+      overflow: 'hidden',
+      background: 'rgba(159,198,255,0.08)',
+      marginBottom: 16
+    }
+  }, total > 0 && counts.map(b => b.n > 0 && /*#__PURE__*/React.createElement("div", {
+    key: b.key,
+    title: `${b.t} · ${b.n}`,
+    style: {
+      width: `${b.n / total * 100}%`,
+      background: b.c,
+      boxShadow: b.key === 'solid' ? '0 0 8px rgba(255,217,138,0.5)' : 'none'
+    }
+  }))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(4, 1fr)',
+      gap: 12
+    }
+  }, counts.map(b => /*#__PURE__*/React.createElement("div", {
+    key: b.key,
+    style: {
+      borderRadius: 'var(--r-md)',
+      border: '1px solid var(--glass-border)',
+      background: 'rgba(159,198,255,0.03)',
+      padding: '12px 13px'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 6
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      width: 7,
+      height: 7,
+      borderRadius: '50%',
+      background: b.c,
+      boxShadow: `0 0 6px ${b.c}`
+    }
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 12,
+      color: 'var(--text-2)'
+    }
+  }, b.t)), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontFamily: 'var(--font-mono)',
+      fontSize: 28,
+      fontWeight: 200,
+      color: 'var(--text-1)',
+      lineHeight: 1.1,
+      marginTop: 8
+    }
+  }, b.n), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 10.5,
+      color: 'var(--text-3)',
+      marginTop: 4,
+      lineHeight: 1.5
+    }
+  }, b.desc)))))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'grid',
+      gridTemplateColumns: '1fr 1fr',
+      gap: 16
+    }
+  }, /*#__PURE__*/React.createElement(GlassPanel, {
+    radius: "lg",
+    pad: "none",
+    style: {
+      padding: 18
+    }
+  }, /*#__PURE__*/React.createElement(SectionTitle, {
+    icon: "orbit",
+    hint: cons.length ? '点击飞入该星域' : undefined
+  }, "\u5404\u661F\u57DF\u5065\u5EB7\u5EA6"), cons.length === 0 && /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: '24px 8px',
+      textAlign: 'center',
+      color: 'var(--text-3)',
+      fontSize: 13,
+      lineHeight: 1.8
+    }
+  }, "\u8FD8\u6CA1\u6709\u661F\u57DF\u3002\u5199\u4E0B\u7B2C\u4E00\u9897\u661F\uFF0C\u4F53\u68C0\u624D\u6709\u5BF9\u8C61\u3002"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 4
+    }
+  }, cons.map(c => /*#__PURE__*/React.createElement("div", {
+    key: c.id,
+    onClick: () => onFocusCon && onFocusCon(c.id),
+    title: `在星图中聚焦 ${c.name}`,
+    role: "button",
+    tabIndex: 0,
+    className: "sr-focus-ring",
+    onKeyDown: e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        onFocusCon && onFocusCon(c.id);
+      }
+    },
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 12,
+      padding: '9px 10px',
+      borderRadius: 'var(--r-md)',
+      cursor: 'pointer',
+      transition: 'background var(--dur-fast)'
+    },
+    onMouseEnter: e => {
+      e.currentTarget.style.background = 'color-mix(in srgb, var(--star-blue) 8%, transparent)';
+    },
+    onMouseLeave: e => {
+      e.currentTarget.style.background = 'transparent';
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 7,
+      width: 92,
+      flex: 'none',
+      fontSize: 13,
+      color: 'var(--text-2)'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      width: 7,
+      height: 7,
+      borderRadius: '50%',
+      background: c.color,
+      boxShadow: `0 0 6px ${c.color}`
+    }
+  }), c.name), /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1
+    }
+  }, /*#__PURE__*/React.createElement(MemoryBar, {
+    value: c.avg,
+    height: 6,
+    fading: c.avg < 0.4
+  })), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontFamily: 'var(--font-mono)',
+      fontSize: 12.5,
+      color: c.avg < 0.4 ? 'var(--star-blue-dim)' : 'var(--text-2)',
+      width: 34,
+      textAlign: 'right'
+    }
+  }, Math.round(c.avg * 100), "%"), /*#__PURE__*/React.createElement(Icon, {
+    name: "chevron-right",
+    size: 15,
+    color: "var(--text-3)"
+  }))))), /*#__PURE__*/React.createElement(GlassPanel, {
+    radius: "lg",
+    pad: "none",
+    style: {
+      padding: 18
+    }
+  }, /*#__PURE__*/React.createElement(SectionTitle, {
+    icon: "trending-down",
+    hint: dueN > 0 ? `${dueN} 颗到期 · 优先回看` : undefined
+  }, "\u6700\u9700\u590D\u4E60"), dueN > 0 && onReview && /*#__PURE__*/React.createElement(Button, {
+    variant: "primary",
+    size: "sm",
+    icon: "repeat",
+    glow: true,
+    onClick: onReview,
+    style: {
+      width: '100%',
+      marginBottom: 10
+    }
+  }, "\u5F00\u59CB\u590D\u4E60\uFF08", dueN, " \u9897\u5230\u671F\uFF09"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 6
+    }
+  }, urgent.length === 0 && /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: '24px 0',
+      textAlign: 'center',
+      color: 'var(--text-3)',
+      fontSize: 13
+    }
+  }, total === 0 ? '还没有星。回到星图写下第一颗，它会在需要时来这里等你。' : '没有到期的星，状态很好。'), urgent.map(s => {
+    // 待重燃覆盖亮度四档的状态文字（与 props.status 同一口径），用暗金余烬色
+    const ember = D.isEmber && D.isEmber(s);
+    const b = ember ? {
+      key: 'ember',
+      t: '待重燃',
+      c: 'color-mix(in srgb, var(--gold) 60%, var(--text-3))'
+    } : band(s.strength);
+    const overdue = s.props && s.props.nextReview === '已逾期';
+    return /*#__PURE__*/React.createElement("div", {
+      key: s.id,
+      onClick: () => onFeynman ? onFeynman(s.id) : onOpenStar && onOpenStar(s.id),
+      title: "\u8D39\u66FC\u5185\u5316",
+      role: "button",
+      tabIndex: 0,
+      className: "sr-focus-ring",
+      onKeyDown: e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          onFeynman ? onFeynman(s.id) : onOpenStar && onOpenStar(s.id);
+        }
+      },
+      style: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: 11,
+        padding: '10px 11px',
+        borderRadius: 'var(--r-md)',
+        border: '1px solid var(--glass-border)',
+        background: 'rgba(120,150,205,0.05)',
+        cursor: 'pointer',
+        transition: 'background var(--dur-fast)'
+      },
+      onMouseEnter: e => {
+        e.currentTarget.style.background = 'color-mix(in srgb, var(--star-blue) 10%, transparent)';
+      },
+      onMouseLeave: e => {
+        e.currentTarget.style.background = 'rgba(120,150,205,0.05)';
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        width: 8,
+        height: 8,
+        borderRadius: '50%',
+        flex: 'none',
+        background: b.c,
+        boxShadow: `0 0 7px ${b.c}`
+      }
+    }), /*#__PURE__*/React.createElement("div", {
+      style: {
+        minWidth: 0,
+        flex: 1
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 13.5,
+        color: 'var(--text-1)',
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis'
+      }
+    }, s.label), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: 6,
+        marginTop: 3
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        width: 5,
+        height: 5,
+        borderRadius: '50%',
+        background: D.conColor(s.con)
+      }
+    }), /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 11,
+        color: 'var(--text-3)'
+      }
+    }, D.conName(s.con)), /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 11,
+        color: b.c
+      }
+    }, "\xB7 ", b.t))), /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontFamily: 'var(--font-mono)',
+        fontSize: 11,
+        color: overdue ? 'var(--danger)' : 'var(--text-3)',
+        flex: 'none'
+      }
+    }, s.props && s.props.nextReview || '—'), /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontFamily: 'var(--font-mono)',
+        fontSize: 12.5,
+        color: b.c,
+        width: 34,
+        textAlign: 'right',
+        flex: 'none'
+      }
+    }, Math.round(s.strength * 100), "%"));
+  }))), /*#__PURE__*/React.createElement(GlassPanel, {
+    radius: "lg",
+    pad: "none",
+    style: {
+      padding: 18
+    }
+  }, /*#__PURE__*/React.createElement(SectionTitle, {
+    icon: "sparkles",
+    hint: series.length ? '本周点亮 / 复习 / 变暗' : undefined
+  }, "\u8FD1\u671F\u70B9\u4EAE\u8D8B\u52BF"), series.length === 0 && /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: '24px 0',
+      textAlign: 'center',
+      color: 'var(--text-3)',
+      fontSize: 13
+    }
+  }, "\u8FD8\u6CA1\u6709\u70B9\u4EAE\u8BB0\u5F55\u3002\u7B2C\u4E00\u6B21\u300C\u878D\u4F1A\u8D2F\u901A\u300D\u4E4B\u540E\uFF0C\u8FD9\u91CC\u4F1A\u4EAE\u8D77\u6765\u3002"), series.length > 0 && /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'flex-end',
+      gap: 16
+    }
+  }, /*#__PURE__*/React.createElement("svg", {
+    width: "100%",
+    viewBox: `0 0 ${SW} ${SH}`,
+    preserveAspectRatio: "none",
+    style: {
+      flex: 1,
+      height: SH
+    }
+  }, /*#__PURE__*/React.createElement("defs", null, /*#__PURE__*/React.createElement("linearGradient", {
+    id: "sr-checkup-trend",
+    x1: "0",
+    y1: "0",
+    x2: "0",
+    y2: "1"
+  }, /*#__PURE__*/React.createElement("stop", {
+    offset: "0%",
+    stopColor: "rgba(255,217,138,0.30)"
+  }), /*#__PURE__*/React.createElement("stop", {
+    offset: "100%",
+    stopColor: "rgba(255,217,138,0)"
+  }))), /*#__PURE__*/React.createElement("line", {
+    x1: PAD,
+    x2: SW - PAD,
+    y1: py(0),
+    y2: py(0),
+    stroke: "var(--line)",
+    strokeDasharray: "3 4"
+  }), areaPts && /*#__PURE__*/React.createElement("polygon", {
+    points: areaPts,
+    fill: "url(#sr-checkup-trend)"
+  }), /*#__PURE__*/React.createElement("polyline", {
+    points: linePts,
+    fill: "none",
+    stroke: "var(--gold)",
+    strokeWidth: "1.6",
+    strokeLinejoin: "round",
+    strokeLinecap: "round"
+  }), series.map((p, i) => {
+    const col = p.ev.kind === 'dim' ? 'var(--star-blue-dim)' : p.ev.kind === 'review' ? 'var(--star-blue)' : 'var(--gold)';
+    return /*#__PURE__*/React.createElement("circle", {
+      key: p.ev.id,
+      cx: px(i),
+      cy: py(p.v),
+      r: "3",
+      fill: col,
+      stroke: "var(--space-0)",
+      strokeWidth: "1.5"
+    });
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 'none',
+      width: 86,
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 10
+    }
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontFamily: 'var(--font-mono)',
+      fontSize: 22,
+      fontWeight: 200,
+      color: netDelta >= 0 ? 'var(--gold)' : 'var(--star-blue-dim)',
+      lineHeight: 1
+    }
+  }, netDelta >= 0 ? '+' : '−', Math.abs(netDelta).toFixed(2)), /*#__PURE__*/React.createElement("div", {
+    style: {
+      ...HUD,
+      marginTop: 4
+    }
+  }, "\u51C0\u5149\u5EA6")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 5,
+      fontSize: 11.5,
+      color: 'var(--text-2)'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 6
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      width: 6,
+      height: 6,
+      borderRadius: '50%',
+      background: 'var(--gold)'
+    }
+  }), "\u70B9\u4EAE ", igniteN), /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 6
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      width: 6,
+      height: 6,
+      borderRadius: '50%',
+      background: 'var(--star-blue)'
+    }
+  }), "\u590D\u4E60 ", reviewN), /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 6
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      width: 6,
+      height: 6,
+      borderRadius: '50%',
+      background: 'var(--star-blue-dim)'
+    }
+  }), "\u53D8\u6697 ", dimN))))), /*#__PURE__*/React.createElement(GlassPanel, {
+    radius: "lg",
+    pad: "none",
+    style: {
+      padding: 18
+    }
+  }, /*#__PURE__*/React.createElement(SectionTitle, {
+    icon: "compass",
+    hint: weakCons.length ? '点击前往' : undefined
+  }, "\u8584\u5F31\u661F\u57DF\u5EFA\u8BAE"), weakCons.length === 0 && /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: '24px 0',
+      textAlign: 'center',
+      color: 'var(--text-3)',
+      fontSize: 13
+    }
+  }, cons.length === 0 ? '有了星域之后，这里会提醒你哪一片正在变暗。' : '各星域都还明亮，无需特别关注。'), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 10
+    }
+  }, weakCons.map(c => /*#__PURE__*/React.createElement("div", {
+    key: c.id,
+    style: {
+      borderRadius: 'var(--r-md)',
+      border: '1px solid var(--glass-border)',
+      background: 'rgba(120,150,205,0.05)',
+      padding: '13px 14px'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 8
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      width: 8,
+      height: 8,
+      borderRadius: '50%',
+      background: c.color,
+      boxShadow: `0 0 7px ${c.color}`
+    }
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 14,
+      color: 'var(--text-1)'
+    }
+  }, c.name), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontFamily: 'var(--font-mono)',
+      fontSize: 11.5,
+      color: 'var(--star-blue-dim)'
+    }
+  }, Math.round(c.avg * 100), "%"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1
+    }
+  }), /*#__PURE__*/React.createElement(Button, {
+    variant: "ghost",
+    size: "sm",
+    icon: "arrow-right",
+    onClick: () => onFocusCon && onFocusCon(c.id)
+  }, "\u524D\u5F80")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: 'var(--text-2)',
+      lineHeight: 1.65,
+      marginTop: 8
+    }
+  }, c.dim, " \u9897\u661F\u6B63\u5728\u53D8\u6697", c.weakStar ? /*#__PURE__*/React.createElement(React.Fragment, null, "\uFF0C\u6700\u6697\u7684\u662F\u300C", /*#__PURE__*/React.createElement("span", {
+    onClick: () => onOpenStar && onOpenStar(c.weakStar.id),
+    role: "button",
+    tabIndex: 0,
+    className: "sr-focus-ring",
+    onKeyDown: e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        onOpenStar && onOpenStar(c.weakStar.id);
+      }
+    },
+    style: {
+      color: 'var(--star-blue)',
+      cursor: 'pointer'
+    }
+  }, c.weakStar.label), "\u300D") : null, "\u3002 \u5EFA\u8BAE\u4F18\u5148\u56DE\u770B\u8FD9\u7247\u661F\u57DF\uFF0C\u628A\u5149\u5EA6\u627E\u56DE\u6765\u3002")))))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 12,
+      marginTop: 22
+    }
+  }, total === 0 ? /*#__PURE__*/React.createElement(Button, {
+    variant: "primary",
+    size: "md",
+    icon: "orbit",
+    glow: true,
+    onClick: onClose
+  }, "\u56DE\u5230\u661F\u56FE\uFF0C\u5199\u4E0B\u7B2C\u4E00\u9897\u661F") : /*#__PURE__*/React.createElement(Button, {
+    variant: "primary",
+    size: "md",
+    icon: "repeat",
+    glow: true,
+    disabled: !topUrgent,
+    onClick: () => topUrgent && (onFeynman ? onFeynman(topUrgent.id) : onOpenStar && onOpenStar(topUrgent.id))
+  }, "\u53BB\u590D\u4E60\u6700\u6697\u7684\u661F", topUrgent ? `「${topUrgent.label}」` : ''), cons[0] && /*#__PURE__*/React.createElement(Button, {
+    variant: "secondary",
+    size: "md",
+    icon: "compass",
+    onClick: () => onFocusCon && onFocusCon(cons[0].id)
+  }, "\u524D\u5F80\u6700\u8584\u5F31\u661F\u57DF"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1
+    }
+  }), /*#__PURE__*/React.createElement(Button, {
+    variant: "ghost",
+    size: "md",
+    icon: "check",
+    onClick: onClose
+  }, "\u5B8C\u6210\u4F53\u68C0"))));
+}
+window.SRKit = Object.assign(window.SRKit || {}, {
+  Checkup
+});
+})(); } catch (e) { __ds_ns.__errors.push({ path: "ui_kits/stellar-raft/Checkup.jsx", error: String((e && e.message) || e) }); }
+
+// ui_kits/stellar-raft/CommandPalette.jsx
+try { (() => {
+/* CommandPalette — 全局搜索 (⌘K): one box to jump to any star, constellation
+   or view. Arrow keys to move, Enter to go, Esc to close. */
+const {
+  GlassPanel,
+  Icon
+} = window.StellarRaftDesignSystem_2866af;
+
+// 视图命令：label 与侧栏完全同名（搜索「时间轴视图」也要命中），补充说明放 sub
+const VIEW_CMDS = [{
+  kind: 'view',
+  id: 'map',
+  label: '星图视图',
+  icon: 'orbit',
+  sub: '视图'
+}, {
+  kind: 'view',
+  id: 'list',
+  label: '列表视图',
+  icon: 'list',
+  sub: '视图'
+}, {
+  kind: 'view',
+  id: 'timeline',
+  label: '时间轴视图',
+  icon: 'git-commit-horizontal',
+  sub: '视图'
+}, {
+  kind: 'view',
+  id: 'inbox',
+  label: '收件箱',
+  icon: 'inbox',
+  sub: '视图'
+}, {
+  kind: 'view',
+  id: 'blackhole',
+  label: '黑洞',
+  icon: 'aperture',
+  sub: '回收站'
+}, {
+  kind: 'view',
+  id: 'aerial',
+  label: '亮度鸟瞰',
+  icon: 'satellite',
+  sub: '视图'
+}, {
+  kind: 'view',
+  id: 'visit',
+  label: '星际漫游',
+  icon: 'telescope',
+  sub: '好友星系'
+}];
+function CommandPalette({
+  onClose,
+  onOpenStar,
+  onOpenView,
+  onFocusCon
+}) {
+  const D = window.SR_DATA;
+  const [query, setQuery] = React.useState('');
+  const [active, setActive] = React.useState(0);
+  const listRef = React.useRef(null);
+
+  // 关闭时把焦点还给打开面板的元素（Tab 也圈禁在面板内）。
+  // 移焦交给 useModalFocus（面板内第一个 focusable 就是搜索 input）：
+  // hook 会先捕获 prev 再移焦；input 上不能用原生 autoFocus，否则在
+  // commit 阶段就抢焦点，hook 捕到的 prev 是面板自己，关闭时无从还原。
+  const rootRef = React.useRef(null);
+  (window.SRKit && window.SRKit.useModalFocus ? window.SRKit.useModalFocus : () => {})(rootRef, {
+    autoFocus: true
+  });
+
+  // 动作命令：⌘K 不只是搜索框——新建知识星落进第一个星域（没有就先立一片），直接进编辑器
+  const newStar = () => {
+    let con = D.constellations[0];
+    if (!con) {
+      con = {
+        id: 'c' + Math.random().toString(36).slice(2, 7),
+        name: '我的星域',
+        color: '#9fc6ff',
+        health: 0,
+        count: 0
+      };
+      D.constellations.push(con);
+    }
+    const id = 's' + Math.random().toString(36).slice(2, 8);
+    D.addStar({
+      id,
+      con: con.id,
+      x: 46 + Math.random() * 10,
+      y: 42 + Math.random() * 10,
+      strength: 0.5,
+      importance: 1,
+      label: '新的知识星',
+      summary: '',
+      tags: ['草稿'],
+      props: {
+        type: '草稿',
+        status: '正常',
+        source: '命令面板',
+        alias: '',
+        nextReview: '明天'
+      },
+      body: [{
+        id: id + '-r',
+        type: 'rich'
+      }, {
+        id: id + '-p',
+        type: 'p',
+        text: ''
+      }]
+    });
+    onOpenStar(id);
+  };
+  const ACTION_CMDS = [{
+    kind: 'action',
+    id: 'new-star',
+    label: '新建知识星',
+    icon: 'plus',
+    sub: '动作',
+    run: newStar
+  }];
+  const q = query.trim().toLowerCase();
+  const views = VIEW_CMDS.filter(v => !q || v.label.toLowerCase().includes(q)).map(v => ({
+    ...v,
+    run: () => onOpenView(v.id)
+  }));
+  const actions = ACTION_CMDS.filter(a => !q || a.label.toLowerCase().includes(q));
+  const cons = D.constellations.filter(c => !q || c.name.toLowerCase().includes(q)).map(c => ({
+    kind: 'con',
+    id: c.id,
+    label: c.name,
+    sub: c.count + ' 颗星',
+    color: c.color,
+    icon: 'orbit',
+    run: () => onFocusCon(c.id)
+  }));
+  const stars = D.stars.filter(s => !q || s.label.toLowerCase().includes(q) || (s.tags || []).some(t => t.toLowerCase().includes(q))).map(s => ({
+    kind: 'star',
+    id: s.id,
+    label: s.label,
+    sub: D.conName(s.con),
+    color: D.conColor(s.con),
+    icon: 'sparkles',
+    run: () => onOpenStar(s.id)
+  }));
+  const sections = [{
+    title: '动作',
+    items: actions
+  }, {
+    title: '视图',
+    items: views
+  }, {
+    title: '星域',
+    items: cons
+  }, {
+    title: '知识星',
+    items: stars
+  }].filter(s => s.items.length);
+  const flat = sections.reduce((a, s) => a.concat(s.items), []);
+  React.useEffect(() => {
+    setActive(0);
+  }, [query]);
+  React.useEffect(() => {
+    const el = listRef.current && listRef.current.querySelector('[data-idx="' + active + '"]');
+    if (el) el.scrollIntoView({
+      block: 'nearest'
+    });
+  }, [active]);
+  const exec = item => {
+    if (!item) return;
+    item.run();
+    onClose();
+  };
+  const onKey = e => {
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setActive(a => Math.min(flat.length - 1, a + 1));
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setActive(a => Math.max(0, a - 1));
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      exec(flat[active]);
+    } else if (e.key === 'Escape') {
+      e.preventDefault();
+      onClose();
+    }
+  };
+  let idx = -1;
+  return /*#__PURE__*/React.createElement("div", {
+    ref: rootRef,
+    onMouseDown: onClose,
+    role: "dialog",
+    "aria-modal": "true",
+    "aria-label": "\u5168\u5C40\u641C\u7D22",
+    style: {
+      position: 'fixed',
+      inset: 0,
+      zIndex: 100,
+      background: 'rgba(3,4,12,0.55)',
+      backdropFilter: 'blur(3px)',
+      display: 'flex',
+      alignItems: 'flex-start',
+      justifyContent: 'center',
+      paddingTop: '13vh'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    onMouseDown: e => e.stopPropagation(),
+    style: {
+      width: 560,
+      maxWidth: '92vw',
+      animation: 'sr-cardin var(--dur-base) var(--ease-flight) both'
+    }
+  }, /*#__PURE__*/React.createElement(GlassPanel, {
+    strong: true,
+    radius: "lg",
+    pad: "none",
+    glow: true,
+    style: {
+      overflow: 'hidden'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 11,
+      padding: '15px 18px',
+      borderBottom: '1px solid var(--line)'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "search",
+    size: 19,
+    color: "var(--star-blue)"
+  }), /*#__PURE__*/React.createElement("input", {
+    value: query,
+    onChange: e => setQuery(e.target.value),
+    onKeyDown: onKey,
+    "aria-label": "\u641C\u7D22\u661F\u3001\u661F\u57DF\u3001\u89C6\u56FE",
+    placeholder: "\u641C\u7D22\u661F\u3001\u661F\u57DF\u3001\u89C6\u56FE\u2026",
+    style: {
+      flex: 1,
+      background: 'transparent',
+      border: 'none',
+      outline: 'none',
+      color: 'var(--text-1)',
+      fontSize: 16,
+      fontFamily: 'var(--font-sans)'
+    }
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontFamily: 'var(--font-mono)',
+      fontSize: 10.5,
+      color: 'var(--text-3)',
+      border: '1px solid var(--line-strong)',
+      borderRadius: 6,
+      padding: '2px 7px'
+    }
+  }, "ESC")), /*#__PURE__*/React.createElement("div", {
+    ref: listRef,
+    style: {
+      maxHeight: 380,
+      overflow: 'auto',
+      padding: 8
+    }
+  }, flat.length === 0 && /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: '32px 0',
+      textAlign: 'center',
+      color: 'var(--text-3)',
+      fontSize: 13.5
+    }
+  }, "\u6CA1\u6709\u5339\u914D\u300C", query, "\u300D\u7684\u7ED3\u679C\u3002"), sections.map(sec => /*#__PURE__*/React.createElement("div", {
+    key: sec.title,
+    style: {
+      marginBottom: 6
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 10,
+      letterSpacing: 'var(--ls-hud)',
+      textTransform: 'uppercase',
+      color: 'var(--text-3)',
+      padding: '6px 10px 4px',
+      fontFamily: 'var(--font-mono)'
+    }
+  }, sec.title), sec.items.map(item => {
+    idx += 1;
+    const i = idx;
+    const on = i === active;
+    return /*#__PURE__*/React.createElement("div", {
+      key: item.kind + item.id,
+      "data-idx": i,
+      onMouseEnter: () => setActive(i),
+      onClick: () => exec(item),
+      style: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: 11,
+        padding: '9px 11px',
+        borderRadius: 'var(--r-sm)',
+        cursor: 'pointer',
+        background: on ? 'color-mix(in srgb, var(--star-blue) 11%, transparent)' : 'transparent'
+      }
+    }, item.color ? /*#__PURE__*/React.createElement("span", {
+      style: {
+        width: 18,
+        display: 'inline-flex',
+        justifyContent: 'center'
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        width: 8,
+        height: 8,
+        borderRadius: '50%',
+        background: item.color,
+        boxShadow: `0 0 7px ${item.color}`
+      }
+    })) : /*#__PURE__*/React.createElement(Icon, {
+      name: item.icon,
+      size: 16,
+      color: on ? 'var(--gold)' : 'var(--text-2)'
+    }), /*#__PURE__*/React.createElement("span", {
+      style: {
+        flex: 1,
+        fontSize: 13.5,
+        color: on ? 'var(--text-1)' : 'var(--text-2)'
+      }
+    }, item.label), /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 11,
+        color: 'var(--text-3)'
+      }
+    }, item.sub), on && /*#__PURE__*/React.createElement(Icon, {
+      name: "corner-down-left",
+      size: 13,
+      color: "var(--text-3)"
+    }));
+  })))))));
+}
+window.SRKit = Object.assign(window.SRKit || {}, {
+  CommandPalette
+});
+})(); } catch (e) { __ds_ns.__errors.push({ path: "ui_kits/stellar-raft/CommandPalette.jsx", error: String((e && e.message) || e) }); }
+
 // ui_kits/stellar-raft/Editor.jsx
 try { (() => {
 /* Editor — professional block editor (screen 8). Block-driven: hover handles,
    right-click context menu, slash insert, selection toolbar, many block types,
-   contentEditable text, + the right knowledge rail. */
+   contentEditable text, + the right knowledge rail. Content is data-driven:
+   each star renders its own body / summary / properties / relations. */
 const {
   GlassPanel,
   Icon,
@@ -1079,7 +6511,9 @@ const {
   Tag,
   Badge,
   MemoryBar,
-  Button
+  Button,
+  Select,
+  Modal
 } = window.StellarRaftDesignSystem_2866af;
 const TXT = {
   default: 'var(--text-1)',
@@ -1095,90 +6529,72 @@ const BG = {
   bgdeep: 'rgba(26,35,80,0.45)'
 };
 const uid = () => 'b' + Math.random().toString(36).slice(2, 8);
-const INITIAL = [{
-  id: 'b1',
-  type: 'rich'
-}, {
-  id: 'b2',
-  type: 'h2',
-  text: 'CHSH 形式'
-}, {
-  id: 'b3',
-  type: 'callout',
-  tone: 'gold',
-  text: '关键判据：经典定域理论给出 |S| ≤ 2，而量子力学允许 |S| 达到 2√2 ≈ 2.83。'
-}, {
-  id: 'b4',
-  type: 'math',
-  tex: 'S = E(a,b) − E(a,b′) + E(a′,b) + E(a′,b′),   |S| ≤ 2'
-}, {
-  id: 'b5',
-  type: 'bulleted',
-  text: '经典定域理论：|S| ≤ 2'
-}, {
-  id: 'b6',
-  type: 'bulleted',
-  text: '量子力学预测：|S| 可达 2√2 ≈ 2.83'
-}, {
-  id: 'b7',
-  type: 'bulleted',
-  text: '实验值显著超过 2，排除定域隐变量'
-}, {
-  id: 'b8',
-  type: 'h3',
-  text: '实验验证'
-}, {
-  id: 'b9',
-  type: 'todo',
-  checked: true,
-  text: 'Aspect 1982 实验（光子偏振关联）'
-}, {
-  id: 'b10',
-  type: 'todo',
-  checked: false,
-  text: '复现 CHSH 推导（待整理）'
-}, {
-  id: 'b11',
-  type: 'code',
-  lang: 'python'
-}, {
-  id: 'b12',
-  type: 'quote',
-  text: '“No reasonable definition of reality could be expected to permit this.” — EPR, 1935'
-}, {
-  id: 'b13',
-  type: 'toggle',
-  open: false,
-  text: '延伸：GHZ 态与三粒子佯谬',
-  child: 'GHZ 态用三个粒子给出确定性（而非统计性）的矛盾，比 CHSH 更强地排除了定域实在论。'
-}, {
-  id: 'b14',
-  type: 'table'
-}, {
-  id: 'b15',
-  type: 'divider'
-}, {
-  id: 'b16',
-  type: 'p',
-  text: ''
-}];
 const EDITABLE = ['p', 'h1', 'h2', 'h3', 'bulleted', 'numbered', 'todo', 'quote', 'toggle', 'callout'];
+
+// 新建/转换为结构块时初始化真实空结构——否则 CodeBlock/DataTable 会兜底渲染演示
+// 内容（「看到」的不等于「存下」的），导出也把演示表当真数据写出。
+const typeExtras = (type, existing) => {
+  const e = existing || {};
+  const x = {};
+  if (type === 'code' && e.code == null) {
+    x.code = '';
+    x.lang = e.lang || 'python';
+    x._new = true;
+  }
+  if (type === 'table' && !e.head) {
+    x.head = ['列 1', '列 2'];
+    x.rows = [['', ''], ['', '']];
+  }
+  if (type === 'math' && e.tex == null) {
+    x.tex = '';
+    x._new = true;
+  }
+  if (type === 'toggle' && e.child == null) {
+    x.child = '';
+    x.open = true;
+  }
+  return x;
+};
+
+/* 白名单 HTML 清洗（sanitize.js）：渲染前 + 入库前双端调用；协议白名单同源。
+   sanitize.js 加载失败时兜底为最小转义，绝不裸渲染原始 HTML。 */
+const SAN = typeof window !== 'undefined' && window.SRSanitize || null;
+const sanHtml = h => SAN ? SAN.sanitizeHtml(h) : String(h == null ? '' : h).replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const safeUrl = u => SAN ? SAN.safeUrl(u) : /^\s*(javascript|data|vbscript):/i.test(String(u || '')) ? null : u;
+
+/* ---- Markdown 支持：核心搬进 mdcore.js（window.SRMd，纯字符串、Node 可测）。
+   这里只留薄封装与加载失败的最小兜底。 ---- */
+const escHtml = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const MD = typeof window !== 'undefined' && window.SRMd || null;
+const CODE_SPAN_CSS = MD && MD.CODE_SPAN_CSS || 'font-family:var(--font-mono);font-size:0.92em;background:color-mix(in srgb, var(--star-blue) 14%, transparent);padding:1px 5px;border-radius:5px;';
+const parseMdBlocks = text => MD ? MD.parseMdBlocks(text) : String(text || '').split('\n').filter(l => l.trim()).map(l => ({
+  id: uid(),
+  type: 'p',
+  text: escHtml(l)
+}));
+const matchInlineMd = pre => MD && MD.matchInline ? MD.matchInline(pre) : null;
 function Handle({
   icon,
   title,
-  onClick
+  onClick,
+  onMouseDown
 }) {
   const [h, setH] = React.useState(false);
   return /*#__PURE__*/React.createElement("button", {
     type: "button",
     title: title,
-    onMouseDown: e => e.preventDefault(),
+    className: "sr-focus-ring sr-hit40",
+    onMouseDown: e => {
+      e.preventDefault();
+      if (onMouseDown) onMouseDown(e);
+    },
     onClick: onClick,
     onMouseEnter: () => setH(true),
     onMouseLeave: () => setH(false),
     style: {
       width: 22,
       height: 24,
+      position: 'relative',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -1208,30 +6624,27 @@ function useDawn() {
   return dawn;
 }
 const CODE_LANGS = window.SR_HL && window.SR_HL.LANGS || ['python', 'javascript', 'plaintext'];
-function CodeBlock() {
+function CodeBlock({
+  code: codeProp,
+  lang: langProp,
+  onCommitCode,
+  onCommitLang,
+  onCopyFail,
+  autoEdit
+}) {
   const dawn = useDawn();
   const [copied, setCopied] = React.useState(false);
-  const [lang, setLang] = React.useState('python');
-  const [menu, setMenu] = React.useState(false);
-  const [editing, setEditing] = React.useState(false);
-  const langBtnRef = React.useRef(null);
-  const [menuPos, setMenuPos] = React.useState(null);
-  React.useLayoutEffect(() => {
-    if (!menu || !langBtnRef.current) return;
-    const r = langBtnRef.current.getBoundingClientRect();
-    const spaceBelow = window.innerHeight - r.bottom - 16;
-    const below = spaceBelow >= 220 || spaceBelow >= r.top;
-    const maxH = Math.max(160, Math.min(340, below ? spaceBelow : r.top - 16));
-    setMenuPos(below ? {
-      left: r.left,
-      top: r.bottom + 6,
-      maxH
-    } : {
-      left: r.left,
-      bottom: window.innerHeight - r.top + 6,
-      maxH
-    });
-  }, [menu]);
+  const [lang, setLangState] = React.useState(langProp || 'python');
+  // 语言切换必须落盘：本地 state + 回写块（否则重开 / 导出语言回退，高亮按错语言）
+  const setLang = v => {
+    setLangState(v);
+    if (v && onCommitLang) onCommitLang(v);
+  };
+  // 语言选择走 DS Select（combobox 键盘词汇 + 焦点环 + 双主题皆由组件承担）
+  const langOpts = (CODE_LANGS.includes(lang) ? CODE_LANGS : [lang, ...CODE_LANGS]).map(l => ({
+    value: l,
+    label: l
+  }));
 
   // Light code surface in dawn, deep surface at night — syntax palette per theme.
   const P = dawn ? {
@@ -1260,17 +6673,18 @@ function CodeBlock() {
     meta: 'rgba(190,212,255,0.62)'
   };
   const HL = window.SR_HL;
-  const code = HL && (HL.SAMPLES[lang] || HL.GENERIC) || '';
-  const rows = HL ? HL.tokenize(code, lang) : [[{
-    t: code,
+  const sample = HL && (HL.SAMPLES[lang] || HL.GENERIC) || '';
+  const [code, setCode] = React.useState(codeProp != null ? codeProp : sample);
+  const [editingCode, setEditingCode] = React.useState(!!autoEdit);
+  const rows = HL ? HL.tokenize(code, lang) : code.split('\n').map(line => [{
+    t: line,
     c: 'plain'
-  }]];
+  }]);
   return /*#__PURE__*/React.createElement("div", {
     style: {
       background: P.bg,
       border: '1px solid ' + P.border,
       borderRadius: 'var(--r-md)',
-      overflow: 'hidden',
       margin: '2px 0'
     }
   }, /*#__PURE__*/React.createElement("div", {
@@ -1278,93 +6692,62 @@ function CodeBlock() {
       display: 'flex',
       alignItems: 'center',
       gap: 8,
-      padding: '8px 12px',
+      padding: '6px 12px 6px 10px',
       borderBottom: '1px solid ' + P.border,
       background: P.head,
+      borderRadius: 'var(--r-md) var(--r-md) 0 0',
       position: 'relative'
     }
-  }, /*#__PURE__*/React.createElement("span", {
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "code",
+    size: 14,
+    color: P.meta,
     style: {
-      display: 'flex',
-      gap: 5
+      flex: 'none'
     }
-  }, ['#ff6b6b88', '#ffc94e99', '#5ec98e99'].map((c, i) => /*#__PURE__*/React.createElement("span", {
-    key: i,
+  }), /*#__PURE__*/React.createElement(Select, {
+    size: "sm",
+    "aria-label": "\u4EE3\u7801\u8BED\u8A00",
+    value: lang,
+    options: langOpts,
+    onChange: v => setLang(v),
     style: {
-      width: 9,
-      height: 9,
-      borderRadius: '50%',
-      background: c
+      width: 148,
+      flex: 'none'
     }
-  }))), editing ? /*#__PURE__*/React.createElement("input", {
-    autoFocus: true,
-    defaultValue: lang,
-    onBlur: e => {
-      const v = e.target.value.trim().toLowerCase();
-      if (v) setLang(v);
-      setEditing(false);
-    },
-    onKeyDown: e => {
-      if (e.key === 'Enter') {
-        const v = e.target.value.trim().toLowerCase();
-        if (v) setLang(v);
-        setEditing(false);
-      }
-      if (e.key === 'Escape') setEditing(false);
-    },
-    style: {
-      marginLeft: 4,
-      width: 110,
-      background: 'transparent',
-      border: 'none',
-      borderBottom: '1px solid ' + P.meta,
-      outline: 'none',
-      color: P.plain,
-      fontFamily: 'var(--font-mono)',
-      fontSize: 11,
-      padding: '1px 0'
-    }
-  }) : /*#__PURE__*/React.createElement("button", {
-    type: "button",
-    ref: langBtnRef,
-    onClick: () => setMenu(m => !m),
-    onDoubleClick: () => {
-      setMenu(false);
-      setEditing(true);
-    },
-    title: "\u70B9\u51FB\u5207\u6362\u8BED\u8A00 \xB7 \u53CC\u51FB\u76F4\u63A5\u7F16\u8F91",
-    style: {
-      display: 'inline-flex',
-      alignItems: 'center',
-      gap: 4,
-      marginLeft: 4,
-      padding: '2px 6px',
-      borderRadius: 6,
-      background: menu ? dawn ? 'rgba(36,52,96,0.08)' : 'rgba(159,198,255,0.1)' : 'transparent',
-      border: 'none',
-      cursor: 'pointer',
-      fontFamily: 'var(--font-mono)',
-      fontSize: 11,
-      color: P.meta
-    }
-  }, lang, " ", /*#__PURE__*/React.createElement(Icon, {
-    name: "chevron-down",
-    size: 12,
-    color: "currentColor",
-    style: {
-      transform: menu ? 'rotate(180deg)' : 'none',
-      transition: 'transform var(--dur-fast)'
-    }
-  })), /*#__PURE__*/React.createElement("div", {
+  }), /*#__PURE__*/React.createElement("div", {
     style: {
       flex: 1
     }
   }), /*#__PURE__*/React.createElement("button", {
     type: "button",
+    className: "sr-focus-ring sr-hit40",
     onClick: () => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1200);
+      // 真正写剪贴板；成功后才切「已复制」，失败降级隐藏 textarea，再失败给提示
+      const done = () => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 1200);
+      };
+      const fallback = () => {
+        try {
+          const ta = document.createElement('textarea');
+          ta.value = code;
+          ta.style.position = 'fixed';
+          ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.select();
+          const ok = document.execCommand('copy');
+          ta.remove();
+          if (ok) done();else if (onCopyFail) onCopyFail();
+        } catch (e) {
+          if (onCopyFail) onCopyFail();
+        }
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(code).then(done).catch(fallback);
+      } else fallback();
     },
+    title: "\u590D\u5236\u4EE3\u7801",
     style: {
       display: 'inline-flex',
       alignItems: 'center',
@@ -1380,67 +6763,50 @@ function CodeBlock() {
     name: copied ? 'check' : 'copy',
     size: 13,
     color: "currentColor"
-  }), copied ? '已复制' : '复制'), menu && menuPos && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    onClick: () => setMenu(false),
-    style: {
-      position: 'fixed',
-      inset: 0,
-      zIndex: 9
-    }
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      position: 'fixed',
-      left: menuPos.left,
-      top: menuPos.top,
-      bottom: menuPos.bottom,
-      zIndex: 10,
-      width: 160
-    }
-  }, /*#__PURE__*/React.createElement(GlassPanel, {
-    strong: true,
-    radius: "md",
-    pad: "none",
-    style: {
-      padding: 5,
-      maxHeight: menuPos.maxH,
-      overflow: 'auto'
-    }
-  }, CODE_LANGS.map(l => /*#__PURE__*/React.createElement("div", {
-    key: l,
-    onClick: () => {
-      setLang(l);
-      setMenu(false);
+  }), copied ? '已复制' : '复制')), editingCode ? /*#__PURE__*/React.createElement("textarea", {
+    value: code,
+    autoFocus: true,
+    spellCheck: false,
+    onChange: e => setCode(e.target.value),
+    onBlur: () => {
+      setEditingCode(false);
+      if (onCommitCode) onCommitCode(code);
+    },
+    onKeyDown: e => {
+      if (e.key === 'Escape') {
+        e.currentTarget.blur();
+      }
     },
     style: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: 7,
-      padding: '6px 9px',
-      borderRadius: 'var(--r-sm)',
-      cursor: 'pointer',
+      display: 'block',
+      width: '100%',
+      boxSizing: 'border-box',
+      minHeight: Math.max(80, rows.length * 22 + 24),
+      background: 'transparent',
+      color: P.plain,
+      border: 'none',
+      outline: 'none',
+      resize: 'vertical',
       fontFamily: 'var(--font-mono)',
       fontSize: 12.5,
-      color: l === lang ? 'var(--gold)' : 'var(--text-1)'
-    },
-    onMouseEnter: e => e.currentTarget.style.background = dawn ? 'rgba(36,52,96,0.07)' : 'rgba(159,198,255,0.08)',
-    onMouseLeave: e => e.currentTarget.style.background = 'transparent'
-  }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      width: 14,
-      display: 'inline-flex'
+      lineHeight: 1.85,
+      padding: '12px 14px',
+      tabSize: 4,
+      borderRadius: '0 0 var(--r-md) var(--r-md)'
     }
-  }, l === lang && /*#__PURE__*/React.createElement(Icon, {
-    name: "check",
-    size: 13,
-    color: "var(--gold)"
-  })), l)))))), /*#__PURE__*/React.createElement("div", {
+  }) : /*#__PURE__*/React.createElement("div", {
+    onClick: () => setEditingCode(true),
+    title: "\u70B9\u51FB\u7F16\u8F91\u4EE3\u7801",
     style: {
       padding: '12px 14px',
       fontFamily: 'var(--font-mono)',
       fontSize: 12.5,
       lineHeight: 1.85,
       color: P.plain,
-      overflowX: 'auto'
+      overflowX: 'auto',
+      cursor: 'text',
+      minHeight: 24,
+      borderRadius: '0 0 var(--r-md) var(--r-md)'
     }
   }, rows.map((toks, i) => /*#__PURE__*/React.createElement("div", {
     key: i,
@@ -1464,12 +6830,50 @@ function CodeBlock() {
     }
   }, tk.t)))))));
 }
-function DataTable() {
-  const head = ['理论', 'S 上限', '是否定域'];
-  const rows = [['经典隐变量', '2', '是'], ['量子力学', '2√2 ≈ 2.83', '否'], ['实验观测', '≈ 2.4', '—']];
-  const cell = (txt, isHead) => /*#__PURE__*/React.createElement("td", {
+function DataTable({
+  head: headProp,
+  rows: rowsProp,
+  onCommit
+}) {
+  // 单元格失焦即把 textContent 回写 head/rows 并 onCommit 落盘——不再静默丢失。
+  const head = headProp || ['理论', 'S 上限', '是否定域'];
+  const rows = rowsProp || [['经典隐变量', '2', '是'], ['量子力学', '2√2 ≈ 2.83', '否'], ['实验观测', '≈ 2.4', '—']];
+  const cols = head.length;
+  const commit = (nh, nr) => {
+    if (onCommit) onCommit(nh.slice(), nr.map(r => r.slice()));
+  };
+  const setHeadCell = (j, v) => {
+    if (head[j] === v) return;
+    const nh = head.slice();
+    nh[j] = v;
+    commit(nh, rows);
+  };
+  const setBodyCell = (i, j, v) => {
+    if ((rows[i] || [])[j] === v) return;
+    const nr = rows.map(r => r.slice());
+    nr[i][j] = v;
+    commit(head, nr);
+  };
+  const addRow = () => commit(head, [...rows, head.map(() => '')]);
+  const delRow = i => {
+    if (rows.length <= 1) return;
+    commit(head, rows.filter((_, k) => k !== i));
+  };
+  const addCol = () => commit([...head, '列 ' + (cols + 1)], rows.map(r => [...r, '']));
+  const delCol = j => {
+    if (cols <= 1) return;
+    commit(head.filter((_, k) => k !== j), rows.map(r => r.filter((_, k) => k !== j)));
+  };
+  const cell = (txt, isHead, onWrite) => /*#__PURE__*/React.createElement("td", {
     contentEditable: true,
     suppressContentEditableWarning: true,
+    onBlur: e => onWrite(e.currentTarget.textContent),
+    onKeyDown: e => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        e.currentTarget.blur();
+      }
+    },
     style: {
       outline: 'none',
       padding: '9px 13px',
@@ -1478,15 +6882,42 @@ function DataTable() {
       fontSize: 13.5,
       color: isHead ? 'var(--text-1)' : 'var(--text-2)',
       fontWeight: isHead ? 500 : 400,
-      background: isHead ? 'rgba(159,198,255,0.05)' : 'transparent'
+      background: isHead ? 'color-mix(in srgb, var(--star-blue) 5%, transparent)' : 'transparent'
     }
   }, txt);
+  const ctrlBtn = (icon, title, onClick) => /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    className: "sr-focus-ring sr-hit40",
+    title: title,
+    onMouseDown: e => e.preventDefault(),
+    onClick: onClick,
+    style: {
+      width: 22,
+      height: 22,
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: 5,
+      border: '1px solid var(--glass-border)',
+      background: 'var(--glass-bg)',
+      color: 'var(--text-3)',
+      cursor: 'pointer',
+      padding: 0
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: icon,
+    size: 13,
+    color: "currentColor"
+  }));
   return /*#__PURE__*/React.createElement("div", {
+    style: {
+      margin: '2px 0'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
       border: '1px solid var(--glass-border)',
       borderRadius: 'var(--r-md)',
-      overflow: 'hidden',
-      margin: '2px 0'
+      overflow: 'hidden'
     }
   }, /*#__PURE__*/React.createElement("table", {
     style: {
@@ -1494,82 +6925,910 @@ function DataTable() {
       borderCollapse: 'collapse',
       fontFamily: 'var(--font-sans)'
     }
-  }, /*#__PURE__*/React.createElement("tbody", null, /*#__PURE__*/React.createElement("tr", null, head.map((h, i) => /*#__PURE__*/React.createElement(React.Fragment, {
-    key: i
-  }, cell(h, true)))), rows.map((r, i) => /*#__PURE__*/React.createElement("tr", {
-    key: i
-  }, r.map((c, j) => /*#__PURE__*/React.createElement(React.Fragment, {
+  }, /*#__PURE__*/React.createElement("tbody", null, /*#__PURE__*/React.createElement("tr", null, head.map((h, j) => /*#__PURE__*/React.createElement(React.Fragment, {
     key: j
-  }, cell(c, false))))))));
+  }, cell(h, true, v => setHeadCell(j, v))))), rows.map((r, i) => /*#__PURE__*/React.createElement("tr", {
+    key: i
+  }, Array.from({
+    length: cols
+  }).map((_, j) => /*#__PURE__*/React.createElement(React.Fragment, {
+    key: j
+  }, cell((r || [])[j] || '', false, v => setBodyCell(i, j, v))))))))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      gap: 7,
+      marginTop: 6,
+      alignItems: 'center'
+    }
+  }, ctrlBtn('plus', '添加一行', addRow), ctrlBtn('minus', '删除末行', () => delRow(rows.length - 1)), ctrlBtn('columns-3', '添加一列', addCol), ctrlBtn('trash-2', '删除末列', () => delCol(cols - 1))));
 }
-function RichIntro() {
-  return /*#__PURE__*/React.createElement("p", {
-    style: {
-      margin: 0
+
+/* ---- MiniTeX: a self-contained LaTeX → typeset renderer (no external lib).
+   Handles ^ _ \frac \sqrt accents \text/\mathrm/\mathbf greek + a wide symbol
+   table; raw unicode passes straight through so existing pretty-printed tex
+   still reads correctly. The block's `tex` is always the editable source. */
+const TEX_SYM = {
+  alpha: 'α',
+  beta: 'β',
+  gamma: 'γ',
+  delta: 'δ',
+  epsilon: 'ε',
+  varepsilon: 'ε',
+  zeta: 'ζ',
+  eta: 'η',
+  theta: 'θ',
+  vartheta: 'ϑ',
+  iota: 'ι',
+  kappa: 'κ',
+  lambda: 'λ',
+  mu: 'μ',
+  nu: 'ν',
+  xi: 'ξ',
+  pi: 'π',
+  varpi: 'ϖ',
+  rho: 'ρ',
+  varrho: 'ϱ',
+  sigma: 'σ',
+  varsigma: 'ς',
+  tau: 'τ',
+  upsilon: 'υ',
+  phi: 'φ',
+  varphi: 'φ',
+  chi: 'χ',
+  psi: 'ψ',
+  omega: 'ω',
+  Gamma: 'Γ',
+  Delta: 'Δ',
+  Theta: 'Θ',
+  Lambda: 'Λ',
+  Xi: 'Ξ',
+  Pi: 'Π',
+  Sigma: 'Σ',
+  Upsilon: 'Υ',
+  Phi: 'Φ',
+  Psi: 'Ψ',
+  Omega: 'Ω',
+  times: '×',
+  cdot: '·',
+  div: '÷',
+  pm: '±',
+  mp: '∓',
+  ast: '∗',
+  star: '⋆',
+  circ: '∘',
+  bullet: '∙',
+  leq: '≤',
+  le: '≤',
+  geq: '≥',
+  ge: '≥',
+  neq: '≠',
+  ne: '≠',
+  approx: '≈',
+  equiv: '≡',
+  cong: '≅',
+  sim: '∼',
+  simeq: '≃',
+  propto: '∝',
+  ll: '≪',
+  gg: '≫',
+  subset: '⊂',
+  supset: '⊃',
+  subseteq: '⊆',
+  supseteq: '⊇',
+  in: '∈',
+  notin: '∉',
+  ni: '∋',
+  cup: '∪',
+  cap: '∩',
+  setminus: '∖',
+  emptyset: '∅',
+  varnothing: '∅',
+  forall: '∀',
+  exists: '∃',
+  nexists: '∄',
+  neg: '¬',
+  land: '∧',
+  wedge: '∧',
+  lor: '∨',
+  vee: '∨',
+  rightarrow: '→',
+  to: '→',
+  longrightarrow: '⟶',
+  leftarrow: '←',
+  gets: '←',
+  leftrightarrow: '↔',
+  Rightarrow: '⇒',
+  implies: '⇒',
+  Leftarrow: '⇐',
+  Leftrightarrow: '⇔',
+  iff: '⇔',
+  mapsto: '↦',
+  uparrow: '↑',
+  downarrow: '↓',
+  infty: '∞',
+  partial: '∂',
+  nabla: '∇',
+  hbar: 'ℏ',
+  ell: 'ℓ',
+  Re: 'ℜ',
+  Im: 'ℑ',
+  aleph: 'ℵ',
+  wp: '℘',
+  sum: '∑',
+  prod: '∏',
+  coprod: '∐',
+  int: '∫',
+  iint: '∬',
+  iiint: '∭',
+  oint: '∮',
+  langle: '⟨',
+  rangle: '⟩',
+  lceil: '⌈',
+  rceil: '⌉',
+  lfloor: '⌊',
+  rfloor: '⌋',
+  otimes: '⊗',
+  oplus: '⊕',
+  odot: '⊙',
+  ominus: '⊖',
+  perp: '⊥',
+  parallel: '∥',
+  angle: '∠',
+  triangle: '△',
+  cdots: '⋯',
+  ldots: '…',
+  dots: '…',
+  vdots: '⋮',
+  ddots: '⋱',
+  prime: '′',
+  surd: '√',
+  dagger: '†',
+  ddagger: '‡',
+  backslash: '\\',
+  quad: ' ',
+  qquad: '  ',
+  '%': '%',
+  '&': '&',
+  '_': '_',
+  '#': '#',
+  '$': '$',
+  '{': '{',
+  '}': '}',
+  ' ': ' '
+};
+const TEX_FN = new Set(['sin', 'cos', 'tan', 'cot', 'sec', 'csc', 'sinh', 'cosh', 'tanh', 'log', 'ln', 'exp', 'lim', 'max', 'min', 'det', 'dim', 'ker', 'deg', 'gcd', 'arg', 'sup', 'inf', 'mod', 'Pr']);
+
+// errs（可选数组）：解析时收集缺参 / 未闭合花括号等问题，供块级的语法提示用——
+// 残缺语法不再被静默吞掉（`\frac{a` 只渲出一个斜体 a 却毫无线索）。
+function renderTex(src, errs) {
+  if (src == null || src === '') return null;
+  let key = 0;
+  const K = () => key++;
+  const report = m => {
+    if (errs && !errs.includes(m)) errs.push(m);
+  };
+  // tokenize
+  const toks = [];
+  let i = 0;
+  while (i < src.length) {
+    const c = src[i];
+    if (c === '\\') {
+      let j = i + 1;
+      if (j < src.length && /[a-zA-Z]/.test(src[j])) {
+        let name = '';
+        while (j < src.length && /[a-zA-Z]/.test(src[j])) {
+          name += src[j];
+          j++;
+        }
+        toks.push({
+          k: 'cmd',
+          v: name
+        });
+        i = j;
+      } else {
+        toks.push({
+          k: 'cmd',
+          v: src[j] || '\\'
+        });
+        i = j + 1;
+      }
+    } else if (c === '{') {
+      toks.push({
+        k: '{'
+      });
+      i++;
+    } else if (c === '}') {
+      toks.push({
+        k: '}'
+      });
+      i++;
+    } else if (c === '^') {
+      toks.push({
+        k: '^'
+      });
+      i++;
+    } else if (c === '_') {
+      toks.push({
+        k: '_'
+      });
+      i++;
+    } else if (c === '&') {
+      i++;
+    } else {
+      toks.push({
+        k: 'c',
+        v: c
+      });
+      i++;
     }
-  }, "\u8D1D\u5C14\u4E0D\u7B49\u5F0F\u7ED9\u51FA\u4E86\u4EFB\u4F55", /*#__PURE__*/React.createElement("span", {
+  }
+  let pos = 0;
+  const peek = () => toks[pos];
+  const upright = node => /*#__PURE__*/React.createElement("span", {
+    key: K(),
     style: {
-      color: 'var(--text-1)',
-      background: 'rgba(255,217,138,0.16)',
-      padding: '1px 4px',
-      borderRadius: 4
+      fontStyle: 'normal'
     }
-  }, "\u5B9A\u57DF\u9690\u53D8\u91CF\u7406\u8BBA"), "\u6240\u80FD\u4EA7\u751F\u7684\u5173\u8054\u7684\u7EDF\u8BA1\u4E0A\u9650\u3002\u5B9E\u9A8C\u4E0A\u5BF9\u8BE5\u4E0D\u7B49\u5F0F\u7684", /*#__PURE__*/React.createElement("b", {
-    style: {
-      color: 'var(--text-1)',
-      fontWeight: 600
-    }
-  }, "\u8FDD\u80CC"), "\uFF0C\u786E\u7ACB\u4E86\u91CF\u5B50\u7EA0\u7F20\u7684", /*#__PURE__*/React.createElement("a", {
-    style: {
-      color: 'var(--star-blue)',
-      textDecoration: 'none',
-      borderBottom: '1px solid rgba(159,198,255,0.4)',
-      cursor: 'pointer'
-    }
-  }, "\u975E\u5B9A\u57DF\u6027"), /*#__PURE__*/React.createElement("span", {
+  }, node);
+  const frac = (a, b) => /*#__PURE__*/React.createElement("span", {
+    key: K(),
     style: {
       display: 'inline-flex',
-      verticalAlign: 'super',
-      marginLeft: 2,
-      color: 'var(--text-3)',
-      fontSize: 11,
-      cursor: 'pointer'
-    },
-    title: "1 \u6761\u8BC4\u8BBA"
+      flexDirection: 'column',
+      alignItems: 'center',
+      verticalAlign: 'middle',
+      margin: '0 0.18em',
+      fontSize: '0.94em'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      padding: '0 0.32em',
+      lineHeight: 1.15
+    }
+  }, a), /*#__PURE__*/React.createElement("span", {
+    style: {
+      width: '100%',
+      height: 1,
+      background: 'currentColor',
+      opacity: 0.85,
+      margin: '1px 0'
+    }
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      padding: '0 0.32em',
+      lineHeight: 1.15
+    }
+  }, b));
+  const sqrtEl = (rad, idx) => /*#__PURE__*/React.createElement("span", {
+    key: K(),
+    style: {
+      display: 'inline-flex',
+      alignItems: 'flex-start',
+      verticalAlign: 'middle'
+    }
+  }, idx != null && /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: '0.6em',
+      transform: 'translateY(0.15em)',
+      marginRight: '-0.32em'
+    }
+  }, idx), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: '1.15em',
+      lineHeight: 1
+    }
+  }, "\u221A"), /*#__PURE__*/React.createElement("span", {
+    style: {
+      borderTop: '1px solid currentColor',
+      padding: '0.06em 0.22em 0'
+    }
+  }, rad));
+  const overlineEl = u => /*#__PURE__*/React.createElement("span", {
+    key: K(),
+    style: {
+      borderTop: '1px solid currentColor',
+      padding: '0.06em 0.1em 0'
+    }
+  }, u);
+  const accentEl = (u, mark) => /*#__PURE__*/React.createElement("span", {
+    key: K(),
+    style: {
+      position: 'relative',
+      display: 'inline-block',
+      padding: '0.18em 0 0'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      top: '-0.42em',
+      textAlign: 'center',
+      fontSize: '0.82em',
+      lineHeight: 1
+    }
+  }, mark), u);
+  function parseSeq(stopBrace) {
+    const out = [];
+    let closed = false;
+    while (pos < toks.length) {
+      const tk = peek();
+      if (!tk) break;
+      if (tk.k === '}') {
+        pos++;
+        if (stopBrace) {
+          closed = true;
+          break;
+        } else continue;
+      }
+      let atom = parseAtom();
+      if (atom == null) continue;
+      atom = attachScripts(atom);
+      out.push(/*#__PURE__*/React.createElement(React.Fragment, {
+        key: K()
+      }, atom));
+    }
+    if (stopBrace && !closed) report('花括号未闭合');
+    return out;
+  }
+  function parseUnit() {
+    const tk = peek();
+    if (!tk) return null;
+    if (tk.k === '{') {
+      pos++;
+      return /*#__PURE__*/React.createElement("span", {
+        key: K()
+      }, parseSeq(true));
+    }
+    return parseAtom();
+  }
+  function attachScripts(base) {
+    let sup = null,
+      sub = null;
+    while (peek() && (peek().k === '^' || peek().k === '_')) {
+      const w = peek().k;
+      pos++;
+      const u = parseUnit();
+      if (w === '^') sup = u;else sub = u;
+    }
+    if (sup == null && sub == null) return base;
+    return /*#__PURE__*/React.createElement("span", {
+      key: K(),
+      style: {
+        display: 'inline-flex',
+        alignItems: 'center'
+      }
+    }, base, /*#__PURE__*/React.createElement("span", {
+      style: {
+        display: 'inline-flex',
+        flexDirection: 'column',
+        fontSize: '0.68em',
+        lineHeight: 1,
+        marginLeft: '0.06em'
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        transform: 'translateY(-0.18em)'
+      }
+    }, sup != null ? sup : '​'), /*#__PURE__*/React.createElement("span", {
+      style: {
+        transform: 'translateY(0.18em)'
+      }
+    }, sub != null ? sub : '​')));
+  }
+  function parseAtom() {
+    const tk = toks[pos++];
+    if (!tk) return null;
+    if (tk.k === '{') return /*#__PURE__*/React.createElement("span", {
+      key: K()
+    }, parseSeq(true));
+    if (tk.k === '^' || tk.k === '_') return tk.k;
+    if (tk.k === 'c') return /[a-zA-Z]/.test(tk.v) ? /*#__PURE__*/React.createElement("span", {
+      key: K(),
+      style: {
+        fontStyle: 'italic'
+      }
+    }, tk.v) : tk.v;
+    if (tk.k === 'cmd') return renderCmd(tk.v);
+    return null;
+  }
+  function renderCmd(name) {
+    switch (name) {
+      case 'frac':
+      case 'dfrac':
+      case 'tfrac':
+        {
+          const a = parseUnit();
+          const b = parseUnit();
+          if (a == null || b == null) report('\\' + name + ' 缺少' + (a == null ? '分子' : '第二个参数（分母）'));
+          return frac(a, b);
+        }
+      case 'sqrt':
+        {
+          let idx = null;
+          if (peek() && peek().k === 'c' && peek().v === '[') {
+            pos++;
+            const inner = [];
+            while (peek() && !(peek().k === 'c' && peek().v === ']')) {
+              const a = parseAtom();
+              if (a != null) inner.push(a);
+            }
+            if (peek()) pos++;
+            idx = inner;
+          }
+          const rad = parseUnit();
+          if (rad == null) report('\\sqrt 缺少被开方式');
+          return sqrtEl(rad, idx);
+        }
+      case 'vec':
+        return accentEl(parseUnit(), '→');
+      case 'hat':
+      case 'widehat':
+        return accentEl(parseUnit(), 'ˆ');
+      case 'tilde':
+      case 'widetilde':
+        return accentEl(parseUnit(), '˜');
+      case 'dot':
+        return accentEl(parseUnit(), '˙');
+      case 'ddot':
+        return accentEl(parseUnit(), '¨');
+      case 'bar':
+      case 'overline':
+        return overlineEl(parseUnit());
+      case 'text':
+      case 'mathrm':
+      case 'operatorname':
+      case 'mathbb':
+      case 'mathsf':
+        return upright(parseUnit());
+      case 'mathbf':
+      case 'boldsymbol':
+        return /*#__PURE__*/React.createElement("span", {
+          key: K(),
+          style: {
+            fontWeight: 600
+          }
+        }, parseUnit());
+      case 'mathcal':
+      case 'mathscr':
+        return /*#__PURE__*/React.createElement("span", {
+          key: K(),
+          style: {
+            fontStyle: 'italic',
+            fontFamily: 'var(--font-serif, Georgia, serif)'
+          }
+        }, parseUnit());
+      case 'left':
+      case 'right':
+      case 'big':
+      case 'Big':
+      case 'bigg':
+      case 'Bigg':
+      case 'bigl':
+      case 'bigr':
+      case 'Bigl':
+      case 'Bigr':
+      case 'biggl':
+      case 'biggr':
+        return parseUnit();
+      case ',':
+      case ':':
+      case ';':
+      case '>':
+        return /*#__PURE__*/React.createElement("span", {
+          key: K(),
+          style: {
+            display: 'inline-block',
+            width: '0.26em'
+          }
+        });
+      case '!':
+        return null;
+      case ' ':
+        return ' ';
+      case '\\':
+        return /*#__PURE__*/React.createElement("br", {
+          key: K()
+        });
+      default:
+        if (TEX_SYM[name] != null) return upright(TEX_SYM[name]);
+        if (TEX_FN.has(name)) return upright(name);
+        return upright('\\' + name);
+    }
+  }
+  try {
+    return /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontStyle: 'normal'
+      }
+    }, parseSeq(false));
+  } catch (e) {
+    report('无法解析，已按原文显示');
+    return /*#__PURE__*/React.createElement("span", null, src);
+  }
+}
+
+/* 低调的 LaTeX 语法提示：danger 色小标记，hover 看具体问题 */
+function TexErrMark({
+  errs
+}) {
+  if (!errs || !errs.length) return null;
+  return /*#__PURE__*/React.createElement("span", {
+    title: 'LaTeX 可能有语法错误：' + errs.join('；'),
+    "aria-label": 'LaTeX 可能有语法错误：' + errs.join('；'),
+    style: {
+      display: 'inline-flex',
+      flex: 'none',
+      marginLeft: 8,
+      transform: 'translateY(1px)'
+    }
   }, /*#__PURE__*/React.createElement(Icon, {
-    name: "message-square-text",
+    name: "triangle-alert",
+    size: 13,
+    color: "var(--danger)"
+  }));
+}
+function MathBlock({
+  tex,
+  onCommit,
+  autoEdit
+}) {
+  const [editing, setEditing] = React.useState(!!autoEdit && !tex);
+  const [v, setV] = React.useState(tex || '');
+  const taRef = React.useRef(null);
+  React.useEffect(() => {
+    setV(tex || '');
+  }, [tex]);
+  const autoH = el => {
+    if (!el) return;
+    el.style.height = 'auto';
+    el.style.height = Math.max(54, el.scrollHeight) + 'px';
+  };
+  React.useEffect(() => {
+    if (editing && taRef.current) {
+      const el = taRef.current;
+      el.focus();
+      el.selectionStart = el.selectionEnd = el.value.length;
+      autoH(el);
+    }
+  }, [editing]);
+  const commit = () => {
+    setEditing(false);
+    const nv = v.trim();
+    if (nv !== (tex || '') && onCommit) onCommit(nv);
+  };
+  const cancel = () => {
+    setV(tex || '');
+    setEditing(false);
+  };
+
+  // 渲染 + 收集语法问题（缺参 / 花括号未闭合），块旁给一个低调的提示标记
+  const viewErrs = [];
+  const viewNode = tex ? renderTex(tex, viewErrs) : null;
+  const previewErrs = [];
+  const previewNode = v.trim() ? renderTex(v, previewErrs) : null;
+  if (editing) {
+    return /*#__PURE__*/React.createElement("div", {
+      style: {
+        borderRadius: 'var(--r-md)',
+        background: 'var(--input-bg, rgba(3,4,12,0.45))',
+        border: '1px solid var(--glass-border-strong)',
+        overflow: 'hidden',
+        margin: '2px 0'
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: 7,
+        padding: '7px 12px',
+        borderBottom: '1px solid var(--line)',
+        color: 'var(--text-3)'
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "sigma",
+      size: 13,
+      color: "var(--gold)"
+    }), /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontFamily: 'var(--font-mono)',
+        fontSize: 10.5,
+        letterSpacing: 'var(--ls-hud)',
+        textTransform: 'uppercase'
+      }
+    }, "LaTeX \u6E90\u7801"), /*#__PURE__*/React.createElement("span", {
+      style: {
+        flex: 1
+      }
+    }), /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontFamily: 'var(--font-mono)',
+        fontSize: 10.5
+      }
+    }, "Enter \u6E32\u67D3 \xB7 Shift+Enter \u6362\u884C \xB7 Esc \u53D6\u6D88")), /*#__PURE__*/React.createElement("textarea", {
+      ref: taRef,
+      value: v,
+      spellCheck: false,
+      onChange: e => {
+        setV(e.target.value);
+        autoH(e.target);
+      },
+      onBlur: commit,
+      onKeyDown: e => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          commit();
+        }
+        if (e.key === 'Escape') {
+          e.preventDefault();
+          cancel();
+        }
+      },
+      placeholder: "\u8F93\u5165 LaTeX \u6E90\u7801\uFF0C\u4F8B\u5982  |\\Phi^+\\rangle = \\frac{|00\\rangle + |11\\rangle}{\\sqrt 2}",
+      style: {
+        display: 'block',
+        width: '100%',
+        boxSizing: 'border-box',
+        minHeight: 54,
+        background: 'transparent',
+        color: 'var(--text-1)',
+        border: 'none',
+        outline: 'none',
+        resize: 'none',
+        fontFamily: 'var(--font-mono)',
+        fontSize: 13.5,
+        lineHeight: 1.7,
+        padding: '11px 14px',
+        tabSize: 2
+      }
+    }), /*#__PURE__*/React.createElement("div", {
+      style: {
+        borderTop: '1px solid var(--line)',
+        padding: '12px 14px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: 30,
+        background: 'rgba(159,198,255,0.04)'
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 19,
+        color: v.trim() ? 'var(--text-1)' : 'var(--text-3)',
+        letterSpacing: '0.01em'
+      }
+    }, v.trim() ? previewNode : '预览'), /*#__PURE__*/React.createElement(TexErrMark, {
+      errs: previewErrs
+    })));
+  }
+  return /*#__PURE__*/React.createElement("div", {
+    onClick: () => setEditing(true),
+    title: viewErrs.length ? 'LaTeX 可能有语法错误：' + viewErrs.join('；') + ' · 点击进入源码编辑' : '点击编辑 LaTeX 源码',
+    style: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      padding: '16px 14px',
+      borderRadius: 'var(--r-md)',
+      background: 'rgba(159,198,255,0.04)',
+      border: '1px solid ' + (viewErrs.length ? 'color-mix(in srgb, var(--danger) 35%, transparent)' : 'var(--glass-border)'),
+      cursor: 'text',
+      margin: '2px 0'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 19.5,
+      color: tex ? 'var(--text-1)' : 'var(--text-3)',
+      letterSpacing: '0.01em',
+      textAlign: 'center'
+    }
+  }, tex ? viewNode : '点击输入公式（LaTeX 源码）…'), /*#__PURE__*/React.createElement(TexErrMark, {
+    errs: viewErrs
+  }));
+}
+
+/* 图片块：src 失效（外链挂掉 / 图床死链）时给出可见的失败态占位，
+   而不是一条 0 高度的隐形横线；重新上传即可替换。 */
+function ImageBlock({
+  b,
+  onSrc
+}) {
+  const [err, setErr] = React.useState(false);
+  React.useEffect(() => {
+    setErr(false);
+  }, [b.src]);
+  const pick = e => {
+    const f = e.target.files && e.target.files[0];
+    if (!f) return;
+    const rd = new FileReader();
+    rd.onload = () => onSrc(rd.result);
+    rd.readAsDataURL(f);
+  };
+  if (b.src && !err) {
+    return /*#__PURE__*/React.createElement("img", {
+      src: b.src,
+      alt: "\u7B14\u8BB0\u56FE\u7247",
+      onError: () => setErr(true),
+      style: {
+        maxWidth: '100%',
+        borderRadius: 'var(--r-md)',
+        display: 'block',
+        border: '1px solid var(--glass-border)'
+      }
+    });
+  }
+  return /*#__PURE__*/React.createElement("label", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: 8,
+      height: 120,
+      borderRadius: 'var(--r-md)',
+      border: '1px dashed ' + (err ? 'color-mix(in srgb, var(--danger) 45%, transparent)' : 'var(--line-strong)'),
+      color: 'var(--text-3)',
+      cursor: 'pointer',
+      background: err ? 'color-mix(in srgb, var(--danger) 5%, transparent)' : 'transparent'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: err ? 'image-off' : 'image',
+    size: 22,
+    color: err ? 'var(--danger)' : 'currentColor'
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 13,
+      color: err ? 'var(--text-2)' : 'inherit'
+    }
+  }, err ? '图片加载失败 · 原链接已失效' : '拖入图片，或点击上传'), err && /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 11.5
+    }
+  }, "\u70B9\u51FB\u91CD\u65B0\u4E0A\u4F20\uFF0C\u66FF\u6362\u8FD9\u5F20\u56FE"), /*#__PURE__*/React.createElement("input", {
+    type: "file",
+    accept: "image/*",
+    style: {
+      display: 'none'
+    },
+    onChange: pick
+  }));
+}
+
+// 标签 chip：悬停露出移除按钮
+function TagChip({
+  label,
+  onRemove
+}) {
+  const [h, setH] = React.useState(false);
+  return /*#__PURE__*/React.createElement("span", {
+    onMouseEnter: () => setH(true),
+    onMouseLeave: () => setH(false),
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 2
+    }
+  }, /*#__PURE__*/React.createElement(Tag, {
+    icon: "hash"
+  }, label), /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    title: "\u79FB\u9664\u6807\u7B7E",
+    className: "sr-focus-ring sr-hit40",
+    onClick: onRemove,
+    onFocus: () => setH(true),
+    onBlur: () => setH(false),
+    style: {
+      width: h ? 18 : 0,
+      height: 18,
+      position: 'relative',
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      opacity: h ? 1 : 0,
+      overflow: 'hidden',
+      border: 0,
+      background: 'transparent',
+      color: 'var(--text-3)',
+      cursor: 'pointer',
+      padding: 0,
+      transition: 'width var(--dur-fast), opacity var(--dur-fast)'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "x",
     size: 12,
     color: "currentColor"
-  })), "\u3002");
+  })));
 }
-function Properties() {
+
+// 基础属性行 → star.props 字段名
+const PROP_KEYS = {
+  type: 'type',
+  status: 'status',
+  source: 'source',
+  alias: 'alias',
+  review: 'nextReview'
+};
+function Properties({
+  props,
+  onFlash,
+  onConfirm,
+  onCommit
+}) {
+  const p = props || {};
   const [open, setOpen] = React.useState(true);
-  const rows = [{
+  const [extra, setExtra] = React.useState([]);
+  const [removed, setRemoved] = React.useState([]);
+  const [hoverKey, setHoverKey] = React.useState(null);
+  const [focusKey, setFocusKey] = React.useState(null); // 光标所在属性行，整行给选中态
+  // 值编辑在失焦时落到 star.props，让记忆栏/列表读到的是新值
+  const commitVal = r => e => {
+    const val = e.currentTarget.textContent.trim();
+    const key = PROP_KEYS[r.key] || r.k || r.key;
+    if (p[key] === val) return;
+    p[key] = val;
+    onCommit && onCommit();
+    onFlash && onFlash('已更新属性');
+  };
+  const base = [{
+    key: 'type',
     icon: 'tag',
     k: '类型',
-    v: '推导',
+    v: p.type || '—',
     kind: 'select'
   }, {
+    key: 'status',
     icon: 'circle-dot',
     k: '状态',
-    v: '复习中',
+    v: p.status || '—',
     kind: 'status'
   }, {
+    key: 'source',
     icon: 'book-open',
     k: '来源',
-    v: '量子信息 · 第 4 讲',
+    v: p.source || '—',
     kind: 'text'
   }, {
+    key: 'alias',
     icon: 'languages',
     k: '别名',
-    v: 'Bell inequality',
+    v: p.alias || '—',
     kind: 'text'
   }, {
+    key: 'review',
     icon: 'calendar',
     k: '下次复习',
-    v: '6 天后',
+    v: p.nextReview || '—',
     kind: 'text'
-  }];
+  }].filter(r => !removed.includes(r.key));
+  const rows = [...base, ...extra];
+  const addRow = () => {
+    const key = 'x' + Math.random().toString(36).slice(2, 7);
+    setExtra(e => [...e, {
+      key,
+      icon: 'plus-circle',
+      k: '',
+      v: '',
+      kind: 'edit'
+    }]);
+    // 新行先命名：渲染后把光标放进属性名
+    setTimeout(() => {
+      const el = document.getElementById('prop-k-' + key);
+      if (el) el.focus();
+    }, 0);
+  };
+  const delRow = r => {
+    const doDel = () => {
+      delete p[PROP_KEYS[r.key] || r.k || r.key];
+      if (r.key && r.key[0] === 'x') setExtra(e => e.filter(x => x.key !== r.key));else setRemoved(s => [...s, r.key]);
+      onCommit && onCommit();
+      onFlash && onFlash('已删除属性');
+    };
+    if (onConfirm) onConfirm({
+      message: '删除属性「' + (r.k || '未命名') + '」？这一行将从这颗星的档案里移除。',
+      confirmLabel: '删除',
+      onYes: doDel
+    });else doDel();
+  };
   return /*#__PURE__*/React.createElement("div", {
     style: {
       marginBottom: 22,
@@ -1578,10 +7837,18 @@ function Properties() {
       background: 'rgba(159,198,255,0.03)',
       overflow: 'hidden'
     }
-  }, /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    className: "sr-focus-ring",
+    "aria-expanded": open,
     onClick: () => setOpen(o => !o),
     style: {
       display: 'flex',
+      width: '100%',
+      font: 'inherit',
+      border: 'none',
+      background: 'transparent',
+      textAlign: 'left',
       alignItems: 'center',
       gap: 8,
       padding: '9px 14px',
@@ -1617,12 +7884,26 @@ function Properties() {
       padding: '2px 14px 12px'
     }
   }, rows.map(r => /*#__PURE__*/React.createElement("div", {
-    key: r.k,
+    key: r.key,
+    onMouseEnter: () => setHoverKey(r.key),
+    onMouseLeave: () => setHoverKey(null),
+    onFocus: () => setFocusKey(r.key),
+    onBlur: e => {
+      if (!e.currentTarget.contains(e.relatedTarget)) setFocusKey(f => f === r.key ? null : f);
+    },
+    onContextMenu: e => {
+      e.preventDefault();
+    },
     style: {
       display: 'flex',
       alignItems: 'center',
       gap: 10,
-      padding: '5px 0'
+      padding: '5px 8px',
+      margin: '0 -8px',
+      borderRadius: 'var(--r-sm)',
+      background: focusKey === r.key ? 'rgba(159,198,255,0.07)' : hoverKey === r.key ? 'rgba(159,198,255,0.03)' : 'transparent',
+      boxShadow: focusKey === r.key ? '0 0 0 1.5px var(--focus)' : 'none',
+      transition: 'background var(--dur-fast), box-shadow var(--dur-fast)'
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
@@ -1638,7 +7919,38 @@ function Properties() {
     name: r.icon,
     size: 13,
     color: "currentColor"
-  }), r.k), r.kind === 'status' ? /*#__PURE__*/React.createElement("span", {
+  }), r.key[0] === 'x' ? /*#__PURE__*/React.createElement("span", {
+    id: 'prop-k-' + r.key,
+    contentEditable: true,
+    suppressContentEditableWarning: true,
+    "data-ph": "\u5C5E\u6027\u540D",
+    onBlur: e => {
+      const k = e.currentTarget.textContent.trim();
+      if (k && k !== r.k) {
+        if (r.k && p[r.k] !== undefined) {
+          p[k] = p[r.k];
+          delete p[r.k];
+        }
+        onCommit && onCommit();
+      }
+      setExtra(es => es.map(x => x.key === r.key ? {
+        ...x,
+        k
+      } : x));
+    },
+    style: {
+      outline: 'none',
+      cursor: 'text',
+      minWidth: 42,
+      borderRadius: 4,
+      padding: '0 2px'
+    }
+  }, r.k) : r.k), /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1,
+      minWidth: 0
+    }
+  }, r.kind === 'status' ? /*#__PURE__*/React.createElement("span", {
     style: {
       display: 'inline-flex',
       alignItems: 'center',
@@ -1654,8 +7966,23 @@ function Properties() {
       background: 'var(--gold)',
       boxShadow: 'var(--glow-gold-soft)'
     }
-  }), r.v) : r.kind === 'select' ? /*#__PURE__*/React.createElement("span", {
+  }), /*#__PURE__*/React.createElement("span", {
+    contentEditable: true,
+    suppressContentEditableWarning: true,
+    title: "\u70B9\u51FB\u7F16\u8F91",
+    onBlur: commitVal(r),
     style: {
+      outline: 'none',
+      cursor: 'text'
+    }
+  }, r.v)) : r.kind === 'select' ? /*#__PURE__*/React.createElement("span", {
+    contentEditable: true,
+    suppressContentEditableWarning: true,
+    title: "\u70B9\u51FB\u7F16\u8F91",
+    onBlur: commitVal(r),
+    style: {
+      outline: 'none',
+      cursor: 'text',
       fontSize: 12,
       padding: '2px 9px',
       borderRadius: 'var(--r-pill)',
@@ -1663,13 +7990,55 @@ function Properties() {
       color: 'var(--star-blue)'
     }
   }, r.v) : /*#__PURE__*/React.createElement("span", {
+    contentEditable: true,
+    suppressContentEditableWarning: true,
+    title: "\u70B9\u51FB\u7F16\u8F91",
+    "data-ph": "\u7A7A",
+    onBlur: commitVal(r),
     style: {
+      outline: 'none',
+      cursor: 'text',
       fontSize: 13,
-      color: 'var(--text-1)'
+      color: 'var(--text-1)',
+      borderRadius: 4,
+      padding: '0 2px',
+      display: 'inline-block',
+      minWidth: 42
     }
-  }, r.v))), /*#__PURE__*/React.createElement("div", {
+  }, r.v)), /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    title: "\u5220\u9664\u6B64\u5C5E\u6027",
+    className: "sr-focus-ring sr-hit40",
+    onMouseDown: e => e.preventDefault(),
+    onClick: () => delRow(r),
+    style: {
+      flex: 'none',
+      width: 22,
+      height: 22,
+      position: 'relative',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      border: 'none',
+      background: 'transparent',
+      cursor: 'pointer',
+      color: 'var(--text-3)',
+      opacity: hoverKey === r.key || focusKey === r.key ? 1 : 0,
+      transition: 'opacity var(--dur-fast)'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "x",
+    size: 14,
+    color: "currentColor"
+  })))), /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    className: "sr-focus-ring",
+    onClick: addRow,
     style: {
       display: 'flex',
+      font: 'inherit',
+      border: 'none',
+      background: 'transparent',
       alignItems: 'center',
       gap: 7,
       padding: '8px 0 2px',
@@ -1683,32 +8052,315 @@ function Properties() {
     color: "currentColor"
   }), "\u6DFB\u52A0\u5C5E\u6027")));
 }
+
+/* ── 迷你星图（右栏「在星图中定位」）──
+   与真实星图同一套视觉语言的静态缩影：读取每颗星拖拽后的真实 wx/wy 等比取景，
+   星域光晕 + 恒星主星 + 星-主星连线（SRConnect 有机曲线）+ 跨星域融会贯通金弧，
+   知识星按记忆温度着色、按重要度定尺寸，当前星金色放大高亮（呼吸微动）。
+   点击任意星（含当前星）→ onPick(star)：上层弹「探索星系」确认，不再直接换笔记。 */
+const MINI_WORLD = {
+  w: 1680,
+  h: 1040
+};
+/* 记忆温度色阶（镜像设计系统 memoryColor；bundle 未导出该函数，此处内联同一份色标） */
+function edMemoryColor(strength, dawn) {
+  const stops = dawn ? [[0.0, [108, 121, 155]], [0.25, [92, 108, 150]], [0.5, [76, 96, 148]], [0.7, [52, 95, 190]], [0.88, [184, 128, 26]], [1.0, [168, 109, 18]]] : [[0.0, [44, 53, 86]], [0.25, [70, 82, 122]], [0.5, [120, 150, 205]], [0.7, [159, 198, 255]], [0.88, [255, 224, 150]], [1.0, [255, 244, 214]]];
+  const s = Math.max(0, Math.min(1, strength));
+  for (let i = 1; i < stops.length; i++) {
+    if (s <= stops[i][0]) {
+      const [a, ca] = stops[i - 1],
+        [b, cb] = stops[i];
+      const t = (s - a) / (b - a || 1);
+      const c = ca.map((v, j) => Math.round(v + (cb[j] - v) * t));
+      return `rgb(${c[0]},${c[1]},${c[2]})`;
+    }
+  }
+  return 'rgb(255,244,214)';
+}
+function MiniStarMap({
+  currentId,
+  onPick
+}) {
+  const D = window.SR_DATA;
+  const dawn = useDawn();
+  const W = 268,
+    H = 166; // 与世界同比例（1680:1040 ≈ 1.615），只缩放不变形
+  const posOf = s => ({
+    px: s.wx != null ? s.wx : (s.x || 50) / 100 * MINI_WORLD.w,
+    py: s.wy != null ? s.wy : (s.y || 50) / 100 * MINI_WORLD.h
+  });
+  const sp = D.stars.map(s => ({
+    ...s,
+    ...posOf(s)
+  }));
+  // 星域几何：与 StarMap.domainGeom 同一套规则（质心 + 包裹全部成员的半径；单星主星上移让位）
+  const doms = D.constellations.map(c => {
+    const ms = sp.filter(s => s.con === c.id);
+    if (!ms.length) return null;
+    const cx = ms.reduce((a, s) => a + s.px, 0) / ms.length;
+    let cy = ms.reduce((a, s) => a + s.py, 0) / ms.length;
+    if (ms.length === 1) cy -= 96;
+    const r = Math.max(150, ...ms.map(s => Math.hypot(s.px - cx, s.py - cy))) + 96;
+    const avg = ms.reduce((a, s) => a + s.strength, 0) / ms.length;
+    return {
+      id: c.id,
+      name: c.name,
+      cx,
+      cy,
+      r,
+      col: avg >= 0.78 ? 'var(--gold)' : c.color,
+      hex: avg >= 0.78 ? '#ffd98a' : c.color
+    };
+  }).filter(Boolean);
+  // 等比取景：把整片星空（含光晕）收进一屏
+  let k = 0.1,
+    ox = 0,
+    oy = 0;
+  if (sp.length) {
+    const minX = Math.min(...doms.map(d => d.cx - d.r), ...sp.map(s => s.px));
+    const maxX = Math.max(...doms.map(d => d.cx + d.r), ...sp.map(s => s.px));
+    const minY = Math.min(...doms.map(d => d.cy - d.r), ...sp.map(s => s.py));
+    const maxY = Math.max(...doms.map(d => d.cy + d.r), ...sp.map(s => s.py));
+    const bw = Math.max(1, maxX - minX),
+      bh = Math.max(1, maxY - minY);
+    const pad = 10;
+    k = Math.min((W - pad * 2) / bw, (H - pad * 2) / bh);
+    ox = (W - bw * k) / 2 - minX * k;
+    oy = (H - bh * k) / 2 - minY * k;
+  }
+  const X = wx => ox + wx * k,
+    Y = wy => oy + wy * k;
+  const conn = (x1, y1, x2, y2, bow) => window.SRConnect ? window.SRConnect(x1, y1, x2, y2, bow) : `M ${x1} ${y1} L ${x2} ${y2}`;
+  const sunOf = Object.fromEntries(doms.map(d => [d.id, d]));
+  // 跨星域「融会贯通」域对（与星图同源：connections 里的 cross 链）
+  const crossPairs = (() => {
+    const seen = new Set(),
+      out = [];
+    (D.connections || []).forEach(c => {
+      if (c.kind !== 'cross') return;
+      const A = D.byId[c.a],
+        B = D.byId[c.b];
+      if (!A || !B || A.con === B.con || !sunOf[A.con] || !sunOf[B.con]) return;
+      const key = [A.con, B.con].sort().join('|');
+      if (seen.has(key)) return;
+      seen.add(key);
+      out.push([A.con, B.con]);
+    });
+    return out;
+  })();
+  const reduce = typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 10,
+      height: H,
+      borderRadius: 'var(--r-md)',
+      border: '1px solid var(--glass-border)',
+      position: 'relative',
+      overflow: 'hidden',
+      background: 'radial-gradient(120% 100% at 40% 40%, rgba(26,35,80,0.5), transparent 60%)'
+    }
+  }, /*#__PURE__*/React.createElement("svg", {
+    viewBox: `0 0 ${W} ${H}`,
+    preserveAspectRatio: "none",
+    "aria-hidden": "true",
+    style: {
+      position: 'absolute',
+      inset: 0,
+      width: '100%',
+      height: '100%',
+      pointerEvents: 'none'
+    }
+  }, doms.map(d => /*#__PURE__*/React.createElement("g", {
+    key: d.id
+  }, /*#__PURE__*/React.createElement("circle", {
+    cx: X(d.cx),
+    cy: Y(d.cy),
+    r: Math.max(14, d.r * k),
+    fill: d.hex,
+    opacity: dawn ? 0.1 : 0.09
+  }), /*#__PURE__*/React.createElement("circle", {
+    cx: X(d.cx),
+    cy: Y(d.cy),
+    r: Math.max(14, d.r * k),
+    fill: "none",
+    stroke: d.hex,
+    strokeWidth: "0.75",
+    opacity: "0.3"
+  }))), sp.map((s, i) => {
+    const sun = sunOf[s.con];
+    if (!sun) return null;
+    return /*#__PURE__*/React.createElement("path", {
+      key: 'i' + s.id,
+      d: conn(X(sun.cx), Y(sun.cy), X(s.px), Y(s.py), 0.1 + i % 3 * 0.03),
+      fill: "none",
+      stroke: "var(--star-blue)",
+      strokeWidth: "0.7",
+      opacity: "0.32"
+    });
+  }), crossPairs.map(([a, b]) => {
+    const A = sunOf[a],
+      B = sunOf[b];
+    return /*#__PURE__*/React.createElement("path", {
+      key: 'c' + a + b,
+      d: conn(X(A.cx), Y(A.cy), X(B.cx), Y(B.cy), 0.16),
+      fill: "none",
+      stroke: "var(--gold)",
+      strokeWidth: "0.9",
+      opacity: "0.5"
+    });
+  }), doms.map(d => /*#__PURE__*/React.createElement("g", {
+    key: 's' + d.id
+  }, /*#__PURE__*/React.createElement("circle", {
+    cx: X(d.cx),
+    cy: Y(d.cy),
+    r: "4.5",
+    fill: "#ff9d52",
+    opacity: "0.34"
+  }), /*#__PURE__*/React.createElement("circle", {
+    cx: X(d.cx),
+    cy: Y(d.cy),
+    r: "2.4",
+    fill: "#ffd58a"
+  }), /*#__PURE__*/React.createElement("text", {
+    x: X(d.cx),
+    y: Y(d.cy) + 10.5,
+    textAnchor: "middle",
+    fontSize: "7.5",
+    fontFamily: "var(--font-sans)",
+    fill: "var(--sun-label, #ffe3b0)",
+    opacity: "0.85",
+    style: {
+      letterSpacing: '0.05em'
+    }
+  }, d.name)))), sp.map(s => {
+    const cur = s.id === currentId;
+    const size = cur ? 9 : Math.max(4, Math.min(7, 3.2 + (s.importance || 1) * 1.1 + s.strength * 1.4));
+    const col = cur ? 'var(--gold)' : edMemoryColor(s.strength, dawn);
+    return /*#__PURE__*/React.createElement("button", {
+      type: "button",
+      key: s.id,
+      "data-tip": cur ? `当前星 ·「${s.label}」· 点击在星图中探索` : `在星图中探索「${s.label}」`,
+      "aria-label": '在星图中探索「' + s.label + '」',
+      className: 'sr-focus-ring sr-hit40' + (cur && !reduce ? ' sr-breathe' : ''),
+      onClick: () => onPick && onPick(s),
+      style: {
+        position: 'absolute',
+        left: `${X(s.px) / W * 100}%`,
+        top: `${Y(s.py) / H * 100}%`,
+        transform: 'translate(-50%,-50%)',
+        padding: 0,
+        border: 'none',
+        width: size,
+        height: size,
+        borderRadius: '50%',
+        background: col,
+        cursor: 'pointer',
+        boxShadow: cur ? '0 0 12px var(--gold), 0 0 4px var(--gold)' : s.strength >= 0.7 ? `0 0 6px ${edMemoryColor(s.strength, dawn)}` : 'none',
+        opacity: cur ? 1 : 0.9
+      }
+    });
+  }));
+}
 function Editor({
   starId,
-  onBack
+  onBack,
+  onOpen,
+  onExplore
 }) {
   const D = window.SR_DATA;
   const star = D.byId[starId] || D.stars[0];
   const refs = React.useRef({});
-  const [blocks, setBlocks] = React.useState(INITIAL);
+  const [blocks, setBlocks] = React.useState(() => (star.body || []).map(b => ({
+    ...b
+  })));
   const [hover, setHover] = React.useState(null);
+  const [focusBlk, setFocusBlk] = React.useState(null); // 光标所在块，给选中态视觉
   const [ctx, setCtx] = React.useState(null); // {x,y,id}
   const [slash, setSlash] = React.useState(null); // {x,y,id}
   const [sel, setSel] = React.useState(null); // {x,y}
   const [colorPop, setColorPop] = React.useState(null);
   const [toast, setToast] = React.useState(null);
+  const [fav, setFav] = React.useState(() => !!star.fav);
+  const toggleFav = () => setFav(f => {
+    const nf = !f;
+    star.fav = nf;
+    D.persist();
+    flash(nf ? '已收藏 · 可在收件箱「收藏」里找到' : '已取消收藏');
+    return nf;
+  });
+  const [tags, setTags] = React.useState(() => (star.tags || []).slice());
+  const [addingTag, setAddingTag] = React.useState(false);
+  const [tagDraft, setTagDraft] = React.useState('');
+  const [connected, setConnected] = React.useState(() => D.relatedStars(star.id));
+  const [linking, setLinking] = React.useState(false);
+  const [confirm, setConfirm] = React.useState(null); // {message, confirmLabel, onYes}
+  const [linkDialog, setLinkDialog] = React.useState(null); // {range}
+  const [more, setMore] = React.useState(null); // page-level 「更多」 dropdown {x,y}
+  const [history, setHistory] = React.useState(false); // version-history dialog (mock)
+  const [explore, setExplore] = React.useState(null); // 迷你星图点选的星（待确认「探索星系」）{id,label,con}
+  const [con, setCon] = React.useState(star.con); // constellation, mutable via 「移动到星域」
+  const [linkStar, setLinkStar] = React.useState(null); // chosen star awaiting a relation sentence
+  const [relDraft, setRelDraft] = React.useState('');
+  const [hoverConn, setHoverConn] = React.useState(null);
+  const [pendingAtomicDel, setPendingAtomicDel] = React.useState(null); // 块首 Backspace 选中的上方原子块，再按一次删除
+  const blockTypeName = type => {
+    const bt = (window.SRKit && window.SRKit.BLOCK_TYPES || []).find(x => x.type === type);
+    return bt ? bt.label : '内容';
+  };
   const {
     SlashMenu,
     SelectionToolbar,
     ContextMenu,
-    ColorMenu
+    ColorMenu,
+    ConfirmDialog,
+    LinkDialog,
+    EditorMoreMenu,
+    HistoryDialog
   } = window.SRKit;
-  const links = D.stars.filter(s => s.id !== star.id && s.con === star.con).slice(0, 3);
-  const backlinks = D.stars.filter(s => s.con !== star.con).slice(0, 2);
+  const backlinks = D.backlinksOf(star.id);
   const scrollRef = React.useRef(null);
-  const outline = blocks.filter(b => ['h1', 'h2', 'h3'].includes(b.type) && (b.text || '').trim());
-  const charCount = blocks.filter(b => EDITABLE.includes(b.type)).map(b => b.text || '').join('').replace(/\s/g, '').length + star.label.length;
-  const readMin = Math.max(1, Math.round(charCount / 350));
+  const stripTags = h => (h || '').replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+  // 大纲与字数读取活的 DOM（输入时防抖触发一次轻量重渲染，不改块状态、不动光标）
+  const [tick, bumpTick] = React.useReducer(x => x + 1, 0);
+  const tickTimer = React.useRef(null);
+  const scheduleTick = () => {
+    clearTimeout(tickTimer.current);
+    tickTimer.current = setTimeout(() => {
+      bumpTick();
+      persistBody();
+    }, 350);
+  };
+  React.useEffect(() => () => clearTimeout(tickTimer.current), []);
+  // 记忆心跳：右栏「记忆」区（强度 / 下次复习 / 点亮·待重燃状态）就地读回新值——
+  // 只改数值不加动画，reduced-motion 下同样安静
+  React.useEffect(() => {
+    const h = () => bumpTick();
+    window.addEventListener('sr-memory', h);
+    return () => window.removeEventListener('sr-memory', h);
+  }, []);
+  const liveText = b => {
+    const el = refs.current[b.id];
+    return el ? el.innerText : stripTags(b.text || '');
+  };
+  const outline = blocks.filter(b => ['h1', 'h2', 'h3'].includes(b.type)).map(b => ({
+    ...b,
+    live: liveText(b).trim()
+  })).filter(b => b.live);
+  // 字数口径：中文按「字」、西文按「词」分列统计（纳入 table/math/toggle-child），
+  // 代码单独按行折算阅读时长（约 30 行/分钟），不再和正文一锅平摊。
+  const proseText = blocks.map(b => {
+    if (b.type === 'toggle') return liveText(b) + ' ' + stripTags(b.child || '');
+    if (EDITABLE.includes(b.type)) return liveText(b);
+    if (b.type === 'math') return b.tex || '';
+    if (b.type === 'table') return (b.head || []).join(' ') + ' ' + (b.rows || []).map(r => r.join(' ')).join(' ');
+    return '';
+  }).join(' ') + ' ' + (star.summary || '') + ' ' + star.label;
+  const codeText = blocks.filter(b => b.type === 'code').map(b => b.code || '').join('\n');
+  const CJK_RE = /[㐀-鿿豈-﫿]/g;
+  const cjkCount = (proseText.match(CJK_RE) || []).length + (codeText.match(CJK_RE) || []).length;
+  const wordCount = (proseText.replace(CJK_RE, ' ').match(/[A-Za-z0-9][A-Za-z0-9'’_-]*/g) || []).length;
+  const codeLines = codeText.trim() ? codeText.split('\n').filter(l => l.trim()).length : 0;
+  const readMin = Math.max(1, Math.round(cjkCount / 350 + wordCount / 200 + codeLines / 30));
   const scrollToBlock = id => {
     const c = scrollRef.current,
       el = document.getElementById('blk-' + id);
@@ -1717,16 +8369,929 @@ function Editor({
       behavior: 'smooth'
     });
   };
+
+  // 编辑器反馈统一走 DS toast（自带 role=status/aria-live + --z-toast + reduced-motion）。
+  // 通用操作反馈一律蓝色——金色是点亮/奖励的保留色，不给「已删除/已复制」这类日常操作
   const flash = msg => {
-    setToast(msg);
-    setTimeout(() => setToast(null), 1600);
+    const NS = window.StellarRaftDesignSystem_2866af;
+    if (NS && NS.toast) NS.toast(msg, {
+      tone: 'blue',
+      icon: 'check'
+    });else {
+      setToast(msg);
+      setTimeout(() => setToast(null), 1600);
+    }
   };
-  const withSynced = fn => setBlocks(bs => fn(bs.map(b => refs.current[b.id] && EDITABLE.includes(b.type) ? {
+  // capture innerHTML (not innerText) so inline formatting — bold / italic /
+  // highlight / links / colors — survives any structural block operation.
+  const syncBlock = b => refs.current[b.id] && EDITABLE.includes(b.type) ? {
     ...b,
-    text: refs.current[b.id].innerText
-  } : b)));
+    text: sanHtml(refs.current[b.id].innerHTML)
+  } : b;
+
+  // ---- 应用级撤销/重做栈 ----
+  // 栈的推进逻辑在 undocore.js（window.SRUndoCore，纯逻辑、Node 单测覆盖）。
+  // 快照 = { blocks: DOM-synced 块数组, con: 所属星域 }：
+  // · 结构变更（拆分/合并/移动/转换/删除/粘贴/着色）经 withSynced/flushSynced 统一压栈；
+  // · 选区格式（execCommand：加粗/颜色/高亮/链接…）经 pushExec 统一压栈；
+  // · 纯打字在一次输入突发的起点压一份 state 快照（此时 state.text 尚为突发前的文本）；
+  // · 「移动到星域」也压栈——快照带 con，⌘Z 能把星移回原星域。
+  // ⌘Z/⌘⇧Z 由全局 capture 拦截、setBlocks 回放，DOM 由 dangerouslySetInnerHTML
+  // 完全驱动，不再与块数组分叉。
+  const U = window.SRUndoCore;
+  const cloneBlk = b => ({
+    ...b,
+    head: b.head && b.head.slice(),
+    rows: b.rows && b.rows.map(r => r.slice())
+  });
+  const undoRef = React.useRef(null);
+  if (!undoRef.current) undoRef.current = U ? U.create(120) : {
+    past: [],
+    future: [],
+    cap: 120,
+    typing: false
+  };
+  const snapNow = () => ({
+    blocks: blocksRef.current.map(syncBlock).map(cloneBlk),
+    con: star.con
+  });
+  const snapState = () => ({
+    blocks: blocksRef.current.map(cloneBlk),
+    con: star.con
+  });
+  const pushHistory = () => {
+    if (U) U.push(undoRef.current, snapNow());
+  };
+  // execCommand 类操作的统一压栈入口：先压快照，再把本次改动标记为「突发已入栈」，
+  // 紧随而来的 input 事件不会重复压栈。
+  const pushExec = () => {
+    pushHistory();
+    undoRef.current.typing = true;
+  };
+  const noteTyping = () => {
+    const u = undoRef.current;
+    if (!U || u.typing) return;
+    U.noteTyping(u, snapState());
+  };
+  const focusedBlockId = () => {
+    const a = document.activeElement;
+    const w = a && a.closest && a.closest('[id^="blk-"]');
+    return w ? w.id.slice(4) : null;
+  };
+  const applyHistory = (snap, preferId) => {
+    const blks = snap.blocks;
+    if (ReactDOM.flushSync) ReactDOM.flushSync(() => setBlocks(blks.map(cloneBlk)));else setBlocks(blks.map(cloneBlk));
+    // 关键：React 对「与上次渲染相同的 __html」不会重设 innerHTML——而行内格式
+    // （颜色/加粗/高亮/链接…）只活在 DOM 里、state.text 未变，回放时必须手动把
+    // DOM 刷回快照，否则「改颜色 → ⌘Z」界面纹丝不动（用户报障的根因）。
+    blks.forEach(b => {
+      if (!EDITABLE.includes(b.type)) return;
+      const el = refs.current[b.id];
+      if (!el) return;
+      const want = sanHtml(b.text || '');
+      if (el.innerHTML !== want) el.innerHTML = want;
+    });
+    if (snap.con && snap.con !== star.con) {
+      star.con = snap.con;
+      D.syncCounts();
+      setCon(snap.con);
+    }
+    persistBody();
+    // 回放后把焦点留在编辑区，撤销/重做链才能连续按 —— 优先原聚焦块，否则第一个可编辑块
+    const target = preferId && blks.some(b => b.id === preferId && EDITABLE.includes(b.type)) ? preferId : (blks.find(b => EDITABLE.includes(b.type)) || {}).id;
+    if (target) focusBlock(target, 'end');
+  };
+  const undo = () => {
+    if (!U) return;
+    if (!U.canUndo(undoRef.current)) {
+      flash('没有可撤销的操作');
+      return;
+    }
+    const fid = focusedBlockId();
+    applyHistory(U.undo(undoRef.current, snapNow()), fid);
+  };
+  const redo = () => {
+    if (!U || !U.canRedo(undoRef.current)) return;
+    const fid = focusedBlockId();
+    applyHistory(U.redo(undoRef.current, snapNow()), fid);
+  };
+  // 结构变更映射前先把所有块的 DOM 文本同步进 state（否则相邻块正在输入、未落 state
+  // 的文字会被这次 setBlocks 覆盖丢失）；withSynced 额外压一份撤销快照。
+  const mutateBlocks = fn => setBlocks(bs => fn(bs.map(syncBlock)));
+  const withSynced = fn => {
+    pushHistory();
+    mutateBlocks(fn);
+  };
+  const blocksRef = React.useRef(blocks);
+  blocksRef.current = blocks;
+  const [dragBlk, setDragBlk] = React.useState(null); // 正在拖拽排序的块 id
+  const [dropIdx, setDropIdx] = React.useState(null); // 拖拽落点（目标索引）
+  const dropIdxRef = React.useRef(null);
+  dropIdxRef.current = dropIdx;
+
+  // 「已自动保存」的实现：正文回写到 star.body。
+  // 结构变更（增删/转换/排序）时 blocks 已同步，直接落盘；
+  // 纯打字停留在 DOM，由输入防抖与卸载时的 persistBody 收拢。
+  const persistBody = () => {
+    star.body = blocksRef.current.map(syncBlock);
+    D.touchNote(star.id);
+  };
+  // 块数组任何变化（结构变更 / 待办勾选 / 折叠开合 / 表格与代码提交）都落盘：
+  // 更新 star.body 并 D.touchNote → SRNet.schedule() 防抖保存 + 刷新 SaveStatus。
+  // 首帧（打开笔记）不算编辑，跳过，避免把「打开」误记为「刚刚编辑」。
+  const mountedRef = React.useRef(false);
+  React.useEffect(() => {
+    star.body = blocks;
+    if (mountedRef.current) D.touchNote(star.id);else mountedRef.current = true;
+  }, [blocks]);
+  React.useEffect(() => () => persistBody(), []);
+  // 关标签页 / 切到后台：强制把编辑器 DOM flush 进 star.body，再交给 api.js 的
+  // beforeunload beacon —— 否则最后一次 keystroke 后 350ms 内关闭会丢尾部输入。
+  React.useEffect(() => {
+    const flush = () => {
+      try {
+        persistBody();
+      } catch (e) {}
+    };
+    const onVis = () => {
+      if (document.visibilityState === 'hidden') flush();
+    };
+    window.addEventListener('beforeunload', flush, true);
+    document.addEventListener('visibilitychange', onVis, true);
+    return () => {
+      window.removeEventListener('beforeunload', flush, true);
+      document.removeEventListener('visibilitychange', onVis, true);
+    };
+  }, []);
+
+  // 结构变更需要同步提交（flushSync），随后立即聚焦——否则连续快速输入
+  // 会赶在 React 提交/聚焦之前，把字符落进旧块
+  const flushSynced = fn => {
+    if (ReactDOM.flushSync) ReactDOM.flushSync(() => withSynced(fn));else withSynced(fn);
+  };
+  const placeCaret = (id, where) => {
+    const el = refs.current[id];
+    if (!el) return false;
+    el.focus();
+    try {
+      const s = window.getSelection();
+      const r = document.createRange();
+      r.selectNodeContents(el);
+      r.collapse(where === 'start');
+      s.removeAllRanges();
+      s.addRange(r);
+    } catch (_) {}
+    return true;
+  };
+  const focusBlock = (id, where) => {
+    if (!placeCaret(id, where)) requestAnimationFrame(() => placeCaret(id, where));
+  };
+  // 可见字符偏移 → 文本节点定位（光标放置 / 查找高亮 / 行内 md 转换共用）
+  const nodeAtOffset = (el, offset) => {
+    let remaining = offset,
+      target = null,
+      toff = 0;
+    const walk = n => {
+      if (target) return;
+      if (n.nodeType === 3) {
+        const len = n.textContent.length;
+        if (remaining <= len) {
+          target = n;
+          toff = remaining;
+        } else remaining -= len;
+      } else {
+        for (let i = 0; i < n.childNodes.length && !target; i++) walk(n.childNodes[i]);
+      }
+    };
+    walk(el);
+    return target ? {
+      node: target,
+      off: toff
+    } : null;
+  };
+  // 按可见字符偏移放置光标（合并块时定位到接缝处，取代写进块 text 的 data-caret 哨兵）
+  const placeCaretAt = (id, offset) => {
+    const el = refs.current[id];
+    if (!el) return false;
+    el.focus();
+    const hit = nodeAtOffset(el, offset);
+    try {
+      const s = window.getSelection();
+      const r = document.createRange();
+      if (hit) {
+        r.setStart(hit.node, hit.off);
+        r.collapse(true);
+      } else {
+        r.selectNodeContents(el);
+        r.collapse(false);
+      }
+      s.removeAllRanges();
+      s.addRange(r);
+    } catch (_) {}
+    return true;
+  };
+  const focusBlockAt = (id, offset) => {
+    if (!placeCaretAt(id, offset)) requestAnimationFrame(() => placeCaretAt(id, offset));
+  };
+  // 节点所属块 id（块包裹层 id 形如 blk-<id>）
+  const blockIdOfNode = node => {
+    let el = node && (node.nodeType === 1 ? node : node.parentElement);
+    while (el && el !== document.body) {
+      if (el.id && el.id.indexOf('blk-') === 0) return el.id.slice(4);
+      el = el.parentElement;
+    }
+    return null;
+  };
+  const htmlSlice = (el, container, offset, before) => {
+    const r = document.createRange();
+    r.selectNodeContents(el);
+    if (before) r.setEnd(container, offset);else r.setStart(container, offset);
+    const div = document.createElement('div');
+    div.appendChild(r.cloneContents());
+    return div.innerHTML;
+  };
+  // 当前光标相对某块的位置（是否折叠 / 在块首 / 在块尾）
+  const caretInfo = el => {
+    const s = window.getSelection();
+    if (!s || !s.rangeCount) return null;
+    const r = s.getRangeAt(0);
+    if (!el.contains(r.startContainer)) return null;
+    const pre = r.cloneRange();
+    pre.selectNodeContents(el);
+    pre.setEnd(r.startContainer, r.startOffset);
+    const post = r.cloneRange();
+    post.selectNodeContents(el);
+    post.setStart(r.endContainer, r.endOffset);
+    return {
+      collapsed: r.collapsed,
+      atStart: pre.toString().length === 0,
+      atEnd: post.toString().length === 0,
+      range: r
+    };
+  };
+
+  // Markdown 前缀 → 块类型（行首输入前缀后按空格触发，Typora / Notion 式）
+  const MD_PREFIX = {
+    '#': 'h1',
+    '##': 'h2',
+    '###': 'h3',
+    '-': 'bulleted',
+    '*': 'bulleted',
+    '>': 'quote',
+    '1.': 'numbered',
+    '[]': 'todo',
+    '[ ]': 'todo',
+    '[x]': 'todo'
+  };
+  const blockKeyDown = b => e => {
+    if (slash || e.nativeEvent.isComposing) return;
+    const el = refs.current[b.id];
+    if (!el) return;
+
+    // Alt+↑/↓ 移动块
+    if (e.altKey && (e.key === 'ArrowUp' || e.key === 'ArrowDown')) {
+      e.preventDefault();
+      const dir = e.key === 'ArrowUp' ? -1 : 1;
+      flushSynced(s => {
+        const i = s.findIndex(x => x.id === b.id);
+        const j = i + dir;
+        if (i < 0 || j < 0 || j >= s.length) return s;
+        const arr = s.slice();
+        const [it] = arr.splice(i, 1);
+        arr.splice(j, 0, it);
+        return arr;
+      });
+      focusBlock(b.id, 'end');
+      return;
+    }
+
+    // 空格触发 Markdown 前缀转换（块里只有前缀本身时）。先清 DOM 再提交：
+    // React 对相同 __html 不会重设 innerHTML，前缀字符会残留
+    if (e.key === ' ') {
+      const t = el.innerText.replace(/\n+$/, '');
+      let type = MD_PREFIX[t];
+      const extra = {};
+      // 任意起始序号的有序列表：`2.` / `3)` → numbered 并记住 start；`+` → 无序
+      const om = t.match(/^(\d+)[.)]$/);
+      if (!type && om) {
+        type = 'numbered';
+        const n0 = parseInt(om[1], 10);
+        if (n0 !== 1) extra.start = n0;
+      }
+      if (!type && t === '+') type = 'bulleted';
+      if (type) {
+        e.preventDefault();
+        el.innerHTML = '';
+        flushSynced(s => s.map(x => x.id === b.id ? {
+          ...x,
+          type,
+          text: '',
+          checked: t.toLowerCase() === '[x]',
+          ...extra
+        } : x));
+        focusBlock(b.id, 'start');
+        return;
+      }
+
+      // 行内 Markdown：光标前缀里已闭合的 **x** / *x* / `x` / ~~x~~，
+      // 按空格就地转为 <b>/<i>/<code>/<s>（Typora 式）。IME 组合期在函数
+      // 入口已被挡掉；行内代码里不再二次转换。
+      const info0 = caretInfo(el);
+      if (info0 && info0.collapsed) {
+        const anchorEl = info0.range.startContainer.nodeType === 1 ? info0.range.startContainer : info0.range.startContainer.parentElement;
+        if (!(anchorEl && anchorEl.closest && anchorEl.closest('code'))) {
+          const pre = info0.range.cloneRange();
+          pre.selectNodeContents(el);
+          pre.setEnd(info0.range.startContainer, info0.range.startOffset);
+          const preText = pre.toString();
+          const hit = matchInlineMd(preText);
+          if (hit) {
+            const sp = nodeAtOffset(el, preText.length - hit.len);
+            if (sp) {
+              e.preventDefault();
+              pushExec();
+              const s0 = window.getSelection();
+              const r0 = document.createRange();
+              r0.setStart(sp.node, sp.off);
+              r0.setEnd(info0.range.startContainer, info0.range.startOffset);
+              s0.removeAllRanges();
+              s0.addRange(r0);
+              document.execCommand('insertHTML', false, hit.html + '&nbsp;');
+              scheduleTick();
+              return;
+            }
+          }
+        }
+      }
+    }
+
+    // Tab / Shift+Tab：列表块缩进（嵌套层级持久化到块模型，md 导出带缩进）
+    if (e.key === 'Tab' && ['bulleted', 'numbered', 'todo'].includes(b.type)) {
+      e.preventDefault();
+      const d = e.shiftKey ? -1 : 1;
+      withSynced(s => s.map(x => x.id === b.id ? {
+        ...x,
+        indent: Math.max(0, Math.min(5, (x.indent || 0) + d))
+      } : x));
+      return;
+    }
+
+    // Enter：在光标处拆分为新块（列表延续同类型；空列表项退出为正文）
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      const listLike = ['bulleted', 'numbered', 'todo'].includes(b.type);
+      if (listLike && el.innerText.trim() === '') {
+        el.innerHTML = '';
+        flushSynced(s => s.map(x => x.id === b.id ? {
+          ...x,
+          type: 'p',
+          text: ''
+        } : x));
+        focusBlock(b.id, 'start');
+        return;
+      }
+      let tail = '';
+      const info = caretInfo(el);
+      if (info) {
+        const after = document.createRange();
+        after.selectNodeContents(el);
+        after.setStart(info.range.endContainer, info.range.endOffset);
+        const tmp = document.createElement('div');
+        tmp.appendChild(after.extractContents());
+        tail = tmp.innerHTML;
+      }
+      const nb = {
+        id: uid(),
+        type: listLike ? b.type : 'p',
+        text: tail,
+        checked: false,
+        ...(listLike && b.indent ? {
+          indent: b.indent
+        } : {})
+      };
+      flushSynced(s => {
+        const i = s.findIndex(x => x.id === b.id);
+        return [...s.slice(0, i + 1), nb, ...s.slice(i + 1)];
+      });
+      focusBlock(nb.id, 'start');
+      return;
+    }
+
+    // Backspace 在块首：先降级为正文，再删除/并入上一块
+    if (e.key === 'Backspace') {
+      const info = caretInfo(el);
+      if (!info || !info.collapsed || !info.atStart) return;
+      if (b.type !== 'p') {
+        e.preventDefault();
+        flushSynced(s => s.map(x => x.id === b.id ? {
+          ...x,
+          type: 'p'
+        } : x));
+        focusBlock(b.id, 'start');
+        return;
+      }
+      const cur = blocksRef.current;
+      const i = cur.findIndex(x => x.id === b.id);
+      const prev = i > 0 ? cur[i - 1] : null;
+      if (!prev) return;
+      e.preventDefault();
+      if (prev.type === 'divider') {
+        flushSynced(s => s.filter(x => x.id !== prev.id));
+        focusBlock(b.id, 'start');
+        return;
+      }
+      if (el.innerText.trim() === '') {
+        flushSynced(s => s.filter(x => x.id !== b.id));
+        focusBlock(prev.id, 'end');
+        return;
+      }
+      if (EDITABLE.includes(prev.type)) {
+        // 接缝处光标：合并后按上一块原可见长度定位，不再往块 text 里塞哨兵 span
+        const curHtml = el.innerHTML;
+        const pel = refs.current[prev.id];
+        const joinAt = pel ? pel.innerText.length : stripTags(prev.text || '').length;
+        flushSynced(s => s.filter(x => x.id !== b.id).map(x => x.id === prev.id ? {
+          ...x,
+          text: sanHtml((x.text || '') + curHtml)
+        } : x));
+        focusBlockAt(prev.id, joinAt);
+        return;
+      }
+      // 上一块是 code / table / math / image 等原子块：选中它并给出删除引导，
+      // 不再静默吞掉按键（Backspace 像被吃）
+      setFocusBlk(prev.id);
+      setPendingAtomicDel(prev.id);
+      scrollToBlock(prev.id);
+      flash('已选中上方的' + blockTypeName(prev.type) + '块 · 再按 ⌫ 删除');
+      return;
+    }
+
+    // ↑/↓ 在块首/块尾时跨块移动光标
+    if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+      const info = caretInfo(el);
+      if (!info || !info.collapsed || !(e.key === 'ArrowUp' ? info.atStart : info.atEnd)) return;
+      const cur = blocksRef.current;
+      const i = cur.findIndex(x => x.id === b.id);
+      const dir = e.key === 'ArrowUp' ? -1 : 1;
+      let k = i + dir;
+      while (k >= 0 && k < cur.length && !EDITABLE.includes(cur[k].type)) k += dir;
+      if (k >= 0 && k < cur.length) {
+        e.preventDefault();
+        focusBlock(cur[k].id, dir < 0 ? 'end' : 'start');
+      }
+    }
+  };
+
+  // 粘贴：统一拦截，绝不放任浏览器默认富文本粘贴（未净化的 HTML 会直接入库）。
+  // 多行 / 含 Markdown 的文本解析成块；单行走白名单清洗后的行内 HTML 插入当前块。
+  const blockPaste = b => e => {
+    const cd = e.clipboardData;
+    if (!cd) return;
+    const text = cd.getData('text/plain') || '';
+    const html = cd.getData('text/html') || '';
+    const md = /(^|\n)(#{1,3} |[-*] |\d+[.)] |> |```|\$\$|(-{3,}|\*{3,})$|\|.+\|)/.test(text);
+    // 多行或含 Markdown → 解析为块
+    if (text.includes('\n') || md) {
+      e.preventDefault();
+      const nbs = parseMdBlocks(text);
+      if (!nbs.length) return;
+      const emptyCur = b.type === 'p' && refs.current[b.id] && refs.current[b.id].innerText.trim() === '';
+      flushSynced(s => {
+        const i = s.findIndex(x => x.id === b.id);
+        return emptyCur ? [...s.slice(0, i), ...nbs, ...s.slice(i + 1)] : [...s.slice(0, i + 1), ...nbs, ...s.slice(i + 1)];
+      });
+      focusBlock(nbs[nbs.length - 1].id, 'end');
+      flash('已粘贴为 ' + nbs.length + ' 个块');
+      return;
+    }
+    // 单行：有 text/html 就白名单清洗后插入，否则纯文本转义插入——始终不走浏览器默认
+    e.preventDefault();
+    if (!EDITABLE.includes(b.type)) return;
+    pushExec();
+    const clean = html ? sanHtml(html) : escHtml(text);
+    if (clean) document.execCommand('insertHTML', false, clean);
+    scheduleTick();
+  };
+
+  // 拖住 ⋮⋮ 手柄排序；原地点击仍打开块菜单
+  const startDrag = (e, id) => {
+    if (e.button !== 0) return;
+    const sy = e.clientY;
+    let moved = false;
+    const move = ev => {
+      if (!moved && Math.abs(ev.clientY - sy) > 4) {
+        moved = true;
+        setDragBlk(id);
+        document.body.style.cursor = 'grabbing';
+      }
+      if (!moved) return;
+      const cur = blocksRef.current;
+      let idx = cur.length;
+      for (let i = 0; i < cur.length; i++) {
+        const bel = document.getElementById('blk-' + cur[i].id);
+        if (!bel) continue;
+        const r = bel.getBoundingClientRect();
+        if (ev.clientY < r.top + r.height / 2) {
+          idx = i;
+          break;
+        }
+      }
+      setDropIdx(idx);
+    };
+    const up = ev => {
+      document.removeEventListener('mousemove', move);
+      document.removeEventListener('mouseup', up);
+      document.body.style.cursor = '';
+      if (!moved) {
+        setCtx({
+          x: ev.clientX,
+          y: ev.clientY,
+          id
+        });
+        setDragBlk(null);
+        setDropIdx(null);
+        return;
+      }
+      const idx = dropIdxRef.current;
+      withSynced(s => {
+        const from = s.findIndex(x => x.id === id);
+        if (from < 0 || idx == null) return s;
+        const arr = s.slice();
+        const [it] = arr.splice(from, 1);
+        arr.splice(from < idx ? idx - 1 : idx, 0, it);
+        return arr;
+      });
+      setDragBlk(null);
+      setDropIdx(null);
+    };
+    document.addEventListener('mousemove', move);
+    document.addEventListener('mouseup', up);
+  };
+
+  // candidates for a new connection: any star not me and not already linked
+  const linkCandidates = D.stars.filter(s => s.id !== star.id && !connected.some(c => c.star.id === s.id));
+  const resetLinking = () => {
+    setLinking(false);
+    setLinkStar(null);
+    setRelDraft('');
+  };
+  const addConnection = (s, rel) => {
+    const sameCon = s.con === con;
+    const relText = rel && rel.trim() || '相关概念';
+    D.connections.push({
+      a: star.id,
+      b: s.id,
+      kind: sameCon ? 'intra' : 'cross',
+      rel: relText
+    });
+    D.touchNote(star.id);
+    D.touchNote(s.id);
+    setConnected(cs => [...cs, {
+      star: s,
+      kind: sameCon ? 'intra' : 'cross',
+      rel: relText
+    }]);
+    resetLinking();
+    flash('已连接到「' + s.label + '」');
+  };
+  const removeConnection = item => setConfirm({
+    message: '断开与「' + item.star.label + '」的连接？连接断开后两颗星不再相互指引。',
+    confirmLabel: '断开',
+    onYes: () => {
+      const i = D.connections.findIndex(c => c.a === star.id && c.b === item.star.id || c.b === star.id && c.a === item.star.id);
+      if (i >= 0) D.connections.splice(i, 1);
+      D.touchNote(star.id);
+      D.touchNote(item.star.id);
+      setConnected(cs => cs.filter(x => x !== item));
+      flash('已断开连接');
+    }
+  });
+
+  // serialize the current (DOM-synced) document to Markdown for 导出
+  // （序列化核心在 mdcore.js：frontmatter / admonition / 列表缩进 / 协议白名单）
+  const blocksToMd = () => MD ? MD.blocksToMd(blocks.map(syncBlock), {
+    title: star.label,
+    props: star.props,
+    tags,
+    summary: star.summary
+  }) : '# ' + star.label + '\n\n' + blocks.map(syncBlock).map(b => stripTags(b.text || '')).filter(Boolean).join('\n\n') + '\n';
+  const exportMd = () => {
+    try {
+      const md = blocksToMd();
+      const blob = new Blob([md], {
+        type: 'text/markdown;charset=utf-8'
+      });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = (star.label || 'star') + '.md';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1500);
+      flash('已导出 Markdown · ' + star.label + '.md');
+    } catch (e) {
+      flash('导出失败，请重试');
+    }
+  };
+
+  // ---- Markdown 导入：「更多」菜单选择 .md 文件，或直接把文件拖进正文 ----
+  // frontmatter 回填 star.props / tags；空笔记整体替换，非空笔记追加到末尾。
+  const importInputRef = React.useRef(null);
+  const importMdText = (name, text) => {
+    const fm = MD && MD.parseFrontmatter ? MD.parseFrontmatter(text) : {
+      props: null,
+      tags: null,
+      body: text
+    };
+    const nbs = parseMdBlocks(fm.body);
+    if (!nbs.length && !fm.props) {
+      flash('文件是空的 · 没有可导入的内容');
+      return;
+    }
+    if (fm.props) {
+      star.props = Object.assign(star.props || {}, fm.props);
+    }
+    if (fm.tags && fm.tags.length) setTags(ts => {
+      const nt = [...ts, ...fm.tags.filter(t => !ts.includes(t))];
+      syncTags(nt);
+      return nt;
+    });
+    const cur = blocksRef.current;
+    const empty = !cur.length || cur.every(b => EDITABLE.includes(b.type) && !liveText(b).trim());
+    flushSynced(s => empty ? nbs : [...s, ...nbs]);
+    bumpTick();
+    if (nbs.length) {
+      scrollToBlock(nbs[nbs.length - 1].id);
+      const lastEd = [...nbs].reverse().find(b => EDITABLE.includes(b.type));
+      if (lastEd) focusBlock(lastEd.id, 'end');
+    }
+    flash('已导入「' + name + '」· ' + nbs.length + ' 个块' + (fm.props ? ' · 属性已回填' : ''));
+  };
+  const readMdFile = f => f.text().then(t => importMdText(f.name.replace(/\.(md|markdown|txt)$/i, ''), t)).catch(() => flash('读取文件失败，请重试'));
+  const onImportFile = e => {
+    const f = e.target.files && e.target.files[0];
+    e.target.value = '';
+    if (f) readMdFile(f);
+  };
+  const onEditorDragOver = e => {
+    if (e.dataTransfer && Array.from(e.dataTransfer.items || []).some(it => it.kind === 'file')) e.preventDefault();
+  };
+  const onEditorDrop = e => {
+    const fs = e.dataTransfer && e.dataTransfer.files ? Array.from(e.dataTransfer.files) : [];
+    const f = fs.find(x => /\.(md|markdown|txt)$/i.test(x.name) || x.type === 'text/markdown');
+    if (!f) return;
+    e.preventDefault();
+    e.stopPropagation();
+    readMdFile(f);
+  };
+
+  // ---- 笔记内查找 / 替换（⌘F）----
+  // 高亮走 CSS Custom Highlight API：不改块 DOM、不进 innerHTML、不碰持久化。
+  const [find, setFind] = React.useState(null); // { q, rv, rep }
+  const [findIdx, setFindIdx] = React.useState(0);
+  const [findMatches, setFindMatches] = React.useState([]);
+  const findInputRef = React.useRef(null);
+  const computeFind = q => {
+    const res = [];
+    const needle = String(q || '').toLowerCase().replace(/\u00a0/g, ' ');
+    if (!needle) return res;
+    blocksRef.current.forEach(b => {
+      if (!EDITABLE.includes(b.type)) return;
+      const el = refs.current[b.id];
+      if (!el) return;
+      const hay = el.textContent.toLowerCase().replace(/\u00a0/g, ' ');
+      let at = 0;
+      while ((at = hay.indexOf(needle, at)) >= 0) {
+        res.push({
+          id: b.id,
+          start: at,
+          end: at + needle.length
+        });
+        at += needle.length;
+      }
+    });
+    return res;
+  };
+  React.useEffect(() => {
+    if (!find) {
+      setFindMatches([]);
+      return;
+    }
+    const ms = computeFind(find.q);
+    setFindMatches(ms);
+    setFindIdx(i => ms.length ? Math.min(i, ms.length - 1) : 0);
+  }, [find ? find.q : null, find ? 1 : 0, blocks, tick]);
+  React.useEffect(() => {
+    const reg = typeof CSS !== 'undefined' && CSS.highlights;
+    const H = window.Highlight;
+    if (!reg || !H) return; // 不支持时退化为「跳转即选中」，无害
+    if (!find) {
+      reg.delete('sr-find');
+      reg.delete('sr-find-cur');
+      return;
+    }
+    const others = [];
+    let curR = null;
+    findMatches.forEach((mt, i) => {
+      const el = refs.current[mt.id];
+      if (!el) return;
+      const s = nodeAtOffset(el, mt.start),
+        e2 = nodeAtOffset(el, mt.end);
+      if (!s || !e2) return;
+      try {
+        const r = document.createRange();
+        r.setStart(s.node, s.off);
+        r.setEnd(e2.node, e2.off);
+        if (i === findIdx) curR = r;else others.push(r);
+      } catch (_) {}
+    });
+    reg.set('sr-find', new H(...others));
+    reg.set('sr-find-cur', curR ? new H(curR) : new H());
+    return () => {
+      reg.delete('sr-find');
+      reg.delete('sr-find-cur');
+    };
+  }, [find, findMatches, findIdx]);
+  const gotoMatch = i => {
+    if (!findMatches.length) return;
+    const k = (i % findMatches.length + findMatches.length) % findMatches.length;
+    setFindIdx(k);
+    scrollToBlock(findMatches[k].id);
+  };
+  const selectMatch = mt => {
+    const el = refs.current[mt.id];
+    if (!el) return false;
+    const s = nodeAtOffset(el, mt.start),
+      e2 = nodeAtOffset(el, mt.end);
+    if (!s || !e2) return false;
+    el.focus();
+    try {
+      const sel0 = window.getSelection();
+      const r = document.createRange();
+      r.setStart(s.node, s.off);
+      r.setEnd(e2.node, e2.off);
+      sel0.removeAllRanges();
+      sel0.addRange(r);
+    } catch (_) {
+      return false;
+    }
+    return true;
+  };
+  const replaceOne = () => {
+    const mt = findMatches[findIdx];
+    if (!mt || !find) return;
+    if (!selectMatch(mt)) return;
+    pushExec();
+    if (find.rv) document.execCommand('insertText', false, find.rv);else document.execCommand('delete');
+    persistBody();
+    bumpTick();
+    if (findInputRef.current) findInputRef.current.focus();
+  };
+  const replaceAll = () => {
+    if (!find || !findMatches.length) return;
+    pushExec();
+    const n = findMatches.length;
+    // 倒序替换：前面命中处的偏移不受后面替换影响
+    for (let k = n - 1; k >= 0; k--) {
+      if (!selectMatch(findMatches[k])) continue;
+      if (find.rv) document.execCommand('insertText', false, find.rv);else document.execCommand('delete');
+    }
+    persistBody();
+    bumpTick();
+    flash('已替换 ' + n + ' 处');
+    if (findInputRef.current) findInputRef.current.focus();
+  };
+  const findReturnRef = React.useRef(null); // ⌘F 打开时光标所在块，关闭时兜底还焦
+  const closeFind = () => {
+    const mt = findMatches[findIdx];
+    setFind(null);
+    // 焦点还给正文：优先当前命中处，其次打开查找前的块，再次第一个可编辑块
+    if (mt) {
+      focusBlockAt(mt.id, mt.start);
+      return;
+    }
+    const back = findReturnRef.current;
+    if (back && refs.current[back]) {
+      focusBlock(back, 'end');
+      return;
+    }
+    const first = blocksRef.current.find(b => EDITABLE.includes(b.type));
+    if (first) focusBlock(first.id, 'end');
+  };
+  // ⌘F：capture 阶段接管（编辑器打开期间不再落到浏览器原生查找）；
+  // 有选中文字时把它带进查找框。⌘K 语义不受影响。
+  React.useEffect(() => {
+    const h = e => {
+      if (!((e.metaKey || e.ctrlKey) && !e.altKey && !e.shiftKey && (e.key === 'f' || e.key === 'F'))) return;
+      e.preventDefault();
+      e.stopPropagation();
+      findReturnRef.current = blockIdOfNode(document.activeElement);
+      const selTxt = String(window.getSelection() || '').trim().slice(0, 120);
+      setFind(f => ({
+        q: selTxt || f && f.q || '',
+        rv: f && f.rv || '',
+        rep: !!(f && f.rep)
+      }));
+      setTimeout(() => {
+        const el = findInputRef.current;
+        if (el) {
+          el.focus();
+          el.select();
+        }
+      }, 0);
+    };
+    window.addEventListener('keydown', h, true);
+    return () => window.removeEventListener('keydown', h, true);
+  }, []);
+  // 查找条打开时 Esc 关闭之——但让位给更上层的浮层（菜单 / 对话框先关它们自己）
+  React.useEffect(() => {
+    if (!find) return;
+    const h = e => {
+      if (e.key !== 'Escape') return;
+      if (slash || ctx || colorPop || linkDialog || confirm || history || more || sel || explore) return;
+      // 让位给正在交互的内层控件：代码语言下拉、数学/代码源码输入等先吃 Esc
+      const t = e.target;
+      if (t && t.closest && !t.closest('[role="search"]') && (t.tagName === 'TEXTAREA' || t.tagName === 'INPUT' || t.closest('[role="combobox"],[role="listbox"]'))) return;
+      e.preventDefault();
+      e.stopPropagation();
+      closeFind();
+    };
+    window.addEventListener('keydown', h, true);
+    return () => window.removeEventListener('keydown', h, true);
+  }, [find, findMatches, findIdx, slash, ctx, colorPop, linkDialog, confirm, history, more, sel, explore]);
+
+  // 移动到星域：也压撤销快照（快照带 con）——⌘Z 能把星移回原星域
+  const moveToCon = cid => {
+    if (cid === star.con) {
+      flash('这颗星已经在「' + D.conName(cid) + '」里了');
+      return;
+    }
+    pushHistory();
+    star.con = cid;
+    D.syncCounts();
+    D.touchNote(star.id);
+    setCon(cid);
+    flash('已移动到「' + D.conName(cid) + '」· ⌘Z 撤销');
+  };
+
+  // actions from the top-right 「更多」 dropdown (page-level, not block-level)
+  const pageAction = (action, arg) => {
+    if (action === 'fav') {
+      toggleFav();
+    } else if (action === 'dup') {
+      const id2 = 's' + Math.random().toString(36).slice(2, 6);
+      const src = D.byId[star.id] || star;
+      const copy = {
+        ...src,
+        id: id2,
+        label: src.label + ' 副本',
+        fav: false,
+        x: Math.min(96, (src.x || 50) + 3),
+        y: Math.min(96, (src.y || 50) + 3),
+        body: (src.body || []).map(b => ({
+          ...b,
+          id: id2 + '-' + Math.random().toString(36).slice(2, 5)
+        })),
+        props: {
+          ...(src.props || {})
+        },
+        tags: (src.tags || []).slice()
+      };
+      delete copy.wx;
+      delete copy.wy;
+      D.addStar(copy);
+      flash('已创建副本 ·「' + copy.label + '」');
+    } else if (action === 'copyLink') {
+      try {
+        navigator.clipboard && navigator.clipboard.writeText('stellar-raft://star/' + star.id);
+      } catch (e) {}
+      flash('已复制星链接');
+    } else if (action === 'export') exportMd();else if (action === 'import') {
+      if (importInputRef.current) importInputRef.current.click();
+    } else if (action === 'move') {
+      moveToCon(arg);
+    } else if (action === 'history') {
+      setHistory(true);
+    } else if (action === 'delete') {
+      setConfirm({
+        message: '「' + star.label + '」将坠入黑洞，连接与反链一并带走。黑洞里的星可以随时恢复。',
+        confirmLabel: '移入黑洞',
+        onYes: () => {
+          D.trashStar(star.id);
+          flash('已移入黑洞 · 可随时恢复');
+          if (onBack) setTimeout(onBack, 480);
+        }
+      });
+    }
+    setMore(null);
+  };
   const act = id => (action, arg) => {
-    if (action === 'delete') withSynced(s => s.filter(b => b.id !== id));else if (action === 'duplicate') withSynced(s => {
+    // 有了应用级撤销栈，删除块不再需要模态确认——直接删除并给「⌘Z 撤销」toast
+    if (action === 'delete') {
+      withSynced(s => s.filter(b => b.id !== id));
+      flash('已删除这个块 · ⌘Z 撤销');
+    } else if (action === 'duplicate') withSynced(s => {
       const i = s.findIndex(b => b.id === id);
       return [...s.slice(0, i + 1), {
         ...s[i],
@@ -1734,14 +9299,27 @@ function Editor({
       }, ...s.slice(i + 1)];
     });else if (action === 'turn') withSynced(s => s.map(b => b.id === id ? {
       ...b,
-      type: arg
+      type: arg,
+      ...typeExtras(arg, b)
     } : b));else if (action === 'color') withSynced(s => s.map(b => b.id === id ? arg.kind === 'text' ? {
       ...b,
       color: arg.id
     } : {
       ...b,
       bg: arg.id
-    } : b));else if (action === 'copyLink') flash('已复制块链接');else if (action === 'move') flash('已移动到「' + D.conName(arg) + '」');else if (action === 'comment') flash('已添加评论');else if (action === 'review') flash('已加入复习队列');else if (action === 'ai') flash('AI 正在阅读这个块…');
+    } : b));else if (action === 'copyLink') {
+      try {
+        navigator.clipboard && navigator.clipboard.writeText('stellar-raft://star/' + star.id + '#' + id);
+      } catch (e) {}
+      flash('已复制块链接');
+    } else if (action === 'move') {
+      moveToCon(arg);
+    } else if (action === 'review') {
+      D.queueReview(star.id, 0);
+      D.pushTimeline('review', star.id, '加入复习队列');
+      bumpTick();
+      flash('已加入复习队列 · 下次复习改为今天');
+    }
     setCtx(null);
   };
   const insertAfter = (id, type = 'p') => withSynced(s => {
@@ -1749,11 +9327,42 @@ function Editor({
     const nb = {
       id: uid(),
       type,
-      text: ''
+      text: '',
+      ...typeExtras(type)
     };
     return [...s.slice(0, i + 1), nb, ...s.slice(i + 1)];
   });
+  // 删光所有块后不再是死局：占位空态点击/回车即插入一个可输入的正文块并聚焦。
+  const seedFirstBlock = () => {
+    const nb = {
+      id: uid(),
+      type: 'p',
+      text: ''
+    };
+    flushSynced(() => [nb]);
+    focusBlock(nb.id, 'start');
+  };
+  const syncTags = ts => {
+    star.tags = ts.slice();
+    D.touchNote(star.id);
+  };
+  const commitTag = () => {
+    const t = tagDraft.trim();
+    if (t && !tags.includes(t)) setTags(ts => {
+      const nt = [...ts, t];
+      syncTags(nt);
+      return nt;
+    });
+    setTagDraft('');
+    setAddingTag(false);
+  };
+  const removeTag = t => setTags(ts => {
+    const nt = ts.filter(x => x !== t);
+    syncTags(nt);
+    return nt;
+  });
   const onMouseUp = () => {
+    if (pendingAtomicDel) setPendingAtomicDel(null);
     const s = window.getSelection();
     if (s && !s.isCollapsed && s.rangeCount && s.toString().trim()) {
       const r = s.getRangeAt(0).getBoundingClientRect();
@@ -1767,13 +9376,281 @@ function Editor({
     }
     setSel(null);
   };
+
+  // 键盘选区（Shift+方向键）也唤出选区工具条：监听 selectionchange（防抖 150ms），
+  // 选区落在编辑区内且非折叠时定位工具条，折叠时收起。
+  React.useEffect(() => {
+    let t = null;
+    const onSelChange = () => {
+      clearTimeout(t);
+      t = setTimeout(() => {
+        const root = scrollRef.current;
+        if (!root) return;
+        const s = window.getSelection();
+        if (!s || !s.rangeCount || s.isCollapsed || !s.toString().trim()) {
+          setSel(cur => cur ? null : cur);
+          return;
+        }
+        const n = s.anchorNode;
+        const el = n && (n.nodeType === 1 ? n : n.parentElement);
+        if (!el || !root.contains(el) || !el.closest('[contenteditable]')) return;
+        const r = s.getRangeAt(0).getBoundingClientRect();
+        if (r.width > 1) setSel({
+          x: r.left + r.width / 2,
+          y: r.top - 6
+        });
+      }, 150);
+    };
+    document.addEventListener('selectionchange', onSelChange);
+    return () => {
+      document.removeEventListener('selectionchange', onSelChange);
+      clearTimeout(t);
+    };
+  }, []);
+  const keepToolbar = () => {
+    const s = window.getSelection();
+    if (s && s.rangeCount && !s.isCollapsed) {
+      const r = s.getRangeAt(0).getBoundingClientRect();
+      if (r.width > 1) setSel({
+        x: r.left + r.width / 2,
+        y: r.top - 6
+      });
+    }
+    persistBody();
+  };
+  // 选区着色 / 高亮：不再往内容里写死具体色值（execCommand foreColor 会烤进 #hex，
+  // 黎明主题下文字隐形）。改为用主题 token（CSS 变量 / color-mix）包一层 span，
+  // 渲染随主题重映射。cssColor 形如 var(--star-blue) 或 color-mix(...)。
+  const applyInlineColor = (prop, cssColor) => {
+    const s0 = window.getSelection();
+    if (!s0 || !s0.rangeCount || s0.isCollapsed) return;
+    const text = escHtml(s0.toString());
+    const style = prop === 'background' ? 'background:' + cssColor + ';border-radius:4px;padding:0 2px;' : 'color:' + cssColor + ';';
+    document.execCommand('insertHTML', false, '<span style="' + style + '">' + text + '</span>');
+    keepToolbar();
+  };
+  // run a rich-text command on the current selection, then keep the toolbar in place.
+  // 统一执行入口：所有 execCommand 格式操作（加粗/斜体/下划线/删除线/行内代码/
+  // 文字颜色/高亮）先经 pushExec 压一份撤销快照——⌘Z 才撤得掉「改颜色」这类操作。
+  const runFormat = (cmd, value) => {
+    const s0 = window.getSelection();
+    if (!s0 || !s0.rangeCount || s0.isCollapsed) return;
+    pushExec();
+    if (cmd === 'inlineCode') {
+      const text = s0.toString().replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      document.execCommand('insertHTML', false, '<code style="' + CODE_SPAN_CSS + '">' + text + '</code>');
+      keepToolbar();
+      return;
+    }
+    if (cmd === 'foreColor') {
+      applyInlineColor('color', value);
+      return;
+    }
+    if (cmd === 'hiliteColor') {
+      applyInlineColor('background', value);
+      return;
+    }
+    document.execCommand('styleWithCSS', false, true);
+    document.execCommand(cmd, false, value);
+    keepToolbar();
+  };
+  const formatLink = () => {
+    const sel = window.getSelection();
+    if (!sel || !sel.rangeCount || sel.isCollapsed) return;
+    setLinkDialog({
+      range: sel.getRangeAt(0).cloneRange()
+    });
+  };
+
+  // 编辑器内有选区时，⌘K 归「添加链接」（选区工具条上标注的语义）；
+  // capture 阶段拦截，app.jsx 的全局命令面板监听不会抢走它。
+  React.useEffect(() => {
+    const h = e => {
+      if (!((e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K'))) return;
+      const s = window.getSelection();
+      const root = scrollRef.current;
+      if (!s || !s.rangeCount || s.isCollapsed || !root) return;
+      const n = s.anchorNode;
+      const el = n && (n.nodeType === 1 ? n : n.parentElement);
+      if (!el || !root.contains(el) || !el.closest('[contenteditable]')) return;
+      e.preventDefault();
+      e.stopPropagation();
+      setLinkDialog({
+        range: s.getRangeAt(0).cloneRange()
+      });
+    };
+    window.addEventListener('keydown', h, true);
+    return () => window.removeEventListener('keydown', h, true);
+  }, []);
+
+  // ⌘Z / ⌘⇧Z：接管撤销/重做（capture 阶段，先于浏览器原生 contentEditable undo），
+  // 只在编辑区内生效，避免抢走其它输入框的原生撤销。
+  React.useEffect(() => {
+    const h = e => {
+      if (!(e.metaKey || e.ctrlKey) || e.key.toLowerCase() !== 'z') return;
+      const root = scrollRef.current;
+      if (!root) return;
+      const a = document.activeElement;
+      const inEditor = a && root.contains(a);
+      // 焦点落在 body（菜单动作执行完、焦点未回正文）时也接管——
+      // 「右键菜单改颜色 → ⌘Z」不能因为焦点丢了就失灵
+      const free = !a || a === document.body;
+      // 对话框 / 浮层里的输入框保留原生撤销
+      if (linkDialog || confirm || history) return;
+      if (!inEditor && !free) return;
+      e.preventDefault();
+      e.stopPropagation();
+      if (e.shiftKey) redo();else undo();
+    };
+    window.addEventListener('keydown', h, true);
+    return () => window.removeEventListener('keydown', h, true);
+  }, [linkDialog, confirm, history]);
+
+  // 被块首 Backspace 选中的原子块：再按一次 ⌫/Delete 删除，其它键 / Esc 取消选中
+  React.useEffect(() => {
+    if (!pendingAtomicDel) return;
+    const onKey = e => {
+      if (e.key === 'Backspace' || e.key === 'Delete') {
+        e.preventDefault();
+        e.stopPropagation();
+        const id = pendingAtomicDel;
+        withSynced(s => s.filter(x => x.id !== id));
+        setPendingAtomicDel(null);
+        flash('已删除 · ⌘Z 撤销');
+      } else if (e.key === 'Escape') {
+        setPendingAtomicDel(null);
+      } else if (e.key.length === 1 || e.key === 'Enter') {
+        setPendingAtomicDel(null);
+      }
+    };
+    window.addEventListener('keydown', onKey, true);
+    return () => window.removeEventListener('keydown', onKey, true);
+  }, [pendingAtomicDel]);
+
+  // 跨块选区的删除/替换/剪切：绝不让浏览器默认行为直接删块 DOM（React 仍持有该块
+  // 与 ref，reconcile 时会 NotFoundError: removeChild）。接管为一次 React 合并，
+  // 把首块选区前 + 尾块选区后的内容并进存活块，中间块整体移除。
+  React.useEffect(() => {
+    const root = scrollRef.current;
+    if (!root) return;
+    const doMerge = (ins, e) => {
+      const sel = window.getSelection();
+      if (!sel || !sel.rangeCount || sel.isCollapsed) return false;
+      const r = sel.getRangeAt(0);
+      if (!root.contains(r.commonAncestorContainer)) return false;
+      const startId = blockIdOfNode(r.startContainer),
+        endId = blockIdOfNode(r.endContainer);
+      if (!startId || !endId || startId === endId) return false; // 同块交给原生
+      const cur = blocksRef.current;
+      const si = cur.findIndex(x => x.id === startId),
+        ei = cur.findIndex(x => x.id === endId);
+      if (si < 0 || ei < 0) return false;
+      e.preventDefault();
+      e.stopPropagation();
+      const lo = Math.min(si, ei),
+        hi = Math.max(si, ei);
+      const startBlk = cur[si],
+        endBlk = cur[ei];
+      const sEl = refs.current[startId],
+        eEl = refs.current[endId];
+      const startEd = sEl && EDITABLE.includes(startBlk.type);
+      const endEd = eEl && EDITABLE.includes(endBlk.type);
+      const head = startEd ? htmlSlice(sEl, r.startContainer, r.startOffset, true) : '';
+      const tail = endEd ? htmlSlice(eEl, r.endContainer, r.endOffset, false) : '';
+      const tmp = document.createElement('div');
+      tmp.innerHTML = head + ins;
+      const caretOff = tmp.textContent.length;
+      let survivor, survivorId;
+      if (startEd) {
+        survivorId = startId;
+        survivor = {
+          ...startBlk,
+          text: sanHtml(head + ins + tail)
+        };
+      } else if (endEd) {
+        survivorId = endId;
+        survivor = {
+          ...endBlk,
+          text: sanHtml(ins + tail)
+        };
+      } else {
+        survivorId = uid();
+        survivor = {
+          id: survivorId,
+          type: 'p',
+          text: sanHtml(ins)
+        };
+      }
+      pushHistory();
+      const next = [...cur.slice(0, lo), survivor, ...cur.slice(hi + 1)];
+      if (ReactDOM.flushSync) ReactDOM.flushSync(() => setBlocks(next.map(cloneBlk)));else setBlocks(next.map(cloneBlk));
+      focusBlockAt(survivorId, caretOff);
+      persistBody();
+      return true;
+    };
+    const onKey = e => {
+      if (e.metaKey || e.ctrlKey || e.altKey || e.isComposing) return;
+      const isChar = e.key.length === 1;
+      const del = e.key === 'Backspace' || e.key === 'Delete';
+      const ent = e.key === 'Enter' && !e.shiftKey;
+      if (!isChar && !del && !ent) return;
+      doMerge(isChar ? escHtml(e.key) : '', e);
+    };
+    const onCut = e => {
+      const sel = window.getSelection();
+      if (sel && sel.toString() && e.clipboardData) {
+        try {
+          e.clipboardData.setData('text/plain', sel.toString());
+        } catch (_) {}
+      }
+      doMerge('', e);
+    };
+    root.addEventListener('keydown', onKey, true);
+    root.addEventListener('cut', onCut, true);
+    return () => {
+      root.removeEventListener('keydown', onKey, true);
+      root.removeEventListener('cut', onCut, true);
+    };
+  }, []);
+  const applyLink = url => {
+    const ld = linkDialog;
+    // 协议白名单：javascript:/data:/vbscript: 拒绝，保留对话框让用户改
+    const ok = safeUrl(url);
+    if (!ok) {
+      flash('链接协议不被允许 · 仅支持 http/https/mailto');
+      return;
+    }
+    setLinkDialog(null);
+    if (!ld) return;
+    const sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(ld.range);
+    pushExec(); // 添加链接同样可 ⌘Z 撤销
+    document.execCommand('createLink', false, ok);
+    persistBody();
+  };
+
+  // 空块引导文案按块类型给（只在光标所在块淡入，不再满屏灰字——Notion 口径）
+  const BLOCK_PH = {
+    p: '输入正文，或按 / 选择块类型…',
+    h1: '一级标题',
+    h2: '二级标题',
+    h3: '三级标题',
+    quote: '引用一句值得记住的话…',
+    callout: '写一句醒目的标注…',
+    todo: '待办事项',
+    bulleted: '列表项',
+    numbered: '列表项',
+    toggle: '折叠标题 · 点左侧箭头收纳内容'
+  };
   const editable = (b, tag, style) => {
     const Tag = tag;
     return React.createElement(Tag, {
       ref: el => refs.current[b.id] = el,
       contentEditable: true,
       suppressContentEditableWarning: true,
-      'data-ph': '输入正文，或按 / 选择块类型',
+      className: 'sr-blk-ph',
+      'data-ph': BLOCK_PH[b.type] || BLOCK_PH.p,
       onContextMenu: e => {
         e.preventDefault();
         e.stopPropagation();
@@ -1783,44 +9660,142 @@ function Editor({
           id: b.id
         });
       },
+      onKeyDown: blockKeyDown(b),
+      onPaste: blockPaste(b),
+      // typing "/" at the caret opens the slash menu (Notion-style) — anywhere in the
+      // block, as long as the char before the "/" is whitespace or line start;
+      // "```" / "$$" / "---" transform in place (Typora-style)
+      onInput: e => {
+        if (e.nativeEvent && e.nativeEvent.isComposing) {
+          scheduleTick();
+          return;
+        }
+        noteTyping();
+        scheduleTick();
+        const t = e.currentTarget.innerText;
+        // 斜杠菜单：任意位置输入 /（行首或前一字符为空白）都触发，不再要求块里只有「/」。
+        // IME 组合期在上面已挡；行内代码里不触发。
+        const justSlash = e.nativeEvent && (e.nativeEvent.data === '/' || e.nativeEvent.data == null && t.replace(/\n+$/, '') === '/');
+        const info = justSlash ? caretInfo(e.currentTarget) : null;
+        if (info && info.collapsed) {
+          const anchorEl = info.range.startContainer.nodeType === 1 ? info.range.startContainer : info.range.startContainer.parentElement;
+          if (!(anchorEl && anchorEl.closest && anchorEl.closest('code'))) {
+            const pre = info.range.cloneRange();
+            pre.selectNodeContents(e.currentTarget);
+            pre.setEnd(info.range.startContainer, info.range.startOffset);
+            const preText = pre.toString().replace(/\u00a0/g, ' ');
+            if (/(?:^|\s)\/$/.test(preText)) {
+              let rect;
+              try {
+                const r = window.getSelection().getRangeAt(0).getBoundingClientRect();
+                if (r && (r.left || r.top)) rect = r;
+              } catch (_) {}
+              if (!rect) rect = e.currentTarget.getBoundingClientRect();
+              setSlash({
+                x: rect.left,
+                y: rect.bottom + 6,
+                id: b.id,
+                inline: true,
+                at: preText.length
+              });
+              return;
+            }
+          }
+        }
+        if (t === '```') {
+          withSynced(s => s.map(x => x.id === b.id ? {
+            id: x.id,
+            type: 'code',
+            lang: 'python',
+            code: '',
+            _new: true
+          } : x));
+          return;
+        }
+        if (t === '$$') {
+          withSynced(s => s.map(x => x.id === b.id ? {
+            id: x.id,
+            type: 'math',
+            tex: '',
+            _new: true
+          } : x));
+          return;
+        }
+        if (t === '---') {
+          const nb = {
+            id: uid(),
+            type: 'p',
+            text: ''
+          };
+          flushSynced(s => {
+            const i = s.findIndex(x => x.id === b.id);
+            const arr = s.map(x => x.id === b.id ? {
+              id: x.id,
+              type: 'divider'
+            } : x);
+            return [...arr.slice(0, i + 1), nb, ...arr.slice(i + 1)];
+          });
+          focusBlock(nb.id, 'start');
+        }
+      },
+      // 用户选的文字颜色必须压过块类型的默认色，所以放在类型样式之后
       style: {
         outline: 'none',
-        color: TXT[b.color] || 'var(--text-1)',
-        ...style
+        ...style,
+        color: TXT[b.color] || style.color || 'var(--text-1)'
       },
       dangerouslySetInnerHTML: {
-        __html: b.text || ''
+        __html: sanHtml(b.text || '')
       }
     });
   };
-  let numCount = 0;
+  let numCounters = []; // 有序列表逐层计数（indent 层级各自续号）
   const renderInner = b => {
-    if (b.type !== 'numbered') numCount = 0;
+    if (b.type !== 'numbered') numCounters = [];
     switch (b.type) {
       case 'rich':
         return /*#__PURE__*/React.createElement("div", {
+          contentEditable: true,
+          suppressContentEditableWarning: true,
+          "data-ph": "\u4E00\u53E5\u8BDD\u6458\u8981\uFF1A\u8FD9\u9897\u661F\u5728\u60AC\u505C\u65F6\u5982\u4F55\u4ECB\u7ECD\u81EA\u5DF1\u2026",
+          onInput: scheduleTick,
+          onBlur: e => {
+            const t = e.currentTarget.innerText.trim();
+            if (t !== (star.summary || '')) {
+              star.summary = t;
+              D.touchNote(star.id);
+            }
+          },
           style: {
+            outline: 'none',
             fontSize: 16.5,
             lineHeight: 1.85,
             color: 'var(--text-2)'
           }
-        }, /*#__PURE__*/React.createElement(RichIntro, null));
+        }, star.summary);
+      // 标题上下留白：上方多、下方少（块间距 8px 统一兜底），阅读节奏对标 Notion/Typora
       case 'h1':
         return editable(b, 'div', {
           fontSize: 28,
           fontWeight: 300,
-          lineHeight: 1.3
+          lineHeight: 1.35,
+          marginTop: 18,
+          marginBottom: 2
         });
       case 'h2':
         return editable(b, 'div', {
           fontSize: 21,
           fontWeight: 300,
-          marginTop: 6
+          lineHeight: 1.45,
+          marginTop: 14,
+          marginBottom: 1
         });
       case 'h3':
         return editable(b, 'div', {
           fontSize: 17.5,
           fontWeight: 500,
+          lineHeight: 1.5,
+          marginTop: 10,
           color: 'var(--text-1)'
         });
       case 'p':
@@ -1856,13 +9831,13 @@ function Editor({
             gap: 12,
             padding: '13px 15px',
             borderRadius: 'var(--r-md)',
-            background: 'rgba(255,217,138,0.06)',
-            border: '1px solid rgba(255,217,138,0.20)'
+            background: b.tone === 'blue' ? 'rgba(159,198,255,0.06)' : 'rgba(255,217,138,0.06)',
+            border: '1px solid ' + (b.tone === 'blue' ? 'rgba(159,198,255,0.20)' : 'rgba(255,217,138,0.20)')
           }
         }, /*#__PURE__*/React.createElement(Icon, {
-          name: "lightbulb",
+          name: b.tone === 'blue' ? 'info' : 'lightbulb',
           size: 18,
-          color: "var(--gold)",
+          color: b.tone === 'blue' ? 'var(--star-blue)' : 'var(--gold)',
           style: {
             marginTop: 2
           }
@@ -1876,7 +9851,8 @@ function Editor({
         return /*#__PURE__*/React.createElement("div", {
           style: {
             display: 'flex',
-            gap: 12
+            gap: 12,
+            marginLeft: (b.indent || 0) * 24
           }
         }, /*#__PURE__*/React.createElement("span", {
           style: {
@@ -1884,7 +9860,7 @@ function Editor({
             marginTop: 11,
             width: 5,
             height: 5,
-            borderRadius: '50%',
+            borderRadius: (b.indent || 0) % 2 ? 1 : '50%',
             background: 'var(--star-blue)',
             flex: 'none'
           }
@@ -1896,12 +9872,17 @@ function Editor({
         }));
       case 'numbered':
         {
-          numCount += 1;
-          const n = numCount;
+          const lvl = b.indent || 0;
+          numCounters = numCounters.slice(0, lvl + 1);
+          if (numCounters[lvl] == null) numCounters[lvl] = 0;
+          if (numCounters[lvl] === 0 && b.start) numCounters[lvl] = b.start - 1;
+          numCounters[lvl] += 1;
+          const n = numCounters[lvl];
           return /*#__PURE__*/React.createElement("div", {
             style: {
               display: 'flex',
-              gap: 12
+              gap: 12,
+              marginLeft: lvl * 24
             }
           }, /*#__PURE__*/React.createElement("span", {
             style: {
@@ -1919,123 +9900,169 @@ function Editor({
           }));
         }
       case 'todo':
-        return /*#__PURE__*/React.createElement("div", {
-          style: {
-            display: 'flex',
-            gap: 11,
-            alignItems: 'flex-start'
-          }
-        }, /*#__PURE__*/React.createElement("span", {
-          onClick: () => setBlocks(s => s.map(x => x.id === b.id ? {
+        {
+          const toggleTodo = () => withSynced(s => s.map(x => x.id === b.id ? {
             ...x,
             checked: !x.checked
-          } : x)),
-          style: {
-            width: 18,
-            height: 18,
-            marginTop: 2,
-            borderRadius: 5,
-            flex: 'none',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            border: '1px solid',
-            borderColor: b.checked ? 'var(--gold)' : 'var(--line-strong)',
-            background: b.checked ? 'var(--gold)' : 'transparent'
-          }
-        }, b.checked && /*#__PURE__*/React.createElement(Icon, {
-          name: "check",
-          size: 12,
-          color: "var(--text-on-gold)"
-        })), editable(b, 'div', {
-          flex: 1,
-          fontSize: 16,
-          lineHeight: 1.7,
-          color: b.checked ? 'var(--text-3)' : 'var(--text-2)',
-          textDecoration: b.checked ? 'line-through' : 'none'
-        }));
+          } : x));
+          return /*#__PURE__*/React.createElement("div", {
+            style: {
+              display: 'flex',
+              gap: 11,
+              alignItems: 'flex-start',
+              marginLeft: (b.indent || 0) * 24
+            }
+          }, /*#__PURE__*/React.createElement("span", {
+            role: "checkbox",
+            tabIndex: 0,
+            "aria-checked": !!b.checked,
+            "aria-label": "\u5F85\u529E\u5B8C\u6210",
+            className: "sr-focus-ring sr-hit40",
+            onClick: toggleTodo,
+            onKeyDown: e => {
+              if (e.key === ' ' || e.key === 'Enter') {
+                e.preventDefault();
+                toggleTodo();
+              }
+            },
+            style: {
+              width: 18,
+              height: 18,
+              marginTop: 2,
+              borderRadius: 5,
+              flex: 'none',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              position: 'relative',
+              border: '1px solid',
+              borderColor: b.checked ? 'var(--gold)' : 'var(--line-strong)',
+              background: b.checked ? 'var(--gold)' : 'transparent'
+            }
+          }, b.checked && /*#__PURE__*/React.createElement(Icon, {
+            name: "check",
+            size: 12,
+            color: "var(--text-on-gold)"
+          })), editable(b, 'div', {
+            flex: 1,
+            fontSize: 16,
+            lineHeight: 1.7,
+            color: b.checked ? 'var(--text-3)' : 'var(--text-2)',
+            textDecoration: b.checked ? 'line-through' : 'none'
+          }));
+        }
       case 'toggle':
-        return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
-          style: {
-            display: 'flex',
-            gap: 8,
-            alignItems: 'flex-start'
-          }
-        }, /*#__PURE__*/React.createElement("span", {
-          onClick: () => setBlocks(s => s.map(x => x.id === b.id ? {
+        {
+          const toggleOpen = () => mutateBlocks(s => s.map(x => x.id === b.id ? {
             ...x,
             open: !x.open
-          } : x)),
-          style: {
-            marginTop: 4,
-            cursor: 'pointer',
-            transform: b.open ? 'rotate(90deg)' : 'none',
-            transition: 'transform var(--dur-fast)',
-            color: 'var(--text-3)'
-          }
-        }, /*#__PURE__*/React.createElement(Icon, {
-          name: "chevron-right",
-          size: 16,
-          color: "currentColor"
-        })), editable(b, 'div', {
-          flex: 1,
-          fontSize: 16.5,
-          lineHeight: 1.7,
-          color: 'var(--text-1)'
-        })), b.open && /*#__PURE__*/React.createElement("div", {
-          style: {
-            marginLeft: 24,
-            marginTop: 6,
-            fontSize: 15,
+          } : x));
+          return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+            style: {
+              display: 'flex',
+              gap: 8,
+              alignItems: 'flex-start'
+            }
+          }, /*#__PURE__*/React.createElement("span", {
+            role: "button",
+            tabIndex: 0,
+            "aria-expanded": !!b.open,
+            "aria-label": "\u5C55\u5F00\u6216\u6536\u8D77",
+            className: "sr-focus-ring sr-hit40",
+            onClick: toggleOpen,
+            onKeyDown: e => {
+              if (e.key === ' ' || e.key === 'Enter') {
+                e.preventDefault();
+                toggleOpen();
+              }
+            },
+            style: {
+              marginTop: 4,
+              cursor: 'pointer',
+              display: 'inline-flex',
+              position: 'relative',
+              transform: b.open ? 'rotate(90deg)' : 'none',
+              transition: 'transform var(--dur-fast)',
+              color: 'var(--text-3)'
+            }
+          }, /*#__PURE__*/React.createElement(Icon, {
+            name: "chevron-right",
+            size: 16,
+            color: "currentColor"
+          })), editable(b, 'div', {
+            flex: 1,
+            fontSize: 16.5,
             lineHeight: 1.7,
-            color: 'var(--text-2)'
-          }
-        }, b.child));
+            color: 'var(--text-1)'
+          })), b.open && /*#__PURE__*/React.createElement("div", {
+            contentEditable: true,
+            suppressContentEditableWarning: true,
+            "data-ph": "\u6298\u53E0\u5185\u5BB9\u2026",
+            onBlur: e => {
+              const h = sanHtml(e.currentTarget.innerHTML);
+              if (h !== (b.child || '')) mutateBlocks(s => s.map(x => x.id === b.id ? {
+                ...x,
+                child: h
+              } : x));
+            },
+            dangerouslySetInnerHTML: {
+              __html: sanHtml(b.child || '')
+            },
+            style: {
+              outline: 'none',
+              marginLeft: 24,
+              marginTop: 6,
+              fontSize: 15,
+              lineHeight: 1.7,
+              color: 'var(--text-2)'
+            }
+          }));
+        }
       case 'math':
-        return /*#__PURE__*/React.createElement("div", {
-          style: {
-            display: 'flex',
-            justifyContent: 'center',
-            padding: '16px 0',
-            borderRadius: 'var(--r-md)',
-            background: 'rgba(159,198,255,0.04)',
-            border: '1px solid var(--glass-border)'
-          }
-        }, /*#__PURE__*/React.createElement("span", {
-          style: {
-            fontFamily: 'var(--font-mono)',
-            fontSize: 18.5,
-            color: 'var(--text-1)',
-            letterSpacing: '0.02em'
-          }
-        }, b.tex));
+        return /*#__PURE__*/React.createElement(MathBlock, {
+          tex: b.tex,
+          autoEdit: b._new,
+          onCommit: t => mutateBlocks(s => s.map(x => x.id === b.id ? {
+            ...x,
+            tex: t,
+            _new: false
+          } : x))
+        });
       case 'code':
-        return /*#__PURE__*/React.createElement(CodeBlock, null);
+        return /*#__PURE__*/React.createElement(CodeBlock, {
+          code: b.code,
+          lang: b.lang,
+          autoEdit: b._new,
+          onCommitCode: c => mutateBlocks(s => s.map(x => x.id === b.id ? {
+            ...x,
+            code: c,
+            _new: false
+          } : x)),
+          onCommitLang: lg => mutateBlocks(s => s.map(x => x.id === b.id ? {
+            ...x,
+            lang: lg
+          } : x)),
+          onCopyFail: () => flash('复制失败 · 请手动选择代码复制')
+        });
       case 'table':
-        return /*#__PURE__*/React.createElement(DataTable, null);
+        return /*#__PURE__*/React.createElement(DataTable, {
+          head: b.head,
+          rows: b.rows,
+          onCommit: (head, rows) => mutateBlocks(s => s.map(x => x.id === b.id ? {
+            ...x,
+            head,
+            rows
+          } : x))
+        });
       case 'image':
-        return /*#__PURE__*/React.createElement("div", {
-          style: {
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: 8,
-            height: 120,
-            borderRadius: 'var(--r-md)',
-            border: '1px dashed var(--line-strong)',
-            color: 'var(--text-3)'
-          }
-        }, /*#__PURE__*/React.createElement(Icon, {
-          name: "image",
-          size: 22,
-          color: "currentColor"
-        }), /*#__PURE__*/React.createElement("span", {
-          style: {
-            fontSize: 13
-          }
-        }, "\u62D6\u5165\u56FE\u7247\uFF0C\u6216\u70B9\u51FB\u4E0A\u4F20"));
+        return /*#__PURE__*/React.createElement(ImageBlock, {
+          b: b,
+          onSrc: src => mutateBlocks(s => s.map(x => x.id === b.id ? {
+            ...x,
+            src
+          } : x))
+        });
       case 'divider':
         return /*#__PURE__*/React.createElement("div", {
           style: {
@@ -2049,6 +10076,7 @@ function Editor({
     }
   };
   return /*#__PURE__*/React.createElement("div", {
+    onContextMenu: e => e.preventDefault(),
     style: {
       position: 'relative',
       flex: 1,
@@ -2056,11 +10084,37 @@ function Editor({
       display: 'flex',
       overflow: 'hidden'
     }
-  }, /*#__PURE__*/React.createElement("sr-starfield", {
+  }, /*#__PURE__*/React.createElement("style", null, `
+        /* 1024–1180px：正文优先——右侧知识栏让位，状态栏铺满 */
+        @media (max-width: 1180px) {
+          .sr-ed-rail { display: none; }
+          .sr-ed-status { right: 0 !important; }
+        }
+        /* 小宽度下按优先级收敛状态栏低价值项，别把「UTF-8」硬截成「UTF-」 */
+        @media (max-width: 1280px) {
+          .sr-ed-status-opt { display: none !important; }
+        }
+        /* 查找条：右栏让位时跟着贴边 */
+        @media (max-width: 1180px) {
+          .sr-ed-find { right: 24px !important; }
+        }
+        /* 笔记内查找高亮（CSS Custom Highlight，不进块 DOM / 不进持久化） */
+        ::highlight(sr-find) { background: color-mix(in srgb, var(--star-blue) 25%, transparent); }
+        ::highlight(sr-find-cur) { background: color-mix(in srgb, var(--star-blue) 55%, transparent); }
+        /* 正文空块的引导文案：只在光标所在块淡入（其余空块保持安静的黑） */
+        .sr-blk-ph:empty:before { opacity: 0; transition: opacity 160ms var(--ease-flight); }
+        .sr-blk-ph:empty:focus:before { opacity: 1; }
+        @media (prefers-reduced-motion: reduce) { .sr-blk-ph:empty:before { transition: none; } }
+        /* 保存中指示的旋转——只表状态，reduced-motion / 设置关动效时静止 */
+        @keyframes sr-ed-spin { to { transform: rotate(360deg); } }
+        @media (prefers-reduced-motion: reduce) { .sr-ed-spin { animation: none !important; } }
+      `), /*#__PURE__*/React.createElement("sr-starfield", {
     density: "0.4"
   }), /*#__PURE__*/React.createElement("div", {
     ref: scrollRef,
     onMouseUp: onMouseUp,
+    onDragOver: onEditorDragOver,
+    onDrop: onEditorDrop,
     style: {
       flex: 1,
       minWidth: 0,
@@ -2105,38 +10159,28 @@ function Editor({
       width: 7,
       height: 7,
       borderRadius: '50%',
-      background: D.conColor(star.con),
-      boxShadow: `0 0 7px ${D.conColor(star.con)}`
+      background: D.conColor(con),
+      boxShadow: `0 0 7px ${D.conColor(con)}`
     }
-  }), D.conName(star.con)), /*#__PURE__*/React.createElement("div", {
+  }), D.conName(con)), /*#__PURE__*/React.createElement("div", {
     style: {
       flex: 1
     }
-  }), /*#__PURE__*/React.createElement("span", {
-    style: {
-      display: 'inline-flex',
-      alignItems: 'center',
-      gap: 6,
-      fontSize: 12,
-      color: 'var(--text-3)',
-      whiteSpace: 'nowrap',
-      flex: 'none'
-    }
-  }, /*#__PURE__*/React.createElement(Icon, {
-    name: "check",
-    size: 14,
-    color: "var(--gold)"
-  }), "\u5DF2\u81EA\u52A8\u4FDD\u5B58"), /*#__PURE__*/React.createElement(IconButton, {
+  }), /*#__PURE__*/React.createElement(IconButton, {
     name: "star",
-    title: "\u6536\u85CF"
+    active: fav,
+    title: fav ? '已收藏 · 点击取消' : '收藏这颗星',
+    onClick: toggleFav
   }), /*#__PURE__*/React.createElement(IconButton, {
     name: "more-horizontal",
     title: "\u66F4\u591A",
-    onClick: e => setCtx({
-      x: e.clientX - 200,
-      y: e.clientY + 8,
-      id: blocks[0].id
-    })
+    onClick: e => {
+      const r = e.currentTarget.getBoundingClientRect();
+      setMore({
+        x: r.right,
+        y: r.bottom + 6
+      });
+    }
   })), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
@@ -2145,11 +10189,41 @@ function Editor({
       marginBottom: 16,
       flexWrap: 'wrap'
     }
-  }, /*#__PURE__*/React.createElement(Tag, {
-    icon: "hash"
-  }, "\u63A8\u5BFC"), /*#__PURE__*/React.createElement(Tag, {
-    icon: "hash"
-  }, "\u8003\u70B9"), /*#__PURE__*/React.createElement("span", {
+  }, tags.map(t => /*#__PURE__*/React.createElement(TagChip, {
+    key: t,
+    label: t,
+    onRemove: () => removeTag(t)
+  })), addingTag ? /*#__PURE__*/React.createElement("input", {
+    autoFocus: true,
+    value: tagDraft,
+    onChange: e => setTagDraft(e.target.value),
+    onBlur: commitTag,
+    onKeyDown: e => {
+      if (e.key === 'Enter') commitTag();
+      if (e.key === 'Escape') {
+        setTagDraft('');
+        setAddingTag(false);
+      }
+    },
+    placeholder: "\u6807\u7B7E\u540D\u2026",
+    style: {
+      height: 26,
+      width: 96,
+      boxSizing: 'border-box',
+      background: 'var(--input-bg, rgba(3,4,12,0.45))',
+      border: '1px solid var(--glass-border-strong)',
+      borderRadius: 'var(--r-pill)',
+      color: 'var(--text-1)',
+      fontSize: 12.5,
+      padding: '0 10px',
+      outline: 'none',
+      fontFamily: 'var(--font-sans)'
+    }
+  }) : /*#__PURE__*/React.createElement("span", {
+    onClick: () => {
+      setTagDraft('');
+      setAddingTag(true);
+    },
     style: {
       display: 'inline-flex',
       alignItems: 'center',
@@ -2176,11 +10250,21 @@ function Editor({
       fontSize: 11,
       color: 'var(--text-3)'
     }
-  }, "\u521B\u5EFA 5/12 \xB7 \u7F16\u8F91 2h"), /*#__PURE__*/React.createElement(Badge, {
-    tone: "gold"
-  }, "Lv.4")), /*#__PURE__*/React.createElement("div", {
+  }, "\u7F16\u8F91\u4E8E ", (() => {
+    const n = D.notes.find(x => x.id === star.id) || {};
+    return n.editedTs ? D.ago(n.editedTs) : n.edited || '刚刚';
+  })())), /*#__PURE__*/React.createElement("div", {
     contentEditable: true,
     suppressContentEditableWarning: true,
+    "data-ph": "\u65E0\u6807\u9898",
+    onBlur: e => {
+      const t = e.currentTarget.textContent.trim();
+      if (t && t !== star.label) {
+        D.renameStar(star.id, t);
+        bumpTick();
+        flash('已重命名');
+      } else if (!t) e.currentTarget.textContent = star.label;
+    },
     style: {
       outline: 'none',
       fontSize: 32,
@@ -2191,17 +10275,50 @@ function Editor({
       marginBottom: 20,
       lineHeight: 1.2
     }
-  }, star.label), /*#__PURE__*/React.createElement(Properties, null), /*#__PURE__*/React.createElement("div", {
+  }, star.label), /*#__PURE__*/React.createElement(Properties, {
+    props: star.props = star.props || {},
+    onFlash: flash,
+    onConfirm: setConfirm,
+    onCommit: () => {
+      D.touchNote(star.id);
+      bumpTick();
+    }
+  }), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       flexDirection: 'column',
-      gap: 8
+      gap: 8,
+      userSelect: dragBlk ? 'none' : 'auto'
     },
     onMouseLeave: () => setHover(null)
-  }, blocks.map((b, idx) => /*#__PURE__*/React.createElement("div", {
+  }, blocks.length === 0 && /*#__PURE__*/React.createElement("div", {
+    role: "button",
+    tabIndex: 0,
+    className: "sr-focus-ring",
+    onClick: seedFirstBlock,
+    onKeyDown: e => {
+      if (e.key === 'Enter' || e.key === ' ' || e.key === '/') {
+        e.preventDefault();
+        seedFirstBlock();
+      }
+    },
+    style: {
+      padding: '14px 8px',
+      margin: '0 -8px',
+      borderRadius: 'var(--r-sm)',
+      color: 'var(--text-3)',
+      cursor: 'text',
+      fontSize: 16.5,
+      lineHeight: 1.85
+    }
+  }, "\u5199\u4E0B\u7B2C\u4E00\u884C\uFF0C\u6216\u6309 / \u9009\u62E9\u5757\u7C7B\u578B\u2026"), blocks.map((b, bi) => /*#__PURE__*/React.createElement("div", {
     key: b.id,
     id: 'blk-' + b.id,
     onMouseEnter: () => setHover(b.id),
+    onFocus: () => setFocusBlk(b.id),
+    onBlur: e => {
+      if (!e.currentTarget.contains(e.relatedTarget)) setFocusBlk(f => f === b.id ? null : f);
+    },
     onContextMenu: e => {
       e.preventDefault();
       setCtx({
@@ -2213,9 +10330,13 @@ function Editor({
     style: {
       position: 'relative',
       borderRadius: 'var(--r-sm)',
-      padding: b.bg && b.bg !== 'none' ? '8px 12px' : '2px 0',
-      background: hover === b.id ? b.bg && b.bg !== 'none' ? BG[b.bg] : 'rgba(159,198,255,0.025)' : b.bg ? BG[b.bg] : 'transparent',
-      transition: 'background var(--dur-fast)'
+      padding: b.bg && b.bg !== 'none' ? '8px 12px' : '2px 8px',
+      margin: b.bg && b.bg !== 'none' ? 0 : '0 -8px',
+      background: focusBlk === b.id ? b.bg && b.bg !== 'none' ? BG[b.bg] : 'rgba(159,198,255,0.07)' : hover === b.id ? b.bg && b.bg !== 'none' ? BG[b.bg] : 'rgba(159,198,255,0.025)' : b.bg ? BG[b.bg] : 'transparent',
+      opacity: dragBlk === b.id ? 0.4 : 1,
+      // 选中态：整块包围的高亮环，一眼看清光标在哪个块里
+      boxShadow: dragBlk && dragBlk !== b.id && dropIdx === bi ? 'inset 0 2px 0 var(--gold)' : pendingAtomicDel === b.id ? '0 0 0 1.5px var(--danger)' : focusBlk === b.id ? '0 0 0 1.5px var(--focus), 0 0 14px color-mix(in srgb, var(--focus) 24%, transparent)' : 'none',
+      transition: 'background var(--dur-fast), opacity var(--dur-fast), box-shadow var(--dur-fast)'
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
@@ -2224,8 +10345,10 @@ function Editor({
       top: 1,
       display: 'flex',
       gap: 1,
-      opacity: hover === b.id ? 1 : 0,
-      transition: 'opacity var(--dur-fast)'
+      opacity: hover === b.id || focusBlk === b.id ? 1 : 0,
+      transform: hover === b.id || focusBlk === b.id ? 'none' : 'translateX(-5px)',
+      pointerEvents: hover === b.id || focusBlk === b.id ? 'auto' : 'none',
+      transition: 'opacity 180ms var(--ease-flight), transform 180ms var(--ease-flight)'
     }
   }, /*#__PURE__*/React.createElement(Handle, {
     icon: "plus",
@@ -2233,34 +10356,17 @@ function Editor({
     onClick: () => insertAfter(b.id)
   }), /*#__PURE__*/React.createElement(Handle, {
     icon: "grip-vertical",
-    title: "\u62D6\u52A8 \xB7 \u53F3\u952E\u6253\u5F00\u83DC\u5355",
-    onClick: e => setCtx({
-      x: e.clientX,
-      y: e.clientY,
-      id: b.id
-    })
-  })), renderInner(b)))), /*#__PURE__*/React.createElement("div", {
-    onClick: e => setSlash({
-      x: e.clientX,
-      y: e.clientY,
-      id: blocks[blocks.length - 1].id
-    }),
+    title: "\u62D6\u52A8\u6392\u5E8F \xB7 \u70B9\u51FB\u6253\u5F00\u83DC\u5355 \xB7 Alt+\u2191\u2193 \u79FB\u52A8",
+    onMouseDown: e => startDrag(e, b.id)
+  })), renderInner(b))), dragBlk && dropIdx === blocks.length && /*#__PURE__*/React.createElement("div", {
     style: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: 8,
-      color: 'var(--text-3)',
-      fontSize: 16,
-      cursor: 'text',
-      minHeight: 30,
-      marginTop: 8
+      height: 2,
+      background: 'var(--gold)',
+      borderRadius: 1,
+      boxShadow: 'var(--glow-gold-soft)'
     }
-  }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      color: 'var(--star-blue)',
-      opacity: 0.7
-    }
-  }, "/"), " \u8F93\u5165\u659C\u6760\u5524\u8D77\u547D\u4EE4\u2026"))), /*#__PURE__*/React.createElement("aside", {
+  })))), /*#__PURE__*/React.createElement("aside", {
+    className: "sr-ed-rail",
     style: {
       width: 312,
       flex: 'none',
@@ -2289,37 +10395,53 @@ function Editor({
       flexDirection: 'column',
       gap: 1
     }
-  }, /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    className: "sr-focus-ring",
     onClick: () => scrollRef.current && scrollRef.current.scrollTo({
       top: 0,
       behavior: 'smooth'
     }),
     style: {
+      display: 'block',
+      width: '100%',
+      textAlign: 'left',
+      font: 'inherit',
+      background: 'transparent',
       padding: '5px 10px',
       borderRadius: 'var(--r-sm)',
+      border: 'none',
+      borderLeft: '2px solid var(--gold)',
       cursor: 'pointer',
       fontSize: 13,
-      color: 'var(--text-1)',
-      borderLeft: '2px solid var(--gold)'
+      color: 'var(--text-1)'
     }
-  }, star.label), outline.map(o => /*#__PURE__*/React.createElement("div", {
+  }, star.label), outline.map(o => /*#__PURE__*/React.createElement("button", {
+    type: "button",
     key: o.id,
+    className: "sr-focus-ring",
     onClick: () => scrollToBlock(o.id),
     style: {
+      display: 'block',
+      width: '100%',
+      textAlign: 'left',
+      font: 'inherit',
+      background: 'transparent',
+      border: 'none',
       padding: '5px 10px',
       paddingLeft: o.type === 'h3' ? 30 : 18,
       borderRadius: 'var(--r-sm)',
+      borderLeft: '2px solid var(--line)',
       cursor: 'pointer',
       fontSize: 12.5,
-      color: 'var(--text-2)',
-      borderLeft: '2px solid var(--line)'
+      color: 'var(--text-2)'
     },
     onMouseEnter: e => e.currentTarget.style.background = 'rgba(159,198,255,0.06)',
     onMouseLeave: e => e.currentTarget.style.background = 'transparent'
-  }, o.text)))), /*#__PURE__*/React.createElement("section", null, /*#__PURE__*/React.createElement(RailHead, {
+  }, o.live)))), /*#__PURE__*/React.createElement("section", null, /*#__PURE__*/React.createElement(RailHead, {
     icon: "waypoints",
     title: "\u8FDE\u63A5\u7684\u661F",
-    extra: links.length
+    extra: connected.length
   }), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
@@ -2327,13 +10449,16 @@ function Editor({
       gap: 8,
       marginTop: 10
     }
-  }, links.map((l, i) => /*#__PURE__*/React.createElement("div", {
-    key: l.id,
+  }, connected.map((l, i) => /*#__PURE__*/React.createElement("div", {
+    key: l.star.id + i,
+    onMouseEnter: () => setHoverConn(i),
+    onMouseLeave: () => setHoverConn(null),
     style: {
+      position: 'relative',
       padding: '10px 12px',
       borderRadius: 'var(--r-md)',
       background: 'rgba(159,198,255,0.04)',
-      border: '1px solid var(--glass-border)'
+      border: '1px solid ' + (l.kind === 'cross' ? 'rgba(255,217,138,0.22)' : 'var(--glass-border)')
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
@@ -2345,21 +10470,236 @@ function Editor({
   }, /*#__PURE__*/React.createElement(Icon, {
     name: "link",
     size: 13,
-    color: "var(--star-blue)"
+    color: l.kind === 'cross' ? 'var(--gold)' : 'var(--star-blue)'
   }), /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 13.5,
       color: 'var(--text-1)'
     }
-  }, l.label)), /*#__PURE__*/React.createElement("div", {
+  }, l.star.label), l.kind === 'cross' && /*#__PURE__*/React.createElement("span", {
+    style: {
+      marginLeft: 'auto',
+      fontSize: 10,
+      color: 'var(--gold)'
+    }
+  }, "\u878D\u4F1A\u8D2F\u901A"), /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    title: "\u65AD\u5F00\u8FDE\u63A5",
+    className: "sr-focus-ring sr-hit40",
+    onClick: () => removeConnection(l),
+    onFocus: () => setHoverConn(i),
+    onBlur: () => setHoverConn(null),
+    style: {
+      marginLeft: l.kind === 'cross' ? 6 : 'auto',
+      flex: 'none',
+      width: 20,
+      height: 20,
+      position: 'relative',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      border: 'none',
+      background: 'transparent',
+      cursor: 'pointer',
+      color: 'var(--text-3)',
+      opacity: hoverConn === i ? 1 : 0,
+      transition: 'opacity var(--dur-fast)'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "unlink",
+    size: 13,
+    color: "currentColor"
+  }))), /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 11.5,
       color: 'var(--text-3)',
       lineHeight: 1.5,
       paddingLeft: 21
     }
-  }, ['是其推导的前提条件', '提供了实验判据', '在同一框架下统一'][i] || '相关概念'))), /*#__PURE__*/React.createElement("button", {
+  }, l.rel))), linking ? /*#__PURE__*/React.createElement("div", {
+    style: {
+      borderRadius: 'var(--r-md)',
+      border: '1px solid var(--glass-border-strong)',
+      background: 'var(--input-bg, rgba(3,4,12,0.45))',
+      overflow: 'hidden'
+    }
+  }, linkStar ? /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: '10px 12px'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 7,
+      marginBottom: 9,
+      fontSize: 12.5,
+      color: 'var(--text-2)'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      width: 7,
+      height: 7,
+      borderRadius: '50%',
+      background: D.conColor(linkStar.con),
+      boxShadow: `0 0 6px ${D.conColor(linkStar.con)}`
+    }
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: 'var(--text-1)'
+    }
+  }, linkStar.label), /*#__PURE__*/React.createElement("span", {
+    style: {
+      marginLeft: 'auto',
+      fontSize: 10,
+      color: linkStar.con === con ? 'var(--star-blue)' : 'var(--gold)'
+    }
+  }, linkStar.con === con ? '同一星域' : '融会贯通')), /*#__PURE__*/React.createElement("input", {
+    autoFocus: true,
+    value: relDraft,
+    onChange: e => setRelDraft(e.target.value),
+    onKeyDown: e => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        addConnection(linkStar, relDraft);
+      }
+      if (e.key === 'Escape') resetLinking();
+    },
+    placeholder: "\u5199\u4E00\u53E5\u5173\u7CFB\uFF0C\u4F8B\u5982\u300C\u662F\u5176\u7279\u4F8B\u300D\u2026",
+    style: {
+      width: '100%',
+      boxSizing: 'border-box',
+      background: 'var(--input-bg, rgba(3,4,12,0.45))',
+      border: '1px solid var(--glass-border-strong)',
+      borderRadius: 'var(--r-sm)',
+      color: 'var(--text-1)',
+      fontSize: 12.5,
+      padding: '7px 10px',
+      outline: 'none',
+      fontFamily: 'var(--font-sans)'
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      gap: 8,
+      justifyContent: 'flex-end',
+      marginTop: 10
+    }
+  }, /*#__PURE__*/React.createElement("button", {
     type: "button",
+    onClick: resetLinking,
+    style: {
+      height: 28,
+      padding: '0 13px',
+      borderRadius: 'var(--r-pill)',
+      border: '1px solid var(--glass-border-strong)',
+      background: 'transparent',
+      color: 'var(--text-2)',
+      fontSize: 12,
+      cursor: 'pointer',
+      fontFamily: 'var(--font-sans)'
+    }
+  }, "\u53D6\u6D88"), /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    onClick: () => addConnection(linkStar, relDraft),
+    style: {
+      height: 28,
+      padding: '0 13px',
+      borderRadius: 'var(--r-pill)',
+      border: '1px solid var(--glass-border-strong)',
+      background: 'rgba(159,198,255,0.14)',
+      color: 'var(--text-1)',
+      fontSize: 12,
+      cursor: 'pointer',
+      fontFamily: 'var(--font-sans)'
+    }
+  }, "\u5EFA\u7ACB\u8FDE\u63A5"))) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 10,
+      letterSpacing: 'var(--ls-hud)',
+      textTransform: 'uppercase',
+      color: 'var(--text-3)',
+      padding: '8px 12px 4px',
+      fontFamily: 'var(--font-mono)'
+    }
+  }, "\u9009\u62E9\u8981\u8FDE\u63A5\u7684\u661F"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      maxHeight: 180,
+      overflow: 'auto'
+    },
+    onContextMenu: e => e.preventDefault()
+  }, linkCandidates.length === 0 && /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: '8px 12px',
+      fontSize: 12,
+      color: 'var(--text-3)'
+    }
+  }, "\u6CA1\u6709\u53EF\u8FDE\u63A5\u7684\u661F\u4E86\u3002"), linkCandidates.map(s => /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    key: s.id,
+    className: "sr-focus-ring",
+    onClick: () => {
+      setLinkStar(s);
+      setRelDraft('');
+    },
+    style: {
+      display: 'flex',
+      width: '100%',
+      textAlign: 'left',
+      font: 'inherit',
+      border: 'none',
+      background: 'transparent',
+      alignItems: 'center',
+      gap: 8,
+      padding: '7px 12px',
+      cursor: 'pointer'
+    },
+    onMouseEnter: e => e.currentTarget.style.background = 'rgba(159,198,255,0.08)',
+    onMouseLeave: e => e.currentTarget.style.background = 'transparent',
+    onFocus: e => e.currentTarget.style.background = 'rgba(159,198,255,0.08)',
+    onBlur: e => e.currentTarget.style.background = 'transparent'
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      width: 7,
+      height: 7,
+      borderRadius: '50%',
+      background: D.conColor(s.con),
+      boxShadow: `0 0 6px ${D.conColor(s.con)}`
+    }
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 13,
+      color: 'var(--text-2)'
+    }
+  }, s.label), /*#__PURE__*/React.createElement("span", {
+    style: {
+      marginLeft: 'auto',
+      fontSize: 10.5,
+      color: 'var(--text-3)'
+    }
+  }, D.conName(s.con))))), /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    className: "sr-focus-ring",
+    onClick: resetLinking,
+    style: {
+      display: 'block',
+      width: '100%',
+      textAlign: 'left',
+      font: 'inherit',
+      background: 'transparent',
+      padding: '7px 12px',
+      fontSize: 12,
+      color: 'var(--text-3)',
+      cursor: 'pointer',
+      border: 'none',
+      borderTop: '1px solid var(--line)'
+    }
+  }, "\u53D6\u6D88"))) : /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    onClick: () => {
+      setLinking(true);
+      setLinkStar(null);
+    },
     style: {
       display: 'flex',
       alignItems: 'center',
@@ -2387,8 +10727,13 @@ function Editor({
       gap: 8,
       marginTop: 10
     }
-  }, backlinks.map((b, i) => /*#__PURE__*/React.createElement("div", {
-    key: b.id,
+  }, backlinks.length === 0 && /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: 'var(--text-3)'
+    }
+  }, "\u6682\u65E0\u5176\u5B83\u661F\u6307\u5411\u8FD9\u91CC\u3002"), backlinks.map((b, i) => /*#__PURE__*/React.createElement("div", {
+    key: b.star.id + i,
     style: {
       padding: '10px 12px',
       borderRadius: 'var(--r-md)',
@@ -2406,8 +10751,8 @@ function Editor({
       width: 7,
       height: 7,
       borderRadius: '50%',
-      background: D.conColor(b.con),
-      boxShadow: `0 0 7px ${D.conColor(b.con)}`,
+      background: D.conColor(b.star.con),
+      boxShadow: `0 0 7px ${D.conColor(b.star.con)}`,
       flex: 'none'
     }
   }), /*#__PURE__*/React.createElement("span", {
@@ -2415,13 +10760,13 @@ function Editor({
       fontSize: 13.5,
       color: 'var(--text-1)'
     }
-  }, b.label), /*#__PURE__*/React.createElement("span", {
+  }, b.star.label), /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 11,
       color: 'var(--text-3)',
       marginLeft: 'auto'
     }
-  }, D.conName(b.con))), /*#__PURE__*/React.createElement("div", {
+  }, D.conName(b.star.con))), /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 11.5,
       color: 'var(--text-3)',
@@ -2429,73 +10774,117 @@ function Editor({
       lineHeight: 1.6,
       paddingLeft: 15
     }
-  }, "\u2026\u5176\u63A8\u5BFC\u76F4\u63A5\u5F15\u7528\u4E86 ", /*#__PURE__*/React.createElement("span", {
+  }, "\u2026", b.rel, "\uFF0C\u5F15\u7528\u4E86 ", /*#__PURE__*/React.createElement("span", {
     style: {
       color: 'var(--star-blue)',
       background: 'rgba(159,198,255,0.10)',
       padding: '0 4px',
       borderRadius: 3
     }
-  }, "[[", star.label, "]]"), " \u7ED9\u51FA\u7684\u7EDF\u8BA1\u4E0A\u9650\u3002"))))), /*#__PURE__*/React.createElement("section", null, /*#__PURE__*/React.createElement(RailHead, {
+  }, "[[", star.label, "]]"), "\u3002"))))), /*#__PURE__*/React.createElement("section", null, /*#__PURE__*/React.createElement(RailHead, {
     icon: "zap",
     title: "\u8BB0\u5FC6"
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginTop: 10,
-      padding: 14,
-      borderRadius: 'var(--r-md)',
-      background: 'rgba(255,217,138,0.05)',
-      border: '1px solid rgba(255,217,138,0.18)'
-    }
-  }, /*#__PURE__*/React.createElement(MemoryBar, {
-    value: star.strength,
-    showPct: true
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: 7,
-      marginTop: 12,
-      fontSize: 12,
-      color: 'var(--text-2)'
-    }
-  }, /*#__PURE__*/React.createElement(Icon, {
-    name: "calendar-clock",
-    size: 14,
-    color: "var(--gold)"
-  }), "\u9057\u5FD8\u66F2\u7EBF\u9884\u8BA1 ", /*#__PURE__*/React.createElement("b", {
-    style: {
-      color: 'var(--gold)',
-      fontWeight: 500
-    }
-  }, "6 \u5929\u540E"), " \u590D\u4E60"))), /*#__PURE__*/React.createElement("section", null, /*#__PURE__*/React.createElement(RailHead, {
+  }), (() => {
+    // 认证态与点亮门槛都从数据层派生（tick / sr-memory 触发重读），不在编辑器另存状态
+    const litSt = !!(D.isLit && D.isLit(star));
+    const emberSt = !!(D.isEmber && D.isEmber(star));
+    const substantial = D.hasSubstance ? D.hasSubstance(star) : true;
+    const sumLen = String(star.summary || '').replace(/\s+/g, '').length;
+    const textyN = (star.body || []).filter(b => b && !['rich', 'divider', 'code'].includes(b.type) && String(b.text || b.tex || '').trim()).length;
+    return /*#__PURE__*/React.createElement("div", {
+      style: {
+        marginTop: 10,
+        padding: 14,
+        borderRadius: 'var(--r-md)',
+        background: 'rgba(255,217,138,0.05)',
+        border: '1px solid rgba(255,217,138,0.18)'
+      }
+    }, /*#__PURE__*/React.createElement(MemoryBar, {
+      value: star.strength,
+      showPct: true
+    }), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: 7,
+        marginTop: 12,
+        fontSize: 12,
+        color: 'var(--text-2)'
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "calendar-clock",
+      size: 14,
+      color: "var(--gold)"
+    }), "\u9057\u5FD8\u66F2\u7EBF\u9884\u8BA1 ", /*#__PURE__*/React.createElement("b", {
+      style: {
+        color: 'var(--gold)',
+        fontWeight: 500
+      }
+    }, star.props && star.props.nextReview || '6 天后'), " \u590D\u4E60"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        height: 1,
+        background: 'var(--line)',
+        margin: '12px 0'
+      }
+    }), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: 7,
+        fontSize: 12.5,
+        color: litSt ? 'var(--gold)' : emberSt ? 'var(--gold-warm)' : 'var(--text-2)'
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      "aria-hidden": "true",
+      style: {
+        flex: 'none',
+        width: 10,
+        height: 10,
+        borderRadius: '50%',
+        boxSizing: 'border-box',
+        border: litSt ? '1px solid var(--gold)' : emberSt ? '1px solid color-mix(in srgb, var(--gold-warm) 55%, transparent)' : '1px solid var(--line-strong)'
+      }
+    }), litSt ? `已点亮 · ${D.ago(star.sr && star.sr.lit)}` : emberSt ? '待重燃' : '未点亮'), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 11.5,
+        color: 'var(--text-3)',
+        lineHeight: 1.7,
+        marginTop: 6
+      }
+    }, litSt ? '已点亮 · 讲清楚的东西，暗得更慢。' : emberSt ? '曾点亮的星暗了下来。再讲透一次，就能重燃。' : '讲清楚一次，这颗星才会真正点亮——点亮的星记得更久。'), !litSt && /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        alignItems: 'flex-start',
+        gap: 6,
+        fontSize: 11,
+        color: substantial ? 'var(--text-2)' : 'var(--text-3)',
+        lineHeight: 1.6,
+        marginTop: 8
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: substantial ? 'check' : 'pen-line',
+      size: 12,
+      color: substantial ? 'var(--gold)' : 'currentColor'
+    }), /*#__PURE__*/React.createElement("span", null, substantial ? emberSt ? '内容已足够 · 讲给 AI 学生，就能重燃' : '内容已足够 · 讲给 AI 学生，就能点亮' : `点亮门槛：摘要 ${Math.min(sumLen, 20)}/20 字，或有内容的块 ${Math.min(textyN, 2)}/2`)));
+  })()), /*#__PURE__*/React.createElement("section", null, /*#__PURE__*/React.createElement(RailHead, {
     icon: "crosshair",
     title: "\u5728\u661F\u56FE\u4E2D\u5B9A\u4F4D"
+  }), /*#__PURE__*/React.createElement(MiniStarMap, {
+    currentId: star.id,
+    onPick: s => setExplore({
+      id: s.id,
+      label: s.label,
+      con: s.con
+    })
   }), /*#__PURE__*/React.createElement("div", {
     style: {
-      marginTop: 10,
-      height: 132,
-      borderRadius: 'var(--r-md)',
-      border: '1px solid var(--glass-border)',
-      position: 'relative',
-      overflow: 'hidden',
-      background: 'radial-gradient(120% 100% at 40% 40%, rgba(26,35,80,0.5), transparent 60%)'
+      marginTop: 8,
+      fontSize: 11,
+      color: 'var(--text-3)',
+      lineHeight: 1.6
     }
-  }, D.stars.map(s => /*#__PURE__*/React.createElement("span", {
-    key: s.id,
-    style: {
-      position: 'absolute',
-      left: `${s.x}%`,
-      top: `${s.y}%`,
-      transform: 'translate(-50%,-50%)',
-      width: s.id === star.id ? 8 : 3.5,
-      height: s.id === star.id ? 8 : 3.5,
-      borderRadius: '50%',
-      background: s.id === star.id ? 'var(--gold)' : s.strength > 0.7 ? '#ffe096' : '#9fc6ff',
-      boxShadow: s.id === star.id ? '0 0 10px var(--gold)' : 'none',
-      opacity: s.id === star.id ? 1 : 0.5
-    }
-  })))))), /*#__PURE__*/React.createElement("div", {
+  }, "\u70B9\u51FB\u4EFB\u610F\u661F\uFF0C\u8DC3\u8FC1\u5230\u661F\u56FE\u4E2D\u63A2\u7D22\u5B83\u7684\u661F\u7CFB\u3002")))), /*#__PURE__*/React.createElement("div", {
+    className: "sr-ed-status",
     style: {
       position: 'absolute',
       bottom: 0,
@@ -2526,7 +10915,10 @@ function Editor({
     name: "layout-list",
     size: 13,
     color: "currentColor"
-  }), blocks.length, " \u5757"), /*#__PURE__*/React.createElement("span", null, charCount, " \u5B57"), /*#__PURE__*/React.createElement("span", {
+  }), blocks.length, " \u5757"), /*#__PURE__*/React.createElement("span", {
+    title: "\u4E2D\u6587\u6309\u5B57\u3001\u897F\u6587\u6309\u8BCD\u5206\u522B\u7EDF\u8BA1\uFF08\u542B\u8868\u683C / \u516C\u5F0F / \u6298\u53E0\u5185\u5BB9\uFF09"
+  }, cjkCount, " \u5B57", wordCount > 0 ? ' · ' + wordCount + ' 词' : ''), /*#__PURE__*/React.createElement("span", {
+    title: '正文与代码分别折算' + (codeLines ? '（含 ' + codeLines + ' 行代码）' : ''),
     style: {
       display: 'inline-flex',
       alignItems: 'center',
@@ -2540,7 +10932,20 @@ function Editor({
     style: {
       flex: 1
     }
-  }), /*#__PURE__*/React.createElement("span", {
+  }), /*#__PURE__*/React.createElement(SaveStatus, null), /*#__PURE__*/React.createElement("span", {
+    className: "sr-ed-status-opt",
+    title: "\u2318F \u5728\u8FD9\u7BC7\u7B14\u8BB0\u5185\u67E5\u627E / \u66FF\u6362",
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 6
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "search",
+    size: 12,
+    color: "currentColor"
+  }), "\u2318F \u67E5\u627E"), /*#__PURE__*/React.createElement("span", {
+    title: "\u2318K \u6253\u5F00\u547D\u4EE4\u9762\u677F\uFF1B\u5728\u7F16\u8F91\u5668\u5185\u9009\u4E2D\u6587\u5B57\u65F6 \u2318K \u4E3A\u300C\u6DFB\u52A0\u94FE\u63A5\u300D",
     style: {
       display: 'inline-flex',
       alignItems: 'center',
@@ -2550,7 +10955,9 @@ function Editor({
     name: "command",
     size: 13,
     color: "currentColor"
-  }), "\u2318P \u547D\u4EE4"), /*#__PURE__*/React.createElement("span", null, "Markdown"), /*#__PURE__*/React.createElement("span", null, "UTF-8")), ctx && /*#__PURE__*/React.createElement(ContextMenu, {
+  }), "\u2318K \u547D\u4EE4 \xB7 \u9009\u4E2D\u6587\u5B57\u65F6\u4E3A\u94FE\u63A5"), /*#__PURE__*/React.createElement("span", {
+    className: "sr-ed-status-opt"
+  }, "Markdown")), ctx && /*#__PURE__*/React.createElement(ContextMenu, {
     x: ctx.x,
     y: ctx.y,
     constellations: D.constellations,
@@ -2559,14 +10966,78 @@ function Editor({
   }), slash && /*#__PURE__*/React.createElement(SlashMenu, {
     x: slash.x,
     y: slash.y,
-    onClose: () => setSlash(null),
-    onPick: t => {
-      insertAfter(slash.id, t);
+    onClose: () => {
+      const sid = slash.id,
+        at = slash.at;
       setSlash(null);
+      const a = document.activeElement;
+      // 不选直接关：保留输入的「/」，光标回到它后面继续打字
+      if (sid && refs.current[sid] && (!a || a === document.body)) {
+        if (at != null) focusBlockAt(sid, at);else focusBlock(sid, 'end');
+      }
+    },
+    onPick: t => {
+      const sid = slash.id,
+        inline = slash.inline,
+        at = slash.at;
+      setSlash(null);
+      if (inline) {
+        const el = refs.current[sid];
+        const bare = el && el.innerText.replace(/\n+$/, '') === '/';
+        if (el && !bare && at != null) {
+          // 块里还有别的内容（正文中途输入 /）：只删掉触发的「/」，
+          // 在下方插入所选类型的新块——当前块的既有内容原样保留。
+          const s1 = nodeAtOffset(el, at - 1),
+            e1 = nodeAtOffset(el, at);
+          if (s1 && e1) {
+            try {
+              const r = document.createRange();
+              r.setStart(s1.node, s1.off);
+              r.setEnd(e1.node, e1.off);
+              r.deleteContents();
+            } catch (_) {}
+          }
+          const nb = {
+            id: uid(),
+            type: t,
+            text: '',
+            ...typeExtras(t)
+          };
+          flushSynced(s => {
+            const i = s.findIndex(x => x.id === sid);
+            return [...s.slice(0, i + 1), nb, ...s.slice(i + 1)];
+          });
+          if (EDITABLE.includes(t)) focusBlock(nb.id, 'start');
+          return;
+        }
+        // 块内容只有「/」：先清掉它（React 对相同 __html 不重设 innerHTML），
+        // 再原地转换块类型，最后把焦点还给该块——避免「/」残留 + 焦点掉到 body。
+        if (el) el.innerHTML = '';
+        flushSynced(s => s.map(bb => bb.id === sid ? {
+          ...bb,
+          type: t,
+          text: '',
+          ...typeExtras(t, bb)
+        } : bb));
+        if (EDITABLE.includes(t)) focusBlock(sid, 'start');
+      } else insertAfter(sid, t);
     }
+  }), more && /*#__PURE__*/React.createElement(EditorMoreMenu, {
+    x: more.x,
+    y: more.y,
+    fav: fav,
+    constellations: D.constellations,
+    onAction: pageAction,
+    onClose: () => setMore(null)
+  }), history && /*#__PURE__*/React.createElement(HistoryDialog, {
+    star: star,
+    onClose: () => setHistory(false),
+    onFlash: flash
   }), sel && !ctx && /*#__PURE__*/React.createElement(SelectionToolbar, {
     x: sel.x,
     y: sel.y,
+    onFormat: runFormat,
+    onLink: formatLink,
     onColor: () => {
       setColorPop({
         x: sel.x,
@@ -2577,15 +11048,20 @@ function Editor({
     x: colorPop.x,
     y: colorPop.y,
     onClose: () => setColorPop(null),
-    onPick: () => setColorPop(null)
+    onPick: c => {
+      if (c.kind === 'text') runFormat('foreColor', c.c);else runFormat('hiliteColor', c.c);
+      setColorPop(null);
+    }
   }), toast && /*#__PURE__*/React.createElement("div", {
+    role: "status",
+    "aria-live": "polite",
     style: {
       position: 'fixed',
       bottom: 26,
       left: '50%',
       transform: 'translateX(-50%)',
-      zIndex: 95,
-      animation: 'sr-cardin var(--dur-base) var(--ease-flight) both'
+      zIndex: 'var(--z-toast)',
+      animation: 'sr-cardin var(--dur-fast) var(--ease-flight) both'
     }
   }, /*#__PURE__*/React.createElement(GlassPanel, {
     strong: true,
@@ -2606,7 +11082,310 @@ function Editor({
       fontSize: 13.5,
       color: 'var(--text-1)'
     }
-  }, toast))));
+  }, toast))), confirm && /*#__PURE__*/React.createElement(ConfirmDialog, {
+    message: confirm.message,
+    confirmLabel: confirm.confirmLabel,
+    onYes: () => {
+      confirm.onYes();
+      setConfirm(null);
+    },
+    onClose: () => setConfirm(null)
+  }), linkDialog && /*#__PURE__*/React.createElement(LinkDialog, {
+    onSubmit: applyLink,
+    onClose: () => setLinkDialog(null)
+  }), explore && (() => {
+    const conNm = D.conName(explore.con) || '未知星域';
+    const goExplore = () => {
+      const s = explore;
+      setExplore(null);
+      persistBody();
+      if (onExplore) {
+        onExplore(s.id);
+        return;
+      }
+      // 兜底：上层没接线时至少跃迁回星图
+      const T = window.srTransition;
+      if (T && T.flight && onBack) T.flight(onBack);else if (onBack) onBack();
+    };
+    return /*#__PURE__*/React.createElement(Modal, {
+      open: true,
+      onClose: () => setExplore(null),
+      title: '探索「' + conNm + '」星系',
+      icon: "orbit",
+      width: 392,
+      footer: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Button, {
+        size: "sm",
+        onClick: () => setExplore(null)
+      }, "\u7559\u5728\u7B14\u8BB0"), /*#__PURE__*/React.createElement(Button, {
+        variant: "primary",
+        size: "sm",
+        icon: "rocket",
+        glow: true,
+        autoFocus: true,
+        onClick: goExplore
+      }, "\u542F\u7A0B"))
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 13.5,
+        lineHeight: 1.8,
+        color: 'var(--text-2)'
+      }
+    }, "\u5C06\u79BB\u5F00\u7F16\u8F91\u5668\uFF0C\u8DC3\u8FC1\u56DE\u661F\u56FE\u2014\u2014\u955C\u5934\u4F1A\u98DE\u5411\u300C", conNm, "\u300D\u661F\u57DF\uFF0C\u4E3A\u4F60\u7167\u4EAE", /*#__PURE__*/React.createElement("span", {
+      style: {
+        color: 'var(--text-1)'
+      }
+    }, "\u300C", explore.label, "\u300D"), "\u6240\u5728\u7684\u4F4D\u7F6E\u3002\u8FD9\u91CC\u7684\u66F4\u6539\u5DF2\u81EA\u52A8\u4FDD\u5B58\u3002"));
+  })(), /*#__PURE__*/React.createElement("input", {
+    ref: importInputRef,
+    id: "sr-md-import",
+    type: "file",
+    accept: ".md,.markdown,.txt,text/markdown",
+    style: {
+      display: 'none'
+    },
+    tabIndex: -1,
+    "aria-hidden": "true",
+    onChange: onImportFile
+  }), find && (() => {
+    const inputCss = {
+      flex: 1,
+      minWidth: 0,
+      boxSizing: 'border-box',
+      background: 'var(--input-bg, rgba(3,4,12,0.45))',
+      border: '1px solid var(--glass-border-strong)',
+      borderRadius: 'var(--r-sm)',
+      color: 'var(--text-1)',
+      fontSize: 13,
+      padding: '6px 9px',
+      outline: 'none',
+      fontFamily: 'var(--font-sans)'
+    };
+    const btnCss = off => ({
+      flex: 'none',
+      position: 'relative',
+      height: 30,
+      padding: '0 11px',
+      borderRadius: 'var(--r-pill)',
+      border: '1px solid var(--glass-border-strong)',
+      background: 'color-mix(in srgb, var(--star-blue) 12%, transparent)',
+      color: 'var(--text-1)',
+      fontSize: 12,
+      cursor: off ? 'not-allowed' : 'pointer',
+      opacity: off ? 0.5 : 1,
+      fontFamily: 'var(--font-sans)'
+    });
+    return /*#__PURE__*/React.createElement("div", {
+      className: "sr-ed-find",
+      role: "search",
+      "aria-label": "\u7B14\u8BB0\u5185\u67E5\u627E",
+      style: {
+        position: 'absolute',
+        top: 10,
+        right: 336,
+        zIndex: 'var(--z-menu)'
+      }
+    }, /*#__PURE__*/React.createElement(GlassPanel, {
+      strong: true,
+      radius: "md",
+      pad: "none",
+      glow: true,
+      style: {
+        padding: 8,
+        width: 348,
+        boxSizing: 'border-box'
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: 7
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "search",
+      size: 14,
+      color: "var(--star-blue)",
+      style: {
+        flex: 'none'
+      }
+    }), /*#__PURE__*/React.createElement("input", {
+      ref: findInputRef,
+      autoFocus: true,
+      value: find.q,
+      placeholder: "\u5728\u8FD9\u7BC7\u7B14\u8BB0\u4E2D\u67E5\u627E\u2026",
+      "aria-label": "\u67E5\u627E\u5185\u5BB9",
+      onChange: e => {
+        const v = e.target.value;
+        setFindIdx(0);
+        setFind(f => ({
+          ...f,
+          q: v
+        }));
+      },
+      onKeyDown: e => {
+        if (e.key === 'Enter' && !e.nativeEvent.isComposing) {
+          e.preventDefault();
+          gotoMatch(findIdx + (e.shiftKey ? -1 : 1));
+        }
+      },
+      style: inputCss
+    }), /*#__PURE__*/React.createElement("span", {
+      "aria-live": "polite",
+      style: {
+        fontFamily: 'var(--font-mono)',
+        fontSize: 11,
+        color: find.q ? findMatches.length ? 'var(--text-2)' : 'var(--danger)' : 'var(--text-3)',
+        flex: 'none',
+        minWidth: 46,
+        textAlign: 'center'
+      }
+    }, find.q ? findMatches.length ? findIdx + 1 + ' / ' + findMatches.length : '无结果' : ''), /*#__PURE__*/React.createElement(IconButton, {
+      name: "chevron-up",
+      size: "sm",
+      title: "\u4E0A\u4E00\u5904 \xB7 \u21E7Enter",
+      onClick: () => gotoMatch(findIdx - 1)
+    }), /*#__PURE__*/React.createElement(IconButton, {
+      name: "chevron-down",
+      size: "sm",
+      title: "\u4E0B\u4E00\u5904 \xB7 Enter",
+      onClick: () => gotoMatch(findIdx + 1)
+    }), /*#__PURE__*/React.createElement(IconButton, {
+      name: "replace",
+      size: "sm",
+      active: !!find.rep,
+      title: find.rep ? '收起替换' : '替换',
+      onClick: () => setFind(f => ({
+        ...f,
+        rep: !f.rep
+      }))
+    }), /*#__PURE__*/React.createElement(IconButton, {
+      name: "x",
+      size: "sm",
+      title: "\u5173\u95ED \xB7 Esc",
+      onClick: closeFind
+    })), find.rep && /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: 7,
+        marginTop: 7
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "corner-down-right",
+      size: 14,
+      color: "var(--text-3)",
+      style: {
+        flex: 'none'
+      }
+    }), /*#__PURE__*/React.createElement("input", {
+      value: find.rv,
+      placeholder: "\u66FF\u6362\u4E3A\u2026",
+      "aria-label": "\u66FF\u6362\u4E3A",
+      onChange: e => {
+        const v = e.target.value;
+        setFind(f => ({
+          ...f,
+          rv: v
+        }));
+      },
+      onKeyDown: e => {
+        if (e.key === 'Enter' && !e.nativeEvent.isComposing) {
+          e.preventDefault();
+          replaceOne();
+        }
+      },
+      style: inputCss
+    }), /*#__PURE__*/React.createElement("button", {
+      type: "button",
+      className: "sr-focus-ring sr-hit40",
+      disabled: !findMatches.length,
+      onClick: replaceOne,
+      style: btnCss(!findMatches.length)
+    }, "\u66FF\u6362"), /*#__PURE__*/React.createElement("button", {
+      type: "button",
+      className: "sr-focus-ring sr-hit40",
+      disabled: !findMatches.length,
+      onClick: replaceAll,
+      style: btnCss(!findMatches.length)
+    }, "\u5168\u90E8\u66FF\u6362"))));
+  })());
+}
+
+/* 顶栏保存指示：真实三态（保存中 / 已同步 / 仅本机），吃 api.js 的 sr-net 事件。
+   离线时点击可立即重试；title 里始终能看到上次同步时间。 */
+function SaveStatus() {
+  const read = () => window.SRNet && window.SRNet.getStatus ? window.SRNet.getStatus() : {
+    status: 'saved',
+    online: true,
+    lastSync: 0
+  };
+  const [st, setSt] = React.useState(read);
+  React.useEffect(() => {
+    const h = e => setSt(e.detail || read());
+    window.addEventListener('sr-net', h);
+    return () => window.removeEventListener('sr-net', h);
+  }, []);
+  const D = window.SR_DATA;
+  const syncTip = st.lastSync ? '上次同步 ' + D.ago(st.lastSync) : '尚未与服务器同步';
+  const base = {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: 6,
+    fontSize: 12,
+    whiteSpace: 'nowrap',
+    flex: 'none'
+  };
+  if (st.status === 'saving') {
+    return /*#__PURE__*/React.createElement("span", {
+      style: {
+        ...base,
+        color: 'var(--text-3)'
+      },
+      title: syncTip
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "sr-ed-spin",
+      style: {
+        display: 'inline-flex',
+        animation: 'sr-ed-spin 1.2s linear infinite'
+      },
+      "aria-hidden": "true"
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "loader",
+      size: 14,
+      color: "var(--text-3)"
+    })), "\u4FDD\u5B58\u4E2D\u2026");
+  }
+  if (st.status === 'local' || st.status === 'error') {
+    return /*#__PURE__*/React.createElement("button", {
+      type: "button",
+      className: "sr-focus-ring",
+      onClick: () => window.SRNet && window.SRNet.saveNow(),
+      title: '服务器暂不可达 · 点击立即重试 · ' + syncTip,
+      style: {
+        ...base,
+        color: st.status === 'error' ? 'var(--danger)' : 'var(--star-blue-dim)',
+        background: 'none',
+        border: 'none',
+        cursor: 'pointer',
+        font: 'inherit',
+        padding: 0
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: st.status === 'error' ? 'triangle-alert' : 'hard-drive',
+      size: 14,
+      color: "currentColor"
+    }), st.status === 'error' ? '未能保存' : '已保存在本机');
+  }
+  return /*#__PURE__*/React.createElement("span", {
+    style: {
+      ...base,
+      color: 'var(--text-3)'
+    },
+    title: syncTip
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "check",
+    size: 14,
+    color: "var(--gold)"
+  }), "\u5DF2\u540C\u6B65");
 }
 function RailHead({
   icon,
@@ -2643,7 +11422,8 @@ window.SRKit = Object.assign(window.SRKit || {}, {
 // ui_kits/stellar-raft/EditorMenus.jsx
 try { (() => {
 /* EditorMenus — professional editor overlays: slash menu, selection toolbar,
-   and the block right-click context menu with 转换为 / 颜色 / 移动到 submenus. */
+   and the block right-click context menu with 转换为 / 颜色 / 移动到 submenus.
+   The selection toolbar drives real document.execCommand formatting. */
 const {
   GlassPanel: SRGlass,
   Icon: SRIcon,
@@ -2688,12 +11468,12 @@ const BLOCK_TYPES = [{
   type: 'toggle',
   icon: 'chevron-right',
   label: '折叠列表',
-  hint: '>'
+  hint: ''
 }, {
   type: 'quote',
   icon: 'quote',
   label: '引用',
-  hint: '"'
+  hint: '>'
 }, {
   type: 'callout',
   icon: 'info',
@@ -2725,60 +11505,124 @@ const BLOCK_TYPES = [{
   label: '图片',
   hint: ''
 }];
+
+// `c` drives the swatch (theme var); `exec` is the concrete value passed to execCommand.
 const TEXT_COLORS = [{
   id: 'default',
   label: '默认',
-  c: 'var(--text-1)'
+  c: 'var(--text-1)',
+  exec: '#eef3ff'
 }, {
   id: 'blue',
   label: '星辉蓝',
-  c: 'var(--star-blue)'
+  c: 'var(--star-blue)',
+  exec: '#9fc6ff'
 }, {
   id: 'gold',
   label: '暖金',
-  c: 'var(--gold)'
+  c: 'var(--gold)',
+  exec: '#ffd98a'
 }, {
   id: 'dim',
   label: '暗淡',
-  c: 'var(--star-blue-dim)'
+  c: 'var(--star-blue-dim)',
+  exec: '#7896cd'
 }, {
   id: 'danger',
   label: '警示',
-  c: 'var(--danger)'
+  c: 'var(--danger)',
+  exec: '#e8917a'
 }];
 const BG_COLORS = [{
   id: 'none',
   label: '无背景',
   c: 'transparent',
-  ring: 'var(--line-strong)'
+  ring: 'var(--line-strong)',
+  exec: 'rgba(0,0,0,0)'
 }, {
   id: 'bgblue',
   label: '星蓝底',
-  c: 'rgba(159,198,255,0.16)'
+  c: 'rgba(159,198,255,0.16)',
+  exec: 'rgba(159,198,255,0.24)'
 }, {
   id: 'bggold',
   label: '暖金底',
-  c: 'rgba(255,217,138,0.16)'
+  c: 'rgba(255,217,138,0.16)',
+  exec: 'rgba(255,217,138,0.24)'
 }, {
   id: 'bgdeep',
   label: '深蓝底',
-  c: 'rgba(26,35,80,0.55)'
+  c: 'rgba(26,35,80,0.55)',
+  exec: 'rgba(26,35,80,0.6)'
 }];
 
-/* ---- generic floating panel that closes on outside click / Esc ---- */
+/* ---- 模态焦点管理（与 DS Modal / ReviewSession 同一套语义）----
+   进场移焦入内 · Tab 只在浮层内部回绕 · 退场把焦点还给打开它的元素。
+   swallowCmdK: 模态置顶期间吞掉 ⌘K，避免命令面板叠在设置/AI 配置之上。 */
+function useModalFocus(rootRef, opts) {
+  const {
+    swallowCmdK = false,
+    autoFocus = true
+  } = opts || {};
+  React.useEffect(() => {
+    const prev = document.activeElement;
+    const root = rootRef.current;
+    if (autoFocus && root && !root.contains(document.activeElement)) {
+      const first = root.querySelector('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])');
+      if (first) first.focus();else if (root.focus) root.focus();
+    }
+    const onKey = e => {
+      if (swallowCmdK && (e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K')) {
+        e.preventDefault();
+        e.stopPropagation();
+        return;
+      }
+      if (e.key !== 'Tab') return;
+      const r = rootRef.current;
+      if (!r) return;
+      const list = Array.from(r.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])')).filter(el => el.offsetWidth || el.offsetHeight || el === document.activeElement);
+      if (!list.length) {
+        e.preventDefault();
+        return;
+      }
+      const inside = r.contains(document.activeElement);
+      const i = list.indexOf(document.activeElement);
+      if (e.shiftKey && (i <= 0 || !inside)) {
+        e.preventDefault();
+        list[list.length - 1].focus();
+      } else if (!e.shiftKey && (i === list.length - 1 || !inside)) {
+        e.preventDefault();
+        list[0].focus();
+      }
+    };
+    window.addEventListener('keydown', onKey, true);
+    return () => {
+      window.removeEventListener('keydown', onKey, true);
+      if (prev && prev.focus && document.contains(prev)) prev.focus();
+    };
+  }, []);
+}
+
+/* ---- generic floating panel that closes on outside click / Esc ----
+   键盘可达：role=menu、↑↓/Home/End 在 [role=menuitem] 间漫游、Enter/Space 激活
+   （原生 button）、Esc 关闭并把焦点还给打开它的元素。autoFocus 为菜单（非 SlashMenu
+   的输入框场景）进场移焦到首项。reduced-motion 下不播开合动画。 */
 function Floating({
   x,
   y,
   width = 240,
   onClose,
   children,
-  anchor = 'left'
+  anchor = 'left',
+  autoFocus = false,
+  role = 'menu'
 }) {
   const ref = React.useRef(null);
   const [pos, setPos] = React.useState({
     left: x,
     top: y
   });
+  const reduce = typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
   React.useLayoutEffect(() => {
     const el = ref.current;
     if (!el) return;
@@ -2796,27 +11640,51 @@ function Floating({
     });
   }, [x, y]);
   React.useEffect(() => {
+    const prev = document.activeElement;
+    if (autoFocus && ref.current) {
+      const items = ref.current.querySelectorAll('[role="menuitem"], button:not([disabled])');
+      if (items.length) items[0].focus();
+    }
     const h = e => {
       if (ref.current && !ref.current.contains(e.target)) onClose();
     };
     const k = e => {
-      if (e.key === 'Escape') onClose();
+      if (e.key === 'Escape') {
+        e.stopPropagation();
+        onClose();
+      }
     };
     document.addEventListener('mousedown', h);
     document.addEventListener('keydown', k);
     return () => {
       document.removeEventListener('mousedown', h);
       document.removeEventListener('keydown', k);
+      if (autoFocus && prev && prev.focus && document.contains(prev)) prev.focus();
     };
   }, [onClose]);
+  const onKeyDown = e => {
+    if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp' && e.key !== 'Home' && e.key !== 'End') return;
+    const items = Array.from(ref.current.querySelectorAll('[role="menuitem"]')).filter(el => el.offsetParent !== null);
+    if (!items.length) return;
+    const i = items.indexOf(document.activeElement);
+    if (i < 0) return; // 焦点不在菜单项上（如 SlashMenu 的搜索框）：交回原处理
+    e.preventDefault();
+    if (e.key === 'ArrowDown') items[(i + 1 + items.length) % items.length].focus();else if (e.key === 'ArrowUp') items[(i - 1 + items.length) % items.length].focus();else if (e.key === 'Home') items[0].focus();else items[items.length - 1].focus();
+  };
+  // 菜单内部的 mousedown 不冒泡到 document——否则父菜单/兄弟子菜单的
+  // "点击外部关闭"会抢在 click 之前卸载整棵菜单，导致子菜单项点了没反应
   return /*#__PURE__*/React.createElement("div", {
     ref: ref,
+    role: role,
+    onMouseDown: e => e.stopPropagation(),
+    onKeyDown: onKeyDown,
     style: {
       position: 'fixed',
       left: pos.left,
       top: pos.top,
-      zIndex: 95,
-      width
+      zIndex: 'var(--z-menu)',
+      width,
+      animation: reduce ? 'none' : 'sr-cardin var(--dur-fast) var(--ease-flight) both'
     }
   }, /*#__PURE__*/React.createElement(SRGlass, {
     strong: true,
@@ -2837,25 +11705,42 @@ function Row({
   tone,
   active,
   onClick,
-  onMouseEnter
+  onMouseEnter,
+  onFocus
 }) {
   const [h, setH] = React.useState(false);
-  const color = danger ? 'var(--danger)' : tone === 'gold' ? 'var(--gold)' : h || active ? 'var(--text-1)' : 'var(--text-2)';
-  return /*#__PURE__*/React.createElement("div", {
+  const on = h || active;
+  const color = danger ? 'var(--danger)' : tone === 'gold' ? 'var(--gold)' : on ? 'var(--text-1)' : 'var(--text-2)';
+  return /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    role: "menuitem",
+    tabIndex: -1,
+    className: "sr-focus-ring",
     onClick: onClick,
     onMouseEnter: e => {
       setH(true);
       onMouseEnter && onMouseEnter(e);
     },
     onMouseLeave: () => setH(false),
+    onFocus: e => {
+      setH(true);
+      onFocus && onFocus(e);
+    },
+    onBlur: () => setH(false),
     style: {
+      width: '100%',
+      textAlign: 'left',
+      font: 'inherit',
       display: 'flex',
       alignItems: 'center',
       gap: 11,
-      padding: '7px 9px',
+      padding: '9px 9px',
+      minHeight: 40,
+      boxSizing: 'border-box',
       borderRadius: 'var(--r-sm)',
       cursor: 'pointer',
-      background: h || active ? danger ? 'rgba(232,145,122,0.12)' : 'rgba(159,198,255,0.08)' : 'transparent',
+      border: 'none',
+      background: on ? danger ? 'color-mix(in srgb, var(--danger) 12%, transparent)' : 'color-mix(in srgb, var(--star-blue) 9%, transparent)' : 'transparent',
       color
     }
   }, icon && /*#__PURE__*/React.createElement(SRIcon, {
@@ -2866,7 +11751,7 @@ function Row({
     style: {
       flex: 1,
       fontSize: 13,
-      color: danger ? 'var(--danger)' : h || active ? 'var(--text-1)' : 'var(--text-2)'
+      color: danger ? 'var(--danger)' : on ? 'var(--text-1)' : 'var(--text-2)'
     }
   }, label), hint && /*#__PURE__*/React.createElement("span", {
     style: {
@@ -2879,6 +11764,54 @@ function Row({
     size: 14,
     color: "var(--text-3)"
   }));
+}
+// 「移动到星域」行：保留星域彩点（承载颜色信息），键盘可达
+function MoveRow({
+  color,
+  name,
+  onClick
+}) {
+  const [h, setH] = React.useState(false);
+  return /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    role: "menuitem",
+    tabIndex: -1,
+    className: "sr-focus-ring",
+    onClick: onClick,
+    onMouseEnter: () => setH(true),
+    onMouseLeave: () => setH(false),
+    onFocus: () => setH(true),
+    onBlur: () => setH(false),
+    style: {
+      width: '100%',
+      textAlign: 'left',
+      font: 'inherit',
+      display: 'flex',
+      alignItems: 'center',
+      gap: 10,
+      padding: '9px 9px',
+      minHeight: 40,
+      boxSizing: 'border-box',
+      borderRadius: 'var(--r-sm)',
+      cursor: 'pointer',
+      border: 'none',
+      background: h ? 'color-mix(in srgb, var(--star-blue) 9%, transparent)' : 'transparent'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      width: 8,
+      height: 8,
+      borderRadius: '50%',
+      flex: 'none',
+      background: color,
+      boxShadow: `0 0 7px ${color}`
+    }
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 13,
+      color: 'var(--text-2)'
+    }
+  }, name));
 }
 function Label({
   children
@@ -2904,13 +11837,32 @@ function Divider() {
   });
 }
 
-/* ---- Slash command menu ---- */
+/* ---- Slash command menu — searchable + keyboard navigable ---- */
 function SlashMenu({
   x,
   y,
   onPick,
   onClose
 }) {
+  const [q, setQ] = React.useState('');
+  const [ai, setAi] = React.useState(0);
+  const s = q.trim().toLowerCase();
+  const list = BLOCK_TYPES.filter(b => !s || b.label.toLowerCase().includes(s) || b.type.includes(s) || (b.hint || '').includes(s));
+  React.useEffect(() => {
+    setAi(0);
+  }, [q]);
+  const onKey = e => {
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setAi(i => Math.min(list.length - 1, i + 1));
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setAi(i => Math.max(0, i - 1));
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      if (list[ai]) onPick(list[ai].type);
+    }
+  };
   return /*#__PURE__*/React.createElement(Floating, {
     x: x,
     y: y,
@@ -2918,54 +11870,108 @@ function SlashMenu({
     onClose: onClose
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      maxHeight: 340,
+      padding: '3px 5px 6px'
+    }
+  }, /*#__PURE__*/React.createElement("input", {
+    autoFocus: true,
+    value: q,
+    onChange: e => setQ(e.target.value),
+    onKeyDown: onKey,
+    placeholder: "\u7B5B\u9009\u5757\u7C7B\u578B\u2026",
+    style: {
+      width: '100%',
+      boxSizing: 'border-box',
+      background: 'var(--input-bg, rgba(3,4,12,0.45))',
+      border: '1px solid var(--glass-border-strong)',
+      borderRadius: 'var(--r-sm)',
+      color: 'var(--text-1)',
+      fontSize: 13,
+      padding: '7px 10px',
+      outline: 'none',
+      fontFamily: 'var(--font-sans)'
+    }
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      maxHeight: 320,
       overflow: 'auto'
     }
-  }, /*#__PURE__*/React.createElement(Label, null, "\u57FA\u7840\u5757"), BLOCK_TYPES.map((b, i) => /*#__PURE__*/React.createElement(Row, {
+  }, /*#__PURE__*/React.createElement(Label, null, "\u57FA\u7840\u5757"), list.length ? list.map((b, i) => /*#__PURE__*/React.createElement(Row, {
     key: b.type,
     icon: b.icon,
     label: b.label,
     hint: b.hint,
-    active: i === 0,
+    active: i === ai,
+    onMouseEnter: () => setAi(i),
     onClick: () => onPick(b.type)
-  }))));
+  })) : /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: '8px 11px',
+      fontSize: 12.5,
+      color: 'var(--text-3)'
+    }
+  }, "\u6CA1\u6709\u5339\u914D\u7684\u5757\u7C7B\u578B")));
 }
 
-/* ---- Selection mini toolbar ---- */
+/* ---- Selection mini toolbar — wired to real execCommand via onFormat ---- */
 function SelectionToolbar({
   x,
   y,
+  onFormat,
+  onLink,
   onColor
 }) {
+  const [active, setActive] = React.useState({});
+  React.useEffect(() => {
+    try {
+      setActive({
+        bold: document.queryCommandState('bold'),
+        italic: document.queryCommandState('italic'),
+        underline: document.queryCommandState('underline'),
+        strikethrough: document.queryCommandState('strikeThrough')
+      });
+    } catch (e) {/* queryCommandState can throw in some states */}
+  }, [x, y]);
   const tools = [{
     n: 'bold',
-    t: '加粗 ⌘B'
+    t: '加粗 ⌘B',
+    cmd: 'bold'
   }, {
     n: 'italic',
-    t: '斜体 ⌘I'
+    t: '斜体 ⌘I',
+    cmd: 'italic'
   }, {
     n: 'underline',
-    t: '下划线 ⌘U'
+    t: '下划线 ⌘U',
+    cmd: 'underline'
   }, {
     n: 'strikethrough',
-    t: '删除线'
+    t: '删除线',
+    cmd: 'strikeThrough'
   }, {
     n: 'code',
-    t: '行内代码'
+    t: '行内代码',
+    cmd: 'inlineCode'
   }, {
     n: 'highlighter',
     t: '高亮',
-    active: true
+    cmd: 'hiliteColor',
+    val: 'color-mix(in srgb, var(--gold) 24%, transparent)'
   }, {
     n: 'link',
-    t: '链接 ⌘K'
+    t: '链接 ⌘K',
+    link: true
   }];
+  // preventDefault on mousedown anywhere in the bar keeps the text selection alive through the click.
+  const reduce = typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
   return /*#__PURE__*/React.createElement("div", {
+    role: "toolbar",
+    "aria-label": "\u6587\u5B57\u683C\u5F0F",
+    onMouseDown: e => e.preventDefault(),
     style: {
       position: 'fixed',
       left: x,
       top: y,
-      zIndex: 95,
+      zIndex: 'var(--z-menu)',
       transform: 'translate(-50%,-100%)'
     }
   }, /*#__PURE__*/React.createElement(SRGlass, {
@@ -2976,10 +11982,14 @@ function SelectionToolbar({
       display: 'flex',
       alignItems: 'center',
       gap: 1,
-      padding: '5px 7px'
+      padding: '5px 7px',
+      animation: reduce ? 'none' : 'sr-cardin var(--dur-fast) var(--ease-flight) both'
     }
-  }, /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    className: "sr-focus-ring sr-hit40",
     onClick: onColor,
+    title: "\u6587\u5B57\u989C\u8272",
     style: {
       display: 'flex',
       alignItems: 'center',
@@ -2988,7 +11998,11 @@ function SelectionToolbar({
       height: 30,
       cursor: 'pointer',
       color: 'var(--text-2)',
-      fontSize: 12.5
+      fontSize: 12.5,
+      background: 'transparent',
+      border: 'none',
+      borderRadius: 'var(--r-sm)',
+      position: 'relative'
     }
   }, "A", /*#__PURE__*/React.createElement(SRIcon, {
     name: "chevron-down",
@@ -3005,39 +12019,53 @@ function SelectionToolbar({
     name: t.n,
     size: "sm",
     title: t.t,
-    active: t.active
+    active: !!active[t.n],
+    onClick: () => {
+      if (t.link) onLink();else onFormat(t.cmd, t.val);
+    }
   }))));
 }
 
-/* ---- Color submenu (text + background) ---- */
+/* ---- Color submenu (text + background) ----
+   onPick receives {kind, id, exec, ...}: block-coloring uses id, selection-coloring uses exec. */
 function ColorMenu({
   x,
   y,
   onClose,
-  onPick
+  onPick,
+  autoFocus = false
 }) {
-  return /*#__PURE__*/React.createElement(Floating, {
-    x: x,
-    y: y,
-    width: 200,
-    onClose: onClose
-  }, /*#__PURE__*/React.createElement(Label, null, "\u6587\u5B57\u989C\u8272"), TEXT_COLORS.map(c => /*#__PURE__*/React.createElement("div", {
-    key: c.id,
+  const swatch = (c, kind) => /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    role: "menuitem",
+    tabIndex: -1,
+    key: kind + c.id,
+    className: "sr-focus-ring",
+    onMouseDown: e => e.preventDefault(),
     onClick: () => onPick({
-      kind: 'text',
+      kind,
       ...c
     }),
     style: {
+      width: '100%',
+      textAlign: 'left',
+      font: 'inherit',
+      border: 'none',
+      background: 'transparent',
       display: 'flex',
       alignItems: 'center',
       gap: 10,
-      padding: '6px 9px',
+      padding: '8px 9px',
+      minHeight: 40,
+      boxSizing: 'border-box',
       borderRadius: 'var(--r-sm)',
       cursor: 'pointer'
     },
-    onMouseEnter: e => e.currentTarget.style.background = 'rgba(159,198,255,0.08)',
-    onMouseLeave: e => e.currentTarget.style.background = 'transparent'
-  }, /*#__PURE__*/React.createElement("span", {
+    onMouseEnter: e => e.currentTarget.style.background = 'color-mix(in srgb, var(--star-blue) 9%, transparent)',
+    onMouseLeave: e => e.currentTarget.style.background = 'transparent',
+    onFocus: e => e.currentTarget.style.background = 'color-mix(in srgb, var(--star-blue) 9%, transparent)',
+    onBlur: e => e.currentTarget.style.background = 'transparent'
+  }, kind === 'text' ? /*#__PURE__*/React.createElement("span", {
     style: {
       width: 18,
       height: 18,
@@ -3050,28 +12078,7 @@ function ColorMenu({
       fontSize: 12,
       fontWeight: 600
     }
-  }, "A"), /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 13,
-      color: 'var(--text-2)'
-    }
-  }, c.label))), /*#__PURE__*/React.createElement(Divider, null), /*#__PURE__*/React.createElement(Label, null, "\u80CC\u666F"), BG_COLORS.map(c => /*#__PURE__*/React.createElement("div", {
-    key: c.id,
-    onClick: () => onPick({
-      kind: 'bg',
-      ...c
-    }),
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: 10,
-      padding: '6px 9px',
-      borderRadius: 'var(--r-sm)',
-      cursor: 'pointer'
-    },
-    onMouseEnter: e => e.currentTarget.style.background = 'rgba(159,198,255,0.08)',
-    onMouseLeave: e => e.currentTarget.style.background = 'transparent'
-  }, /*#__PURE__*/React.createElement("span", {
+  }, "A") : /*#__PURE__*/React.createElement("span", {
     style: {
       width: 18,
       height: 18,
@@ -3084,7 +12091,14 @@ function ColorMenu({
       fontSize: 13,
       color: 'var(--text-2)'
     }
-  }, c.label))));
+  }, c.label));
+  return /*#__PURE__*/React.createElement(Floating, {
+    x: x,
+    y: y,
+    width: 200,
+    onClose: onClose,
+    autoFocus: autoFocus
+  }, /*#__PURE__*/React.createElement(Label, null, "\u6587\u5B57\u989C\u8272"), TEXT_COLORS.map(c => swatch(c, 'text')), /*#__PURE__*/React.createElement(Divider, null), /*#__PURE__*/React.createElement(Label, null, "\u80CC\u666F"), BG_COLORS.map(c => swatch(c, 'bg')));
 }
 
 /* ---- Block context menu (right-click / ⋮⋮ handle) ---- */
@@ -3100,69 +12114,60 @@ function ContextMenu({
     x: 0,
     y: 0
   });
-  const openSub = (name, e) => {
+  const [subAuto, setSubAuto] = React.useState(false);
+  const openSub = (name, e, auto) => {
     const r = e.currentTarget.getBoundingClientRect();
     setSubPos({
       x: r.right + 4,
       y: r.top - 6
     });
     setSub(name);
+    setSubAuto(!!auto);
   };
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Floating, {
     x: x,
     y: y,
     width: 238,
-    onClose: onClose
+    onClose: onClose,
+    autoFocus: true
   }, /*#__PURE__*/React.createElement(Row, {
-    icon: "sparkles",
-    label: "\u8BE2\u95EE AI",
-    tone: "gold",
-    onClick: () => onAction('ai'),
-    onMouseEnter: () => setSub(null)
-  }), /*#__PURE__*/React.createElement(Divider, null), /*#__PURE__*/React.createElement(Row, {
     icon: "refresh-cw",
     label: "\u8F6C\u6362\u4E3A",
     chevron: true,
-    onMouseEnter: e => openSub('turn', e)
+    onMouseEnter: e => openSub('turn', e),
+    onFocus: e => openSub('turn', e),
+    onClick: e => openSub('turn', e, true)
   }), /*#__PURE__*/React.createElement(Row, {
     icon: "copy",
     label: "\u590D\u5236\u4E3A\u526F\u672C",
-    hint: "\u2318D",
-    onClick: () => onAction('duplicate'),
-    onMouseEnter: () => setSub(null)
+    onClick: () => onAction('duplicate')
   }), /*#__PURE__*/React.createElement(Row, {
     icon: "link",
     label: "\u590D\u5236\u5757\u94FE\u63A5",
-    onClick: () => onAction('copyLink'),
-    onMouseEnter: () => setSub(null)
+    onClick: () => onAction('copyLink')
   }), /*#__PURE__*/React.createElement(Row, {
     icon: "corner-up-right",
-    label: "\u79FB\u52A8\u5230\u661F\u5EA7",
+    label: "\u79FB\u52A8\u5230\u661F\u57DF",
     chevron: true,
-    onMouseEnter: e => openSub('move', e)
+    onMouseEnter: e => openSub('move', e),
+    onFocus: e => openSub('move', e),
+    onClick: e => openSub('move', e, true)
   }), /*#__PURE__*/React.createElement(Divider, null), /*#__PURE__*/React.createElement(Row, {
     icon: "palette",
     label: "\u989C\u8272",
     chevron: true,
-    onMouseEnter: e => openSub('color', e)
-  }), /*#__PURE__*/React.createElement(Row, {
-    icon: "message-square-text",
-    label: "\u8BC4\u8BBA",
-    hint: "\u2318\u21E7M",
-    onClick: () => onAction('comment'),
-    onMouseEnter: () => setSub(null)
+    onMouseEnter: e => openSub('color', e),
+    onFocus: e => openSub('color', e),
+    onClick: e => openSub('color', e, true)
   }), /*#__PURE__*/React.createElement(Row, {
     icon: "bookmark",
     label: "\u52A0\u5165\u590D\u4E60\u961F\u5217",
-    onClick: () => onAction('review'),
-    onMouseEnter: () => setSub(null)
+    onClick: () => onAction('review')
   }), /*#__PURE__*/React.createElement(Divider, null), /*#__PURE__*/React.createElement(Row, {
     icon: "trash-2",
     label: "\u5220\u9664",
-    hint: "Del",
     danger: true,
-    onClick: () => onAction('delete'),
-    onMouseEnter: () => setSub(null)
+    onClick: () => onAction('delete')
   }), /*#__PURE__*/React.createElement("div", {
     style: {
       padding: '7px 11px 4px',
@@ -3174,11 +12179,12 @@ function ContextMenu({
       fontSize: 11,
       color: 'var(--text-3)'
     }
-  }, "\u6797\u6DF1 \u7F16\u8F91\u4E8E 2 \u5C0F\u65F6\u524D"))), sub === 'turn' && /*#__PURE__*/React.createElement(Floating, {
+  }, (window.SR_DATA.account || {}).name || '我', " \u7F16\u8F91"))), sub === 'turn' && /*#__PURE__*/React.createElement(Floating, {
     x: subPos.x,
     y: subPos.y,
     width: 208,
-    onClose: () => setSub(null)
+    onClose: () => setSub(null),
+    autoFocus: subAuto
   }, /*#__PURE__*/React.createElement(Label, null, "\u8F6C\u6362\u4E3A"), /*#__PURE__*/React.createElement("div", {
     style: {
       maxHeight: 300,
@@ -3196,51 +12202,601 @@ function ContextMenu({
     x: subPos.x,
     y: subPos.y,
     width: 190,
-    onClose: () => setSub(null)
-  }, /*#__PURE__*/React.createElement(Label, null, "\u79FB\u52A8\u5230\u661F\u5EA7"), constellations.map(c => /*#__PURE__*/React.createElement("div", {
+    onClose: () => setSub(null),
+    autoFocus: subAuto
+  }, /*#__PURE__*/React.createElement(Label, null, "\u79FB\u52A8\u5230\u661F\u57DF"), constellations.map(c => /*#__PURE__*/React.createElement(MoveRow, {
     key: c.id,
+    color: c.color,
+    name: c.name,
     onClick: () => {
       onAction('move', c.id);
       onClose();
-    },
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: 10,
-      padding: '7px 9px',
-      borderRadius: 'var(--r-sm)',
-      cursor: 'pointer'
-    },
-    onMouseEnter: e => e.currentTarget.style.background = 'rgba(159,198,255,0.08)',
-    onMouseLeave: e => e.currentTarget.style.background = 'transparent'
-  }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      width: 8,
-      height: 8,
-      borderRadius: '50%',
-      background: c.color,
-      boxShadow: `0 0 7px ${c.color}`
     }
-  }), /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 13,
-      color: 'var(--text-2)'
-    }
-  }, c.name)))), sub === 'color' && /*#__PURE__*/React.createElement(ColorMenu, {
+  }))), sub === 'color' && /*#__PURE__*/React.createElement(ColorMenu, {
     x: subPos.x,
     y: subPos.y,
     onClose: () => setSub(null),
+    autoFocus: subAuto,
     onPick: c => {
       onAction('color', c);
       onClose();
     }
   }));
 }
+
+/* in-app confirm dialog (no browser confirm/alert) */
+function ConfirmDialog({
+  message,
+  confirmLabel,
+  onYes,
+  onClose
+}) {
+  const ref = React.useRef(null);
+  useModalFocus(ref, {
+    swallowCmdK: true
+  });
+  const reduce = typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  React.useEffect(() => {
+    const k = e => {
+      if (e.key === 'Escape') onClose();else if (e.key === 'Enter') {
+        e.preventDefault();
+        onYes();
+      }
+    };
+    document.addEventListener('keydown', k);
+    return () => document.removeEventListener('keydown', k);
+  }, []);
+  return /*#__PURE__*/React.createElement("div", {
+    onMouseDown: onClose,
+    onContextMenu: e => e.preventDefault(),
+    style: {
+      position: 'fixed',
+      inset: 0,
+      zIndex: 'var(--z-modal)',
+      background: 'rgba(3,4,12,0.55)',
+      backdropFilter: 'blur(3px)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    ref: ref,
+    onMouseDown: e => e.stopPropagation(),
+    style: {
+      width: 348,
+      maxWidth: '90vw',
+      animation: reduce ? 'none' : 'sr-cardin var(--dur-fast) var(--ease-flight) both'
+    }
+  }, /*#__PURE__*/React.createElement(SRGlass, {
+    strong: true,
+    radius: "lg",
+    pad: "md",
+    glow: true
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'flex-start',
+      gap: 12,
+      marginBottom: 18
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      flex: 'none',
+      width: 34,
+      height: 34,
+      borderRadius: '50%',
+      background: 'color-mix(in srgb, var(--danger) 14%, transparent)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+    }
+  }, /*#__PURE__*/React.createElement(SRIcon, {
+    name: "alert-triangle",
+    size: 18,
+    color: "var(--danger)"
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 14,
+      lineHeight: 1.65,
+      color: 'var(--text-1)',
+      paddingTop: 5
+    }
+  }, message)), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      gap: 10,
+      justifyContent: 'flex-end'
+    }
+  }, /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    className: "sr-focus-ring",
+    onClick: onClose,
+    style: {
+      height: 34,
+      padding: '0 16px',
+      borderRadius: 'var(--r-pill)',
+      border: '1px solid var(--glass-border-strong)',
+      background: 'transparent',
+      color: 'var(--text-2)',
+      fontSize: 13,
+      cursor: 'pointer',
+      fontFamily: 'var(--font-sans)'
+    }
+  }, "\u53D6\u6D88"), /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    className: "sr-focus-ring",
+    onClick: onYes,
+    style: {
+      height: 34,
+      padding: '0 16px',
+      borderRadius: 'var(--r-pill)',
+      border: '1px solid color-mix(in srgb, var(--danger) 50%, transparent)',
+      background: 'color-mix(in srgb, var(--danger) 16%, transparent)',
+      color: 'var(--danger)',
+      fontSize: 13,
+      cursor: 'pointer',
+      fontFamily: 'var(--font-sans)'
+    }
+  }, confirmLabel || '删除')))));
+}
+
+/* in-app link input (replaces window.prompt) */
+function LinkDialog({
+  initial,
+  onSubmit,
+  onClose
+}) {
+  const [v, setV] = React.useState(initial || 'https://');
+  const ref = React.useRef(null);
+  useModalFocus(ref, {
+    swallowCmdK: true
+  });
+  const reduce = typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const SANI = window.SRSanitize;
+  const u = v.trim();
+  const bad = u && SANI && SANI.safeUrl(u) == null; // 协议非法：即时提示，禁用「添加」
+  React.useEffect(() => {
+    const k = e => {
+      if (e.key === 'Escape') onClose();
+    };
+    document.addEventListener('keydown', k);
+    return () => document.removeEventListener('keydown', k);
+  }, []);
+  const submit = () => {
+    if (!u) {
+      onClose();
+      return;
+    }
+    if (bad) return;
+    onSubmit(u);
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    onMouseDown: onClose,
+    onContextMenu: e => e.preventDefault(),
+    style: {
+      position: 'fixed',
+      inset: 0,
+      zIndex: 'var(--z-modal)',
+      background: 'rgba(3,4,12,0.5)',
+      backdropFilter: 'blur(3px)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    ref: ref,
+    onMouseDown: e => e.stopPropagation(),
+    style: {
+      width: 380,
+      maxWidth: '92vw',
+      animation: reduce ? 'none' : 'sr-cardin var(--dur-fast) var(--ease-flight) both'
+    }
+  }, /*#__PURE__*/React.createElement(SRGlass, {
+    strong: true,
+    radius: "lg",
+    pad: "md",
+    glow: true
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 9,
+      marginBottom: 12,
+      fontSize: 13.5,
+      color: 'var(--text-1)'
+    }
+  }, /*#__PURE__*/React.createElement(SRIcon, {
+    name: "link",
+    size: 16,
+    color: "var(--star-blue)"
+  }), "\u6DFB\u52A0\u94FE\u63A5"), /*#__PURE__*/React.createElement("input", {
+    autoFocus: true,
+    value: v,
+    onChange: e => setV(e.target.value),
+    onKeyDown: e => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        submit();
+      }
+    },
+    placeholder: "https://\u2026",
+    style: {
+      width: '100%',
+      boxSizing: 'border-box',
+      background: 'var(--input-bg, rgba(3,4,12,0.45))',
+      border: '1px solid ' + (bad ? 'color-mix(in srgb, var(--danger) 55%, transparent)' : 'var(--glass-border-strong)'),
+      borderRadius: 'var(--r-sm)',
+      color: 'var(--text-1)',
+      fontSize: 14,
+      padding: '9px 11px',
+      outline: 'none',
+      fontFamily: 'var(--font-sans)'
+    }
+  }), bad && /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 8,
+      fontSize: 12,
+      color: 'var(--danger)'
+    }
+  }, "\u4E0D\u652F\u6301\u8BE5\u534F\u8BAE \xB7 \u4EC5\u5141\u8BB8 http/https/mailto \u6216\u76F8\u5BF9\u94FE\u63A5"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      gap: 10,
+      justifyContent: 'flex-end',
+      marginTop: 14
+    }
+  }, /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    className: "sr-focus-ring",
+    onClick: onClose,
+    style: {
+      height: 34,
+      padding: '0 16px',
+      borderRadius: 'var(--r-pill)',
+      border: '1px solid var(--glass-border-strong)',
+      background: 'transparent',
+      color: 'var(--text-2)',
+      fontSize: 13,
+      cursor: 'pointer',
+      fontFamily: 'var(--font-sans)'
+    }
+  }, "\u53D6\u6D88"), /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    className: "sr-focus-ring",
+    onClick: submit,
+    disabled: bad,
+    style: {
+      height: 34,
+      padding: '0 16px',
+      borderRadius: 'var(--r-pill)',
+      border: '1px solid var(--glass-border-strong)',
+      background: 'rgba(159,198,255,0.14)',
+      color: 'var(--text-1)',
+      fontSize: 13,
+      cursor: bad ? 'not-allowed' : 'pointer',
+      opacity: bad ? 0.5 : 1,
+      fontFamily: 'var(--font-sans)'
+    }
+  }, "\u6DFB\u52A0")))));
+}
+
+/* ---- Page-level 「更多」 dropdown for the editor title bar ---- */
+function EditorMoreMenu({
+  x,
+  y,
+  fav,
+  constellations,
+  onAction,
+  onClose
+}) {
+  const [sub, setSub] = React.useState(null);
+  const [subPos, setSubPos] = React.useState({
+    x: 0,
+    y: 0
+  });
+  const [subAuto, setSubAuto] = React.useState(false);
+  const openSub = (name, e, auto) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    setSubPos({
+      x: r.left - 4,
+      y: r.top - 6
+    });
+    setSub(name);
+    setSubAuto(!!auto);
+  };
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Floating, {
+    x: x,
+    y: y,
+    width: 236,
+    anchor: "right",
+    onClose: onClose,
+    autoFocus: true
+  }, /*#__PURE__*/React.createElement(Row, {
+    icon: "star",
+    tone: fav ? 'gold' : undefined,
+    active: fav,
+    label: fav ? '取消收藏' : '收藏这颗星',
+    onClick: () => onAction('fav')
+  }), /*#__PURE__*/React.createElement(Divider, null), /*#__PURE__*/React.createElement(Row, {
+    icon: "copy",
+    label: "\u521B\u5EFA\u661F\u7684\u526F\u672C",
+    onClick: () => onAction('dup')
+  }), /*#__PURE__*/React.createElement(Row, {
+    icon: "link",
+    label: "\u590D\u5236\u661F\u94FE\u63A5",
+    onClick: () => onAction('copyLink')
+  }), /*#__PURE__*/React.createElement(Row, {
+    icon: "file-down",
+    label: "\u5BFC\u51FA Markdown",
+    onClick: () => onAction('export')
+  }), /*#__PURE__*/React.createElement(Row, {
+    icon: "file-up",
+    label: "\u5BFC\u5165 Markdown",
+    onClick: () => onAction('import')
+  }), /*#__PURE__*/React.createElement(Row, {
+    icon: "corner-up-right",
+    label: "\u79FB\u52A8\u5230\u661F\u57DF",
+    chevron: true,
+    onMouseEnter: e => openSub('move', e),
+    onFocus: e => openSub('move', e),
+    onClick: e => openSub('move', e, true)
+  }), /*#__PURE__*/React.createElement(Row, {
+    icon: "history",
+    label: "\u67E5\u770B\u5386\u53F2",
+    onClick: () => onAction('history')
+  }), /*#__PURE__*/React.createElement(Divider, null), /*#__PURE__*/React.createElement(Row, {
+    icon: "trash-2",
+    label: "\u5220\u9664\u8FD9\u9897\u661F",
+    danger: true,
+    onClick: () => onAction('delete')
+  })), sub === 'move' && /*#__PURE__*/React.createElement(Floating, {
+    x: subPos.x,
+    y: subPos.y,
+    width: 190,
+    anchor: "right",
+    onClose: () => setSub(null),
+    autoFocus: subAuto
+  }, /*#__PURE__*/React.createElement(Label, null, "\u79FB\u52A8\u5230\u661F\u57DF"), constellations.map(c => /*#__PURE__*/React.createElement(MoveRow, {
+    key: c.id,
+    color: c.color,
+    name: c.name,
+    onClick: () => {
+      onAction('move', c.id);
+      onClose();
+    }
+  }))));
+}
+
+/* ---- Version history (mock) — self-drawn GlassPanel dialog, no browser modal ---- */
+function HistoryDialog({
+  star,
+  onClose,
+  onFlash
+}) {
+  const ref = React.useRef(null);
+  useModalFocus(ref, {
+    swallowCmdK: true
+  });
+  const reduce = typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  React.useEffect(() => {
+    const k = e => {
+      if (e.key === 'Escape') onClose();
+    };
+    document.addEventListener('keydown', k);
+    return () => document.removeEventListener('keydown', k);
+  }, []);
+  const versions = [{
+    when: '刚刚',
+    who: '你',
+    note: '编辑了公式块与正文',
+    cur: true
+  }, {
+    when: '今天 14:08',
+    who: '你',
+    note: '新增「实验验证」小节与代码块'
+  }, {
+    when: '昨天 21:14',
+    who: '你',
+    note: '调整属性、补充标签'
+  }, {
+    when: '6 月 22 日',
+    who: '你',
+    note: '建立到「量子纠缠」的连接'
+  }, {
+    when: '6 月 18 日',
+    who: '你',
+    note: '创建这颗星',
+    first: true
+  }];
+  return /*#__PURE__*/React.createElement("div", {
+    onMouseDown: onClose,
+    onContextMenu: e => e.preventDefault(),
+    style: {
+      position: 'fixed',
+      inset: 0,
+      zIndex: 'var(--z-modal)',
+      background: 'rgba(3,4,12,0.55)',
+      backdropFilter: 'blur(3px)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    ref: ref,
+    onMouseDown: e => e.stopPropagation(),
+    style: {
+      width: 432,
+      maxWidth: '92vw',
+      animation: reduce ? 'none' : 'sr-cardin var(--dur-fast) var(--ease-flight) both'
+    }
+  }, /*#__PURE__*/React.createElement(SRGlass, {
+    strong: true,
+    radius: "lg",
+    pad: "md",
+    glow: true
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 9,
+      marginBottom: 4
+    }
+  }, /*#__PURE__*/React.createElement(SRIcon, {
+    name: "history",
+    size: 17,
+    color: "var(--star-blue)"
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 14.5,
+      color: 'var(--text-1)'
+    }
+  }, "\u7248\u672C\u5386\u53F2"), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 11.5,
+      color: 'var(--text-3)'
+    }
+  }, "\xB7 ", star.label), /*#__PURE__*/React.createElement("span", {
+    style: {
+      flex: 1
+    }
+  }), /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    className: "sr-focus-ring sr-hit40",
+    onClick: onClose,
+    style: {
+      width: 26,
+      height: 26,
+      position: 'relative',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      border: 'none',
+      background: 'transparent',
+      cursor: 'pointer',
+      color: 'var(--text-3)'
+    }
+  }, /*#__PURE__*/React.createElement(SRIcon, {
+    name: "x",
+    size: 16,
+    color: "currentColor"
+  }))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11,
+      color: 'var(--text-3)',
+      marginBottom: 12,
+      fontFamily: 'var(--font-mono)'
+    }
+  }, "\u8BB0\u5F55\u6700\u8FD1\u7684\u7F16\u8F91\u5FEB\u7167"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      maxHeight: 320,
+      overflow: 'auto',
+      display: 'flex',
+      flexDirection: 'column'
+    }
+  }, versions.map((v, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    style: {
+      display: 'flex',
+      gap: 12,
+      padding: '10px 4px',
+      borderTop: i === 0 ? 'none' : '1px solid var(--line)'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      paddingTop: 3
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      width: 9,
+      height: 9,
+      borderRadius: '50%',
+      flex: 'none',
+      background: v.cur ? 'var(--gold)' : 'var(--star-blue)',
+      boxShadow: v.cur ? 'var(--glow-gold-soft)' : 'none',
+      opacity: v.cur ? 1 : 0.6
+    }
+  }), i < versions.length - 1 && /*#__PURE__*/React.createElement("span", {
+    style: {
+      width: 1,
+      flex: 1,
+      marginTop: 4,
+      background: 'var(--line)'
+    }
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1,
+      minWidth: 0
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 8
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 13,
+      color: 'var(--text-1)'
+    }
+  }, v.note), v.cur && /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 10,
+      color: 'var(--gold)',
+      border: '1px solid rgba(255,217,138,0.4)',
+      borderRadius: 'var(--r-pill)',
+      padding: '1px 7px'
+    }
+  }, "\u5F53\u524D"), v.first && /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 10,
+      color: 'var(--text-3)',
+      border: '1px solid var(--line-strong)',
+      borderRadius: 'var(--r-pill)',
+      padding: '1px 7px'
+    }
+  }, "\u521B\u5EFA")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11.5,
+      color: 'var(--text-3)',
+      marginTop: 3,
+      fontFamily: 'var(--font-mono)'
+    }
+  }, v.who, " \xB7 ", v.when)), !v.cur && /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    onClick: () => {
+      onFlash && onFlash('已恢复到该版本');
+      onClose();
+    },
+    style: {
+      flex: 'none',
+      alignSelf: 'center',
+      height: 26,
+      padding: '0 12px',
+      borderRadius: 'var(--r-pill)',
+      border: '1px solid var(--glass-border-strong)',
+      background: 'transparent',
+      color: 'var(--text-2)',
+      fontSize: 12,
+      cursor: 'pointer',
+      fontFamily: 'var(--font-sans)'
+    },
+    onMouseEnter: e => e.currentTarget.style.background = 'color-mix(in srgb, var(--star-blue) 9%, transparent)',
+    onMouseLeave: e => e.currentTarget.style.background = 'transparent'
+  }, "\u6062\u590D")))))));
+}
 window.SRKit = Object.assign(window.SRKit || {}, {
   SlashMenu,
   SelectionToolbar,
   ContextMenu,
   ColorMenu,
+  ConfirmDialog,
+  LinkDialog,
+  EditorMoreMenu,
+  HistoryDialog,
+  useModalFocus,
   BLOCK_TYPES,
   TEXT_COLORS,
   BG_COLORS
@@ -3250,14 +12806,19 @@ window.SRKit = Object.assign(window.SRKit || {}, {
 // ui_kits/stellar-raft/FeynmanDrawer.jsx
 try { (() => {
 /* FeynmanDrawer — right drawer for 费曼内化 mode + the ignite climax (screen 5).
-   Explain the concept to the AI student, then 点亮这颗星 → glow burst + toast. */
+   真实闭环：你向 AI 学生讲解 → 学生按显式判据（有效讲解字数 / 覆盖要点 / 轮次）追问或「听懂了」→
+   讲透后按认证态走状态机的三条边：
+   · 未点亮 → 点亮（金色时刻：IgniteBurst + 金 toast）
+   · 待重燃 → 重燃（快速通道：门槛减半，同一金色时刻，toast「重燃 · 星光归位」）
+   · 已点亮 → 巩固（按「记得」lit 档计，无爆发、蓝 toast——金色只属于状态跃迁）
+   「还没讲透」= 一次失败复习；对已点亮星模型会当场熄灭（extinguished），这里出冷色反馈。 */
 const {
-  GlassPanel,
   IconButton,
   Icon,
   Button,
   MemoryBar,
-  Tag
+  Tag,
+  Input
 } = window.StellarRaftDesignSystem_2866af;
 function IgniteBurst() {
   // particle ring + flash, 1.3s
@@ -3311,42 +12872,81 @@ function IgniteBurst() {
     });
   }));
 }
-function IgniteToast() {
-  return /*#__PURE__*/React.createElement("div", {
-    style: {
-      position: 'fixed',
-      top: 28,
-      left: '50%',
-      transform: 'translateX(-50%)',
-      zIndex: 90,
-      animation: 'sr-toast 2.6s var(--ease-flight) both'
-    }
-  }, /*#__PURE__*/React.createElement(GlassPanel, {
-    strong: true,
-    radius: "pill",
-    pad: "none",
-    glow: true,
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: 11,
-      padding: '11px 22px'
-    }
-  }, /*#__PURE__*/React.createElement(Icon, {
-    name: "sparkles",
-    size: 20,
-    color: "var(--gold)"
-  }), /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 15,
-      color: 'var(--text-1)'
-    }
-  }, "\u70B9\u4EAE +1 \xB7 ", /*#__PURE__*/React.createElement("b", {
-    style: {
-      color: 'var(--gold)',
-      fontWeight: 500
-    }
-  }, "\u878D\u4F1A\u8D2F\u901A"))));
+
+// 反馈横幅统一走 DS toast()（底部中央，与复习评分同一视觉词汇同一位置）。
+// 金色纪律：tone:'gold' 只出现在点亮 / 重燃两次状态跃迁；巩固与熄灭全部走冷色。
+const feyToast = (msg, opts) => {
+  const t = window.StellarRaftDesignSystem_2866af.toast;
+  if (t) t(msg, opts);
+};
+
+// 从一颗星里提取干净、可被讲解命中的「要点关键词」：别名的拉丁词、正文文本里的拉丁术语、再加标签兜底。
+// 只取有文本意义的块（跳过 code，避免把 import/numpy 之类代码词当要点）。
+function deriveKeyPoints(star) {
+  const out = [];
+  const push = w => {
+    w = (w || '').trim();
+    if (w && !out.includes(w)) out.push(w);
+  };
+  if (star.props && star.props.alias) star.props.alias.split(/\s+/).forEach(push);
+  const texts = [star.summary];
+  (star.body || []).forEach(b => {
+    if (['bulleted', 'callout', 'h2', 'h3', 'quote', 'todo'].includes(b.type) && b.text) texts.push(b.text);
+  });
+  texts.forEach(t => (String(t).match(/[A-Za-z][A-Za-z]{2,}/g) || []).forEach(push));
+  (star.tags || []).forEach(push);
+  return out.slice(0, 5);
+}
+
+/* 复述门槛（显式判据，抽屉里就地自解释）：
+   · 常规（点亮 / 巩固）：有效讲解累计 ≥ 60 字（被判「太短」的轮次不计）
+     且（有效轮次 ≥ 2 或 覆盖要点 ≥ min(2, 要点数)）
+   · 重燃快速通道（待重燃星）：有效讲解 ≥ 40 字 且 ≥ 1 轮——重燃是恢复不是初考 */
+const FEY_SHORT = 12; // 单轮有效下限（与 AI 学生「太短」的判定同一口径）
+const feyNeedChars = mode => mode === 'relight' ? 40 : 60;
+const feyReady = (mode, effChars, effRounds, coveredN, targetN) => mode === 'relight' ? effChars >= 40 && effRounds >= 1 : effChars >= 60 && (effRounds >= 2 || coveredN >= Math.min(2, targetN));
+
+// 讲解文本对要点的命中：返回累计覆盖集合与本轮新命中
+function matchTargets(targets, covered, txt) {
+  const has = t => txt.toLowerCase().includes(t.toLowerCase());
+  const newly = targets.filter(t => !covered.has(t) && has(t));
+  const after = new Set(covered);
+  newly.forEach(t => after.add(t));
+  return {
+    after,
+    newly
+  };
+}
+
+// AI 学生的回应措辞。达标与否由 send 里的显式门槛（feyReady）决定，这里只负责说话。
+function studentText({
+  mode,
+  targets,
+  after,
+  newly,
+  round,
+  tooShort,
+  ready
+}) {
+  if (tooShort) {
+    return '这句话太短，我还没真的听懂。再展开一点——多讲一两句，最好带个例子或一步推导。';
+  }
+  if (ready) {
+    const said = [...after].slice(0, 2).join('、');
+    if (mode === 'relight') return `想起来了——${said ? `${said} 又对上了，` : ''}和你上次讲的连起来了。这颗星，可以重燃。`;
+    if (mode === 'consolidate') return `比上次讲得还清楚，我现在能自己复述一遍了。`;
+    return `懂了——${said ? `你把 ${said} 也讲清楚了，` : ''}我现在能自己复述一遍了。这颗星，可以点亮。`;
+  }
+  const remaining = targets.filter(t => !after.has(t));
+  const ack = newly.length ? `嗯，${newly[0]} 这点清楚了。` : '';
+  let q;
+  if (remaining.length && round % 2 === 1) {
+    q = `那能顺带说说「${remaining[0]}」在这里是什么角色吗？我想确认我没理解错。`;
+  } else {
+    const deep = ['能再具体一点吗？比如举一个例子，或写出最关键的那一步。', '这背后的「为什么」是什么——为什么必须是这样，而不能是别的？', '如果要一句话讲给同学，让他立刻记住，你会怎么说？'];
+    q = deep[(round - 1) % deep.length];
+  }
+  return ack + q;
 }
 function FeynmanDrawer({
   starId,
@@ -3354,18 +12954,205 @@ function FeynmanDrawer({
 }) {
   const D = window.SR_DATA;
   const star = D.byId[starId] || D.stars[0];
+  const targets = React.useMemo(() => deriveKeyPoints(star), [star.id]);
+  // 会话模式在进场时定格（认证态是状态机上的边，不在会话中途换轨）：
+  // relight = 待重燃星重燃（门槛减半）· consolidate = 已点亮星巩固 · ignite = 首次点亮
+  const mode = React.useMemo(() => D.isEmber && D.isEmber(star) ? 'relight' : D.isLit && D.isLit(star) ? 'consolidate' : 'ignite', [star.id]);
+  // 内容门槛：摘要去空白 ≥ 20 字，或带文本的非 rich/divider 块 ≥ 2——空星先去写，才谈得上点亮
+  const substance = React.useMemo(() => D.hasSubstance ? D.hasSubstance(star) : true, [star.id]);
+  const gated = !substance && mode !== 'consolidate';
+  const needChars = feyNeedChars(mode);
   const [strength, setStrength] = React.useState(star.strength);
+  const [stability, setStability] = React.useState(0); // 成功后的稳定度（天）——sr 增益提示
   const [igniting, setIgniting] = React.useState(false);
-  const [lit, setLit] = React.useState(false);
-  const ignite = () => {
-    setIgniting(true);
-    setTimeout(() => setStrength(0.97), 250);
-    setTimeout(() => {
-      setLit(true);
-    }, 200);
-    setTimeout(() => setIgniting(false), 2600);
+  const [lit, setLit] = React.useState(false); // 本次会话完成点亮 / 重燃
+  const [consolidated, setConsolidated] = React.useState(false); // 已点亮星本次完成巩固
+  const [deferred, setDeferred] = React.useState(false); // 「还没讲透」：按失败记
+  const [extinguished, setExtinguished] = React.useState(false); // 「还没讲透」把已点亮星讲灭了
+
+  const [input, setInput] = React.useState('');
+  const [round, setRound] = React.useState(0);
+  const [effChars, setEffChars] = React.useState(0); // 有效讲解累计字数（「太短」轮次不计）
+  const [effRounds, setEffRounds] = React.useState(0); // 有效轮次
+  const [covered, setCovered] = React.useState(() => new Set());
+  const [thinking, setThinking] = React.useState(false);
+  const [canIgnite, setCanIgnite] = React.useState(false);
+  const [messages, setMessages] = React.useState(() => gated ? [] : [{
+    who: 'ai',
+    name: 'AI 学生',
+    text: mode === 'relight' ? '上次你把它讲得很清楚，现在它暗下来了。再帮我回忆一遍——它到底在解决什么问题？' : `用最简单的话告诉我：${star.label} 到底在解决什么问题？`
+  }]);
+  const scrollRef = React.useRef(null);
+  const timers = React.useRef([]);
+  React.useEffect(() => () => timers.current.forEach(clearTimeout), []);
+
+  // 抽屉即模态：移焦入内、Tab 圈禁、关闭还原焦点；Esc 关闭（全站一致）
+  const drawerRef = React.useRef(null);
+  (window.SRKit && window.SRKit.useModalFocus ? window.SRKit.useModalFocus : () => {})(drawerRef);
+  React.useEffect(() => {
+    const k = e => {
+      if (e.key === 'Escape') {
+        e.stopPropagation();
+        onClose();
+      }
+    };
+    document.addEventListener('keydown', k);
+    return () => document.removeEventListener('keydown', k);
+  }, [onClose]);
+  React.useEffect(() => {
+    const el = scrollRef.current;
+    if (el) el.scrollTop = el.scrollHeight;
+  }, [messages.length, thinking]);
+  const send = () => {
+    const txt = input.trim();
+    if (!txt || thinking || lit || consolidated || gated) return;
+    const r = round + 1;
+    const clean = txt.replace(/\s+/g, '');
+    const tooShort = clean.length < FEY_SHORT;
+    const {
+      after,
+      newly
+    } = matchTargets(targets, covered, txt);
+    const nextChars = effChars + (tooShort ? 0 : clean.length);
+    const nextRounds = effRounds + (tooShort ? 0 : 1);
+    const ready = canIgnite || feyReady(mode, nextChars, nextRounds, after.size, targets.length);
+    setMessages(m => [...m, {
+      who: 'me',
+      text: txt
+    }]);
+    setInput('');
+    setRound(r);
+    setEffChars(nextChars);
+    setEffRounds(nextRounds);
+    setThinking(true);
+    const t = setTimeout(() => {
+      setCovered(after);
+      setThinking(false);
+      setMessages(m => [...m, {
+        who: 'ai',
+        name: 'AI 学生',
+        text: studentText({
+          mode,
+          targets,
+          after,
+          newly,
+          round: r,
+          tooShort,
+          ready
+        })
+      }]);
+      if (ready) setCanIgnite(true);
+    }, 720 + Math.random() * 420);
+    timers.current.push(t);
   };
-  return /*#__PURE__*/React.createElement(React.Fragment, null, igniting && /*#__PURE__*/React.createElement(IgniteBurst, null), igniting && /*#__PURE__*/React.createElement(IgniteToast, null), /*#__PURE__*/React.createElement("div", {
+
+  // 点亮 / 重燃 = 状态跃迁：S×(2.5+(1−R)·0.6) 封顶 365、R 回满、lit=now——
+  // 时间线（点亮 / 重燃）由 reviewSuccess({ ignite:true }) 内部写入，这里不再重复记录。
+  const ignite = () => {
+    if (!canIgnite || lit || igniting || gated) return;
+    setIgniting(true);
+    feyToast(mode === 'relight' ? '重燃 · 星光归位' : '点亮 +1 · 融会贯通', {
+      tone: 'gold',
+      icon: mode === 'relight' ? 'flame' : 'sparkles',
+      duration: 2600
+    });
+    timers.current.push(setTimeout(() => setLit(true), 200));
+    timers.current.push(setTimeout(() => {
+      const res = D.reviewSuccess(star.id, {
+        ignite: true
+      });
+      if (!res) return;
+      setStrength(res.strength);
+      setStability(res.stability);
+      // 广播点亮事件：星图 / 三维星系等在场视图就地变暖，无需重新挂载
+      window.dispatchEvent(new CustomEvent('sr-ignite', {
+        detail: {
+          id: star.id,
+          strength: res.strength
+        }
+      }));
+    }, 250));
+    timers.current.push(setTimeout(() => {
+      setMessages(m => [...m, {
+        who: 'ai',
+        name: 'AI 学生',
+        text: '这颗星亮了。只要按时复习，它就不会熄灭。'
+      }]);
+    }, 900));
+    timers.current.push(setTimeout(() => setIgniting(false), 2600));
+  };
+
+  // 已点亮星讲透 = 巩固：按「记得」lit 档（×2.2 + 奖励项）计，认证保持。
+  // 金色只属于状态跃迁——这里无爆发、蓝 toast。
+  const consolidate = () => {
+    if (!canIgnite || consolidated || igniting || extinguished) return;
+    const res = D.reviewSuccess(star.id);
+    if (!res) return;
+    setConsolidated(true);
+    setStrength(res.strength);
+    setStability(res.stability);
+    feyToast('讲得更清楚了 · 记忆更牢', {
+      icon: 'check'
+    });
+    window.dispatchEvent(new CustomEvent('sr-memory'));
+  };
+
+  // 还没讲透 = 一次失败复习：稳定度回缩、到期提前。已点亮星会当场熄灭（模型返回
+  // extinguished），出冷色 toast；未点亮星保持原来那句克制的反馈。不播点亮动画。
+  const defer = () => {
+    if (deferred || lit || consolidated || igniting) return;
+    const res = D.reviewFail(star.id);
+    if (!res) return;
+    setDeferred(true);
+    setStrength(res.strength);
+    if (res.extinguished) {
+      setExtinguished(true);
+      feyToast(`「${star.label}」已熄灭 · 待重燃`, {
+        icon: 'cloud-off'
+      });
+    }
+    // 在场视图（星图 / 鸟瞰 / 侧栏复习角标）就地读回新亮度
+    window.dispatchEvent(new CustomEvent('sr-memory'));
+  };
+
+  // 「去写笔记」：抽屉拿不到打开编辑器的回调（app 层未下发），从上下文接力——
+  // 关闭抽屉后若星图摘要卡仍在场，替用户按下它的「打开编辑」；其他上下文
+  //（体检 / 列表）关闭抽屉即回到能打开这颗星的地方。
+  const goWrite = () => {
+    onClose();
+    requestAnimationFrame(() => {
+      const btn = Array.from(document.querySelectorAll('button')).find(b => (b.textContent || '').trim() === '打开编辑');
+      if (btn) btn.click();
+    });
+  };
+  const onKeyDown = e => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      send();
+    }
+  };
+  const doneFlag = lit || consolidated;
+  // 右侧状态口径：随模式自解释
+  const statusText = mode === 'relight' ? lit ? '星光归位' : canIgnite ? '可以重燃' : '再讲透一次，就能重燃' : mode === 'consolidate' ? consolidated ? '记忆更牢' : extinguished ? '已熄灭 · 待重燃' : canIgnite ? '可以巩固' : '把它讲得更清楚' : lit ? '已融会贯通' : canIgnite ? '可以点亮' : '继续讲，直到讲透';
+  // 金色只给点亮 / 重燃的「可以跃迁」提示；巩固的就绪提示走星蓝
+  const statusColor = canIgnite && !doneFlag && !extinguished ? mode === 'consolidate' ? 'var(--star-blue)' : 'var(--gold)' : 'var(--text-3)';
+
+  // 认证态徽标（差异呈现）：已点亮 = 金发丝 · 待重燃 = 暗金余烬；
+  // 本次会话点亮 / 重燃成功后就地转正，被「还没讲透」讲灭则转暗金
+  const litChip = {
+    text: '已点亮',
+    border: 'color-mix(in srgb, var(--gold) 45%, transparent)',
+    color: 'var(--gold)',
+    bg: 'color-mix(in srgb, var(--gold) 8%, transparent)'
+  };
+  const emberChip = {
+    text: '待重燃',
+    border: 'color-mix(in srgb, var(--gold) 30%, transparent)',
+    color: 'color-mix(in srgb, var(--gold) 72%, var(--text-3))',
+    bg: 'color-mix(in srgb, var(--gold) 6%, transparent)'
+  };
+  const certChip = lit ? litChip : extinguished ? emberChip : mode === 'relight' ? emberChip : mode === 'consolidate' ? litChip : null;
+  return /*#__PURE__*/React.createElement(React.Fragment, null, igniting && /*#__PURE__*/React.createElement(IgniteBurst, null), /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'absolute',
       inset: 0,
@@ -3373,8 +13160,13 @@ function FeynmanDrawer({
       background: 'rgba(3,4,12,0.45)',
       backdropFilter: 'blur(2px)'
     },
-    onClick: onClose
+    onClick: onClose,
+    "aria-hidden": "true"
   }), /*#__PURE__*/React.createElement("div", {
+    ref: drawerRef,
+    role: "dialog",
+    "aria-modal": "true",
+    "aria-label": '费曼内化 · ' + star.label,
     style: {
       position: 'absolute',
       top: 0,
@@ -3418,6 +13210,8 @@ function FeynmanDrawer({
     title: "\u5173\u95ED",
     onClick: onClose
   })), /*#__PURE__*/React.createElement("div", {
+    ref: scrollRef,
+    onContextMenu: e => e.preventDefault(),
     style: {
       flex: 1,
       overflow: 'auto',
@@ -3430,10 +13224,16 @@ function FeynmanDrawer({
     style: {
       display: 'inline-flex',
       alignItems: 'center',
-      gap: 6,
+      gap: 8,
       fontSize: 11,
       color: 'var(--text-3)',
       marginBottom: 6
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 6
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
@@ -3443,7 +13243,17 @@ function FeynmanDrawer({
       background: D.conColor(star.con),
       boxShadow: `0 0 8px ${D.conColor(star.con)}`
     }
-  }), D.conName(star.con)), /*#__PURE__*/React.createElement("div", {
+  }), D.conName(star.con)), certChip && /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 10,
+      letterSpacing: '0.05em',
+      padding: '2px 8px',
+      borderRadius: 'var(--r-pill)',
+      border: `1px solid ${certChip.border}`,
+      color: certChip.color,
+      background: certChip.bg
+    }
+  }, certChip.text)), /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 24,
       fontWeight: 300,
@@ -3461,47 +13271,233 @@ function FeynmanDrawer({
       lineHeight: 1.75,
       color: 'var(--text-2)'
     }
-  }, "\u7528\u6700\u7B80\u5355\u7684\u8BDD\u5411 AI \u5B66\u751F\u8BB2\u6E05\u695A\u8FD9\u9897\u661F\u3002\u8BB2\u660E\u767D\u4E86\uFF0C\u5B83\u5C31\u88AB\u70B9\u4EAE\u3002"), /*#__PURE__*/React.createElement("div", {
+  }, mode === 'relight' ? '曾点亮的星暗了下来。再讲透一次，就能重燃。' : mode === 'consolidate' ? '已点亮 · 讲清楚的东西，暗得更慢。' : '把这颗星讲清楚，它就被点亮——点亮的星，记得更久。'), gated && /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 10,
+      padding: '14px 15px',
+      borderRadius: 'var(--r-md)',
+      border: '1px dashed var(--line-strong)',
+      background: 'color-mix(in srgb, var(--star-blue) 4%, transparent)'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      gap: 8,
+      fontSize: 12.5,
+      lineHeight: 1.7,
+      color: 'var(--text-2)'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "pen-line",
+    size: 15,
+    color: "var(--star-blue)",
+    style: {
+      marginTop: 2,
+      flex: 'none'
+    }
+  }), /*#__PURE__*/React.createElement("span", null, "\u8FD9\u9897\u661F\u8FD8\u6CA1\u6709\u5185\u5BB9\u2014\u2014\u5148\u5199\u4E0B\u5B83\uFF0C\u624D\u8C08\u5F97\u4E0A\u70B9\u4EAE\u3002")), /*#__PURE__*/React.createElement(Button, {
+    size: "sm",
+    icon: "pen-line",
+    onClick: goWrite,
+    style: {
+      alignSelf: 'flex-start'
+    }
+  }, "\u53BB\u5199\u7B14\u8BB0")), targets.length > 0 && /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      gap: 6,
+      flexWrap: 'wrap',
+      alignItems: 'center'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 10,
+      letterSpacing: '0.08em',
+      color: 'var(--text-3)',
+      textTransform: 'uppercase',
+      fontFamily: 'var(--font-mono)'
+    }
+  }, "\u8981\u70B9"), targets.map(t => {
+    const on = covered.has(t);
+    return /*#__PURE__*/React.createElement("span", {
+      key: t,
+      style: {
+        fontSize: 11,
+        padding: '3px 9px',
+        borderRadius: 'var(--r-pill)',
+        border: '1px solid',
+        transition: 'all var(--dur-base) var(--ease-flight)',
+        borderColor: on ? 'rgba(255,217,138,0.5)' : 'var(--glass-border)',
+        background: on ? 'rgba(255,217,138,0.12)' : 'transparent',
+        color: on ? 'var(--gold)' : 'var(--text-3)',
+        boxShadow: on ? 'var(--glow-faint)' : 'none'
+      }
+    }, t);
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       flexDirection: 'column',
       gap: 10
     }
-  }, /*#__PURE__*/React.createElement(Bubble, {
-    who: "ai",
-    name: "AI \u5B66\u751F"
-  }, "\u4E3A\u4EC0\u4E48\u5B9A\u57DF\u9690\u53D8\u91CF\u7406\u8BBA\u4E0D\u80FD\u89E3\u91CA\u5B9E\u9A8C\u7ED3\u679C\uFF1F\u80FD\u7528\u4E00\u53E5\u8BDD\u8BF4\u6E05\u5417\uFF1F"), /*#__PURE__*/React.createElement(Bubble, {
-    who: "me"
-  }, "\u56E0\u4E3A\u8D1D\u5C14\u4E0D\u7B49\u5F0F\u7ED9\u51FA\u4E86\u4EFB\u4F55\u5B9A\u57DF\u7406\u8BBA\u7684\u7EDF\u8BA1\u4E0A\u9650\uFF0C\u800C\u5B9E\u9A8C\u6D4B\u5F97\u7684\u5173\u8054\u8D85\u8FC7\u4E86\u8FD9\u4E2A\u4E0A\u9650\u3002"), /*#__PURE__*/React.createElement(Bubble, {
-    who: "ai",
-    name: "AI \u5B66\u751F"
-  }, "\u90A3\u300C\u8D85\u8FC7\u4E0A\u9650\u300D\u5177\u4F53\u610F\u5473\u7740\u4EC0\u4E48\uFF1F", lit ? ' 好——你已经讲透了。' : '')), /*#__PURE__*/React.createElement("div", {
+  }, messages.map((m, i) => /*#__PURE__*/React.createElement(Bubble, {
+    key: i,
+    who: m.who,
+    name: m.name
+  }, m.text)), thinking && /*#__PURE__*/React.createElement(TypingBubble, null)), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       gap: 6,
       flexWrap: 'wrap'
     }
-  }, /*#__PURE__*/React.createElement(Tag, {
+  }, (star.tags || []).slice(0, 3).map(t => /*#__PURE__*/React.createElement(Tag, {
+    key: t,
     icon: "hash"
-  }, "\u63A8\u5BFC"), /*#__PURE__*/React.createElement(Tag, {
-    icon: "hash"
-  }, "\u8003\u70B9"))), /*#__PURE__*/React.createElement("div", {
+  }, t)))), /*#__PURE__*/React.createElement("div", {
     style: {
       padding: 18,
-      borderTop: '1px solid var(--line)'
+      borderTop: '1px solid var(--line)',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 12
     }
-  }, /*#__PURE__*/React.createElement(Button, {
+  }, !doneFlag && /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 8
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1
+    }
+  }, /*#__PURE__*/React.createElement(Input, {
+    value: input,
+    onChange: e => setInput(e.target.value),
+    onKeyDown: onKeyDown,
+    placeholder: gated ? '先写下这颗星，再来讲给 AI 学生' : canIgnite ? '还想补充就继续讲…' : '把你的理解讲给 AI 学生…',
+    icon: "message-circle",
+    size: "md",
+    disabled: thinking || gated
+  })), /*#__PURE__*/React.createElement(IconButton, {
+    name: "send",
+    title: "\u8BB2\u7ED9 AI \u5B66\u751F",
+    onClick: send,
+    disabled: !input.trim() || thinking || gated
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      gap: 10,
+      fontSize: 11,
+      color: 'var(--text-3)',
+      fontFamily: 'var(--font-mono)'
+    }
+  }, /*#__PURE__*/React.createElement("span", null, "\u6709\u6548\u8BB2\u89E3 ", effChars, "/", needChars, " \u5B57 \xB7 ", effRounds, " \u8F6E", targets.length ? ` · 要点 ${covered.size}/${targets.length}` : ''), /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: statusColor,
+      textAlign: 'right',
+      flex: 'none'
+    }
+  }, statusText)), doneFlag && stability > 0 && /*#__PURE__*/React.createElement("div", {
+    "aria-live": "polite",
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: 7,
+      fontSize: 12,
+      color: 'var(--text-2)',
+      fontFamily: 'var(--font-mono)'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "trending-up",
+    size: 13,
+    color: lit ? 'var(--gold)' : 'var(--star-blue)'
+  }), "\u8BB0\u5FC6\u7A33\u5B9A\u5EA6\u5347\u81F3 ", Math.round(stability), " \u5929 \xB7 \u590D\u4E60\u95F4\u9694\u66F4\u957F"), mode === 'consolidate' ? /*#__PURE__*/React.createElement(Button, {
     variant: "primary",
-    icon: "zap",
-    glow: !lit,
-    disabled: lit,
+    icon: "check",
+    disabled: !canIgnite || consolidated || extinguished,
+    onClick: consolidate,
+    style: {
+      width: '100%',
+      height: 48,
+      fontSize: 16
+    }
+  }, consolidated ? '已巩固 · 记忆更牢' : '巩固这颗星') : /*#__PURE__*/React.createElement(Button, {
+    variant: "primary",
+    icon: mode === 'relight' ? 'flame' : 'zap',
+    glow: canIgnite && !lit && !gated,
+    disabled: !canIgnite || lit || gated,
     onClick: ignite,
     style: {
       width: '100%',
       height: 48,
       fontSize: 16
     }
-  }, lit ? '已点亮 · 融会贯通' : '点亮这颗星'))));
+  }, mode === 'relight' ? lit ? '已重燃 · 星光归位' : '重燃这颗星' : lit ? '已点亮 · 融会贯通' : '点亮这颗星'), !doneFlag && (deferred ? /*#__PURE__*/React.createElement("div", {
+    "aria-live": "polite",
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: 7,
+      fontSize: 12,
+      color: 'var(--text-3)',
+      padding: '2px 0'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: extinguished ? 'cloud-off' : 'rotate-ccw',
+    size: 13,
+    color: "var(--star-blue-dim)"
+  }), extinguished ? '已熄灭 · 待重燃——把它讲透，光就会回来' : '这颗星还需要时间 — 已排回复习队列') : /*#__PURE__*/React.createElement(Button, {
+    variant: "ghost",
+    size: "sm",
+    icon: "rotate-ccw",
+    onClick: defer,
+    disabled: gated,
+    style: {
+      width: '100%'
+    }
+  }, "\u8FD8\u6CA1\u8BB2\u900F \xB7 \u4E4B\u540E\u518D\u6765")))));
+}
+function TypingBubble() {
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      alignSelf: 'flex-start',
+      maxWidth: '88%'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 10,
+      color: 'var(--text-3)',
+      marginBottom: 4,
+      marginLeft: 2
+    }
+  }, "AI \u5B66\u751F"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 4,
+      padding: '12px 14px',
+      borderRadius: '4px 14px 14px 14px',
+      background: 'rgba(159,198,255,0.08)',
+      border: '1px solid var(--glass-border)'
+    }
+  }, [0, 1, 2].map(i => /*#__PURE__*/React.createElement("span", {
+    key: i,
+    style: {
+      width: 5,
+      height: 5,
+      borderRadius: '50%',
+      background: 'var(--star-blue)',
+      opacity: 0.7,
+      animation: 'sr-breathe 1.2s var(--ease-flight) infinite',
+      animationDelay: `${i * 0.18}s`
+    }
+  }))));
 }
 function Bubble({
   who,
@@ -3512,7 +13508,8 @@ function Bubble({
   return /*#__PURE__*/React.createElement("div", {
     style: {
       alignSelf: ai ? 'flex-start' : 'flex-end',
-      maxWidth: '88%'
+      maxWidth: '88%',
+      animation: 'sr-cardin var(--dur-base) var(--ease-flight) both'
     }
   }, name && /*#__PURE__*/React.createElement("div", {
     style: {
@@ -3539,10 +13536,2645 @@ window.SRKit = Object.assign(window.SRKit || {}, {
 });
 })(); } catch (e) { __ds_ns.__errors.push({ path: "ui_kits/stellar-raft/FeynmanDrawer.jsx", error: String((e && e.message) || e) }); }
 
+// ui_kits/stellar-raft/Galaxy3D.jsx
+try { (() => {
+/* Galaxy3D — 真三维星系视图（Three.js / WebGL）。
+   把整张知识图谱读成一座旋转的星系：每个星座是一颗暖橙色的发光恒星(主星，
+   带点光源照亮四周与一层辉光壳)，星座下的每颗知识星是绕它公转的行星——不同的
+   轨道半径、公转速度、轨道倾角，行星按「记忆温度色阶」着色(冷蓝=正变暗，暖金=已掌握)
+   并缓慢自转。恒星的三维位置沿用星图创作态的真实编排（成员星质心），因此
+   「俯瞰」机位(theta=0 正上方)看到的布局与自己的 2D 星图完全一致。
+   场景包含：软圆斑贴图的双层背景星点、双旋臂星尘盘、跨星域「融会贯通」的
+   金色光弧与沿弧飞行的光点、始终面向相机的星域名牌(飞近时淡出)。
+   相机为透视相机，自实现轨道控制(拖拽旋转 / 滚轮缩放 / 阻尼缓动 / 默认缓慢
+   自转)，入场自远处斜掠飞入。点击恒星平滑飞近近景；点击行星飞入其所属星系、
+   用屏幕空间的金色四角框标记选中(行星本身不放大不增亮)并在右侧弹出摘要卡片。
+   可拾取对象悬停时指针变为 pointer。深空背景 ACESFilmic 色调映射。
+   组件卸载时释放全部 GL 资源。 */
+const {
+  GlassPanel,
+  Icon,
+  Button: SRButton,
+  IconButton,
+  MemoryBar
+} = window.StellarRaftDesignSystem_2866af;
+
+/* 记忆温度色阶：0..1 强度映射到一条冷→暖的颜色。镜像设计系统 memoryColor，
+   读取 data-theme 以适配黎明模式。 */
+function g3dMemoryColor(strength) {
+  const dawn = typeof document !== 'undefined' && document.documentElement.dataset.theme === 'dawn';
+  const stops = dawn ? [[0.0, [108, 121, 155]], [0.25, [92, 108, 150]], [0.5, [76, 96, 148]], [0.7, [52, 95, 190]], [0.88, [184, 128, 26]], [1.0, [168, 109, 18]]] : [[0.0, [44, 53, 86]], [0.25, [70, 82, 122]], [0.5, [120, 150, 205]], [0.7, [159, 198, 255]], [0.88, [255, 224, 150]], [1.0, [255, 244, 214]]];
+  const v = Math.max(0, Math.min(1, strength));
+  let a = stops[0],
+    b = stops[stops.length - 1];
+  for (let i = 0; i < stops.length - 1; i++) {
+    if (v >= stops[i][0] && v <= stops[i + 1][0]) {
+      a = stops[i];
+      b = stops[i + 1];
+      break;
+    }
+  }
+  const t = b[0] === a[0] ? 0 : (v - a[0]) / (b[0] - a[0]);
+  const c = a[1].map((x, i) => Math.round(x + (b[1][i] - x) * t));
+  return {
+    r: c[0],
+    g: c[1],
+    b: c[2]
+  };
+}
+function g3dHash(str) {
+  let h = 2166136261;
+  for (let i = 0; i < str.length; i++) {
+    h ^= str.charCodeAt(i);
+    h = h * 16777619 >>> 0;
+  }
+  return h;
+}
+
+/* 生成一张径向渐变贴图，用于恒星辉光壳 / 行星高亮环 / 背景核心。 */
+function g3dRadialTexture(THREE, inner, outer) {
+  const s = 128;
+  const cv = document.createElement('canvas');
+  cv.width = cv.height = s;
+  const ctx = cv.getContext('2d');
+  const g = ctx.createRadialGradient(s / 2, s / 2, 0, s / 2, s / 2, s / 2);
+  g.addColorStop(0, inner);
+  g.addColorStop(0.45, outer);
+  g.addColorStop(1, 'rgba(0,0,0,0)');
+  ctx.fillStyle = g;
+  ctx.fillRect(0, 0, s, s);
+  const tex = new THREE.CanvasTexture(cv);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  return tex;
+}
+
+/* 星域名牌：把「名称 · 星数」画进 Canvas 再作为 Sprite 悬在恒星上方，
+   始终面向相机；相机飞近该星系时淡出，避免遮挡近景。黎明用深琥珀墨 + 白晕。 */
+function g3dLabelSprite(THREE, name, count, dawn) {
+  const W = 360,
+    H = 104,
+    dpr = 2;
+  const cv = document.createElement('canvas');
+  cv.width = W * dpr;
+  cv.height = H * dpr;
+  const ctx = cv.getContext('2d');
+  ctx.scale(dpr, dpr);
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  const nameFont = (dawn ? '500' : '300') + ' 34px Sora, "Noto Sans SC", sans-serif';
+  if (dawn) {
+    // 白色柔和底板：让深琥珀文字在星尘与恒星辉光上都保持可读
+    ctx.font = nameFont;
+    const tw = Math.min(W - 16, ctx.measureText(name).width + 40);
+    ctx.fillStyle = 'rgba(246,248,251,0.78)';
+    ctx.beginPath();
+    ctx.roundRect((W - tw) / 2, 12, tw, 82, 20);
+    ctx.fill();
+  }
+  ctx.shadowColor = dawn ? 'rgba(255,255,255,0.9)' : 'rgba(255,150,70,0.55)';
+  ctx.shadowBlur = dawn ? 4 : 14;
+  ctx.fillStyle = dawn ? '#5e3a0c' : '#ffe3b0';
+  ctx.font = nameFont;
+  ctx.fillText(name, W / 2, 40);
+  ctx.shadowBlur = dawn ? 0 : 6;
+  ctx.fillStyle = dawn ? 'rgba(94,58,12,0.9)' : 'rgba(255,200,140,0.72)';
+  ctx.font = (dawn ? '500' : '400') + ' 19px "JetBrains Mono", monospace';
+  ctx.fillText(String(count), W / 2, 78);
+  const tex = new THREE.CanvasTexture(cv);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  const mat = new THREE.SpriteMaterial({
+    map: tex,
+    transparent: true,
+    depthWrite: false,
+    opacity: 0.92
+  });
+  const spr = new THREE.Sprite(mat);
+  spr.scale.set(24, 24 * H / W, 1);
+  return {
+    spr,
+    mat,
+    tex
+  };
+}
+
+/* 监听 data-theme，主题切换时触发整个三维场景以对应配色重建 */
+function useG3dDawn() {
+  const [dawn, setDawn] = React.useState(() => document.documentElement.dataset.theme === 'dawn');
+  React.useEffect(() => {
+    const obs = new MutationObserver(() => setDawn(document.documentElement.dataset.theme === 'dawn'));
+    obs.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme']
+    });
+    return () => obs.disconnect();
+  }, []);
+  return dawn;
+}
+function Galaxy3D({
+  onClose,
+  onOpenStar,
+  onFeynman,
+  dataset
+}) {
+  // dataset：造访好友星系时注入的只读数据；缺省用自己的
+  const D = dataset || window.SR_DATA;
+  // 认证态（点亮/待重燃）：自己的星走数据层派生函数（读共享 sr），
+  // 造访好友时消费 server 透传的 lit/ember 两个布尔（不含时间戳）
+  const litOf = s => D.isLit ? !!D.isLit(s) : !!(s && s.lit);
+  const emberOf = s => D.isEmber ? !!D.isEmber(s) : !!(s && s.ember);
+  const mountRef = React.useRef(null);
+  const apiRef = React.useRef(null);
+  const [selected, setSelected] = React.useState(null); // 选中的行星(知识星) 数据，控制右侧卡片
+  const [playing, setPlaying] = React.useState(true); // 公转是否进行
+  const [closeup, setCloseup] = React.useState(false); // 是否处于恒星近景
+  const [ready, setReady] = React.useState(false); // 入场淡入
+
+  const reduced = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const dawn = useG3dDawn();
+  React.useEffect(() => {
+    const THREE = window.THREE;
+    const mount = mountRef.current;
+    if (!THREE || !mount) return;
+
+    // 黎明的浅色天幕上加色混合会"消失"，改用普通混合 + 深色星点
+    const BLEND = dawn ? THREE.NormalBlending : THREE.AdditiveBlending;
+    const SKY = dawn ? '#dde3f0' : '#05060f';
+
+    // ── 渲染器 ───────────────────────────────────────────────
+    const renderer = new THREE.WebGLRenderer({
+      antialias: true,
+      alpha: false
+    });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.setSize(mount.clientWidth || 1, mount.clientHeight || 1);
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = dawn ? 1.0 : 1.08;
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.domElement.style.display = 'block';
+    mount.appendChild(renderer.domElement);
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(SKY);
+    // 雾只负责「远景微雾」的深度暗示：密度压到原来的四到五成，近景星体保持清透；
+    // 黎明天幕本就明亮，雾要更轻，否则整片星系泛白发灰。
+    scene.fog = new THREE.FogExp2(new THREE.Color(SKY).getHex(), dawn ? 0.00032 : 0.00055);
+    const camera = new THREE.PerspectiveCamera(55, (mount.clientWidth || 1) / (mount.clientHeight || 1), 0.1, 3000);
+
+    // ── 资源登记，便于卸载时释放 ─────────────────────────────
+    const geoms = [],
+      mats = [],
+      texs = [];
+    const reg = o => {
+      if (o.geometry) geoms.push(o.geometry);
+      if (o.material) mats.push(o.material);
+      return o;
+    };
+
+    // ── 灯光 ─────────────────────────────────────────────────
+    scene.add(new THREE.AmbientLight(dawn ? 0x9aa8c8 : 0x2a3552, dawn ? 0.95 : 0.55));
+    const hemi = new THREE.HemisphereLight(dawn ? 0xd8e0ee : 0x213056, dawn ? 0xa8b2c8 : 0x070810, dawn ? 0.55 : 0.35);
+    scene.add(hemi);
+
+    // 软圆斑贴图：让 Points 呈现为带辉光的圆星点，而非方形像素
+    const starTex = g3dRadialTexture(THREE, 'rgba(255,255,255,1)', 'rgba(255,255,255,0.28)');
+    texs.push(starTex);
+
+    // ── 背景星空 (Points，双层深度) ──────────────────────────
+    const mkStarLayer = (count, rMin, rMax, size, opacity) => {
+      const pos = new Float32Array(count * 3);
+      const col = new Float32Array(count * 3);
+      const tmp = new THREE.Color();
+      for (let i = 0; i < count; i++) {
+        const r = rMin + Math.random() * (rMax - rMin);
+        const th = Math.random() * Math.PI * 2;
+        const ph = Math.acos(2 * Math.random() - 1);
+        pos[i * 3] = r * Math.sin(ph) * Math.cos(th);
+        pos[i * 3 + 1] = r * Math.cos(ph);
+        pos[i * 3 + 2] = r * Math.sin(ph) * Math.sin(th);
+        const warm = Math.random();
+        if (dawn) {
+          if (warm > 0.85) tmp.setStyle('rgb(176,125,28)');else if (warm > 0.4) tmp.setStyle('rgb(70,98,168)');else tmp.setStyle('rgb(106,127,173)');
+        } else {
+          if (warm > 0.85) tmp.setRGB(1.0, 0.86, 0.62);else if (warm > 0.7) tmp.setRGB(0.95, 0.96, 1.0);else if (warm > 0.4) tmp.setStyle('rgb(159,198,255)');else tmp.setStyle('rgb(120,150,205)');
+        }
+        col[i * 3] = tmp.r;
+        col[i * 3 + 1] = tmp.g;
+        col[i * 3 + 2] = tmp.b;
+      }
+      const geo = new THREE.BufferGeometry();
+      geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+      geo.setAttribute('color', new THREE.BufferAttribute(col, 3));
+      const mat = new THREE.PointsMaterial({
+        size,
+        sizeAttenuation: true,
+        vertexColors: true,
+        map: starTex,
+        transparent: true,
+        opacity: dawn ? opacity * 0.75 : opacity,
+        depthWrite: false,
+        blending: BLEND
+      });
+      const pts = new THREE.Points(geo, mat);
+      geoms.push(geo);
+      mats.push(mat);
+      scene.add(pts);
+      return pts;
+    };
+    const bgFar = mkStarLayer(2400, 700, 1300, 2.6, 0.6); // 远层：细密星幕
+    const bgStars = mkStarLayer(1100, 380, 700, 4.2, 0.85); // 近层：更大更亮，缓慢视差
+
+    // ── 双旋臂星尘盘：所有知识星系都嵌在同一座星系里 ─────────
+    const DUSTN = 1800; // 星尘量收敛：保留旋臂形态，不让尘埃糊住知识星系
+    const dPos = new Float32Array(DUSTN * 3);
+    const dCol = new Float32Array(DUSTN * 3);
+    const dTmp = new THREE.Color();
+    const dGauss = () => (Math.random() + Math.random() + Math.random()) / 1.5 - 1;
+    for (let i = 0; i < DUSTN; i++) {
+      const t01 = Math.random();
+      const arm = i % 2;
+      const ang = t01 * 4.4 * Math.PI + arm * Math.PI; // 对数旋臂
+      const rad = 24 + Math.pow(t01, 0.75) * 250;
+      const spread = 3.5 + rad * 0.09;
+      dPos[i * 3] = Math.cos(ang) * rad + dGauss() * spread;
+      dPos[i * 3 + 1] = -7 + dGauss() * (2.2 + rad * 0.02); // 薄盘，略低于知识星系平面
+      dPos[i * 3 + 2] = Math.sin(ang) * rad + dGauss() * spread;
+      if (dawn) {
+        if (rad < 62 && Math.random() < 0.65) dTmp.setStyle('rgb(156,106,18)'); // 核球偏暖（深琥珀）
+        else dTmp.setStyle(Math.random() < 0.5 ? 'rgb(70,98,168)' : 'rgb(96,112,156)');
+      } else {
+        if (rad < 62 && Math.random() < 0.65) dTmp.setRGB(1.0, 0.84, 0.55); // 核球偏暖
+        else if (Math.random() < 0.22) dTmp.setRGB(0.86, 0.9, 1.0);else dTmp.setStyle(Math.random() < 0.5 ? 'rgb(120,150,205)' : 'rgb(90,112,168)');
+      }
+      dCol[i * 3] = dTmp.r;
+      dCol[i * 3 + 1] = dTmp.g;
+      dCol[i * 3 + 2] = dTmp.b;
+    }
+    const dustGeo = new THREE.BufferGeometry();
+    dustGeo.setAttribute('position', new THREE.BufferAttribute(dPos, 3));
+    dustGeo.setAttribute('color', new THREE.BufferAttribute(dCol, 3));
+    const dustMat = new THREE.PointsMaterial({
+      size: dawn ? 1.6 : 2.2,
+      sizeAttenuation: true,
+      vertexColors: true,
+      map: starTex,
+      transparent: true,
+      opacity: dawn ? 0.13 : 0.26,
+      depthWrite: false,
+      blending: BLEND
+    });
+    const dust = new THREE.Points(dustGeo, dustMat);
+    geoms.push(dustGeo);
+    mats.push(dustMat);
+    scene.add(dust);
+
+    // 星系核心弥散辉光
+    const coreTex = g3dRadialTexture(THREE, 'rgba(255,236,200,0.9)', 'rgba(255,180,110,0.28)');
+    texs.push(coreTex);
+    const coreMat = new THREE.SpriteMaterial({
+      map: coreTex,
+      transparent: true,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+      opacity: 0.34
+    });
+    const coreGlow = new THREE.Sprite(coreMat);
+    coreGlow.scale.set(190, 190, 1);
+    mats.push(coreMat);
+    if (!dawn) scene.add(coreGlow);
+
+    // 共享辉光贴图
+    const sunGlowTex = g3dRadialTexture(THREE, 'rgba(255,238,205,0.95)', 'rgba(255,168,92,0.45)');
+    texs.push(sunGlowTex);
+    const ringGlowTex = g3dRadialTexture(THREE, 'rgba(255,255,255,0.0)', 'rgba(255,255,255,0.0)');
+    texs.push(ringGlowTex);
+
+    // 认证环配色（tokens 的 --gold / --gold-warm 同色值，黎明取深琥珀）：
+    // 已点亮 = 细金环；待重燃 = 低透明度暗金余烬环
+    const CERT = dawn ? {
+      lit: 0xb07d1c,
+      litOp: 0.6,
+      ember: 0x9c6a12,
+      emberOp: 0.34
+    } : {
+      lit: 0xffd98a,
+      litOp: 0.55,
+      ember: 0xffb86b,
+      emberOp: 0.22
+    };
+    const haloById = {}; // id → 认证环，点亮事件就地转金
+
+    // ── 布局：星座中心由成员星平均坐标决定 ───────────────────
+    const SCALE = 1.7;
+    const cons = D.constellations;
+    const pickable = []; // 可被射线拾取的网格(恒星+行星)
+    const planetMeshById = {}; // id → 行星 mesh
+    const planetAnims = []; // 每帧驱动公转/自转
+    const sunBreathe = []; // 恒星呼吸
+    const sunPosById = {}; // 星座 id → 恒星世界坐标(供金弧连接)
+    const labels = []; // 星域名牌，按相机距离淡入淡出
+
+    const worldOf = s => {
+      const b = D.byId[s.id] || s;
+      const wx = b.wx != null ? b.wx / 1680 * 100 : s.x;
+      const wy = b.wy != null ? b.wy / 1040 * 100 : s.y;
+      return {
+        x: wx,
+        y: wy
+      };
+    };
+    cons.forEach((c, ci) => {
+      const members = D.stars.filter(s => s.con === c.id);
+      if (!members.length) return;
+      let mx = 0,
+        my = 0;
+      members.forEach(s => {
+        const w = worldOf(s);
+        mx += w.x;
+        my += w.y;
+      });
+      mx /= members.length;
+      my /= members.length;
+      const h = g3dHash(c.id);
+      const cx = (mx - 50) * SCALE;
+      const cz = (my - 50) * SCALE;
+      const cy = (h % 36 - 18) * 1.1; // 纵向抖动，制造层次
+
+      const sysGroup = new THREE.Group();
+      sysGroup.position.set(cx, cy, cz);
+      scene.add(sysGroup);
+
+      // 恒星本体
+      const sunR = 2.6 + Math.sqrt(c.count || members.length) * 0.72;
+      const sunGeo = new THREE.SphereGeometry(sunR, 40, 40);
+      const sunMat = new THREE.MeshStandardMaterial({
+        color: 0x2a1606,
+        emissive: new THREE.Color('#ffb060'),
+        emissiveIntensity: 1.5,
+        roughness: 0.5,
+        metalness: 0.0
+      });
+      const sun = new THREE.Mesh(sunGeo, sunMat);
+      sun.userData = {
+        kind: 'sun',
+        con: c,
+        sunR,
+        pos: new THREE.Vector3(cx, cy, cz)
+      };
+      sysGroup.add(sun);
+      pickable.push(sun);
+      sunBreathe.push({
+        mat: sunMat,
+        base: 1.5,
+        phase: h % 100 / 100 * Math.PI * 2,
+        sun
+      });
+      sunPosById[c.id] = new THREE.Vector3(cx, cy, cz);
+
+      // 点光源：照亮周围行星
+      const light = new THREE.PointLight(0xffb066, 90, sunR * 16, 2.0);
+      light.position.set(0, 0, 0);
+      sysGroup.add(light);
+      sunBreathe[sunBreathe.length - 1].light = light;
+
+      // 星域名牌：悬在恒星的"屏幕上方"（随相机方位动态偏移），飞近时淡出
+      const lbl = g3dLabelSprite(THREE, c.name, `${members.length} 星`, dawn);
+      lbl.spr.position.set(0, sunR + 8.5, 0);
+      sysGroup.add(lbl.spr);
+      mats.push(lbl.mat);
+      texs.push(lbl.tex);
+      labels.push({
+        spr: lbl.spr,
+        base: new THREE.Vector3(cx, cy, cz),
+        sunR
+      });
+
+      // 恒星辉光壳 (Sprite，加色)
+      const glowMat = new THREE.SpriteMaterial({
+        map: sunGlowTex,
+        transparent: true,
+        blending: BLEND,
+        depthWrite: false,
+        opacity: dawn ? 0.34 : 0.62
+      });
+      const glow = new THREE.Sprite(glowMat);
+      glow.scale.set(sunR * 4.4, sunR * 4.4, 1);
+      mats.push(glowMat);
+      sysGroup.add(glow);
+
+      // 行星
+      members.forEach((s, k) => {
+        const ph = g3dHash(s.id);
+        const orbitR = sunR + 4.5 + k * 3.4;
+        const incX = (ph % 40 - 20) / 90; // 轨道倾角 ±0.22rad
+        const incZ = ((ph >> 5) % 32 - 16) / 110;
+        const startA = (ph >> 2) % 360 / 180 * Math.PI;
+        const speed = 0.62 / Math.sqrt(orbitR) * (1 + (ph % 5 - 2) * 0.08); // 外圈更慢
+        const spin = 0.5 + ph % 7 * 0.08;
+        const pr = 0.95 + (s.importance || 1) * 0.7;
+        const orbitGroup = new THREE.Group();
+        orbitGroup.rotation.x = incX;
+        orbitGroup.rotation.z = incZ;
+        sysGroup.add(orbitGroup);
+
+        // 轨道环
+        const ringGeo = new THREE.RingGeometry(orbitR - 0.06, orbitR + 0.06, 96);
+        const ringMat = new THREE.MeshBasicMaterial({
+          color: new THREE.Color(dawn ? 'rgb(58,98,192)' : 'rgb(159,198,255)'),
+          transparent: true,
+          opacity: dawn ? 0.2 + (s.strength || 0) * 0.1 : 0.06 + (s.strength || 0) * 0.09,
+          side: THREE.DoubleSide,
+          depthWrite: false
+        });
+        const ring = new THREE.Mesh(ringGeo, ringMat);
+        ring.rotation.x = Math.PI / 2;
+        orbitGroup.add(ring);
+        geoms.push(ringGeo);
+        mats.push(ringMat);
+
+        // 公转支点
+        const pivot = new THREE.Group();
+        pivot.rotation.y = startA;
+        orbitGroup.add(pivot);
+        const c3 = g3dMemoryColor(s.strength);
+        const baseCol = new THREE.Color().setStyle(`rgb(${c3.r},${c3.g},${c3.b})`);
+        const pGeo = new THREE.SphereGeometry(pr, 28, 28);
+        const pMat = new THREE.MeshStandardMaterial({
+          color: baseCol,
+          emissive: baseCol.clone().multiplyScalar(dawn ? 0.12 : 0.45),
+          emissiveIntensity: dawn ? 0.3 : 0.9 + (s.strength || 0) * 0.6,
+          roughness: dawn ? 0.4 : 0.55,
+          metalness: 0.1
+        });
+        const planet = new THREE.Mesh(pGeo, pMat);
+        planet.position.set(orbitR, 0, 0);
+        planet.userData = {
+          kind: 'planet',
+          star: s,
+          con: c,
+          pr,
+          sunPos: new THREE.Vector3(cx, cy, cz),
+          sunR,
+          sysR: sunR + 4.5 + (members.length - 1) * 3.4 // 该星系最外圈轨道半径
+        };
+        pivot.add(planet);
+        geoms.push(pGeo);
+        mats.push(pMat);
+        pickable.push(planet);
+        planetMeshById[s.id] = planet;
+
+        // 认证环：随行星公转的细环（叠加在记忆温度着色之上的正交维度）
+        const certLit = litOf(s),
+          certEmber = emberOf(s);
+        const haloGeo = new THREE.RingGeometry(pr * 1.5, pr * 1.64, 48);
+        const haloMat = new THREE.MeshBasicMaterial({
+          color: certLit ? CERT.lit : CERT.ember,
+          transparent: true,
+          opacity: certLit ? CERT.litOp : CERT.emberOp,
+          side: THREE.DoubleSide,
+          depthWrite: false
+        });
+        const haloRing = new THREE.Mesh(haloGeo, haloMat);
+        haloRing.rotation.x = Math.PI / 2;
+        haloRing.visible = certLit || certEmber;
+        planet.add(haloRing);
+        geoms.push(haloGeo);
+        mats.push(haloMat);
+        haloById[s.id] = {
+          mesh: haloRing,
+          mat: haloMat
+        };
+        planetAnims.push({
+          pivot,
+          planet,
+          speed,
+          spin
+        });
+      });
+    });
+
+    // ── 融会贯通：跨星域光弧。新口径——仅当某条 cross 连接两端知识星均「已点亮」，
+    //    这对星域间才是金弧＋流光；未齐亮时退为无流光的冷色细弧（一端熄灭，金弧当场冷却） ──
+    const arcs = [];
+    {
+      const pairGold = new Map(); // 'conA|conB' → 是否存在两端齐亮的连接
+      D.connections.forEach(cn => {
+        if (cn.kind !== 'cross') return;
+        const A = D.byId[cn.a],
+          B = D.byId[cn.b];
+        if (!A || !B || A.con === B.con) return;
+        const key = [A.con, B.con].sort().join('|');
+        pairGold.set(key, pairGold.get(key) || false || litOf(A) && litOf(B));
+      });
+      pairGold.forEach((gold, key) => {
+        const [ca, cb] = key.split('|');
+        const pa = sunPosById[ca],
+          pb = sunPosById[cb];
+        if (!pa || !pb) return;
+        const mid = pa.clone().add(pb).multiplyScalar(0.5);
+        mid.y += 14 + pa.distanceTo(pb) * 0.24; // 拱起，像跨越星域的桥
+        const curve = new THREE.QuadraticBezierCurve3(pa, mid, pb);
+        const geo = new THREE.BufferGeometry().setFromPoints(curve.getPoints(72));
+        if (!gold) {
+          const cMat = new THREE.LineBasicMaterial({
+            color: dawn ? 0x3a62c0 : 0x9fc6ff,
+            transparent: true,
+            opacity: dawn ? 0.3 : 0.16,
+            blending: BLEND,
+            depthWrite: false
+          });
+          scene.add(new THREE.Line(geo, cMat));
+          geoms.push(geo);
+          mats.push(cMat);
+          return;
+        }
+        const mat = new THREE.LineBasicMaterial({
+          color: dawn ? 0xb07d1c : 0xffd98a,
+          transparent: true,
+          opacity: dawn ? 0.5 : 0.32,
+          blending: BLEND,
+          depthWrite: false
+        });
+        scene.add(new THREE.Line(geo, mat));
+        geoms.push(geo);
+        mats.push(mat);
+        const tMat = new THREE.SpriteMaterial({
+          map: sunGlowTex,
+          color: dawn ? 0x9c6a12 : 0xffe6b0,
+          transparent: true,
+          blending: BLEND,
+          depthWrite: false,
+          opacity: 0.9
+        });
+        const traveler = new THREE.Sprite(tMat);
+        traveler.scale.set(dawn ? 2.6 : 4.6, dawn ? 2.6 : 4.6, 1);
+        scene.add(traveler);
+        mats.push(tMat);
+        arcs.push({
+          curve,
+          traveler,
+          mat,
+          off: arcs.length * 0.41 % 1
+        });
+      });
+    }
+
+    // 选中行星：屏幕空间四角框 + 一圈金色描边（反向壳，不改动行星本身）
+    let highlightId = null;
+    const outlineGeo = new THREE.SphereGeometry(1, 32, 32);
+    const outlineMat = new THREE.MeshBasicMaterial({
+      color: dawn ? 0xb07d1c : 0xffc561,
+      side: THREE.BackSide,
+      transparent: true,
+      opacity: 0.95
+    });
+    const outline = new THREE.Mesh(outlineGeo, outlineMat);
+    outline.visible = false;
+    scene.add(outline);
+    geoms.push(outlineGeo);
+    mats.push(outlineMat);
+
+    // 点亮事件：行星色温从冷蓝升到暖金，带一次短促的发光爆发后落定
+    const igniteFx = [];
+    const onIgnite = e => {
+      const {
+        id,
+        strength
+      } = e.detail || {};
+      const pm = planetMeshById[id];
+      if (!pm) return;
+      const c3 = g3dMemoryColor(strength);
+      igniteFx.push({
+        pm,
+        t0: performance.now(),
+        to: new THREE.Color(`rgb(${c3.r},${c3.g},${c3.b})`),
+        settle: document.documentElement.dataset.theme === 'dawn' ? 0.3 : 0.9 + (strength || 0) * 0.6
+      });
+      // 认证环就地转金：点亮 / 重燃后无需重建场景
+      const h = haloById[id];
+      if (h) {
+        h.mat.color.setHex(CERT.lit);
+        h.mat.opacity = CERT.litOp;
+        h.mesh.visible = true;
+      }
+    };
+    window.addEventListener('sr-ignite', onIgnite);
+
+    // 屏幕空间选择框（金色四角 bracket）跟随选中行星
+    const selBox = document.createElement('div');
+    selBox.className = 'g3d-selbox';
+    selBox.innerHTML = '<i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i>';
+    selBox.style.display = 'none';
+    mount.appendChild(selBox);
+
+    // ── 自实现轨道相机控制 ───────────────────────────────────
+    const target = new THREE.Vector3(0, 0, 0);
+    const targetGoal = new THREE.Vector3(0, 0, 0);
+    const cam = {
+      theta: -0.42,
+      phi: 0.82,
+      radius: 660
+    }; // 当前(入场自远处斜掠飞入)
+    const camGoal = {
+      theta: 0.6,
+      phi: 1.16,
+      radius: 195
+    }; // 目标
+    const RAD_MIN = 16,
+      RAD_MAX = 620;
+    let autoRotate = !reduced;
+    let dragging = false,
+      downX = 0,
+      downY = 0,
+      moved = 0,
+      lastX = 0,
+      lastY = 0;
+    const applyCamera = () => {
+      const sp = Math.sin(cam.phi),
+        cp = Math.cos(cam.phi);
+      camera.position.set(target.x + cam.radius * sp * Math.sin(cam.theta), target.y + cam.radius * cp, target.z + cam.radius * sp * Math.cos(cam.theta));
+      camera.lookAt(target);
+    };
+    const el = renderer.domElement;
+    const onDown = e => {
+      if (e.button !== 0) return;
+      dragging = true;
+      moved = 0;
+      downX = lastX = e.clientX;
+      downY = lastY = e.clientY;
+      autoRotate = false;
+      try {
+        el.setPointerCapture(e.pointerId);
+      } catch (_) {}
+    };
+    let hoverT = 0;
+    const onMove = e => {
+      if (!dragging) {
+        // 节流射线检测：悬停在恒星/行星上时给出 pointer 指针
+        if (e.timeStamp - hoverT > 90) {
+          hoverT = e.timeStamp;
+          const rect = el.getBoundingClientRect();
+          ndc.x = (e.clientX - rect.left) / rect.width * 2 - 1;
+          ndc.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+          raycaster.setFromCamera(ndc, camera);
+          el.style.cursor = raycaster.intersectObjects(pickable, false).length ? 'pointer' : '';
+        }
+        return;
+      }
+      const dx = e.clientX - lastX,
+        dy = e.clientY - lastY;
+      lastX = e.clientX;
+      lastY = e.clientY;
+      moved += Math.abs(dx) + Math.abs(dy);
+      camGoal.theta -= dx * 0.005;
+      camGoal.phi = Math.max(0.18, Math.min(Math.PI - 0.18, camGoal.phi - dy * 0.005));
+    };
+    const onUp = e => {
+      try {
+        el.releasePointerCapture(e.pointerId);
+      } catch (_) {}
+      const wasDrag = dragging && moved > 6;
+      dragging = false;
+      if (!wasDrag) handlePick(e);
+    };
+    // 滚轮缩放：乘法式 dolly。以 100px ≈ 一格普通滚轮计，每格 ~1.3 倍，
+    // 5-6 格即可从全景贴近一个星域；触控板的小 delta 按比例得到更细的步进。
+    // deltaMode 归一（1=行, 2=页），单次事件最多按 3 格计，防止惯性甩飞。
+    // 距离本身仍走渲染循环的阻尼缓动（短平滑），reduced-motion 时瞬到目标。
+    const onWheel = e => {
+      e.preventDefault();
+      let dy = e.deltaY;
+      if (e.deltaMode === 1) dy *= 33;else if (e.deltaMode === 2) dy *= 120;
+      const notch = Math.max(-3, Math.min(3, dy / 100));
+      camGoal.radius = Math.max(RAD_MIN, Math.min(RAD_MAX, camGoal.radius * Math.pow(1.3, notch)));
+      if (reduced) cam.radius = camGoal.radius;
+    };
+    el.addEventListener('pointerdown', onDown);
+    el.addEventListener('pointermove', onMove);
+    el.addEventListener('pointerup', onUp);
+    el.addEventListener('pointerleave', e => {
+      if (dragging) onUp(e);
+    });
+    el.addEventListener('wheel', onWheel, {
+      passive: false
+    });
+
+    // ── 拾取 ─────────────────────────────────────────────────
+    const raycaster = new THREE.Raycaster();
+    const ndc = new THREE.Vector2();
+    // 飞入某个恒星系：相机目标移到恒星，收拢到给定半径的近景
+    const flyToSystem = (pos, radius) => {
+      targetGoal.copy(pos);
+      camGoal.radius = Math.max(RAD_MIN, radius);
+      camGoal.phi = 1.12;
+      autoRotate = false;
+      setCloseup(true);
+    };
+    const handlePick = e => {
+      const rect = el.getBoundingClientRect();
+      ndc.x = (e.clientX - rect.left) / rect.width * 2 - 1;
+      ndc.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+      raycaster.setFromCamera(ndc, camera);
+      const hits = raycaster.intersectObjects(pickable, false);
+      if (!hits.length) {
+        setSelected(null);
+        return;
+      }
+      const ud = hits[0].object.userData;
+      if (ud.kind === 'sun') {
+        flyToSystem(ud.pos, ud.sunR * 5.2);
+        setSelected(null);
+      } else if (ud.kind === 'planet') {
+        // 选中行星：相机直接拉近到行星本身，之后在渲染循环里持续跟随它公转
+        camGoal.radius = Math.max(RAD_MIN, ud.pr * 10);
+        camGoal.phi = 1.08;
+        autoRotate = false;
+        setCloseup(true);
+        setSelected(ud.star);
+      }
+    };
+
+    // ── 命令式 API，供 React 控制 ────────────────────────────
+    let playingNow = !reduced;
+    apiRef.current = {
+      setPlaying: v => {
+        playingNow = v;
+      },
+      flyHome: () => {
+        targetGoal.set(0, 0, 0);
+        camGoal.radius = 195;
+        camGoal.phi = 1.16;
+        autoRotate = !reduced;
+        setCloseup(false);
+      },
+      // 俯瞰机位：theta=0 正对上方——此时布局与 2D 星图的编排逐点一致。
+      // 半径按当前数据的实际外接半径动态取景（恒星最远距离 + 轨道/名牌余量），
+      // fov 55° 时可视半高 ≈ 0.52R，除以 0.48 留一点边（原来写死 340，星系只占三成）
+      flyTop: () => {
+        targetGoal.set(0, 0, 0);
+        let ext = 60;
+        Object.values(sunPosById).forEach(p => {
+          const d = Math.hypot(p.x, p.z);
+          if (Number.isFinite(d)) ext = Math.max(ext, d);
+        });
+        camGoal.radius = Math.max(90, Math.min(RAD_MAX, (ext + 30) / 0.55));
+        camGoal.phi = 0.16;
+        camGoal.theta = 0;
+        autoRotate = false;
+        setCloseup(true);
+      },
+      setHighlight: id => {
+        highlightId = id;
+      }
+    };
+
+    // ── 渲染循环 ─────────────────────────────────────────────
+    let raf,
+      last = performance.now();
+    const wpos = new THREE.Vector3();
+    const loop = t => {
+      const dt = Math.min(0.05, (t - last) / 1000);
+      last = t;
+      if (autoRotate && !dragging) camGoal.theta += dt * 0.06;
+
+      // 阻尼缓动
+      const ka = 1 - Math.exp(-dt * 5);
+      const kt = 1 - Math.exp(-dt * 4);
+      cam.theta += (camGoal.theta - cam.theta) * ka;
+      cam.phi += (camGoal.phi - cam.phi) * ka;
+      cam.radius += (camGoal.radius - cam.radius) * ka;
+      target.lerp(targetGoal, kt);
+      applyCamera();
+
+      // 公转 / 自转
+      if (playingNow) {
+        for (const a of planetAnims) {
+          a.pivot.rotation.y += a.speed * dt;
+          a.planet.rotation.y += a.spin * dt;
+        }
+      } else {
+        for (const a of planetAnims) a.planet.rotation.y += a.spin * dt * 0.25;
+      }
+
+      // 恒星呼吸 + 光源随之微微闪烁
+      for (const sb of sunBreathe) {
+        const br = Math.sin(t * 0.0013 + sb.phase);
+        sb.mat.emissiveIntensity = sb.base + br * 0.28;
+        if (sb.light) sb.light.intensity = 90 * (1 + br * 0.08);
+      }
+      coreGlow.material.rotation += dt * 0.02;
+
+      // 深空缓慢流动：远近星幕反向微转产生视差，星尘盘随星系旋转
+      bgFar.rotation.y += dt * 0.0022;
+      bgStars.rotation.y -= dt * 0.004;
+      dust.rotation.y += dt * (playingNow ? 0.012 : 0.003);
+
+      // 金弧上的光点沿曲线飞行，弧线亮度轻微脉动
+      for (let i = 0; i < arcs.length; i++) {
+        const a = arcs[i];
+        const k01 = playingNow ? (t * 0.00055 + a.off) % 1 : a.off;
+        a.traveler.position.copy(a.curve.getPoint(k01));
+        a.mat.opacity = (dawn ? 0.44 : 0.26) + 0.1 * Math.sin(t * 0.0016 + i * 1.7);
+      }
+
+      // 星域名牌：沿相机的屏幕上方向悬浮（俯瞰时也不会压在恒星光斑上），
+      // 远处清晰、飞近淡出，避免遮挡近景行星
+      const upDir = new THREE.Vector3(0, 1, 0).applyQuaternion(camera.quaternion);
+      for (const L of labels) {
+        const off = L.sunR + 8.5;
+        L.spr.position.set(upDir.x * off, upDir.y * off, upDir.z * off);
+        wpos.copy(L.base).addScaledVector(upDir, off);
+        const d = camera.position.distanceTo(wpos);
+        L.spr.material.opacity = Math.max(0, Math.min(1, (d - L.sunR * 7) / 55)) * 0.92;
+        const sc = Math.min(2.1, Math.max(1, d / 230)); // 远观时放大，保持可读
+        L.spr.scale.set(24 * sc, 24 * (104 / 360) * sc, 1);
+      }
+
+      // 点亮动画：1.6s 内色温升到暖金，发光先爆发后落定
+      for (let i = igniteFx.length - 1; i >= 0; i--) {
+        const fx = igniteFx[i];
+        const k = (t - fx.t0) / 1600;
+        if (k >= 1) {
+          fx.pm.material.color.copy(fx.to);
+          fx.pm.material.emissive.copy(fx.to).multiplyScalar(0.45);
+          fx.pm.material.emissiveIntensity = fx.settle;
+          igniteFx.splice(i, 1);
+          continue;
+        }
+        fx.pm.material.color.lerp(fx.to, 1 - Math.exp(-dt * 4));
+        fx.pm.material.emissive.copy(fx.pm.material.color).multiplyScalar(0.45);
+        fx.pm.material.emissiveIntensity = fx.settle + Math.sin(Math.min(1, k) * Math.PI) * 2.4;
+      }
+
+      // 选中行星：相机目标持续跟随行星公转，屏幕空间的金色四角框标记它
+      // （行星本身不放大、不增亮）
+      if (highlightId && planetMeshById[highlightId]) {
+        const pm = planetMeshById[highlightId];
+        pm.getWorldPosition(wpos);
+        targetGoal.copy(wpos);
+        // 金色描边：稍大于行星的反向壳
+        outline.visible = true;
+        outline.position.copy(wpos);
+        outline.scale.setScalar((pm.userData.pr || 1) * 1.035);
+        const proj = wpos.clone().project(camera);
+        const vw = mount.clientWidth,
+          vh = mount.clientHeight;
+        if (proj.z < 1) {
+          const sx = (proj.x * 0.5 + 0.5) * vw;
+          const sy = (-proj.y * 0.5 + 0.5) * vh;
+          const dist = camera.position.distanceTo(wpos);
+          const fovR = camera.fov * Math.PI / 180;
+          const screenR = (pm.userData.pr || 1) / Math.max(0.001, dist) * (vh / 2) / Math.tan(fovR / 2);
+          const half = Math.max(15, screenR * 1.3 + 9); // 始终比星球投影大一圈，随远近缩放
+          selBox.style.display = 'block';
+          selBox.style.left = sx - half + 'px';
+          selBox.style.top = sy - half + 'px';
+          selBox.style.width = half * 2 + 'px';
+          selBox.style.height = half * 2 + 'px';
+        } else {
+          selBox.style.display = 'none';
+        }
+      } else {
+        outline.visible = false;
+        selBox.style.display = 'none';
+      }
+      renderer.render(scene, camera);
+      raf = requestAnimationFrame(loop);
+    };
+    applyCamera();
+    raf = requestAnimationFrame(loop);
+    requestAnimationFrame(() => setReady(true));
+
+    // ── 自适应尺寸 ───────────────────────────────────────────
+    const onResize = () => {
+      const w = mount.clientWidth,
+        h = mount.clientHeight;
+      if (!w || !h) return;
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
+    };
+    const ro = new ResizeObserver(onResize);
+    ro.observe(mount);
+
+    // ── 卸载释放 ─────────────────────────────────────────────
+    return () => {
+      cancelAnimationFrame(raf);
+      ro.disconnect();
+      window.removeEventListener('sr-ignite', onIgnite);
+      el.removeEventListener('pointerdown', onDown);
+      el.removeEventListener('pointermove', onMove);
+      el.removeEventListener('pointerup', onUp);
+      el.removeEventListener('wheel', onWheel);
+      apiRef.current = null;
+      geoms.forEach(g => g.dispose());
+      mats.forEach(m => m.dispose());
+      texs.forEach(tx => tx.dispose());
+      renderer.dispose();
+      if (selBox.parentNode) selBox.parentNode.removeChild(selBox);
+      if (el.parentNode) el.parentNode.removeChild(el);
+    };
+  }, [dawn]);
+
+  // React 状态 → 场景
+  React.useEffect(() => {
+    if (apiRef.current) apiRef.current.setPlaying(playing);
+  }, [playing]);
+  React.useEffect(() => {
+    if (apiRef.current) apiRef.current.setHighlight(selected ? selected.id : null);
+  }, [selected]);
+
+  // 点亮后刷新右侧卡片的记忆强度
+  React.useEffect(() => {
+    const h = e => setSelected(s => s && e.detail && s.id === e.detail.id ? {
+      ...s,
+      strength: e.detail.strength
+    } : s);
+    window.addEventListener('sr-ignite', h);
+    return () => window.removeEventListener('sr-ignite', h);
+  }, []);
+
+  // Esc 统一词汇：先收起行星摘要卡，再返回星图（费曼抽屉在 app 层捕获，永远先关）
+  const selRef = React.useRef(null);
+  selRef.current = selected;
+  React.useEffect(() => {
+    const h = e => {
+      if (e.key !== 'Escape' || e.defaultPrevented) return;
+      e.preventDefault();
+      if (selRef.current) setSelected(null);else if (onClose) onClose();
+    };
+    document.addEventListener('keydown', h);
+    return () => document.removeEventListener('keydown', h);
+  }, [onClose]);
+  const flyHome = () => {
+    if (apiRef.current) apiRef.current.flyHome();
+  };
+  const cons = D.constellations;
+  const totalStars = D.stars.length;
+  const lit = D.stars.filter(litOf).length; // 已点亮 = 认证口径，不再用亮度近似
+  const noWebGL = typeof window !== 'undefined' && !window.THREE;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "g3d-root",
+    style: {
+      position: 'relative',
+      flex: 1,
+      minWidth: 0,
+      overflow: 'hidden',
+      background: dawn ? '#dde3f0' : '#05060f',
+      opacity: ready ? 1 : 0,
+      transition: 'opacity 520ms var(--ease-flight, ease)'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    ref: mountRef,
+    style: {
+      position: 'absolute',
+      inset: 0,
+      zIndex: 1
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "g3d-vignette"
+  }), /*#__PURE__*/React.createElement(Galaxy3DStyle, null), noWebGL && /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'absolute',
+      inset: 0,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      zIndex: 40
+    }
+  }, /*#__PURE__*/React.createElement(GlassPanel, {
+    strong: true,
+    radius: "lg",
+    pad: "md"
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: 'var(--text-2)',
+      fontSize: 13
+    }
+  }, "\u5F53\u524D\u73AF\u5883\u4E0D\u652F\u6301 WebGL\uFF0C\u65E0\u6CD5\u6E32\u67D3\u4E09\u7EF4\u661F\u7CFB\u3002"))), !noWebGL && totalStars === 0 && /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'absolute',
+      inset: 0,
+      zIndex: 35,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: 'var(--s-4)',
+      textAlign: 'center',
+      pointerEvents: 'none'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 14,
+      color: 'var(--text-2)'
+    }
+  }, "\u4F60\u7684\u661F\u7A7A\u8FD8\u5F88\u6697\u3002\u5199\u4E0B\u7B2C\u4E00\u9897\u661F\uFF0C\u8BA9\u5B83\u53D1\u5149\u3002"), /*#__PURE__*/React.createElement("span", {
+    style: {
+      pointerEvents: 'auto'
+    }
+  }, /*#__PURE__*/React.createElement(SRButton, {
+    icon: "corner-up-left",
+    onClick: onClose
+  }, "\u8FD4\u56DE\u661F\u56FE\u521B\u5EFA"))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'absolute',
+      top: 18,
+      left: 24,
+      zIndex: 30
+    }
+  }, /*#__PURE__*/React.createElement(GlassPanel, {
+    radius: "pill",
+    pad: "none",
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 22,
+      padding: '10px 24px'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 8,
+      fontSize: 13,
+      color: 'var(--text-2)'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "orbit",
+    size: 17,
+    color: "var(--gold)"
+  }), "\u4E09\u7EF4\u661F\u7CFB"), dataset && dataset.ownerName && /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 7,
+      fontSize: 12.5,
+      color: 'var(--gold)',
+      whiteSpace: 'nowrap'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "telescope",
+    size: 14,
+    color: "var(--gold)"
+  }), dataset.ownerName, " \xB7 \u53EA\u8BFB"), /*#__PURE__*/React.createElement(Sep, null), /*#__PURE__*/React.createElement(Stat, {
+    n: cons.length,
+    t: "\u661F\u57DF"
+  }), /*#__PURE__*/React.createElement(Stat, {
+    n: totalStars,
+    t: "\u884C\u661F"
+  }), /*#__PURE__*/React.createElement(Stat, {
+    n: lit,
+    t: "\u5DF2\u70B9\u4EAE",
+    tone: "var(--gold)"
+  }), /*#__PURE__*/React.createElement(Sep, null), /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 8
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 10.5,
+      color: 'var(--text-3)'
+    }
+  }, "\u6B63\u53D8\u6697"), /*#__PURE__*/React.createElement("span", {
+    style: {
+      width: 74,
+      height: 5,
+      borderRadius: 3,
+      background: 'linear-gradient(90deg, var(--mem-dead), var(--mem-low), var(--mem-mid), var(--mem-high), var(--mem-full))'
+    }
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 10.5,
+      color: 'var(--gold)'
+    }
+  }, "\u5DF2\u638C\u63E1")), /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 7
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      width: 20,
+      height: 0,
+      borderTop: '2px solid var(--gold)',
+      opacity: 0.8,
+      borderRadius: 2
+    }
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 10.5,
+      color: 'var(--text-3)'
+    }
+  }, "\u878D\u4F1A\u8D2F\u901A")))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'absolute',
+      bottom: 26,
+      left: 24,
+      zIndex: 30,
+      display: 'flex',
+      alignItems: 'center',
+      gap: 8,
+      fontSize: 11.5,
+      color: 'var(--text-3)',
+      pointerEvents: 'none'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "move-3d",
+    size: 14,
+    color: "currentColor"
+  }), "\u62D6\u62FD\u65CB\u8F6C \xB7 \u6EDA\u8F6E\u7F29\u653E \xB7 \u70B9\u51FB\u6052\u661F\u98DE\u8FD1 \xB7 \u70B9\u51FB\u884C\u661F\u67E5\u770B \xB7 \u91D1\u5F27 = \u4E24\u7AEF\u5DF2\u70B9\u4EAE\u7684\u878D\u4F1A\u8D2F\u901A"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'absolute',
+      bottom: 26,
+      right: 24,
+      zIndex: 30,
+      display: 'flex',
+      alignItems: 'center',
+      gap: 10
+    }
+  }, /*#__PURE__*/React.createElement(GlassPanel, {
+    radius: "pill",
+    pad: "none",
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 4,
+      padding: 6
+    }
+  }, /*#__PURE__*/React.createElement(IconButton, {
+    name: playing ? 'pause' : 'play',
+    size: "sm",
+    title: playing ? '暂停公转' : '播放公转',
+    onClick: () => setPlaying(p => !p)
+  }), /*#__PURE__*/React.createElement(IconButton, {
+    name: "satellite",
+    size: "sm",
+    title: "\u4FEF\u77B0\u5168\u5C40 \xB7 \u4E0E\u661F\u56FE\u540C\u4E00\u7F16\u6392",
+    onClick: () => apiRef.current && apiRef.current.flyTop()
+  }), /*#__PURE__*/React.createElement(IconButton, {
+    name: "locate-fixed",
+    size: "sm",
+    title: "\u56DE\u5230\u5168\u666F",
+    onClick: flyHome
+  })), /*#__PURE__*/React.createElement(SRButton, {
+    icon: "corner-up-left",
+    onClick: onClose
+  }, "\u8FD4\u56DE\u661F\u56FE")), closeup && /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'absolute',
+      top: 18,
+      left: '50%',
+      transform: 'translateX(-50%)',
+      zIndex: 30
+    }
+  }, /*#__PURE__*/React.createElement(GlassPanel, {
+    radius: "pill",
+    pad: "none",
+    style: {
+      padding: '6px 8px'
+    }
+  }, /*#__PURE__*/React.createElement(SRButton, {
+    size: "sm",
+    icon: "minimize-2",
+    onClick: flyHome
+  }, "\u56DE\u5230\u5168\u666F"))), selected && /*#__PURE__*/React.createElement("div", {
+    onPointerDown: e => e.stopPropagation(),
+    style: {
+      position: 'absolute',
+      top: '50%',
+      right: 24,
+      transform: 'translateY(-50%)',
+      width: 286,
+      zIndex: 32,
+      animation: 'g3d-cardin 320ms var(--ease-flight, ease) both'
+    }
+  }, /*#__PURE__*/React.createElement(GlassPanel, {
+    strong: true,
+    radius: "lg",
+    pad: "md",
+    glow: true
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      marginBottom: 4
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 6,
+      fontSize: 11,
+      color: 'var(--text-3)'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      width: 7,
+      height: 7,
+      borderRadius: '50%',
+      background: D.conColor(selected.con),
+      boxShadow: `0 0 8px ${D.conColor(selected.con)}`
+    }
+  }), D.conName(selected.con)), /*#__PURE__*/React.createElement(IconButton, {
+    name: "x",
+    size: "sm",
+    title: "\u5173\u95ED",
+    onClick: () => setSelected(null)
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 19,
+      fontWeight: 300,
+      color: 'var(--text-1)',
+      marginBottom: 10,
+      textShadow: 'var(--text-glow-cool)'
+    }
+  }, selected.label), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12.5,
+      lineHeight: 1.7,
+      color: 'var(--text-2)',
+      marginBottom: 14
+    }
+  }, selected.summary || (dataset ? '对方未开放摘要。' : '还没有摘要——打开编辑器，写下第一段。')), /*#__PURE__*/React.createElement(MemoryBar, {
+    value: selected.strength,
+    label: "\u8BB0\u5FC6\u5F3A\u5EA6",
+    showPct: true,
+    fading: selected.strength < 0.4
+  }), (() => {
+    const selLit = litOf(D.byId[selected.id] || selected),
+      selEmber = emberOf(D.byId[selected.id] || selected);
+    return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        alignItems: 'flex-start',
+        gap: 7,
+        marginTop: 10,
+        fontSize: 11.5,
+        lineHeight: 1.6,
+        color: 'var(--text-3)'
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      "aria-hidden": "true",
+      style: {
+        flex: 'none',
+        width: 9,
+        height: 9,
+        marginTop: 4,
+        borderRadius: '50%',
+        boxSizing: 'border-box',
+        border: selLit ? '1px solid var(--gold)' : selEmber ? '1px solid color-mix(in srgb, var(--gold-warm) 55%, transparent)' : '1px solid var(--line-strong)'
+      }
+    }), /*#__PURE__*/React.createElement("span", null, selLit ? '已点亮 · 讲清楚的东西，暗得更慢。' : selEmber ? '曾点亮的星暗了下来。再讲透一次，就能重燃。' : '讲清楚一次，这颗星才会真正点亮——点亮的星记得更久。')), (onFeynman || onOpenStar) && /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        gap: 8,
+        marginTop: 14
+      }
+    }, onFeynman && /*#__PURE__*/React.createElement(SRButton, {
+      variant: "primary",
+      size: "sm",
+      icon: selEmber ? 'flame' : 'zap',
+      glow: true,
+      onClick: () => onFeynman(selected.id),
+      style: {
+        flex: 1
+      }
+    }, selEmber ? '重燃' : '费曼内化'), onOpenStar && /*#__PURE__*/React.createElement(SRButton, {
+      size: "sm",
+      icon: "maximize-2",
+      onClick: () => onOpenStar(selected.id),
+      style: {
+        flex: 1
+      }
+    }, "\u6253\u5F00\u7F16\u8F91")));
+  })())));
+}
+function Sep() {
+  return /*#__PURE__*/React.createElement("span", {
+    style: {
+      width: 1,
+      height: 20,
+      background: 'var(--line)'
+    }
+  });
+}
+function Stat({
+  n,
+  t,
+  tone
+}) {
+  return /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'flex',
+      alignItems: 'baseline',
+      gap: 6
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontFamily: 'var(--font-mono)',
+      fontSize: 17,
+      color: tone || 'var(--text-1)'
+    }
+  }, n), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 11.5,
+      color: 'var(--text-3)'
+    }
+  }, t));
+}
+function Galaxy3DStyle() {
+  return /*#__PURE__*/React.createElement("style", null, `
+    .g3d-root { cursor: grab; }
+    .g3d-root:active { cursor: grabbing; }
+    .g3d-vignette { position:absolute; inset:0; z-index:2; pointer-events:none;
+      background: radial-gradient(125% 100% at 50% 46%, transparent 54%, rgba(3,4,12,0.6) 100%); }
+    :root[data-theme="dawn"] .g3d-vignette { background: radial-gradient(125% 100% at 50% 46%, transparent 58%, rgba(223,228,238,0.55) 100%); }
+    @keyframes g3d-cardin { from { opacity:0; transform: translateY(-50%) translateX(14px); } to { opacity:1; transform: translateY(-50%) translateX(0); } }
+    .g3d-selbox { position:absolute; z-index:25; pointer-events:none; animation: g3d-selpulse 1.6s var(--ease-flight, ease) infinite; }
+    .g3d-selbox .c { position:absolute; width:22%; max-width:16px; height:22%; max-height:16px; border:1.5px solid var(--gold); filter:drop-shadow(0 0 2px rgba(0,0,0,0.85)); }
+    .g3d-selbox .tl { left:0; top:0; border-right:none; border-bottom:none; }
+    .g3d-selbox .tr { right:0; top:0; border-left:none; border-bottom:none; }
+    .g3d-selbox .bl { left:0; bottom:0; border-right:none; border-top:none; }
+    .g3d-selbox .br { right:0; bottom:0; border-left:none; border-top:none; }
+    @keyframes g3d-selpulse { 0%,100% { opacity:0.95; } 50% { opacity:0.6; } }
+    `);
+}
+window.SRKit = Object.assign(window.SRKit || {}, {
+  Galaxy3D
+});
+})(); } catch (e) { __ds_ns.__errors.push({ path: "ui_kits/stellar-raft/Galaxy3D.jsx", error: String((e && e.message) || e) }); }
+
+// ui_kits/stellar-raft/Inbox.jsx
+try { (() => {
+/* Inbox — 收件箱：两个标签页。
+   「待整理」顶部的「星际来信」：好友寄来的造访邀请（去造访 / 忽略）与赠星
+   （收纳到星域 / 忽略）——消息本体在服务器（GET /api/inbox），后端未运行时
+   整区隐藏不报错；收纳经 data.js 的 adoptShared 建星，从未点亮起步。
+   「待整理」：随手捕捉、尚未归入任何星域的想法草稿——
+   · 归入即真的创建一颗知识星（落在该星域质心附近，星图/3D 立即可见）
+   · 有建议的草稿一键「按建议归入」；批量勾选后可一次归入/忽略
+   · 搜索 + 「全部 / 有建议 / 无建议」过滤，长列表也好整理
+   「收藏」：所有被收藏的笔记（编辑器右上角星形按钮），可直接打开、
+   在星图中定位、或取消收藏。所有操作同步写回共享数据。 */
+const {
+  GlassPanel,
+  Icon,
+  IconButton,
+  Button,
+  Tag,
+  Tabs,
+  Badge
+} = window.StellarRaftDesignSystem_2866af;
+
+// 收件箱数据变更后广播：侧栏角标（收件箱计数）与在场视图立即读到同一份真相
+const inboxPulse = () => window.dispatchEvent(new CustomEvent('sr-memory'));
+const INBOX_WORLD = {
+  w: 1680,
+  h: 1040
+};
+
+// 从随手记的一句话里取一个可做星名的短标题
+function draftLabel(text) {
+  const t = (text || '').replace(/^["'「『""]+/, '').trim();
+  const cut = t.split(/[。：:；;！!？?\n—…]/)[0].trim();
+  const s = cut || t;
+  return s.length > 16 ? s.slice(0, 15) + '…' : s || '新的知识星';
+}
+function Inbox({
+  onFocusCon,
+  onOpen
+}) {
+  const D = window.SR_DATA;
+  const [tab, setTab] = React.useState('triage'); // triage | fav
+  const [, bumpFav] = React.useReducer(x => x + 1, 0);
+  const [items, setItems] = React.useState(() => D.inbox.slice());
+  const [draft, setDraft] = React.useState('');
+  const [query, setQuery] = React.useState('');
+  const [filter, setFilter] = React.useState('all'); // all | suggested | none
+  const [sel, setSel] = React.useState([]); // 勾选的草稿 id
+  const [picker, setPicker] = React.useState(null); // { id } 或 { batch: true }，正在选星域
+  const [confirm, setConfirm] = React.useState(null);
+  const [toast, setToast] = React.useState(null); // { msg, con } — con 给「查看」用
+  const seq = React.useRef(0);
+  const toastTimer = React.useRef(null);
+  // 带动作的 toast 多停一会儿（5s），纯文字的保持 2.6s
+  const flash = (msg, con) => {
+    clearTimeout(toastTimer.current);
+    setToast({
+      msg,
+      con
+    });
+    toastTimer.current = setTimeout(() => setToast(null), con ? 5000 : 2600);
+  };
+  React.useEffect(() => () => clearTimeout(toastTimer.current), []);
+
+  // 本地列表和共享数据一起改，角标与其它视图保持一致
+  const removeItems = ids => {
+    setItems(s => s.filter(x => !ids.includes(x.id)));
+    for (let i = D.inbox.length - 1; i >= 0; i--) if (ids.includes(D.inbox[i].id)) D.inbox.splice(i, 1);
+    setSel(s => s.filter(id => !ids.includes(id)));
+    D.persist();
+    inboxPulse();
+  };
+
+  // 快速捕捉
+  const capture = () => {
+    const text = draft.trim();
+    if (!text) return;
+    seq.current += 1;
+    const item = {
+      id: 'cap-' + seq.current,
+      text,
+      captured: '刚刚',
+      suggest: null
+    };
+    setItems(s => [item, ...s]);
+    D.inbox.unshift(item);
+    D.persist();
+    inboxPulse();
+    setDraft('');
+    flash('已捕捉一条草稿');
+  };
+
+  // 归入 = 真的在该星域生出一颗新星（落在星域质心附近）。
+  // 新星未点亮——「点亮」是奖励保留动词，要在费曼抽屉里讲透才配得上。
+  const fileOne = (it, conId) => {
+    const members = D.stars.filter(s => s.con === conId);
+    let wx = INBOX_WORLD.w / 2,
+      wy = INBOX_WORLD.h / 2;
+    if (members.length) {
+      const px = s => s.wx != null ? s.wx : s.x / 100 * INBOX_WORLD.w;
+      const py = s => s.wy != null ? s.wy : s.y / 100 * INBOX_WORLD.h;
+      wx = members.reduce((a, s) => a + px(s), 0) / members.length;
+      wy = members.reduce((a, s) => a + py(s), 0) / members.length;
+    }
+    const a = Math.random() * Math.PI * 2,
+      r = 70 + Math.random() * 70;
+    wx += Math.cos(a) * r;
+    wy += Math.sin(a) * r;
+    const id = 's' + Math.random().toString(36).slice(2, 8);
+    const star = {
+      id,
+      con: conId,
+      x: wx / INBOX_WORLD.w * 100,
+      y: wy / INBOX_WORLD.h * 100,
+      wx,
+      wy,
+      strength: 0.5,
+      importance: 1,
+      label: draftLabel(it.text),
+      summary: it.text,
+      tags: ['草稿'],
+      props: {
+        type: '草稿',
+        status: '正常',
+        source: '收件箱',
+        alias: '',
+        nextReview: '明天'
+      },
+      body: [{
+        id: id + '-r',
+        type: 'rich'
+      }, {
+        id: id + '-p',
+        type: 'p',
+        text: ''
+      }]
+    };
+    D.addStar(star);
+    return star;
+  };
+  const fileTo = (ids, conId) => {
+    const its = items.filter(x => ids.includes(x.id));
+    its.forEach(it => fileOne(it, conId));
+    removeItems(ids);
+    setPicker(null);
+    flash(its.length === 1 ? '已归入 · 写下内容，讲给 AI 学生，让它自己发光。' : `${its.length} 颗新星已归入「${D.conName(conId)}」· 讲给 AI 学生，让它们自己发光。`, conId);
+  };
+  // 按各自的建议归入（批量时逐条按自己的 suggest）
+  const fileBySuggest = ids => {
+    const its = items.filter(x => ids.includes(x.id) && x.suggest);
+    if (!its.length) return;
+    const byCon = {};
+    its.forEach(it => {
+      fileOne(it, it.suggest);
+      (byCon[it.suggest] = byCon[it.suggest] || []).push(it);
+    });
+    removeItems(its.map(x => x.id));
+    const cons = Object.keys(byCon);
+    flash(its.length === 1 ? '已归入 · 写下内容，讲给 AI 学生，让它自己发光。' : `${its.length} 颗新星已按建议归入 · 讲给 AI 学生，让它们自己发光。`, cons.length === 1 ? cons[0] : null);
+  };
+
+  /* ——— 星际来信：好友寄来的造访邀请与赠星（服务端收件箱）———
+     打开视图即拉取一次（GET /api/inbox 的 SRNet 便捷方法）；
+     后端未运行 → 镜像保持为空，整个区块隐藏、不报错。 */
+  const [, bumpMail] = React.useReducer(x => x + 1, 0);
+  const [mailPicker, setMailPicker] = React.useState(null); // 正在选星域收纳的来信 id
+  React.useEffect(() => {
+    if (D.refreshMail) D.refreshMail();
+    const h = () => bumpMail();
+    window.addEventListener('sr-data', h); // adoptShared / 拉取成功都会广播
+    return () => window.removeEventListener('sr-data', h);
+  }, []);
+  const mail = D.mail && D.mail.list || [];
+  // 服务器时间是 UTC 的 'YYYY-MM-DD HH:MM:SS'，换算成「n 分钟前」
+  const mailAgo = at => {
+    const ts = Date.parse(String(at || '').replace(' ', 'T') + 'Z');
+    return Number.isFinite(ts) ? D.ago(ts) : '刚刚';
+  };
+  const dismissMail = m => setConfirm({
+    message: m.kind === 'galaxy' ? '忽略后这封造访邀请会被删除。确定忽略吗？' : `忽略后「${m.payload && m.payload.label || '这颗星'}」的赠星来信会被删除，不会成为你的星。确定忽略吗？`,
+    confirmLabel: '忽略',
+    onYes: () => {
+      if (window.SRNet && window.SRNet.inbox) window.SRNet.inbox.ack(m.id, 'dismiss'); // 静默降级
+      const i = mail.indexOf(m);
+      if (i >= 0) mail.splice(i, 1);
+      if (mailPicker === m.id) setMailPicker(null);
+      window.dispatchEvent(new Event('sr-data')); // 侧栏角标即时对齐
+      flash('已忽略这封来信');
+    }
+  });
+  // 去造访：密文放进 sessionStorage 供星际漫游预填，广播后由侧栏代跳视图
+  const visitMail = m => {
+    const code = m.payload && m.payload.code || '';
+    try {
+      sessionStorage.setItem('sr.visit.code', code);
+    } catch (e) {}
+    window.dispatchEvent(new CustomEvent('sr-visit-code', {
+      detail: {
+        code,
+        fromId: m.from && m.from.id
+      }
+    }));
+  };
+  // 收纳赠星：payload 建星（未点亮起步），领取由 adoptShared 内部 ack('claim')
+  const adoptMail = (m, conId) => {
+    const star = D.adoptShared && D.adoptShared(m, conId);
+    setMailPicker(null);
+    if (star) flash(`已收纳「${star.label}」· 从未点亮起步，讲透它，才是你的星。`, conId);
+  };
+  const askDismiss = ids => setConfirm({
+    message: ids.length === 1 ? '忽略后这条捕获会被丢弃，不会成为星。确定忽略吗？' : `确定忽略已选的 ${ids.length} 条捕获吗？它们不会成为星。`,
+    confirmLabel: '忽略',
+    onYes: () => {
+      removeItems(ids);
+      if (picker && ids.includes(picker.id)) setPicker(null);
+      flash('已忽略');
+    }
+  });
+  const ConfirmDialog = window.SRKit && window.SRKit.ConfirmDialog;
+  const q = query.trim().toLowerCase();
+  const visible = items.filter(it => (filter === 'all' || (filter === 'suggested' ? !!it.suggest : !it.suggest)) && (!q || it.text.toLowerCase().includes(q)));
+  const allChecked = visible.length > 0 && visible.every(it => sel.includes(it.id));
+  const toggleAll = () => setSel(allChecked ? [] : visible.map(it => it.id));
+  const toggle = id => setSel(s => s.includes(id) ? s.filter(x => x !== id) : [...s, id]);
+  const selSuggested = sel.filter(id => {
+    const it = items.find(x => x.id === id);
+    return it && it.suggest;
+  });
+  const ConPicker = ({
+    suggest,
+    onPick,
+    onCancel
+  }) => /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 12,
+      paddingTop: 12,
+      borderTop: '1px solid var(--line)'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11.5,
+      color: 'var(--text-3)',
+      marginBottom: 9
+    }
+  }, "\u5F52\u5165\u54EA\u4E2A\u661F\u57DF\uFF1F\u70B9\u51FB\u5373\u6210\u661F"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      gap: 6,
+      flexWrap: 'wrap'
+    }
+  }, D.constellations.map(c => /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    key: c.id,
+    onClick: () => onPick(c.id),
+    className: "sr-focus-ring",
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 6,
+      height: 28,
+      padding: '0 12px',
+      borderRadius: 'var(--r-pill)',
+      cursor: 'pointer',
+      transition: 'all var(--dur-fast) var(--ease-flight)',
+      font: 'inherit',
+      border: '1px solid',
+      borderColor: c.id === suggest ? 'rgba(255,217,138,0.45)' : 'var(--glass-border)',
+      background: c.id === suggest ? 'rgba(255,217,138,0.08)' : 'color-mix(in srgb, var(--star-blue) 5%, transparent)',
+      fontSize: 12.5,
+      color: 'var(--text-2)'
+    },
+    onMouseEnter: e => {
+      e.currentTarget.style.borderColor = 'rgba(255,217,138,0.55)';
+      e.currentTarget.style.color = 'var(--gold)';
+    },
+    onMouseLeave: e => {
+      e.currentTarget.style.borderColor = c.id === suggest ? 'rgba(255,217,138,0.45)' : 'var(--glass-border)';
+      e.currentTarget.style.color = 'var(--text-2)';
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      width: 7,
+      height: 7,
+      borderRadius: '50%',
+      background: c.color,
+      boxShadow: `0 0 6px ${c.color}`
+    }
+  }), c.name, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontFamily: 'var(--font-mono)',
+      fontSize: 10,
+      opacity: 0.7
+    }
+  }, D.stars.filter(s => s.con === c.id).length))), /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    onClick: onCancel,
+    className: "sr-focus-ring",
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      height: 28,
+      padding: '0 11px',
+      borderRadius: 'var(--r-pill)',
+      cursor: 'pointer',
+      fontSize: 12,
+      font: 'inherit',
+      color: 'var(--text-3)',
+      background: 'transparent',
+      border: '1px dashed var(--line-strong)'
+    }
+  }, "\u53D6\u6D88")));
+  return /*#__PURE__*/React.createElement("div", {
+    onContextMenu: e => e.preventDefault(),
+    style: {
+      position: 'relative',
+      flex: 1,
+      minWidth: 0,
+      overflow: 'auto',
+      padding: '28px 30px 48px'
+    }
+  }, /*#__PURE__*/React.createElement("sr-starfield", {
+    density: "0.6"
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'relative',
+      zIndex: 2,
+      maxWidth: 760,
+      margin: '0 auto'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'baseline',
+      gap: 12,
+      marginBottom: 14
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 23,
+      fontWeight: 300,
+      color: 'var(--text-1)'
+    }
+  }, "\u6536\u4EF6\u7BB1"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1
+    }
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 13,
+      fontFamily: 'var(--font-mono)',
+      color: 'var(--text-3)'
+    }
+  }, tab === 'triage' ? `${items.length} 条待整理` : `${D.stars.filter(s => s.fav).length} 颗收藏`)), /*#__PURE__*/React.createElement(Tabs, {
+    size: "sm",
+    value: tab,
+    onChange: setTab,
+    style: {
+      marginBottom: 16
+    },
+    tabs: [{
+      id: 'triage',
+      label: '待整理',
+      icon: 'inbox',
+      count: items.length
+    }, {
+      id: 'fav',
+      label: '收藏',
+      icon: 'star',
+      count: D.stars.filter(s => s.fav).length
+    }]
+  }), tab === 'fav' && /*#__PURE__*/React.createElement(FavList, {
+    D: D,
+    onOpen: onOpen,
+    onFocusCon: onFocusCon,
+    onUnfav: s => {
+      s.fav = false;
+      D.persist();
+      bumpFav();
+      flash(`已取消收藏「${s.label}」`);
+    }
+  }), tab === 'triage' && /*#__PURE__*/React.createElement(React.Fragment, null, mail.length > 0 && /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginBottom: 20
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'baseline',
+      gap: 8,
+      margin: '0 2px 3px'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "mail",
+    size: 14,
+    color: "var(--star-blue)",
+    style: {
+      alignSelf: 'center',
+      flex: 'none'
+    }
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 13,
+      color: 'var(--text-1)'
+    }
+  }, "\u661F\u9645\u6765\u4FE1"), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontFamily: 'var(--font-mono)',
+      fontSize: 11,
+      color: 'var(--text-3)'
+    }
+  }, mail.filter(m => !m.claimed).length, " \u5C01\u672A\u9886\u53D6")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11.5,
+      lineHeight: 1.7,
+      color: 'var(--text-3)',
+      margin: '0 2px 10px'
+    }
+  }, "\u6765\u81EA\u661F\u9645\u7684\u77E5\u8BC6\uFF0C\u6536\u7EB3\u540E\u4ECE\u672A\u70B9\u4EAE\u8D77\u6B65\u2014\u2014\u8BB2\u900F\u5B83\uFF0C\u624D\u662F\u4F60\u7684\u661F\u3002"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 10
+    }
+  }, mail.map(m => {
+    const galaxy = m.kind === 'galaxy';
+    const p = m.payload || {};
+    const from = m.from || {};
+    const open = mailPicker === m.id;
+    return /*#__PURE__*/React.createElement(GlassPanel, {
+      key: 'mail-' + m.id,
+      radius: "md",
+      pad: "none",
+      style: {
+        padding: '13px 15px',
+        opacity: m.claimed ? 0.62 : 1
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        gap: 11
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      "aria-hidden": "true",
+      style: {
+        width: 32,
+        height: 32,
+        flex: 'none',
+        borderRadius: '50%',
+        background: 'linear-gradient(140deg, #2a3566, #56689c)',
+        border: '1px solid var(--glass-border-strong)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontSize: 13,
+        color: 'var(--text-1)'
+      }
+    }, from.avatar || '星'), /*#__PURE__*/React.createElement("div", {
+      style: {
+        flex: 1,
+        minWidth: 0
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: 9,
+        flexWrap: 'wrap'
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 13.5,
+        color: 'var(--text-1)'
+      }
+    }, from.name || '星际旅人'), /*#__PURE__*/React.createElement("span", {
+      style: {
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: 5,
+        fontSize: 11,
+        color: 'var(--star-blue)',
+        border: '1px solid rgba(159,198,255,0.28)',
+        borderRadius: 'var(--r-pill)',
+        padding: '2.5px 9px'
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: galaxy ? 'radio-tower' : 'star',
+      size: 11,
+      color: "currentColor"
+    }), galaxy ? '星系邀请' : '知识星'), m.claimed && /*#__PURE__*/React.createElement(Badge, {
+      tone: "gold"
+    }, "\u5DF2\u6536\u7EB3"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        flex: 1
+      }
+    }), /*#__PURE__*/React.createElement("span", {
+      style: {
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: 5,
+        fontFamily: 'var(--font-mono)',
+        fontSize: 11,
+        color: 'var(--text-3)'
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "clock",
+      size: 12,
+      color: "currentColor"
+    }), mailAgo(m.at))), galaxy ? /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 13.5,
+        lineHeight: 1.7,
+        color: 'var(--text-2)',
+        marginTop: 7
+      }
+    }, "\u9080\u8BF7\u4F60\u9020\u8BBF\u300C", p.galaxyName || '一片新的星空', "\u300D", p.starCount != null && /*#__PURE__*/React.createElement("span", {
+      style: {
+        color: 'var(--text-3)'
+      }
+    }, " \xB7 ", p.starCount, " \u9897\u661F"), p.code && /*#__PURE__*/React.createElement("span", {
+      style: {
+        display: 'block',
+        marginTop: 5,
+        fontFamily: 'var(--font-mono)',
+        fontSize: 11.5,
+        letterSpacing: '0.08em',
+        color: 'var(--text-3)'
+      }
+    }, "\u5BC6\u6587 ", p.code)) : /*#__PURE__*/React.createElement("div", {
+      style: {
+        marginTop: 7
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 14.5,
+        color: 'var(--text-1)'
+      }
+    }, p.label || '一颗知识星'), p.summary && /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 12.5,
+        lineHeight: 1.65,
+        color: 'var(--text-3)',
+        marginTop: 5,
+        overflow: 'hidden',
+        display: '-webkit-box',
+        WebkitLineClamp: 2,
+        WebkitBoxOrient: 'vertical'
+      }
+    }, p.summary), !!(p.keyPoints || []).length && /*#__PURE__*/React.createElement("div", {
+      style: {
+        marginTop: 7,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 3
+      }
+    }, p.keyPoints.slice(0, 4).map((k, i) => /*#__PURE__*/React.createElement("div", {
+      key: i,
+      style: {
+        fontSize: 12,
+        lineHeight: 1.55,
+        color: 'var(--text-2)',
+        borderLeft: '2px solid var(--line)',
+        padding: '1px 2px 1px 9px',
+        marginLeft: 2
+      }
+    }, k)), p.keyPoints.length > 4 && /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 11,
+        color: 'var(--text-3)',
+        marginLeft: 13
+      }
+    }, "\u2026 \u5171 ", p.keyPoints.length, " \u6761\u8981\u70B9\uFF0C\u6536\u7EB3\u540E\u53EF\u89C1\u5168\u90E8"))), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: 8,
+        marginTop: 10,
+        flexWrap: 'wrap'
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        flex: 1
+      }
+    }), !m.claimed && (galaxy ? /*#__PURE__*/React.createElement(Button, {
+      size: "sm",
+      icon: "rocket",
+      glow: true,
+      onClick: () => visitMail(m)
+    }, "\u53BB\u9020\u8BBF") : /*#__PURE__*/React.createElement(Button, {
+      size: "sm",
+      icon: "folder-input",
+      glow: true,
+      onClick: () => setMailPicker(open ? null : m.id)
+    }, "\u6536\u7EB3\u5230\u661F\u57DF")), /*#__PURE__*/React.createElement(Button, {
+      size: "sm",
+      variant: "ghost",
+      icon: "x",
+      onClick: () => dismissMail(m)
+    }, "\u5FFD\u7565")), open && !m.claimed && (D.constellations.length ? /*#__PURE__*/React.createElement(ConPicker, {
+      onPick: conId => adoptMail(m, conId),
+      onCancel: () => setMailPicker(null)
+    }) : /*#__PURE__*/React.createElement("div", {
+      style: {
+        marginTop: 12,
+        paddingTop: 12,
+        borderTop: '1px solid var(--line)',
+        fontSize: 12,
+        lineHeight: 1.6,
+        color: 'var(--text-3)'
+      }
+    }, "\u8FD8\u6CA1\u6709\u661F\u57DF\u53EF\u4EE5\u5B89\u653E\u5B83\u2014\u2014\u5148\u56DE\u661F\u56FE\u521B\u5EFA\u4E00\u4E2A\u661F\u57DF\uFF0C\u518D\u6765\u6536\u7EB3\u8FD9\u9897\u661F\u3002")))));
+  }))), /*#__PURE__*/React.createElement(GlassPanel, {
+    radius: "md",
+    pad: "none",
+    style: {
+      padding: '13px 15px',
+      marginBottom: 14
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      gap: 11
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "feather",
+    size: 16,
+    color: "var(--star-blue)",
+    style: {
+      marginTop: 6,
+      flex: 'none'
+    }
+  }), /*#__PURE__*/React.createElement("textarea", {
+    value: draft,
+    onChange: e => setDraft(e.target.value),
+    onKeyDown: e => {
+      if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        capture();
+      }
+    },
+    placeholder: "\u968F\u624B\u8BB0\u4E0B\u4E00\u4E2A\u60F3\u6CD5\u3001\u4E00\u6BB5\u516C\u5F0F\u3001\u4E00\u53E5\u7075\u611F\u2026",
+    "aria-label": "\u5FEB\u901F\u6355\u6349",
+    rows: 2,
+    style: {
+      flex: 1,
+      minWidth: 0,
+      resize: 'none',
+      background: 'transparent',
+      border: 'none',
+      outline: 'none',
+      color: 'var(--text-1)',
+      fontSize: 14,
+      lineHeight: 1.7,
+      fontFamily: 'var(--font-sans)',
+      padding: '3px 0'
+    }
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 10,
+      marginTop: 8,
+      paddingTop: 10,
+      borderTop: '1px solid var(--line)'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 11,
+      fontFamily: 'var(--font-mono)',
+      color: 'var(--text-3)'
+    }
+  }, "\u2318/Ctrl + Enter \u6355\u6349"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1
+    }
+  }), /*#__PURE__*/React.createElement(Button, {
+    size: "sm",
+    icon: "plus",
+    glow: true,
+    disabled: !draft.trim(),
+    onClick: capture
+  }, "\u6355\u6349"))), items.length > 0 && /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 8,
+      margin: '0 2px 12px',
+      fontSize: 12,
+      lineHeight: 1.6,
+      color: 'var(--text-3)'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "info",
+    size: 13,
+    color: "var(--star-blue-dim)",
+    style: {
+      flex: 'none'
+    }
+  }), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontFamily: 'var(--font-mono)',
+      color: 'var(--text-2)'
+    }
+  }, items.length), " \u6761\u6355\u6349\u8FD8\u6CA1\u5F52\u5165\u661F\u57DF\u2014\u2014\u5F52\u5165\u5E76\u5199\u4E0B\u5185\u5BB9\uFF0C\u5B83\u4EEC\u624D\u4F1A\u6210\u4E3A\u661F\u3002")), items.length > 0 && /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 8,
+      marginBottom: 12,
+      flexWrap: 'wrap'
+    }
+  }, [{
+    id: 'all',
+    label: '全部',
+    n: items.length
+  }, {
+    id: 'suggested',
+    label: '有建议',
+    n: items.filter(i => i.suggest).length
+  }, {
+    id: 'none',
+    label: '无建议',
+    n: items.filter(i => !i.suggest).length
+  }].map(f => /*#__PURE__*/React.createElement(Tag, {
+    key: f.id,
+    active: filter === f.id,
+    onClick: () => setFilter(f.id)
+  }, f.label, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontFamily: 'var(--font-mono)',
+      fontSize: 10.5,
+      opacity: 0.8,
+      marginLeft: 4
+    }
+  }, f.n))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'relative'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "search",
+    size: 13,
+    color: "var(--text-3)",
+    style: {
+      position: 'absolute',
+      left: 9,
+      top: 7
+    }
+  }), /*#__PURE__*/React.createElement("input", {
+    value: query,
+    onChange: e => setQuery(e.target.value),
+    placeholder: "\u641C\u7D22\u8349\u7A3F\u2026",
+    "aria-label": "\u641C\u7D22\u8349\u7A3F",
+    style: {
+      height: 27,
+      width: 150,
+      boxSizing: 'border-box',
+      background: 'var(--input-bg, rgba(3,4,12,0.45))',
+      border: '1px solid var(--glass-border)',
+      borderRadius: 'var(--r-pill)',
+      color: 'var(--text-1)',
+      fontSize: 12,
+      padding: '0 10px 0 27px',
+      outline: 'none',
+      fontFamily: 'var(--font-sans)'
+    }
+  })), /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    onClick: toggleAll,
+    title: allChecked ? '取消全选' : '全选当前列表',
+    className: "sr-focus-ring",
+    "aria-pressed": allChecked,
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 6,
+      fontSize: 12,
+      font: 'inherit',
+      color: 'var(--text-3)',
+      cursor: 'pointer',
+      background: 'none',
+      border: 'none',
+      padding: '4px 2px'
+    }
+  }, /*#__PURE__*/React.createElement(CheckBox, {
+    checked: allChecked
+  }), "\u5168\u9009")), sel.length > 0 && /*#__PURE__*/React.createElement(GlassPanel, {
+    strong: true,
+    radius: "md",
+    pad: "none",
+    glow: true,
+    style: {
+      padding: '9px 14px',
+      marginBottom: 12,
+      display: 'flex',
+      alignItems: 'center',
+      gap: 10
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 12.5,
+      color: 'var(--text-1)'
+    }
+  }, "\u5DF2\u9009 ", /*#__PURE__*/React.createElement("b", {
+    style: {
+      color: 'var(--gold)',
+      fontWeight: 500,
+      fontFamily: 'var(--font-mono)'
+    }
+  }, sel.length), " \u6761"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1
+    }
+  }), selSuggested.length > 0 && /*#__PURE__*/React.createElement(Button, {
+    size: "sm",
+    icon: "sparkles",
+    glow: true,
+    onClick: () => fileBySuggest(sel)
+  }, "\u6309\u5EFA\u8BAE\u5F52\u5165 ", selSuggested.length, " \u6761"), /*#__PURE__*/React.createElement(Button, {
+    size: "sm",
+    icon: "folder-input",
+    onClick: () => setPicker({
+      batch: true
+    })
+  }, "\u5F52\u5165\u540C\u4E00\u661F\u57DF"), /*#__PURE__*/React.createElement(Button, {
+    size: "sm",
+    variant: "ghost",
+    icon: "x",
+    onClick: () => askDismiss(sel)
+  }, "\u5FFD\u7565"), /*#__PURE__*/React.createElement(Button, {
+    size: "sm",
+    variant: "ghost",
+    onClick: () => setSel([])
+  }, "\u53D6\u6D88")), picker && picker.batch && /*#__PURE__*/React.createElement(GlassPanel, {
+    radius: "md",
+    pad: "none",
+    style: {
+      padding: '4px 15px 15px',
+      marginBottom: 12
+    }
+  }, /*#__PURE__*/React.createElement(ConPicker, {
+    onPick: conId => fileTo(sel, conId),
+    onCancel: () => setPicker(null)
+  })), visible.length === 0 ? /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      gap: 13,
+      padding: '54px 0 40px',
+      color: 'var(--text-3)',
+      textAlign: 'center'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      width: 56,
+      height: 56,
+      borderRadius: '50%',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      background: 'rgba(159,198,255,0.06)',
+      boxShadow: '0 0 22px rgba(159,198,255,0.10) inset'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "inbox",
+    size: 26,
+    color: "var(--star-blue)"
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 15,
+      color: 'var(--text-2)'
+    }
+  }, items.length ? '没有匹配的草稿' : '收件箱已清空'), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12.5,
+      lineHeight: 1.7,
+      maxWidth: 320
+    }
+  }, items.length ? '换个关键词或切换过滤条件试试。' : /*#__PURE__*/React.createElement("span", null, "\u6240\u6709\u6355\u83B7\u90FD\u5DF2\u6574\u7406\u5165\u661F\u57DF\u3002", /*#__PURE__*/React.createElement("br", null), "\u6709\u4E86\u65B0\u5FF5\u5934\uFF0C\u5C31\u5728\u4E0A\u9762\u968F\u624B\u8BB0\u4E0B\u4E00\u9897\u661F\u3002"))) : /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 10
+    }
+  }, visible.map(it => {
+    const open = picker && picker.id === it.id;
+    const checked = sel.includes(it.id);
+    return /*#__PURE__*/React.createElement(GlassPanel, {
+      key: it.id,
+      radius: "md",
+      pad: "none",
+      style: {
+        padding: '13px 15px',
+        border: checked ? '1px solid rgba(255,217,138,0.35)' : undefined
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        gap: 11
+      }
+    }, /*#__PURE__*/React.createElement("button", {
+      type: "button",
+      onClick: () => toggle(it.id),
+      className: "sr-focus-ring",
+      role: "checkbox",
+      "aria-checked": checked,
+      "aria-label": "\u9009\u62E9\u8FD9\u6761\u6355\u83B7",
+      style: {
+        marginTop: 3,
+        cursor: 'pointer',
+        flex: 'none',
+        background: 'none',
+        border: 'none',
+        padding: 0,
+        display: 'inline-flex'
+      }
+    }, /*#__PURE__*/React.createElement(CheckBox, {
+      checked: checked
+    })), /*#__PURE__*/React.createElement("div", {
+      style: {
+        flex: 1,
+        minWidth: 0
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      contentEditable: true,
+      suppressContentEditableWarning: true,
+      title: "\u70B9\u51FB\u53EF\u76F4\u63A5\u4FEE\u6539\u8FD9\u6761\u6355\u83B7",
+      "data-ph": "\u5199\u70B9\u4EC0\u4E48\u2026",
+      onBlur: e => {
+        const t = e.currentTarget.innerText.trim();
+        if (!t || t === it.text) {
+          if (!t) e.currentTarget.innerText = it.text;
+          return;
+        }
+        setItems(s => s.map(x => x.id === it.id ? {
+          ...x,
+          text: t
+        } : x));
+        const rec = D.inbox.find(x => x.id === it.id);
+        if (rec) rec.text = t;
+        D.persist();
+        flash('已更新捕获');
+      },
+      style: {
+        fontSize: 14,
+        lineHeight: 1.7,
+        color: 'var(--text-1)',
+        outline: 'none',
+        cursor: 'text',
+        caretColor: 'var(--gold)'
+      }
+    }, it.text), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: 12,
+        marginTop: 10,
+        flexWrap: 'wrap'
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: 5,
+        fontFamily: 'var(--font-mono)',
+        fontSize: 11,
+        color: 'var(--text-3)'
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "clock",
+      size: 12,
+      color: "currentColor"
+    }), it.captured), it.suggest && /*#__PURE__*/React.createElement("span", {
+      style: {
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: 5,
+        fontSize: 11.5,
+        color: 'var(--text-3)'
+      }
+    }, "\u5EFA\u8BAE ", /*#__PURE__*/React.createElement("span", {
+      style: {
+        width: 7,
+        height: 7,
+        borderRadius: '50%',
+        background: D.conColor(it.suggest),
+        boxShadow: `0 0 6px ${D.conColor(it.suggest)}`
+      }
+    }), D.conName(it.suggest)), /*#__PURE__*/React.createElement("div", {
+      style: {
+        flex: 1
+      }
+    }), it.suggest && /*#__PURE__*/React.createElement(Button, {
+      size: "sm",
+      icon: "sparkles",
+      glow: true,
+      onClick: () => fileBySuggest([it.id])
+    }, "\u6309\u5EFA\u8BAE\u5F52\u5165"), /*#__PURE__*/React.createElement(Button, {
+      size: "sm",
+      icon: "folder-input",
+      onClick: () => setPicker(open ? null : {
+        id: it.id
+      })
+    }, it.suggest ? '换个星域' : '归入星域'), /*#__PURE__*/React.createElement(Button, {
+      size: "sm",
+      variant: "ghost",
+      icon: "x",
+      onClick: () => askDismiss([it.id])
+    }, "\u5FFD\u7565")), open && /*#__PURE__*/React.createElement(ConPicker, {
+      suggest: it.suggest,
+      onPick: conId => fileTo([it.id], conId),
+      onCancel: () => setPicker(null)
+    }))));
+  })))), confirm && ConfirmDialog && /*#__PURE__*/React.createElement(ConfirmDialog, {
+    message: confirm.message,
+    confirmLabel: confirm.confirmLabel,
+    onYes: () => {
+      confirm.onYes();
+      setConfirm(null);
+    },
+    onClose: () => setConfirm(null)
+  }), toast && /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'fixed',
+      bottom: 26,
+      left: '50%',
+      transform: 'translateX(-50%)',
+      zIndex: 95,
+      animation: 'sr-cardin var(--dur-base) var(--ease-flight) both'
+    }
+  }, /*#__PURE__*/React.createElement(GlassPanel, {
+    strong: true,
+    radius: "pill",
+    pad: "none",
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 9,
+      padding: '10px 18px'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "check",
+    size: 16,
+    color: "var(--gold)"
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 13.5,
+      color: 'var(--text-1)'
+    }
+  }, toast.msg), toast.con && onFocusCon && /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    onClick: () => onFocusCon(toast.con),
+    className: "sr-focus-ring",
+    style: {
+      fontSize: 12.5,
+      font: 'inherit',
+      color: 'var(--star-blue)',
+      cursor: 'pointer',
+      background: 'none',
+      border: 'none',
+      padding: 0,
+      borderBottom: '1px dashed rgba(159,198,255,0.5)'
+    }
+  }, "\u5728\u661F\u56FE\u4E2D\u67E5\u770B"))));
+}
+
+/* 收藏标签页：所有 fav=true 的知识星 */
+function FavList({
+  D,
+  onOpen,
+  onFocusCon,
+  onUnfav
+}) {
+  const favs = D.stars.filter(s => s.fav);
+  if (!favs.length) {
+    return /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: 13,
+        padding: '54px 0 40px',
+        color: 'var(--text-3)',
+        textAlign: 'center'
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        width: 56,
+        height: 56,
+        borderRadius: '50%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: 'rgba(255,217,138,0.06)',
+        boxShadow: '0 0 22px rgba(255,217,138,0.10) inset'
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "star",
+      size: 26,
+      color: "var(--gold)"
+    })), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 15,
+        color: 'var(--text-2)'
+      }
+    }, "\u8FD8\u6CA1\u6709\u6536\u85CF"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 12.5,
+        lineHeight: 1.7,
+        maxWidth: 320
+      }
+    }, "\u6253\u5F00\u4EFB\u4F55\u4E00\u9897\u661F\uFF0C\u70B9\u53F3\u4E0A\u89D2\u7684\u661F\u5F62\u6309\u94AE\uFF0C", /*#__PURE__*/React.createElement("br", null), "\u5B83\u5C31\u4F1A\u51FA\u73B0\u5728\u8FD9\u91CC\uFF0C\u968F\u624B\u53EF\u8FBE\u3002"));
+  }
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 10
+    }
+  }, favs.map(s => /*#__PURE__*/React.createElement(GlassPanel, {
+    key: s.id,
+    radius: "md",
+    pad: "none",
+    style: {
+      padding: '14px 16px'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      gap: 12
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      width: 32,
+      height: 32,
+      flex: 'none',
+      borderRadius: '50%',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      background: 'rgba(255,217,138,0.08)',
+      border: '1px solid rgba(255,217,138,0.25)'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "star",
+    size: 15,
+    color: "var(--gold)"
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1,
+      minWidth: 0
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 10,
+      flexWrap: 'wrap'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    onClick: () => onOpen && onOpen(s.id),
+    style: {
+      fontSize: 15.5,
+      color: 'var(--text-1)',
+      cursor: 'pointer'
+    }
+  }, s.label), /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 5,
+      fontSize: 11.5,
+      color: 'var(--text-3)'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      width: 7,
+      height: 7,
+      borderRadius: '50%',
+      background: D.conColor(s.con),
+      boxShadow: `0 0 6px ${D.conColor(s.con)}`
+    }
+  }), D.conName(s.con)), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontFamily: 'var(--font-mono)',
+      fontSize: 11,
+      color: s.strength >= 0.7 ? 'var(--gold)' : 'var(--star-blue-dim)'
+    }
+  }, "\u8BB0\u5FC6 ", Math.round(s.strength * 100), "%")), s.summary && /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12.5,
+      lineHeight: 1.65,
+      color: 'var(--text-3)',
+      marginTop: 6,
+      overflow: 'hidden',
+      display: '-webkit-box',
+      WebkitLineClamp: 2,
+      WebkitBoxOrient: 'vertical'
+    }
+  }, s.summary), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 8,
+      marginTop: 11
+    }
+  }, /*#__PURE__*/React.createElement(Button, {
+    size: "sm",
+    icon: "maximize-2",
+    onClick: () => onOpen && onOpen(s.id)
+  }, "\u6253\u5F00\u7B14\u8BB0"), /*#__PURE__*/React.createElement(Button, {
+    size: "sm",
+    variant: "ghost",
+    icon: "crosshair",
+    onClick: () => onFocusCon && onFocusCon(s.con)
+  }, "\u5728\u661F\u56FE\u4E2D\u5B9A\u4F4D"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1
+    }
+  }), /*#__PURE__*/React.createElement(Button, {
+    size: "sm",
+    variant: "ghost",
+    icon: "star-off",
+    onClick: () => onUnfav(s)
+  }, "\u53D6\u6D88\u6536\u85CF")))))));
+}
+function CheckBox({
+  checked
+}) {
+  const {
+    Icon
+  } = window.StellarRaftDesignSystem_2866af;
+  return /*#__PURE__*/React.createElement("span", {
+    style: {
+      width: 16,
+      height: 16,
+      borderRadius: 5,
+      flex: 'none',
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      border: '1px solid',
+      borderColor: checked ? 'var(--gold)' : 'var(--line-strong)',
+      background: checked ? 'var(--gold)' : 'transparent',
+      transition: 'all var(--dur-fast)'
+    }
+  }, checked && /*#__PURE__*/React.createElement(Icon, {
+    name: "check",
+    size: 11,
+    color: "var(--text-on-gold)"
+  }));
+}
+window.SRKit = Object.assign(window.SRKit || {}, {
+  Inbox
+});
+})(); } catch (e) { __ds_ns.__errors.push({ path: "ui_kits/stellar-raft/Inbox.jsx", error: String((e && e.message) || e) }); }
+
 // ui_kits/stellar-raft/ListView.jsx
 try { (() => {
 /* ListView — 笔记管理界面 (俯瞰态·列表视图): flatten the universe into a
-   scannable, filterable data table. Dimming rows read colder. */
+   scannable, filterable, sortable, batch-editable data table. Header columns
+   sort on click; rows reveal quick actions on hover; batch and per-row
+   destructive actions go through a self-drawn confirm. Dimming rows read colder.
+   All mutations are local to this view (data.js stays untouched), so moves /
+   tags / review-queue / deletes take real effect on what's rendered here. */
 const {
   GlassPanel,
   Icon,
@@ -3571,15 +16203,328 @@ function strengthLabel(s) {
     c: 'var(--gold)'
   };
 }
+
+// Lower rank = more urgent, used by the 下次复习 column sort.
+function reviewRank(r) {
+  if (!r) return 999;
+  if (r.indexOf('逾期') >= 0) return -1;
+  if (r.indexOf('今天') >= 0) return 0;
+  if (r.indexOf('明天') >= 0) return 1;
+  const m = r.match(/(\d+)/);
+  return m ? 1 + parseInt(m[1], 10) : 900;
+}
+function reviewColor(r) {
+  if (!r) return 'var(--text-3)';
+  if (r.indexOf('逾期') >= 0) return 'var(--danger)';
+  if (r.indexOf('明天') >= 0 || r.indexOf('今天') >= 0) return 'var(--star-blue)';
+  return 'var(--text-3)';
+}
+
+// Sortable columns. dir is the default direction the first click applies.
+const SORT_DEFS = {
+  title: {
+    dir: 'asc',
+    cmp: (a, b) => (a.title || '').localeCompare(b.title || '', 'zh')
+  },
+  strength: {
+    dir: 'desc',
+    cmp: (a, b) => a.strength - b.strength
+  },
+  review: {
+    dir: 'asc',
+    cmp: (a, b) => reviewRank(a.nextReview) - reviewRank(b.nextReview) || a.strength - b.strength
+  },
+  links: {
+    dir: 'desc',
+    cmp: (a, b) => a.links - b.links
+  }
+};
+const GRID = '30px 1fr 156px 150px 116px 78px';
+
+// A neutral / positive confirm modal (non-destructive) drawn from GlassPanel.
+// Destructive actions reuse window.SRKit.ConfirmDialog (danger styling) instead.
+function ActionDialog({
+  icon,
+  accent,
+  title,
+  children,
+  confirmLabel,
+  confirmDisabled,
+  onYes,
+  onClose
+}) {
+  React.useEffect(() => {
+    const k = e => {
+      if (e.key === 'Escape') onClose();
+    };
+    document.addEventListener('keydown', k);
+    return () => document.removeEventListener('keydown', k);
+  }, []);
+  const tint = accent || 'var(--star-blue)';
+  return /*#__PURE__*/React.createElement("div", {
+    onMouseDown: onClose,
+    onContextMenu: e => e.preventDefault(),
+    style: {
+      position: 'fixed',
+      inset: 0,
+      zIndex: 120,
+      background: 'rgba(3,4,12,0.55)',
+      backdropFilter: 'blur(3px)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    onMouseDown: e => e.stopPropagation(),
+    style: {
+      width: 360,
+      maxWidth: '90vw',
+      animation: 'sr-cardin var(--dur-base) var(--ease-flight) both'
+    }
+  }, /*#__PURE__*/React.createElement(GlassPanel, {
+    strong: true,
+    radius: "lg",
+    pad: "md",
+    glow: true
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 11,
+      marginBottom: 16
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      flex: 'none',
+      width: 34,
+      height: 34,
+      borderRadius: '50%',
+      background: 'rgba(159,198,255,0.10)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: icon,
+    size: 17,
+    color: tint
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 14.5,
+      color: 'var(--text-1)'
+    }
+  }, title)), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginBottom: 18
+    }
+  }, children), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      gap: 10,
+      justifyContent: 'flex-end'
+    }
+  }, /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    onClick: onClose,
+    style: {
+      height: 32,
+      padding: '0 16px',
+      borderRadius: 'var(--r-pill)',
+      border: '1px solid var(--glass-border-strong)',
+      background: 'transparent',
+      color: 'var(--text-2)',
+      fontSize: 13,
+      cursor: 'pointer',
+      fontFamily: 'var(--font-sans)'
+    }
+  }, "\u53D6\u6D88"), /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    onClick: confirmDisabled ? undefined : onYes,
+    disabled: confirmDisabled,
+    style: {
+      height: 32,
+      padding: '0 16px',
+      borderRadius: 'var(--r-pill)',
+      border: '1px solid rgba(255,217,138,0.5)',
+      background: confirmDisabled ? 'rgba(159,198,255,0.06)' : 'rgba(255,217,138,0.16)',
+      color: confirmDisabled ? 'var(--text-3)' : 'var(--gold)',
+      fontSize: 13,
+      cursor: confirmDisabled ? 'not-allowed' : 'pointer',
+      fontFamily: 'var(--font-sans)'
+    }
+  }, confirmLabel)))));
+}
+
+// A small glass dropdown anchored under its trigger; closes on outside click.
+function Menu({
+  open,
+  onClose,
+  width,
+  children
+}) {
+  if (!open) return null;
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    onMouseDown: onClose,
+    style: {
+      position: 'fixed',
+      inset: 0,
+      zIndex: 60
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    onContextMenu: e => e.preventDefault(),
+    style: {
+      position: 'absolute',
+      top: 'calc(100% + 7px)',
+      left: 0,
+      zIndex: 61,
+      width: width || 200,
+      animation: 'sr-cardin var(--dur-fast) var(--ease-flight) both'
+    }
+  }, /*#__PURE__*/React.createElement(GlassPanel, {
+    strong: true,
+    radius: "md",
+    pad: "none",
+    style: {
+      overflow: 'hidden',
+      padding: 6
+    }
+  }, children)));
+}
+function MenuRow({
+  onClick,
+  active,
+  children
+}) {
+  const [h, setH] = React.useState(false);
+  return /*#__PURE__*/React.createElement("div", {
+    onMouseDown: e => e.stopPropagation(),
+    onClick: onClick,
+    onMouseEnter: () => setH(true),
+    onMouseLeave: () => setH(false),
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 9,
+      padding: '8px 10px',
+      borderRadius: 'var(--r-sm)',
+      cursor: 'pointer',
+      fontSize: 13,
+      color: active ? 'var(--gold)' : 'var(--text-2)',
+      background: h ? 'color-mix(in srgb, var(--star-blue) 9%, transparent)' : 'transparent',
+      transition: 'background var(--dur-fast)'
+    }
+  }, children);
+}
 function ListView({
-  onOpen
+  onOpen,
+  onOpenCon,
+  onFeynman
 }) {
   const D = window.SR_DATA;
-  const [filter, setFilter] = React.useState('all');
+  const ConfirmDialog = window.SRKit && window.SRKit.ConfirmDialog;
+
+  // Local mirror of the note list for rendering; every mutation writes through
+  // to window.SR_DATA first, so other views (map / editor / timeline) stay in sync.
+  const [notes, setNotes] = React.useState(() => D.notes.map(n => ({
+    ...n,
+    tags: [...(n.tags || [])]
+  })));
+  const [reviewQueue, setReviewQueue] = React.useState([]); // ids queued for review
+
+  // 记忆心跳：数据层每分钟按真实时间重算 R，本地镜像跟着刷新亮度与到期（只改数值，无动画）
+  React.useEffect(() => {
+    const h = () => setNotes(ns => ns.map(n => {
+      const s = D.byId[n.id];
+      return s ? {
+        ...n,
+        strength: s.strength,
+        nextReview: s.props && s.props.nextReview || n.nextReview
+      } : n;
+    }));
+    window.addEventListener('sr-memory', h);
+    return () => window.removeEventListener('sr-memory', h);
+  }, []);
+  const [query, setQuery] = React.useState('');
+  const [band, setBand] = React.useState('all'); // 记忆强度档
+  const [conFilter, setConFilter] = React.useState(null); // 星座
+  const [tagFilter, setTagFilter] = React.useState(null); // 标签
+  const [overdueOnly, setOverdueOnly] = React.useState(false);
+  const [sortKey, setSortKey] = React.useState(null); // null = 原始(最近编辑)序
+  const [sortDir, setSortDir] = React.useState('asc');
   const [sel, setSel] = React.useState([]);
-  const filters = [{
+  const [hoverId, setHoverId] = React.useState(null);
+  const [menu, setMenu] = React.useState(null); // 'con' | 'tag' | null
+  const [dialog, setDialog] = React.useState(null); // ActionDialog config
+  const [confirm, setConfirm] = React.useState(null); // danger ConfirmDialog config
+  const [tagDraft, setTagDraft] = React.useState('');
+  const [moveTarget, setMoveTarget] = React.useState(null);
+  const [toast, setToast] = React.useState(null);
+  const flash = msg => {
+    setToast(msg);
+    setTimeout(() => setToast(null), 1700);
+  };
+
+  // 空态的第一步：就地写下第一颗星（没有星域时先立一片），随后直接进入编辑器
+  const [newStarOpen, setNewStarOpen] = React.useState(false);
+  const [newStarDraft, setNewStarDraft] = React.useState('');
+  const createFirstStar = () => {
+    const label = newStarDraft.trim();
+    if (!label) return;
+    let con = D.constellations[0];
+    if (!con) {
+      con = {
+        id: 'c' + Math.random().toString(36).slice(2, 7),
+        name: '我的星域',
+        color: '#9fc6ff',
+        health: 0,
+        count: 0
+      };
+      D.constellations.push(con);
+    }
+    const id = 's' + Math.random().toString(36).slice(2, 8);
+    D.addStar({
+      id,
+      con: con.id,
+      x: 46 + Math.random() * 10,
+      y: 42 + Math.random() * 10,
+      strength: 0.5,
+      importance: 1,
+      label,
+      summary: '',
+      tags: ['草稿'],
+      props: {
+        type: '草稿',
+        status: '正常',
+        source: '列表视图',
+        alias: '',
+        nextReview: '明天'
+      },
+      body: [{
+        id: id + '-r',
+        type: 'rich'
+      }, {
+        id: id + '-p',
+        type: 'p',
+        text: ''
+      }]
+    });
+    setNewStarOpen(false);
+    setNewStarDraft('');
+    onOpen(id);
+  };
+
+  // 认证态（点亮/待重燃）——与亮度四档正交，从数据层派生，不在本地镜像里存一份
+  const litOf = n => !!(D.isLit && D.isLit(D.byId[n.id]));
+  const emberOf = n => !!(D.isEmber && D.isEmber(D.byId[n.id]));
+  const bands = [{
     id: 'all',
     label: '全部'
+  }, {
+    id: 'lit',
+    label: '已点亮'
+  }, {
+    id: 'ember',
+    label: '待重燃'
   }, {
     id: 'solid',
     label: '牢固'
@@ -3593,9 +16538,301 @@ function ListView({
     id: 'dying',
     label: '将熄灭'
   }];
-  const match = n => filter === 'all' || filter === 'solid' && n.strength >= 0.7 || filter === 'normal' && n.strength >= 0.4 && n.strength < 0.7 || filter === 'fading' && n.strength >= 0.2 && n.strength < 0.4 || filter === 'dying' && n.strength < 0.2;
-  const rows = D.notes.filter(match);
+  const matchBand = n => band === 'all' || band === 'lit' && litOf(n) || band === 'ember' && emberOf(n) || band === 'solid' && n.strength >= 0.7 || band === 'normal' && n.strength >= 0.4 && n.strength < 0.7 || band === 'fading' && n.strength >= 0.2 && n.strength < 0.4 || band === 'dying' && n.strength < 0.2;
+  const allTags = React.useMemo(() => Array.from(new Set(notes.flatMap(n => n.tags || []))).sort((a, b) => a.localeCompare(b, 'zh')), [notes]);
+  const q = query.trim().toLowerCase();
+  const matchQuery = n => !q || n.title.toLowerCase().includes(q) || (n.tags || []).some(t => t.toLowerCase().includes(q)) || (D.conName(n.con) || '').toLowerCase().includes(q);
+  const matchCon = n => !conFilter || n.con === conFilter;
+  const matchTag = n => !tagFilter || (n.tags || []).includes(tagFilter);
+  const matchOverdue = n => !overdueOnly || (n.nextReview || '').indexOf('逾期') >= 0;
+  let rows = notes.filter(n => matchBand(n) && matchQuery(n) && matchCon(n) && matchTag(n) && matchOverdue(n));
+  if (sortKey && SORT_DEFS[sortKey]) {
+    const cmp = SORT_DEFS[sortKey].cmp;
+    rows = rows.slice().sort((a, b) => {
+      const base = cmp(a, b);
+      return sortDir === 'asc' ? base : -base;
+    });
+  }
+  const visibleIds = rows.map(n => n.id);
+  const selSet = new Set(sel);
+  const allChecked = rows.length > 0 && visibleIds.every(id => selSet.has(id));
+  const someChecked = visibleIds.some(id => selSet.has(id));
   const toggle = id => setSel(s => s.includes(id) ? s.filter(x => x !== id) : [...s, id]);
+  const selectAll = () => setSel(allChecked ? sel.filter(id => !visibleIds.includes(id)) : Array.from(new Set([...sel, ...visibleIds])));
+  const invert = () => setSel(Array.from(new Set([...sel.filter(id => !visibleIds.includes(id)), ...visibleIds.filter(id => !selSet.has(id))])));
+  const clickHeader = key => {
+    if (sortKey === key) setSortDir(d => d === 'asc' ? 'desc' : 'asc');else {
+      setSortKey(key);
+      setSortDir(SORT_DEFS[key].dir);
+    }
+  };
+  const anyFilter = band !== 'all' || conFilter || tagFilter || overdueOnly || q;
+  const resetFilters = () => {
+    setBand('all');
+    setConFilter(null);
+    setTagFilter(null);
+    setOverdueOnly(false);
+    setQuery('');
+  };
+
+  // ---- mutations（写穿数据层，星图/编辑器/时间轴同步可见）----
+  const applyMove = (ids, conId) => {
+    const set = new Set(ids);
+    ids.forEach(id => {
+      const s = D.byId[id];
+      if (s) {
+        s.con = conId;
+        D.touchNote(id);
+      }
+    });
+    D.syncCounts();
+    setNotes(ns => ns.map(n => set.has(n.id) ? {
+      ...n,
+      con: conId
+    } : n));
+  };
+  const applyTag = (ids, tag) => {
+    const set = new Set(ids);
+    ids.forEach(id => {
+      const s = D.byId[id];
+      if (s) {
+        s.tags = s.tags || [];
+        if (!s.tags.includes(tag)) s.tags.push(tag);
+        D.touchNote(id);
+      }
+    });
+    setNotes(ns => ns.map(n => set.has(n.id) && !n.tags.includes(tag) ? {
+      ...n,
+      tags: [...n.tags, tag]
+    } : n));
+  };
+  const applyReview = ids => {
+    // 写穿记忆模型：到期时刻提前到「明天」（已逾期的保持逾期），并记入时间线
+    ids.forEach(id => {
+      if (D.byId[id]) {
+        D.queueReview(id, 1);
+        D.pushTimeline('review', id, '加入复习队列');
+      }
+    });
+    setReviewQueue(q => Array.from(new Set([...q, ...ids])));
+    setNotes(ns => ns.map(n => {
+      if (!ids.includes(n.id)) return n;
+      const s = D.byId[n.id];
+      return s ? {
+        ...n,
+        nextReview: s.props && s.props.nextReview || n.nextReview
+      } : n;
+    }));
+  };
+  const applyDelete = ids => {
+    const set = new Set(ids);
+    setNotes(ns => ns.filter(n => !set.has(n.id)));
+    setSel(s => s.filter(id => !set.has(id)));
+  };
+
+  // ---- batch flows ----
+  const openBatchMove = () => {
+    const ids = sel.slice();
+    setMoveTarget(null);
+    setDialog({
+      icon: 'folder-input',
+      accent: 'var(--star-blue)',
+      title: '移动星域',
+      confirmLabel: '移动到此',
+      body: 'pickCon',
+      ids,
+      onYes: target => {
+        if (!target) return;
+        applyMove(ids, target);
+        flash(`已将 ${ids.length} 颗星移动到「${D.conName(target)}」`);
+        setSel([]);
+        setDialog(null);
+        setMoveTarget(null);
+      }
+    });
+  };
+  const batchTag = () => {
+    const ids = sel.slice();
+    setTagDraft('');
+    setDialog({
+      icon: 'hash',
+      accent: 'var(--gold)',
+      title: '加标签',
+      confirmLabel: '添加',
+      body: 'tag',
+      ids,
+      onYes: tag => {
+        const t = (tag || '').trim().replace(/^#/, '');
+        if (!t) return;
+        applyTag(ids, t);
+        flash(`已为 ${ids.length} 颗星添加标签 #${t}`);
+        setSel([]);
+        setDialog(null);
+      }
+    });
+  };
+  const batchReview = () => {
+    const ids = sel.slice();
+    setDialog({
+      icon: 'repeat',
+      accent: 'var(--gold)',
+      title: '加入复习',
+      confirmLabel: '加入队列',
+      body: 'review',
+      ids,
+      onYes: () => {
+        applyReview(ids);
+        flash(`已将 ${ids.length} 颗星加入复习队列`);
+        setSel([]);
+        setDialog(null);
+      }
+    });
+  };
+  const batchDelete = () => {
+    const ids = sel.slice();
+    setConfirm({
+      message: `已选的 ${ids.length} 颗星将一并坠入黑洞（星图同步移除）。黑洞里的星可以随时恢复。`,
+      confirmLabel: '移入黑洞',
+      onYes: () => {
+        ids.forEach(id => D.trashStar(id));
+        applyDelete(ids);
+        flash(`${ids.length} 颗星已移入黑洞`);
+        setConfirm(null);
+      }
+    });
+  };
+
+  // ---- per-row quick actions ----
+  const [renameId, setRenameId] = React.useState(null);
+  const [renameDraft, setRenameDraft] = React.useState('');
+  const startRename = n => {
+    setRenameId(n.id);
+    setRenameDraft(n.title);
+  };
+  const commitRename = () => {
+    const t = renameDraft.trim();
+    if (t && renameId) {
+      D.renameStar(renameId, t);
+      setNotes(ns => ns.map(x => x.id === renameId ? {
+        ...x,
+        title: t
+      } : x));
+      flash('已重命名');
+    }
+    setRenameId(null);
+  };
+  const rowReview = n => {
+    applyReview([n.id]);
+    flash(`「${n.title}」已加入复习队列`);
+  };
+  const rowDelete = n => {
+    setConfirm({
+      message: `「${n.title}」将坠入黑洞（星图同步移除）。黑洞里的星可以随时恢复。`,
+      confirmLabel: '移入黑洞',
+      onYes: () => {
+        D.trashStar(n.id);
+        applyDelete([n.id]);
+        flash(`「${n.title}」已移入黑洞`);
+        setConfirm(null);
+      }
+    });
+  };
+
+  // real health stats from the (possibly mutated) local list
+  const total = notes.length;
+  const litTotal = notes.filter(litOf).length;
+  const dimming = notes.filter(n => n.strength < 0.4).length;
+  const health = total ? Math.round(notes.reduce((a, n) => a + n.strength, 0) / total * 100) : 0;
+  const HeadCell = ({
+    k,
+    children,
+    justify
+  }) => {
+    const active = sortKey === k;
+    return /*#__PURE__*/React.createElement("button", {
+      type: "button",
+      onClick: () => clickHeader(k),
+      title: "\u70B9\u51FB\u6309\u6B64\u5217\u6392\u5E8F",
+      className: "sr-focus-ring",
+      style: {
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: 5,
+        cursor: 'pointer',
+        userSelect: 'none',
+        justifyContent: justify || 'flex-start',
+        background: 'none',
+        border: 'none',
+        padding: 0,
+        font: 'inherit',
+        letterSpacing: 'inherit',
+        textTransform: 'inherit',
+        color: active ? 'var(--gold)' : 'var(--text-3)',
+        transition: 'color var(--dur-fast)'
+      }
+    }, children, /*#__PURE__*/React.createElement(Icon, {
+      name: active ? sortDir === 'asc' ? 'arrow-up' : 'arrow-down' : 'chevrons-up-down',
+      size: 12,
+      color: active ? 'var(--gold)' : 'var(--line-strong)'
+    }));
+  };
+  const Checkbox = ({
+    on,
+    dash,
+    onClick,
+    label
+  }) => /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    onClick: onClick,
+    className: "sr-focus-ring",
+    role: "checkbox",
+    "aria-checked": dash && !on ? 'mixed' : !!on,
+    "aria-label": label || '选择',
+    style: {
+      width: 17,
+      height: 17,
+      borderRadius: 5,
+      border: '1px solid',
+      cursor: 'pointer',
+      padding: 0,
+      borderColor: on || dash ? 'var(--gold)' : 'var(--line-strong)',
+      background: on || dash ? 'var(--gold)' : 'transparent',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      transition: 'all var(--dur-fast)'
+    }
+  }, on && /*#__PURE__*/React.createElement(Icon, {
+    name: "check",
+    size: 12,
+    color: "var(--text-on-gold)"
+  }), !on && dash && /*#__PURE__*/React.createElement("span", {
+    style: {
+      width: 8,
+      height: 2,
+      borderRadius: 1,
+      background: 'var(--text-on-gold)'
+    }
+  }));
+
+  // 批量条上的文字动作：真按钮，可聚焦、可回车
+  const TextAction = ({
+    onClick,
+    children
+  }) => /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    onClick: onClick,
+    className: "sr-focus-ring",
+    style: {
+      background: 'none',
+      border: 'none',
+      font: 'inherit',
+      fontSize: 12,
+      color: 'var(--text-3)',
+      cursor: 'pointer',
+      padding: '6px 4px'
+    }
+  }, children);
   return /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'relative',
@@ -3603,14 +16840,15 @@ function ListView({
       minWidth: 0,
       overflow: 'auto',
       padding: '26px 30px 40px'
-    }
+    },
+    onContextMenu: e => e.preventDefault()
   }, /*#__PURE__*/React.createElement("sr-starfield", {
     density: "0.5"
   }), /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'relative',
       zIndex: 2,
-      maxWidth: 1040,
+      maxWidth: 1080,
       margin: '0 auto'
     }
   }, /*#__PURE__*/React.createElement("div", {
@@ -3636,7 +16874,11 @@ function ListView({
       color: 'var(--text-3)',
       marginTop: 2
     }
-  }, "1,284 \u9897\u661F \xB7 47 \u9897\u6B63\u5728\u53D8\u6697")), /*#__PURE__*/React.createElement(GlassPanel, {
+  }, total, " \u9897\u661F \xB7 ", /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: litTotal ? 'var(--gold)' : 'inherit'
+    }
+  }, litTotal, " \u5DF2\u70B9\u4EAE"), " \xB7 ", dimming, " \u9897\u504F\u6697")), /*#__PURE__*/React.createElement(GlassPanel, {
     radius: "pill",
     pad: "none",
     style: {
@@ -3661,149 +16903,375 @@ function ListView({
     style: {
       fontFamily: 'var(--font-mono)',
       fontSize: 13,
-      color: 'var(--gold)'
+      color: health >= 60 ? 'var(--gold)' : 'var(--star-blue-dim)'
     }
-  }, "\u5065\u5EB7\u5EA6 78%"))), /*#__PURE__*/React.createElement("div", {
+  }, "\u5065\u5EB7\u5EA6 ", health, "%"))), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       alignItems: 'center',
       gap: 10,
-      marginBottom: 16,
+      marginBottom: 12,
       flexWrap: 'wrap'
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      width: 260
+      width: 240
     }
   }, /*#__PURE__*/React.createElement(Input, {
     icon: "search",
     placeholder: "\u68C0\u7D22\u6807\u9898\u3001\u6807\u7B7E\u2026",
-    size: "sm"
+    size: "sm",
+    value: query,
+    onChange: e => setQuery(e && e.target ? e.target.value : e || '')
   })), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       gap: 6
     }
-  }, filters.map(f => /*#__PURE__*/React.createElement(Tag, {
+  }, bands.map(f => /*#__PURE__*/React.createElement(Tag, {
     key: f.id,
-    active: filter === f.id,
-    onClick: () => setFilter(f.id)
+    active: band === f.id,
+    onClick: () => setBand(f.id)
   }, f.label))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'relative'
+    }
+  }, /*#__PURE__*/React.createElement(Tag, {
+    icon: "orbit",
+    dot: conFilter ? D.conColor(conFilter) : undefined,
+    active: !!conFilter,
+    onClick: () => setMenu(menu === 'con' ? null : 'con')
+  }, conFilter ? D.conName(conFilter) : '星域'), /*#__PURE__*/React.createElement(Menu, {
+    open: menu === 'con',
+    onClose: () => setMenu(null),
+    width: 170
+  }, /*#__PURE__*/React.createElement(MenuRow, {
+    active: !conFilter,
+    onClick: () => {
+      setConFilter(null);
+      setMenu(null);
+    }
+  }, "\u5168\u90E8\u661F\u57DF"), D.constellations.map(c => /*#__PURE__*/React.createElement(MenuRow, {
+    key: c.id,
+    active: conFilter === c.id,
+    onClick: () => {
+      setConFilter(c.id);
+      setMenu(null);
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      width: 7,
+      height: 7,
+      borderRadius: '50%',
+      background: c.color,
+      boxShadow: `0 0 6px ${c.color}`
+    }
+  }), c.name)))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'relative'
+    }
+  }, /*#__PURE__*/React.createElement(Tag, {
+    icon: "hash",
+    active: !!tagFilter,
+    onClick: () => setMenu(menu === 'tag' ? null : 'tag')
+  }, tagFilter ? tagFilter : '标签'), /*#__PURE__*/React.createElement(Menu, {
+    open: menu === 'tag',
+    onClose: () => setMenu(null),
+    width: 160
+  }, /*#__PURE__*/React.createElement(MenuRow, {
+    active: !tagFilter,
+    onClick: () => {
+      setTagFilter(null);
+      setMenu(null);
+    }
+  }, "\u5168\u90E8\u6807\u7B7E"), allTags.map(t => /*#__PURE__*/React.createElement(MenuRow, {
+    key: t,
+    active: tagFilter === t,
+    onClick: () => {
+      setTagFilter(t);
+      setMenu(null);
+    }
+  }, "#", t)))), /*#__PURE__*/React.createElement(Tag, {
+    icon: "alarm-clock",
+    active: overdueOnly,
+    onClick: () => setOverdueOnly(v => !v)
+  }, "\u903E\u671F"), /*#__PURE__*/React.createElement("div", {
     style: {
       flex: 1
     }
   }), /*#__PURE__*/React.createElement("span", {
     style: {
-      display: 'inline-flex',
-      alignItems: 'center',
-      gap: 6,
-      fontSize: 12.5,
+      fontFamily: 'var(--font-mono)',
+      fontSize: 12,
       color: 'var(--text-3)'
     }
+  }, rows.length, /*#__PURE__*/React.createElement("span", {
+    style: {
+      opacity: 0.5
+    }
+  }, " / ", total), " \u9897", sel.length > 0 && /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: 'var(--gold)'
+    }
+  }, " \xB7 \u9009 ", sel.length)), anyFilter && /*#__PURE__*/React.createElement("span", {
+    onClick: resetFilters,
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 4,
+      fontSize: 12,
+      color: 'var(--text-3)',
+      cursor: 'pointer'
+    }
   }, /*#__PURE__*/React.createElement(Icon, {
-    name: "arrow-up-down",
-    size: 15,
+    name: "x",
+    size: 13,
     color: "currentColor"
-  }), "\u6700\u8FD1\u7F16\u8F91")), sel.length > 0 && /*#__PURE__*/React.createElement(GlassPanel, {
+  }), "\u6E05\u9664\u7B5B\u9009")), sel.length > 0 && /*#__PURE__*/React.createElement(GlassPanel, {
     radius: "md",
     pad: "none",
     style: {
       display: 'flex',
       alignItems: 'center',
-      gap: 12,
+      gap: 10,
       padding: '10px 16px',
-      marginBottom: 12
+      marginBottom: 12,
+      flexWrap: 'wrap'
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 13,
       color: 'var(--text-1)'
     }
-  }, "\u5DF2\u9009 ", sel.length, " \u9879"), /*#__PURE__*/React.createElement("div", {
+  }, "\u5DF2\u9009 ", sel.length, " \u9897"), /*#__PURE__*/React.createElement(TextAction, {
+    onClick: selectAll
+  }, allChecked ? '全不选' : '全选'), /*#__PURE__*/React.createElement(TextAction, {
+    onClick: invert
+  }, "\u53CD\u9009"), /*#__PURE__*/React.createElement(TextAction, {
+    onClick: () => setSel([])
+  }, "\u53D6\u6D88"), /*#__PURE__*/React.createElement("div", {
     style: {
       flex: 1
     }
   }), /*#__PURE__*/React.createElement(Button, {
     size: "sm",
     variant: "ghost",
-    icon: "folder-input"
-  }, "\u79FB\u52A8\u661F\u5EA7"), /*#__PURE__*/React.createElement(Button, {
+    icon: "folder-input",
+    onClick: openBatchMove
+  }, "\u79FB\u52A8\u661F\u57DF"), /*#__PURE__*/React.createElement(Button, {
     size: "sm",
     variant: "ghost",
-    icon: "hash"
+    icon: "hash",
+    onClick: batchTag
   }, "\u52A0\u6807\u7B7E"), /*#__PURE__*/React.createElement(Button, {
     size: "sm",
-    icon: "repeat"
-  }, "\u52A0\u5165\u590D\u4E60")), /*#__PURE__*/React.createElement("div", {
+    variant: "ghost",
+    icon: "repeat",
+    onClick: batchReview
+  }, "\u52A0\u5165\u590D\u4E60"), /*#__PURE__*/React.createElement(Button, {
+    size: "sm",
+    variant: "ghost",
+    icon: "trash-2",
+    onClick: batchDelete
+  }, "\u5220\u9664")), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'grid',
-      gridTemplateColumns: '28px 1fr 130px 150px 92px 70px',
+      gridTemplateColumns: GRID,
       gap: 14,
       padding: '0 16px 10px',
       fontFamily: 'var(--font-mono)',
       fontSize: 10,
       letterSpacing: 'var(--ls-hud)',
-      textTransform: 'uppercase',
+      textTransform: 'uppercase'
+    }
+  }, /*#__PURE__*/React.createElement(Checkbox, {
+    on: allChecked,
+    dash: !allChecked && someChecked,
+    onClick: selectAll
+  }), /*#__PURE__*/React.createElement(HeadCell, {
+    k: "title"
+  }, "\u6807\u9898"), /*#__PURE__*/React.createElement(HeadCell, {
+    k: "strength"
+  }, "\u8BB0\u5FC6\u5F3A\u5EA6"), /*#__PURE__*/React.createElement("span", {
+    style: {
       color: 'var(--text-3)'
     }
-  }, /*#__PURE__*/React.createElement("span", null), /*#__PURE__*/React.createElement("span", null, "\u6807\u9898"), /*#__PURE__*/React.createElement("span", null, "\u8BB0\u5FC6\u5F3A\u5EA6"), /*#__PURE__*/React.createElement("span", null, "\u6240\u5C5E\u661F\u5EA7"), /*#__PURE__*/React.createElement("span", null, "\u4E0B\u6B21\u590D\u4E60"), /*#__PURE__*/React.createElement("span", null, "\u8FDE\u63A5")), /*#__PURE__*/React.createElement("div", {
+  }, "\u6240\u5C5E\u661F\u57DF"), /*#__PURE__*/React.createElement(HeadCell, {
+    k: "review"
+  }, "\u4E0B\u6B21\u590D\u4E60"), /*#__PURE__*/React.createElement(HeadCell, {
+    k: "links",
+    justify: "flex-start"
+  }, "\u8FDE\u63A5")), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       flexDirection: 'column',
       gap: 6
     }
-  }, rows.map(n => {
-    const sl = strengthLabel(n.strength);
+  }, rows.length === 0 && /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: '54px 0 40px',
+      textAlign: 'center'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'inline-flex',
+      width: 52,
+      height: 52,
+      borderRadius: '50%',
+      alignItems: 'center',
+      justifyContent: 'center',
+      background: 'rgba(159,198,255,0.06)',
+      marginBottom: 14
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: total === 0 ? 'sparkles' : 'search-x',
+    size: 24,
+    color: "var(--star-blue-dim)"
+  })), total === 0 ? /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      color: 'var(--text-2)',
+      fontSize: 14
+    }
+  }, "\u4F60\u7684\u661F\u7A7A\u8FD8\u5F88\u6697\u3002", /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: 'var(--text-3)'
+    }
+  }, "\u5199\u4E0B\u7B2C\u4E00\u9897\u661F\uFF0C\u8BA9\u5B83\u53D1\u5149\u3002")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      justifyContent: 'center',
+      gap: 10,
+      marginTop: 18
+    }
+  }, /*#__PURE__*/React.createElement(Button, {
+    size: "sm",
+    variant: "primary",
+    icon: "plus",
+    glow: true,
+    onClick: () => {
+      setNewStarDraft('');
+      setNewStarOpen(true);
+    }
+  }, "\u5199\u4E0B\u7B2C\u4E00\u9897\u661F"), D.loadDemo && /*#__PURE__*/React.createElement(Button, {
+    size: "sm",
+    variant: "ghost",
+    icon: "telescope",
+    title: "\u8F7D\u5165\u4E00\u7247\u53EF\u968F\u65F6\u6E05\u7A7A\u7684\u6F14\u793A\u661F\u7A7A",
+    onClick: () => D.loadDemo()
+  }, "\u8F7D\u5165\u793A\u4F8B\u661F\u7CFB"))) : /*#__PURE__*/React.createElement("div", {
+    style: {
+      color: 'var(--text-2)',
+      fontSize: 14
+    }
+  }, "\u6CA1\u6709\u5339\u914D\u7684\u661F\u3002", /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: 'var(--text-3)'
+    }
+  }, "\u6362\u4E2A\u5173\u952E\u8BCD\uFF0C\u6216"), /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    onClick: resetFilters,
+    className: "sr-focus-ring",
+    style: {
+      background: 'none',
+      border: 'none',
+      padding: 0,
+      font: 'inherit',
+      color: 'var(--gold)',
+      cursor: 'pointer'
+    }
+  }, "\u6E05\u9664\u7B5B\u9009"), "\u3002")), rows.map(n => {
+    const litRow = litOf(n);
+    const emberRow = emberOf(n);
+    // 待重燃是唯一新增的用户可见状态：覆盖亮度四档的状态文字（口径同 props.status）
+    const sl = emberRow ? {
+      t: '待重燃',
+      c: 'var(--gold-warm)'
+    } : strengthLabel(n.strength);
     const dim = n.strength < 0.4;
-    const checked = sel.includes(n.id);
+    const checked = selSet.has(n.id);
+    const queued = reviewQueue.includes(n.id);
+    const hov = hoverId === n.id;
     return /*#__PURE__*/React.createElement("div", {
       key: n.id,
       onClick: () => onOpen(n.id),
+      role: "button",
+      tabIndex: 0,
+      className: "sr-focus-ring",
+      onKeyDown: e => {
+        if ((e.key === 'Enter' || e.key === ' ') && e.target === e.currentTarget) {
+          e.preventDefault();
+          onOpen(n.id);
+        }
+      },
+      onMouseEnter: () => setHoverId(n.id),
+      onMouseLeave: () => setHoverId(h => h === n.id ? null : h),
+      onFocus: () => setHoverId(n.id),
+      onBlur: e => {
+        if (!e.currentTarget.contains(e.relatedTarget)) setHoverId(h => h === n.id ? null : h);
+      },
       style: {
+        position: 'relative',
         display: 'grid',
-        gridTemplateColumns: '28px 1fr 130px 150px 92px 70px',
+        gridTemplateColumns: GRID,
         gap: 14,
         alignItems: 'center',
         padding: '13px 16px',
         borderRadius: 'var(--r-md)',
         cursor: 'pointer',
-        background: checked ? 'rgba(255,217,138,0.06)' : dim ? 'rgba(8,11,28,0.5)' : 'rgba(159,198,255,0.035)',
+        // 变暗的星降低整行「存在感」而不是叠深色底——黎明主题下深底会把整行糊死
+        background: checked ? 'rgba(255,217,138,0.06)' : hov ? 'color-mix(in srgb, var(--star-blue) 8%, transparent)' : dim ? 'var(--glass-bg-faint)' : 'color-mix(in srgb, var(--star-blue) 4%, transparent)',
         border: '1px solid',
         borderColor: checked ? 'rgba(255,217,138,0.24)' : 'var(--glass-border)',
-        opacity: dim ? 0.82 : 1,
+        opacity: dim ? 0.8 : 1,
         transition: 'background var(--dur-fast), border-color var(--dur-fast)'
-      },
-      onMouseEnter: e => {
-        if (!checked) e.currentTarget.style.background = 'rgba(159,198,255,0.07)';
-      },
-      onMouseLeave: e => {
-        if (!checked) e.currentTarget.style.background = dim ? 'rgba(8,11,28,0.5)' : 'rgba(159,198,255,0.035)';
       }
-    }, /*#__PURE__*/React.createElement("span", {
+    }, /*#__PURE__*/React.createElement(Checkbox, {
+      on: checked,
+      label: '选择「' + n.title + '」',
       onClick: e => {
         e.stopPropagation();
         toggle(n.id);
-      },
-      style: {
-        width: 17,
-        height: 17,
-        borderRadius: 5,
-        border: '1px solid',
-        borderColor: checked ? 'var(--gold)' : 'var(--line-strong)',
-        background: checked ? 'var(--gold)' : 'transparent',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
       }
-    }, checked && /*#__PURE__*/React.createElement(Icon, {
-      name: "check",
-      size: 12,
-      color: "var(--text-on-gold)"
-    })), /*#__PURE__*/React.createElement("div", {
+    }), /*#__PURE__*/React.createElement("div", {
       style: {
         minWidth: 0
       }
     }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: 7
+      }
+    }, renameId === n.id ? /*#__PURE__*/React.createElement("input", {
+      autoFocus: true,
+      value: renameDraft,
+      onClick: e => e.stopPropagation(),
+      onChange: e => setRenameDraft(e.target.value),
+      onBlur: commitRename,
+      onKeyDown: e => {
+        if (e.key === 'Enter') commitRename();
+        if (e.key === 'Escape') setRenameId(null);
+      },
+      style: {
+        height: 24,
+        minWidth: 0,
+        flex: 1,
+        boxSizing: 'border-box',
+        background: 'var(--input-bg, rgba(3,4,12,0.45))',
+        border: '1px solid var(--glass-border-strong)',
+        borderRadius: 'var(--r-sm)',
+        color: 'var(--text-1)',
+        fontSize: 13.5,
+        padding: '0 8px',
+        outline: 'none',
+        fontFamily: 'var(--font-sans)'
+      }
+    }) : /*#__PURE__*/React.createElement("span", {
+      onDoubleClick: e => {
+        e.stopPropagation();
+        startRename(n);
+      },
+      title: "\u53CC\u51FB\u91CD\u547D\u540D",
       style: {
         fontSize: 14.5,
         color: dim ? 'var(--text-2)' : 'var(--text-1)',
@@ -3811,13 +17279,61 @@ function ListView({
         overflow: 'hidden',
         textOverflow: 'ellipsis'
       }
-    }, n.title), /*#__PURE__*/React.createElement("div", {
+    }, n.title), litRow && /*#__PURE__*/React.createElement("span", {
+      title: "\u5DF2\u70B9\u4EAE \xB7 \u8BB2\u6E05\u695A\u7684\u4E1C\u897F\uFF0C\u6697\u5F97\u66F4\u6162\u3002",
+      style: {
+        flex: 'none',
+        width: 9,
+        height: 9,
+        borderRadius: '50%',
+        boxSizing: 'border-box',
+        border: '1px solid var(--gold)'
+      }
+    }), emberRow && /*#__PURE__*/React.createElement("span", {
+      title: "\u66FE\u70B9\u4EAE\u7684\u661F\u6697\u4E86\u4E0B\u6765\u3002\u518D\u8BB2\u900F\u4E00\u6B21\uFF0C\u5C31\u80FD\u91CD\u71C3\u3002",
+      style: {
+        flex: 'none',
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: 3,
+        height: 17,
+        padding: '0 7px',
+        borderRadius: 'var(--r-pill)',
+        background: 'color-mix(in srgb, var(--gold-warm) 10%, transparent)',
+        border: '1px solid color-mix(in srgb, var(--gold-warm) 30%, transparent)',
+        fontSize: 10,
+        color: 'var(--gold-warm)'
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "flame",
+      size: 10,
+      color: "var(--gold-warm)"
+    }), "\u5F85\u91CD\u71C3"), queued && /*#__PURE__*/React.createElement("span", {
+      title: "\u5DF2\u52A0\u5165\u590D\u4E60\u961F\u5217",
+      style: {
+        flex: 'none',
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: 3,
+        height: 17,
+        padding: '0 7px',
+        borderRadius: 'var(--r-pill)',
+        background: 'rgba(255,217,138,0.12)',
+        border: '1px solid rgba(255,217,138,0.28)',
+        fontSize: 10,
+        color: 'var(--gold)'
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "repeat",
+      size: 10,
+      color: "var(--gold)"
+    }), "\u5F85\u590D\u4E60")), /*#__PURE__*/React.createElement("div", {
       style: {
         display: 'flex',
         gap: 5,
         marginTop: 4
       }
-    }, n.tags.map(t => /*#__PURE__*/React.createElement("span", {
+    }, (n.tags || []).map(t => /*#__PURE__*/React.createElement("span", {
       key: t,
       style: {
         fontSize: 10.5,
@@ -3844,26 +17360,39 @@ function ListView({
         width: 38
       }
     }, sl.t)), /*#__PURE__*/React.createElement("span", {
+      onClick: e => {
+        e.stopPropagation();
+        onOpenCon && onOpenCon(n.con);
+      },
+      title: "\u5728\u661F\u56FE\u4E2D\u805A\u7126\u8BE5\u661F\u57DF",
       style: {
         display: 'inline-flex',
         alignItems: 'center',
         gap: 7,
         fontSize: 12.5,
-        color: 'var(--text-2)'
+        color: 'var(--text-2)',
+        minWidth: 0
       }
     }, /*#__PURE__*/React.createElement("span", {
       style: {
+        flex: 'none',
         width: 7,
         height: 7,
         borderRadius: '50%',
         background: D.conColor(n.con),
         boxShadow: `0 0 6px ${D.conColor(n.con)}`
       }
-    }), D.conName(n.con)), /*#__PURE__*/React.createElement("span", {
+    }), /*#__PURE__*/React.createElement("span", {
+      style: {
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis'
+      }
+    }, D.conName(n.con))), /*#__PURE__*/React.createElement("span", {
       style: {
         fontFamily: 'var(--font-mono)',
         fontSize: 12,
-        color: n.nextReview === '已逾期' ? 'var(--danger)' : 'var(--text-3)'
+        color: reviewColor(n.nextReview)
       }
     }, n.nextReview), /*#__PURE__*/React.createElement("span", {
       style: {
@@ -3878,13 +17407,1752 @@ function ListView({
       name: "link",
       size: 13,
       color: "currentColor"
-    }), n.links));
-  }))));
+    }), n.links), hov && /*#__PURE__*/React.createElement("div", {
+      onClick: e => e.stopPropagation(),
+      style: {
+        position: 'absolute',
+        right: 10,
+        top: '50%',
+        transform: 'translateY(-50%)',
+        display: 'flex',
+        alignItems: 'center',
+        gap: 2,
+        paddingLeft: 28,
+        background: 'linear-gradient(90deg, transparent 0%, var(--glass-bg-strong) 32%)',
+        borderRadius: 'var(--r-md)',
+        animation: 'sr-cardin var(--dur-fast) var(--ease-flight) both'
+      }
+    }, /*#__PURE__*/React.createElement(IconButton, {
+      name: "square-arrow-out-up-right",
+      size: "sm",
+      title: "\u6253\u5F00",
+      onClick: () => onOpen(n.id)
+    }), /*#__PURE__*/React.createElement(IconButton, {
+      name: "pen-line",
+      size: "sm",
+      title: "\u91CD\u547D\u540D",
+      onClick: () => startRename(n)
+    }), /*#__PURE__*/React.createElement(IconButton, {
+      name: emberRow ? 'flame' : 'brain',
+      size: "sm",
+      title: emberRow ? '重燃 · 再讲透一次' : '费曼内化',
+      onClick: () => onFeynman ? onFeynman(n.id) : onOpen(n.id)
+    }), /*#__PURE__*/React.createElement(IconButton, {
+      name: "repeat",
+      size: "sm",
+      title: "\u52A0\u5165\u590D\u4E60",
+      onClick: () => rowReview(n)
+    }), /*#__PURE__*/React.createElement(DangerIconButton, {
+      name: "trash-2",
+      title: "\u5220\u9664",
+      onClick: () => rowDelete(n)
+    })));
+  }))), dialog && /*#__PURE__*/React.createElement(ActionDialog, {
+    icon: dialog.icon,
+    accent: dialog.accent,
+    title: dialog.title,
+    confirmLabel: dialog.confirmLabel,
+    confirmDisabled: dialog.body === 'tag' ? !tagDraft.trim() : dialog.body === 'pickCon' ? !moveTarget : false,
+    onClose: () => {
+      setDialog(null);
+      setMoveTarget(null);
+    },
+    onYes: () => dialog.onYes(dialog.body === 'tag' ? tagDraft : dialog.body === 'pickCon' ? moveTarget : undefined)
+  }, dialog.body === 'review' && /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 13.5,
+      lineHeight: 1.7,
+      color: 'var(--text-2)'
+    }
+  }, "\u628A\u5DF2\u9009\u7684 ", /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: 'var(--gold)'
+    }
+  }, dialog.ids.length), " \u9897\u661F\u52A0\u5165\u590D\u4E60\u961F\u5217\uFF0C\u4E0B\u6B21\u590D\u4E60\u5C06\u63D0\u524D\u5230\u300C\u660E\u5929\u300D\u3002"), dialog.body === 'tag' && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 13,
+      color: 'var(--text-2)',
+      marginBottom: 10
+    }
+  }, "\u4E3A\u5DF2\u9009\u7684 ", dialog.ids.length, " \u9897\u661F\u6DFB\u52A0\u4E00\u4E2A\u6807\u7B7E\uFF1A"), /*#__PURE__*/React.createElement(Input, {
+    icon: "hash",
+    placeholder: "\u8F93\u5165\u6807\u7B7E\u540D\u2026",
+    size: "sm",
+    value: tagDraft,
+    onChange: e => setTagDraft(e && e.target ? e.target.value : e || '')
+  }), allTags.length > 0 && /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      gap: 6,
+      marginTop: 10
+    }
+  }, allTags.slice(0, 8).map(t => /*#__PURE__*/React.createElement(Tag, {
+    key: t,
+    onClick: () => setTagDraft(t)
+  }, "#", t)))), dialog.body === 'pickCon' && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 13,
+      color: 'var(--text-2)',
+      marginBottom: 10
+    }
+  }, "\u628A\u5DF2\u9009\u7684 ", dialog.ids.length, " \u9897\u661F\u79FB\u52A8\u5230\uFF1A"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 4
+    }
+  }, D.constellations.map(c => /*#__PURE__*/React.createElement(MenuRow, {
+    key: c.id,
+    active: moveTarget === c.id,
+    onClick: () => setMoveTarget(c.id)
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      width: 8,
+      height: 8,
+      borderRadius: '50%',
+      background: c.color,
+      boxShadow: `0 0 6px ${c.color}`
+    }
+  }), c.name, moveTarget === c.id && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", {
+    style: {
+      flex: 1
+    }
+  }), /*#__PURE__*/React.createElement(Icon, {
+    name: "check",
+    size: 14,
+    color: "var(--gold)"
+  }))))))), newStarOpen && /*#__PURE__*/React.createElement(ActionDialog, {
+    icon: "sparkles",
+    accent: "var(--gold)",
+    title: "\u5199\u4E0B\u7B2C\u4E00\u9897\u661F",
+    confirmLabel: "\u70B9\u4EAE",
+    confirmDisabled: !newStarDraft.trim(),
+    onClose: () => setNewStarOpen(false),
+    onYes: createFirstStar
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 13,
+      color: 'var(--text-2)',
+      marginBottom: 10
+    }
+  }, "\u7ED9\u5B83\u4E00\u4E2A\u540D\u5B57\u2014\u2014\u4E00\u4E2A\u6982\u5FF5\u3001\u4E00\u6761\u516C\u5F0F\u3001\u4E00\u4E2A\u6B64\u523B\u60F3\u7559\u4F4F\u7684\u5FF5\u5934\u3002"), /*#__PURE__*/React.createElement(Input, {
+    icon: "sparkles",
+    placeholder: "\u4F8B\u5982\u300C\u5085\u91CC\u53F6\u53D8\u6362\u300D\u2026",
+    size: "sm",
+    autoFocus: true,
+    value: newStarDraft,
+    onChange: e => setNewStarDraft(e && e.target ? e.target.value : e || ''),
+    onKeyDown: e => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        createFirstStar();
+      }
+    }
+  })), confirm && ConfirmDialog && /*#__PURE__*/React.createElement(ConfirmDialog, {
+    message: confirm.message,
+    confirmLabel: confirm.confirmLabel,
+    onYes: confirm.onYes,
+    onClose: () => setConfirm(null)
+  }), toast && /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'fixed',
+      bottom: 26,
+      left: '50%',
+      transform: 'translateX(-50%)',
+      zIndex: 130,
+      animation: 'sr-cardin var(--dur-base) var(--ease-flight) both'
+    }
+  }, /*#__PURE__*/React.createElement(GlassPanel, {
+    strong: true,
+    radius: "pill",
+    pad: "none",
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 9,
+      padding: '10px 18px'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "check",
+    size: 16,
+    color: "var(--gold)"
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 13.5,
+      color: 'var(--text-1)'
+    }
+  }, toast))));
+}
+
+// A trash/danger icon control with warm low-sat danger tint on hover.
+function DangerIconButton({
+  name,
+  title,
+  onClick
+}) {
+  const [h, setH] = React.useState(false);
+  return /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    "aria-label": title,
+    onClick: onClick,
+    onMouseEnter: () => setH(true),
+    onMouseLeave: () => setH(false),
+    style: {
+      width: 30,
+      height: 30,
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: 'var(--r-sm)',
+      border: '1px solid',
+      borderColor: h ? 'rgba(232,145,122,0.4)' : 'transparent',
+      background: h ? 'rgba(232,145,122,0.12)' : 'transparent',
+      cursor: 'pointer',
+      transition: 'all var(--dur-fast)'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: name,
+    size: 16,
+    color: h ? 'var(--danger)' : 'var(--text-3)'
+  }));
 }
 window.SRKit = Object.assign(window.SRKit || {}, {
   ListView
 });
 })(); } catch (e) { __ds_ns.__errors.push({ path: "ui_kits/stellar-raft/ListView.jsx", error: String((e && e.message) || e) }); }
+
+// ui_kits/stellar-raft/ReviewSession.jsx
+try { (() => {
+/* ReviewSession — 复习会话（间隔重复的核心闭环）。
+   从到期星里按到期先后取卡：先只呈现星名 + 所属星座（回忆阶段），空格 / 点「展开」
+   翻开笔记摘要与大纲（翻开阶段），随后三档自评：
+   忘了 (1/←) → D.reviewFail · 模糊 (2/↓) → D.reviewPartial · 记得 (3/→) → D.reviewSuccess。
+   评分立即持久化（reviewX 内部走 touchNote → SRNet 防抖落盘），并广播 sr-memory
+   让星图 / 鸟瞰 / 侧栏角标就地读回新亮度。Esc 退出；reduced-motion 下卡片瞬切。 */
+const {
+  GlassPanel,
+  Icon,
+  IconButton,
+  Button
+} = window.StellarRaftDesignSystem_2866af;
+const RS_HUD = {
+  fontSize: 10,
+  letterSpacing: 'var(--ls-hud)',
+  textTransform: 'uppercase',
+  color: 'var(--text-3)',
+  fontFamily: 'var(--font-mono)'
+};
+
+// 直接落在深色遮罩上的文字（HUD / 键位提示）：遮罩两个主题下都是深色，
+// 墨水必须用固定亮色，不能跟随主题（黎明的深藏青压在遮罩上约 1.26:1，不可读）。
+const RS_SCRIM_INK = 'var(--text-on-scrim, rgba(255,255,255,0.92))';
+const RS_SCRIM_INK_DIM = 'var(--text-on-scrim-dim, rgba(214,225,255,0.86))';
+const RS_HUD_SCRIM = {
+  ...RS_HUD,
+  color: RS_SCRIM_INK_DIM
+};
+
+// 系统 reduced-motion 或设置页关闭动效时，卡片不飞、直接瞬切
+const rsReduced = () => window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches || document.documentElement.dataset.motion === 'off';
+
+// 从笔记块里提炼一个克制的大纲：标题与前几条要点
+const rsOutline = star => (star.body || []).filter(b => ['h2', 'h3', 'bulleted', 'numbered'].includes(b.type) && b.text).slice(0, 5);
+function RSKbd({
+  children,
+  onScrim
+}) {
+  return /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontFamily: 'var(--font-mono)',
+      fontSize: 10,
+      lineHeight: 1,
+      color: onScrim ? RS_SCRIM_INK_DIM : 'var(--text-3)',
+      border: '1px solid ' + (onScrim ? 'rgba(208,220,255,0.28)' : 'var(--glass-border)'),
+      borderRadius: 5,
+      padding: '2px 5px',
+      flex: 'none'
+    }
+  }, children);
+}
+
+/* 认证态徽标：已点亮 = 金发丝 · 待重燃 = 暗金余烬（差异呈现，金色只属于点亮语义本身） */
+function RSCertChip({
+  ember
+}) {
+  return /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 10,
+      letterSpacing: '0.05em',
+      padding: '2px 8px',
+      borderRadius: 'var(--r-pill)',
+      border: '1px solid ' + (ember ? 'color-mix(in srgb, var(--gold) 30%, transparent)' : 'color-mix(in srgb, var(--gold) 45%, transparent)'),
+      color: ember ? 'color-mix(in srgb, var(--gold) 72%, var(--text-3))' : 'var(--gold)',
+      background: ember ? 'color-mix(in srgb, var(--gold) 6%, transparent)' : 'color-mix(in srgb, var(--gold) 8%, transparent)'
+    }
+  }, ember ? '待重燃' : '已点亮');
+}
+
+/* 三档自评按钮：忘了 / 模糊 / 记得 —— 玻璃底 + 发丝边，色彩各归其位 */
+function RSGrade({
+  label,
+  hint,
+  kbd,
+  keys,
+  icon,
+  color,
+  border,
+  onClick
+}) {
+  const [hover, setHover] = React.useState(false);
+  return /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    onClick: onClick,
+    "aria-keyshortcuts": keys,
+    className: "sr-focus-ring",
+    onMouseEnter: () => setHover(true),
+    onMouseLeave: () => setHover(false),
+    style: {
+      flex: 1,
+      minWidth: 0,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      gap: 7,
+      padding: '14px 10px 12px',
+      borderRadius: 'var(--r-md)',
+      cursor: 'pointer',
+      border: '1px solid ' + (hover ? border : 'var(--glass-border)'),
+      // hover 底色从主题墨水派生：深空≈原来的星蓝水洗，黎明下自动换成可感知的深色低透明
+      background: hover ? 'color-mix(in srgb, var(--star-blue) 10%, transparent)' : 'color-mix(in srgb, var(--star-blue) 4%, transparent)',
+      transition: 'background var(--dur-fast), border-color var(--dur-fast), transform var(--dur-fast)',
+      transform: hover ? 'translateY(-1px)' : 'none'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: icon,
+    size: 18,
+    color: color
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 13.5,
+      color: 'var(--text-1)'
+    }
+  }, label), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 10.5,
+      color: 'var(--text-3)',
+      lineHeight: 1.4
+    }
+  }, hint), /*#__PURE__*/React.createElement(RSKbd, null, kbd));
+}
+function ReviewSession({
+  onClose
+}) {
+  const D = window.SR_DATA;
+  const toast = window.StellarRaftDesignSystem_2866af.toast;
+  // 结束页「去重燃」复用费曼抽屉（渲染时取，脚本加载顺序无关）
+  const RelightDrawer = window.SRKit && window.SRKit.FeynmanDrawer;
+  // 进场时按真实时间重算一遍，再取到期队列的快照（按到期先后）
+  const queue = React.useMemo(() => {
+    D.refreshMemory();
+    return D.dueStars();
+  }, []);
+  const total = queue.length;
+  const [idx, setIdx] = React.useState(0);
+  const [revealed, setRevealed] = React.useState(false);
+  const [leaving, setLeaving] = React.useState(false);
+  const [stats, setStats] = React.useState({
+    ok: 0,
+    hazy: 0,
+    fail: 0
+  });
+  // 结束页「去重燃」：在会话之上就地打开费曼抽屉（重燃是恢复，出口留在结束页，不打断卡序）
+  const [relight, setRelight] = React.useState(null); // starId | null
+  const timers = React.useRef([]);
+  React.useEffect(() => () => timers.current.forEach(clearTimeout), []);
+  const done = total === 0 || idx >= total;
+  const star = done ? null : queue[idx];
+  // 当前卡的认证态：已点亮（差异呈现 + 熄灭警示）/ 待重燃（复习保温，重燃走费曼）
+  const starLit = !!(star && D.isLit && D.isLit(star));
+  const starEmber = !!(star && D.isEmber && D.isEmber(star));
+  // 结束页口径：本轮队列里此刻仍待重燃的星（含本轮被「忘了」讲灭的）——重燃成功即从这里消失
+  const emberLeft = done ? queue.filter(s => D.isEmber && D.isEmber(s)) : [];
+
+  // 焦点管理：会话即模态——进场移焦到舞台，退场还给原处
+  const stageRef = React.useRef(null);
+  React.useEffect(() => {
+    const prev = document.activeElement;
+    if (stageRef.current) stageRef.current.focus();
+    return () => {
+      if (prev && prev.focus) prev.focus();
+    };
+  }, []);
+  // 阶段切换（翻开 / 换卡）会卸载刚被点击的按钮，焦点若掉出对话框则收回舞台，
+  // 保证键盘与读屏的上下文始终留在会话之内
+  React.useEffect(() => {
+    const root = stageRef.current;
+    if (root && !root.contains(document.activeElement)) root.focus();
+  }, [revealed, idx, done]);
+  const grade = kind => {
+    if (!star || leaving) return;
+    if (kind === 'fail') {
+      const res = D.reviewFail(star.id);
+      // 已点亮星「忘了」：模型 ×0.55 并当场熄灭——冷色 toast，认证作废、待重燃
+      if (res && res.extinguished && toast) toast(`「${star.label}」已熄灭 · 待重燃`, {
+        icon: 'cloud-off'
+      });
+    } else if (kind === 'hazy') D.reviewPartial(star.id);else {
+      const res = D.reviewSuccess(star.id);
+      if (res) D.pushTimeline('review', star.id, '复习巩固', res.gained);
+      // 已点亮星「记得」走 2.2 档；待重燃星只回亮度，认证要靠费曼重燃
+      if (toast) toast(starLit ? `记得 · ${star.label} 点亮加固` : starEmber ? `记得 · ${star.label} 亮度回来了，重燃还差一次讲透` : `记得 · ${star.label} 重新亮起`, {
+        icon: 'check'
+      });
+    }
+    // 就地广播：星图 / 鸟瞰 / 侧栏角标立即读回新亮度（持久化已在 reviewX 内完成）
+    window.dispatchEvent(new CustomEvent('sr-memory'));
+    setStats(s => ({
+      ...s,
+      [kind === 'fail' ? 'fail' : kind === 'hazy' ? 'hazy' : 'ok']: s[kind === 'fail' ? 'fail' : kind === 'hazy' ? 'hazy' : 'ok'] + 1
+    }));
+    const next = () => {
+      setRevealed(false);
+      setLeaving(false);
+      setIdx(i => i + 1);
+    };
+    if (rsReduced()) next();else {
+      setLeaving(true);
+      timers.current.push(setTimeout(next, 340));
+    }
+  };
+
+  // 键盘：空格翻开 · 1/2/3 或 ←↓→ 评分 · Esc 退出（每次渲染重挂，闭包始终新鲜）
+  React.useEffect(() => {
+    const h = e => {
+      // 来源防护：别处已处理过的按键、或正在输入框 / 可编辑区里的敲击，一律不当作评分
+      if (e.defaultPrevented) return;
+      // 结束页的费曼抽屉（去重燃）开着时让位：抽屉自带 Esc / 焦点圈禁，会话按键全部休眠
+      if (relight) return;
+      const t = e.target;
+      if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+      // 焦点圈禁：会话是模态，Tab 只在对话框内部回绕（同 DS Modal 的做法）
+      if (e.key === 'Tab') {
+        const root = stageRef.current;
+        if (!root) return;
+        const list = Array.from(root.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'));
+        if (!list.length) {
+          e.preventDefault();
+          root.focus();
+          return;
+        }
+        const inside = root.contains(document.activeElement);
+        const i = list.indexOf(document.activeElement);
+        if (e.shiftKey && (i <= 0 || !inside)) {
+          e.preventDefault();
+          list[list.length - 1].focus();
+        } else if (!e.shiftKey && (i === list.length - 1 || !inside)) {
+          e.preventDefault();
+          list[0].focus();
+        }
+        return;
+      }
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        onClose();
+        return;
+      }
+      // 焦点在按钮上时把 Space / Enter 让给原生激活（Tab 到「退出会话」按 Space
+      // 应该退出，而不是被抢去翻卡）；只有焦点落在舞台 / 非交互区时才当快捷键
+      const onButton = !!(t && t.closest && t.closest('button, a[href], [role="button"]'));
+      if (done) {
+        if ((e.key === 'Enter' || e.key === ' ') && !onButton) {
+          e.preventDefault();
+          onClose();
+        }
+        return;
+      }
+      if (e.key === ' ') {
+        if (onButton) return;
+        e.preventDefault();
+        if (!revealed) setRevealed(true);
+        return;
+      }
+      if (!revealed) return;
+      if (e.key === '1' || e.key === 'ArrowLeft') {
+        e.preventDefault();
+        grade('fail');
+      } else if (e.key === '2' || e.key === 'ArrowDown') {
+        e.preventDefault();
+        grade('hazy');
+      } else if (e.key === '3' || e.key === 'ArrowRight') {
+        e.preventDefault();
+        grade('ok');
+      }
+    };
+    window.addEventListener('keydown', h);
+    return () => window.removeEventListener('keydown', h);
+  });
+  const reviewed = stats.ok + stats.hazy + stats.fail;
+  const progress = total ? Math.min(idx + (revealed ? 0.5 : 0), total) / total : 1;
+  return /*#__PURE__*/React.createElement("div", {
+    ref: stageRef,
+    tabIndex: -1,
+    role: "dialog",
+    "aria-modal": "true",
+    "aria-label": "\u590D\u4E60\u4F1A\u8BDD",
+    style: {
+      position: 'fixed',
+      inset: 0,
+      zIndex: 70,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      outline: 'none'
+    }
+  }, /*#__PURE__*/React.createElement("style", null, `
+        @keyframes sr-review-out { from { opacity: 1; transform: none; } to { opacity: 0; transform: translateY(-30px) scale(0.96); } }
+        @media (prefers-reduced-motion: reduce) { .sr-review-card { animation: none !important; } }
+      `), /*#__PURE__*/React.createElement("div", {
+    onClick: onClose,
+    "aria-hidden": "true",
+    style: {
+      position: 'absolute',
+      inset: 0,
+      background: 'rgba(3,4,12,0.66)',
+      WebkitBackdropFilter: 'blur(6px)',
+      backdropFilter: 'blur(6px)'
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'relative',
+      zIndex: 2,
+      width: 580,
+      maxWidth: 'calc(100vw - 48px)',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 14
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 12,
+      padding: '0 4px'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 7,
+      ...RS_HUD_SCRIM
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "repeat",
+    size: 13,
+    color: "#9fc6ff"
+  }), "REVIEW SESSION"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1,
+      height: 1,
+      background: 'rgba(208,220,255,0.22)',
+      position: 'relative',
+      overflow: 'hidden',
+      borderRadius: 1
+    },
+    "aria-hidden": "true"
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'absolute',
+      inset: 0,
+      width: `${progress * 100}%`,
+      background: '#9fc6ff',
+      opacity: 0.75,
+      transition: 'width var(--dur-base) var(--ease-flight)'
+    }
+  })), /*#__PURE__*/React.createElement("span", {
+    style: {
+      ...RS_HUD_SCRIM,
+      color: RS_SCRIM_INK
+    },
+    "aria-live": "polite"
+  }, done ? `${reviewed} / ${total}` : `${idx + 1} / ${total}`), /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'inline-flex',
+      borderRadius: 'var(--r-sm)',
+      background: 'var(--glass-bg)'
+    }
+  }, /*#__PURE__*/React.createElement(IconButton, {
+    name: "x",
+    title: "\u9000\u51FA\u4F1A\u8BDD (Esc)",
+    onClick: onClose
+  }))), total === 0 && /*#__PURE__*/React.createElement(GlassPanel, {
+    strong: true,
+    radius: "lg",
+    pad: "none",
+    style: {
+      padding: '46px 40px',
+      textAlign: 'center',
+      animation: 'sr-cardin var(--dur-base) var(--ease-flight) both'
+    },
+    className: "sr-review-card"
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "sparkles",
+    size: 22,
+    color: "var(--star-blue)"
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 19,
+      fontWeight: 300,
+      color: 'var(--text-1)',
+      marginTop: 14
+    }
+  }, "\u6CA1\u6709\u5230\u671F\u7684\u661F"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 13,
+      color: 'var(--text-3)',
+      marginTop: 8,
+      lineHeight: 1.7
+    }
+  }, "\u661F\u7A7A\u660E\u4EAE\uFF0C\u6B64\u523B\u65E0\u9700\u590D\u4E60\u3002\u4FDD\u6301\u8282\u594F\uFF0C\u6539\u5929\u518D\u6765\u3002"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 22
+    }
+  }, /*#__PURE__*/React.createElement(Button, {
+    variant: "secondary",
+    size: "md",
+    icon: "arrow-left",
+    onClick: onClose
+  }, "\u56DE\u5230\u661F\u7A7A"))), total > 0 && done && /*#__PURE__*/React.createElement(GlassPanel, {
+    strong: true,
+    radius: "lg",
+    pad: "none",
+    className: "sr-review-card",
+    style: {
+      padding: '42px 40px',
+      textAlign: 'center',
+      animation: 'sr-cardin var(--dur-base) var(--ease-flight) both'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "check",
+    size: 22,
+    color: "var(--star-blue)"
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 21,
+      fontWeight: 300,
+      color: 'var(--text-1)',
+      marginTop: 14,
+      textShadow: 'var(--text-glow-cool)'
+    }
+  }, "\u672C\u8F6E\u590D\u4E60\u7ED3\u675F"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontFamily: 'var(--font-mono)',
+      fontSize: 13.5,
+      color: 'var(--text-2)',
+      marginTop: 12
+    }
+  }, "\u590D\u4E60 ", reviewed, " \u9897 \xB7 \u8BB0\u5F97 ", stats.ok, " \u9897", stats.hazy > 0 ? ` · ${stats.hazy} 颗还有些模糊` : '', stats.fail > 0 ? ` · ${stats.fail} 颗还需回来` : ''), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12.5,
+      color: 'var(--text-3)',
+      marginTop: 10,
+      lineHeight: 1.7
+    }
+  }, stats.fail > 0 ? '暗下去的星已排回队列，它们会在合适的时候等你。' : '星光已经归位。'), emberLeft.length > 0 && /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 18,
+      paddingTop: 16,
+      borderTop: '1px solid var(--line)',
+      textAlign: 'left'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 7,
+      fontSize: 12.5,
+      lineHeight: 1.7,
+      color: 'var(--text-2)',
+      marginBottom: 10
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "flame",
+    size: 14,
+    color: "color-mix(in srgb, var(--gold) 60%, var(--text-3))"
+  }), "\u672C\u8F6E\u6709 ", emberLeft.length, " \u9897\u661F\u7184\u706D\u5F85\u91CD\u71C3\u2014\u2014\u628A\u5B83\u8BB2\u900F\uFF0C\u5149\u5C31\u4F1A\u56DE\u6765\u3002"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 6
+    }
+  }, emberLeft.map(s => /*#__PURE__*/React.createElement("div", {
+    key: s.id,
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 10,
+      padding: '7px 10px',
+      borderRadius: 'var(--r-md)',
+      border: '1px solid color-mix(in srgb, var(--gold) 16%, transparent)',
+      background: 'color-mix(in srgb, var(--gold) 4%, transparent)'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      width: 7,
+      height: 7,
+      borderRadius: '50%',
+      flex: 'none',
+      background: D.conColor(s.con),
+      boxShadow: `0 0 6px ${D.conColor(s.con)}`
+    },
+    "aria-hidden": "true"
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 13,
+      color: 'var(--text-1)',
+      flex: 1,
+      minWidth: 0,
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis'
+    }
+  }, s.label), /*#__PURE__*/React.createElement(Button, {
+    size: "sm",
+    icon: "flame",
+    onClick: () => setRelight(s.id)
+  }, "\u53BB\u91CD\u71C3"))))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 24,
+      display: 'flex',
+      justifyContent: 'center'
+    }
+  }, /*#__PURE__*/React.createElement(Button, {
+    variant: "primary",
+    size: "md",
+    icon: "orbit",
+    onClick: onClose
+  }, "\u56DE\u5230\u661F\u7A7A"))), star && /*#__PURE__*/React.createElement(GlassPanel, {
+    key: star.id,
+    strong: true,
+    radius: "lg",
+    pad: "none",
+    glow: true,
+    className: "sr-review-card",
+    style: {
+      padding: '34px 36px 26px',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 18,
+      animation: leaving ? 'sr-review-out 340ms var(--ease-flight) both' : 'sr-cardin var(--dur-base) var(--ease-flight) both'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      textAlign: 'center',
+      padding: revealed ? '4px 0 0' : '26px 0 8px',
+      transition: 'padding var(--dur-base) var(--ease-flight)'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 8,
+      fontSize: 11.5,
+      color: 'var(--text-3)'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 7
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      width: 7,
+      height: 7,
+      borderRadius: '50%',
+      background: D.conColor(star.con),
+      boxShadow: `0 0 8px ${D.conColor(star.con)}`
+    },
+    "aria-hidden": "true"
+  }), D.conName(star.con)), (starLit || starEmber) && /*#__PURE__*/React.createElement(RSCertChip, {
+    ember: starEmber
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: revealed ? 24 : 30,
+      fontWeight: 300,
+      color: 'var(--text-1)',
+      textShadow: 'var(--text-glow-cool)',
+      marginTop: 8,
+      transition: 'font-size var(--dur-base) var(--ease-flight)'
+    }
+  }, star.label), !revealed && /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 13,
+      color: 'var(--text-3)',
+      marginTop: 14,
+      lineHeight: 1.7
+    }
+  }, "\u5148\u5728\u5FC3\u91CC\u56DE\u5FC6\uFF1A\u8FD9\u9897\u661F\u8BB2\u4E86\u4EC0\u4E48\uFF1F")), !revealed && /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      justifyContent: 'center',
+      paddingBottom: 8
+    }
+  }, /*#__PURE__*/React.createElement(Button, {
+    variant: "secondary",
+    size: "md",
+    icon: "chevrons-down",
+    onClick: () => setRevealed(true),
+    "aria-keyshortcuts": "Space"
+  }, "\u5C55\u5F00\u7B14\u8BB0")), revealed && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      height: 1,
+      background: 'var(--line)'
+    },
+    "aria-hidden": "true"
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 13.5,
+      lineHeight: 1.8,
+      color: 'var(--text-2)'
+    }
+  }, star.summary), rsOutline(star).length > 0 && /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 7
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: RS_HUD
+  }, "\u5927\u7EB2"), rsOutline(star).map(b => /*#__PURE__*/React.createElement("div", {
+    key: b.id,
+    style: {
+      display: 'flex',
+      alignItems: 'baseline',
+      gap: 9
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      width: 4,
+      height: 4,
+      borderRadius: '50%',
+      flex: 'none',
+      background: 'var(--star-blue)',
+      opacity: 0.55,
+      transform: 'translateY(-2px)'
+    },
+    "aria-hidden": "true"
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 12.5,
+      color: ['h2', 'h3'].includes(b.type) ? 'var(--text-1)' : 'var(--text-3)',
+      lineHeight: 1.6,
+      minWidth: 0
+    }
+  }, b.text)))), starEmber && /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 7,
+      fontSize: 12,
+      lineHeight: 1.6,
+      color: 'var(--text-3)'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "flame",
+    size: 13,
+    color: "color-mix(in srgb, var(--gold) 60%, var(--text-3))"
+  }), "\u590D\u4E60\u80FD\u8BA9\u5B83\u4FDD\u6E29\u2014\u2014\u91CD\u65B0\u70B9\u4EAE\uFF0C\u8981\u518D\u8BB2\u900F\u4E00\u6B21\u3002"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      gap: 10,
+      marginTop: 4
+    },
+    role: "group",
+    "aria-label": "\u81EA\u8BC4\u8FD9\u9897\u661F\u8BB0\u5F97\u5982\u4F55"
+  }, /*#__PURE__*/React.createElement(RSGrade, {
+    label: "\u5FD8\u4E86",
+    hint: starLit ? '将熄灭 · 转待重燃' : '重新排回队列',
+    kbd: "1 / \u2190",
+    keys: "1 ArrowLeft",
+    icon: "cloud-off",
+    color: "var(--danger)",
+    border: "rgba(232,145,122,0.4)",
+    onClick: () => grade('fail')
+  }), /*#__PURE__*/React.createElement(RSGrade, {
+    label: "\u6A21\u7CCA",
+    hint: starLit ? '想起了大概 · 保持点亮' : '想起了大概',
+    kbd: "2 / \u2193",
+    keys: "2 ArrowDown",
+    icon: "haze",
+    color: "var(--star-blue-dim)",
+    border: "rgba(120,150,205,0.5)",
+    onClick: () => grade('hazy')
+  }), /*#__PURE__*/React.createElement(RSGrade, {
+    label: "\u8BB0\u5F97",
+    hint: starLit ? '点亮加固 · 间隔更长' : '星光如常',
+    kbd: "3 / \u2192",
+    keys: "3 ArrowRight",
+    icon: "check",
+    color: "var(--star-blue)",
+    border: "rgba(159,198,255,0.5)",
+    onClick: () => grade('ok')
+  })))), star && /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      gap: 14,
+      ...RS_HUD_SCRIM
+    },
+    "aria-hidden": "true"
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 6
+    }
+  }, /*#__PURE__*/React.createElement(RSKbd, {
+    onScrim: true
+  }, "\u7A7A\u683C"), "\u7FFB\u5F00"), /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 6
+    }
+  }, /*#__PURE__*/React.createElement(RSKbd, {
+    onScrim: true
+  }, "1 \xB7 2 \xB7 3"), "\u8BC4\u5206"), /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 6
+    }
+  }, /*#__PURE__*/React.createElement(RSKbd, {
+    onScrim: true
+  }, "Esc"), "\u9000\u51FA"))), relight && RelightDrawer && /*#__PURE__*/React.createElement(RelightDrawer, {
+    starId: relight,
+    onClose: () => setRelight(null)
+  }));
+}
+window.SRKit = Object.assign(window.SRKit || {}, {
+  ReviewSession
+});
+})(); } catch (e) { __ds_ns.__errors.push({ path: "ui_kits/stellar-raft/ReviewSession.jsx", error: String((e && e.message) || e) }); }
+
+// ui_kits/stellar-raft/Settings.jsx
+try { (() => {
+/* Settings — 用户设置覆盖层。居中玻璃 modal，左侧分区导航 + 右侧内容。
+   由左下角头像点击打开。Esc / 点遮罩关闭，保存有 toast 反馈，无浏览器原生弹窗。
+   props: { onClose, theme, onToggleTheme } */
+const {
+  Button,
+  GlassPanel,
+  Icon,
+  IconButton,
+  Input
+} = window.StellarRaftDesignSystem_2866af;
+
+/* 头像预设：渐变色块，semantic 内仍走冷蓝/暖金的克制色域 */
+const SR_AVATARS = [{
+  id: 'nebula',
+  grad: 'linear-gradient(140deg, #2a3566, #56689c)'
+}, {
+  id: 'dawn',
+  grad: 'linear-gradient(140deg, #8ea2cc, #b6c3dc)'
+}, {
+  id: 'gold',
+  grad: 'linear-gradient(140deg, #7a5a22, #ffd98a)'
+}, {
+  id: 'deep',
+  grad: 'linear-gradient(140deg, #11152e, #2a3566)'
+}, {
+  id: 'ice',
+  grad: 'linear-gradient(140deg, #3a4a7a, #9fc6ff)'
+}, {
+  id: 'ember',
+  grad: 'linear-gradient(140deg, #5a2e26, #e8917a)'
+}];
+
+// 只列真实存在的快捷键——这页是承诺，不是愿望清单
+const SR_SHORTCUTS = [{
+  keys: ['⌘', 'K'],
+  label: '全局搜索 · 跳转任意星或视图'
+}, {
+  keys: ['⌘', 'K'],
+  label: '编辑器内选中文字 · 添加链接'
+}, {
+  keys: ['⌘', 'F'],
+  label: '编辑器 · 笔记内查找 / 替换'
+}, {
+  keys: ['⌘', 'Z'],
+  label: '编辑器 · 撤销（加 ⇧ 重做）'
+}, {
+  keys: ['/'],
+  label: '编辑器内唤起块菜单'
+}, {
+  keys: ['⌥', '↑', '↓'],
+  label: '编辑器 · 上下移动当前块'
+}, {
+  keys: ['Tab'],
+  label: '编辑器 · 列表缩进（⇧Tab 减少）'
+}, {
+  keys: ['⌘', 'Enter'],
+  label: '收件箱 · 捕捉当前草稿'
+}, {
+  keys: ['Space'],
+  label: '复习会话 · 翻开卡片'
+}, {
+  keys: ['1', '2', '3'],
+  label: '复习会话 · 忘了 / 模糊 / 记得'
+}, {
+  keys: ['Esc'],
+  label: '关闭当前弹窗 / 抽屉'
+}];
+const SR_SET_NAV = [{
+  id: 'profile',
+  label: '个人资料',
+  icon: 'user'
+}, {
+  id: 'prefs',
+  label: '偏好',
+  icon: 'sliders-horizontal'
+}, {
+  id: 'review',
+  label: '复习提醒',
+  icon: 'bell'
+}, {
+  id: 'keys',
+  label: '快捷键',
+  icon: 'keyboard'
+}, {
+  id: 'account',
+  label: '账户',
+  icon: 'shield'
+}];
+
+/* 玻璃开关 */
+function SRToggle({
+  on,
+  onChange,
+  disabled
+}) {
+  return /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    disabled: disabled,
+    onClick: () => !disabled && onChange(!on),
+    style: {
+      width: 42,
+      height: 24,
+      flex: 'none',
+      borderRadius: 'var(--r-pill)',
+      position: 'relative',
+      border: '1px solid ' + (on ? 'rgba(255,217,138,0.5)' : 'var(--glass-border-strong)'),
+      background: on ? 'rgba(255,217,138,0.18)' : 'var(--input-bg, rgba(3,4,12,0.45))',
+      cursor: disabled ? 'not-allowed' : 'pointer',
+      opacity: disabled ? 0.45 : 1,
+      transition: 'background var(--dur-fast), border-color var(--dur-fast)',
+      padding: 0
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      position: 'absolute',
+      top: 2,
+      left: on ? 20 : 2,
+      width: 18,
+      height: 18,
+      borderRadius: '50%',
+      background: on ? 'var(--gold)' : 'var(--text-3)',
+      boxShadow: on ? '0 0 8px rgba(255,217,138,0.6)' : 'none',
+      transition: 'left var(--dur-base) var(--ease-flight), background var(--dur-fast)'
+    }
+  }));
+}
+
+/* 设置行：标题 + 说明 + 右侧控件 */
+function SRRow({
+  title,
+  hint,
+  children,
+  align
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: align || 'center',
+      justifyContent: 'space-between',
+      gap: 18,
+      padding: '13px 0',
+      borderBottom: '1px solid var(--line)'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      minWidth: 0
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 13.5,
+      color: 'var(--text-1)'
+    }
+  }, title), hint && /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11.5,
+      color: 'var(--text-3)',
+      marginTop: 3,
+      lineHeight: 1.55
+    }
+  }, hint)), /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 'none'
+    }
+  }, children));
+}
+function SRSectionTitle({
+  children
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 10,
+      letterSpacing: 'var(--ls-hud)',
+      textTransform: 'uppercase',
+      color: 'var(--text-3)',
+      fontFamily: 'var(--font-mono)',
+      marginBottom: 4
+    }
+  }, children);
+}
+
+/* 分段选择（如复习频率） */
+function SRSegment({
+  options,
+  value,
+  onChange
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'inline-flex',
+      background: 'var(--input-bg, rgba(3,4,12,0.45))',
+      border: '1px solid var(--line-strong)',
+      borderRadius: 'var(--r-pill)',
+      padding: 2
+    }
+  }, options.map(o => {
+    const on = o.value === value;
+    return /*#__PURE__*/React.createElement("button", {
+      key: o.value,
+      type: "button",
+      onClick: () => onChange(o.value),
+      style: {
+        height: 26,
+        padding: '0 14px',
+        borderRadius: 'var(--r-pill)',
+        border: 'none',
+        cursor: 'pointer',
+        fontSize: 12.5,
+        fontFamily: 'var(--font-sans)',
+        background: on ? 'rgba(159,198,255,0.16)' : 'transparent',
+        color: on ? 'var(--text-1)' : 'var(--text-3)',
+        transition: 'background var(--dur-fast), color var(--dur-fast)'
+      }
+    }, o.label);
+  }));
+}
+function Settings({
+  onClose,
+  theme,
+  onToggleTheme
+}) {
+  const dawn = theme === 'dawn';
+  const [tab, setTab] = React.useState('profile');
+  const [toast, setToast] = React.useState(null);
+  const toastTimer = React.useRef(null);
+
+  // 已保存的设置（本机浏览器）；昵称等身份信息以 D.account 为单一来源
+  const D = window.SR_DATA;
+  const saved = React.useMemo(() => {
+    try {
+      return JSON.parse(localStorage.getItem('sr.settings')) || {};
+    } catch (e) {
+      return {};
+    }
+  }, []);
+
+  // 个人资料
+  const [nickname, setNickname] = React.useState(() => saved.nickname || D.account.name);
+  const [avatar, setAvatar] = React.useState(() => saved.avatar || 'nebula');
+  const [bio, setBio] = React.useState(() => saved.bio != null ? saved.bio : '在深空里慢慢点亮自己的星。物理 / 数学 / 一点点哲学。');
+
+  // 偏好
+  const [motion, setMotion] = React.useState(() => saved.motion !== false);
+  const [twinkle, setTwinkle] = React.useState(() => saved.twinkle !== false);
+
+  // 复习提醒
+  const [remind, setRemind] = React.useState(() => saved.remind !== false);
+  const [freq, setFreq] = React.useState(() => saved.freq || 'daily');
+  const [remindTime, setRemindTime] = React.useState(() => saved.remindTime || '21:00');
+  const [dimNudge, setDimNudge] = React.useState(() => saved.dimNudge !== false);
+  const [confirm, setConfirm] = React.useState(null); // {message, confirmLabel, onYes}
+
+  // 模态焦点管理：移焦入内 · Tab 圈禁 · 关闭还原焦点；打开期间吞掉 ⌘K，
+  // 命令面板不再叠在设置之上（同 DS Modal / ReviewSession 的语义）
+  const modalRef = React.useRef(null);
+  (window.SRKit && window.SRKit.useModalFocus ? window.SRKit.useModalFocus : () => {})(modalRef, {
+    swallowCmdK: true
+  });
+  React.useEffect(() => {
+    const k = e => {
+      if (e.key === 'Escape') {
+        e.stopPropagation();
+        onClose();
+      }
+    };
+    document.addEventListener('keydown', k);
+    return () => {
+      document.removeEventListener('keydown', k);
+      if (toastTimer.current) clearTimeout(toastTimer.current);
+    };
+  }, [onClose]);
+  const flashToast = msg => {
+    setToast(msg);
+    if (toastTimer.current) clearTimeout(toastTimer.current);
+    toastTimer.current = setTimeout(() => setToast(null), 2400);
+  };
+  const avatarGrad = (SR_AVATARS.find(a => a.id === avatar) || SR_AVATARS[0]).grad;
+  const avatarLetter = nickname.trim()[0] || '星';
+  const save = () => {
+    const name = nickname.trim();
+    if (name) {
+      D.account.name = name;
+      D.account.avatar = name[0];
+    }
+    try {
+      localStorage.setItem('sr.settings', JSON.stringify({
+        nickname: name || D.account.name,
+        avatar,
+        bio,
+        motion,
+        twinkle,
+        remind,
+        freq,
+        remindTime,
+        dimNudge
+      }));
+    } catch (e) {}
+    // 动效偏好即刻生效（index.html 里有对应 CSS 钩子）
+    document.documentElement.dataset.motion = motion ? 'on' : 'off';
+    document.documentElement.dataset.twinkle = twinkle && motion ? 'on' : 'off';
+    flashToast('设置已保存 · 你的星空已更新');
+  };
+  const ink = dawn ? '#1a2238' : 'var(--text-1)';
+  return /*#__PURE__*/React.createElement("div", {
+    ref: modalRef,
+    onMouseDown: onClose,
+    onContextMenu: e => e.preventDefault(),
+    role: "dialog",
+    "aria-modal": "true",
+    "aria-label": "\u8BBE\u7F6E",
+    style: {
+      position: 'fixed',
+      inset: 0,
+      zIndex: 110,
+      background: 'rgba(3,4,12,0.55)',
+      backdropFilter: 'blur(4px)',
+      WebkitBackdropFilter: 'blur(4px)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: 20
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    onMouseDown: e => e.stopPropagation(),
+    style: {
+      width: 760,
+      maxWidth: '94vw',
+      height: 560,
+      maxHeight: '92vh',
+      animation: 'sr-cardin var(--dur-base) var(--ease-flight) both'
+    }
+  }, /*#__PURE__*/React.createElement(GlassPanel, {
+    strong: true,
+    radius: "lg",
+    pad: "none",
+    glow: true,
+    style: {
+      height: '100%',
+      overflow: 'hidden',
+      display: 'flex',
+      flexDirection: 'column'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      padding: '15px 18px',
+      borderBottom: '1px solid var(--line)',
+      flex: 'none'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 10
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "settings",
+    size: 18,
+    color: "var(--star-blue)"
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 15,
+      color: 'var(--text-1)',
+      fontWeight: 300,
+      letterSpacing: '0.02em'
+    }
+  }, "\u8BBE\u7F6E")), /*#__PURE__*/React.createElement(IconButton, {
+    name: "x",
+    title: "\u5173\u95ED",
+    onClick: onClose
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1,
+      minHeight: 0,
+      display: 'flex'
+    }
+  }, /*#__PURE__*/React.createElement("nav", {
+    style: {
+      width: 168,
+      flex: 'none',
+      borderRight: '1px solid var(--line)',
+      padding: '12px 10px',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 3,
+      overflow: 'auto'
+    }
+  }, SR_SET_NAV.map(n => {
+    const on = tab === n.id;
+    return /*#__PURE__*/React.createElement("button", {
+      key: n.id,
+      type: "button",
+      onClick: () => setTab(n.id),
+      style: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: 10,
+        height: 38,
+        padding: '0 11px',
+        width: '100%',
+        borderRadius: 'var(--r-sm)',
+        cursor: 'pointer',
+        textAlign: 'left',
+        border: '1px solid ' + (on ? 'var(--glass-border-strong)' : 'transparent'),
+        background: on ? 'rgba(159,198,255,0.08)' : 'transparent',
+        color: on ? 'var(--gold)' : 'var(--text-2)',
+        transition: 'background var(--dur-fast), color var(--dur-fast)'
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: n.icon,
+      size: 17,
+      color: "currentColor"
+    }), /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 13,
+        color: on ? 'var(--text-1)' : 'inherit'
+      }
+    }, n.label));
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1,
+      minWidth: 0,
+      overflow: 'auto',
+      padding: '20px 24px'
+    }
+  }, tab === 'profile' && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(SRSectionTitle, null, "\u5934\u50CF"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 16,
+      padding: '10px 0 16px',
+      borderBottom: '1px solid var(--line)'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      width: 56,
+      height: 56,
+      flex: 'none',
+      borderRadius: '50%',
+      background: avatarGrad,
+      border: '1px solid var(--glass-border-strong)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      fontSize: 22,
+      color: ink,
+      boxShadow: '0 0 18px rgba(159,198,255,0.18)'
+    }
+  }, avatarLetter), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      gap: 9
+    }
+  }, SR_AVATARS.map(a => {
+    const on = a.id === avatar;
+    return /*#__PURE__*/React.createElement("button", {
+      key: a.id,
+      type: "button",
+      onClick: () => setAvatar(a.id),
+      title: '头像 ' + a.id,
+      style: {
+        width: 34,
+        height: 34,
+        borderRadius: '50%',
+        cursor: 'pointer',
+        background: a.grad,
+        border: '2px solid ' + (on ? 'var(--gold)' : 'transparent'),
+        outline: on ? 'none' : '1px solid var(--glass-border)',
+        boxShadow: on ? '0 0 10px rgba(255,217,138,0.45)' : 'none',
+        transition: 'box-shadow var(--dur-fast), border-color var(--dur-fast)'
+      }
+    });
+  }))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      paddingTop: 16
+    }
+  }, /*#__PURE__*/React.createElement(SRSectionTitle, null, "\u6635\u79F0"), /*#__PURE__*/React.createElement(Input, {
+    value: nickname,
+    onChange: e => setNickname(e.target.value),
+    placeholder: "\u4F60\u7684\u540D\u5B57",
+    icon: "user"
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      paddingTop: 16
+    }
+  }, /*#__PURE__*/React.createElement(SRSectionTitle, null, "\u4E2A\u4EBA\u7B80\u4ECB"), /*#__PURE__*/React.createElement("textarea", {
+    value: bio,
+    onChange: e => setBio(e.target.value),
+    rows: 3,
+    placeholder: "\u7528\u4E00\u4E24\u53E5\u8BDD\u63CF\u8FF0\u4F60\u7684\u661F\u7A7A\u2026",
+    onContextMenu: e => e.stopPropagation(),
+    style: {
+      width: '100%',
+      boxSizing: 'border-box',
+      resize: 'vertical',
+      minHeight: 72,
+      background: 'var(--input-bg, rgba(3,4,12,0.45))',
+      border: '1px solid var(--glass-border-strong)',
+      borderRadius: 'var(--r-sm)',
+      color: 'var(--text-1)',
+      fontSize: 13.5,
+      lineHeight: 1.7,
+      padding: '10px 12px',
+      outline: 'none',
+      fontFamily: 'var(--font-sans)'
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11,
+      color: 'var(--text-3)',
+      marginTop: 6,
+      textAlign: 'right',
+      fontFamily: 'var(--font-mono)'
+    }
+  }, bio.length, " / 120"))), tab === 'prefs' && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(SRSectionTitle, null, "\u5916\u89C2"), /*#__PURE__*/React.createElement(SRRow, {
+    title: "\u4E3B\u9898",
+    hint: dawn ? '当前为「黎明」浅色 · 切回深空让星辰更亮' : '当前为「深空」暗场 · 知识是唯一的光'
+  }, /*#__PURE__*/React.createElement(SRSegment, {
+    value: dawn ? 'dawn' : 'space',
+    onChange: v => {
+      if (v === 'dawn' !== dawn) onToggleTheme();
+    },
+    options: [{
+      value: 'space',
+      label: '深空'
+    }, {
+      value: 'dawn',
+      label: '黎明'
+    }]
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      height: 10
+    }
+  }), /*#__PURE__*/React.createElement(SRSectionTitle, null, "\u52A8\u6548"), /*#__PURE__*/React.createElement(SRRow, {
+    title: "\u754C\u9762\u52A8\u6548",
+    hint: "\u661F\u8FB0\u547C\u5438\u3001\u5361\u7247\u6D6E\u8D77\u3001\u70B9\u4EAE\u65F6\u7684\u5149\u7206\u3002\u5173\u95ED\u540E\u754C\u9762\u66F4\u5B89\u9759\u3002"
+  }, /*#__PURE__*/React.createElement(SRToggle, {
+    on: motion,
+    onChange: setMotion
+  })), /*#__PURE__*/React.createElement(SRRow, {
+    title: "\u80CC\u666F\u661F\u70B9\u95EA\u70C1",
+    hint: "\u8FDC\u666F\u661F\u573A\u7684\u5FAE\u5F31\u660E\u706D\u3002"
+  }, /*#__PURE__*/React.createElement(SRToggle, {
+    on: twinkle,
+    onChange: setTwinkle,
+    disabled: !motion
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 14,
+      display: 'flex',
+      gap: 10,
+      padding: '12px 14px',
+      borderRadius: 'var(--r-md)',
+      background: 'rgba(159,198,255,0.05)',
+      border: '1px solid var(--line)'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "accessibility",
+    size: 16,
+    color: "var(--star-blue)"
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: 'var(--text-2)',
+      lineHeight: 1.7
+    }
+  }, "\u82E5\u7CFB\u7EDF\u5DF2\u5F00\u542F\u300C\u51CF\u5C11\u52A8\u6001\u6548\u679C\u300D(prefers-reduced-motion)\uFF0C\u661F\u56FE\u4F1A\u81EA\u52A8\u6536\u655B\u6240\u6709\u52A8\u753B\uFF1B\u4E0A\u9762\u7684\u5F00\u5173\u4FDD\u5B58\u540E\u7ACB\u5373\u751F\u6548\uFF0C\u53EF\u968F\u65F6\u624B\u52A8\u63A7\u5236\u3002"))), tab === 'review' && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(SRSectionTitle, null, "\u590D\u4E60\u63D0\u9192"), /*#__PURE__*/React.createElement(SRRow, {
+    title: "\u5F00\u542F\u63D0\u9192",
+    hint: "\u5230\u70B9\u63D0\u9192\u4F60\u56DE\u6765\u70B9\u4EAE\u6B63\u5728\u53D8\u6697\u7684\u661F\u3002"
+  }, /*#__PURE__*/React.createElement(SRToggle, {
+    on: remind,
+    onChange: setRemind
+  })), /*#__PURE__*/React.createElement(SRRow, {
+    title: "\u63D0\u9192\u9891\u7387"
+  }, /*#__PURE__*/React.createElement(SRSegment, {
+    value: freq,
+    onChange: setFreq,
+    options: [{
+      value: 'daily',
+      label: '每日'
+    }, {
+      value: 'weekly',
+      label: '每周'
+    }, {
+      value: 'smart',
+      label: '智能'
+    }]
+  })), /*#__PURE__*/React.createElement(SRRow, {
+    title: "\u63D0\u9192\u65F6\u95F4",
+    hint: "\u5B89\u9759\u7684\u65F6\u523B\uFF0C\u9002\u5408\u56DE\u671B\u4E00\u5929\u3002"
+  }, /*#__PURE__*/React.createElement("input", {
+    type: "time",
+    value: remindTime,
+    onChange: e => setRemindTime(e.target.value),
+    disabled: !remind,
+    style: {
+      height: 30,
+      padding: '0 10px',
+      borderRadius: 'var(--r-sm)',
+      outline: 'none',
+      background: 'var(--input-bg, rgba(3,4,12,0.45))',
+      border: '1px solid var(--glass-border-strong)',
+      color: 'var(--text-1)',
+      fontSize: 13,
+      fontFamily: 'var(--font-mono)',
+      opacity: remind ? 1 : 0.45,
+      colorScheme: 'dark'
+    }
+  })), /*#__PURE__*/React.createElement(SRRow, {
+    title: "\u661F\u57DF\u53D8\u6697\u63D0\u9192",
+    hint: "\u5F53\u4E00\u7247\u661F\u57DF\u957F\u671F\u65E0\u4EBA\u95EE\u6D25\u3001\u6574\u4F53\u53D8\u6697\u65F6\uFF0C\u8F7B\u8F7B\u63D0\u9192\u4F60\u3002",
+    align: "flex-start"
+  }, /*#__PURE__*/React.createElement(SRToggle, {
+    on: dimNudge,
+    onChange: setDimNudge
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 14,
+      fontSize: 11.5,
+      color: 'var(--text-3)',
+      lineHeight: 1.7
+    }
+  }, "\u63D0\u9192\u53EA\u5728\u4F60\u70B9\u4EAE\u8282\u594F\u653E\u7F13\u65F6\u51FA\u73B0\uFF0C\u4E0D\u4F1A\u50AC\u4FC3\u3002\u4F60\u7684\u661F\u7A7A\uFF0C\u7531\u4F60\u51B3\u5B9A\u4F55\u65F6\u56DE\u6765\u3002")), tab === 'keys' && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(SRSectionTitle, null, "\u5FEB\u6377\u952E\u4E00\u89C8"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 8
+    }
+  }, SR_SHORTCUTS.map((s, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      gap: 16,
+      padding: '11px 0',
+      borderBottom: '1px solid var(--line)'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 13,
+      color: 'var(--text-2)'
+    }
+  }, s.label), /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'flex',
+      gap: 5,
+      flex: 'none'
+    }
+  }, s.keys.map((k, j) => /*#__PURE__*/React.createElement("kbd", {
+    key: j,
+    style: {
+      fontFamily: 'var(--font-mono)',
+      fontSize: 11.5,
+      color: 'var(--text-1)',
+      minWidth: 22,
+      textAlign: 'center',
+      border: '1px solid var(--line-strong)',
+      borderRadius: 6,
+      padding: '3px 7px',
+      background: 'var(--input-bg, rgba(3,4,12,0.45))'
+    }
+  }, k))))))), tab === 'account' && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(SRSectionTitle, null, "\u8D26\u6237"), /*#__PURE__*/React.createElement(SRRow, {
+    title: "\u90AE\u7BB1"
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 13,
+      color: 'var(--text-2)',
+      fontFamily: 'var(--font-mono)'
+    }
+  }, D.account.email)), /*#__PURE__*/React.createElement(SRRow, {
+    title: "\u65B9\u6848"
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 6,
+      fontSize: 12.5,
+      color: 'var(--gold)',
+      border: '1px solid rgba(255,217,138,0.35)',
+      borderRadius: 'var(--r-pill)',
+      padding: '3px 11px',
+      background: 'rgba(255,217,138,0.1)'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "sparkles",
+    size: 13,
+    color: "var(--gold)"
+  }), D.account.plan)), /*#__PURE__*/React.createElement(SRRow, {
+    title: "\u52A0\u5165\u4E8E"
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 13,
+      color: 'var(--text-2)',
+      fontFamily: 'var(--font-mono)'
+    }
+  }, D.account.joined)), /*#__PURE__*/React.createElement(SRRow, {
+    title: "\u6211\u7684\u661F\u7A7A"
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 13,
+      color: 'var(--text-2)',
+      fontFamily: 'var(--font-mono)'
+    }
+  }, "\u5171 ", D.stars.length, " \u9897 \xB7 \u6B63\u53D1\u5149 ", D.stars.filter(s => s.strength >= 0.7).length, " \xB7 \u6B63\u53D8\u6697 ", D.stars.filter(s => s.strength < 0.4).length, " \xB7 \u8FDE\u63A5 ", D.connections.length)), /*#__PURE__*/React.createElement(SRRow, {
+    title: "\u8FDE\u7EED\u70B9\u4EAE"
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 13,
+      color: 'var(--text-2)',
+      fontFamily: 'var(--font-mono)'
+    }
+  }, D.account.streak, " \u5929")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      gap: 10,
+      marginTop: 18
+    }
+  }, /*#__PURE__*/React.createElement(Button, {
+    size: "sm",
+    variant: "ghost",
+    icon: "download",
+    onClick: () => {
+      const snap = window.SRNet && window.SRNet.snapshot();
+      if (!snap) {
+        flashToast('导出失败 · 数据尚未就绪');
+        return;
+      }
+      const blob = new Blob([JSON.stringify(snap, null, 2)], {
+        type: 'application/json'
+      });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = '星图-我的星空.json';
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+      flashToast('已导出你的星图数据（JSON 文件）');
+    }
+  }, "\u5BFC\u51FA\u6570\u636E"), /*#__PURE__*/React.createElement(Button, {
+    size: "sm",
+    variant: "ghost",
+    icon: "log-out",
+    onClick: () => setConfirm({
+      message: '退出登录后，本设备上的星空将回到未登录状态。确定退出吗？',
+      confirmLabel: '退出登录',
+      onYes: () => flashToast('已退出当前设备')
+    })
+  }, "\u9000\u51FA\u767B\u5F55"))))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'flex-end',
+      gap: 10,
+      padding: '13px 18px',
+      borderTop: '1px solid var(--line)',
+      flex: 'none'
+    }
+  }, /*#__PURE__*/React.createElement(Button, {
+    size: "sm",
+    onClick: onClose
+  }, "\u53D6\u6D88"), /*#__PURE__*/React.createElement(Button, {
+    size: "sm",
+    variant: "primary",
+    icon: "check",
+    glow: true,
+    onClick: save
+  }, "\u4FDD\u5B58\u66F4\u6539")))), confirm && window.SRKit.ConfirmDialog && /*#__PURE__*/React.createElement(window.SRKit.ConfirmDialog, {
+    message: confirm.message,
+    confirmLabel: confirm.confirmLabel,
+    onYes: () => {
+      confirm.onYes();
+      setConfirm(null);
+    },
+    onClose: () => setConfirm(null)
+  }), toast && /*#__PURE__*/React.createElement("div", {
+    onMouseDown: e => e.stopPropagation(),
+    style: {
+      position: 'fixed',
+      bottom: 26,
+      left: '50%',
+      transform: 'translateX(-50%)',
+      zIndex: 130,
+      animation: 'sr-cardin var(--dur-base) var(--ease-flight) both'
+    }
+  }, /*#__PURE__*/React.createElement(GlassPanel, {
+    strong: true,
+    radius: "pill",
+    pad: "sm",
+    glow: true
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 9,
+      padding: '2px 8px'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "check",
+    size: 16,
+    color: "var(--gold)"
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 13.5,
+      color: 'var(--text-1)'
+    }
+  }, toast)))));
+}
+window.SRKit = Object.assign(window.SRKit || {}, {
+  Settings
+});
+})(); } catch (e) { __ds_ns.__errors.push({ path: "ui_kits/stellar-raft/Settings.jsx", error: String((e && e.message) || e) }); }
 
 // ui_kits/stellar-raft/Sidebar.jsx
 try { (() => {
@@ -4002,14 +19270,18 @@ function NavRow({
   badge,
   collapsed,
   onClick,
-  dawn
+  dawn,
+  tip
 }) {
   const [hover, setHover] = React.useState(false);
   const lit = active || hover;
   const idle = dawn ? 'rgba(22,30,56,0.82)' : 'rgba(159,198,255,0.72)';
   return /*#__PURE__*/React.createElement("button", {
     type: "button",
+    className: "sr-focus-ring",
     onClick: onClick,
+    "data-tip": collapsed ? label : undefined,
+    title: collapsed ? undefined : tip,
     onMouseEnter: () => setHover(true),
     onMouseLeave: () => setHover(false),
     style: {
@@ -4053,6 +19325,78 @@ function NavRow({
     tone: "gold"
   })));
 }
+
+/* footer user chip — opens personal settings on click */
+function UserChip({
+  collapsed,
+  dawn,
+  onClick
+}) {
+  const [hover, setHover] = React.useState(false);
+  return /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    className: "sr-focus-ring",
+    onClick: onClick,
+    title: "\u4E2A\u4EBA\u8BBE\u7F6E",
+    onMouseEnter: () => setHover(true),
+    onMouseLeave: () => setHover(false),
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 10,
+      width: '100%',
+      padding: collapsed ? 0 : '6px 8px',
+      justifyContent: collapsed ? 'center' : 'flex-start',
+      marginTop: 2,
+      cursor: 'pointer',
+      borderRadius: 'var(--r-sm)',
+      border: '1px solid transparent',
+      borderColor: hover ? 'var(--glass-border-strong)' : 'transparent',
+      background: hover ? 'rgba(159,198,255,0.05)' : 'transparent',
+      transition: 'background var(--dur-fast), border-color var(--dur-fast)'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      width: 28,
+      height: 28,
+      flex: 'none',
+      borderRadius: '50%',
+      background: dawn ? 'linear-gradient(140deg, #8ea2cc, #b6c3dc)' : 'linear-gradient(140deg, #2a3566, #56689c)',
+      border: '1px solid var(--glass-border-strong)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      fontSize: 12,
+      color: dawn ? '#1a2238' : 'var(--text-1)'
+    }
+  }, window.SR_DATA.account.avatar), !collapsed && /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      lineHeight: 1.2,
+      minWidth: 0,
+      textAlign: 'left'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 13,
+      color: 'var(--text-1)'
+    }
+  }, window.SR_DATA.account.name), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 11,
+      color: 'var(--text-3)'
+    }
+  }, "\u8FDE\u7EED\u70B9\u4EAE ", window.SR_DATA.account.streak, " \u5929")), !collapsed && /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1
+    }
+  }), !collapsed && /*#__PURE__*/React.createElement(Icon, {
+    name: "settings",
+    size: 15,
+    color: hover ? 'var(--text-1)' : 'var(--text-3)'
+  }));
+}
 function Sidebar({
   collapsed,
   onToggle,
@@ -4061,10 +19405,48 @@ function Sidebar({
   focus,
   onFocus,
   theme,
-  onToggleTheme
+  onToggleTheme,
+  onSearch,
+  onCheckup,
+  onAIConfig,
+  onOpenSettings,
+  onReview
 }) {
   const D = window.SR_DATA;
   const dawn = theme === 'dawn';
+  // 好友数 / 到期星数 / 黑洞·收件箱计数都随写操作变化：
+  // sr-friends（好友异步取回）、sr-memory（每分钟心跳）之外，
+  // 写操作（删除/恢复/建星）即时广播 sr-data——角标不再等心跳才对齐
+  const [, srTick] = React.useReducer(x => x + 1, 0);
+  React.useEffect(() => {
+    window.addEventListener('sr-friends', srTick);
+    window.addEventListener('sr-memory', srTick);
+    window.addEventListener('sr-data', srTick);
+    return () => {
+      window.removeEventListener('sr-friends', srTick);
+      window.removeEventListener('sr-memory', srTick);
+      window.removeEventListener('sr-data', srTick);
+    };
+  }, []);
+  // 「去造访」接线：收件箱的星系邀请广播 sr-visit-code，这里代跳星际漫游。
+  // 密文已放进 sessionStorage（sr.visit.code），VisitView 挂载/收到事件时读取并预填。
+  const onViewRef = React.useRef(onView);
+  onViewRef.current = onView;
+  React.useEffect(() => {
+    const h = () => {
+      if (onViewRef.current) onViewRef.current('visit');
+    };
+    window.addEventListener('sr-visit-code', h);
+    return () => window.removeEventListener('sr-visit-code', h);
+  }, []);
+  // 复习入口的 live 计数（样式同收件箱 / 黑洞的角标）；dueStars 口径不变
+  const dueN = D.dueStars ? D.dueStars().length : 0;
+  // 收件箱角标口径 = 本地捕捉 + 未领取来信（tooltip 写明白，两处计数不再各说各话）
+  const mailN = D.unclaimedMail ? D.unclaimedMail() : 0;
+  const inboxN = D.inbox.length + mailN;
+  // 体检 = 统一今日待办：到期复习 + 待重燃 + 收件箱待整理（三行计数，due 与 ember 可重叠）
+  const todo = D.todayTodo ? D.todayTodo() : null;
+  const todoN = todo ? todo.due + todo.ember + todo.inbox : 0;
   return /*#__PURE__*/React.createElement("aside", {
     style: {
       width: collapsed ? 64 : 260,
@@ -4084,7 +19466,6 @@ function Sidebar({
     style: {
       display: 'flex',
       alignItems: 'center',
-      justifyContent: 'space-between',
       height: 60,
       padding: collapsed ? '0' : '0 14px',
       flex: 'none',
@@ -4114,13 +19495,36 @@ function Sidebar({
     }
   }, collapsed ? /*#__PURE__*/React.createElement(IconButton, {
     name: "search",
-    title: "\u641C\u7D22"
-  }) : /*#__PURE__*/React.createElement(Input, {
+    title: "\u641C\u7D22 \u2318K",
+    onClick: onSearch
+  }) :
+  /*#__PURE__*/
+  /* 搜索入口：点击 / Enter / 直接开始输入 都打开命令面板。
+     readOnly 让它保持可 Tab 聚焦（Input 自带聚焦发光），
+     但不再吞字——键盘用户不会把「量子」打进一个死输入框 */
+  React.createElement("div", {
+    style: {
+      cursor: 'pointer'
+    },
+    onClick: onSearch
+  }, /*#__PURE__*/React.createElement(Input, {
     icon: "search",
     placeholder: "\u641C\u7D22\u4F60\u7684\u661F\u7A7A\u2026",
     kbd: "\u2318K",
-    size: "sm"
-  })), /*#__PURE__*/React.createElement("nav", {
+    size: "sm",
+    readOnly: true,
+    value: "",
+    "aria-label": "\u641C\u7D22\u4F60\u7684\u661F\u7A7A\uFF08\u6253\u5F00\u547D\u4EE4\u9762\u677F\uFF09",
+    inputStyle: {
+      cursor: 'pointer'
+    },
+    onKeyDown: e => {
+      if (e.key === 'Enter' || e.key === ' ' || e.key.length === 1 && !e.metaKey && !e.ctrlKey && !e.altKey) {
+        e.preventDefault();
+        onSearch();
+      }
+    }
+  }))), /*#__PURE__*/React.createElement("nav", {
     style: {
       padding: collapsed ? '6px 8px' : '6px 12px',
       display: 'flex',
@@ -4156,13 +19560,38 @@ function Sidebar({
       margin: '8px 4px'
     }
   }), /*#__PURE__*/React.createElement(NavRow, {
+    icon: "repeat",
+    label: "\u590D\u4E60",
+    badge: dueN || null,
+    collapsed: collapsed,
+    dawn: dawn,
+    onClick: onReview,
+    active: false
+  }), /*#__PURE__*/React.createElement(NavRow, {
     icon: "inbox",
     label: "\u6536\u4EF6\u7BB1",
-    badge: 7,
+    badge: inboxN || null,
+    tip: `本地捕捉 ${D.inbox.length} 条 + 未领取来信 ${mailN} 封`,
     collapsed: collapsed,
     dawn: dawn,
     onClick: () => onView('inbox'),
     active: view === 'inbox'
+  }), /*#__PURE__*/React.createElement(NavRow, {
+    icon: "aperture",
+    label: "\u9ED1\u6D1E",
+    badge: D.trash.length || null,
+    collapsed: collapsed,
+    dawn: dawn,
+    onClick: () => onView('blackhole'),
+    active: view === 'blackhole'
+  }), /*#__PURE__*/React.createElement(NavRow, {
+    icon: "telescope",
+    label: "\u661F\u9645\u6F2B\u6E38",
+    badge: D.social && D.social.friends || null,
+    collapsed: collapsed,
+    dawn: dawn,
+    onClick: () => onView('visit'),
+    active: view === 'visit'
   })), !collapsed && /*#__PURE__*/React.createElement("div", {
     style: {
       flex: 1,
@@ -4179,7 +19608,7 @@ function Sidebar({
       padding: '0 6px 8px',
       fontFamily: 'var(--font-mono)'
     }
-  }, "\u6211\u7684\u661F\u5EA7"), /*#__PURE__*/React.createElement("div", {
+  }, "\u6211\u7684\u661F\u57DF"), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       flexDirection: 'column',
@@ -4214,50 +19643,22 @@ function Sidebar({
   }), /*#__PURE__*/React.createElement(NavRow, {
     icon: "activity",
     label: "\u77E5\u8BC6\u4F53\u68C0\u62A5\u544A",
+    badge: todoN || null,
     collapsed: collapsed,
     dawn: dawn,
-    onClick: () => {}
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: 10,
-      padding: collapsed ? 0 : '6px 8px',
-      justifyContent: collapsed ? 'center' : 'flex-start',
-      marginTop: 2
-    }
-  }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      width: 28,
-      height: 28,
-      flex: 'none',
-      borderRadius: '50%',
-      background: dawn ? 'linear-gradient(140deg, #8ea2cc, #b6c3dc)' : 'linear-gradient(140deg, #2a3566, #56689c)',
-      border: '1px solid var(--glass-border-strong)',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      fontSize: 12,
-      color: dawn ? '#1a2238' : 'var(--text-1)'
-    }
-  }, "\u6797"), !collapsed && /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      flexDirection: 'column',
-      lineHeight: 1.2,
-      minWidth: 0
-    }
-  }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 13,
-      color: 'var(--text-1)'
-    }
-  }, "\u6797\u6DF1"), /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 11,
-      color: 'var(--text-3)'
-    }
-  }, "\u8FDE\u7EED\u70B9\u4EAE 14 \u5929")))));
+    active: view === 'checkup',
+    onClick: onCheckup
+  }), /*#__PURE__*/React.createElement(NavRow, {
+    icon: "bot",
+    label: "AI \u914D\u7F6E",
+    collapsed: collapsed,
+    dawn: dawn,
+    onClick: onAIConfig
+  }), /*#__PURE__*/React.createElement(UserChip, {
+    collapsed: collapsed,
+    dawn: dawn,
+    onClick: onOpenSettings
+  })));
 }
 window.SRKit = Object.assign(window.SRKit || {}, {
   Sidebar
@@ -4266,9 +19667,13 @@ window.SRKit = Object.assign(window.SRKit || {}, {
 
 // ui_kits/stellar-raft/StarMap.jsx
 try { (() => {
-/* StarMap — infinite pannable/zoomable creation canvas.
-   · Drag empty space to pan · wheel to zoom (toward cursor) · drag a star to move it
-   · Right-click empty space → create a 星域 (constellation) or a knowledge star
+/* StarMap — infinite pannable/zoomable creation canvas. Domains group stars:
+   · 星域 (constellation) groups its knowledge stars. Right-click empty space → create a 星域.
+   · 知识星 (note) lives INSIDE a 星域. You can only create one within a domain's
+     halo — right-click inside a domain (or click its name) → 新建知识星. Outside any
+     domain you can only create a 星域.
+   · A domain's halo glows in its own color; once its stars are well-remembered
+     (lit) the halo turns gold.
    Stars, connections and domain halos live in a transformed world layer;
    HUD / tool capsule / cards stay screen-fixed. */
 const {
@@ -4277,14 +19682,71 @@ const {
   IconButton,
   Icon,
   Button,
-  MemoryBar
+  MemoryBar,
+  toast
 } = window.StellarRaftDesignSystem_2866af;
+
+/* 数据写操作后广播：侧栏角标（黑洞/复习）监听 sr-data 即时刷新，不等每分钟心跳 */
+const emitData = () => window.dispatchEvent(new Event('sr-data'));
 const WORLD = {
   w: 1680,
   h: 1040
 };
-const NEW_COLORS = ['#ffd98a', '#9fc6ff', '#bcd0ff', '#7896cd'];
+// New domains start in a COLD (un-lit) color; they warm to gold as their stars are remembered.
+const NEW_COLORS = ['#9fc6ff', '#bcd0ff', '#7896cd', '#8ea2cc'];
+const LIT_GOLD = '#ffd98a';
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+
+// Geometry of a domain in world px: centroid of its stars + a radius that wraps them.
+function domainGeom(con, stars) {
+  const members = stars.filter(s => s.con === con.id);
+  if (members.length) {
+    const cx = members.reduce((a, s) => a + s.wx, 0) / members.length;
+    let cy = members.reduce((a, s) => a + s.wy, 0) / members.length;
+    // 单星星域：质心与唯一成员重合，主星会压住知识星让它无法点击——主星上移让位
+    if (members.length === 1) cy -= 96;
+    const r = Math.max(150, ...members.map(s => Math.hypot(s.wx - cx, s.wy - cy))) + 96;
+    return {
+      cx,
+      cy,
+      r,
+      members: members.length
+    };
+  }
+  return {
+    cx: con.wx,
+    cy: con.wy,
+    r: 170,
+    members: 0
+  };
+}
+// 认证维度（与亮度四档正交）：本地 star 拷贝与数据层共享同一 sr 引用，可直接判定
+const litOf = s => {
+  const D = window.SR_DATA;
+  return !!(D && D.isLit && D.isLit(s));
+};
+const emberOf = s => {
+  const D = window.SR_DATA;
+  return !!(D && D.isEmber && D.isEmber(s));
+};
+// 星域点亮统计 + 光环转金判据：litRatio ≥ 0.5 ∧ health ≥ 0.5
+//（过半点亮 · 星域转暖；health 下限防止全员熄灭却仍挂金）
+function domainStats(con, stars) {
+  const members = stars.filter(s => s.con === con.id);
+  const n = members.length;
+  const health = n ? members.reduce((a, s) => a + s.strength, 0) / n : 0;
+  const lit = members.filter(litOf).length;
+  return {
+    n,
+    health,
+    lit,
+    gold: n > 0 && lit / n >= 0.5 && health >= 0.5
+  };
+}
+// Halo color: a domain's own color, or gold once half its stars are certified-lit.
+function domainColor(con, stars) {
+  return domainStats(con, stars).gold ? LIT_GOLD : con.color;
+}
 function HudStat({
   label,
   value,
@@ -4300,10 +19762,10 @@ function HudStat({
   }, /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: 'var(--font-mono)',
-      fontSize: 9.5,
+      fontSize: 'var(--t-xs)',
       letterSpacing: 'var(--ls-hud)',
       textTransform: 'uppercase',
-      color: 'var(--text-3)'
+      color: 'var(--text-2)'
     }
   }, label), /*#__PURE__*/React.createElement("span", {
     style: {
@@ -4313,49 +19775,109 @@ function HudStat({
     }
   }, value));
 }
-function CapBtn({
-  icon,
-  label,
-  onClick
-}) {
-  const [h, setH] = React.useState(false);
-  return /*#__PURE__*/React.createElement("button", {
-    type: "button",
-    onClick: onClick,
-    onMouseEnter: () => setH(true),
-    onMouseLeave: () => setH(false),
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: 7,
-      height: 34,
-      padding: '0 14px',
-      borderRadius: 'var(--r-pill)',
-      background: h ? 'rgba(159,198,255,0.08)' : 'transparent',
-      border: 'none',
-      cursor: 'pointer',
-      color: h ? 'var(--gold)' : 'var(--text-2)',
-      transition: 'color var(--dur-fast), background var(--dur-fast)'
-    }
-  }, /*#__PURE__*/React.createElement(Icon, {
-    name: icon,
-    size: 18,
-    color: "currentColor"
-  }), /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 13,
-      color: h ? 'var(--text-1)' : 'var(--text-2)'
-    }
-  }, label));
-}
 
-/* connections drawn in world px (uses live star positions) */
+/* connections, in world px — star-shaped around each domain's sun:
+   · every knowledge star links to its domain's sun (intra, blue)
+   · suns link to suns across domains that share a 融会贯通 link (cross, gold) */
 function Connections({
   stars,
-  dim
+  cons,
+  dim,
+  k,
+  vis
 }) {
   const D = window.SR_DATA;
   const byId = React.useMemo(() => Object.fromEntries(stars.map(s => [s.id, s])), [stars]);
+  const suns = React.useMemo(() => {
+    const m = {};
+    cons.forEach(c => {
+      m[c.id] = domainGeom(c, stars);
+    });
+    return m;
+  }, [cons, stars]);
+  // domain↔domain pairs, derived from the cross links in the data.
+  // 融会贯通金弧的新口径：仅当某条 cross 连接的两端知识星都「已点亮」，
+  // 这对星域之间才亮金弧＋流光；否则退为无流光的冷色细弧（一端熄灭，金弧当场冷却）。
+  const crossPairs = React.useMemo(() => {
+    const seen = new Map(),
+      pairs = [];
+    D.connections.forEach(c => {
+      if (c.kind !== 'cross') return;
+      const A = byId[c.a],
+        B = byId[c.b];
+      if (!A || !B || A.con === B.con) return;
+      const key = [A.con, B.con].sort().join('|');
+      const gold = litOf(A) && litOf(B);
+      if (seen.has(key)) {
+        const p = seen.get(key);
+        p.gold = p.gold || gold;
+        return;
+      }
+      const p = {
+        a: A.con,
+        b: B.con,
+        gold
+      };
+      seen.set(key, p);
+      pairs.push(p);
+    });
+    return pairs;
+  }, [stars]);
+
+  /* LOD（几百颗星的边界）：星多时逐条模糊滤镜辉光 + 逐条流光动画是帧率杀手
+     （312 星 ≈ 900 条 path + 300 个 feGaussianBlur），也把深空糊成灰白乱麻。
+     dense 时改为单层描边（略调不透明度补辉光），流光只留给少数金色融会贯通弧；
+     远景（k 低）时星-主星连线整层隐去，只留星点 + 星域晕——亮度才是这一层的信息。 */
+  const dense = stars.length > 120;
+  const far = k < 0.55;
+  const drawIntra = !(dense && far);
+
+  // non-scaling-stroke keeps the lines a constant on-screen thickness at any zoom
+  const line = (key, d, gold, tip) => /*#__PURE__*/React.createElement("g", {
+    key: key,
+    style: tip ? {
+      pointerEvents: 'stroke'
+    } : undefined
+  }, tip && /*#__PURE__*/React.createElement("title", null, tip), !dense && /*#__PURE__*/React.createElement("path", {
+    d: d,
+    fill: "none",
+    vectorEffect: "non-scaling-stroke",
+    stroke: gold ? 'var(--gold)' : 'var(--star-blue)',
+    strokeWidth: gold ? 4 : 3,
+    opacity: gold ? 0.5 : 0.3,
+    filter: "url(#cglow)"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: d,
+    fill: "none",
+    vectorEffect: "non-scaling-stroke",
+    stroke: gold ? 'var(--gold)' : 'var(--star-blue)',
+    strokeWidth: gold ? 1.8 : 1.3,
+    opacity: dense && !gold ? 0.4 : 0.82
+  }), (gold || !dense) && /*#__PURE__*/React.createElement("path", {
+    d: d,
+    fill: "none",
+    vectorEffect: "non-scaling-stroke",
+    stroke: gold ? 'var(--flow-dash-gold, #fff4d6)' : 'var(--flow-dash-blue, #cfe0ff)',
+    strokeWidth: "1.4",
+    strokeDasharray: "3 7",
+    style: {
+      animation: `sr-flow ${gold ? 2.2 : 3}s linear infinite`
+    }
+  }));
+  // 未齐亮的跨星域连接：无流光的冷色细弧，静静等着两端点亮
+  const coldArc = (key, d, tip) => /*#__PURE__*/React.createElement("g", {
+    key: key,
+    style: {
+      pointerEvents: 'stroke'
+    }
+  }, /*#__PURE__*/React.createElement("title", null, tip), /*#__PURE__*/React.createElement("path", {
+    d: d,
+    fill: "none",
+    vectorEffect: "non-scaling-stroke",
+    stroke: "var(--star-blue)",
+    strokeWidth: "1.1",
+    opacity: "0.42"
+  }));
   return /*#__PURE__*/React.createElement("svg", {
     width: WORLD.w,
     height: WORLD.h,
@@ -4365,6 +19887,7 @@ function Connections({
       top: 0,
       zIndex: 1,
       pointerEvents: 'none',
+      overflow: 'visible',
       opacity: dim ? 0.22 : 1,
       transition: 'opacity var(--dur-base)'
     }
@@ -4376,60 +19899,39 @@ function Connections({
     height: "140%"
   }, /*#__PURE__*/React.createElement("feGaussianBlur", {
     stdDeviation: "2.4"
-  }))), D.connections.map((c, i) => {
-    const A = byId[c.a],
-      B = byId[c.b];
+  }))), drawIntra && stars.map((s, i) => {
+    const sun = suns[s.con];
+    if (!sun) return null;
+    // 视口外剔除：两端都在屏外的连线不画
+    if (vis && !vis(s.wx, s.wy) && !vis(sun.cx, sun.cy)) return null;
+    return line('i' + s.id, window.SRConnect(sun.cx, sun.cy, s.wx, s.wy, 0.1 + i % 3 * 0.03), false);
+  }), crossPairs.map(p => {
+    const A = suns[p.a],
+      B = suns[p.b];
     if (!A || !B) return null;
-    const d = window.SRConnect(A.wx, A.wy, B.wx, B.wy, 0.16 + i % 3 * 0.04);
-    const gold = c.kind === 'cross';
-    const col = gold ? 'var(--gold)' : 'var(--star-blue)';
-    return /*#__PURE__*/React.createElement("g", {
-      key: i
-    }, /*#__PURE__*/React.createElement("path", {
-      d: d,
-      fill: "none",
-      stroke: col,
-      strokeWidth: gold ? 2.6 : 1.8,
-      opacity: gold ? 0.5 : 0.32,
-      filter: "url(#cglow)"
-    }), /*#__PURE__*/React.createElement("path", {
-      d: d,
-      fill: "none",
-      stroke: col,
-      strokeWidth: gold ? 1.4 : 1,
-      opacity: 0.8
-    }), /*#__PURE__*/React.createElement("path", {
-      d: d,
-      fill: "none",
-      stroke: gold ? '#fff4d6' : '#cfe0ff',
-      strokeWidth: "1.5",
-      strokeDasharray: "2 9",
-      style: {
-        animation: `sr-flow ${gold ? 2.2 : 3}s linear infinite`
-      }
-    }));
+    const d = window.SRConnect(A.cx, A.cy, B.cx, B.cy, 0.16);
+    return p.gold ? line('c' + p.a + p.b, d, true, '融会贯通 · 两端已点亮') : coldArc('c' + p.a + p.b, d, '两端都点亮后，这条连接才是融会贯通的金弧。');
   }));
 }
 
-/* faint glowing domain halo + name behind each constellation cluster */
+/* faint glowing domain halo + clickable name behind each constellation cluster */
 function DomainHalos({
   stars,
   cons,
-  k
+  k,
+  onDomainDown,
+  onDomainKey
 }) {
   const nameOpacity = clamp(1.4 - k, 0.25, 1); // semantic zoom: names louder when far
   return /*#__PURE__*/React.createElement(React.Fragment, null, cons.map(c => {
-    const members = stars.filter(s => s.con === c.id);
-    let cx, cy, r;
-    if (members.length) {
-      cx = members.reduce((a, s) => a + s.wx, 0) / members.length;
-      cy = members.reduce((a, s) => a + s.wy, 0) / members.length;
-      r = Math.max(150, ...members.map(s => Math.hypot(s.wx - cx, s.wy - cy))) + 96;
-    } else {
-      cx = c.wx;
-      cy = c.wy;
-      r = 150;
-    }
+    const {
+      cx,
+      cy,
+      r
+    } = domainGeom(c, stars);
+    const st = domainStats(c, stars);
+    const col = st.gold ? LIT_GOLD : c.color;
+    const count = st.n;
     return /*#__PURE__*/React.createElement("div", {
       key: c.id
     }, /*#__PURE__*/React.createElement("div", {
@@ -4441,47 +19943,76 @@ function DomainHalos({
         height: r * 2,
         transform: 'translate(-50%,-50%)',
         borderRadius: '50%',
-        background: `radial-gradient(circle, ${c.color}1f 0%, ${c.color}0d 38%, transparent 68%)`,
-        border: `1px solid ${c.color}1c`,
+        background: `radial-gradient(circle, ${col}2b 0%, ${col}16 44%, transparent 72%)`,
+        border: `1.5px solid ${col}4a`,
+        boxShadow: `0 0 60px ${col}28, inset 0 0 80px ${col}1f`,
         pointerEvents: 'none'
       }
     }), /*#__PURE__*/React.createElement("div", {
+      onMouseDown: e => {
+        if (e.button === 0) {
+          e.stopPropagation();
+          onDomainDown(e, c);
+        }
+      },
+      role: "button",
+      tabIndex: 0,
+      className: "sr-focus-ring",
+      "aria-label": `星域「${c.name}」· ${count} 颗星 · 已点亮 ${st.lit} 颗 · 回车打开菜单`,
+      onKeyDown: e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          onDomainKey(c);
+        }
+      },
+      title: `星域「${c.name}」· 拖动可整体移动 · 点击新建知识星 · 右键更多`,
       style: {
         position: 'absolute',
         left: cx,
-        top: cy - r + 22,
-        transform: 'translate(-50%,-50%)',
+        top: cy,
+        transform: 'translate(-50%, calc(-50% + 14px))',
         display: 'flex',
+        flexDirection: 'column',
         alignItems: 'center',
-        gap: 8,
-        pointerEvents: 'none',
-        opacity: nameOpacity,
-        transition: 'opacity var(--dur-base)'
+        gap: 9,
+        cursor: 'grab',
+        zIndex: 3
       }
     }, /*#__PURE__*/React.createElement("span", {
+      className: "sr-breathe",
       style: {
-        width: 6,
-        height: 6,
+        width: 30,
+        height: 30,
         borderRadius: '50%',
-        background: c.color,
-        boxShadow: `0 0 8px ${c.color}`
+        flex: 'none',
+        background: 'radial-gradient(circle at 38% 34%, #fff6e0 0%, #ffd58a 32%, #ff9d52 64%, #e8623a 100%)',
+        boxShadow: '0 0 48px 9px rgba(255,128,60,0.5), 0 0 18px 3px rgba(255,196,120,0.85), inset 0 0 9px rgba(255,90,40,0.45)'
       }
     }), /*#__PURE__*/React.createElement("span", {
       style: {
-        fontSize: 15,
-        fontWeight: 300,
-        letterSpacing: '0.08em',
-        color: 'var(--text-1)',
-        textShadow: '0 1px 8px rgba(0,0,0,0.8)',
+        display: 'flex',
+        alignItems: 'center',
+        gap: 7,
+        opacity: nameOpacity,
+        transition: 'opacity var(--dur-base)',
         whiteSpace: 'nowrap'
       }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 15.5,
+        fontWeight: 400,
+        letterSpacing: '0.06em',
+        color: 'var(--sun-label, #ffe3b0)',
+        textShadow: 'var(--sun-label-glow, 0 0 12px rgba(255,150,70,0.55), 0 1px 8px rgba(0,0,0,0.85))'
+      }
     }, c.name), /*#__PURE__*/React.createElement("span", {
+      title: `已点亮 ${st.lit} / 共 ${count} 颗`,
       style: {
         fontFamily: 'var(--font-mono)',
         fontSize: 11,
-        color: 'var(--text-3)'
+        color: 'var(--sun-label-dim, rgba(255,200,140,0.62))'
       }
-    }, members.length)));
+    }, st.lit, "/", count))));
   }));
 }
 function SummaryCard({
@@ -4491,20 +20022,44 @@ function SummaryCard({
   onClose,
   screen
 }) {
+  const boxRef = React.useRef(null);
+  const [pos, setPos] = React.useState(null);
+  // 实测卡片尺寸后贴着星定位：优先星右侧，右边放不下翻到左侧；
+  // 垂直与星对齐后按实际高度钳进视口（此前用固定估高 300，星在屏幕下缘时
+  // 卡片会被顶到离星 250px 远，摘要一长还会溢出屏幕）
+  React.useLayoutEffect(() => {
+    if (!star || !screen) return;
+    const el = boxRef.current;
+    if (!el) return;
+    const w = el.offsetWidth,
+      h = el.offsetHeight,
+      pad = 12,
+      gap = 22;
+    let left = screen.x + gap;
+    if (left + w > window.innerWidth - pad) left = screen.x - w - gap;
+    left = clamp(left, pad, window.innerWidth - w - pad);
+    const top = clamp(screen.y - 40, 78, window.innerHeight - h - pad);
+    setPos({
+      left,
+      top
+    });
+  }, [star && star.id, screen && screen.x, screen && screen.y]);
   if (!star || !screen) return null;
   const D = window.SR_DATA;
-  const flip = screen.x > window.innerWidth - 320;
-  const left = flip ? screen.x - 280 : screen.x + 26;
-  const top = clamp(screen.y - 40, 78, window.innerHeight - 300);
+  // 认证态（点亮/待重燃）随状态就地自解释；重燃 = 待重燃星的费曼快速通道
+  const lit = litOf(star),
+    ember = emberOf(star);
   return /*#__PURE__*/React.createElement("div", {
+    ref: boxRef,
     onMouseDown: e => e.stopPropagation(),
     style: {
       position: 'fixed',
-      left,
-      top,
+      left: pos ? pos.left : screen.x,
+      top: pos ? pos.top : screen.y,
+      visibility: pos ? 'visible' : 'hidden',
       width: 260,
       zIndex: 28,
-      animation: 'sr-cardin var(--dur-base) var(--ease-flight) both'
+      animation: pos ? 'sr-cardin var(--dur-base) var(--ease-flight) both' : 'none'
     }
   }, /*#__PURE__*/React.createElement(GlassPanel, {
     strong: true,
@@ -4554,7 +20109,7 @@ function SummaryCard({
       color: 'var(--text-2)',
       marginBottom: 14
     }
-  }, "\u4EFB\u4F55\u5B9A\u57DF\u9690\u53D8\u91CF\u7406\u8BBA\u90FD\u65E0\u6CD5\u91CD\u73B0\u91CF\u5B50\u529B\u5B66\u7684\u5168\u90E8\u7EDF\u8BA1\u9884\u6D4B\u2014\u2014\u8FD9\u6B63\u662F\u7EA0\u7F20\u975E\u5B9A\u57DF\u6027\u7684\u5224\u636E\u3002"), /*#__PURE__*/React.createElement(MemoryBar, {
+  }, star.summary || '还没有摘要——打开编辑器，写下第一段。'), /*#__PURE__*/React.createElement(MemoryBar, {
     value: star.strength,
     label: "\u8BB0\u5FC6\u5F3A\u5EA6",
     showPct: true,
@@ -4562,19 +20117,40 @@ function SummaryCard({
   }), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
+      alignItems: 'flex-start',
+      gap: 7,
+      marginTop: 10,
+      fontSize: 11.5,
+      lineHeight: 1.6,
+      color: 'var(--text-3)'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    "aria-hidden": "true",
+    style: {
+      flex: 'none',
+      width: 9,
+      height: 9,
+      marginTop: 4,
+      borderRadius: '50%',
+      boxSizing: 'border-box',
+      border: lit ? '1px solid var(--gold)' : ember ? '1px solid color-mix(in srgb, var(--gold-warm) 55%, transparent)' : '1px solid var(--line-strong)'
+    }
+  }), /*#__PURE__*/React.createElement("span", null, lit ? '已点亮 · 讲清楚的东西，暗得更慢。' : ember ? '曾点亮的星暗了下来。再讲透一次，就能重燃。' : '讲清楚一次，这颗星才会真正点亮——点亮的星记得更久。')), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
       gap: 8,
-      marginTop: 16
+      marginTop: 14
     }
   }, /*#__PURE__*/React.createElement(Button, {
     variant: "primary",
     size: "sm",
-    icon: "zap",
+    icon: ember ? 'flame' : 'zap',
     glow: true,
     onClick: onFeynman,
     style: {
       flex: 1
     }
-  }, "\u8D39\u66FC\u5185\u5316"), /*#__PURE__*/React.createElement(Button, {
+  }, ember ? '重燃' : '费曼内化'), /*#__PURE__*/React.createElement(Button, {
     size: "sm",
     icon: "maximize-2",
     onClick: onOpen,
@@ -4584,76 +20160,111 @@ function SummaryCard({
   }, "\u6253\u5F00\u7F16\u8F91"))));
 }
 
-/* small right-click create menu */
-function CreateMenu({
+/* PopMenu — 星图两个右键菜单的共用基座，与 DS ContextMenu 同一套键盘词汇：
+   焦点移入菜单、↑↓/Home/End 移动、Enter/Space 选取、Esc 关闭、关闭后焦点还原；
+   任意按键不再误关菜单（此前 keydown 一律 onClose）。items:
+   { icon, label, tone?, hint?, disabled?, sep?, onClick } */
+function PopMenu({
   x,
   y,
-  onClose,
-  onDomain,
-  onStar
+  width = 228,
+  header,
+  footer,
+  items,
+  onClose
 }) {
+  const ref = React.useRef(null);
+  const prevFocus = React.useRef(null);
+  const [active, setActive] = React.useState(-1);
+  const enabled = items.map((it, i) => !it.sep && !it.disabled ? i : -1).filter(i => i >= 0);
+  const close = React.useCallback(() => {
+    onClose();
+    const p = prevFocus.current;
+    if (p && p.focus) p.focus();
+  }, [onClose]);
   React.useEffect(() => {
-    const h = () => onClose();
-    document.addEventListener('mousedown', h);
-    document.addEventListener('keydown', h);
-    return () => {
-      document.removeEventListener('mousedown', h);
-      document.removeEventListener('keydown', h);
+    prevFocus.current = document.activeElement;
+    if (ref.current) ref.current.focus();
+    const down = e => {
+      if (ref.current && !ref.current.contains(e.target)) close();
     };
-  }, []);
-  const Item = ({
-    icon,
-    label,
-    hint,
-    tone,
-    onClick
-  }) => {
-    const [h, setH] = React.useState(false);
-    return /*#__PURE__*/React.createElement("div", {
-      onMouseDown: e => {
-        e.stopPropagation();
-        onClick();
-      },
-      onMouseEnter: () => setH(true),
-      onMouseLeave: () => setH(false),
-      style: {
-        display: 'flex',
-        alignItems: 'center',
-        gap: 11,
-        padding: '8px 10px',
-        borderRadius: 'var(--r-sm)',
-        cursor: 'pointer',
-        background: h ? 'rgba(159,198,255,0.08)' : 'transparent'
-      }
-    }, /*#__PURE__*/React.createElement(Icon, {
-      name: icon,
-      size: 16,
-      color: tone || (h ? 'var(--gold)' : 'var(--text-2)')
-    }), /*#__PURE__*/React.createElement("span", {
-      style: {
-        flex: 1,
-        fontSize: 13,
-        color: h ? 'var(--text-1)' : 'var(--text-2)'
-      }
-    }, label), hint && /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontFamily: 'var(--font-mono)',
-        fontSize: 11,
-        color: 'var(--text-3)'
-      }
-    }, hint));
+    document.addEventListener('mousedown', down, true);
+    document.addEventListener('contextmenu', down, true);
+    return () => {
+      document.removeEventListener('mousedown', down, true);
+      document.removeEventListener('contextmenu', down, true);
+    };
+  }, [close]);
+  const pick = it => {
+    if (it.disabled) return;
+    close();
+    it.onClick();
   };
-  const left = Math.min(x, window.innerWidth - 220),
-    top = Math.min(y, window.innerHeight - 160);
+  const onKey = e => {
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      close();
+      return;
+    }
+    if (e.key === 'Tab') {
+      e.preventDefault();
+      return;
+    }
+    if (!enabled.length) return;
+    const cur = enabled.indexOf(active);
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setActive(enabled[(cur + 1) % enabled.length]);
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setActive(cur < 0 ? enabled[enabled.length - 1] : enabled[(cur - 1 + enabled.length) % enabled.length]);
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      setActive(enabled[0]);
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      setActive(enabled[enabled.length - 1]);
+    } else if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      const it = items[active];
+      if (it && !it.sep && !it.disabled) pick(it);
+    }
+  };
+  // 实测菜单尺寸后贴着光标定位：默认在点击点右下，右/下放不下就翻到左/上
+  // （此前用 items×34+64 估高做钳位，带 header/footer 时估不准会溢出视口）
+  const [pos, setPos] = React.useState(null);
+  React.useLayoutEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const w = el.offsetWidth,
+      h = el.offsetHeight,
+      pad = 12;
+    let left = x + 4,
+      top = y + 4;
+    if (left + w > window.innerWidth - pad) left = Math.max(pad, x - w - 4);
+    if (top + h > window.innerHeight - pad) top = Math.max(pad, y - h - 4);
+    setPos({
+      left,
+      top
+    });
+  }, [x, y, items.length]);
   return /*#__PURE__*/React.createElement("div", {
+    ref: ref,
+    role: "menu",
+    tabIndex: -1,
+    className: "sr-focus-ring",
+    onKeyDown: onKey,
+    onMouseDown: e => e.stopPropagation(),
+    onContextMenu: e => e.preventDefault(),
     style: {
       position: 'fixed',
-      left,
-      top,
-      width: 208,
-      zIndex: 60
-    },
-    onMouseDown: e => e.stopPropagation()
+      left: pos ? pos.left : x,
+      top: pos ? pos.top : y,
+      visibility: pos ? 'visible' : 'hidden',
+      width,
+      zIndex: 60,
+      outline: 'none'
+    }
   }, /*#__PURE__*/React.createElement(GlassPanel, {
     strong: true,
     radius: "md",
@@ -4662,25 +20273,168 @@ function CreateMenu({
     style: {
       padding: 6
     }
-  }, /*#__PURE__*/React.createElement("div", {
+  }, header && /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 10,
       letterSpacing: 'var(--ls-hud)',
       textTransform: 'uppercase',
       color: 'var(--text-3)',
       padding: '6px 10px 4px',
-      fontFamily: 'var(--font-mono)'
+      fontFamily: 'var(--font-mono)',
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis'
     }
-  }, "\u5728\u6B64\u521B\u5EFA"), /*#__PURE__*/React.createElement(Item, {
-    icon: "orbit",
-    label: "\u65B0\u5EFA\u661F\u57DF",
-    tone: "var(--gold)",
-    onClick: onDomain
-  }), /*#__PURE__*/React.createElement(Item, {
-    icon: "plus",
-    label: "\u65B0\u5EFA\u77E5\u8BC6\u661F",
-    onClick: onStar
-  })));
+  }, header), items.map((it, i) => it.sep ? /*#__PURE__*/React.createElement("div", {
+    key: 'sep' + i,
+    role: "separator",
+    style: {
+      height: 1,
+      background: 'var(--line)',
+      margin: '5px 6px'
+    }
+  }) : /*#__PURE__*/React.createElement("div", {
+    key: it.label,
+    role: "menuitem",
+    "aria-disabled": it.disabled || undefined,
+    onMouseEnter: () => {
+      if (!it.disabled) setActive(i);
+    },
+    onMouseLeave: () => setActive(a => a === i ? -1 : a),
+    onClick: () => pick(it),
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 11,
+      padding: '8px 10px',
+      borderRadius: 'var(--r-sm)',
+      cursor: it.disabled ? 'default' : 'pointer',
+      background: active === i && !it.disabled ? 'rgba(159,198,255,0.08)' : 'transparent',
+      opacity: it.disabled ? 0.5 : 1
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: it.icon,
+    size: 16,
+    color: it.tone || (active === i && !it.disabled ? 'var(--gold)' : 'var(--text-2)')
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      flex: 1,
+      fontSize: 13,
+      color: it.tone || (active === i && !it.disabled ? 'var(--text-1)' : 'var(--text-2)')
+    }
+  }, it.label), it.hint && /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontFamily: 'var(--font-mono)',
+      fontSize: 'var(--t-xs)',
+      color: 'var(--text-3)'
+    }
+  }, it.hint))), footer && /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 'var(--t-xs)',
+      color: 'var(--text-3)',
+      lineHeight: 1.5,
+      padding: '4px 10px 6px'
+    }
+  }, footer)));
+}
+
+/* in-canvas confirm dialog (no browser confirm/alert) */
+function ConfirmDialog({
+  message,
+  confirmLabel,
+  onYes,
+  onClose
+}) {
+  React.useEffect(() => {
+    const k = e => {
+      if (e.key === 'Escape' && !e.defaultPrevented) {
+        e.preventDefault();
+        onClose();
+      }
+    };
+    document.addEventListener('keydown', k);
+    return () => document.removeEventListener('keydown', k);
+  }, []);
+  return /*#__PURE__*/React.createElement("div", {
+    onMouseDown: onClose,
+    onContextMenu: e => e.preventDefault(),
+    style: {
+      position: 'fixed',
+      inset: 0,
+      zIndex: 120,
+      background: 'rgba(3,4,12,0.55)',
+      backdropFilter: 'blur(3px)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    onMouseDown: e => e.stopPropagation(),
+    style: {
+      width: 348,
+      maxWidth: '90vw',
+      animation: 'sr-cardin var(--dur-base) var(--ease-flight) both'
+    }
+  }, /*#__PURE__*/React.createElement(GlassPanel, {
+    strong: true,
+    radius: "lg",
+    pad: "md",
+    glow: true
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'flex-start',
+      gap: 12,
+      marginBottom: 18
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      flex: 'none',
+      width: 34,
+      height: 34,
+      borderRadius: '50%',
+      background: 'rgba(232,145,122,0.14)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "alert-triangle",
+    size: 18,
+    color: "var(--danger)"
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 14,
+      lineHeight: 1.65,
+      color: 'var(--text-1)',
+      paddingTop: 5
+    }
+  }, message)), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      gap: 10,
+      justifyContent: 'flex-end'
+    }
+  }, /*#__PURE__*/React.createElement(Button, {
+    size: "sm",
+    autoFocus: true,
+    onClick: onClose
+  }, "\u53D6\u6D88"), /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    className: "sr-focus-ring",
+    onClick: onYes,
+    style: {
+      height: 32,
+      padding: '0 16px',
+      borderRadius: 'var(--r-pill)',
+      border: '1px solid rgba(232,145,122,0.5)',
+      background: 'rgba(232,145,122,0.16)',
+      color: 'var(--danger)',
+      fontSize: 13,
+      cursor: 'pointer',
+      fontFamily: 'var(--font-sans)'
+    }
+  }, confirmLabel || '删除')))));
 }
 function StarMap({
   selected,
@@ -4688,7 +20442,9 @@ function StarMap({
   onOpenEditor,
   onFeynman,
   onAerial,
-  igniteId
+  on3D,
+  igniteId,
+  focusReq
 }) {
   const D = window.SR_DATA;
   const ref = React.useRef(null);
@@ -4699,18 +20455,57 @@ function StarMap({
   });
   const [stars, setStars] = React.useState(() => D.stars.map(s => ({
     ...s,
-    wx: s.x / 100 * WORLD.w,
-    wy: s.y / 100 * WORLD.h
+    wx: s.wx != null ? s.wx : s.x / 100 * WORLD.w,
+    wy: s.wy != null ? s.wy : s.y / 100 * WORLD.h
   })));
   const [cons, setCons] = React.useState(() => D.constellations.map(c => ({
     ...c,
-    wx: WORLD.w / 2,
-    wy: WORLD.h / 2
+    wx: c.wx != null ? c.wx : WORLD.w / 2,
+    wy: c.wy != null ? c.wy : WORLD.h / 2
   })));
-  const [menu, setMenu] = React.useState(null); // {x,y,wx,wy}
+  const [menu, setMenu] = React.useState(null); // {x,y,wx,wy,inDomain}
   const [naming, setNaming] = React.useState(null); // {x,y,wx,wy}
   const [draftName, setDraftName] = React.useState('');
   const [selScreen, setSelScreen] = React.useState(null);
+  const [starMenu, setStarMenu] = React.useState(null); // {x,y,id}
+  const [gift, setGift] = React.useState(null); // {x,y,id,label} 赠星好友选择器
+  const [confirm, setConfirm] = React.useState(null); // {message, confirmLabel, onYes}
+  // 轻量操作反馈走 DS 的 toast()：自带 role=status/aria-live 栈，读屏也听得到
+  const flash = msg => toast(msg);
+
+  /* 星际好友（赠星选择器用）：静默取回——后端未运行 / 还没有好友时保持空数组，
+     「赠给好友」菜单项随之隐藏，不打扰纯本地使用 */
+  const [friends, setFriends] = React.useState([]);
+  React.useEffect(() => {
+    const N = window.SRNet;
+    if (!N) return;
+    let alive = true;
+    const load = () => N.api('/api/friends').then(r => {
+      if (alive) setFriends(r.friends || []);
+    }).catch(() => {});
+    load();
+    window.addEventListener('sr-friends', load); // 星际漫游里连接/移除好友后就地刷新
+    return () => {
+      alive = false;
+      window.removeEventListener('sr-friends', load);
+    };
+  }, []);
+  // 赠星：POST /api/inbox/send kind:'star'——服务端剥 HTML、只取标题作要点，正文永不出库
+  const giftStar = (f, starId) => {
+    const N = window.SRNet;
+    if (!N || !N.inbox) return;
+    N.inbox.send(f.id, 'star', starId).then(r => {
+      if (!r) toast('星际网络暂不可用，稍后再试', {
+        tone: 'danger',
+        icon: 'circle-alert'
+      });else if (r.error) toast(r.error, {
+        tone: 'danger',
+        icon: 'circle-alert'
+      });else if (r.duplicate) toast(`已在「${f.name}」的收件箱里等待领取`);else toast('已送达', {
+        icon: 'send'
+      });
+    });
+  };
   const viewRef = React.useRef(view);
   viewRef.current = view;
   const drag = React.useRef(null);
@@ -4732,7 +20527,11 @@ function StarMap({
     };
   };
 
-  // center the world on first measure
+  // which domain (if any) contains a world point
+  const domainAt = (wx, wy) => cons.find(c => {
+    const g = domainGeom(c, stars);
+    return Math.hypot(wx - g.cx, wy - g.cy) <= g.r;
+  }) || null;
   React.useEffect(() => {
     const el = ref.current;
     if (!el) return;
@@ -4753,8 +20552,21 @@ function StarMap({
     fit();
     return () => ro.disconnect();
   }, []);
-
-  // keep summary card pinned to its star while panning/zooming
+  React.useEffect(() => {
+    if (!focusReq) return;
+    const el = ref.current;
+    if (!el) return;
+    const members = stars.filter(s => s.con === focusReq.con);
+    if (!members.length) return;
+    const cx = members.reduce((a, s) => a + s.wx, 0) / members.length;
+    const cy = members.reduce((a, s) => a + s.wy, 0) / members.length;
+    const k = 1.05;
+    setView({
+      k,
+      x: el.clientWidth / 2 - cx * k,
+      y: el.clientHeight / 2 - cy * k
+    });
+  }, [focusReq]);
   React.useEffect(() => {
     if (!selected) {
       setSelScreen(null);
@@ -4764,7 +20576,94 @@ function StarMap({
     if (s) setSelScreen(toScreen(s.wx, s.wy));
   }, [selected, view, stars]);
 
-  // wheel zoom toward cursor
+  // 点亮事件（费曼抽屉派发）：就地提升该星的亮度，无需重新挂载
+  React.useEffect(() => {
+    const h = e => {
+      const {
+        id,
+        strength
+      } = e.detail || {};
+      if (id) setStars(ss => ss.map(s => s.id === id ? {
+        ...s,
+        strength
+      } : s));
+    };
+    window.addEventListener('sr-ignite', h);
+    return () => window.removeEventListener('sr-ignite', h);
+  }, []);
+
+  // 记忆心跳：数据层按真实时间重算 R 后，星就地读回新亮度——
+  // 只更新数值，不加任何闪烁动画，prefers-reduced-motion 下同样安静。
+  // 一律换新对象：点亮/熄灭（lit/ember）可能在强度几乎不变时跨越，也要触发重绘
+  React.useEffect(() => {
+    const h = () => setStars(ss => ss.map(s => {
+      const d = D.byId[s.id];
+      return d ? {
+        ...s,
+        strength: d.strength
+      } : s;
+    }));
+    window.addEventListener('sr-memory', h);
+    return () => window.removeEventListener('sr-memory', h);
+  }, []);
+
+  // 星域首次转金只提示一次（金色只属于状态跃迁）：litRatio ≥ 0.5 ∧ health ≥ 0.5
+  const goldKey = cons.filter(c => domainStats(c, stars).gold).map(c => c.id).sort().join(',');
+  const prevGoldRef = React.useRef(null);
+  React.useEffect(() => {
+    const cur = new Set(goldKey ? goldKey.split(',') : []);
+    const prev = prevGoldRef.current;
+    prevGoldRef.current = cur;
+    if (!prev) return; // 首帧不提示——只有「跨越」才配一次金 toast
+    cons.forEach(c => {
+      if (cur.has(c.id) && !prev.has(c.id)) toast(`「${c.name}」过半点亮 · 星域转暖`, {
+        tone: 'gold',
+        icon: 'orbit'
+      });
+    });
+  }, [goldKey]);
+
+  // Esc 统一词汇：摘要卡也响应 Escape（菜单/命名/确认各自有 Esc，先让位给它们；
+  // 费曼抽屉的 Esc 在 app 层捕获阶段处理，层级永远先于这里）
+  React.useEffect(() => {
+    const h = e => {
+      if (e.key !== 'Escape' || e.defaultPrevented) return;
+      if (menu || naming || confirm || starMenu) return;
+      if (selected) {
+        e.preventDefault();
+        onSelect(null);
+      }
+    };
+    document.addEventListener('keydown', h);
+    return () => document.removeEventListener('keydown', h);
+  }, [menu, naming, confirm, starMenu, selected, onSelect]);
+
+  // persist live positions to the shared dataset so the bird's-eye view shows the real layout;
+  // 拖动星 / 星域后的坐标也要落盘（SRNet 自带 1.2s 防抖，拖拽途中不会刷库）
+  React.useEffect(() => {
+    let moved = false;
+    stars.forEach(s => {
+      const d = D.byId[s.id];
+      if (!d) return;
+      if (d.wx !== s.wx || d.wy !== s.wy) moved = true;
+      d.wx = s.wx;
+      d.wy = s.wy;
+      d.x = s.wx / WORLD.w * 100;
+      d.y = s.wy / WORLD.h * 100;
+    });
+    if (moved && window.SRNet) window.SRNet.schedule();
+  }, [stars]);
+  React.useEffect(() => {
+    let moved = false;
+    cons.forEach(c => {
+      const d = D.constellations.find(x => x.id === c.id);
+      if (!d) return;
+      if (d.wx !== c.wx || d.wy !== c.wy) moved = true;
+      d.wx = c.wx;
+      d.wy = c.wy;
+    });
+    if (moved && window.SRNet) window.SRNet.schedule();
+  }, [cons]);
   React.useEffect(() => {
     const el = ref.current;
     if (!el) return;
@@ -4787,8 +20686,6 @@ function StarMap({
     });
     return () => el.removeEventListener('wheel', onWheel);
   }, []);
-
-  // global drag handlers (pan or move-star)
   React.useEffect(() => {
     const move = e => {
       const d = drag.current;
@@ -4800,17 +20697,38 @@ function StarMap({
         y: d.oy + (e.clientY - d.sy)
       }));else if (d.mode === 'star') {
         const k = viewRef.current.k;
+        // 行星可自由拖到任何位置（包括与主星重合）——行星层级高于主星，随时能再拖出来
         setStars(ss => ss.map(s => s.id === d.id ? {
           ...s,
           wx: d.swx + (e.clientX - d.sx) / k,
           wy: d.swy + (e.clientY - d.sy) / k
         } : s));
+      } else if (d.mode === 'domain') {
+        const k = viewRef.current.k;
+        const dx = (e.clientX - d.sx) / k,
+          dy = (e.clientY - d.sy) / k;
+        if (d.members.length) {
+          const mp = Object.fromEntries(d.members.map(m => [m.id, m]));
+          setStars(ss => ss.map(s => mp[s.id] ? {
+            ...s,
+            wx: mp[s.id].swx + dx,
+            wy: mp[s.id].swy + dy
+          } : s));
+        } else {
+          setCons(cs => cs.map(c => c.id === d.conId ? {
+            ...c,
+            wx: d.cwx + dx,
+            wy: d.cwy + dy
+          } : c));
+        }
       }
     };
     const up = e => {
       const d = drag.current;
       drag.current = null;
-      if (d && d.mode === 'pan' && !d.moved && e.button === 0) onSelect(null);
+      if (d && d.mode === 'domain' && !d.moved && e.button === 0) {
+        if (pickRef.current) pickRef.current(d.con, e.clientX, e.clientY);
+      } else if (d && d.mode === 'pan' && !d.moved && e.button === 0) onSelect(null);
       document.body.style.cursor = '';
     };
     window.addEventListener('mousemove', move);
@@ -4820,10 +20738,13 @@ function StarMap({
       window.removeEventListener('mouseup', up);
     };
   }, [onSelect]);
+
+  // press anywhere that isn't the sun or a star → pan the canvas
   const bgDown = e => {
     if (e.button !== 0) return;
     setMenu(null);
     setNaming(null);
+    setStarMenu(null);
     drag.current = {
       mode: 'pan',
       sx: e.clientX,
@@ -4834,10 +20755,34 @@ function StarMap({
     };
     document.body.style.cursor = 'grabbing';
   };
+  // press the domain's sun → drag moves the whole 星域; a click (no drag) opens its create menu
+  const domainDown = (e, con) => {
+    if (e.button !== 0) return;
+    setMenu(null);
+    setNaming(null);
+    setStarMenu(null);
+    const members = stars.filter(s => s.con === con.id).map(s => ({
+      id: s.id,
+      swx: s.wx,
+      swy: s.wy
+    }));
+    drag.current = {
+      mode: 'domain',
+      con,
+      conId: con.id,
+      members,
+      cwx: con.wx,
+      cwy: con.wy,
+      sx: e.clientX,
+      sy: e.clientY,
+      moved: false
+    };
+    document.body.style.cursor = 'grabbing';
+  };
   const starDown = (e, s) => {
     if (e.button !== 0) return;
     e.stopPropagation();
-    onSelect(s.id); // select immediately so the summary card always appears
+    onSelect(s.id);
     drag.current = {
       mode: 'star',
       id: s.id,
@@ -4855,12 +20800,29 @@ function StarMap({
       x: e.clientX,
       y: e.clientY,
       wx: w.wx,
-      wy: w.wy
+      wy: w.wy,
+      inDomain: domainAt(w.wx, w.wy)
     });
     setNaming(null);
   };
+  // clicking a domain name opens the same create menu, scoped to that domain
+  const onPickDomain = (con, clientX, clientY) => {
+    const w = toWorld(clientX, clientY);
+    setMenu({
+      x: clientX,
+      y: clientY,
+      wx: w.wx,
+      wy: w.wy,
+      inDomain: con
+    });
+    setNaming(null);
+    onSelect(null);
+  };
+  const pickRef = React.useRef();
+  pickRef.current = onPickDomain;
   const startDomain = () => {
     setNaming({
+      kind: 'domain',
       x: menu.x,
       y: menu.y,
       wx: menu.wx,
@@ -4869,44 +20831,133 @@ function StarMap({
     setDraftName('');
     setMenu(null);
   };
-  const commitDomain = () => {
-    const name = draftName.trim() || '新星域';
-    const color = NEW_COLORS[cons.length % NEW_COLORS.length];
-    setCons(cs => [...cs, {
-      id: 'c' + Math.random().toString(36).slice(2, 6),
-      name,
-      color,
-      wx: naming.wx,
-      wy: naming.wy
-    }]);
-    setNaming(null);
-  };
-  const createStar = () => {
-    // assign to nearest domain centroid
-    let best = null,
-      bd = 1e9;
-    cons.forEach(c => {
-      const mem = stars.filter(s => s.con === c.id);
-      const cx = mem.length ? mem.reduce((a, s) => a + s.wx, 0) / mem.length : c.wx;
-      const cy = mem.length ? mem.reduce((a, s) => a + s.wy, 0) / mem.length : c.wy;
-      const dist = Math.hypot(menu.wx - cx, menu.wy - cy);
-      if (dist < bd) {
-        bd = dist;
-        best = c.id;
-      }
-    });
-    const id = 's' + Math.random().toString(36).slice(2, 6);
-    setStars(ss => [...ss, {
-      id,
-      con: best,
+  // 新建知识星也先命名（弹窗），确认后才真正落到星图上
+  const startStar = () => {
+    const dom = menu && menu.inDomain;
+    if (!dom) {
+      setMenu(null);
+      return;
+    } // guard: knowledge stars only inside a domain
+    setNaming({
+      kind: 'star',
+      x: menu.x,
+      y: menu.y,
       wx: menu.wx,
       wy: menu.wy,
+      dom
+    });
+    setDraftName('');
+    setMenu(null);
+  };
+  const startRename = (id, x, y, label) => {
+    setNaming({
+      kind: 'rename',
+      x,
+      y,
+      id
+    });
+    setDraftName(label || '');
+  };
+  const doCreateStar = (label, wx, wy, dom) => {
+    const id = 's' + Math.random().toString(36).slice(2, 6);
+    const ns = {
+      id,
+      con: dom.id,
+      x: wx / WORLD.w * 100,
+      y: wy / WORLD.h * 100,
       strength: 0.5,
       importance: 1,
-      label: '新的知识星'
+      label,
+      summary: '一颗新点亮的星，等待你为它写下内容。',
+      tags: ['草稿'],
+      props: {
+        type: '草稿',
+        status: '正常',
+        source: '手动创建',
+        alias: '',
+        nextReview: '明天'
+      },
+      body: [{
+        id: id + '-r',
+        type: 'rich'
+      }, {
+        id: id + '-p',
+        type: 'p',
+        text: ''
+      }]
+    };
+    D.addStar(ns);
+    emitData();
+    setStars(ss => [...ss, {
+      ...ns,
+      wx,
+      wy
     }]);
-    setMenu(null);
     onSelect(id);
+    flash(`已创建「${ns.label}」`);
+  };
+  const renameStar = (id, label) => {
+    D.renameStar(id, label);
+    setStars(ss => ss.map(s => s.id === id ? {
+      ...s,
+      label
+    } : s));
+    flash('已重命名');
+  };
+  const commitNaming = () => {
+    if (!naming) return;
+    const name = draftName.trim();
+    if (naming.kind === 'star') {
+      doCreateStar(name || '新的知识星', naming.wx, naming.wy, naming.dom);
+    } else if (naming.kind === 'rename') {
+      if (name) renameStar(naming.id, name);
+    } else if (naming.kind === 'renameDomain') {
+      if (name) {
+        const rec = D.constellations.find(c => c.id === naming.id);
+        if (rec) rec.name = name;
+        setCons(cs => cs.map(c => c.id === naming.id ? {
+          ...c,
+          name
+        } : c));
+        flash('已重命名星域');
+      }
+    } else {
+      const dn = name || '新星域';
+      const color = NEW_COLORS[D.constellations.length % NEW_COLORS.length];
+      const cid = 'c' + Math.random().toString(36).slice(2, 6);
+      D.constellations.push({
+        id: cid,
+        name: dn,
+        color,
+        health: 0.5,
+        count: 0
+      });
+      setCons(cs => [...cs, {
+        id: cid,
+        name: dn,
+        color,
+        wx: naming.wx,
+        wy: naming.wy
+      }]);
+    }
+    setNaming(null);
+  };
+  // 删除 = 移入黑洞（可在黑洞视图恢复或彻底销毁）
+  const deleteStar = id => {
+    D.trashStar(id);
+    emitData();
+    setStars(ss => ss.filter(s => s.id !== id));
+    if (selected === id) onSelect(null);
+    flash('已移入黑洞 · 可随时恢复');
+  };
+  const deleteDomain = conId => {
+    const memberIds = stars.filter(s => s.con === conId).map(s => s.id);
+    D.trashDomain(conId);
+    emitData();
+    setStars(ss => ss.filter(s => s.con !== conId));
+    setCons(cs => cs.filter(c => c.id !== conId));
+    if (selected && memberIds.includes(selected)) onSelect(null);
+    flash('星域已移入黑洞 · 可随时恢复');
   };
   const resetView = () => {
     const el = ref.current;
@@ -4920,6 +20971,29 @@ function StarMap({
     onSelect(null);
   };
   const sel = stars.find(s => s.id === selected);
+
+  // 键盘打开星域菜单：Enter 落在主星上时，菜单出现在主星的屏幕位置
+  const onDomainKey = con => {
+    const g = domainGeom(con, stars);
+    const p = toScreen(g.cx, g.cy);
+    onPickDomain(con, p.x, p.y + 24);
+  };
+
+  /* ── LOD：几百颗星也要保持深空的安静 ─────────────────────────
+     · 视口外剔除：屏外（含 240px 余量）的星不渲染 DOM
+     · dense（>120 星）时标签只在近景（k≥0.9）常显——远景标签互相压叠，
+       亮度=记忆的可读性反而丢失；选中星的标签任何时候都在 */
+  const boxEl = ref.current;
+  const vw = boxEl ? boxEl.clientWidth : window.innerWidth;
+  const vh = boxEl ? boxEl.clientHeight : window.innerHeight;
+  const vis = (wx, wy) => {
+    const sx = view.x + wx * view.k,
+      sy = view.y + wy * view.k;
+    return sx > -240 && sx < vw + 240 && sy > -240 && sy < vh + 240;
+  };
+  const dense = stars.length > 120;
+  const showLabels = !dense || view.k >= 0.9;
+  const empty = stars.length === 0 && cons.length === 0;
   return /*#__PURE__*/React.createElement("div", {
     ref: ref,
     onMouseDown: bgDown,
@@ -4946,33 +21020,137 @@ function StarMap({
   }, /*#__PURE__*/React.createElement(DomainHalos, {
     stars: stars,
     cons: cons,
-    k: view.k
+    k: view.k,
+    onDomainDown: domainDown,
+    onDomainKey: onDomainKey
   }), /*#__PURE__*/React.createElement(Connections, {
     stars: stars,
-    dim: !!sel
-  }), stars.map(s => /*#__PURE__*/React.createElement("div", {
-    key: s.id,
-    onMouseDown: e => starDown(e, s),
-    onDoubleClick: () => onOpenEditor(s.id),
+    cons: cons,
+    dim: !!sel,
+    k: view.k,
+    vis: vis
+  }), stars.map(s => {
+    if (!vis(s.wx, s.wy) && selected !== s.id) return null; // 视口外剔除
+    const litS = litOf(s),
+      emberS = emberOf(s);
+    return /*#__PURE__*/React.createElement("div", {
+      key: s.id,
+      onMouseDown: e => starDown(e, s),
+      onDoubleClick: () => onOpenEditor(s.id),
+      onContextMenu: e => {
+        e.preventDefault();
+        e.stopPropagation();
+        setMenu(null);
+        setStarMenu({
+          x: e.clientX,
+          y: e.clientY,
+          id: s.id
+        });
+      },
+      style: {
+        position: 'absolute',
+        left: s.wx,
+        top: s.wy,
+        zIndex: 4 /* 行星的点击层级高于星域主星 */
+      }
+    }, (litS || emberS) && /*#__PURE__*/React.createElement("span", {
+      "data-cert": litS ? 'lit' : 'ember',
+      "aria-hidden": "true",
+      style: {
+        position: 'absolute',
+        left: 0,
+        top: 0,
+        width: 12 * (s.importance || 1) + 10,
+        height: 12 * (s.importance || 1) + 10,
+        transform: 'translate(-50%,-50%)',
+        borderRadius: '50%',
+        boxSizing: 'border-box',
+        pointerEvents: 'none',
+        zIndex: 0,
+        border: litS ? '1px solid var(--gold)' : '1px solid color-mix(in srgb, var(--gold-warm) 45%, transparent)',
+        opacity: sel && selected !== s.id ? 0.35 : litS ? 0.9 : 0.8,
+        transition: 'opacity var(--dur-base)'
+      }
+    }), /*#__PURE__*/React.createElement(StarNode, {
+      strength: s.id === igniteId ? 0.96 : s.strength,
+      importance: s.importance,
+      label: showLabels || selected === s.id ? s.label : undefined,
+      onClick: () => onSelect(s.id),
+      selected: selected === s.id,
+      style: {
+        left: 0,
+        top: 0,
+        transform: 'translate(-50%, calc(-50% + 11.5px))',
+        cursor: 'grab',
+        opacity: sel && selected !== s.id ? 0.45 : 1,
+        transition: 'opacity var(--dur-base)'
+      }
+    }));
+  })), empty && !naming && /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'absolute',
-      left: s.wx,
-      top: s.wy,
-      zIndex: 2
+      inset: 0,
+      zIndex: 20,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: 'var(--s-2)',
+      pointerEvents: 'none',
+      textAlign: 'center'
     }
-  }, /*#__PURE__*/React.createElement(StarNode, {
-    strength: s.id === igniteId ? 0.96 : s.strength,
-    importance: s.importance,
-    label: s.label,
-    selected: selected === s.id,
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "sr-breathe",
     style: {
-      left: 0,
-      top: 0,
-      cursor: 'grab',
-      opacity: sel && selected !== s.id ? 0.45 : 1,
-      transition: 'opacity var(--dur-base)'
+      width: 10,
+      height: 10,
+      borderRadius: '50%',
+      background: 'radial-gradient(circle at 38% 35%, #eaf2ff, var(--star-blue-dim) 70%)',
+      boxShadow: '0 0 18px rgba(159,198,255,0.5)',
+      marginBottom: 'var(--s-3)'
     }
-  })))), /*#__PURE__*/React.createElement("div", {
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 'var(--t-h3)',
+      fontWeight: 300,
+      color: 'var(--text-1)',
+      textShadow: 'var(--text-glow-cool)'
+    }
+  }, "\u4F60\u7684\u661F\u7A7A\u8FD8\u5F88\u6697\u3002"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 'var(--t-sm)',
+      color: 'var(--text-2)',
+      lineHeight: 1.7,
+      maxWidth: 300
+    }
+  }, "\u5148\u5212\u51FA\u4E00\u7247\u661F\u57DF\uFF0C\u518D\u5199\u4E0B\u7B2C\u4E00\u9897\u661F\uFF0C\u8BA9\u5B83\u53D1\u5149\u3002"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 'var(--s-4)',
+      pointerEvents: 'auto'
+    }
+  }, /*#__PURE__*/React.createElement(Button, {
+    variant: "primary",
+    icon: "orbit",
+    glow: true,
+    onClick: () => {
+      const r = ref.current.getBoundingClientRect();
+      const w = toWorld(r.left + r.width / 2, r.top + r.height / 2);
+      setDraftName('');
+      setNaming({
+        kind: 'domain',
+        x: r.left + r.width / 2 - 110,
+        y: r.top + r.height / 2 - 40,
+        wx: w.wx,
+        wy: w.wy
+      });
+    }
+  }, "\u521B\u5EFA\u7B2C\u4E00\u4E2A\u661F\u57DF")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 'var(--s-2)',
+      fontSize: 'var(--t-xs)',
+      color: 'var(--text-3)'
+    }
+  }, "\u4E5F\u53EF\u4EE5\u5728\u753B\u5E03\u4EFB\u610F\u5904\u53F3\u952E\u521B\u5EFA")), /*#__PURE__*/React.createElement("div", {
     onMouseDown: e => e.stopPropagation(),
     style: {
       position: 'absolute',
@@ -5024,12 +21202,15 @@ function StarMap({
       pointerEvents: 'auto'
     }
   }, /*#__PURE__*/React.createElement(HudStat, {
-    label: "Knowledge Stars",
+    label: "\u77E5\u8BC6\u661F",
     value: stars.length
   }), /*#__PURE__*/React.createElement(HudStat, {
-    label: "\u6B63\u53D1\u5149",
-    value: stars.filter(s => s.strength >= 0.7).length,
+    label: "\u5DF2\u70B9\u4EAE",
+    value: stars.filter(litOf).length,
     tone: "var(--gold)"
+  }), /*#__PURE__*/React.createElement(HudStat, {
+    label: "\u6B63\u53D1\u5149",
+    value: stars.filter(s => s.strength >= 0.7).length
   }), /*#__PURE__*/React.createElement(HudStat, {
     label: "\u6B63\u53D8\u6697",
     value: stars.filter(s => s.strength < 0.4).length,
@@ -5055,7 +21236,7 @@ function StarMap({
     name: "move",
     size: 14,
     color: "currentColor"
-  }), "\u62D6\u52A8\u5E73\u79FB \xB7 \u6EDA\u8F6E\u7F29\u653E \xB7 \u53F3\u952E\u521B\u5EFA\u661F\u57DF"), /*#__PURE__*/React.createElement("div", {
+  }), "\u62D6\u4E3B\u661F=\u6574\u4F53\u79FB\u52A8\u661F\u57DF \xB7 \u62D6\u7A7A\u767D=\u5E73\u79FB\u753B\u5E03 \xB7 \u62D6\u661F\u70B9=\u79FB\u52A8\u5355\u9897 \xB7 \u6EDA\u8F6E\u7F29\u653E \xB7 \u53F3\u952E\u521B\u5EFA"), /*#__PURE__*/React.createElement("div", {
     onMouseDown: e => e.stopPropagation(),
     style: {
       position: 'absolute',
@@ -5103,6 +21284,11 @@ function StarMap({
       background: 'var(--line)'
     }
   }), /*#__PURE__*/React.createElement(IconButton, {
+    name: "box",
+    size: "sm",
+    title: "\u4E09\u7EF4\u661F\u7CFB\uFF082D / 3D\uFF09",
+    onClick: on3D
+  }), /*#__PURE__*/React.createElement(IconButton, {
     name: "satellite",
     size: "sm",
     title: "\u4EAE\u5EA6\u9E1F\u77B0",
@@ -5118,107 +21304,2873 @@ function StarMap({
     onOpen: () => onOpenEditor(sel.id),
     onFeynman: () => onFeynman(sel.id),
     onClose: () => onSelect(null)
-  }), menu && /*#__PURE__*/React.createElement(CreateMenu, {
+  }), menu && /*#__PURE__*/React.createElement(PopMenu, {
     x: menu.x,
     y: menu.y,
+    header: menu.inDomain ? `星域「${menu.inDomain.name}」内` : '在此创建',
+    footer: menu.inDomain ? null : '知识星要安放在星域之内。先建一片星域，或在已有星域的范围里创建。',
     onClose: () => setMenu(null),
-    onDomain: startDomain,
-    onStar: createStar
-  }), naming && /*#__PURE__*/React.createElement("div", {
-    style: {
-      position: 'fixed',
-      left: Math.min(naming.x, window.innerWidth - 240),
-      top: Math.min(naming.y, window.innerHeight - 90),
-      zIndex: 60,
-      width: 220
+    items: [{
+      icon: 'orbit',
+      label: '新建星域',
+      tone: 'var(--gold)',
+      onClick: startDomain
+    }, menu.inDomain ? {
+      icon: 'plus',
+      label: '新建知识星',
+      onClick: startStar
+    } : {
+      icon: 'plus',
+      label: '新建知识星',
+      hint: '需在星域内',
+      disabled: true,
+      onClick: () => {}
+    }, ...(menu.inDomain ? [{
+      sep: true
+    }, {
+      icon: 'pen-line',
+      label: `重命名「${menu.inDomain.name}」`,
+      onClick: () => {
+        const dom = menu.inDomain;
+        setNaming({
+          kind: 'renameDomain',
+          x: menu.x,
+          y: menu.y,
+          id: dom.id
+        });
+        setDraftName(dom.name);
+      }
+    }, {
+      icon: 'trash-2',
+      label: `删除星域「${menu.inDomain.name}」`,
+      tone: 'var(--danger)',
+      onClick: () => {
+        const dom = menu.inDomain;
+        const n = stars.filter(s => s.con === dom.id).length;
+        setConfirm({
+          message: n ? `星域「${dom.name}」和它的 ${n} 颗知识星将一并坠入黑洞。黑洞里的东西可以随时恢复。` : `空星域「${dom.name}」将坠入黑洞。黑洞里的东西可以随时恢复。`,
+          confirmLabel: '移入黑洞',
+          onYes: () => deleteDomain(dom.id)
+        });
+      }
+    }] : [])]
+  }), starMenu && (() => {
+    const st = stars.find(s => s.id === starMenu.id);
+    return /*#__PURE__*/React.createElement(PopMenu, {
+      x: starMenu.x,
+      y: starMenu.y,
+      width: 200,
+      header: st ? st.label : '知识星',
+      onClose: () => setStarMenu(null),
+      items: [{
+        icon: 'maximize-2',
+        label: '打开编辑',
+        onClick: () => onOpenEditor(starMenu.id)
+      }, {
+        icon: 'pen-line',
+        label: '重命名',
+        onClick: () => startRename(starMenu.id, starMenu.x, starMenu.y, st ? st.label : '')
+      }, {
+        icon: 'zap',
+        label: '费曼内化',
+        onClick: () => onFeynman(starMenu.id)
+      },
+      // 赠给好友：无好友 / 后端未运行（friends 为空）时整项隐藏
+      ...(friends.length ? [{
+        icon: 'gift',
+        label: '赠给好友',
+        onClick: () => setGift({
+          x: starMenu.x,
+          y: starMenu.y,
+          id: starMenu.id,
+          label: st ? st.label : '这颗星'
+        })
+      }] : []), {
+        sep: true
+      }, {
+        icon: 'trash-2',
+        label: '删除知识星',
+        tone: 'var(--danger)',
+        onClick: () => {
+          const lbl = st ? st.label : '这颗星';
+          setConfirm({
+            message: `知识星「${lbl}」将坠入黑洞。黑洞里的星可以随时恢复。`,
+            confirmLabel: '移入黑洞',
+            onYes: () => deleteStar(starMenu.id)
+          });
+        }
+      }]
+    });
+  })(), gift && /*#__PURE__*/React.createElement(PopMenu, {
+    x: gift.x,
+    y: gift.y,
+    width: 224,
+    header: `赠「${gift.label}」给`,
+    footer: "\u661F\u540D\u4E0E\u5927\u7EB2\u8981\u70B9\u4F1A\u5BC4\u8FDB\u5BF9\u65B9\u7684\u6536\u4EF6\u7BB1\uFF0C\u6B63\u6587\u4E0D\u4F1A\u3002",
+    onClose: () => setGift(null),
+    items: friends.map(f => ({
+      icon: 'user-round',
+      label: f.name,
+      onClick: () => giftStar(f, gift.id)
+    }))
+  }), confirm && /*#__PURE__*/React.createElement(ConfirmDialog, {
+    message: confirm.message,
+    confirmLabel: confirm.confirmLabel,
+    onYes: () => {
+      confirm.onYes();
+      setConfirm(null);
     },
-    onMouseDown: e => e.stopPropagation()
-  }, /*#__PURE__*/React.createElement(GlassPanel, {
-    strong: true,
-    radius: "md",
-    pad: "sm",
-    glow: true
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 11,
-      color: 'var(--text-3)',
-      marginBottom: 7
-    }
-  }, "\u65B0\u661F\u57DF\u540D\u79F0"), /*#__PURE__*/React.createElement("input", {
-    autoFocus: true,
-    value: draftName,
-    onChange: e => setDraftName(e.target.value),
-    onKeyDown: e => {
-      if (e.key === 'Enter') commitDomain();
-      if (e.key === 'Escape') setNaming(null);
-    },
-    placeholder: "\u4F8B\u5982\uFF1A\u6982\u7387\u8BBA",
-    style: {
-      width: '100%',
-      boxSizing: 'border-box',
-      background: 'rgba(3,4,12,0.5)',
-      border: '1px solid var(--glass-border-strong)',
-      borderRadius: 'var(--r-sm)',
-      color: 'var(--text-1)',
-      fontSize: 14,
-      padding: '8px 10px',
-      outline: 'none',
-      fontFamily: 'var(--font-sans)'
-    }
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      gap: 8,
-      marginTop: 10
-    }
-  }, /*#__PURE__*/React.createElement(Button, {
-    variant: "primary",
-    size: "sm",
-    glow: true,
-    onClick: commitDomain,
-    style: {
-      flex: 1
-    }
-  }, "\u521B\u5EFA"), /*#__PURE__*/React.createElement(Button, {
-    size: "sm",
-    onClick: () => setNaming(null)
-  }, "\u53D6\u6D88")))));
+    onClose: () => setConfirm(null)
+  }), naming && (() => {
+    const meta = {
+      domain: {
+        title: '新星域名称',
+        ph: '例如：概率论',
+        ok: '创建'
+      },
+      star: {
+        title: '新知识星名称',
+        ph: '例如：贝叶斯定理',
+        ok: '创建'
+      },
+      rename: {
+        title: '重命名知识星',
+        ph: '输入新名字…',
+        ok: '保存'
+      },
+      renameDomain: {
+        title: '重命名星域',
+        ph: '输入新名字…',
+        ok: '保存'
+      }
+    }[naming.kind || 'domain'];
+    return /*#__PURE__*/React.createElement("div", {
+      style: {
+        position: 'fixed',
+        left: Math.min(naming.x, window.innerWidth - 240),
+        top: Math.min(naming.y, window.innerHeight - 130),
+        zIndex: 60,
+        width: 220
+      },
+      onMouseDown: e => e.stopPropagation()
+    }, /*#__PURE__*/React.createElement(GlassPanel, {
+      strong: true,
+      radius: "md",
+      pad: "sm",
+      glow: true
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 11,
+        color: 'var(--text-3)',
+        marginBottom: 7
+      }
+    }, meta.title), /*#__PURE__*/React.createElement("input", {
+      autoFocus: true,
+      className: "sr-focus-ring",
+      value: draftName,
+      onChange: e => setDraftName(e.target.value),
+      onFocus: e => e.target.select(),
+      onKeyDown: e => {
+        if (e.key === 'Enter') commitNaming();
+        if (e.key === 'Escape') {
+          e.preventDefault();
+          setNaming(null);
+        }
+      },
+      placeholder: meta.ph,
+      style: {
+        width: '100%',
+        boxSizing: 'border-box',
+        background: 'var(--input-bg, rgba(3,4,12,0.45))',
+        border: '1px solid var(--glass-border-strong)',
+        borderRadius: 'var(--r-sm)',
+        color: 'var(--text-1)',
+        fontSize: 14,
+        padding: '8px 10px',
+        outline: 'none',
+        fontFamily: 'var(--font-sans)'
+      }
+    }), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        gap: 8,
+        marginTop: 10
+      }
+    }, /*#__PURE__*/React.createElement(Button, {
+      variant: "primary",
+      size: "sm",
+      glow: true,
+      onClick: commitNaming,
+      style: {
+        flex: 1
+      }
+    }, meta.ok), /*#__PURE__*/React.createElement(Button, {
+      size: "sm",
+      onClick: () => setNaming(null)
+    }, "\u53D6\u6D88"))));
+  })());
 }
 window.SRKit = Object.assign(window.SRKit || {}, {
   StarMap
 });
 })(); } catch (e) { __ds_ns.__errors.push({ path: "ui_kits/stellar-raft/StarMap.jsx", error: String((e && e.message) || e) }); }
 
+// ui_kits/stellar-raft/Timeline.jsx
+try { (() => {
+/* Timeline — 时间轴视图: trace back every star you've lit, dimmed or reviewed.
+   Newest first, grouped by 今天/昨天/本周/更早, with a glowing thread down the left.
+   Filter by kind, glance at this week's tally, click an entry to fly to its star. */
+const {
+  GlassPanel,
+  Icon,
+  Button,
+  Tag,
+  MemoryBar
+} = window.StellarRaftDesignSystem_2866af;
+const TL_KIND = {
+  ignite: {
+    icon: 'zap',
+    color: 'var(--gold)',
+    label: '点亮'
+  },
+  review: {
+    icon: 'repeat',
+    color: 'var(--star-blue)',
+    label: '复习'
+  },
+  dim: {
+    icon: 'trending-down',
+    color: 'var(--star-blue-dim)',
+    label: '变暗'
+  }
+};
+
+// 时段分组，自新到旧
+const TL_BUCKETS = [{
+  id: 'today',
+  label: '今天'
+}, {
+  id: 'yesterday',
+  label: '昨天'
+}, {
+  id: 'week',
+  label: '本周'
+}, {
+  id: 'earlier',
+  label: '更早'
+}];
+
+// 把一条事件归入某个时段：优先用显式 bucket，否则从 when 文案推断。
+function tlBucketOf(ev) {
+  if (ev.bucket) return ev.bucket;
+  const w = ev.when || '';
+  if (w.indexOf('今天') === 0) return 'today';
+  if (w.indexOf('昨天') === 0) return 'yesterday';
+  if (w.indexOf('上周') === 0 || w.indexOf('更早') === 0) return 'earlier';
+  const m = w.match(/(\d+)\s*天前/);
+  if (m) return +m[1] <= 6 ? 'week' : 'earlier';
+  return 'week';
+}
+const tlIsUp = ev => ev.delta.indexOf('−') !== 0 && ev.delta.indexOf('-') !== 0;
+const TL_PAGE = 6; // 每次展示/加载的条目数
+
+function Timeline({
+  onOpen
+}) {
+  const D = window.SR_DATA;
+  const [kind, setKind] = React.useState('all'); // all | ignite | review | dim
+  const [shown, setShown] = React.useState(TL_PAGE);
+
+  // 全量事件：只呈现真实发生过、且星仍然存在的记录——
+  // 已销毁的星不再以「未知星」空壳占据时间轴。
+  const all = React.useMemo(() => D.timeline.filter(ev => D.byId[ev.starId]), [D]);
+
+  // 顶部小统计：本周（今天/昨天/本周，不含更早）的点亮与复习数。
+  const weekly = all.filter(ev => tlBucketOf(ev) !== 'earlier');
+  const lit = weekly.filter(ev => ev.kind === 'ignite').length;
+  const reviewed = weekly.filter(ev => ev.kind === 'review').length;
+  const fading = weekly.filter(ev => ev.kind === 'dim').length;
+  const chips = [{
+    id: 'all',
+    label: '全部',
+    icon: 'layers',
+    color: 'var(--text-2)'
+  }, {
+    id: 'ignite',
+    label: '点亮',
+    icon: TL_KIND.ignite.icon,
+    color: TL_KIND.ignite.color
+  }, {
+    id: 'review',
+    label: '复习',
+    icon: TL_KIND.review.icon,
+    color: TL_KIND.review.color
+  }, {
+    id: 'dim',
+    label: '变暗',
+    icon: TL_KIND.dim.icon,
+    color: TL_KIND.dim.color
+  }];
+  const filtered = kind === 'all' ? all : all.filter(ev => ev.kind === kind);
+  const visible = filtered.slice(0, shown);
+  const hasMore = filtered.length > visible.length;
+
+  // 把可见事件按时段切片，保留顺序。
+  const groups = TL_BUCKETS.map(b => ({
+    ...b,
+    items: visible.filter(ev => tlBucketOf(ev) === b.id)
+  })).filter(g => g.items.length > 0);
+  const pickKind = id => {
+    setKind(id);
+    setShown(TL_PAGE);
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'relative',
+      flex: 1,
+      minWidth: 0,
+      overflow: 'auto',
+      padding: '28px 30px 48px'
+    },
+    onContextMenu: e => e.preventDefault()
+  }, /*#__PURE__*/React.createElement("sr-starfield", {
+    density: "0.6"
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'relative',
+      zIndex: 2,
+      maxWidth: 680,
+      margin: '0 auto'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'flex-end',
+      gap: 16,
+      flexWrap: 'wrap'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1,
+      minWidth: 200
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 23,
+      fontWeight: 300,
+      color: 'var(--text-1)'
+    }
+  }, "\u65F6\u95F4\u8F74"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 13,
+      color: 'var(--text-3)',
+      marginTop: 4
+    }
+  }, "\u6309\u65F6\u95F4\u56DE\u6EAF\u4F60\u70B9\u4EAE\u3001\u590D\u4E60\u4E0E\u53D8\u6697\u7684\u6BCF\u4E00\u9897\u661F\u3002")), /*#__PURE__*/React.createElement(GlassPanel, {
+    radius: "pill",
+    pad: "none",
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 18,
+      padding: '9px 20px'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 6,
+      fontFamily: 'var(--font-mono)',
+      fontSize: 11,
+      letterSpacing: 'var(--ls-hud)',
+      textTransform: 'uppercase',
+      color: 'var(--text-3)'
+    }
+  }, "This Week"), /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 6,
+      fontSize: 12.5,
+      color: 'var(--text-2)'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: TL_KIND.ignite.icon,
+    size: 15,
+    color: TL_KIND.ignite.color
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontFamily: 'var(--font-mono)',
+      color: 'var(--gold)'
+    }
+  }, lit), " \u70B9\u4EAE"), /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 6,
+      fontSize: 12.5,
+      color: 'var(--text-2)'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: TL_KIND.review.icon,
+    size: 15,
+    color: TL_KIND.review.color
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontFamily: 'var(--font-mono)',
+      color: 'var(--star-blue)'
+    }
+  }, reviewed), " \u590D\u4E60"), /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 6,
+      fontSize: 12.5,
+      color: 'var(--text-3)'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: TL_KIND.dim.icon,
+    size: 15,
+    color: TL_KIND.dim.color
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontFamily: 'var(--font-mono)'
+    }
+  }, fading), " \u53D8\u6697"))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      gap: 8,
+      margin: '20px 0 22px',
+      flexWrap: 'wrap'
+    }
+  }, chips.map(c => {
+    const count = c.id === 'all' ? all.length : all.filter(ev => ev.kind === c.id).length;
+    return /*#__PURE__*/React.createElement(Tag, {
+      key: c.id,
+      active: kind === c.id,
+      icon: c.icon,
+      onClick: () => pickKind(c.id)
+    }, c.label, /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontFamily: 'var(--font-mono)',
+        fontSize: 11,
+        opacity: 0.7,
+        marginLeft: 2
+      }
+    }, count));
+  })), visible.length === 0 ? /*#__PURE__*/React.createElement("div", {
+    style: {
+      textAlign: 'center',
+      padding: '64px 20px',
+      color: 'var(--text-3)'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "telescope",
+    size: 30,
+    color: "var(--star-blue-dim)"
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 14.5,
+      color: 'var(--text-2)',
+      marginTop: 14
+    }
+  }, "\u8FD9\u6BB5\u65F6\u95F4\u6CA1\u6709\u8FD9\u7C7B\u6D3B\u52A8\u3002"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12.5,
+      marginTop: 6
+    }
+  }, "\u6362\u4E2A\u7B5B\u9009\uFF0C\u6216\u56DE\u5230\u661F\u7A7A\u70B9\u4EAE\u4E00\u9897\u661F\u3002")) : /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'relative',
+      paddingLeft: 30
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'absolute',
+      left: 9,
+      top: 6,
+      bottom: 28,
+      width: 1,
+      background: 'linear-gradient(var(--gold), var(--star-blue), transparent)'
+    }
+  }), groups.map(g => /*#__PURE__*/React.createElement("div", {
+    key: g.id,
+    style: {
+      marginBottom: 8
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'relative',
+      display: 'flex',
+      alignItems: 'center',
+      gap: 10,
+      padding: '14px 0 10px'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      position: 'absolute',
+      left: -25,
+      top: '50%',
+      width: 7,
+      height: 7,
+      marginTop: -3.5,
+      transform: 'rotate(45deg)',
+      background: 'var(--space-0)',
+      border: '1px solid var(--line-strong)'
+    }
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontFamily: 'var(--font-mono)',
+      fontSize: 10.5,
+      letterSpacing: 'var(--ls-hud)',
+      textTransform: 'uppercase',
+      color: 'var(--text-3)'
+    }
+  }, g.label), /*#__PURE__*/React.createElement("span", {
+    style: {
+      flex: 1,
+      height: 1,
+      background: 'var(--glass-border)'
+    }
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontFamily: 'var(--font-mono)',
+      fontSize: 11,
+      color: 'var(--text-3)'
+    }
+  }, g.items.length)), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 12
+    }
+  }, g.items.map(ev => {
+    const star = D.byId[ev.starId] || {};
+    const k = TL_KIND[ev.kind] || TL_KIND.review;
+    const up = tlIsUp(ev);
+    // 状态机新增的两种迁移在时间轴上有自己的名字：
+    // ignite + note「重燃」→ 重燃（flame）；dim + note「熄灭」→ 熄灭（待重燃）
+    const relitEv = ev.kind === 'ignite' && (ev.note || '').indexOf('重燃') >= 0;
+    const outEv = ev.kind === 'dim' && (ev.note || '').indexOf('熄灭') >= 0;
+    const evIcon = relitEv ? 'flame' : k.icon;
+    const evLabel = relitEv ? '重燃' : outEv ? '熄灭' : k.label;
+    // 这颗星当下的认证态（与事件无关的现状徽标）
+    const litNow = !!(D.isLit && D.isLit(star));
+    const emberNow = !!(D.isEmber && D.isEmber(star));
+    // 星域一律由这颗星当前的归属派生，不信事件快照里的 con 字段
+    const conId = star.con || ev.con;
+    return /*#__PURE__*/React.createElement("div", {
+      key: ev.id,
+      style: {
+        position: 'relative'
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        position: 'absolute',
+        left: -25,
+        top: 16,
+        width: 11,
+        height: 11,
+        borderRadius: '50%',
+        background: k.color,
+        boxShadow: `0 0 8px ${k.color}`,
+        border: '2px solid var(--space-0)'
+      }
+    }), /*#__PURE__*/React.createElement("div", {
+      onClick: () => onOpen && onOpen(star.id),
+      title: "\u5728\u661F\u56FE\u4E2D\u6253\u5F00\u8FD9\u9897\u661F",
+      role: "button",
+      tabIndex: 0,
+      className: "sr-focus-ring",
+      onKeyDown: e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          onOpen && onOpen(star.id);
+        }
+      },
+      style: {
+        borderRadius: 'var(--r-md)',
+        border: '1px solid var(--glass-border)',
+        background: 'color-mix(in srgb, var(--star-blue) 4%, transparent)',
+        padding: '12px 15px',
+        cursor: 'pointer',
+        transition: 'background var(--dur-fast), border-color var(--dur-fast)'
+      },
+      onMouseEnter: e => {
+        e.currentTarget.style.background = 'color-mix(in srgb, var(--star-blue) 9%, transparent)';
+        e.currentTarget.style.borderColor = 'var(--line-strong)';
+      },
+      onMouseLeave: e => {
+        e.currentTarget.style.background = 'color-mix(in srgb, var(--star-blue) 4%, transparent)';
+        e.currentTarget.style.borderColor = 'var(--glass-border)';
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: 9
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: 5,
+        fontFamily: 'var(--font-mono)',
+        fontSize: 10.5,
+        letterSpacing: 'var(--ls-hud)',
+        textTransform: 'uppercase',
+        color: k.color
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: evIcon,
+      size: 14,
+      color: k.color
+    }), evLabel), /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 14.5,
+        color: 'var(--text-1)',
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        maxWidth: 240
+      }
+    }, star.label), litNow && /*#__PURE__*/React.createElement("span", {
+      title: "\u5DF2\u70B9\u4EAE \xB7 \u8BB2\u6E05\u695A\u7684\u4E1C\u897F\uFF0C\u6697\u5F97\u66F4\u6162\u3002",
+      style: {
+        flex: 'none',
+        width: 8,
+        height: 8,
+        borderRadius: '50%',
+        boxSizing: 'border-box',
+        border: '1px solid var(--gold)'
+      }
+    }), emberNow && /*#__PURE__*/React.createElement("span", {
+      title: "\u66FE\u70B9\u4EAE\u7684\u661F\u6697\u4E86\u4E0B\u6765\u3002\u518D\u8BB2\u900F\u4E00\u6B21\uFF0C\u5C31\u80FD\u91CD\u71C3\u3002",
+      style: {
+        flex: 'none',
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: 3,
+        height: 16,
+        padding: '0 6px',
+        borderRadius: 'var(--r-pill)',
+        background: 'color-mix(in srgb, var(--gold-warm) 10%, transparent)',
+        border: '1px solid color-mix(in srgb, var(--gold-warm) 30%, transparent)',
+        fontSize: 10,
+        color: 'var(--gold-warm)'
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "flame",
+      size: 10,
+      color: "var(--gold-warm)"
+    }), "\u5F85\u91CD\u71C3"), /*#__PURE__*/React.createElement("span", {
+      style: {
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: 5,
+        fontSize: 11.5,
+        color: 'var(--text-3)',
+        flex: 'none'
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        width: 6,
+        height: 6,
+        borderRadius: '50%',
+        background: D.conColor(conId),
+        boxShadow: `0 0 5px ${D.conColor(conId)}`
+      }
+    }), D.conName(conId)), /*#__PURE__*/React.createElement("div", {
+      style: {
+        flex: 1
+      }
+    }), /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontFamily: 'var(--font-mono)',
+        fontSize: 12.5,
+        color: up ? 'var(--gold)' : 'var(--star-blue-dim)'
+      }
+    }, ev.delta)), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: 10,
+        marginTop: 8,
+        paddingLeft: 24
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 12.5,
+        color: 'var(--text-2)',
+        minWidth: 0,
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        whiteSpace: 'nowrap'
+      }
+    }, ev.note), /*#__PURE__*/React.createElement("div", {
+      style: {
+        flex: 1
+      }
+    }), typeof star.strength === 'number' && /*#__PURE__*/React.createElement("span", {
+      style: {
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: 7,
+        flex: 'none'
+      },
+      title: "\u5F53\u524D\u8BB0\u5FC6\u5F3A\u5EA6"
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        width: 56
+      }
+    }, /*#__PURE__*/React.createElement(MemoryBar, {
+      value: star.strength,
+      height: 4,
+      fading: star.strength < 0.4
+    })), /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontFamily: 'var(--font-mono)',
+        fontSize: 11,
+        color: 'var(--text-3)'
+      }
+    }, Math.round(star.strength * 100), "%")), /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontFamily: 'var(--font-mono)',
+        fontSize: 11,
+        color: 'var(--text-3)',
+        flex: 'none'
+      }
+    }, ev.ts ? D.ago(ev.ts) : ev.when))));
+  })))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'relative',
+      paddingTop: 18,
+      textAlign: 'center'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      position: 'absolute',
+      left: -22,
+      top: 24,
+      width: 5,
+      height: 5,
+      borderRadius: '50%',
+      background: 'var(--line-strong)'
+    }
+  }), hasMore ? /*#__PURE__*/React.createElement(Button, {
+    variant: "ghost",
+    size: "sm",
+    icon: "chevron-down",
+    onClick: () => setShown(s => s + TL_PAGE)
+  }, "\u52A0\u8F7D\u66F4\u65E9\u7684\u6D3B\u52A8") : /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 12,
+      color: 'var(--text-3)'
+    }
+  }, "\u5DF2\u662F\u661F\u7A7A\u8BB0\u5FC6\u7684\u5C3D\u5934")))));
+}
+window.SRKit = Object.assign(window.SRKit || {}, {
+  Timeline
+});
+})(); } catch (e) { __ds_ns.__errors.push({ path: "ui_kits/stellar-raft/Timeline.jsx", error: String((e && e.message) || e) }); }
+
+// ui_kits/stellar-raft/VisitView.jsx
+try { (() => {
+/* VisitView — 星际漫游（好友星系）。
+   「我的分享」 开关星系访问 · 星系密文复制/重置 · 可见度（仅星名 / 星名+大纲）· 访客拉黑
+   「好友星系」 兑换密文 · 好友卡片 → 只读造访：
+     与自己的星图同一套世界坐标 + 相机（拖拽平移 / 滚轮缩放 / 星域光晕 / 缩放控件），
+     只是不可编辑；点星只看得到服务端裁剪后的大纲——正文从未离开对方数据库。 */
+const {
+  GlassPanel,
+  Button,
+  IconButton,
+  Icon,
+  Input,
+  Badge,
+  Tag,
+  StarNode,
+  MemoryBar
+} = window.StellarRaftDesignSystem_2866af;
+const VWORLD = {
+  w: 1680,
+  h: 1040
+};
+const vclamp = (v, a, b) => Math.max(a, Math.min(b, v));
+
+/* 密文备忘：收纳（/api/inbox/collect）要用主人的当前密文，但 /api/friends 与
+   /api/visit 都不回传密文（不扩大它的暴露面）。兑换成功时在本机记下
+   friendId → code；主人重置密文后这份备忘自然失效，收纳时给「重新连接」的引导。 */
+const VISIT_CODE_KEY = 'sr.visit.codes.v1';
+const codeMemo = {
+  read() {
+    try {
+      return JSON.parse(localStorage.getItem(VISIT_CODE_KEY)) || {};
+    } catch (e) {
+      return {};
+    }
+  },
+  get(id) {
+    return this.read()[id] || null;
+  },
+  set(id, code) {
+    try {
+      const m = this.read();
+      m[id] = code;
+      localStorage.setItem(VISIT_CODE_KEY, JSON.stringify(m));
+    } catch (e) {}
+  }
+};
+
+/* ---------- 共享样式：远航坞 / 飞船 / 卡片 / 电波环 ---------- */
+function VisitStyle() {
+  return /*#__PURE__*/React.createElement("style", null, `
+      @keyframes sr-bay-bob   { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+      @keyframes sr-ship-flame{ 0%,100% { transform: scaleX(1); opacity: 0.85; } 50% { transform: scaleX(1.4); opacity: 0.55; } }
+      @keyframes sr-beacon    { 0%,100% { opacity: 0.15; } 50% { opacity: 1; } }
+      @keyframes sr-launch    { 0% { transform: translateY(0); } 14% { transform: translateY(5px); } 100% { transform: translateY(-135vh); } }
+      @keyframes sr-pad-flash { from { opacity: 0.85; transform: translateX(-50%) scale(0.4); } to { opacity: 0; transform: translateX(-50%) scale(2.4); } }
+      @keyframes sr-ping      { from { transform: scale(0.55); opacity: 0.7; } to { transform: scale(2.2); opacity: 0; } }
+      @keyframes sr-twk       { 0%,100% { opacity: 0.2; } 50% { opacity: 0.85; } }
+      .sr-ship-flame { animation: sr-ship-flame 0.32s ease-in-out infinite; }
+      .sr-bay-ship   { animation: sr-bay-bob 2.6s var(--ease-flight) infinite; }
+      .sr-bay-ship.launch { animation: sr-launch 1.05s cubic-bezier(0.55, 0, 0.9, 0.4) both; }
+      .sr-bay-ship.launch .sr-ship-flame { animation-duration: 0.1s; }
+      .sr-visit-card { transition: transform var(--dur-base) var(--ease-flight), border-color var(--dur-base); }
+      .sr-visit-card:hover { transform: translateY(-3px); }
+      @media (prefers-reduced-motion: reduce) {
+        .sr-bay-ship, .sr-ship-flame { animation: none; }
+      }
+    `);
+}
+
+/* ---------- 飞船（远航坞与跃迁转场共用同一艘） ---------- */
+function ShipSVG({
+  width = 160
+}) {
+  return /*#__PURE__*/React.createElement("svg", {
+    viewBox: "0 0 160 64",
+    style: {
+      width,
+      display: 'block',
+      filter: 'drop-shadow(0 0 18px rgba(159,198,255,0.35))'
+    }
+  }, /*#__PURE__*/React.createElement("defs", null, /*#__PURE__*/React.createElement("linearGradient", {
+    id: "srw-hull",
+    x1: "0",
+    y1: "0",
+    x2: "1",
+    y2: "0"
+  }, /*#__PURE__*/React.createElement("stop", {
+    offset: "0",
+    stopColor: "#56689c"
+  }), /*#__PURE__*/React.createElement("stop", {
+    offset: "0.55",
+    stopColor: "#9fc6ff"
+  }), /*#__PURE__*/React.createElement("stop", {
+    offset: "1",
+    stopColor: "#e8f0ff"
+  })), /*#__PURE__*/React.createElement("linearGradient", {
+    id: "srw-flame",
+    x1: "1",
+    y1: "0",
+    x2: "0",
+    y2: "0"
+  }, /*#__PURE__*/React.createElement("stop", {
+    offset: "0",
+    stopColor: "#fff4d6"
+  }), /*#__PURE__*/React.createElement("stop", {
+    offset: "0.35",
+    stopColor: "#ffd98a"
+  }), /*#__PURE__*/React.createElement("stop", {
+    offset: "1",
+    stopColor: "rgba(255,184,107,0)"
+  }))), /*#__PURE__*/React.createElement("g", {
+    className: "sr-ship-flame",
+    style: {
+      transformOrigin: '46px 32px'
+    }
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M46 27 L4 32 L46 37 Z",
+    fill: "url(#srw-flame)",
+    opacity: "0.9"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M46 29.5 L18 32 L46 34.5 Z",
+    fill: "#fff4d6",
+    opacity: "0.8"
+  })), /*#__PURE__*/React.createElement("path", {
+    d: "M44 32 C56 16, 96 12, 128 26 L148 32 L128 38 C96 52, 56 48, 44 32 Z",
+    fill: "url(#srw-hull)"
+  }), /*#__PURE__*/React.createElement("ellipse", {
+    cx: "112",
+    cy: "28",
+    rx: "11",
+    ry: "6",
+    fill: "#0b0e22",
+    stroke: "rgba(159,198,255,0.8)",
+    strokeWidth: "1.2"
+  }), /*#__PURE__*/React.createElement("ellipse", {
+    cx: "115",
+    cy: "27",
+    rx: "4",
+    ry: "2.2",
+    fill: "rgba(159,198,255,0.9)"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M70 20 L84 6 L92 18 Z",
+    fill: "#56689c"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M70 44 L84 58 L92 46 Z",
+    fill: "#3d4c7a"
+  }), /*#__PURE__*/React.createElement("circle", {
+    cx: "132",
+    cy: "32",
+    r: "2",
+    fill: "#ffd98a"
+  }, /*#__PURE__*/React.createElement("animate", {
+    attributeName: "opacity",
+    values: "1;0.2;1",
+    dur: "1s",
+    repeatCount: "indefinite"
+  })));
+}
+
+/* ---------- 远航坞：飞船在发射台待命，点火后冲出画面 ---------- */
+function LaunchBay({
+  launching
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'relative',
+      height: 210,
+      marginTop: 26,
+      overflow: 'hidden',
+      pointerEvents: 'none'
+    }
+  }, launching && /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'absolute',
+      left: '50%',
+      bottom: 22,
+      width: 200,
+      height: 60,
+      borderRadius: '50%',
+      transformOrigin: 'center',
+      animation: 'sr-pad-flash 0.9s ease-out both',
+      background: 'radial-gradient(ellipse closest-side, rgba(255,217,138,0.65), rgba(255,184,107,0.2) 55%, transparent 80%)'
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    className: 'sr-bay-ship' + (launching ? ' launch' : ''),
+    style: {
+      position: 'absolute',
+      left: '50%',
+      bottom: 46,
+      marginLeft: -32,
+      width: 64,
+      height: 128,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      transform: 'rotate(-90deg)'
+    }
+  }, /*#__PURE__*/React.createElement(ShipSVG, {
+    width: 128
+  }))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'absolute',
+      left: '50%',
+      bottom: 26,
+      transform: 'translateX(-50%)',
+      width: 230,
+      height: 22,
+      borderRadius: '50%',
+      background: 'radial-gradient(ellipse closest-side, rgba(159,198,255,0.22), rgba(159,198,255,0.06) 60%, transparent 85%)',
+      border: '1px solid rgba(159,198,255,0.18)'
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'absolute',
+      left: '50%',
+      bottom: 20,
+      transform: 'translateX(-50%)',
+      width: 300,
+      height: 10,
+      borderRadius: '50%',
+      background: 'radial-gradient(ellipse closest-side, rgba(159,198,255,0.10), transparent 80%)'
+    }
+  }), [-96, -52, 52, 96].map((dx, i) => /*#__PURE__*/React.createElement("span", {
+    key: i,
+    style: {
+      position: 'absolute',
+      left: `calc(50% + ${dx}px)`,
+      bottom: 32,
+      width: 4,
+      height: 4,
+      borderRadius: '50%',
+      background: launching ? 'var(--gold)' : 'var(--star-blue)',
+      boxShadow: `0 0 8px ${launching ? 'var(--gold)' : 'var(--star-blue)'}`,
+      animation: `sr-beacon ${launching ? 0.35 : 1.8}s ease-in-out ${i * (launching ? 0.08 : 0.4)}s infinite`
+    }
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      bottom: 0,
+      textAlign: 'center',
+      fontFamily: 'var(--font-mono)',
+      fontSize: 10.5,
+      letterSpacing: '0.28em',
+      textTransform: 'uppercase',
+      color: launching ? 'var(--gold)' : 'var(--text-3)'
+    }
+  }, launching ? `IGNITION · ${launching.name}` : 'DOCK · READY'));
+}
+const VISIBILITY_OPTS = [{
+  id: 'outline',
+  label: '星名 + 大纲',
+  desc: '访客可见星名、标签与各级标题，正文永不可见'
+}, {
+  id: 'stars',
+  label: '仅星名',
+  desc: '访客只能看到星与连线的形状'
+}];
+
+/* ---------- 我的分享 ---------- */
+function SharePanel({
+  flash,
+  onGoFriends
+}) {
+  const N = window.SRNet;
+  const [share, setShare] = React.useState(null);
+  const [busy, setBusy] = React.useState(false);
+  // 好友名单：给「把星系分享给好友」的选择器用；后端不可用时本面板整体不渲染
+  const [friends, setFriends] = React.useState(null);
+  const [inviting, setInviting] = React.useState(null); // 正在投递的好友 id
+  const load = () => N.api('/api/share').then(setShare).catch(() => setShare(null));
+  React.useEffect(() => {
+    load();
+  }, []);
+  React.useEffect(() => {
+    N.api('/api/friends').then(r => setFriends(r.friends || [])).catch(() => setFriends([]));
+  }, []);
+
+  // 造访邀请：POST /api/inbox/send kind:'galaxy'（payload 由服务端生成，带当前密文）
+  const invite = f => {
+    if (inviting) return;
+    setInviting(f.id);
+    N.inbox.send(f.id, 'galaxy').then(r => {
+      if (!r) flash('星际网络暂不可用，稍后再试', 'danger');else if (r.error) flash(r.error, 'danger');else if (r.duplicate) flash(`邀请已在「${f.name}」的收件箱里等待领取`);else flash(`已送达「${f.name}」的收件箱`);
+    }).finally(() => setInviting(null));
+  };
+  const post = (body, msg) => {
+    setBusy(true);
+    N.api('/api/share', {
+      method: 'POST',
+      body
+    }).then(s => {
+      setShare(prev => ({
+        ...prev,
+        ...s
+      }));
+      if (msg) flash(msg);
+      load();
+    }).catch(e => flash(e.message, 'danger')).finally(() => setBusy(false));
+  };
+  const copyCode = () => {
+    try {
+      navigator.clipboard.writeText(share.code);
+      flash('密文已复制 · 发给朋友即可造访你的星系');
+    } catch (e) {
+      flash('复制失败，请手动选择', 'danger');
+    }
+  };
+  const toggleBlock = v => {
+    N.api('/api/share/block', {
+      method: 'POST',
+      body: {
+        viewerId: v.id,
+        blocked: !v.blocked
+      }
+    }).then(() => {
+      flash(v.blocked ? `已恢复「${v.name}」的访问` : `已对「${v.name}」隐身`);
+      load();
+    }).catch(e => flash(e.message, 'danger'));
+  };
+  if (!share) return /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: 40,
+      color: 'var(--text-3)',
+      fontSize: 13
+    }
+  }, "\u6B63\u5728\u8FDE\u63A5\u661F\u9645\u7F51\u7EDC\u2026\uFF08\u540E\u7AEF\u672A\u8FD0\u884C\u65F6\u6B64\u9875\u4E0D\u53EF\u7528\uFF09");
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 18,
+      maxWidth: 620
+    }
+  }, /*#__PURE__*/React.createElement(GlassPanel, {
+    radius: "lg",
+    pad: "md"
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 12
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      position: 'relative',
+      width: 38,
+      height: 38,
+      borderRadius: 12,
+      background: share.enabled ? 'rgba(255,217,138,0.12)' : 'rgba(159,198,255,0.08)',
+      border: '1px solid',
+      borderColor: share.enabled ? 'rgba(255,217,138,0.3)' : 'var(--glass-border)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "radio-tower",
+    size: 19,
+    color: share.enabled ? 'var(--gold)' : 'var(--text-3)'
+  }), share.enabled && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", {
+    style: {
+      position: 'absolute',
+      inset: -2,
+      borderRadius: 14,
+      border: '1px solid rgba(255,217,138,0.5)',
+      animation: 'sr-ping 2.4s ease-out infinite',
+      pointerEvents: 'none'
+    }
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      position: 'absolute',
+      inset: -2,
+      borderRadius: 14,
+      border: '1px solid rgba(255,217,138,0.35)',
+      animation: 'sr-ping 2.4s ease-out 1.2s infinite',
+      pointerEvents: 'none'
+    }
+  }))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 15,
+      color: 'var(--text-1)'
+    }
+  }, "\u661F\u7CFB\u8BBF\u95EE"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: 'var(--text-3)',
+      marginTop: 2
+    }
+  }, share.enabled ? '你的星空正在对持有密文的人开放' : '已关闭 · 任何人都无法造访')), /*#__PURE__*/React.createElement(Button, {
+    variant: share.enabled ? 'secondary' : 'primary',
+    size: "sm",
+    glow: !share.enabled,
+    disabled: busy,
+    onClick: () => post({
+      enabled: !share.enabled
+    }, share.enabled ? '星系已关闭访问' : '星系已开放 · 把密文分享给朋友吧')
+  }, share.enabled ? '关闭访问' : '开放星系')), share.enabled && /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 18,
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 14
+    }
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: 'var(--text-3)',
+      marginBottom: 7
+    }
+  }, "\u661F\u7CFB\u5BC6\u6587 \xB7 \u6301\u6709\u5B83\u7684\u4EBA\u624D\u80FD\u9020\u8BBF"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      gap: 8,
+      alignItems: 'center'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      flex: 1,
+      fontFamily: 'var(--font-mono)',
+      fontSize: 17,
+      letterSpacing: '0.12em',
+      color: 'var(--gold-white)',
+      padding: '10px 14px',
+      borderRadius: 'var(--r-md)',
+      background: 'rgba(3,4,12,0.5)',
+      border: '1px solid var(--glass-border-strong)',
+      textShadow: 'var(--text-glow-warm)'
+    }
+  }, share.code), /*#__PURE__*/React.createElement(IconButton, {
+    name: "copy",
+    title: "\u590D\u5236\u5BC6\u6587",
+    onClick: copyCode
+  }), /*#__PURE__*/React.createElement(IconButton, {
+    name: "refresh-cw",
+    title: "\u91CD\u7F6E\u5BC6\u6587\uFF08\u65E7\u5BC6\u6587\u7ACB\u5373\u5931\u6548\uFF09",
+    onClick: () => post({
+      reset: true
+    }, '密文已重置 · 旧密文全部失效')
+  }))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: 'var(--text-3)',
+      marginBottom: 7
+    }
+  }, "\u8BBF\u5BA2\u53EF\u89C1\u5EA6"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 7
+    }
+  }, VISIBILITY_OPTS.map(o => {
+    const on = share.visibility === o.id;
+    return /*#__PURE__*/React.createElement("div", {
+      key: o.id,
+      role: "radio",
+      "aria-checked": on,
+      onClick: () => !on && post({
+        visibility: o.id
+      }, `可见度已改为「${o.label}」`),
+      style: {
+        display: 'flex',
+        alignItems: 'flex-start',
+        gap: 10,
+        padding: '10px 12px',
+        cursor: 'pointer',
+        borderRadius: 'var(--r-md)',
+        border: '1px solid',
+        borderColor: on ? 'rgba(255,217,138,0.4)' : 'var(--glass-border)',
+        background: on ? 'rgba(255,217,138,0.08)' : 'rgba(159,198,255,0.04)'
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        width: 15,
+        height: 15,
+        borderRadius: '50%',
+        marginTop: 2,
+        flex: 'none',
+        border: '1.5px solid',
+        borderColor: on ? 'var(--gold)' : 'var(--text-3)',
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }
+    }, on && /*#__PURE__*/React.createElement("span", {
+      style: {
+        width: 6,
+        height: 6,
+        borderRadius: '50%',
+        background: 'var(--gold)'
+      }
+    })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 13,
+        color: on ? 'var(--text-1)' : 'var(--text-2)'
+      }
+    }, o.label), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 11.5,
+        color: 'var(--text-3)',
+        marginTop: 2
+      }
+    }, o.desc)));
+  }))))), /*#__PURE__*/React.createElement(GlassPanel, {
+    radius: "lg",
+    pad: "md"
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 8,
+      marginBottom: 6
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "send",
+    size: 15,
+    color: "var(--star-blue)"
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 14,
+      color: 'var(--text-1)'
+    }
+  }, "\u628A\u661F\u7CFB\u5206\u4EAB\u7ED9\u597D\u53CB")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: 'var(--text-3)',
+      marginBottom: 12
+    }
+  }, "\u9020\u8BBF\u9080\u8BF7\u4F1A\u5E26\u4E0A\u4F60\u7684\u661F\u7CFB\u5BC6\u6587\uFF0C\u5BC4\u8FDB\u5BF9\u65B9\u7684\u6536\u4EF6\u7BB1\uFF0C\u9886\u53D6\u5373\u53EF\u9020\u8BBF\u3002"), !share.enabled ? /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 12,
+      padding: '10px 12px',
+      borderRadius: 'var(--r-md)',
+      border: '1px solid var(--glass-border)',
+      background: 'rgba(159,198,255,0.04)'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "radio-tower",
+    size: 16,
+    color: "var(--text-3)"
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      flex: 1,
+      fontSize: 12.5,
+      color: 'var(--text-2)'
+    }
+  }, "\u661F\u7CFB\u8BBF\u95EE\u8FD8\u6CA1\u5F00\u542F\u2014\u2014\u5148\u5F00\u653E\u661F\u7CFB\uFF0C\u9080\u8BF7\u624D\u6709\u5904\u53EF\u53BB\u3002"), /*#__PURE__*/React.createElement(Button, {
+    size: "sm",
+    variant: "primary",
+    glow: true,
+    disabled: busy,
+    onClick: () => post({
+      enabled: true
+    }, '星系已开放 · 现在可以寄出邀请了')
+  }, "\u5F00\u653E\u661F\u7CFB")) : friends === null ? /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12.5,
+      color: 'var(--text-3)'
+    }
+  }, "\u6B63\u5728\u547C\u53EB\u597D\u53CB\u540D\u5355\u2026") : !friends.length ? /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 12,
+      padding: '10px 12px',
+      borderRadius: 'var(--r-md)',
+      border: '1px solid var(--glass-border)',
+      background: 'rgba(159,198,255,0.04)'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "user-plus",
+    size: 16,
+    color: "var(--text-3)"
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      flex: 1,
+      fontSize: 12.5,
+      color: 'var(--text-2)'
+    }
+  }, "\u8FD8\u6CA1\u6709\u661F\u9645\u597D\u53CB\u2014\u2014\u5148\u4EA4\u6362\u5BC6\u6587\u6210\u4E3A\u597D\u53CB\u3002"), /*#__PURE__*/React.createElement(Button, {
+    size: "sm",
+    variant: "ghost",
+    icon: "key-round",
+    onClick: onGoFriends
+  }, "\u53BB\u8FDE\u63A5\u597D\u53CB\u661F\u7CFB")) : /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column'
+    }
+  }, friends.map(f => /*#__PURE__*/React.createElement("div", {
+    key: f.id,
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 11,
+      padding: '8px 2px'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      width: 28,
+      height: 28,
+      flex: 'none',
+      borderRadius: '50%',
+      background: 'linear-gradient(140deg, #2a3566, #56689c)',
+      border: '1px solid var(--glass-border-strong)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      fontSize: 12,
+      color: 'var(--text-1)'
+    }
+  }, f.avatar), /*#__PURE__*/React.createElement("span", {
+    style: {
+      flex: 1,
+      fontSize: 13.5,
+      color: 'var(--text-1)',
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis'
+    }
+  }, f.name), /*#__PURE__*/React.createElement(Button, {
+    size: "sm",
+    variant: "ghost",
+    icon: "send",
+    disabled: inviting === f.id,
+    onClick: () => invite(f)
+  }, inviting === f.id ? '寄出中…' : '寄出邀请'))))), /*#__PURE__*/React.createElement(GlassPanel, {
+    radius: "lg",
+    pad: "md"
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      letterSpacing: 'var(--ls-hud)',
+      textTransform: 'uppercase',
+      color: 'var(--text-3)',
+      fontFamily: 'var(--font-mono)',
+      marginBottom: 12
+    }
+  }, "\u8BBF\u5BA2 \xB7 ", (share.visitors || []).length), !(share.visitors || []).length && /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12.5,
+      color: 'var(--text-3)'
+    }
+  }, "\u8FD8\u6CA1\u6709\u4EBA\u9020\u8BBF\u8FC7\u4F60\u7684\u661F\u7CFB\u3002\u628A\u5BC6\u6587\u53D1\u7ED9\u670B\u53CB\u8BD5\u8BD5\u3002"), (share.visitors || []).map(v => /*#__PURE__*/React.createElement("div", {
+    key: v.id,
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 11,
+      padding: '9px 2px'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      width: 28,
+      height: 28,
+      borderRadius: '50%',
+      background: 'linear-gradient(140deg, #2a3566, #56689c)',
+      border: '1px solid var(--glass-border-strong)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      fontSize: 12,
+      color: 'var(--text-1)',
+      opacity: v.blocked ? 0.45 : 1
+    }
+  }, v.avatar), /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 13.5,
+      color: v.blocked ? 'var(--text-3)' : 'var(--text-1)'
+    }
+  }, v.name), v.blocked && /*#__PURE__*/React.createElement(Badge, {
+    tone: "neutral",
+    style: {
+      marginLeft: 8
+    }
+  }, "\u5DF2\u9690\u8EAB")), /*#__PURE__*/React.createElement(Button, {
+    size: "sm",
+    variant: "ghost",
+    icon: v.blocked ? 'eye' : 'eye-off',
+    onClick: () => toggleBlock(v)
+  }, v.blocked ? '恢复可见' : '对 TA 隐身')))));
+}
+
+/* ---------- 好友星系列表 + 兑换 ---------- */
+function FriendsPanel({
+  flash,
+  onVisit,
+  launching
+}) {
+  const N = window.SRNet;
+  const [friends, setFriends] = React.useState([]);
+  const [code, setCode] = React.useState('');
+  const [busy, setBusy] = React.useState(false);
+  const load = () => N.api('/api/friends').then(r => {
+    const list = r.friends || [];
+    setFriends(list);
+    // 同步侧边栏「星际漫游」的好友数角标
+    const D = window.SR_DATA;
+    if (D.social) {
+      D.social.friends = list.length;
+      window.dispatchEvent(new CustomEvent('sr-friends'));
+    }
+  }).catch(() => {});
+  React.useEffect(() => {
+    load();
+  }, []);
+  // 收件箱「去造访」的接线：邀请里的密文放在 sessionStorage（sr.visit.code），到这里预填
+  React.useEffect(() => {
+    const pull = () => {
+      try {
+        const c = sessionStorage.getItem('sr.visit.code');
+        if (c) {
+          setCode(c);
+          sessionStorage.removeItem('sr.visit.code');
+        }
+      } catch (e) {}
+    };
+    pull();
+    window.addEventListener('sr-visit-code', pull);
+    return () => window.removeEventListener('sr-visit-code', pull);
+  }, []);
+  const redeem = () => {
+    const c = code.trim();
+    if (!c) return;
+    setBusy(true);
+    N.api('/api/friends/redeem', {
+      method: 'POST',
+      body: {
+        code: c
+      }
+    }).then(r => {
+      codeMemo.set(r.friend.id, c.toUpperCase()); // 记住密文：造访时「收纳这颗星」要用
+      flash(`已连接「${r.friend.name}」的星系`, 'gold');
+      setCode('');
+      load();
+    }).catch(e => flash(e.message, 'danger')).finally(() => setBusy(false));
+  };
+  const [confirm, setConfirm] = React.useState(null); // {message, confirmLabel, onYes}
+  const remove = f => setConfirm({
+    message: `移除「${f.name} 的星系」？移除后需要重新输入密文才能再次连接。`,
+    confirmLabel: '移除',
+    onYes: () => {
+      N.api('/api/friends/remove', {
+        method: 'POST',
+        body: {
+          friendId: f.id
+        }
+      }).then(() => {
+        flash(`已移除「${f.name}」的星系`);
+        load();
+      }).catch(e => flash(e.message, 'danger'));
+    }
+  });
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 18
+    }
+  }, /*#__PURE__*/React.createElement(GlassPanel, {
+    radius: "lg",
+    pad: "md",
+    style: {
+      maxWidth: 620
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: 'var(--text-3)',
+      marginBottom: 8
+    }
+  }, "\u8F93\u5165\u670B\u53CB\u7684\u661F\u7CFB\u5BC6\u6587\uFF0C\u8FDE\u63A5\u4E00\u7247\u65B0\u7684\u661F\u7A7A"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      gap: 8
+    }
+  }, /*#__PURE__*/React.createElement(Input, {
+    value: code,
+    onChange: e => setCode(e.target.value),
+    placeholder: "XING-XXXX-XXXX\uFF08\u8BD5\u8BD5\u6F14\u793A\u5BC6\u6587 XING-DEMO-2333\uFF09",
+    icon: "key-round",
+    size: "md",
+    style: {
+      flex: 1,
+      fontFamily: 'var(--font-mono)'
+    },
+    onKeyDown: e => {
+      if (e.key === 'Enter') redeem();
+    }
+  }), /*#__PURE__*/React.createElement(Button, {
+    variant: "primary",
+    size: "md",
+    icon: "telescope",
+    glow: true,
+    disabled: busy || !code.trim(),
+    onClick: redeem
+  }, "\u8FDE\u63A5"))), !friends.length && /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12.5,
+      color: 'var(--text-3)',
+      padding: '0 4px'
+    }
+  }, "\u8FDC\u822A\u575E\u7684\u98DE\u8239\u5728\u5F85\u547D\u2014\u2014\u5411\u670B\u53CB\u8981\u4E00\u6BB5\u5BC6\u6587\uFF0C\u4E3A\u5B83\u8BBE\u5B9A\u7B2C\u4E00\u4E2A\u76EE\u7684\u5730\u3002"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fill, minmax(290px, 1fr))',
+      gap: 14
+    }
+  }, friends.map((f, fi) => {
+    const reachable = f.enabled && !f.blocked;
+    // 卡片里的装饰小星：位置由好友 id 决定，稳定不闪跳
+    const seeds = [f.id * 37 % 100, f.id * 61 % 100, f.id * 89 % 100];
+    return /*#__PURE__*/React.createElement("div", {
+      key: f.id,
+      className: "sr-visit-card"
+    }, /*#__PURE__*/React.createElement(GlassPanel, {
+      radius: "lg",
+      pad: "md",
+      style: {
+        position: 'relative',
+        overflow: 'hidden',
+        opacity: reachable ? 1 : 0.6
+      }
+    }, seeds.map((s, i) => /*#__PURE__*/React.createElement("span", {
+      key: i,
+      style: {
+        position: 'absolute',
+        left: 14 + s * 0.72 + '%',
+        top: 10 + (s * 7 + i * 31) % 46 + '%',
+        width: 3,
+        height: 3,
+        borderRadius: '50%',
+        background: i === 1 ? 'var(--gold)' : 'var(--star-blue)',
+        boxShadow: `0 0 6px ${i === 1 ? 'var(--gold)' : 'var(--star-blue)'}`,
+        animation: `sr-twk ${2.6 + i}s ease-in-out ${i * 0.7}s infinite`,
+        pointerEvents: 'none'
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: 12
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        width: 44,
+        height: 44,
+        flex: 'none',
+        borderRadius: '50%',
+        background: 'linear-gradient(140deg, #2a3566, #56689c)',
+        border: '1px solid var(--glass-border-strong)',
+        boxShadow: reachable ? 'var(--glow-faint)' : 'none',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontSize: 17,
+        color: 'var(--text-1)'
+      }
+    }, f.avatar), /*#__PURE__*/React.createElement("div", {
+      style: {
+        flex: 1,
+        minWidth: 0
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 15,
+        color: 'var(--text-1)',
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis'
+      }
+    }, f.name, " \u7684\u661F\u7CFB"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: 6,
+        fontSize: 11.5,
+        color: 'var(--text-3)',
+        marginTop: 3
+      }
+    }, f.enabled ? f.blocked ? /*#__PURE__*/React.createElement("span", null, "\u5BF9\u65B9\u6682\u65F6\u5BF9\u4F60\u9690\u8EAB") : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Icon, {
+      name: "sparkles",
+      size: 11,
+      color: "var(--gold)"
+    }), /*#__PURE__*/React.createElement("span", null, f.starCount, " \u9897\u661F"), /*#__PURE__*/React.createElement("span", null, "\xB7"), /*#__PURE__*/React.createElement("span", null, f.visibility === 'outline' ? '可见大纲' : '仅星名')) : /*#__PURE__*/React.createElement("span", null, "\u5BF9\u65B9\u5DF2\u5173\u95ED\u8BBF\u95EE")))), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        gap: 8,
+        marginTop: 14
+      }
+    }, /*#__PURE__*/React.createElement(Button, {
+      size: "sm",
+      variant: "ghost",
+      icon: "x",
+      onClick: () => remove(f)
+    }, "\u79FB\u9664"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        flex: 1
+      }
+    }), /*#__PURE__*/React.createElement(Button, {
+      size: "sm",
+      variant: "primary",
+      icon: "rocket",
+      glow: true,
+      disabled: !reachable || !!launching,
+      onClick: () => onVisit(f)
+    }, launching && launching.id === f.id ? '点火中…' : '造访'))));
+  })), /*#__PURE__*/React.createElement(LaunchBay, {
+    launching: launching
+  }), confirm && window.SRKit.ConfirmDialog && /*#__PURE__*/React.createElement(window.SRKit.ConfirmDialog, {
+    message: confirm.message,
+    confirmLabel: confirm.confirmLabel,
+    onYes: () => {
+      confirm.onYes();
+      setConfirm(null);
+    },
+    onClose: () => setConfirm(null)
+  }));
+}
+
+/* ---------- 跃迁转场：飞船穿越星流，抵达后加速离场 ----------
+   cruise 阶段飞船居中巡航、星光拉成流线；数据就绪且演出满最短时长后
+   进入 depart：飞船冲出画面，幕布淡出。 */
+function WarpOverlay({
+  name,
+  ready,
+  onFinish
+}) {
+  const MIN_MS = 1900;
+  const [phase, setPhase] = React.useState('cruise'); // cruise | depart
+  const t0 = React.useRef(performance.now());
+  React.useEffect(() => {
+    if (!ready || phase !== 'cruise') return;
+    const wait = Math.max(0, MIN_MS - (performance.now() - t0.current));
+    const t = setTimeout(() => setPhase('depart'), wait);
+    return () => clearTimeout(t);
+  }, [ready, phase]);
+  React.useEffect(() => {
+    if (phase !== 'depart') return;
+    const t = setTimeout(onFinish, 700);
+    return () => clearTimeout(t);
+  }, [phase]);
+
+  // 星流线：一次生成，蓝为主、偶有金
+  const streaks = React.useMemo(() => Array.from({
+    length: 26
+  }, (_, i) => ({
+    top: 4 + Math.random() * 92,
+    w: 60 + Math.random() * 180,
+    delay: Math.random() * 1.2,
+    dur: 0.55 + Math.random() * 0.7,
+    gold: i % 9 === 0,
+    op: 0.25 + Math.random() * 0.5
+  })), []);
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'absolute',
+      inset: 0,
+      zIndex: 80,
+      overflow: 'hidden',
+      background: 'radial-gradient(120% 100% at 50% 50%, #080a18 0%, #03040c 70%)',
+      opacity: phase === 'depart' ? 0 : 1,
+      transition: 'opacity 0.55s ease 0.15s',
+      pointerEvents: phase === 'depart' ? 'none' : 'auto'
+    }
+  }, /*#__PURE__*/React.createElement("style", null, `
+        @keyframes sr-warp-streak { from { transform: translateX(60vw); } to { transform: translateX(-140vw); } }
+        @keyframes sr-warp-bob { 0%,100% { transform: translateY(-4px) rotate(-1deg); } 50% { transform: translateY(4px) rotate(1deg); } }
+        @keyframes sr-warp-flame { 0%,100% { transform: scaleX(1); opacity: 0.9; } 50% { transform: scaleX(1.35); opacity: 0.6; } }
+        @keyframes sr-warp-dots { 0% { content: '·'; } 33% { content: '· ·'; } 66% { content: '· · ·'; } }
+        .sr-warp-eta::after { content: '· · ·'; animation: sr-warp-dots 1.2s steps(1) infinite; margin-left: 6px; }
+        .sr-warp-ship { animation: sr-warp-bob 2.2s var(--ease-flight) infinite; transition: transform 0.65s cubic-bezier(0.6, 0, 0.9, 0.4); }
+        .sr-warp-ship.depart { transform: translateX(120vw) !important; animation: none; }
+      `), streaks.map((s, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    style: {
+      position: 'absolute',
+      left: '50%',
+      top: s.top + '%',
+      height: 1.5,
+      width: s.w,
+      background: s.gold ? 'linear-gradient(90deg, transparent, rgba(255,217,138,0.85), transparent)' : 'linear-gradient(90deg, transparent, rgba(159,198,255,0.8), transparent)',
+      opacity: s.op,
+      borderRadius: 2,
+      animation: `sr-warp-streak ${s.dur}s linear ${s.delay}s infinite`
+    }
+  })), /*#__PURE__*/React.createElement("div", {
+    className: 'sr-warp-ship' + (phase === 'depart' ? ' depart' : ''),
+    style: {
+      position: 'absolute',
+      left: 'calc(50% - 80px)',
+      top: 'calc(50% - 56px)',
+      width: 160
+    }
+  }, /*#__PURE__*/React.createElement(ShipSVG, {
+    width: 160
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      bottom: '18%',
+      textAlign: 'center',
+      pointerEvents: 'none'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sr-warp-eta",
+    style: {
+      display: 'inline-block',
+      fontFamily: 'var(--font-mono)',
+      fontSize: 12,
+      letterSpacing: '0.3em',
+      textTransform: 'uppercase',
+      color: 'var(--text-on-scrim-dim, rgba(214,225,255,0.86))'
+    }
+  }, "WARP"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 10,
+      fontSize: 17,
+      fontWeight: 300,
+      color: 'var(--text-on-scrim, rgba(255,255,255,0.92))',
+      letterSpacing: '0.04em'
+    }
+  }, "\u6B63\u5728\u8DC3\u8FC1 \xB7 \u76EE\u7684\u5730 ", /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: '#fff4d6',
+      textShadow: '0 0 18px rgba(255,217,138,0.45)'
+    }
+  }, name), " \u7684\u661F\u7CFB")));
+}
+
+/* ---------- 造访：只读星图（与自己的星图同一套相机手感） ---------- */
+function VisitMap({
+  friend,
+  onBack,
+  onReady,
+  flash
+}) {
+  const N = window.SRNet;
+  const ref = React.useRef(null);
+  const [state, setState] = React.useState({
+    loading: true
+  });
+  const [view, setView] = React.useState({
+    x: 0,
+    y: 0,
+    k: 0.8
+  });
+  const [selected, setSelected] = React.useState(null);
+  const [mode, setMode] = React.useState('map'); // map | 3d | aerial
+  const [collecting, setCollecting] = React.useState(false);
+
+  /* 收纳这颗星：POST /api/inbox/collect —— 服务端按主人的可见度生成 payload，
+     投进「我自己」的收件箱（寄件人=星系主人）；重复收纳幂等，不重复入库 */
+  const collectStar = star => {
+    if (collecting) return;
+    const c = codeMemo.get(friend.id);
+    if (!c) {
+      flash('缺少这片星系的密文——回到好友列表重新输入密文连接一次，就能收纳', 'danger');
+      return;
+    }
+    setCollecting(true);
+    N.inbox.collect(c, star.id).then(r => {
+      if (!r) flash('星际网络暂不可用，稍后再试', 'danger');else if (r.error) flash(r.error, 'danger');else if (r.duplicate) flash('这颗星已在你的收件箱里 · 等待领取');else flash(`已收进你的收件箱 · 来自 ${state.owner && state.owner.name || friend.name}`);
+    }).finally(() => setCollecting(false));
+  };
+  const viewRef = React.useRef(view);
+  viewRef.current = view;
+  const drag = React.useRef(null);
+  const readyRef = React.useRef(onReady);
+  readyRef.current = onReady;
+  React.useEffect(() => {
+    N.api('/api/visit/' + friend.id).then(r => {
+      setState({
+        galaxy: r.galaxy,
+        owner: r.owner
+      });
+      readyRef.current && readyRef.current();
+    }).catch(e => {
+      setState({
+        error: e.message
+      });
+      readyRef.current && readyRef.current();
+    });
+  }, [friend.id]);
+  const g = state.galaxy;
+  // 世界坐标：与 StarMap 相同的百分比 → 像素映射
+  const stars = React.useMemo(() => g ? g.stars.map(s => ({
+    ...s,
+    wx: s.x / 100 * VWORLD.w,
+    wy: s.y / 100 * VWORLD.h
+  })) : [], [g]);
+  const byId = React.useMemo(() => Object.fromEntries(stars.map(s => [s.id, s])), [stars]);
+  // 注入给 3D / 鸟瞰的只读数据集（形状与 window.SR_DATA 对齐）
+  const dataset = React.useMemo(() => g ? {
+    stars,
+    constellations: g.constellations,
+    connections: g.connections,
+    byId,
+    timeline: [],
+    notes: [],
+    trash: [],
+    ownerName: state.owner ? state.owner.name : '',
+    conName: id => (g.constellations.find(c => c.id === id) || {}).name,
+    conColor: id => (g.constellations.find(c => c.id === id) || {}).color
+  } : null, [g, stars, byId, state.owner]);
+
+  // 初始视图：把整片星系收进画面正中
+  React.useEffect(() => {
+    if (!stars.length || !ref.current) return;
+    const el = ref.current,
+      w = el.clientWidth,
+      h = el.clientHeight;
+    let a = 1e9,
+      b = 1e9,
+      c = -1e9,
+      d = -1e9;
+    stars.forEach(s => {
+      a = Math.min(a, s.wx);
+      b = Math.min(b, s.wy);
+      c = Math.max(c, s.wx);
+      d = Math.max(d, s.wy);
+    });
+    const k = vclamp(Math.min(w / (c - a + 480), h / (d - b + 420)), 0.4, 1.4);
+    setView({
+      k,
+      x: w / 2 - (a + c) / 2 * k,
+      y: h / 2 - (b + d) / 2 * k
+    });
+  }, [stars]);
+
+  // 拖拽把监听器挂在 document 上；组件卸载（如拖拽中途切视图）时必须摘除
+  const dragCleanup = React.useRef(null);
+  React.useEffect(() => () => {
+    if (dragCleanup.current) dragCleanup.current();
+  }, []);
+  const bgDown = e => {
+    drag.current = {
+      sx: e.clientX,
+      sy: e.clientY,
+      ox: viewRef.current.x,
+      oy: viewRef.current.y,
+      moved: 0
+    };
+    const move = ev => {
+      const dcur = drag.current;
+      if (!dcur) return;
+      dcur.moved += Math.abs(ev.movementX) + Math.abs(ev.movementY);
+      setView(v => ({
+        ...v,
+        x: dcur.ox + (ev.clientX - dcur.sx),
+        y: dcur.oy + (ev.clientY - dcur.sy)
+      }));
+    };
+    const up = () => {
+      drag.current = null;
+      document.removeEventListener('mousemove', move);
+      document.removeEventListener('mouseup', up);
+      dragCleanup.current = null;
+    };
+    document.addEventListener('mousemove', move);
+    document.addEventListener('mouseup', up);
+    dragCleanup.current = () => {
+      document.removeEventListener('mousemove', move);
+      document.removeEventListener('mouseup', up);
+    };
+  };
+  // React 的 onWheel 是被动监听、preventDefault 无效；与 Galaxy3D 一样用原生非被动监听
+  React.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const onWheel = e => {
+      e.preventDefault();
+      const r = el.getBoundingClientRect();
+      const mx = e.clientX - r.left,
+        my = e.clientY - r.top;
+      setView(v => {
+        const k = vclamp(v.k * (e.deltaY < 0 ? 1.12 : 0.89), 0.34, 2.6);
+        // 缩放锚定在光标：保持光标下的世界点不动
+        return {
+          k,
+          x: mx - (mx - v.x) * (k / v.k),
+          y: my - (my - v.y) * (k / v.k)
+        };
+      });
+    };
+    el.addEventListener('wheel', onWheel, {
+      passive: false
+    });
+    return () => el.removeEventListener('wheel', onWheel);
+  }, [state.galaxy]);
+  const zoomBy = f => setView(v => ({
+    ...v,
+    k: vclamp(v.k * f, 0.34, 2.6)
+  }));
+  if (state.loading) return /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1,
+      padding: 60,
+      textAlign: 'center',
+      color: 'var(--text-3)',
+      fontSize: 13
+    }
+  }, "\u6B63\u5728\u98DE\u5F80\u300C", friend.name, "\u300D\u7684\u661F\u7CFB\u2026");
+  if (state.error) return /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1,
+      padding: 60,
+      textAlign: 'center'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "cloud-off",
+    size: 30,
+    color: "var(--star-blue-dim)"
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 14,
+      color: 'var(--text-2)',
+      marginTop: 14
+    }
+  }, state.error), /*#__PURE__*/React.createElement(Button, {
+    size: "sm",
+    variant: "ghost",
+    icon: "corner-up-left",
+    style: {
+      marginTop: 18
+    },
+    onClick: onBack
+  }, "\u8FD4\u56DE"));
+
+  // 三维 / 鸟瞰：直接复用同一套视图组件，只注入对方的只读数据集。
+  // 不包任何额外容器、不加悬浮层——与浏览自己星空时的渲染路径完全一致，
+  // 主人名字由组件在自己已有的 HUD 里展示（dataset.ownerName）。
+  if (mode === '3d' || mode === 'aerial') {
+    const G3D = window.SRKit.Galaxy3D,
+      Aerial = window.SRKit.AerialView;
+    return mode === '3d' ? /*#__PURE__*/React.createElement(G3D, {
+      dataset: dataset,
+      onClose: () => setMode('map')
+    }) : /*#__PURE__*/React.createElement(Aerial, {
+      dataset: dataset,
+      onClose: () => setMode('map'),
+      onOpenCon: () => setMode('map')
+    });
+  }
+  const outlineMode = g.visibility === 'outline';
+  const sel = selected ? byId[selected] : null;
+  // 星域几何：质心 + 成员散布半径 + 平均记忆（与 StarMap 的 domainGeom/domainColor 同一口径）
+  const geoms = g.constellations.map(c => {
+    const members = stars.filter(s => s.con === c.id);
+    if (!members.length) return null;
+    const cx = members.reduce((a, s) => a + s.wx, 0) / members.length;
+    const cy = members.reduce((a, s) => a + s.wy, 0) / members.length;
+    const r = Math.max(150, ...members.map(s => Math.hypot(s.wx - cx, s.wy - cy))) + 96;
+    const avg = members.reduce((a, s) => a + s.strength, 0) / members.length;
+    return {
+      con: c,
+      cx,
+      cy,
+      r,
+      count: members.length,
+      col: avg >= 0.78 ? '#ffd98a' : c.color
+    };
+  }).filter(Boolean);
+  const nameOpacity = vclamp(1.4 - view.k, 0.25, 1); // 语义缩放：拉远时域名更醒目
+
+  return /*#__PURE__*/React.createElement("div", {
+    ref: ref,
+    onMouseDown: bgDown,
+    style: {
+      position: 'absolute',
+      inset: 0,
+      overflow: 'hidden',
+      cursor: drag.current ? 'grabbing' : 'grab',
+      userSelect: 'none',
+      background: 'var(--bg-deepspace)'
+    }
+  }, /*#__PURE__*/React.createElement("sr-starfield", {
+    density: "1"
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'absolute',
+      left: 0,
+      top: 0,
+      transformOrigin: '0 0',
+      transform: `translate(${view.x}px, ${view.y}px) scale(${view.k})`,
+      willChange: 'transform'
+    }
+  }, geoms.map(({
+    con,
+    cx,
+    cy,
+    r,
+    count,
+    col
+  }) => /*#__PURE__*/React.createElement("div", {
+    key: con.id
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'absolute',
+      left: cx,
+      top: cy,
+      width: r * 2,
+      height: r * 2,
+      transform: 'translate(-50%,-50%)',
+      borderRadius: '50%',
+      background: `radial-gradient(circle, ${col}2b 0%, ${col}16 44%, transparent 72%)`,
+      border: `1.5px solid ${col}4a`,
+      boxShadow: `0 0 60px ${col}28, inset 0 0 80px ${col}1f`,
+      pointerEvents: 'none'
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    title: `星域「${con.name}」`,
+    style: {
+      position: 'absolute',
+      left: cx,
+      top: cy,
+      transform: 'translate(-50%, calc(-50% + 14px))',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      gap: 9,
+      zIndex: 3,
+      pointerEvents: 'none'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "sr-breathe",
+    style: {
+      width: 30,
+      height: 30,
+      borderRadius: '50%',
+      flex: 'none',
+      background: 'radial-gradient(circle at 38% 34%, #fff6e0 0%, #ffd58a 32%, #ff9d52 64%, #e8623a 100%)',
+      boxShadow: '0 0 48px 9px rgba(255,128,60,0.5), 0 0 18px 3px rgba(255,196,120,0.85), inset 0 0 9px rgba(255,90,40,0.45)'
+    }
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 7,
+      opacity: nameOpacity,
+      transition: 'opacity var(--dur-base)',
+      whiteSpace: 'nowrap'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 15.5,
+      fontWeight: 400,
+      letterSpacing: '0.06em',
+      color: 'var(--sun-label, #ffe3b0)',
+      textShadow: 'var(--sun-label-glow, 0 0 12px rgba(255,150,70,0.55), 0 1px 8px rgba(0,0,0,0.85))'
+    }
+  }, con.name), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontFamily: 'var(--font-mono)',
+      fontSize: 11,
+      color: 'var(--sun-label-dim, rgba(255,200,140,0.62))'
+    }
+  }, count))))), /*#__PURE__*/React.createElement("svg", {
+    width: VWORLD.w,
+    height: VWORLD.h,
+    style: {
+      position: 'absolute',
+      left: 0,
+      top: 0,
+      overflow: 'visible',
+      pointerEvents: 'none'
+    }
+  }, g.connections.map((cn, i) => {
+    const a = byId[cn.a],
+      b = byId[cn.b];
+    if (!a || !b) return null;
+    const d = window.SRConnect ? window.SRConnect(a.wx, a.wy, b.wx, b.wy, 0.1 + i % 3 * 0.03) : `M${a.wx},${a.wy} Q${(a.wx + b.wx) / 2},${(a.wy + b.wy) / 2 - 40} ${b.wx},${b.wy}`;
+    const lit = Math.min(a.strength, b.strength);
+    return /*#__PURE__*/React.createElement("path", {
+      key: i,
+      d: d,
+      fill: "none",
+      stroke: cn.kind === 'cross' ? 'rgba(255,217,138,0.35)' : `rgba(159,198,255,${0.16 + lit * 0.2})`,
+      strokeWidth: "1.1"
+    });
+  })), stars.map(s => /*#__PURE__*/React.createElement("div", {
+    key: s.id,
+    onMouseDown: e => e.stopPropagation(),
+    onClick: () => setSelected(s.id === selected ? null : s.id),
+    style: {
+      position: 'absolute',
+      left: s.wx,
+      top: s.wy,
+      zIndex: 4
+    }
+  }, /*#__PURE__*/React.createElement(StarNode, {
+    strength: s.strength,
+    importance: s.importance || 1,
+    label: s.label,
+    selected: selected === s.id,
+    style: {
+      left: 0,
+      top: 0,
+      transform: 'translate(-50%, calc(-50% + 11.5px))',
+      cursor: 'pointer'
+    }
+  })))), /*#__PURE__*/React.createElement("div", {
+    onMouseDown: e => e.stopPropagation(),
+    style: {
+      position: 'absolute',
+      top: 18,
+      left: 22,
+      right: 22,
+      zIndex: 30,
+      display: 'flex',
+      alignItems: 'center',
+      gap: 14,
+      pointerEvents: 'none'
+    }
+  }, /*#__PURE__*/React.createElement(GlassPanel, {
+    radius: "pill",
+    pad: "none",
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 10,
+      padding: '8px 16px',
+      pointerEvents: 'auto'
+    }
+  }, /*#__PURE__*/React.createElement(IconButton, {
+    name: "corner-up-left",
+    size: "sm",
+    title: "\u8FD4\u56DE\u597D\u53CB\u5217\u8868",
+    onClick: onBack
+  }), /*#__PURE__*/React.createElement(Icon, {
+    name: "telescope",
+    size: 16,
+    color: "var(--gold)"
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 14,
+      color: 'var(--text-1)'
+    }
+  }, state.owner && state.owner.name || friend.name, " \u7684\u661F\u7CFB"), /*#__PURE__*/React.createElement(Badge, {
+    tone: "gold"
+  }, outlineMode ? '可见大纲' : '仅星名')), /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1
+    }
+  }), /*#__PURE__*/React.createElement(GlassPanel, {
+    radius: "pill",
+    pad: "none",
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 18,
+      padding: '8px 18px',
+      pointerEvents: 'auto'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 12,
+      color: 'var(--text-3)'
+    }
+  }, "\u77E5\u8BC6\u661F ", /*#__PURE__*/React.createElement("b", {
+    style: {
+      color: 'var(--text-1)',
+      fontWeight: 500
+    }
+  }, stars.length)), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 12,
+      color: 'var(--text-3)'
+    }
+  }, "\u661F\u57DF ", /*#__PURE__*/React.createElement("b", {
+    style: {
+      color: 'var(--star-blue)',
+      fontWeight: 500
+    }
+  }, geoms.length)), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 12,
+      color: 'var(--text-3)'
+    }
+  }, "\u8FDE\u63A5 ", /*#__PURE__*/React.createElement("b", {
+    style: {
+      color: 'var(--gold)',
+      fontWeight: 500
+    }
+  }, g.connections.length)))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'absolute',
+      bottom: 26,
+      left: 24,
+      zIndex: 30,
+      display: 'flex',
+      alignItems: 'center',
+      gap: 8,
+      fontSize: 11.5,
+      color: 'var(--text-3)',
+      pointerEvents: 'none'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "move",
+    size: 14,
+    color: "currentColor"
+  }), "\u62D6\u62FD\u5E73\u79FB \xB7 \u6EDA\u8F6E\u7F29\u653E \xB7 \u70B9\u661F\u770B\u5927\u7EB2 \xB7 \u53EA\u8BFB\u9020\u8BBF\uFF0C\u7B14\u8BB0\u6B63\u6587\u4E0D\u4F1A\u79BB\u5F00\u5BF9\u65B9\u7684\u6570\u636E\u5E93"), /*#__PURE__*/React.createElement("div", {
+    onMouseDown: e => e.stopPropagation(),
+    style: {
+      position: 'absolute',
+      bottom: 26,
+      right: 24,
+      zIndex: 30
+    }
+  }, /*#__PURE__*/React.createElement(GlassPanel, {
+    radius: "pill",
+    pad: "none",
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 2,
+      padding: '6px 8px'
+    }
+  }, /*#__PURE__*/React.createElement(IconButton, {
+    name: "minus",
+    size: "sm",
+    title: "\u7F29\u5C0F",
+    onClick: () => zoomBy(0.85)
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontFamily: 'var(--font-mono)',
+      fontSize: 12,
+      color: 'var(--text-2)',
+      minWidth: 42,
+      textAlign: 'center'
+    }
+  }, Math.round(view.k * 100), "%"), /*#__PURE__*/React.createElement(IconButton, {
+    name: "plus",
+    size: "sm",
+    title: "\u653E\u5927",
+    onClick: () => zoomBy(1.18)
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      width: 1,
+      height: 18,
+      background: 'var(--line)'
+    }
+  }), /*#__PURE__*/React.createElement(IconButton, {
+    name: "box",
+    size: "sm",
+    title: "\u4E09\u7EF4\u661F\u7CFB",
+    onClick: () => setMode('3d')
+  }), /*#__PURE__*/React.createElement(IconButton, {
+    name: "satellite",
+    size: "sm",
+    title: "\u4EAE\u5EA6\u9E1F\u77B0",
+    onClick: () => setMode('aerial')
+  }))), sel && /*#__PURE__*/React.createElement("div", {
+    onMouseDown: e => e.stopPropagation(),
+    style: {
+      position: 'absolute',
+      right: 20,
+      top: 76,
+      width: 292,
+      zIndex: 40,
+      animation: 'sr-cardin var(--dur-base) var(--ease-flight) both'
+    }
+  }, /*#__PURE__*/React.createElement(GlassPanel, {
+    strong: true,
+    radius: "lg",
+    pad: "md",
+    glow: true
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'flex-start',
+      gap: 8
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 10,
+      letterSpacing: '0.2em',
+      textTransform: 'uppercase',
+      color: 'var(--gold)',
+      opacity: 0.8
+    }
+  }, (g.constellations.find(c => c.id === sel.con) || {}).name), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 18,
+      fontWeight: 400,
+      color: 'var(--text-1)',
+      marginTop: 4
+    }
+  }, sel.label)), /*#__PURE__*/React.createElement(IconButton, {
+    name: "x",
+    size: "sm",
+    title: "\u5173\u95ED",
+    onClick: () => setSelected(null)
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      margin: '10px 0 4px'
+    }
+  }, /*#__PURE__*/React.createElement(MemoryBar, {
+    value: sel.strength,
+    height: 5
+  })), !!(sel.tags || []).length && /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      gap: 5,
+      flexWrap: 'wrap',
+      margin: '8px 0 2px'
+    }
+  }, sel.tags.map(t => /*#__PURE__*/React.createElement(Tag, {
+    key: t,
+    icon: "hash"
+  }, t))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 10
+    }
+  }, outlineMode ? (sel.outline || []).length ? /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 4
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 10,
+      letterSpacing: '0.2em',
+      textTransform: 'uppercase',
+      color: 'var(--text-3)',
+      fontFamily: 'var(--font-mono)',
+      marginBottom: 3
+    }
+  }, "\u5927\u7EB2"), sel.outline.map((o, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    style: {
+      fontSize: o.type === 'h1' ? 13.5 : 12.5,
+      color: 'var(--text-2)',
+      borderLeft: '2px solid var(--line)',
+      padding: '2px 2px 2px ' + (o.type === 'h3' ? 16 : o.type === 'h2' ? 10 : 6) + 'px',
+      marginLeft: 2,
+      lineHeight: 1.5
+    }
+  }, o.text))) : /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: 'var(--text-3)'
+    }
+  }, "\u8FD9\u9897\u661F\u8FD8\u6CA1\u6709\u5927\u7EB2\u3002") : /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 7,
+      fontSize: 12,
+      color: 'var(--text-3)'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "lock",
+    size: 13,
+    color: "currentColor"
+  }), "\u5BF9\u65B9\u53EA\u5F00\u653E\u4E86\u661F\u540D")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 14
+    }
+  }, /*#__PURE__*/React.createElement(Button, {
+    size: "sm",
+    icon: "inbox",
+    disabled: collecting,
+    onClick: () => collectStar(sel),
+    style: {
+      width: '100%'
+    }
+  }, collecting ? '收纳中…' : '收纳这颗星'), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 7,
+      fontSize: 11,
+      lineHeight: 1.6,
+      color: 'var(--text-3)'
+    }
+  }, outlineMode ? '星名与大纲要点会寄进你的收件箱，正文不会离开对方的数据库。' : '对方只开放了星名——只能收纳星名。')))));
+}
+
+/* ---------- 主视图 ---------- */
+function VisitView() {
+  const [tab, setTab] = React.useState('friends'); // friends | share
+  const [visiting, setVisiting] = React.useState(null);
+  const [launching, setLaunching] = React.useState(null); // 远航坞点火中的目标好友
+  const [warp, setWarp] = React.useState(false); // 跃迁转场进行中
+  const [mapReady, setMapReady] = React.useState(false);
+  const [toast, setToast] = React.useState(null); // { msg, tone } — 错误与成功用不同视觉词汇
+  const toastT = React.useRef(null);
+  const launchT = React.useRef(null);
+  const launchingRef = React.useRef(false); // 同步双击在同一轮事件里看不到 state 更新，用 ref 挡
+  React.useEffect(() => () => {
+    clearTimeout(toastT.current);
+    clearTimeout(launchT.current);
+  }, []);
+  const flash = (msg, tone) => {
+    setToast({
+      msg,
+      tone: tone || 'blue'
+    });
+    clearTimeout(toastT.current);
+    toastT.current = setTimeout(() => setToast(null), tone === 'danger' ? 3200 : 2200);
+  };
+  // 点火 → 起飞（1.05s，远航坞演出）→ 跃迁巡航 → 抵达
+  const startVisit = f => {
+    if (launchingRef.current) return;
+    launchingRef.current = true;
+    setLaunching(f);
+    launchT.current = setTimeout(() => {
+      launchingRef.current = false;
+      setLaunching(null);
+      setVisiting(f);
+      setWarp(true);
+      setMapReady(false);
+    }, 1050);
+  };
+  return (
+    /*#__PURE__*/
+    // display:flex 与应用主区域一致——3D/鸟瞰组件靠 flex:1 撑满，
+    // 渲染语境和浏览自己的星空完全相同
+    React.createElement("div", {
+      style: {
+        position: 'relative',
+        flex: 1,
+        minWidth: 0,
+        height: '100%',
+        overflow: 'hidden',
+        display: 'flex'
+      }
+    }, /*#__PURE__*/React.createElement(VisitStyle, null), visiting ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(VisitMap, {
+      friend: visiting,
+      onBack: () => setVisiting(null),
+      onReady: () => setMapReady(true),
+      flash: flash
+    }), warp && /*#__PURE__*/React.createElement(WarpOverlay, {
+      name: visiting.name,
+      ready: mapReady,
+      onFinish: () => setWarp(false)
+    })) : /*#__PURE__*/React.createElement("div", {
+      style: {
+        flex: 1,
+        minWidth: 0,
+        height: '100%',
+        overflow: 'auto',
+        position: 'relative'
+      }
+    }, /*#__PURE__*/React.createElement("sr-starfield", {
+      density: "0.8",
+      meteors: "0"
+    }), /*#__PURE__*/React.createElement("div", {
+      style: {
+        position: 'relative',
+        zIndex: 1,
+        maxWidth: 960,
+        margin: '0 auto',
+        padding: '34px 32px 24px'
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: 13,
+        marginBottom: 8
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "telescope",
+      size: 26,
+      color: "var(--gold)"
+    }), /*#__PURE__*/React.createElement("h1", {
+      style: {
+        fontSize: 30,
+        fontWeight: 200,
+        letterSpacing: '0.04em',
+        background: 'linear-gradient(100deg, var(--gold), var(--gold-white) 45%, var(--star-blue))',
+        WebkitBackgroundClip: 'text',
+        backgroundClip: 'text',
+        color: 'transparent'
+      }
+    }, "\u661F\u9645\u6F2B\u6E38")), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 13,
+        color: 'var(--text-3)',
+        marginBottom: 22,
+        fontWeight: 300
+      }
+    }, "\u7528\u5BC6\u6587\u8FDE\u63A5\u5F7C\u6B64\u7684\u661F\u7A7A\u2014\u2014\u770B\u5F97\u89C1\u661F\u4E0E\u661F\u57DF\u7684\u5F62\u72B6\uFF0C\u770B\u4E0D\u89C1\u7B14\u8BB0\u7684\u5185\u5BB9\u3002"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        gap: 4,
+        marginBottom: 20
+      }
+    }, [{
+      id: 'friends',
+      icon: 'rocket',
+      label: '好友星系'
+    }, {
+      id: 'share',
+      icon: 'radio-tower',
+      label: '我的分享'
+    }].map(t => {
+      const on = tab === t.id;
+      return /*#__PURE__*/React.createElement("button", {
+        key: t.id,
+        type: "button",
+        onClick: () => setTab(t.id),
+        style: {
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: 7,
+          padding: '8px 16px',
+          border: '1px solid',
+          borderColor: on ? 'rgba(255,217,138,0.4)' : 'transparent',
+          borderRadius: 'var(--r-pill)',
+          background: on ? 'rgba(255,217,138,0.1)' : 'transparent',
+          color: on ? 'var(--text-1)' : 'var(--text-3)',
+          font: 'inherit',
+          fontSize: 13,
+          cursor: 'pointer'
+        }
+      }, /*#__PURE__*/React.createElement(Icon, {
+        name: t.icon,
+        size: 15,
+        color: on ? 'var(--gold)' : 'var(--text-3)'
+      }), t.label);
+    })), tab === 'share' ? /*#__PURE__*/React.createElement(SharePanel, {
+      flash: flash,
+      onGoFriends: () => setTab('friends')
+    }) : /*#__PURE__*/React.createElement(FriendsPanel, {
+      flash: flash,
+      onVisit: startVisit,
+      launching: launching
+    }))), toast && /*#__PURE__*/React.createElement("div", {
+      style: {
+        position: 'fixed',
+        bottom: 26,
+        left: '50%',
+        transform: 'translateX(-50%)',
+        zIndex: 95,
+        animation: 'sr-cardin var(--dur-base) var(--ease-flight) both'
+      },
+      role: "status"
+    }, /*#__PURE__*/React.createElement(GlassPanel, {
+      strong: true,
+      radius: "pill",
+      pad: "none",
+      style: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: 9,
+        padding: '10px 18px'
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: toast.tone === 'danger' ? 'circle-alert' : 'check',
+      size: 16,
+      color: toast.tone === 'danger' ? 'var(--danger)' : toast.tone === 'gold' ? 'var(--gold)' : 'var(--star-blue)'
+    }), /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 13.5,
+        color: 'var(--text-1)'
+      }
+    }, toast.msg))))
+  );
+}
+window.SRKit = Object.assign(window.SRKit || {}, {
+  VisitView
+});
+})(); } catch (e) { __ds_ns.__errors.push({ path: "ui_kits/stellar-raft/VisitView.jsx", error: String((e && e.message) || e) }); }
+
 // ui_kits/stellar-raft/app.jsx
 try { (() => {
 /* App — orchestrates the Stellar Raft kit as one interactive click-through.
-   star map ⇄ list ⇄ editor, with Feynman drawer + ignite, all via the sidebar. */
+   star map ⇄ list ⇄ editor ⇄ inbox ⇄ timeline, with Feynman drawer, ignite,
+   aerial heat map, ⌘K command palette and a 知识体检 report — all via the sidebar. */
 const {
   Sidebar,
   StarMap,
   AerialView,
   FeynmanDrawer,
   ListView,
-  Editor
+  Editor,
+  Inbox,
+  Timeline,
+  CommandPalette,
+  Checkup,
+  Galaxy3D,
+  Settings,
+  AIConfig,
+  BlackHole,
+  VisitView,
+  ReviewSession
 } = window.SRKit;
+const {
+  GlassPanel,
+  Icon,
+  IconButton,
+  Button,
+  MemoryBar
+} = window.StellarRaftDesignSystem_2866af;
 function App() {
   const [collapsed, setCollapsed] = React.useState(false);
-  const [view, setView] = React.useState('map'); // map | list | editor | inbox | timeline
+  const [view, setView] = React.useState('map'); // map | list | editor | inbox | timeline | checkup | galaxy3d
   const [selected, setSelected] = React.useState(null);
   const [focus, setFocus] = React.useState('qm');
+  const [focusReq, setFocusReq] = React.useState(null); // {con, n} — ask the map to fly to a constellation
   const [aerial, setAerial] = React.useState(false);
   const [feynman, setFeynman] = React.useState(null); // starId or null
   const [editing, setEditing] = React.useState(null); // starId or null
   const [theme, setTheme] = React.useState('night'); // night | dawn
+  const [cmd, setCmd] = React.useState(false); // command palette open
+  const [settingsOpen, setSettingsOpen] = React.useState(false); // 个人设置 modal
+  const [reviewOpen, setReviewOpen] = React.useState(false); // 复习会话（间隔重复）
+  const [aiConfigOpen, setAiConfigOpen] = React.useState(false); // AI 配置 modal
+  const [dataRev, setDataRev] = React.useState(0); // 数据库水合后整体重挂载
+  const nonce = React.useRef(0);
+  React.useEffect(() => {
+    const h = () => {
+      setDataRev(r => r + 1);
+      setSelected(null);
+      setEditing(null);
+    };
+    window.addEventListener('sr-hydrated', h);
+    return () => window.removeEventListener('sr-hydrated', h);
+  }, []);
 
+  // 应用挂载完成：淡出 index.html 里的静态启动帧
+  React.useEffect(() => {
+    const b = document.getElementById('sr-boot');
+    if (b) {
+      b.setAttribute('data-done', '');
+      setTimeout(() => b.remove(), 700);
+    }
+  }, []);
+
+  // 主题切换：300ms 全局 crossfade（transition.js 注入的 html 层过渡类；
+  // reduced-motion / 关动效时 themeCrossfade 内部瞬切，不加类）
+  const toggleTheme = () => {
+    const T = window.srTransition;
+    if (T && T.themeCrossfade) T.themeCrossfade();
+    setTheme(t => t === 'dawn' ? 'night' : 'dawn');
+  };
   React.useEffect(() => {
     document.documentElement.dataset.theme = theme === 'dawn' ? 'dawn' : '';
   }, [theme]);
+
+  // ⌘K / Ctrl+K opens the command palette anywhere —
+  // 复习会话是模态：进行中不叠命令面板，避免按键穿透到会话里误评分
+  React.useEffect(() => {
+    const h = e => {
+      if ((e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K')) {
+        if (reviewOpen) return;
+        e.preventDefault();
+        setCmd(c => !c);
+      }
+    };
+    window.addEventListener('keydown', h);
+    return () => window.removeEventListener('keydown', h);
+  }, [reviewOpen]);
+
+  // Esc 统一词汇：同一动作（离开当前浮层）在所有屏幕说同一句话。
+  // 命令面板 / 设置 / AI 配置 / 复习会话自带 Esc，这里让位；
+  // 捕获阶段处理费曼抽屉——抽屉永远盖在视图内浮层（菜单、摘要卡）之上，Esc 先关它；
+  // 体检报告自身无键盘处理，Esc 在这里统一返回星图。
+  // 鸟瞰 / 三维星系的 Esc 在各自组件内（它们检查 e.defaultPrevented 协调层叠）。
+  React.useEffect(() => {
+    const h = e => {
+      if (e.key !== 'Escape' || e.defaultPrevented) return;
+      if (cmd || settingsOpen || aiConfigOpen || reviewOpen) return;
+      if (feynman) {
+        e.preventDefault();
+        setFeynman(null);
+        return;
+      }
+      if (view === 'checkup') {
+        e.preventDefault();
+        freshen();
+        setView('map');
+        setAerial(false);
+      }
+    };
+    window.addEventListener('keydown', h, true);
+    return () => window.removeEventListener('keydown', h, true);
+  }, [cmd, settingsOpen, aiConfigOpen, reviewOpen, feynman, view]);
+
+  // 切换视图前按真实时间重算全部星的 R（衰减模型），新挂载的视图读到的是当下的亮度
+  const freshen = () => {
+    const D = window.SR_DATA;
+    if (D && D.refreshMemory) D.refreshMemory();
+  };
+
+  // 星际跃迁遮罩（srTransition.flight）只留给「大跳转」——目前仅编辑器右栏的
+  // 「探索星系」。高频操作（侧栏切视图、开关编辑器、复习、返回星图）一律直接
+  // 切换：<main> 按视图 key 重挂载自带 .sr-view-enter 轻量入场，不挡操作。
+  const warp = fn => {
+    const T = window.srTransition;
+    if (T && T.flight) T.flight(fn);else fn();
+  };
+
+  // 视图切换统一收掉费曼抽屉——抽屉属于打开它的那个上下文，不跨视图滞留
   const openEditor = id => {
+    freshen();
+    setFeynman(null);
     setEditing(id);
     setView('editor');
+    setAerial(false);
   };
+  const openReview = () => {
+    freshen();
+    setFeynman(null);
+    setReviewOpen(true);
+  };
+  const closeReview = () => {
+    setReviewOpen(false);
+    freshen();
+  };
+  const focusCon = id => {
+    // 落到星图后由地图自己的镜头飞行承担这次跃迁感，无需全屏遮罩
+    freshen();
+    setFeynman(null);
+    setFocus(id);
+    setView('map');
+    setAerial(false);
+    setEditing(null);
+    nonce.current += 1;
+    setFocusReq({
+      con: id,
+      n: nonce.current
+    });
+  };
+  // 编辑器右栏迷你星图的「探索星系」：跃迁回星图，聚焦该星的星域并选中它
+  // （选中即 StarNode 高亮 + 摘要卡随镜头打开）
+  const exploreStar = id => {
+    const D = window.SR_DATA;
+    const s = D && D.byId && D.byId[id];
+    if (!s) {
+      backToMap();
+      return;
+    }
+    warp(() => {
+      freshen();
+      setFeynman(null);
+      setFocus(s.con);
+      setView('map');
+      setAerial(false);
+      setEditing(null);
+      setSelected(id);
+      nonce.current += 1;
+      setFocusReq({
+        con: s.con,
+        n: nonce.current
+      });
+    });
+  };
+  const openView = v => {
+    if (v === 'aerial' ? view === 'map' && aerial : v === view && !aerial && !editing) return; // 已在目标视图，不空跳
+    freshen();
+    setFeynman(null);
+    if (v === 'aerial') {
+      setView('map');
+      setAerial(true);
+      setEditing(null);
+      return;
+    }
+    setView(v);
+    setAerial(false);
+    setEditing(null);
+  };
+  const backToMap = () => {
+    setView('map');
+    setAerial(false);
+    setEditing(null);
+  };
+  // 稳定 ref：只在 <main> 真正重挂载（key 变化）时触发入场动画；
+  // 内联箭头 ref 每次渲染都会重跑 enter，任何 setState 都会闪一次入场
+  const mainEnter = React.useCallback(el => {
+    const T = window.srTransition;
+    if (el && T && T.enter) T.enter(el);
+  }, []);
   return /*#__PURE__*/React.createElement("div", {
+    key: dataRev,
     style: {
       display: 'flex',
       width: '100%',
@@ -5230,20 +24182,19 @@ function App() {
     collapsed: collapsed,
     onToggle: () => setCollapsed(c => !c),
     view: view === 'editor' ? 'map' : view,
-    onView: v => {
-      setView(v);
-      setAerial(false);
-      setEditing(null);
-    },
+    onView: openView,
     focus: focus,
-    onFocus: id => {
-      setFocus(id);
-      setView('map');
-      setAerial(false);
-    },
+    onFocus: focusCon,
     theme: theme,
-    onToggleTheme: () => setTheme(t => t === 'dawn' ? 'night' : 'dawn')
+    onToggleTheme: toggleTheme,
+    onSearch: () => setCmd(true),
+    onCheckup: () => openView('checkup'),
+    onAIConfig: () => setAiConfigOpen(true),
+    onReview: openReview,
+    onOpenSettings: () => setSettingsOpen(true)
   }), /*#__PURE__*/React.createElement("main", {
+    key: `${view}|${aerial ? 'a' : ''}|${view === 'editor' ? editing : ''}`,
+    ref: mainEnter,
     style: {
       flex: 1,
       minWidth: 0,
@@ -5255,65 +24206,57 @@ function App() {
     onSelect: setSelected,
     onOpenEditor: openEditor,
     onFeynman: id => setFeynman(id),
-    onAerial: () => setAerial(true),
-    igniteId: null
+    onAerial: () => openView('aerial'),
+    on3D: () => openView('galaxy3d'),
+    igniteId: null,
+    focusReq: focusReq
   }), view === 'map' && aerial && /*#__PURE__*/React.createElement(AerialView, {
-    onClose: () => setAerial(false)
+    onClose: () => setAerial(false),
+    onOpenCon: focusCon
+  }), view === 'galaxy3d' && /*#__PURE__*/React.createElement(Galaxy3D, {
+    onClose: backToMap,
+    onOpenStar: openEditor,
+    onFeynman: id => setFeynman(id)
   }), view === 'list' && /*#__PURE__*/React.createElement(ListView, {
-    onOpen: openEditor
+    onOpen: openEditor,
+    onOpenCon: focusCon,
+    onFeynman: id => setFeynman(id)
   }), view === 'editor' && /*#__PURE__*/React.createElement(Editor, {
+    key: editing,
     starId: editing,
-    onBack: () => {
-      setView('map');
-      setEditing(null);
-    }
-  }), (view === 'inbox' || view === 'timeline') && /*#__PURE__*/React.createElement(Placeholder, {
-    view: view
+    onBack: backToMap,
+    onOpen: openEditor,
+    onExplore: exploreStar
+  }), view === 'inbox' && /*#__PURE__*/React.createElement(Inbox, {
+    onFocusCon: focusCon,
+    onOpen: openEditor
+  }), view === 'blackhole' && /*#__PURE__*/React.createElement(BlackHole, {
+    onOpenCon: focusCon
+  }), view === 'visit' && /*#__PURE__*/React.createElement(VisitView, null), view === 'timeline' && /*#__PURE__*/React.createElement(Timeline, {
+    onOpen: openEditor
+  }), view === 'checkup' && /*#__PURE__*/React.createElement(Checkup, {
+    onClose: backToMap,
+    onOpenStar: openEditor,
+    onFocusCon: focusCon,
+    onFeynman: id => setFeynman(id),
+    onReview: openReview
   }), feynman && /*#__PURE__*/React.createElement(FeynmanDrawer, {
     starId: feynman,
     onClose: () => setFeynman(null)
-  })));
-}
-function Placeholder({
-  view
-}) {
-  const map = {
-    inbox: ['inbox', '收件箱', '随手捕捉的卡片暂存于此，待整理入星座。'],
-    timeline: ['git-commit-horizontal', '时间轴视图', '按时间回溯你点亮过的每一颗星。']
-  };
-  const [icon, title, sub] = map[view];
-  return /*#__PURE__*/React.createElement("div", {
-    style: {
-      position: 'relative',
-      flex: 1,
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      flexDirection: 'column',
-      gap: 14
-    }
-  }, /*#__PURE__*/React.createElement("sr-starfield", {
-    density: "0.7"
-  }), /*#__PURE__*/React.createElement("i", {
-    "data-lucide": icon,
-    style: {
-      width: 34,
-      height: 34,
-      color: 'var(--star-blue)',
-      opacity: 0.6
-    }
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 20,
-      fontWeight: 300,
-      color: 'var(--text-1)'
-    }
-  }, title), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 13.5,
-      color: 'var(--text-3)'
-    }
-  }, sub));
+  })), reviewOpen && /*#__PURE__*/React.createElement(ReviewSession, {
+    onClose: closeReview
+  }), cmd && /*#__PURE__*/React.createElement(CommandPalette, {
+    onClose: () => setCmd(false),
+    onOpenStar: openEditor,
+    onOpenView: openView,
+    onFocusCon: focusCon
+  }), settingsOpen && /*#__PURE__*/React.createElement(Settings, {
+    onClose: () => setSettingsOpen(false),
+    theme: theme,
+    onToggleTheme: toggleTheme
+  }), aiConfigOpen && /*#__PURE__*/React.createElement(AIConfig, {
+    onClose: () => setAiConfigOpen(false)
+  }));
 }
 ReactDOM.createRoot(document.getElementById('root')).render(/*#__PURE__*/React.createElement(App, null));
 if (window.lucide) window.lucide.createIcons();
@@ -5392,8 +24335,8 @@ try { (() => {
   def('markdown md mdx', '', null);
   // 'plaintext'/'text' intentionally NOT defined → renders plain.
 
-  const idword = /[A-Za-z_$\u00C0-\uFFFF]/;
-  const idword2 = /[A-Za-z0-9_$\u00C0-\uFFFF]/;
+  const idword = /[A-Za-z_$À-￿]/;
+  const idword2 = /[A-Za-z0-9_$À-￿]/;
   function tokenize(code, lang) {
     const d = DEFS[(lang || '').toLowerCase()];
     const lines = String(code).split('\n');
@@ -5527,7 +24470,10 @@ try { (() => {
 
 // ui_kits/stellar-raft/data.js
 try { (() => {
-/* ===== Stellar Raft UI kit — mock data (plain global, no imports) ===== */
+/* ===== Stellar Raft UI kit — mock data (plain global, no imports) =====
+   Every star carries its own note: a one-line summary, frontmatter props,
+   and a real block body. Connections carry a relation sentence. Plus
+   inbox cards and an ignite timeline for those two views. */
 window.SR_DATA = function () {
   const constellations = [{
     id: 'qm',
@@ -5555,17 +24501,95 @@ window.SR_DATA = function () {
     count: 19
   }];
 
-  // Stars laid out across the canvas in four loose clusters (% coords).
-  const stars = [
-  // 量子力学 cluster (upper-left, bright/gold)
-  {
+  // Each star: layout (x,y %), strength, importance, label + its own note.
+  const stars = [{
     id: 's1',
     con: 'qm',
     x: 26,
     y: 32,
     strength: 0.95,
     importance: 1.5,
-    label: '贝尔不等式'
+    label: '贝尔不等式',
+    fav: true,
+    summary: '贝尔不等式给出了任何定域隐变量理论所能产生的关联的统计上限；实验上对它的违背，确立了量子纠缠的非定域性。',
+    props: {
+      type: '推导',
+      status: '牢固',
+      source: '量子信息 · 第 4 讲',
+      alias: 'Bell inequality',
+      nextReview: '6 天后'
+    },
+    tags: ['推导', '考点'],
+    body: [{
+      id: 's1-r',
+      type: 'rich'
+    }, {
+      id: 's1-h',
+      type: 'h2',
+      text: 'CHSH 形式'
+    }, {
+      id: 's1-c',
+      type: 'callout',
+      tone: 'gold',
+      text: '关键判据：经典定域理论给出 |S| ≤ 2，而量子力学允许 |S| 达到 2√2 ≈ 2.83。'
+    }, {
+      id: 's1-m',
+      type: 'math',
+      tex: 'S = E(a,b) − E(a,b′) + E(a′,b) + E(a′,b′),   |S| ≤ 2'
+    }, {
+      id: 's1-l1',
+      type: 'bulleted',
+      text: '经典定域理论：|S| ≤ 2'
+    }, {
+      id: 's1-l2',
+      type: 'bulleted',
+      text: '量子力学预测：|S| 可达 2√2 ≈ 2.83'
+    }, {
+      id: 's1-l3',
+      type: 'bulleted',
+      text: '实验值显著超过 2，排除定域隐变量'
+    }, {
+      id: 's1-h2',
+      type: 'h3',
+      text: '实验验证'
+    }, {
+      id: 's1-t1',
+      type: 'todo',
+      checked: true,
+      text: 'Aspect 1982 实验（光子偏振关联）'
+    }, {
+      id: 's1-t2',
+      type: 'todo',
+      checked: false,
+      text: '复现 CHSH 推导（待整理）'
+    }, {
+      id: 's1-code',
+      type: 'code',
+      lang: 'python',
+      code: 'import numpy as np\n\n# CHSH: four correlation terms at optimal angles\nangles = [0, np.pi/4, np.pi/8, 3*np.pi/8]\ndef E(a, b):\n    return -np.cos(2 * (a - b))\n\nS = E(0, angles[2]) - E(0, angles[3]) + E(angles[1], angles[2]) + E(angles[1], angles[3])\nprint(abs(S))   # -> 2.828...  ( = 2*sqrt(2) )'
+    }, {
+      id: 's1-q',
+      type: 'quote',
+      text: '"No reasonable definition of reality could be expected to permit this." — EPR, 1935'
+    }, {
+      id: 's1-tg',
+      type: 'toggle',
+      open: false,
+      text: '延伸：GHZ 态与三粒子佯谬',
+      child: 'GHZ 态用三个粒子给出确定性（而非统计性）的矛盾，比 CHSH 更强地排除了定域实在论。'
+    }, {
+      id: 's1-tb',
+      type: 'table',
+      head: ['理论', 'S 上限', '是否定域'],
+      rows: [['经典隐变量', '2', '是'], ['量子力学', '2√2 ≈ 2.83', '否'], ['实验观测', '≈ 2.4', '—']]
+    }, {
+      id: 's1-d',
+      type: 'divider'
+    }, {
+      id: 's1-p',
+      type: 'p',
+      text: ''
+    }]
   }, {
     id: 's2',
     con: 'qm',
@@ -5573,7 +24597,49 @@ window.SR_DATA = function () {
     y: 48,
     strength: 0.78,
     importance: 1.0,
-    label: '纠缠态'
+    label: '纠缠态',
+    summary: '两个或多个粒子的联合态无法写成各自状态的张量积；测量其中一方，会瞬间确定另一方的结果。',
+    props: {
+      type: '概念',
+      status: '复习中',
+      source: '量子信息 · 第 3 讲',
+      alias: 'Entanglement',
+      nextReview: '明天'
+    },
+    tags: ['概念', '考点'],
+    body: [{
+      id: 's2-r',
+      type: 'rich'
+    }, {
+      id: 's2-h',
+      type: 'h3',
+      text: '贝尔基'
+    }, {
+      id: 's2-m',
+      type: 'math',
+      tex: '|Φ⁺⟩ = (|00⟩ + |11⟩) / √2'
+    }, {
+      id: 's2-l1',
+      type: 'bulleted',
+      text: '四个贝尔态构成两比特的一组正交基'
+    }, {
+      id: 's2-l2',
+      type: 'bulleted',
+      text: '最大纠缠：单方约化密度矩阵为最大混合态'
+    }, {
+      id: 's2-l3',
+      type: 'bulleted',
+      text: '纠缠无法靠局域操作与经典通信（LOCC）凭空增加'
+    }, {
+      id: 's2-c',
+      type: 'callout',
+      tone: 'blue',
+      text: '纠缠是一种资源——量子隐形传态、超密编码、量子密钥分发都建立在它之上。'
+    }, {
+      id: 's2-q',
+      type: 'quote',
+      text: '"Spooky action at a distance." — Einstein'
+    }]
   }, {
     id: 's3',
     con: 'qm',
@@ -5581,7 +24647,45 @@ window.SR_DATA = function () {
     y: 52,
     strength: 0.6,
     importance: 0.95,
-    label: '叠加原理'
+    label: '叠加原理',
+    summary: '量子态空间是线性的：若干本征态的线性组合仍是合法状态，测量时按振幅模方坍缩到某一本征态。',
+    props: {
+      type: '概念',
+      status: '正常',
+      source: '量子力学导论 · 第 2 章',
+      alias: 'Superposition',
+      nextReview: '4 天后'
+    },
+    tags: ['概念'],
+    body: [{
+      id: 's3-r',
+      type: 'rich'
+    }, {
+      id: 's3-h',
+      type: 'h3',
+      text: '线性与测量'
+    }, {
+      id: 's3-m',
+      type: 'math',
+      tex: '|ψ⟩ = α|0⟩ + β|1⟩,   |α|² + |β|² = 1'
+    }, {
+      id: 's3-l1',
+      type: 'bulleted',
+      text: '态空间线性 → 解可叠加'
+    }, {
+      id: 's3-l2',
+      type: 'bulleted',
+      text: '测量按 |α|² 概率坍缩到对应本征态'
+    }, {
+      id: 's3-l3',
+      type: 'bulleted',
+      text: '相对相位可观测，体现为干涉'
+    }, {
+      id: 's3-c',
+      type: 'callout',
+      tone: 'gold',
+      text: '双缝实验：单个粒子同时"经过"两条路径并与自身干涉，正是叠加的直接证据。'
+    }]
   }, {
     id: 's4',
     con: 'qm',
@@ -5589,17 +24693,104 @@ window.SR_DATA = function () {
     y: 19,
     strength: 0.42,
     importance: 0.8,
-    label: '波函数'
-  },
-  // 线性代数 cluster (upper-right, blue)
-  {
+    label: '波函数',
+    summary: '波函数 ψ 编码了量子系统的全部信息；其模方给出测量结果的概率密度，随时间按薛定谔方程演化。',
+    props: {
+      type: '概念',
+      status: '正变暗',
+      source: '量子力学导论 · 第 1 章',
+      alias: 'Wavefunction',
+      nextReview: '已逾期'
+    },
+    tags: ['概念', '复习'],
+    body: [{
+      id: 's4-r',
+      type: 'rich'
+    }, {
+      id: 's4-m1',
+      type: 'math',
+      tex: 'P(x) = |ψ(x,t)|²'
+    }, {
+      id: 's4-l1',
+      type: 'bulleted',
+      text: 'Born 规则：概率密度等于振幅模方'
+    }, {
+      id: 's4-l2',
+      type: 'bulleted',
+      text: '归一化：∫|ψ|² dx = 1'
+    }, {
+      id: 's4-l3',
+      type: 'bulleted',
+      text: '演化遵从薛定谔方程'
+    }, {
+      id: 's4-m2',
+      type: 'math',
+      tex: 'iℏ ∂ψ/∂t = Ĥψ'
+    }, {
+      id: 's4-c',
+      type: 'callout',
+      tone: 'blue',
+      text: '波函数"坍缩"如何发生，至今仍是量子诠释争论的核心。'
+    }]
+  }, {
     id: 's5',
     con: 'la',
     x: 70,
     y: 27,
     strength: 0.82,
     importance: 1.3,
-    label: '特征值'
+    label: '特征值',
+    fav: true,
+    summary: '特征向量在矩阵作用下只被缩放不被转向，缩放因子即特征值；它揭示线性变换的"主轴"。',
+    props: {
+      type: '推导',
+      status: '牢固',
+      source: '线性代数 · 第 5 章',
+      alias: 'Eigenvalue',
+      nextReview: '7 天后'
+    },
+    tags: ['推导', '公式'],
+    body: [{
+      id: 's5-r',
+      type: 'rich'
+    }, {
+      id: 's5-m',
+      type: 'math',
+      tex: 'A v = λ v'
+    }, {
+      id: 's5-l1',
+      type: 'bulleted',
+      text: '特征多项式：det(A − λI) = 0'
+    }, {
+      id: 's5-l2',
+      type: 'bulleted',
+      text: '可对角化 ⇔ 有 n 个线性无关特征向量'
+    }, {
+      id: 's5-l3',
+      type: 'bulleted',
+      text: '对称矩阵：特征值为实数，特征向量相互正交'
+    }, {
+      id: 's5-h',
+      type: 'h3',
+      text: '应用'
+    }, {
+      id: 's5-n1',
+      type: 'numbered',
+      text: '主成分分析（PCA）取最大特征值方向'
+    }, {
+      id: 's5-n2',
+      type: 'numbered',
+      text: '结构振动的固有模态'
+    }, {
+      id: 's5-n3',
+      type: 'numbered',
+      text: '量子可观测量的本征值'
+    }, {
+      id: 's5-code',
+      type: 'code',
+      lang: 'python',
+      code: 'import numpy as np\n\nA = np.array([[2., 1.],\n              [1., 2.]])\nvals, vecs = np.linalg.eig(A)\nprint(vals)   # [3. 1.]\nprint(vecs)   # 正交特征向量'
+    }]
   }, {
     id: 's6',
     con: 'la',
@@ -5607,7 +24798,41 @@ window.SR_DATA = function () {
     y: 40,
     strength: 0.55,
     importance: 0.95,
-    label: '奇异值分解'
+    label: '奇异值分解',
+    summary: '任意矩阵都能分解为旋转·缩放·旋转三步（A = UΣVᵀ），是特征分解向非方阵的推广。',
+    props: {
+      type: '推导',
+      status: '正常',
+      source: '线性代数 · 第 6 章',
+      alias: 'SVD',
+      nextReview: '3 天后'
+    },
+    tags: ['推导', '公式'],
+    body: [{
+      id: 's6-r',
+      type: 'rich'
+    }, {
+      id: 's6-m',
+      type: 'math',
+      tex: 'A = U Σ Vᵀ'
+    }, {
+      id: 's6-l1',
+      type: 'bulleted',
+      text: '奇异值是 AᵀA 特征值的平方根'
+    }, {
+      id: 's6-l2',
+      type: 'bulleted',
+      text: '任意形状矩阵都可分解（不要求方阵）'
+    }, {
+      id: 's6-l3',
+      type: 'bulleted',
+      text: '截断前 k 个奇异值即得最优低秩近似（Eckart–Young）'
+    }, {
+      id: 's6-c',
+      type: 'callout',
+      tone: 'gold',
+      text: '推荐系统、图像压缩、PCA 在 SVD 下统一为同一件事：抓住最强的几个方向。'
+    }]
   }, {
     id: 's7',
     con: 'la',
@@ -5615,17 +24840,88 @@ window.SR_DATA = function () {
     y: 42,
     strength: 0.5,
     importance: 0.85,
-    label: '正交基'
-  },
-  // 数据结构 cluster (lower-left, dimming)
-  {
+    label: '正交基',
+    summary: '一组两两正交且单位长度的向量构成标准正交基；在它之下，坐标就是内积投影，计算大为简化。',
+    props: {
+      type: '概念',
+      status: '正常',
+      source: '线性代数 · 第 4 章',
+      alias: 'Orthonormal basis',
+      nextReview: '5 天后'
+    },
+    tags: ['概念'],
+    body: [{
+      id: 's7-r',
+      type: 'rich'
+    }, {
+      id: 's7-m',
+      type: 'math',
+      tex: '⟨eᵢ, eⱼ⟩ = δᵢⱼ'
+    }, {
+      id: 's7-l1',
+      type: 'bulleted',
+      text: 'Gram–Schmidt 把任意一组基正交化'
+    }, {
+      id: 's7-l2',
+      type: 'bulleted',
+      text: '标准正交基下，坐标 = 与基向量的内积'
+    }, {
+      id: 's7-l3',
+      type: 'bulleted',
+      text: '简化最小二乘投影与傅里叶展开'
+    }, {
+      id: 's7-t',
+      type: 'todo',
+      checked: false,
+      text: '复习 Gram–Schmidt 的逐步推导'
+    }]
+  }, {
     id: 's8',
     con: 'ds',
-    x: 30,
-    y: 76,
+    x: 33,
+    y: 68,
     strength: 0.3,
     importance: 1.0,
-    label: '红黑树'
+    label: '红黑树',
+    summary: '一种自平衡二叉搜索树，用节点染色约束树高，保证查找、插入、删除都是 O(log n)。',
+    props: {
+      type: '考点',
+      status: '正变暗',
+      source: '算法导论 · 第 13 章',
+      alias: 'Red-Black Tree',
+      nextReview: '已逾期'
+    },
+    tags: ['考点', '复习'],
+    body: [{
+      id: 's8-r',
+      type: 'rich'
+    }, {
+      id: 's8-l1',
+      type: 'bulleted',
+      text: '每个节点非红即黑'
+    }, {
+      id: 's8-l2',
+      type: 'bulleted',
+      text: '根与叶（NIL）为黑'
+    }, {
+      id: 's8-l3',
+      type: 'bulleted',
+      text: '红节点的子节点必为黑（不出现连续红）'
+    }, {
+      id: 's8-l4',
+      type: 'bulleted',
+      text: '从任一节点到其叶的每条路径黑节点数相同'
+    }, {
+      id: 's8-c',
+      type: 'callout',
+      tone: 'blue',
+      text: '这些约束让最长路径至多是最短路径的两倍，从而把树高锁在 O(log n)。'
+    }, {
+      id: 's8-tb',
+      type: 'table',
+      head: ['操作', '平均', '最坏'],
+      rows: [['查找', 'O(log n)', 'O(log n)'], ['插入', 'O(log n)', 'O(log n)'], ['删除', 'O(log n)', 'O(log n)']]
+    }]
   }, {
     id: 's9',
     con: 'ds',
@@ -5633,7 +24929,42 @@ window.SR_DATA = function () {
     y: 70,
     strength: 0.16,
     importance: 0.75,
-    label: '并查集'
+    label: '并查集',
+    summary: '维护不相交集合的合并与查询；配合路径压缩与按秩合并，单次操作摊还近似 O(1)。',
+    props: {
+      type: '考点',
+      status: '将熄灭',
+      source: '算法导论 · 第 21 章',
+      alias: 'Union-Find',
+      nextReview: '已逾期'
+    },
+    tags: ['考点', '复习'],
+    body: [{
+      id: 's9-r',
+      type: 'rich'
+    }, {
+      id: 's9-l1',
+      type: 'bulleted',
+      text: 'find：查根 + 路径压缩'
+    }, {
+      id: 's9-l2',
+      type: 'bulleted',
+      text: 'union：按秩 / 按大小合并'
+    }, {
+      id: 's9-l3',
+      type: 'bulleted',
+      text: '摊还复杂度 O(α(n))，α 为反阿克曼函数，近似常数'
+    }, {
+      id: 's9-code',
+      type: 'code',
+      lang: 'python',
+      code: 'parent = list(range(n))\n\ndef find(x):\n    while parent[x] != x:\n        parent[x] = parent[parent[x]]   # 路径压缩\n        x = parent[x]\n    return x\n\ndef union(a, b):\n    parent[find(a)] = find(b)'
+    }, {
+      id: 's9-c',
+      type: 'callout',
+      tone: 'blue',
+      text: 'Kruskal 最小生成树、连通分量判定都以并查集为核心。'
+    }]
   }, {
     id: 's10',
     con: 'ds',
@@ -5641,17 +24972,87 @@ window.SR_DATA = function () {
     y: 84,
     strength: 0.24,
     importance: 0.8,
-    label: '跳表'
-  },
-  // 热力学 cluster (lower-right)
-  {
+    label: '跳表',
+    summary: '在有序链表上叠加多级"快车道"索引，用随机化把查找期望复杂度降到 O(log n)。',
+    props: {
+      type: '考点',
+      status: '正变暗',
+      source: '算法导论 · 补充',
+      alias: 'Skip List',
+      nextReview: '明天'
+    },
+    tags: ['考点'],
+    body: [{
+      id: 's10-r',
+      type: 'rich'
+    }, {
+      id: 's10-l1',
+      type: 'bulleted',
+      text: '多层有序链表，底层包含全部元素'
+    }, {
+      id: 's10-l2',
+      type: 'bulleted',
+      text: '每个节点以概率 p 提升到上一层'
+    }, {
+      id: 's10-l3',
+      type: 'bulleted',
+      text: '期望层高与查找代价均为 O(log n)'
+    }, {
+      id: 's10-m',
+      type: 'math',
+      tex: 'E[查找] = O(log₁/ₚ n)'
+    }, {
+      id: 's10-c',
+      type: 'callout',
+      tone: 'gold',
+      text: '用随机化换取实现简单——Redis 的有序集合（ZSet）底层即跳表。'
+    }]
+  }, {
     id: 's11',
     con: 'th',
     x: 72,
     y: 72,
     strength: 0.62,
     importance: 1.1,
-    label: '熵增原理'
+    label: '熵增原理',
+    summary: '孤立系统的总熵永不减少；这条第二定律给出了时间的方向，也刻画了不可逆性的根源。',
+    props: {
+      type: '推导',
+      status: '正常',
+      source: '热力学 · 第 3 章',
+      alias: 'Entropy',
+      nextReview: '6 天后'
+    },
+    tags: ['推导', '考点'],
+    body: [{
+      id: 's11-r',
+      type: 'rich'
+    }, {
+      id: 's11-m1',
+      type: 'math',
+      tex: 'dS ≥ δQ / T,   孤立系统 ΔS ≥ 0'
+    }, {
+      id: 's11-l1',
+      type: 'bulleted',
+      text: '第二定律：孤立系统的熵不减'
+    }, {
+      id: 's11-l2',
+      type: 'bulleted',
+      text: '可逆过程取等号 ΔS = 0'
+    }, {
+      id: 's11-l3',
+      type: 'bulleted',
+      text: '玻尔兹曼：熵是微观态数的度量 S = k ln Ω'
+    }, {
+      id: 's11-q',
+      type: 'quote',
+      text: '熵是时间之箭。 — Eddington'
+    }, {
+      id: 's11-c',
+      type: 'callout',
+      tone: 'blue',
+      text: '热力学熵与信息熵在形式上一致——都是对不确定性的计量。'
+    }]
   }, {
     id: 's12',
     con: 'th',
@@ -5659,78 +25060,1901 @@ window.SR_DATA = function () {
     y: 64,
     strength: 0.48,
     importance: 0.85,
-    label: '卡诺循环'
+    label: '卡诺循环',
+    summary: '由两条等温线与两条绝热线构成的可逆循环，给出了在两个热源间工作的热机效率上限。',
+    props: {
+      type: '推导',
+      status: '正常',
+      source: '热力学 · 第 4 章',
+      alias: 'Carnot cycle',
+      nextReview: '3 天后'
+    },
+    tags: ['推导', '公式'],
+    body: [{
+      id: 's12-r',
+      type: 'rich'
+    }, {
+      id: 's12-h',
+      type: 'h3',
+      text: '四个过程'
+    }, {
+      id: 's12-n1',
+      type: 'numbered',
+      text: '等温吸热（与高温热源接触）'
+    }, {
+      id: 's12-n2',
+      type: 'numbered',
+      text: '绝热膨胀（温度降至低温）'
+    }, {
+      id: 's12-n3',
+      type: 'numbered',
+      text: '等温放热（与低温热源接触）'
+    }, {
+      id: 's12-n4',
+      type: 'numbered',
+      text: '绝热压缩（温度回到高温）'
+    }, {
+      id: 's12-m',
+      type: 'math',
+      tex: 'η = 1 − T_c / T_h'
+    }, {
+      id: 's12-c',
+      type: 'callout',
+      tone: 'gold',
+      text: '任何热机的效率都不超过同温区间的卡诺效率——这是可逆性给出的理论上限。'
+    }]
   }];
 
-  // Connections: intra (blue) and cross-constellation 融会贯通 (gold).
+  // Connections: intra (blue) and cross-constellation 融会贯通 (gold), each with a relation sentence.
   const connections = [{
     a: 's1',
     b: 's2',
-    kind: 'intra'
+    kind: 'intra',
+    rel: '纠缠态是检验贝尔不等式的物理载体'
   }, {
     a: 's1',
     b: 's3',
-    kind: 'intra'
+    kind: 'intra',
+    rel: '叠加原理是产生纠缠与贝尔关联的前提'
   }, {
     a: 's2',
     b: 's4',
-    kind: 'intra'
+    kind: 'intra',
+    rel: '波函数用于描述纠缠态的联合振幅'
   }, {
     a: 's5',
     b: 's6',
-    kind: 'intra'
+    kind: 'intra',
+    rel: '奇异值分解是特征分解向任意矩阵的推广'
   }, {
     a: 's5',
     b: 's7',
-    kind: 'intra'
+    kind: 'intra',
+    rel: '正交基张成特征向量所在的空间'
   }, {
     a: 's8',
     b: 's9',
-    kind: 'intra'
+    kind: 'intra',
+    rel: '同为支撑高效算法的基础数据结构'
   }, {
     a: 's8',
     b: 's10',
-    kind: 'intra'
+    kind: 'intra',
+    rel: '平衡树与概率结构是对同一问题的两种解法'
   }, {
     a: 's11',
     b: 's12',
-    kind: 'intra'
+    kind: 'intra',
+    rel: '卡诺循环是熵增 / 第二定律的理想化体现'
   }, {
     a: 's1',
     b: 's5',
-    kind: 'cross'
-  },
-  // 量子 ↔ 线代 融会贯通
-  {
+    kind: 'cross',
+    rel: '量子可观测量即希尔伯特空间上算符的特征值'
+  }, {
     a: 's5',
     b: 's11',
-    kind: 'cross'
-  } // 线代 ↔ 热力学
-  ];
+    kind: 'cross',
+    rel: '对角化是统计力学中密度矩阵与配分函数的计算工具'
+  }];
   const byId = Object.fromEntries(stars.map(s => [s.id, s]));
 
-  // Note list for the management / list view.
+  /* ===== 记忆衰减模型（FSRS-lite）=========================================
+     每颗星维护 sr = { S: 稳定度(天), last: 上次成功复习(ms), due: 手动队列覆盖(ms, 0=无),
+                       lit: 0|点亮时刻(ms), ember: 0|熄灭时刻(ms) }。
+     可提取率 R = exp(−Δt天 / S)，重算后直接写回 star.strength ——
+     星图 / 鸟瞰 / 三维 / 列表 / MemoryBar 的亮度全部吃这个值（映射到 --mem-* 温度梯），
+     放几天不看，星真的会变暗。
+      点亮（认证轴，与亮度四档正交）：
+       未点亮 := lit=0 ∧ ember=0（缺省，全部旧档案）
+       已点亮 := lit>0 —— 费曼讲透授予；「记得」乘数升到 2.2，稳定度上限 365
+       待重燃 := lit=0 ∧ ember>0 —— 已点亮星 R<0.35（或被评「忘了」）熄灭；
+                三档复习按未点亮参数只回亮度，认证只能靠费曼重燃
+     复习成功：S ×= (增长因子 + (1−R)·0.6)，点亮/重燃 2.5 / lit 星记得 2.2 / 普通复习 1.8；
+     失败：S ×= 0.45（lit 星 0.55 且立即熄灭）。
+     稳定度上限：曾点亮星（lit 或 ember）365；从未点亮星 min(新S, max(当前S, 60))——只封顶生长，
+     绝不削减旧档案里已有的 S。R 衰减到 0.60 即视为到期，复习队列按到期时刻升序。 */
+  const DAY = 86400000;
+  const MEM = {
+    rMin: 0.02,
+    rMax: 0.98,
+    dueR: 0.6,
+    growIgnite: 2.5,
+    growReview: 1.8,
+    growPartial: 1.2,
+    partialR: 0.85,
+    shrinkFail: 0.45,
+    sMin: 0.8,
+    sMax: 365,
+    emberR: 0.35,
+    // 熄灭阈值：已点亮星 R < 0.35 → 待重燃
+    growReviewLit: 2.2,
+    // 已点亮星「记得」的 S 乘数（未点亮 1.8）
+    shrinkFailLit: 0.55,
+    // 已点亮星「忘了」的回缩（未点亮 0.45），且随即熄灭
+    sMaxUnlit: 60 // 从未点亮星的稳定度上限；sMax:365 只留给曾点亮星（lit 或 ember）
+  };
+  const clampN = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
+  // 种子星：由 strength 反推「相对当前时间」的 lastReview / stability——
+  // demo 一打开就有正发光 / 正变暗的层次，且此后随真实时间继续衰减。
+  const seedStability = r => r >= 0.85 ? 34 : r >= 0.7 ? 21 : r >= 0.55 ? 12 : r >= 0.4 ? 7 : r >= 0.2 ? 3.5 : 1.8;
+  // 唯一迁移入口：旧快照（localStorage / sqlite / 黑洞 payload / 无 sr 的种子星）
+  // 打开即补默认 lit:0 / ember:0 —— 全部视为未点亮，旧「点亮」动画不追溯授予认证。
+  const ensureMemory = (s, now) => {
+    if (s.sr && s.sr.S > 0 && s.sr.last) {
+      if (!(s.sr.lit > 0)) s.sr.lit = 0;
+      if (!(s.sr.ember > 0)) s.sr.ember = 0;
+      return s.sr;
+    }
+    now = now || Date.now();
+    const r = clampN(typeof s.strength === 'number' ? s.strength : 0.5, 0.05, MEM.rMax);
+    const S = seedStability(r);
+    s.sr = {
+      S,
+      last: Math.round(now - Math.log(1 / r) * S * DAY),
+      due: 0,
+      lit: 0,
+      ember: 0
+    };
+    return s.sr;
+  };
+  // 认证轴的三个派生状态（不落盘）：isLit=已点亮 · isEmber=待重燃 · everLit=曾点亮（决定 S 上限）
+  const isLit = s => !!(s && s.sr && s.sr.lit > 0);
+  const isEmber = s => !!(s && s.sr && !(s.sr.lit > 0) && s.sr.ember > 0);
+  const everLit = s => !!(s && s.sr && (s.sr.lit > 0 || s.sr.ember > 0));
+  // 稳定度封顶：曾点亮星 365；从未点亮星 max(当前S, 60)——旧档案里 S 已超 60 的星只封顶生长、不回缩
+  const sCapOf = s => everLit(s) ? MEM.sMax : Math.max(s.sr.S, MEM.sMaxUnlit);
+  const retrievability = (s, now) => Math.exp(-Math.max(0, (now || Date.now()) - s.sr.last) / DAY / s.sr.S);
+  // 到期时刻：R 自然衰减到 dueR 的那一刻；「加入复习队列」可把它提前
+  const dueTsOf = s => {
+    ensureMemory(s);
+    const natural = s.sr.last + s.sr.S * Math.log(1 / MEM.dueR) * DAY;
+    return s.sr.due ? Math.min(s.sr.due, natural) : natural;
+  };
+  const reviewLabel = (due, now) => {
+    const diff = due - now;
+    if (diff <= 0) return '已逾期';
+    if (diff < DAY) return '今天';
+    if (diff < DAY * 2) return '明天';
+    return Math.ceil(diff / DAY) + ' 天后';
+  };
+  const statusOf = r => r >= 0.7 ? '牢固' : r >= 0.4 ? '正常' : r >= 0.2 ? '正变暗' : '将熄灭';
+  // 按真实时间重算一颗星：strength / 下次复习 / 状态 全部由模型导出。
+  // 熄灭检测也在这里：已点亮星衰减到 R < emberR → 转待重燃（lit=0, ember=now），
+  // 心跳/开屏/视图切换自动执行，只在跨越阈值那一次写时间线；随后的 sr-memory 广播让在场视图就地更新。
+  const refreshStar = (s, now) => {
+    ensureMemory(s, now);
+    now = now || Date.now();
+    s.strength = Math.round(clampN(retrievability(s, now), MEM.rMin, MEM.rMax) * 1000) / 1000;
+    if (s.sr.lit > 0 && s.strength < MEM.emberR) {
+      s.sr.lit = 0;
+      s.sr.ember = now;
+      pushTimeline('dim', s.id, '熄灭 · 待重燃');
+    }
+    s.props = s.props || {};
+    s.props.nextReview = reviewLabel(dueTsOf(s), now);
+    s.props.status = isEmber(s) ? '待重燃' : statusOf(s.strength);
+  };
+  // 打开应用 / 定时心跳 / 视图切换时调用：全部星按真实时间重算
+  const refreshMemory = now => {
+    now = now || Date.now();
+    stars.forEach(s => refreshStar(s, now));
+    notes.forEach(n => {
+      const s = byId[n.id];
+      if (!s) return;
+      n.strength = s.strength;
+      n.nextReview = s.props.nextReview;
+    });
+    syncCounts();
+    return now;
+  };
+  // 一次成功复习（费曼点亮/重燃 = ignite:true）：稳定度增长、R 回满，队列覆盖清除。
+  // 乘数按认证态取档：ignite 2.5（点亮/重燃同乘数）· 已点亮「记得」2.2 · 其余 1.8。
+  // ignite 时写入认证（lit=now, ember=0）并记时间线（待重燃星 note「重燃」）；
+  // 待重燃星普通「记得」只回亮度不回认证——重燃只走费曼。
+  const reviewSuccess = (id, opts) => {
+    const s = byId[id];
+    if (!s) return null;
+    const now = Date.now();
+    ensureMemory(s, now);
+    const ignite = !!(opts && opts.ignite);
+    const relit = ignite && isEmber(s);
+    const before = clampN(retrievability(s, now), MEM.rMin, MEM.rMax);
+    const base = ignite ? MEM.growIgnite : isLit(s) ? MEM.growReviewLit : MEM.growReview;
+    const cap = ignite ? MEM.sMax : sCapOf(s); // 点亮当场获得 365 档上限
+    s.sr.S = clampN(s.sr.S * (base + (1 - before) * 0.6), MEM.sMin, cap);
+    s.sr.last = now;
+    s.sr.due = 0;
+    if (ignite) {
+      s.sr.lit = now;
+      s.sr.ember = 0;
+      pushTimeline('ignite', id, relit ? '重燃' : '点亮', Math.max(0, MEM.rMax - before));
+    }
+    refreshStar(s, now);
+    syncCounts(); // 星域健康度按新强度重算
+    touchNote(id); // 列表行刷新 + 防抖落盘
+    return {
+      strength: s.strength,
+      gained: Math.max(0, s.strength - before),
+      stability: s.sr.S,
+      lit: isLit(s),
+      relit
+    };
+  };
+  // 复习模糊：想起来了但不牢——稳定度小幅增长（×1.2），R 回到 0.85 左右：
+  // last 回拨到「刚好衰减至 partialR」的时刻，下次到期比「记得」更早、比「忘了」更晚。
+  // 认证态不动：想起大概 ≠ 火灭——已点亮保持点亮，待重燃保持待重燃。
+  const reviewPartial = id => {
+    const s = byId[id];
+    if (!s) return null;
+    const now = Date.now();
+    ensureMemory(s, now);
+    s.sr.S = clampN(s.sr.S * MEM.growPartial, MEM.sMin, sCapOf(s));
+    s.sr.last = Math.round(now - Math.log(1 / MEM.partialR) * s.sr.S * DAY);
+    s.sr.due = 0;
+    refreshStar(s, now);
+    syncCounts();
+    touchNote(id);
+    return {
+      strength: s.strength,
+      stability: s.sr.S
+    };
+  };
+  // 到期队列：R 已衰减到阈值（或被手动排入且已到时）的星，按到期先后升序
+  const dueStars = now => {
+    now = now || Date.now();
+    return stars.map(s => ({
+      s,
+      due: dueTsOf(s)
+    })).filter(x => x.due <= now).sort((a, b) => a.due - b.due).map(x => x.s);
+  };
+  // 复习失败（含费曼「还没讲透」）：稳定度回缩，下次到期大幅提前。
+  // 显示强度保持评分前的值——把 last 回拨到「按新 S 刚好衰减至 R_before」的时刻，
+  // 而不是 last=now（那会让被评「忘了」的星瞬间跳回 R≈0.98，反而最亮）。
+  // 新 S 更小 ⇒ 到期时刻依然更近，三档间隔严格有序：fail < partial < success。
+  // 已点亮星回缩更留情（×0.55，记忆节省效应：曾掌握者重学更快），但认证作废——立即熄灭转待重燃。
+  const reviewFail = id => {
+    const s = byId[id];
+    if (!s) return null;
+    const now = Date.now();
+    ensureMemory(s, now);
+    const before = clampN(retrievability(s, now), MEM.rMin, MEM.rMax);
+    const wasLit = isLit(s);
+    s.sr.S = Math.max(MEM.sMin, s.sr.S * (wasLit ? MEM.shrinkFailLit : MEM.shrinkFail));
+    s.sr.last = Math.round(now - Math.log(1 / before) * s.sr.S * DAY);
+    s.sr.due = 0;
+    if (wasLit) {
+      s.sr.lit = 0;
+      s.sr.ember = now; // 先于 refreshStar 落定，避免阈值检测重复写时间线
+      pushTimeline('dim', id, '熄灭 · 待重燃');
+    }
+    refreshStar(s, now);
+    syncCounts();
+    touchNote(id);
+    return {
+      strength: s.strength,
+      stability: s.sr.S,
+      extinguished: wasLit
+    };
+  };
+  // 手动加入复习队列：把到期时刻提前到 days 天内（0 = 今天，1 = 明天）
+  const queueReview = (id, days) => {
+    const s = byId[id];
+    if (!s) return null;
+    const now = Date.now();
+    ensureMemory(s, now);
+    const target = now + (days == null ? 1 : Math.max(0.4, days)) * DAY;
+    s.sr.due = s.sr.due ? Math.min(s.sr.due, target) : target;
+    refreshStar(s, now);
+    touchNote(id);
+    return s.props.nextReview;
+  };
+
+  // ---- 黑洞（回收站）：被删除的星与星域先落入这里，可恢复或彻底销毁 ----
+  const trash = [{
+    id: 'tr-seed1',
+    kind: 'star',
+    deletedAt: '3 天前',
+    payload: {
+      star: {
+        id: 'sx1',
+        con: 'la',
+        x: 74,
+        y: 33,
+        strength: 0.36,
+        importance: 0.9,
+        label: '卷积定理',
+        summary: '时域卷积等于频域乘积；它把复杂的卷积运算变成简单的逐点相乘。',
+        props: {
+          type: '推导',
+          status: '正变暗',
+          source: '信号与系统 · 第 4 章',
+          alias: 'Convolution theorem',
+          nextReview: '已逾期'
+        },
+        tags: ['推导'],
+        body: [{
+          id: 'sx1-r',
+          type: 'rich'
+        }, {
+          id: 'sx1-m',
+          type: 'math',
+          tex: 'f * g ⟷ F · G'
+        }]
+      },
+      connections: []
+    }
+  }, {
+    id: 'tr-seed2',
+    kind: 'domain',
+    deletedAt: '上周',
+    payload: {
+      con: {
+        id: 'fx',
+        name: '傅里叶分析',
+        color: '#8ea2cc',
+        health: 0.3,
+        count: 2
+      },
+      stars: [{
+        id: 'sx2',
+        con: 'fx',
+        x: 48,
+        y: 22,
+        strength: 0.22,
+        importance: 1.0,
+        label: '傅里叶级数',
+        summary: '任何周期函数都能分解为一组正弦与余弦的加权和。',
+        props: {
+          type: '概念',
+          status: '将熄灭',
+          source: '数学物理方法',
+          alias: 'Fourier series',
+          nextReview: '已逾期'
+        },
+        tags: ['概念'],
+        body: [{
+          id: 'sx2-r',
+          type: 'rich'
+        }]
+      }, {
+        id: 'sx3',
+        con: 'fx',
+        x: 54,
+        y: 30,
+        strength: 0.18,
+        importance: 0.8,
+        label: '频谱泄漏',
+        summary: '截断信号使能量从主瓣泄漏到旁瓣；加窗可以缓解。',
+        props: {
+          type: '考点',
+          status: '将熄灭',
+          source: '数字信号处理',
+          alias: 'Spectral leakage',
+          nextReview: '已逾期'
+        },
+        tags: ['考点'],
+        body: [{
+          id: 'sx3-r',
+          type: 'rich'
+        }]
+      }],
+      connections: [{
+        a: 'sx2',
+        b: 'sx3',
+        kind: 'intra',
+        rel: '泄漏是级数/变换截断的直接后果'
+      }]
+    }
+  }];
+  let trashSeq = 0;
+  const trashId = () => 'tr' + ++trashSeq + Math.random().toString(36).slice(2, 6);
+
+  // 把一颗知识星移入黑洞（连同它的连接），返回黑洞条目
+  const trashStar = id => {
+    const s = byId[id];
+    if (!s) return null;
+    const i = stars.findIndex(x => x.id === id);
+    if (i >= 0) stars.splice(i, 1);
+    delete byId[id];
+    const conns = [];
+    for (let j = connections.length - 1; j >= 0; j--) {
+      if (connections[j].a === id || connections[j].b === id) conns.push(connections.splice(j, 1)[0]);
+    }
+    const ni = notes.findIndex(n => n.id === id);
+    if (ni >= 0) notes.splice(ni, 1);
+    const entry = {
+      id: trashId(),
+      kind: 'star',
+      deletedAt: '刚刚',
+      ts: Date.now(),
+      payload: {
+        star: s,
+        connections: conns
+      }
+    };
+    trash.unshift(entry);
+    syncCounts();
+    persistRemote();
+    return entry;
+  };
+  // 把整个星域（连同全部成员星与连接）移入黑洞
+  const trashDomain = conId => {
+    const ci = constellations.findIndex(c => c.id === conId);
+    if (ci < 0) return null;
+    const con = constellations.splice(ci, 1)[0];
+    const members = [];
+    for (let i = stars.length - 1; i >= 0; i--) {
+      if (stars[i].con === conId) {
+        const s = stars.splice(i, 1)[0];
+        delete byId[s.id];
+        members.unshift(s);
+      }
+    }
+    const memberIds = new Set(members.map(s => s.id));
+    const conns = [];
+    for (let j = connections.length - 1; j >= 0; j--) {
+      if (memberIds.has(connections[j].a) || memberIds.has(connections[j].b)) conns.push(connections.splice(j, 1)[0]);
+    }
+    members.forEach(s => {
+      const ni = notes.findIndex(n => n.id === s.id);
+      if (ni >= 0) notes.splice(ni, 1);
+    });
+    const entry = {
+      id: trashId(),
+      kind: 'domain',
+      deletedAt: '刚刚',
+      ts: Date.now(),
+      payload: {
+        con,
+        stars: members,
+        connections: conns
+      }
+    };
+    trash.unshift(entry);
+    syncCounts();
+    persistRemote();
+    return entry;
+  };
+  // 从黑洞恢复：星回到原星域（若星域已不存在则落入第一个星域），星域整体归位
+  const restoreTrash = entryId => {
+    const i = trash.findIndex(t => t.id === entryId);
+    if (i < 0) return null;
+    const t = trash[i];
+    if (t.kind === 'star') {
+      const s = t.payload.star;
+      if (!constellations.find(c => c.id === s.con)) {
+        if (!constellations.length) return null;
+        s.con = constellations[0].id;
+      }
+      trash.splice(i, 1);
+      stars.push(s);
+      byId[s.id] = s;
+      t.payload.connections.forEach(c => {
+        if (byId[c.a] && byId[c.b]) connections.push(c);
+      });
+      notes.unshift(noteFor(s));
+    } else {
+      trash.splice(i, 1);
+      constellations.push(t.payload.con);
+      t.payload.stars.forEach(s => {
+        stars.push(s);
+        byId[s.id] = s;
+      });
+      t.payload.connections.forEach(c => {
+        if (byId[c.a] && byId[c.b]) connections.push(c);
+      });
+      t.payload.stars.forEach(s => notes.unshift(noteFor(s)));
+    }
+    refreshMemory(); // 恢复的星按真实时间重新点算亮度（含 syncCounts）
+    persistRemote();
+    return t;
+  };
+  // 彻底销毁（不可恢复）
+  const purgeTrash = entryId => {
+    const i = trash.findIndex(t => t.id === entryId);
+    if (i >= 0) {
+      trash.splice(i, 1);
+      persistRemote();
+    }
+  };
+
+  // Note list for the management / list view — derived from each star's own data.
   const notes = stars.map((s, i) => ({
     id: s.id,
     title: s.label,
     con: s.con,
     strength: s.strength,
-    tags: [['推导', '公式'], ['概念'], ['考点', '复习'], ['实验']][i % 4],
+    tags: s.tags || ['概念'],
     edited: ['2 小时前', '昨天', '3 天前', '上周', '2 周前'][i % 5],
-    nextReview: s.strength < 0.35 ? '已逾期' : s.strength < 0.6 ? '明天' : '6 天后',
-    links: 2 + i % 4
+    nextReview: s.props && s.props.nextReview || (s.strength < 0.35 ? '已逾期' : s.strength < 0.6 ? '明天' : '6 天后'),
+    links: connections.filter(c => c.a === s.id || c.b === s.id).length
   }));
+
+  // Inbox — unsorted captures waiting to be filed into a constellation (badge: 7).
+  const inbox = [{
+    id: 'in1',
+    text: '费曼："如果你不能简单地解释它，说明你没有真正理解。" 想做成一颗元认知的星。',
+    captured: '12 分钟前',
+    suggest: 'qm'
+  }, {
+    id: 'in2',
+    text: '密度矩阵 ρ = Σ pᵢ|ψᵢ⟩⟨ψᵢ|，混合态与纯态的统一描述 —— 待整理进量子力学。',
+    captured: '1 小时前',
+    suggest: 'qm'
+  }, {
+    id: 'in3',
+    text: '哈希表开放寻址 vs 链地址法，负载因子与再散列的取舍。',
+    captured: '今天 09:24',
+    suggest: 'ds'
+  }, {
+    id: 'in4',
+    text: 'QR 分解与 Gram–Schmidt 的关系，最小二乘的数值稳定写法。',
+    captured: '昨天',
+    suggest: 'la'
+  }, {
+    id: 'in5',
+    text: '麦克斯韦妖与信息熵——Landauer 原理：擦除 1 bit 至少耗散 kT ln2。',
+    captured: '昨天',
+    suggest: 'th'
+  }, {
+    id: 'in6',
+    text: '随手记：B+ 树为什么更适合磁盘？节点扇出与页大小。',
+    captured: '2 天前',
+    suggest: 'ds'
+  }, {
+    id: 'in7',
+    text: '退相干（decoherence）：环境如何"测量"系统、把叠加抹成经典混合。',
+    captured: '3 天前',
+    suggest: 'qm'
+  }];
+
+  // Timeline — recent ignite / review events, newest first.
+  const timeline = [{
+    id: 'tl1',
+    starId: 's1',
+    con: 'qm',
+    when: '今天 10:30',
+    delta: '+0.12',
+    kind: 'ignite',
+    note: '点亮 · 融会贯通'
+  }, {
+    id: 'tl2',
+    starId: 's5',
+    con: 'la',
+    when: '今天 09:05',
+    delta: '+0.08',
+    kind: 'review',
+    note: '复习巩固'
+  }, {
+    id: 'tl3',
+    starId: 's11',
+    con: 'th',
+    when: '昨天 21:40',
+    delta: '+0.10',
+    kind: 'ignite',
+    note: '点亮'
+  }, {
+    id: 'tl4',
+    starId: 's3',
+    con: 'qm',
+    when: '昨天 16:12',
+    delta: '+0.05',
+    kind: 'review',
+    note: '复习'
+  }, {
+    id: 'tl5',
+    starId: 's6',
+    con: 'la',
+    when: '昨天 11:20',
+    delta: '+0.09',
+    kind: 'ignite',
+    note: '点亮'
+  }, {
+    id: 'tl6',
+    starId: 's9',
+    con: 'ds',
+    when: '3 天前',
+    delta: '−0.06',
+    kind: 'dim',
+    note: '长时间未复习，开始变暗'
+  }, {
+    id: 'tl7',
+    starId: 's12',
+    con: 'th',
+    when: '3 天前',
+    delta: '+0.07',
+    kind: 'review',
+    note: '复习'
+  }, {
+    id: 'tl8',
+    starId: 's2',
+    con: 'qm',
+    when: '上周',
+    delta: '+0.11',
+    kind: 'ignite',
+    note: '点亮 · 融会贯通'
+  }];
+
+  // 任何写操作后调用：把整棵星系防抖同步到本地数据库（server/stellar.db）
+  const persistRemote = () => {
+    if (window.SRNet) window.SRNet.schedule();
+  };
+
+  // 相对时间：带 ts 的记录显示真实的「n 分钟前」，而不是永远的「刚刚」
+  const ago = ts => {
+    if (!ts) return '刚刚';
+    const s = Math.max(0, (Date.now() - ts) / 1000);
+    if (s < 60) return '刚刚';
+    if (s < 3600) return Math.floor(s / 60) + ' 分钟前';
+    if (s < 86400) return Math.floor(s / 3600) + ' 小时前';
+    if (s < 86400 * 30) return Math.floor(s / 86400) + ' 天前';
+    return Math.floor(s / 86400 / 30) + ' 个月前';
+  };
+
+  // ——— 派生数据同步：让所有视图看到同一份真相 ———
+  // 星域的 count / health / litRatio 始终按现存成员实时重算，不留手写快照。
+  // health 保持「记忆亮度均值」单一语义不变；点亮维度独立为 litRatio（已点亮成员占比），
+  // 星域光环转金判据 = litRatio ≥ 0.5 ∧ health ≥ 0.5。
+  const syncCounts = () => {
+    constellations.forEach(c => {
+      const members = stars.filter(s => s.con === c.id);
+      c.count = members.length;
+      c.health = members.length ? members.reduce((a, s) => a + s.strength, 0) / members.length : 0;
+      c.litRatio = members.length ? members.filter(isLit).length / members.length : 0;
+    });
+  };
+  // 待重燃队列：曾点亮但已熄灭的星（体检「今日待办」第二行），按熄灭先后升序
+  const emberStars = () => stars.filter(isEmber).sort((a, b) => (a.sr.ember || 0) - (b.sr.ember || 0));
+  // 统一今日待办（体检 = 唯一待办入口）：到期复习 n + 待重燃 m + 收件箱待整理 k。
+  // due 与 ember 两行可重叠（熄灭星多半也到期）——重燃成功会同时清掉到期（R 回满）。
+  const todayTodo = now => ({
+    due: dueStars(now).length,
+    ember: emberStars().length,
+    inbox: inbox.length
+  });
+  // 点亮的内容门槛：摘要去空白 ≥ 20 字，或正文带文本的非 rich/divider 块 ≥ 2
+  //（沿用 deriveKeyPoints 的取块口径，跳过 code——不惩罚简短概念星，两条满足其一即可）。
+  const hasSubstance = star => {
+    if (!star) return false;
+    if (String(star.summary || '').replace(/\s+/g, '').length >= 20) return true;
+    const texty = (star.body || []).filter(b => b && !['rich', 'divider', 'code'].includes(b.type) && String(b.text || b.tex || '').trim());
+    return texty.length >= 2;
+  };
+  const noteFor = s => ({
+    id: s.id,
+    title: s.label,
+    con: s.con,
+    strength: s.strength,
+    tags: s.tags || ['草稿'],
+    edited: '刚刚',
+    nextReview: s.props && s.props.nextReview || '明天',
+    links: connections.filter(c => c.a === s.id || c.b === s.id).length
+  });
+  // 新建知识星的唯一入口：stars/byId/notes/count 一次到位。
+  // 记忆模型从「刚刚写下」开始：S 取初始稳定度、last=now、R 从满格自然衰减——
+  // strength 反推 last 的逻辑只留给无 sr 的旧快照 / 种子，别让新星一出生就「已逾期」。
+  const addStar = ns => {
+    if (!(ns.sr && ns.sr.S > 0 && ns.sr.last)) ns.sr = {
+      S: 2.5,
+      last: Date.now(),
+      due: 0,
+      lit: 0,
+      ember: 0
+    };
+    refreshStar(ns, Date.now());
+    stars.push(ns);
+    byId[ns.id] = ns;
+    notes.unshift(noteFor(ns));
+    syncCounts();
+    persistRemote();
+    return ns;
+  };
+  const renameStar = (id, label) => {
+    const s = byId[id];
+    if (!s) return;
+    s.label = label;
+    const n = notes.find(x => x.id === id);
+    if (n) {
+      n.title = label;
+      n.edited = '刚刚';
+    }
+    persistRemote();
+  };
+  // 星的任何编辑后调用：把对应列表行刷新成当前真相
+  const touchNote = id => {
+    const s = byId[id];
+    if (!s) return;
+    const n = notes.find(x => x.id === id);
+    if (!n) return;
+    n.title = s.label;
+    n.con = s.con;
+    n.strength = s.strength;
+    n.tags = (s.tags || n.tags).slice();
+    n.nextReview = s.props && s.props.nextReview || n.nextReview;
+    n.links = connections.filter(c => c.a === id || c.b === id).length;
+    n.edited = '刚刚';
+    n.editedTs = Date.now();
+    persistRemote();
+  };
+  // 事件写入时间线（ignite/review/dim），鸟瞰、时间轴的统计才是活的
+  const pushTimeline = (kind, starId, note, delta) => {
+    const s = byId[starId];
+    if (!s) return;
+    timeline.unshift({
+      id: 'tl' + Math.random().toString(36).slice(2, 7),
+      starId,
+      con: s.con,
+      when: '刚刚',
+      ts: Date.now(),
+      delta: delta != null ? (delta >= 0 ? '+' : '−') + Math.abs(delta).toFixed(2) : '—',
+      kind,
+      note
+    });
+    persistRemote();
+  };
+  // [deprecated] 点亮的时间线现由 reviewSuccess(id, { ignite:true }) 内部写入（note 点亮/重燃），
+  // 这里保留空实现只为兼容旧调用点，避免同一次点亮记两条时间线。
+  const logIgnite = () => {};
+
+  // 账户信息单一来源：Sidebar 与设置页共用，别各存一份
+  const account = {
+    name: '林深',
+    avatar: '林',
+    email: 'linshen@stellar.app',
+    plan: '观星者 · Pro',
+    joined: '2024 年 9 月 18 日',
+    streak: 14
+  };
+  // 社交状态：好友（可造访星系）数量，启动时取回、变更时由星际漫游视图刷新
+  const social = {
+    friends: 0
+  };
+  const conName = id => (constellations.find(c => c.id === id) || {}).name;
+  const conColor = id => (constellations.find(c => c.id === id) || {}).color;
+
+  // Stars connected to `id`, with each connection's relation sentence and direction.
+  const relatedStars = id => connections.filter(c => c.a === id || c.b === id).map(c => {
+    const otherId = c.a === id ? c.b : c.a;
+    return {
+      star: byId[otherId],
+      kind: c.kind,
+      rel: c.rel
+    };
+  }).filter(r => r.star);
+
+  // Backlinks: connected stars in a *different* constellation (notes that reference this one).
+  const backlinksOf = id => {
+    const me = byId[id];
+    if (!me) return [];
+    return relatedStars(id).filter(r => r.star.con !== me.con);
+  };
+
+  /* ——— 星际来信（服务端收件箱镜像）———
+     消息本体只存在服务器（inbox_messages 表），不进星系快照；这里保留一份
+     内存镜像给收件箱视图与侧栏角标共用。后端未运行时 SRNet.inbox.list()
+     返回 null——镜像保持为空，「星际来信」整区隐藏、不报错。 */
+  const mail = {
+    list: [],
+    loaded: false
+  };
+  const unclaimedMail = () => mail.list.filter(m => m && !m.claimed).length;
+  const refreshMail = () => {
+    const N = window.SRNet;
+    if (!(N && N.inbox)) return Promise.resolve(null);
+    return N.inbox.list().then(r => {
+      if (!Array.isArray(r)) return null; // 网络失败 null / 业务错误 {error}——都按「暂不可用」静默
+      mail.list = r;
+      mail.loaded = true;
+      window.dispatchEvent(new Event('sr-data')); // 侧栏收件箱角标即时对齐
+      return r;
+    });
+  };
+  // 兜底剥 HTML + 钳长度：服务端投递时已剥过一遍，这里是建星入库前的最后一道保险
+  const plainText = (v, max) => String(v == null ? '' : v).replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, max);
+  /* 收纳一封「星际来信」赠星：用 payload 建星，落在目标星域质心附近（与收件箱
+     本地捕捉「归入」同一口径）。keyPoints 转为正文列表块；新星经 addStar 从
+     未点亮起步（S=2.5, lit=0, ember=0）——来自星际的知识要自己讲透，才配点亮。 */
+  const adoptShared = (msg, conId) => {
+    if (!msg || !msg.payload || !constellations.find(c => c.id === conId)) return null;
+    const p = msg.payload;
+    const fromName = plainText(msg.from && msg.from.name, 24) || '星际旅人';
+    const label = plainText(p.label, 120) || '来自星际的星';
+    const summary = plainText(p.summary, 2000);
+    const keyPoints = (Array.isArray(p.keyPoints) ? p.keyPoints : []).map(k => plainText(k, 300)).filter(Boolean).slice(0, 12);
+    // 位置：星域质心附近随机散布（世界坐标与星图同参 1680×1040）
+    const W = 1680,
+      H = 1040;
+    const members = stars.filter(s => s.con === conId);
+    let wx = W / 2,
+      wy = H / 2;
+    if (members.length) {
+      const px = s => s.wx != null ? s.wx : s.x / 100 * W;
+      const py = s => s.wy != null ? s.wy : s.y / 100 * H;
+      wx = members.reduce((a, s) => a + px(s), 0) / members.length;
+      wy = members.reduce((a, s) => a + py(s), 0) / members.length;
+    }
+    const ang = Math.random() * Math.PI * 2,
+      rad = 70 + Math.random() * 70;
+    wx += Math.cos(ang) * rad;
+    wy += Math.sin(ang) * rad;
+    const id = 's' + Math.random().toString(36).slice(2, 8);
+    const body = [{
+      id: id + '-r',
+      type: 'rich'
+    }];
+    keyPoints.forEach((k, i) => body.push({
+      id: id + '-k' + i,
+      type: 'bulleted',
+      text: k
+    }));
+    body.push({
+      id: id + '-p',
+      type: 'p',
+      text: ''
+    });
+    const star = {
+      id,
+      con: conId,
+      x: wx / W * 100,
+      y: wy / H * 100,
+      wx,
+      wy,
+      strength: 0.5,
+      importance: 1,
+      label,
+      summary,
+      tags: ['星际来信'],
+      props: {
+        type: '收纳',
+        status: '正常',
+        source: '星际来信 · ' + fromName,
+        alias: '',
+        nextReview: '明天'
+      },
+      body
+    };
+    addStar(star); // 无 sr 的新星在这里补默认：S=2.5, last=now, lit=0, ember=0
+    pushTimeline('review', id, '收纳自 ' + fromName);
+    // 领取：镜像立即置 claimed，再通知服务器（静默降级——失败时下次拉取自然对齐）
+    const rec = mail.list.find(x => x && x.id === msg.id);
+    if (rec) rec.claimed = true;
+    if (window.SRNet && window.SRNet.inbox) window.SRNet.inbox.ack(msg.id, 'claim');
+    window.dispatchEvent(new Event('sr-data'));
+    return star;
+  };
+
+  // 演示星系快照：留给「载入示例星系」用。必须在 refreshMemory 之前深拷贝——
+  // 演示数据只是可选的参观材料，绝不再当作新用户的真实数据落库。
+  const DEMO_SEED = JSON.parse(JSON.stringify({
+    constellations,
+    stars,
+    connections,
+    notes,
+    inbox,
+    timeline,
+    trash
+  }));
+
+  // 种子里的 count/health/strength 只是占位：打开应用即按真实时间重算全部星的 R
+  //（含 syncCounts），种子的 lastReview/stability 由 strength 相对当前时间反推生成。
+  refreshMemory();
+
+  // 长时间停留：每分钟按真实时间重算一次，广播给在场视图就地更新数值——
+  // 只改数值不加动画，自然兼容 prefers-reduced-motion / data-motion="off"，不会闪烁。
+  setInterval(() => {
+    if (document.hidden) return;
+    refreshMemory();
+    window.dispatchEvent(new CustomEvent('sr-memory'));
+  }, 60000);
+
+  // 应用本机已保存的设置：昵称覆盖账户信息，动效偏好落到 <html> data 属性供 CSS 读取
+  try {
+    const prefs = JSON.parse(localStorage.getItem('sr.settings')) || {};
+    if (prefs.nickname) {
+      account.name = prefs.nickname;
+      account.avatar = prefs.nickname.trim()[0] || account.avatar;
+    }
+    document.documentElement.dataset.motion = prefs.motion === false ? 'off' : 'on';
+    document.documentElement.dataset.twinkle = prefs.twinkle === false || prefs.motion === false ? 'off' : 'on';
+  } catch (e) {}
+
+  // ——— 真实存储：启动时取回上次的星空 ———
+  // 有 server → 走 REST（sqlite）；无 server（file:// 打开 / 后端未启动）→ 降级 localStorage。
+  // 两边都有快照时按 savedAt / updated_at 新者优先；本地较新则回推给服务器。
+  // 注意：空星系（stars: []）也是合法快照——用户删光全部星域后刷新，
+  // 不能把「空」误判成「没有」而让演示种子复活覆盖真实数据。
+  const looksLikeGalaxy = d => d && Array.isArray(d.stars);
+  const hydrate = d => {
+    constellations.splice(0, constellations.length, ...(d.constellations || []));
+    stars.splice(0, stars.length, ...d.stars);
+    connections.splice(0, connections.length, ...(d.connections || []));
+    notes.splice(0, notes.length, ...(d.notes || []));
+    inbox.splice(0, inbox.length, ...(d.inbox || []));
+    timeline.splice(0, timeline.length, ...(d.timeline || []));
+    trash.splice(0, trash.length, ...(d.trash || []));
+    Object.keys(byId).forEach(k => delete byId[k]);
+    stars.forEach(s => {
+      byId[s.id] = s;
+    });
+    if (d.account && d.account.name) {
+      account.name = d.account.name;
+      account.avatar = d.account.avatar || account.avatar;
+    }
+    refreshMemory(); // 取回的星空立刻按真实时间重算 R —— 放几天不看真的变暗
+    window.SRNet.setReady(); // 真实数据已就位，此后才允许上传
+    window.dispatchEvent(new CustomEvent('sr-hydrated'));
+  };
+  // 并发冲突（409）：api.js 收到服务器最新版后广播，这里就地重载，收敛到服务器真相
+  window.addEventListener('sr-conflict', e => {
+    if (looksLikeGalaxy(e.detail)) hydrate(e.detail);
+  });
+  // 首次使用：进入真空态——「你的星空还很暗」，不再把 12 颗演示星连同
+  // 伪造的 streak / 时间线当成新用户的真实数据落库。演示星系收进 loadDemo()。
+  const startFresh = () => {
+    account.streak = 0;
+    hydrate({
+      constellations: [],
+      stars: [],
+      connections: [],
+      notes: [],
+      inbox: [],
+      timeline: [],
+      trash: []
+    });
+    persistRemote(); // 把「空」作为起点写下，之后的空星空刷新不会被任何种子覆盖
+  };
+  // 载入示例星系（可选入口，如列表视图空态）：整棵演示快照替换当前星空并落库
+  const loadDemo = () => {
+    hydrate(JSON.parse(JSON.stringify(DEMO_SEED)));
+    persistRemote();
+  };
+  if (window.SRNet) {
+    const local = window.SRNet.loadLocal(); // { savedAt, data } | null
+    const localOk = local && looksLikeGalaxy(local.data);
+    window.SRNet.api('/api/hello', {
+      method: 'POST',
+      body: {
+        name: account.name,
+        avatar: account.avatar
+      }
+    }).then(r => {
+      if (r.user && r.user.name) {
+        account.name = r.user.name;
+        account.avatar = r.user.avatar || account.avatar;
+      }
+      return window.SRNet.api('/api/galaxy');
+    }).then(r => {
+      const d = r && r.data;
+      if (r && r.version != null) window.SRNet.setVersion(r.version); // 乐观锁基准版本
+      const remoteOk = looksLikeGalaxy(d);
+      // 服务器快照时间：优先 data 内嵌的客户端 savedAt，缺失时退回 sqlite 的 updated_at（UTC）
+      const remoteTs = remoteOk && d.savedAt || (remoteOk && r.updatedAt ? Date.parse(String(r.updatedAt).replace(' ', 'T') + 'Z') || 1 : remoteOk ? 1 : 0);
+      if (remoteOk && (!localOk || remoteTs >= local.savedAt)) {
+        hydrate(d);
+      } else if (localOk) {
+        hydrate(local.data); // 本地较新（或服务器为空）：以本地为准
+        persistRemote(); // 并把它回推给服务器
+      } else {
+        startFresh(); // 首次使用：真空态起步，演示数据改为可选入口
+      }
+    }).catch(() => {
+      // 后端未运行 / file:// 打开：降级 localStorage，仍然可读可写
+      if (localOk) hydrate(local.data);else startFresh();
+    });
+
+    // 好友数量：给侧边栏「星际漫游」角标用
+    window.SRNet.api('/api/friends').then(r => {
+      social.friends = (r.friends || []).length;
+      window.dispatchEvent(new CustomEvent('sr-friends'));
+    }).catch(() => {});
+
+    // 星际来信：启动即取一次，侧栏收件箱角标才带上未领取来信（后端未运行时静默为空）
+    refreshMail();
+  }
   return {
     constellations,
     stars,
     connections,
     byId,
     notes,
-    conName: id => (constellations.find(c => c.id === id) || {}).name,
-    conColor: id => (constellations.find(c => c.id === id) || {}).color
+    inbox,
+    timeline,
+    conName,
+    conColor,
+    relatedStars,
+    backlinksOf,
+    trash,
+    trashStar,
+    trashDomain,
+    restoreTrash,
+    purgeTrash,
+    addStar,
+    renameStar,
+    touchNote,
+    logIgnite,
+    pushTimeline,
+    syncCounts,
+    account,
+    social,
+    ago,
+    loadDemo,
+    mail,
+    refreshMail,
+    unclaimedMail,
+    adoptShared,
+    refreshMemory,
+    reviewSuccess,
+    reviewFail,
+    reviewPartial,
+    queueReview,
+    dueTsOf,
+    dueStars,
+    isLit,
+    isEmber,
+    hasSubstance,
+    emberStars,
+    todayTodo,
+    persist: persistRemote
   };
 }();
 })(); } catch (e) { __ds_ns.__errors.push({ path: "ui_kits/stellar-raft/data.js", error: String((e && e.message) || e) }); }
+
+// ui_kits/stellar-raft/mdcore.js
+try { (() => {
+/* mdcore.js — window.SRMd：Markdown 纯字符串核心（不依赖 DOM，Node 可直接
+   import 做单元测试，tests/mdcore.test.js）。编辑器的四条 Markdown 通路共用：
+     parseMdBlocks(text)        → 块数组（粘贴 / 导入）
+     parseFrontmatter(text)     → { props, tags, body }（YAML frontmatter 回填属性）
+     matchInline(textBeforeCaret) → { len, html }（打字时行内 **x** · *x* · `x` · ~~x~~ 即时转换）
+     blocksToMd(blocks, opts)   → Markdown 全文（导出，含 frontmatter 与列表缩进）
+   链接协议统一走 SRSanitize.safeUrl（未加载时退化为最小黑名单）。 */
+(function () {
+  'use strict';
+
+  const uid = () => 'b' + Math.random().toString(36).slice(2, 8);
+  const safeUrl = u => {
+    const S = typeof globalThis !== 'undefined' ? globalThis.SRSanitize : null;
+    if (S && S.safeUrl) return S.safeUrl(u);
+    return /^\s*(javascript|data|vbscript):/i.test(String(u || '')) ? null : u;
+  };
+  const escHtml = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  // 行内代码的着色走主题 token（color-mix），黎明主题下同样成立
+  const CODE_SPAN_CSS = 'font-family:var(--font-mono);font-size:0.92em;background:color-mix(in srgb, var(--star-blue) 14%, transparent);padding:1px 5px;border-radius:5px;';
+
+  /* ---- 行内标记 → HTML（整行解析，粘贴 / 导入用） ---- */
+  const mdInline = s => escHtml(s).replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>').replace(/(^|[^*])\*([^*\s][^*]*)\*/g, '$1<i>$2</i>').replace(/~~([^~]+)~~/g, '<s>$1</s>').replace(/`([^`]+)`/g, '<code style="' + CODE_SPAN_CSS + '">$1</code>')
+  // 链接协议白名单：javascript:/data: 等降级为纯文本（保留可见字样，去掉可点 href）
+  .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (mm, txt, url) => {
+    const ok = safeUrl(url);
+    return ok ? '<a href="' + ok.replace(/"/g, '&quot;') + '" style="color:var(--star-blue);text-decoration:underline;text-underline-offset:3px;">' + txt + '</a>' : txt;
+  });
+
+  /* ---- 打字即时转换：光标前缀里已闭合的行内标记（Typora 式，空格触发） ----
+     顺序敏感：** 在 * 之前；斜体用 lookbehind 避免吃掉 ** 的一半。
+     不支持 _下划线_ 语法——snake_case / __init__ 一类标识符太容易误伤。 */
+  const INLINE_RULES = [{
+    re: /\*\*([^*]+)\*\*$/,
+    tag: 'b'
+  }, {
+    re: /~~([^~]+)~~$/,
+    tag: 's'
+  }, {
+    re: /`([^`]+)`$/,
+    tag: 'code'
+  }, {
+    re: /(?<!\*)\*([^*\s](?:[^*]*[^*\s])?)\*$/,
+    tag: 'i'
+  }];
+  const matchInline = pre => {
+    const s = String(pre == null ? '' : pre);
+    for (const r of INLINE_RULES) {
+      const m = s.match(r.re);
+      if (!m || !m[1]) continue;
+      const inner = escHtml(m[1]);
+      const html = r.tag === 'code' ? '<code style="' + CODE_SPAN_CSS + '">' + inner + '</code>' : '<' + r.tag + '>' + inner + '</' + r.tag + '>';
+      return {
+        len: m[0].length,
+        html
+      };
+    }
+    return null;
+  };
+
+  /* ---- 整段 Markdown → 块数组 ----
+     列表（- · * · + · 数字. · []）带缩进解析为 indent 层级（2 空格一级，封顶 5），
+     嵌套列表不再被压平；非列表的 4 空格缩进段仍识别为 plaintext 代码块。 */
+  const LIST_RE = /^([-*+]|\d+[.)])\s/;
+  function parseMdBlocks(text) {
+    const lines = String(text == null ? '' : text).replace(/\r\n?/g, '\n').split('\n');
+    const out = [];
+    let i = 0,
+      m;
+    while (i < lines.length) {
+      const raw = lines[i];
+      const l = raw.trim();
+      if (!l) {
+        i++;
+        continue;
+      }
+      const lead = (raw.match(/^[ \t]*/)[0] || '').replace(/\t/g, '  ').length;
+      const indent = Math.min(5, Math.floor(lead / 2));
+      const ind = indent ? {
+        indent
+      } : {};
+      if (m = l.match(/^```(\w*)/)) {
+        // 代码围栏
+        const buf = [];
+        i++;
+        let closed = false;
+        while (i < lines.length) {
+          if (/^```/.test(lines[i].trim())) {
+            closed = true;
+            i++;
+            break;
+          }
+          buf.push(lines[i]);
+          i++;
+        }
+        // 只有真正围起了内容才建代码块——文本末尾一个孤零零的 ``` 不再遗留空 code 块
+        if (closed || buf.length) out.push({
+          id: uid(),
+          type: 'code',
+          lang: (m[1] || 'plaintext').toLowerCase(),
+          code: buf.join('\n')
+        });
+      } else if (m = l.match(/^[-*+]\s+\[( |x|X)\]\s+(.*)/)) {
+        out.push({
+          id: uid(),
+          type: 'todo',
+          checked: m[1].toLowerCase() === 'x',
+          text: mdInline(m[2]),
+          ...ind
+        });
+        i++;
+      } else if (/^(-{3,}|\*{3,})$/.test(l)) {
+        out.push({
+          id: uid(),
+          type: 'divider'
+        });
+        i++;
+      } else if (m = l.match(/^[-*+]\s+(.*)/)) {
+        out.push({
+          id: uid(),
+          type: 'bulleted',
+          text: mdInline(m[1]),
+          ...ind
+        });
+        i++;
+      } else if (m = l.match(/^(\d+)[.)]\s+(.*)/)) {
+        out.push({
+          id: uid(),
+          type: 'numbered',
+          text: mdInline(m[2]),
+          ...ind,
+          ...(m[1] !== '1' ? {
+            start: parseInt(m[1], 10)
+          } : {})
+        });
+        i++;
+      } else if (/^(\t| {4,})\S/.test(raw)) {
+        // 缩进代码：连续缩进行整体保留为 plaintext 代码块
+        const buf = [];
+        while (i < lines.length && (/^(\t| {2,})\S/.test(lines[i]) || lines[i].trim() === '' && i + 1 < lines.length && /^(\t| {2,})\S/.test(lines[i + 1])) && !LIST_RE.test(lines[i].trim())) {
+          buf.push(lines[i]);
+          i++;
+        }
+        const minIndent = Math.min(...buf.filter(x => x.trim()).map(x => (x.match(/^[ \t]*/)[0] || '').length));
+        out.push({
+          id: uid(),
+          type: 'code',
+          lang: 'plaintext',
+          code: buf.map(x => x.slice(minIndent)).join('\n')
+        });
+      } else if (/^\$\$/.test(l)) {
+        // 数学块
+        if (l.length > 4 && /\$\$$/.test(l)) {
+          out.push({
+            id: uid(),
+            type: 'math',
+            tex: l.slice(2, -2).trim()
+          });
+          i++;
+        } else {
+          const buf = [];
+          i++;
+          while (i < lines.length && !/\$\$/.test(lines[i])) {
+            buf.push(lines[i]);
+            i++;
+          }
+          i++;
+          out.push({
+            id: uid(),
+            type: 'math',
+            tex: buf.join('\n').trim()
+          });
+        }
+      } else if (/^\|.+\|$/.test(l)) {
+        // 表格
+        const rowsRaw = [];
+        while (i < lines.length && /^\|.+\|$/.test(lines[i].trim())) {
+          rowsRaw.push(lines[i].trim());
+          i++;
+        }
+        const cells = r => r.slice(1, -1).split('|').map(c => c.trim());
+        const body = rowsRaw.slice(1).filter(r => !/^\|[\s:\-|]+\|$/.test(r)).map(cells);
+        out.push({
+          id: uid(),
+          type: 'table',
+          head: cells(rowsRaw[0]),
+          rows: body
+        });
+      } else if (m = l.match(/^(#{1,3})\s+(.*)/)) {
+        out.push({
+          id: uid(),
+          type: 'h' + m[1].length,
+          text: mdInline(m[2])
+        });
+        i++;
+      } else if (m = l.match(/^>\s?(.*)/)) {
+        out.push({
+          id: uid(),
+          type: 'quote',
+          text: mdInline(m[1])
+        });
+        i++;
+      } else {
+        out.push({
+          id: uid(),
+          type: 'p',
+          text: mdInline(l)
+        });
+        i++;
+      }
+    }
+    return out;
+  }
+
+  /* ---- YAML frontmatter（--- 包围的 k: v 段）→ { props, tags, body } ---- */
+  function parseFrontmatter(text) {
+    const src = String(text == null ? '' : text).replace(/\r\n?/g, '\n');
+    const m = src.match(/^---\n([\s\S]*?)\n---\n?/);
+    if (!m) return {
+      props: null,
+      tags: null,
+      body: src
+    };
+    const props = {};
+    let tags = null;
+    m[1].split('\n').forEach(line => {
+      const mm = line.match(/^([A-Za-z_一-鿿][\w一-鿿-]*)\s*:\s*(.*)$/);
+      if (!mm) return;
+      const k = mm[1];
+      const v = mm[2].trim().replace(/^["']|["']$/g, '');
+      if (k === 'tags') {
+        tags = v.replace(/^\[|\]$/g, '').split(',').map(s => s.trim()).filter(Boolean);
+        return;
+      }
+      if (v) props[k] = v;
+    });
+    return {
+      props: Object.keys(props).length ? props : null,
+      tags,
+      body: src.slice(m[0].length)
+    };
+  }
+
+  /* ---- 块数组 → Markdown（导出）----
+     opts: { title, props, tags, summary }。frontmatter / admonition / <details> /
+     列表缩进（2 空格一级）/ 协议白名单与 Editor 渲染语义一一对应。 */
+  const stripTags = h => String(h == null ? '' : h).replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+  const htmlToMd = h => stripTags(String(h == null ? '' : h).replace(/<br\s*\/?>/gi, '\n').replace(/<\/(p|div)>/gi, '\n').replace(/<(b|strong)[^>]*>([\s\S]*?)<\/\1>/gi, '**$2**').replace(/<(i|em)[^>]*>([\s\S]*?)<\/\1>/gi, '*$2*').replace(/<(s|strike|del)[^>]*>([\s\S]*?)<\/\1>/gi, '~~$2~~').replace(/<code[^>]*>([\s\S]*?)<\/code>/gi, '`$1`')
+  // 导出时同样过协议白名单：非法链接降级为纯文本，不把 javascript:/data: 带出仓
+  .replace(/<a[^>]*href="([^"]*)"[^>]*>([\s\S]*?)<\/a>/gi, (mm, url, txt) => safeUrl(url) ? '[' + txt + '](' + url + ')' : txt)).trim();
+  function blocksToMd(blocks, opts) {
+    const o = opts || {};
+    const lines = [];
+    let counters = [];
+    (blocks || []).forEach(b => {
+      if (b.type !== 'numbered') counters = [];
+      const pad = '  '.repeat(b.indent || 0);
+      switch (b.type) {
+        case 'rich':
+          if (o.summary) lines.push(o.summary);
+          break;
+        case 'h1':
+          lines.push('# ' + htmlToMd(b.text));
+          break;
+        case 'h2':
+          lines.push('## ' + htmlToMd(b.text));
+          break;
+        case 'h3':
+          lines.push('### ' + htmlToMd(b.text));
+          break;
+        case 'p':
+          lines.push(htmlToMd(b.text));
+          break;
+        case 'quote':
+          lines.push('> ' + htmlToMd(b.text));
+          break;
+        // callout 用 admonition 语法并带 tone，round-trip 不再退化成普通引用
+        case 'callout':
+          lines.push('> [!' + (b.tone === 'blue' ? 'note' : 'tip') + ']\n> ' + htmlToMd(b.text));
+          break;
+        case 'bulleted':
+          lines.push(pad + '- ' + htmlToMd(b.text));
+          break;
+        case 'numbered':
+          {
+            const lvl = b.indent || 0;
+            counters = counters.slice(0, lvl + 1);
+            if (counters[lvl] == null) counters[lvl] = 0;
+            if (counters[lvl] === 0 && b.start) counters[lvl] = b.start - 1;
+            counters[lvl] += 1;
+            lines.push(pad + counters[lvl] + '. ' + htmlToMd(b.text));
+            break;
+          }
+        case 'todo':
+          lines.push(pad + '- [' + (b.checked ? 'x' : ' ') + '] ' + htmlToMd(b.text));
+          break;
+        // toggle 用标准可折叠 <details>，标注其为折叠块
+        case 'toggle':
+          lines.push('<details>\n<summary>' + htmlToMd(b.text) + '</summary>\n\n' + htmlToMd(b.child || '') + '\n</details>');
+          break;
+        case 'math':
+          lines.push('$$\n' + (b.tex || '') + '\n$$');
+          break;
+        case 'code':
+          lines.push('```' + (b.lang || '') + '\n' + (b.code || '') + '\n```');
+          break;
+        case 'divider':
+          lines.push('---');
+          break;
+        // 本地上传的 dataURL 不把超大 base64 内联进 md，改为附件提示
+        case 'image':
+          lines.push(/^data:/.test(b.src || '') ? '![' + (b.alt || '本地图片') + '](附件：本地上传的图片已略去内联数据)' : '![' + (b.alt || '') + '](' + (b.src || '') + ')');
+          break;
+        case 'table':
+          {
+            const head = b.head || [];
+            const rows = b.rows || [];
+            if (!head.length) break;
+            lines.push('| ' + head.join(' | ') + ' |');
+            lines.push('| ' + head.map(() => '---').join(' | ') + ' |');
+            rows.forEach(r => lines.push('| ' + r.join(' | ') + ' |'));
+            break;
+          }
+        default:
+          break;
+      }
+    });
+    // YAML frontmatter：把结构化属性写出，round-trip 后属性不再丢失（对标 Obsidian）
+    const p = o.props || {};
+    const fm = [];
+    const pushFm = (k, v) => {
+      if (v != null && String(v).trim() !== '' && v !== '—') fm.push(k + ': ' + v);
+    };
+    pushFm('type', p.type);
+    pushFm('status', p.status);
+    pushFm('source', p.source);
+    pushFm('alias', p.alias);
+    pushFm('nextReview', p.nextReview);
+    if (o.tags && o.tags.length) fm.push('tags: [' + o.tags.join(', ') + ']');
+    const front = fm.length ? '---\n' + fm.join('\n') + '\n---\n\n' : '';
+    const title = o.title ? '# ' + o.title + '\n\n' : '';
+    return front + title + lines.filter(l => l != null && l !== '').join('\n\n') + '\n';
+  }
+  const api = {
+    parseMdBlocks,
+    parseFrontmatter,
+    matchInline,
+    mdInline,
+    blocksToMd,
+    CODE_SPAN_CSS,
+    INLINE_RULES
+  };
+  if (typeof window !== 'undefined') window.SRMd = api;
+  if (typeof globalThis !== 'undefined') globalThis.SRMd = api;
+})();
+})(); } catch (e) { __ds_ns.__errors.push({ path: "ui_kits/stellar-raft/mdcore.js", error: String((e && e.message) || e) }); }
+
+// ui_kits/stellar-raft/sanitize.js
+try { (() => {
+/* sanitize.js — window.SRSanitize：编辑器内容的白名单 HTML 清洗与链接协议校验。
+   块正文的唯一净化通道：渲染前（dangerouslySetInnerHTML）与入库前（syncBlock
+   抓取 innerHTML）都过这里，粘贴的 text/html 同样先清洗再插入。
+
+   纯字符串实现（不依赖 DOM），Node 可直接 import 做单元测试。
+   API：
+     sanitizeHtml(html)  → 只保留行内语义标签（b/i/u/s/code/a/span/…），
+                           剥除全部 on* 事件、script/img/svg/iframe 等元素，
+                           style 只留颜色/字体等安全声明，href 走协议白名单。
+     safeUrl(url)        → 通过协议白名单（http/https/mailto/stellar-raft/相对
+                           路径）返回原串，否则返回 null（javascript:/data:/
+                           vbscript: 及其实体/控制字符混淆一律拒绝）。
+     cleanStyle(css)     → style 声明白名单过滤（导出复用）。 */
+(function () {
+  'use strict';
+
+  // 允许保留的行内语义标签（div/p 等容器标签剥壳留内容；br 单独处理）
+  const SAFE_TAGS = {
+    b: 1,
+    strong: 1,
+    i: 1,
+    em: 1,
+    u: 1,
+    s: 1,
+    strike: 1,
+    del: 1,
+    code: 1,
+    a: 1,
+    span: 1,
+    sub: 1,
+    sup: 1,
+    mark: 1
+  };
+  // 连内容一起丢弃的元素（其文本没有语义，或本身就是执行面）
+  const DROP_WITH_CONTENT = {
+    script: 1,
+    style: 1,
+    iframe: 1,
+    object: 1,
+    embed: 1,
+    title: 1,
+    textarea: 1,
+    noscript: 1,
+    template: 1,
+    select: 1,
+    option: 1,
+    svg: 1,
+    math: 1,
+    head: 1
+  };
+
+  // style 白名单：只允许影响行内排版/配色的声明
+  const SAFE_STYLE_PROPS = {
+    color: 1,
+    background: 1,
+    'background-color': 1,
+    'font-family': 1,
+    'font-size': 1,
+    'font-style': 1,
+    'font-weight': 1,
+    'text-decoration': 1,
+    'text-decoration-line': 1,
+    'text-underline-offset': 1,
+    padding: 1,
+    'border-radius': 1,
+    'letter-spacing': 1
+  };
+  const SAFE_STYLE_VAL = /^[a-zA-Z0-9#%.,()\-\s'"_/]*$/;
+  const BAD_STYLE_VAL = /url\s*\(|expression|javascript|image-set|element\s*\(|@|\\/i;
+  const cleanStyle = raw => {
+    const out = [];
+    String(raw == null ? '' : raw).split(';').forEach(d => {
+      const i = d.indexOf(':');
+      if (i < 0) return;
+      const prop = d.slice(0, i).trim().toLowerCase();
+      const val = d.slice(i + 1).trim();
+      if (!SAFE_STYLE_PROPS[prop]) return;
+      if (!val || val.length > 220 || !SAFE_STYLE_VAL.test(val) || BAD_STYLE_VAL.test(val)) return;
+      out.push(prop + ':' + val);
+    });
+    return out.join(';');
+  };
+
+  // 属性值里的实体最小解码——只为协议嗅探（&#58; / &colon; 混淆的 javascript:）
+  const decodeEntities = s => String(s).replace(/&#x([0-9a-f]+);?/gi, (_, h) => String.fromCodePoint(parseInt(h, 16) || 0)).replace(/&#(\d+);?/g, (_, d) => String.fromCodePoint(parseInt(d, 10) || 0)).replace(/&(colon|tab|newline|amp|quot|apos|lt|gt);/gi, (_, n) => ({
+    colon: ':',
+    tab: '\t',
+    newline: '\n',
+    amp: '&',
+    quot: '"',
+    apos: "'",
+    lt: '<',
+    gt: '>'
+  })[n.toLowerCase()]);
+  const SAFE_SCHEMES = {
+    http: 1,
+    https: 1,
+    mailto: 1,
+    'stellar-raft': 1
+  };
+  const safeUrl = url => {
+    if (url == null) return null;
+    const u = String(url).trim();
+    if (!u) return null;
+    // 浏览器解析 scheme 时忽略控制字符/空白，实体也会先解码——按同样规则嗅探
+    const sniff = decodeEntities(u).replace(/[\u0000-\u0020]/g, '').toLowerCase();
+    const m = sniff.match(/^([a-z][a-z0-9+.-]*):/);
+    if (m) return SAFE_SCHEMES[m[1]] ? u : null;
+    return u; // 无协议：相对路径 / 锚点
+  };
+  const escAttr = s => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+  const escText = s => String(s).replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  const ATTR_RE = /([a-zA-Z_][-a-zA-Z0-9_:.]*)\s*=\s*("([^"]*)"|'([^']*)'|([^\s>]+))/g;
+  const getAttr = (attrs, name) => {
+    ATTR_RE.lastIndex = 0;
+    let m;
+    while (m = ATTR_RE.exec(attrs)) {
+      if (m[1].toLowerCase() === name) return m[3] != null ? m[3] : m[4] != null ? m[4] : m[5];
+    }
+    return null;
+  };
+  const TAG_RE = /<(\/?)([a-zA-Z][a-zA-Z0-9-]*)((?:"[^"]*"|'[^']*'|[^>"'])*)>/g;
+  const sanitizeHtml = html => {
+    if (html == null) return '';
+    const src = String(html);
+    let out = '';
+    const stack = [];
+    let last = 0;
+    let skipUntil = null; // 正在整体丢弃内容的元素名
+    let m;
+    TAG_RE.lastIndex = 0;
+    while (m = TAG_RE.exec(src)) {
+      const text = src.slice(last, m.index);
+      if (!skipUntil && text) out += escText(text);
+      last = TAG_RE.lastIndex;
+      const closing = m[1] === '/';
+      const name = m[2].toLowerCase();
+      const attrs = m[3] || '';
+      if (skipUntil) {
+        if (closing && name === skipUntil) skipUntil = null;
+        continue;
+      }
+      if (closing) {
+        if (SAFE_TAGS[name]) {
+          const i = stack.lastIndexOf(name);
+          if (i >= 0) while (stack.length > i) out += '</' + stack.pop() + '>';
+        }
+        continue; // 未开启/非白名单的闭合标签直接丢
+      }
+      if (DROP_WITH_CONTENT[name]) {
+        if (!/\/\s*$/.test(attrs)) skipUntil = name;
+        continue;
+      }
+      if (name === 'br') {
+        out += '<br>';
+        continue;
+      }
+      if (!SAFE_TAGS[name]) continue; // 非白名单元素剥壳留内容（div/p/img/…）
+      let attrStr = '';
+      if (name === 'a') {
+        const href = getAttr(attrs, 'href');
+        const ok = href != null ? safeUrl(decodeEntities(href)) : null;
+        if (ok) attrStr += ' href="' + escAttr(ok) + '" rel="noopener noreferrer"';
+      }
+      const st = getAttr(attrs, 'style');
+      if (st != null) {
+        const cs = cleanStyle(decodeEntities(st));
+        if (cs) attrStr += ' style="' + escAttr(cs) + '"';
+      }
+      out += '<' + name + attrStr + '>';
+      stack.push(name);
+    }
+    const tail = src.slice(last);
+    if (!skipUntil && tail) out += escText(tail);
+    while (stack.length) out += '</' + stack.pop() + '>';
+    return out;
+  };
+  const api = {
+    sanitizeHtml,
+    safeUrl,
+    cleanStyle
+  };
+  if (typeof window !== 'undefined') window.SRSanitize = api;
+  if (typeof globalThis !== 'undefined') globalThis.SRSanitize = api;
+})();
+})(); } catch (e) { __ds_ns.__errors.push({ path: "ui_kits/stellar-raft/sanitize.js", error: String((e && e.message) || e) }); }
+
+// ui_kits/stellar-raft/transition.js
+try { (() => {
+/* sr-transition — 星际跃迁转场系统（plain global：window.srTransition）。
+   把「换视图」变成一次微型星际飞行：深空遮罩淡入、星光拉成短暂的光轨、
+   旧视图微缩放退后；遮罩峰值处执行真正的切换（run()），再揭开新视图。
+
+   API（挂在 window.srTransition）：
+   · flight(run, opts?) → Promise<boolean>
+       视图级跃迁。入场 ~300ms → 峰值执行 run() → 出场 ~340ms，全程
+       var(--ease-flight)。prefers-reduced-motion / 设置页关动效 /
+       opts.instant 时直接 run() 不播动画（resolve(false)）。
+       防连点：入场阶段的重复调用只保留最后一次意图（同一目标点两下 = 一次），
+       出场阶段的调用直接执行（遮罩正在揭开，切换被自然盖住）。
+   · enter(el) — 元素级入场辅助：给新挂载的视图根补一次 .sr-view-enter
+       淡入 + 上浮（React 里也可以直接写 className="sr-view-enter"）。
+   · themeCrossfade(apply?) — 主题切换的 300ms 全局 crossfade：
+       给 <html> 挂临时过渡类，随后（或在回调里）改 data-theme；
+       reduced-motion / 动效关闭时不加类、瞬切。
+   · reduced() — 当前是否应跳过动画（系统 reduced-motion 或 data-motion="off"）。
+   · busy — 只读：跃迁遮罩是否在场（可用来做额外的防连点判断）。
+
+   动效口径：视图级 300/340ms（仅保留给「探索星系」等大跳转）、控件级入场 240ms，缓动统一 var(--ease-flight)；
+   遮罩与光轨只用 tokens（--bg-deepspace / --star-blue），双主题自然成立。 */
+(function () {
+  if (typeof window === 'undefined' || typeof document === 'undefined') return;
+  const IN_MS = 300; // 入场遮罩（视图级 250–450ms 区间）
+  const OUT_MS = 340; // 出场揭开
+  const ENTER_MS = 240; // 元素级入场辅助（高频视图切换的唯一过渡，宜快不宜久）
+  const THEME_MS = 300; // 主题 crossfade
+
+  const reduced = () => window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches || document.documentElement.dataset.motion === 'off';
+
+  /* ------------------------------ CSS ------------------------------ */
+
+  const CSS = `
+/* —— 星际跃迁遮罩（tokens-only，深空/黎明双主题成立） —— */
+.sr-warp {
+  position: fixed; inset: 0; z-index: calc(var(--z-toast, 140) + 10);
+  background: var(--bg-deepspace); pointer-events: auto; overflow: hidden;
+  opacity: 0;
+}
+.sr-warp[data-phase="in"]  { animation: sr-warp-in ${IN_MS}ms var(--ease-flight) both; }
+.sr-warp[data-phase="out"] { animation: sr-warp-out ${OUT_MS}ms var(--ease-flight) both; }
+@keyframes sr-warp-in  { from { opacity: 0; } to { opacity: 1; } }
+@keyframes sr-warp-out { from { opacity: 1; } to { opacity: 0; } }
+/* 拉成光轨的星光：细渐变线，纵向拉伸掠过 */
+.sr-warp-streak {
+  position: absolute; width: 2px; border-radius: 2px;
+  background: linear-gradient(180deg, transparent, var(--star-blue), transparent);
+  opacity: 0; will-change: transform, opacity;
+  animation: sr-warp-streak ${IN_MS + OUT_MS}ms var(--ease-flight) both;
+}
+@keyframes sr-warp-streak {
+  0%   { transform: translateY(-46%) scaleY(0.35); opacity: 0; }
+  40%  { opacity: 0.7; }
+  100% { transform: translateY(52%) scaleY(1.6); opacity: 0; }
+}
+/* 跃迁时旧视图微缩放淡出（遮罩峰值处移除，切换被完全盖住） */
+.sr-warp-stage {
+  transition: transform ${IN_MS}ms var(--ease-flight), opacity ${IN_MS}ms var(--ease-flight);
+  transform: scale(1.014); opacity: 0.72;
+}
+/* —— 元素级入场辅助：新挂载视图根的淡入 + 上浮 —— */
+.sr-view-enter { animation: sr-view-enter ${ENTER_MS}ms var(--ease-flight) both; }
+@keyframes sr-view-enter {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: none; }
+}
+/* —— 主题切换的全局 crossfade（reduced-motion 时不加此类） —— */
+html.sr-theme-xfade, html.sr-theme-xfade *,
+html.sr-theme-xfade *::before, html.sr-theme-xfade *::after {
+  transition:
+    background ${THEME_MS}ms var(--ease-flight),
+    color ${THEME_MS}ms var(--ease-flight),
+    border-color ${THEME_MS}ms var(--ease-flight),
+    fill ${THEME_MS}ms var(--ease-flight),
+    stroke ${THEME_MS}ms var(--ease-flight),
+    box-shadow ${THEME_MS}ms var(--ease-flight) !important;
+}
+/* reduced-motion：全部直达终态（flight() 本身也不会建遮罩，这里是双保险） */
+@media (prefers-reduced-motion: reduce) {
+  .sr-warp, .sr-warp-streak, .sr-view-enter { animation: none !important; }
+  .sr-warp { display: none; }
+  .sr-warp-stage { transition: none; transform: none; opacity: 1; }
+}
+`;
+  function injectCss() {
+    let el = document.getElementById('sr-transition-css');
+    if (!el) {
+      el = document.createElement('style');
+      el.id = 'sr-transition-css';
+      (document.head || document.documentElement).appendChild(el);
+    }
+    el.textContent = CSS;
+  }
+  injectCss();
+
+  /* --------------------------- 跃迁遮罩 --------------------------- */
+
+  // 光轨的固定布点（确定性的「伪随机」，不引入运行时随机闪烁）：
+  // [left%, top%, height(px), delay(ms)]
+  const STREAKS = [[8, 6, 130, 0], [16, 52, 92, 60], [24, 22, 150, 30], [33, 66, 112, 90], [41, 12, 84, 15], [48, 44, 165, 75], [55, 74, 100, 45], [62, 18, 132, 105], [70, 58, 90, 20], [77, 4, 148, 65], [84, 38, 116, 35], [91, 64, 96, 95], [28, 84, 76, 50], [66, 88, 122, 10]];
+  function buildOverlay() {
+    const overlay = document.createElement('div');
+    overlay.className = 'sr-warp';
+    overlay.setAttribute('aria-hidden', 'true');
+    for (const [left, top, h, delay] of STREAKS) {
+      const s = document.createElement('span');
+      s.className = 'sr-warp-streak';
+      s.style.left = left + '%';
+      s.style.top = top + '%';
+      s.style.height = h + 'px';
+      s.style.animationDelay = delay + 'ms';
+      overlay.appendChild(s);
+    }
+    return overlay;
+  }
+  let active = null; // { overlay, phase: 'in'|'out', pending, done, resolve }
+
+  function flight(run, opts) {
+    opts = opts || {};
+    if (typeof run !== 'function') return Promise.resolve(false);
+    if (opts.instant || reduced()) {
+      run();
+      return Promise.resolve(false);
+    }
+    if (active) {
+      // 防连点：入场阶段只保留最后一次意图（双击同一目标 = 只切一次）；
+      // 出场阶段直接执行——遮罩尚在揭开，切换仍被视觉盖住。
+      if (active.phase === 'in') active.pending = run;else run();
+      return active.done;
+    }
+    const overlay = buildOverlay();
+    document.body.appendChild(overlay);
+    let resolve;
+    const done = new Promise(r => {
+      resolve = r;
+    });
+    active = {
+      overlay,
+      phase: 'in',
+      pending: run,
+      done,
+      resolve
+    };
+    const stage = document.getElementById('root');
+    if (stage) stage.classList.add('sr-warp-stage');
+    overlay.dataset.phase = 'in';
+
+    // 不用 rAF 编排（后台标签页 rAF 会冻结，遮罩会卡死），全部走定时器
+    setTimeout(() => {
+      if (!active) return;
+      const job = active.pending;
+      active.pending = null;
+      try {
+        if (job) job();
+      } catch (err) {
+        console.error('[srTransition] run() 抛错：', err);
+      }
+      if (stage) stage.classList.remove('sr-warp-stage');
+      // 留一帧给 React 提交新视图，再揭开遮罩
+      setTimeout(() => {
+        if (!active) return;
+        active.phase = 'out';
+        overlay.dataset.phase = 'out';
+        setTimeout(() => {
+          overlay.remove();
+          const r = active && active.resolve;
+          active = null;
+          if (r) r(true);
+        }, OUT_MS + 30);
+      }, 30);
+    }, IN_MS + 20);
+    return done;
+  }
+
+  /* ------------------------ 元素级入场辅助 ------------------------ */
+
+  function enter(el) {
+    if (!el || !el.classList || reduced()) return;
+    el.classList.remove('sr-view-enter');
+    // 强制 reflow，保证同一元素可重复触发入场
+    void el.offsetWidth;
+    el.classList.add('sr-view-enter');
+    el.addEventListener('animationend', () => el.classList.remove('sr-view-enter'), {
+      once: true
+    });
+  }
+
+  /* ------------------------ 主题全局 crossfade ------------------------ */
+
+  let themeTimer = 0;
+  function themeCrossfade(apply) {
+    const root = document.documentElement;
+    if (reduced()) {
+      if (apply) apply();
+      return;
+    }
+    root.classList.add('sr-theme-xfade');
+    if (apply) {
+      try {
+        apply();
+      } catch (err) {
+        console.error('[srTransition] themeCrossfade apply() 抛错：', err);
+      }
+    }
+    clearTimeout(themeTimer);
+    themeTimer = setTimeout(() => root.classList.remove('sr-theme-xfade'), THEME_MS + 60);
+  }
+  window.srTransition = {
+    flight,
+    enter,
+    themeCrossfade,
+    reduced,
+    enterClass: 'sr-view-enter',
+    get busy() {
+      return !!active;
+    }
+  };
+})();
+})(); } catch (e) { __ds_ns.__errors.push({ path: "ui_kits/stellar-raft/transition.js", error: String((e && e.message) || e) }); }
+
+// ui_kits/stellar-raft/undocore.js
+try { (() => {
+/* SRUndoCore — 编辑器应用级撤销/重做栈的纯逻辑核心（无 DOM / 无 React）。
+   快照对调用方不透明：这里只负责 past/future 两个栈的推进、容量上限、
+   「输入突发只在起点压一次栈」的 typing 语义。Editor.jsx 负责生成快照
+   （DOM-synced 块数组 + 所属星域）并在回放时应用。
+   Node 可直接 import（tests/undocore.test.js），浏览器挂 window.SRUndoCore。 */
+(function (g) {
+  'use strict';
+
+  /** 新建一个撤销历史。cap：past 栈的容量上限（超出丢最旧）。 */
+  function create(cap) {
+    return {
+      cap: cap > 0 ? cap : 120,
+      past: [],
+      future: [],
+      typing: false
+    };
+  }
+
+  /** 结构变更 / 格式操作前压一份快照：清空 redo 分支，结束当前输入突发。 */
+  function push(h, snap) {
+    h.past.push(snap);
+    if (h.past.length > h.cap) h.past.shift();
+    h.future = [];
+    h.typing = false;
+  }
+
+  /** 纯打字：一次输入突发只在起点压一份快照。
+      返回 true = 本次真的压栈了；false = 突发已在进行中，忽略。 */
+  function noteTyping(h, snap) {
+    if (h.typing) return false;
+    h.past.push(snap);
+    if (h.past.length > h.cap) h.past.shift();
+    h.future = [];
+    h.typing = true;
+    return true;
+  }
+
+  /** 撤销：把「当前状态」压进 future，弹出并返回上一份快照；无可撤销时返回 null。 */
+  function undo(h, current) {
+    if (!h.past.length) return null;
+    h.future.push(current);
+    h.typing = false;
+    return h.past.pop();
+  }
+
+  /** 重做：把「当前状态」压回 past，弹出并返回 future 顶部快照；无可重做时返回 null。 */
+  function redo(h, current) {
+    if (!h.future.length) return null;
+    h.past.push(current);
+    h.typing = false;
+    return h.future.pop();
+  }
+  const api = {
+    create,
+    push,
+    noteTyping,
+    undo,
+    redo,
+    canUndo: h => h.past.length > 0,
+    canRedo: h => h.future.length > 0
+  };
+  g.SRUndoCore = api;
+})(typeof globalThis !== 'undefined' ? globalThis : window);
+})(); } catch (e) { __ds_ns.__errors.push({ path: "ui_kits/stellar-raft/undocore.js", error: String((e && e.message) || e) }); }
 
 __ds_ns.Badge = __ds_scope.Badge;
 
@@ -5746,10 +26970,28 @@ __ds_ns.Input = __ds_scope.Input;
 
 __ds_ns.Tag = __ds_scope.Tag;
 
+__ds_ns.Checkbox = __ds_scope.Checkbox;
+
+__ds_ns.Select = __ds_scope.Select;
+
+__ds_ns.Switch = __ds_scope.Switch;
+
+__ds_ns.Tabs = __ds_scope.Tabs;
+
 __ds_ns.ConstellationItem = __ds_scope.ConstellationItem;
 
 __ds_ns.MemoryBar = __ds_scope.MemoryBar;
 
 __ds_ns.StarNode = __ds_scope.StarNode;
+
+__ds_ns.ContextMenu = __ds_scope.ContextMenu;
+
+__ds_ns.Modal = __ds_scope.Modal;
+
+__ds_ns.Toast = __ds_scope.Toast;
+
+__ds_ns.Tooltip = __ds_scope.Tooltip;
+
+__ds_ns.toast = __ds_scope.toast;
 
 })();

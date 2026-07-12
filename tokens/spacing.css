@@ -35,7 +35,11 @@
   --rail-w:           320px; /* right knowledge rail / drawer */
   --canvas-w:         1440px;
 
-  /* ---- Z layers ---- */
+  /* ---- Z layers ----
+     canvas < hud < sidebar < drawer < overlay < menu < modal < bar < toast.
+     Menus (context / slash / dropdown) float above passive overlays;
+     modals (confirm / dialogs) above menus; the batch-action bar above
+     modals it must survive; toast is always the topmost voice. */
   --z-canvas:   0; /* @kind other */
   --z-conn:     1; /* @kind other */
   --z-stars:    2; /* @kind other */
@@ -43,5 +47,8 @@
   --z-sidebar:  50; /* @kind other */
   --z-drawer:   60; /* @kind other */
   --z-overlay:  80; /* @kind other */
-  --z-toast:    90; /* @kind other */
+  --z-menu:     95; /* @kind other */
+  --z-modal:    120; /* @kind other */
+  --z-bar:      130; /* @kind other */
+  --z-toast:    140; /* @kind other */
 }

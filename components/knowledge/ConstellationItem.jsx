@@ -1,5 +1,11 @@
 import React from 'react';
-import { Icon } from '../core/Icon.jsx';
+
+if (typeof document !== 'undefined' && !document.getElementById('sr-focus-ring-css')) {
+  const s = document.createElement('style');
+  s.id = 'sr-focus-ring-css';
+  s.textContent = '.sr-focus-ring:focus{outline:none}.sr-focus-ring:focus-visible{outline:2px solid var(--focus);outline-offset:2px}';
+  document.head.appendChild(s);
+}
 
 /**
  * ConstellationItem — a sidebar row for one constellation (note group).
@@ -11,6 +17,8 @@ export function ConstellationItem({ name, color = 'var(--star-blue)', count, act
   return (
     <button
       type="button"
+      aria-current={active ? 'true' : undefined}
+      className="sr-focus-ring"
       onClick={onClick}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
@@ -26,7 +34,7 @@ export function ConstellationItem({ name, color = 'var(--star-blue)', count, act
         ...style,
       }}
     >
-      <span style={{
+      <span aria-hidden="true" style={{
         width: 9, height: 9, borderRadius: '50%', flex: 'none',
         background: color,
         boxShadow: `0 0 8px ${color}`,

@@ -1,0 +1,114 @@
+<!-- @dsCard group="Components" viewport="700x420" name="Form" subtitle="Select · switch · checkbox · tabs on glass" -->
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../styles.css">
+<style>
+  body{margin:0;font-family:var(--font-sans);background:var(--bg-deepspace);padding:26px;}
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;background-image:
+    radial-gradient(1px 1px at 15% 20%,rgba(159,198,255,.6),transparent),
+    radial-gradient(1px 1px at 78% 44%,rgba(255,217,138,.5),transparent),
+    radial-gradient(1.4px 1.4px at 50% 75%,rgba(255,255,255,.6),transparent);}
+  .wrap{position:relative;display:flex;flex-direction:column;gap:18px;}
+  .row{display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+  .label{font-family:var(--font-mono);font-size:10px;letter-spacing:var(--ls-hud);text-transform:uppercase;color:var(--text-3);width:100%;margin-bottom:-6px;}
+</style></head>
+<body>
+  <div class="wrap" id="root"></div>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="../../_ds_bundle.js"></script>
+  <script type="text/babel">
+    const NS = window.StellarRaftDesignSystem_2866af;
+    const { Icon, IconButton, GlassPanel } = NS;
+
+    function Demo({ C }) {
+      const { Select, Switch, Checkbox, Tabs } = C;
+      const [sort, setSort] = React.useState('recent');
+      const [twinkle, setTwinkle] = React.useState(true);
+      const [nudge, setNudge] = React.useState(false);
+      const [c1, setC1] = React.useState(true);
+      const [c2, setC2] = React.useState(false);
+      const [tab, setTab] = React.useState('graph');
+      const [, bump] = React.useState(0);
+      const flipTheme = () => {
+        const el = document.documentElement;
+        el.dataset.theme = el.dataset.theme === 'dawn' ? '' : 'dawn';
+        bump(n => n + 1);
+      };
+      return (
+        <React.Fragment>
+          <div className="row" style={{justifyContent:'space-between'}}>
+            <span className="label" style={{width:'auto'}}>Select · ↑↓ / Enter / Esc</span>
+            <IconButton name="sun-moon" title="切换 深空 / 黎明" onClick={flipTheme} />
+          </div>
+          <div className="row">
+            <div style={{width:240}}>
+              <Select value={sort} onChange={setSort} placeholder="排序方式" options={[
+                { value: 'recent', label: '最近编辑',  icon: 'clock' },
+                { value: 'dim',    label: '最先变暗',  icon: 'moon' },
+                { value: 'links',  label: '连接最多',  icon: 'link' },
+                { value: 'locked', label: '尚未解锁',  icon: 'lock', disabled: true },
+              ]} />
+            </div>
+            <div style={{width:200}}>
+              <Select size="sm" placeholder="移动到星座…" options={[
+                { value: 'qm',  label: '量子力学' },
+                { value: 'la',  label: '线性代数' },
+                { value: 'ds',  label: '数据结构' },
+              ]} onChange={() => {}} />
+            </div>
+          </div>
+
+          <div className="label">Switch · 开 = 星蓝微光</div>
+          <div className="row">
+            <Switch checked={twinkle} onChange={setTwinkle} label="背景星闪烁" />
+            <Switch checked={nudge} onChange={setNudge} label="变暗提醒" />
+            <Switch checked disabled label="记忆引力（固定开启）" />
+          </div>
+
+          <div className="label">Checkbox · 自绘对勾</div>
+          <div className="row">
+            <Checkbox checked={c1} onChange={setC1} label="纳入本周复习" />
+            <Checkbox checked={c2} onChange={setC2} label="连同子星一起移动" />
+            <Checkbox checked disabled>已归档</Checkbox>
+          </div>
+
+          <div className="label">Tabs · 下划线微光指示条 · ← →</div>
+          <Tabs value={tab} onChange={setTab} tabs={[
+            { id: 'graph', label: '星图',   icon: 'sparkles' },
+            { id: 'list',  label: '列表',   icon: 'list', count: 48 },
+            { id: 'dim',   label: '正变暗', icon: 'moon-star', count: 5 },
+          ]} />
+          <span style={{fontSize:12.5,color:'var(--text-3)'}}>
+            {tab === 'graph' ? '以星图视角浏览你的星空。' : tab === 'list' ? '以列表整理每一颗星。' : '这片星座正在变暗 — 该回来看看了。'}
+          </span>
+        </React.Fragment>
+      );
+    }
+
+    function mount(C) {
+      ReactDOM.createRoot(document.getElementById('root')).render(<Demo C={C}/>);
+    }
+
+    // Prefer the built bundle; fall back to compiling the sibling .jsx sources.
+    if (NS.Select && NS.Switch && NS.Checkbox && NS.Tabs) {
+      mount(NS);
+    } else {
+      const files = ['Select.jsx', 'Switch.jsx', 'Checkbox.jsx', 'Tabs.jsx'];
+      Promise.all(files.map(f => fetch('./' + f).then(r => r.text())))
+        .then(srcs => {
+          let code = srcs.join('\n')
+            .replace(/^import[^\n]*$/gm, '')
+            .replace(/^export\s+/gm, '');
+          code += '\n;window.__srFormLocal = { Select, Switch, Checkbox, Tabs };';
+          const js = Babel.transform(code, { presets: ['react'] }).code;
+          new Function('React', 'Icon', js)(React, Icon);
+          mount(window.__srFormLocal);
+        })
+        .catch(() => {
+          document.getElementById('root').innerHTML =
+            '<span style="color:var(--text-2);font-size:13px">组件尚未打包，且源码加载失败 — 请通过本地 HTTP 服务打开此卡片。</span>';
+        });
+    }
+  </script>
+</body></html>

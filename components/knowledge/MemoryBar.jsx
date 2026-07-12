@@ -47,7 +47,14 @@ export function MemoryBar({ value = 0.5, label, showPct = false, height = 6, fad
           {showPct && <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: warm ? 'var(--gold)' : 'var(--star-blue)' }}>{Math.round(v * 100)}%</span>}
         </div>
       )}
-      <div style={{ height, borderRadius: 999, background: 'rgba(159,198,255,0.10)', overflow: 'hidden' }}>
+      <div
+        role="meter"
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-valuenow={Math.round(v * 100)}
+        aria-label={typeof label === 'string' ? label : '记忆强度'}
+        style={{ height, borderRadius: 999, background: 'rgba(159,198,255,0.10)', overflow: 'hidden' }}
+      >
         <div style={{
           width: (v * 100) + '%', height: '100%', borderRadius: 999,
           background: `linear-gradient(90deg, var(--star-blue-deep), ${col})`,

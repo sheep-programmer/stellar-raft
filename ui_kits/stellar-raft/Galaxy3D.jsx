@@ -102,6 +102,10 @@ function useG3dDawn() {
 function Galaxy3D({ onClose, onOpenStar, onFeynman, dataset }) {
   // dataset：造访好友星系时注入的只读数据；缺省用自己的
   const D = dataset || window.SR_DATA;
+  // 认证态（点亮/待重燃）：自己的星走数据层派生函数（读共享 sr），
+  // 造访好友时消费 server 透传的 lit/ember 两个布尔（不含时间戳）
+  const litOf = (s) => D.isLit ? !!D.isLit(s) : !!(s && s.lit);
+  const emberOf = (s) => D.isEmber ? !!D.isEmber(s) : !!(s && s.ember);
   const mountRef = React.useRef(null);
   const apiRef = React.useRef(null);
   const [selected, setSelected] = React.useState(null);   // 选中的行星(知识星) 数据，控制右侧卡片
@@ -134,7 +138,9 @@ function Galaxy3D({ onClose, onOpenStar, onFeynman, dataset }) {
 
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(SKY);
-    scene.fog = new THREE.FogExp2(new THREE.Color(SKY).getHex(), dawn ? 0.0008 : 0.0011);
+    // 雾只负责「远景微雾」的深度暗示：密度压到原来的四到五成，近景星体保持清透；
+    // 黎明天幕本就明亮，雾要更轻，否则整片星系泛白发灰。
+    scene.fog = new THREE.FogExp2(new THREE.Color(SKY).getHex(), dawn ? 0.00032 : 0.00055);
 
     const camera = new THREE.PerspectiveCamera(55, (mount.clientWidth || 1) / (mount.clientHeight || 1), 0.1, 3000);
 
@@ -188,7 +194,7 @@ function Galaxy3D({ onClose, onOpenStar, onFeynman, dataset }) {
     const bgStars = mkStarLayer(1100, 380, 700, 4.2, 0.85); // 近层：更大更亮，缓慢视差
 
     // ── 双旋臂星尘盘：所有知识星系都嵌在同一座星系里 ─────────
-    const DUSTN = 2600;
+    const DUSTN = 1800;   // 星尘量收敛：保留旋臂形态，不让尘埃糊住知识星系
     const dPos = new Float32Array(DUSTN * 3);
     const dCol = new Float32Array(DUSTN * 3);
     const dTmp = new THREE.Color();
@@ -215,20 +221,27 @@ function Galaxy3D({ onClose, onOpenStar, onFeynman, dataset }) {
     const dustGeo = new THREE.BufferGeometry();
     dustGeo.setAttribute('position', new THREE.BufferAttribute(dPos, 3));
     dustGeo.setAttribute('color', new THREE.BufferAttribute(dCol, 3));
-    const dustMat = new THREE.PointsMaterial({ size: dawn ? 1.6 : 2.2, sizeAttenuation: true, vertexColors: true, map: starTex, transparent: true, opacity: dawn ? 0.2 : 0.38, depthWrite: false, blending: BLEND });
+    const dustMat = new THREE.PointsMaterial({ size: dawn ? 1.6 : 2.2, sizeAttenuation: true, vertexColors: true, map: starTex, transparent: true, opacity: dawn ? 0.13 : 0.26, depthWrite: false, blending: BLEND });
     const dust = new THREE.Points(dustGeo, dustMat);
     geoms.push(dustGeo); mats.push(dustMat);
     scene.add(dust);
 
     // 星系核心弥散辉光
     const coreTex = g3dRadialTexture(THREE, 'rgba(255,236,200,0.9)', 'rgba(255,180,110,0.28)'); texs.push(coreTex);
-    const coreMat = new THREE.SpriteMaterial({ map: coreTex, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, opacity: 0.5 });
-    const coreGlow = new THREE.Sprite(coreMat); coreGlow.scale.set(220, 220, 1); mats.push(coreMat);
+    const coreMat = new THREE.SpriteMaterial({ map: coreTex, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, opacity: 0.34 });
+    const coreGlow = new THREE.Sprite(coreMat); coreGlow.scale.set(190, 190, 1); mats.push(coreMat);
     if (!dawn) scene.add(coreGlow);
 
     // 共享辉光贴图
     const sunGlowTex = g3dRadialTexture(THREE, 'rgba(255,238,205,0.95)', 'rgba(255,168,92,0.45)'); texs.push(sunGlowTex);
     const ringGlowTex = g3dRadialTexture(THREE, 'rgba(255,255,255,0.0)', 'rgba(255,255,255,0.0)'); texs.push(ringGlowTex);
+
+    // 认证环配色（tokens 的 --gold / --gold-warm 同色值，黎明取深琥珀）：
+    // 已点亮 = 细金环；待重燃 = 低透明度暗金余烬环
+    const CERT = dawn
+      ? { lit: 0xb07d1c, litOp: 0.6, ember: 0x9c6a12, emberOp: 0.34 }
+      : { lit: 0xffd98a, litOp: 0.55, ember: 0xffb86b, emberOp: 0.22 };
+    const haloById = {};   // id → 认证环，点亮事件就地转金
 
     // ── 布局：星座中心由成员星平均坐标决定 ───────────────────
     const SCALE = 1.7;
@@ -288,8 +301,8 @@ function Galaxy3D({ onClose, onOpenStar, onFeynman, dataset }) {
       labels.push({ spr: lbl.spr, base: new THREE.Vector3(cx, cy, cz), sunR });
 
       // 恒星辉光壳 (Sprite，加色)
-      const glowMat = new THREE.SpriteMaterial({ map: sunGlowTex, transparent: true, blending: BLEND, depthWrite: false, opacity: dawn ? 0.42 : 0.8 });
-      const glow = new THREE.Sprite(glowMat); glow.scale.set(sunR * 5.0, sunR * 5.0, 1); mats.push(glowMat);
+      const glowMat = new THREE.SpriteMaterial({ map: sunGlowTex, transparent: true, blending: BLEND, depthWrite: false, opacity: dawn ? 0.34 : 0.62 });
+      const glow = new THREE.Sprite(glowMat); glow.scale.set(sunR * 4.4, sunR * 4.4, 1); mats.push(glowMat);
       sysGroup.add(glow);
 
       // 行星
@@ -336,26 +349,51 @@ function Galaxy3D({ onClose, onOpenStar, onFeynman, dataset }) {
         pickable.push(planet);
         planetMeshById[s.id] = planet;
 
+        // 认证环：随行星公转的细环（叠加在记忆温度着色之上的正交维度）
+        const certLit = litOf(s), certEmber = emberOf(s);
+        const haloGeo = new THREE.RingGeometry(pr * 1.5, pr * 1.64, 48);
+        const haloMat = new THREE.MeshBasicMaterial({
+          color: certLit ? CERT.lit : CERT.ember,
+          transparent: true, opacity: certLit ? CERT.litOp : CERT.emberOp,
+          side: THREE.DoubleSide, depthWrite: false,
+        });
+        const haloRing = new THREE.Mesh(haloGeo, haloMat);
+        haloRing.rotation.x = Math.PI / 2;
+        haloRing.visible = certLit || certEmber;
+        planet.add(haloRing);
+        geoms.push(haloGeo); mats.push(haloMat);
+        haloById[s.id] = { mesh: haloRing, mat: haloMat };
+
         planetAnims.push({ pivot, planet, speed, spin });
       });
     });
 
-    // ── 融会贯通：跨星域的金色光弧 + 沿弧飞行的光点 ──────────
+    // ── 融会贯通：跨星域光弧。新口径——仅当某条 cross 连接两端知识星均「已点亮」，
+    //    这对星域间才是金弧＋流光；未齐亮时退为无流光的冷色细弧（一端熄灭，金弧当场冷却） ──
     const arcs = [];
     {
-      const seenPair = new Set();
+      const pairGold = new Map();   // 'conA|conB' → 是否存在两端齐亮的连接
       D.connections.forEach((cn) => {
         if (cn.kind !== 'cross') return;
         const A = D.byId[cn.a], B = D.byId[cn.b];
         if (!A || !B || A.con === B.con) return;
         const key = [A.con, B.con].sort().join('|');
-        if (seenPair.has(key)) return; seenPair.add(key);
-        const pa = sunPosById[A.con], pb = sunPosById[B.con];
+        pairGold.set(key, (pairGold.get(key) || false) || (litOf(A) && litOf(B)));
+      });
+      pairGold.forEach((gold, key) => {
+        const [ca, cb] = key.split('|');
+        const pa = sunPosById[ca], pb = sunPosById[cb];
         if (!pa || !pb) return;
         const mid = pa.clone().add(pb).multiplyScalar(0.5);
         mid.y += 14 + pa.distanceTo(pb) * 0.24;            // 拱起，像跨越星域的桥
         const curve = new THREE.QuadraticBezierCurve3(pa, mid, pb);
         const geo = new THREE.BufferGeometry().setFromPoints(curve.getPoints(72));
+        if (!gold) {
+          const cMat = new THREE.LineBasicMaterial({ color: dawn ? 0x3a62c0 : 0x9fc6ff, transparent: true, opacity: dawn ? 0.3 : 0.16, blending: BLEND, depthWrite: false });
+          scene.add(new THREE.Line(geo, cMat));
+          geoms.push(geo); mats.push(cMat);
+          return;
+        }
         const mat = new THREE.LineBasicMaterial({ color: dawn ? 0xb07d1c : 0xffd98a, transparent: true, opacity: dawn ? 0.5 : 0.32, blending: BLEND, depthWrite: false });
         scene.add(new THREE.Line(geo, mat));
         geoms.push(geo); mats.push(mat);
@@ -387,6 +425,9 @@ function Galaxy3D({ onClose, onOpenStar, onFeynman, dataset }) {
         to: new THREE.Color(`rgb(${c3.r},${c3.g},${c3.b})`),
         settle: (document.documentElement.dataset.theme === 'dawn') ? 0.3 : 0.9 + (strength || 0) * 0.6,
       });
+      // 认证环就地转金：点亮 / 重燃后无需重建场景
+      const h = haloById[id];
+      if (h) { h.mat.color.setHex(CERT.lit); h.mat.opacity = CERT.litOp; h.mesh.visible = true; }
     };
     window.addEventListener('sr-ignite', onIgnite);
 
@@ -449,10 +490,18 @@ function Galaxy3D({ onClose, onOpenStar, onFeynman, dataset }) {
       dragging = false;
       if (!wasDrag) handlePick(e);
     };
+    // 滚轮缩放：乘法式 dolly。以 100px ≈ 一格普通滚轮计，每格 ~1.3 倍，
+    // 5-6 格即可从全景贴近一个星域；触控板的小 delta 按比例得到更细的步进。
+    // deltaMode 归一（1=行, 2=页），单次事件最多按 3 格计，防止惯性甩飞。
+    // 距离本身仍走渲染循环的阻尼缓动（短平滑），reduced-motion 时瞬到目标。
     const onWheel = (e) => {
       e.preventDefault();
-      const f = Math.exp(e.deltaY * 0.0012);
-      camGoal.radius = Math.max(RAD_MIN, Math.min(RAD_MAX, camGoal.radius * f));
+      let dy = e.deltaY;
+      if (e.deltaMode === 1) dy *= 33;
+      else if (e.deltaMode === 2) dy *= 120;
+      const notch = Math.max(-3, Math.min(3, dy / 100));
+      camGoal.radius = Math.max(RAD_MIN, Math.min(RAD_MAX, camGoal.radius * Math.pow(1.3, notch)));
+      if (reduced) cam.radius = camGoal.radius;
     };
     el.addEventListener('pointerdown', onDown);
     el.addEventListener('pointermove', onMove);
@@ -500,10 +549,18 @@ function Galaxy3D({ onClose, onOpenStar, onFeynman, dataset }) {
         autoRotate = !reduced;
         setCloseup(false);
       },
-      // 俯瞰机位：theta=0 正对上方——此时布局与 2D 星图的编排逐点一致
+      // 俯瞰机位：theta=0 正对上方——此时布局与 2D 星图的编排逐点一致。
+      // 半径按当前数据的实际外接半径动态取景（恒星最远距离 + 轨道/名牌余量），
+      // fov 55° 时可视半高 ≈ 0.52R，除以 0.48 留一点边（原来写死 340，星系只占三成）
       flyTop: () => {
         targetGoal.set(0, 0, 0);
-        camGoal.radius = 340; camGoal.phi = 0.16; camGoal.theta = 0;
+        let ext = 60;
+        Object.values(sunPosById).forEach(p => {
+          const d = Math.hypot(p.x, p.z);
+          if (Number.isFinite(d)) ext = Math.max(ext, d);
+        });
+        camGoal.radius = Math.max(90, Math.min(RAD_MAX, (ext + 30) / 0.55));
+        camGoal.phi = 0.16; camGoal.theta = 0;
         autoRotate = false;
         setCloseup(true);
       },
@@ -659,11 +716,25 @@ function Galaxy3D({ onClose, onOpenStar, onFeynman, dataset }) {
     return () => window.removeEventListener('sr-ignite', h);
   }, []);
 
+  // Esc 统一词汇：先收起行星摘要卡，再返回星图（费曼抽屉在 app 层捕获，永远先关）
+  const selRef = React.useRef(null);
+  selRef.current = selected;
+  React.useEffect(() => {
+    const h = (e) => {
+      if (e.key !== 'Escape' || e.defaultPrevented) return;
+      e.preventDefault();
+      if (selRef.current) setSelected(null);
+      else if (onClose) onClose();
+    };
+    document.addEventListener('keydown', h);
+    return () => document.removeEventListener('keydown', h);
+  }, [onClose]);
+
   const flyHome = () => { if (apiRef.current) apiRef.current.flyHome(); };
 
   const cons = D.constellations;
   const totalStars = D.stars.length;
-  const lit = D.stars.filter(s => s.strength >= 0.78).length;
+  const lit = D.stars.filter(litOf).length;   // 已点亮 = 认证口径，不再用亮度近似
   const noWebGL = typeof window !== 'undefined' && !window.THREE;
 
   return (
@@ -679,6 +750,16 @@ function Galaxy3D({ onClose, onOpenStar, onFeynman, dataset }) {
         </div>
       )}
 
+      {/* 教学空态：与鸟瞰同一句话、同一视觉词汇——不让 0 星的三维是一整屏虚空 */}
+      {!noWebGL && totalStars === 0 && (
+        <div style={{ position: 'absolute', inset: 0, zIndex: 35, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 'var(--s-4)', textAlign: 'center', pointerEvents: 'none' }}>
+          <span style={{ fontSize: 14, color: 'var(--text-2)' }}>你的星空还很暗。写下第一颗星，让它发光。</span>
+          <span style={{ pointerEvents: 'auto' }}>
+            <SRButton icon="corner-up-left" onClick={onClose}>返回星图创建</SRButton>
+          </span>
+        </div>
+      )}
+
       {/* 顶部 HUD */}
       <div style={{ position: 'absolute', top: 18, left: 24, zIndex: 30 }}>
         <GlassPanel radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', gap: 22, padding: '10px 24px' }}>
@@ -691,7 +772,7 @@ function Galaxy3D({ onClose, onOpenStar, onFeynman, dataset }) {
             </span>
           )}
           <Sep />
-          <Stat n={cons.length} t="星座" />
+          <Stat n={cons.length} t="星域" />
           <Stat n={totalStars} t="行星" />
           <Stat n={lit} t="已点亮" tone="var(--gold)" />
           <Sep />
@@ -709,7 +790,7 @@ function Galaxy3D({ onClose, onOpenStar, onFeynman, dataset }) {
 
       {/* 操作提示 */}
       <div style={{ position: 'absolute', bottom: 26, left: 24, zIndex: 30, display: 'flex', alignItems: 'center', gap: 8, fontSize: 11.5, color: 'var(--text-3)', pointerEvents: 'none' }}>
-        <Icon name="move-3d" size={14} color="currentColor" />拖拽旋转 · 滚轮缩放 · 点击恒星飞近 · 点击行星查看 · 金色光弧 = 融会贯通
+        <Icon name="move-3d" size={14} color="currentColor" />拖拽旋转 · 滚轮缩放 · 点击恒星飞近 · 点击行星查看 · 金弧 = 两端已点亮的融会贯通
       </div>
 
       {/* 右下控制：暂停/播放 · 回到全景 · 返回星图 */}
@@ -747,12 +828,30 @@ function Galaxy3D({ onClose, onOpenStar, onFeynman, dataset }) {
               {selected.summary || (dataset ? '对方未开放摘要。' : '还没有摘要——打开编辑器，写下第一段。')}
             </div>
             <MemoryBar value={selected.strength} label="记忆强度" showPct fading={selected.strength < 0.4} />
-            {(onFeynman || onOpenStar) && (
-              <div style={{ display: 'flex', gap: 8, marginTop: 16 }}>
-                {onFeynman && <SRButton variant="primary" size="sm" icon="zap" glow onClick={() => onFeynman(selected.id)} style={{ flex: 1 }}>费曼内化</SRButton>}
-                {onOpenStar && <SRButton size="sm" icon="maximize-2" onClick={() => onOpenStar(selected.id)} style={{ flex: 1 }}>打开编辑</SRButton>}
-              </div>
-            )}
+            {(() => {
+              const selLit = litOf(D.byId[selected.id] || selected), selEmber = emberOf(D.byId[selected.id] || selected);
+              return (
+                <React.Fragment>
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: 7, marginTop: 10, fontSize: 11.5, lineHeight: 1.6, color: 'var(--text-3)' }}>
+                    <span aria-hidden="true" style={{ flex: 'none', width: 9, height: 9, marginTop: 4, borderRadius: '50%', boxSizing: 'border-box',
+                      border: selLit ? '1px solid var(--gold)'
+                        : selEmber ? '1px solid color-mix(in srgb, var(--gold-warm) 55%, transparent)'
+                        : '1px solid var(--line-strong)' }} />
+                    <span>
+                      {selLit ? '已点亮 · 讲清楚的东西，暗得更慢。'
+                        : selEmber ? '曾点亮的星暗了下来。再讲透一次，就能重燃。'
+                        : '讲清楚一次，这颗星才会真正点亮——点亮的星记得更久。'}
+                    </span>
+                  </div>
+                  {(onFeynman || onOpenStar) && (
+                    <div style={{ display: 'flex', gap: 8, marginTop: 14 }}>
+                      {onFeynman && <SRButton variant="primary" size="sm" icon={selEmber ? 'flame' : 'zap'} glow onClick={() => onFeynman(selected.id)} style={{ flex: 1 }}>{selEmber ? '重燃' : '费曼内化'}</SRButton>}
+                      {onOpenStar && <SRButton size="sm" icon="maximize-2" onClick={() => onOpenStar(selected.id)} style={{ flex: 1 }}>打开编辑</SRButton>}
+                    </div>
+                  )}
+                </React.Fragment>
+              );
+            })()}
           </GlassPanel>
         </div>
       )}

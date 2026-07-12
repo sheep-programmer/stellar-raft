@@ -8,6 +8,16 @@ const { GlassPanel, Button, IconButton, Icon, Input, Badge, Tag, StarNode, Memor
 const VWORLD = { w: 1680, h: 1040 };
 const vclamp = (v, a, b) => Math.max(a, Math.min(b, v));
 
+/* 密文备忘：收纳（/api/inbox/collect）要用主人的当前密文，但 /api/friends 与
+   /api/visit 都不回传密文（不扩大它的暴露面）。兑换成功时在本机记下
+   friendId → code；主人重置密文后这份备忘自然失效，收纳时给「重新连接」的引导。 */
+const VISIT_CODE_KEY = 'sr.visit.codes.v1';
+const codeMemo = {
+  read() { try { return JSON.parse(localStorage.getItem(VISIT_CODE_KEY)) || {}; } catch (e) { return {}; } },
+  get(id) { return this.read()[id] || null; },
+  set(id, code) { try { const m = this.read(); m[id] = code; localStorage.setItem(VISIT_CODE_KEY, JSON.stringify(m)); } catch (e) { } },
+};
+
 /* ---------- 共享样式：远航坞 / 飞船 / 卡片 / 电波环 ---------- */
 function VisitStyle() {
   return (
@@ -96,25 +106,43 @@ const VISIBILITY_OPTS = [
 ];
 
 /* ---------- 我的分享 ---------- */
-function SharePanel({ flash }) {
+function SharePanel({ flash, onGoFriends }) {
   const N = window.SRNet;
   const [share, setShare] = React.useState(null);
   const [busy, setBusy] = React.useState(false);
+  // 好友名单：给「把星系分享给好友」的选择器用；后端不可用时本面板整体不渲染
+  const [friends, setFriends] = React.useState(null);
+  const [inviting, setInviting] = React.useState(null); // 正在投递的好友 id
   const load = () => N.api('/api/share').then(setShare).catch(() => setShare(null));
   React.useEffect(() => { load(); }, []);
+  React.useEffect(() => {
+    N.api('/api/friends').then(r => setFriends(r.friends || [])).catch(() => setFriends([]));
+  }, []);
+
+  // 造访邀请：POST /api/inbox/send kind:'galaxy'（payload 由服务端生成，带当前密文）
+  const invite = (f) => {
+    if (inviting) return;
+    setInviting(f.id);
+    N.inbox.send(f.id, 'galaxy').then(r => {
+      if (!r) flash('星际网络暂不可用，稍后再试', 'danger');
+      else if (r.error) flash(r.error, 'danger');
+      else if (r.duplicate) flash(`邀请已在「${f.name}」的收件箱里等待领取`);
+      else flash(`已送达「${f.name}」的收件箱`);
+    }).finally(() => setInviting(null));
+  };
 
   const post = (body, msg) => {
     setBusy(true);
     N.api('/api/share', { method: 'POST', body }).then(s => { setShare(prev => ({ ...prev, ...s })); if (msg) flash(msg); load(); })
-      .catch(e => flash(e.message)).finally(() => setBusy(false));
+      .catch(e => flash(e.message, 'danger')).finally(() => setBusy(false));
   };
   const copyCode = () => {
-    try { navigator.clipboard.writeText(share.code); flash('密文已复制 · 发给朋友即可造访你的星系'); } catch (e) { flash('复制失败，请手动选择'); }
+    try { navigator.clipboard.writeText(share.code); flash('密文已复制 · 发给朋友即可造访你的星系'); } catch (e) { flash('复制失败，请手动选择', 'danger'); }
   };
   const toggleBlock = (v) => {
     N.api('/api/share/block', { method: 'POST', body: { viewerId: v.id, blocked: !v.blocked } })
       .then(() => { flash(v.blocked ? `已恢复「${v.name}」的访问` : `已对「${v.name}」隐身`); load(); })
-      .catch(e => flash(e.message));
+      .catch(e => flash(e.message, 'danger'));
   };
 
   if (!share) return <div style={{ padding: 40, color: 'var(--text-3)', fontSize: 13 }}>正在连接星际网络…（后端未运行时此页不可用）</div>;
@@ -177,6 +205,42 @@ function SharePanel({ flash }) {
         )}
       </GlassPanel>
 
+      {/* 把星系分享给好友：造访邀请直接寄进对方的收件箱（服务端自动带上当前密文） */}
+      <GlassPanel radius="lg" pad="md">
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
+          <Icon name="send" size={15} color="var(--star-blue)" />
+          <span style={{ fontSize: 14, color: 'var(--text-1)' }}>把星系分享给好友</span>
+        </div>
+        <div style={{ fontSize: 12, color: 'var(--text-3)', marginBottom: 12 }}>造访邀请会带上你的星系密文，寄进对方的收件箱，领取即可造访。</div>
+        {!share.enabled ? (
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '10px 12px', borderRadius: 'var(--r-md)', border: '1px solid var(--glass-border)', background: 'rgba(159,198,255,0.04)' }}>
+            <Icon name="radio-tower" size={16} color="var(--text-3)" />
+            <span style={{ flex: 1, fontSize: 12.5, color: 'var(--text-2)' }}>星系访问还没开启——先开放星系，邀请才有处可去。</span>
+            <Button size="sm" variant="primary" glow disabled={busy} onClick={() => post({ enabled: true }, '星系已开放 · 现在可以寄出邀请了')}>开放星系</Button>
+          </div>
+        ) : friends === null ? (
+          <div style={{ fontSize: 12.5, color: 'var(--text-3)' }}>正在呼叫好友名单…</div>
+        ) : !friends.length ? (
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '10px 12px', borderRadius: 'var(--r-md)', border: '1px solid var(--glass-border)', background: 'rgba(159,198,255,0.04)' }}>
+            <Icon name="user-plus" size={16} color="var(--text-3)" />
+            <span style={{ flex: 1, fontSize: 12.5, color: 'var(--text-2)' }}>还没有星际好友——先交换密文成为好友。</span>
+            <Button size="sm" variant="ghost" icon="key-round" onClick={onGoFriends}>去连接好友星系</Button>
+          </div>
+        ) : (
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            {friends.map(f => (
+              <div key={f.id} style={{ display: 'flex', alignItems: 'center', gap: 11, padding: '8px 2px' }}>
+                <span style={{ width: 28, height: 28, flex: 'none', borderRadius: '50%', background: 'linear-gradient(140deg, #2a3566, #56689c)', border: '1px solid var(--glass-border-strong)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, color: 'var(--text-1)' }}>{f.avatar}</span>
+                <span style={{ flex: 1, fontSize: 13.5, color: 'var(--text-1)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{f.name}</span>
+                <Button size="sm" variant="ghost" icon="send" disabled={inviting === f.id} onClick={() => invite(f)}>
+                  {inviting === f.id ? '寄出中…' : '寄出邀请'}
+                </Button>
+              </div>
+            ))}
+          </div>
+        )}
+      </GlassPanel>
+
       <GlassPanel radius="lg" pad="md">
         <div style={{ fontSize: 12, letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: 'var(--text-3)', fontFamily: 'var(--font-mono)', marginBottom: 12 }}>访客 · {((share.visitors || []).length)}</div>
         {!(share.visitors || []).length && <div style={{ fontSize: 12.5, color: 'var(--text-3)' }}>还没有人造访过你的星系。把密文发给朋友试试。</div>}
@@ -211,13 +275,28 @@ function FriendsPanel({ flash, onVisit, launching }) {
     if (D.social) { D.social.friends = list.length; window.dispatchEvent(new CustomEvent('sr-friends')); }
   }).catch(() => { });
   React.useEffect(() => { load(); }, []);
+  // 收件箱「去造访」的接线：邀请里的密文放在 sessionStorage（sr.visit.code），到这里预填
+  React.useEffect(() => {
+    const pull = () => {
+      try {
+        const c = sessionStorage.getItem('sr.visit.code');
+        if (c) { setCode(c); sessionStorage.removeItem('sr.visit.code'); }
+      } catch (e) { }
+    };
+    pull();
+    window.addEventListener('sr-visit-code', pull);
+    return () => window.removeEventListener('sr-visit-code', pull);
+  }, []);
 
   const redeem = () => {
     const c = code.trim(); if (!c) return;
     setBusy(true);
     N.api('/api/friends/redeem', { method: 'POST', body: { code: c } })
-      .then(r => { flash(`已连接「${r.friend.name}」的星系 ✦`); setCode(''); load(); })
-      .catch(e => flash(e.message)).finally(() => setBusy(false));
+      .then(r => {
+        codeMemo.set(r.friend.id, c.toUpperCase()); // 记住密文：造访时「收纳这颗星」要用
+        flash(`已连接「${r.friend.name}」的星系`, 'gold'); setCode(''); load();
+      })
+      .catch(e => flash(e.message, 'danger')).finally(() => setBusy(false));
   };
   const [confirm, setConfirm] = React.useState(null); // {message, confirmLabel, onYes}
   const remove = (f) => setConfirm({
@@ -225,7 +304,7 @@ function FriendsPanel({ flash, onVisit, launching }) {
     confirmLabel: '移除',
     onYes: () => {
       N.api('/api/friends/remove', { method: 'POST', body: { friendId: f.id } })
-        .then(() => { flash(`已移除「${f.name}」的星系`); load(); }).catch(e => flash(e.message));
+        .then(() => { flash(`已移除「${f.name}」的星系`); load(); }).catch(e => flash(e.message, 'danger'));
     },
   });
 
@@ -352,11 +431,11 @@ function WarpOverlay({ name, ready, onFinish }) {
         <ShipSVG width={160} />
       </div>
 
-      {/* 目的地播报 */}
+      {/* 目的地播报——背景固定是深空黑，墨水必须用固定亮色，不随主题（黎明深字压黑幕不可读） */}
       <div style={{ position: 'absolute', left: 0, right: 0, bottom: '18%', textAlign: 'center', pointerEvents: 'none' }}>
-        <div className="sr-warp-eta" style={{ display: 'inline-block', fontFamily: 'var(--font-mono)', fontSize: 12, letterSpacing: '0.3em', textTransform: 'uppercase', color: 'var(--text-3)' }}>WARP</div>
-        <div style={{ marginTop: 10, fontSize: 17, fontWeight: 300, color: 'var(--text-1)', letterSpacing: '0.04em' }}>
-          正在跃迁 · 目的地 <span style={{ color: 'var(--gold-white)', textShadow: 'var(--text-glow-warm)' }}>{name}</span> 的星系
+        <div className="sr-warp-eta" style={{ display: 'inline-block', fontFamily: 'var(--font-mono)', fontSize: 12, letterSpacing: '0.3em', textTransform: 'uppercase', color: 'var(--text-on-scrim-dim, rgba(214,225,255,0.86))' }}>WARP</div>
+        <div style={{ marginTop: 10, fontSize: 17, fontWeight: 300, color: 'var(--text-on-scrim, rgba(255,255,255,0.92))', letterSpacing: '0.04em' }}>
+          正在跃迁 · 目的地 <span style={{ color: '#fff4d6', textShadow: '0 0 18px rgba(255,217,138,0.45)' }}>{name}</span> 的星系
         </div>
       </div>
     </div>
@@ -364,13 +443,29 @@ function WarpOverlay({ name, ready, onFinish }) {
 }
 
 /* ---------- 造访：只读星图（与自己的星图同一套相机手感） ---------- */
-function VisitMap({ friend, onBack, onReady }) {
+function VisitMap({ friend, onBack, onReady, flash }) {
   const N = window.SRNet;
   const ref = React.useRef(null);
   const [state, setState] = React.useState({ loading: true });
   const [view, setView] = React.useState({ x: 0, y: 0, k: 0.8 });
   const [selected, setSelected] = React.useState(null);
   const [mode, setMode] = React.useState('map'); // map | 3d | aerial
+  const [collecting, setCollecting] = React.useState(false);
+
+  /* 收纳这颗星：POST /api/inbox/collect —— 服务端按主人的可见度生成 payload，
+     投进「我自己」的收件箱（寄件人=星系主人）；重复收纳幂等，不重复入库 */
+  const collectStar = (star) => {
+    if (collecting) return;
+    const c = codeMemo.get(friend.id);
+    if (!c) { flash('缺少这片星系的密文——回到好友列表重新输入密文连接一次，就能收纳', 'danger'); return; }
+    setCollecting(true);
+    N.inbox.collect(c, star.id).then(r => {
+      if (!r) flash('星际网络暂不可用，稍后再试', 'danger');
+      else if (r.error) flash(r.error, 'danger');
+      else if (r.duplicate) flash('这颗星已在你的收件箱里 · 等待领取');
+      else flash(`已收进你的收件箱 · 来自 ${(state.owner && state.owner.name) || friend.name}`);
+    }).finally(() => setCollecting(false));
+  };
   const viewRef = React.useRef(view); viewRef.current = view;
   const drag = React.useRef(null);
   const readyRef = React.useRef(onReady); readyRef.current = onReady;
@@ -584,6 +679,15 @@ function VisitMap({ friend, onBack, onReady }) {
                 </div>
               )}
             </div>
+            {/* 收纳：把这颗可见的星寄进自己的收件箱（内容按主人的可见度裁剪） */}
+            <div style={{ marginTop: 14 }}>
+              <Button size="sm" icon="inbox" disabled={collecting} onClick={() => collectStar(sel)} style={{ width: '100%' }}>
+                {collecting ? '收纳中…' : '收纳这颗星'}
+              </Button>
+              <div style={{ marginTop: 7, fontSize: 11, lineHeight: 1.6, color: 'var(--text-3)' }}>
+                {outlineMode ? '星名与大纲要点会寄进你的收件箱，正文不会离开对方的数据库。' : '对方只开放了星名——只能收纳星名。'}
+              </div>
+            </div>
           </GlassPanel>
         </div>
       )}
@@ -598,12 +702,12 @@ function VisitView() {
   const [launching, setLaunching] = React.useState(null); // 远航坞点火中的目标好友
   const [warp, setWarp] = React.useState(false);      // 跃迁转场进行中
   const [mapReady, setMapReady] = React.useState(false);
-  const [toast, setToast] = React.useState(null);
+  const [toast, setToast] = React.useState(null); // { msg, tone } — 错误与成功用不同视觉词汇
   const toastT = React.useRef(null);
   const launchT = React.useRef(null);
   const launchingRef = React.useRef(false); // 同步双击在同一轮事件里看不到 state 更新，用 ref 挡
   React.useEffect(() => () => { clearTimeout(toastT.current); clearTimeout(launchT.current); }, []);
-  const flash = (msg) => { setToast(msg); clearTimeout(toastT.current); toastT.current = setTimeout(() => setToast(null), 2200); };
+  const flash = (msg, tone) => { setToast({ msg, tone: tone || 'blue' }); clearTimeout(toastT.current); toastT.current = setTimeout(() => setToast(null), tone === 'danger' ? 3200 : 2200); };
   // 点火 → 起飞（1.05s，远航坞演出）→ 跃迁巡航 → 抵达
   const startVisit = (f) => {
     if (launchingRef.current) return;
@@ -623,7 +727,7 @@ function VisitView() {
       <VisitStyle />
       {visiting ? (
         <React.Fragment>
-          <VisitMap friend={visiting} onBack={() => setVisiting(null)} onReady={() => setMapReady(true)} />
+          <VisitMap friend={visiting} onBack={() => setVisiting(null)} onReady={() => setMapReady(true)} flash={flash} />
           {warp && <WarpOverlay name={visiting.name} ready={mapReady} onFinish={() => setWarp(false)} />}
         </React.Fragment>
       ) : (
@@ -634,7 +738,7 @@ function VisitView() {
               <Icon name="telescope" size={26} color="var(--gold)" />
               <h1 style={{ fontSize: 30, fontWeight: 200, letterSpacing: '0.04em', background: 'linear-gradient(100deg, var(--gold), var(--gold-white) 45%, var(--star-blue))', WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent' }}>星际漫游</h1>
             </div>
-            <div style={{ fontSize: 13, color: 'var(--text-3)', marginBottom: 22, fontWeight: 300 }}>用密文连接彼此的星空——看得见星与星座的形状，看不见笔记的内容。</div>
+            <div style={{ fontSize: 13, color: 'var(--text-3)', marginBottom: 22, fontWeight: 300 }}>用密文连接彼此的星空——看得见星与星域的形状，看不见笔记的内容。</div>
 
             <div style={{ display: 'flex', gap: 4, marginBottom: 20 }}>
               {[{ id: 'friends', icon: 'rocket', label: '好友星系' }, { id: 'share', icon: 'radio-tower', label: '我的分享' }].map(t => {
@@ -648,15 +752,17 @@ function VisitView() {
               })}
             </div>
 
-            {tab === 'share' ? <SharePanel flash={flash} /> : <FriendsPanel flash={flash} onVisit={startVisit} launching={launching} />}
+            {tab === 'share' ? <SharePanel flash={flash} onGoFriends={() => setTab('friends')} /> : <FriendsPanel flash={flash} onVisit={startVisit} launching={launching} />}
           </div>
         </div>
       )}
 
       {toast && (
-        <div style={{ position: 'fixed', bottom: 26, left: '50%', transform: 'translateX(-50%)', zIndex: 95, animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
+        <div style={{ position: 'fixed', bottom: 26, left: '50%', transform: 'translateX(-50%)', zIndex: 95, animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }} role="status">
           <GlassPanel strong radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '10px 18px' }}>
-            <Icon name="check" size={16} color="var(--gold)" /><span style={{ fontSize: 13.5, color: 'var(--text-1)' }}>{toast}</span>
+            <Icon name={toast.tone === 'danger' ? 'circle-alert' : 'check'} size={16}
+              color={toast.tone === 'danger' ? 'var(--danger)' : toast.tone === 'gold' ? 'var(--gold)' : 'var(--star-blue)'} />
+            <span style={{ fontSize: 13.5, color: 'var(--text-1)' }}>{toast.msg}</span>
           </GlassPanel>
         </div>
       )}

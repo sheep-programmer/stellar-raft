@@ -41,7 +41,7 @@ The product is **Chinese-first**. Copy is quiet, precise, and a little poetic �
   - Empty state: 「你的星空还很暗。写下第一颗星，让它发光。」
   - Light-up toast: 「点亮 +1 · 融会贯通」
   - Dimming nudge: 「这片星座正在变暗 — 该回来看看了。」
-  - Sidebar section: 「我的星座」 / 「收件箱（待整理）」
+  - Sidebar section: 「我的星域」 / 「收件箱（待整理）」
   - Stat strip: 「正发光 · 正变暗 · 连接数」
 
 **Avoid:** exclamation spam, growth-hack urgency, cutesy gamification ("恭喜你获得金币！"), and over-explaining the metaphor — show it, don't narrate it.
@@ -94,12 +94,17 @@ The product is **Chinese-first**. Copy is quiet, precise, and a little poetic �
 - **`styles.css`** — the single entry point consumers link (imports only).
 - **`tokens/`** — `fonts.css`, `colors.css`, `typography.css`, `spacing.css`, `effects.css`, `themes.css` (opt-in 黎明 Dawn light theme). Effects file also carries the `.sr-glass*` utilities and all `@keyframes` (breathe, twinkle, flow, ignite burst/ring/toast, drawer/card-in).
 - **`assets/`** — `starfield.js` → the `<sr-starfield>` web component (parallax depth layers, stellar-temperature star colors, diffraction-spike bright stars, a faint Milky-Way band of pre-rendered haze + star dust, rare meteor streaks; all reduced-motion aware) + `window.SRConnect()` organic-connection path generator.
-- **`components/`** — 10 reusable primitives, namespace **`window.StellarRaftDesignSystem_2866af`**:
+- **`components/`** — 18 reusable primitives, namespace **`window.StellarRaftDesignSystem_2866af`**:
   - `core/` — `Icon`, `IconButton`, `Button`, `GlassPanel`, `Badge`, `Tag`, `Input`
   - `knowledge/` — `MemoryBar` (+ `memoryColor`), `StarNode`, `ConstellationItem`
-  - Each ships `<Name>.jsx` + `<Name>.d.ts` + `<Name>.prompt.md`; one `*.card.html` per group.
-- **`ui_kits/stellar-raft/`** — interactive recreation of the desktop app covering all 8 briefed screens (`index.html` + `data.js` + `app.jsx` + per-screen JSX). See its `README.md` for the screen→file map.
-- **`guidelines/`** — 14 foundation specimen cards (Colors / Type / Spacing / Brand).
+  - `overlay/` — `Modal`, `Toast` (+ imperative `toast()`, exposed on the namespace), `Tooltip`, `ContextMenu`
+  - `form/` — `Select`, `Switch`, `Checkbox`, `Tabs`
+  - Each ships `<Name>.jsx` + `<Name>.d.ts` + `<Name>.prompt.md`; one `*.card.html` per group (metadata lives in each card's `@dsCard` comment).
+- **`ui_kits/stellar-raft/`** — interactive recreation of the desktop app covering all 8 briefed screens (`index.html` + `data.js` + `app.jsx` + per-screen JSX), now with a real **memory-decay model** (FSRS-lite: `R = exp(−Δt/S)` recomputed against real time — stars genuinely dim if you stay away), an **ignite certification loop** (点亮 is earned by teaching the star in Feynman mode against explicit thresholds; lit stars decay too — below R 0.35 they extinguish into 待重燃 ember state, relit through a half-threshold fast lane; ratios drive gold halos, arcs and a unified 今日待办) and **persistence** (localStorage mirror `sr.galaxy.v1` + optional local server sync, newer snapshot wins; visitor views only ever see lit/ember booleans, never timestamps). See its `README.md` for the screen→file map and model parameters.
+- **`server/`** — zero-dependency local backend (`node server/server.js`, Node ≥ 22.5 for `node:sqlite`): anonymous tokens, whole-galaxy PUT/GET, share codes with visibility stripping, static hosting for the app and docs.
+- **`docs/`** — zero-build static documentation site (`docs/index.html`): brand home, getting started, foundations (live token tables + all guideline cards), component gallery driven by `docs/registry.js` (append one entry per new component), and the app showcase. Dual-theme with a persistent toggle.
+- **`guidelines/`** — 15 foundation specimen cards (Colors / Type / Spacing / Icons / Brand).
+- **`scripts/` + `tests/` + `package.json`** — build & QA: `npm run build` regenerates `_ds_bundle.js` + `_ds_manifest.json` from sources (never edit those by hand; `npm run build:check` detects drift), `npm test` runs server/tokens/bundle suites, `npm run lint` runs oxlint with the derived adherence config. CI: `.github/workflows/ci.yml` (Node 22, lint → build → test).
 - **`SKILL.md`** — Agent-Skill wrapper for use in Claude Code.
 
 See the **Design System** tab for live specimen cards of every color, type, spacing, component, and the full app.

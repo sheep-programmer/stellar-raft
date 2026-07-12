@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>基础 · 星图设计系统</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26'%3E%3Crect x='.5' y='.5' width='25' height='25' rx='7.5' fill='%23080c1c' stroke='rgba(159,198,255,.28)'/%3E%3Cpath d='M7.5 9 L16.5 7 L19 16.5 L11 18.5' stroke='rgba(159,198,255,.5)' stroke-width='.8' fill='none' stroke-linejoin='round' stroke-linecap='round'/%3E%3Ccircle cx='7.5' cy='9' r='1.35' fill='%23d6e6ff'/%3E%3Ccircle cx='19' cy='16.5' r='1.15' fill='%239fc6ff'/%3E%3Ccircle cx='11' cy='18.5' r='1.1' fill='%239fc6ff'/%3E%3Ccircle cx='16.5' cy='7' r='3.4' fill='%23ffd98a' opacity='.22'/%3E%3Ccircle cx='16.5' cy='7' r='1.8' fill='%23ffe9b0'/%3E%3C/svg%3E">
+  <script>try{var m=location.search.match(/[?&]theme=(dawn|space)/);var t=m?m[1]:localStorage.getItem('sr.docs.theme');if(t==='dawn')document.documentElement.dataset.theme='dawn';if(m)localStorage.setItem('sr.docs.theme',m[1])}catch(e){}</script>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+  <sr-starfield class="docs-sky" style="position:fixed" density="0.5"></sr-starfield>
+
+  <header class="docs-header">
+    <div class="docs-header-inner">
+      <a class="docs-brand" href="index.html"><span class="zh">星图</span><span class="en">Stellar Raft</span></a>
+      <nav class="docs-nav" aria-label="文档导航">
+        <a href="index.html">首页</a>
+        <a href="getting-started.html">开始使用</a>
+        <a href="foundations.html" aria-current="page">基础</a>
+        <a href="components.html">组件</a>
+        <a href="showcase.html">应用复刻</a>
+      </nav>
+      <button class="theme-toggle" type="button" title="切换 深空 / 黎明" aria-label="切换 深空 / 黎明 主题">
+        <i data-lucide="sunrise" class="ic-space"></i>
+        <i data-lucide="moon-star" class="ic-dawn"></i>
+      </button>
+    </div>
+  </header>
+
+  <main class="docs-main">
+    <div class="hud-label">FOUNDATIONS</div>
+    <h1 class="docs-h1">基础</h1>
+    <p class="docs-lede">全部设计决定都固化为 <code>tokens/</code> 里的 CSS 变量。下表的「当前值」按你此刻所在的主题实时解析——切一下右上角的主题开关，看同一个 token 在深空与黎明各自的样子。</p>
+
+    <section class="docs-section" style="margin-top:var(--s-10)">
+      <div class="hud-label">COLOR · BACKDROP</div>
+      <h2>深空底</h2>
+      <p class="desc">背景永远不是纯平色：<code>--bg-deepspace</code> 在近黑的蓝黑场上叠极淡的星云径向光。空账户几乎全黑——知识是唯一被引入的光。</p>
+      <div class="table-scroll"><table class="tk-table">
+        <thead><tr><th>样例</th><th>Token</th><th>当前值</th><th>用途</th></tr></thead>
+        <tbody>
+          <tr><td><span class="sw" style="background:var(--space-void)"></span></td><td class="tok">--space-void</td><td class="val" data-token="--space-void"></td><td>最深处，空无的天空</td></tr>
+          <tr><td><span class="sw" style="background:var(--space-0)"></span></td><td class="tok">--space-0</td><td class="val" data-token="--space-0"></td><td>页面基底</td></tr>
+          <tr><td><span class="sw" style="background:var(--space-1)"></span></td><td class="tok">--space-1</td><td class="val" data-token="--space-1"></td><td>低层表面</td></tr>
+          <tr><td><span class="sw" style="background:var(--space-2)"></span></td><td class="tok">--space-2</td><td class="val" data-token="--space-2"></td><td>午夜深蓝 · 卡片基底</td></tr>
+          <tr><td><span class="sw" style="background:var(--space-3)"></span></td><td class="tok">--space-3</td><td class="val" data-token="--space-3"></td><td>抬升表面</td></tr>
+          <tr><td><span class="sw" style="background:var(--space-4)"></span></td><td class="tok">--space-4</td><td class="val" data-token="--space-4"></td><td>悬停抬升</td></tr>
+          <tr><td><span class="sw" style="background:var(--nebula)"></span></td><td class="tok">--nebula</td><td class="val" data-token="--nebula"></td><td>星云微光，仅极低不透明度使用</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section class="docs-section">
+      <div class="hud-label">COLOR · TWO ACCENTS</div>
+      <h2>结构蓝与奖励金</h2>
+      <p class="desc">仅有的两个强调色，全部语义化：冷<b>星蓝</b>负责结构、连接、描边与默认图标；暖<b>金</b>只留给奖励、点亮与掌握。除此之外没有任何色相。</p>
+      <div class="table-scroll"><table class="tk-table">
+        <thead><tr><th>样例</th><th>Token</th><th>当前值</th><th>用途</th></tr></thead>
+        <tbody>
+          <tr><td><span class="sw" style="background:var(--star-blue)"></span></td><td class="tok">--star-blue</td><td class="val" data-token="--star-blue"></td><td>结构 · 连接 · 默认图标</td></tr>
+          <tr><td><span class="sw" style="background:var(--star-blue-dim)"></span></td><td class="tok">--star-blue-dim</td><td class="val" data-token="--star-blue-dim"></td><td>正在冷却变暗的星（低记忆）</td></tr>
+          <tr><td><span class="sw" style="background:var(--star-blue-deep)"></span></td><td class="tok">--star-blue-deep</td><td class="val" data-token="--star-blue-deep"></td><td>更深的结构蓝</td></tr>
+          <tr><td><span class="sw" style="background:var(--gold)"></span></td><td class="tok">--gold</td><td class="val" data-token="--gold"></td><td>奖励 · 点亮 · 激活图标</td></tr>
+          <tr><td><span class="sw" style="background:var(--gold-warm)"></span></td><td class="tok">--gold-warm</td><td class="val" data-token="--gold-warm"></td><td>点燃渐变的深端</td></tr>
+          <tr><td><span class="sw" style="background:var(--gold-white)"></span></td><td class="tok">--gold-white</td><td class="val" data-token="--gold-white"></td><td>完全点亮的星核</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section class="docs-section">
+      <div class="hud-label">COLOR · MEMORY TEMPERATURE RAMP</div>
+      <h2>记忆温度梯</h2>
+      <p class="desc">驱动每一颗知识星：遗忘时冷而暗，掌握时暖而亮。组件侧由 <code>memoryColor(strength)</code> 统一映射。</p>
+      <div class="ramp-bar" role="img" aria-label="记忆温度梯：由冷暗到暖亮"></div>
+      <div class="table-scroll"><table class="tk-table">
+        <thead><tr><th>样例</th><th>Token</th><th>当前值</th><th>状态</th></tr></thead>
+        <tbody>
+          <tr><td><span class="sw sw-round" style="background:var(--mem-dead)"></span></td><td class="tok">--mem-dead</td><td class="val" data-token="--mem-dead"></td><td>已熄灭，近乎不可见</td></tr>
+          <tr><td><span class="sw sw-round" style="background:var(--mem-faint)"></span></td><td class="tok">--mem-faint</td><td class="val" data-token="--mem-faint"></td><td>行将熄灭</td></tr>
+          <tr><td><span class="sw sw-round" style="background:var(--mem-low)"></span></td><td class="tok">--mem-low</td><td class="val" data-token="--mem-low"></td><td>正在变暗</td></tr>
+          <tr><td><span class="sw sw-round" style="background:var(--mem-mid)"></span></td><td class="tok">--mem-mid</td><td class="val" data-token="--mem-mid"></td><td>正常</td></tr>
+          <tr><td><span class="sw sw-round" style="background:var(--mem-high)"></span></td><td class="tok">--mem-high</td><td class="val" data-token="--mem-high"></td><td>扎实</td></tr>
+          <tr><td><span class="sw sw-round" style="background:var(--mem-full)"></span></td><td class="tok">--mem-full</td><td class="val" data-token="--mem-full"></td><td>已掌握，正发光</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section class="docs-section">
+      <div class="hud-label">COLOR · TEXT &amp; SEMANTIC</div>
+      <h2>文本层级与语义色</h2>
+      <div class="table-scroll"><table class="tk-table">
+        <thead><tr><th>样例</th><th>Token</th><th>当前值</th><th>用途</th></tr></thead>
+        <tbody>
+          <tr><td style="color:var(--text-1)">主要文字</td><td class="tok">--text-1</td><td class="val" data-token="--text-1"></td><td>正文 · 标题</td></tr>
+          <tr><td style="color:var(--text-2)">次要文字</td><td class="tok">--text-2</td><td class="val" data-token="--text-2"></td><td>说明 · 辅助</td></tr>
+          <tr><td style="color:var(--text-3)">三级文字</td><td class="tok">--text-3</td><td class="val" data-token="--text-3"></td><td>元信息 · HUD 标签</td></tr>
+          <tr><td style="color:var(--text-disabled)">禁用文字</td><td class="tok">--text-disabled</td><td class="val" data-token="--text-disabled"></td><td>禁用态</td></tr>
+          <tr><td><span class="sw" style="background:var(--gold);color:var(--text-on-gold);display:inline-flex;align-items:center;justify-content:center;font-size:11px;width:auto;padding:0 10px">点亮</span></td><td class="tok">--text-on-gold</td><td class="val" data-token="--text-on-gold"></td><td>金色按钮上的墨色</td></tr>
+          <tr><td><span class="sw sw-round" style="background:var(--ignite)"></span></td><td class="tok">--ignite</td><td class="val" data-token="--ignite"></td><td>点亮 / 成功（即 --gold）</td></tr>
+          <tr><td><span class="sw sw-round" style="background:var(--fading)"></span></td><td class="tok">--fading</td><td class="val" data-token="--fading"></td><td>变暗 / 待复习</td></tr>
+          <tr><td><span class="sw sw-round" style="background:var(--danger)"></span></td><td class="tok">--danger</td><td class="val" data-token="--danger"></td><td>罕见的破坏性操作，低饱和暖色</td></tr>
+          <tr><td><span class="sw sw-round" style="background:var(--focus)"></span></td><td class="tok">--focus</td><td class="val" data-token="--focus"></td><td>焦点环</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section class="docs-section">
+      <div class="hud-label">COLOR · GLASS &amp; HAIRLINES</div>
+      <h2>玻璃与发丝线</h2>
+      <p class="desc">面板 = 半透明深蓝 + <code>blur(var(--glass-blur)) saturate(1.2)</code> + 1px 冷发丝边 + 深柔阴影 + 1px 内光边。工具类 <code>.sr-glass</code> / <code>.sr-glass-strong</code> 一步到位。</p>
+      <div class="table-scroll"><table class="tk-table">
+        <thead><tr><th>样例</th><th>Token</th><th>当前值</th><th>用途</th></tr></thead>
+        <tbody>
+          <tr><td><span class="sw sr-glass" style="background:var(--glass-bg)"></span></td><td class="tok">--glass-bg</td><td class="val" data-token="--glass-bg"></td><td>标准玻璃底</td></tr>
+          <tr><td><span class="sw" style="background:var(--glass-bg-strong)"></span></td><td class="tok">--glass-bg-strong</td><td class="val" data-token="--glass-bg-strong"></td><td>抽屉 / 弹窗的实底玻璃</td></tr>
+          <tr><td><span class="sw" style="background:var(--glass-bg-faint)"></span></td><td class="tok">--glass-bg-faint</td><td class="val" data-token="--glass-bg-faint"></td><td>最淡的玻璃层</td></tr>
+          <tr><td><span class="sw" style="background:transparent;border-color:var(--glass-border)"></span></td><td class="tok">--glass-border</td><td class="val" data-token="--glass-border"></td><td>玻璃发丝边</td></tr>
+          <tr><td><span class="sw" style="background:transparent;border-color:var(--glass-border-strong)"></span></td><td class="tok">--glass-border-strong</td><td class="val" data-token="--glass-border-strong"></td><td>强调玻璃边</td></tr>
+          <tr><td class="val" data-token="--glass-blur"></td><td class="tok">--glass-blur</td><td class="val" data-token="--glass-blur"></td><td>背景模糊半径</td></tr>
+          <tr><td><span class="sw" style="background:transparent;border-color:var(--line)"></span></td><td class="tok">--line</td><td class="val" data-token="--line"></td><td>分隔发丝线</td></tr>
+          <tr><td><span class="sw" style="background:transparent;border-color:var(--line-strong)"></span></td><td class="tok">--line-strong</td><td class="val" data-token="--line-strong"></td><td>强分隔线</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section class="docs-section">
+      <div class="hud-label">TYPE</div>
+      <h2>字体</h2>
+      <p class="desc">Sora（拉丁 / 展示）+ Noto Sans SC（中文）+ JetBrains Mono（HUD / 代码）。字重克制在 thin → medium，大标题细字重带一缕微光，绝不粗体霓虹。编辑器正文行高 1.8，栏宽约 720px。</p>
+      <div class="table-scroll"><table class="tk-table">
+        <thead><tr><th>样例</th><th>Token</th><th>说明</th></tr></thead>
+        <tbody>
+          <tr><td class="type-demo" style="font-family:var(--font-sans);font-size:17px">星图 Stellar Raft</td><td class="tok">--font-sans</td><td>Sora + Noto Sans SC —— 界面默认</td></tr>
+          <tr><td class="type-demo" style="font-family:var(--font-cjk);font-size:17px">深空之上，克制作光</td><td class="tok">--font-cjk</td><td>Noto Sans SC —— 中文正文</td></tr>
+          <tr><td class="type-demo" style="font-family:var(--font-mono);font-size:14px">MEM 0.86 · +12</td><td class="tok">--font-mono</td><td>JetBrains Mono —— HUD 数字 / 代码</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>字号梯</h3>
+      <div class="table-scroll"><table class="tk-table">
+        <thead><tr><th>样例</th><th>Token</th><th>当前值</th><th>角色</th></tr></thead>
+        <tbody>
+          <tr><td class="type-demo" style="font-size:var(--t-display);font-weight:var(--w-thin);line-height:1.1">星空 44</td><td class="tok">--t-display</td><td class="val" data-token="--t-display"></td><td>主视觉 / 点亮时刻</td></tr>
+          <tr><td class="type-demo" style="font-size:var(--t-h1);font-weight:var(--w-light)">标题一 30</td><td class="tok">--t-h1</td><td class="val" data-token="--t-h1"></td><td>编辑器大标题</td></tr>
+          <tr><td class="type-demo" style="font-size:var(--t-h2);font-weight:var(--w-light)">标题二 23</td><td class="tok">--t-h2</td><td class="val" data-token="--t-h2"></td><td>分区 / 星座名</td></tr>
+          <tr><td class="type-demo" style="font-size:var(--t-h3);font-weight:var(--w-medium)">标题三 18</td><td class="tok">--t-h3</td><td class="val" data-token="--t-h3"></td><td>小节标题</td></tr>
+          <tr><td class="type-demo" style="font-size:var(--t-body-lg)">阅读正文 17</td><td class="tok">--t-body-lg</td><td class="val" data-token="--t-body-lg"></td><td>编辑器阅读正文</td></tr>
+          <tr><td class="type-demo" style="font-size:var(--t-body)">界面默认 15</td><td class="tok">--t-body</td><td class="val" data-token="--t-body"></td><td>UI 默认</td></tr>
+          <tr><td class="type-demo" style="font-size:var(--t-sm);color:var(--text-2)">元信息 13</td><td class="tok">--t-sm</td><td class="val" data-token="--t-sm"></td><td>meta / 说明</td></tr>
+          <tr><td class="type-demo hud-label" style="font-size:var(--t-xs)">HUD LABEL 11</td><td class="tok">--t-xs</td><td class="val" data-token="--t-xs"></td><td>HUD 标签 / 徽标</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>行高 · 字距 · 字重</h3>
+      <div class="table-scroll"><table class="tk-table">
+        <thead><tr><th>Token</th><th>当前值</th><th>用途</th></tr></thead>
+        <tbody>
+          <tr><td class="tok">--lh-tight / --lh-snug / --lh-body / --lh-loose</td><td class="val">1.15 / 1.35 / 1.55 / 1.8</td><td>展示标题 → 编辑器正文（1.8 松行高）</td></tr>
+          <tr><td class="tok">--ls-tight / --ls-wide / --ls-hud</td><td class="val">-0.02em / 0.04em / 0.14em</td><td>大标题收紧 · HUD 大写宽字距</td></tr>
+          <tr><td class="tok">--w-thin … --w-semi</td><td class="val">200 · 300 · 400 · 500 · 600</td><td>字重全域克制，展示级用 thin/light</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section class="docs-section">
+      <div class="hud-label">SPACING · 8PX RHYTHM</div>
+      <h2>间距</h2>
+      <p class="desc">8px 基础节奏，刻意的低密度——留白就是留黑，虚空是设计的一部分。</p>
+      <div class="table-scroll"><table class="tk-table">
+        <thead><tr><th style="width:50%">样例</th><th>Token</th><th>当前值</th></tr></thead>
+        <tbody>
+          <tr><td><div class="space-bar" style="width:var(--s-1)"></div></td><td class="tok">--s-1</td><td class="val" data-token="--s-1"></td></tr>
+          <tr><td><div class="space-bar" style="width:var(--s-2)"></div></td><td class="tok">--s-2</td><td class="val" data-token="--s-2"></td></tr>
+          <tr><td><div class="space-bar" style="width:var(--s-3)"></div></td><td class="tok">--s-3</td><td class="val" data-token="--s-3"></td></tr>
+          <tr><td><div class="space-bar" style="width:var(--s-4)"></div></td><td class="tok">--s-4</td><td class="val" data-token="--s-4"></td></tr>
+          <tr><td><div class="space-bar" style="width:var(--s-6)"></div></td><td class="tok">--s-6</td><td class="val" data-token="--s-6"></td></tr>
+          <tr><td><div class="space-bar" style="width:var(--s-8)"></div></td><td class="tok">--s-8</td><td class="val" data-token="--s-8"></td></tr>
+          <tr><td><div class="space-bar" style="width:var(--s-12)"></div></td><td class="tok">--s-12</td><td class="val" data-token="--s-12"></td></tr>
+          <tr><td><div class="space-bar" style="width:var(--s-16)"></div></td><td class="tok">--s-16</td><td class="val" data-token="--s-16"></td></tr>
+          <tr><td><div class="space-bar" style="width:var(--s-24)"></div></td><td class="tok">--s-24</td><td class="val" data-token="--s-24"></td></tr>
+        </tbody>
+      </table></div>
+      <p class="desc" style="margin-top:var(--s-4)">布局常量：<code>--sidebar-w</code> 260 · <code>--sidebar-collapsed</code> 64 · <code>--editor-col</code> 720 · <code>--rail-w</code> 320 · <code>--canvas-w</code> 1440。</p>
+    </section>
+
+    <section class="docs-section">
+      <div class="hud-label">RADII · SOFT EVERYWHERE</div>
+      <h2>圆角</h2>
+      <p class="desc">处处柔软，没有锐角：面板 14–24px，工具胶囊与小片一律全圆 pill。</p>
+      <div class="table-scroll"><table class="tk-table">
+        <thead><tr><th>样例</th><th>Token</th><th>当前值</th><th>用途</th></tr></thead>
+        <tbody>
+          <tr><td><div class="radius-demo" style="border-radius:var(--r-xs)"></div></td><td class="tok">--r-xs</td><td class="val" data-token="--r-xs"></td><td>行内代码 / 微元素</td></tr>
+          <tr><td><div class="radius-demo" style="border-radius:var(--r-sm)"></div></td><td class="tok">--r-sm</td><td class="val" data-token="--r-sm"></td><td>小控件</td></tr>
+          <tr><td><div class="radius-demo" style="border-radius:var(--r-md)"></div></td><td class="tok">--r-md</td><td class="val" data-token="--r-md"></td><td>卡片默认</td></tr>
+          <tr><td><div class="radius-demo" style="border-radius:var(--r-lg)"></div></td><td class="tok">--r-lg</td><td class="val" data-token="--r-lg"></td><td>面板</td></tr>
+          <tr><td><div class="radius-demo" style="border-radius:var(--r-xl)"></div></td><td class="tok">--r-xl</td><td class="val" data-token="--r-xl"></td><td>抽屉 / 大面板</td></tr>
+          <tr><td><div class="radius-demo" style="border-radius:var(--r-2xl)"></div></td><td class="tok">--r-2xl</td><td class="val" data-token="--r-2xl"></td><td>特大容器</td></tr>
+          <tr><td><div class="radius-demo" style="border-radius:var(--r-pill);width:84px"></div></td><td class="tok">--r-pill</td><td class="val" data-token="--r-pill"></td><td>工具胶囊 · chips</td></tr>
+          <tr><td><div class="radius-demo" style="border-radius:var(--r-full);width:36px"></div></td><td class="tok">--r-full</td><td class="val" data-token="--r-full"></td><td>圆点 / 星核</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section class="docs-section">
+      <div class="hud-label">GLOW &amp; SHADOW · TWO SYSTEMS</div>
+      <h2>发光与阴影</h2>
+      <p class="desc">两套体系：<b>Glow</b> 是从星、字标、激活图标里渗出的加色光；<b>Shadow</b> 是深而柔的层级投影。黎明主题下光晕自动收敛为暖意，阴影接管层级。</p>
+      <div class="table-scroll"><table class="tk-table">
+        <thead><tr><th>样例</th><th>Token</th><th>用途</th></tr></thead>
+        <tbody>
+          <tr><td><div class="glow-demo" style="box-shadow:var(--glow-blue);background:var(--star-blue)"></div></td><td class="tok">--glow-blue</td><td>冷光溢出：普通星 / 焦点</td></tr>
+          <tr><td><div class="glow-demo" style="box-shadow:var(--glow-gold);background:var(--gold)"></div></td><td class="tok">--glow-gold</td><td>暖光溢出：点亮 / 掌握</td></tr>
+          <tr><td><div class="glow-demo" style="box-shadow:var(--glow-gold-soft);background:var(--gold)"></div></td><td class="tok">--glow-gold-soft</td><td>悬停时的极淡暖光</td></tr>
+          <tr><td><div class="glow-demo" style="box-shadow:var(--glow-faint);background:var(--star-blue-dim)"></div></td><td class="tok">--glow-faint</td><td>将暗之星的余光</td></tr>
+          <tr><td><span class="type-demo" style="font-size:18px;font-weight:var(--w-light);text-shadow:var(--text-glow-cool)">冷光标题</span></td><td class="tok">--text-glow-cool</td><td>大标题的一缕微光</td></tr>
+          <tr><td><span class="type-demo" style="font-size:18px;font-weight:var(--w-light);color:var(--gold);text-shadow:var(--text-glow-warm)">暖光字</span></td><td class="tok">--text-glow-warm</td><td>点亮文案</td></tr>
+          <tr><td><div class="glow-demo" style="box-shadow:var(--shadow-sm);border-radius:var(--r-sm);width:44px"></div></td><td class="tok">--shadow-sm</td><td>轻抬升</td></tr>
+          <tr><td><div class="glow-demo" style="box-shadow:var(--shadow-md);border-radius:var(--r-sm);width:44px"></div></td><td class="tok">--shadow-md</td><td>卡片 / 面板</td></tr>
+          <tr><td><div class="glow-demo" style="box-shadow:var(--shadow-lg);border-radius:var(--r-sm);width:44px"></div></td><td class="tok">--shadow-lg</td><td>抽屉 / 弹窗</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section class="docs-section">
+      <div class="hud-label">MOTION · SLOW &amp; CALM</div>
+      <h2>动效</h2>
+      <p class="desc">缓慢、克制、深空般安静。全局一条缓动曲线；缩放即飞行；星在呼吸，背景星在闪烁；点亮时刻是唯一的高能瞬间（1.3s 光爆 + 粒子环）。全部尊重 <code>prefers-reduced-motion</code>。</p>
+      <div class="table-scroll"><table class="tk-table">
+        <thead><tr><th>Token</th><th>当前值</th><th>用途</th></tr></thead>
+        <tbody>
+          <tr><td class="tok">--ease-flight</td><td class="val" data-token="--ease-flight"></td><td>全局缓动 —— 一切位移与状态</td></tr>
+          <tr><td class="tok">--ease-out</td><td class="val" data-token="--ease-out"></td><td>入场收尾</td></tr>
+          <tr><td class="tok">--dur-fast</td><td class="val" data-token="--dur-fast"></td><td>悬停 / 按下</td></tr>
+          <tr><td class="tok">--dur-base</td><td class="val" data-token="--dur-base"></td><td>常规过渡</td></tr>
+          <tr><td class="tok">--dur-slow</td><td class="val" data-token="--dur-slow"></td><td>面板 / 抽屉</td></tr>
+          <tr><td class="tok">--dur-flight</td><td class="val" data-token="--dur-flight"></td><td>缩放飞行</td></tr>
+          <tr><td class="tok">--dur-ignite</td><td class="val" data-token="--dur-ignite"></td><td>点亮时刻（唯一的高能动效）</td></tr>
+        </tbody>
+      </table></div>
+      <p class="desc" style="margin-top:var(--s-4)">现成关键帧（<code>tokens/effects.css</code>）：<code>sr-breathe</code> 星呼吸 · <code>sr-twinkle</code> 背景闪烁 · <code>sr-flow</code> 连线流光 · <code>sr-flash / sr-ring / sr-particle</code> 点亮三件套 · <code>sr-cardin / sr-drawerin / sr-toast</code> 入场。</p>
+    </section>
+
+    <hr class="docs-hr">
+
+    <section class="docs-section" style="margin-top:0">
+      <div class="hud-label">SPECIMEN CARDS · GUIDELINES/</div>
+      <h2>规范卡片</h2>
+      <p class="desc">以下卡片直接嵌自 <code>../guidelines/</code>，是各基础规范的活样张（随文档站主题一同换肤；「黎明」卡固定演示浅色主题）。</p>
+
+      <div class="frame-meta"><span class="name">深空底 Deep Space Backdrop</span><span class="sub">近黑蓝场——知识是唯一的光</span></div>
+      <div class="frame-card"><iframe src="../guidelines/color-backdrop.card.html" style="height:174px" loading="lazy" title="深空底规范卡" data-theme-sync></iframe></div>
+
+      <div class="frame-meta"><span class="name">星蓝与暖金 Star Blue &amp; Warm Gold</span><span class="sub">冷结构 vs 暖奖励——仅有的两个强调色</span></div>
+      <div class="frame-card"><iframe src="../guidelines/color-accents.card.html" style="height:174px" loading="lazy" title="强调色规范卡" data-theme-sync></iframe></div>
+
+      <div class="frame-meta"><span class="name">记忆温度梯 Memory Temperature Ramp</span><span class="sub">星色 = 记忆强度：冷暗 → 暖亮</span></div>
+      <div class="frame-card"><iframe src="../guidelines/color-memory-ramp.card.html" style="height:174px" loading="lazy" title="记忆温度梯规范卡" data-theme-sync></iframe></div>
+
+      <div class="frame-meta"><span class="name">深色上的文字 Text on Dark</span><span class="sub">三级可读性 + 金底墨字</span></div>
+      <div class="frame-card"><iframe src="../guidelines/color-text.card.html" style="height:164px" loading="lazy" title="文字层级规范卡" data-theme-sync></iframe></div>
+
+      <div class="frame-meta"><span class="name">主题 · 黎明 Dawn</span><span class="sub">可选浅色主题 —— &lt;html data-theme="dawn"&gt;（此卡固定演示黎明）</span></div>
+      <div class="frame-card"><iframe src="../guidelines/theme-dawn.card.html" style="height:204px" loading="lazy" title="黎明主题规范卡"></iframe></div>
+
+      <div class="frame-meta"><span class="name">展示与标题 Display &amp; Titles</span><span class="sub">Sora + Noto Sans SC —— thin 到 light，微光</span></div>
+      <div class="frame-card"><iframe src="../guidelines/type-display.card.html" style="height:224px" loading="lazy" title="展示字体规范卡" data-theme-sync></iframe></div>
+
+      <div class="frame-meta"><span class="name">正文与 HUD Body &amp; Mono</span><span class="sub">松行高阅读正文 + 表格化 HUD 标签</span></div>
+      <div class="frame-card"><iframe src="../guidelines/type-body-hud.card.html" style="height:204px" loading="lazy" title="正文与HUD规范卡" data-theme-sync></iframe></div>
+
+      <div class="frame-meta"><span class="name">间距节奏 Spacing Scale</span><span class="sub">8px 节奏——低密度，留出呼吸</span></div>
+      <div class="frame-card"><iframe src="../guidelines/spacing-scale.card.html" style="height:174px" loading="lazy" title="间距规范卡" data-theme-sync></iframe></div>
+
+      <div class="frame-meta"><span class="name">圆角 Corner Radii</span><span class="sub">柔软面板 · 工具全圆胶囊——没有锐角</span></div>
+      <div class="frame-card"><iframe src="../guidelines/spacing-radii.card.html" style="height:174px" loading="lazy" title="圆角规范卡" data-theme-sync></iframe></div>
+
+      <div class="frame-meta"><span class="name">标志 Logo 星图</span><span class="sub">星座徽记 + 受光字标</span></div>
+      <div class="frame-card"><iframe src="../guidelines/brand-logo.card.html" style="height:174px" loading="lazy" title="标志规范卡" data-theme-sync></iframe></div>
+
+      <div class="frame-meta"><span class="name">星的解剖 Star Anatomy</span><span class="sub">星核 + 光晕 + 呼吸——亮度编码记忆</span></div>
+      <div class="frame-card"><iframe src="../guidelines/brand-star-anatomy.card.html" style="height:254px" loading="lazy" title="星解剖规范卡" data-theme-sync></iframe></div>
+
+      <div class="frame-meta"><span class="name">发光系统 Glow System</span><span class="sub">加色光溢出——星、字标、激活图标</span></div>
+      <div class="frame-card"><iframe src="../guidelines/brand-glow.card.html" style="height:194px" loading="lazy" title="发光规范卡" data-theme-sync></iframe></div>
+
+      <div class="frame-meta"><span class="name">玻璃面板 Glass Panels</span><span class="sub">深蓝半透明 · 14px 模糊 · 1px 冷边</span></div>
+      <div class="frame-card"><iframe src="../guidelines/brand-glass.card.html" style="height:204px" loading="lazy" title="玻璃面板规范卡" data-theme-sync></iframe></div>
+
+      <div class="frame-meta"><span class="name">连接规范 Connection Spec</span><span class="sub">有机曲线，绝不用箭头 · 蓝 = 同星座 · 金 = 融会贯通</span></div>
+      <div class="frame-card"><iframe src="../guidelines/brand-connection.card.html" style="height:244px" loading="lazy" title="连接规范卡" data-theme-sync></iframe></div>
+
+      <div class="frame-meta"><span class="name">图标库 Icon Library</span><span class="sub">Lucide 线性 · 冷蓝默认 → 暖金激活 · 1.6px 描边</span></div>
+      <div class="frame-card"><iframe src="../guidelines/icon-library.card.html" style="height:454px" loading="lazy" title="图标库规范卡" data-theme-sync></iframe></div>
+    </section>
+  </main>
+
+  <footer class="docs-footer">
+    <span>星图 · Stellar Raft 设计系统 —— 知识是唯一的光。</span>
+    <span class="mono">TOKENS/ · GUIDELINES/ · ALL VAR(), NO RAW HEX</span>
+  </footer>
+
+  <script src="../assets/starfield.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="docs.js"></script>
+</body>
+</html>

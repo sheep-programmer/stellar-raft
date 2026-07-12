@@ -1,0 +1,31 @@
+# 星图 Stellar Raft — CI
+# lint → build（重新生成 _ds_bundle.js / _ds_manifest.json）→ node:test 测试套件
+# server 测试依赖 node:sqlite（Node 22.5+），构建依赖 devDependency @babel/standalone。
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: |
+          if [ -f package-lock.json ]; then npm ci; else npm install; fi
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build design-system bundle
+        run: npm run build
+
+      - name: Test
+        run: npm test

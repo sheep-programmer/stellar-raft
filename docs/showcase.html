@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>应用复刻 · 星图设计系统</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26'%3E%3Crect x='.5' y='.5' width='25' height='25' rx='7.5' fill='%23080c1c' stroke='rgba(159,198,255,.28)'/%3E%3Cpath d='M7.5 9 L16.5 7 L19 16.5 L11 18.5' stroke='rgba(159,198,255,.5)' stroke-width='.8' fill='none' stroke-linejoin='round' stroke-linecap='round'/%3E%3Ccircle cx='7.5' cy='9' r='1.35' fill='%23d6e6ff'/%3E%3Ccircle cx='19' cy='16.5' r='1.15' fill='%239fc6ff'/%3E%3Ccircle cx='11' cy='18.5' r='1.1' fill='%239fc6ff'/%3E%3Ccircle cx='16.5' cy='7' r='3.4' fill='%23ffd98a' opacity='.22'/%3E%3Ccircle cx='16.5' cy='7' r='1.8' fill='%23ffe9b0'/%3E%3C/svg%3E">
+  <script>try{var m=location.search.match(/[?&]theme=(dawn|space)/);var t=m?m[1]:localStorage.getItem('sr.docs.theme');if(t==='dawn')document.documentElement.dataset.theme='dawn';if(m)localStorage.setItem('sr.docs.theme',m[1])}catch(e){}</script>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+  <sr-starfield class="docs-sky" style="position:fixed" density="0.5"></sr-starfield>
+
+  <header class="docs-header">
+    <div class="docs-header-inner">
+      <a class="docs-brand" href="index.html"><span class="zh">星图</span><span class="en">Stellar Raft</span></a>
+      <nav class="docs-nav" aria-label="文档导航">
+        <a href="index.html">首页</a>
+        <a href="getting-started.html">开始使用</a>
+        <a href="foundations.html">基础</a>
+        <a href="components.html">组件</a>
+        <a href="showcase.html" aria-current="page">应用复刻</a>
+      </nav>
+      <button class="theme-toggle" type="button" title="切换 深空 / 黎明" aria-label="切换 深空 / 黎明 主题">
+        <i data-lucide="sunrise" class="ic-space"></i>
+        <i data-lucide="moon-star" class="ic-dawn"></i>
+      </button>
+    </div>
+  </header>
+
+  <main class="docs-main">
+    <div class="hud-label">SHOWCASE · UI_KITS/STELLAR-RAFT</div>
+    <h1 class="docs-h1">应用复刻</h1>
+    <p class="docs-lede">桌面端（1440px）的高保真交互复刻，覆盖产品简报的全部 8 屏。这是一个单页应用，直接由设计系统基元拼成——从星图画布点进一颗星，走完「语义缩放 → 费曼内化 → 点亮」的完整旅程。应用左下角自带 深空 / 黎明 切换与设置项，独立于文档站主题。</p>
+
+    <p style="margin:0 0 var(--s-4)">
+      <a href="../ui_kits/stellar-raft/index.html" target="_blank" rel="noopener"
+         style="display:inline-flex;align-items:center;gap:8px;padding:9px 20px;border-radius:var(--r-pill);background:var(--glass-bg);border:1px solid var(--glass-border-strong);color:var(--text-1);text-decoration:none;font-size:var(--t-sm)">
+        <i data-lucide="external-link" style="width:15px;height:15px;color:var(--star-blue)"></i>
+        在新标签页中打开（推荐全屏体验）
+      </a>
+    </p>
+
+    <div class="frame-card app-frame" style="margin-top:var(--s-5)">
+      <iframe src="../ui_kits/stellar-raft/index.html" style="height:100%;min-height:560px" loading="lazy" title="星图应用交互复刻"></iframe>
+    </div>
+    <p class="desc" style="font-size:var(--t-sm);color:var(--text-3)">画布按 1440px 桌面设计；窗口较窄时建议用上方按钮全屏打开。应用内数据为演示数据，交互为高保真模拟。</p>
+
+    <section class="docs-section">
+      <div class="hud-label">THE 8 BRIEFED SCREENS</div>
+      <h2>八屏清单</h2>
+      <p class="desc">每屏对应 <code>ui_kits/stellar-raft/</code> 下的一个 JSX 文件（见该目录 <code>README.md</code> 的屏幕→文件对照）。</p>
+      <ul class="screen-list">
+        <li><i data-lucide="map" class="ic"></i><div><b>1 · 星图主界面（创作态 · 中景）</b><span>无限平移缩放画布：拖拽空处平移、滚轮向光标缩放、拖星重排、星域光环与命名、右键新建星域或知识星。<code>StarMap.jsx</code></span></div></li>
+        <li><i data-lucide="satellite" class="ic"></i><div><b>2 · 亮度鸟瞰（极远景）</b><span>忠实镜像用户自己的星图布局，记忆温度着色 + 冷→暖图例，点击星域飞回。<code>AerialView.jsx</code></span></div></li>
+        <li><i data-lucide="zoom-in" class="ic"></i><div><b>3 · 近景语义缩放</b><span>点一颗星，飞近展开摘要卡——层级信息随距离展开。<code>StarMap.jsx · SummaryCard</code></span></div></li>
+        <li><i data-lucide="graduation-cap" class="ic"></i><div><b>4 · 费曼内化模式（右抽屉）</b><span>用自己的话讲一遍——玻璃抽屉自右滑入。<code>FeynmanDrawer.jsx</code></span></div></li>
+        <li><i data-lucide="zap" class="ic"></i><div><b>5 · 点亮高潮瞬间</b><span>全系统唯一的高能动效：1.3s 光爆 + 粒子环 + 「点亮 +1 · 融会贯通」toast。<code>IgniteBurst + IgniteToast</code></span></div></li>
+        <li><i data-lucide="panel-left" class="ic"></i><div><b>6 · 左侧边栏</b><span>我的星座 · 收件箱 · 搜索，260px ⇄ 64px 可折叠。<code>Sidebar.jsx</code></span></div></li>
+        <li><i data-lucide="list" class="ic"></i><div><b>7 · 笔记管理（俯瞰态 · 列表视图）</b><span>把星空放平成一张可排序、可批量操作的表。<code>ListView.jsx</code></span></div></li>
+        <li><i data-lucide="pen-line" class="ic"></i><div><b>8 · 专业笔记编辑页</b><span>块级编辑器：Markdown 前缀转换、斜杠菜单、右键菜单、大纲 / 反链 / 遗忘曲线知识栏。<code>Editor.jsx + EditorMenus.jsx</code></span></div></li>
+      </ul>
+    </section>
+
+    <section class="docs-section">
+      <div class="hud-label">BEYOND THE BRIEF</div>
+      <h2>加映屏幕</h2>
+      <ul class="screen-list">
+        <li><i data-lucide="orbit" class="ic"></i><div><b>三维星系 Galaxy3D</b><span>Three.js：星座为发光恒星、笔记为记忆色行星，金色融会贯通弧线带流光；俯瞰机位点对点还原 2D 布局。<code>Galaxy3D.jsx</code></span></div></li>
+        <li><i data-lucide="inbox" class="ic"></i><div><b>收件箱（待整理 / 收藏）</b><span>快速捕获、按建议归入星域、批量整理；收藏页汇集所有加星笔记。<code>Inbox.jsx</code></span></div></li>
+        <li><i data-lucide="circle-dot" class="ic"></i><div><b>黑洞（回收站）</b><span>删除的星与星域坠入黑洞，作为吸积盘碎片绕行；可还原，可彻底销毁。<code>BlackHole.jsx</code></span></div></li>
+        <li><i data-lucide="settings" class="ic"></i><div><b>设置 / AI 配置 / 命令面板</b><span>动效与闪烁开关、提醒节奏、AI 端点配置、⌘K 命令面板。<code>Settings.jsx · AIConfig.jsx · CommandPalette.jsx</code></span></div></li>
+      </ul>
+    </section>
+
+    <section class="docs-section">
+      <div class="hud-label">SOURCE MAP</div>
+      <h2>怎么读这份复刻</h2>
+      <ul class="usage-list" style="max-width:680px">
+        <li>入口 <code>ui_kits/stellar-raft/index.html</code>：React 18 + Babel + Lucide + <code>_ds_bundle.js</code> + <code>data.js</code>（演示数据）+ 每屏一个 JSX。</li>
+        <li>组件全部来自命名空间 <code>window.StellarRaftDesignSystem_2866af</code>；连接曲线用 <code>window.SRConnect()</code>；背景是 <code>&lt;sr-starfield&gt;</code>。</li>
+        <li>配 <code>server/server.js</code>（零 npm 依赖，<code>node server/server.js</code>，默认端口 8756）可同源托管本站与应用，并获得账户 / 星系分享等真实后端。</li>
+        <li>这是外观级复刻而非生产代码——个别交互为高保真模拟。</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="docs-footer">
+    <span>星图 · Stellar Raft 设计系统 —— 知识是唯一的光。</span>
+    <span class="mono">8 SCREENS + GALAXY3D · 1440PX DESKTOP</span>
+  </footer>
+
+  <script src="../assets/starfield.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="docs.js"></script>
+</body>
+</html>
