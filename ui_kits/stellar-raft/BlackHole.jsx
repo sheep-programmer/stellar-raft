@@ -1,10 +1,182 @@
 /* BlackHole — 黑洞（回收站）。所有被删除的星域与知识星都坠入这里：
    左侧是一座正俯视的 CSS 黑洞——纯黑事件视界 + 光子环 + 面向观察者旋转的
    吸积盘漩涡（双层湍流条纹 + 静态多普勒增亮），被吞噬的条目化作碎屑沿
-   各自的圆轨道绕洞公转（文字反向旋转保持直立）。碎屑可交互：悬停暂停公转
-   并显示名字，点击弹出操作卡直接「恢复 / 彻底销毁」；右侧列表与碎屑互相
-   高亮联动。恢复的星带着原有的位置、连接一起回到星图。 */
+   各自的圆轨道绕洞公转。公转不再用 CSS 动画，而是一台 rAF 引擎：每个碎屑
+   持有稳定的 { 半径, 角速度, 相位 }（全部由 t.id 哈希派生，与数组下标无关），
+   每帧推进角度后直接写 transform——销毁任何一颗只移除它自己的节点，
+   其余碎屑的运动在引擎里连续不断、绝不跳位。碎屑层底下叠一张 canvas 画
+   运动拖尾：常速绕行是淡淡的星蓝短尾，坠向奇点转为暗红长尾，逃逸恢复
+   转为金色长尾（金 = 奖励/恢复语义）；颜色全部取自 tokens 的运行时值，
+   黎明主题自动换色。prefers-reduced-motion / data-motion=off 时引擎不启动：
+   碎屑按各自相位静止排布、不画拖尾。碎屑本体是可聚焦的真按钮（Enter/点击
+   弹恢复/销毁卡，聚焦即显名），恢复/销毁反馈走 role=status。 */
 const { GlassPanel, Icon, IconButton, Button, Badge } = window.StellarRaftDesignSystem_2866af;
+
+/* ---- 碎屑轨道引擎（独立于 React 渲染） ---- */
+
+const BH_TRAIL_PAD = 190;                       // 拖尾画布向舞台四周溢出，逃逸的长尾不被 520 框裁断
+const BH_TRAIL_SIZE = 520 + BH_TRAIL_PAD * 2;
+
+// FNV-1a：碎屑的轨道参数只由 id 决定——销毁别的碎屑不会改变自己的相位/周期
+const bhHash = (s) => {
+  let h = 2166136261;
+  for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); }
+  return h >>> 0;
+};
+
+function bhMakeEngine(pausedRef) {
+  const bodies = new Map();  // id → { el, baseR, radius, omega, angle, mode, modeStart, trail }
+  let canvas = null, ctx = null, raf = 0, last = 0, running = false;
+  let colors = null, colorTick = 0;
+
+  const reduced = () => (window.srTransition && window.srTransition.reduced)
+    ? window.srTransition.reduced()
+    : !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+  // 拖尾颜色全部读 tokens 的运行时值（绕行=--star-blue · 坠落=--danger · 逃逸=--gold），
+  // 定期重读，黎明/深空切换后自动跟上
+  const parseRgb = (v) => {
+    let m = /^#([0-9a-f]{6})$/i.exec(v);
+    if (m) { const n = parseInt(m[1], 16); return { r: (n >> 16) & 255, g: (n >> 8) & 255, b: n & 255 }; }
+    m = /^#([0-9a-f]{3})$/i.exec(v);
+    if (m) { const n = parseInt(m[1], 16); const e = (x) => x | (x << 4); return { r: e((n >> 8) & 15), g: e((n >> 4) & 15), b: e(n & 15) }; }
+    m = /rgba?\(\s*([\d.]+)[,\s]+([\d.]+)[,\s]+([\d.]+)/.exec(v);
+    if (m) return { r: +m[1], g: +m[2], b: +m[3] };
+    return null;
+  };
+  const parseTokenColor = (cs, name, fallback) =>
+    parseRgb((cs.getPropertyValue(name) || '').trim()) || parseRgb(fallback);
+  const resolveColors = () => {
+    const cs = getComputedStyle(document.documentElement);
+    colors = {
+      orbit: parseTokenColor(cs, '--star-blue', '#9fc6ff'),
+      fall: parseTokenColor(cs, '--danger', '#e8917a'),
+      escape: parseTokenColor(cs, '--gold', '#ffd98a'),
+    };
+  };
+
+  const place = (b) => {
+    if (!b.el) return;
+    const x = Math.cos(b.angle) * b.radius, y = Math.sin(b.angle) * b.radius;
+    b.el.style.transform = `translate(${x}px, ${y}px)`;
+  };
+
+  const attach = (id, el) => {
+    let b = bodies.get(id);
+    if (!b) {
+      const h = bhHash(id);
+      const baseR = 170 + (h % 4) * 26;                       // 全部在吸积盘外缘绕行（对齐轨道细线）
+      const period = 16 + ((h >>> 2) % 5) * 5;                // 16–36s 一圈
+      b = {
+        id, el, baseR, radius: baseR,
+        omega: (2 * Math.PI) / period,
+        angle: (((h >>> 5) % 3600) / 3600) * 2 * Math.PI,     // 相位同样由 id 派生
+        mode: 'orbit', modeStart: 0, trail: [],
+      };
+      bodies.set(id, b);
+    } else {
+      b.el = el;      // React 重渲染只是换 ref 回调——角度/半径原样保留，运动连续
+    }
+    place(b);         // 挂载当帧就放到位，不在圆心闪现
+  };
+  const detach = (id) => {
+    const b = bodies.get(id); if (!b) return;
+    b.el = null;                          // 运行中交给下一帧 GC（重渲染的 detach→attach 会原样接回）
+    if (!running) bodies.delete(id);      // reduced-motion 下没有帧循环，就地回收（参数由 id 派生，可无损重建）
+  };
+
+  const syncModes = (fallIds, escIds) => {
+    const now = performance.now();
+    for (const b of bodies.values()) {
+      const m = fallIds.indexOf(b.id) >= 0 ? 'fall' : (escIds.indexOf(b.id) >= 0 ? 'escape' : 'orbit');
+      if (b.mode !== m) { b.mode = m; b.modeStart = now; }
+    }
+  };
+
+  const draw = () => {
+    if (!ctx) return;
+    ctx.clearRect(0, 0, BH_TRAIL_SIZE, BH_TRAIL_SIZE);
+    ctx.globalCompositeOperation = 'lighter';
+    ctx.lineCap = 'round';
+    const C = BH_TRAIL_SIZE / 2;
+    for (const b of bodies.values()) {
+      const pts = b.trail;
+      if (pts.length < 2 || !colors) continue;
+      const col = b.mode === 'fall' ? colors.fall : (b.mode === 'escape' ? colors.escape : colors.orbit);
+      const baseA = b.mode === 'orbit' ? 0.3 : (b.mode === 'fall' ? 0.55 : 0.7);
+      const w = b.mode === 'orbit' ? 1.4 : 2.2;
+      for (let i = 1; i < pts.length; i++) {
+        const a = baseA * Math.pow(i / (pts.length - 1), 1.6);   // 尾端渐隐、头部最亮
+        if (a <= 0.012) continue;
+        ctx.strokeStyle = `rgba(${col.r},${col.g},${col.b},${a})`;
+        ctx.lineWidth = w;
+        ctx.beginPath();
+        ctx.moveTo(C + pts[i - 1].x, C + pts[i - 1].y);
+        ctx.lineTo(C + pts[i].x, C + pts[i].y);
+        ctx.stroke();
+      }
+    }
+  };
+
+  const frame = (t) => {
+    raf = requestAnimationFrame(frame);
+    const dt = Math.min(Math.max((t - last) / 1000, 0), 0.05);  // 后台回来不跳大步
+    last = t;
+    if (!colors || (colorTick++ % 120) === 0) resolveColors();
+    const paused = pausedRef.current;
+    for (const [id, b] of bodies) {
+      if (!b.el) { bodies.delete(id); continue; }               // 已卸载 → 连拖尾一起湮灭
+      if (b.mode === 'fall') {
+        // 坠落：公转持续加速，半径收缩坠向奇点——轨迹自然成螺旋
+        const p = Math.min((t - b.modeStart) / 1450, 1);
+        b.angle += b.omega * dt * (1 + 2.4 * p);
+        b.radius = b.baseR + (6 - b.baseR) * p * p;
+      } else if (b.mode === 'escape') {
+        // 逃逸：冻结公转，沿当前半径背离中心加速飞出
+        const p = Math.min((t - b.modeStart) / 980, 1);
+        b.radius = b.baseR + (620 - b.baseR) * p * p * p;
+      } else {
+        if (!paused.has(id)) b.angle += b.omega * dt;           // 悬停/选中即暂停，松开原地续行
+        b.radius = b.baseR;
+      }
+      place(b);
+      // 常速绕行留短尾；坠落/逃逸拉长采样窗（暂停时旧点照常滑出，尾巴自然收拢）
+      const cap = b.mode === 'orbit' ? 10 : 34;
+      b.trail.push({ x: Math.cos(b.angle) * b.radius, y: Math.sin(b.angle) * b.radius });
+      while (b.trail.length > cap) b.trail.shift();
+    }
+    draw();
+  };
+
+  const api = {
+    attach, detach, syncModes,
+    setCanvas(el) {
+      if (!el) { canvas = null; ctx = null; return; }
+      if (el === canvas && ctx) return;
+      canvas = el;
+      const dpr = window.devicePixelRatio || 1;
+      el.width = BH_TRAIL_SIZE * dpr;
+      el.height = BH_TRAIL_SIZE * dpr;
+      ctx = el.getContext('2d');
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      el.__srBhEngine = api;    // 自测钩子：无头浏览器从 canvas 节点拿引擎内部状态
+    },
+    start() {
+      if (running || reduced()) return;   // reduced-motion：不起 rAF——碎屑静止在各自相位上，不画拖尾
+      running = true;
+      last = performance.now();
+      raf = requestAnimationFrame(frame);
+    },
+    stop() {
+      running = false;
+      cancelAnimationFrame(raf);
+      bodies.clear();
+    },
+    isRunning: () => running,
+    bodies,
+  };
+  return api;
+}
 
 function BlackHole({ onOpenCon }) {
   const D = window.SR_DATA;
@@ -26,6 +198,25 @@ function BlackHole({ onOpenCon }) {
     el.addEventListener('wheel', onWheel, { passive: false });
     return () => el.removeEventListener('wheel', onWheel);
   }, []);
+
+  // ---- 轨道引擎：React 只负责挂载/卸载节点（key=t.id），运动全在引擎里 ----
+  const pausedRef = React.useRef(new Set());
+  pausedRef.current = new Set([hoverId, picked && picked.id].filter(Boolean));
+  const engineRef = React.useRef(null);
+  const getEngine = () => {
+    if (!engineRef.current) engineRef.current = bhMakeEngine(pausedRef);
+    return engineRef.current;
+  };
+  const trailRef = React.useCallback((el) => { getEngine().setCanvas(el); }, []);
+  React.useEffect(() => {
+    const eng = getEngine();
+    eng.start();
+    return () => eng.stop();
+  }, []);
+  React.useEffect(() => {
+    if (engineRef.current) engineRef.current.syncModes(falling, escaping);
+  }, [falling, escaping]);
+
   const toastTimer = React.useRef(null);
   const fallTimers = React.useRef([]);
   const flash = (msg, con) => {
@@ -44,6 +235,7 @@ function BlackHole({ onOpenCon }) {
     setFalling(f => [...f, ...ids.filter(id => !f.includes(id))]);
     fallTimers.current.push(setTimeout(() => {
       ids.forEach(id => D.purgeTrash(id));
+      window.dispatchEvent(new Event('sr-data')); // 侧栏角标即时刷新
       setFalling(f => f.filter(x => !ids.includes(x)));
       sync();
       flash(doneMsg);
@@ -61,6 +253,7 @@ function BlackHole({ onOpenCon }) {
     setEscaping(e => [...e, t.id]);
     fallTimers.current.push(setTimeout(() => {
       const r = D.restoreTrash(t.id);
+      window.dispatchEvent(new Event('sr-data')); // 侧栏角标即时刷新
       setEscaping(e => e.filter(x => x !== t.id));
       sync();
       if (!r) { flash('恢复失败 — 找不到可以安放它的星域'); return; }
@@ -100,42 +293,51 @@ function BlackHole({ onOpenCon }) {
           ))}
           <div className="bh-photon" />
           <div className="bh-core" />
-          {/* 被吞噬的条目化作碎屑绕洞公转：悬停暂停并显名，点击弹出操作卡 */}
-          {entries.slice(0, 12).map((t, i) => {
-            const R = 170 + (i % 4) * 26;   // 全部在吸积盘外缘绕行
+          {/* 拖尾画布：引擎每帧把各碎屑的近若干帧位置画成渐隐光迹 */}
+          <canvas className="bh-trails" aria-hidden="true" ref={trailRef}
+            style={{ width: BH_TRAIL_SIZE, height: BH_TRAIL_SIZE }} />
+          {/* 被吞噬的条目化作碎屑绕洞公转（rAF 引擎驱动，transform 由引擎每帧写入）：
+              悬停/聚焦暂停并显名，点击/Enter 弹出操作卡 */}
+          {entries.slice(0, 12).map((t) => {
             const isFalling = falling.includes(t.id);
             const isEscaping = escaping.includes(t.id);
             const busy = isFalling || isEscaping;
             const lit = !busy && (hoverId === t.id || (picked && picked.id === t.id));
+            const size = t.kind === 'domain' ? 17 : 12;
             return (
-              <div key={t.id} className="bh-orbiter"
-                style={{ animationDuration: `${16 + (i % 5) * 5}s`, animationDelay: `${-i * 3.7}s`,
-                  animationPlayState: isEscaping ? 'paused' : undefined }}>
-                {/* 坠落 = 半径收缩（公转继续，轨迹成螺旋）；逃逸 = 暂停公转、半径拉出舞台（径向直线） */}
-                <div className="bh-chip" style={{ marginLeft: isEscaping ? 640 : (isFalling ? 4 : R), animationDuration: `${16 + (i % 5) * 5}s`, animationDelay: `${-i * 3.7}s`,
-                  animationPlayState: isEscaping ? 'paused' : undefined,
-                  transition: isEscaping ? 'margin-left 0.98s cubic-bezier(0.5, 0, 0.85, 0.6)' : 'margin-left 1.45s cubic-bezier(0.55, 0, 0.85, 0.4)' }}>
-                  <span
-                    onClick={(e) => { e.stopPropagation(); setPicked({ id: t.id, x: e.clientX, y: e.clientY }); }}
-                    onMouseEnter={() => setHoverId(t.id)} onMouseLeave={() => setHoverId(null)}
-                    style={{
-                      width: t.kind === 'domain' ? 17 : 12, height: t.kind === 'domain' ? 17 : 12,
-                      borderRadius: '50%', display: 'block',
-                      cursor: busy ? 'default' : 'pointer',
-                      pointerEvents: busy ? 'none' : 'auto',
-                      background: `radial-gradient(circle at 35% 32%, #fff 0%, ${colorOf(t)} 55%, ${colorOf(t)} 100%)`,
-                      opacity: busy ? 0 : (lit ? 1 : 0.95),
-                      transform: isFalling ? 'scale(0.15)' : (isEscaping ? 'scale(1.25)' : 'none'),
-                      border: lit ? '1.5px solid var(--gold)' : '1.5px solid transparent',
-                      boxShadow: `0 0 ${lit ? 18 : 12}px 2px ${colorOf(t)}`,
-                      transition: isFalling
-                        ? 'opacity 0.5s ease 0.95s, transform 1.45s cubic-bezier(0.55, 0, 0.85, 0.4)'
-                        : isEscaping
-                          ? 'opacity 0.4s ease 0.6s, transform 0.98s ease-in'
-                          : 'opacity var(--dur-base), box-shadow var(--dur-base)',
-                    }} />
-                  <span className="bh-chip-name" style={{ opacity: lit ? 1 : 0 }}>{nameOf(t)}</span>
-                </div>
+              <div key={t.id} className="bh-body"
+                ref={(el) => { if (el) getEngine().attach(t.id, el); else getEngine().detach(t.id); }}>
+                <button type="button" className="sr-focus-ring bh-chip-btn"
+                  aria-label={`${nameOf(t)} — 恢复或彻底销毁`}
+                  disabled={busy}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    const box = e.currentTarget.getBoundingClientRect();
+                    setPicked({ id: t.id, x: e.clientX || box.left + box.width / 2, y: e.clientY || box.top + box.height / 2 });
+                  }}
+                  onMouseEnter={() => setHoverId(t.id)} onMouseLeave={() => setHoverId(null)}
+                  onFocus={() => setHoverId(t.id)} onBlur={() => setHoverId(null)}
+                  style={{
+                    // 坠落 = 引擎收缩半径成螺旋，这里只负责缩小淡出；逃逸 = 引擎拉出半径，这里放大淡出
+                    opacity: busy ? 0 : 1,
+                    transform: isFalling ? 'scale(0.15)' : (isEscaping ? 'scale(1.25)' : 'none'),
+                    cursor: busy ? 'default' : 'pointer',
+                    transition: isFalling
+                      ? 'opacity 0.5s ease 0.95s, transform 1.45s cubic-bezier(0.55, 0, 0.85, 0.4)'
+                      : isEscaping
+                        ? 'opacity 0.4s ease 0.6s, transform 0.98s ease-in'
+                        : 'opacity var(--dur-base)',
+                  }}>
+                  <span aria-hidden="true" style={{
+                    width: size, height: size, borderRadius: '50%', display: 'block',
+                    background: `radial-gradient(circle at 35% 32%, #fff 0%, ${colorOf(t)} 55%, ${colorOf(t)} 100%)`,
+                    opacity: lit ? 1 : 0.95,
+                    border: lit ? '1.5px solid var(--gold)' : '1.5px solid transparent',
+                    boxShadow: `0 0 ${lit ? 18 : 12}px 2px ${colorOf(t)}`,
+                    transition: 'opacity var(--dur-base), box-shadow var(--dur-base)',
+                  }} />
+                </button>
+                <span className="bh-chip-name" style={{ opacity: lit ? 1 : 0 }}>{nameOf(t)}</span>
               </div>
             );
           })}
@@ -147,13 +349,15 @@ function BlackHole({ onOpenCon }) {
         </div>
 
         {toast && (
-          /* 定位层与动画层分离：sr-cardin 结束帧的 transform:none 会覆盖居中的 translateX */
-          <div style={{ position: 'absolute', bottom: 64, left: '50%', transform: 'translateX(-50%)', zIndex: 95 }}>
+          /* 定位层与动画层分离：sr-cardin 结束帧的 transform:none 会覆盖居中的 translateX。
+             role=status：恢复/销毁的反馈读屏也听得到；动作是真按钮，键盘可达 */
+          <div role="status" style={{ position: 'absolute', bottom: 64, left: '50%', transform: 'translateX(-50%)', zIndex: 95 }}>
             <div style={{ animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
               <GlassPanel strong radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '10px 18px', whiteSpace: 'nowrap' }}>
                 <Icon name="check" size={16} color="var(--gold)" /><span style={{ fontSize: 13.5, color: 'var(--text-1)' }}>{toast.msg}</span>
                 {toast.con && onOpenCon && (
-                  <span onClick={() => onOpenCon(toast.con)} style={{ fontSize: 12.5, color: 'var(--star-blue)', cursor: 'pointer', borderBottom: '1px dashed rgba(159,198,255,0.5)' }}>在星图中查看</span>
+                  <button type="button" className="sr-focus-ring" onClick={() => onOpenCon(toast.con)}
+                    style={{ background: 'none', border: 'none', padding: 0, fontFamily: 'var(--font-sans)', fontSize: 12.5, color: 'var(--star-blue)', cursor: 'pointer', borderBottom: '1px dashed rgba(159,198,255,0.5)' }}>在星图中查看</button>
                 )}
               </GlassPanel>
             </div>
@@ -220,7 +424,7 @@ function BlackHole({ onOpenCon }) {
                         </div>
                         <div style={{ display: 'flex', gap: 8, marginTop: 10 }}>
                           <Button size="sm" icon="undo-2" glow onClick={() => restore(t)} style={{ flex: 1 }}>恢复</Button>
-                          <button type="button" onClick={() => purge(t)}
+                          <button type="button" className="sr-focus-ring" onClick={() => purge(t)}
                             style={{ flex: 1, height: 30, borderRadius: 'var(--r-pill)', border: '1px solid rgba(232,145,122,0.4)', background: 'rgba(232,145,122,0.10)', color: 'var(--danger)', fontSize: 12.5, cursor: 'pointer', fontFamily: 'var(--font-sans)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
                             <Icon name="flame" size={13} color="currentColor" />彻底销毁
                           </button>
@@ -255,7 +459,7 @@ function BlackHole({ onOpenCon }) {
               </div>
               <div style={{ display: 'flex', gap: 8 }}>
                 <Button size="sm" icon="undo-2" glow onClick={() => restore(t)} style={{ flex: 1 }}>恢复</Button>
-                <button type="button" onClick={() => purge(t)}
+                <button type="button" className="sr-focus-ring" onClick={() => purge(t)}
                   style={{ flex: 1, height: 30, borderRadius: 'var(--r-pill)', border: '1px solid rgba(232,145,122,0.4)', background: 'rgba(232,145,122,0.10)', color: 'var(--danger)', fontSize: 12.5, cursor: 'pointer', fontFamily: 'var(--font-sans)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
                   <Icon name="flame" size={13} color="currentColor" />销毁
                 </button>
@@ -346,21 +550,29 @@ function BlackHoleStyle() {
       background: radial-gradient(circle at 50% 46%, #000 0%, #000 80%, #0a0805 100%);
       box-shadow: 0 0 80px 26px rgba(255,150,64,0.12);
     }
-    /* 碎屑：外层公转，内层反向旋转让名字保持直立；悬停暂停公转 */
-    .bh-orbiter { position: absolute; left: 50%; top: 50%; transform-origin: 0 0; animation: bh-rot linear infinite; z-index: 5; pointer-events: none; }
-    .bh-orbiter:hover, .bh-orbiter:hover .bh-chip { animation-play-state: paused; }
-    .bh-chip { display: flex; align-items: center; transform-origin: 8px 50%; animation: bh-rot-rev linear infinite; pointer-events: none; }
-    .bh-chip > span:first-child { pointer-events: auto; }
+    /* 拖尾画布：盖在黑洞本体之上、碎屑之下；向四周溢出舞台，长尾不被裁断 */
+    .bh-trails {
+      left: ${-BH_TRAIL_PAD}px; top: ${-BH_TRAIL_PAD}px;
+      z-index: 4; pointer-events: none;
+    }
+    /* 碎屑：位置由 rAF 轨道引擎每帧写 transform（translate 不旋转，名字天然直立） */
+    .bh-body { width: 0; height: 0; z-index: 5; pointer-events: none; }
+    .bh-chip-btn {
+      position: absolute; left: -20px; top: -20px; width: 40px; height: 40px;
+      display: flex; align-items: center; justify-content: center;
+      background: transparent; border: none; padding: 0; margin: 0;
+      border-radius: 50%; pointer-events: auto; font: inherit;
+    }
+    .bh-chip-btn:disabled { pointer-events: none; }
     .bh-chip-name {
-      margin-left: 7px; font-size: 11px; color: var(--text-1); white-space: nowrap;
+      position: absolute; left: 14px; top: 0; transform: translateY(-50%);
+      font-size: 11px; color: var(--text-1); white-space: nowrap;
       text-shadow: var(--star-label-shadow); pointer-events: none;
       transition: opacity var(--dur-base);
     }
     @keyframes bh-rot-center { from { transform: translate(-50%,-50%) rotate(0deg); } to { transform: translate(-50%,-50%) rotate(360deg); } }
-    @keyframes bh-rot { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-    @keyframes bh-rot-rev { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
     @media (prefers-reduced-motion: reduce) {
-      .bh-disk, .bh-disk2, .bh-orbiter, .bh-chip { animation: none; }
+      .bh-disk, .bh-disk2 { animation: none; }
     }
     `}</style>
   );

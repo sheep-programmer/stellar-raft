@@ -11,8 +11,8 @@ const BLOCK_TYPES = [
   { type: 'todo', icon: 'square-check-big', label: '待办列表', hint: '[]' },
   { type: 'bulleted', icon: 'list', label: '无序列表', hint: '-' },
   { type: 'numbered', icon: 'list-ordered', label: '有序列表', hint: '1.' },
-  { type: 'toggle', icon: 'chevron-right', label: '折叠列表', hint: '>' },
-  { type: 'quote', icon: 'quote', label: '引用', hint: '"' },
+  { type: 'toggle', icon: 'chevron-right', label: '折叠列表', hint: '' },
+  { type: 'quote', icon: 'quote', label: '引用', hint: '>' },
   { type: 'callout', icon: 'info', label: '标注', hint: '' },
   { type: 'code', icon: 'code', label: '代码块', hint: '```' },
   { type: 'math', icon: 'sigma', label: '数学公式', hint: '$$' },
@@ -36,10 +36,49 @@ const BG_COLORS = [
   { id: 'bgdeep', label: '深蓝底', c: 'rgba(26,35,80,0.55)', exec: 'rgba(26,35,80,0.6)' },
 ];
 
-/* ---- generic floating panel that closes on outside click / Esc ---- */
-function Floating({ x, y, width = 240, onClose, children, anchor = 'left' }) {
+/* ---- 模态焦点管理（与 DS Modal / ReviewSession 同一套语义）----
+   进场移焦入内 · Tab 只在浮层内部回绕 · 退场把焦点还给打开它的元素。
+   swallowCmdK: 模态置顶期间吞掉 ⌘K，避免命令面板叠在设置/AI 配置之上。 */
+function useModalFocus(rootRef, opts) {
+  const { swallowCmdK = false, autoFocus = true } = opts || {};
+  React.useEffect(() => {
+    const prev = document.activeElement;
+    const root = rootRef.current;
+    if (autoFocus && root && !root.contains(document.activeElement)) {
+      const first = root.querySelector('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])');
+      if (first) first.focus(); else if (root.focus) root.focus();
+    }
+    const onKey = (e) => {
+      if (swallowCmdK && (e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K')) {
+        e.preventDefault(); e.stopPropagation(); return;
+      }
+      if (e.key !== 'Tab') return;
+      const r = rootRef.current; if (!r) return;
+      const list = Array.from(r.querySelectorAll(
+        'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      )).filter(el => el.offsetWidth || el.offsetHeight || el === document.activeElement);
+      if (!list.length) { e.preventDefault(); return; }
+      const inside = r.contains(document.activeElement);
+      const i = list.indexOf(document.activeElement);
+      if (e.shiftKey && (i <= 0 || !inside)) { e.preventDefault(); list[list.length - 1].focus(); }
+      else if (!e.shiftKey && (i === list.length - 1 || !inside)) { e.preventDefault(); list[0].focus(); }
+    };
+    window.addEventListener('keydown', onKey, true);
+    return () => {
+      window.removeEventListener('keydown', onKey, true);
+      if (prev && prev.focus && document.contains(prev)) prev.focus();
+    };
+  }, []);
+}
+
+/* ---- generic floating panel that closes on outside click / Esc ----
+   键盘可达：role=menu、↑↓/Home/End 在 [role=menuitem] 间漫游、Enter/Space 激活
+   （原生 button）、Esc 关闭并把焦点还给打开它的元素。autoFocus 为菜单（非 SlashMenu
+   的输入框场景）进场移焦到首项。reduced-motion 下不播开合动画。 */
+function Floating({ x, y, width = 240, onClose, children, anchor = 'left', autoFocus = false, role = 'menu' }) {
   const ref = React.useRef(null);
   const [pos, setPos] = React.useState({ left: x, top: y });
+  const reduce = typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
   React.useLayoutEffect(() => {
     const el = ref.current; if (!el) return;
     const r = el.getBoundingClientRect();
@@ -52,32 +91,69 @@ function Floating({ x, y, width = 240, onClose, children, anchor = 'left' }) {
     setPos({ left, top });
   }, [x, y]);
   React.useEffect(() => {
+    const prev = document.activeElement;
+    if (autoFocus && ref.current) {
+      const items = ref.current.querySelectorAll('[role="menuitem"], button:not([disabled])');
+      if (items.length) items[0].focus();
+    }
     const h = e => { if (ref.current && !ref.current.contains(e.target)) onClose(); };
-    const k = e => { if (e.key === 'Escape') onClose(); };
+    const k = e => { if (e.key === 'Escape') { e.stopPropagation(); onClose(); } };
     document.addEventListener('mousedown', h); document.addEventListener('keydown', k);
-    return () => { document.removeEventListener('mousedown', h); document.removeEventListener('keydown', k); };
+    return () => {
+      document.removeEventListener('mousedown', h); document.removeEventListener('keydown', k);
+      if (autoFocus && prev && prev.focus && document.contains(prev)) prev.focus();
+    };
   }, [onClose]);
+  const onKeyDown = (e) => {
+    if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp' && e.key !== 'Home' && e.key !== 'End') return;
+    const items = Array.from(ref.current.querySelectorAll('[role="menuitem"]')).filter(el => el.offsetParent !== null);
+    if (!items.length) return;
+    const i = items.indexOf(document.activeElement);
+    if (i < 0) return;   // 焦点不在菜单项上（如 SlashMenu 的搜索框）：交回原处理
+    e.preventDefault();
+    if (e.key === 'ArrowDown') items[(i + 1 + items.length) % items.length].focus();
+    else if (e.key === 'ArrowUp') items[(i - 1 + items.length) % items.length].focus();
+    else if (e.key === 'Home') items[0].focus();
+    else items[items.length - 1].focus();
+  };
   // 菜单内部的 mousedown 不冒泡到 document——否则父菜单/兄弟子菜单的
   // "点击外部关闭"会抢在 click 之前卸载整棵菜单，导致子菜单项点了没反应
   return (
-    <div ref={ref} onMouseDown={(e) => e.stopPropagation()} style={{ position: 'fixed', left: pos.left, top: pos.top, zIndex: 95, width }}>
+    <div ref={ref} role={role} onMouseDown={(e) => e.stopPropagation()} onKeyDown={onKeyDown}
+      style={{ position: 'fixed', left: pos.left, top: pos.top, zIndex: 'var(--z-menu)', width, animation: reduce ? 'none' : 'sr-cardin var(--dur-fast) var(--ease-flight) both' }}>
       <SRGlass strong radius="md" pad="none" glow style={{ padding: 6 }}>{children}</SRGlass>
     </div>
   );
 }
 
-function Row({ icon, label, hint, chevron, danger, tone, active, onClick, onMouseEnter }) {
+function Row({ icon, label, hint, chevron, danger, tone, active, onClick, onMouseEnter, onFocus }) {
   const [h, setH] = React.useState(false);
-  const color = danger ? 'var(--danger)' : tone === 'gold' ? 'var(--gold)' : (h || active) ? 'var(--text-1)' : 'var(--text-2)';
+  const on = h || active;
+  const color = danger ? 'var(--danger)' : tone === 'gold' ? 'var(--gold)' : on ? 'var(--text-1)' : 'var(--text-2)';
   return (
-    <div onClick={onClick} onMouseEnter={(e) => { setH(true); onMouseEnter && onMouseEnter(e); }} onMouseLeave={() => setH(false)}
-      style={{ display: 'flex', alignItems: 'center', gap: 11, padding: '7px 9px', borderRadius: 'var(--r-sm)', cursor: 'pointer',
-        background: (h || active) ? (danger ? 'rgba(232,145,122,0.12)' : 'rgba(159,198,255,0.08)') : 'transparent', color }}>
+    <button type="button" role="menuitem" tabIndex={-1} className="sr-focus-ring" onClick={onClick}
+      onMouseEnter={(e) => { setH(true); onMouseEnter && onMouseEnter(e); }} onMouseLeave={() => setH(false)}
+      onFocus={(e) => { setH(true); onFocus && onFocus(e); }} onBlur={() => setH(false)}
+      style={{ width: '100%', textAlign: 'left', font: 'inherit', display: 'flex', alignItems: 'center', gap: 11, padding: '9px 9px', minHeight: 40, boxSizing: 'border-box', borderRadius: 'var(--r-sm)', cursor: 'pointer', border: 'none',
+        background: on ? (danger ? 'color-mix(in srgb, var(--danger) 12%, transparent)' : 'color-mix(in srgb, var(--star-blue) 9%, transparent)') : 'transparent', color }}>
       {icon && <SRIcon name={icon} size={16} color="currentColor" />}
-      <span style={{ flex: 1, fontSize: 13, color: danger ? 'var(--danger)' : (h || active) ? 'var(--text-1)' : 'var(--text-2)' }}>{label}</span>
+      <span style={{ flex: 1, fontSize: 13, color: danger ? 'var(--danger)' : on ? 'var(--text-1)' : 'var(--text-2)' }}>{label}</span>
       {hint && <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-3)' }}>{hint}</span>}
       {chevron && <SRIcon name="chevron-right" size={14} color="var(--text-3)" />}
-    </div>
+    </button>
+  );
+}
+// 「移动到星域」行：保留星域彩点（承载颜色信息），键盘可达
+function MoveRow({ color, name, onClick }) {
+  const [h, setH] = React.useState(false);
+  return (
+    <button type="button" role="menuitem" tabIndex={-1} className="sr-focus-ring" onClick={onClick}
+      onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)} onFocus={() => setH(true)} onBlur={() => setH(false)}
+      style={{ width: '100%', textAlign: 'left', font: 'inherit', display: 'flex', alignItems: 'center', gap: 10, padding: '9px 9px', minHeight: 40, boxSizing: 'border-box', borderRadius: 'var(--r-sm)', cursor: 'pointer', border: 'none',
+        background: h ? 'color-mix(in srgb, var(--star-blue) 9%, transparent)' : 'transparent' }}>
+      <span style={{ width: 8, height: 8, borderRadius: '50%', flex: 'none', background: color, boxShadow: `0 0 7px ${color}` }} />
+      <span style={{ fontSize: 13, color: 'var(--text-2)' }}>{name}</span>
+    </button>
   );
 }
 function Label({ children }) {
@@ -132,16 +208,19 @@ function SelectionToolbar({ x, y, onFormat, onLink, onColor }) {
     { n: 'underline', t: '下划线 ⌘U', cmd: 'underline' },
     { n: 'strikethrough', t: '删除线', cmd: 'strikeThrough' },
     { n: 'code', t: '行内代码', cmd: 'inlineCode' },
-    { n: 'highlighter', t: '高亮', cmd: 'hiliteColor', val: 'rgba(255,217,138,0.24)' },
+    { n: 'highlighter', t: '高亮', cmd: 'hiliteColor', val: 'color-mix(in srgb, var(--gold) 24%, transparent)' },
     { n: 'link', t: '链接 ⌘K', link: true },
   ];
   // preventDefault on mousedown anywhere in the bar keeps the text selection alive through the click.
+  const reduce = typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
   return (
-    <div onMouseDown={(e) => e.preventDefault()} style={{ position: 'fixed', left: x, top: y, zIndex: 95, transform: 'translate(-50%,-100%)' }}>
-      <SRGlass strong radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', gap: 1, padding: '5px 7px' }}>
-        <div onClick={onColor} style={{ display: 'flex', alignItems: 'center', gap: 4, padding: '0 8px', height: 30, cursor: 'pointer', color: 'var(--text-2)', fontSize: 12.5 }}>
+    <div role="toolbar" aria-label="文字格式" onMouseDown={(e) => e.preventDefault()} style={{ position: 'fixed', left: x, top: y, zIndex: 'var(--z-menu)', transform: 'translate(-50%,-100%)' }}>
+      {/* 开合动画与菜单同一口径：--ease-flight · 控件级 160ms（reduced-motion 直达） */}
+      <SRGlass strong radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', gap: 1, padding: '5px 7px', animation: reduce ? 'none' : 'sr-cardin var(--dur-fast) var(--ease-flight) both' }}>
+        <button type="button" className="sr-focus-ring sr-hit40" onClick={onColor} title="文字颜色"
+          style={{ display: 'flex', alignItems: 'center', gap: 4, padding: '0 8px', height: 30, cursor: 'pointer', color: 'var(--text-2)', fontSize: 12.5, background: 'transparent', border: 'none', borderRadius: 'var(--r-sm)', position: 'relative' }}>
           A<SRIcon name="chevron-down" size={13} color="var(--text-3)" />
-        </div>
+        </button>
         <span style={{ width: 1, height: 18, background: 'var(--line)' }} />
         {tools.map(t => (
           <SRIconBtn key={t.n} name={t.n} size="sm" title={t.t} active={!!active[t.n]}
@@ -154,19 +233,20 @@ function SelectionToolbar({ x, y, onFormat, onLink, onColor }) {
 
 /* ---- Color submenu (text + background) ----
    onPick receives {kind, id, exec, ...}: block-coloring uses id, selection-coloring uses exec. */
-function ColorMenu({ x, y, onClose, onPick }) {
+function ColorMenu({ x, y, onClose, onPick, autoFocus = false }) {
   const swatch = (c, kind) => (
-    <div key={c.id} onMouseDown={(e) => e.preventDefault()} onClick={() => onPick({ kind, ...c })}
-      style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '6px 9px', borderRadius: 'var(--r-sm)', cursor: 'pointer' }}
-      onMouseEnter={e => e.currentTarget.style.background = 'rgba(159,198,255,0.08)'} onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
+    <button type="button" role="menuitem" tabIndex={-1} key={kind + c.id} className="sr-focus-ring" onMouseDown={(e) => e.preventDefault()} onClick={() => onPick({ kind, ...c })}
+      style={{ width: '100%', textAlign: 'left', font: 'inherit', border: 'none', background: 'transparent', display: 'flex', alignItems: 'center', gap: 10, padding: '8px 9px', minHeight: 40, boxSizing: 'border-box', borderRadius: 'var(--r-sm)', cursor: 'pointer' }}
+      onMouseEnter={e => e.currentTarget.style.background = 'color-mix(in srgb, var(--star-blue) 9%, transparent)'} onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+      onFocus={e => e.currentTarget.style.background = 'color-mix(in srgb, var(--star-blue) 9%, transparent)'} onBlur={e => e.currentTarget.style.background = 'transparent'}>
       {kind === 'text'
         ? <span style={{ width: 18, height: 18, borderRadius: 5, border: '1px solid var(--line-strong)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: c.c, fontSize: 12, fontWeight: 600 }}>A</span>
         : <span style={{ width: 18, height: 18, borderRadius: 5, background: c.c, border: '1px solid ' + (c.ring || 'var(--line)') }} />}
       <span style={{ fontSize: 13, color: 'var(--text-2)' }}>{c.label}</span>
-    </div>
+    </button>
   );
   return (
-    <Floating x={x} y={y} width={200} onClose={onClose}>
+    <Floating x={x} y={y} width={200} onClose={onClose} autoFocus={autoFocus}>
       <Label>文字颜色</Label>
       {TEXT_COLORS.map(c => swatch(c, 'text'))}
       <Divider />
@@ -180,30 +260,28 @@ function ColorMenu({ x, y, onClose, onPick }) {
 function ContextMenu({ x, y, onClose, onAction, constellations }) {
   const [sub, setSub] = React.useState(null); // 'turn' | 'color' | 'move'
   const [subPos, setSubPos] = React.useState({ x: 0, y: 0 });
-  const openSub = (name, e) => { const r = e.currentTarget.getBoundingClientRect(); setSubPos({ x: r.right + 4, y: r.top - 6 }); setSub(name); };
+  const [subAuto, setSubAuto] = React.useState(false);
+  const openSub = (name, e, auto) => { const r = e.currentTarget.getBoundingClientRect(); setSubPos({ x: r.right + 4, y: r.top - 6 }); setSub(name); setSubAuto(!!auto); };
 
   return (
     <React.Fragment>
-      <Floating x={x} y={y} width={238} onClose={onClose}>
-        <Row icon="sparkles" label="询问 AI" tone="gold" onClick={() => onAction('ai')} />
-        <Divider />
-        <Row icon="refresh-cw" label="转换为" chevron onMouseEnter={(e) => openSub('turn', e)} />
-        <Row icon="copy" label="复制为副本" hint="⌘D" onClick={() => onAction('duplicate')} />
+      <Floating x={x} y={y} width={238} onClose={onClose} autoFocus>
+        <Row icon="refresh-cw" label="转换为" chevron onMouseEnter={(e) => openSub('turn', e)} onFocus={(e) => openSub('turn', e)} onClick={(e) => openSub('turn', e, true)} />
+        <Row icon="copy" label="复制为副本" onClick={() => onAction('duplicate')} />
         <Row icon="link" label="复制块链接" onClick={() => onAction('copyLink')} />
-        <Row icon="corner-up-right" label="移动到星座" chevron onMouseEnter={(e) => openSub('move', e)} />
+        <Row icon="corner-up-right" label="移动到星域" chevron onMouseEnter={(e) => openSub('move', e)} onFocus={(e) => openSub('move', e)} onClick={(e) => openSub('move', e, true)} />
         <Divider />
-        <Row icon="palette" label="颜色" chevron onMouseEnter={(e) => openSub('color', e)} />
-        <Row icon="message-square-text" label="评论" hint="⌘⇧M" onClick={() => onAction('comment')} />
+        <Row icon="palette" label="颜色" chevron onMouseEnter={(e) => openSub('color', e)} onFocus={(e) => openSub('color', e)} onClick={(e) => openSub('color', e, true)} />
         <Row icon="bookmark" label="加入复习队列" onClick={() => onAction('review')} />
         <Divider />
-        <Row icon="trash-2" label="删除" hint="Del" danger onClick={() => onAction('delete')} />
+        <Row icon="trash-2" label="删除" danger onClick={() => onAction('delete')} />
         <div style={{ padding: '7px 11px 4px', borderTop: '1px solid var(--line)', marginTop: 4 }}>
           <div style={{ fontSize: 11, color: 'var(--text-3)' }}>{(window.SR_DATA.account || {}).name || '我'} 编辑</div>
         </div>
       </Floating>
 
       {sub === 'turn' && (
-        <Floating x={subPos.x} y={subPos.y} width={208} onClose={() => setSub(null)}>
+        <Floating x={subPos.x} y={subPos.y} width={208} onClose={() => setSub(null)} autoFocus={subAuto}>
           <Label>转换为</Label>
           <div style={{ maxHeight: 300, overflow: 'auto' }}>
             {BLOCK_TYPES.filter(b => b.type !== 'divider' && b.type !== 'image').map(b => (
@@ -213,19 +291,15 @@ function ContextMenu({ x, y, onClose, onAction, constellations }) {
         </Floating>
       )}
       {sub === 'move' && (
-        <Floating x={subPos.x} y={subPos.y} width={190} onClose={() => setSub(null)}>
-          <Label>移动到星座</Label>
+        <Floating x={subPos.x} y={subPos.y} width={190} onClose={() => setSub(null)} autoFocus={subAuto}>
+          <Label>移动到星域</Label>
           {constellations.map(c => (
-            <div key={c.id} onClick={() => { onAction('move', c.id); onClose(); }} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '7px 9px', borderRadius: 'var(--r-sm)', cursor: 'pointer' }}
-              onMouseEnter={e => e.currentTarget.style.background = 'rgba(159,198,255,0.08)'} onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
-              <span style={{ width: 8, height: 8, borderRadius: '50%', background: c.color, boxShadow: `0 0 7px ${c.color}` }} />
-              <span style={{ fontSize: 13, color: 'var(--text-2)' }}>{c.name}</span>
-            </div>
+            <MoveRow key={c.id} color={c.color} name={c.name} onClick={() => { onAction('move', c.id); onClose(); }} />
           ))}
         </Floating>
       )}
       {sub === 'color' && (
-        <ColorMenu x={subPos.x} y={subPos.y} onClose={() => setSub(null)} onPick={(c) => { onAction('color', c); onClose(); }} />
+        <ColorMenu x={subPos.x} y={subPos.y} onClose={() => setSub(null)} autoFocus={subAuto} onPick={(c) => { onAction('color', c); onClose(); }} />
       )}
     </React.Fragment>
   );
@@ -233,18 +307,21 @@ function ContextMenu({ x, y, onClose, onAction, constellations }) {
 
 /* in-app confirm dialog (no browser confirm/alert) */
 function ConfirmDialog({ message, confirmLabel, onYes, onClose }) {
-  React.useEffect(() => { const k = (e) => { if (e.key === 'Escape') onClose(); }; document.addEventListener('keydown', k); return () => document.removeEventListener('keydown', k); }, []);
+  const ref = React.useRef(null);
+  useModalFocus(ref, { swallowCmdK: true });
+  const reduce = typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  React.useEffect(() => { const k = (e) => { if (e.key === 'Escape') onClose(); else if (e.key === 'Enter') { e.preventDefault(); onYes(); } }; document.addEventListener('keydown', k); return () => document.removeEventListener('keydown', k); }, []);
   return (
-    <div onMouseDown={onClose} onContextMenu={(e) => e.preventDefault()} style={{ position: 'fixed', inset: 0, zIndex: 120, background: 'rgba(3,4,12,0.55)', backdropFilter: 'blur(3px)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <div onMouseDown={(e) => e.stopPropagation()} style={{ width: 348, maxWidth: '90vw', animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
+    <div onMouseDown={onClose} onContextMenu={(e) => e.preventDefault()} style={{ position: 'fixed', inset: 0, zIndex: 'var(--z-modal)', background: 'rgba(3,4,12,0.55)', backdropFilter: 'blur(3px)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <div ref={ref} onMouseDown={(e) => e.stopPropagation()} style={{ width: 348, maxWidth: '90vw', animation: reduce ? 'none' : 'sr-cardin var(--dur-fast) var(--ease-flight) both' }}>
         <SRGlass strong radius="lg" pad="md" glow>
           <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12, marginBottom: 18 }}>
-            <span style={{ flex: 'none', width: 34, height: 34, borderRadius: '50%', background: 'rgba(232,145,122,0.14)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><SRIcon name="alert-triangle" size={18} color="var(--danger)" /></span>
+            <span style={{ flex: 'none', width: 34, height: 34, borderRadius: '50%', background: 'color-mix(in srgb, var(--danger) 14%, transparent)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><SRIcon name="alert-triangle" size={18} color="var(--danger)" /></span>
             <div style={{ fontSize: 14, lineHeight: 1.65, color: 'var(--text-1)', paddingTop: 5 }}>{message}</div>
           </div>
           <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end' }}>
-            <button type="button" onClick={onClose} style={{ height: 32, padding: '0 16px', borderRadius: 'var(--r-pill)', border: '1px solid var(--glass-border-strong)', background: 'transparent', color: 'var(--text-2)', fontSize: 13, cursor: 'pointer', fontFamily: 'var(--font-sans)' }}>取消</button>
-            <button type="button" onClick={onYes} style={{ height: 32, padding: '0 16px', borderRadius: 'var(--r-pill)', border: '1px solid rgba(232,145,122,0.5)', background: 'rgba(232,145,122,0.16)', color: 'var(--danger)', fontSize: 13, cursor: 'pointer', fontFamily: 'var(--font-sans)' }}>{confirmLabel || '删除'}</button>
+            <button type="button" className="sr-focus-ring" onClick={onClose} style={{ height: 34, padding: '0 16px', borderRadius: 'var(--r-pill)', border: '1px solid var(--glass-border-strong)', background: 'transparent', color: 'var(--text-2)', fontSize: 13, cursor: 'pointer', fontFamily: 'var(--font-sans)' }}>取消</button>
+            <button type="button" className="sr-focus-ring" onClick={onYes} style={{ height: 34, padding: '0 16px', borderRadius: 'var(--r-pill)', border: '1px solid color-mix(in srgb, var(--danger) 50%, transparent)', background: 'color-mix(in srgb, var(--danger) 16%, transparent)', color: 'var(--danger)', fontSize: 13, cursor: 'pointer', fontFamily: 'var(--font-sans)' }}>{confirmLabel || '删除'}</button>
           </div>
         </SRGlass>
       </div>
@@ -255,19 +332,26 @@ function ConfirmDialog({ message, confirmLabel, onYes, onClose }) {
 /* in-app link input (replaces window.prompt) */
 function LinkDialog({ initial, onSubmit, onClose }) {
   const [v, setV] = React.useState(initial || 'https://');
+  const ref = React.useRef(null);
+  useModalFocus(ref, { swallowCmdK: true });
+  const reduce = typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const SANI = window.SRSanitize;
+  const u = v.trim();
+  const bad = u && SANI && SANI.safeUrl(u) == null;   // 协议非法：即时提示，禁用「添加」
   React.useEffect(() => { const k = (e) => { if (e.key === 'Escape') onClose(); }; document.addEventListener('keydown', k); return () => document.removeEventListener('keydown', k); }, []);
-  const submit = () => { const u = v.trim(); if (u) onSubmit(u); else onClose(); };
+  const submit = () => { if (!u) { onClose(); return; } if (bad) return; onSubmit(u); };
   return (
-    <div onMouseDown={onClose} onContextMenu={(e) => e.preventDefault()} style={{ position: 'fixed', inset: 0, zIndex: 120, background: 'rgba(3,4,12,0.5)', backdropFilter: 'blur(3px)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <div onMouseDown={(e) => e.stopPropagation()} style={{ width: 380, maxWidth: '92vw', animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
+    <div onMouseDown={onClose} onContextMenu={(e) => e.preventDefault()} style={{ position: 'fixed', inset: 0, zIndex: 'var(--z-modal)', background: 'rgba(3,4,12,0.5)', backdropFilter: 'blur(3px)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <div ref={ref} onMouseDown={(e) => e.stopPropagation()} style={{ width: 380, maxWidth: '92vw', animation: reduce ? 'none' : 'sr-cardin var(--dur-fast) var(--ease-flight) both' }}>
         <SRGlass strong radius="lg" pad="md" glow>
           <div style={{ display: 'flex', alignItems: 'center', gap: 9, marginBottom: 12, fontSize: 13.5, color: 'var(--text-1)' }}><SRIcon name="link" size={16} color="var(--star-blue)" />添加链接</div>
           <input autoFocus value={v} onChange={(e) => setV(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); submit(); } }}
             placeholder="https://…"
-            style={{ width: '100%', boxSizing: 'border-box', background: 'var(--input-bg, rgba(3,4,12,0.45))', border: '1px solid var(--glass-border-strong)', borderRadius: 'var(--r-sm)', color: 'var(--text-1)', fontSize: 14, padding: '9px 11px', outline: 'none', fontFamily: 'var(--font-sans)' }} />
+            style={{ width: '100%', boxSizing: 'border-box', background: 'var(--input-bg, rgba(3,4,12,0.45))', border: '1px solid ' + (bad ? 'color-mix(in srgb, var(--danger) 55%, transparent)' : 'var(--glass-border-strong)'), borderRadius: 'var(--r-sm)', color: 'var(--text-1)', fontSize: 14, padding: '9px 11px', outline: 'none', fontFamily: 'var(--font-sans)' }} />
+          {bad && <div style={{ marginTop: 8, fontSize: 12, color: 'var(--danger)' }}>不支持该协议 · 仅允许 http/https/mailto 或相对链接</div>}
           <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end', marginTop: 14 }}>
-            <button type="button" onClick={onClose} style={{ height: 32, padding: '0 16px', borderRadius: 'var(--r-pill)', border: '1px solid var(--glass-border-strong)', background: 'transparent', color: 'var(--text-2)', fontSize: 13, cursor: 'pointer', fontFamily: 'var(--font-sans)' }}>取消</button>
-            <button type="button" onClick={submit} style={{ height: 32, padding: '0 16px', borderRadius: 'var(--r-pill)', border: '1px solid var(--glass-border-strong)', background: 'rgba(159,198,255,0.14)', color: 'var(--text-1)', fontSize: 13, cursor: 'pointer', fontFamily: 'var(--font-sans)' }}>添加</button>
+            <button type="button" className="sr-focus-ring" onClick={onClose} style={{ height: 34, padding: '0 16px', borderRadius: 'var(--r-pill)', border: '1px solid var(--glass-border-strong)', background: 'transparent', color: 'var(--text-2)', fontSize: 13, cursor: 'pointer', fontFamily: 'var(--font-sans)' }}>取消</button>
+            <button type="button" className="sr-focus-ring" onClick={submit} disabled={bad} style={{ height: 34, padding: '0 16px', borderRadius: 'var(--r-pill)', border: '1px solid var(--glass-border-strong)', background: 'rgba(159,198,255,0.14)', color: 'var(--text-1)', fontSize: 13, cursor: bad ? 'not-allowed' : 'pointer', opacity: bad ? 0.5 : 1, fontFamily: 'var(--font-sans)' }}>添加</button>
           </div>
         </SRGlass>
       </div>
@@ -279,29 +363,27 @@ function LinkDialog({ initial, onSubmit, onClose }) {
 function EditorMoreMenu({ x, y, fav, constellations, onAction, onClose }) {
   const [sub, setSub] = React.useState(null);
   const [subPos, setSubPos] = React.useState({ x: 0, y: 0 });
-  const openSub = (name, e) => { const r = e.currentTarget.getBoundingClientRect(); setSubPos({ x: r.left - 4, y: r.top - 6 }); setSub(name); };
+  const [subAuto, setSubAuto] = React.useState(false);
+  const openSub = (name, e, auto) => { const r = e.currentTarget.getBoundingClientRect(); setSubPos({ x: r.left - 4, y: r.top - 6 }); setSub(name); setSubAuto(!!auto); };
   return (
     <React.Fragment>
-      <Floating x={x} y={y} width={236} anchor="right" onClose={onClose}>
+      <Floating x={x} y={y} width={236} anchor="right" onClose={onClose} autoFocus>
         <Row icon="star" tone={fav ? 'gold' : undefined} active={fav} label={fav ? '取消收藏' : '收藏这颗星'} onClick={() => onAction('fav')} />
         <Divider />
-        <Row icon="copy" label="复制为副本" onClick={() => onAction('dup')} />
+        <Row icon="copy" label="创建星的副本" onClick={() => onAction('dup')} />
         <Row icon="link" label="复制星链接" onClick={() => onAction('copyLink')} />
         <Row icon="file-down" label="导出 Markdown" onClick={() => onAction('export')} />
-        <Row icon="corner-up-right" label="移动到星座" chevron onMouseEnter={(e) => openSub('move', e)} />
+        <Row icon="file-up" label="导入 Markdown" onClick={() => onAction('import')} />
+        <Row icon="corner-up-right" label="移动到星域" chevron onMouseEnter={(e) => openSub('move', e)} onFocus={(e) => openSub('move', e)} onClick={(e) => openSub('move', e, true)} />
         <Row icon="history" label="查看历史" onClick={() => onAction('history')} />
         <Divider />
         <Row icon="trash-2" label="删除这颗星" danger onClick={() => onAction('delete')} />
       </Floating>
       {sub === 'move' && (
-        <Floating x={subPos.x} y={subPos.y} width={190} anchor="right" onClose={() => setSub(null)}>
-          <Label>移动到星座</Label>
+        <Floating x={subPos.x} y={subPos.y} width={190} anchor="right" onClose={() => setSub(null)} autoFocus={subAuto}>
+          <Label>移动到星域</Label>
           {constellations.map(c => (
-            <div key={c.id} onClick={() => { onAction('move', c.id); onClose(); }} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '7px 9px', borderRadius: 'var(--r-sm)', cursor: 'pointer' }}
-              onMouseEnter={e => e.currentTarget.style.background = 'rgba(159,198,255,0.08)'} onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
-              <span style={{ width: 8, height: 8, borderRadius: '50%', background: c.color, boxShadow: `0 0 7px ${c.color}` }} />
-              <span style={{ fontSize: 13, color: 'var(--text-2)' }}>{c.name}</span>
-            </div>
+            <MoveRow key={c.id} color={c.color} name={c.name} onClick={() => { onAction('move', c.id); onClose(); }} />
           ))}
         </Floating>
       )}
@@ -311,6 +393,9 @@ function EditorMoreMenu({ x, y, fav, constellations, onAction, onClose }) {
 
 /* ---- Version history (mock) — self-drawn GlassPanel dialog, no browser modal ---- */
 function HistoryDialog({ star, onClose, onFlash }) {
+  const ref = React.useRef(null);
+  useModalFocus(ref, { swallowCmdK: true });
+  const reduce = typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
   React.useEffect(() => { const k = (e) => { if (e.key === 'Escape') onClose(); }; document.addEventListener('keydown', k); return () => document.removeEventListener('keydown', k); }, []);
   const versions = [
     { when: '刚刚', who: '你', note: '编辑了公式块与正文', cur: true },
@@ -320,15 +405,15 @@ function HistoryDialog({ star, onClose, onFlash }) {
     { when: '6 月 18 日', who: '你', note: '创建这颗星', first: true },
   ];
   return (
-    <div onMouseDown={onClose} onContextMenu={(e) => e.preventDefault()} style={{ position: 'fixed', inset: 0, zIndex: 120, background: 'rgba(3,4,12,0.55)', backdropFilter: 'blur(3px)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <div onMouseDown={(e) => e.stopPropagation()} style={{ width: 432, maxWidth: '92vw', animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
+    <div onMouseDown={onClose} onContextMenu={(e) => e.preventDefault()} style={{ position: 'fixed', inset: 0, zIndex: 'var(--z-modal)', background: 'rgba(3,4,12,0.55)', backdropFilter: 'blur(3px)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <div ref={ref} onMouseDown={(e) => e.stopPropagation()} style={{ width: 432, maxWidth: '92vw', animation: reduce ? 'none' : 'sr-cardin var(--dur-fast) var(--ease-flight) both' }}>
         <SRGlass strong radius="lg" pad="md" glow>
           <div style={{ display: 'flex', alignItems: 'center', gap: 9, marginBottom: 4 }}>
             <SRIcon name="history" size={17} color="var(--star-blue)" />
             <span style={{ fontSize: 14.5, color: 'var(--text-1)' }}>版本历史</span>
             <span style={{ fontSize: 11.5, color: 'var(--text-3)' }}>· {star.label}</span>
             <span style={{ flex: 1 }} />
-            <button type="button" onClick={onClose} style={{ width: 26, height: 26, display: 'flex', alignItems: 'center', justifyContent: 'center', border: 'none', background: 'transparent', cursor: 'pointer', color: 'var(--text-3)' }}><SRIcon name="x" size={16} color="currentColor" /></button>
+            <button type="button" className="sr-focus-ring sr-hit40" onClick={onClose} style={{ width: 26, height: 26, position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', border: 'none', background: 'transparent', cursor: 'pointer', color: 'var(--text-3)' }}><SRIcon name="x" size={16} color="currentColor" /></button>
           </div>
           <div style={{ fontSize: 11, color: 'var(--text-3)', marginBottom: 12, fontFamily: 'var(--font-mono)' }}>记录最近的编辑快照</div>
           <div style={{ maxHeight: 320, overflow: 'auto', display: 'flex', flexDirection: 'column' }}>
@@ -349,7 +434,7 @@ function HistoryDialog({ star, onClose, onFlash }) {
                 {!v.cur && (
                   <button type="button" onClick={() => { onFlash && onFlash('已恢复到该版本'); onClose(); }}
                     style={{ flex: 'none', alignSelf: 'center', height: 26, padding: '0 12px', borderRadius: 'var(--r-pill)', border: '1px solid var(--glass-border-strong)', background: 'transparent', color: 'var(--text-2)', fontSize: 12, cursor: 'pointer', fontFamily: 'var(--font-sans)' }}
-                    onMouseEnter={e => e.currentTarget.style.background = 'rgba(159,198,255,0.08)'} onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>恢复</button>
+                    onMouseEnter={e => e.currentTarget.style.background = 'color-mix(in srgb, var(--star-blue) 9%, transparent)'} onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>恢复</button>
                 )}
               </div>
             ))}
@@ -360,4 +445,4 @@ function HistoryDialog({ star, onClose, onFlash }) {
   );
 }
 
-window.SRKit = Object.assign(window.SRKit || {}, { SlashMenu, SelectionToolbar, ContextMenu, ColorMenu, ConfirmDialog, LinkDialog, EditorMoreMenu, HistoryDialog, BLOCK_TYPES, TEXT_COLORS, BG_COLORS });
+window.SRKit = Object.assign(window.SRKit || {}, { SlashMenu, SelectionToolbar, ContextMenu, ColorMenu, ConfirmDialog, LinkDialog, EditorMoreMenu, HistoryDialog, useModalFocus, BLOCK_TYPES, TEXT_COLORS, BG_COLORS });

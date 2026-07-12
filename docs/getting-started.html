@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>开始使用 · 星图设计系统</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26'%3E%3Crect x='.5' y='.5' width='25' height='25' rx='7.5' fill='%23080c1c' stroke='rgba(159,198,255,.28)'/%3E%3Cpath d='M7.5 9 L16.5 7 L19 16.5 L11 18.5' stroke='rgba(159,198,255,.5)' stroke-width='.8' fill='none' stroke-linejoin='round' stroke-linecap='round'/%3E%3Ccircle cx='7.5' cy='9' r='1.35' fill='%23d6e6ff'/%3E%3Ccircle cx='19' cy='16.5' r='1.15' fill='%239fc6ff'/%3E%3Ccircle cx='11' cy='18.5' r='1.1' fill='%239fc6ff'/%3E%3Ccircle cx='16.5' cy='7' r='3.4' fill='%23ffd98a' opacity='.22'/%3E%3Ccircle cx='16.5' cy='7' r='1.8' fill='%23ffe9b0'/%3E%3C/svg%3E">
+  <script>try{var m=location.search.match(/[?&]theme=(dawn|space)/);var t=m?m[1]:localStorage.getItem('sr.docs.theme');if(t==='dawn')document.documentElement.dataset.theme='dawn';if(m)localStorage.setItem('sr.docs.theme',m[1])}catch(e){}</script>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+  <sr-starfield class="docs-sky" style="position:fixed" density="0.5"></sr-starfield>
+
+  <header class="docs-header">
+    <div class="docs-header-inner">
+      <a class="docs-brand" href="index.html"><span class="zh">星图</span><span class="en">Stellar Raft</span></a>
+      <nav class="docs-nav" aria-label="文档导航">
+        <a href="index.html">首页</a>
+        <a href="getting-started.html" aria-current="page">开始使用</a>
+        <a href="foundations.html">基础</a>
+        <a href="components.html">组件</a>
+        <a href="showcase.html">应用复刻</a>
+      </nav>
+      <button class="theme-toggle" type="button" title="切换 深空 / 黎明" aria-label="切换 深空 / 黎明 主题">
+        <i data-lucide="sunrise" class="ic-space"></i>
+        <i data-lucide="moon-star" class="ic-dawn"></i>
+      </button>
+    </div>
+  </header>
+
+  <main class="docs-main">
+    <div class="hud-label">GETTING STARTED</div>
+    <h1 class="docs-h1">开始使用</h1>
+    <p class="docs-lede">整套系统是纯静态资源：一个样式入口、一份编译好的组件 bundle、一段星场脚本。不需要构建工具，把仓库放上任何静态服务器（或直接 <code>node server/server.js</code>）就能用。</p>
+
+    <section class="docs-section" style="margin-top:var(--s-10)">
+      <div class="hud-label">STEP 1 · TOKENS</div>
+      <h2>链接唯一的样式入口</h2>
+      <p class="desc">消费者只链 <code>styles.css</code> 这一个文件。它 <code>@import</code> 全部 <code>tokens/</code>（字体、色彩、字号、间距、效果、主题），同时带来 <code>.sr-glass</code> 等工具类与所有 <code>@keyframes</code>。此后一切样式都写 <code>var(--token)</code>，不要硬编码新颜色。</p>
+      <div class="codeblock">
+        <div class="cb-head">index.html</div>
+        <pre><span class="c-cm">&lt;!-- 相对路径按你的页面位置调整；本文档站在 docs/ 下，故为 ../ --&gt;</span>
+<span class="c-tag">&lt;link</span> rel=<span class="c-str">"stylesheet"</span> href=<span class="c-str">"../styles.css"</span><span class="c-tag">&gt;</span>
+
+<span class="c-cm">&lt;!-- 深空舞台：背景永远不是纯平色 --&gt;</span>
+<span class="c-tag">&lt;body</span> style=<span class="c-str">"background: var(--bg-deepspace); color: var(--text-1); font-family: var(--font-sans)"</span><span class="c-tag">&gt;</span></pre>
+      </div>
+    </section>
+
+    <section class="docs-section">
+      <div class="hud-label">STEP 2 · STARFIELD</div>
+      <h2>铺上活的星场</h2>
+      <p class="desc">引入 <code>assets/starfield.js</code> 后即可使用自注册的 <code>&lt;sr-starfield&gt;</code> 元素：三层视差星层、恒星温度配色、衍射亮星、银河薄雾与偶发流星——全部感知 <code>prefers-reduced-motion</code>，并在黎明主题下自动收敛。同文件还导出 <code>window.SRConnect()</code>，生成有机连接曲线（连接永远是曲线，不是直线箭头）。</p>
+      <div class="codeblock">
+        <div class="cb-head">starfield + 有机连接</div>
+        <pre><span class="c-tag">&lt;script</span> src=<span class="c-str">"../assets/starfield.js"</span><span class="c-tag">&gt;&lt;/script&gt;</span>
+
+<span class="c-cm">&lt;!-- 定好位（absolute/fixed），星场自己铺满 --&gt;</span>
+<span class="c-tag">&lt;sr-starfield</span> density=<span class="c-str">"1"</span> warm=<span class="c-str">"0.12"</span><span class="c-tag">&gt;&lt;/sr-starfield&gt;</span>
+
+<span class="c-cm">// SVG path d：两星之间的有机弧线（bow 为弯曲量）</span>
+const d = window.SRConnect(x1, y1, x2, y2, bow);</pre>
+      </div>
+    </section>
+
+    <section class="docs-section">
+      <div class="hud-label">STEP 3 · COMPONENTS</div>
+      <h2>加载组件 bundle 与命名空间</h2>
+      <p class="desc">组件编译在 <code>_ds_bundle.js</code>，挂载于全局命名空间 <code>window.StellarRaftDesignSystem_2866af</code>。运行时依赖 React 18 UMD；静态页写 JSX 可加 Babel Standalone（生产环境请预编译）。</p>
+      <div class="codeblock">
+        <div class="cb-head">依赖顺序：React → Babel → Lucide → bundle</div>
+        <pre><span class="c-tag">&lt;script</span> src=<span class="c-str">"https://unpkg.com/react@18.3.1/umd/react.production.min.js"</span><span class="c-tag">&gt;&lt;/script&gt;</span>
+<span class="c-tag">&lt;script</span> src=<span class="c-str">"https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"</span><span class="c-tag">&gt;&lt;/script&gt;</span>
+<span class="c-tag">&lt;script</span> src=<span class="c-str">"https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"</span><span class="c-tag">&gt;&lt;/script&gt;</span>
+<span class="c-tag">&lt;script</span> src=<span class="c-str">"https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"</span><span class="c-tag">&gt;&lt;/script&gt;</span>
+<span class="c-tag">&lt;script</span> src=<span class="c-str">"../_ds_bundle.js"</span><span class="c-tag">&gt;&lt;/script&gt;</span></pre>
+      </div>
+      <div class="codeblock">
+        <div class="cb-head">app.jsx · 从命名空间解构</div>
+        <pre><span class="c-tag">&lt;script</span> type=<span class="c-str">"text/babel"</span><span class="c-tag">&gt;</span>
+const {
+  GlassPanel, Button, IconButton, Icon, Input, Tag, Badge,
+  StarNode, MemoryBar, ConstellationItem,
+  Modal, Toast, toast, Tooltip, ContextMenu,
+  Select, Switch, Checkbox, Tabs,
+} = window.StellarRaftDesignSystem_2866af;
+
+function App() {
+  return (
+    &lt;GlassPanel pad=<span class="c-str">"lg"</span> radius=<span class="c-str">"xl"</span>&gt;
+      &lt;MemoryBar value={0.86} label=<span class="c-str">"记忆强度"</span> showPct /&gt;
+      &lt;Button variant=<span class="c-str">"primary"</span> icon=<span class="c-str">"zap"</span> glow&gt;点亮这颗星&lt;/Button&gt;
+    &lt;/GlassPanel&gt;
+  );
+}
+ReactDOM.createRoot(document.getElementById(<span class="c-str">'root'</span>)).render(&lt;App /&gt;);
+<span class="c-tag">&lt;/script&gt;</span></pre>
+      </div>
+      <p class="desc">每个组件的 props 表与用法要点见<a href="components.html" style="color:var(--star-blue)">组件页</a>；源头文档在 <code>components/*/*.d.ts</code> 与 <code>*.prompt.md</code>。</p>
+    </section>
+
+    <section class="docs-section">
+      <div class="hud-label">STEP 4 · ICONS</div>
+      <h2>图标：只用 Lucide</h2>
+      <p class="desc">品牌铁律：禁 emoji，禁把 unicode 字符当图标。唯一图标来源是 Lucide（CDN），线性 ~1.6px 描边。默认态星蓝约 70% 不透明度，悬停 / 激活转暖金——<code>Icon</code> / <code>IconButton</code> 已封装这套行为。</p>
+      <div class="codeblock">
+        <div class="cb-head">两种消费方式</div>
+        <pre><span class="c-cm">// React：走组件（推荐，行为与着色统一）</span>
+&lt;Icon name=<span class="c-str">"satellite"</span> size={20} /&gt;
+&lt;IconButton name=<span class="c-str">"search"</span> title=<span class="c-str">"搜索"</span> /&gt;
+
+<span class="c-cm">&lt;!-- 纯静态 HTML：data-lucide + createIcons --&gt;</span>
+<span class="c-tag">&lt;i</span> data-lucide=<span class="c-str">"telescope"</span><span class="c-tag">&gt;&lt;/i&gt;</span>
+<span class="c-tag">&lt;script&gt;</span>lucide.createIcons({ attrs: { <span class="c-str">'stroke-width'</span>: 1.6 } });<span class="c-tag">&lt;/script&gt;</span></pre>
+      </div>
+    </section>
+
+    <section class="docs-section">
+      <div class="hud-label">STEP 5 · THEMES</div>
+      <h2>双主题：深空 / 黎明</h2>
+      <p class="desc">系统深色优先；浅色主题「黎明 Dawn」以 token 作用域交付（<code>tokens/themes.css</code>）。只要你的样式全部走 <code>var(--token)</code>，切主题就是改一个属性——语义不变：金 = 奖励，星蓝 = 结构。星场与 <code>memoryColor</code> 会在运行时读取主题自动适配。</p>
+      <div class="codeblock">
+        <div class="cb-head">theme.js · 切换 + 记忆</div>
+        <pre><span class="c-cm">// 开启黎明</span>
+document.documentElement.dataset.theme = <span class="c-str">'dawn'</span>;
+<span class="c-cm">// 回到深空（移除属性即回默认）</span>
+delete document.documentElement.dataset.theme;
+
+<span class="c-cm">// 持久化：进页面先读，再写 &lt;html data-theme&gt;（放 &lt;head&gt; 内联防闪白）</span>
+try {
+  if (localStorage.getItem(<span class="c-str">'theme'</span>) === <span class="c-str">'dawn'</span>)
+    document.documentElement.dataset.theme = <span class="c-str">'dawn'</span>;
+} catch (e) {}</pre>
+      </div>
+    </section>
+
+    <section class="docs-section">
+      <div class="hud-label">NON-NEGOTIABLES</div>
+      <h2>接入前的自查清单</h2>
+      <ul class="usage-list" style="max-width:680px">
+        <li>色相预算 ≤ 3–4：深空蓝黑 + 星蓝（结构）+ 金（仅奖励 / 点亮 / 掌握）。金色绝不铺开用。</li>
+        <li>所有颜色、间距、圆角、字号都来自 token —— 不新造十六进制。</li>
+        <li>面板走玻璃拟态（<code>.sr-glass</code> / <code>GlassPanel</code>），边框只用发丝线，工具条用胶囊。</li>
+        <li>动效缓慢克制，统一 <code>var(--ease-flight)</code>；点亮时刻是唯一的高能瞬间；尊重 <code>prefers-reduced-motion</code>。</li>
+        <li>文案中文优先，克制、精确、略带诗意——展示隐喻，不解说隐喻。</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="docs-footer">
+    <span>星图 · Stellar Raft 设计系统 —— 知识是唯一的光。</span>
+    <span class="mono">STYLES.CSS → _DS_BUNDLE.JS → STARFIELD.JS</span>
+  </footer>
+
+  <script src="../assets/starfield.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="docs.js"></script>
+</body>
+</html>

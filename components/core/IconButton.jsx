@@ -1,10 +1,28 @@
 import React from 'react';
 import { Icon } from './Icon.jsx';
 
+if (typeof document !== 'undefined' && !document.getElementById('sr-focus-ring-css')) {
+  const s = document.createElement('style');
+  s.id = 'sr-focus-ring-css';
+  s.textContent = '.sr-focus-ring:focus{outline:none}.sr-focus-ring:focus-visible{outline:2px solid var(--focus);outline-offset:2px}';
+  document.head.appendChild(s);
+}
+
+/* Invisible hit-area extender: keeps the visual size untouched while
+   guaranteeing a ≥40px pointer target (touch/product baseline). */
+if (typeof document !== 'undefined' && !document.getElementById('sr-hit40-css')) {
+  const s = document.createElement('style');
+  s.id = 'sr-hit40-css';
+  s.textContent = '.sr-hit40{position:relative}.sr-hit40::after{content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:max(100%,40px);height:max(100%,40px)}';
+  document.head.appendChild(s);
+}
+
 /**
  * IconButton — a square, ghost-by-default icon control.
- * Default: star-blue at ~70%. Hover/active: warm gold + faint glow.
- * Press: gentle shrink. This is the canonical icon-tint behavior.
+ * Default: star-blue at ~70% (`--icon-idle`, theme-aware). Hover/active:
+ * warm gold + faint glow. Press: gentle shrink. Visual size follows `size`,
+ * but the pointer target is always ≥40px via an invisible hit extender.
+ * This is the canonical icon-tint behavior.
  */
 export function IconButton({
   name,
@@ -46,7 +64,7 @@ export function IconButton({
         background: lit ? 'rgba(159,198,255,0.06)' : 'transparent',
         color: disabled
           ? 'var(--text-disabled)'
-          : lit ? 'var(--gold)' : 'rgba(159,198,255,0.7)',
+          : lit ? 'var(--gold)' : 'var(--icon-idle)',
         boxShadow: lit && !active ? 'none' : active ? 'var(--glow-gold-soft)' : 'none',
         cursor: disabled ? 'not-allowed' : 'pointer',
         transform: press ? 'scale(0.92)' : 'scale(1)',
@@ -55,6 +73,7 @@ export function IconButton({
         ...style,
       }}
       {...rest}
+      className={['sr-focus-ring', 'sr-hit40', rest.className].filter(Boolean).join(' ')}
     >
       <Icon name={name} size={icon} title={title} />
     </button>

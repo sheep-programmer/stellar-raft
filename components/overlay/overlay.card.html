@@ -1,0 +1,115 @@
+<!-- @dsCard group="Components" viewport="700x460" name="Overlay" subtitle="Modal · toast · tooltip · context menu on glass" -->
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../styles.css">
+<style>
+  body{margin:0;font-family:var(--font-sans);background:var(--bg-deepspace);padding:26px;}
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;background-image:
+    radial-gradient(1px 1px at 15% 20%,rgba(159,198,255,.6),transparent),
+    radial-gradient(1px 1px at 78% 44%,rgba(255,217,138,.5),transparent),
+    radial-gradient(1.4px 1.4px at 50% 75%,rgba(255,255,255,.6),transparent);}
+  .wrap{position:relative;display:flex;flex-direction:column;gap:18px;}
+  .row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+  .label{font-family:var(--font-mono);font-size:10px;letter-spacing:var(--ls-hud);text-transform:uppercase;color:var(--text-3);width:100%;margin-bottom:-6px;}
+  .rc-zone{flex:1;min-height:96px;display:flex;align-items:center;justify-content:center;
+    border:1px dashed var(--glass-border-strong);border-radius:var(--r-md);
+    color:var(--text-3);font-size:12.5px;background:var(--glass-bg-faint);user-select:none;}
+</style></head>
+<body>
+  <div class="wrap" id="root"></div>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="../../_ds_bundle.js"></script>
+  <script type="text/babel">
+    const NS = window.StellarRaftDesignSystem_2866af;
+    const { Button, IconButton, Input, Tag, Icon, GlassPanel } = NS;
+
+    function Demo({ C }) {
+      const { Modal, Toast, toast, Tooltip, ContextMenu } = C;
+      const [open, setOpen] = React.useState(false);
+      const [, bump] = React.useState(0);
+      const flipTheme = () => {
+        const el = document.documentElement;
+        el.dataset.theme = el.dataset.theme === 'dawn' ? '' : 'dawn';
+        bump(n => n + 1);
+      };
+      return (
+        <React.Fragment>
+          <div className="row" style={{justifyContent:'space-between'}}>
+            <span className="label" style={{width:'auto'}}>Modal · focus trap · Esc</span>
+            <Tooltip content="切换 深空 / 黎明" side="left">
+              <IconButton name="sun-moon" title="切换主题" onClick={flipTheme} />
+            </Tooltip>
+          </div>
+          <div className="row">
+            <Button icon="orbit" onClick={() => setOpen(true)}>移动到星座…</Button>
+            <Modal open={open} onClose={() => setOpen(false)} title="移动到星座" icon="orbit" width={420}
+              footer={<React.Fragment>
+                <Button variant="ghost" onClick={() => setOpen(false)}>取消</Button>
+                <Button variant="primary" icon="check" onClick={() => { setOpen(false); toast('这颗星已飞入「量子力学」'); }}>确认移动</Button>
+              </React.Fragment>}>
+              <div style={{display:'flex',flexDirection:'column',gap:12}}>
+                <span style={{fontSize:13.5,color:'var(--text-2)',lineHeight:1.8}}>
+                  「贝尔不等式」将离开当前星座，飞入你选择的新星座。已有的连接会保留。
+                </span>
+                <Input icon="search" placeholder="搜索星座…" />
+              </div>
+            </Modal>
+          </div>
+
+          <div className="label">Toast · 命令式 toast()</div>
+          <div className="row">
+            <Button size="sm" icon="check" onClick={() => toast('已移入「量子力学」')}>普通反馈</Button>
+            <Button size="sm" variant="primary" icon="zap" onClick={() => toast('点亮 +1 · 融会贯通', { tone: 'gold', icon: 'zap' })}>点亮时刻</Button>
+            <Toast tone="gold" icon="sparkles" message="这颗星已融会贯通" />
+          </div>
+
+          <div className="label">Tooltip · 延迟出现 · Esc 隐藏</div>
+          <div className="row">
+            <Tooltip content="模拟一个月后的星空"><IconButton name="hourglass" title="模拟遗忘" /></Tooltip>
+            <Tooltip content="回到鸟瞰视角" side="bottom"><IconButton name="satellite" title="鸟瞰" /></Tooltip>
+            <Tooltip content="融会贯通的连接是金色的" side="right"><Tag icon="link">跨星座连接</Tag></Tooltip>
+          </div>
+
+          <div className="label">Context menu · 右键打开</div>
+          <div className="row">
+            <ContextMenu items={[
+              { id: 'fly',    label: '飞往这颗星', icon: 'navigation', kbd: 'Enter' },
+              { id: 'link',   label: '建立连接',   icon: 'link' },
+              { id: 'review', label: '纳入复习',   icon: 'rotate-ccw', disabled: true },
+              { type: 'separator' },
+              { id: 'delete', label: '熄灭并删除', icon: 'trash-2', danger: true },
+            ]} onSelect={(it) => toast('已选择「' + it.label + '」')}>
+              <div className="rc-zone">在这片星空上右键</div>
+            </ContextMenu>
+          </div>
+        </React.Fragment>
+      );
+    }
+
+    function mount(C) {
+      ReactDOM.createRoot(document.getElementById('root')).render(<Demo C={C}/>);
+    }
+
+    // Prefer the built bundle; fall back to compiling the sibling .jsx sources.
+    if (NS.Modal && NS.Toast && NS.toast && NS.Tooltip && NS.ContextMenu) {
+      mount(NS);
+    } else {
+      const files = ['Modal.jsx', 'Toast.jsx', 'Tooltip.jsx', 'ContextMenu.jsx'];
+      Promise.all(files.map(f => fetch('./' + f).then(r => r.text())))
+        .then(srcs => {
+          let code = srcs.join('\n')
+            .replace(/^import[^\n]*$/gm, '')
+            .replace(/^export\s+/gm, '');
+          code += '\n;window.__srOverlayLocal = { Modal, Toast, toast, Tooltip, ContextMenu };';
+          const js = Babel.transform(code, { presets: ['react'] }).code;
+          new Function('React', 'Icon', 'IconButton', 'GlassPanel', js)(React, Icon, IconButton, GlassPanel);
+          mount(window.__srOverlayLocal);
+        })
+        .catch(() => {
+          document.getElementById('root').innerHTML =
+            '<span style="color:var(--text-2);font-size:13px">组件尚未打包，且源码加载失败 — 请通过本地 HTTP 服务打开此卡片。</span>';
+        });
+    }
+  </script>
+</body></html>

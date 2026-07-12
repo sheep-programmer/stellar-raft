@@ -1,6 +1,13 @@
 import React from 'react';
 import { Icon } from './Icon.jsx';
 
+if (typeof document !== 'undefined' && !document.getElementById('sr-focus-ring-css')) {
+  const s = document.createElement('style');
+  s.id = 'sr-focus-ring-css';
+  s.textContent = '.sr-focus-ring:focus{outline:none}.sr-focus-ring:focus-visible{outline:2px solid var(--focus);outline-offset:2px}';
+  document.head.appendChild(s);
+}
+
 /**
  * Button — text action. Three variants:
  *  · primary  : warm gold fill, dark ink — reward / ignition / confirm
@@ -27,10 +34,17 @@ export function Button({
   const fs = { sm: 13, md: 15, lg: 16 }[size] || 15;
 
   const palettes = {
-    primary: {
+    primary: disabled ? {
+      // 不可点就不发光：收掉金色渐变与辉光，退成玻璃面 + 失效墨色
+      background: 'var(--glass-bg)',
+      color: 'var(--text-disabled)',
+      border: '1px solid var(--glass-border)',
+      boxShadow: 'none',
+      fontWeight: 600,
+    } : {
       background: hover
-        ? 'linear-gradient(180deg, var(--gold-white), var(--gold))'
-        : 'linear-gradient(180deg, var(--gold), var(--gold-warm))',
+        ? 'linear-gradient(180deg, var(--gold-btn-hover-hi), var(--gold-btn-hover-lo))'
+        : 'linear-gradient(180deg, var(--gold-btn-hi), var(--gold-btn-lo))',
       color: 'var(--text-on-gold)',
       border: '1px solid rgba(255,240,200,0.5)',
       boxShadow: (glow || hover) ? 'var(--glow-gold)' : 'var(--glow-gold-soft)',
@@ -75,7 +89,8 @@ export function Button({
         fontSize: fs,
         letterSpacing: '0.01em',
         cursor: disabled ? 'not-allowed' : 'pointer',
-        opacity: disabled ? 0.45 : 1,
+        // primary 的禁用态已换成专门的哑光玻璃面，不再叠加整体降透明
+        opacity: disabled && variant !== 'primary' ? 0.45 : 1,
         transform: press ? 'scale(0.97)' : 'scale(1)',
         transition: 'transform var(--dur-fast), background var(--dur-base), box-shadow var(--dur-base), border-color var(--dur-base), color var(--dur-base)',
         whiteSpace: 'nowrap',
@@ -83,6 +98,7 @@ export function Button({
         ...style,
       }}
       {...rest}
+      className={['sr-focus-ring', rest.className].filter(Boolean).join(' ')}
     >
       {icon && <Icon name={icon} size={fs + 3} color="currentColor" />}
       {children}

@@ -46,7 +46,7 @@
   --text-2: rgba(28, 39, 70, 0.74); /* secondary */
   --text-3: rgba(40, 54, 92, 0.58); /* tertiary / meta */
   --text-disabled: rgba(40, 54, 92, 0.34);
-  --text-on-gold: #fff6e6; /* light cream ink on deep-amber buttons */
+  --text-on-gold: #fffdf5; /* near-white cream ink on deep-amber buttons */
 
   /* ---- Glass — light and a touch opaque so text always wins over the canvas ---- */
   --glass-bg:        rgba(244, 247, 251, 0.72);
@@ -60,7 +60,17 @@
   --line-strong: rgba(40, 60, 110, 0.20);
 
   --fading: var(--star-blue-dim);
+  --danger: #b4472e; /* destructive ink deepened for pale surfaces (≈5:1) */
   --focus:  rgba(58, 98, 192, 0.50);
+
+  /* ---- Icon idle tint: deep star-blue ink so idle icons read on light ---- */
+  --icon-idle: rgba(40, 70, 140, 0.75);
+
+  /* ---- Primary button gradient: one step deeper so cream ink clears 4.5:1 ---- */
+  --gold-btn-hi:       #92620f;
+  --gold-btn-lo:       #7a4c10;
+  --gold-btn-hover-hi: #9d6a11;
+  --gold-btn-hover-lo: #815010;
 
   /* ---- Inline control surfaces: light, slightly opaque on dawn glass ---- */
   --input-bg: rgba(255, 255, 255, 0.72);

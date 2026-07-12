@@ -269,6 +269,10 @@ function AIConfig({ onClose }) {
   };
   const switchProvider = (id) => { set({ provider: id }); setTest({ state: 'idle', msg: '' }); };
 
+  // 模态焦点管理：移焦入内 · Tab 圈禁 · 关闭还原焦点；打开期间吞掉 ⌘K
+  const modalRef = React.useRef(null);
+  (window.SRKit && window.SRKit.useModalFocus ? window.SRKit.useModalFocus : () => { })(modalRef, { swallowCmdK: true });
+
   React.useEffect(() => {
     const onKey = (e) => { if (e.key === 'Escape') { e.preventDefault(); onClose && onClose(); } };
     document.addEventListener('keydown', onKey);
@@ -305,8 +309,10 @@ function AIConfig({ onClose }) {
 
   return (
     <div
+      ref={modalRef}
       onMouseDown={onClose}
       onContextMenu={(e) => e.preventDefault()}
+      role="dialog" aria-modal="true" aria-label="AI 配置"
       style={{
         position: 'fixed', inset: 0, zIndex: 100, background: 'rgba(3,4,12,0.58)',
         backdropFilter: 'blur(3px)', WebkitBackdropFilter: 'blur(3px)',
@@ -483,7 +489,7 @@ function AIConfig({ onClose }) {
                 <ToggleRow on={cfg.autoSummary} onChange={(v) => set({ autoSummary: v })}
                   title="自动摘要" desc="保存长笔记时生成一句话摘要，作为这颗星的悬停说明。" />
                 <ToggleRow on={cfg.linkSuggest} onChange={(v) => set({ linkSuggest: v })}
-                  title="连接建议" desc="发现跨星座的潜在关联，提示可点亮的「融会贯通」金色连线。" />
+                  title="连接建议" desc="发现跨星域的潜在关联，提示可点亮的「融会贯通」金色连线。" />
                 <ToggleRow on={cfg.tagSuggest} onChange={(v) => set({ tagSuggest: v })}
                   title="标签推荐" desc="根据正文推荐合适的标签，整理收件箱时更省力。" />
               </div>

@@ -89,7 +89,7 @@ function MenuRow({ onClick, active, children }) {
   return (
     <div onMouseDown={(e) => e.stopPropagation()} onClick={onClick} onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)}
       style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '8px 10px', borderRadius: 'var(--r-sm)', cursor: 'pointer', fontSize: 13,
-        color: active ? 'var(--gold)' : 'var(--text-2)', background: h ? 'rgba(159,198,255,0.08)' : 'transparent', transition: 'background var(--dur-fast)' }}>
+        color: active ? 'var(--gold)' : 'var(--text-2)', background: h ? 'color-mix(in srgb, var(--star-blue) 9%, transparent)' : 'transparent', transition: 'background var(--dur-fast)' }}>
       {children}
     </div>
   );
@@ -103,6 +103,16 @@ function ListView({ onOpen, onOpenCon, onFeynman }) {
   // to window.SR_DATA first, so other views (map / editor / timeline) stay in sync.
   const [notes, setNotes] = React.useState(() => D.notes.map(n => ({ ...n, tags: [...(n.tags || [])] })));
   const [reviewQueue, setReviewQueue] = React.useState([]); // ids queued for review
+
+  // 记忆心跳：数据层每分钟按真实时间重算 R，本地镜像跟着刷新亮度与到期（只改数值，无动画）
+  React.useEffect(() => {
+    const h = () => setNotes(ns => ns.map(n => {
+      const s = D.byId[n.id];
+      return s ? { ...n, strength: s.strength, nextReview: (s.props && s.props.nextReview) || n.nextReview } : n;
+    }));
+    window.addEventListener('sr-memory', h);
+    return () => window.removeEventListener('sr-memory', h);
+  }, []);
 
   const [query, setQuery] = React.useState('');
   const [band, setBand] = React.useState('all');           // 记忆强度档
@@ -123,11 +133,39 @@ function ListView({ onOpen, onOpenCon, onFeynman }) {
   const [toast, setToast] = React.useState(null);
   const flash = (msg) => { setToast(msg); setTimeout(() => setToast(null), 1700); };
 
+  // 空态的第一步：就地写下第一颗星（没有星域时先立一片），随后直接进入编辑器
+  const [newStarOpen, setNewStarOpen] = React.useState(false);
+  const [newStarDraft, setNewStarDraft] = React.useState('');
+  const createFirstStar = () => {
+    const label = newStarDraft.trim();
+    if (!label) return;
+    let con = D.constellations[0];
+    if (!con) {
+      con = { id: 'c' + Math.random().toString(36).slice(2, 7), name: '我的星域', color: '#9fc6ff', health: 0, count: 0 };
+      D.constellations.push(con);
+    }
+    const id = 's' + Math.random().toString(36).slice(2, 8);
+    D.addStar({
+      id, con: con.id, x: 46 + Math.random() * 10, y: 42 + Math.random() * 10,
+      strength: 0.5, importance: 1, label, summary: '', tags: ['草稿'],
+      props: { type: '草稿', status: '正常', source: '列表视图', alias: '', nextReview: '明天' },
+      body: [{ id: id + '-r', type: 'rich' }, { id: id + '-p', type: 'p', text: '' }],
+    });
+    setNewStarOpen(false); setNewStarDraft('');
+    onOpen(id);
+  };
+
+  // 认证态（点亮/待重燃）——与亮度四档正交，从数据层派生，不在本地镜像里存一份
+  const litOf = n => !!(D.isLit && D.isLit(D.byId[n.id]));
+  const emberOf = n => !!(D.isEmber && D.isEmber(D.byId[n.id]));
+
   const bands = [
-    { id: 'all', label: '全部' }, { id: 'solid', label: '牢固' },
-    { id: 'normal', label: '正常' }, { id: 'fading', label: '正变暗' }, { id: 'dying', label: '将熄灭' },
+    { id: 'all', label: '全部' }, { id: 'lit', label: '已点亮' }, { id: 'ember', label: '待重燃' },
+    { id: 'solid', label: '牢固' }, { id: 'normal', label: '正常' },
+    { id: 'fading', label: '正变暗' }, { id: 'dying', label: '将熄灭' },
   ];
   const matchBand = n => band === 'all'
+    || (band === 'lit' && litOf(n)) || (band === 'ember' && emberOf(n))
     || (band === 'solid' && n.strength >= 0.7) || (band === 'normal' && n.strength >= 0.4 && n.strength < 0.7)
     || (band === 'fading' && n.strength >= 0.2 && n.strength < 0.4) || (band === 'dying' && n.strength < 0.2);
 
@@ -175,9 +213,14 @@ function ListView({ onOpen, onOpenCon, onFeynman }) {
     setNotes(ns => ns.map(n => set.has(n.id) && !n.tags.includes(tag) ? { ...n, tags: [...n.tags, tag] } : n));
   };
   const applyReview = (ids) => {
-    ids.forEach(id => { const s = D.byId[id]; if (s) { s.props = s.props || {}; s.props.nextReview = '明天'; D.pushTimeline('review', id, '加入复习队列'); D.touchNote(id); } });
+    // 写穿记忆模型：到期时刻提前到「明天」（已逾期的保持逾期），并记入时间线
+    ids.forEach(id => { if (D.byId[id]) { D.queueReview(id, 1); D.pushTimeline('review', id, '加入复习队列'); } });
     setReviewQueue(q => Array.from(new Set([...q, ...ids])));
-    setNotes(ns => ns.map(n => ids.includes(n.id) && reviewRank(n.nextReview) > 1 ? { ...n, nextReview: '明天' } : n));
+    setNotes(ns => ns.map(n => {
+      if (!ids.includes(n.id)) return n;
+      const s = D.byId[n.id];
+      return s ? { ...n, nextReview: (s.props && s.props.nextReview) || n.nextReview } : n;
+    }));
   };
   const applyDelete = (ids) => { const set = new Set(ids); setNotes(ns => ns.filter(n => !set.has(n.id))); setSel(s => s.filter(id => !set.has(id))); };
 
@@ -186,7 +229,7 @@ function ListView({ onOpen, onOpenCon, onFeynman }) {
     const ids = sel.slice();
     setMoveTarget(null);
     setDialog({
-      icon: 'folder-input', accent: 'var(--star-blue)', title: '移动星座', confirmLabel: '移动到此',
+      icon: 'folder-input', accent: 'var(--star-blue)', title: '移动星域', confirmLabel: '移动到此',
       body: 'pickCon', ids,
       onYes: (target) => { if (!target) return; applyMove(ids, target); flash(`已将 ${ids.length} 颗星移动到「${D.conName(target)}」`); setSel([]); setDialog(null); setMoveTarget(null); },
     });
@@ -240,30 +283,41 @@ function ListView({ onOpen, onOpenCon, onFeynman }) {
 
   // real health stats from the (possibly mutated) local list
   const total = notes.length;
+  const litTotal = notes.filter(litOf).length;
   const dimming = notes.filter(n => n.strength < 0.4).length;
   const health = total ? Math.round(notes.reduce((a, n) => a + n.strength, 0) / total * 100) : 0;
 
   const HeadCell = ({ k, children, justify }) => {
     const active = sortKey === k;
     return (
-      <span onClick={() => clickHeader(k)} title="点击按此列排序"
+      <button type="button" onClick={() => clickHeader(k)} title="点击按此列排序" className="sr-focus-ring"
         style={{ display: 'inline-flex', alignItems: 'center', gap: 5, cursor: 'pointer', userSelect: 'none', justifyContent: justify || 'flex-start',
+          background: 'none', border: 'none', padding: 0, font: 'inherit', letterSpacing: 'inherit', textTransform: 'inherit',
           color: active ? 'var(--gold)' : 'var(--text-3)', transition: 'color var(--dur-fast)' }}>
         {children}
         <Icon name={active ? (sortDir === 'asc' ? 'arrow-up' : 'arrow-down') : 'chevrons-up-down'} size={12}
           color={active ? 'var(--gold)' : 'var(--line-strong)'} />
-      </span>
+      </button>
     );
   };
 
-  const Checkbox = ({ on, dash, onClick }) => (
-    <span onClick={onClick}
-      style={{ width: 17, height: 17, borderRadius: 5, border: '1px solid', cursor: 'pointer',
+  const Checkbox = ({ on, dash, onClick, label }) => (
+    <button type="button" onClick={onClick} className="sr-focus-ring"
+      role="checkbox" aria-checked={dash && !on ? 'mixed' : !!on} aria-label={label || '选择'}
+      style={{ width: 17, height: 17, borderRadius: 5, border: '1px solid', cursor: 'pointer', padding: 0,
         borderColor: on || dash ? 'var(--gold)' : 'var(--line-strong)', background: on || dash ? 'var(--gold)' : 'transparent',
         display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all var(--dur-fast)' }}>
       {on && <Icon name="check" size={12} color="var(--text-on-gold)" />}
       {!on && dash && <span style={{ width: 8, height: 2, borderRadius: 1, background: 'var(--text-on-gold)' }} />}
-    </span>
+    </button>
+  );
+
+  // 批量条上的文字动作：真按钮，可聚焦、可回车
+  const TextAction = ({ onClick, children }) => (
+    <button type="button" onClick={onClick} className="sr-focus-ring"
+      style={{ background: 'none', border: 'none', font: 'inherit', fontSize: 12, color: 'var(--text-3)', cursor: 'pointer', padding: '6px 4px' }}>
+      {children}
+    </button>
   );
 
   return (
@@ -276,7 +330,7 @@ function ListView({ onOpen, onOpenCon, onFeynman }) {
         <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 18 }}>
           <div style={{ flex: 1 }}>
             <div style={{ fontSize: 23, fontWeight: 300, color: 'var(--text-1)' }}>笔记管理</div>
-            <div style={{ fontSize: 13, color: 'var(--text-3)', marginTop: 2 }}>{total} 颗星 · {dimming} 颗正在变暗</div>
+            <div style={{ fontSize: 13, color: 'var(--text-3)', marginTop: 2 }}>{total} 颗星 · <span style={{ color: litTotal ? 'var(--gold)' : 'inherit' }}>{litTotal} 已点亮</span> · {dimming} 颗偏暗</div>
           </div>
           <GlassPanel radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', gap: 18, padding: '9px 20px' }}>
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, fontSize: 12.5, color: 'var(--text-2)' }}><Icon name="activity" size={16} color="var(--gold)" />知识体检</span>
@@ -291,13 +345,13 @@ function ListView({ onOpen, onOpenCon, onFeynman }) {
             {bands.map(f => <Tag key={f.id} active={band === f.id} onClick={() => setBand(f.id)}>{f.label}</Tag>)}
           </div>
 
-          {/* 星座 filter */}
+          {/* 星域 filter */}
           <div style={{ position: 'relative' }}>
             <Tag icon="orbit" dot={conFilter ? D.conColor(conFilter) : undefined} active={!!conFilter} onClick={() => setMenu(menu === 'con' ? null : 'con')}>
-              {conFilter ? D.conName(conFilter) : '星座'}
+              {conFilter ? D.conName(conFilter) : '星域'}
             </Tag>
             <Menu open={menu === 'con'} onClose={() => setMenu(null)} width={170}>
-              <MenuRow active={!conFilter} onClick={() => { setConFilter(null); setMenu(null); }}>全部星座</MenuRow>
+              <MenuRow active={!conFilter} onClick={() => { setConFilter(null); setMenu(null); }}>全部星域</MenuRow>
               {D.constellations.map(c => (
                 <MenuRow key={c.id} active={conFilter === c.id} onClick={() => { setConFilter(c.id); setMenu(null); }}>
                   <span style={{ width: 7, height: 7, borderRadius: '50%', background: c.color, boxShadow: `0 0 6px ${c.color}` }} />{c.name}
@@ -332,12 +386,12 @@ function ListView({ onOpen, onOpenCon, onFeynman }) {
         {/* batch bar */}
         {sel.length > 0 && (
           <GlassPanel radius="md" pad="none" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 16px', marginBottom: 12, flexWrap: 'wrap' }}>
-            <span style={{ fontSize: 13, color: 'var(--text-1)' }}>已选 {sel.length} 项</span>
-            <span onClick={selectAll} style={{ fontSize: 12, color: 'var(--text-3)', cursor: 'pointer' }}>{allChecked ? '全不选' : '全选'}</span>
-            <span onClick={invert} style={{ fontSize: 12, color: 'var(--text-3)', cursor: 'pointer' }}>反选</span>
-            <span onClick={() => setSel([])} style={{ fontSize: 12, color: 'var(--text-3)', cursor: 'pointer' }}>取消</span>
+            <span style={{ fontSize: 13, color: 'var(--text-1)' }}>已选 {sel.length} 颗</span>
+            <TextAction onClick={selectAll}>{allChecked ? '全不选' : '全选'}</TextAction>
+            <TextAction onClick={invert}>反选</TextAction>
+            <TextAction onClick={() => setSel([])}>取消</TextAction>
             <div style={{ flex: 1 }} />
-            <Button size="sm" variant="ghost" icon="folder-input" onClick={openBatchMove}>移动星座</Button>
+            <Button size="sm" variant="ghost" icon="folder-input" onClick={openBatchMove}>移动星域</Button>
             <Button size="sm" variant="ghost" icon="hash" onClick={batchTag}>加标签</Button>
             <Button size="sm" variant="ghost" icon="repeat" onClick={batchReview}>加入复习</Button>
             <Button size="sm" variant="ghost" icon="trash-2" onClick={batchDelete}>删除</Button>
@@ -349,7 +403,7 @@ function ListView({ onOpen, onOpenCon, onFeynman }) {
           <Checkbox on={allChecked} dash={!allChecked && someChecked} onClick={selectAll} />
           <HeadCell k="title">标题</HeadCell>
           <HeadCell k="strength">记忆强度</HeadCell>
-          <span style={{ color: 'var(--text-3)' }}>所属星座</span>
+          <span style={{ color: 'var(--text-3)' }}>所属星域</span>
           <HeadCell k="review">下次复习</HeadCell>
           <HeadCell k="links" justify="flex-start">连接</HeadCell>
         </div>
@@ -362,27 +416,45 @@ function ListView({ onOpen, onOpenCon, onFeynman }) {
                 <Icon name={total === 0 ? 'sparkles' : 'search-x'} size={24} color="var(--star-blue-dim)" />
               </div>
               {total === 0
-                ? <div style={{ color: 'var(--text-2)', fontSize: 14 }}>这片星空已被清空。<span style={{ color: 'var(--text-3)' }}>写下第一颗星，让它发光。</span></div>
-                : <div style={{ color: 'var(--text-2)', fontSize: 14 }}>没有匹配的星。<span style={{ color: 'var(--text-3)' }}>换个关键词，或</span><span onClick={resetFilters} style={{ color: 'var(--gold)', cursor: 'pointer' }}>清除筛选</span>。</div>}
+                ? (
+                  <div>
+                    <div style={{ color: 'var(--text-2)', fontSize: 14 }}>你的星空还很暗。<span style={{ color: 'var(--text-3)' }}>写下第一颗星，让它发光。</span></div>
+                    <div style={{ display: 'flex', justifyContent: 'center', gap: 10, marginTop: 18 }}>
+                      <Button size="sm" variant="primary" icon="plus" glow onClick={() => { setNewStarDraft(''); setNewStarOpen(true); }}>写下第一颗星</Button>
+                      {D.loadDemo && <Button size="sm" variant="ghost" icon="telescope" title="载入一片可随时清空的演示星空" onClick={() => D.loadDemo()}>载入示例星系</Button>}
+                    </div>
+                  </div>
+                )
+                : <div style={{ color: 'var(--text-2)', fontSize: 14 }}>没有匹配的星。<span style={{ color: 'var(--text-3)' }}>换个关键词，或</span><button type="button" onClick={resetFilters} className="sr-focus-ring" style={{ background: 'none', border: 'none', padding: 0, font: 'inherit', color: 'var(--gold)', cursor: 'pointer' }}>清除筛选</button>。</div>}
             </div>
           )}
 
           {rows.map(n => {
-            const sl = strengthLabel(n.strength);
+            const litRow = litOf(n);
+            const emberRow = emberOf(n);
+            // 待重燃是唯一新增的用户可见状态：覆盖亮度四档的状态文字（口径同 props.status）
+            const sl = emberRow ? { t: '待重燃', c: 'var(--gold-warm)' } : strengthLabel(n.strength);
             const dim = n.strength < 0.4;
             const checked = selSet.has(n.id);
             const queued = reviewQueue.includes(n.id);
             const hov = hoverId === n.id;
             return (
               <div key={n.id} onClick={() => onOpen(n.id)}
+                role="button" tabIndex={0} className="sr-focus-ring"
+                onKeyDown={(e) => { if ((e.key === 'Enter' || e.key === ' ') && e.target === e.currentTarget) { e.preventDefault(); onOpen(n.id); } }}
                 onMouseEnter={() => setHoverId(n.id)} onMouseLeave={() => setHoverId(h => h === n.id ? null : h)}
+                onFocus={() => setHoverId(n.id)}
+                onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget)) setHoverId(h => h === n.id ? null : h); }}
                 style={{ position: 'relative', display: 'grid', gridTemplateColumns: GRID, gap: 14, alignItems: 'center',
                   padding: '13px 16px', borderRadius: 'var(--r-md)', cursor: 'pointer',
-                  background: checked ? 'rgba(255,217,138,0.06)' : (hov ? 'rgba(159,198,255,0.07)' : (dim ? 'rgba(8,11,28,0.5)' : 'rgba(159,198,255,0.035)')),
+                  // 变暗的星降低整行「存在感」而不是叠深色底——黎明主题下深底会把整行糊死
+                  background: checked ? 'rgba(255,217,138,0.06)'
+                    : (hov ? 'color-mix(in srgb, var(--star-blue) 8%, transparent)'
+                      : (dim ? 'var(--glass-bg-faint)' : 'color-mix(in srgb, var(--star-blue) 4%, transparent)')),
                   border: '1px solid', borderColor: checked ? 'rgba(255,217,138,0.24)' : 'var(--glass-border)',
-                  opacity: dim ? 0.85 : 1, transition: 'background var(--dur-fast), border-color var(--dur-fast)' }}>
+                  opacity: dim ? 0.8 : 1, transition: 'background var(--dur-fast), border-color var(--dur-fast)' }}>
 
-                <Checkbox on={checked} onClick={(e) => { e.stopPropagation(); toggle(n.id); }} />
+                <Checkbox on={checked} label={'选择「' + n.title + '」'} onClick={(e) => { e.stopPropagation(); toggle(n.id); }} />
 
                 <div style={{ minWidth: 0 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
@@ -397,6 +469,8 @@ function ListView({ onOpen, onOpenCon, onFeynman }) {
                       <span onDoubleClick={(e) => { e.stopPropagation(); startRename(n); }} title="双击重命名"
                         style={{ fontSize: 14.5, color: dim ? 'var(--text-2)' : 'var(--text-1)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{n.title}</span>
                     )}
+                    {litRow && <span title="已点亮 · 讲清楚的东西，暗得更慢。" style={{ flex: 'none', width: 9, height: 9, borderRadius: '50%', boxSizing: 'border-box', border: '1px solid var(--gold)' }} />}
+                    {emberRow && <span title="曾点亮的星暗了下来。再讲透一次，就能重燃。" style={{ flex: 'none', display: 'inline-flex', alignItems: 'center', gap: 3, height: 17, padding: '0 7px', borderRadius: 'var(--r-pill)', background: 'color-mix(in srgb, var(--gold-warm) 10%, transparent)', border: '1px solid color-mix(in srgb, var(--gold-warm) 30%, transparent)', fontSize: 10, color: 'var(--gold-warm)' }}><Icon name="flame" size={10} color="var(--gold-warm)" />待重燃</span>}
                     {queued && <span title="已加入复习队列" style={{ flex: 'none', display: 'inline-flex', alignItems: 'center', gap: 3, height: 17, padding: '0 7px', borderRadius: 'var(--r-pill)', background: 'rgba(255,217,138,0.12)', border: '1px solid rgba(255,217,138,0.28)', fontSize: 10, color: 'var(--gold)' }}><Icon name="repeat" size={10} color="var(--gold)" />待复习</span>}
                   </div>
                   <div style={{ display: 'flex', gap: 5, marginTop: 4 }}>{(n.tags || []).map(t => <span key={t} style={{ fontSize: 10.5, color: 'var(--text-3)' }}>#{t}</span>)}</div>
@@ -407,7 +481,7 @@ function ListView({ onOpen, onOpenCon, onFeynman }) {
                   <span style={{ fontSize: 11, color: sl.c, width: 38 }}>{sl.t}</span>
                 </div>
 
-                <span onClick={(e) => { e.stopPropagation(); onOpenCon && onOpenCon(n.con); }} title="在星图中聚焦该星座"
+                <span onClick={(e) => { e.stopPropagation(); onOpenCon && onOpenCon(n.con); }} title="在星图中聚焦该星域"
                   style={{ display: 'inline-flex', alignItems: 'center', gap: 7, fontSize: 12.5, color: 'var(--text-2)', minWidth: 0 }}>
                   <span style={{ flex: 'none', width: 7, height: 7, borderRadius: '50%', background: D.conColor(n.con), boxShadow: `0 0 6px ${D.conColor(n.con)}` }} />
                   <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{D.conName(n.con)}</span>
@@ -421,11 +495,11 @@ function ListView({ onOpen, onOpenCon, onFeynman }) {
                 {hov && (
                   <div onClick={(e) => e.stopPropagation()}
                     style={{ position: 'absolute', right: 10, top: '50%', transform: 'translateY(-50%)', display: 'flex', alignItems: 'center', gap: 2, paddingLeft: 28,
-                      background: 'linear-gradient(90deg, rgba(11,15,34,0) 0%, var(--surface-1, rgba(11,15,34,0.96)) 32%)',
+                      background: 'linear-gradient(90deg, transparent 0%, var(--glass-bg-strong) 32%)',
                       borderRadius: 'var(--r-md)', animation: 'sr-cardin var(--dur-fast) var(--ease-flight) both' }}>
                     <IconButton name="square-arrow-out-up-right" size="sm" title="打开" onClick={() => onOpen(n.id)} />
                     <IconButton name="pen-line" size="sm" title="重命名" onClick={() => startRename(n)} />
-                    <IconButton name="brain" size="sm" title="费曼复述" onClick={() => (onFeynman ? onFeynman(n.id) : onOpen(n.id))} />
+                    <IconButton name={emberRow ? 'flame' : 'brain'} size="sm" title={emberRow ? '重燃 · 再讲透一次' : '费曼内化'} onClick={() => (onFeynman ? onFeynman(n.id) : onOpen(n.id))} />
                     <IconButton name="repeat" size="sm" title="加入复习" onClick={() => rowReview(n)} />
                     <DangerIconButton name="trash-2" title="删除" onClick={() => rowDelete(n)} />
                   </div>
@@ -469,6 +543,18 @@ function ListView({ onOpen, onOpenCon, onFeynman }) {
               </div>
             </div>
           )}
+        </ActionDialog>
+      )}
+
+      {/* 写下第一颗星 */}
+      {newStarOpen && (
+        <ActionDialog icon="sparkles" accent="var(--gold)" title="写下第一颗星" confirmLabel="点亮"
+          confirmDisabled={!newStarDraft.trim()}
+          onClose={() => setNewStarOpen(false)} onYes={createFirstStar}>
+          <div style={{ fontSize: 13, color: 'var(--text-2)', marginBottom: 10 }}>给它一个名字——一个概念、一条公式、一个此刻想留住的念头。</div>
+          <Input icon="sparkles" placeholder="例如「傅里叶变换」…" size="sm" autoFocus value={newStarDraft}
+            onChange={(e) => setNewStarDraft(e && e.target ? e.target.value : (e || ''))}
+            onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); createFirstStar(); } }} />
         </ActionDialog>
       )}
 

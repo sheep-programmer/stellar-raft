@@ -37,6 +37,10 @@ function hexRgb(hex) {
 function AerialView({ onClose, onOpenCon, dataset }) {
   // dataset：造访好友星系时注入的只读数据；缺省用自己的
   const D = dataset || window.SR_DATA;
+  // 认证态（点亮/待重燃）：自己的星走数据层派生函数（读共享 sr），
+  // 造访好友时 server sanitizeGalaxy 只透传 lit/ember 两个布尔（不泄露时间戳）
+  const litOf = (s) => D.isLit ? !!D.isLit(s) : !!s.lit;
+  const emberOf = (s) => D.isEmber ? !!D.isEmber(s) : !!s.ember;
   const ref = React.useRef(null);
   const [box, setBox] = React.useState(null);      // 容器实际尺寸，用于等比换算
   const [hoverCon, setHoverCon] = React.useState(null);
@@ -47,6 +51,14 @@ function AerialView({ onClose, onOpenCon, dataset }) {
     const ro = new ResizeObserver(read); ro.observe(el); read();
     return () => ro.disconnect();
   }, []);
+
+  // Esc = 返回星图：与其它浮层/沉浸视图同一词汇（费曼抽屉在 app 层捕获，永远先关）
+  React.useEffect(() => {
+    if (!onClose) return;
+    const h = (e) => { if (e.key === 'Escape' && !e.defaultPrevented) { e.preventDefault(); onClose(); } };
+    document.addEventListener('keydown', h);
+    return () => document.removeEventListener('keydown', h);
+  }, [onClose]);
 
   // 真实位置：优先星图写回的 wx/wy，否则用种子布局
   const posOf = (s) => {
@@ -64,7 +76,10 @@ function AerialView({ onClose, onOpenCon, dataset }) {
     if (ms.length === 1) cy -= 96;   // 与星图一致：单星星域主星上移让位
     const r = Math.max(150, ...ms.map(s => Math.hypot(s.x - cx, s.y - cy))) + 96;
     const avg = ms.reduce((a, s) => a + s.strength, 0) / ms.length;
-    return { ...c, cx, cy, r, avg, members: ms.length, col: avg >= 0.78 ? '#ffd98a' : c.color };
+    // 星域光环转金的新口径：过半点亮 ∧ 平均亮度不塌（litRatio ≥ 0.5 ∧ health ≥ 0.5）
+    const lit = ms.filter(litOf).length;
+    const gold = lit / ms.length >= 0.5 && avg >= 0.5;
+    return { ...c, cx, cy, r, avg, lit, members: ms.length, col: gold ? '#ffd98a' : c.color };
   }).filter(Boolean);
 
   // 等比取景：把（含光晕的）整片星空收进一屏，只缩放、不变形
@@ -84,7 +99,8 @@ function AerialView({ onClose, onOpenCon, dataset }) {
   }
 
   const weakest = doms.slice().sort((a, b) => a.avg - b.avg)[0] || { name: '—' };
-  const igniteCount = D.timeline.filter(t => t.kind === 'ignite').length;
+  const litCount = sp.filter(litOf).length;
+  const emberCount = sp.filter(emberOf).length;
   const dimming = sp.filter(s => s.strength < 0.4).length;
 
   return (
@@ -127,10 +143,15 @@ function AerialView({ onClose, onOpenCon, dataset }) {
           {sp.map((s, i) => {
             const col = aMemoryColor(s.strength);
             const sz = 3 + (s.importance || 1) * 2.2 + s.strength * 2;
+            const lit = litOf(s), ember = emberOf(s);
             return (
-              <span key={s.id} className="aer-star" style={{ position: 'absolute', left: X(s.x), top: Y(s.y), width: sz, height: sz, borderRadius: '50%', transform: 'translate(-50%,-50%)',
+              <span key={s.id} className="aer-star" data-cert={lit ? 'lit' : ember ? 'ember' : undefined}
+                style={{ position: 'absolute', left: X(s.x), top: Y(s.y), width: sz, height: sz, borderRadius: '50%', transform: 'translate(-50%,-50%)',
                 background: col, opacity: 0.4 + s.strength * 0.55,
                 boxShadow: `0 0 ${4 + s.strength * 8}px ${col}`, pointerEvents: 'none',
+                // 认证环：已点亮 = 发丝金环；待重燃 = 低透明度暗金余烬环（冷暗星体 + 残迹）
+                outline: lit ? '1px solid var(--gold)' : ember ? '1px solid color-mix(in srgb, var(--gold-warm) 45%, transparent)' : 'none',
+                outlineOffset: 2,
                 animationDuration: `${3.4 + (i % 5) * 0.9}s`, animationDelay: `${(i % 7) * 0.5}s` }} />
             );
           })}
@@ -145,10 +166,11 @@ function AerialView({ onClose, onOpenCon, dataset }) {
                 boxShadow: '0 0 26px 5px rgba(255,128,60,0.5), 0 0 10px 2px rgba(255,196,120,0.85)' }} />
               <span style={{ textAlign: 'center', whiteSpace: 'nowrap' }}>
                 <span style={{ display: 'block', fontSize: 15, fontWeight: 300, color: 'var(--text-1)', letterSpacing: '0.05em', textShadow: 'var(--star-label-shadow)' }}>{g.name}</span>
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: 10.5, color: g.avg > 0.6 ? 'var(--gold)' : 'var(--star-blue-dim)' }}>
-                  {Math.round(g.avg * 100)}% · {g.members} 星
+                <span title={`健康度 ${Math.round(g.avg * 100)}% · 已点亮 ${g.lit} / 共 ${g.members} 颗`}
+                  style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--t-xs)', color: g.avg > 0.6 ? 'var(--gold)' : 'var(--star-blue-dim)' }}>
+                  {Math.round(g.avg * 100)}% · 已点亮 {g.lit}/{g.members}
                 </span>
-                <span className="aer-flyhint" style={{ display: 'block', fontSize: 10, color: 'var(--gold)', letterSpacing: '0.14em', marginTop: 3, opacity: hoverCon === g.id ? 1 : 0, transition: 'opacity var(--dur-base)' }}>点击飞入</span>
+                <span className="aer-flyhint" style={{ display: 'block', fontSize: 'var(--t-xs)', color: 'var(--gold)', letterSpacing: 'var(--ls-hud)', marginTop: 3, opacity: hoverCon === g.id ? 1 : 0, transition: 'opacity var(--dur-base)' }}>点击飞入</span>
               </span>
             </div>
           ))}
@@ -157,40 +179,49 @@ function AerialView({ onClose, onOpenCon, dataset }) {
 
       {!sp.length && (
         <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 5 }}>
-          <span style={{ fontSize: 14, color: 'var(--text-3)' }}>你的星空还很暗。写下第一颗星，让它发光。</span>
+          <span style={{ fontSize: 14, color: 'var(--text-2)' }}>你的星空还很暗。写下第一颗星，让它发光。</span>
         </div>
       )}
 
       {/* 顶部概览条 */}
       <div style={{ position: 'absolute', top: 18, left: '50%', transform: 'translateX(-50%)', zIndex: 30 }}>
-        <GlassPanel radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', gap: 24, padding: '10px 26px' }}>
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 13, color: 'var(--text-2)' }}>
+        <GlassPanel radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', gap: 'var(--s-6)', padding: 'var(--s-2) var(--s-6)' }}>
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 'var(--s-2)', fontSize: 'var(--t-sm)', color: 'var(--text-2)' }}>
             <Icon name="satellite" size={17} color="var(--gold)" />亮度鸟瞰
           </span>
           {dataset && dataset.ownerName && (
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, fontSize: 12.5, color: 'var(--gold)', whiteSpace: 'nowrap' }}>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, fontSize: 'var(--t-sm)', color: 'var(--gold)', whiteSpace: 'nowrap' }}>
               <Icon name="telescope" size={14} color="var(--gold)" />{dataset.ownerName} · 只读
             </span>
           )}
           <Sep />
           <Stat n={D.stars.length} t="知识星" />
-          {!dataset && <Stat n={igniteCount} t="近期点亮" tone="var(--gold)" />}
+          <Stat n={litCount} t="已点亮" tone="var(--gold)" />
+          {emberCount > 0 && <Stat n={emberCount} t="待重燃" tone="var(--gold-warm)" />}
           <Stat n={dimming} t="正变暗" tone="var(--star-blue-dim)" />
           <Sep />
-          <span style={{ fontSize: 12.5, color: 'var(--text-2)' }}>最薄弱星域 <b style={{ color: 'var(--star-blue-dim)', fontWeight: 500 }}>{weakest.name}</b></span>
+          <span style={{ fontSize: 'var(--t-sm)', color: 'var(--text-2)' }}>最薄弱星域 <b style={{ color: 'var(--star-blue-dim)', fontWeight: 500 }}>{weakest.name}</b></span>
         </GlassPanel>
       </div>
 
       {/* 左下：说明；右下：记忆温度图例 */}
-      <div style={{ position: 'absolute', bottom: 26, left: 24, zIndex: 30, display: 'flex', alignItems: 'center', gap: 8, fontSize: 11.5, color: 'var(--text-3)' }}>
+      <div style={{ position: 'absolute', bottom: 26, left: 24, zIndex: 30, display: 'flex', alignItems: 'center', gap: 'var(--s-2)', fontSize: 'var(--t-xs)', color: 'var(--text-2)' }}>
         <Icon name="map" size={14} color="currentColor" />{dataset ? `${dataset.ownerName ? dataset.ownerName + ' 的星空编排' : '对方的星空编排'} · 点击星域返回星图` : '与你的星图同一编排 · 点击星域飞入'}
       </div>
       <div style={{ position: 'absolute', bottom: 22, right: 24, zIndex: 30 }}>
-        <GlassPanel radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '8px 16px' }}>
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: 9.5, letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: 'var(--text-3)' }}>记忆温度</span>
-          <span style={{ fontSize: 10.5, color: 'var(--text-3)' }}>正在变暗</span>
+        {/* 图例小字统一收敛到 --t-xs 地板，颜色抬到 --text-2 保证对比 */}
+        <GlassPanel radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', gap: 'var(--s-3)', padding: 'var(--s-2) var(--s-4)' }}>
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--t-xs)', letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: 'var(--text-2)' }}>记忆温度</span>
+          <span style={{ fontSize: 'var(--t-xs)', color: 'var(--text-2)' }}>正在变暗</span>
           <span style={{ width: 84, height: 5, borderRadius: 3, background: 'linear-gradient(90deg, var(--mem-dead), var(--mem-low), var(--mem-mid), var(--mem-high), var(--mem-full))' }} />
-          <span style={{ fontSize: 10.5, color: 'var(--gold)' }}>融会贯通</span>
+          <span style={{ fontSize: 'var(--t-xs)', color: 'var(--gold)' }}>融会贯通</span>
+          <span style={{ width: 1, height: 14, background: 'var(--line)' }} />
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: 'var(--t-xs)', color: 'var(--text-2)' }}>
+            <span aria-hidden="true" style={{ width: 8, height: 8, borderRadius: '50%', boxSizing: 'border-box', border: '1px solid var(--gold)' }} />金环 = 已点亮
+          </span>
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: 'var(--t-xs)', color: 'var(--text-2)' }}>
+            <span aria-hidden="true" style={{ width: 8, height: 8, borderRadius: '50%', boxSizing: 'border-box', border: '1px solid color-mix(in srgb, var(--gold-warm) 55%, transparent)' }} />暗金环 = 待重燃
+          </span>
         </GlassPanel>
       </div>
 
@@ -221,8 +252,8 @@ function Sep() { return <span style={{ width: 1, height: 20, background: 'var(--
 function Stat({ n, t, tone }) {
   return (
     <span style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
-      <span style={{ fontFamily: 'var(--font-mono)', fontSize: 17, color: tone || 'var(--text-1)' }}>{n}</span>
-      <span style={{ fontSize: 11.5, color: 'var(--text-3)' }}>{t}</span>
+      <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--t-body-lg)', color: tone || 'var(--text-1)' }}>{n}</span>
+      <span style={{ fontSize: 'var(--t-xs)', color: 'var(--text-3)' }}>{t}</span>
     </span>
   );
 }

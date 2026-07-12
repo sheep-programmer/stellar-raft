@@ -34,12 +34,13 @@ function SRLogo({ collapsed, theme }) {
   );
 }
 
-function NavRow({ icon, label, active, badge, collapsed, onClick, dawn }) {
+function NavRow({ icon, label, active, badge, collapsed, onClick, dawn, tip }) {
   const [hover, setHover] = React.useState(false);
   const lit = active || hover;
   const idle = dawn ? 'rgba(22,30,56,0.82)' : 'rgba(159,198,255,0.72)';
   return (
-    <button type="button" onClick={onClick} data-tip={collapsed ? label : undefined}
+    <button type="button" className="sr-focus-ring" onClick={onClick} data-tip={collapsed ? label : undefined}
+      title={collapsed ? undefined : tip}
       onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
       style={{
         display: 'flex', alignItems: 'center', gap: 11, width: '100%', height: 40,
@@ -62,7 +63,7 @@ function NavRow({ icon, label, active, badge, collapsed, onClick, dawn }) {
 function UserChip({ collapsed, dawn, onClick }) {
   const [hover, setHover] = React.useState(false);
   return (
-    <button type="button" onClick={onClick} title="个人设置"
+    <button type="button" className="sr-focus-ring" onClick={onClick} title="个人设置"
       onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
       style={{
         display: 'flex', alignItems: 'center', gap: 10, width: '100%',
@@ -85,15 +86,35 @@ function UserChip({ collapsed, dawn, onClick }) {
   );
 }
 
-function Sidebar({ collapsed, onToggle, view, onView, focus, onFocus, theme, onToggleTheme, onSearch, onCheckup, onAIConfig, onOpenSettings }) {
+function Sidebar({ collapsed, onToggle, view, onView, focus, onFocus, theme, onToggleTheme, onSearch, onCheckup, onAIConfig, onOpenSettings, onReview }) {
   const D = window.SR_DATA;
   const dawn = theme === 'dawn';
-  // 好友数是异步取回/随时变化的，收到 sr-friends 事件时刷新角标
+  // 好友数 / 到期星数 / 黑洞·收件箱计数都随写操作变化：
+  // sr-friends（好友异步取回）、sr-memory（每分钟心跳）之外，
+  // 写操作（删除/恢复/建星）即时广播 sr-data——角标不再等心跳才对齐
   const [, srTick] = React.useReducer(x => x + 1, 0);
   React.useEffect(() => {
     window.addEventListener('sr-friends', srTick);
-    return () => window.removeEventListener('sr-friends', srTick);
+    window.addEventListener('sr-memory', srTick);
+    window.addEventListener('sr-data', srTick);
+    return () => { window.removeEventListener('sr-friends', srTick); window.removeEventListener('sr-memory', srTick); window.removeEventListener('sr-data', srTick); };
   }, []);
+  // 「去造访」接线：收件箱的星系邀请广播 sr-visit-code，这里代跳星际漫游。
+  // 密文已放进 sessionStorage（sr.visit.code），VisitView 挂载/收到事件时读取并预填。
+  const onViewRef = React.useRef(onView); onViewRef.current = onView;
+  React.useEffect(() => {
+    const h = () => { if (onViewRef.current) onViewRef.current('visit'); };
+    window.addEventListener('sr-visit-code', h);
+    return () => window.removeEventListener('sr-visit-code', h);
+  }, []);
+  // 复习入口的 live 计数（样式同收件箱 / 黑洞的角标）；dueStars 口径不变
+  const dueN = D.dueStars ? D.dueStars().length : 0;
+  // 收件箱角标口径 = 本地捕捉 + 未领取来信（tooltip 写明白，两处计数不再各说各话）
+  const mailN = D.unclaimedMail ? D.unclaimedMail() : 0;
+  const inboxN = D.inbox.length + mailN;
+  // 体检 = 统一今日待办：到期复习 + 待重燃 + 收件箱待整理（三行计数，due 与 ember 可重叠）
+  const todo = D.todayTodo ? D.todayTodo() : null;
+  const todoN = todo ? (todo.due + todo.ember + todo.inbox) : 0;
   return (
     <aside style={{
       width: collapsed ? 64 : 260, flex: 'none', height: '100%',
@@ -104,7 +125,7 @@ function Sidebar({ collapsed, onToggle, view, onView, focus, onFocus, theme, onT
       transition: 'width var(--dur-base) var(--ease-flight)',
     }}>
       {/* header */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 60, padding: collapsed ? '0' : '0 14px', flex: 'none', justifyContent: collapsed ? 'center' : 'space-between' }}>
+      <div style={{ display: 'flex', alignItems: 'center', height: 60, padding: collapsed ? '0' : '0 14px', flex: 'none', justifyContent: collapsed ? 'center' : 'space-between' }}>
         <SRLogo collapsed={collapsed} theme={theme} />
         {!collapsed && <IconButton name="panel-left-close" title="折叠" onClick={onToggle} />}
       </div>
@@ -119,10 +140,18 @@ function Sidebar({ collapsed, onToggle, view, onView, focus, onFocus, theme, onT
         {collapsed
           ? <IconButton name="search" title="搜索 ⌘K" onClick={onSearch} />
           : (
-            <div style={{ position: 'relative', cursor: 'pointer' }} onClick={onSearch}>
-              <Input icon="search" placeholder="搜索你的星空…" kbd="⌘K" size="sm" />
-              {/* transparent hit layer: the search box opens the command palette instead of typing inline */}
-              <div style={{ position: 'absolute', inset: 0 }} />
+            /* 搜索入口：点击 / Enter / 直接开始输入 都打开命令面板。
+               readOnly 让它保持可 Tab 聚焦（Input 自带聚焦发光），
+               但不再吞字——键盘用户不会把「量子」打进一个死输入框 */
+            <div style={{ cursor: 'pointer' }} onClick={onSearch}>
+              <Input icon="search" placeholder="搜索你的星空…" kbd="⌘K" size="sm"
+                readOnly value="" aria-label="搜索你的星空（打开命令面板）"
+                inputStyle={{ cursor: 'pointer' }}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ' || (e.key.length === 1 && !e.metaKey && !e.ctrlKey && !e.altKey)) {
+                    e.preventDefault(); onSearch();
+                  }
+                }} />
             </div>
           )}
       </div>
@@ -133,7 +162,8 @@ function Sidebar({ collapsed, onToggle, view, onView, focus, onFocus, theme, onT
         <NavRow icon="list"    label="列表视图"   active={view === 'list'} collapsed={collapsed} dawn={dawn} onClick={() => onView('list')} />
         <NavRow icon="git-commit-horizontal" label="时间轴视图" active={view === 'timeline'} collapsed={collapsed} dawn={dawn} onClick={() => onView('timeline')} />
         <div style={{ height: 1, background: 'var(--line)', margin: '8px 4px' }} />
-        <NavRow icon="inbox"    label="收件箱" badge={D.inbox.length || null} collapsed={collapsed} dawn={dawn} onClick={() => onView('inbox')} active={view === 'inbox'} />
+        <NavRow icon="repeat"   label="复习"   badge={dueN || null} collapsed={collapsed} dawn={dawn} onClick={onReview} active={false} />
+        <NavRow icon="inbox"    label="收件箱" badge={inboxN || null} tip={`本地捕捉 ${D.inbox.length} 条 + 未领取来信 ${mailN} 封`} collapsed={collapsed} dawn={dawn} onClick={() => onView('inbox')} active={view === 'inbox'} />
         <NavRow icon="aperture" label="黑洞"   badge={D.trash.length || null} collapsed={collapsed} dawn={dawn} onClick={() => onView('blackhole')} active={view === 'blackhole'} />
         <NavRow icon="telescope" label="星际漫游" badge={(D.social && D.social.friends) || null} collapsed={collapsed} dawn={dawn} onClick={() => onView('visit')} active={view === 'visit'} />
       </nav>
@@ -141,7 +171,7 @@ function Sidebar({ collapsed, onToggle, view, onView, focus, onFocus, theme, onT
       {/* constellations */}
       {!collapsed && (
         <div style={{ flex: 1, minHeight: 0, overflow: 'auto', padding: '10px 12px 0' }}>
-          <div style={{ fontSize: 10, letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: 'var(--text-3)', padding: '0 6px 8px', fontFamily: 'var(--font-mono)' }}>我的星座</div>
+          <div style={{ fontSize: 10, letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: 'var(--text-3)', padding: '0 6px 8px', fontFamily: 'var(--font-mono)' }}>我的星域</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
             {D.constellations.map(c => (
               <ConstellationItem key={c.id} name={c.name} color={c.color} count={c.count}
@@ -155,7 +185,7 @@ function Sidebar({ collapsed, onToggle, view, onView, focus, onFocus, theme, onT
       {/* footer */}
       <div style={{ flex: 'none', padding: collapsed ? '10px 8px' : '12px', borderTop: '1px solid var(--line)', display: 'flex', flexDirection: 'column', gap: 4 }}>
         <NavRow icon={dawn ? 'moon-star' : 'sunrise'} label={dawn ? '切回深空' : '黎明模式'} collapsed={collapsed} dawn={dawn} onClick={onToggleTheme} />
-        <NavRow icon="activity" label="知识体检报告" collapsed={collapsed} dawn={dawn} active={view === 'checkup'} onClick={onCheckup} />
+        <NavRow icon="activity" label="知识体检报告" badge={todoN || null} collapsed={collapsed} dawn={dawn} active={view === 'checkup'} onClick={onCheckup} />
         <NavRow icon="bot" label="AI 配置" collapsed={collapsed} dawn={dawn} onClick={onAIConfig} />
         <UserChip collapsed={collapsed} dawn={dawn} onClick={onOpenSettings} />
       </div>

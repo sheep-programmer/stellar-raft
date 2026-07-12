@@ -17,16 +17,6 @@ const TL_BUCKETS = [
   { id: 'earlier', label: '更早' },
 ];
 
-// 更久之前的活动 —— 由「加载更多」逐步揭开（mock，不写进 data.js）。
-const TL_OLDER = [
-  { id: 'tlx1', starId: 's7',  con: 'ds', when: '上周三 14:20', delta: '+0.09', kind: 'ignite', note: '点亮 · 哈希冲突与开放寻址', bucket: 'earlier' },
-  { id: 'tlx2', starId: 's4',  con: 'qm', when: '上周二 19:50', delta: '+0.06', kind: 'review', note: '复习 · 不确定性原理', bucket: 'earlier' },
-  { id: 'tlx3', starId: 's10', con: 'ds', when: '上周一 09:10', delta: '−0.05', kind: 'dim',    note: '长时间未复习，开始变暗', bucket: 'earlier' },
-  { id: 'tlx4', starId: 's8',  con: 'th', when: '更早',         delta: '+0.12', kind: 'ignite', note: '点亮 · 卡诺循环与效率上限', bucket: 'earlier' },
-  { id: 'tlx5', starId: 's5',  con: 'la', when: '更早',         delta: '+0.04', kind: 'review', note: '复习 · 特征值分解', bucket: 'earlier' },
-  { id: 'tlx6', starId: 's9',  con: 'ds', when: '更早',         delta: '−0.08', kind: 'dim',    note: '记忆继续冷却，亮度走低', bucket: 'earlier' },
-];
-
 // 把一条事件归入某个时段：优先用显式 bucket，否则从 when 文案推断。
 function tlBucketOf(ev) {
   if (ev.bucket) return ev.bucket;
@@ -47,8 +37,9 @@ function Timeline({ onOpen }) {
   const [kind, setKind] = React.useState('all'); // all | ignite | review | dim
   const [shown, setShown] = React.useState(TL_PAGE);
 
-  // 全量事件：data.js 的近期记录 + 本文件补充的更早记录。
-  const all = React.useMemo(() => [...D.timeline, ...TL_OLDER], [D]);
+  // 全量事件：只呈现真实发生过、且星仍然存在的记录——
+  // 已销毁的星不再以「未知星」空壳占据时间轴。
+  const all = React.useMemo(() => D.timeline.filter(ev => D.byId[ev.starId]), [D]);
 
   // 顶部小统计：本周（今天/昨天/本周，不含更早）的点亮与复习数。
   const weekly = all.filter(ev => tlBucketOf(ev) !== 'earlier');
@@ -142,23 +133,37 @@ function Timeline({ onOpen }) {
                     const star = D.byId[ev.starId] || {};
                     const k = TL_KIND[ev.kind] || TL_KIND.review;
                     const up = tlIsUp(ev);
-                    const clickable = !!star.id;
+                    // 状态机新增的两种迁移在时间轴上有自己的名字：
+                    // ignite + note「重燃」→ 重燃（flame）；dim + note「熄灭」→ 熄灭（待重燃）
+                    const relitEv = ev.kind === 'ignite' && (ev.note || '').indexOf('重燃') >= 0;
+                    const outEv = ev.kind === 'dim' && (ev.note || '').indexOf('熄灭') >= 0;
+                    const evIcon = relitEv ? 'flame' : k.icon;
+                    const evLabel = relitEv ? '重燃' : outEv ? '熄灭' : k.label;
+                    // 这颗星当下的认证态（与事件无关的现状徽标）
+                    const litNow = !!(D.isLit && D.isLit(star));
+                    const emberNow = !!(D.isEmber && D.isEmber(star));
+                    // 星域一律由这颗星当前的归属派生，不信事件快照里的 con 字段
+                    const conId = star.con || ev.con;
                     return (
                       <div key={ev.id} style={{ position: 'relative' }}>
                         {/* 节点 */}
                         <span style={{ position: 'absolute', left: -25, top: 16, width: 11, height: 11, borderRadius: '50%', background: k.color, boxShadow: `0 0 8px ${k.color}`, border: '2px solid var(--space-0)' }} />
-                        <div onClick={() => clickable && onOpen && onOpen(star.id)}
-                          title={clickable ? '在星图中打开这颗星' : undefined}
-                          style={{ borderRadius: 'var(--r-md)', border: '1px solid var(--glass-border)', background: 'rgba(159,198,255,0.04)', padding: '12px 15px', cursor: clickable ? 'pointer' : 'default', transition: 'background var(--dur-fast), border-color var(--dur-fast)' }}
-                          onMouseEnter={e => { if (clickable) { e.currentTarget.style.background = 'rgba(159,198,255,0.08)'; e.currentTarget.style.borderColor = 'var(--line-strong)'; } }}
-                          onMouseLeave={e => { e.currentTarget.style.background = 'rgba(159,198,255,0.04)'; e.currentTarget.style.borderColor = 'var(--glass-border)'; }}>
+                        <div onClick={() => onOpen && onOpen(star.id)}
+                          title="在星图中打开这颗星"
+                          role="button" tabIndex={0} className="sr-focus-ring"
+                          onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onOpen && onOpen(star.id); } }}
+                          style={{ borderRadius: 'var(--r-md)', border: '1px solid var(--glass-border)', background: 'color-mix(in srgb, var(--star-blue) 4%, transparent)', padding: '12px 15px', cursor: 'pointer', transition: 'background var(--dur-fast), border-color var(--dur-fast)' }}
+                          onMouseEnter={e => { e.currentTarget.style.background = 'color-mix(in srgb, var(--star-blue) 9%, transparent)'; e.currentTarget.style.borderColor = 'var(--line-strong)'; }}
+                          onMouseLeave={e => { e.currentTarget.style.background = 'color-mix(in srgb, var(--star-blue) 4%, transparent)'; e.currentTarget.style.borderColor = 'var(--glass-border)'; }}>
                           <div style={{ display: 'flex', alignItems: 'center', gap: 9 }}>
                             <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontFamily: 'var(--font-mono)', fontSize: 10.5, letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: k.color }}>
-                              <Icon name={k.icon} size={14} color={k.color} />{k.label}
+                              <Icon name={evIcon} size={14} color={k.color} />{evLabel}
                             </span>
-                            <span style={{ fontSize: 14.5, color: 'var(--text-1)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 240 }}>{star.label || '未知星'}</span>
+                            <span style={{ fontSize: 14.5, color: 'var(--text-1)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 240 }}>{star.label}</span>
+                            {litNow && <span title="已点亮 · 讲清楚的东西，暗得更慢。" style={{ flex: 'none', width: 8, height: 8, borderRadius: '50%', boxSizing: 'border-box', border: '1px solid var(--gold)' }} />}
+                            {emberNow && <span title="曾点亮的星暗了下来。再讲透一次，就能重燃。" style={{ flex: 'none', display: 'inline-flex', alignItems: 'center', gap: 3, height: 16, padding: '0 6px', borderRadius: 'var(--r-pill)', background: 'color-mix(in srgb, var(--gold-warm) 10%, transparent)', border: '1px solid color-mix(in srgb, var(--gold-warm) 30%, transparent)', fontSize: 10, color: 'var(--gold-warm)' }}><Icon name="flame" size={10} color="var(--gold-warm)" />待重燃</span>}
                             <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: 11.5, color: 'var(--text-3)', flex: 'none' }}>
-                              <span style={{ width: 6, height: 6, borderRadius: '50%', background: D.conColor(ev.con), boxShadow: `0 0 5px ${D.conColor(ev.con)}` }} />{D.conName(ev.con)}
+                              <span style={{ width: 6, height: 6, borderRadius: '50%', background: D.conColor(conId), boxShadow: `0 0 5px ${D.conColor(conId)}` }} />{D.conName(conId)}
                             </span>
                             <div style={{ flex: 1 }} />
                             <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12.5, color: up ? 'var(--gold)' : 'var(--star-blue-dim)' }}>{ev.delta}</span>

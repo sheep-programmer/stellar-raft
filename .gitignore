@@ -7,3 +7,6 @@ uploads/
 node_modules/
 *.log
 .env
+
+# lint 派生配置（scripts/lint.mjs 每次生成）
+.oxlintrc.derived.json

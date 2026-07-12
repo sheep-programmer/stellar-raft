@@ -220,6 +220,179 @@ window.SR_DATA = (function () {
 
   const byId = Object.fromEntries(stars.map(s => [s.id, s]));
 
+  /* ===== 记忆衰减模型（FSRS-lite）=========================================
+     每颗星维护 sr = { S: 稳定度(天), last: 上次成功复习(ms), due: 手动队列覆盖(ms, 0=无),
+                       lit: 0|点亮时刻(ms), ember: 0|熄灭时刻(ms) }。
+     可提取率 R = exp(−Δt天 / S)，重算后直接写回 star.strength ——
+     星图 / 鸟瞰 / 三维 / 列表 / MemoryBar 的亮度全部吃这个值（映射到 --mem-* 温度梯），
+     放几天不看，星真的会变暗。
+
+     点亮（认证轴，与亮度四档正交）：
+       未点亮 := lit=0 ∧ ember=0（缺省，全部旧档案）
+       已点亮 := lit>0 —— 费曼讲透授予；「记得」乘数升到 2.2，稳定度上限 365
+       待重燃 := lit=0 ∧ ember>0 —— 已点亮星 R<0.35（或被评「忘了」）熄灭；
+                三档复习按未点亮参数只回亮度，认证只能靠费曼重燃
+     复习成功：S ×= (增长因子 + (1−R)·0.6)，点亮/重燃 2.5 / lit 星记得 2.2 / 普通复习 1.8；
+     失败：S ×= 0.45（lit 星 0.55 且立即熄灭）。
+     稳定度上限：曾点亮星（lit 或 ember）365；从未点亮星 min(新S, max(当前S, 60))——只封顶生长，
+     绝不削减旧档案里已有的 S。R 衰减到 0.60 即视为到期，复习队列按到期时刻升序。 */
+  const DAY = 86400000;
+  const MEM = {
+    rMin: 0.02, rMax: 0.98, dueR: 0.6, growIgnite: 2.5, growReview: 1.8, growPartial: 1.2,
+    partialR: 0.85, shrinkFail: 0.45, sMin: 0.8, sMax: 365,
+    emberR: 0.35,        // 熄灭阈值：已点亮星 R < 0.35 → 待重燃
+    growReviewLit: 2.2,  // 已点亮星「记得」的 S 乘数（未点亮 1.8）
+    shrinkFailLit: 0.55, // 已点亮星「忘了」的回缩（未点亮 0.45），且随即熄灭
+    sMaxUnlit: 60,       // 从未点亮星的稳定度上限；sMax:365 只留给曾点亮星（lit 或 ember）
+  };
+  const clampN = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
+  // 种子星：由 strength 反推「相对当前时间」的 lastReview / stability——
+  // demo 一打开就有正发光 / 正变暗的层次，且此后随真实时间继续衰减。
+  const seedStability = (r) => r >= 0.85 ? 34 : r >= 0.7 ? 21 : r >= 0.55 ? 12 : r >= 0.4 ? 7 : r >= 0.2 ? 3.5 : 1.8;
+  // 唯一迁移入口：旧快照（localStorage / sqlite / 黑洞 payload / 无 sr 的种子星）
+  // 打开即补默认 lit:0 / ember:0 —— 全部视为未点亮，旧「点亮」动画不追溯授予认证。
+  const ensureMemory = (s, now) => {
+    if (s.sr && s.sr.S > 0 && s.sr.last) {
+      if (!(s.sr.lit > 0)) s.sr.lit = 0;
+      if (!(s.sr.ember > 0)) s.sr.ember = 0;
+      return s.sr;
+    }
+    now = now || Date.now();
+    const r = clampN(typeof s.strength === 'number' ? s.strength : 0.5, 0.05, MEM.rMax);
+    const S = seedStability(r);
+    s.sr = { S, last: Math.round(now - Math.log(1 / r) * S * DAY), due: 0, lit: 0, ember: 0 };
+    return s.sr;
+  };
+  // 认证轴的三个派生状态（不落盘）：isLit=已点亮 · isEmber=待重燃 · everLit=曾点亮（决定 S 上限）
+  const isLit = (s) => !!(s && s.sr && s.sr.lit > 0);
+  const isEmber = (s) => !!(s && s.sr && !(s.sr.lit > 0) && s.sr.ember > 0);
+  const everLit = (s) => !!(s && s.sr && (s.sr.lit > 0 || s.sr.ember > 0));
+  // 稳定度封顶：曾点亮星 365；从未点亮星 max(当前S, 60)——旧档案里 S 已超 60 的星只封顶生长、不回缩
+  const sCapOf = (s) => everLit(s) ? MEM.sMax : Math.max(s.sr.S, MEM.sMaxUnlit);
+  const retrievability = (s, now) => Math.exp(-Math.max(0, (now || Date.now()) - s.sr.last) / DAY / s.sr.S);
+  // 到期时刻：R 自然衰减到 dueR 的那一刻；「加入复习队列」可把它提前
+  const dueTsOf = (s) => {
+    ensureMemory(s);
+    const natural = s.sr.last + s.sr.S * Math.log(1 / MEM.dueR) * DAY;
+    return s.sr.due ? Math.min(s.sr.due, natural) : natural;
+  };
+  const reviewLabel = (due, now) => {
+    const diff = due - now;
+    if (diff <= 0) return '已逾期';
+    if (diff < DAY) return '今天';
+    if (diff < DAY * 2) return '明天';
+    return Math.ceil(diff / DAY) + ' 天后';
+  };
+  const statusOf = (r) => r >= 0.7 ? '牢固' : r >= 0.4 ? '正常' : r >= 0.2 ? '正变暗' : '将熄灭';
+  // 按真实时间重算一颗星：strength / 下次复习 / 状态 全部由模型导出。
+  // 熄灭检测也在这里：已点亮星衰减到 R < emberR → 转待重燃（lit=0, ember=now），
+  // 心跳/开屏/视图切换自动执行，只在跨越阈值那一次写时间线；随后的 sr-memory 广播让在场视图就地更新。
+  const refreshStar = (s, now) => {
+    ensureMemory(s, now);
+    now = now || Date.now();
+    s.strength = Math.round(clampN(retrievability(s, now), MEM.rMin, MEM.rMax) * 1000) / 1000;
+    if (s.sr.lit > 0 && s.strength < MEM.emberR) {
+      s.sr.lit = 0; s.sr.ember = now;
+      pushTimeline('dim', s.id, '熄灭 · 待重燃');
+    }
+    s.props = s.props || {};
+    s.props.nextReview = reviewLabel(dueTsOf(s), now);
+    s.props.status = isEmber(s) ? '待重燃' : statusOf(s.strength);
+  };
+  // 打开应用 / 定时心跳 / 视图切换时调用：全部星按真实时间重算
+  const refreshMemory = (now) => {
+    now = now || Date.now();
+    stars.forEach(s => refreshStar(s, now));
+    notes.forEach(n => {
+      const s = byId[n.id]; if (!s) return;
+      n.strength = s.strength; n.nextReview = s.props.nextReview;
+    });
+    syncCounts();
+    return now;
+  };
+  // 一次成功复习（费曼点亮/重燃 = ignite:true）：稳定度增长、R 回满，队列覆盖清除。
+  // 乘数按认证态取档：ignite 2.5（点亮/重燃同乘数）· 已点亮「记得」2.2 · 其余 1.8。
+  // ignite 时写入认证（lit=now, ember=0）并记时间线（待重燃星 note「重燃」）；
+  // 待重燃星普通「记得」只回亮度不回认证——重燃只走费曼。
+  const reviewSuccess = (id, opts) => {
+    const s = byId[id]; if (!s) return null;
+    const now = Date.now();
+    ensureMemory(s, now);
+    const ignite = !!(opts && opts.ignite);
+    const relit = ignite && isEmber(s);
+    const before = clampN(retrievability(s, now), MEM.rMin, MEM.rMax);
+    const base = ignite ? MEM.growIgnite : (isLit(s) ? MEM.growReviewLit : MEM.growReview);
+    const cap = ignite ? MEM.sMax : sCapOf(s);   // 点亮当场获得 365 档上限
+    s.sr.S = clampN(s.sr.S * (base + (1 - before) * 0.6), MEM.sMin, cap);
+    s.sr.last = now; s.sr.due = 0;
+    if (ignite) {
+      s.sr.lit = now; s.sr.ember = 0;
+      pushTimeline('ignite', id, relit ? '重燃' : '点亮', Math.max(0, MEM.rMax - before));
+    }
+    refreshStar(s, now);
+    syncCounts();      // 星域健康度按新强度重算
+    touchNote(id);     // 列表行刷新 + 防抖落盘
+    return { strength: s.strength, gained: Math.max(0, s.strength - before), stability: s.sr.S, lit: isLit(s), relit };
+  };
+  // 复习模糊：想起来了但不牢——稳定度小幅增长（×1.2），R 回到 0.85 左右：
+  // last 回拨到「刚好衰减至 partialR」的时刻，下次到期比「记得」更早、比「忘了」更晚。
+  // 认证态不动：想起大概 ≠ 火灭——已点亮保持点亮，待重燃保持待重燃。
+  const reviewPartial = (id) => {
+    const s = byId[id]; if (!s) return null;
+    const now = Date.now();
+    ensureMemory(s, now);
+    s.sr.S = clampN(s.sr.S * MEM.growPartial, MEM.sMin, sCapOf(s));
+    s.sr.last = Math.round(now - Math.log(1 / MEM.partialR) * s.sr.S * DAY);
+    s.sr.due = 0;
+    refreshStar(s, now);
+    syncCounts();
+    touchNote(id);
+    return { strength: s.strength, stability: s.sr.S };
+  };
+  // 到期队列：R 已衰减到阈值（或被手动排入且已到时）的星，按到期先后升序
+  const dueStars = (now) => {
+    now = now || Date.now();
+    return stars
+      .map(s => ({ s, due: dueTsOf(s) }))
+      .filter(x => x.due <= now)
+      .sort((a, b) => a.due - b.due)
+      .map(x => x.s);
+  };
+  // 复习失败（含费曼「还没讲透」）：稳定度回缩，下次到期大幅提前。
+  // 显示强度保持评分前的值——把 last 回拨到「按新 S 刚好衰减至 R_before」的时刻，
+  // 而不是 last=now（那会让被评「忘了」的星瞬间跳回 R≈0.98，反而最亮）。
+  // 新 S 更小 ⇒ 到期时刻依然更近，三档间隔严格有序：fail < partial < success。
+  // 已点亮星回缩更留情（×0.55，记忆节省效应：曾掌握者重学更快），但认证作废——立即熄灭转待重燃。
+  const reviewFail = (id) => {
+    const s = byId[id]; if (!s) return null;
+    const now = Date.now();
+    ensureMemory(s, now);
+    const before = clampN(retrievability(s, now), MEM.rMin, MEM.rMax);
+    const wasLit = isLit(s);
+    s.sr.S = Math.max(MEM.sMin, s.sr.S * (wasLit ? MEM.shrinkFailLit : MEM.shrinkFail));
+    s.sr.last = Math.round(now - Math.log(1 / before) * s.sr.S * DAY);
+    s.sr.due = 0;
+    if (wasLit) {
+      s.sr.lit = 0; s.sr.ember = now;   // 先于 refreshStar 落定，避免阈值检测重复写时间线
+      pushTimeline('dim', id, '熄灭 · 待重燃');
+    }
+    refreshStar(s, now);
+    syncCounts();
+    touchNote(id);
+    return { strength: s.strength, stability: s.sr.S, extinguished: wasLit };
+  };
+  // 手动加入复习队列：把到期时刻提前到 days 天内（0 = 今天，1 = 明天）
+  const queueReview = (id, days) => {
+    const s = byId[id]; if (!s) return null;
+    const now = Date.now();
+    ensureMemory(s, now);
+    const target = now + (days == null ? 1 : Math.max(0.4, days)) * DAY;
+    s.sr.due = s.sr.due ? Math.min(s.sr.due, target) : target;
+    refreshStar(s, now);
+    touchNote(id);
+    return s.props.nextReview;
+  };
+
   // ---- 黑洞（回收站）：被删除的星与星域先落入这里，可恢复或彻底销毁 ----
   const trash = [
     {
@@ -317,7 +490,7 @@ window.SR_DATA = (function () {
       t.payload.connections.forEach(c => { if (byId[c.a] && byId[c.b]) connections.push(c); });
       t.payload.stars.forEach(s => notes.unshift(noteFor(s)));
     }
-    syncCounts();
+    refreshMemory();   // 恢复的星按真实时间重新点算亮度（含 syncCounts）
     persistRemote();
     return t;
   };
@@ -377,13 +550,34 @@ window.SR_DATA = (function () {
   };
 
   // ——— 派生数据同步：让所有视图看到同一份真相 ———
-  // 星域的 count / health 始终按现存成员实时重算，不留手写快照。
+  // 星域的 count / health / litRatio 始终按现存成员实时重算，不留手写快照。
+  // health 保持「记忆亮度均值」单一语义不变；点亮维度独立为 litRatio（已点亮成员占比），
+  // 星域光环转金判据 = litRatio ≥ 0.5 ∧ health ≥ 0.5。
   const syncCounts = () => {
     constellations.forEach(c => {
       const members = stars.filter(s => s.con === c.id);
       c.count = members.length;
       c.health = members.length ? members.reduce((a, s) => a + s.strength, 0) / members.length : 0;
+      c.litRatio = members.length ? members.filter(isLit).length / members.length : 0;
     });
+  };
+  // 待重燃队列：曾点亮但已熄灭的星（体检「今日待办」第二行），按熄灭先后升序
+  const emberStars = () => stars.filter(isEmber).sort((a, b) => (a.sr.ember || 0) - (b.sr.ember || 0));
+  // 统一今日待办（体检 = 唯一待办入口）：到期复习 n + 待重燃 m + 收件箱待整理 k。
+  // due 与 ember 两行可重叠（熄灭星多半也到期）——重燃成功会同时清掉到期（R 回满）。
+  const todayTodo = (now) => ({
+    due: dueStars(now).length,
+    ember: emberStars().length,
+    inbox: inbox.length,
+  });
+  // 点亮的内容门槛：摘要去空白 ≥ 20 字，或正文带文本的非 rich/divider 块 ≥ 2
+  //（沿用 deriveKeyPoints 的取块口径，跳过 code——不惩罚简短概念星，两条满足其一即可）。
+  const hasSubstance = (star) => {
+    if (!star) return false;
+    if (String(star.summary || '').replace(/\s+/g, '').length >= 20) return true;
+    const texty = (star.body || []).filter(b =>
+      b && !['rich', 'divider', 'code'].includes(b.type) && String(b.text || b.tex || '').trim());
+    return texty.length >= 2;
   };
   const noteFor = (s) => ({
     id: s.id, title: s.label, con: s.con, strength: s.strength,
@@ -391,8 +585,14 @@ window.SR_DATA = (function () {
     nextReview: (s.props && s.props.nextReview) || '明天',
     links: connections.filter(c => c.a === s.id || c.b === s.id).length,
   });
-  // 新建知识星的唯一入口：stars/byId/notes/count 一次到位
-  const addStar = (ns) => { stars.push(ns); byId[ns.id] = ns; notes.unshift(noteFor(ns)); syncCounts(); persistRemote(); return ns; };
+  // 新建知识星的唯一入口：stars/byId/notes/count 一次到位。
+  // 记忆模型从「刚刚写下」开始：S 取初始稳定度、last=now、R 从满格自然衰减——
+  // strength 反推 last 的逻辑只留给无 sr 的旧快照 / 种子，别让新星一出生就「已逾期」。
+  const addStar = (ns) => {
+    if (!(ns.sr && ns.sr.S > 0 && ns.sr.last)) ns.sr = { S: 2.5, last: Date.now(), due: 0, lit: 0, ember: 0 };
+    refreshStar(ns, Date.now());
+    stars.push(ns); byId[ns.id] = ns; notes.unshift(noteFor(ns)); syncCounts(); persistRemote(); return ns;
+  };
   const renameStar = (id, label) => {
     const s = byId[id]; if (!s) return;
     s.label = label;
@@ -420,10 +620,12 @@ window.SR_DATA = (function () {
     });
     persistRemote();
   };
-  const logIgnite = (starId, delta) => pushTimeline('ignite', starId, '点亮 · 融会贯通', delta != null ? delta : 0.12);
+  // [deprecated] 点亮的时间线现由 reviewSuccess(id, { ignite:true }) 内部写入（note 点亮/重燃），
+  // 这里保留空实现只为兼容旧调用点，避免同一次点亮记两条时间线。
+  const logIgnite = () => { };
 
   // 账户信息单一来源：Sidebar 与设置页共用，别各存一份
-  const account = { name: '林深', avatar: '林', email: 'linshen@stellar.app', plan: '观星者 · Pro', joined: '2024 · 09 · 18', streak: 14 };
+  const account = { name: '林深', avatar: '林', email: 'linshen@stellar.app', plan: '观星者 · Pro', joined: '2024 年 9 月 18 日', streak: 14 };
   // 社交状态：好友（可造访星系）数量，启动时取回、变更时由星际漫游视图刷新
   const social = { friends: 0 };
 
@@ -442,8 +644,84 @@ window.SR_DATA = (function () {
     return relatedStars(id).filter(r => r.star.con !== me.con);
   };
 
-  // 种子里的 count/health 只是占位，载入即按真实成员重算，别让视图各说各话
-  syncCounts();
+  /* ——— 星际来信（服务端收件箱镜像）———
+     消息本体只存在服务器（inbox_messages 表），不进星系快照；这里保留一份
+     内存镜像给收件箱视图与侧栏角标共用。后端未运行时 SRNet.inbox.list()
+     返回 null——镜像保持为空，「星际来信」整区隐藏、不报错。 */
+  const mail = { list: [], loaded: false };
+  const unclaimedMail = () => mail.list.filter(m => m && !m.claimed).length;
+  const refreshMail = () => {
+    const N = window.SRNet;
+    if (!(N && N.inbox)) return Promise.resolve(null);
+    return N.inbox.list().then(r => {
+      if (!Array.isArray(r)) return null;   // 网络失败 null / 业务错误 {error}——都按「暂不可用」静默
+      mail.list = r; mail.loaded = true;
+      window.dispatchEvent(new Event('sr-data'));   // 侧栏收件箱角标即时对齐
+      return r;
+    });
+  };
+  // 兜底剥 HTML + 钳长度：服务端投递时已剥过一遍，这里是建星入库前的最后一道保险
+  const plainText = (v, max) => String(v == null ? '' : v)
+    .replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, max);
+  /* 收纳一封「星际来信」赠星：用 payload 建星，落在目标星域质心附近（与收件箱
+     本地捕捉「归入」同一口径）。keyPoints 转为正文列表块；新星经 addStar 从
+     未点亮起步（S=2.5, lit=0, ember=0）——来自星际的知识要自己讲透，才配点亮。 */
+  const adoptShared = (msg, conId) => {
+    if (!msg || !msg.payload || !constellations.find(c => c.id === conId)) return null;
+    const p = msg.payload;
+    const fromName = plainText(msg.from && msg.from.name, 24) || '星际旅人';
+    const label = plainText(p.label, 120) || '来自星际的星';
+    const summary = plainText(p.summary, 2000);
+    const keyPoints = (Array.isArray(p.keyPoints) ? p.keyPoints : [])
+      .map(k => plainText(k, 300)).filter(Boolean).slice(0, 12);
+    // 位置：星域质心附近随机散布（世界坐标与星图同参 1680×1040）
+    const W = 1680, H = 1040;
+    const members = stars.filter(s => s.con === conId);
+    let wx = W / 2, wy = H / 2;
+    if (members.length) {
+      const px = (s) => s.wx != null ? s.wx : s.x / 100 * W;
+      const py = (s) => s.wy != null ? s.wy : s.y / 100 * H;
+      wx = members.reduce((a, s) => a + px(s), 0) / members.length;
+      wy = members.reduce((a, s) => a + py(s), 0) / members.length;
+    }
+    const ang = Math.random() * Math.PI * 2, rad = 70 + Math.random() * 70;
+    wx += Math.cos(ang) * rad; wy += Math.sin(ang) * rad;
+    const id = 's' + Math.random().toString(36).slice(2, 8);
+    const body = [{ id: id + '-r', type: 'rich' }];
+    keyPoints.forEach((k, i) => body.push({ id: id + '-k' + i, type: 'bulleted', text: k }));
+    body.push({ id: id + '-p', type: 'p', text: '' });
+    const star = {
+      id, con: conId, x: wx / W * 100, y: wy / H * 100, wx, wy,
+      strength: 0.5, importance: 1, label, summary,
+      tags: ['星际来信'],
+      props: { type: '收纳', status: '正常', source: '星际来信 · ' + fromName, alias: '', nextReview: '明天' },
+      body,
+    };
+    addStar(star);   // 无 sr 的新星在这里补默认：S=2.5, last=now, lit=0, ember=0
+    pushTimeline('review', id, '收纳自 ' + fromName);
+    // 领取：镜像立即置 claimed，再通知服务器（静默降级——失败时下次拉取自然对齐）
+    const rec = mail.list.find(x => x && x.id === msg.id);
+    if (rec) rec.claimed = true;
+    if (window.SRNet && window.SRNet.inbox) window.SRNet.inbox.ack(msg.id, 'claim');
+    window.dispatchEvent(new Event('sr-data'));
+    return star;
+  };
+
+  // 演示星系快照：留给「载入示例星系」用。必须在 refreshMemory 之前深拷贝——
+  // 演示数据只是可选的参观材料，绝不再当作新用户的真实数据落库。
+  const DEMO_SEED = JSON.parse(JSON.stringify({ constellations, stars, connections, notes, inbox, timeline, trash }));
+
+  // 种子里的 count/health/strength 只是占位：打开应用即按真实时间重算全部星的 R
+  //（含 syncCounts），种子的 lastReview/stability 由 strength 相对当前时间反推生成。
+  refreshMemory();
+
+  // 长时间停留：每分钟按真实时间重算一次，广播给在场视图就地更新数值——
+  // 只改数值不加动画，自然兼容 prefers-reduced-motion / data-motion="off"，不会闪烁。
+  setInterval(() => {
+    if (document.hidden) return;
+    refreshMemory();
+    window.dispatchEvent(new CustomEvent('sr-memory'));
+  }, 60000);
 
   // 应用本机已保存的设置：昵称覆盖账户信息，动效偏好落到 <html> data 属性供 CSS 读取
   try {
@@ -453,45 +731,86 @@ window.SR_DATA = (function () {
     document.documentElement.dataset.twinkle = (prefs.twinkle === false || prefs.motion === false) ? 'off' : 'on';
   } catch (e) { }
 
-  // ——— 真实存储：启动时从数据库取回上次的星空 ———
-  // 数据库里已有星系 → 原地替换种子数据并广播 sr-hydrated（app 整体重挂载）；
-  // 首次使用 → 把种子星空写入数据库作为起点。
+  // ——— 真实存储：启动时取回上次的星空 ———
+  // 有 server → 走 REST（sqlite）；无 server（file:// 打开 / 后端未启动）→ 降级 localStorage。
+  // 两边都有快照时按 savedAt / updated_at 新者优先；本地较新则回推给服务器。
+  // 注意：空星系（stars: []）也是合法快照——用户删光全部星域后刷新，
+  // 不能把「空」误判成「没有」而让演示种子复活覆盖真实数据。
+  const looksLikeGalaxy = (d) => d && Array.isArray(d.stars);
+  const hydrate = (d) => {
+    constellations.splice(0, constellations.length, ...(d.constellations || []));
+    stars.splice(0, stars.length, ...d.stars);
+    connections.splice(0, connections.length, ...(d.connections || []));
+    notes.splice(0, notes.length, ...(d.notes || []));
+    inbox.splice(0, inbox.length, ...(d.inbox || []));
+    timeline.splice(0, timeline.length, ...(d.timeline || []));
+    trash.splice(0, trash.length, ...(d.trash || []));
+    Object.keys(byId).forEach(k => delete byId[k]);
+    stars.forEach(s => { byId[s.id] = s; });
+    if (d.account && d.account.name) { account.name = d.account.name; account.avatar = d.account.avatar || account.avatar; }
+    refreshMemory();               // 取回的星空立刻按真实时间重算 R —— 放几天不看真的变暗
+    window.SRNet.setReady();       // 真实数据已就位，此后才允许上传
+    window.dispatchEvent(new CustomEvent('sr-hydrated'));
+  };
+  // 并发冲突（409）：api.js 收到服务器最新版后广播，这里就地重载，收敛到服务器真相
+  window.addEventListener('sr-conflict', (e) => { if (looksLikeGalaxy(e.detail)) hydrate(e.detail); });
+  // 首次使用：进入真空态——「你的星空还很暗」，不再把 12 颗演示星连同
+  // 伪造的 streak / 时间线当成新用户的真实数据落库。演示星系收进 loadDemo()。
+  const startFresh = () => {
+    account.streak = 0;
+    hydrate({ constellations: [], stars: [], connections: [], notes: [], inbox: [], timeline: [], trash: [] });
+    persistRemote();   // 把「空」作为起点写下，之后的空星空刷新不会被任何种子覆盖
+  };
+  // 载入示例星系（可选入口，如列表视图空态）：整棵演示快照替换当前星空并落库
+  const loadDemo = () => {
+    hydrate(JSON.parse(JSON.stringify(DEMO_SEED)));
+    persistRemote();
+  };
+
   if (window.SRNet) {
+    const local = window.SRNet.loadLocal();                       // { savedAt, data } | null
+    const localOk = local && looksLikeGalaxy(local.data);
     window.SRNet.api('/api/hello', { method: 'POST', body: { name: account.name, avatar: account.avatar } })
       .then(r => { if (r.user && r.user.name) { account.name = r.user.name; account.avatar = r.user.avatar || account.avatar; } return window.SRNet.api('/api/galaxy'); })
       .then(r => {
         const d = r && r.data;
-        if (d && Array.isArray(d.stars) && d.stars.length) {
-          constellations.splice(0, constellations.length, ...(d.constellations || []));
-          stars.splice(0, stars.length, ...d.stars);
-          connections.splice(0, connections.length, ...(d.connections || []));
-          notes.splice(0, notes.length, ...(d.notes || []));
-          inbox.splice(0, inbox.length, ...(d.inbox || []));
-          timeline.splice(0, timeline.length, ...(d.timeline || []));
-          trash.splice(0, trash.length, ...(d.trash || []));
-          Object.keys(byId).forEach(k => delete byId[k]);
-          stars.forEach(s => { byId[s.id] = s; });
-          if (d.account && d.account.name) { account.name = d.account.name; account.avatar = d.account.avatar || account.avatar; }
-          syncCounts();
-          window.SRNet.setReady();   // 真实数据已就位，此后才允许上传
-          window.dispatchEvent(new CustomEvent('sr-hydrated'));
+        if (r && r.version != null) window.SRNet.setVersion(r.version);   // 乐观锁基准版本
+        const remoteOk = looksLikeGalaxy(d);
+        // 服务器快照时间：优先 data 内嵌的客户端 savedAt，缺失时退回 sqlite 的 updated_at（UTC）
+        const remoteTs = (remoteOk && d.savedAt) ||
+          (remoteOk && r.updatedAt ? Date.parse(String(r.updatedAt).replace(' ', 'T') + 'Z') || 1 : (remoteOk ? 1 : 0));
+        if (remoteOk && (!localOk || remoteTs >= local.savedAt)) {
+          hydrate(d);
+        } else if (localOk) {
+          hydrate(local.data);     // 本地较新（或服务器为空）：以本地为准
+          persistRemote();         // 并把它回推给服务器
         } else {
-          window.SRNet.setReady();   // 首次使用：确认服务器为空后，把种子存为起点
-          persistRemote();
+          startFresh();            // 首次使用：真空态起步，演示数据改为可选入口
         }
       })
-      .catch(() => { window.SRNet.setReady(); /* 后端未运行时保持纯前端模式 */ });
+      .catch(() => {
+        // 后端未运行 / file:// 打开：降级 localStorage，仍然可读可写
+        if (localOk) hydrate(local.data);
+        else startFresh();
+      });
 
     // 好友数量：给侧边栏「星际漫游」角标用
     window.SRNet.api('/api/friends')
       .then(r => { social.friends = (r.friends || []).length; window.dispatchEvent(new CustomEvent('sr-friends')); })
       .catch(() => { });
+
+    // 星际来信：启动即取一次，侧栏收件箱角标才带上未领取来信（后端未运行时静默为空）
+    refreshMail();
   }
 
   return {
     constellations, stars, connections, byId, notes, inbox, timeline,
     conName, conColor, relatedStars, backlinksOf,
     trash, trashStar, trashDomain, restoreTrash, purgeTrash,
-    addStar, renameStar, touchNote, logIgnite, pushTimeline, syncCounts, account, social, ago,
+    addStar, renameStar, touchNote, logIgnite, pushTimeline, syncCounts, account, social, ago, loadDemo,
+    mail, refreshMail, unclaimedMail, adoptShared,
+    refreshMemory, reviewSuccess, reviewFail, reviewPartial, queueReview, dueTsOf, dueStars,
+    isLit, isEmber, hasSubstance, emberStars, todayTodo,
+    persist: persistRemote,
   };
 })();

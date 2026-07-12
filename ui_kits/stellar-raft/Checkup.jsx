@@ -32,13 +32,53 @@ function SectionTitle({ icon, children, hint }) {
   );
 }
 
-function Checkup({ onClose, onOpenStar, onFocusCon, onFeynman }) {
+// 「去整理」直达收件箱：体检拿不到切视图的回调（app 层只下发了复习 / 费曼 / 星域），
+// 从侧栏唯一的收件箱入口接力——展开态匹配按钮文字，收起态匹配 data-tip。
+function goInbox() {
+  const btn = Array.from(document.querySelectorAll('button')).find(b =>
+    (b.dataset && b.dataset.tip === '收件箱') || (b.textContent || '').trim().startsWith('收件箱'));
+  if (btn) btn.click();
+}
+
+/* 今日待办的一行：图标 + 类别（计数）+ 一句自解释 + 直达动作。
+   待重燃行用暗金发丝边——「曾获认证」的残迹属于点亮语义本身，其余保持冷色。 */
+function TodoRow({ icon, iconColor, title, count, desc, action, ember }) {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '11px 13px', borderRadius: 'var(--r-md)',
+      border: '1px solid ' + (ember ? 'color-mix(in srgb, var(--gold) 16%, transparent)' : 'var(--glass-border)'),
+      background: ember ? 'color-mix(in srgb, var(--gold) 4%, transparent)' : 'rgba(120,150,205,0.05)' }}>
+      <Icon name={icon} size={16} color={iconColor} style={{ flex: 'none' }} />
+      <div style={{ flex: 1, minWidth: 0 }}>
+        <div style={{ display: 'flex', alignItems: 'baseline', gap: 8 }}>
+          <span style={{ fontSize: 13.5, color: 'var(--text-1)' }}>{title}</span>
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: ember ? 'color-mix(in srgb, var(--gold) 72%, var(--text-3))' : 'var(--star-blue)' }}>{count}</span>
+        </div>
+        <div style={{ fontSize: 11.5, color: 'var(--text-3)', marginTop: 3, lineHeight: 1.6 }}>{desc}</div>
+      </div>
+      {action && <div style={{ flex: 'none' }}>{action}</div>}
+    </div>
+  );
+}
+
+function Checkup({ onClose, onOpenStar, onFocusCon, onFeynman, onReview }) {
   const D = window.SR_DATA;
+  // 待办与亮度都是活数据：费曼抽屉 / 复习会话在本视图之上操作后，就地读回新真相
+  const [, bump] = React.useReducer(x => x + 1, 0);
+  React.useEffect(() => {
+    const h = () => bump();
+    ['sr-memory', 'sr-data', 'sr-ignite'].forEach(ev => window.addEventListener(ev, h));
+    return () => ['sr-memory', 'sr-data', 'sr-ignite'].forEach(ev => window.removeEventListener(ev, h));
+  }, []);
   const stars = D.stars;
   const total = stars.length;
+  const dueN = D.dueStars ? D.dueStars().length : 0;
+  // 统一今日待办：到期复习 + 待重燃 + 收件箱待整理（due 与 ember 可重叠——重燃会同时清掉到期）
+  const todo = D.todayTodo ? D.todayTodo() : { due: dueN, ember: 0, inbox: (D.inbox || []).length };
+  const embers = D.emberStars ? D.emberStars() : [];
+  const todoEmpty = todo.due === 0 && todo.ember === 0 && todo.inbox === 0;
 
-  // overall memory health
-  const overall = Math.round(stars.reduce((a, s) => a + s.strength, 0) / total * 100);
+  // overall memory health（0 颗星时为 0，不做除零）
+  const overall = total ? Math.round(stars.reduce((a, s) => a + s.strength, 0) / total * 100) : 0;
   const overallCol = overall >= 70 ? 'var(--gold)' : overall >= 45 ? 'var(--star-blue)' : 'var(--star-blue-dim)';
 
   // distribution by band
@@ -59,28 +99,23 @@ function Checkup({ onClose, onOpenStar, onFocusCon, onFeynman }) {
     return { ...c, avg, members: ss.length, weakStar: weakest, dim: ss.filter(s => s.strength < 0.4).length };
   }).sort((a, b) => a.avg - b.avg);
 
-  // stars most in need of review (overdue or dim, weakest first)
-  const urgent = stars.slice()
-    .filter(s => s.strength < 0.6 || (s.props && s.props.nextReview === '已逾期'))
-    .sort((a, b) => {
-      const ao = (a.props && a.props.nextReview === '已逾期') ? 0 : 1;
-      const bo = (b.props && b.props.nextReview === '已逾期') ? 0 : 1;
-      return ao - bo || a.strength - b.strength;
-    })
-    .slice(0, 6);
+  // 复习队列：与侧栏角标、「开始复习」按钮同一口径（dueStars），
+  // 按真实到期时刻升序——逾期最久的排最前，列表只展示最需要的前 6 颗
+  const urgent = (D.dueStars ? D.dueStars() : []).slice(0, 6);
   const topUrgent = urgent[0];
 
   // weak-constellation nudges — the two coldest domains with dim members
   const weakCons = cons.filter(c => c.avg < 0.6).slice(0, 2);
 
   // recent ignite trend, oldest → newest, cumulative net light gained
-  const events = D.timeline.slice().reverse();
+  //（只统计仍然存在的星：已销毁的星不该继续贡献假曲线）
+  const events = D.timeline.filter(ev => D.byId[ev.starId]).slice().reverse();
   let acc = 0;
   const series = events.map(ev => { acc += parseDelta(ev.delta); return { ev, v: acc }; });
   const netDelta = acc;
-  const igniteN = D.timeline.filter(t => t.kind === 'ignite').length;
-  const reviewN = D.timeline.filter(t => t.kind === 'review').length;
-  const dimN = D.timeline.filter(t => t.kind === 'dim').length;
+  const igniteN = events.filter(t => t.kind === 'ignite').length;
+  const reviewN = events.filter(t => t.kind === 'review').length;
+  const dimN = events.filter(t => t.kind === 'dim').length;
 
   // sparkline geometry
   const SW = 320, SH = 96, PAD = 8;
@@ -117,6 +152,41 @@ function Checkup({ onClose, onOpenStar, onFocusCon, onFeynman }) {
           </div>
         </div>
 
+        {/* 统一今日待办：到期复习 / 待重燃 / 收件箱积压——体检是唯一的待办入口，
+            每类一句自解释 + 一个直达动作 */}
+        <GlassPanel strong radius="lg" pad="none" glow style={{ padding: 18, marginBottom: 16 }}>
+          <SectionTitle icon="list-todo" hint={todoEmpty ? undefined : '到期与待重燃可能重叠'}>今日待办</SectionTitle>
+          {todoEmpty && (
+            <div style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '10px 4px 4px', color: 'var(--text-3)', fontSize: 13 }}>
+              <Icon name="sparkles" size={15} color="var(--star-blue)" />
+              星空明亮，观测台今夜无事。
+            </div>
+          )}
+          {!todoEmpty && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+              {todo.due > 0 && (
+                <TodoRow icon="repeat" iconColor="var(--star-blue)"
+                  title="到期复习" count={`${todo.due} 颗`}
+                  desc="到期的星正在变暗——复习负责保温，别让光溜走。"
+                  action={onReview && <Button variant="primary" size="sm" icon="repeat" glow onClick={onReview}>开始复习</Button>} />
+              )}
+              {todo.ember > 0 && (
+                <TodoRow icon="flame" iconColor="color-mix(in srgb, var(--gold) 60%, var(--text-3))" ember
+                  title="待重燃" count={`${todo.ember} 颗`}
+                  desc="曾点亮的星熄灭后，会在这里等你重燃。"
+                  action={onFeynman && embers[0] &&
+                    <Button size="sm" icon="flame" onClick={() => onFeynman(embers[0].id)}>去重燃{embers[0] ? `「${embers[0].label}」` : ''}</Button>} />
+              )}
+              {todo.inbox > 0 && (
+                <TodoRow icon="inbox" iconColor="var(--star-blue)"
+                  title="收件箱" count={`${todo.inbox} 条待整理`}
+                  desc="捕捉还躺在收件箱里——归入星域、写下内容，才会成为星。"
+                  action={<Button size="sm" icon="folder-input" onClick={goInbox}>去整理</Button>} />
+              )}
+            </div>
+          )}
+        </GlassPanel>
+
         {/* hero row: big health number + distribution */}
         <div style={{ display: 'grid', gridTemplateColumns: '300px 1fr', gap: 16, marginBottom: 16 }}>
           {/* overall */}
@@ -130,9 +200,13 @@ function Checkup({ onClose, onOpenStar, onFocusCon, onFeynman }) {
               <MemoryBar value={overall / 100} height={6} />
             </div>
             <div style={{ fontSize: 12.5, color: 'var(--text-2)', lineHeight: 1.7, marginTop: 14 }}>
-              共 <b style={{ fontFamily: 'var(--font-mono)', color: 'var(--text-1)', fontWeight: 500 }}>{total}</b> 颗知识星，其中
-              <b style={{ color: 'var(--star-blue-dim)', fontWeight: 500 }}> {fadingTotal} </b>颗正在变暗。
-              {fadingTotal > 0 ? '该回来看看了。' : '星空明亮，保持节奏。'}
+              {total === 0
+                ? <span>你的星空还很暗。写下第一颗星，让它发光。</span>
+                : <span>
+                    共 <b style={{ fontFamily: 'var(--font-mono)', color: 'var(--text-1)', fontWeight: 500 }}>{total}</b> 颗知识星，其中
+                    <b style={{ color: 'var(--star-blue-dim)', fontWeight: 500 }}> {fadingTotal} </b>颗偏暗（正变暗或将熄灭）。
+                    {fadingTotal > 0 ? '该回来看看了。' : '星空明亮，保持节奏。'}
+                  </span>}
             </div>
           </GlassPanel>
 
@@ -141,7 +215,7 @@ function Checkup({ onClose, onOpenStar, onFocusCon, onFeynman }) {
             <SectionTitle icon="layers" hint="按记忆强度分层">记忆分布</SectionTitle>
             {/* stacked proportion bar */}
             <div style={{ display: 'flex', height: 10, borderRadius: 999, overflow: 'hidden', background: 'rgba(159,198,255,0.08)', marginBottom: 16 }}>
-              {counts.map(b => b.n > 0 && (
+              {total > 0 && counts.map(b => b.n > 0 && (
                 <div key={b.key} title={`${b.t} · ${b.n}`} style={{ width: `${b.n / total * 100}%`, background: b.c, boxShadow: b.key === 'solid' ? '0 0 8px rgba(255,217,138,0.5)' : 'none' }} />
               ))}
             </div>
@@ -163,14 +237,21 @@ function Checkup({ onClose, onOpenStar, onFocusCon, onFeynman }) {
         {/* main grid */}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
 
-          {/* per-constellation health */}
+          {/* per-domain health */}
           <GlassPanel radius="lg" pad="none" style={{ padding: 18 }}>
-            <SectionTitle icon="orbit" hint="点击飞入该星座">各星座健康度</SectionTitle>
+            <SectionTitle icon="orbit" hint={cons.length ? '点击飞入该星域' : undefined}>各星域健康度</SectionTitle>
+            {cons.length === 0 && (
+              <div style={{ padding: '24px 8px', textAlign: 'center', color: 'var(--text-3)', fontSize: 13, lineHeight: 1.8 }}>
+                还没有星域。写下第一颗星，体检才有对象。
+              </div>
+            )}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
               {cons.map(c => (
                 <div key={c.id} onClick={() => onFocusCon && onFocusCon(c.id)} title={`在星图中聚焦 ${c.name}`}
+                  role="button" tabIndex={0} className="sr-focus-ring"
+                  onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onFocusCon && onFocusCon(c.id); } }}
                   style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '9px 10px', borderRadius: 'var(--r-md)', cursor: 'pointer', transition: 'background var(--dur-fast)' }}
-                  onMouseEnter={e => { e.currentTarget.style.background = 'rgba(159,198,255,0.06)'; }}
+                  onMouseEnter={e => { e.currentTarget.style.background = 'color-mix(in srgb, var(--star-blue) 8%, transparent)'; }}
                   onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; }}>
                   <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, width: 92, flex: 'none', fontSize: 13, color: 'var(--text-2)' }}>
                     <span style={{ width: 7, height: 7, borderRadius: '50%', background: c.color, boxShadow: `0 0 6px ${c.color}` }} />{c.name}
@@ -185,18 +266,31 @@ function Checkup({ onClose, onOpenStar, onFocusCon, onFeynman }) {
 
           {/* most-needed review list */}
           <GlassPanel radius="lg" pad="none" style={{ padding: 18 }}>
-            <SectionTitle icon="trending-down" hint={`${urgent.length} 颗待复习`}>最需复习</SectionTitle>
+            <SectionTitle icon="trending-down" hint={dueN > 0 ? `${dueN} 颗到期 · 优先回看` : undefined}>最需复习</SectionTitle>
+            {/* 到期队列头部：进入复习会话（回忆 → 翻开 → 三档自评） */}
+            {dueN > 0 && onReview && (
+              <Button variant="primary" size="sm" icon="repeat" glow onClick={onReview}
+                style={{ width: '100%', marginBottom: 10 }}>
+                开始复习（{dueN} 颗到期）
+              </Button>
+            )}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
               {urgent.length === 0 && (
-                <div style={{ padding: '24px 0', textAlign: 'center', color: 'var(--text-3)', fontSize: 13 }}>没有正在变暗的星，状态很好。</div>
+                <div style={{ padding: '24px 0', textAlign: 'center', color: 'var(--text-3)', fontSize: 13 }}>
+                  {total === 0 ? '还没有星。回到星图写下第一颗，它会在需要时来这里等你。' : '没有到期的星，状态很好。'}
+                </div>
               )}
               {urgent.map(s => {
-                const b = band(s.strength);
+                // 待重燃覆盖亮度四档的状态文字（与 props.status 同一口径），用暗金余烬色
+                const ember = D.isEmber && D.isEmber(s);
+                const b = ember ? { key: 'ember', t: '待重燃', c: 'color-mix(in srgb, var(--gold) 60%, var(--text-3))' } : band(s.strength);
                 const overdue = s.props && s.props.nextReview === '已逾期';
                 return (
-                  <div key={s.id} onClick={() => (onFeynman ? onFeynman(s.id) : onOpenStar && onOpenStar(s.id))} title="进入费曼复习"
+                  <div key={s.id} onClick={() => (onFeynman ? onFeynman(s.id) : onOpenStar && onOpenStar(s.id))} title="费曼内化"
+                    role="button" tabIndex={0} className="sr-focus-ring"
+                    onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); (onFeynman ? onFeynman(s.id) : onOpenStar && onOpenStar(s.id)); } }}
                     style={{ display: 'flex', alignItems: 'center', gap: 11, padding: '10px 11px', borderRadius: 'var(--r-md)', border: '1px solid var(--glass-border)', background: 'rgba(120,150,205,0.05)', cursor: 'pointer', transition: 'background var(--dur-fast)' }}
-                    onMouseEnter={e => { e.currentTarget.style.background = 'rgba(159,198,255,0.09)'; }}
+                    onMouseEnter={e => { e.currentTarget.style.background = 'color-mix(in srgb, var(--star-blue) 10%, transparent)'; }}
                     onMouseLeave={e => { e.currentTarget.style.background = 'rgba(120,150,205,0.05)'; }}>
                     <span style={{ width: 8, height: 8, borderRadius: '50%', flex: 'none', background: b.c, boxShadow: `0 0 7px ${b.c}` }} />
                     <div style={{ minWidth: 0, flex: 1 }}>
@@ -219,7 +313,13 @@ function Checkup({ onClose, onOpenStar, onFocusCon, onFeynman }) {
 
           {/* recent ignite trend */}
           <GlassPanel radius="lg" pad="none" style={{ padding: 18 }}>
-            <SectionTitle icon="sparkles" hint="本周点亮 / 复习 / 变暗">近期点亮趋势</SectionTitle>
+            <SectionTitle icon="sparkles" hint={series.length ? '本周点亮 / 复习 / 变暗' : undefined}>近期点亮趋势</SectionTitle>
+            {series.length === 0 && (
+              <div style={{ padding: '24px 0', textAlign: 'center', color: 'var(--text-3)', fontSize: 13 }}>
+                还没有点亮记录。第一次「融会贯通」之后，这里会亮起来。
+              </div>
+            )}
+            {series.length > 0 && (
             <div style={{ display: 'flex', alignItems: 'flex-end', gap: 16 }}>
               <svg width="100%" viewBox={`0 0 ${SW} ${SH}`} preserveAspectRatio="none" style={{ flex: 1, height: SH }}>
                 <defs>
@@ -251,13 +351,16 @@ function Checkup({ onClose, onOpenStar, onFocusCon, onFeynman }) {
                 </div>
               </div>
             </div>
+            )}
           </GlassPanel>
 
-          {/* weak-constellation nudges */}
+          {/* weak-domain nudges */}
           <GlassPanel radius="lg" pad="none" style={{ padding: 18 }}>
-            <SectionTitle icon="compass" hint="点击前往">薄弱星座建议</SectionTitle>
+            <SectionTitle icon="compass" hint={weakCons.length ? '点击前往' : undefined}>薄弱星域建议</SectionTitle>
             {weakCons.length === 0 && (
-              <div style={{ padding: '24px 0', textAlign: 'center', color: 'var(--text-3)', fontSize: 13 }}>各星座都还明亮，无需特别关注。</div>
+              <div style={{ padding: '24px 0', textAlign: 'center', color: 'var(--text-3)', fontSize: 13 }}>
+                {cons.length === 0 ? '有了星域之后，这里会提醒你哪一片正在变暗。' : '各星域都还明亮，无需特别关注。'}
+              </div>
             )}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               {weakCons.map(c => (
@@ -270,8 +373,8 @@ function Checkup({ onClose, onOpenStar, onFocusCon, onFeynman }) {
                     <Button variant="ghost" size="sm" icon="arrow-right" onClick={() => onFocusCon && onFocusCon(c.id)}>前往</Button>
                   </div>
                   <div style={{ fontSize: 12, color: 'var(--text-2)', lineHeight: 1.65, marginTop: 8 }}>
-                    {c.dim} 颗星正在变暗{c.weakStar ? <>，最暗的是「<span onClick={() => onOpenStar && onOpenStar(c.weakStar.id)} style={{ color: 'var(--star-blue)', cursor: 'pointer' }}>{c.weakStar.label}</span>」</> : null}。
-                    建议优先回看这片星座，把光度找回来。
+                    {c.dim} 颗星正在变暗{c.weakStar ? <>，最暗的是「<span onClick={() => onOpenStar && onOpenStar(c.weakStar.id)} role="button" tabIndex={0} className="sr-focus-ring" onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onOpenStar && onOpenStar(c.weakStar.id); } }} style={{ color: 'var(--star-blue)', cursor: 'pointer' }}>{c.weakStar.label}</span>」</> : null}。
+                    建议优先回看这片星域，把光度找回来。
                   </div>
                 </div>
               ))}
@@ -281,13 +384,19 @@ function Checkup({ onClose, onOpenStar, onFocusCon, onFeynman }) {
 
         {/* actions */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginTop: 22 }}>
-          <Button variant="primary" size="md" icon="repeat" glow disabled={!topUrgent}
-            onClick={() => topUrgent && (onFeynman ? onFeynman(topUrgent.id) : onOpenStar && onOpenStar(topUrgent.id))}>
-            去复习最暗的星{topUrgent ? `「${topUrgent.label}」` : ''}
-          </Button>
+          {total === 0 ? (
+            <Button variant="primary" size="md" icon="orbit" glow onClick={onClose}>
+              回到星图，写下第一颗星
+            </Button>
+          ) : (
+            <Button variant="primary" size="md" icon="repeat" glow disabled={!topUrgent}
+              onClick={() => topUrgent && (onFeynman ? onFeynman(topUrgent.id) : onOpenStar && onOpenStar(topUrgent.id))}>
+              去复习最暗的星{topUrgent ? `「${topUrgent.label}」` : ''}
+            </Button>
+          )}
           {cons[0] && (
             <Button variant="secondary" size="md" icon="compass" onClick={() => onFocusCon && onFocusCon(cons[0].id)}>
-              前往最薄弱星座
+              前往最薄弱星域
             </Button>
           )}
           <div style={{ flex: 1 }} />

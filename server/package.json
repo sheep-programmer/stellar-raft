@@ -1,0 +1,6 @@
+{
+  "name": "stellar-raft-server",
+  "private": true,
+  "type": "commonjs",
+  "description": "星图本地后端（零 npm 依赖，node:sqlite）。根 package.json 是 type:module，这里就近声明 commonjs，保证 node server/server.js 可直接启动。"
+}

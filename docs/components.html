@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>组件 · 星图设计系统</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26'%3E%3Crect x='.5' y='.5' width='25' height='25' rx='7.5' fill='%23080c1c' stroke='rgba(159,198,255,.28)'/%3E%3Cpath d='M7.5 9 L16.5 7 L19 16.5 L11 18.5' stroke='rgba(159,198,255,.5)' stroke-width='.8' fill='none' stroke-linejoin='round' stroke-linecap='round'/%3E%3Ccircle cx='7.5' cy='9' r='1.35' fill='%23d6e6ff'/%3E%3Ccircle cx='19' cy='16.5' r='1.15' fill='%239fc6ff'/%3E%3Ccircle cx='11' cy='18.5' r='1.1' fill='%239fc6ff'/%3E%3Ccircle cx='16.5' cy='7' r='3.4' fill='%23ffd98a' opacity='.22'/%3E%3Ccircle cx='16.5' cy='7' r='1.8' fill='%23ffe9b0'/%3E%3C/svg%3E">
+  <script>try{var m=location.search.match(/[?&]theme=(dawn|space)/);var t=m?m[1]:localStorage.getItem('sr.docs.theme');if(t==='dawn')document.documentElement.dataset.theme='dawn';if(m)localStorage.setItem('sr.docs.theme',m[1])}catch(e){}</script>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+  <sr-starfield class="docs-sky" style="position:fixed" density="0.5"></sr-starfield>
+
+  <header class="docs-header">
+    <div class="docs-header-inner">
+      <a class="docs-brand" href="index.html"><span class="zh">星图</span><span class="en">Stellar Raft</span></a>
+      <nav class="docs-nav" aria-label="文档导航">
+        <a href="index.html">首页</a>
+        <a href="getting-started.html">开始使用</a>
+        <a href="foundations.html">基础</a>
+        <a href="components.html" aria-current="page">组件</a>
+        <a href="showcase.html">应用复刻</a>
+      </nav>
+      <button class="theme-toggle" type="button" title="切换 深空 / 黎明" aria-label="切换 深空 / 黎明 主题">
+        <i data-lucide="sunrise" class="ic-space"></i>
+        <i data-lucide="moon-star" class="ic-dawn"></i>
+      </button>
+    </div>
+  </header>
+
+  <main class="docs-main">
+    <div class="hud-label">COMPONENTS</div>
+    <h1 class="docs-h1">组件</h1>
+    <p class="docs-lede">全部组件编译于 <code>_ds_bundle.js</code>，挂载在命名空间 <code>window.StellarRaftDesignSystem_2866af</code> 下。本页由 <code>docs/registry.js</code> 里的单一数组 <code>REGISTRY</code> 驱动——新增组件只需往数组追加一项。props 表提炼自各组件的 <code>.d.ts</code>，用法要点提炼自 <code>.prompt.md</code>。</p>
+
+    <nav class="anchor-rail" id="anchor-rail" aria-label="组件锚点"></nav>
+
+    <div id="gallery"></div>
+  </main>
+
+  <footer class="docs-footer">
+    <span>星图 · Stellar Raft 设计系统 —— 知识是唯一的光。</span>
+    <span class="mono" id="reg-count"></span>
+  </footer>
+
+  <script src="../assets/starfield.js"></script>
+  <script src="registry.js"></script>
+  <script>
+  /* ===== 画廊渲染：完全由 REGISTRY 驱动，零手写组件章节 ===== */
+  (function () {
+    var gallery = document.getElementById('gallery');
+    var rail = document.getElementById('anchor-rail');
+    var seenCards = {};   /* 同一张演示卡只嵌一次（按路径去重） */
+    var seenGroups = {};
+
+    function el(tag, cls, text) {
+      var n = document.createElement(tag);
+      if (cls) n.className = cls;
+      if (text != null) n.textContent = text;
+      return n;
+    }
+
+    REGISTRY.forEach(function (c) {
+      /* 锚点胶囊 */
+      var a = el('a', null, c.name);
+      a.href = '#' + c.id;
+      rail.appendChild(a);
+
+      /* 分组头（同组仅一次） */
+      if (!seenGroups[c.group]) {
+        seenGroups[c.group] = true;
+        var gs = el('section', 'docs-section');
+        gs.appendChild(el('div', 'hud-label', c.groupLabel || c.group.toUpperCase()));
+        gallery.appendChild(gs);
+      }
+
+      /* 演示卡（同一路径仅嵌一次） */
+      if (c.card && !seenCards[c.card]) {
+        seenCards[c.card] = true;
+        var fc = el('div', 'frame-card');
+        var f = document.createElement('iframe');
+        f.src = c.card;
+        f.style.height = (c.cardHeight || 360) + 24 + 'px';
+        f.loading = 'lazy';
+        f.title = (c.groupLabel || c.group) + ' 演示卡';
+        f.setAttribute('data-theme-sync', '');
+        fc.appendChild(f);
+        gallery.appendChild(fc);
+      }
+
+      /* 组件章节 */
+      var sec = el('section', 'comp-section');
+      sec.id = c.id;
+
+      var head = el('div', 'comp-head');
+      head.appendChild(el('h3', null, c.name));
+      head.appendChild(el('span', 'cn', c.cn));
+      var src = el('span', 'sub');
+      src.style.cssText = 'font-family:var(--font-mono);font-size:11px;color:var(--text-3)';
+      src.textContent = (c.dts || '').replace('../', '');
+      head.appendChild(src);
+      sec.appendChild(head);
+
+      sec.appendChild(el('p', 'summary', c.summary));
+
+      /* 代码示例 */
+      if (c.code) {
+        var cb = el('div', 'codeblock');
+        cb.appendChild(el('div', 'cb-head', c.name + ' · 用法'));
+        var pre = el('pre');
+        pre.textContent = c.code;
+        cb.appendChild(pre);
+        sec.appendChild(cb);
+      }
+
+      /* props 表 */
+      if (c.props && c.props.length) {
+        var scroll = el('div', 'table-scroll');
+        var table = el('table', 'tk-table');
+        var thead = el('thead');
+        var htr = el('tr');
+        ['Prop', '类型', '默认', '说明'].forEach(function (h) { htr.appendChild(el('th', null, h)); });
+        thead.appendChild(htr);
+        table.appendChild(thead);
+        var tbody = el('tbody');
+        c.props.forEach(function (p) {
+          var tr = el('tr');
+          tr.appendChild(el('td', 'tok', p.name));
+          var tdType = el('td', 'val', p.type);
+          tdType.style.whiteSpace = 'normal';
+          tr.appendChild(tdType);
+          tr.appendChild(el('td', 'val', p.def || '—'));
+          tr.appendChild(el('td', null, p.desc));
+          tbody.appendChild(tr);
+        });
+        table.appendChild(tbody);
+        scroll.appendChild(table);
+        sec.appendChild(scroll);
+      }
+
+      /* 用法要点 */
+      if (c.usage && c.usage.length) {
+        var ul = el('ul', 'usage-list');
+        c.usage.forEach(function (u) { ul.appendChild(el('li', null, u)); });
+        sec.appendChild(ul);
+      }
+
+      gallery.appendChild(sec);
+    });
+
+    document.getElementById('reg-count').textContent =
+      'REGISTRY · ' + REGISTRY.length + ' COMPONENTS · WINDOW.STELLARRAFTDESIGNSYSTEM_2866AF';
+  })();
+  </script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="docs.js"></script>
+</body>
+</html>

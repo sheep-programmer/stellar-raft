@@ -2,7 +2,7 @@
    right-click context menu, slash insert, selection toolbar, many block types,
    contentEditable text, + the right knowledge rail. Content is data-driven:
    each star renders its own body / summary / properties / relations. */
-const { GlassPanel, Icon, IconButton, Input, Tag, Badge, MemoryBar, Button } = window.StellarRaftDesignSystem_2866af;
+const { GlassPanel, Icon, IconButton, Input, Tag, Badge, MemoryBar, Button, Select, Modal } = window.StellarRaftDesignSystem_2866af;
 
 const TXT = { default: 'var(--text-1)', blue: 'var(--star-blue)', gold: 'var(--gold)', dim: 'var(--star-blue-dim)', danger: 'var(--danger)' };
 const BG = { none: 'transparent', bgblue: 'rgba(159,198,255,0.10)', bggold: 'rgba(255,217,138,0.10)', bgdeep: 'rgba(26,35,80,0.45)' };
@@ -10,58 +10,39 @@ const uid = () => 'b' + Math.random().toString(36).slice(2, 8);
 
 const EDITABLE = ['p', 'h1', 'h2', 'h3', 'bulleted', 'numbered', 'todo', 'quote', 'toggle', 'callout'];
 
-/* ---- Markdown 支持：行内标记 → HTML，整段 Markdown → 块数组（粘贴时使用） ---- */
-const escHtml = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-const CODE_SPAN_CSS = 'font-family:var(--font-mono);font-size:0.92em;background:rgba(159,198,255,0.14);padding:1px 5px;border-radius:5px;';
-const mdInline = (s) => escHtml(s)
-  .replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>')
-  .replace(/(^|[^*])\*([^*\s][^*]*)\*/g, '$1<i>$2</i>')
-  .replace(/`([^`]+)`/g, '<code style="' + CODE_SPAN_CSS + '">$1</code>')
-  .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, '<a href="$2" style="color:var(--star-blue);text-decoration:underline;text-underline-offset:3px;">$1</a>');
+// 新建/转换为结构块时初始化真实空结构——否则 CodeBlock/DataTable 会兜底渲染演示
+// 内容（「看到」的不等于「存下」的），导出也把演示表当真数据写出。
+const typeExtras = (type, existing) => {
+  const e = existing || {};
+  const x = {};
+  if (type === 'code' && e.code == null) { x.code = ''; x.lang = e.lang || 'python'; x._new = true; }
+  if (type === 'table' && !e.head) { x.head = ['列 1', '列 2']; x.rows = [['', ''], ['', '']]; }
+  if (type === 'math' && e.tex == null) { x.tex = ''; x._new = true; }
+  if (type === 'toggle' && e.child == null) { x.child = ''; x.open = true; }
+  return x;
+};
 
-function parseMdBlocks(text) {
-  const lines = text.replace(/\r\n?/g, '\n').split('\n');
-  const out = [];
-  let i = 0, m;
-  while (i < lines.length) {
-    const l = lines[i].trim();
-    if (!l) { i++; continue; }
-    if ((m = l.match(/^```(\w*)/))) {                                    // 代码围栏
-      const buf = []; i++;
-      while (i < lines.length && !/^```/.test(lines[i].trim())) { buf.push(lines[i]); i++; }
-      i++;
-      out.push({ id: uid(), type: 'code', lang: (m[1] || 'plaintext').toLowerCase(), code: buf.join('\n') });
-    } else if (/^\$\$/.test(l)) {                                        // 数学块
-      if (l.length > 4 && /\$\$$/.test(l)) { out.push({ id: uid(), type: 'math', tex: l.slice(2, -2).trim() }); i++; }
-      else {
-        const buf = []; i++;
-        while (i < lines.length && !/\$\$/.test(lines[i])) { buf.push(lines[i]); i++; }
-        i++;
-        out.push({ id: uid(), type: 'math', tex: buf.join('\n').trim() });
-      }
-    } else if (/^\|.+\|$/.test(l)) {                                     // 表格
-      const rowsRaw = [];
-      while (i < lines.length && /^\|.+\|$/.test(lines[i].trim())) { rowsRaw.push(lines[i].trim()); i++; }
-      const cells = (r) => r.slice(1, -1).split('|').map(c => c.trim());
-      const body = rowsRaw.slice(1).filter(r => !/^\|[\s:\-|]+\|$/.test(r)).map(cells);
-      out.push({ id: uid(), type: 'table', head: cells(rowsRaw[0]), rows: body });
-    } else if (/^(-{3,}|\*{3,})$/.test(l)) { out.push({ id: uid(), type: 'divider' }); i++; }
-    else if ((m = l.match(/^(#{1,3})\s+(.*)/))) { out.push({ id: uid(), type: 'h' + m[1].length, text: mdInline(m[2]) }); i++; }
-    else if ((m = l.match(/^[-*]\s+\[( |x|X)\]\s+(.*)/))) { out.push({ id: uid(), type: 'todo', checked: m[1].toLowerCase() === 'x', text: mdInline(m[2]) }); i++; }
-    else if ((m = l.match(/^[-*]\s+(.*)/))) { out.push({ id: uid(), type: 'bulleted', text: mdInline(m[1]) }); i++; }
-    else if ((m = l.match(/^\d+[.)]\s+(.*)/))) { out.push({ id: uid(), type: 'numbered', text: mdInline(m[1]) }); i++; }
-    else if ((m = l.match(/^>\s?(.*)/))) { out.push({ id: uid(), type: 'quote', text: mdInline(m[1]) }); i++; }
-    else { out.push({ id: uid(), type: 'p', text: mdInline(l) }); i++; }
-  }
-  return out;
-}
+/* 白名单 HTML 清洗（sanitize.js）：渲染前 + 入库前双端调用；协议白名单同源。
+   sanitize.js 加载失败时兜底为最小转义，绝不裸渲染原始 HTML。 */
+const SAN = (typeof window !== 'undefined' && window.SRSanitize) || null;
+const sanHtml = (h) => SAN ? SAN.sanitizeHtml(h) : String(h == null ? '' : h).replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const safeUrl = (u) => SAN ? SAN.safeUrl(u) : (/^\s*(javascript|data|vbscript):/i.test(String(u || '')) ? null : u);
+
+/* ---- Markdown 支持：核心搬进 mdcore.js（window.SRMd，纯字符串、Node 可测）。
+   这里只留薄封装与加载失败的最小兜底。 ---- */
+const escHtml = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const MD = (typeof window !== 'undefined' && window.SRMd) || null;
+const CODE_SPAN_CSS = (MD && MD.CODE_SPAN_CSS) || 'font-family:var(--font-mono);font-size:0.92em;background:color-mix(in srgb, var(--star-blue) 14%, transparent);padding:1px 5px;border-radius:5px;';
+const parseMdBlocks = (text) => MD ? MD.parseMdBlocks(text)
+  : String(text || '').split('\n').filter(l => l.trim()).map(l => ({ id: uid(), type: 'p', text: escHtml(l) }));
+const matchInlineMd = (pre) => (MD && MD.matchInline) ? MD.matchInline(pre) : null;
 
 function Handle({ icon, title, onClick, onMouseDown }) {
   const [h, setH] = React.useState(false);
   return (
-    <button type="button" title={title} onMouseDown={(e) => { e.preventDefault(); if (onMouseDown) onMouseDown(e); }} onClick={onClick}
+    <button type="button" title={title} className="sr-focus-ring sr-hit40" onMouseDown={(e) => { e.preventDefault(); if (onMouseDown) onMouseDown(e); }} onClick={onClick}
       onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)}
-      style={{ width: 22, height: 24, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 5,
+      style={{ width: 22, height: 24, position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 5,
         background: h ? 'rgba(159,198,255,0.12)' : 'transparent', border: 'none', cursor: 'grab', color: 'var(--text-3)', padding: 0 }}>
       <Icon name={icon} size={15} color="currentColor" />
     </button>
@@ -80,22 +61,14 @@ function useDawn() {
 
 const CODE_LANGS = (window.SR_HL && window.SR_HL.LANGS) || ['python', 'javascript', 'plaintext'];
 
-function CodeBlock({ code: codeProp, lang: langProp, onCommitCode, autoEdit }) {
+function CodeBlock({ code: codeProp, lang: langProp, onCommitCode, onCommitLang, onCopyFail, autoEdit }) {
   const dawn = useDawn();
   const [copied, setCopied] = React.useState(false);
-  const [lang, setLang] = React.useState(langProp || 'python');
-  const [menu, setMenu] = React.useState(false);
-  const [editing, setEditing] = React.useState(false);
-  const langBtnRef = React.useRef(null);
-  const [menuPos, setMenuPos] = React.useState(null);
-  React.useLayoutEffect(() => {
-    if (!menu || !langBtnRef.current) return;
-    const r = langBtnRef.current.getBoundingClientRect();
-    const spaceBelow = window.innerHeight - r.bottom - 16;
-    const below = spaceBelow >= 220 || spaceBelow >= r.top;
-    const maxH = Math.max(160, Math.min(340, below ? spaceBelow : r.top - 16));
-    setMenuPos(below ? { left: r.left, top: r.bottom + 6, maxH } : { left: r.left, bottom: window.innerHeight - r.top + 6, maxH });
-  }, [menu]);
+  const [lang, setLangState] = React.useState(langProp || 'python');
+  // 语言切换必须落盘：本地 state + 回写块（否则重开 / 导出语言回退，高亮按错语言）
+  const setLang = (v) => { setLangState(v); if (v && onCommitLang) onCommitLang(v); };
+  // 语言选择走 DS Select（combobox 键盘词汇 + 焦点环 + 双主题皆由组件承担）
+  const langOpts = (CODE_LANGS.includes(lang) ? CODE_LANGS : [lang, ...CODE_LANGS]).map(l => ({ value: l, label: l }));
 
   // Light code surface in dawn, deep surface at night — syntax palette per theme.
   const P = dawn
@@ -109,53 +82,41 @@ function CodeBlock({ code: codeProp, lang: langProp, onCommitCode, autoEdit }) {
   const rows = HL ? HL.tokenize(code, lang) : code.split('\n').map(line => [{ t: line, c: 'plain' }]);
 
   return (
-    <div style={{ background: P.bg, border: '1px solid ' + P.border, borderRadius: 'var(--r-md)', overflow: 'hidden', margin: '2px 0' }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 12px', borderBottom: '1px solid ' + P.border, background: P.head, position: 'relative' }}>
-        <span style={{ display: 'flex', gap: 5 }}>
-          {['#ff6b6b88', '#ffc94e99', '#5ec98e99'].map((c, i) => <span key={i} style={{ width: 9, height: 9, borderRadius: '50%', background: c }} />)}
-        </span>
-        {editing ? (
-          <input autoFocus defaultValue={lang}
-            onBlur={(e) => { const v = e.target.value.trim().toLowerCase(); if (v) setLang(v); setEditing(false); }}
-            onKeyDown={(e) => { if (e.key === 'Enter') { const v = e.target.value.trim().toLowerCase(); if (v) setLang(v); setEditing(false); } if (e.key === 'Escape') setEditing(false); }}
-            style={{ marginLeft: 4, width: 110, background: 'transparent', border: 'none', borderBottom: '1px solid ' + P.meta, outline: 'none', color: P.plain, fontFamily: 'var(--font-mono)', fontSize: 11, padding: '1px 0' }} />
-        ) : (
-          <button type="button" ref={langBtnRef} onClick={() => setMenu(m => !m)} onDoubleClick={() => { setMenu(false); setEditing(true); }}
-            title="点击切换语言 · 双击直接编辑"
-            style={{ display: 'inline-flex', alignItems: 'center', gap: 4, marginLeft: 4, padding: '2px 6px', borderRadius: 6, background: menu ? (dawn ? 'rgba(36,52,96,0.08)' : 'rgba(159,198,255,0.1)') : 'transparent', border: 'none', cursor: 'pointer', fontFamily: 'var(--font-mono)', fontSize: 11, color: P.meta }}>
-            {lang} <Icon name="chevron-down" size={12} color="currentColor" style={{ transform: menu ? 'rotate(180deg)' : 'none', transition: 'transform var(--dur-fast)' }} />
-          </button>
-        )}
+    <div style={{ background: P.bg, border: '1px solid ' + P.border, borderRadius: 'var(--r-md)', margin: '2px 0' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '6px 12px 6px 10px', borderBottom: '1px solid ' + P.border, background: P.head, borderRadius: 'var(--r-md) var(--r-md) 0 0', position: 'relative' }}>
+        <Icon name="code" size={14} color={P.meta} style={{ flex: 'none' }} />
+        <Select size="sm" aria-label="代码语言" value={lang} options={langOpts}
+          onChange={(v) => setLang(v)} style={{ width: 148, flex: 'none' }} />
         <div style={{ flex: 1 }} />
-        <button type="button" onClick={() => { setCopied(true); setTimeout(() => setCopied(false), 1200); }}
+        <button type="button" className="sr-focus-ring sr-hit40" onClick={() => {
+          // 真正写剪贴板；成功后才切「已复制」，失败降级隐藏 textarea，再失败给提示
+          const done = () => { setCopied(true); setTimeout(() => setCopied(false), 1200); };
+          const fallback = () => {
+            try {
+              const ta = document.createElement('textarea');
+              ta.value = code; ta.style.position = 'fixed'; ta.style.opacity = '0';
+              document.body.appendChild(ta); ta.select();
+              const ok = document.execCommand('copy'); ta.remove();
+              if (ok) done(); else if (onCopyFail) onCopyFail();
+            } catch (e) { if (onCopyFail) onCopyFail(); }
+          };
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(code).then(done).catch(fallback);
+          } else fallback();
+        }}
+          title="复制代码"
           style={{ display: 'inline-flex', alignItems: 'center', gap: 5, background: 'transparent', border: 'none', cursor: 'pointer', color: copied ? (dawn ? '#b8801a' : '#ffd98a') : P.meta, fontSize: 11.5, fontFamily: 'var(--font-mono)' }}>
           <Icon name={copied ? 'check' : 'copy'} size={13} color="currentColor" />{copied ? '已复制' : '复制'}
         </button>
-        {menu && menuPos && (
-          <React.Fragment>
-            <div onClick={() => setMenu(false)} style={{ position: 'fixed', inset: 0, zIndex: 9 }} />
-            <div style={{ position: 'fixed', left: menuPos.left, top: menuPos.top, bottom: menuPos.bottom, zIndex: 10, width: 160 }}>
-              <GlassPanel strong radius="md" pad="none" style={{ padding: 5, maxHeight: menuPos.maxH, overflow: 'auto' }}>
-                {CODE_LANGS.map(l => (
-                  <div key={l} onClick={() => { setLang(l); setMenu(false); }}
-                    style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '6px 9px', borderRadius: 'var(--r-sm)', cursor: 'pointer', fontFamily: 'var(--font-mono)', fontSize: 12.5, color: l === lang ? 'var(--gold)' : 'var(--text-1)' }}
-                    onMouseEnter={e => e.currentTarget.style.background = dawn ? 'rgba(36,52,96,0.07)' : 'rgba(159,198,255,0.08)'} onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
-                    <span style={{ width: 14, display: 'inline-flex' }}>{l === lang && <Icon name="check" size={13} color="var(--gold)" />}</span>{l}
-                  </div>
-                ))}
-              </GlassPanel>
-            </div>
-          </React.Fragment>
-        )}
       </div>
       {editingCode ? (
         <textarea value={code} autoFocus spellCheck={false}
           onChange={(e) => setCode(e.target.value)}
           onBlur={() => { setEditingCode(false); if (onCommitCode) onCommitCode(code); }}
           onKeyDown={(e) => { if (e.key === 'Escape') { e.currentTarget.blur(); } }}
-          style={{ display: 'block', width: '100%', boxSizing: 'border-box', minHeight: Math.max(80, rows.length * 22 + 24), background: 'transparent', color: P.plain, border: 'none', outline: 'none', resize: 'vertical', fontFamily: 'var(--font-mono)', fontSize: 12.5, lineHeight: 1.85, padding: '12px 14px', tabSize: 4 }} />
+          style={{ display: 'block', width: '100%', boxSizing: 'border-box', minHeight: Math.max(80, rows.length * 22 + 24), background: 'transparent', color: P.plain, border: 'none', outline: 'none', resize: 'vertical', fontFamily: 'var(--font-mono)', fontSize: 12.5, lineHeight: 1.85, padding: '12px 14px', tabSize: 4, borderRadius: '0 0 var(--r-md) var(--r-md)' }} />
       ) : (
-        <div onClick={() => setEditingCode(true)} title="点击编辑代码" style={{ padding: '12px 14px', fontFamily: 'var(--font-mono)', fontSize: 12.5, lineHeight: 1.85, color: P.plain, overflowX: 'auto', cursor: 'text', minHeight: 24 }}>
+        <div onClick={() => setEditingCode(true)} title="点击编辑代码" style={{ padding: '12px 14px', fontFamily: 'var(--font-mono)', fontSize: 12.5, lineHeight: 1.85, color: P.plain, overflowX: 'auto', cursor: 'text', minHeight: 24, borderRadius: '0 0 var(--r-md) var(--r-md)' }}>
           {rows.map((toks, i) => (
             <div key={i} style={{ display: 'flex', gap: 16, whiteSpace: 'pre' }}>
               <span style={{ width: 18, flex: 'none', textAlign: 'right', color: P.ln, userSelect: 'none' }}>{i + 1}</span>
@@ -168,21 +129,46 @@ function CodeBlock({ code: codeProp, lang: langProp, onCommitCode, autoEdit }) {
   );
 }
 
-function DataTable({ head: headProp, rows: rowsProp }) {
+function DataTable({ head: headProp, rows: rowsProp, onCommit }) {
+  // 单元格失焦即把 textContent 回写 head/rows 并 onCommit 落盘——不再静默丢失。
   const head = headProp || ['理论', 'S 上限', '是否定域'];
   const rows = rowsProp || [['经典隐变量', '2', '是'], ['量子力学', '2√2 ≈ 2.83', '否'], ['实验观测', '≈ 2.4', '—']];
-  const cell = (txt, isHead) => (
-    <td contentEditable suppressContentEditableWarning style={{ outline: 'none', padding: '9px 13px', borderRight: '1px solid var(--line)', borderBottom: '1px solid var(--line)',
-      fontSize: 13.5, color: isHead ? 'var(--text-1)' : 'var(--text-2)', fontWeight: isHead ? 500 : 400, background: isHead ? 'rgba(159,198,255,0.05)' : 'transparent' }}>{txt}</td>
+  const cols = head.length;
+  const commit = (nh, nr) => { if (onCommit) onCommit(nh.slice(), nr.map(r => r.slice())); };
+  const setHeadCell = (j, v) => { if (head[j] === v) return; const nh = head.slice(); nh[j] = v; commit(nh, rows); };
+  const setBodyCell = (i, j, v) => { if ((rows[i] || [])[j] === v) return; const nr = rows.map(r => r.slice()); nr[i][j] = v; commit(head, nr); };
+  const addRow = () => commit(head, [...rows, head.map(() => '')]);
+  const delRow = (i) => { if (rows.length <= 1) return; commit(head, rows.filter((_, k) => k !== i)); };
+  const addCol = () => commit([...head, '列 ' + (cols + 1)], rows.map(r => [...r, '']));
+  const delCol = (j) => { if (cols <= 1) return; commit(head.filter((_, k) => k !== j), rows.map(r => r.filter((_, k) => k !== j))); };
+  const cell = (txt, isHead, onWrite) => (
+    <td contentEditable suppressContentEditableWarning onBlur={(e) => onWrite(e.currentTarget.textContent)}
+      onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); e.currentTarget.blur(); } }}
+      style={{ outline: 'none', padding: '9px 13px', borderRight: '1px solid var(--line)', borderBottom: '1px solid var(--line)',
+      fontSize: 13.5, color: isHead ? 'var(--text-1)' : 'var(--text-2)', fontWeight: isHead ? 500 : 400, background: isHead ? 'color-mix(in srgb, var(--star-blue) 5%, transparent)' : 'transparent' }}>{txt}</td>
+  );
+  const ctrlBtn = (icon, title, onClick) => (
+    <button type="button" className="sr-focus-ring sr-hit40" title={title} onMouseDown={(e) => e.preventDefault()} onClick={onClick}
+      style={{ width: 22, height: 22, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', borderRadius: 5, border: '1px solid var(--glass-border)', background: 'var(--glass-bg)', color: 'var(--text-3)', cursor: 'pointer', padding: 0 }}>
+      <Icon name={icon} size={13} color="currentColor" />
+    </button>
   );
   return (
-    <div style={{ border: '1px solid var(--glass-border)', borderRadius: 'var(--r-md)', overflow: 'hidden', margin: '2px 0' }}>
-      <table style={{ width: '100%', borderCollapse: 'collapse', fontFamily: 'var(--font-sans)' }}>
-        <tbody>
-          <tr>{head.map((h, i) => <React.Fragment key={i}>{cell(h, true)}</React.Fragment>)}</tr>
-          {rows.map((r, i) => <tr key={i}>{r.map((c, j) => <React.Fragment key={j}>{cell(c, false)}</React.Fragment>)}</tr>)}
-        </tbody>
-      </table>
+    <div style={{ margin: '2px 0' }}>
+      <div style={{ border: '1px solid var(--glass-border)', borderRadius: 'var(--r-md)', overflow: 'hidden' }}>
+        <table style={{ width: '100%', borderCollapse: 'collapse', fontFamily: 'var(--font-sans)' }}>
+          <tbody>
+            <tr>{head.map((h, j) => <React.Fragment key={j}>{cell(h, true, (v) => setHeadCell(j, v))}</React.Fragment>)}</tr>
+            {rows.map((r, i) => <tr key={i}>{Array.from({ length: cols }).map((_, j) => <React.Fragment key={j}>{cell((r || [])[j] || '', false, (v) => setBodyCell(i, j, v))}</React.Fragment>)}</tr>)}
+          </tbody>
+        </table>
+      </div>
+      <div style={{ display: 'flex', gap: 7, marginTop: 6, alignItems: 'center' }}>
+        {ctrlBtn('plus', '添加一行', addRow)}
+        {ctrlBtn('minus', '删除末行', () => delRow(rows.length - 1))}
+        {ctrlBtn('columns-3', '添加一列', addCol)}
+        {ctrlBtn('trash-2', '删除末列', () => delCol(cols - 1))}
+      </div>
     </div>
   );
 }
@@ -209,9 +195,12 @@ const TEX_SYM = {
 };
 const TEX_FN = new Set(['sin', 'cos', 'tan', 'cot', 'sec', 'csc', 'sinh', 'cosh', 'tanh', 'log', 'ln', 'exp', 'lim', 'max', 'min', 'det', 'dim', 'ker', 'deg', 'gcd', 'arg', 'sup', 'inf', 'mod', 'Pr']);
 
-function renderTex(src) {
+// errs（可选数组）：解析时收集缺参 / 未闭合花括号等问题，供块级的语法提示用——
+// 残缺语法不再被静默吞掉（`\frac{a` 只渲出一个斜体 a 却毫无线索）。
+function renderTex(src, errs) {
   if (src == null || src === '') return null;
   let key = 0; const K = () => key++;
+  const report = (m) => { if (errs && !errs.includes(m)) errs.push(m); };
   // tokenize
   const toks = []; let i = 0;
   while (i < src.length) {
@@ -252,15 +241,17 @@ function renderTex(src) {
   );
   function parseSeq(stopBrace) {
     const out = [];
+    let closed = false;
     while (pos < toks.length) {
       const tk = peek();
       if (!tk) break;
-      if (tk.k === '}') { pos++; if (stopBrace) break; else continue; }
+      if (tk.k === '}') { pos++; if (stopBrace) { closed = true; break; } else continue; }
       let atom = parseAtom();
       if (atom == null) continue;
       atom = attachScripts(atom);
       out.push(<React.Fragment key={K()}>{atom}</React.Fragment>);
     }
+    if (stopBrace && !closed) report('花括号未闭合');
     return out;
   }
   function parseUnit() {
@@ -291,11 +282,17 @@ function renderTex(src) {
   }
   function renderCmd(name) {
     switch (name) {
-      case 'frac': case 'dfrac': case 'tfrac': { const a = parseUnit(); const b = parseUnit(); return frac(a, b); }
+      case 'frac': case 'dfrac': case 'tfrac': {
+        const a = parseUnit(); const b = parseUnit();
+        if (a == null || b == null) report('\\' + name + ' 缺少' + (a == null ? '分子' : '第二个参数（分母）'));
+        return frac(a, b);
+      }
       case 'sqrt': {
         let idx = null;
         if (peek() && peek().k === 'c' && peek().v === '[') { pos++; const inner = []; while (peek() && !(peek().k === 'c' && peek().v === ']')) { const a = parseAtom(); if (a != null) inner.push(a); } if (peek()) pos++; idx = inner; }
-        return sqrtEl(parseUnit(), idx);
+        const rad = parseUnit();
+        if (rad == null) report('\\sqrt 缺少被开方式');
+        return sqrtEl(rad, idx);
       }
       case 'vec': return accentEl(parseUnit(), '→');
       case 'hat': case 'widehat': return accentEl(parseUnit(), 'ˆ');
@@ -318,7 +315,18 @@ function renderTex(src) {
     }
   }
   try { return <span style={{ fontStyle: 'normal' }}>{parseSeq(false)}</span>; }
-  catch (e) { return <span>{src}</span>; }
+  catch (e) { report('无法解析，已按原文显示'); return <span>{src}</span>; }
+}
+
+/* 低调的 LaTeX 语法提示：danger 色小标记，hover 看具体问题 */
+function TexErrMark({ errs }) {
+  if (!errs || !errs.length) return null;
+  return (
+    <span title={'LaTeX 可能有语法错误：' + errs.join('；')} aria-label={'LaTeX 可能有语法错误：' + errs.join('；')}
+      style={{ display: 'inline-flex', flex: 'none', marginLeft: 8, transform: 'translateY(1px)' }}>
+      <Icon name="triangle-alert" size={13} color="var(--danger)" />
+    </span>
+  );
 }
 
 function MathBlock({ tex, onCommit, autoEdit }) {
@@ -330,6 +338,12 @@ function MathBlock({ tex, onCommit, autoEdit }) {
   React.useEffect(() => { if (editing && taRef.current) { const el = taRef.current; el.focus(); el.selectionStart = el.selectionEnd = el.value.length; autoH(el); } }, [editing]);
   const commit = () => { setEditing(false); const nv = v.trim(); if (nv !== (tex || '') && onCommit) onCommit(nv); };
   const cancel = () => { setV(tex || ''); setEditing(false); };
+
+  // 渲染 + 收集语法问题（缺参 / 花括号未闭合），块旁给一个低调的提示标记
+  const viewErrs = [];
+  const viewNode = tex ? renderTex(tex, viewErrs) : null;
+  const previewErrs = [];
+  const previewNode = v.trim() ? renderTex(v, previewErrs) : null;
 
   if (editing) {
     return (
@@ -347,18 +361,43 @@ function MathBlock({ tex, onCommit, autoEdit }) {
           placeholder="输入 LaTeX 源码，例如  |\Phi^+\rangle = \frac{|00\rangle + |11\rangle}{\sqrt 2}"
           style={{ display: 'block', width: '100%', boxSizing: 'border-box', minHeight: 54, background: 'transparent', color: 'var(--text-1)', border: 'none', outline: 'none', resize: 'none', fontFamily: 'var(--font-mono)', fontSize: 13.5, lineHeight: 1.7, padding: '11px 14px', tabSize: 2 }} />
         <div style={{ borderTop: '1px solid var(--line)', padding: '12px 14px', display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 30, background: 'rgba(159,198,255,0.04)' }}>
-          <span style={{ fontSize: 19, color: v.trim() ? 'var(--text-1)' : 'var(--text-3)', letterSpacing: '0.01em' }}>{v.trim() ? renderTex(v) : '预览'}</span>
+          <span style={{ fontSize: 19, color: v.trim() ? 'var(--text-1)' : 'var(--text-3)', letterSpacing: '0.01em' }}>{v.trim() ? previewNode : '预览'}</span>
+          <TexErrMark errs={previewErrs} />
         </div>
       </div>
     );
   }
   return (
-    <div onClick={() => setEditing(true)} title="点击编辑 LaTeX 源码"
-      style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '16px 14px', borderRadius: 'var(--r-md)', background: 'rgba(159,198,255,0.04)', border: '1px solid var(--glass-border)', cursor: 'text', margin: '2px 0' }}>
+    <div onClick={() => setEditing(true)} title={viewErrs.length ? 'LaTeX 可能有语法错误：' + viewErrs.join('；') + ' · 点击进入源码编辑' : '点击编辑 LaTeX 源码'}
+      style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '16px 14px', borderRadius: 'var(--r-md)', background: 'rgba(159,198,255,0.04)', border: '1px solid ' + (viewErrs.length ? 'color-mix(in srgb, var(--danger) 35%, transparent)' : 'var(--glass-border)'), cursor: 'text', margin: '2px 0' }}>
       <span style={{ fontSize: 19.5, color: tex ? 'var(--text-1)' : 'var(--text-3)', letterSpacing: '0.01em', textAlign: 'center' }}>
-        {tex ? renderTex(tex) : '点击输入公式（LaTeX 源码）…'}
+        {tex ? viewNode : '点击输入公式（LaTeX 源码）…'}
       </span>
+      <TexErrMark errs={viewErrs} />
     </div>
+  );
+}
+
+/* 图片块：src 失效（外链挂掉 / 图床死链）时给出可见的失败态占位，
+   而不是一条 0 高度的隐形横线；重新上传即可替换。 */
+function ImageBlock({ b, onSrc }) {
+  const [err, setErr] = React.useState(false);
+  React.useEffect(() => { setErr(false); }, [b.src]);
+  const pick = (e) => {
+    const f = e.target.files && e.target.files[0]; if (!f) return;
+    const rd = new FileReader(); rd.onload = () => onSrc(rd.result); rd.readAsDataURL(f);
+  };
+  if (b.src && !err) {
+    return <img src={b.src} alt="笔记图片" onError={() => setErr(true)}
+      style={{ maxWidth: '100%', borderRadius: 'var(--r-md)', display: 'block', border: '1px solid var(--glass-border)' }} />;
+  }
+  return (
+    <label style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 8, height: 120, borderRadius: 'var(--r-md)', border: '1px dashed ' + (err ? 'color-mix(in srgb, var(--danger) 45%, transparent)' : 'var(--line-strong)'), color: 'var(--text-3)', cursor: 'pointer', background: err ? 'color-mix(in srgb, var(--danger) 5%, transparent)' : 'transparent' }}>
+      <Icon name={err ? 'image-off' : 'image'} size={22} color={err ? 'var(--danger)' : 'currentColor'} />
+      <span style={{ fontSize: 13, color: err ? 'var(--text-2)' : 'inherit' }}>{err ? '图片加载失败 · 原链接已失效' : '拖入图片，或点击上传'}</span>
+      {err && <span style={{ fontSize: 11.5 }}>点击重新上传，替换这张图</span>}
+      <input type="file" accept="image/*" style={{ display: 'none' }} onChange={pick} />
+    </label>
   );
 }
 
@@ -368,8 +407,9 @@ function TagChip({ label, onRemove }) {
   return (
     <span onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)} style={{ display: 'inline-flex', alignItems: 'center', gap: 2 }}>
       <Tag icon="hash">{label}</Tag>
-      <button type="button" title="移除标签" onClick={onRemove}
-        style={{ width: h ? 18 : 0, height: 18, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', opacity: h ? 1 : 0, overflow: 'hidden', border: 0, background: 'transparent', color: 'var(--text-3)', cursor: 'pointer', padding: 0, transition: 'width var(--dur-fast), opacity var(--dur-fast)' }}>
+      <button type="button" title="移除标签" className="sr-focus-ring sr-hit40" onClick={onRemove}
+        onFocus={() => setH(true)} onBlur={() => setH(false)}
+        style={{ width: h ? 18 : 0, height: 18, position: 'relative', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', opacity: h ? 1 : 0, overflow: 'hidden', border: 0, background: 'transparent', color: 'var(--text-3)', cursor: 'pointer', padding: 0, transition: 'width var(--dur-fast), opacity var(--dur-fast)' }}>
         <Icon name="x" size={12} color="currentColor" />
       </button>
     </span>
@@ -421,22 +461,22 @@ function Properties({ props, onFlash, onConfirm, onCommit }) {
   };
   return (
     <div style={{ marginBottom: 22, border: '1px solid var(--glass-border)', borderRadius: 'var(--r-md)', background: 'rgba(159,198,255,0.03)', overflow: 'hidden' }}>
-      <div onClick={() => setOpen(o => !o)} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '9px 14px', cursor: 'pointer', color: 'var(--text-3)' }}>
+      <button type="button" className="sr-focus-ring" aria-expanded={open} onClick={() => setOpen(o => !o)} style={{ display: 'flex', width: '100%', font: 'inherit', border: 'none', background: 'transparent', textAlign: 'left', alignItems: 'center', gap: 8, padding: '9px 14px', cursor: 'pointer', color: 'var(--text-3)' }}>
         <Icon name="chevron-right" size={14} color="currentColor" style={{ transform: open ? 'rotate(90deg)' : 'none', transition: 'transform var(--dur-fast)' }} />
         <span style={{ fontSize: 11, letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', fontFamily: 'var(--font-mono)' }}>属性 Properties</span>
         <span style={{ flex: 1 }} />
         <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11 }}>{rows.length}</span>
-      </div>
+      </button>
       {open && (
         <div style={{ padding: '2px 14px 12px' }}>
           {rows.map((r) => (
             <div key={r.key} onMouseEnter={() => setHoverKey(r.key)} onMouseLeave={() => setHoverKey(null)}
               onFocus={() => setFocusKey(r.key)}
               onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget)) setFocusKey(f => (f === r.key ? null : f)); }}
-              onContextMenu={(e) => { e.preventDefault(); delRow(r); }}
+              onContextMenu={(e) => { e.preventDefault(); }}
               style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '5px 8px', margin: '0 -8px', borderRadius: 'var(--r-sm)',
                 background: focusKey === r.key ? 'rgba(159,198,255,0.07)' : (hoverKey === r.key ? 'rgba(159,198,255,0.03)' : 'transparent'),
-                boxShadow: focusKey === r.key ? '0 0 0 1.5px rgba(159,198,255,0.45)' : 'none',
+                boxShadow: focusKey === r.key ? '0 0 0 1.5px var(--focus)' : 'none',
                 transition: 'background var(--dur-fast), box-shadow var(--dur-fast)' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 7, width: 96, flex: 'none', color: 'var(--text-3)', fontSize: 12.5 }}>
                 <Icon name={r.icon} size={13} color="currentColor" />
@@ -458,22 +498,143 @@ function Properties({ props, onFlash, onConfirm, onCommit }) {
                     : <span contentEditable suppressContentEditableWarning title="点击编辑" data-ph="空" onBlur={commitVal(r)}
                         style={{ outline: 'none', cursor: 'text', fontSize: 13, color: 'var(--text-1)', borderRadius: 4, padding: '0 2px', display: 'inline-block', minWidth: 42 }}>{r.v}</span>}
               </div>
-              <button type="button" title="删除此属性（或右键该行）" onMouseDown={(e) => e.preventDefault()} onClick={() => delRow(r)}
-                style={{ flex: 'none', width: 22, height: 22, display: 'flex', alignItems: 'center', justifyContent: 'center', border: 'none', background: 'transparent', cursor: 'pointer', color: 'var(--text-3)', opacity: hoverKey === r.key ? 1 : 0, transition: 'opacity var(--dur-fast)' }}>
+              <button type="button" title="删除此属性" className="sr-focus-ring sr-hit40" onMouseDown={(e) => e.preventDefault()} onClick={() => delRow(r)}
+                style={{ flex: 'none', width: 22, height: 22, position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', border: 'none', background: 'transparent', cursor: 'pointer', color: 'var(--text-3)', opacity: (hoverKey === r.key || focusKey === r.key) ? 1 : 0, transition: 'opacity var(--dur-fast)' }}>
                 <Icon name="x" size={14} color="currentColor" />
               </button>
             </div>
           ))}
-          <div onClick={addRow} style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '8px 0 2px', color: 'var(--text-3)', fontSize: 12.5, cursor: 'pointer' }}>
+          <button type="button" className="sr-focus-ring" onClick={addRow} style={{ display: 'flex', font: 'inherit', border: 'none', background: 'transparent', alignItems: 'center', gap: 7, padding: '8px 0 2px', color: 'var(--text-3)', fontSize: 12.5, cursor: 'pointer' }}>
             <Icon name="plus" size={13} color="currentColor" />添加属性
-          </div>
+          </button>
         </div>
       )}
     </div>
   );
 }
 
-function Editor({ starId, onBack, onOpen }) {
+/* ── 迷你星图（右栏「在星图中定位」）──
+   与真实星图同一套视觉语言的静态缩影：读取每颗星拖拽后的真实 wx/wy 等比取景，
+   星域光晕 + 恒星主星 + 星-主星连线（SRConnect 有机曲线）+ 跨星域融会贯通金弧，
+   知识星按记忆温度着色、按重要度定尺寸，当前星金色放大高亮（呼吸微动）。
+   点击任意星（含当前星）→ onPick(star)：上层弹「探索星系」确认，不再直接换笔记。 */
+const MINI_WORLD = { w: 1680, h: 1040 };
+/* 记忆温度色阶（镜像设计系统 memoryColor；bundle 未导出该函数，此处内联同一份色标） */
+function edMemoryColor(strength, dawn) {
+  const stops = dawn ? [
+    [0.0, [108, 121, 155]], [0.25, [92, 108, 150]], [0.5, [76, 96, 148]],
+    [0.7, [52, 95, 190]], [0.88, [184, 128, 26]], [1.0, [168, 109, 18]],
+  ] : [
+    [0.0, [44, 53, 86]], [0.25, [70, 82, 122]], [0.5, [120, 150, 205]],
+    [0.7, [159, 198, 255]], [0.88, [255, 224, 150]], [1.0, [255, 244, 214]],
+  ];
+  const s = Math.max(0, Math.min(1, strength));
+  for (let i = 1; i < stops.length; i++) {
+    if (s <= stops[i][0]) {
+      const [a, ca] = stops[i - 1], [b, cb] = stops[i];
+      const t = (s - a) / (b - a || 1);
+      const c = ca.map((v, j) => Math.round(v + (cb[j] - v) * t));
+      return `rgb(${c[0]},${c[1]},${c[2]})`;
+    }
+  }
+  return 'rgb(255,244,214)';
+}
+function MiniStarMap({ currentId, onPick }) {
+  const D = window.SR_DATA;
+  const dawn = useDawn();
+  const W = 268, H = 166;   // 与世界同比例（1680:1040 ≈ 1.615），只缩放不变形
+  const posOf = (s) => ({ px: s.wx != null ? s.wx : (s.x || 50) / 100 * MINI_WORLD.w, py: s.wy != null ? s.wy : (s.y || 50) / 100 * MINI_WORLD.h });
+  const sp = D.stars.map(s => ({ ...s, ...posOf(s) }));
+  // 星域几何：与 StarMap.domainGeom 同一套规则（质心 + 包裹全部成员的半径；单星主星上移让位）
+  const doms = D.constellations.map(c => {
+    const ms = sp.filter(s => s.con === c.id);
+    if (!ms.length) return null;
+    const cx = ms.reduce((a, s) => a + s.px, 0) / ms.length;
+    let cy = ms.reduce((a, s) => a + s.py, 0) / ms.length;
+    if (ms.length === 1) cy -= 96;
+    const r = Math.max(150, ...ms.map(s => Math.hypot(s.px - cx, s.py - cy))) + 96;
+    const avg = ms.reduce((a, s) => a + s.strength, 0) / ms.length;
+    return { id: c.id, name: c.name, cx, cy, r, col: avg >= 0.78 ? 'var(--gold)' : c.color, hex: avg >= 0.78 ? '#ffd98a' : c.color };
+  }).filter(Boolean);
+  // 等比取景：把整片星空（含光晕）收进一屏
+  let k = 0.1, ox = 0, oy = 0;
+  if (sp.length) {
+    const minX = Math.min(...doms.map(d => d.cx - d.r), ...sp.map(s => s.px));
+    const maxX = Math.max(...doms.map(d => d.cx + d.r), ...sp.map(s => s.px));
+    const minY = Math.min(...doms.map(d => d.cy - d.r), ...sp.map(s => s.py));
+    const maxY = Math.max(...doms.map(d => d.cy + d.r), ...sp.map(s => s.py));
+    const bw = Math.max(1, maxX - minX), bh = Math.max(1, maxY - minY);
+    const pad = 10;
+    k = Math.min((W - pad * 2) / bw, (H - pad * 2) / bh);
+    ox = (W - bw * k) / 2 - minX * k;
+    oy = (H - bh * k) / 2 - minY * k;
+  }
+  const X = (wx) => ox + wx * k, Y = (wy) => oy + wy * k;
+  const conn = (x1, y1, x2, y2, bow) => window.SRConnect ? window.SRConnect(x1, y1, x2, y2, bow) : `M ${x1} ${y1} L ${x2} ${y2}`;
+  const sunOf = Object.fromEntries(doms.map(d => [d.id, d]));
+  // 跨星域「融会贯通」域对（与星图同源：connections 里的 cross 链）
+  const crossPairs = (() => {
+    const seen = new Set(), out = [];
+    (D.connections || []).forEach(c => {
+      if (c.kind !== 'cross') return;
+      const A = D.byId[c.a], B = D.byId[c.b];
+      if (!A || !B || A.con === B.con || !sunOf[A.con] || !sunOf[B.con]) return;
+      const key = [A.con, B.con].sort().join('|');
+      if (seen.has(key)) return; seen.add(key);
+      out.push([A.con, B.con]);
+    });
+    return out;
+  })();
+  const reduce = typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  return (
+    <div style={{ marginTop: 10, height: H, borderRadius: 'var(--r-md)', border: '1px solid var(--glass-border)', position: 'relative', overflow: 'hidden', background: 'radial-gradient(120% 100% at 40% 40%, rgba(26,35,80,0.5), transparent 60%)' }}>
+      <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" aria-hidden="true"
+        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none' }}>
+        {/* 星域大气光晕（各自的颜色；点亮的星域转暖金） */}
+        {doms.map(d => (
+          <g key={d.id}>
+            <circle cx={X(d.cx)} cy={Y(d.cy)} r={Math.max(14, d.r * k)} fill={d.hex} opacity={dawn ? 0.1 : 0.09} />
+            <circle cx={X(d.cx)} cy={Y(d.cy)} r={Math.max(14, d.r * k)} fill="none" stroke={d.hex} strokeWidth="0.75" opacity="0.3" />
+          </g>
+        ))}
+        {/* 星-主星连线（蓝）与跨星域融会贯通弧（金）——与星图同一语言的静态缩影 */}
+        {sp.map((s, i) => {
+          const sun = sunOf[s.con]; if (!sun) return null;
+          return <path key={'i' + s.id} d={conn(X(sun.cx), Y(sun.cy), X(s.px), Y(s.py), 0.1 + (i % 3) * 0.03)} fill="none" stroke="var(--star-blue)" strokeWidth="0.7" opacity="0.32" />;
+        })}
+        {crossPairs.map(([a, b]) => {
+          const A = sunOf[a], B = sunOf[b];
+          return <path key={'c' + a + b} d={conn(X(A.cx), Y(A.cy), X(B.cx), Y(B.cy), 0.16)} fill="none" stroke="var(--gold)" strokeWidth="0.9" opacity="0.5" />;
+        })}
+        {/* 恒星主星：暖核 + 星域名 */}
+        {doms.map(d => (
+          <g key={'s' + d.id}>
+            <circle cx={X(d.cx)} cy={Y(d.cy)} r="4.5" fill="#ff9d52" opacity="0.34" />
+            <circle cx={X(d.cx)} cy={Y(d.cy)} r="2.4" fill="#ffd58a" />
+            <text x={X(d.cx)} y={Y(d.cy) + 10.5} textAnchor="middle" fontSize="7.5" fontFamily="var(--font-sans)" fill="var(--sun-label, #ffe3b0)" opacity="0.85" style={{ letterSpacing: '0.05em' }}>{d.name}</text>
+          </g>
+        ))}
+      </svg>
+      {/* 知识星：记忆温度着色 · 重要度定尺寸 · 当前星金色放大。点击 → 探索确认 */}
+      {sp.map(s => {
+        const cur = s.id === currentId;
+        const size = cur ? 9 : Math.max(4, Math.min(7, 3.2 + (s.importance || 1) * 1.1 + s.strength * 1.4));
+        const col = cur ? 'var(--gold)' : edMemoryColor(s.strength, dawn);
+        return (
+          <button type="button" key={s.id} data-tip={cur ? `当前星 ·「${s.label}」· 点击在星图中探索` : `在星图中探索「${s.label}」`}
+            aria-label={'在星图中探索「' + s.label + '」'} className={'sr-focus-ring sr-hit40' + (cur && !reduce ? ' sr-breathe' : '')}
+            onClick={() => onPick && onPick(s)}
+            style={{ position: 'absolute', left: `${X(s.px) / W * 100}%`, top: `${Y(s.py) / H * 100}%`, transform: 'translate(-50%,-50%)', padding: 0, border: 'none',
+              width: size, height: size, borderRadius: '50%', background: col, cursor: 'pointer',
+              boxShadow: cur ? '0 0 12px var(--gold), 0 0 4px var(--gold)' : (s.strength >= 0.7 ? `0 0 6px ${edMemoryColor(s.strength, dawn)}` : 'none'),
+              opacity: cur ? 1 : 0.9 }} />
+        );
+      })}
+    </div>
+  );
+}
+
+function Editor({ starId, onBack, onOpen, onExplore }) {
   const D = window.SR_DATA;
   const star = D.byId[starId] || D.stars[0];
   const refs = React.useRef({});
@@ -486,7 +647,7 @@ function Editor({ starId, onBack, onOpen }) {
   const [colorPop, setColorPop] = React.useState(null);
   const [toast, setToast] = React.useState(null);
   const [fav, setFav] = React.useState(() => !!star.fav);
-  const toggleFav = () => setFav(f => { const nf = !f; star.fav = nf; flash(nf ? '已收藏 · 可在收件箱「收藏」里找到' : '已取消收藏'); return nf; });
+  const toggleFav = () => setFav(f => { const nf = !f; star.fav = nf; D.persist(); flash(nf ? '已收藏 · 可在收件箱「收藏」里找到' : '已取消收藏'); return nf; });
   const [tags, setTags] = React.useState(() => (star.tags || []).slice());
   const [addingTag, setAddingTag] = React.useState(false);
   const [tagDraft, setTagDraft] = React.useState('');
@@ -496,34 +657,127 @@ function Editor({ starId, onBack, onOpen }) {
   const [linkDialog, setLinkDialog] = React.useState(null); // {range}
   const [more, setMore] = React.useState(null);           // page-level 「更多」 dropdown {x,y}
   const [history, setHistory] = React.useState(false);    // version-history dialog (mock)
-  const [con, setCon] = React.useState(star.con);         // constellation, mutable via 「移动到星座」
+  const [explore, setExplore] = React.useState(null);     // 迷你星图点选的星（待确认「探索星系」）{id,label,con}
+  const [con, setCon] = React.useState(star.con);         // constellation, mutable via 「移动到星域」
   const [linkStar, setLinkStar] = React.useState(null);   // chosen star awaiting a relation sentence
   const [relDraft, setRelDraft] = React.useState('');
   const [hoverConn, setHoverConn] = React.useState(null);
+  const [pendingAtomicDel, setPendingAtomicDel] = React.useState(null); // 块首 Backspace 选中的上方原子块，再按一次删除
+  const blockTypeName = (type) => { const bt = ((window.SRKit && window.SRKit.BLOCK_TYPES) || []).find(x => x.type === type); return bt ? bt.label : '内容'; };
 
   const { SlashMenu, SelectionToolbar, ContextMenu, ColorMenu, ConfirmDialog, LinkDialog, EditorMoreMenu, HistoryDialog } = window.SRKit;
   const backlinks = D.backlinksOf(star.id);
   const scrollRef = React.useRef(null);
   const stripTags = (h) => (h || '').replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
   // 大纲与字数读取活的 DOM（输入时防抖触发一次轻量重渲染，不改块状态、不动光标）
-  const [, bumpTick] = React.useReducer(x => x + 1, 0);
+  const [tick, bumpTick] = React.useReducer(x => x + 1, 0);
   const tickTimer = React.useRef(null);
   const scheduleTick = () => { clearTimeout(tickTimer.current); tickTimer.current = setTimeout(() => { bumpTick(); persistBody(); }, 350); };
   React.useEffect(() => () => clearTimeout(tickTimer.current), []);
+  // 记忆心跳：右栏「记忆」区（强度 / 下次复习 / 点亮·待重燃状态）就地读回新值——
+  // 只改数值不加动画，reduced-motion 下同样安静
+  React.useEffect(() => {
+    const h = () => bumpTick();
+    window.addEventListener('sr-memory', h);
+    return () => window.removeEventListener('sr-memory', h);
+  }, []);
   const liveText = (b) => { const el = refs.current[b.id]; return el ? el.innerText : stripTags(b.text || ''); };
   const outline = blocks.filter(b => ['h1', 'h2', 'h3'].includes(b.type)).map(b => ({ ...b, live: liveText(b).trim() })).filter(b => b.live);
-  const charCount = blocks.filter(b => EDITABLE.includes(b.type)).map(liveText).join('').replace(/\s/g, '').length + (star.summary || '').length + star.label.length;
-  const readMin = Math.max(1, Math.round(charCount / 350));
+  // 字数口径：中文按「字」、西文按「词」分列统计（纳入 table/math/toggle-child），
+  // 代码单独按行折算阅读时长（约 30 行/分钟），不再和正文一锅平摊。
+  const proseText = blocks.map(b => {
+    if (b.type === 'toggle') return liveText(b) + ' ' + stripTags(b.child || '');
+    if (EDITABLE.includes(b.type)) return liveText(b);
+    if (b.type === 'math') return b.tex || '';
+    if (b.type === 'table') return (b.head || []).join(' ') + ' ' + (b.rows || []).map(r => r.join(' ')).join(' ');
+    return '';
+  }).join(' ') + ' ' + (star.summary || '') + ' ' + star.label;
+  const codeText = blocks.filter(b => b.type === 'code').map(b => b.code || '').join('\n');
+  const CJK_RE = /[㐀-鿿豈-﫿]/g;
+  const cjkCount = (proseText.match(CJK_RE) || []).length + (codeText.match(CJK_RE) || []).length;
+  const wordCount = (proseText.replace(CJK_RE, ' ').match(/[A-Za-z0-9][A-Za-z0-9'’_-]*/g) || []).length;
+  const codeLines = codeText.trim() ? codeText.split('\n').filter(l => l.trim()).length : 0;
+  const readMin = Math.max(1, Math.round(cjkCount / 350 + wordCount / 200 + codeLines / 30));
   const scrollToBlock = (id) => {
     const c = scrollRef.current, el = document.getElementById('blk-' + id);
     if (c && el) c.scrollTo({ top: el.getBoundingClientRect().top - c.getBoundingClientRect().top + c.scrollTop - 40, behavior: 'smooth' });
   };
 
-  const flash = (msg) => { setToast(msg); setTimeout(() => setToast(null), 1600); };
+  // 编辑器反馈统一走 DS toast（自带 role=status/aria-live + --z-toast + reduced-motion）。
+  // 通用操作反馈一律蓝色——金色是点亮/奖励的保留色，不给「已删除/已复制」这类日常操作
+  const flash = (msg) => {
+    const NS = window.StellarRaftDesignSystem_2866af;
+    if (NS && NS.toast) NS.toast(msg, { tone: 'blue', icon: 'check' });
+    else { setToast(msg); setTimeout(() => setToast(null), 1600); }
+  };
   // capture innerHTML (not innerText) so inline formatting — bold / italic /
   // highlight / links / colors — survives any structural block operation.
-  const syncBlock = (b) => (refs.current[b.id] && EDITABLE.includes(b.type)) ? { ...b, text: refs.current[b.id].innerHTML } : b;
-  const withSynced = (fn) => setBlocks(bs => fn(bs.map(syncBlock)));
+  const syncBlock = (b) => (refs.current[b.id] && EDITABLE.includes(b.type)) ? { ...b, text: sanHtml(refs.current[b.id].innerHTML) } : b;
+
+  // ---- 应用级撤销/重做栈 ----
+  // 栈的推进逻辑在 undocore.js（window.SRUndoCore，纯逻辑、Node 单测覆盖）。
+  // 快照 = { blocks: DOM-synced 块数组, con: 所属星域 }：
+  // · 结构变更（拆分/合并/移动/转换/删除/粘贴/着色）经 withSynced/flushSynced 统一压栈；
+  // · 选区格式（execCommand：加粗/颜色/高亮/链接…）经 pushExec 统一压栈；
+  // · 纯打字在一次输入突发的起点压一份 state 快照（此时 state.text 尚为突发前的文本）；
+  // · 「移动到星域」也压栈——快照带 con，⌘Z 能把星移回原星域。
+  // ⌘Z/⌘⇧Z 由全局 capture 拦截、setBlocks 回放，DOM 由 dangerouslySetInnerHTML
+  // 完全驱动，不再与块数组分叉。
+  const U = window.SRUndoCore;
+  const cloneBlk = (b) => ({ ...b, head: b.head && b.head.slice(), rows: b.rows && b.rows.map(r => r.slice()) });
+  const undoRef = React.useRef(null);
+  if (!undoRef.current) undoRef.current = U ? U.create(120) : { past: [], future: [], cap: 120, typing: false };
+  const snapNow = () => ({ blocks: blocksRef.current.map(syncBlock).map(cloneBlk), con: star.con });
+  const snapState = () => ({ blocks: blocksRef.current.map(cloneBlk), con: star.con });
+  const pushHistory = () => { if (U) U.push(undoRef.current, snapNow()); };
+  // execCommand 类操作的统一压栈入口：先压快照，再把本次改动标记为「突发已入栈」，
+  // 紧随而来的 input 事件不会重复压栈。
+  const pushExec = () => { pushHistory(); undoRef.current.typing = true; };
+  const noteTyping = () => {
+    const u = undoRef.current;
+    if (!U || u.typing) return;
+    U.noteTyping(u, snapState());
+  };
+  const focusedBlockId = () => {
+    const a = document.activeElement;
+    const w = a && a.closest && a.closest('[id^="blk-"]');
+    return w ? w.id.slice(4) : null;
+  };
+  const applyHistory = (snap, preferId) => {
+    const blks = snap.blocks;
+    if (ReactDOM.flushSync) ReactDOM.flushSync(() => setBlocks(blks.map(cloneBlk)));
+    else setBlocks(blks.map(cloneBlk));
+    // 关键：React 对「与上次渲染相同的 __html」不会重设 innerHTML——而行内格式
+    // （颜色/加粗/高亮/链接…）只活在 DOM 里、state.text 未变，回放时必须手动把
+    // DOM 刷回快照，否则「改颜色 → ⌘Z」界面纹丝不动（用户报障的根因）。
+    blks.forEach(b => {
+      if (!EDITABLE.includes(b.type)) return;
+      const el = refs.current[b.id]; if (!el) return;
+      const want = sanHtml(b.text || '');
+      if (el.innerHTML !== want) el.innerHTML = want;
+    });
+    if (snap.con && snap.con !== star.con) { star.con = snap.con; D.syncCounts(); setCon(snap.con); }
+    persistBody();
+    // 回放后把焦点留在编辑区，撤销/重做链才能连续按 —— 优先原聚焦块，否则第一个可编辑块
+    const target = (preferId && blks.some(b => b.id === preferId && EDITABLE.includes(b.type)))
+      ? preferId : (blks.find(b => EDITABLE.includes(b.type)) || {}).id;
+    if (target) focusBlock(target, 'end');
+  };
+  const undo = () => {
+    if (!U) return;
+    if (!U.canUndo(undoRef.current)) { flash('没有可撤销的操作'); return; }
+    const fid = focusedBlockId();
+    applyHistory(U.undo(undoRef.current, snapNow()), fid);
+  };
+  const redo = () => {
+    if (!U || !U.canRedo(undoRef.current)) return;
+    const fid = focusedBlockId();
+    applyHistory(U.redo(undoRef.current, snapNow()), fid);
+  };
+  // 结构变更映射前先把所有块的 DOM 文本同步进 state（否则相邻块正在输入、未落 state
+   // 的文字会被这次 setBlocks 覆盖丢失）；withSynced 额外压一份撤销快照。
+  const mutateBlocks = (fn) => setBlocks(bs => fn(bs.map(syncBlock)));
+  const withSynced = (fn) => { pushHistory(); mutateBlocks(fn); };
 
   const blocksRef = React.useRef(blocks); blocksRef.current = blocks;
   const [dragBlk, setDragBlk] = React.useState(null);   // 正在拖拽排序的块 id
@@ -534,8 +788,24 @@ function Editor({ starId, onBack, onOpen }) {
   // 结构变更（增删/转换/排序）时 blocks 已同步，直接落盘；
   // 纯打字停留在 DOM，由输入防抖与卸载时的 persistBody 收拢。
   const persistBody = () => { star.body = blocksRef.current.map(syncBlock); D.touchNote(star.id); };
-  React.useEffect(() => { star.body = blocks; }, [blocks]);
+  // 块数组任何变化（结构变更 / 待办勾选 / 折叠开合 / 表格与代码提交）都落盘：
+  // 更新 star.body 并 D.touchNote → SRNet.schedule() 防抖保存 + 刷新 SaveStatus。
+  // 首帧（打开笔记）不算编辑，跳过，避免把「打开」误记为「刚刚编辑」。
+  const mountedRef = React.useRef(false);
+  React.useEffect(() => {
+    star.body = blocks;
+    if (mountedRef.current) D.touchNote(star.id); else mountedRef.current = true;
+  }, [blocks]);
   React.useEffect(() => () => persistBody(), []);
+  // 关标签页 / 切到后台：强制把编辑器 DOM flush 进 star.body，再交给 api.js 的
+  // beforeunload beacon —— 否则最后一次 keystroke 后 350ms 内关闭会丢尾部输入。
+  React.useEffect(() => {
+    const flush = () => { try { persistBody(); } catch (e) { } };
+    const onVis = () => { if (document.visibilityState === 'hidden') flush(); };
+    window.addEventListener('beforeunload', flush, true);
+    document.addEventListener('visibilitychange', onVis, true);
+    return () => { window.removeEventListener('beforeunload', flush, true); document.removeEventListener('visibilitychange', onVis, true); };
+  }, []);
 
   // 结构变更需要同步提交（flushSync），随后立即聚焦——否则连续快速输入
   // 会赶在 React 提交/聚焦之前，把字符落进旧块
@@ -555,6 +825,47 @@ function Editor({ starId, onBack, onOpen }) {
   };
   const focusBlock = (id, where) => {
     if (!placeCaret(id, where)) requestAnimationFrame(() => placeCaret(id, where));
+  };
+  // 可见字符偏移 → 文本节点定位（光标放置 / 查找高亮 / 行内 md 转换共用）
+  const nodeAtOffset = (el, offset) => {
+    let remaining = offset, target = null, toff = 0;
+    const walk = (n) => {
+      if (target) return;
+      if (n.nodeType === 3) {
+        const len = n.textContent.length;
+        if (remaining <= len) { target = n; toff = remaining; } else remaining -= len;
+      } else { for (let i = 0; i < n.childNodes.length && !target; i++) walk(n.childNodes[i]); }
+    };
+    walk(el);
+    return target ? { node: target, off: toff } : null;
+  };
+  // 按可见字符偏移放置光标（合并块时定位到接缝处，取代写进块 text 的 data-caret 哨兵）
+  const placeCaretAt = (id, offset) => {
+    const el = refs.current[id]; if (!el) return false;
+    el.focus();
+    const hit = nodeAtOffset(el, offset);
+    try {
+      const s = window.getSelection(); const r = document.createRange();
+      if (hit) { r.setStart(hit.node, hit.off); r.collapse(true); }
+      else { r.selectNodeContents(el); r.collapse(false); }
+      s.removeAllRanges(); s.addRange(r);
+    } catch (_) { }
+    return true;
+  };
+  const focusBlockAt = (id, offset) => { if (!placeCaretAt(id, offset)) requestAnimationFrame(() => placeCaretAt(id, offset)); };
+  // 节点所属块 id（块包裹层 id 形如 blk-<id>）
+  const blockIdOfNode = (node) => {
+    let el = node && (node.nodeType === 1 ? node : node.parentElement);
+    while (el && el !== document.body) {
+      if (el.id && el.id.indexOf('blk-') === 0) return el.id.slice(4);
+      el = el.parentElement;
+    }
+    return null;
+  };
+  const htmlSlice = (el, container, offset, before) => {
+    const r = document.createRange(); r.selectNodeContents(el);
+    if (before) r.setEnd(container, offset); else r.setStart(container, offset);
+    const div = document.createElement('div'); div.appendChild(r.cloneContents()); return div.innerHTML;
   };
   // 当前光标相对某块的位置（是否折叠 / 在块首 / 在块尾）
   const caretInfo = (el) => {
@@ -592,14 +903,56 @@ function Editor({ starId, onBack, onOpen }) {
     // React 对相同 __html 不会重设 innerHTML，前缀字符会残留
     if (e.key === ' ') {
       const t = el.innerText.replace(/\n+$/, '');
-      const type = MD_PREFIX[t];
+      let type = MD_PREFIX[t];
+      const extra = {};
+      // 任意起始序号的有序列表：`2.` / `3)` → numbered 并记住 start；`+` → 无序
+      const om = t.match(/^(\d+)[.)]$/);
+      if (!type && om) { type = 'numbered'; const n0 = parseInt(om[1], 10); if (n0 !== 1) extra.start = n0; }
+      if (!type && t === '+') type = 'bulleted';
       if (type) {
         e.preventDefault();
         el.innerHTML = '';
-        flushSynced(s => s.map(x => x.id === b.id ? { ...x, type, text: '', checked: t.toLowerCase() === '[x]' } : x));
+        flushSynced(s => s.map(x => x.id === b.id ? { ...x, type, text: '', checked: t.toLowerCase() === '[x]', ...extra } : x));
         focusBlock(b.id, 'start');
         return;
       }
+
+      // 行内 Markdown：光标前缀里已闭合的 **x** / *x* / `x` / ~~x~~，
+      // 按空格就地转为 <b>/<i>/<code>/<s>（Typora 式）。IME 组合期在函数
+      // 入口已被挡掉；行内代码里不再二次转换。
+      const info0 = caretInfo(el);
+      if (info0 && info0.collapsed) {
+        const anchorEl = info0.range.startContainer.nodeType === 1 ? info0.range.startContainer : info0.range.startContainer.parentElement;
+        if (!(anchorEl && anchorEl.closest && anchorEl.closest('code'))) {
+          const pre = info0.range.cloneRange();
+          pre.selectNodeContents(el);
+          pre.setEnd(info0.range.startContainer, info0.range.startOffset);
+          const preText = pre.toString();
+          const hit = matchInlineMd(preText);
+          if (hit) {
+            const sp = nodeAtOffset(el, preText.length - hit.len);
+            if (sp) {
+              e.preventDefault();
+              pushExec();
+              const s0 = window.getSelection(); const r0 = document.createRange();
+              r0.setStart(sp.node, sp.off);
+              r0.setEnd(info0.range.startContainer, info0.range.startOffset);
+              s0.removeAllRanges(); s0.addRange(r0);
+              document.execCommand('insertHTML', false, hit.html + '&nbsp;');
+              scheduleTick();
+              return;
+            }
+          }
+        }
+      }
+    }
+
+    // Tab / Shift+Tab：列表块缩进（嵌套层级持久化到块模型，md 导出带缩进）
+    if (e.key === 'Tab' && ['bulleted', 'numbered', 'todo'].includes(b.type)) {
+      e.preventDefault();
+      const d = e.shiftKey ? -1 : 1;
+      withSynced(s => s.map(x => x.id === b.id ? { ...x, indent: Math.max(0, Math.min(5, (x.indent || 0) + d)) } : x));
+      return;
     }
 
     // Enter：在光标处拆分为新块（列表延续同类型；空列表项退出为正文）
@@ -622,7 +975,7 @@ function Editor({ starId, onBack, onOpen }) {
         tmp.appendChild(after.extractContents());
         tail = tmp.innerHTML;
       }
-      const nb = { id: uid(), type: listLike ? b.type : 'p', text: tail, checked: false };
+      const nb = { id: uid(), type: listLike ? b.type : 'p', text: tail, checked: false, ...(listLike && b.indent ? { indent: b.indent } : {}) };
       flushSynced(s => { const i = s.findIndex(x => x.id === b.id); return [...s.slice(0, i + 1), nb, ...s.slice(i + 1)]; });
       focusBlock(nb.id, 'start');
       return;
@@ -646,20 +999,20 @@ function Editor({ starId, onBack, onOpen }) {
       if (prev.type === 'divider') { flushSynced(s => s.filter(x => x.id !== prev.id)); focusBlock(b.id, 'start'); return; }
       if (el.innerText.trim() === '') { flushSynced(s => s.filter(x => x.id !== b.id)); focusBlock(prev.id, 'end'); return; }
       if (EDITABLE.includes(prev.type)) {
+        // 接缝处光标：合并后按上一块原可见长度定位，不再往块 text 里塞哨兵 span
         const curHtml = el.innerHTML;
-        flushSynced(s => s.filter(x => x.id !== b.id).map(x => x.id === prev.id ? { ...x, text: (x.text || '') + '<span data-caret="1"></span>' + curHtml } : x));
         const pel = refs.current[prev.id];
-        if (pel) {
-          pel.focus();
-          const mark = pel.querySelector('[data-caret="1"]');
-          if (mark) {
-            const s2 = window.getSelection(); const r2 = document.createRange();
-            r2.setStartBefore(mark); r2.collapse(true);
-            s2.removeAllRanges(); s2.addRange(r2);
-            mark.remove();
-          }
-        }
+        const joinAt = pel ? pel.innerText.length : stripTags(prev.text || '').length;
+        flushSynced(s => s.filter(x => x.id !== b.id).map(x => x.id === prev.id ? { ...x, text: sanHtml((x.text || '') + curHtml) } : x));
+        focusBlockAt(prev.id, joinAt);
+        return;
       }
+      // 上一块是 code / table / math / image 等原子块：选中它并给出删除引导，
+      // 不再静默吞掉按键（Backspace 像被吃）
+      setFocusBlk(prev.id);
+      setPendingAtomicDel(prev.id);
+      scrollToBlock(prev.id);
+      flash('已选中上方的' + blockTypeName(prev.type) + '块 · 再按 ⌫ 删除');
       return;
     }
 
@@ -676,22 +1029,34 @@ function Editor({ starId, onBack, onOpen }) {
     }
   };
 
-  // 粘贴：多行或含 Markdown 标记的文本解析成块插入
+  // 粘贴：统一拦截，绝不放任浏览器默认富文本粘贴（未净化的 HTML 会直接入库）。
+  // 多行 / 含 Markdown 的文本解析成块；单行走白名单清洗后的行内 HTML 插入当前块。
   const blockPaste = (b) => (e) => {
-    const text = e.clipboardData && e.clipboardData.getData('text/plain');
-    if (!text) return;
+    const cd = e.clipboardData; if (!cd) return;
+    const text = cd.getData('text/plain') || '';
+    const html = cd.getData('text/html') || '';
     const md = /(^|\n)(#{1,3} |[-*] |\d+[.)] |> |```|\$\$|(-{3,}|\*{3,})$|\|.+\|)/.test(text);
-    if (!text.includes('\n') && !md) return;   // 单行普通文本走默认粘贴
+    // 多行或含 Markdown → 解析为块
+    if (text.includes('\n') || md) {
+      e.preventDefault();
+      const nbs = parseMdBlocks(text);
+      if (!nbs.length) return;
+      const emptyCur = b.type === 'p' && refs.current[b.id] && refs.current[b.id].innerText.trim() === '';
+      flushSynced(s => {
+        const i = s.findIndex(x => x.id === b.id);
+        return emptyCur ? [...s.slice(0, i), ...nbs, ...s.slice(i + 1)] : [...s.slice(0, i + 1), ...nbs, ...s.slice(i + 1)];
+      });
+      focusBlock(nbs[nbs.length - 1].id, 'end');
+      flash('已粘贴为 ' + nbs.length + ' 个块');
+      return;
+    }
+    // 单行：有 text/html 就白名单清洗后插入，否则纯文本转义插入——始终不走浏览器默认
     e.preventDefault();
-    const nbs = parseMdBlocks(text);
-    if (!nbs.length) return;
-    const emptyCur = b.type === 'p' && refs.current[b.id] && refs.current[b.id].innerText.trim() === '';
-    flushSynced(s => {
-      const i = s.findIndex(x => x.id === b.id);
-      return emptyCur ? [...s.slice(0, i), ...nbs, ...s.slice(i + 1)] : [...s.slice(0, i + 1), ...nbs, ...s.slice(i + 1)];
-    });
-    focusBlock(nbs[nbs.length - 1].id, 'end');
-    flash('已粘贴为 ' + nbs.length + ' 个块');
+    if (!EDITABLE.includes(b.type)) return;
+    pushExec();
+    const clean = html ? sanHtml(html) : escHtml(text);
+    if (clean) document.execCommand('insertHTML', false, clean);
+    scheduleTick();
   };
 
   // 拖住 ⋮⋮ 手柄排序；原地点击仍打开块菜单
@@ -748,49 +1113,10 @@ function Editor({ starId, onBack, onOpen }) {
   } });
 
   // serialize the current (DOM-synced) document to Markdown for 导出
-  const blocksToMd = () => {
-    const cur = blocks.map(syncBlock);
-    const toMd = (h) => stripTags((h || '')
-      .replace(/<br\s*\/?>/gi, '\n')
-      .replace(/<\/(p|div)>/gi, '\n')
-      .replace(/<(b|strong)[^>]*>([\s\S]*?)<\/\1>/gi, '**$2**')
-      .replace(/<(i|em)[^>]*>([\s\S]*?)<\/\1>/gi, '*$2*')
-      .replace(/<code[^>]*>([\s\S]*?)<\/code>/gi, '`$1`')
-      .replace(/<a[^>]*href="([^"]*)"[^>]*>([\s\S]*?)<\/a>/gi, '[$2]($1)')).trim();
-    let n = 0;
-    const lines = [];
-    cur.forEach(b => {
-      if (b.type !== 'numbered') n = 0;
-      switch (b.type) {
-        case 'rich': if (star.summary) lines.push(star.summary); break;
-        case 'h1': lines.push('# ' + toMd(b.text)); break;
-        case 'h2': lines.push('## ' + toMd(b.text)); break;
-        case 'h3': lines.push('### ' + toMd(b.text)); break;
-        case 'p': lines.push(toMd(b.text)); break;
-        case 'quote': lines.push('> ' + toMd(b.text)); break;
-        case 'callout': lines.push('> ' + toMd(b.text)); break;
-        case 'bulleted': lines.push('- ' + toMd(b.text)); break;
-        case 'numbered': n += 1; lines.push(n + '. ' + toMd(b.text)); break;
-        case 'todo': lines.push('- [' + (b.checked ? 'x' : ' ') + '] ' + toMd(b.text)); break;
-        case 'toggle': lines.push('- ' + toMd(b.text) + (b.child ? '\n  ' + b.child : '')); break;
-        case 'math': lines.push('$$\n' + (b.tex || '') + '\n$$'); break;
-        case 'code': lines.push('```' + (b.lang || '') + '\n' + (b.code || '') + '\n```'); break;
-        case 'divider': lines.push('---'); break;
-        case 'image': lines.push('![](' + (b.src || '') + ')'); break;
-        case 'table': {
-          const head = b.head || ['理论', 'S 上限', '是否定域'];
-          const rows = b.rows || [];
-          lines.push('| ' + head.join(' | ') + ' |');
-          lines.push('| ' + head.map(() => '---').join(' | ') + ' |');
-          rows.forEach(r => lines.push('| ' + r.join(' | ') + ' |'));
-          break;
-        }
-        default: break;
-      }
-    });
-    const tagLine = tags.length ? tags.map(t => '#' + t).join(' ') + '\n\n' : '';
-    return '# ' + star.label + '\n\n' + tagLine + lines.filter(l => l != null && l !== '').join('\n\n') + '\n';
-  };
+  // （序列化核心在 mdcore.js：frontmatter / admonition / 列表缩进 / 协议白名单）
+  const blocksToMd = () => MD
+    ? MD.blocksToMd(blocks.map(syncBlock), { title: star.label, props: star.props, tags, summary: star.summary })
+    : '# ' + star.label + '\n\n' + blocks.map(syncBlock).map(b => stripTags(b.text || '')).filter(Boolean).join('\n\n') + '\n';
   const exportMd = () => {
     try {
       const md = blocksToMd();
@@ -802,6 +1128,180 @@ function Editor({ starId, onBack, onOpen }) {
       setTimeout(() => URL.revokeObjectURL(url), 1500);
       flash('已导出 Markdown · ' + star.label + '.md');
     } catch (e) { flash('导出失败，请重试'); }
+  };
+
+  // ---- Markdown 导入：「更多」菜单选择 .md 文件，或直接把文件拖进正文 ----
+  // frontmatter 回填 star.props / tags；空笔记整体替换，非空笔记追加到末尾。
+  const importInputRef = React.useRef(null);
+  const importMdText = (name, text) => {
+    const fm = (MD && MD.parseFrontmatter) ? MD.parseFrontmatter(text) : { props: null, tags: null, body: text };
+    const nbs = parseMdBlocks(fm.body);
+    if (!nbs.length && !fm.props) { flash('文件是空的 · 没有可导入的内容'); return; }
+    if (fm.props) { star.props = Object.assign(star.props || {}, fm.props); }
+    if (fm.tags && fm.tags.length) setTags(ts => { const nt = [...ts, ...fm.tags.filter(t => !ts.includes(t))]; syncTags(nt); return nt; });
+    const cur = blocksRef.current;
+    const empty = !cur.length || cur.every(b => EDITABLE.includes(b.type) && !liveText(b).trim());
+    flushSynced(s => empty ? nbs : [...s, ...nbs]);
+    bumpTick();
+    if (nbs.length) {
+      scrollToBlock(nbs[nbs.length - 1].id);
+      const lastEd = [...nbs].reverse().find(b => EDITABLE.includes(b.type));
+      if (lastEd) focusBlock(lastEd.id, 'end');
+    }
+    flash('已导入「' + name + '」· ' + nbs.length + ' 个块' + (fm.props ? ' · 属性已回填' : ''));
+  };
+  const readMdFile = (f) => f.text()
+    .then(t => importMdText(f.name.replace(/\.(md|markdown|txt)$/i, ''), t))
+    .catch(() => flash('读取文件失败，请重试'));
+  const onImportFile = (e) => {
+    const f = e.target.files && e.target.files[0];
+    e.target.value = '';
+    if (f) readMdFile(f);
+  };
+  const onEditorDragOver = (e) => {
+    if (e.dataTransfer && Array.from(e.dataTransfer.items || []).some(it => it.kind === 'file')) e.preventDefault();
+  };
+  const onEditorDrop = (e) => {
+    const fs = (e.dataTransfer && e.dataTransfer.files) ? Array.from(e.dataTransfer.files) : [];
+    const f = fs.find(x => /\.(md|markdown|txt)$/i.test(x.name) || x.type === 'text/markdown');
+    if (!f) return;
+    e.preventDefault(); e.stopPropagation();
+    readMdFile(f);
+  };
+
+  // ---- 笔记内查找 / 替换（⌘F）----
+  // 高亮走 CSS Custom Highlight API：不改块 DOM、不进 innerHTML、不碰持久化。
+  const [find, setFind] = React.useState(null);          // { q, rv, rep }
+  const [findIdx, setFindIdx] = React.useState(0);
+  const [findMatches, setFindMatches] = React.useState([]);
+  const findInputRef = React.useRef(null);
+  const computeFind = (q) => {
+    const res = [];
+    const needle = String(q || '').toLowerCase().replace(/\u00a0/g, ' ');
+    if (!needle) return res;
+    blocksRef.current.forEach(b => {
+      if (!EDITABLE.includes(b.type)) return;
+      const el = refs.current[b.id]; if (!el) return;
+      const hay = el.textContent.toLowerCase().replace(/\u00a0/g, ' ');
+      let at = 0;
+      while ((at = hay.indexOf(needle, at)) >= 0) { res.push({ id: b.id, start: at, end: at + needle.length }); at += needle.length; }
+    });
+    return res;
+  };
+  React.useEffect(() => {
+    if (!find) { setFindMatches([]); return; }
+    const ms = computeFind(find.q);
+    setFindMatches(ms);
+    setFindIdx(i => ms.length ? Math.min(i, ms.length - 1) : 0);
+  }, [find ? find.q : null, find ? 1 : 0, blocks, tick]);
+  React.useEffect(() => {
+    const reg = typeof CSS !== 'undefined' && CSS.highlights;
+    const H = window.Highlight;
+    if (!reg || !H) return;   // 不支持时退化为「跳转即选中」，无害
+    if (!find) { reg.delete('sr-find'); reg.delete('sr-find-cur'); return; }
+    const others = [];
+    let curR = null;
+    findMatches.forEach((mt, i) => {
+      const el = refs.current[mt.id]; if (!el) return;
+      const s = nodeAtOffset(el, mt.start), e2 = nodeAtOffset(el, mt.end);
+      if (!s || !e2) return;
+      try {
+        const r = document.createRange();
+        r.setStart(s.node, s.off); r.setEnd(e2.node, e2.off);
+        if (i === findIdx) curR = r; else others.push(r);
+      } catch (_) { }
+    });
+    reg.set('sr-find', new H(...others));
+    reg.set('sr-find-cur', curR ? new H(curR) : new H());
+    return () => { reg.delete('sr-find'); reg.delete('sr-find-cur'); };
+  }, [find, findMatches, findIdx]);
+  const gotoMatch = (i) => {
+    if (!findMatches.length) return;
+    const k = ((i % findMatches.length) + findMatches.length) % findMatches.length;
+    setFindIdx(k);
+    scrollToBlock(findMatches[k].id);
+  };
+  const selectMatch = (mt) => {
+    const el = refs.current[mt.id]; if (!el) return false;
+    const s = nodeAtOffset(el, mt.start), e2 = nodeAtOffset(el, mt.end);
+    if (!s || !e2) return false;
+    el.focus();
+    try {
+      const sel0 = window.getSelection(); const r = document.createRange();
+      r.setStart(s.node, s.off); r.setEnd(e2.node, e2.off);
+      sel0.removeAllRanges(); sel0.addRange(r);
+    } catch (_) { return false; }
+    return true;
+  };
+  const replaceOne = () => {
+    const mt = findMatches[findIdx]; if (!mt || !find) return;
+    if (!selectMatch(mt)) return;
+    pushExec();
+    if (find.rv) document.execCommand('insertText', false, find.rv); else document.execCommand('delete');
+    persistBody(); bumpTick();
+    if (findInputRef.current) findInputRef.current.focus();
+  };
+  const replaceAll = () => {
+    if (!find || !findMatches.length) return;
+    pushExec();
+    const n = findMatches.length;
+    // 倒序替换：前面命中处的偏移不受后面替换影响
+    for (let k = n - 1; k >= 0; k--) {
+      if (!selectMatch(findMatches[k])) continue;
+      if (find.rv) document.execCommand('insertText', false, find.rv); else document.execCommand('delete');
+    }
+    persistBody(); bumpTick();
+    flash('已替换 ' + n + ' 处');
+    if (findInputRef.current) findInputRef.current.focus();
+  };
+  const findReturnRef = React.useRef(null);   // ⌘F 打开时光标所在块，关闭时兜底还焦
+  const closeFind = () => {
+    const mt = findMatches[findIdx];
+    setFind(null);
+    // 焦点还给正文：优先当前命中处，其次打开查找前的块，再次第一个可编辑块
+    if (mt) { focusBlockAt(mt.id, mt.start); return; }
+    const back = findReturnRef.current;
+    if (back && refs.current[back]) { focusBlock(back, 'end'); return; }
+    const first = blocksRef.current.find(b => EDITABLE.includes(b.type));
+    if (first) focusBlock(first.id, 'end');
+  };
+  // ⌘F：capture 阶段接管（编辑器打开期间不再落到浏览器原生查找）；
+  // 有选中文字时把它带进查找框。⌘K 语义不受影响。
+  React.useEffect(() => {
+    const h = (e) => {
+      if (!((e.metaKey || e.ctrlKey) && !e.altKey && !e.shiftKey && (e.key === 'f' || e.key === 'F'))) return;
+      e.preventDefault(); e.stopPropagation();
+      findReturnRef.current = blockIdOfNode(document.activeElement);
+      const selTxt = String(window.getSelection() || '').trim().slice(0, 120);
+      setFind(f => ({ q: selTxt || (f && f.q) || '', rv: (f && f.rv) || '', rep: !!(f && f.rep) }));
+      setTimeout(() => { const el = findInputRef.current; if (el) { el.focus(); el.select(); } }, 0);
+    };
+    window.addEventListener('keydown', h, true);
+    return () => window.removeEventListener('keydown', h, true);
+  }, []);
+  // 查找条打开时 Esc 关闭之——但让位给更上层的浮层（菜单 / 对话框先关它们自己）
+  React.useEffect(() => {
+    if (!find) return;
+    const h = (e) => {
+      if (e.key !== 'Escape') return;
+      if (slash || ctx || colorPop || linkDialog || confirm || history || more || sel || explore) return;
+      // 让位给正在交互的内层控件：代码语言下拉、数学/代码源码输入等先吃 Esc
+      const t = e.target;
+      if (t && t.closest && !t.closest('[role="search"]')
+        && (t.tagName === 'TEXTAREA' || t.tagName === 'INPUT' || t.closest('[role="combobox"],[role="listbox"]'))) return;
+      e.preventDefault(); e.stopPropagation();
+      closeFind();
+    };
+    window.addEventListener('keydown', h, true);
+    return () => window.removeEventListener('keydown', h, true);
+  }, [find, findMatches, findIdx, slash, ctx, colorPop, linkDialog, confirm, history, more, sel, explore]);
+
+  // 移动到星域：也压撤销快照（快照带 con）——⌘Z 能把星移回原星域
+  const moveToCon = (cid) => {
+    if (cid === star.con) { flash('这颗星已经在「' + D.conName(cid) + '」里了'); return; }
+    pushHistory();
+    star.con = cid; D.syncCounts(); D.touchNote(star.id); setCon(cid);
+    flash('已移动到「' + D.conName(cid) + '」· ⌘Z 撤销');
   };
 
   // actions from the top-right 「更多」 dropdown (page-level, not block-level)
@@ -822,32 +1322,35 @@ function Editor({ starId, onBack, onOpen }) {
     }
     else if (action === 'copyLink') { try { navigator.clipboard && navigator.clipboard.writeText('stellar-raft://star/' + star.id); } catch (e) { } flash('已复制星链接'); }
     else if (action === 'export') exportMd();
-    else if (action === 'move') { star.con = arg; D.syncCounts(); D.touchNote(star.id); setCon(arg); flash('已移动到「' + D.conName(arg) + '」'); }
+    else if (action === 'import') { if (importInputRef.current) importInputRef.current.click(); }
+    else if (action === 'move') { moveToCon(arg); }
     else if (action === 'history') { setHistory(true); }
     else if (action === 'delete') { setConfirm({ message: '「' + star.label + '」将坠入黑洞，连接与反链一并带走。黑洞里的星可以随时恢复。', confirmLabel: '移入黑洞', onYes: () => { D.trashStar(star.id); flash('已移入黑洞 · 可随时恢复'); if (onBack) setTimeout(onBack, 480); } }); }
     setMore(null);
   };
 
   const act = (id) => (action, arg) => {
-    if (action === 'delete') setConfirm({ message: '确定删除这个块吗？此操作不可撤销。', confirmLabel: '删除', onYes: () => withSynced(s => s.filter(b => b.id !== id)) });
+    // 有了应用级撤销栈，删除块不再需要模态确认——直接删除并给「⌘Z 撤销」toast
+    if (action === 'delete') { withSynced(s => s.filter(b => b.id !== id)); flash('已删除这个块 · ⌘Z 撤销'); }
     else if (action === 'duplicate') withSynced(s => { const i = s.findIndex(b => b.id === id); return [...s.slice(0, i + 1), { ...s[i], id: uid() }, ...s.slice(i + 1)]; });
-    else if (action === 'turn') withSynced(s => s.map(b => b.id === id ? { ...b, type: arg } : b));
+    else if (action === 'turn') withSynced(s => s.map(b => b.id === id ? { ...b, type: arg, ...typeExtras(arg, b) } : b));
     else if (action === 'color') withSynced(s => s.map(b => b.id === id ? (arg.kind === 'text' ? { ...b, color: arg.id } : { ...b, bg: arg.id }) : b));
     else if (action === 'copyLink') { try { navigator.clipboard && navigator.clipboard.writeText('stellar-raft://star/' + star.id + '#' + id); } catch (e) { } flash('已复制块链接'); }
-    else if (action === 'move') { star.con = arg; D.syncCounts(); D.touchNote(star.id); setCon(arg); flash('已移动到「' + D.conName(arg) + '」'); }
-    else if (action === 'comment') flash('已添加评论');
-    else if (action === 'review') { star.props = star.props || {}; star.props.nextReview = '今天'; D.pushTimeline('review', star.id, '加入复习队列'); D.touchNote(star.id); bumpTick(); flash('已加入复习队列 · 下次复习改为今天'); }
-    else if (action === 'ai') flash('AI 正在阅读这个块…');
+    else if (action === 'move') { moveToCon(arg); }
+    else if (action === 'review') { D.queueReview(star.id, 0); D.pushTimeline('review', star.id, '加入复习队列'); bumpTick(); flash('已加入复习队列 · 下次复习改为今天'); }
     setCtx(null);
   };
 
-  const insertAfter = (id, type = 'p') => withSynced(s => { const i = s.findIndex(b => b.id === id); const nb = { id: uid(), type, text: '' }; return [...s.slice(0, i + 1), nb, ...s.slice(i + 1)]; });
+  const insertAfter = (id, type = 'p') => withSynced(s => { const i = s.findIndex(b => b.id === id); const nb = { id: uid(), type, text: '', ...typeExtras(type) }; return [...s.slice(0, i + 1), nb, ...s.slice(i + 1)]; });
+  // 删光所有块后不再是死局：占位空态点击/回车即插入一个可输入的正文块并聚焦。
+  const seedFirstBlock = () => { const nb = { id: uid(), type: 'p', text: '' }; flushSynced(() => [nb]); focusBlock(nb.id, 'start'); };
 
   const syncTags = (ts) => { star.tags = ts.slice(); D.touchNote(star.id); };
   const commitTag = () => { const t = tagDraft.trim(); if (t && !tags.includes(t)) setTags(ts => { const nt = [...ts, t]; syncTags(nt); return nt; }); setTagDraft(''); setAddingTag(false); };
   const removeTag = (t) => setTags(ts => { const nt = ts.filter(x => x !== t); syncTags(nt); return nt; });
 
   const onMouseUp = () => {
+    if (pendingAtomicDel) setPendingAtomicDel(null);
     const s = window.getSelection();
     if (s && !s.isCollapsed && s.rangeCount && s.toString().trim()) {
       const r = s.getRangeAt(0).getBoundingClientRect();
@@ -856,55 +1359,237 @@ function Editor({ starId, onBack, onOpen }) {
     setSel(null);
   };
 
-  // run a rich-text command on the current selection, then keep the toolbar in place
-  const runFormat = (cmd, value) => {
-    if (cmd === 'inlineCode') {
-      const s0 = window.getSelection();
-      if (s0 && s0.rangeCount && !s0.isCollapsed) {
-        const text = s0.toString().replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-        document.execCommand('insertHTML', false, '<code style="font-family:var(--font-mono);font-size:0.92em;background:rgba(159,198,255,0.14);padding:1px 5px;border-radius:5px;">' + text + '</code>');
-      }
-      return;
-    }
-    document.execCommand('styleWithCSS', false, true);
-    document.execCommand(cmd, false, value);
+  // 键盘选区（Shift+方向键）也唤出选区工具条：监听 selectionchange（防抖 150ms），
+  // 选区落在编辑区内且非折叠时定位工具条，折叠时收起。
+  React.useEffect(() => {
+    let t = null;
+    const onSelChange = () => {
+      clearTimeout(t);
+      t = setTimeout(() => {
+        const root = scrollRef.current; if (!root) return;
+        const s = window.getSelection();
+        if (!s || !s.rangeCount || s.isCollapsed || !s.toString().trim()) { setSel(cur => cur ? null : cur); return; }
+        const n = s.anchorNode; const el = n && (n.nodeType === 1 ? n : n.parentElement);
+        if (!el || !root.contains(el) || !el.closest('[contenteditable]')) return;
+        const r = s.getRangeAt(0).getBoundingClientRect();
+        if (r.width > 1) setSel({ x: r.left + r.width / 2, y: r.top - 6 });
+      }, 150);
+    };
+    document.addEventListener('selectionchange', onSelChange);
+    return () => { document.removeEventListener('selectionchange', onSelChange); clearTimeout(t); };
+  }, []);
+
+  const keepToolbar = () => {
     const s = window.getSelection();
     if (s && s.rangeCount && !s.isCollapsed) {
       const r = s.getRangeAt(0).getBoundingClientRect();
       if (r.width > 1) setSel({ x: r.left + r.width / 2, y: r.top - 6 });
     }
+    persistBody();
+  };
+  // 选区着色 / 高亮：不再往内容里写死具体色值（execCommand foreColor 会烤进 #hex，
+  // 黎明主题下文字隐形）。改为用主题 token（CSS 变量 / color-mix）包一层 span，
+  // 渲染随主题重映射。cssColor 形如 var(--star-blue) 或 color-mix(...)。
+  const applyInlineColor = (prop, cssColor) => {
+    const s0 = window.getSelection();
+    if (!s0 || !s0.rangeCount || s0.isCollapsed) return;
+    const text = escHtml(s0.toString());
+    const style = prop === 'background'
+      ? 'background:' + cssColor + ';border-radius:4px;padding:0 2px;'
+      : 'color:' + cssColor + ';';
+    document.execCommand('insertHTML', false, '<span style="' + style + '">' + text + '</span>');
+    keepToolbar();
+  };
+  // run a rich-text command on the current selection, then keep the toolbar in place.
+  // 统一执行入口：所有 execCommand 格式操作（加粗/斜体/下划线/删除线/行内代码/
+  // 文字颜色/高亮）先经 pushExec 压一份撤销快照——⌘Z 才撤得掉「改颜色」这类操作。
+  const runFormat = (cmd, value) => {
+    const s0 = window.getSelection();
+    if (!s0 || !s0.rangeCount || s0.isCollapsed) return;
+    pushExec();
+    if (cmd === 'inlineCode') {
+      const text = s0.toString().replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      document.execCommand('insertHTML', false, '<code style="' + CODE_SPAN_CSS + '">' + text + '</code>');
+      keepToolbar();
+      return;
+    }
+    if (cmd === 'foreColor') { applyInlineColor('color', value); return; }
+    if (cmd === 'hiliteColor') { applyInlineColor('background', value); return; }
+    document.execCommand('styleWithCSS', false, true);
+    document.execCommand(cmd, false, value);
+    keepToolbar();
   };
   const formatLink = () => {
     const sel = window.getSelection();
     if (!sel || !sel.rangeCount || sel.isCollapsed) return;
     setLinkDialog({ range: sel.getRangeAt(0).cloneRange() });
   };
+
+  // 编辑器内有选区时，⌘K 归「添加链接」（选区工具条上标注的语义）；
+  // capture 阶段拦截，app.jsx 的全局命令面板监听不会抢走它。
+  React.useEffect(() => {
+    const h = (e) => {
+      if (!((e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K'))) return;
+      const s = window.getSelection();
+      const root = scrollRef.current;
+      if (!s || !s.rangeCount || s.isCollapsed || !root) return;
+      const n = s.anchorNode;
+      const el = n && (n.nodeType === 1 ? n : n.parentElement);
+      if (!el || !root.contains(el) || !el.closest('[contenteditable]')) return;
+      e.preventDefault(); e.stopPropagation();
+      setLinkDialog({ range: s.getRangeAt(0).cloneRange() });
+    };
+    window.addEventListener('keydown', h, true);
+    return () => window.removeEventListener('keydown', h, true);
+  }, []);
+
+  // ⌘Z / ⌘⇧Z：接管撤销/重做（capture 阶段，先于浏览器原生 contentEditable undo），
+  // 只在编辑区内生效，避免抢走其它输入框的原生撤销。
+  React.useEffect(() => {
+    const h = (e) => {
+      if (!(e.metaKey || e.ctrlKey) || e.key.toLowerCase() !== 'z') return;
+      const root = scrollRef.current; if (!root) return;
+      const a = document.activeElement;
+      const inEditor = a && root.contains(a);
+      // 焦点落在 body（菜单动作执行完、焦点未回正文）时也接管——
+      // 「右键菜单改颜色 → ⌘Z」不能因为焦点丢了就失灵
+      const free = !a || a === document.body;
+      // 对话框 / 浮层里的输入框保留原生撤销
+      if (linkDialog || confirm || history) return;
+      if (!inEditor && !free) return;
+      e.preventDefault(); e.stopPropagation();
+      if (e.shiftKey) redo(); else undo();
+    };
+    window.addEventListener('keydown', h, true);
+    return () => window.removeEventListener('keydown', h, true);
+  }, [linkDialog, confirm, history]);
+
+  // 被块首 Backspace 选中的原子块：再按一次 ⌫/Delete 删除，其它键 / Esc 取消选中
+  React.useEffect(() => {
+    if (!pendingAtomicDel) return;
+    const onKey = (e) => {
+      if (e.key === 'Backspace' || e.key === 'Delete') {
+        e.preventDefault(); e.stopPropagation();
+        const id = pendingAtomicDel;
+        withSynced(s => s.filter(x => x.id !== id));
+        setPendingAtomicDel(null);
+        flash('已删除 · ⌘Z 撤销');
+      } else if (e.key === 'Escape') { setPendingAtomicDel(null); }
+      else if (e.key.length === 1 || e.key === 'Enter') { setPendingAtomicDel(null); }
+    };
+    window.addEventListener('keydown', onKey, true);
+    return () => window.removeEventListener('keydown', onKey, true);
+  }, [pendingAtomicDel]);
+
+  // 跨块选区的删除/替换/剪切：绝不让浏览器默认行为直接删块 DOM（React 仍持有该块
+  // 与 ref，reconcile 时会 NotFoundError: removeChild）。接管为一次 React 合并，
+  // 把首块选区前 + 尾块选区后的内容并进存活块，中间块整体移除。
+  React.useEffect(() => {
+    const root = scrollRef.current; if (!root) return;
+    const doMerge = (ins, e) => {
+      const sel = window.getSelection();
+      if (!sel || !sel.rangeCount || sel.isCollapsed) return false;
+      const r = sel.getRangeAt(0);
+      if (!root.contains(r.commonAncestorContainer)) return false;
+      const startId = blockIdOfNode(r.startContainer), endId = blockIdOfNode(r.endContainer);
+      if (!startId || !endId || startId === endId) return false;   // 同块交给原生
+      const cur = blocksRef.current;
+      const si = cur.findIndex(x => x.id === startId), ei = cur.findIndex(x => x.id === endId);
+      if (si < 0 || ei < 0) return false;
+      e.preventDefault(); e.stopPropagation();
+      const lo = Math.min(si, ei), hi = Math.max(si, ei);
+      const startBlk = cur[si], endBlk = cur[ei];
+      const sEl = refs.current[startId], eEl = refs.current[endId];
+      const startEd = sEl && EDITABLE.includes(startBlk.type);
+      const endEd = eEl && EDITABLE.includes(endBlk.type);
+      const head = startEd ? htmlSlice(sEl, r.startContainer, r.startOffset, true) : '';
+      const tail = endEd ? htmlSlice(eEl, r.endContainer, r.endOffset, false) : '';
+      const tmp = document.createElement('div'); tmp.innerHTML = head + ins; const caretOff = tmp.textContent.length;
+      let survivor, survivorId;
+      if (startEd) { survivorId = startId; survivor = { ...startBlk, text: sanHtml(head + ins + tail) }; }
+      else if (endEd) { survivorId = endId; survivor = { ...endBlk, text: sanHtml(ins + tail) }; }
+      else { survivorId = uid(); survivor = { id: survivorId, type: 'p', text: sanHtml(ins) }; }
+      pushHistory();
+      const next = [...cur.slice(0, lo), survivor, ...cur.slice(hi + 1)];
+      if (ReactDOM.flushSync) ReactDOM.flushSync(() => setBlocks(next.map(cloneBlk))); else setBlocks(next.map(cloneBlk));
+      focusBlockAt(survivorId, caretOff);
+      persistBody();
+      return true;
+    };
+    const onKey = (e) => {
+      if (e.metaKey || e.ctrlKey || e.altKey || e.isComposing) return;
+      const isChar = e.key.length === 1;
+      const del = e.key === 'Backspace' || e.key === 'Delete';
+      const ent = e.key === 'Enter' && !e.shiftKey;
+      if (!isChar && !del && !ent) return;
+      doMerge(isChar ? escHtml(e.key) : '', e);
+    };
+    const onCut = (e) => {
+      const sel = window.getSelection();
+      if (sel && sel.toString() && e.clipboardData) {
+        try { e.clipboardData.setData('text/plain', sel.toString()); } catch (_) { }
+      }
+      doMerge('', e);
+    };
+    root.addEventListener('keydown', onKey, true);
+    root.addEventListener('cut', onCut, true);
+    return () => { root.removeEventListener('keydown', onKey, true); root.removeEventListener('cut', onCut, true); };
+  }, []);
   const applyLink = (url) => {
-    const ld = linkDialog; setLinkDialog(null);
+    const ld = linkDialog;
+    // 协议白名单：javascript:/data:/vbscript: 拒绝，保留对话框让用户改
+    const ok = safeUrl(url);
+    if (!ok) { flash('链接协议不被允许 · 仅支持 http/https/mailto'); return; }
+    setLinkDialog(null);
     if (!ld) return;
     const sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(ld.range);
-    document.execCommand('createLink', false, url);
+    pushExec();   // 添加链接同样可 ⌘Z 撤销
+    document.execCommand('createLink', false, ok);
+    persistBody();
   };
 
+  // 空块引导文案按块类型给（只在光标所在块淡入，不再满屏灰字——Notion 口径）
+  const BLOCK_PH = {
+    p: '输入正文，或按 / 选择块类型…', h1: '一级标题', h2: '二级标题', h3: '三级标题',
+    quote: '引用一句值得记住的话…', callout: '写一句醒目的标注…', todo: '待办事项',
+    bulleted: '列表项', numbered: '列表项', toggle: '折叠标题 · 点左侧箭头收纳内容',
+  };
   const editable = (b, tag, style) => {
     const Tag = tag;
     return React.createElement(Tag, {
       ref: el => (refs.current[b.id] = el), contentEditable: true, suppressContentEditableWarning: true,
-      'data-ph': '输入正文，或按 / 选择块类型',
+      className: 'sr-blk-ph',
+      'data-ph': BLOCK_PH[b.type] || BLOCK_PH.p,
       onContextMenu: (e) => { e.preventDefault(); e.stopPropagation(); setCtx({ x: e.clientX, y: e.clientY, id: b.id }); },
       onKeyDown: blockKeyDown(b),
       onPaste: blockPaste(b),
-      // typing "/" in an empty block opens the slash menu at the caret (Notion-style);
+      // typing "/" at the caret opens the slash menu (Notion-style) — anywhere in the
+      // block, as long as the char before the "/" is whitespace or line start;
       // "```" / "$$" / "---" transform in place (Typora-style)
       onInput: (e) => {
+        if (e.nativeEvent && e.nativeEvent.isComposing) { scheduleTick(); return; }
+        noteTyping();
         scheduleTick();
         const t = e.currentTarget.innerText;
-        if (t === '/') {
-          let rect;
-          try { const r = window.getSelection().getRangeAt(0).getBoundingClientRect(); if (r && (r.left || r.top)) rect = r; } catch (_) { }
-          if (!rect) rect = e.currentTarget.getBoundingClientRect();
-          setSlash({ x: rect.left, y: rect.bottom + 6, id: b.id, inline: true });
-          return;
+        // 斜杠菜单：任意位置输入 /（行首或前一字符为空白）都触发，不再要求块里只有「/」。
+        // IME 组合期在上面已挡；行内代码里不触发。
+        const justSlash = e.nativeEvent && (e.nativeEvent.data === '/' || (e.nativeEvent.data == null && t.replace(/\n+$/, '') === '/'));
+        const info = justSlash ? caretInfo(e.currentTarget) : null;
+        if (info && info.collapsed) {
+          const anchorEl = info.range.startContainer.nodeType === 1 ? info.range.startContainer : info.range.startContainer.parentElement;
+          if (!(anchorEl && anchorEl.closest && anchorEl.closest('code'))) {
+            const pre = info.range.cloneRange();
+            pre.selectNodeContents(e.currentTarget);
+            pre.setEnd(info.range.startContainer, info.range.startOffset);
+            const preText = pre.toString().replace(/\u00a0/g, ' ');
+            if (/(?:^|\s)\/$/.test(preText)) {
+              let rect;
+              try { const r = window.getSelection().getRangeAt(0).getBoundingClientRect(); if (r && (r.left || r.top)) rect = r; } catch (_) { }
+              if (!rect) rect = e.currentTarget.getBoundingClientRect();
+              setSlash({ x: rect.left, y: rect.bottom + 6, id: b.id, inline: true, at: preText.length });
+              return;
+            }
+          }
         }
         if (t === '```') { withSynced(s => s.map(x => x.id === b.id ? { id: x.id, type: 'code', lang: 'python', code: '', _new: true } : x)); return; }
         if (t === '$$') { withSynced(s => s.map(x => x.id === b.id ? { id: x.id, type: 'math', tex: '', _new: true } : x)); return; }
@@ -920,21 +1605,22 @@ function Editor({ starId, onBack, onOpen }) {
       },
       // 用户选的文字颜色必须压过块类型的默认色，所以放在类型样式之后
       style: { outline: 'none', ...style, color: TXT[b.color] || style.color || 'var(--text-1)' },
-      dangerouslySetInnerHTML: { __html: b.text || '' },
+      dangerouslySetInnerHTML: { __html: sanHtml(b.text || '') },
     });
   };
 
-  let numCount = 0;
+  let numCounters = [];   // 有序列表逐层计数（indent 层级各自续号）
   const renderInner = (b) => {
-    if (b.type !== 'numbered') numCount = 0;
+    if (b.type !== 'numbered') numCounters = [];
     switch (b.type) {
       case 'rich': return <div contentEditable suppressContentEditableWarning data-ph="一句话摘要：这颗星在悬停时如何介绍自己…"
         onInput={scheduleTick}
         onBlur={(e) => { const t = e.currentTarget.innerText.trim(); if (t !== (star.summary || '')) { star.summary = t; D.touchNote(star.id); } }}
         style={{ outline: 'none', fontSize: 16.5, lineHeight: 1.85, color: 'var(--text-2)' }}>{star.summary}</div>;
-      case 'h1': return editable(b, 'div', { fontSize: 28, fontWeight: 300, lineHeight: 1.3 });
-      case 'h2': return editable(b, 'div', { fontSize: 21, fontWeight: 300, marginTop: 6 });
-      case 'h3': return editable(b, 'div', { fontSize: 17.5, fontWeight: 500, color: 'var(--text-1)' });
+      // 标题上下留白：上方多、下方少（块间距 8px 统一兜底），阅读节奏对标 Notion/Typora
+      case 'h1': return editable(b, 'div', { fontSize: 28, fontWeight: 300, lineHeight: 1.35, marginTop: 18, marginBottom: 2 });
+      case 'h2': return editable(b, 'div', { fontSize: 21, fontWeight: 300, lineHeight: 1.45, marginTop: 14, marginBottom: 1 });
+      case 'h3': return editable(b, 'div', { fontSize: 17.5, fontWeight: 500, lineHeight: 1.5, marginTop: 10, color: 'var(--text-1)' });
       case 'p': return editable(b, 'div', { fontSize: 16.5, lineHeight: 1.85, color: 'var(--text-2)', minHeight: 26 });
       case 'quote': return (
         <div style={{ display: 'flex', gap: 14 }}>
@@ -951,53 +1637,58 @@ function Editor({ starId, onBack, onOpen }) {
         </div>
       );
       case 'bulleted': return (
-        <div style={{ display: 'flex', gap: 12 }}>
-          <span style={{ color: 'var(--star-blue)', marginTop: 11, width: 5, height: 5, borderRadius: '50%', background: 'var(--star-blue)', flex: 'none' }} />
+        <div style={{ display: 'flex', gap: 12, marginLeft: (b.indent || 0) * 24 }}>
+          <span style={{ color: 'var(--star-blue)', marginTop: 11, width: 5, height: 5, borderRadius: (b.indent || 0) % 2 ? 1 : '50%', background: 'var(--star-blue)', flex: 'none' }} />
           {editable(b, 'div', { flex: 1, fontSize: 16.5, lineHeight: 1.7, color: 'var(--text-2)' })}
         </div>
       );
-      case 'numbered': { numCount += 1; const n = numCount; return (
-        <div style={{ display: 'flex', gap: 12 }}>
+      case 'numbered': {
+        const lvl = b.indent || 0;
+        numCounters = numCounters.slice(0, lvl + 1);
+        if (numCounters[lvl] == null) numCounters[lvl] = 0;
+        if (numCounters[lvl] === 0 && b.start) numCounters[lvl] = b.start - 1;
+        numCounters[lvl] += 1;
+        const n = numCounters[lvl];
+        return (
+        <div style={{ display: 'flex', gap: 12, marginLeft: lvl * 24 }}>
           <span style={{ color: 'var(--star-blue)', fontFamily: 'var(--font-mono)', fontSize: 14, marginTop: 2, minWidth: 16 }}>{n}.</span>
           {editable(b, 'div', { flex: 1, fontSize: 16.5, lineHeight: 1.7, color: 'var(--text-2)' })}
         </div>
       ); }
-      case 'todo': return (
-        <div style={{ display: 'flex', gap: 11, alignItems: 'flex-start' }}>
-          <span onClick={() => setBlocks(s => s.map(x => x.id === b.id ? { ...x, checked: !x.checked } : x))}
-            style={{ width: 18, height: 18, marginTop: 2, borderRadius: 5, flex: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+      case 'todo': { const toggleTodo = () => withSynced(s => s.map(x => x.id === b.id ? { ...x, checked: !x.checked } : x)); return (
+        <div style={{ display: 'flex', gap: 11, alignItems: 'flex-start', marginLeft: (b.indent || 0) * 24 }}>
+          <span role="checkbox" tabIndex={0} aria-checked={!!b.checked} aria-label="待办完成" className="sr-focus-ring sr-hit40"
+            onClick={toggleTodo} onKeyDown={(e) => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); toggleTodo(); } }}
+            style={{ width: 18, height: 18, marginTop: 2, borderRadius: 5, flex: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative',
               border: '1px solid', borderColor: b.checked ? 'var(--gold)' : 'var(--line-strong)', background: b.checked ? 'var(--gold)' : 'transparent' }}>
             {b.checked && <Icon name="check" size={12} color="var(--text-on-gold)" />}
           </span>
           {editable(b, 'div', { flex: 1, fontSize: 16, lineHeight: 1.7, color: b.checked ? 'var(--text-3)' : 'var(--text-2)', textDecoration: b.checked ? 'line-through' : 'none' })}
         </div>
-      );
-      case 'toggle': return (
+      ); }
+      case 'toggle': { const toggleOpen = () => mutateBlocks(s => s.map(x => x.id === b.id ? { ...x, open: !x.open } : x)); return (
         <div>
           <div style={{ display: 'flex', gap: 8, alignItems: 'flex-start' }}>
-            <span onClick={() => setBlocks(s => s.map(x => x.id === b.id ? { ...x, open: !x.open } : x))}
-              style={{ marginTop: 4, cursor: 'pointer', transform: b.open ? 'rotate(90deg)' : 'none', transition: 'transform var(--dur-fast)', color: 'var(--text-3)' }}>
+            <span role="button" tabIndex={0} aria-expanded={!!b.open} aria-label="展开或收起" className="sr-focus-ring sr-hit40"
+              onClick={toggleOpen} onKeyDown={(e) => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); toggleOpen(); } }}
+              style={{ marginTop: 4, cursor: 'pointer', display: 'inline-flex', position: 'relative', transform: b.open ? 'rotate(90deg)' : 'none', transition: 'transform var(--dur-fast)', color: 'var(--text-3)' }}>
               <Icon name="chevron-right" size={16} color="currentColor" />
             </span>
             {editable(b, 'div', { flex: 1, fontSize: 16.5, lineHeight: 1.7, color: 'var(--text-1)' })}
           </div>
-          {b.open && <div contentEditable suppressContentEditableWarning style={{ outline: 'none', marginLeft: 24, marginTop: 6, fontSize: 15, lineHeight: 1.7, color: 'var(--text-2)' }}>{b.child}</div>}
+          {b.open && <div contentEditable suppressContentEditableWarning data-ph="折叠内容…"
+            onBlur={(e) => { const h = sanHtml(e.currentTarget.innerHTML); if (h !== (b.child || '')) mutateBlocks(s => s.map(x => x.id === b.id ? { ...x, child: h } : x)); }}
+            dangerouslySetInnerHTML={{ __html: sanHtml(b.child || '') }}
+            style={{ outline: 'none', marginLeft: 24, marginTop: 6, fontSize: 15, lineHeight: 1.7, color: 'var(--text-2)' }} />}
         </div>
-      );
-      case 'math': return <MathBlock tex={b.tex} autoEdit={b._new} onCommit={(t) => setBlocks(s => s.map(x => x.id === b.id ? { ...x, tex: t, _new: false } : x))} />;
-      case 'code': return <CodeBlock code={b.code} lang={b.lang} autoEdit={b._new} onCommitCode={(c) => setBlocks(s => s.map(x => x.id === b.id ? { ...x, code: c, _new: false } : x))} />;
-      case 'table': return <DataTable head={b.head} rows={b.rows} />;
-      case 'image': return (
-        b.src
-          ? <img src={b.src} alt="" style={{ maxWidth: '100%', borderRadius: 'var(--r-md)', display: 'block', border: '1px solid var(--glass-border)' }} />
-          : (
-            <label style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 8, height: 120, borderRadius: 'var(--r-md)', border: '1px dashed var(--line-strong)', color: 'var(--text-3)', cursor: 'pointer' }}>
-              <Icon name="image" size={22} color="currentColor" /><span style={{ fontSize: 13 }}>拖入图片，或点击上传</span>
-              <input type="file" accept="image/*" style={{ display: 'none' }}
-                onChange={(e) => { const f = e.target.files && e.target.files[0]; if (!f) return; const rd = new FileReader(); rd.onload = () => setBlocks(s => s.map(x => x.id === b.id ? { ...x, src: rd.result } : x)); rd.readAsDataURL(f); }} />
-            </label>
-          )
-      );
+      ); }
+      case 'math': return <MathBlock tex={b.tex} autoEdit={b._new} onCommit={(t) => mutateBlocks(s => s.map(x => x.id === b.id ? { ...x, tex: t, _new: false } : x))} />;
+      case 'code': return <CodeBlock code={b.code} lang={b.lang} autoEdit={b._new}
+        onCommitCode={(c) => mutateBlocks(s => s.map(x => x.id === b.id ? { ...x, code: c, _new: false } : x))}
+        onCommitLang={(lg) => mutateBlocks(s => s.map(x => x.id === b.id ? { ...x, lang: lg } : x))}
+        onCopyFail={() => flash('复制失败 · 请手动选择代码复制')} />;
+      case 'table': return <DataTable head={b.head} rows={b.rows} onCommit={(head, rows) => mutateBlocks(s => s.map(x => x.id === b.id ? { ...x, head, rows } : x))} />;
+      case 'image': return <ImageBlock b={b} onSrc={(src) => mutateBlocks(s => s.map(x => x.id === b.id ? { ...x, src } : x))} />;
       case 'divider': return <div style={{ height: 1, background: 'var(--line-strong)', margin: '6px 0' }} />;
       default: return null;
     }
@@ -1005,10 +1696,35 @@ function Editor({ starId, onBack, onOpen }) {
 
   return (
     <div onContextMenu={(e) => e.preventDefault()} style={{ position: 'relative', flex: 1, minWidth: 0, display: 'flex', overflow: 'hidden' }}>
+      <style>{`
+        /* 1024–1180px：正文优先——右侧知识栏让位，状态栏铺满 */
+        @media (max-width: 1180px) {
+          .sr-ed-rail { display: none; }
+          .sr-ed-status { right: 0 !important; }
+        }
+        /* 小宽度下按优先级收敛状态栏低价值项，别把「UTF-8」硬截成「UTF-」 */
+        @media (max-width: 1280px) {
+          .sr-ed-status-opt { display: none !important; }
+        }
+        /* 查找条：右栏让位时跟着贴边 */
+        @media (max-width: 1180px) {
+          .sr-ed-find { right: 24px !important; }
+        }
+        /* 笔记内查找高亮（CSS Custom Highlight，不进块 DOM / 不进持久化） */
+        ::highlight(sr-find) { background: color-mix(in srgb, var(--star-blue) 25%, transparent); }
+        ::highlight(sr-find-cur) { background: color-mix(in srgb, var(--star-blue) 55%, transparent); }
+        /* 正文空块的引导文案：只在光标所在块淡入（其余空块保持安静的黑） */
+        .sr-blk-ph:empty:before { opacity: 0; transition: opacity 160ms var(--ease-flight); }
+        .sr-blk-ph:empty:focus:before { opacity: 1; }
+        @media (prefers-reduced-motion: reduce) { .sr-blk-ph:empty:before { transition: none; } }
+        /* 保存中指示的旋转——只表状态，reduced-motion / 设置关动效时静止 */
+        @keyframes sr-ed-spin { to { transform: rotate(360deg); } }
+        @media (prefers-reduced-motion: reduce) { .sr-ed-spin { animation: none !important; } }
+      `}</style>
       <sr-starfield density="0.4"></sr-starfield>
 
       {/* MIDDLE — editor */}
-      <div ref={scrollRef} onMouseUp={onMouseUp} style={{ flex: 1, minWidth: 0, overflow: 'auto', position: 'relative', zIndex: 2 }}>
+      <div ref={scrollRef} onMouseUp={onMouseUp} onDragOver={onEditorDragOver} onDrop={onEditorDrop} style={{ flex: 1, minWidth: 0, overflow: 'auto', position: 'relative', zIndex: 2 }}>
         <div style={{ maxWidth: 720, margin: '0 auto', padding: '20px 52px 120px' }}>
           {/* top bar */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 22 }}>
@@ -1018,9 +1734,8 @@ function Editor({ starId, onBack, onOpen }) {
               <span style={{ width: 7, height: 7, borderRadius: '50%', background: D.conColor(con), boxShadow: `0 0 7px ${D.conColor(con)}` }} />{D.conName(con)}
             </span>
             <div style={{ flex: 1 }} />
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12, color: 'var(--text-3)', whiteSpace: 'nowrap', flex: 'none' }}><Icon name="check" size={14} color="var(--gold)" />已自动保存</span>
             <IconButton name="star" active={fav} title={fav ? '已收藏 · 点击取消' : '收藏这颗星'} onClick={toggleFav} />
-            <IconButton name="more-horizontal" title="更多" onClick={(e) => setMore({ x: e.clientX + 12, y: e.clientY + 10 })} />
+            <IconButton name="more-horizontal" title="更多" onClick={(e) => { const r = e.currentTarget.getBoundingClientRect(); setMore({ x: r.right, y: r.bottom + 6 }); }} />
           </div>
 
           {/* meta */}
@@ -1036,7 +1751,6 @@ function Editor({ starId, onBack, onOpen }) {
             )}
             <div style={{ flex: 1 }} />
             <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-3)' }}>编辑于 {(() => { const n = D.notes.find(x => x.id === star.id) || {}; return n.editedTs ? D.ago(n.editedTs) : (n.edited || '刚刚'); })()}</span>
-            <Badge tone="gold">Lv.4</Badge>
           </div>
 
           {/* title */}
@@ -1053,6 +1767,13 @@ function Editor({ starId, onBack, onOpen }) {
 
           {/* blocks */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8, userSelect: dragBlk ? 'none' : 'auto' }} onMouseLeave={() => setHover(null)}>
+            {blocks.length === 0 && (
+              <div role="button" tabIndex={0} className="sr-focus-ring" onClick={seedFirstBlock}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ' || e.key === '/') { e.preventDefault(); seedFirstBlock(); } }}
+                style={{ padding: '14px 8px', margin: '0 -8px', borderRadius: 'var(--r-sm)', color: 'var(--text-3)', cursor: 'text', fontSize: 16.5, lineHeight: 1.85 }}>
+                写下第一行，或按 / 选择块类型…
+              </div>
+            )}
             {blocks.map((b, bi) => (
               <div key={b.id} id={'blk-' + b.id} onMouseEnter={() => setHover(b.id)}
                 onFocus={() => setFocusBlk(b.id)}
@@ -1065,9 +1786,16 @@ function Editor({ starId, onBack, onOpen }) {
                   opacity: dragBlk === b.id ? 0.4 : 1,
                   // 选中态：整块包围的高亮环，一眼看清光标在哪个块里
                   boxShadow: dragBlk && dragBlk !== b.id && dropIdx === bi ? 'inset 0 2px 0 var(--gold)'
-                    : focusBlk === b.id ? '0 0 0 1.5px rgba(159,198,255,0.45), 0 0 14px rgba(159,198,255,0.12)' : 'none',
+                    : pendingAtomicDel === b.id ? '0 0 0 1.5px var(--danger)'
+                    : focusBlk === b.id ? '0 0 0 1.5px var(--focus), 0 0 14px color-mix(in srgb, var(--focus) 24%, transparent)' : 'none',
                   transition: 'background var(--dur-fast), opacity var(--dur-fast), box-shadow var(--dur-fast)' }}>
-                <div style={{ position: 'absolute', left: -52, top: 1, display: 'flex', gap: 1, opacity: hover === b.id ? 1 : 0, transition: 'opacity var(--dur-fast)' }}>
+                {/* ⊕/⋮⋮ 块手柄：hover/聚焦时淡入 + 轻微滑入（150–220ms 口径，--ease-flight）；
+                    隐藏时关掉指针事件，看不见的手柄不再吃到误点击 */}
+                <div style={{ position: 'absolute', left: -52, top: 1, display: 'flex', gap: 1,
+                  opacity: (hover === b.id || focusBlk === b.id) ? 1 : 0,
+                  transform: (hover === b.id || focusBlk === b.id) ? 'none' : 'translateX(-5px)',
+                  pointerEvents: (hover === b.id || focusBlk === b.id) ? 'auto' : 'none',
+                  transition: 'opacity 180ms var(--ease-flight), transform 180ms var(--ease-flight)' }}>
                   <Handle icon="plus" title="在下方插入块" onClick={() => insertAfter(b.id)} />
                   <Handle icon="grip-vertical" title="拖动排序 · 点击打开菜单 · Alt+↑↓ 移动" onMouseDown={(e) => startDrag(e, b.id)} />
                 </div>
@@ -1081,17 +1809,17 @@ function Editor({ starId, onBack, onOpen }) {
       </div>
 
       {/* RIGHT — knowledge rail */}
-      <aside style={{ width: 312, flex: 'none', borderLeft: '1px solid var(--glass-border)', background: 'var(--glass-bg)', WebkitBackdropFilter: 'blur(var(--glass-blur))', backdropFilter: 'blur(var(--glass-blur))', overflow: 'auto', position: 'relative', zIndex: 2 }}>
+      <aside className="sr-ed-rail" style={{ width: 312, flex: 'none', borderLeft: '1px solid var(--glass-border)', background: 'var(--glass-bg)', WebkitBackdropFilter: 'blur(var(--glass-blur))', backdropFilter: 'blur(var(--glass-blur))', overflow: 'auto', position: 'relative', zIndex: 2 }}>
         <div style={{ padding: 20, display: 'flex', flexDirection: 'column', gap: 22 }}>
           <section>
             <RailHead icon="list-tree" title="大纲" />
             <div style={{ marginTop: 10, display: 'flex', flexDirection: 'column', gap: 1 }}>
-              <div onClick={() => scrollRef.current && scrollRef.current.scrollTo({ top: 0, behavior: 'smooth' })}
-                style={{ padding: '5px 10px', borderRadius: 'var(--r-sm)', cursor: 'pointer', fontSize: 13, color: 'var(--text-1)', borderLeft: '2px solid var(--gold)' }}>{star.label}</div>
+              <button type="button" className="sr-focus-ring" onClick={() => scrollRef.current && scrollRef.current.scrollTo({ top: 0, behavior: 'smooth' })}
+                style={{ display: 'block', width: '100%', textAlign: 'left', font: 'inherit', background: 'transparent', padding: '5px 10px', borderRadius: 'var(--r-sm)', border: 'none', borderLeft: '2px solid var(--gold)', cursor: 'pointer', fontSize: 13, color: 'var(--text-1)' }}>{star.label}</button>
               {outline.map(o => (
-                <div key={o.id} onClick={() => scrollToBlock(o.id)}
-                  style={{ padding: '5px 10px', paddingLeft: o.type === 'h3' ? 30 : 18, borderRadius: 'var(--r-sm)', cursor: 'pointer', fontSize: 12.5, color: 'var(--text-2)', borderLeft: '2px solid var(--line)' }}
-                  onMouseEnter={e => e.currentTarget.style.background = 'rgba(159,198,255,0.06)'} onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>{o.live}</div>
+                <button type="button" key={o.id} className="sr-focus-ring" onClick={() => scrollToBlock(o.id)}
+                  style={{ display: 'block', width: '100%', textAlign: 'left', font: 'inherit', background: 'transparent', border: 'none', padding: '5px 10px', paddingLeft: o.type === 'h3' ? 30 : 18, borderRadius: 'var(--r-sm)', borderLeft: '2px solid var(--line)', cursor: 'pointer', fontSize: 12.5, color: 'var(--text-2)' }}
+                  onMouseEnter={e => e.currentTarget.style.background = 'rgba(159,198,255,0.06)'} onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>{o.live}</button>
               ))}
             </div>
           </section>
@@ -1104,8 +1832,9 @@ function Editor({ starId, onBack, onOpen }) {
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
                     <Icon name="link" size={13} color={l.kind === 'cross' ? 'var(--gold)' : 'var(--star-blue)'} /><span style={{ fontSize: 13.5, color: 'var(--text-1)' }}>{l.star.label}</span>
                     {l.kind === 'cross' && <span style={{ marginLeft: 'auto', fontSize: 10, color: 'var(--gold)' }}>融会贯通</span>}
-                    <button type="button" title="断开连接" onClick={() => removeConnection(l)}
-                      style={{ marginLeft: l.kind === 'cross' ? 6 : 'auto', flex: 'none', width: 20, height: 20, display: 'flex', alignItems: 'center', justifyContent: 'center', border: 'none', background: 'transparent', cursor: 'pointer', color: 'var(--text-3)', opacity: hoverConn === i ? 1 : 0, transition: 'opacity var(--dur-fast)' }}>
+                    <button type="button" title="断开连接" className="sr-focus-ring sr-hit40" onClick={() => removeConnection(l)}
+                      onFocus={() => setHoverConn(i)} onBlur={() => setHoverConn(null)}
+                      style={{ marginLeft: l.kind === 'cross' ? 6 : 'auto', flex: 'none', width: 20, height: 20, position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', border: 'none', background: 'transparent', cursor: 'pointer', color: 'var(--text-3)', opacity: hoverConn === i ? 1 : 0, transition: 'opacity var(--dur-fast)' }}>
                       <Icon name="unlink" size={13} color="currentColor" />
                     </button>
                   </div>
@@ -1119,7 +1848,7 @@ function Editor({ starId, onBack, onOpen }) {
                       <div style={{ display: 'flex', alignItems: 'center', gap: 7, marginBottom: 9, fontSize: 12.5, color: 'var(--text-2)' }}>
                         <span style={{ width: 7, height: 7, borderRadius: '50%', background: D.conColor(linkStar.con), boxShadow: `0 0 6px ${D.conColor(linkStar.con)}` }} />
                         <span style={{ color: 'var(--text-1)' }}>{linkStar.label}</span>
-                        <span style={{ marginLeft: 'auto', fontSize: 10, color: linkStar.con === con ? 'var(--star-blue)' : 'var(--gold)' }}>{linkStar.con === con ? '同一星座' : '融会贯通'}</span>
+                        <span style={{ marginLeft: 'auto', fontSize: 10, color: linkStar.con === con ? 'var(--star-blue)' : 'var(--gold)' }}>{linkStar.con === con ? '同一星域' : '融会贯通'}</span>
                       </div>
                       <input autoFocus value={relDraft} onChange={(e) => setRelDraft(e.target.value)}
                         onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); addConnection(linkStar, relDraft); } if (e.key === 'Escape') resetLinking(); }}
@@ -1136,15 +1865,15 @@ function Editor({ starId, onBack, onOpen }) {
                       <div style={{ maxHeight: 180, overflow: 'auto' }} onContextMenu={(e) => e.preventDefault()}>
                         {linkCandidates.length === 0 && <div style={{ padding: '8px 12px', fontSize: 12, color: 'var(--text-3)' }}>没有可连接的星了。</div>}
                         {linkCandidates.map(s => (
-                          <div key={s.id} onClick={() => { setLinkStar(s); setRelDraft(''); }} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '7px 12px', cursor: 'pointer' }}
-                            onMouseEnter={e => e.currentTarget.style.background = 'rgba(159,198,255,0.08)'} onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
+                          <button type="button" key={s.id} className="sr-focus-ring" onClick={() => { setLinkStar(s); setRelDraft(''); }} style={{ display: 'flex', width: '100%', textAlign: 'left', font: 'inherit', border: 'none', background: 'transparent', alignItems: 'center', gap: 8, padding: '7px 12px', cursor: 'pointer' }}
+                            onMouseEnter={e => e.currentTarget.style.background = 'rgba(159,198,255,0.08)'} onMouseLeave={e => e.currentTarget.style.background = 'transparent'} onFocus={e => e.currentTarget.style.background = 'rgba(159,198,255,0.08)'} onBlur={e => e.currentTarget.style.background = 'transparent'}>
                             <span style={{ width: 7, height: 7, borderRadius: '50%', background: D.conColor(s.con), boxShadow: `0 0 6px ${D.conColor(s.con)}` }} />
                             <span style={{ fontSize: 13, color: 'var(--text-2)' }}>{s.label}</span>
                             <span style={{ marginLeft: 'auto', fontSize: 10.5, color: 'var(--text-3)' }}>{D.conName(s.con)}</span>
-                          </div>
+                          </button>
                         ))}
                       </div>
-                      <div onClick={resetLinking} style={{ padding: '7px 12px', fontSize: 12, color: 'var(--text-3)', cursor: 'pointer', borderTop: '1px solid var(--line)' }}>取消</div>
+                      <button type="button" className="sr-focus-ring" onClick={resetLinking} style={{ display: 'block', width: '100%', textAlign: 'left', font: 'inherit', background: 'transparent', padding: '7px 12px', fontSize: 12, color: 'var(--text-3)', cursor: 'pointer', border: 'none', borderTop: '1px solid var(--line)' }}>取消</button>
                     </React.Fragment>
                   )}
                 </div>
@@ -1175,52 +1904,108 @@ function Editor({ starId, onBack, onOpen }) {
           </section>
           <section>
             <RailHead icon="zap" title="记忆" />
-            <div style={{ marginTop: 10, padding: 14, borderRadius: 'var(--r-md)', background: 'rgba(255,217,138,0.05)', border: '1px solid rgba(255,217,138,0.18)' }}>
-              <MemoryBar value={star.strength} showPct />
-              <div style={{ display: 'flex', alignItems: 'center', gap: 7, marginTop: 12, fontSize: 12, color: 'var(--text-2)' }}>
-                <Icon name="calendar-clock" size={14} color="var(--gold)" />遗忘曲线预计 <b style={{ color: 'var(--gold)', fontWeight: 500 }}>{(star.props && star.props.nextReview) || '6 天后'}</b> 复习
-              </div>
-            </div>
+            {(() => {
+              // 认证态与点亮门槛都从数据层派生（tick / sr-memory 触发重读），不在编辑器另存状态
+              const litSt = !!(D.isLit && D.isLit(star));
+              const emberSt = !!(D.isEmber && D.isEmber(star));
+              const substantial = D.hasSubstance ? D.hasSubstance(star) : true;
+              const sumLen = String(star.summary || '').replace(/\s+/g, '').length;
+              const textyN = (star.body || []).filter(b => b && !['rich', 'divider', 'code'].includes(b.type) && String(b.text || b.tex || '').trim()).length;
+              return (
+                <div style={{ marginTop: 10, padding: 14, borderRadius: 'var(--r-md)', background: 'rgba(255,217,138,0.05)', border: '1px solid rgba(255,217,138,0.18)' }}>
+                  <MemoryBar value={star.strength} showPct />
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 7, marginTop: 12, fontSize: 12, color: 'var(--text-2)' }}>
+                    <Icon name="calendar-clock" size={14} color="var(--gold)" />遗忘曲线预计 <b style={{ color: 'var(--gold)', fontWeight: 500 }}>{(star.props && star.props.nextReview) || '6 天后'}</b> 复习
+                  </div>
+                  <div style={{ height: 1, background: 'var(--line)', margin: '12px 0' }} />
+                  {/* 点亮状态（认证轴，与亮度四档正交）：已点亮 = 发丝金环 · 待重燃 = 暗金余烬环 */}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 7, fontSize: 12.5, color: litSt ? 'var(--gold)' : emberSt ? 'var(--gold-warm)' : 'var(--text-2)' }}>
+                    <span aria-hidden="true" style={{ flex: 'none', width: 10, height: 10, borderRadius: '50%', boxSizing: 'border-box',
+                      border: litSt ? '1px solid var(--gold)'
+                        : emberSt ? '1px solid color-mix(in srgb, var(--gold-warm) 55%, transparent)'
+                        : '1px solid var(--line-strong)' }} />
+                    {litSt ? `已点亮 · ${D.ago(star.sr && star.sr.lit)}` : emberSt ? '待重燃' : '未点亮'}
+                  </div>
+                  <div style={{ fontSize: 11.5, color: 'var(--text-3)', lineHeight: 1.7, marginTop: 6 }}>
+                    {litSt ? '已点亮 · 讲清楚的东西，暗得更慢。'
+                      : emberSt ? '曾点亮的星暗了下来。再讲透一次，就能重燃。'
+                      : '讲清楚一次，这颗星才会真正点亮——点亮的星记得更久。'}
+                  </div>
+                  {/* 门槛进度：内容门槛（摘要 ≥ 20 字 或 有内容块 ≥ 2）随输入就地更新 */}
+                  {!litSt && (
+                    <div style={{ display: 'flex', alignItems: 'flex-start', gap: 6, fontSize: 11, color: substantial ? 'var(--text-2)' : 'var(--text-3)', lineHeight: 1.6, marginTop: 8 }}>
+                      <Icon name={substantial ? 'check' : 'pen-line'} size={12} color={substantial ? 'var(--gold)' : 'currentColor'} />
+                      <span>
+                        {substantial
+                          ? (emberSt ? '内容已足够 · 讲给 AI 学生，就能重燃' : '内容已足够 · 讲给 AI 学生，就能点亮')
+                          : `点亮门槛：摘要 ${Math.min(sumLen, 20)}/20 字，或有内容的块 ${Math.min(textyN, 2)}/2`}
+                      </span>
+                    </div>
+                  )}
+                </div>
+              );
+            })()}
           </section>
           <section>
             <RailHead icon="crosshair" title="在星图中定位" />
-            <div style={{ marginTop: 10, height: 132, borderRadius: 'var(--r-md)', border: '1px solid var(--glass-border)', position: 'relative', overflow: 'hidden', background: 'radial-gradient(120% 100% at 40% 40%, rgba(26,35,80,0.5), transparent 60%)' }}>
-              {D.stars.map(s => (
-                <span key={s.id} data-tip={s.id === star.id ? undefined : s.label}
-                  onClick={s.id === star.id ? undefined : () => onOpen && onOpen(s.id)}
-                  style={{ position: 'absolute', left: `${s.x}%`, top: `${s.y}%`, transform: 'translate(-50%,-50%)',
-                    width: s.id === star.id ? 8 : 5, height: s.id === star.id ? 8 : 5, borderRadius: '50%',
-                    background: s.id === star.id ? 'var(--gold)' : (s.strength > 0.7 ? '#ffe096' : '#9fc6ff'),
-                    boxShadow: s.id === star.id ? '0 0 10px var(--gold)' : 'none', opacity: s.id === star.id ? 1 : 0.55,
-                    cursor: s.id === star.id ? 'default' : 'pointer' }} />
-              ))}
-            </div>
+            <MiniStarMap currentId={star.id} onPick={(s) => setExplore({ id: s.id, label: s.label, con: s.con })} />
+            <div style={{ marginTop: 8, fontSize: 11, color: 'var(--text-3)', lineHeight: 1.6 }}>点击任意星，跃迁到星图中探索它的星系。</div>
           </section>
         </div>
       </aside>
 
       {/* status bar */}
-      <div style={{ position: 'absolute', bottom: 0, left: 0, right: 312, zIndex: 3, display: 'flex', alignItems: 'center', gap: 18, padding: '7px 24px', borderTop: '1px solid var(--line)', background: 'var(--glass-bg-strong)', WebkitBackdropFilter: 'blur(var(--glass-blur))', backdropFilter: 'blur(var(--glass-blur))', fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-3)', whiteSpace: 'nowrap', overflow: 'hidden' }}>
+      <div className="sr-ed-status" style={{ position: 'absolute', bottom: 0, left: 0, right: 312, zIndex: 3, display: 'flex', alignItems: 'center', gap: 18, padding: '7px 24px', borderTop: '1px solid var(--line)', background: 'var(--glass-bg-strong)', WebkitBackdropFilter: 'blur(var(--glass-blur))', backdropFilter: 'blur(var(--glass-blur))', fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-3)', whiteSpace: 'nowrap', overflow: 'hidden' }}>
         <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}><Icon name="layout-list" size={13} color="currentColor" />{blocks.length} 块</span>
-        <span>{charCount} 字</span>
-        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}><Icon name="clock" size={13} color="currentColor" />约 {readMin} 分钟阅读</span>
+        <span title="中文按字、西文按词分别统计（含表格 / 公式 / 折叠内容）">{cjkCount} 字{wordCount > 0 ? ' · ' + wordCount + ' 词' : ''}</span>
+        <span title={'正文与代码分别折算' + (codeLines ? '（含 ' + codeLines + ' 行代码）' : '')} style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}><Icon name="clock" size={13} color="currentColor" />约 {readMin} 分钟阅读</span>
         <div style={{ flex: 1 }} />
-        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}><Icon name="command" size={13} color="currentColor" />⌘P 命令</span>
-        <span>Markdown</span>
-        <span>UTF-8</span>
+        <SaveStatus />
+        <span className="sr-ed-status-opt" title="⌘F 在这篇笔记内查找 / 替换" style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}><Icon name="search" size={12} color="currentColor" />⌘F 查找</span>
+        <span title="⌘K 打开命令面板；在编辑器内选中文字时 ⌘K 为「添加链接」" style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}><Icon name="command" size={13} color="currentColor" />⌘K 命令 · 选中文字时为链接</span>
+        <span className="sr-ed-status-opt">Markdown</span>
       </div>
 
       {/* overlays */}
       {ctx && <ContextMenu x={ctx.x} y={ctx.y} constellations={D.constellations} onClose={() => setCtx(null)} onAction={act(ctx.id)} />}
-      {slash && <SlashMenu x={slash.x} y={slash.y} onClose={() => setSlash(null)}
-        onPick={(t) => { if (slash.inline) withSynced(s => s.map(bb => bb.id === slash.id ? { ...bb, type: t, text: '' } : bb)); else insertAfter(slash.id, t); setSlash(null); }} />}
+      {slash && <SlashMenu x={slash.x} y={slash.y}
+        onClose={() => {
+          const sid = slash.id, at = slash.at; setSlash(null);
+          const a = document.activeElement;
+          // 不选直接关：保留输入的「/」，光标回到它后面继续打字
+          if (sid && refs.current[sid] && (!a || a === document.body)) {
+            if (at != null) focusBlockAt(sid, at); else focusBlock(sid, 'end');
+          }
+        }}
+        onPick={(t) => {
+          const sid = slash.id, inline = slash.inline, at = slash.at; setSlash(null);
+          if (inline) {
+            const el = refs.current[sid];
+            const bare = el && el.innerText.replace(/\n+$/, '') === '/';
+            if (el && !bare && at != null) {
+              // 块里还有别的内容（正文中途输入 /）：只删掉触发的「/」，
+              // 在下方插入所选类型的新块——当前块的既有内容原样保留。
+              const s1 = nodeAtOffset(el, at - 1), e1 = nodeAtOffset(el, at);
+              if (s1 && e1) { try { const r = document.createRange(); r.setStart(s1.node, s1.off); r.setEnd(e1.node, e1.off); r.deleteContents(); } catch (_) { } }
+              const nb = { id: uid(), type: t, text: '', ...typeExtras(t) };
+              flushSynced(s => { const i = s.findIndex(x => x.id === sid); return [...s.slice(0, i + 1), nb, ...s.slice(i + 1)]; });
+              if (EDITABLE.includes(t)) focusBlock(nb.id, 'start');
+              return;
+            }
+            // 块内容只有「/」：先清掉它（React 对相同 __html 不重设 innerHTML），
+            // 再原地转换块类型，最后把焦点还给该块——避免「/」残留 + 焦点掉到 body。
+            if (el) el.innerHTML = '';
+            flushSynced(s => s.map(bb => bb.id === sid ? { ...bb, type: t, text: '', ...typeExtras(t, bb) } : bb));
+            if (EDITABLE.includes(t)) focusBlock(sid, 'start');
+          } else insertAfter(sid, t);
+        }} />}
       {more && <EditorMoreMenu x={more.x} y={more.y} fav={fav} constellations={D.constellations} onAction={pageAction} onClose={() => setMore(null)} />}
       {history && <HistoryDialog star={star} onClose={() => setHistory(false)} onFlash={flash} />}
       {sel && !ctx && <SelectionToolbar x={sel.x} y={sel.y} onFormat={runFormat} onLink={formatLink} onColor={() => { setColorPop({ x: sel.x, y: sel.y + 10 }); }} />}
-      {colorPop && <ColorMenu x={colorPop.x} y={colorPop.y} onClose={() => setColorPop(null)} onPick={(c) => { if (c.kind === 'text') runFormat('foreColor', c.exec); else runFormat('hiliteColor', c.exec); setColorPop(null); }} />}
+      {colorPop && <ColorMenu x={colorPop.x} y={colorPop.y} onClose={() => setColorPop(null)} onPick={(c) => { if (c.kind === 'text') runFormat('foreColor', c.c); else runFormat('hiliteColor', c.c); setColorPop(null); }} />}
 
       {toast && (
-        <div style={{ position: 'fixed', bottom: 26, left: '50%', transform: 'translateX(-50%)', zIndex: 95, animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
+        <div role="status" aria-live="polite" style={{ position: 'fixed', bottom: 26, left: '50%', transform: 'translateX(-50%)', zIndex: 'var(--z-toast)', animation: 'sr-cardin var(--dur-fast) var(--ease-flight) both' }}>
           <GlassPanel strong radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '10px 18px' }}>
             <Icon name="check" size={16} color="var(--gold)" /><span style={{ fontSize: 13.5, color: 'var(--text-1)' }}>{toast}</span>
           </GlassPanel>
@@ -1229,8 +2014,111 @@ function Editor({ starId, onBack, onOpen }) {
 
       {confirm && <ConfirmDialog message={confirm.message} confirmLabel={confirm.confirmLabel} onYes={() => { confirm.onYes(); setConfirm(null); }} onClose={() => setConfirm(null)} />}
       {linkDialog && <LinkDialog onSubmit={applyLink} onClose={() => setLinkDialog(null)} />}
+
+      {/* 「在星图中探索」确认：DS Modal——确认后关闭编辑器，跃迁到星图并聚焦该星系 */}
+      {explore && (() => {
+        const conNm = D.conName(explore.con) || '未知星域';
+        const goExplore = () => {
+          const s = explore; setExplore(null);
+          persistBody();
+          if (onExplore) { onExplore(s.id); return; }
+          // 兜底：上层没接线时至少跃迁回星图
+          const T = window.srTransition;
+          if (T && T.flight && onBack) T.flight(onBack); else if (onBack) onBack();
+        };
+        return (
+          <Modal open onClose={() => setExplore(null)} title={'探索「' + conNm + '」星系'} icon="orbit" width={392}
+            footer={
+              <React.Fragment>
+                <Button size="sm" onClick={() => setExplore(null)}>留在笔记</Button>
+                <Button variant="primary" size="sm" icon="rocket" glow autoFocus onClick={goExplore}>启程</Button>
+              </React.Fragment>
+            }>
+            <div style={{ fontSize: 13.5, lineHeight: 1.8, color: 'var(--text-2)' }}>
+              将离开编辑器，跃迁回星图——镜头会飞向「{conNm}」星域，为你照亮
+              <span style={{ color: 'var(--text-1)' }}>「{explore.label}」</span>所在的位置。这里的更改已自动保存。
+            </div>
+          </Modal>
+        );
+      })()}
+
+      {/* Markdown 导入的隐藏文件入口（「更多 ▸ 导入 Markdown」触发；也支持直接拖入正文） */}
+      <input ref={importInputRef} id="sr-md-import" type="file" accept=".md,.markdown,.txt,text/markdown"
+        style={{ display: 'none' }} tabIndex={-1} aria-hidden="true" onChange={onImportFile} />
+
+      {/* 笔记内查找 / 替换条（⌘F）——非模态浮条，Esc 关闭并把焦点还给正文 */}
+      {find && (() => {
+        const inputCss = { flex: 1, minWidth: 0, boxSizing: 'border-box', background: 'var(--input-bg, rgba(3,4,12,0.45))', border: '1px solid var(--glass-border-strong)', borderRadius: 'var(--r-sm)', color: 'var(--text-1)', fontSize: 13, padding: '6px 9px', outline: 'none', fontFamily: 'var(--font-sans)' };
+        const btnCss = (off) => ({ flex: 'none', position: 'relative', height: 30, padding: '0 11px', borderRadius: 'var(--r-pill)', border: '1px solid var(--glass-border-strong)', background: 'color-mix(in srgb, var(--star-blue) 12%, transparent)', color: 'var(--text-1)', fontSize: 12, cursor: off ? 'not-allowed' : 'pointer', opacity: off ? 0.5 : 1, fontFamily: 'var(--font-sans)' });
+        return (
+          <div className="sr-ed-find" role="search" aria-label="笔记内查找"
+            style={{ position: 'absolute', top: 10, right: 336, zIndex: 'var(--z-menu)' }}>
+            <GlassPanel strong radius="md" pad="none" glow style={{ padding: 8, width: 348, boxSizing: 'border-box' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
+                <Icon name="search" size={14} color="var(--star-blue)" style={{ flex: 'none' }} />
+                <input ref={findInputRef} autoFocus value={find.q} placeholder="在这篇笔记中查找…" aria-label="查找内容"
+                  onChange={(e) => { const v = e.target.value; setFindIdx(0); setFind(f => ({ ...f, q: v })); }}
+                  onKeyDown={(e) => { if (e.key === 'Enter' && !e.nativeEvent.isComposing) { e.preventDefault(); gotoMatch(findIdx + (e.shiftKey ? -1 : 1)); } }}
+                  style={inputCss} />
+                <span aria-live="polite" style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: find.q ? (findMatches.length ? 'var(--text-2)' : 'var(--danger)') : 'var(--text-3)', flex: 'none', minWidth: 46, textAlign: 'center' }}>
+                  {find.q ? (findMatches.length ? (findIdx + 1) + ' / ' + findMatches.length : '无结果') : ''}
+                </span>
+                <IconButton name="chevron-up" size="sm" title="上一处 · ⇧Enter" onClick={() => gotoMatch(findIdx - 1)} />
+                <IconButton name="chevron-down" size="sm" title="下一处 · Enter" onClick={() => gotoMatch(findIdx + 1)} />
+                <IconButton name="replace" size="sm" active={!!find.rep} title={find.rep ? '收起替换' : '替换'} onClick={() => setFind(f => ({ ...f, rep: !f.rep }))} />
+                <IconButton name="x" size="sm" title="关闭 · Esc" onClick={closeFind} />
+              </div>
+              {find.rep && (
+                <div style={{ display: 'flex', alignItems: 'center', gap: 7, marginTop: 7 }}>
+                  <Icon name="corner-down-right" size={14} color="var(--text-3)" style={{ flex: 'none' }} />
+                  <input value={find.rv} placeholder="替换为…" aria-label="替换为"
+                    onChange={(e) => { const v = e.target.value; setFind(f => ({ ...f, rv: v })); }}
+                    onKeyDown={(e) => { if (e.key === 'Enter' && !e.nativeEvent.isComposing) { e.preventDefault(); replaceOne(); } }}
+                    style={inputCss} />
+                  <button type="button" className="sr-focus-ring sr-hit40" disabled={!findMatches.length} onClick={replaceOne} style={btnCss(!findMatches.length)}>替换</button>
+                  <button type="button" className="sr-focus-ring sr-hit40" disabled={!findMatches.length} onClick={replaceAll} style={btnCss(!findMatches.length)}>全部替换</button>
+                </div>
+              )}
+            </GlassPanel>
+          </div>
+        );
+      })()}
     </div>
   );
+}
+
+/* 顶栏保存指示：真实三态（保存中 / 已同步 / 仅本机），吃 api.js 的 sr-net 事件。
+   离线时点击可立即重试；title 里始终能看到上次同步时间。 */
+function SaveStatus() {
+  const read = () => (window.SRNet && window.SRNet.getStatus) ? window.SRNet.getStatus() : { status: 'saved', online: true, lastSync: 0 };
+  const [st, setSt] = React.useState(read);
+  React.useEffect(() => {
+    const h = (e) => setSt(e.detail || read());
+    window.addEventListener('sr-net', h);
+    return () => window.removeEventListener('sr-net', h);
+  }, []);
+  const D = window.SR_DATA;
+  const syncTip = st.lastSync ? '上次同步 ' + D.ago(st.lastSync) : '尚未与服务器同步';
+  const base = { display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12, whiteSpace: 'nowrap', flex: 'none' };
+  if (st.status === 'saving') {
+    return (
+      <span style={{ ...base, color: 'var(--text-3)' }} title={syncTip}>
+        <span className="sr-ed-spin" style={{ display: 'inline-flex', animation: 'sr-ed-spin 1.2s linear infinite' }} aria-hidden="true"><Icon name="loader" size={14} color="var(--text-3)" /></span>
+        保存中…
+      </span>
+    );
+  }
+  if (st.status === 'local' || st.status === 'error') {
+    return (
+      <button type="button" className="sr-focus-ring" onClick={() => window.SRNet && window.SRNet.saveNow()}
+        title={'服务器暂不可达 · 点击立即重试 · ' + syncTip}
+        style={{ ...base, color: st.status === 'error' ? 'var(--danger)' : 'var(--star-blue-dim)', background: 'none', border: 'none', cursor: 'pointer', font: 'inherit', padding: 0 }}>
+        <Icon name={st.status === 'error' ? 'triangle-alert' : 'hard-drive'} size={14} color="currentColor" />
+        {st.status === 'error' ? '未能保存' : '已保存在本机'}
+      </button>
+    );
+  }
+  return <span style={{ ...base, color: 'var(--text-3)' }} title={syncTip}><Icon name="check" size={14} color="var(--gold)" />已同步</span>;
 }
 
 function RailHead({ icon, title, extra }) {

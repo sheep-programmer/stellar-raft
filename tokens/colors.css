@@ -57,6 +57,19 @@
   --fading:  var(--star-blue-dim); /* dimming / needs review */
   --danger:  #e8917a;              /* rare destructive — warm, low-sat */
 
+  /* ---- Icon idle tint (IconButton / ghost icon controls) ----
+     Dark stage: faded star-blue. Dawn remaps to a deep star-blue ink
+     so idle icons keep ≥3:1 against pale surfaces. */
+  --icon-idle: rgba(159, 198, 255, 0.7);
+
+  /* ---- Primary (gold) button gradient stops ----
+     Night rides the reward golds; dawn remaps the whole ramp one step
+     deeper so cream ink on gold clears 4.5:1. */
+  --gold-btn-hi:       var(--gold);
+  --gold-btn-lo:       var(--gold-warm);
+  --gold-btn-hover-hi: var(--gold-white);
+  --gold-btn-hover-lo: var(--gold);
+
   /* ---- Focus ring ---- */
   --focus: rgba(159, 198, 255, 0.55);
 

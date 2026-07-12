@@ -20,7 +20,7 @@ const { DatabaseSync } = require('node:sqlite');
 
 const PORT = Number(process.env.PORT || 8756);
 const ROOT = path.resolve(__dirname, '..');            // stellar-raft/
-const APP = '/ui_kits/stellar-raft/index.html';
+const APP_DIR = '/ui_kits/stellar-raft/';              // 应用入口（目录式，页面内相对引用才成立）
 const DB_PATH = path.join(__dirname, 'stellar.db');
 
 /* ============================ 数据库 ============================ */
@@ -37,6 +37,7 @@ db.exec(`
   CREATE TABLE IF NOT EXISTS galaxies (
     user_id    INTEGER PRIMARY KEY REFERENCES users(id),
     data       TEXT NOT NULL,
+    version    INTEGER NOT NULL DEFAULT 0,
     updated_at TEXT NOT NULL DEFAULT (datetime('now'))
   );
   CREATE TABLE IF NOT EXISTS shares (
@@ -52,16 +53,33 @@ db.exec(`
     added_at  TEXT NOT NULL DEFAULT (datetime('now')),
     PRIMARY KEY (owner_id, viewer_id)
   );
+  CREATE TABLE IF NOT EXISTS inbox_messages (
+    id         INTEGER PRIMARY KEY AUTOINCREMENT,
+    to_user    INTEGER NOT NULL REFERENCES users(id),
+    from_user  INTEGER NOT NULL REFERENCES users(id),
+    kind       TEXT NOT NULL,
+    payload    TEXT NOT NULL,
+    created_at TEXT NOT NULL DEFAULT (datetime('now')),
+    claimed    INTEGER NOT NULL DEFAULT 0
+  );
+  CREATE TABLE IF NOT EXISTS meta (
+    key   TEXT PRIMARY KEY,
+    value TEXT NOT NULL
+  );
 `);
+
+// 兼容旧库：为已存在的 galaxies 表补 version 列（乐观锁用）。新库已含该列，重复
+// 添加会抛错，吞掉即可——绝不改动既有行数据。
+try { db.exec('ALTER TABLE galaxies ADD COLUMN version INTEGER NOT NULL DEFAULT 0'); } catch { /* 列已存在 */ }
 
 const q = {
   userByToken: db.prepare('SELECT * FROM users WHERE token = ?'),
   userById: db.prepare('SELECT * FROM users WHERE id = ?'),
   insertUser: db.prepare('INSERT INTO users (token, name, avatar) VALUES (?, ?, ?)'),
   updateUser: db.prepare('UPDATE users SET name = ?, avatar = ? WHERE id = ?'),
-  getGalaxy: db.prepare('SELECT data FROM galaxies WHERE user_id = ?'),
-  putGalaxy: db.prepare(`INSERT INTO galaxies (user_id, data, updated_at) VALUES (?, ?, datetime('now'))
-    ON CONFLICT(user_id) DO UPDATE SET data = excluded.data, updated_at = excluded.updated_at`),
+  getGalaxy: db.prepare('SELECT data, updated_at, version FROM galaxies WHERE user_id = ?'),
+  putGalaxy: db.prepare(`INSERT INTO galaxies (user_id, data, version, updated_at) VALUES (?, ?, ?, datetime('now'))
+    ON CONFLICT(user_id) DO UPDATE SET data = excluded.data, version = excluded.version, updated_at = excluded.updated_at`),
   getShare: db.prepare('SELECT * FROM shares WHERE user_id = ?'),
   shareByCode: db.prepare('SELECT * FROM shares WHERE code = ?'),
   upsertShare: db.prepare(`INSERT INTO shares (user_id, enabled, code, visibility) VALUES (?, ?, ?, ?)
@@ -74,6 +92,15 @@ const q = {
   visitorsOf: db.prepare(`SELECT u.id, u.name, u.avatar, f.blocked, f.added_at FROM friendships f
     JOIN users u ON u.id = f.viewer_id WHERE f.owner_id = ?`),
   setBlocked: db.prepare('UPDATE friendships SET blocked = ? WHERE owner_id = ? AND viewer_id = ?'),
+  inboxInsert: db.prepare('INSERT INTO inbox_messages (to_user, from_user, kind, payload) VALUES (?, ?, ?, ?)'),
+  inboxList: db.prepare('SELECT * FROM inbox_messages WHERE to_user = ? ORDER BY id DESC'),
+  inboxById: db.prepare('SELECT * FROM inbox_messages WHERE id = ?'),
+  inboxUnclaimed: db.prepare('SELECT * FROM inbox_messages WHERE to_user = ? AND from_user = ? AND kind = ? AND claimed = 0 ORDER BY id DESC'),
+  inboxClaim: db.prepare('UPDATE inbox_messages SET claimed = 1 WHERE id = ?'),
+  inboxDelete: db.prepare('DELETE FROM inbox_messages WHERE id = ?'),
+  metaGet: db.prepare('SELECT value FROM meta WHERE key = ?'),
+  metaSet: db.prepare('INSERT OR REPLACE INTO meta (key, value) VALUES (?, ?)'),
+  metaDel: db.prepare('DELETE FROM meta WHERE key = ?'),
 };
 
 /* ============================ 工具 ============================ */
@@ -93,6 +120,7 @@ const ensureUser = (token, name, avatar) => {
   if (!u) {
     q.insertUser.run(token, (name || '旅行者').slice(0, 24), (avatar || '星').slice(0, 2));
     u = q.userByToken.get(token);
+    maybeSeedWelcomeInbox(u); // 新装 DB 的第一位旅行者：收件箱里预置两封「星际来信」
   }
   return u;
 };
@@ -104,21 +132,133 @@ const shareOf = (userId) => {
 
 const stripHtml = (h) => String(h || '').replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
 
+/* ——— 星际收件箱（好友互寄）工具 ———
+   一切进 payload 的文本都先剥 HTML 再钳长度：label 120 · summary 2000 ·
+   keyPoints 每条 300 且至多 12 条。keyPoints 沿用访客视图的大纲提取口径
+   （只取 h1/h2/h3 标题），正文与富文本永不进收件箱。 */
+const INBOX_LIM = { label: 120, summary: 2000, keyPoint: 300, keyPoints: 12 };
+const cleanText = (v, max) => stripHtml(v).replace(/\s+/g, ' ').trim().slice(0, max);
+const outlinePoints = (star) => (star.body || [])
+  .filter(b => b && ['h1', 'h2', 'h3'].includes(b.type))
+  .map(b => cleanText(b.text, INBOX_LIM.keyPoint))
+  .filter(Boolean)
+  .slice(0, INBOX_LIM.keyPoints);
+
+// 好友关系（任一方向的 friendships 行即算好友）；任一方向被拉黑 → 两个方向都投递不进
+const relationOf = (a, b) => {
+  const f1 = q.friendship.get(a, b);
+  const f2 = q.friendship.get(b, a);
+  return { friends: !!(f1 || f2), blocked: !!((f1 && f1.blocked) || (f2 && f2.blocked)) };
+};
+
+// 速率：send / collect 共享一个桶，每用户每分钟 ≤ 20 条（只统计真正入库的投递）
+const RATE = { limit: 20, windowMs: 60000 };
+const rateBuckets = new Map();
+const rateHit = (userId) => {
+  const now = Date.now();
+  let arr = rateBuckets.get(userId);
+  if (!arr) { arr = []; rateBuckets.set(userId, arr); }
+  while (arr.length && now - arr[0] > RATE.windowMs) arr.shift();
+  if (arr.length >= RATE.limit) return false;
+  arr.push(now);
+  return true;
+};
+
+// 出库形态：payload 反序列化 + 寄件人公开信息（绝不带 token）
+const pubMsg = (m) => {
+  const fu = q.userById.get(m.from_user);
+  let payload; try { payload = JSON.parse(m.payload); } catch { payload = {}; }
+  return {
+    id: m.id, kind: m.kind,
+    from: fu ? { id: fu.id, name: fu.name, avatar: fu.avatar } : { id: m.from_user, name: '旅行者', avatar: '星' },
+    payload, at: m.created_at, claimed: !!m.claimed,
+  };
+};
+
+// 从某用户的星系快照里按 id 找星（快照损坏按找不到计）
+const starInGalaxyOf = (userId, starId) => {
+  if (!starId) return null;
+  const g = q.getGalaxy.get(userId);
+  try { return ((JSON.parse(g ? g.data : '{}').stars) || []).find(x => x && x.id === starId) || null; }
+  catch { return null; }
+};
+
+/* 投递（send / collect 共用）：
+   ① 防重复 —— 同 (to, from, kind, starId) 已有未领取消息时幂等返回既有消息，不重复入库
+   ② 速率 —— 只有真正入库才消耗投递者（actor）的配额 */
+const deliver = (res, actorId, fromId, toId, kind, starId, payload) => {
+  const dup = q.inboxUnclaimed.all(toId, fromId, kind).find(m => {
+    if (kind !== 'star') return true;
+    try { return JSON.parse(m.payload).starId === starId; } catch { return false; }
+  });
+  if (dup) return json(res, 200, { ok: true, duplicate: true, message: pubMsg(dup) });
+  if (!rateHit(actorId)) return json(res, 429, { error: '来信太频繁，请稍后再寄' });
+  const info = q.inboxInsert.run(toId, fromId, kind, JSON.stringify(payload));
+  return json(res, 200, { ok: true, message: pubMsg(q.inboxById.get(Number(info.lastInsertRowid))) });
+};
+
+/* 记忆衰减（FSRS-lite，与 ui_kits/stellar-raft/data.js 同参）：
+   R = exp(−Δt天 / S)，clamp 到 [rMin, rMax] 后保留三位小数。
+   访客视图出库时按快照里的 sr = { S, last } 实时重算亮度 —— 主人几天不回来，
+   访客看到的星也一样变暗。sr.due 只影响复习队列时刻，不影响显示强度，故不参与。
+   无 sr 的旧星（或字段残缺）保持快照静态 strength 原样。
+   emberR = 熄灭阈值：已点亮星（sr.lit>0）实时 R 衰减到 0.35 以下，访客视角即判「待重燃」——
+   主人几天不回来，访客看到的不只是变暗，还有熄灭，与主人视角同一世界观。 */
+const DAY = 86400000;
+const MEM = { rMin: 0.02, rMax: 0.98, emberR: 0.35 };
+const decayedStrength = (s, now) => {
+  const sr = s.sr;
+  if (!sr || !(Number(sr.S) > 0) || !Number(sr.last)) return s.strength;
+  const r = Math.exp(-Math.max(0, now - sr.last) / DAY / sr.S);
+  return Math.round(Math.min(MEM.rMax, Math.max(MEM.rMin, r)) * 1000) / 1000;
+};
+// 认证态透传（只出布尔，绝不泄露 lit/ember 时间戳）：
+//   lit   = sr.lit>0 且衰减后 R ≥ emberR（快照写入后主人再没回来，也会在访客视角实时熄灭）
+//   ember = (sr.ember>0 ∧ lit=0) ∨ (sr.lit>0 ∧ 衰减后 R < emberR)
+const litFlags = (s, strength) => {
+  const sr = s.sr || {};
+  const wasLit = Number(sr.lit) > 0;
+  const r = Number(strength);
+  return {
+    lit: wasLit && r >= MEM.emberR,
+    ember: (Number(sr.ember) > 0 && !wasLit) || (wasLit && r < MEM.emberR),
+  };
+};
+
 // 访客视图在服务端生成：正文、摘要、属性、关系语句一律不出库
 const sanitizeGalaxy = (raw, visibility) => {
-  let d; try { d = JSON.parse(raw); } catch (e) { return null; }
+  let d; try { d = JSON.parse(raw); } catch { return null; }
+  const now = Date.now();
   const outline = visibility === 'outline';
-  return {
-    visibility,
-    constellations: (d.constellations || []).map(c => ({ id: c.id, name: c.name, color: c.color, health: c.health, count: c.count })),
-    stars: (d.stars || []).map(s => ({
+  const stars = (d.stars || []).map(s => {
+    const strength = decayedStrength(s, now);
+    const flags = litFlags(s, strength);
+    return {
       id: s.id, con: s.con, x: s.x, y: s.y,
-      strength: s.strength, importance: s.importance, label: s.label,
+      strength, importance: s.importance, label: cleanText(s.label, 120),
+      lit: flags.lit, ember: flags.ember,
       tags: outline ? (s.tags || []) : [],
       outline: outline
         ? (s.body || []).filter(b => ['h1', 'h2', 'h3'].includes(b.type)).map(b => ({ type: b.type, text: stripHtml(b.text).slice(0, 120) }))
         : [],
-    })),
+    };
+  });
+  return {
+    visibility,
+    // 星域 health / count / litRatio 不透传快照静态值：按衰减后的成员强度实时重算，
+    // 与前端 data.js 的 syncCounts 同口径（health = 均值 / count = 现存成员数 /
+    // litRatio = 已点亮成员占比，访客端按实时熄灭后的 lit 布尔计）
+    constellations: (d.constellations || []).map(c => {
+      const members = stars.filter(s => s.con === c.id);
+      const health = members.length
+        ? Math.round(members.reduce((a, s) => a + (Number(s.strength) || 0), 0) / members.length * 1000) / 1000
+        : 0;
+      const litRatio = members.length
+        ? Math.round(members.filter(s => s.lit).length / members.length * 1000) / 1000
+        : 0;
+      return { id: c.id, name: cleanText(c.name, 60), color: c.color, health, count: members.length, litRatio };
+    }),
+    stars,
     connections: (d.connections || []).map(c => ({ a: c.a, b: c.b, kind: c.kind })),
   };
 };
@@ -156,10 +296,37 @@ const DEMO_CODE = 'XING-DEMO-2333';
     notes: [], inbox: [], timeline: [], trash: [],
     account: { name: '星图伙伴', avatar: '星' },
   };
-  q.putGalaxy.run(u.id, JSON.stringify(galaxy));
+  q.putGalaxy.run(u.id, JSON.stringify(galaxy), 1);
   q.upsertShare.run(u.id, 1, DEMO_CODE, 'outline');
+  // 新装 DB 一次性标记：第一位建档的旅行者会收到两封演示「星际来信」
+  q.metaSet.run('welcome_inbox_pending', '1');
   console.log('[seed] 演示好友「星图伙伴」已就绪，分享码', DEMO_CODE);
 })();
+
+/* 星际来信种子：仅在「新装 DB 种子」标记尚未消费时，给第一位真实用户的收件箱
+   预置一封 kind:'galaxy'（造访邀请）与一封 kind:'star'（赠星），寄件人都是演示
+   好友「星图伙伴」——新用户第一次打开收件箱就能看到来信长什么样。 */
+const maybeSeedWelcomeInbox = (user) => {
+  if (!user || user.token === 'demo-friend-token') return;
+  if (!q.metaGet.get('welcome_inbox_pending')) return;
+  q.metaDel.run('welcome_inbox_pending');
+  const demo = q.userByToken.get('demo-friend-token');
+  if (!demo) return;
+  const star = starInGalaxyOf(demo.id, 'd1');
+  q.inboxInsert.run(user.id, demo.id, 'galaxy', JSON.stringify({
+    code: DEMO_CODE,
+    galaxyName: '星图伙伴的星系',
+    starCount: (() => { try { return (JSON.parse(q.getGalaxy.get(demo.id).data).stars || []).length; } catch { return 0; } })(),
+  }));
+  if (star) {
+    q.inboxInsert.run(user.id, demo.id, 'star', JSON.stringify({
+      starId: star.id,
+      label: cleanText(star.label, INBOX_LIM.label),
+      summary: cleanText(star.summary, INBOX_LIM.summary),
+      keyPoints: outlinePoints(star),
+    }));
+  }
+};
 
 /* ============================ API ============================ */
 const json = (res, code, obj) => {
@@ -187,7 +354,7 @@ async function handleApi(req, res, url) {
   if (!token) return json(res, 401, { error: '缺少访问令牌' });
   let body = {};
   if (req.method === 'POST' || req.method === 'PUT') {
-    try { body = await readBody(req); } catch (e) { return json(res, 400, { error: '请求体格式错误' }); }
+    try { body = await readBody(req); } catch { return json(res, 400, { error: '请求体格式错误' }); }
   }
   const me = ensureUser(token, body.name, body.avatar);
 
@@ -202,19 +369,31 @@ async function handleApi(req, res, url) {
   if (seg[1] === 'galaxy' && seg.length === 2) {
     if (req.method === 'GET') {
       const g = q.getGalaxy.get(me.id);
-      return json(res, 200, { data: g ? JSON.parse(g.data) : null });
+      // updatedAt（UTC）：前端启动时与 localStorage 镜像比对，新者优先；version 供乐观锁
+      return json(res, 200, { data: g ? JSON.parse(g.data) : null, updatedAt: g ? g.updated_at : null, version: g ? (g.version || 0) : 0 });
     }
     if (req.method === 'PUT') {
       if (!body.data) return json(res, 400, { error: '缺少 data' });
       if (!Array.isArray(body.data.stars)) return json(res, 400, { error: 'data.stars 必须是数组' });
-      q.putGalaxy.run(me.id, JSON.stringify(body.data));
+      const cur = q.getGalaxy.get(me.id);
+      const curVer = cur ? (cur.version || 0) : 0;
+      // 乐观锁：带 baseVersion 且与服务器当前版本不一致 → 409，把服务器最新版回给客户端合并，
+      // 避免后保存者整棵星系覆盖前保存者的全部改动。beacon / 无 baseVersion 不校验（末发兜底）。
+      if (body.baseVersion != null && cur && Number(body.baseVersion) !== curVer) {
+        return json(res, 409, { error: 'version_conflict', data: JSON.parse(cur.data), version: curVer, updatedAt: cur.updated_at });
+      }
+      const newVer = curVer + 1;
+      q.putGalaxy.run(me.id, JSON.stringify(body.data), newVer);
       if (body.data.account && body.data.account.name) q.updateUser.run(String(body.data.account.name).slice(0, 24), String(body.data.account.avatar || me.avatar).slice(0, 2), me.id);
-      return json(res, 200, { ok: true });
+      return json(res, 200, { ok: true, version: newVer });
     }
   }
   // POST /api/galaxy/beacon — 页面卸载时的最后一发（sendBeacon 无法带 header）
   if (seg[1] === 'galaxy' && seg[2] === 'beacon' && req.method === 'POST') {
-    if (body.data && Array.isArray(body.data.stars)) q.putGalaxy.run(me.id, JSON.stringify(body.data));
+    if (body.data && Array.isArray(body.data.stars)) {
+      const cur = q.getGalaxy.get(me.id);
+      q.putGalaxy.run(me.id, JSON.stringify(body.data), (cur ? (cur.version || 0) : 0) + 1);
+    }
     return json(res, 200, { ok: true });
   }
 
@@ -257,7 +436,7 @@ async function handleApi(req, res, url) {
     const list = q.friendsOf.all(me.id).map(f => {
       const s = shareOf(f.id);
       const g = q.getGalaxy.get(f.id);
-      let starCount = 0; try { starCount = (JSON.parse(g ? g.data : '{}').stars || []).length; } catch (e) { }
+      let starCount = 0; try { starCount = (JSON.parse(g ? g.data : '{}').stars || []).length; } catch { /* 快照损坏时按 0 颗计 */ }
       return { id: f.id, name: f.name, avatar: f.avatar, addedAt: f.added_at, enabled: !!s.enabled, blocked: !!f.blocked, visibility: s.visibility, starCount };
     });
     return json(res, 200, { friends: list });
@@ -283,6 +462,82 @@ async function handleApi(req, res, url) {
     return json(res, 200, { owner: { id: owner.id, name: owner.name, avatar: owner.avatar }, galaxy: sanitizeGalaxy(g.data, s.visibility) });
   }
 
+  /* ——— 星际收件箱 ——— */
+
+  // POST /api/inbox/send — 给好友寄「造访邀请」(kind:'galaxy') 或赠一颗自己的星 (kind:'star')
+  if (seg[1] === 'inbox' && seg[2] === 'send' && req.method === 'POST') {
+    const toId = Number(body.toUserId);
+    const toUser = Number.isInteger(toId) ? q.userById.get(toId) : null;
+    if (!toUser) return json(res, 404, { error: '收件人不存在' });
+    if (toUser.id === me.id) return json(res, 400, { error: '不能寄给自己' });
+    const rel = relationOf(me.id, toUser.id);
+    if (!rel.friends) return json(res, 403, { error: '你们还不是星际好友' });
+    if (rel.blocked) return json(res, 403, { error: '这条星路暂时不通' });
+
+    if (body.kind === 'galaxy') {
+      const s = shareOf(me.id);
+      if (!s.enabled || !s.code) return json(res, 400, { error: '先在设置里开启星系分享' });
+      const g = q.getGalaxy.get(me.id);
+      let starCount = 0; try { starCount = (JSON.parse(g ? g.data : '{}').stars || []).length; } catch { /* 快照损坏按 0 颗计 */ }
+      const payload = {
+        code: s.code,
+        galaxyName: cleanText(me.name, INBOX_LIM.label) + '的星系',
+        starCount,
+      };
+      return deliver(res, me.id, me.id, toUser.id, 'galaxy', null, payload);
+    }
+
+    if (body.kind === 'star') {
+      const star = starInGalaxyOf(me.id, body.starId);
+      if (!star) return json(res, 404, { error: '这颗星不在你的星系里' });
+      const payload = {
+        starId: star.id,
+        label: cleanText(star.label, INBOX_LIM.label),
+        summary: cleanText(star.summary, INBOX_LIM.summary),
+        keyPoints: outlinePoints(star),
+      };
+      return deliver(res, me.id, me.id, toUser.id, 'star', star.id, payload);
+    }
+
+    return json(res, 400, { error: '未知的来信类型' });
+  }
+
+  // POST /api/inbox/collect — 造访好友星系时收纳一颗可见的星（投进自己的收件箱，寄件人=星系主人）
+  if (seg[1] === 'inbox' && seg[2] === 'collect' && req.method === 'POST') {
+    const code = String(body.code || '').trim().toUpperCase();
+    const s = q.shareByCode.get(code);
+    if (!s || !s.enabled) return json(res, 404, { error: '密文无效，或对方已关闭星系访问' });
+    if (s.user_id === me.id) return json(res, 400, { error: '这是你自己的星系' });
+    if (relationOf(s.user_id, me.id).blocked) return json(res, 403, { error: '对方暂时关闭了你的访问' });
+    const star = starInGalaxyOf(s.user_id, body.starId);
+    if (!star) return json(res, 404, { error: '这颗星不存在' });
+    // 严格按主人的可见度裁剪：'stars' 档只有星名；'outline' 档另含大纲要点。摘要与正文永不进收件箱
+    const payload = { starId: star.id, label: cleanText(star.label, INBOX_LIM.label) };
+    if (s.visibility === 'outline') payload.keyPoints = outlinePoints(star);
+    return deliver(res, me.id, s.user_id, me.id, 'star', star.id, payload);
+  }
+
+  // GET /api/inbox — 我的星际来信（时间倒序）
+  if (seg[1] === 'inbox' && seg.length === 2 && req.method === 'GET') {
+    return json(res, 200, q.inboxList.all(me.id).map(pubMsg));
+  }
+
+  // POST /api/inbox/ack — 领取（收纳完成）或忽略（删除）
+  if (seg[1] === 'inbox' && seg[2] === 'ack' && req.method === 'POST') {
+    const msgId = Number(body.id);
+    const m = Number.isInteger(msgId) ? q.inboxById.get(msgId) : null;
+    if (!m || m.to_user !== me.id) return json(res, 404, { error: '来信不存在' });
+    if (body.action === 'claim') {
+      q.inboxClaim.run(m.id);
+      return json(res, 200, { ok: true, message: pubMsg(q.inboxById.get(m.id)) });
+    }
+    if (body.action === 'dismiss') {
+      q.inboxDelete.run(m.id);
+      return json(res, 200, { ok: true });
+    }
+    return json(res, 400, { error: '未知操作' });
+  }
+
   return json(res, 404, { error: '未知接口' });
 }
 
@@ -297,7 +552,13 @@ const MIME = {
 };
 function serveStatic(req, res, url) {
   let p = decodeURIComponent(url.pathname);
-  if (p === '/' || p === '/index.html') p = APP;
+  // 根路径重定向到应用目录：index.html 里的相对引用（*.jsx / data.js …）
+  // 只有在 /ui_kits/stellar-raft/ 下解析才全部正确，原地改写会 404 成黑屏
+  if (p === '/' || p === '/index.html') {
+    res.writeHead(302, { Location: APP_DIR });
+    return res.end();
+  }
+  if (p.endsWith('/')) p += 'index.html'; // 目录路径回退：/docs/ → /docs/index.html
   const file = path.normalize(path.join(ROOT, p));
   if (file !== ROOT && !file.startsWith(ROOT + path.sep)) { res.writeHead(403); return res.end('forbidden'); }
   fs.stat(file, (err, st) => {
@@ -318,5 +579,5 @@ http.createServer((req, res) => {
     res.writeHead(405); res.end();
   }
 }).listen(PORT, '127.0.0.1', () => {
-  console.log(`[stellar-raft] http://localhost:${PORT}  (静态 + API · 数据库 ${path.relative(ROOT, DB_PATH)})`);
+  console.log(`[stellar-raft] http://localhost:${PORT}${APP_DIR}  (静态 + API · 数据库 ${path.relative(ROOT, DB_PATH)})`);
 });

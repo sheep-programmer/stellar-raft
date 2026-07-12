@@ -13,11 +13,18 @@ If the user invokes this skill without any other guidance, ask them what they wa
 ## Fast orientation
 - **Brand in one line:** knowledge is the only light in a deep-space sky; remembered = bright/warm, forgotten = dim/cold. Restrained, high-end, dark-stage. ≤ 3–4 hues.
 - **Tokens & global CSS:** link `styles.css` (it `@import`s everything in `tokens/`). Key vars: `--bg-deepspace`, `--space-*`, `--star-blue`, `--gold`, the `--mem-*` memory ramp, `--glass-*`, `--glow-*`.
-- **Components:** built into `_ds_bundle.js` under `window.StellarRaftDesignSystem_2866af` — `StarNode`, `MemoryBar`, `GlassPanel`, `Button`, `IconButton`, `Icon`, `Input`, `Tag`, `Badge`, `ConstellationItem`. See `components/*/*.prompt.md`.
+- **Components (18):** built into `_ds_bundle.js` under `window.StellarRaftDesignSystem_2866af` —
+  - core: `Icon`, `IconButton`, `Button`, `GlassPanel`, `Badge`, `Tag`, `Input`
+  - knowledge: `StarNode`, `MemoryBar`, `ConstellationItem`
+  - overlay: `Modal`, `Toast` + imperative `toast(message, {tone, icon, duration})` (also on the namespace), `Tooltip`, `ContextMenu`
+  - form: `Select`, `Switch`, `Checkbox`, `Tabs`
+  - See `components/*/*.prompt.md`; regenerate the bundle with `npm run build` after editing any `.jsx`.
 - **Icons:** Lucide via CDN (`https://unpkg.com/lucide@latest`). Star-blue idle → gold on hover/active. **Never** emoji or unicode glyph icons.
 - **Starfield + organic connections:** `assets/starfield.js` → `<sr-starfield>` element + `window.SRConnect(...)` path generator.
-- **Full app recreation:** `ui_kits/stellar-raft/` (8 screens, interactive).
+- **Full app recreation:** `ui_kits/stellar-raft/` (8 screens, interactive) — memory strength now decays for real (FSRS-lite in `data.js`) and every edit persists (localStorage mirror + optional `node server/server.js` sync).
+- **Docs site:** `docs/index.html` — zero-build static pages (brand / getting started / foundations / component gallery / showcase). Register new components by appending to `REGISTRY` in `docs/registry.js`.
 - **Foundations:** specimen cards in `guidelines/`.
+- **Build & QA:** `npm install` once, then `npm run build` (rebuild `_ds_bundle.js` + `_ds_manifest.json` — never hand-edit those), `npm test` (server / tokens / bundle suites), `npm run lint`.
 
 ## Non-negotiables
 - Dark stage, bold negative (black) space, low density, breathing.
