@@ -141,7 +141,12 @@ function OnboardingTour({ onClose }) {
     return false;
   }, []);
 
-  React.useEffect(() => { if (!locate(0)) onClose(); }, [locate, onClose]);
+  const didInit = React.useRef(false);
+  React.useEffect(() => {
+    if (didInit.current) return;
+    didInit.current = true;
+    if (!locate(0)) onClose();
+  }, [locate, onClose]);
 
   React.useEffect(() => {
     const k = (e) => { if (e.key === 'Escape') { e.stopPropagation(); onClose(); } };
