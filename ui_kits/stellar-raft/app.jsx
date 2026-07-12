@@ -59,13 +59,13 @@ function App() {
   React.useEffect(() => {
     const h = (e) => {
       if ((e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K')) {
-        if (reviewOpen) return;
+        if (reviewOpen || onboard || tour) return;
         e.preventDefault(); setCmd(c => !c);
       }
     };
     window.addEventListener('keydown', h);
     return () => window.removeEventListener('keydown', h);
-  }, [reviewOpen]);
+  }, [reviewOpen, onboard, tour]);
 
   // Esc 统一词汇：同一动作（离开当前浮层）在所有屏幕说同一句话。
   // 命令面板 / 设置 / AI 配置 / 复习会话自带 Esc，这里让位；
@@ -75,13 +75,13 @@ function App() {
   React.useEffect(() => {
     const h = (e) => {
       if (e.key !== 'Escape' || e.defaultPrevented) return;
-      if (cmd || settingsOpen || aiConfigOpen || reviewOpen) return;
+      if (cmd || settingsOpen || aiConfigOpen || reviewOpen || onboard || tour) return;
       if (feynman) { e.preventDefault(); setFeynman(null); return; }
       if (view === 'checkup') { e.preventDefault(); freshen(); setView('map'); setAerial(false); }
     };
     window.addEventListener('keydown', h, true);
     return () => window.removeEventListener('keydown', h, true);
-  }, [cmd, settingsOpen, aiConfigOpen, reviewOpen, feynman, view]);
+  }, [cmd, settingsOpen, aiConfigOpen, reviewOpen, onboard, tour, feynman, view]);
 
   // 切换视图前按真实时间重算全部星的 R（衰减模型），新挂载的视图读到的是当下的亮度
   const freshen = () => { const D = window.SR_DATA; if (D && D.refreshMemory) D.refreshMemory(); };
@@ -176,7 +176,7 @@ function App() {
       {reviewOpen && <ReviewSession onClose={closeReview} />}
 
       {cmd && <CommandPalette onClose={() => setCmd(false)} onOpenStar={openEditor} onOpenView={openView} onFocusCon={focusCon} />}
-      {settingsOpen && <Settings onClose={() => setSettingsOpen(false)} theme={theme} onToggleTheme={toggleTheme} />}
+      {settingsOpen && <Settings onClose={() => setSettingsOpen(false)} theme={theme} onToggleTheme={toggleTheme} onReplayGuide={replayGuide} />}
       {aiConfigOpen && <AIConfig onClose={() => setAiConfigOpen(false)} />}
       {onboard && <Onboarding onClose={finishOnboard} onSpotlight={startTour} />}
       {tour && <OnboardingTour onClose={() => setTour(false)} />}

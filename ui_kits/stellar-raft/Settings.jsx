@@ -1,6 +1,6 @@
 /* Settings — 用户设置覆盖层。居中玻璃 modal，左侧分区导航 + 右侧内容。
    由左下角头像点击打开。Esc / 点遮罩关闭，保存有 toast 反馈，无浏览器原生弹窗。
-   props: { onClose, theme, onToggleTheme } */
+   props: { onClose, theme, onToggleTheme, onReplayGuide } */
 const { Button, GlassPanel, Icon, IconButton, Input } = window.StellarRaftDesignSystem_2866af;
 
 /* 头像预设：渐变色块，semantic 内仍走冷蓝/暖金的克制色域 */
@@ -33,6 +33,7 @@ const SR_SET_NAV = [
   { id: 'prefs',   label: '偏好',     icon: 'sliders-horizontal' },
   { id: 'review',  label: '复习提醒', icon: 'bell' },
   { id: 'keys',    label: '快捷键',   icon: 'keyboard' },
+  { id: 'guide',   label: '上手引导', icon: 'compass' },
   { id: 'account', label: '账户',     icon: 'shield' },
 ];
 
@@ -95,7 +96,7 @@ function SRSegment({ options, value, onChange }) {
   );
 }
 
-function Settings({ onClose, theme, onToggleTheme }) {
+function Settings({ onClose, theme, onToggleTheme, onReplayGuide }) {
   const dawn = theme === 'dawn';
   const [tab, setTab] = React.useState('profile');
   const [toast, setToast] = React.useState(null);
@@ -310,6 +311,19 @@ function Settings({ onClose, theme, onToggleTheme }) {
                         </span>
                       </div>
                     ))}
+                  </div>
+                </div>
+              )}
+
+              {tab === 'guide' && (
+                <div>
+                  <SRSectionTitle>上手引导</SRSectionTitle>
+                  <div style={{ padding: '14px 0 4px', fontSize: 13, color: 'var(--text-2)', lineHeight: 1.85 }}>
+                    第一次进来的那本「星图手册」——星图、点亮、复习、收件箱、黑洞、漫游，一页页讲清楚。想重温随时翻开。
+                  </div>
+                  <div style={{ marginTop: 8 }}>
+                    <Button size="sm" variant="primary" glow icon="book-open"
+                      onClick={() => { if (onReplayGuide) onReplayGuide(); }}>重新观看引导</Button>
                   </div>
                 </div>
               )}
