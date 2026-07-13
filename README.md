@@ -213,7 +213,7 @@ stellar-raft/
 ├─ guidelines/             # 15 张基础规范示例卡（颜色 / 字体 / 间距 / 图标 / 品牌）
 ├─ scripts/                # build · lint（构建产物由源码生成，勿手改 _ds_bundle.js）
 ├─ tests/                  # node --test：server / tokens / bundle / mdcore / onboarding
-└─ SKILL.md                # 供 Claude Code 使用的 Agent-Skill 封装
+└─ SKILL.md                # 设计系统的 Agent-Skill 封装（技能清单）
 ```
 
 **组件库 · Design System** — 18 个原语挂在命名空间 `window.StellarRaftDesignSystem_2866af`:
