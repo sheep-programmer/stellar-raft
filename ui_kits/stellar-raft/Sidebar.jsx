@@ -63,7 +63,7 @@ function NavRow({ icon, label, active, badge, collapsed, onClick, dawn, tip, dat
 function UserChip({ collapsed, dawn, onClick }) {
   const [hover, setHover] = React.useState(false);
   return (
-    <button type="button" className="sr-focus-ring" onClick={onClick} title="个人设置"
+    <button type="button" className="sr-focus-ring" onClick={onClick} title="个人设置" data-tour="settings"
       onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
       style={{
         display: 'flex', alignItems: 'center', gap: 10, width: '100%',
@@ -157,15 +157,15 @@ function Sidebar({ collapsed, onToggle, view, onView, focus, onFocus, theme, onT
       </div>
 
       {/* views */}
-      <nav style={{ padding: collapsed ? '6px 8px' : '6px 12px', display: 'flex', flexDirection: 'column', gap: 3, flex: 'none' }}>
+      <nav data-tour="nav-views" style={{ padding: collapsed ? '6px 8px' : '6px 12px', display: 'flex', flexDirection: 'column', gap: 3, flex: 'none' }}>
         <NavRow icon="orbit"   label="星图视图"   active={view === 'map'}  collapsed={collapsed} dawn={dawn} onClick={() => onView('map')} />
         <NavRow icon="list"    label="列表视图"   active={view === 'list'} collapsed={collapsed} dawn={dawn} onClick={() => onView('list')} />
         <NavRow icon="git-commit-horizontal" label="时间轴视图" active={view === 'timeline'} collapsed={collapsed} dawn={dawn} onClick={() => onView('timeline')} />
         <div style={{ height: 1, background: 'var(--line)', margin: '8px 4px' }} />
         <NavRow icon="repeat"   label="复习"   badge={dueN || null} collapsed={collapsed} dawn={dawn} onClick={onReview} active={false} dataTour="review" />
-        <NavRow icon="inbox"    label="收件箱" badge={inboxN || null} tip={`本地捕捉 ${D.inbox.length} 条 + 未领取来信 ${mailN} 封`} collapsed={collapsed} dawn={dawn} onClick={() => onView('inbox')} active={view === 'inbox'} />
-        <NavRow icon="aperture" label="黑洞"   badge={D.trash.length || null} collapsed={collapsed} dawn={dawn} onClick={() => onView('blackhole')} active={view === 'blackhole'} />
-        <NavRow icon="telescope" label="星际漫游" badge={(D.social && D.social.friends) || null} collapsed={collapsed} dawn={dawn} onClick={() => onView('visit')} active={view === 'visit'} />
+        <NavRow icon="inbox"    label="收件箱" badge={inboxN || null} tip={`本地捕捉 ${D.inbox.length} 条 + 未领取来信 ${mailN} 封`} collapsed={collapsed} dawn={dawn} onClick={() => onView('inbox')} active={view === 'inbox'} dataTour="inbox" />
+        <NavRow icon="aperture" label="黑洞"   badge={D.trash.length || null} collapsed={collapsed} dawn={dawn} onClick={() => onView('blackhole')} active={view === 'blackhole'} dataTour="trash" />
+        <NavRow icon="telescope" label="星际漫游" badge={(D.social && D.social.friends) || null} collapsed={collapsed} dawn={dawn} onClick={() => onView('visit')} active={view === 'visit'} dataTour="visit" />
       </nav>
 
       {/* constellations */}
@@ -184,8 +184,8 @@ function Sidebar({ collapsed, onToggle, view, onView, focus, onFocus, theme, onT
 
       {/* footer */}
       <div style={{ flex: 'none', padding: collapsed ? '10px 8px' : '12px', borderTop: '1px solid var(--line)', display: 'flex', flexDirection: 'column', gap: 4 }}>
-        <NavRow icon={dawn ? 'moon-star' : 'sunrise'} label={dawn ? '切回深空' : '黎明模式'} collapsed={collapsed} dawn={dawn} onClick={onToggleTheme} />
-        <NavRow icon="activity" label="知识体检报告" badge={todoN || null} collapsed={collapsed} dawn={dawn} active={view === 'checkup'} onClick={onCheckup} />
+        <NavRow icon={dawn ? 'moon-star' : 'sunrise'} label={dawn ? '切回深空' : '黎明模式'} collapsed={collapsed} dawn={dawn} onClick={onToggleTheme} dataTour="theme" />
+        <NavRow icon="activity" label="知识体检报告" badge={todoN || null} collapsed={collapsed} dawn={dawn} active={view === 'checkup'} onClick={onCheckup} dataTour="checkup" />
         <NavRow icon="bot" label="AI 配置" collapsed={collapsed} dawn={dawn} onClick={onAIConfig} />
         <UserChip collapsed={collapsed} dawn={dawn} onClick={onOpenSettings} />
       </div>

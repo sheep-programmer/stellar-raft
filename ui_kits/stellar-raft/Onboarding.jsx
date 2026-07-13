@@ -68,8 +68,8 @@ const SR_DEMO_CSS = `
 @keyframes mp-cur{0%{transform:translate(272px,124px);opacity:0}5%{opacity:1}6%{transform:translate(272px,124px)}
  14%{transform:translate(202px,96px)}16%{transform:translate(202px,96px);animation-timing-function:cubic-bezier(.65,0,.35,1)}
  38%,40%{transform:translate(137px,71px)}
- 50%{transform:translate(242px,54px)}62%{transform:translate(296px,94px)}
- 76%{transform:translate(296px,94px);opacity:1}84%{transform:translate(306px,110px);opacity:0}
+ 50%{transform:translate(242px,54px)}62%{transform:translate(298px,112px)}
+ 76%{transform:translate(298px,112px);opacity:1}84%{transform:translate(308px,126px);opacity:0}
  100%{transform:translate(272px,124px);opacity:0}}
 @keyframes mp-press{0%,13%{transform:scale(1)}15%,39%{transform:scale(.85)}41%,51%{transform:scale(1)}
  53%,54%{transform:scale(.85)}56%,61%{transform:scale(1)}63%,64%{transform:scale(.85)}66%,100%{transform:scale(1)}}
@@ -113,7 +113,7 @@ const SR_DEMO_CSS = `
 
 /* — review（5s）：点「记得」→ 卡片飞出 → 下一张滑入（无缝洗牌） — */
 @keyframes rv-cur{0%{transform:translate(196px,134px);opacity:0}8%{opacity:1}
- 24%{transform:translate(258px,117px)}44%,58%{transform:translate(258px,117px)}
+ 24%{transform:translate(258px,119px)}44%,58%{transform:translate(258px,119px)}
  72%{transform:translate(286px,138px);opacity:1}82%,100%{transform:translate(286px,138px);opacity:0}}
 @keyframes rv-press{0%,43%{transform:scale(1)}45%,47%{transform:scale(.85)}50%,100%{transform:scale(1)}}
 @keyframes rv-pulse{0%,44%{transform:scale(.3);opacity:0}46%{opacity:.75}56%,100%{transform:scale(1.9);opacity:0}}
@@ -157,8 +157,8 @@ const SR_DEMO_CSS = `
 
 /* — views（6s）：点分段开关 星图 ⇄ 鸟瞰热图（热图格子逐格铺开） — */
 @keyframes vw-cur{0%{transform:translate(180px,120px);opacity:0}8%{opacity:1}
- 22%{transform:translate(294px,27px)}40%,42%{transform:translate(294px,27px)}
- 56%{transform:translate(272px,27px)}66%,68%{transform:translate(272px,27px)}
+ 22%{transform:translate(319px,27px)}40%,42%{transform:translate(319px,27px)}
+ 56%{transform:translate(273px,27px)}66%,68%{transform:translate(273px,27px)}
  80%{transform:translate(240px,84px);opacity:1}90%,100%{transform:translate(240px,84px);opacity:0}}
 @keyframes vw-press{0%,39%{transform:scale(1)}41%,43%{transform:scale(.85)}45%,65%{transform:scale(1)}
  67%,69%{transform:scale(.85)}71%,100%{transform:scale(1)}}
@@ -213,9 +213,10 @@ const EO = 'cubic-bezier(.22,1,.36,1)'; // ease-out-quint：默认逐段缓动
 function Cursor({ move, press, dur }) {
   return (
     <span className="sr-cur" style={{ animation: `${move} ${dur} ${EO} infinite` }}>
-      <svg style={{ display: 'block', transformOrigin: '4px 3px', animation: press ? `${press} ${dur} ${EO} infinite` : 'none' }}
+      <svg style={{ display: 'block', transformOrigin: '2px 2px', animation: press ? `${press} ${dur} ${EO} infinite` : 'none' }}
         width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M5 3 L5 20.5 L9.8 15.7 L12.6 22 L15.6 20.7 L12.8 14.6 L19.5 14 Z"
+        {/* 尖端在 (0,0)：translate 坐标即点击热点，光标指哪就是哪 */}
+        <path d="M0 0 L0 17.5 L4.8 12.7 L7.6 19 L10.6 17.7 L7.8 11.6 L14.5 11 Z"
           fill="#f2f6ff" stroke="rgba(3,4,12,.9)" strokeWidth="1.3" strokeLinejoin="round" />
       </svg>
     </span>
@@ -279,7 +280,7 @@ function GuideDemo({ id }) {
             border: '1px solid rgba(159,198,255,.14)' }} />
         </div>
         <Pulse x={242} y={54} anim="mp-pulse1" dur="7s" />
-        <Pulse x={296} y={94} anim="mp-pulse2" dur="7s" />
+        <Pulse x={298} y={112} anim="mp-pulse2" dur="7s" />
         {/* 右键菜单（迷你玻璃） */}
         <div style={{ position: 'absolute', left: 248, top: 60, width: 100, borderRadius: 10, overflow: 'hidden',
           background: 'rgba(12,17,38,.96)', border: '1px solid rgba(159,198,255,.28)', boxShadow: '0 10px 26px rgba(0,0,0,.5)',
@@ -360,7 +361,7 @@ function GuideDemo({ id }) {
             ...(i === 2 ? kf('rv-btn', '5s') : {}) }}>{b[0]}</span>
         ))}
         <span className="sr-tag" style={{ left: 212, top: 6, background: 'transparent', color: '#ffd98a', ...kf('rv-chip', '5s') }}>记忆稳定度 ↑</span>
-        <Pulse x={258} y={117} anim="rv-pulse" dur="5s" />
+        <Pulse x={258} y={119} anim="rv-pulse" dur="5s" />
         <Cursor move="rv-cur" press="rv-press" dur="5s" />
       </>
     ),
@@ -436,8 +437,8 @@ function GuideDemo({ id }) {
           <span style={{ position: 'absolute', left: 0, top: 0, width: 50, height: 26, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, ...kf('vw-lab1', '6s') }}>星图</span>
           <span style={{ position: 'absolute', right: 0, top: 0, width: 50, height: 26, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, ...kf('vw-lab2', '6s') }}>鸟瞰</span>
         </div>
-        <Pulse x={294} y={27} anim="vw-pulse1" dur="6s" />
-        <Pulse x={272} y={27} anim="vw-pulse2" dur="6s" />
+        <Pulse x={319} y={27} anim="vw-pulse1" dur="6s" />
+        <Pulse x={273} y={27} anim="vw-pulse2" dur="6s" />
         <Cursor move="vw-cur" press="vw-press" dur="6s" />
       </>
     ),
@@ -562,8 +563,8 @@ function Onboarding({ onClose, onSpotlight }) {
             <Button size="sm" variant="ghost" icon="chevron-left" disabled={page === 0} onClick={() => setPage(v => Math.max(v - 1, 0))}>上一页</Button>
             {last ? (
               <div style={{ display: 'flex', gap: 10 }}>
-                <Button size="sm" variant="ghost" icon="compass" onClick={onSpotlight}>实地看看</Button>
-                <Button size="sm" variant="primary" glow icon="check" onClick={onClose}>开始使用</Button>
+                <Button size="sm" variant="ghost" icon="check" onClick={onClose}>直接开始</Button>
+                <Button size="sm" variant="primary" glow icon="compass" onClick={onSpotlight}>实地看看这些位置</Button>
               </div>
             ) : (
               <Button size="sm" variant="primary" icon="chevron-right" iconRight onClick={() => setPage(v => Math.min(v + 1, total - 1))}>下一页</Button>
@@ -575,11 +576,20 @@ function Onboarding({ onClose, onSpotlight }) {
   );
 }
 
-// 聚光步骤——只指向星图主界面的稳定 chrome；找不到的目标优雅跳过。
+// 聚光步骤——逐处高亮真实界面上的功能位置；找不到的目标优雅跳过。
 const SR_TOUR_STEPS = [
-  { target: '[data-tour="search"]', title: '随时跳转', body: '⌘K 或点这里，跳到任意一颗星、任意一个视图。' },
-  { target: '[data-tour="review"]', title: '到期复习', body: '角标是今天到期的星数。点它开始一轮复习，让星不熄灭。' },
-  { target: '[data-tour="tools"]',  title: '换个视角', body: '这里切换亮度鸟瞰与三维星系，也能缩放、复位画布。' },
+  { target: '[data-tour="search"]',    title: '随时跳转',   body: '⌘K 或点这里，跳到任意一颗星、任意一个视图。' },
+  { target: '[data-tour="nav-views"]', title: '三种看法',   body: '星图是创作的画布，列表管理账目，时间轴回望来路。' },
+  { target: '[data-tour="review"]',    title: '到期复习',   body: '角标是今天到期的星数。点它走一轮「忘了 · 模糊 · 记得」。' },
+  { target: '[data-tour="inbox"]',     title: '收件箱',     body: '⌘Enter 的速记与好友来信都落在这里，攒着慢慢归入星域。' },
+  { target: '[data-tour="trash"]',     title: '黑洞',       body: '删掉的星在事件视界打转。随时捞回，位置与连接都还在。' },
+  { target: '[data-tour="visit"]',     title: '星际漫游',   body: '凭分享码造访好友的星系，心动的星可以收进自己的星域。' },
+  { target: '[data-tour="theme"]',     title: '黎明与深空', body: '换一种天色看你的星空，语义不变：金色仍是奖励，星蓝仍是结构。' },
+  { target: '[data-tour="checkup"]',   title: '知识体检',   body: '到期复习、待重燃、待整理——三行今日待办，一眼看完。' },
+  { target: '[data-tour="hud"]',       title: '星空总览',   body: '知识星 · 已点亮 · 正发光 · 正变暗，你的星空一行读完。' },
+  { target: '[data-tour="tools"]',     title: '换个视角',   body: '亮度鸟瞰与三维星系在这里切换，也能缩放、复位画布。' },
+  { target: '[data-tour="hint"]',      title: '创作手势',   body: '拖空白平移 · 拖星移动 · 滚轮缩放 · 右键创建——都在这一行里。' },
+  { target: '[data-tour="settings"]',  title: '回看这份引导', body: '想重温手册，随时来这里：个人设置 →「上手引导」。' },
 ];
 
 function OnboardingTour({ onClose }) {
@@ -619,10 +629,23 @@ function OnboardingTour({ onClose }) {
 
   const pad = 8;
   const hole = { left: rect.left - pad, top: rect.top - pad, width: rect.width + pad * 2, height: rect.height + pad * 2 };
-  // 气泡放在光洞右侧；靠右则翻到左侧
-  const bubbleLeft = hole.left + hole.width + 14 > window.innerWidth - 300
-    ? Math.max(16, hole.left - 300 - 14) : hole.left + hole.width + 14;
-  const bubbleTop = Math.min(Math.max(16, hole.top), window.innerHeight - 160);
+  // 气泡四向自适应：右 → 左 → 下 → 上（宽目标如顶部 HUD 走上下，不遮挡光洞）
+  const BW = 280, BH = 170, M = 14;
+  const holeR = hole.left + hole.width, holeB = hole.top + hole.height;
+  let bubbleLeft, bubbleTop;
+  if (holeR + M + BW <= window.innerWidth - 10) {
+    bubbleLeft = holeR + M;
+    bubbleTop = Math.min(Math.max(16, hole.top), window.innerHeight - BH);
+  } else if (hole.left - M - BW >= 10) {
+    bubbleLeft = hole.left - M - BW;
+    bubbleTop = Math.min(Math.max(16, hole.top), window.innerHeight - BH);
+  } else if (holeB + M + BH <= window.innerHeight) {
+    bubbleLeft = Math.min(Math.max(16, hole.left + hole.width / 2 - BW / 2), window.innerWidth - BW - 16);
+    bubbleTop = holeB + M;
+  } else {
+    bubbleLeft = Math.min(Math.max(16, hole.left + hole.width / 2 - BW / 2), window.innerWidth - BW - 16);
+    bubbleTop = Math.max(16, hole.top - M - BH);
+  }
 
   return (
     <div onMouseDown={onClose} role="dialog" aria-modal="true" aria-label="实地导览"

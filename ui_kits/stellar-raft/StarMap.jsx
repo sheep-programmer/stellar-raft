@@ -689,7 +689,7 @@ function StarMap({ selected, onSelect, onOpenEditor, onFeynman, onAerial, on3D, 
       )}
 
       {/* Top HUD */}
-      <div onMouseDown={(e) => e.stopPropagation()} style={{ position: 'absolute', top: 18, left: 22, right: 22, zIndex: 30, display: 'flex', alignItems: 'stretch', gap: 14, pointerEvents: 'none' }}>
+      <div data-tour="hud" onMouseDown={(e) => e.stopPropagation()} style={{ position: 'absolute', top: 18, left: 22, right: 22, zIndex: 30, display: 'flex', alignItems: 'stretch', gap: 14, pointerEvents: 'none' }}>
         <GlassPanel radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '8px 18px', pointerEvents: 'auto' }}>
           <Icon name="orbit" size={17} color="var(--gold)" />
           <span style={{ fontSize: 14, color: 'var(--text-1)' }}>我的星空</span>
@@ -706,7 +706,7 @@ function StarMap({ selected, onSelect, onOpenEditor, onFeynman, onAerial, on3D, 
       </div>
 
       {/* hint */}
-      <div style={{ position: 'absolute', bottom: 26, left: 24, zIndex: 30, display: 'flex', alignItems: 'center', gap: 8, fontSize: 11.5, color: 'var(--text-3)', pointerEvents: 'none' }}>
+      <div data-tour="hint" style={{ position: 'absolute', bottom: 26, left: 24, zIndex: 30, display: 'flex', alignItems: 'center', gap: 8, fontSize: 11.5, color: 'var(--text-3)', pointerEvents: 'none' }}>
         <Icon name="move" size={14} color="currentColor" />拖主星=整体移动星域 · 拖空白=平移画布 · 拖星点=移动单颗 · 滚轮缩放 · 右键创建
       </div>
 
