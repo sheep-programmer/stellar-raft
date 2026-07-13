@@ -586,6 +586,8 @@ function MiniStarMap({ currentId, onPick }) {
     return out;
   })();
   const reduce = typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // 定位的主角是「当前星」：十字准线 + 目标环把视线钉在它的位置上，其余一切退为背景
+  const cs = sp.find(s => s.id === currentId);
   return (
     <div style={{ marginTop: 10, height: H, borderRadius: 'var(--r-md)', border: '1px solid var(--glass-border)', position: 'relative', overflow: 'hidden', background: 'radial-gradient(120% 100% at 40% 40%, rgba(26,35,80,0.5), transparent 60%)' }}>
       <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" aria-hidden="true"
@@ -600,7 +602,7 @@ function MiniStarMap({ currentId, onPick }) {
         {/* 星-主星连线（蓝）与跨星域融会贯通弧（金）——与星图同一语言的静态缩影 */}
         {sp.map((s, i) => {
           const sun = sunOf[s.con]; if (!sun) return null;
-          return <path key={'i' + s.id} d={conn(X(sun.cx), Y(sun.cy), X(s.px), Y(s.py), 0.1 + (i % 3) * 0.03)} fill="none" stroke="var(--star-blue)" strokeWidth="0.7" opacity="0.32" />;
+          return <path key={'i' + s.id} d={conn(X(sun.cx), Y(sun.cy), X(s.px), Y(s.py), 0.1 + (i % 3) * 0.03)} fill="none" stroke="var(--star-blue)" strokeWidth="0.7" opacity={s.id === currentId ? 0.5 : 0.2} />;
         })}
         {crossPairs.map(([a, b]) => {
           const A = sunOf[a], B = sunOf[b];
@@ -614,11 +616,20 @@ function MiniStarMap({ currentId, onPick }) {
             <text x={X(d.cx)} y={Y(d.cy) + 10.5} textAnchor="middle" fontSize="7.5" fontFamily="var(--font-sans)" fill="var(--sun-label, #ffe3b0)" opacity="0.85" style={{ letterSpacing: '0.05em' }}>{d.name}</text>
           </g>
         ))}
+        {/* 定位准线：贯穿全幅的金色十字虚线 + 双层目标环，钉住当前星的位置 */}
+        {cs && (
+          <g>
+            <line x1="0" y1={Y(cs.py)} x2={W} y2={Y(cs.py)} stroke="var(--gold)" strokeWidth="0.6" strokeDasharray="2 3" opacity="0.25" />
+            <line x1={X(cs.px)} y1="0" x2={X(cs.px)} y2={H} stroke="var(--gold)" strokeWidth="0.6" strokeDasharray="2 3" opacity="0.25" />
+            <circle cx={X(cs.px)} cy={Y(cs.py)} r="8.5" fill="none" stroke="var(--gold)" strokeWidth="0.9" opacity="0.6" />
+            <circle cx={X(cs.px)} cy={Y(cs.py)} r="14" fill="none" stroke="var(--gold)" strokeWidth="0.6" opacity="0.28" />
+          </g>
+        )}
       </svg>
       {/* 知识星：记忆温度着色 · 重要度定尺寸 · 当前星金色放大。点击 → 探索确认 */}
       {sp.map(s => {
         const cur = s.id === currentId;
-        const size = cur ? 9 : Math.max(4, Math.min(7, 3.2 + (s.importance || 1) * 1.1 + s.strength * 1.4));
+        const size = cur ? 10 : Math.max(4, Math.min(7, 3.2 + (s.importance || 1) * 1.1 + s.strength * 1.4));
         const col = cur ? 'var(--gold)' : edMemoryColor(s.strength, dawn);
         return (
           <button type="button" key={s.id} data-tip={cur ? `当前星 ·「${s.label}」· 点击在星图中探索` : `在星图中探索「${s.label}」`}
@@ -626,8 +637,8 @@ function MiniStarMap({ currentId, onPick }) {
             onClick={() => onPick && onPick(s)}
             style={{ position: 'absolute', left: `${X(s.px) / W * 100}%`, top: `${Y(s.py) / H * 100}%`, transform: 'translate(-50%,-50%)', padding: 0, border: 'none',
               width: size, height: size, borderRadius: '50%', background: col, cursor: 'pointer',
-              boxShadow: cur ? '0 0 12px var(--gold), 0 0 4px var(--gold)' : (s.strength >= 0.7 ? `0 0 6px ${edMemoryColor(s.strength, dawn)}` : 'none'),
-              opacity: cur ? 1 : 0.9 }} />
+              boxShadow: cur ? '0 0 14px var(--gold), 0 0 5px var(--gold)' : (s.strength >= 0.7 ? `0 0 6px ${edMemoryColor(s.strength, dawn)}` : 'none'),
+              opacity: cur ? 1 : 0.55 }} />
         );
       })}
     </div>
