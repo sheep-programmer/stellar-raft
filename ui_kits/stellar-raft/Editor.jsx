@@ -647,14 +647,18 @@ function MiniStarMap({ currentId, onPick }) {
         const col = cur ? 'var(--gold)' : edMemoryColor(s.strength, dawn);
         const sx = X(s.px), sy = Y(s.py);
         if (sx < -24 || sx > W + 24 || sy < -24 || sy > H + 24) return null; // 视口外剔除
+        // 定位与呼吸分层：外层按钮只管 translate 居中（sr-breathe 的 transform:scale
+        // 若直接挂在按钮上会覆盖居中位移，星点整体偏移半个身位——准线就对不上了）
         return (
           <button type="button" key={s.id} data-tip={cur ? `当前星 ·「${s.label}」· 点击在星图中探索` : `在星图中探索「${s.label}」`}
-            aria-label={'在星图中探索「' + s.label + '」'} className={'sr-focus-ring sr-hit40' + (cur && !reduce ? ' sr-breathe' : '')}
+            aria-label={'在星图中探索「' + s.label + '」'} className="sr-focus-ring sr-hit40"
             onClick={() => pick(s)}
             style={{ position: 'absolute', left: `${sx / W * 100}%`, top: `${sy / H * 100}%`, transform: 'translate(-50%,-50%)', padding: 0, border: 'none',
-              width: size, height: size, borderRadius: '50%', background: col, cursor: 'pointer',
-              boxShadow: cur ? '0 0 14px var(--gold), 0 0 5px var(--gold)' : (s.strength >= 0.7 ? `0 0 6px ${edMemoryColor(s.strength, dawn)}` : 'none'),
-              opacity: cur ? 1 : 0.72 }} />
+              width: size, height: size, background: 'transparent', cursor: 'pointer', opacity: cur ? 1 : 0.72 }}>
+            <span aria-hidden="true" className={cur && !reduce ? 'sr-breathe' : ''}
+              style={{ display: 'block', width: '100%', height: '100%', borderRadius: '50%', background: col,
+                boxShadow: cur ? '0 0 14px var(--gold), 0 0 5px var(--gold)' : (s.strength >= 0.7 ? `0 0 6px ${edMemoryColor(s.strength, dawn)}` : 'none') }} />
+          </button>
         );
       })}
       {/* 拖离当前星后：回中按钮 */}
