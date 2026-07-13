@@ -112,10 +112,10 @@
 stateDiagram-v2
     direction LR
     [*] --> Unlit: 新建知识星 New star
-    Unlit --> Lit: 费曼讲透 Explained<br/>(≥60字 · 覆盖要点)
-    Lit --> Ember: R < 0.35 衰减熄灭<br/>或被评「忘了」
-    Ember --> Lit: 费曼快速通道<br/>Re-kindle (门槛减半)
-    Lit --> Lit: 复习成功 · 巩固<br/>S ×= 增长因子
+    Unlit --> Lit: 费曼讲透 Explained (≥60字 · 覆盖要点)
+    Lit --> Ember: R < 0.35 衰减 / 被评「忘了」
+    Ember --> Lit: 费曼快速通道 Re-kindle (门槛减半)
+    Lit --> Lit: 复习成功 · 巩固 S↑
 ```
 
 > 亮度 `R = exp(−Δt / S)`:冷蓝(遗忘)→ 暖金白(掌握)。复习成功 `S ×= 增长因子 + (1−R)·0.6`,失败 `×0.45`。曾点亮的星稳定度封顶 365 天,从未点亮的封顶 60 天。
