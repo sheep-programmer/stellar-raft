@@ -108,15 +108,9 @@
 
 **English** — Each star holds `sr = { S stability, last review, lit timestamp, ember timestamp }`. Retrievability `R = exp(−Δt / S)` is used directly as brightness and recomputed on every open, view switch, and per-minute heartbeat. **Ignition** is a certification axis independent of brightness:
 
-```mermaid
-stateDiagram-v2
-    direction LR
-    [*] --> Unlit: 新建知识星 New star
-    Unlit --> Lit: 费曼讲透 Explained (≥60字 · 覆盖要点)
-    Lit --> Ember: R < 0.35 衰减 / 被评「忘了」
-    Ember --> Lit: 费曼快速通道 Re-kindle (门槛减半)
-    Lit --> Lit: 复习成功 · 巩固 S↑
-```
+<div align="center">
+<img src="docs/diagrams/ignite-state.svg" alt="点亮状态机 · Ignite state machine" width="820"/>
+</div>
 
 > 亮度 `R = exp(−Δt / S)`:冷蓝(遗忘)→ 暖金白(掌握)。复习成功 `S ×= 增长因子 + (1−R)·0.6`,失败 `×0.45`。曾点亮的星稳定度封顶 365 天,从未点亮的封顶 60 天。
 > Brightness `R = exp(−Δt / S)`: cold blue (forgetting) → warm gold-white (mastered). On success `S ×= growth + (1−R)·0.6`, on failure `×0.45`. Stability caps at 365 days once lit, 60 days if never lit.
@@ -129,28 +123,9 @@ stateDiagram-v2
 
 **English** — Layered bottom-up: design tokens → component library → app UI kit, with a zero-dependency backend and a zero-build docs site alongside.
 
-```mermaid
-flowchart TD
-    subgraph FOUND["基础层 · Foundations"]
-        T["tokens/<br/>colors · spacing · typography<br/>effects · themes 黎明 Dawn"]
-        A["assets/<br/>starfield 星场 · SRConnect 连接曲线"]
-    end
-    subgraph DS["组件库 · Design System · 18 primitives"]
-        C["core · knowledge · overlay · form<br/>window.StellarRaftDesignSystem_2866af"]
-    end
-    subgraph APP["应用 · UI Kit"]
-        K["ui_kits/stellar-raft/<br/>8 屏 + 记忆模型 + 点亮 复习 + 持久化"]
-    end
-    subgraph BACK["后端与文档 · Backend & Docs"]
-        S["server/ · node:sqlite<br/>匿名令牌 · 整存整取 · 分享码"]
-        D["docs/ · 零构建文档站"]
-    end
-    T --> C --> K
-    A --> C
-    K <--> S
-    C --> D
-    K --> D
-```
+<div align="center">
+<img src="docs/diagrams/architecture.svg" alt="分层架构 · Architecture" width="820"/>
+</div>
 
 ---
 
