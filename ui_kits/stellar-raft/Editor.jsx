@@ -542,7 +542,7 @@ function edMemoryColor(strength, dawn) {
 function MiniStarMap({ currentId, onPick }) {
   const D = window.SR_DATA;
   const dawn = useDawn();
-  const W = 268, H = 166;   // 与世界同比例（1680:1040 ≈ 1.615），只缩放不变形
+  const W = 268, H = 166;
   const posOf = (s) => ({ px: s.wx != null ? s.wx : (s.x || 50) / 100 * MINI_WORLD.w, py: s.wy != null ? s.wy : (s.y || 50) / 100 * MINI_WORLD.h });
   const sp = D.stars.map(s => ({ ...s, ...posOf(s) }));
   // 星域几何：与 StarMap.domainGeom 同一套规则（质心 + 包裹全部成员的半径；单星主星上移让位）
@@ -556,20 +556,33 @@ function MiniStarMap({ currentId, onPick }) {
     const avg = ms.reduce((a, s) => a + s.strength, 0) / ms.length;
     return { id: c.id, name: c.name, cx, cy, r, col: avg >= 0.78 ? 'var(--gold)' : c.color, hex: avg >= 0.78 ? '#ffd98a' : c.color };
   }).filter(Boolean);
-  // 等比取景：把整片星空（含光晕）收进一屏
-  let k = 0.1, ox = 0, oy = 0;
-  if (sp.length) {
-    const minX = Math.min(...doms.map(d => d.cx - d.r), ...sp.map(s => s.px));
-    const maxX = Math.max(...doms.map(d => d.cx + d.r), ...sp.map(s => s.px));
-    const minY = Math.min(...doms.map(d => d.cy - d.r), ...sp.map(s => s.py));
-    const maxY = Math.max(...doms.map(d => d.cy + d.r), ...sp.map(s => s.py));
-    const bw = Math.max(1, maxX - minX), bh = Math.max(1, maxY - minY);
-    const pad = 10;
-    k = Math.min((W - pad * 2) / bw, (H - pad * 2) / bh);
-    ox = (W - bw * k) / 2 - minX * k;
-    oy = (H - bh * k) / 2 - minY * k;
-  }
-  const X = (wx) => ox + wx * k, Y = (wy) => oy + wy * k;
+  const cs = sp.find(s => s.id === currentId);
+  // 放大取景：以当前星为视口中心（k 固定，星点大、好点击），可拖拽平移看邻域
+  const k = 0.45;
+  const home = cs ? { x: cs.px, y: cs.py } : { x: MINI_WORLD.w / 2, y: MINI_WORLD.h / 2 };
+  const [center, setCenter] = React.useState(home);
+  React.useEffect(() => { setCenter(cs ? { x: cs.px, y: cs.py } : home); }, [currentId]); // 换笔记回中
+  const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+  const drag = React.useRef(null);          // {sx,sy,cx,cy}
+  const movedRef = React.useRef(0);         // 本次手势位移，>5px 则吞掉星点 click
+  const onPointerDown = (e) => {
+    drag.current = { sx: e.clientX, sy: e.clientY, cx: center.x, cy: center.y };
+    movedRef.current = 0;
+    e.currentTarget.setPointerCapture && e.currentTarget.setPointerCapture(e.pointerId);
+  };
+  const onPointerMove = (e) => {
+    if (!drag.current) return;
+    const dx = e.clientX - drag.current.sx, dy = e.clientY - drag.current.sy;
+    movedRef.current = Math.max(movedRef.current, Math.hypot(dx, dy));
+    setCenter({
+      x: clamp(drag.current.cx - dx / k, -120, MINI_WORLD.w + 120),
+      y: clamp(drag.current.cy - dy / k, -120, MINI_WORLD.h + 120),
+    });
+  };
+  const onPointerUp = () => { drag.current = null; };
+  const pick = (s) => { if (movedRef.current <= 5 && onPick) onPick(s); };
+  const offHome = cs && Math.hypot(center.x - cs.px, center.y - cs.py) > 8;
+  const X = (wx) => W / 2 + (wx - center.x) * k, Y = (wy) => H / 2 + (wy - center.y) * k;
   const conn = (x1, y1, x2, y2, bow) => window.SRConnect ? window.SRConnect(x1, y1, x2, y2, bow) : `M ${x1} ${y1} L ${x2} ${y2}`;
   const sunOf = Object.fromEntries(doms.map(d => [d.id, d]));
   // 跨星域「融会贯通」域对（与星图同源：connections 里的 cross 链）
@@ -586,10 +599,11 @@ function MiniStarMap({ currentId, onPick }) {
     return out;
   })();
   const reduce = typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
-  // 定位的主角是「当前星」：十字准线 + 目标环把视线钉在它的位置上，其余一切退为背景
-  const cs = sp.find(s => s.id === currentId);
   return (
-    <div style={{ marginTop: 10, height: H, borderRadius: 'var(--r-md)', border: '1px solid var(--glass-border)', position: 'relative', overflow: 'hidden', background: 'radial-gradient(120% 100% at 40% 40%, rgba(26,35,80,0.5), transparent 60%)' }}>
+    <div onPointerDown={onPointerDown} onPointerMove={onPointerMove} onPointerUp={onPointerUp} onPointerCancel={onPointerUp}
+      style={{ marginTop: 10, height: H, borderRadius: 'var(--r-md)', border: '1px solid var(--glass-border)', position: 'relative', overflow: 'hidden',
+        background: 'radial-gradient(120% 100% at 40% 40%, rgba(26,35,80,0.5), transparent 60%)',
+        cursor: drag.current ? 'grabbing' : 'grab', touchAction: 'none' }}>
       <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" aria-hidden="true"
         style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none' }}>
         {/* 星域大气光晕（各自的颜色；点亮的星域转暖金） */}
@@ -611,9 +625,9 @@ function MiniStarMap({ currentId, onPick }) {
         {/* 恒星主星：暖核 + 星域名 */}
         {doms.map(d => (
           <g key={'s' + d.id}>
-            <circle cx={X(d.cx)} cy={Y(d.cy)} r="4.5" fill="#ff9d52" opacity="0.34" />
-            <circle cx={X(d.cx)} cy={Y(d.cy)} r="2.4" fill="#ffd58a" />
-            <text x={X(d.cx)} y={Y(d.cy) + 10.5} textAnchor="middle" fontSize="7.5" fontFamily="var(--font-sans)" fill="var(--sun-label, #ffe3b0)" opacity="0.85" style={{ letterSpacing: '0.05em' }}>{d.name}</text>
+            <circle cx={X(d.cx)} cy={Y(d.cy)} r="6" fill="#ff9d52" opacity="0.34" />
+            <circle cx={X(d.cx)} cy={Y(d.cy)} r="3.2" fill="#ffd58a" />
+            <text x={X(d.cx)} y={Y(d.cy) + 13} textAnchor="middle" fontSize="8.5" fontFamily="var(--font-sans)" fill="var(--sun-label, #ffe3b0)" opacity="0.85" style={{ letterSpacing: '0.05em' }}>{d.name}</text>
           </g>
         ))}
         {/* 定位准线：贯穿全幅的金色十字虚线 + 双层目标环，钉住当前星的位置 */}
@@ -626,21 +640,36 @@ function MiniStarMap({ currentId, onPick }) {
           </g>
         )}
       </svg>
-      {/* 知识星：记忆温度着色 · 重要度定尺寸 · 当前星金色放大。点击 → 探索确认 */}
+      {/* 知识星：放大视口下星点更大更好点。拖拽超过阈值的松手不算点击 */}
       {sp.map(s => {
         const cur = s.id === currentId;
-        const size = cur ? 10 : Math.max(4, Math.min(7, 3.2 + (s.importance || 1) * 1.1 + s.strength * 1.4));
+        const size = cur ? 13 : Math.max(7, Math.min(11, 5.5 + (s.importance || 1) * 1.6 + s.strength * 2));
         const col = cur ? 'var(--gold)' : edMemoryColor(s.strength, dawn);
+        const sx = X(s.px), sy = Y(s.py);
+        if (sx < -24 || sx > W + 24 || sy < -24 || sy > H + 24) return null; // 视口外剔除
         return (
           <button type="button" key={s.id} data-tip={cur ? `当前星 ·「${s.label}」· 点击在星图中探索` : `在星图中探索「${s.label}」`}
             aria-label={'在星图中探索「' + s.label + '」'} className={'sr-focus-ring sr-hit40' + (cur && !reduce ? ' sr-breathe' : '')}
-            onClick={() => onPick && onPick(s)}
-            style={{ position: 'absolute', left: `${X(s.px) / W * 100}%`, top: `${Y(s.py) / H * 100}%`, transform: 'translate(-50%,-50%)', padding: 0, border: 'none',
+            onClick={() => pick(s)}
+            style={{ position: 'absolute', left: `${sx / W * 100}%`, top: `${sy / H * 100}%`, transform: 'translate(-50%,-50%)', padding: 0, border: 'none',
               width: size, height: size, borderRadius: '50%', background: col, cursor: 'pointer',
               boxShadow: cur ? '0 0 14px var(--gold), 0 0 5px var(--gold)' : (s.strength >= 0.7 ? `0 0 6px ${edMemoryColor(s.strength, dawn)}` : 'none'),
-              opacity: cur ? 1 : 0.55 }} />
+              opacity: cur ? 1 : 0.72 }} />
         );
       })}
+      {/* 拖离当前星后：回中按钮 */}
+      {offHome && (
+        <button type="button" title="回到当前星" aria-label="回到当前星" className="sr-focus-ring"
+          onClick={() => setCenter({ x: cs.px, y: cs.py })}
+          onPointerDown={(e) => e.stopPropagation()}
+          style={{ position: 'absolute', right: 6, bottom: 6, width: 24, height: 24, borderRadius: 7, cursor: 'pointer',
+            display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0,
+            background: 'rgba(12,17,38,.92)', border: '1px solid rgba(255,217,138,.45)' }}>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" strokeWidth="2.2" strokeLinecap="round">
+            <circle cx="12" cy="12" r="3.2" /><path d="M12 2v4M12 18v4M2 12h4M18 12h4" />
+          </svg>
+        </button>
+      )}
     </div>
   );
 }
