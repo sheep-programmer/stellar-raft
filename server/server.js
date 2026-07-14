@@ -72,6 +72,26 @@ db.exec(`
 // 添加会抛错，吞掉即可——绝不改动既有行数据。
 try { db.exec('ALTER TABLE galaxies ADD COLUMN version INTEGER NOT NULL DEFAULT 0'); } catch { /* 列已存在 */ }
 
+// 账号体系：既有库平滑加列（ALTER ADD COLUMN 不支持 UNIQUE，唯一性用部分索引兜底）
+const ensureColumn = (table, col, ddl) => {
+  const has = db.prepare(`PRAGMA table_info(${table})`).all().some(c => c.name === col);
+  if (!has) db.exec(`ALTER TABLE ${table} ADD COLUMN ${ddl}`);
+};
+ensureColumn('users', 'username', 'username TEXT');
+ensureColumn('users', 'email', 'email TEXT');
+ensureColumn('users', 'pass', 'pass TEXT');
+ensureColumn('users', 'registered_at', 'registered_at TEXT');
+db.exec(`
+  CREATE UNIQUE INDEX IF NOT EXISTS idx_users_username ON users(username) WHERE username IS NOT NULL;
+  CREATE UNIQUE INDEX IF NOT EXISTS idx_users_email ON users(email) WHERE email IS NOT NULL;
+  CREATE TABLE IF NOT EXISTS sessions (
+    token      TEXT PRIMARY KEY,
+    user_id    INTEGER NOT NULL REFERENCES users(id),
+    created_at TEXT NOT NULL DEFAULT (datetime('now')),
+    last_seen  TEXT NOT NULL DEFAULT (datetime('now'))
+  );
+`);
+
 const q = {
   userByToken: db.prepare('SELECT * FROM users WHERE token = ?'),
   userById: db.prepare('SELECT * FROM users WHERE id = ?'),
@@ -101,6 +121,14 @@ const q = {
   metaGet: db.prepare('SELECT value FROM meta WHERE key = ?'),
   metaSet: db.prepare('INSERT OR REPLACE INTO meta (key, value) VALUES (?, ?)'),
   metaDel: db.prepare('DELETE FROM meta WHERE key = ?'),
+  sessionByToken: db.prepare('SELECT * FROM sessions WHERE token = ?'),
+  insertSession: db.prepare('INSERT INTO sessions (token, user_id) VALUES (?, ?)'),
+  touchSession: db.prepare("UPDATE sessions SET last_seen = datetime('now') WHERE token = ?"),
+  deleteSession: db.prepare('DELETE FROM sessions WHERE token = ?'),
+  userByUsername: db.prepare('SELECT * FROM users WHERE username = ?'),
+  userByEmail: db.prepare('SELECT * FROM users WHERE email = ?'),
+  registerUser: db.prepare("UPDATE users SET username = ?, email = ?, pass = ?, registered_at = datetime('now') WHERE id = ?"),
+  setPass: db.prepare('UPDATE users SET pass = ? WHERE id = ?'),
 };
 
 /* ============================ 工具 ============================ */
@@ -124,6 +152,23 @@ const ensureUser = (token, name, avatar) => {
   }
   return u;
 };
+
+/* ——— 账号体系：密码哈希 / 会话 ——— */
+const hashPass = (pw) => {
+  const salt = crypto.randomBytes(16).toString('hex');
+  return 'scrypt:' + salt + ':' + crypto.scryptSync(pw, salt, 64).toString('hex');
+};
+const checkPass = (pw, stored) => {
+  try {
+    const [m, salt, hex] = String(stored || '').split(':');
+    if (m !== 'scrypt') return false;
+    const a = crypto.scryptSync(pw, salt, 64), b = Buffer.from(hex, 'hex');
+    return a.length === b.length && crypto.timingSafeEqual(a, b);
+  } catch { return false; }
+};
+const newSession = (userId) => { const t = 's_' + crypto.randomBytes(24).toString('hex'); q.insertSession.run(t, userId); return t; };
+const pubAccount = (u) => ({ id: u.id, name: u.name, avatar: u.avatar, registered: !!u.username,
+  username: u.username || null, email: u.email || null, registeredAt: u.registered_at || null });
 
 const shareOf = (userId) => {
   const s = q.getShare.get(userId);
@@ -356,13 +401,52 @@ async function handleApi(req, res, url) {
   if (req.method === 'POST' || req.method === 'PUT') {
     try { body = await readBody(req); } catch { return json(res, 400, { error: '请求体格式错误' }); }
   }
-  const me = ensureUser(token, body.name, body.avatar);
+  // 鉴权链：session 优先（登录态），未命中退回匿名 token 建档
+  const sess = q.sessionByToken.get(token);
+  let me;
+  if (sess) { me = q.userById.get(sess.user_id); q.touchSession.run(token); }
+  else { me = ensureUser(token, body.name, body.avatar); }
+
+  // ——— 账号体系 ———
+  if (seg[1] === 'auth' && seg[2] === 'register' && req.method === 'POST') {
+    if (me.username) return json(res, 409, { error: '当前已登录账号，如需另建请先退出' });
+    const username = String(body.username || '').trim();
+    const email = String(body.email || '').trim();
+    const password = String(body.password || '');
+    if (!/^[\w一-龥-]{2,24}$/.test(username)) return json(res, 400, { error: '用户名需 2–24 个字符（中英文、数字、_ 或 -）' });
+    if (email && !/^\S+@\S+\.\S+$/.test(email)) return json(res, 400, { error: '邮箱格式不对' });
+    if (password.length < 6) return json(res, 400, { error: '密码至少 6 位' });
+    if (q.userByUsername.get(username)) return json(res, 409, { error: '这个用户名已经有主人了' });
+    if (email && q.userByEmail.get(email)) return json(res, 409, { error: '这个邮箱已经绑定过账号' });
+    q.registerUser.run(username, email || null, hashPass(password), me.id);
+    const session = newSession(me.id);
+    return json(res, 200, { session, user: pubAccount(q.userById.get(me.id)) });
+  }
+  if (seg[1] === 'auth' && seg[2] === 'login' && req.method === 'POST') {
+    const idf = String(body.id || '').trim();
+    const u = q.userByUsername.get(idf) || q.userByEmail.get(idf);
+    if (!u || !u.pass || !checkPass(String(body.password || ''), u.pass)) return json(res, 401, { error: '用户名或密码不对' });
+    return json(res, 200, { session: newSession(u.id), user: pubAccount(u) });
+  }
+  if (seg[1] === 'auth' && seg[2] === 'logout' && req.method === 'POST') {
+    q.deleteSession.run(token);
+    return json(res, 200, { ok: true });
+  }
+  if (seg[1] === 'auth' && seg[2] === 'password' && req.method === 'POST') {
+    // 改密仅认「登录态」（有效 session）：即便某个匿名 token 恰好是某个已注册账号
+    // 升级前的原始 token（同一行、未失效），未经会话鉴权也不当作登录态放行
+    if (!sess || !me.username || !me.pass) return json(res, 401, { error: '尚未登录账号' });
+    if (!checkPass(String(body.old || ''), me.pass)) return json(res, 401, { error: '旧密码不对' });
+    if (String(body.new || '').length < 6) return json(res, 400, { error: '新密码至少 6 位' });
+    q.setPass.run(hashPass(String(body.new)), me.id);
+    return json(res, 200, { ok: true });
+  }
 
   // POST /api/hello — 建档/取回身份与分享状态
   if (seg[1] === 'hello' && req.method === 'POST') {
     if (body.name && body.name !== me.name) { q.updateUser.run(String(body.name).slice(0, 24), String(body.avatar || me.avatar).slice(0, 2), me.id); }
     const u = q.userById.get(me.id);
-    return json(res, 200, { user: { id: u.id, name: u.name, avatar: u.avatar }, share: pubShare(shareOf(u.id)), hasGalaxy: !!q.getGalaxy.get(u.id) });
+    return json(res, 200, { user: { id: u.id, name: u.name, avatar: u.avatar }, share: pubShare(shareOf(u.id)), hasGalaxy: !!q.getGalaxy.get(u.id), account: pubAccount(u) });
   }
 
   // GET/PUT /api/galaxy — 自己的星系整存整取
