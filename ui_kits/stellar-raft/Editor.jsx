@@ -1393,6 +1393,17 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
   const insertAfter = (id, type = 'p') => withSynced(s => { const i = s.findIndex(b => b.id === id); const nb = { id: uid(), type, text: '', ...typeExtras(type) }; return [...s.slice(0, i + 1), nb, ...s.slice(i + 1)]; });
   // 删光所有块后不再是死局：占位空态点击/回车即插入一个可输入的正文块并聚焦。
   const seedFirstBlock = () => { const nb = { id: uid(), type: 'p', text: '' }; flushSynced(() => [nb]); focusBlock(nb.id, 'start'); };
+  // 点击正文末尾的空白区：末块已是空段落则直接聚焦，否则追加一个空段落并聚焦——
+  // 无论最后一块是代码/表格/引用还是别的，鼠标永远能「点出下一行」。
+  const appendTailBlock = () => {
+    const last = blocks[blocks.length - 1];
+    if (!last) { seedFirstBlock(); return; }
+    const isEmptyP = last.type === 'p' && !stripTags(last.html != null ? last.html : (last.text || '')).trim();
+    if (isEmptyP) { focusBlock(last.id, 'end'); return; }
+    const nb = { id: uid(), type: 'p', text: '' };
+    flushSynced(s => [...s, nb]);
+    focusBlock(nb.id, 'start');
+  };
 
   const syncTags = (ts) => { star.tags = ts.slice(); D.touchNote(star.id); };
   const commitTag = () => { const t = tagDraft.trim(); if (t && !tags.includes(t)) setTags(ts => { const nt = [...ts, t]; syncTags(nt); return nt; }); setTagDraft(''); setAddingTag(false); };
@@ -1774,7 +1785,7 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
 
       {/* MIDDLE — editor */}
       <div ref={scrollRef} onMouseUp={onMouseUp} onDragOver={onEditorDragOver} onDrop={onEditorDrop} style={{ flex: 1, minWidth: 0, overflow: 'auto', position: 'relative', zIndex: 2 }}>
-        <div style={{ maxWidth: 720, margin: '0 auto', padding: '20px 52px 120px' }}>
+        <div style={{ maxWidth: 720, margin: '0 auto', padding: '20px 52px 24px' }}>
           {/* top bar */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 22 }}>
             <Button variant="ghost" size="sm" icon="corner-up-left" onClick={onBack}>星图</Button>
@@ -1854,6 +1865,11 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
             {dragBlk && dropIdx === blocks.length && <div style={{ height: 2, background: 'var(--gold)', borderRadius: 1, boxShadow: 'var(--glow-gold-soft)' }} />}
           </div>
 
+          {/* 尾部点击区：点正文下方的空白 = 新增/聚焦一行（文本光标提示这里可写） */}
+          {blocks.length > 0 && (
+            <div aria-hidden="true" onClick={appendTailBlock}
+              style={{ height: 96, margin: '0 -8px', cursor: 'text' }} />
+          )}
         </div>
       </div>
 
