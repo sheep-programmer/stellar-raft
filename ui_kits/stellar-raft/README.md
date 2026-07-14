@@ -73,6 +73,14 @@ lit/ember 布尔与 litRatio，不泄露时间戳。
 （`node server/server.js`，node:sqlite）。无后端（file:// 直接打开）时 localStorage 就是
 唯一存储；启动时两份快照按 `savedAt / updated_at` 新者优先，本地较新则回推服务器。
 
+## 账号（星门）
+
+匿名开箱即用；注册把**当前这片星空收进账号**（`users` 行原地升级，星系/分享/好友/来信零迁移）。
+用户名或邮箱皆可登录（`/api/auth/*`，scrypt 哈希 + `sessions` 多设备会话）；未登录首启出全屏
+登录页（`LoginView.jsx` → 「暂不登录，先逛逛」可跳过并记住）。设置 · 账户页支持改密码与真实
+退出登录（登出回到全新匿名身份）；侧栏用户 chip 未登录态显示「星际旅客 · 点击登录」。
+`SRNet.adoptSession/logoutFlow` 切换身份时清 `sr.galaxy.v1` 本地镜像，防旧账号快照覆盖新账号数据。
+
 ## Files
 - `index.html` — entry; loads React + Babel + Lucide + the DS bundle + `data.js` + screens.
 - `data.js` — constellations / stars / connections / notes (plain global `window.SR_DATA`) + 记忆衰减模型（FSRS-lite）、点亮状态机（lit/ember）与全部写操作入口。
