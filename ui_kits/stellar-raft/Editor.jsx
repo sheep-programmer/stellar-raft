@@ -563,17 +563,22 @@ function MiniStarMap({ currentId, onPick }) {
   const [center, setCenter] = React.useState(home);
   React.useEffect(() => { setCenter(cs ? { x: cs.px, y: cs.py } : home); }, [currentId]); // 换笔记回中
   const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
-  const drag = React.useRef(null);          // {sx,sy,cx,cy}
+  const drag = React.useRef(null);          // {sx,sy,cx,cy,el,pid,captured}
   const movedRef = React.useRef(0);         // 本次手势位移，>5px 则吞掉星点 click
   const onPointerDown = (e) => {
-    drag.current = { sx: e.clientX, sy: e.clientY, cx: center.x, cy: center.y };
+    drag.current = { sx: e.clientX, sy: e.clientY, cx: center.x, cy: center.y, el: e.currentTarget, pid: e.pointerId, captured: false };
     movedRef.current = 0;
-    e.currentTarget.setPointerCapture && e.currentTarget.setPointerCapture(e.pointerId);
+    // 注意：不能在这里就 setPointerCapture——捕获会把 pointerup/click 重定向到容器，
+    // 星点按钮的 click 就永远收不到了。捕获推迟到确认拖拽意图（位移 >5px）之后。
   };
   const onPointerMove = (e) => {
     if (!drag.current) return;
     const dx = e.clientX - drag.current.sx, dy = e.clientY - drag.current.sy;
     movedRef.current = Math.max(movedRef.current, Math.hypot(dx, dy));
+    if (!drag.current.captured && movedRef.current > 5) {
+      drag.current.captured = true;
+      drag.current.el.setPointerCapture && drag.current.el.setPointerCapture(drag.current.pid);
+    }
     setCenter({
       x: clamp(drag.current.cx - dx / k, -120, MINI_WORLD.w + 120),
       y: clamp(drag.current.cy - dy / k, -120, MINI_WORLD.h + 120),
