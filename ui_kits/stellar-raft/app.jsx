@@ -194,7 +194,8 @@ function App() {
       {cmd && <CommandPalette onClose={() => setCmd(false)} onOpenStar={openEditor} onOpenView={openView} onFocusCon={focusCon} />}
       {settingsOpen && <Settings onClose={() => setSettingsOpen(false)} theme={theme} onToggleTheme={toggleTheme} onReplayGuide={replayGuide} />}
       {aiConfigOpen && <AIConfig onClose={() => setAiConfigOpen(false)} />}
-      {onboard && <Onboarding onClose={finishOnboard} onSpotlight={startTour} />}
+      {/* 登录页与新手引导的焦点圈禁互斥：登录优先，登录页出现时引导整体让位（卸载），避免 Tab 焦点陷阱与 Esc 冲突 */}
+      {onboard && !login && <Onboarding onClose={finishOnboard} onSpotlight={startTour} />}
       {tour && <OnboardingTour onClose={() => setTour(false)} />}
       {login && <LoginView onClose={closeLogin} />}
     </div>
