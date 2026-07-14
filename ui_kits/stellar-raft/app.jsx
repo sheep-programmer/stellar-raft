@@ -41,6 +41,7 @@ function App() {
       let skipped = false; try { skipped = localStorage.getItem('sr.login.skipped') === '1'; } catch (e) {}
       if (A && A.registered === false && !skipped) setLogin(true);
     };
+    h();   // 补查：本地后端很快，sr-hydrated 可能早于 React 挂载已经发过
     window.addEventListener('sr-hydrated', h);
     return () => window.removeEventListener('sr-hydrated', h);
   }, []);
