@@ -143,11 +143,33 @@ window.SRNet = (function () {
       soften(api('/api/inbox/ack', { method: 'POST', body: { id, action } })),
   };
 
+  // ——— 账号：登录/注册/改密/登出（薄封装 api()）；会话切换与登出流负责清 KEY + 旧镜像 ———
+  const auth = {
+    register: (p) => api('/api/auth/register', { method: 'POST', body: p }),
+    login: (p) => api('/api/auth/login', { method: 'POST', body: p }),
+    logout: () => api('/api/auth/logout', { method: 'POST', body: {} }),
+    changePassword: (p) => api('/api/auth/password', { method: 'POST', body: p }),
+  };
+  // 采用一个新会话（登录/注册成功后）：换 token + 清旧镜像，防旧账号本地数据覆盖新账号的服务器数据
+  const adoptSession = (t) => {
+    token = t; localStorage.setItem(KEY, t);
+    try { localStorage.removeItem(LS_GALAXY); } catch (e) {}   // 关键：清旧镜像，防覆盖新账号数据
+  };
+  // 登出流：删服务端 session → 换回全新匿名身份 → 清旧镜像 → 整页刷新重水合
+  const logoutFlow = async () => {
+    try { await auth.logout(); } catch (e) {}
+    const fresh = 'u-' + (crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).slice(2) + Date.now().toString(36));
+    token = fresh; localStorage.setItem(KEY, fresh);
+    try { localStorage.removeItem(LS_GALAXY); } catch (e) {}
+    location.reload();
+  };
+
   return {
     token, api, schedule, saveNow, snapshot, saveLocal, loadLocal, inbox,
     isOnline: () => online,
     getStatus: () => ({ status, online, lastSync }),
     setReady: () => { ready = true; }, isReady: () => ready,
     setVersion: (v) => { if (v != null) version = v; }, getVersion: () => version,
+    auth, adoptSession, logoutFlow,
   };
 })();

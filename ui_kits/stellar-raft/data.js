@@ -771,7 +771,14 @@ window.SR_DATA = (function () {
     const local = window.SRNet.loadLocal();                       // { savedAt, data } | null
     const localOk = local && looksLikeGalaxy(local.data);
     window.SRNet.api('/api/hello', { method: 'POST', body: { name: account.name, avatar: account.avatar } })
-      .then(r => { if (r.user && r.user.name) { account.name = r.user.name; account.avatar = r.user.avatar || account.avatar; } return window.SRNet.api('/api/galaxy'); })
+      .then(r => {
+        if (r.user && r.user.name) { account.name = r.user.name; account.avatar = r.user.avatar || account.avatar; }
+        if (r.account) Object.assign(account, {
+          registered: r.account.registered, username: r.account.username,
+          email: r.account.email, registeredAt: r.account.registeredAt,
+        });
+        return window.SRNet.api('/api/galaxy');
+      })
       .then(r => {
         const d = r && r.data;
         if (r && r.version != null) window.SRNet.setVersion(r.version);   // 乐观锁基准版本
