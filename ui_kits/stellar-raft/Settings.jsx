@@ -1,6 +1,6 @@
 /* Settings — 用户设置覆盖层。居中玻璃 modal，左侧分区导航 + 右侧内容。
    由左下角头像点击打开。Esc / 点遮罩关闭，保存有 toast 反馈，无浏览器原生弹窗。
-   props: { onClose, theme, onToggleTheme, onReplayGuide } */
+   props: { onClose, theme, onToggleTheme, onReplayGuide, onOpenLogin } */
 const { Button, GlassPanel, Icon, IconButton, Input } = window.StellarRaftDesignSystem_2866af;
 
 /* 头像预设：渐变色块，semantic 内仍走冷蓝/暖金的克制色域 */
@@ -96,11 +96,18 @@ function SRSegment({ options, value, onChange }) {
   );
 }
 
-function Settings({ onClose, theme, onToggleTheme, onReplayGuide }) {
+function Settings({ onClose, theme, onToggleTheme, onReplayGuide, onOpenLogin }) {
   const dawn = theme === 'dawn';
   const [tab, setTab] = React.useState('profile');
   const [toast, setToast] = React.useState(null);
   const toastTimer = React.useRef(null);
+
+  // 账户 tab：改密行内展开 + 忙碌 / 报错态
+  const [pwOpen, setPwOpen] = React.useState(false);
+  const [oldPw, setOldPw] = React.useState('');
+  const [newPw, setNewPw] = React.useState('');
+  const [pwBusy, setPwBusy] = React.useState(false);
+  const [pwErr, setPwErr] = React.useState('');
 
   // 已保存的设置（本机浏览器）；昵称等身份信息以 D.account 为单一来源
   const D = window.SR_DATA;
@@ -137,6 +144,21 @@ function Settings({ onClose, theme, onToggleTheme, onReplayGuide }) {
     setToast(msg);
     if (toastTimer.current) clearTimeout(toastTimer.current);
     toastTimer.current = setTimeout(() => setToast(null), 2400);
+  };
+
+  const submitPwChange = async () => {
+    if (pwBusy) return;
+    setPwErr('');
+    setPwBusy(true);
+    try {
+      await window.SRNet.auth.changePassword({ old: oldPw, new: newPw });
+      setPwOpen(false); setOldPw(''); setNewPw('');
+      flashToast('密码已更新');
+    } catch (err) {
+      setPwErr((err && err.message) || '出了点问题，请再试一次');
+    } finally {
+      setPwBusy(false);
+    }
   };
 
   const avatarGrad = (SR_AVATARS.find(a => a.id === avatar) || SR_AVATARS[0]).grad;
@@ -331,9 +353,39 @@ function Settings({ onClose, theme, onToggleTheme, onReplayGuide }) {
               {tab === 'account' && (
                 <div>
                   <SRSectionTitle>账户</SRSectionTitle>
-                  <SRRow title="邮箱"><span style={{ fontSize: 13, color: 'var(--text-2)', fontFamily: 'var(--font-mono)' }}>{D.account.email}</span></SRRow>
-                  <SRRow title="方案"><span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12.5, color: 'var(--gold)', border: '1px solid rgba(255,217,138,0.35)', borderRadius: 'var(--r-pill)', padding: '3px 11px', background: 'rgba(255,217,138,0.1)' }}><Icon name="sparkles" size={13} color="var(--gold)" />{D.account.plan}</span></SRRow>
-                  <SRRow title="加入于"><span style={{ fontSize: 13, color: 'var(--text-2)', fontFamily: 'var(--font-mono)' }}>{D.account.joined}</span></SRRow>
+
+                  {!D.account.registered && (
+                    <div style={{ padding: '14px 0 4px' }}>
+                      <div style={{ fontSize: 13, color: 'var(--text-2)', lineHeight: 1.85, marginBottom: 14 }}>
+                        登录后，这片星空会跟着账号走——换台设备也能回来。
+                      </div>
+                      <Button variant="primary" glow icon="log-in" onClick={() => { if (onOpenLogin) onOpenLogin(); }}>登录 / 注册</Button>
+                    </div>
+                  )}
+
+                  {D.account.registered && (
+                    <div>
+                      <SRRow title="用户名"><span style={{ fontSize: 13, color: 'var(--text-2)', fontFamily: 'var(--font-mono)' }}>{D.account.username}</span></SRRow>
+                      <SRRow title="邮箱"><span style={{ fontSize: 13, color: 'var(--text-2)', fontFamily: 'var(--font-mono)' }}>{D.account.email || '未绑定'}</span></SRRow>
+                      <SRRow title="注册于"><span style={{ fontSize: 13, color: 'var(--text-2)', fontFamily: 'var(--font-mono)' }}>{(D.account.registeredAt || '').slice(0, 10)}</span></SRRow>
+
+                      <SRRow title="修改密码" hint={pwOpen ? undefined : '定期更换密码，让账号更安全。'} align={pwOpen ? 'flex-start' : 'center'}>
+                        {!pwOpen && <Button size="sm" variant="ghost" icon="key-round" onClick={() => { setPwErr(''); setPwOpen(true); }}>修改密码</Button>}
+                      </SRRow>
+                      {pwOpen && (
+                        <div style={{ padding: '2px 0 14px', display: 'flex', flexDirection: 'column', gap: 9, borderBottom: '1px solid var(--line)' }}>
+                          <Input type="password" icon="lock" placeholder="旧密码" value={oldPw} onChange={(e) => setOldPw(e.target.value)} />
+                          <Input type="password" icon="lock" placeholder="新密码" value={newPw} onChange={(e) => setNewPw(e.target.value)} />
+                          {pwErr && <div style={{ fontSize: 12, color: 'var(--danger)', lineHeight: 1.6 }}>{pwErr}</div>}
+                          <div style={{ display: 'flex', gap: 8, marginTop: 2 }}>
+                            <Button size="sm" variant="primary" glow disabled={pwBusy} icon={pwBusy ? undefined : 'check'} onClick={submitPwChange}>{pwBusy ? '确认中…' : '确认'}</Button>
+                            <Button size="sm" variant="ghost" disabled={pwBusy} onClick={() => { setPwOpen(false); setOldPw(''); setNewPw(''); setPwErr(''); }}>取消</Button>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
                   <SRRow title="我的星空"><span style={{ fontSize: 13, color: 'var(--text-2)', fontFamily: 'var(--font-mono)' }}>共 {D.stars.length} 颗 · 正发光 {D.stars.filter(s => s.strength >= 0.7).length} · 正变暗 {D.stars.filter(s => s.strength < 0.4).length} · 连接 {D.connections.length}</span></SRRow>
                   <SRRow title="连续点亮"><span style={{ fontSize: 13, color: 'var(--text-2)', fontFamily: 'var(--font-mono)' }}>{D.account.streak} 天</span></SRRow>
                   <div style={{ display: 'flex', gap: 10, marginTop: 18 }}>
@@ -348,7 +400,13 @@ function Settings({ onClose, theme, onToggleTheme, onReplayGuide }) {
                       setTimeout(() => URL.revokeObjectURL(a.href), 4000);
                       flashToast('已导出你的星图数据（JSON 文件）');
                     }}>导出数据</Button>
-                    <Button size="sm" variant="ghost" icon="log-out" onClick={() => setConfirm({ message: '退出登录后，本设备上的星空将回到未登录状态。确定退出吗？', confirmLabel: '退出登录', onYes: () => flashToast('已退出当前设备') })}>退出登录</Button>
+                    {D.account.registered && (
+                      <Button size="sm" variant="ghost" icon="log-out" onClick={() => setConfirm({
+                        message: '退出后，这台设备回到匿名状态；你的星空安全地留在账号里。',
+                        confirmLabel: '退出登录',
+                        onYes: () => { window.SRNet.logoutFlow(); },
+                      })}>退出登录</Button>
+                    )}
                   </div>
                 </div>
               )}

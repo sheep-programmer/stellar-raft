@@ -59,11 +59,16 @@ function NavRow({ icon, label, active, badge, collapsed, onClick, dawn, tip, dat
   );
 }
 
-/* footer user chip — opens personal settings on click */
-function UserChip({ collapsed, dawn, onClick }) {
+/* footer user chip — opens personal settings on click (logged in), or the login page (anonymous) */
+function UserChip({ collapsed, dawn, registered, onClick, onOpenLogin }) {
   const [hover, setHover] = React.useState(false);
+  const account = window.SR_DATA.account;
+  const primary = registered ? (account.username || account.name) : '星际旅客';
+  const secondary = registered ? `连续点亮 ${account.streak} 天` : '未登录 · 点击登录';
+  const avatarLetter = registered ? account.avatar : '旅';
   return (
-    <button type="button" className="sr-focus-ring" onClick={onClick} title="个人设置" data-tour="settings"
+    <button type="button" className="sr-focus-ring" onClick={registered ? onClick : onOpenLogin}
+      title={registered ? '个人设置' : '登录 / 注册'} data-tour="settings"
       onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
       style={{
         display: 'flex', alignItems: 'center', gap: 10, width: '100%',
@@ -73,20 +78,20 @@ function UserChip({ collapsed, dawn, onClick }) {
         background: hover ? 'rgba(159,198,255,0.05)' : 'transparent',
         transition: 'background var(--dur-fast), border-color var(--dur-fast)',
       }}>
-      <span style={{ width: 28, height: 28, flex: 'none', borderRadius: '50%', background: dawn ? 'linear-gradient(140deg, #8ea2cc, #b6c3dc)' : 'linear-gradient(140deg, #2a3566, #56689c)', border: '1px solid var(--glass-border-strong)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, color: dawn ? '#1a2238' : 'var(--text-1)' }}>{window.SR_DATA.account.avatar}</span>
+      <span style={{ width: 28, height: 28, flex: 'none', borderRadius: '50%', background: dawn ? 'linear-gradient(140deg, #8ea2cc, #b6c3dc)' : 'linear-gradient(140deg, #2a3566, #56689c)', border: '1px solid var(--glass-border-strong)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, color: dawn ? '#1a2238' : 'var(--text-1)' }}>{avatarLetter}</span>
       {!collapsed && (
         <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.2, minWidth: 0, textAlign: 'left' }}>
-          <span style={{ fontSize: 13, color: 'var(--text-1)' }}>{window.SR_DATA.account.name}</span>
-          <span style={{ fontSize: 11, color: 'var(--text-3)' }}>连续点亮 {window.SR_DATA.account.streak} 天</span>
+          <span style={{ fontSize: 13, color: 'var(--text-1)' }}>{primary}</span>
+          <span style={{ fontSize: 11, color: 'var(--text-3)' }}>{secondary}</span>
         </div>
       )}
       {!collapsed && <div style={{ flex: 1 }} />}
-      {!collapsed && <Icon name="settings" size={15} color={hover ? 'var(--text-1)' : 'var(--text-3)'} />}
+      {!collapsed && <Icon name={registered ? 'settings' : 'log-in'} size={15} color={hover ? 'var(--text-1)' : 'var(--text-3)'} />}
     </button>
   );
 }
 
-function Sidebar({ collapsed, onToggle, view, onView, focus, onFocus, theme, onToggleTheme, onSearch, onCheckup, onAIConfig, onOpenSettings, onReview }) {
+function Sidebar({ collapsed, onToggle, view, onView, focus, onFocus, theme, onToggleTheme, onSearch, onCheckup, onAIConfig, onOpenSettings, onOpenLogin, onReview }) {
   const D = window.SR_DATA;
   const dawn = theme === 'dawn';
   // 好友数 / 到期星数 / 黑洞·收件箱计数都随写操作变化：
@@ -187,7 +192,7 @@ function Sidebar({ collapsed, onToggle, view, onView, focus, onFocus, theme, onT
         <NavRow icon={dawn ? 'moon-star' : 'sunrise'} label={dawn ? '切回深空' : '黎明模式'} collapsed={collapsed} dawn={dawn} onClick={onToggleTheme} dataTour="theme" />
         <NavRow icon="activity" label="知识体检报告" badge={todoN || null} collapsed={collapsed} dawn={dawn} active={view === 'checkup'} onClick={onCheckup} dataTour="checkup" />
         <NavRow icon="bot" label="AI 配置" collapsed={collapsed} dawn={dawn} onClick={onAIConfig} />
-        <UserChip collapsed={collapsed} dawn={dawn} onClick={onOpenSettings} />
+        <UserChip collapsed={collapsed} dawn={dawn} registered={!!D.account.registered} onClick={onOpenSettings} onOpenLogin={onOpenLogin} />
       </div>
     </aside>
   );

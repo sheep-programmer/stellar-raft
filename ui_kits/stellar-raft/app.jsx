@@ -160,7 +160,8 @@ function App() {
         onCheckup={() => openView('checkup')}
         onAIConfig={() => setAiConfigOpen(true)}
         onReview={openReview}
-        onOpenSettings={() => setSettingsOpen(true)} />
+        onOpenSettings={() => setSettingsOpen(true)}
+        onOpenLogin={openLogin} />
 
       {/* main stage — key 随视图变化：换视图重挂载一次，用 srTransition.enter 做
           元素级入场（淡入 + 上浮，240ms var(--ease-flight)，reduced-motion 直达）。
@@ -192,7 +193,7 @@ function App() {
       {reviewOpen && <ReviewSession onClose={closeReview} />}
 
       {cmd && <CommandPalette onClose={() => setCmd(false)} onOpenStar={openEditor} onOpenView={openView} onFocusCon={focusCon} />}
-      {settingsOpen && <Settings onClose={() => setSettingsOpen(false)} theme={theme} onToggleTheme={toggleTheme} onReplayGuide={replayGuide} />}
+      {settingsOpen && <Settings onClose={() => setSettingsOpen(false)} theme={theme} onToggleTheme={toggleTheme} onReplayGuide={replayGuide} onOpenLogin={() => { setSettingsOpen(false); openLogin(); }} />}
       {aiConfigOpen && <AIConfig onClose={() => setAiConfigOpen(false)} />}
       {/* 登录页与新手引导的焦点圈禁互斥：登录优先，登录页出现时引导整体让位（卸载），避免 Tab 焦点陷阱与 Esc 冲突 */}
       {onboard && !login && <Onboarding onClose={finishOnboard} onSpotlight={startTour} />}
