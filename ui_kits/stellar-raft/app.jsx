@@ -1,7 +1,7 @@
 /* App — orchestrates the Stellar Raft kit as one interactive click-through.
    star map ⇄ list ⇄ editor ⇄ inbox ⇄ timeline, with Feynman drawer, ignite,
    aerial heat map, ⌘K command palette and a 知识体检 report — all via the sidebar. */
-const { Sidebar, StarMap, AerialView, FeynmanDrawer, ListView, Editor, Inbox, Timeline, CommandPalette, Checkup, Galaxy3D, Settings, AIConfig, BlackHole, VisitView, ReviewSession, Onboarding, OnboardingTour } = window.SRKit;
+const { Sidebar, StarMap, AerialView, FeynmanDrawer, ListView, Editor, Inbox, Timeline, CommandPalette, Checkup, Galaxy3D, Settings, AIConfig, BlackHole, VisitView, ReviewSession, Onboarding, OnboardingTour, LoginView } = window.SRKit;
 const { GlassPanel, Icon, IconButton, Button, MemoryBar } = window.StellarRaftDesignSystem_2866af;
 
 function App() {
@@ -20,11 +20,27 @@ function App() {
   const [aiConfigOpen, setAiConfigOpen] = React.useState(false); // AI 配置 modal
   const [onboard, setOnboard] = React.useState(false); // 新手引导册
   const [tour, setTour] = React.useState(false);       // 聚光实地导览
+  const [login, setLogin] = React.useState(false);     // 全屏登录/注册页
   const [dataRev, setDataRev] = React.useState(0); // 数据库水合后整体重挂载
   const nonce = React.useRef(0);
 
+  const openLogin = () => setLogin(true);
+  const closeLogin = () => { try { localStorage.setItem('sr.login.skipped', '1'); } catch (e) {} setLogin(false); };
+
   React.useEffect(() => {
     const h = () => { setDataRev(r => r + 1); setSelected(null); setEditing(null); };
+    window.addEventListener('sr-hydrated', h);
+    return () => window.removeEventListener('sr-hydrated', h);
+  }, []);
+
+  // 首启：水合完成后，服务器确认「未注册」且用户没跳过 → 弹全屏登录页
+  // （account.registered 仅在服务器 hello 成功后才为 false；后端未运行时是 undefined，不弹）
+  React.useEffect(() => {
+    const h = () => {
+      const A = window.SR_DATA && window.SR_DATA.account;
+      let skipped = false; try { skipped = localStorage.getItem('sr.login.skipped') === '1'; } catch (e) {}
+      if (A && A.registered === false && !skipped) setLogin(true);
+    };
     window.addEventListener('sr-hydrated', h);
     return () => window.removeEventListener('sr-hydrated', h);
   }, []);
@@ -59,13 +75,13 @@ function App() {
   React.useEffect(() => {
     const h = (e) => {
       if ((e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K')) {
-        if (reviewOpen || onboard || tour) return;
+        if (reviewOpen || onboard || tour || login) return;
         e.preventDefault(); setCmd(c => !c);
       }
     };
     window.addEventListener('keydown', h);
     return () => window.removeEventListener('keydown', h);
-  }, [reviewOpen, onboard, tour]);
+  }, [reviewOpen, onboard, tour, login]);
 
   // Esc 统一词汇：同一动作（离开当前浮层）在所有屏幕说同一句话。
   // 命令面板 / 设置 / AI 配置 / 复习会话自带 Esc，这里让位；
@@ -75,13 +91,13 @@ function App() {
   React.useEffect(() => {
     const h = (e) => {
       if (e.key !== 'Escape' || e.defaultPrevented) return;
-      if (cmd || settingsOpen || aiConfigOpen || reviewOpen || onboard || tour) return;
+      if (cmd || settingsOpen || aiConfigOpen || reviewOpen || onboard || tour || login) return;
       if (feynman) { e.preventDefault(); setFeynman(null); return; }
       if (view === 'checkup') { e.preventDefault(); freshen(); setView('map'); setAerial(false); }
     };
     window.addEventListener('keydown', h, true);
     return () => window.removeEventListener('keydown', h, true);
-  }, [cmd, settingsOpen, aiConfigOpen, reviewOpen, onboard, tour, feynman, view]);
+  }, [cmd, settingsOpen, aiConfigOpen, reviewOpen, onboard, tour, login, feynman, view]);
 
   // 切换视图前按真实时间重算全部星的 R（衰减模型），新挂载的视图读到的是当下的亮度
   const freshen = () => { const D = window.SR_DATA; if (D && D.refreshMemory) D.refreshMemory(); };
@@ -180,6 +196,7 @@ function App() {
       {aiConfigOpen && <AIConfig onClose={() => setAiConfigOpen(false)} />}
       {onboard && <Onboarding onClose={finishOnboard} onSpotlight={startTour} />}
       {tour && <OnboardingTour onClose={() => setTour(false)} />}
+      {login && <LoginView onClose={closeLogin} />}
     </div>
   );
 }
