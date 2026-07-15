@@ -3,6 +3,7 @@
    首次打开自动弹出（app.jsx 判 localStorage['sr.onboarded']），设置里可回看。
    props: Onboarding { onClose, onSpotlight } · OnboardingTour { onClose } */
 const { Button, GlassPanel, Icon } = window.StellarRaftDesignSystem_2866af;
+const SRK = window.SRKeys;  // 快捷键提示按系统说话（⌘K / Ctrl+K）
 
 // 11 页内容：欢迎 · 星图 · 记忆 · 点亮 · 复习 · 收件箱 · 编辑器 · 视角 · 黑洞 · 到访 · 快捷键。
 const SR_GUIDE_PAGES = [
@@ -17,9 +18,9 @@ const SR_GUIDE_PAGES = [
   { id: 'review',   kicker: 'REVIEW',       icon: 'repeat',    warm: false,
     title: '让星不熄灭',       body: '复习会话按到期先后取卡：忘了 · 模糊 · 记得。间隔重复让亮起来的星，不再悄悄熄灭。' },
   { id: 'inbox',    kicker: 'INBOX',        icon: 'inbox',     warm: false,
-    title: '随手收，慢慢理',   body: '灵光一现先 ⌘Enter 收进收件箱，之后按建议一键归入星域。好友的星际来信也落在这里。' },
+    title: '随手收，慢慢理',   body: '灵光一现先 ' + SRK.combo('Enter') + ' 收进收件箱，之后按建议一键归入星域。好友的星际来信也落在这里。' },
   { id: 'editor',   kicker: 'EDITOR',       icon: 'pen-line',  warm: false,
-    title: '专业的编辑台',     body: '块编辑、markdown 快捷输入、⌘F 查找替换、导入导出——像主流笔记软件一样顺手，又始终安静好看。' },
+    title: '专业的编辑台',     body: '块编辑、markdown 快捷输入、' + SRK.combo('F') + ' 查找替换、导入导出——像主流笔记软件一样顺手，又始终安静好看。' },
   { id: 'views',    kicker: 'AERIAL · 3D',  icon: 'satellite', warm: false,
     title: '换一个视角',       body: '亮度鸟瞰把整片星空摊成一张热图，一眼看清哪里正亮、哪里正暗；三维星系则让你在星海里绕行。' },
   { id: 'trash',    kicker: 'BLACK HOLE',   icon: 'aperture',  warm: false,
@@ -27,7 +28,7 @@ const SR_GUIDE_PAGES = [
   { id: 'visit',    kicker: 'VISIT',        icon: 'telescope', warm: true,
     title: '星与星的相逢',     body: '用分享码邀请好友造访你的星系，也去看看别人的深空。遇到心动的星，把它收进自己的星域。' },
   { id: 'shortcuts', kicker: 'SHORTCUTS',   icon: 'keyboard',  warm: true,
-    title: '就这些，去点亮吧', body: '⌘K 跳转任意星 · ⌘F 笔记内查找 · / 唤起块菜单 · Esc 收起浮层。想再看这份手册，去设置里找「上手引导」。' },
+    title: '就这些，去点亮吧', body: SRK.combo('K') + ' 跳转任意星 · ' + SRK.combo('F') + ' 笔记内查找 · / 唤起块菜单 · Esc 收起浮层。想再看这份手册，去设置里找「上手引导」。' },
 ];
 
 /* ============================================================
@@ -374,7 +375,7 @@ function GuideDemo({ id }) {
           <span style={{ height: 6, borderRadius: 3, background: 'rgba(159,198,255,.6)', animation: `ib-type 5.5s steps(14) infinite` }} />
         </div>
         <span className="sr-tag" style={{ left: 232, top: 34, padding: '7px 10px', fontSize: 10.5, borderRadius: 8,
-          border: '1px solid rgba(159,198,255,.25)', ...kf('ib-key', '5.5s') }}>⌘ Enter</span>
+          border: '1px solid rgba(159,198,255,.25)', ...kf('ib-key', '5.5s') }}>{SRK.mac ? '⌘ Enter' : 'Ctrl+Enter'}</span>
         <span style={{ position: 'absolute', left: 70, top: 36, width: 96, height: 20, borderRadius: 7,
           background: 'rgba(159,198,255,.16)', border: '1px solid rgba(159,198,255,.4)', willChange: 'transform', ...kf('ib-chip', '5.5s') }} />
         <div style={{ position: 'absolute', left: 125, top: 106, width: 110, height: 30, borderRadius: 9,
@@ -410,7 +411,7 @@ function GuideDemo({ id }) {
             <span style={{ width: 2, height: 14, background: '#ffd98a', ...kf('ed-blink', '1s'), animationTimingFunction: 'step-end' }} />
           </div>
         </div>
-        <span className="sr-tag" style={{ left: 20, top: 132, background: 'transparent', color: 'var(--text-3)', padding: 0 }}># 标题 · [] 待办 · ⌘F 查找</span>
+        <span className="sr-tag" style={{ left: 20, top: 132, background: 'transparent', color: 'var(--text-3)', padding: 0 }}>{'# 标题 · [] 待办 · ' + SRK.combo('F') + ' 查找'}</span>
       </div>
     ),
     /* 视角：分段开关 星图 ⇄ 鸟瞰。热图格子逐格铺开（stagger），再切回 */
@@ -491,7 +492,7 @@ function GuideDemo({ id }) {
     shortcuts: (
       <>
         <Field />
-        {[['⌘K', 46, 0], ['⌘F', 124, 0.95], ['/', 202, 1.9], ['Esc', 258, 2.85]].map((k, i) => (
+        {[[SRK.combo('K'), 46, 0], [SRK.combo('F'), 124, 0.95], ['/', 202, 1.9], ['Esc', 258, 2.85]].map((k, i) => (
           <span key={i} style={{ position: 'absolute', left: k[1], top: 62, minWidth: 40, height: 32, padding: '0 11px',
             borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center',
             fontFamily: 'var(--font-mono)', fontSize: 12, border: '1px solid rgba(159,198,255,.22)',
@@ -578,10 +579,10 @@ function Onboarding({ onClose, onSpotlight }) {
 
 // 聚光步骤——逐处高亮真实界面上的功能位置；找不到的目标优雅跳过。
 const SR_TOUR_STEPS = [
-  { target: '[data-tour="search"]',    title: '随时跳转',   body: '⌘K 或点这里，跳到任意一颗星、任意一个视图。' },
+  { target: '[data-tour="search"]',    title: '随时跳转',   body: SRK.combo('K') + ' 或点这里，跳到任意一颗星、任意一个视图。' },
   { target: '[data-tour="nav-views"]', title: '三种看法',   body: '星图是创作的画布，列表管理账目，时间轴回望来路。' },
   { target: '[data-tour="review"]',    title: '到期复习',   body: '角标是今天到期的星数。点它走一轮「忘了 · 模糊 · 记得」。' },
-  { target: '[data-tour="inbox"]',     title: '收件箱',     body: '⌘Enter 的速记与好友来信都落在这里，攒着慢慢归入星域。' },
+  { target: '[data-tour="inbox"]',     title: '收件箱',     body: SRK.combo('Enter') + ' 的速记与好友来信都落在这里，攒着慢慢归入星域。' },
   { target: '[data-tour="trash"]',     title: '黑洞',       body: '删掉的星在事件视界打转。随时捞回，位置与连接都还在。' },
   { target: '[data-tour="visit"]',     title: '星际漫游',   body: '凭分享码造访好友的星系，心动的星可以收进自己的星域。' },
   { target: '[data-tour="theme"]',     title: '黎明与深空', body: '换一种天色看你的星空，语义不变：金色仍是奖励，星蓝仍是结构。' },

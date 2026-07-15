@@ -311,7 +311,7 @@ function Inbox({ onFocusCon, onOpen }) {
                 color: 'var(--text-1)', fontSize: 14, lineHeight: 1.7, fontFamily: 'var(--font-sans)', padding: '3px 0' }} />
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 8, paddingTop: 10, borderTop: '1px solid var(--line)' }}>
-            <span style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-3)' }}>⌘/Ctrl + Enter 捕捉</span>
+            <span style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-3)' }}>{window.SRKeys.combo('Enter') + ' 捕捉'}</span>
             <div style={{ flex: 1 }} />
             <Button size="sm" icon="plus" glow disabled={!draft.trim()} onClick={capture}>捕捉</Button>
           </div>

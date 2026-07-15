@@ -31,9 +31,10 @@ test('导览册恰好 11 页，每页字段完整', () => {
 
   const ids = pages.match(/\bid:\s*'[a-z]+'/g) || [];
   assert.equal(ids.length, 11, '期望 11 页，实得 ' + ids.length);
-  // 每页应有 title 与 body
-  const titles = pages.match(/\btitle:\s*'/g) || [];
-  const bodies = pages.match(/\bbody:\s*'/g) || [];
+  // 每页应有 title 与 body（值可以是字符串字面量，也可以是 SRKeys 拼接表达式——
+  // 快捷键说法按系统变换后，部分 body 以 SRK.combo(...) 开头，不再强求紧跟引号）
+  const titles = pages.match(/\btitle:\s*/g) || [];
+  const bodies = pages.match(/\bbody:\s*/g) || [];
   assert.equal(titles.length, 11);
   assert.equal(bodies.length, 11);
 });

@@ -1350,7 +1350,7 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
     if (cid === star.con) { flash('这颗星已经在「' + D.conName(cid) + '」里了'); return; }
     pushHistory();
     star.con = cid; D.syncCounts(); D.touchNote(star.id); setCon(cid);
-    flash('已移动到「' + D.conName(cid) + '」· ⌘Z 撤销');
+    flash('已移动到「' + D.conName(cid) + '」· ' + window.SRKeys.combo('Z') + ' 撤销');
   };
 
   // actions from the top-right 「更多」 dropdown (page-level, not block-level)
@@ -1380,7 +1380,7 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
 
   const act = (id) => (action, arg) => {
     // 有了应用级撤销栈，删除块不再需要模态确认——直接删除并给「⌘Z 撤销」toast
-    if (action === 'delete') { withSynced(s => s.filter(b => b.id !== id)); flash('已删除这个块 · ⌘Z 撤销'); }
+    if (action === 'delete') { withSynced(s => s.filter(b => b.id !== id)); flash('已删除这个块 · ' + window.SRKeys.combo('Z') + ' 撤销'); }
     else if (action === 'duplicate') withSynced(s => { const i = s.findIndex(b => b.id === id); return [...s.slice(0, i + 1), { ...s[i], id: uid() }, ...s.slice(i + 1)]; });
     else if (action === 'turn') withSynced(s => s.map(b => b.id === id ? { ...b, type: arg, ...typeExtras(arg, b) } : b));
     else if (action === 'color') withSynced(s => s.map(b => b.id === id ? (arg.kind === 'text' ? { ...b, color: arg.id } : { ...b, bg: arg.id }) : b));
@@ -1533,7 +1533,7 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
         const id = pendingAtomicDel;
         withSynced(s => s.filter(x => x.id !== id));
         setPendingAtomicDel(null);
-        flash('已删除 · ⌘Z 撤销');
+        flash('已删除 · ' + window.SRKeys.combo('Z') + ' 撤销');
       } else if (e.key === 'Escape') { setPendingAtomicDel(null); }
       else if (e.key.length === 1 || e.key === 'Enter') { setPendingAtomicDel(null); }
     };
@@ -2026,8 +2026,8 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
         <span title={'正文与代码分别折算' + (codeLines ? '（含 ' + codeLines + ' 行代码）' : '')} style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}><Icon name="clock" size={13} color="currentColor" />约 {readMin} 分钟阅读</span>
         <div style={{ flex: 1 }} />
         <SaveStatus />
-        <span className="sr-ed-status-opt" title="⌘F 在这篇笔记内查找 / 替换" style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}><Icon name="search" size={12} color="currentColor" />⌘F 查找</span>
-        <span title="⌘K 打开命令面板；在编辑器内选中文字时 ⌘K 为「添加链接」" style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}><Icon name="command" size={13} color="currentColor" />⌘K 命令 · 选中文字时为链接</span>
+        <span className="sr-ed-status-opt" title={window.SRKeys.combo('F') + ' 在这篇笔记内查找 / 替换'} style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}><Icon name="search" size={12} color="currentColor" />{window.SRKeys.combo('F')} 查找</span>
+        <span title={window.SRKeys.combo('K') + ' 打开命令面板；在编辑器内选中文字时 ' + window.SRKeys.combo('K') + ' 为「添加链接」'} style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}><Icon name="command" size={13} color="currentColor" />{window.SRKeys.combo('K')} 命令 · 选中文字时为链接</span>
         <span className="sr-ed-status-opt">Markdown</span>
       </div>
 

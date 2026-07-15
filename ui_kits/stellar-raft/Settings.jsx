@@ -14,15 +14,16 @@ const SR_AVATARS = [
 ];
 
 // 只列真实存在的快捷键——这页是承诺，不是愿望清单
+const SRK = window.SRKeys;
 const SR_SHORTCUTS = [
-  { keys: ['⌘', 'K'],     label: '全局搜索 · 跳转任意星或视图' },
-  { keys: ['⌘', 'K'],     label: '编辑器内选中文字 · 添加链接' },
-  { keys: ['⌘', 'F'],     label: '编辑器 · 笔记内查找 / 替换' },
-  { keys: ['⌘', 'Z'],     label: '编辑器 · 撤销（加 ⇧ 重做）' },
+  { keys: [SRK.mod, 'K'],     label: '全局搜索 · 跳转任意星或视图' },
+  { keys: [SRK.mod, 'K'],     label: '编辑器内选中文字 · 添加链接' },
+  { keys: [SRK.mod, 'F'],     label: '编辑器 · 笔记内查找 / 替换' },
+  { keys: [SRK.mod, 'Z'],     label: '编辑器 · 撤销（加 ' + SRK.shift + ' 重做）' },
   { keys: ['/'],          label: '编辑器内唤起块菜单' },
-  { keys: ['⌥', '↑', '↓'], label: '编辑器 · 上下移动当前块' },
-  { keys: ['Tab'],        label: '编辑器 · 列表缩进（⇧Tab 减少）' },
-  { keys: ['⌘', 'Enter'], label: '收件箱 · 捕捉当前草稿' },
+  { keys: [SRK.alt, '↑', '↓'], label: '编辑器 · 上下移动当前块' },
+  { keys: ['Tab'],        label: '编辑器 · 列表缩进（' + SRK.shift + 'Tab 减少）' },
+  { keys: [SRK.mod, 'Enter'], label: '收件箱 · 捕捉当前草稿' },
   { keys: ['Space'],      label: '复习会话 · 翻开卡片' },
   { keys: ['1', '2', '3'], label: '复习会话 · 忘了 / 模糊 / 记得' },
   { keys: ['Esc'],        label: '关闭当前弹窗 / 抽屉' },

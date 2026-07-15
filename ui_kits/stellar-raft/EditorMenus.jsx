@@ -203,13 +203,13 @@ function SelectionToolbar({ x, y, onFormat, onLink, onColor }) {
     } catch (e) { /* queryCommandState can throw in some states */ }
   }, [x, y]);
   const tools = [
-    { n: 'bold', t: '加粗 ⌘B', cmd: 'bold' },
-    { n: 'italic', t: '斜体 ⌘I', cmd: 'italic' },
-    { n: 'underline', t: '下划线 ⌘U', cmd: 'underline' },
+    { n: 'bold', t: '加粗 ' + window.SRKeys.combo('B'), cmd: 'bold' },
+    { n: 'italic', t: '斜体 ' + window.SRKeys.combo('I'), cmd: 'italic' },
+    { n: 'underline', t: '下划线 ' + window.SRKeys.combo('U'), cmd: 'underline' },
     { n: 'strikethrough', t: '删除线', cmd: 'strikeThrough' },
     { n: 'code', t: '行内代码', cmd: 'inlineCode' },
     { n: 'highlighter', t: '高亮', cmd: 'hiliteColor', val: 'color-mix(in srgb, var(--gold) 24%, transparent)' },
-    { n: 'link', t: '链接 ⌘K', link: true },
+    { n: 'link', t: '链接 ' + window.SRKeys.combo('K'), link: true },
   ];
   // preventDefault on mousedown anywhere in the bar keeps the text selection alive through the click.
   const reduce = typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;

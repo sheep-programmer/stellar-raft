@@ -143,13 +143,13 @@ function Sidebar({ collapsed, onToggle, view, onView, focus, onFocus, theme, onT
       {/* search */}
       <div style={{ padding: collapsed ? '0 12px 8px' : '0 14px 10px', flex: 'none' }}>
         {collapsed
-          ? <IconButton name="search" title="搜索 ⌘K" onClick={onSearch} />
+          ? <IconButton name="search" title={'搜索 ' + window.SRKeys.combo('K')} onClick={onSearch} />
           : (
             /* 搜索入口：点击 / Enter / 直接开始输入 都打开命令面板。
                readOnly 让它保持可 Tab 聚焦（Input 自带聚焦发光），
                但不再吞字——键盘用户不会把「量子」打进一个死输入框 */
             <div data-tour="search" style={{ cursor: 'pointer' }} onClick={onSearch}>
-              <Input icon="search" placeholder="搜索你的星空…" kbd="⌘K" size="sm"
+              <Input icon="search" placeholder="搜索你的星空…" kbd={window.SRKeys.combo('K')} size="sm"
                 readOnly value="" aria-label="搜索你的星空（打开命令面板）"
                 inputStyle={{ cursor: 'pointer' }}
                 onKeyDown={(e) => {

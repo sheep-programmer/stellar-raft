@@ -5,6 +5,19 @@
    - 键盘聚焦（:focus-visible）同样触发，按目标元素定位——收起态侧栏的图标按钮
      不再对键盘用户「盲开」（WCAG 1.4.13：Esc 可随时隐藏）；
    - 250ms 延迟出现、跟随目标元素定位、越界自动收进视口，滚动/按下即隐藏。 */
+
+/* SRKeys — 快捷键提示按系统说话：macOS 用 ⌘/⌥/⇧ 符号，Windows/Linux 用 Ctrl/Alt/Shift 文字。
+   只影响「说法」，按键处理各处本就 metaKey||ctrlKey 双收。 */
+window.SRKeys = (function () {
+  const mac = /Mac|iPhone|iPad|iPod/.test(navigator.platform || '') || /Macintosh/.test(navigator.userAgent || '');
+  const mod = mac ? '⌘' : 'Ctrl';
+  const alt = mac ? '⌥' : 'Alt';
+  const shift = mac ? '⇧' : 'Shift';
+  const combo = (k) => mac ? mod + k : mod + '+' + k;        // ⌘K / Ctrl+K
+  const altCombo = (k) => mac ? alt + k : alt + '+' + k;      // ⌥↑ / Alt+↑
+  return { mac, mod, alt, shift, combo, altCombo };
+})();
+
 (function () {
   const tip = document.createElement('div');
   tip.setAttribute('data-sr-tip', '');
