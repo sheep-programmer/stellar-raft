@@ -149,6 +149,7 @@ window.SRNet = (function () {
     login: (p) => api('/api/auth/login', { method: 'POST', body: p }),
     logout: () => api('/api/auth/logout', { method: 'POST', body: {} }),
     changePassword: (p) => api('/api/auth/password', { method: 'POST', body: p }),
+    changeEmail: (p) => api('/api/auth/email', { method: 'POST', body: p }),
   };
   // 采用一个新会话（登录/注册成功后）：换 token + 清旧镜像，防旧账号本地数据覆盖新账号的服务器数据
   // 身份切换的本地卫生：清掉上一个身份的昵称/头像/简介残留（动效等设备偏好保留）

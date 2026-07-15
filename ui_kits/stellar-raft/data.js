@@ -717,10 +717,32 @@ window.SR_DATA = (function () {
 
   // 长时间停留：每分钟按真实时间重算一次，广播给在场视图就地更新数值——
   // 只改数值不加动画，自然兼容 prefers-reduced-motion / data-motion="off"，不会闪烁。
+  // 复习提醒：页面开着时，过了设定时刻且有到期星 → 一条系统通知。
+  // daily 每天最多一次 · weekly 每 7 天一次 · smart 到期 ≥5 颗才提醒（安静哲学）。
+  const maybeRemind = () => {
+    try {
+      if (typeof Notification === 'undefined' || Notification.permission !== 'granted') return;
+      const prefs = JSON.parse(localStorage.getItem('sr.settings')) || {};
+      if (prefs.remind === false) return;
+      const due = dueStars().length; if (!due) return;
+      const freq = prefs.freq || 'daily';
+      if (freq === 'smart' && due < 5) return;
+      const now = new Date();
+      const [hh, mm] = String(prefs.remindTime || '21:00').split(':').map(Number);
+      if (now.getHours() < hh || (now.getHours() === hh && now.getMinutes() < mm)) return;
+      const today = now.toISOString().slice(0, 10);
+      const last = localStorage.getItem('sr.remind.last') || '';
+      if (freq === 'weekly' ? (last && Date.now() - Date.parse(last) < 6.5 * 864e5) : last === today) return;
+      localStorage.setItem('sr.remind.last', today);
+      new Notification('星图 · 复习提醒', { body: '有 ' + due + ' 颗星到了回望的时刻。', tag: 'sr-remind' });
+    } catch (e) { }
+  };
+  if (typeof setTimeout !== 'undefined') setTimeout(maybeRemind, 8000);   // 打开应用稍后先查一次（测试沙箱无 setTimeout）
   setInterval(() => {
     if (document.hidden) return;
     refreshMemory();
     window.dispatchEvent(new CustomEvent('sr-memory'));
+    maybeRemind();
   }, 60000);
 
   // 应用本机已保存的设置：昵称覆盖账户信息，动效偏好落到 <html> data 属性供 CSS 读取

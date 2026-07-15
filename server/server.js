@@ -129,6 +129,7 @@ const q = {
   userByEmail: db.prepare('SELECT * FROM users WHERE email = ?'),
   registerUser: db.prepare("UPDATE users SET username = ?, email = ?, pass = ?, registered_at = datetime('now') WHERE id = ?"),
   setPass: db.prepare('UPDATE users SET pass = ? WHERE id = ?'),
+  setEmail: db.prepare('UPDATE users SET email = ? WHERE id = ?'),
 };
 
 /* ============================ 工具 ============================ */
@@ -441,6 +442,18 @@ async function handleApi(req, res, url) {
     if (String(body.new || '').length < 6) return json(res, 400, { error: '新密码至少 6 位' });
     q.setPass.run(hashPass(String(body.new)), me.id);
     return json(res, 200, { ok: true });
+  }
+  // 绑定 / 修改邮箱：仅登录态，验密码；改成自己当前邮箱视为幂等成功
+  if (seg[1] === 'auth' && seg[2] === 'email' && req.method === 'POST') {
+    if (!sess || !me.username || !me.pass) return json(res, 401, { error: '尚未登录账号' });
+    if (!checkPass(String(body.password || ''), me.pass)) return json(res, 401, { error: '密码不对' });
+    const email = String(body.email || '').trim();
+    if (!/^\S+@\S+\.\S+$/.test(email)) return json(res, 400, { error: '邮箱格式不对' });
+    const holder = q.userByEmail.get(email);
+    if (holder && holder.id !== me.id) return json(res, 409, { error: '这个邮箱已经绑定过账号' });
+    try { q.setEmail.run(email, me.id); }
+    catch (e) { return json(res, 409, { error: '这个邮箱刚被占用，换一个试试' }); }
+    return json(res, 200, { ok: true, user: pubAccount(q.userById.get(me.id)) });
   }
 
   // POST /api/hello — 建档/取回身份与分享状态

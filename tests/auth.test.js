@@ -156,3 +156,24 @@ test('补充不变量：哈希不出库 · 双会话互异 · 旧匿名 token �
   assert.equal(g.body.data.stars[0].id, 'x1');
   assert.equal((await api(anon, 'POST', '/api/auth/password', { old: 'secret2', new: 'secret9' })).status, 401);
 });
+
+test('绑定/修改邮箱：验密码 · 校格式 · 防占用 · 未登录拒绝', async () => {
+  const sess = (await api(anon, 'POST', '/api/auth/login', { id: '林深', password: 'secret2' })).body.session;
+  // 未登录（匿名 token）→ 401
+  assert.equal((await api(anon, 'POST', '/api/auth/email', { password: 'secret2', email: 'x@y.z' })).status, 401);
+  // 密码不对 → 401；格式不对 → 400
+  assert.equal((await api(sess, 'POST', '/api/auth/email', { password: 'nope', email: 'x@y.z' })).status, 401);
+  assert.equal((await api(sess, 'POST', '/api/auth/email', { password: 'secret2', email: 'not-an-email' })).status, 400);
+  // 被别人占用 → 409（先造第二个账号占一个邮箱）
+  const anonB = 'anonB-' + Math.random().toString(36).slice(2);
+  await api(anonB, 'POST', '/api/hello', {});
+  await api(anonB, 'POST', '/api/auth/register', { username: '占位者', email: 'taken@star.map', password: 'secret1' });
+  assert.equal((await api(sess, 'POST', '/api/auth/email', { password: 'secret2', email: 'taken@star.map' })).status, 409);
+  // 成功：改绑新邮箱，hello 读回新值；改成自己当前邮箱也应 200（幂等不误报占用）
+  const ok = await api(sess, 'POST', '/api/auth/email', { password: 'secret2', email: 'new@star.map' });
+  assert.equal(ok.status, 200);
+  assert.equal(ok.body.user.email, 'new@star.map');
+  const h = await api(sess, 'POST', '/api/hello', {});
+  assert.equal(h.body.account.email, 'new@star.map');
+  assert.equal((await api(sess, 'POST', '/api/auth/email', { password: 'secret2', email: 'new@star.map' })).status, 200);
+});

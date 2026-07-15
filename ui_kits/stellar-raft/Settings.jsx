@@ -105,6 +105,12 @@ function Settings({ onClose, theme, onToggleTheme, onReplayGuide, onOpenLogin })
 
   // 账户 tab：改密行内展开 + 忙碌 / 报错态
   const [pwOpen, setPwOpen] = React.useState(false);
+  const [emOpen, setEmOpen] = React.useState(false);   // 邮箱绑定/修改行内展开
+  const [emPw, setEmPw] = React.useState('');
+  const [emVal, setEmVal] = React.useState('');
+  const [emErr, setEmErr] = React.useState('');
+  const [emBusy, setEmBusy] = React.useState(false);
+  const importRef = React.useRef(null);                 // 导入数据的隐藏 file input
   const [oldPw, setOldPw] = React.useState('');
   const [newPw, setNewPw] = React.useState('');
   const [pwBusy, setPwBusy] = React.useState(false);
@@ -292,8 +298,16 @@ function Settings({ onClose, theme, onToggleTheme, onReplayGuide, onOpenLogin })
               {tab === 'review' && (
                 <div>
                   <SRSectionTitle>复习提醒</SRSectionTitle>
-                  <SRRow title="开启提醒" hint="到点提醒你回来点亮正在变暗的星。">
-                    <SRToggle on={remind} onChange={setRemind} />
+                  <SRRow title="开启提醒" hint={(() => {
+                    if (typeof Notification === 'undefined') return '当前环境不支持系统通知。';
+                    if (Notification.permission === 'denied') return '浏览器拦截了通知——到浏览器设置里允许本站通知后生效。';
+                    if (Notification.permission === 'default') return '到点提醒你回来点亮正在变暗的星。开启后浏览器会询问通知权限。';
+                    return '到点提醒你回来点亮正在变暗的星。页面开着时按设定时刻通知。';
+                  })()}>
+                    <SRToggle on={remind} onChange={(v) => {
+                      setRemind(v);
+                      if (v && typeof Notification !== 'undefined' && Notification.permission === 'default') Notification.requestPermission();
+                    }} />
                   </SRRow>
                   <SRRow title="提醒频率">
                     <SRSegment value={freq} onChange={setFreq}
@@ -367,7 +381,32 @@ function Settings({ onClose, theme, onToggleTheme, onReplayGuide, onOpenLogin })
                   {D.account.registered && (
                     <div>
                       <SRRow title="用户名"><span style={{ fontSize: 13, color: 'var(--text-2)', fontFamily: 'var(--font-mono)' }}>{D.account.username}</span></SRRow>
-                      <SRRow title="邮箱"><span style={{ fontSize: 13, color: 'var(--text-2)', fontFamily: 'var(--font-mono)' }}>{D.account.email || '未绑定'}</span></SRRow>
+                      <SRRow title="邮箱" noLine={emOpen}>
+                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 10 }}>
+                          <span style={{ fontSize: 13, color: 'var(--text-2)', fontFamily: 'var(--font-mono)' }}>{D.account.email || '未绑定'}</span>
+                          {!emOpen && <Button size="sm" variant="ghost" icon="mail" onClick={() => { setEmErr(''); setEmVal(D.account.email || ''); setEmPw(''); setEmOpen(true); }}>{D.account.email ? '修改' : '绑定'}</Button>}
+                        </span>
+                      </SRRow>
+                      {emOpen && (
+                        <div style={{ padding: '2px 0 14px', display: 'flex', flexDirection: 'column', gap: 9, borderBottom: '1px solid var(--line)' }}>
+                          <Input icon="mail" placeholder="新邮箱" autoComplete="email" value={emVal} onChange={(e) => setEmVal(e.target.value)} />
+                          <Input type="password" icon="lock" placeholder="账号密码（确认是你本人）" autoComplete="current-password" value={emPw} onChange={(e) => setEmPw(e.target.value)} />
+                          {emErr && <div style={{ fontSize: 12, color: 'var(--danger)', lineHeight: 1.6 }}>{emErr}</div>}
+                          <div style={{ display: 'flex', gap: 8, marginTop: 2 }}>
+                            <Button size="sm" variant="primary" glow disabled={emBusy} icon={emBusy ? undefined : 'check'} onClick={async () => {
+                              if (emBusy) return;
+                              setEmBusy(true); setEmErr('');
+                              try {
+                                const r = await window.SRNet.auth.changeEmail({ password: emPw, email: emVal.trim() });
+                                D.account.email = (r.user && r.user.email) || emVal.trim();
+                                setEmOpen(false); setEmPw(''); flashToast('邮箱已更新');
+                              } catch (err) { setEmErr((err && err.message) || '出了点问题，请再试一次'); }
+                              setEmBusy(false);
+                            }}>{emBusy ? '确认中…' : '确认'}</Button>
+                            <Button size="sm" variant="ghost" disabled={emBusy} onClick={() => { setEmOpen(false); setEmPw(''); setEmErr(''); }}>取消</Button>
+                          </div>
+                        </div>
+                      )}
                       <SRRow title="注册于"><span style={{ fontSize: 13, color: 'var(--text-2)', fontFamily: 'var(--font-mono)' }}>{(D.account.registeredAt || '').slice(0, 10)}</span></SRRow>
 
                       <SRRow title="修改密码" hint={pwOpen ? undefined : '定期更换密码，让账号更安全。'} align={pwOpen ? 'flex-start' : 'center'} noLine={pwOpen}>
@@ -401,6 +440,31 @@ function Settings({ onClose, theme, onToggleTheme, onReplayGuide, onOpenLogin })
                       setTimeout(() => URL.revokeObjectURL(a.href), 4000);
                       flashToast('已导出你的星图数据（JSON 文件）');
                     }}>导出数据</Button>
+                    <Button size="sm" variant="ghost" icon="upload" onClick={() => importRef.current && importRef.current.click()}>导入数据</Button>
+                    <input ref={importRef} type="file" accept=".json,application/json" style={{ display: 'none' }}
+                      onChange={(e) => {
+                        const f = e.target.files && e.target.files[0];
+                        e.target.value = '';
+                        if (!f) return;
+                        const rd = new FileReader();
+                        rd.onload = () => {
+                          let data = null;
+                          try { data = JSON.parse(String(rd.result)); } catch (err) { }
+                          if (!data || !Array.isArray(data.stars)) { flashToast('这不是有效的星图数据文件'); return; }
+                          setConfirm({
+                            message: `导入将替换当前星空（文件含 ${data.stars.length} 颗星），本机与账号里的现有数据都会被覆盖。确定导入吗？`,
+                            confirmLabel: '导入并替换',
+                            onYes: () => {
+                              // 复用冲突收敛通道：hydrate + sr-hydrated 整体重挂载，再落库
+                              window.dispatchEvent(new CustomEvent('sr-conflict', { detail: data }));
+                              setTimeout(() => { try { window.SRNet.saveNow(); } catch (err) { } }, 400);
+                              const T = window.StellarRaftDesignSystem_2866af;
+                              if (T && T.toast) T.toast('星空已导入 · ' + data.stars.length + ' 颗星就位', { icon: 'check' });
+                            },
+                          });
+                        };
+                        rd.readAsText(f);
+                      }} />
                     {D.account.registered && (
                       <Button size="sm" variant="ghost" icon="log-out" onClick={() => setConfirm({
                         message: '退出后，这台设备回到匿名状态；你的星空安全地留在账号里。',
