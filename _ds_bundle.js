@@ -1,4 +1,4 @@
-/* @ds-bundle: {"format":3,"namespace":"StellarRaftDesignSystem_2866af","components":[{"name":"Badge","sourcePath":"components/core/Badge.jsx"},{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"GlassPanel","sourcePath":"components/core/GlassPanel.jsx"},{"name":"Icon","sourcePath":"components/core/Icon.jsx"},{"name":"IconButton","sourcePath":"components/core/IconButton.jsx"},{"name":"Input","sourcePath":"components/core/Input.jsx"},{"name":"Tag","sourcePath":"components/core/Tag.jsx"},{"name":"Checkbox","sourcePath":"components/form/Checkbox.jsx"},{"name":"Select","sourcePath":"components/form/Select.jsx"},{"name":"Switch","sourcePath":"components/form/Switch.jsx"},{"name":"Tabs","sourcePath":"components/form/Tabs.jsx"},{"name":"ConstellationItem","sourcePath":"components/knowledge/ConstellationItem.jsx"},{"name":"MemoryBar","sourcePath":"components/knowledge/MemoryBar.jsx"},{"name":"StarNode","sourcePath":"components/knowledge/StarNode.jsx"},{"name":"ContextMenu","sourcePath":"components/overlay/ContextMenu.jsx"},{"name":"Modal","sourcePath":"components/overlay/Modal.jsx"},{"name":"Toast","sourcePath":"components/overlay/Toast.jsx"},{"name":"Tooltip","sourcePath":"components/overlay/Tooltip.jsx"}],"sourceHashes":{"assets/starfield.js":"d776d2b45dc4","components/core/Badge.jsx":"b0bd9735d638","components/core/Button.jsx":"a1c387a07e86","components/core/GlassPanel.jsx":"299a19d8fbb4","components/core/Icon.jsx":"7505f83ab03d","components/core/IconButton.jsx":"24052f4eed78","components/core/Input.jsx":"54a6c9af7e3f","components/core/Tag.jsx":"d8513c07ea96","components/form/Checkbox.jsx":"38aa593157dd","components/form/Select.jsx":"86b8c1c71e12","components/form/Switch.jsx":"938c62be0664","components/form/Tabs.jsx":"ede2dbff1963","components/knowledge/ConstellationItem.jsx":"d73e999469b6","components/knowledge/MemoryBar.jsx":"a54c928d5065","components/knowledge/StarNode.jsx":"1bedee49f0bf","components/overlay/ContextMenu.jsx":"11783420e876","components/overlay/Modal.jsx":"0906de457544","components/overlay/Toast.jsx":"d22ad40680a6","components/overlay/Tooltip.jsx":"a042caa8970d","ui_kits/stellar-raft/AIConfig.jsx":"ac3ebbc8c643","ui_kits/stellar-raft/AerialView.jsx":"c03956215464","ui_kits/stellar-raft/BlackHole.jsx":"17eb30e1a014","ui_kits/stellar-raft/Checkup.jsx":"432f59decbb5","ui_kits/stellar-raft/CommandPalette.jsx":"0e41e59f2e82","ui_kits/stellar-raft/Editor.jsx":"78bfb1224f72","ui_kits/stellar-raft/EditorMenus.jsx":"d1e43e13658d","ui_kits/stellar-raft/FeynmanDrawer.jsx":"22555e93116f","ui_kits/stellar-raft/Galaxy3D.jsx":"8e40ab3d2a66","ui_kits/stellar-raft/Inbox.jsx":"59cb0e9861d0","ui_kits/stellar-raft/ListView.jsx":"04333626cd62","ui_kits/stellar-raft/ReviewSession.jsx":"8e0b3ed9e247","ui_kits/stellar-raft/Settings.jsx":"4ca18ad86a8b","ui_kits/stellar-raft/Sidebar.jsx":"8319dcbb6c23","ui_kits/stellar-raft/StarMap.jsx":"3f007183d133","ui_kits/stellar-raft/Timeline.jsx":"56d938b8201e","ui_kits/stellar-raft/VisitView.jsx":"c59ff48bf477","ui_kits/stellar-raft/app.jsx":"33738d8d7032","ui_kits/stellar-raft/codehl.js":"6fbdd0100deb","ui_kits/stellar-raft/data.js":"85a8add5deee","ui_kits/stellar-raft/mdcore.js":"297534e398c8","ui_kits/stellar-raft/sanitize.js":"88e63cd63253","ui_kits/stellar-raft/transition.js":"3725d8982dc5","ui_kits/stellar-raft/undocore.js":"7f8c94da35f9"},"inlinedExternals":[],"unexposedExports":[{"name":"memoryColor","sourcePath":"components/knowledge/MemoryBar.jsx"}],"exposedHelpers":[{"name":"toast","sourcePath":"components/overlay/Toast.jsx"}]} */
+/* @ds-bundle: {"format":3,"namespace":"StellarRaftDesignSystem_2866af","components":[{"name":"Badge","sourcePath":"components/core/Badge.jsx"},{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"GlassPanel","sourcePath":"components/core/GlassPanel.jsx"},{"name":"Icon","sourcePath":"components/core/Icon.jsx"},{"name":"IconButton","sourcePath":"components/core/IconButton.jsx"},{"name":"Input","sourcePath":"components/core/Input.jsx"},{"name":"Tag","sourcePath":"components/core/Tag.jsx"},{"name":"Checkbox","sourcePath":"components/form/Checkbox.jsx"},{"name":"Select","sourcePath":"components/form/Select.jsx"},{"name":"Switch","sourcePath":"components/form/Switch.jsx"},{"name":"Tabs","sourcePath":"components/form/Tabs.jsx"},{"name":"ConstellationItem","sourcePath":"components/knowledge/ConstellationItem.jsx"},{"name":"MemoryBar","sourcePath":"components/knowledge/MemoryBar.jsx"},{"name":"StarNode","sourcePath":"components/knowledge/StarNode.jsx"},{"name":"ContextMenu","sourcePath":"components/overlay/ContextMenu.jsx"},{"name":"Modal","sourcePath":"components/overlay/Modal.jsx"},{"name":"Toast","sourcePath":"components/overlay/Toast.jsx"},{"name":"Tooltip","sourcePath":"components/overlay/Tooltip.jsx"}],"sourceHashes":{"assets/starfield.js":"d776d2b45dc4","components/core/Badge.jsx":"b0bd9735d638","components/core/Button.jsx":"a1c387a07e86","components/core/GlassPanel.jsx":"299a19d8fbb4","components/core/Icon.jsx":"7505f83ab03d","components/core/IconButton.jsx":"24052f4eed78","components/core/Input.jsx":"54a6c9af7e3f","components/core/Tag.jsx":"d8513c07ea96","components/form/Checkbox.jsx":"38aa593157dd","components/form/Select.jsx":"86b8c1c71e12","components/form/Switch.jsx":"938c62be0664","components/form/Tabs.jsx":"ede2dbff1963","components/knowledge/ConstellationItem.jsx":"d73e999469b6","components/knowledge/MemoryBar.jsx":"a54c928d5065","components/knowledge/StarNode.jsx":"1bedee49f0bf","components/overlay/ContextMenu.jsx":"11783420e876","components/overlay/Modal.jsx":"0906de457544","components/overlay/Toast.jsx":"d22ad40680a6","components/overlay/Tooltip.jsx":"a042caa8970d","ui_kits/stellar-raft/AIConfig.jsx":"ac3ebbc8c643","ui_kits/stellar-raft/AerialView.jsx":"c03956215464","ui_kits/stellar-raft/BlackHole.jsx":"17eb30e1a014","ui_kits/stellar-raft/Checkup.jsx":"432f59decbb5","ui_kits/stellar-raft/CommandPalette.jsx":"0e41e59f2e82","ui_kits/stellar-raft/Editor.jsx":"89c6b2358425","ui_kits/stellar-raft/EditorMenus.jsx":"fb80581f6bcc","ui_kits/stellar-raft/FeynmanDrawer.jsx":"22555e93116f","ui_kits/stellar-raft/Galaxy3D.jsx":"8e40ab3d2a66","ui_kits/stellar-raft/Inbox.jsx":"fb947f4edf7f","ui_kits/stellar-raft/ListView.jsx":"04333626cd62","ui_kits/stellar-raft/LoginView.jsx":"18d9c842c5c6","ui_kits/stellar-raft/Onboarding.jsx":"a0a8609b98bb","ui_kits/stellar-raft/ReviewSession.jsx":"8e0b3ed9e247","ui_kits/stellar-raft/Settings.jsx":"a5ce40624d0b","ui_kits/stellar-raft/Sidebar.jsx":"8f3ca4c39abb","ui_kits/stellar-raft/StarMap.jsx":"26ebb8fc6e2f","ui_kits/stellar-raft/Timeline.jsx":"56d938b8201e","ui_kits/stellar-raft/VisitView.jsx":"c59ff48bf477","ui_kits/stellar-raft/app.jsx":"e0e7b6a77961","ui_kits/stellar-raft/codehl.js":"6fbdd0100deb","ui_kits/stellar-raft/data.js":"d7d028d086cc","ui_kits/stellar-raft/mdcore.js":"297534e398c8","ui_kits/stellar-raft/sanitize.js":"88e63cd63253","ui_kits/stellar-raft/transition.js":"3725d8982dc5","ui_kits/stellar-raft/undocore.js":"7f8c94da35f9"},"inlinedExternals":[],"unexposedExports":[{"name":"memoryColor","sourcePath":"components/knowledge/MemoryBar.jsx"}],"exposedHelpers":[{"name":"toast","sourcePath":"components/overlay/Toast.jsx"}]} */
 
 (() => {
 
@@ -8084,7 +8084,7 @@ function MiniStarMap({
   const D = window.SR_DATA;
   const dawn = useDawn();
   const W = 268,
-    H = 166; // 与世界同比例（1680:1040 ≈ 1.615），只缩放不变形
+    H = 166;
   const posOf = s => ({
     px: s.wx != null ? s.wx : (s.x || 50) / 100 * MINI_WORLD.w,
     py: s.wy != null ? s.wy : (s.y || 50) / 100 * MINI_WORLD.h
@@ -8112,24 +8112,63 @@ function MiniStarMap({
       hex: avg >= 0.78 ? '#ffd98a' : c.color
     };
   }).filter(Boolean);
-  // 等比取景：把整片星空（含光晕）收进一屏
-  let k = 0.1,
-    ox = 0,
-    oy = 0;
-  if (sp.length) {
-    const minX = Math.min(...doms.map(d => d.cx - d.r), ...sp.map(s => s.px));
-    const maxX = Math.max(...doms.map(d => d.cx + d.r), ...sp.map(s => s.px));
-    const minY = Math.min(...doms.map(d => d.cy - d.r), ...sp.map(s => s.py));
-    const maxY = Math.max(...doms.map(d => d.cy + d.r), ...sp.map(s => s.py));
-    const bw = Math.max(1, maxX - minX),
-      bh = Math.max(1, maxY - minY);
-    const pad = 10;
-    k = Math.min((W - pad * 2) / bw, (H - pad * 2) / bh);
-    ox = (W - bw * k) / 2 - minX * k;
-    oy = (H - bh * k) / 2 - minY * k;
-  }
-  const X = wx => ox + wx * k,
-    Y = wy => oy + wy * k;
+  const cs = sp.find(s => s.id === currentId);
+  // 放大取景：以当前星为视口中心（k 固定，星点大、好点击），可拖拽平移看邻域
+  const k = 0.45;
+  const home = cs ? {
+    x: cs.px,
+    y: cs.py
+  } : {
+    x: MINI_WORLD.w / 2,
+    y: MINI_WORLD.h / 2
+  };
+  const [center, setCenter] = React.useState(home);
+  React.useEffect(() => {
+    setCenter(cs ? {
+      x: cs.px,
+      y: cs.py
+    } : home);
+  }, [currentId]); // 换笔记回中
+  const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+  const drag = React.useRef(null); // {sx,sy,cx,cy,el,pid,captured}
+  const movedRef = React.useRef(0); // 本次手势位移，>5px 则吞掉星点 click
+  const onPointerDown = e => {
+    drag.current = {
+      sx: e.clientX,
+      sy: e.clientY,
+      cx: center.x,
+      cy: center.y,
+      el: e.currentTarget,
+      pid: e.pointerId,
+      captured: false
+    };
+    movedRef.current = 0;
+    // 注意：不能在这里就 setPointerCapture——捕获会把 pointerup/click 重定向到容器，
+    // 星点按钮的 click 就永远收不到了。捕获推迟到确认拖拽意图（位移 >5px）之后。
+  };
+  const onPointerMove = e => {
+    if (!drag.current) return;
+    const dx = e.clientX - drag.current.sx,
+      dy = e.clientY - drag.current.sy;
+    movedRef.current = Math.max(movedRef.current, Math.hypot(dx, dy));
+    if (!drag.current.captured && movedRef.current > 5) {
+      drag.current.captured = true;
+      drag.current.el.setPointerCapture && drag.current.el.setPointerCapture(drag.current.pid);
+    }
+    setCenter({
+      x: clamp(drag.current.cx - dx / k, -120, MINI_WORLD.w + 120),
+      y: clamp(drag.current.cy - dy / k, -120, MINI_WORLD.h + 120)
+    });
+  };
+  const onPointerUp = () => {
+    drag.current = null;
+  };
+  const pick = s => {
+    if (movedRef.current <= 5 && onPick) onPick(s);
+  };
+  const offHome = cs && Math.hypot(center.x - cs.px, center.y - cs.py) > 8;
+  const X = wx => W / 2 + (wx - center.x) * k,
+    Y = wy => H / 2 + (wy - center.y) * k;
   const conn = (x1, y1, x2, y2, bow) => window.SRConnect ? window.SRConnect(x1, y1, x2, y2, bow) : `M ${x1} ${y1} L ${x2} ${y2}`;
   const sunOf = Object.fromEntries(doms.map(d => [d.id, d]));
   // 跨星域「融会贯通」域对（与星图同源：connections 里的 cross 链）
@@ -8150,6 +8189,10 @@ function MiniStarMap({
   })();
   const reduce = typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
   return /*#__PURE__*/React.createElement("div", {
+    onPointerDown: onPointerDown,
+    onPointerMove: onPointerMove,
+    onPointerUp: onPointerUp,
+    onPointerCancel: onPointerUp,
     style: {
       marginTop: 10,
       height: H,
@@ -8157,7 +8200,9 @@ function MiniStarMap({
       border: '1px solid var(--glass-border)',
       position: 'relative',
       overflow: 'hidden',
-      background: 'radial-gradient(120% 100% at 40% 40%, rgba(26,35,80,0.5), transparent 60%)'
+      background: 'radial-gradient(120% 100% at 40% 40%, rgba(26,35,80,0.5), transparent 60%)',
+      cursor: drag.current ? 'grabbing' : 'grab',
+      touchAction: 'none'
     }
   }, /*#__PURE__*/React.createElement("svg", {
     viewBox: `0 0 ${W} ${H}`,
@@ -8195,7 +8240,7 @@ function MiniStarMap({
       fill: "none",
       stroke: "var(--star-blue)",
       strokeWidth: "0.7",
-      opacity: "0.32"
+      opacity: s.id === currentId ? 0.5 : 0.2
     });
   }), crossPairs.map(([a, b]) => {
     const A = sunOf[a],
@@ -8213,53 +8258,140 @@ function MiniStarMap({
   }, /*#__PURE__*/React.createElement("circle", {
     cx: X(d.cx),
     cy: Y(d.cy),
-    r: "4.5",
+    r: "6",
     fill: "#ff9d52",
     opacity: "0.34"
   }), /*#__PURE__*/React.createElement("circle", {
     cx: X(d.cx),
     cy: Y(d.cy),
-    r: "2.4",
+    r: "3.2",
     fill: "#ffd58a"
   }), /*#__PURE__*/React.createElement("text", {
     x: X(d.cx),
-    y: Y(d.cy) + 10.5,
+    y: Y(d.cy) + 13,
     textAnchor: "middle",
-    fontSize: "7.5",
+    fontSize: "8.5",
     fontFamily: "var(--font-sans)",
     fill: "var(--sun-label, #ffe3b0)",
     opacity: "0.85",
     style: {
       letterSpacing: '0.05em'
     }
-  }, d.name)))), sp.map(s => {
+  }, d.name))), cs && /*#__PURE__*/React.createElement("g", null, /*#__PURE__*/React.createElement("line", {
+    x1: "0",
+    y1: Y(cs.py),
+    x2: W,
+    y2: Y(cs.py),
+    stroke: "var(--gold)",
+    strokeWidth: "0.6",
+    strokeDasharray: "2 3",
+    opacity: "0.25"
+  }), /*#__PURE__*/React.createElement("line", {
+    x1: X(cs.px),
+    y1: "0",
+    x2: X(cs.px),
+    y2: H,
+    stroke: "var(--gold)",
+    strokeWidth: "0.6",
+    strokeDasharray: "2 3",
+    opacity: "0.25"
+  }), /*#__PURE__*/React.createElement("circle", {
+    cx: X(cs.px),
+    cy: Y(cs.py),
+    r: "8.5",
+    fill: "none",
+    stroke: "var(--gold)",
+    strokeWidth: "0.9",
+    opacity: "0.6"
+  }), /*#__PURE__*/React.createElement("circle", {
+    cx: X(cs.px),
+    cy: Y(cs.py),
+    r: "14",
+    fill: "none",
+    stroke: "var(--gold)",
+    strokeWidth: "0.6",
+    opacity: "0.28"
+  }))), sp.map(s => {
     const cur = s.id === currentId;
-    const size = cur ? 9 : Math.max(4, Math.min(7, 3.2 + (s.importance || 1) * 1.1 + s.strength * 1.4));
+    const size = cur ? 13 : Math.max(7, Math.min(11, 5.5 + (s.importance || 1) * 1.6 + s.strength * 2));
     const col = cur ? 'var(--gold)' : edMemoryColor(s.strength, dawn);
+    const sx = X(s.px),
+      sy = Y(s.py);
+    if (sx < -24 || sx > W + 24 || sy < -24 || sy > H + 24) return null; // 视口外剔除
+    // 定位与呼吸分层：外层按钮只管 translate 居中（sr-breathe 的 transform:scale
+    // 若直接挂在按钮上会覆盖居中位移，星点整体偏移半个身位——准线就对不上了）
     return /*#__PURE__*/React.createElement("button", {
       type: "button",
       key: s.id,
       "data-tip": cur ? `当前星 ·「${s.label}」· 点击在星图中探索` : `在星图中探索「${s.label}」`,
       "aria-label": '在星图中探索「' + s.label + '」',
-      className: 'sr-focus-ring sr-hit40' + (cur && !reduce ? ' sr-breathe' : ''),
-      onClick: () => onPick && onPick(s),
+      className: "sr-focus-ring sr-hit40",
+      onClick: () => pick(s),
       style: {
         position: 'absolute',
-        left: `${X(s.px) / W * 100}%`,
-        top: `${Y(s.py) / H * 100}%`,
+        left: `${sx / W * 100}%`,
+        top: `${sy / H * 100}%`,
         transform: 'translate(-50%,-50%)',
         padding: 0,
         border: 'none',
         width: size,
         height: size,
+        background: 'transparent',
+        cursor: 'pointer',
+        opacity: cur ? 1 : 0.72
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      "aria-hidden": "true",
+      className: cur && !reduce ? 'sr-breathe' : '',
+      style: {
+        display: 'block',
+        width: '100%',
+        height: '100%',
         borderRadius: '50%',
         background: col,
-        cursor: 'pointer',
-        boxShadow: cur ? '0 0 12px var(--gold), 0 0 4px var(--gold)' : s.strength >= 0.7 ? `0 0 6px ${edMemoryColor(s.strength, dawn)}` : 'none',
-        opacity: cur ? 1 : 0.9
+        boxShadow: cur ? '0 0 14px var(--gold), 0 0 5px var(--gold)' : s.strength >= 0.7 ? `0 0 6px ${edMemoryColor(s.strength, dawn)}` : 'none'
       }
-    });
-  }));
+    }));
+  }), offHome && /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    title: "\u56DE\u5230\u5F53\u524D\u661F",
+    "aria-label": "\u56DE\u5230\u5F53\u524D\u661F",
+    className: "sr-focus-ring",
+    onClick: () => setCenter({
+      x: cs.px,
+      y: cs.py
+    }),
+    onPointerDown: e => e.stopPropagation(),
+    style: {
+      position: 'absolute',
+      right: 6,
+      bottom: 6,
+      width: 24,
+      height: 24,
+      borderRadius: 7,
+      cursor: 'pointer',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: 0,
+      background: 'rgba(12,17,38,.92)',
+      border: '1px solid rgba(255,217,138,.45)'
+    }
+  }, /*#__PURE__*/React.createElement("svg", {
+    width: "12",
+    height: "12",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "var(--gold)",
+    strokeWidth: "2.2",
+    strokeLinecap: "round"
+  }, /*#__PURE__*/React.createElement("circle", {
+    cx: "12",
+    cy: "12",
+    r: "3.2"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M12 2v4M12 18v4M2 12h4M18 12h4"
+  }))));
 }
 function Editor({
   starId,
@@ -9232,7 +9364,7 @@ function Editor({
     D.syncCounts();
     D.touchNote(star.id);
     setCon(cid);
-    flash('已移动到「' + D.conName(cid) + '」· ⌘Z 撤销');
+    flash('已移动到「' + D.conName(cid) + '」· ' + window.SRKeys.combo('Z') + ' 撤销');
   };
 
   // actions from the top-right 「更多」 dropdown (page-level, not block-level)
@@ -9290,7 +9422,7 @@ function Editor({
     // 有了应用级撤销栈，删除块不再需要模态确认——直接删除并给「⌘Z 撤销」toast
     if (action === 'delete') {
       withSynced(s => s.filter(b => b.id !== id));
-      flash('已删除这个块 · ⌘Z 撤销');
+      flash('已删除这个块 · ' + window.SRKeys.combo('Z') + ' 撤销');
     } else if (action === 'duplicate') withSynced(s => {
       const i = s.findIndex(b => b.id === id);
       return [...s.slice(0, i + 1), {
@@ -9340,6 +9472,27 @@ function Editor({
       text: ''
     };
     flushSynced(() => [nb]);
+    focusBlock(nb.id, 'start');
+  };
+  // 点击正文末尾的空白区：末块已是空段落则直接聚焦，否则追加一个空段落并聚焦——
+  // 无论最后一块是代码/表格/引用还是别的，鼠标永远能「点出下一行」。
+  const appendTailBlock = () => {
+    const last = blocks[blocks.length - 1];
+    if (!last) {
+      seedFirstBlock();
+      return;
+    }
+    const isEmptyP = last.type === 'p' && !stripTags(last.html != null ? last.html : last.text || '').trim();
+    if (isEmptyP) {
+      focusBlock(last.id, 'end');
+      return;
+    }
+    const nb = {
+      id: uid(),
+      type: 'p',
+      text: ''
+    };
+    flushSynced(s => [...s, nb]);
     focusBlock(nb.id, 'start');
   };
   const syncTags = ts => {
@@ -9516,7 +9669,7 @@ function Editor({
         const id = pendingAtomicDel;
         withSynced(s => s.filter(x => x.id !== id));
         setPendingAtomicDel(null);
-        flash('已删除 · ⌘Z 撤销');
+        flash('已删除 · ' + window.SRKeys.combo('Z') + ' 撤销');
       } else if (e.key === 'Escape') {
         setPendingAtomicDel(null);
       } else if (e.key.length === 1 || e.key === 'Enter') {
@@ -10126,7 +10279,7 @@ function Editor({
     style: {
       maxWidth: 720,
       margin: '0 auto',
-      padding: '20px 52px 120px'
+      padding: '20px 52px 24px'
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
@@ -10365,7 +10518,15 @@ function Editor({
       borderRadius: 1,
       boxShadow: 'var(--glow-gold-soft)'
     }
-  })))), /*#__PURE__*/React.createElement("aside", {
+  })), blocks.length > 0 && /*#__PURE__*/React.createElement("div", {
+    "aria-hidden": "true",
+    onClick: appendTailBlock,
+    style: {
+      height: 96,
+      margin: '0 -8px',
+      cursor: 'text'
+    }
+  }))), /*#__PURE__*/React.createElement("aside", {
     className: "sr-ed-rail",
     style: {
       width: 312,
@@ -10934,7 +11095,7 @@ function Editor({
     }
   }), /*#__PURE__*/React.createElement(SaveStatus, null), /*#__PURE__*/React.createElement("span", {
     className: "sr-ed-status-opt",
-    title: "\u2318F \u5728\u8FD9\u7BC7\u7B14\u8BB0\u5185\u67E5\u627E / \u66FF\u6362",
+    title: window.SRKeys.combo('F') + ' 在这篇笔记内查找 / 替换',
     style: {
       display: 'inline-flex',
       alignItems: 'center',
@@ -10944,8 +11105,8 @@ function Editor({
     name: "search",
     size: 12,
     color: "currentColor"
-  }), "\u2318F \u67E5\u627E"), /*#__PURE__*/React.createElement("span", {
-    title: "\u2318K \u6253\u5F00\u547D\u4EE4\u9762\u677F\uFF1B\u5728\u7F16\u8F91\u5668\u5185\u9009\u4E2D\u6587\u5B57\u65F6 \u2318K \u4E3A\u300C\u6DFB\u52A0\u94FE\u63A5\u300D",
+  }), window.SRKeys.combo('F'), " \u67E5\u627E"), /*#__PURE__*/React.createElement("span", {
+    title: window.SRKeys.combo('K') + ' 打开命令面板；在编辑器内选中文字时 ' + window.SRKeys.combo('K') + ' 为「添加链接」',
     style: {
       display: 'inline-flex',
       alignItems: 'center',
@@ -10955,7 +11116,7 @@ function Editor({
     name: "command",
     size: 13,
     color: "currentColor"
-  }), "\u2318K \u547D\u4EE4 \xB7 \u9009\u4E2D\u6587\u5B57\u65F6\u4E3A\u94FE\u63A5"), /*#__PURE__*/React.createElement("span", {
+  }), window.SRKeys.combo('K'), " \u547D\u4EE4 \xB7 \u9009\u4E2D\u6587\u5B57\u65F6\u4E3A\u94FE\u63A5"), /*#__PURE__*/React.createElement("span", {
     className: "sr-ed-status-opt"
   }, "Markdown")), ctx && /*#__PURE__*/React.createElement(ContextMenu, {
     x: ctx.x,
@@ -11933,15 +12094,15 @@ function SelectionToolbar({
   }, [x, y]);
   const tools = [{
     n: 'bold',
-    t: '加粗 ⌘B',
+    t: '加粗 ' + window.SRKeys.combo('B'),
     cmd: 'bold'
   }, {
     n: 'italic',
-    t: '斜体 ⌘I',
+    t: '斜体 ' + window.SRKeys.combo('I'),
     cmd: 'italic'
   }, {
     n: 'underline',
-    t: '下划线 ⌘U',
+    t: '下划线 ' + window.SRKeys.combo('U'),
     cmd: 'underline'
   }, {
     n: 'strikethrough',
@@ -11958,7 +12119,7 @@ function SelectionToolbar({
     val: 'color-mix(in srgb, var(--gold) 24%, transparent)'
   }, {
     n: 'link',
-    t: '链接 ⌘K',
+    t: '链接 ' + window.SRKeys.combo('K'),
     link: true
   }];
   // preventDefault on mousedown anywhere in the bar keeps the text selection alive through the click.
@@ -15577,7 +15738,7 @@ function Inbox({
       fontFamily: 'var(--font-mono)',
       color: 'var(--text-3)'
     }
-  }, "\u2318/Ctrl + Enter \u6355\u6349"), /*#__PURE__*/React.createElement("div", {
+  }, window.SRKeys.combo('Enter') + ' 捕捉'), /*#__PURE__*/React.createElement("div", {
     style: {
       flex: 1
     }
@@ -17622,6 +17783,1954 @@ window.SRKit = Object.assign(window.SRKit || {}, {
 });
 })(); } catch (e) { __ds_ns.__errors.push({ path: "ui_kits/stellar-raft/ListView.jsx", error: String((e && e.message) || e) }); }
 
+// ui_kits/stellar-raft/LoginView.jsx
+try { (() => {
+/* LoginView — 全屏登录/注册页。首次启动（服务器确认未注册且未跳过）自动展示，
+   也可由 Settings / Sidebar 的「登录 / 注册」按钮随时唤起（openLogin）。
+   深空渐变 + 微闪星点背景，居中玻璃卡，双 Tab 登录/注册。
+   注册 = 把当前这台设备的匿名星空升级为账号（同一 users.id，零数据迁移）；
+   登录 = 把本浏览器切到该账号的星空。两者成功后都 adoptSession + 整页刷新重水合。
+   props: { onClose } —— 跳过 / Esc 都调它，从不强留。 */
+const {
+  Button,
+  GlassPanel,
+  Icon,
+  Input
+} = window.StellarRaftDesignSystem_2866af;
+
+// 背景微闪星点：与 Onboarding 的 .bd 手法同源，独立一份 CSS（避免依赖 Onboarding 是否已挂载）
+const SR_LOGIN_CSS = `
+@keyframes sr-login-tw { 0%, 100% { opacity: .25; } 50% { opacity: .9; } }
+.sr-login-bd { position: fixed; border-radius: 50%; background: rgba(159,198,255,.55); pointer-events: none; }
+`;
+function injectLoginCss() {
+  if (typeof document === 'undefined' || document.getElementById('sr-login-css')) return;
+  const s = document.createElement('style');
+  s.id = 'sr-login-css';
+  s.textContent = SR_LOGIN_CSS;
+  document.head.appendChild(s);
+}
+// 十二颗星点：分散在整个视口（vw/vh 百分比），大小与延迟错开，避免机械感
+const SR_LOGIN_STARS = [[8, 14, 1.5], [22, 62, 1], [34, 28, 1.5], [46, 8, 1], [58, 46, 1.5], [70, 20, 1], [82, 58, 1.5], [92, 32, 1], [14, 78, 1], [64, 84, 1.5], [88, 12, 1], [40, 90, 1.5]];
+function LoginTabs({
+  tab,
+  onChange
+}) {
+  const tabs = [{
+    id: 'login',
+    label: '登录'
+  }, {
+    id: 'register',
+    label: '注册'
+  }];
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      gap: 6,
+      padding: 3,
+      borderRadius: 'var(--r-pill)',
+      background: 'var(--input-bg, rgba(3,4,12,0.45))',
+      border: '1px solid var(--line-strong)'
+    }
+  }, tabs.map(t => {
+    const on = t.id === tab;
+    return /*#__PURE__*/React.createElement("button", {
+      key: t.id,
+      type: "button",
+      onClick: () => onChange(t.id),
+      style: {
+        flex: 1,
+        height: 34,
+        border: 'none',
+        cursor: 'pointer',
+        borderRadius: 'var(--r-pill)',
+        fontSize: 13.5,
+        fontFamily: 'var(--font-sans)',
+        background: on ? 'rgba(255,217,138,0.16)' : 'transparent',
+        color: on ? 'var(--gold)' : 'var(--text-3)',
+        transition: 'background var(--dur-fast), color var(--dur-fast)'
+      }
+    }, t.label);
+  }));
+}
+function LoginView({
+  onClose
+}) {
+  const [tab, setTab] = React.useState('login');
+  const [busy, setBusy] = React.useState(false);
+  const [error, setError] = React.useState('');
+
+  // 登录字段
+  const [idOrEmail, setIdOrEmail] = React.useState('');
+  const [loginPass, setLoginPass] = React.useState('');
+
+  // 注册字段
+  const [username, setUsername] = React.useState('');
+  const [email, setEmail] = React.useState('');
+  const [regPass, setRegPass] = React.useState('');
+  const [regConfirm, setRegConfirm] = React.useState('');
+  React.useEffect(() => {
+    injectLoginCss();
+  }, []);
+  const modalRef = React.useRef(null);
+  (window.SRKit && window.SRKit.useModalFocus ? window.SRKit.useModalFocus : () => {})(modalRef, {
+    swallowCmdK: true
+  });
+  React.useEffect(() => {
+    const k = e => {
+      if (e.key === 'Escape') {
+        e.stopPropagation();
+        onClose();
+      }
+    };
+    document.addEventListener('keydown', k);
+    return () => document.removeEventListener('keydown', k);
+  }, [onClose]);
+  const switchTab = t => {
+    setTab(t);
+    setError('');
+  };
+  const submit = async e => {
+    if (e) e.preventDefault();
+    if (busy) return;
+    setError('');
+    if (tab === 'register' && regPass !== regConfirm) {
+      setError('两次输入的密码不一致');
+      return;
+    }
+    setBusy(true);
+    try {
+      const N = window.SRNet;
+      const r = tab === 'login' ? await N.auth.login({
+        id: idOrEmail.trim(),
+        password: loginPass
+      }) : await N.auth.register({
+        username: username.trim(),
+        email: email.trim() || undefined,
+        password: regPass
+      });
+      await N.adoptSession(r.session); // 内含冲刷未保存编辑，await 后再刷新
+      location.reload();
+    } catch (err) {
+      setError(err && err.message || '出了点问题，请再试一次');
+      setBusy(false);
+    }
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    ref: modalRef,
+    role: "dialog",
+    "aria-modal": "true",
+    "aria-label": tab === 'login' ? '登录' : '注册',
+    style: {
+      position: 'fixed',
+      inset: 0,
+      zIndex: 150,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: 20,
+      background: 'radial-gradient(1200px 800px at 78% -10%, rgba(26,35,80,0.55), transparent 60%), radial-gradient(900px 700px at 12% 110%, rgba(40,30,70,0.35), transparent 60%), linear-gradient(180deg, #05060f 0%, #03040c 55%, #04050e 100%)'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    "aria-hidden": "true"
+  }, SR_LOGIN_STARS.map((d, i) => /*#__PURE__*/React.createElement("span", {
+    key: i,
+    className: "sr-login-bd",
+    style: {
+      left: d[0] + '%',
+      top: d[1] + '%',
+      width: d[2],
+      height: d[2],
+      animation: `sr-login-tw ${2.6 + i % 4 * 0.7}s ease-in-out ${i * 0.32}s infinite`
+    }
+  }))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      width: 400,
+      maxWidth: '94vw',
+      animation: 'sr-cardin var(--dur-base) var(--ease-flight) both'
+    }
+  }, /*#__PURE__*/React.createElement(GlassPanel, {
+    strong: true,
+    radius: "lg",
+    glow: true,
+    style: {
+      padding: '32px 28px 24px'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      textAlign: 'center',
+      marginBottom: 22
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 30,
+      fontWeight: 300,
+      letterSpacing: '0.08em',
+      color: 'var(--text-1)',
+      textShadow: '0 0 16px rgba(159,198,255,0.22)'
+    }
+  }, "\u661F\u56FE"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 13,
+      color: 'var(--text-3)',
+      marginTop: 8
+    }
+  }, "\u767B\u5F55\u4F60\u7684\u661F\u7A7A")), /*#__PURE__*/React.createElement(LoginTabs, {
+    tab: tab,
+    onChange: switchTab
+  }), /*#__PURE__*/React.createElement("form", {
+    onSubmit: submit,
+    style: {
+      marginTop: 20
+    }
+  }, tab === 'register' && /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: 'var(--text-2)',
+      lineHeight: 1.7,
+      marginBottom: 16
+    }
+  }, "\u6CE8\u518C\u4F1A\u628A\u5F53\u524D\u8FD9\u7247\u661F\u7A7A\u6536\u8FDB\u8D26\u53F7\u91CC\uFF0C\u6362\u53F0\u8BBE\u5907\u4E5F\u80FD\u56DE\u6765\u3002"), tab === 'login' ? /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 12
+    }
+  }, /*#__PURE__*/React.createElement(Input, {
+    icon: "user",
+    placeholder: "\u7528\u6237\u540D\u6216\u90AE\u7BB1",
+    autoComplete: "username",
+    value: idOrEmail,
+    onChange: e => setIdOrEmail(e.target.value),
+    autoFocus: true
+  }), /*#__PURE__*/React.createElement(Input, {
+    icon: "lock",
+    type: "password",
+    placeholder: "\u5BC6\u7801",
+    autoComplete: "current-password",
+    value: loginPass,
+    onChange: e => setLoginPass(e.target.value)
+  })) : /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 12
+    }
+  }, /*#__PURE__*/React.createElement(Input, {
+    icon: "user",
+    placeholder: "\u7528\u6237\u540D\uFF082\u201324 \u4F4D\uFF09",
+    autoComplete: "username",
+    value: username,
+    onChange: e => setUsername(e.target.value),
+    autoFocus: true
+  }), /*#__PURE__*/React.createElement(Input, {
+    icon: "mail",
+    placeholder: "\u90AE\u7BB1\uFF08\u9009\u586B\uFF09",
+    autoComplete: "email",
+    value: email,
+    onChange: e => setEmail(e.target.value)
+  }), /*#__PURE__*/React.createElement(Input, {
+    icon: "lock",
+    type: "password",
+    placeholder: "\u5BC6\u7801\uFF08\u81F3\u5C11 6 \u4F4D\uFF09",
+    autoComplete: "new-password",
+    value: regPass,
+    onChange: e => setRegPass(e.target.value)
+  }), /*#__PURE__*/React.createElement(Input, {
+    icon: "lock",
+    type: "password",
+    placeholder: "\u786E\u8BA4\u5BC6\u7801",
+    autoComplete: "new-password",
+    value: regConfirm,
+    onChange: e => setRegConfirm(e.target.value)
+  })), error && /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12.5,
+      color: 'var(--danger)',
+      marginTop: 12,
+      lineHeight: 1.6
+    }
+  }, error), /*#__PURE__*/React.createElement(Button, {
+    type: "submit",
+    variant: "primary",
+    glow: true,
+    disabled: busy,
+    icon: busy ? undefined : 'sparkles',
+    style: {
+      width: '100%',
+      marginTop: 18
+    }
+  }, busy ? '正在点亮…' : tab === 'login' ? '登录' : '注册')), /*#__PURE__*/React.createElement("div", {
+    style: {
+      textAlign: 'center',
+      marginTop: 16
+    }
+  }, /*#__PURE__*/React.createElement(Button, {
+    variant: "ghost",
+    size: "sm",
+    onClick: onClose
+  }, "\u6682\u4E0D\u767B\u5F55\uFF0C\u5148\u901B\u901B")))));
+}
+window.SRKit = Object.assign(window.SRKit || {}, {
+  LoginView
+});
+})(); } catch (e) { __ds_ns.__errors.push({ path: "ui_kits/stellar-raft/LoginView.jsx", error: String((e && e.message) || e) }); }
+
+// ui_kits/stellar-raft/Onboarding.jsx
+try { (() => {
+/* Onboarding — 星图手册 · 新手引导。
+   分页玻璃导览册（Onboarding）+ 末页聚光实地导览（OnboardingTour）。
+   首次打开自动弹出（app.jsx 判 localStorage['sr.onboarded']），设置里可回看。
+   props: Onboarding { onClose, onSpotlight } · OnboardingTour { onClose } */
+const {
+  Button,
+  GlassPanel,
+  Icon
+} = window.StellarRaftDesignSystem_2866af;
+const SRK = window.SRKeys; // 快捷键提示按系统说话（⌘K / Ctrl+K）
+
+// 11 页内容：欢迎 · 星图 · 记忆 · 点亮 · 复习 · 收件箱 · 编辑器 · 视角 · 黑洞 · 到访 · 快捷键。
+const SR_GUIDE_PAGES = [{
+  id: 'welcome',
+  kicker: 'WELCOME',
+  icon: 'sparkles',
+  warm: true,
+  title: '知识是唯一的光',
+  body: '别人的笔记堆在仓库里；你的笔记是一片活着的深空。记得越牢，星越亮；久不回望，它会慢慢变暗。'
+}, {
+  id: 'map',
+  kicker: 'STAR MAP',
+  icon: 'orbit',
+  warm: false,
+  title: '你的星图',
+  body: '拖空白平移，滚轮缩放就像飞行般靠近或远离。在空白处右键，建一片星域，或点亮一颗新的知识星。'
+}, {
+  id: 'memory',
+  kicker: 'MEMORY',
+  icon: 'activity',
+  warm: false,
+  title: '会生长，也会遗忘',
+  body: '每颗星的亮度就是你此刻的记忆强度，按真实时间衰减。放着不看，它会一天天冷下去——这是提醒，不是责备。'
+}, {
+  id: 'ignite',
+  kicker: 'IGNITE',
+  icon: 'flame',
+  warm: true,
+  title: '点亮一颗星',
+  body: '在费曼内化模式里把这颗星讲透，它才被真正「点亮」——一次金色的时刻，记忆稳定度随之升起。'
+}, {
+  id: 'review',
+  kicker: 'REVIEW',
+  icon: 'repeat',
+  warm: false,
+  title: '让星不熄灭',
+  body: '复习会话按到期先后取卡：忘了 · 模糊 · 记得。间隔重复让亮起来的星，不再悄悄熄灭。'
+}, {
+  id: 'inbox',
+  kicker: 'INBOX',
+  icon: 'inbox',
+  warm: false,
+  title: '随手收，慢慢理',
+  body: '灵光一现先 ' + SRK.combo('Enter') + ' 收进收件箱，之后按建议一键归入星域。好友的星际来信也落在这里。'
+}, {
+  id: 'editor',
+  kicker: 'EDITOR',
+  icon: 'pen-line',
+  warm: false,
+  title: '专业的编辑台',
+  body: '块编辑、markdown 快捷输入、' + SRK.combo('F') + ' 查找替换、导入导出——像主流笔记软件一样顺手，又始终安静好看。'
+}, {
+  id: 'views',
+  kicker: 'AERIAL · 3D',
+  icon: 'satellite',
+  warm: false,
+  title: '换一个视角',
+  body: '亮度鸟瞰把整片星空摊成一张热图，一眼看清哪里正亮、哪里正暗；三维星系则让你在星海里绕行。'
+}, {
+  id: 'trash',
+  kicker: 'BLACK HOLE',
+  icon: 'aperture',
+  warm: false,
+  title: '删掉的去了哪',
+  body: '删除的星与星域坠入黑洞，绕着事件视界打转。想它回来，随时把它捞出，位置与连接都还在。'
+}, {
+  id: 'visit',
+  kicker: 'VISIT',
+  icon: 'telescope',
+  warm: true,
+  title: '星与星的相逢',
+  body: '用分享码邀请好友造访你的星系，也去看看别人的深空。遇到心动的星，把它收进自己的星域。'
+}, {
+  id: 'shortcuts',
+  kicker: 'SHORTCUTS',
+  icon: 'keyboard',
+  warm: true,
+  title: '就这些，去点亮吧',
+  body: SRK.combo('K') + ' 跳转任意星 · ' + SRK.combo('F') + ' 笔记内查找 · / 唤起块菜单 · Esc 收起浮层。想再看这份手册，去设置里找「上手引导」。'
+}];
+
+/* ============================================================
+   动画演示：每页一个「假光标 + 迷你场景」循环，演示该操作的真实手势。
+   工艺要点：全部 transform 合成器动画（光标不走 left/top）·
+   逐段缓动（keyframe 内覆写 timing-function）· 循环首尾状态闭合 ·
+   点击金色脉冲反馈 · 拖拽与画布位移物理同步。
+   纯 CSS keyframes（注入一次），零依赖；prefers-reduced-motion 静音成静态构图。
+   ============================================================ */
+const SR_DEMO_CSS = `
+.sr-demo{position:relative;width:360px;height:160px;flex:none;border-radius:16px;overflow:hidden;
+ background:radial-gradient(130% 115% at 50% 0%,#0b1226 0%,#05060f 74%);
+ border:1px solid rgba(159,198,255,.15);box-shadow:inset 0 0 36px rgba(0,0,0,.45)}
+.sr-demo *{box-sizing:border-box}
+.sr-demo .bd{position:absolute;width:2px;height:2px;border-radius:50%;background:rgba(159,198,255,.45)}
+.sr-star{position:absolute;border-radius:50%}
+.sr-cur{position:absolute;left:0;top:0;z-index:9;opacity:0;pointer-events:none;will-change:transform;
+ filter:drop-shadow(0 2px 3px rgba(0,0,0,.65))}
+.sr-pulse{position:absolute;width:26px;height:26px;margin:-13px 0 0 -13px;border-radius:50%;
+ border:1.5px solid rgba(255,217,138,.8);opacity:0;pointer-events:none}
+.sr-tag{position:absolute;font:600 10px/1 var(--font-mono,monospace);letter-spacing:.05em;
+ padding:3px 8px;border-radius:999px;white-space:nowrap}
+.sr-demo.reduce *{animation:none!important}
+@keyframes dm-tw{0%,100%{opacity:.3}50%{opacity:.9}}
+@keyframes dm-spin{to{transform:rotate(360deg)}}
+
+/* — welcome（5s）：一颗星被点亮，闭环回到暗星 — */
+@keyframes w-star{0%{background:#4a5c8a;transform:scale(.78);box-shadow:0 0 6px rgba(90,116,173,.5)}
+ 30%{background:#9fc6ff;box-shadow:0 0 10px rgba(159,198,255,.6)}
+ 44%{background:#fff4d6;transform:scale(1.16);box-shadow:0 0 30px 8px rgba(255,244,214,.95)}
+ 54%{transform:scale(.98)}60%{background:#ffd98a;transform:scale(1.04);box-shadow:0 0 18px 4px rgba(255,217,138,.7)}
+ 78%{background:#ffd98a;transform:scale(1);box-shadow:0 0 14px 3px rgba(255,217,138,.6)}
+ 100%{background:#4a5c8a;transform:scale(.78);box-shadow:0 0 6px rgba(90,116,173,.5)}}
+@keyframes w-ring{0%,36%{transform:scale(.35);opacity:0}44%{opacity:.85}62%,100%{transform:scale(2.6);opacity:0}}
+@keyframes w-spike{0%,38%{opacity:0;transform:scale(.2) rotate(var(--r,0deg))}46%,58%{opacity:.85;transform:scale(1) rotate(var(--r,0deg))}72%,100%{opacity:0;transform:scale(.2) rotate(var(--r,0deg))}}
+
+/* — map（7s）：拖拽平移（画布同步）→ 右键 → 菜单 → 新星 — */
+@keyframes mp-cur{0%{transform:translate(272px,124px);opacity:0}5%{opacity:1}6%{transform:translate(272px,124px)}
+ 14%{transform:translate(202px,96px)}16%{transform:translate(202px,96px);animation-timing-function:cubic-bezier(.65,0,.35,1)}
+ 38%,40%{transform:translate(137px,71px)}
+ 50%{transform:translate(242px,54px)}62%{transform:translate(298px,112px)}
+ 76%{transform:translate(298px,112px);opacity:1}84%{transform:translate(308px,126px);opacity:0}
+ 100%{transform:translate(272px,124px);opacity:0}}
+@keyframes mp-press{0%,13%{transform:scale(1)}15%,39%{transform:scale(.85)}41%,51%{transform:scale(1)}
+ 53%,54%{transform:scale(.85)}56%,61%{transform:scale(1)}63%,64%{transform:scale(.85)}66%,100%{transform:scale(1)}}
+@keyframes mp-pan{0%,16%{transform:translate(0,0);animation-timing-function:cubic-bezier(.65,0,.35,1)}
+ 38%,84%{transform:translate(-65px,-25px);animation-timing-function:cubic-bezier(.65,0,.35,1)}
+ 96%,100%{transform:translate(0,0)}}
+@keyframes mp-pulse1{0%,51%{transform:scale(.3);opacity:0}53%{opacity:.75}62%,100%{transform:scale(1.9);opacity:0}}
+@keyframes mp-pulse2{0%,62%{transform:scale(.3);opacity:0}64%{opacity:.75}73%,100%{transform:scale(1.9);opacity:0}}
+@keyframes mp-menu{0%,54%{opacity:0;transform:translateY(5px) scale(.95)}58%,69%{opacity:1;transform:translateY(0) scale(1)}
+ 73%,100%{opacity:0;transform:translateY(0) scale(.98)}}
+@keyframes mp-row{0%,62%{background:transparent;color:#c9d6f0}64%,69%{background:rgba(255,217,138,.15);color:#ffd98a}
+ 70%,100%{background:transparent;color:#c9d6f0}}
+@keyframes mp-star{0%,73%{transform:scale(0);opacity:0}77%{opacity:1}78%{transform:scale(1.25)}81%{transform:scale(1)}
+ 90%{transform:scale(1);opacity:1}97%,100%{transform:scale(.5);opacity:0}}
+@keyframes mp-ring{0%,74%{transform:scale(.3);opacity:0}79%{opacity:.85}90%,100%{transform:scale(2.3);opacity:0}}
+
+/* — memory（5.5s）：星群冷却变暗 → 一次复习回暖，闭环 — */
+@keyframes me-cool{0%,10%{background:#fff1cf;box-shadow:0 0 12px 2px rgba(255,241,207,.8)}
+ 60%,78%{background:#5a74ad;box-shadow:0 0 4px rgba(90,116,173,.45)}
+ 88%{background:#ffe9b8;box-shadow:0 0 14px 3px rgba(255,233,184,.85)}
+ 96%,100%{background:#fff1cf;box-shadow:0 0 12px 2px rgba(255,241,207,.8)}}
+@keyframes me-mark{0%,10%{transform:translateX(4px)}60%,78%{transform:translateX(78px)}
+ 88%{transform:translateX(18px)}96%,100%{transform:translateX(4px)}}
+
+/* — ignite（5.5s）：讲解逐行铺开 → 金色点亮爆发 + 粒子环 — */
+@keyframes ig-l1{0%,8%{transform:scaleX(0)}18%,100%{transform:scaleX(1)}}
+@keyframes ig-l2{0%,20%{transform:scaleX(0)}32%,100%{transform:scaleX(1)}}
+@keyframes ig-l3{0%,34%{transform:scaleX(0)}46%,100%{transform:scaleX(1)}}
+@keyframes ig-star{0%,48%{background:#46608f;transform:scale(.85);box-shadow:0 0 6px rgba(90,116,173,.5)}
+ 56%{transform:scale(1.3);animation-timing-function:cubic-bezier(.22,1,.36,1)}
+ 60%{background:#fff4d6;box-shadow:0 0 26px 8px rgba(255,217,138,.9)}64%{transform:scale(1.02)}
+ 80%,90%{background:#ffd98a;transform:scale(1);box-shadow:0 0 14px 3px rgba(255,217,138,.6)}
+ 98%,100%{background:#46608f;transform:scale(.85);box-shadow:0 0 6px rgba(90,116,173,.5)}}
+@keyframes ig-ring{0%,52%{transform:scale(.3);opacity:0}58%{opacity:.9}72%,100%{transform:scale(2.6);opacity:0}}
+@keyframes ig-p{0%,54%{transform:translate(0,0) scale(1);opacity:0}57%{opacity:1}
+ 74%,100%{transform:translate(var(--dx),var(--dy)) scale(.2);opacity:0}}
+@keyframes ig-conn{0%,50%{stroke:rgba(159,198,255,.25)}60%,80%{stroke:rgba(255,217,138,.7)}95%,100%{stroke:rgba(159,198,255,.25)}}
+@keyframes ig-wrap{0%{opacity:0}4%{opacity:1}92%{opacity:1}98%,100%{opacity:0}}
+@keyframes ig-chip{0%,58%{opacity:0;transform:translateY(6px)}64%,84%{opacity:1;transform:translateY(0)}
+ 92%,100%{opacity:0;transform:translateY(-4px)}}
+
+/* — review（5s）：点「记得」→ 卡片飞出 → 下一张滑入（无缝洗牌） — */
+@keyframes rv-cur{0%{transform:translate(196px,134px);opacity:0}8%{opacity:1}
+ 24%{transform:translate(258px,119px)}44%,58%{transform:translate(258px,119px)}
+ 72%{transform:translate(286px,138px);opacity:1}82%,100%{transform:translate(286px,138px);opacity:0}}
+@keyframes rv-press{0%,43%{transform:scale(1)}45%,47%{transform:scale(.85)}50%,100%{transform:scale(1)}}
+@keyframes rv-pulse{0%,44%{transform:scale(.3);opacity:0}46%{opacity:.75}56%,100%{transform:scale(1.9);opacity:0}}
+@keyframes rv-btn{0%,44%{background:rgba(159,198,255,.08);border-color:rgba(159,198,255,.18);color:#8a94a8}
+ 47%,62%{background:rgba(255,217,138,.2);border-color:rgba(255,217,138,.55);color:#ffd98a}
+ 70%,100%{background:rgba(159,198,255,.08);border-color:rgba(159,198,255,.18);color:#8a94a8}}
+@keyframes rv-card1{0%,48%{transform:translate(0,0) rotate(0);opacity:1;animation-timing-function:cubic-bezier(.5,0,.75,0)}
+ 64%,100%{transform:translate(190px,-10px) rotate(8deg);opacity:0}}
+@keyframes rv-card2{0%,60%{transform:translate(-190px,8px) rotate(-6deg);opacity:0}64%{opacity:1}
+ 78%,100%{transform:translate(0,0) rotate(0);opacity:1}}
+@keyframes rv-chip{0%,50%{opacity:0;transform:translateY(6px)}56%,70%{opacity:1;transform:translateY(0)}
+ 78%,100%{opacity:0;transform:translateY(-6px)}}
+
+/* — inbox（5.5s）：打字 → ⌘Enter 键按下 → 卡片弧线落入收件箱 — */
+@keyframes ib-wrap{0%{opacity:0}5%{opacity:1}92%{opacity:1}98%,100%{opacity:0}}
+@keyframes ib-type{0%,6%{width:0}30%,100%{width:100px}}
+@keyframes ib-key{0%,44%{transform:translateY(0);background:rgba(159,198,255,.08);border-color:rgba(159,198,255,.25);color:#c9d6f0;box-shadow:0 3px 0 rgba(8,12,28,.95)}
+ 48%,54%{transform:translateY(3px);background:rgba(255,217,138,.22);border-color:rgba(255,217,138,.6);color:#ffd98a;box-shadow:0 0 0 rgba(8,12,28,.95)}
+ 58%,100%{transform:translateY(0);background:rgba(159,198,255,.08);border-color:rgba(159,198,255,.25);color:#c9d6f0;box-shadow:0 3px 0 rgba(8,12,28,.95)}}
+@keyframes ib-chip{0%,50%{opacity:0;transform:translate(0,0) scale(1)}
+ 54%{opacity:1;transform:translate(0,0) scale(1);animation-timing-function:cubic-bezier(.5,0,.75,0)}
+ 74%{transform:translate(58px,66px) scale(.5);opacity:.9}78%,100%{opacity:0;transform:translate(58px,66px) scale(.4)}}
+@keyframes ib-tray{0%,72%{border-color:rgba(159,198,255,.35);box-shadow:none}
+ 76%,84%{border-color:rgba(255,217,138,.6);box-shadow:0 0 14px rgba(255,217,138,.35)}
+ 92%,100%{border-color:rgba(159,198,255,.35);box-shadow:none}}
+@keyframes ib-n3{0%,76%{opacity:1;transform:translateY(0)}82%,100%{opacity:0;transform:translateY(-5px)}}
+@keyframes ib-n4{0%,77%{opacity:0;transform:translateY(5px)}84%,100%{opacity:1;transform:translateY(0)}}
+
+/* — editor（5.5s）：# 前缀即时转标题 · [] 转待办 · 勾选划线 — */
+@keyframes ed-wrap{0%{opacity:0}4%{opacity:1}93%{opacity:1}99%,100%{opacity:0}}
+@keyframes ed-t1{0%,6%{clip-path:inset(0 100% 0 0)}24%,100%{clip-path:inset(0 -8% 0 0)}}
+@keyframes ed-hash{0%,5%{opacity:0;width:0}7%,28%{opacity:1;width:15px}33%,100%{opacity:0;width:0}}
+@keyframes ed-size{0%,28%{font-size:12px;color:#8a94a8}36%,100%{font-size:19px;color:#e8eefc}}
+@keyframes ed-l2{0%,42%{opacity:0}46%,100%{opacity:1}}
+@keyframes ed-t2{0%,46%{clip-path:inset(0 100% 0 0)}64%,100%{clip-path:inset(0 -8% 0 0)}}
+@keyframes ed-br{0%,44%{opacity:0;width:0}46%,62%{opacity:1;width:18px}67%,100%{opacity:0;width:0}}
+@keyframes ed-box{0%,64%{opacity:0;transform:scale(.6)}69%,100%{opacity:1;transform:scale(1)}}
+@keyframes ed-fill{0%,76%{background:transparent;border-color:rgba(159,198,255,.5)}82%,100%{background:#ffd98a;border-color:#ffd98a}}
+@keyframes ed-check{0%,78%{stroke-dashoffset:14}86%,100%{stroke-dashoffset:0}}
+@keyframes ed-blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+
+/* — views（6s）：点分段开关 星图 ⇄ 鸟瞰热图（热图格子逐格铺开） — */
+@keyframes vw-cur{0%{transform:translate(180px,120px);opacity:0}8%{opacity:1}
+ 22%{transform:translate(319px,27px)}40%,42%{transform:translate(319px,27px)}
+ 56%{transform:translate(273px,27px)}66%,68%{transform:translate(273px,27px)}
+ 80%{transform:translate(240px,84px);opacity:1}90%,100%{transform:translate(240px,84px);opacity:0}}
+@keyframes vw-press{0%,39%{transform:scale(1)}41%,43%{transform:scale(.85)}45%,65%{transform:scale(1)}
+ 67%,69%{transform:scale(.85)}71%,100%{transform:scale(1)}}
+@keyframes vw-pulse1{0%,40%{transform:scale(.3);opacity:0}42%{opacity:.75}52%,100%{transform:scale(1.9);opacity:0}}
+@keyframes vw-pulse2{0%,66%{transform:scale(.3);opacity:0}68%{opacity:.75}78%,100%{transform:scale(1.9);opacity:0}}
+@keyframes vw-thumb{0%,41%{transform:translateX(0)}45%,67%{transform:translateX(46px)}71%,100%{transform:translateX(0)}}
+@keyframes vw-lab1{0%,41%{color:#e8eefc}45%,67%{color:#8a94a8}71%,100%{color:#e8eefc}}
+@keyframes vw-lab2{0%,41%{color:#8a94a8}45%,67%{color:#e8eefc}71%,100%{color:#8a94a8}}
+@keyframes vw-map{0%,42%{opacity:1;transform:scale(1)}48%,68%{opacity:0;transform:scale(.93)}76%,100%{opacity:1;transform:scale(1)}}
+@keyframes vw-cell{0%,44%{opacity:0;transform:scale(.5)}50%,66%{opacity:.92;transform:scale(1)}72%,100%{opacity:0;transform:scale(.5)}}
+
+/* — trash（5.5s）：拖星到黑洞 → 螺旋吞没 → 星域重生，闭环 — */
+@keyframes tr-cur{0%{transform:translate(38px,124px);opacity:0}6%{opacity:1}
+ 16%{transform:translate(70px,52px)}18%{transform:translate(70px,52px);animation-timing-function:cubic-bezier(.65,0,.35,1)}
+ 50%,52%{transform:translate(236px,92px)}
+ 64%{transform:translate(206px,124px);opacity:1}74%,100%{transform:translate(206px,124px);opacity:0}}
+@keyframes tr-press{0%,15%{transform:scale(1)}17%,51%{transform:scale(.85)}54%,100%{transform:scale(1)}}
+@keyframes tr-star{0%,18%{transform:translate(70px,52px) rotate(0) scale(1);opacity:1;animation-timing-function:cubic-bezier(.65,0,.35,1)}
+ 50%{transform:translate(236px,92px) rotate(50deg) scale(1);animation-timing-function:cubic-bezier(.5,0,.75,0)}
+ 66%{transform:translate(272px,104px) rotate(460deg) scale(0);opacity:.9}
+ 67%,88%{transform:translate(70px,52px) scale(0);opacity:0}
+ 96%,100%{transform:translate(70px,52px) rotate(0) scale(1);opacity:1}}
+@keyframes tr-flash{0%,62%{box-shadow:0 0 0 rgba(255,217,138,0)}66%,72%{box-shadow:0 0 18px rgba(255,217,138,.5)}
+ 80%,100%{box-shadow:0 0 0 rgba(255,217,138,0)}}
+
+/* — visit（5.5s）：金弧相连 → 光点旅行 → 收纳新星 — */
+@keyframes vi-arc{0%,10%{stroke-dashoffset:300;opacity:0}16%{opacity:1}48%,86%{stroke-dashoffset:0;opacity:1}
+ 94%,100%{stroke-dashoffset:0;opacity:0}}
+@keyframes vi-dot{0%,24%{offset-distance:0%;opacity:0}30%{opacity:1}62%{offset-distance:100%;opacity:1}
+ 66%,100%{offset-distance:100%;opacity:0}}
+@keyframes vi-adopt{0%,64%{transform:scale(0);opacity:0}70%{transform:scale(1.25);opacity:1}
+ 74%,88%{transform:scale(1);opacity:1}96%,100%{transform:scale(0);opacity:0}}
+@keyframes vi-ring{0%,65%{transform:scale(.3);opacity:0}70%{opacity:.85}80%,100%{transform:scale(2.3);opacity:0}}
+@keyframes vi-chip{0%,68%{opacity:0;transform:translateY(5px)}74%,86%{opacity:1;transform:translateY(0)}
+ 94%,100%{opacity:0;transform:translateY(-4px)}}
+
+/* — shortcuts（4.8s）：键帽依次按下（3D 底边压缩 + 金色亮起） — */
+@keyframes sc-key{0%,4%{transform:translateY(0);box-shadow:0 3px 0 rgba(8,12,28,.95),0 5px 10px rgba(0,0,0,.35);background:rgba(159,198,255,.07);color:#c9d6f0;border-color:rgba(159,198,255,.22)}
+ 8%,14%{transform:translateY(3px);box-shadow:0 0 0 rgba(8,12,28,.95),0 0 14px rgba(255,217,138,.4);background:rgba(255,217,138,.2);color:#ffd98a;border-color:rgba(255,217,138,.55)}
+ 19%,100%{transform:translateY(0);box-shadow:0 3px 0 rgba(8,12,28,.95),0 5px 10px rgba(0,0,0,.35);background:rgba(159,198,255,.07);color:#c9d6f0;border-color:rgba(159,198,255,.22)}}
+`;
+function injectDemoCss() {
+  if (typeof document === 'undefined' || document.getElementById('sr-onb-demo-css')) return;
+  const s = document.createElement('style');
+  s.id = 'sr-onb-demo-css';
+  s.textContent = SR_DEMO_CSS;
+  document.head.appendChild(s);
+}
+const EO = 'cubic-bezier(.22,1,.36,1)'; // ease-out-quint：默认逐段缓动
+
+/* 假光标：外层走位（translate keyframes），内层按压缩放，尖端为原点 */
+function Cursor({
+  move,
+  press,
+  dur
+}) {
+  return /*#__PURE__*/React.createElement("span", {
+    className: "sr-cur",
+    style: {
+      animation: `${move} ${dur} ${EO} infinite`
+    }
+  }, /*#__PURE__*/React.createElement("svg", {
+    style: {
+      display: 'block',
+      transformOrigin: '2px 2px',
+      animation: press ? `${press} ${dur} ${EO} infinite` : 'none'
+    },
+    width: "18",
+    height: "18",
+    viewBox: "0 0 24 24",
+    "aria-hidden": "true"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M0 0 L0 17.5 L4.8 12.7 L7.6 19 L10.6 17.7 L7.8 11.6 L14.5 11 Z",
+    fill: "#f2f6ff",
+    stroke: "rgba(3,4,12,.9)",
+    strokeWidth: "1.3",
+    strokeLinejoin: "round"
+  })));
+}
+function Pulse({
+  x,
+  y,
+  anim,
+  dur
+}) {
+  return /*#__PURE__*/React.createElement("span", {
+    className: "sr-pulse",
+    style: {
+      left: x,
+      top: y,
+      animation: `${anim} ${dur} ${EO} infinite`
+    }
+  });
+}
+const Field = () => /*#__PURE__*/React.createElement("div", {
+  "aria-hidden": "true"
+}, [[18, 22], [318, 32], [64, 128], [296, 118], [208, 16], [126, 64], [262, 74], [44, 96], [338, 88], [168, 138], [232, 132], [90, 40]].map((d, i) => /*#__PURE__*/React.createElement("span", {
+  key: i,
+  className: "bd",
+  style: {
+    left: d[0],
+    top: d[1],
+    animation: `dm-tw ${2.6 + i % 4 * 0.7}s ease-in-out ${i * 0.28}s infinite`
+  }
+})));
+const dot = (x, y, size, bg, glow) => ({
+  left: x,
+  top: y,
+  width: size,
+  height: size,
+  background: bg,
+  boxShadow: glow,
+  marginLeft: -size / 2,
+  marginTop: -size / 2
+});
+const kf = (name, dur, extra) => ({
+  animation: `${name} ${dur} ${EO} infinite${extra ? ' ' + extra : ''}`
+});
+
+/* 每页的演示场景。id → 一个 360×160 迷你舞台的无缝循环。 */
+function GuideDemo({
+  id
+}) {
+  React.useEffect(() => {
+    injectDemoCss();
+  }, []);
+  const reduce = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const scenes = {
+    /* 欢迎：一颗星被点亮（衍射芒 + 双环），再缓缓归于暗 */
+    welcome: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Field, null), /*#__PURE__*/React.createElement("span", {
+      className: "sr-star",
+      style: {
+        ...dot(185, 82, 16, '#4a5c8a'),
+        ...kf('w-star', '5s')
+      }
+    }), [0, 90].map((r, i) => /*#__PURE__*/React.createElement("span", {
+      key: i,
+      style: {
+        position: 'absolute',
+        left: 185,
+        top: 82,
+        width: 2,
+        height: 52,
+        marginLeft: -1,
+        marginTop: -26,
+        '--r': r + 'deg',
+        background: 'linear-gradient(180deg,transparent,rgba(255,236,190,.85),transparent)',
+        ...kf('w-spike', '5s')
+      }
+    })), /*#__PURE__*/React.createElement("span", {
+      style: {
+        position: 'absolute',
+        left: 185,
+        top: 82,
+        width: 16,
+        height: 16,
+        margin: '-8px 0 0 -8px',
+        borderRadius: '50%',
+        border: '1.5px solid rgba(255,217,138,.7)',
+        ...kf('w-ring', '5s')
+      }
+    }), /*#__PURE__*/React.createElement("span", {
+      className: "sr-star",
+      style: dot(95, 48, 4, 'rgba(159,198,255,.75)')
+    }), /*#__PURE__*/React.createElement("span", {
+      className: "sr-star",
+      style: dot(268, 62, 5, 'rgba(188,208,255,.8)')
+    }), /*#__PURE__*/React.createElement("span", {
+      className: "sr-star",
+      style: dot(258, 122, 3, 'rgba(159,198,255,.6)')
+    }), /*#__PURE__*/React.createElement("span", {
+      className: "sr-star",
+      style: dot(120, 126, 4, 'rgba(199,220,255,.7)')
+    })),
+    /* 星图：按住拖空白 → 画布同步平移 → 右键 → 菜单选「新建知识星」→ 新星入场 */
+    map: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+      style: {
+        position: 'absolute',
+        inset: 0,
+        willChange: 'transform',
+        ...kf('mp-pan', '7s')
+      }
+    }, /*#__PURE__*/React.createElement(Field, null), /*#__PURE__*/React.createElement("span", {
+      style: {
+        position: 'absolute',
+        left: 100,
+        top: 74,
+        width: 118,
+        height: 118,
+        margin: '-59px 0 0 -59px',
+        borderRadius: '50%',
+        border: '1px solid rgba(255,217,138,.16)',
+        background: 'radial-gradient(circle,rgba(255,217,138,.05),transparent 70%)'
+      }
+    }), /*#__PURE__*/React.createElement("svg", {
+      style: {
+        position: 'absolute',
+        left: 0,
+        top: 0
+      },
+      width: "360",
+      height: "160",
+      "aria-hidden": "true"
+    }, /*#__PURE__*/React.createElement("path", {
+      d: "M100 74 Q 80 58 64 50",
+      fill: "none",
+      stroke: "rgba(159,198,255,.3)",
+      strokeWidth: "1"
+    }), /*#__PURE__*/React.createElement("path", {
+      d: "M100 74 Q 122 90 136 100",
+      fill: "none",
+      stroke: "rgba(159,198,255,.3)",
+      strokeWidth: "1"
+    }), /*#__PURE__*/React.createElement("path", {
+      d: "M100 74 Q 130 56 150 44",
+      fill: "none",
+      stroke: "rgba(159,198,255,.3)",
+      strokeWidth: "1"
+    })), /*#__PURE__*/React.createElement("span", {
+      className: "sr-star",
+      style: dot(100, 74, 13, '#ffd98a', '0 0 14px rgba(255,217,138,.7)')
+    }), /*#__PURE__*/React.createElement("span", {
+      style: {
+        position: 'absolute',
+        left: 100,
+        top: 92,
+        transform: 'translateX(-50%)',
+        fontSize: 9,
+        color: 'rgba(255,217,138,.75)',
+        letterSpacing: '.12em'
+      }
+    }, "\u91CF\u5B50\u529B\u5B66"), /*#__PURE__*/React.createElement("span", {
+      className: "sr-star",
+      style: dot(64, 50, 6, '#9fc6ff', '0 0 7px rgba(159,198,255,.6)')
+    }), /*#__PURE__*/React.createElement("span", {
+      className: "sr-star",
+      style: dot(136, 100, 7, '#c7dcff', '0 0 7px rgba(199,220,255,.55)')
+    }), /*#__PURE__*/React.createElement("span", {
+      className: "sr-star",
+      style: dot(150, 44, 5, '#bcd0ff')
+    }), /*#__PURE__*/React.createElement("span", {
+      style: {
+        position: 'absolute',
+        left: 330,
+        top: 150,
+        width: 96,
+        height: 96,
+        margin: '-48px 0 0 -48px',
+        borderRadius: '50%',
+        border: '1px solid rgba(159,198,255,.14)'
+      }
+    })), /*#__PURE__*/React.createElement(Pulse, {
+      x: 242,
+      y: 54,
+      anim: "mp-pulse1",
+      dur: "7s"
+    }), /*#__PURE__*/React.createElement(Pulse, {
+      x: 298,
+      y: 112,
+      anim: "mp-pulse2",
+      dur: "7s"
+    }), /*#__PURE__*/React.createElement("div", {
+      style: {
+        position: 'absolute',
+        left: 248,
+        top: 60,
+        width: 100,
+        borderRadius: 10,
+        overflow: 'hidden',
+        background: 'rgba(12,17,38,.96)',
+        border: '1px solid rgba(159,198,255,.28)',
+        boxShadow: '0 10px 26px rgba(0,0,0,.5)',
+        ...kf('mp-menu', '7s')
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        padding: '5px 9px 3px',
+        fontSize: 8,
+        letterSpacing: '.14em',
+        color: '#8a94a8'
+      }
+    }, "\u5728\u6B64\u521B\u5EFA"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        padding: '5px 9px',
+        fontSize: 10.5,
+        color: '#c9d6f0',
+        display: 'flex',
+        alignItems: 'center',
+        gap: 6
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        width: 5,
+        height: 5,
+        borderRadius: '50%',
+        background: '#9fc6ff'
+      }
+    }), "\u65B0\u5EFA\u661F\u57DF"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        padding: '5px 9px 7px',
+        fontSize: 10.5,
+        display: 'flex',
+        alignItems: 'center',
+        gap: 6,
+        ...kf('mp-row', '7s')
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        width: 5,
+        height: 5,
+        borderRadius: '50%',
+        background: '#ffd98a'
+      }
+    }), "\u65B0\u5EFA\u77E5\u8BC6\u661F")), /*#__PURE__*/React.createElement("span", {
+      className: "sr-star",
+      style: {
+        ...dot(242, 54, 12, '#9fc6ff', '0 0 12px rgba(159,198,255,.85)'),
+        ...kf('mp-star', '7s')
+      }
+    }), /*#__PURE__*/React.createElement("span", {
+      style: {
+        position: 'absolute',
+        left: 242,
+        top: 54,
+        width: 12,
+        height: 12,
+        margin: '-6px 0 0 -6px',
+        borderRadius: '50%',
+        border: '1.5px solid rgba(159,198,255,.8)',
+        ...kf('mp-ring', '7s')
+      }
+    }), /*#__PURE__*/React.createElement(Cursor, {
+      move: "mp-cur",
+      press: "mp-press",
+      dur: "7s"
+    })),
+    /* 记忆：星群按错开节奏冷却变暗，记忆温度计同步滑向冷端；一次复习回暖 */
+    memory: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Field, null), [[105, 54, 13, 0], [172, 92, 10, 0.18], [238, 50, 9, 0.36], [150, 120, 8, 0.54]].map((s, i) => /*#__PURE__*/React.createElement("span", {
+      key: i,
+      className: "sr-star",
+      style: {
+        ...dot(s[0], s[1], s[2], '#fff1cf'),
+        animation: `me-cool 5.5s ${EO} ${s[3]}s infinite`
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      style: {
+        position: 'absolute',
+        left: 232,
+        top: 124,
+        width: 92,
+        height: 5,
+        borderRadius: 3,
+        background: 'linear-gradient(90deg,#ffe9b8,#9fc6ff 55%,#46608f)'
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        position: 'absolute',
+        top: -2,
+        left: 0,
+        width: 9,
+        height: 9,
+        borderRadius: '50%',
+        background: '#e8eefc',
+        boxShadow: '0 0 6px rgba(232,238,252,.8)',
+        ...kf('me-mark', '5.5s')
+      }
+    })), /*#__PURE__*/React.createElement("span", {
+      className: "sr-tag",
+      style: {
+        left: 20,
+        top: 126,
+        background: 'transparent',
+        color: 'var(--text-3)',
+        padding: 0
+      }
+    }, "R = e^(\u2212\u0394t/S)")),
+    /* 点亮：讲解逐行铺开 → 连接线转金 → 星爆发点亮 + 粒子环 + 徽章 */
+    ignite: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Field, null), /*#__PURE__*/React.createElement("svg", {
+      style: {
+        position: 'absolute',
+        left: 0,
+        top: 0
+      },
+      width: "360",
+      height: "160",
+      "aria-hidden": "true"
+    }, /*#__PURE__*/React.createElement("path", {
+      d: "M172 74 C 208 74, 226 72, 254 72",
+      fill: "none",
+      strokeWidth: "1.2",
+      style: kf('ig-conn', '5.5s')
+    })), /*#__PURE__*/React.createElement("div", {
+      style: {
+        ...kf('ig-wrap', '5.5s')
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        position: 'absolute',
+        left: 22,
+        top: 24,
+        width: 150,
+        height: 102,
+        borderRadius: 12,
+        background: 'rgba(12,17,38,.85)',
+        border: '1px solid rgba(159,198,255,.22)',
+        padding: '12px 13px'
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 8,
+        letterSpacing: '.16em',
+        color: '#8a94a8',
+        marginBottom: 9
+      }
+    }, "\u8D39\u66FC\u5185\u5316 \xB7 \u8BB2\u7ED9\u81EA\u5DF1\u542C"), [[118, 'ig-l1'], [96, 'ig-l2'], [110, 'ig-l3']].map((l, i) => /*#__PURE__*/React.createElement("span", {
+      key: i,
+      style: {
+        display: 'block',
+        width: l[0],
+        height: 5,
+        borderRadius: 3,
+        marginBottom: 9,
+        background: 'rgba(159,198,255,.4)',
+        transformOrigin: 'left center',
+        ...kf(l[1], '5.5s')
+      }
+    }))), /*#__PURE__*/React.createElement("span", {
+      className: "sr-tag",
+      style: {
+        left: 216,
+        top: 106,
+        background: 'rgba(255,217,138,.14)',
+        border: '1px solid rgba(255,217,138,.5)',
+        color: '#ffd98a',
+        ...kf('ig-chip', '5.5s')
+      }
+    }, "\u70B9\u4EAE +1 \xB7 \u878D\u4F1A\u8D2F\u901A")), /*#__PURE__*/React.createElement("span", {
+      className: "sr-star",
+      style: {
+        ...dot(262, 72, 15, '#46608f'),
+        ...kf('ig-star', '5.5s')
+      }
+    }), /*#__PURE__*/React.createElement("span", {
+      style: {
+        position: 'absolute',
+        left: 262,
+        top: 72,
+        width: 15,
+        height: 15,
+        margin: '-7.5px 0 0 -7.5px',
+        borderRadius: '50%',
+        border: '1.5px solid rgba(255,217,138,.85)',
+        ...kf('ig-ring', '5.5s')
+      }
+    }), [[24, -16], [28, 10], [6, -28], [-6, 26], [20, 24], [-14, -20]].map((p, i) => /*#__PURE__*/React.createElement("span", {
+      key: i,
+      className: "sr-star",
+      style: {
+        ...dot(262, 72, 4, '#ffe9b8', '0 0 6px rgba(255,233,184,.9)'),
+        '--dx': p[0] + 'px',
+        '--dy': p[1] + 'px',
+        ...kf('ig-p', '5.5s')
+      }
+    }))),
+    /* 复习：点「记得」→ 金色确认 → 卡片飞出 → 下一张滑入（洗牌闭环） */
+    review: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Field, null), ['rv-card1', 'rv-card2'].map((a, i) => /*#__PURE__*/React.createElement("div", {
+      key: i,
+      style: {
+        position: 'absolute',
+        left: 100,
+        top: 24,
+        width: 160,
+        height: 64,
+        borderRadius: 12,
+        background: 'rgba(12,17,38,.94)',
+        border: '1px solid rgba(159,198,255,.28)',
+        boxShadow: '0 8px 22px rgba(0,0,0,.45)',
+        willChange: 'transform',
+        ...kf(a, '5s')
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        padding: '11px 14px'
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 8.5,
+        letterSpacing: '.18em',
+        color: '#8a94a8'
+      }
+    }, "\u91CF\u5B50\u529B\u5B66 \xB7 \u5230\u671F"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 14,
+        color: '#e8eefc',
+        marginTop: 6,
+        fontWeight: 300
+      }
+    }, i === 0 ? '贝尔不等式' : '纠缠态')))), [['忘了', 100], ['模糊', 168], ['记得', 236]].map((b, i) => /*#__PURE__*/React.createElement("span", {
+      key: i,
+      className: "sr-tag",
+      style: {
+        left: b[1],
+        top: 108,
+        padding: '5px 12px',
+        fontSize: 10.5,
+        border: '1px solid rgba(159,198,255,.18)',
+        background: 'rgba(159,198,255,.08)',
+        color: '#8a94a8',
+        ...(i === 2 ? kf('rv-btn', '5s') : {})
+      }
+    }, b[0])), /*#__PURE__*/React.createElement("span", {
+      className: "sr-tag",
+      style: {
+        left: 212,
+        top: 6,
+        background: 'transparent',
+        color: '#ffd98a',
+        ...kf('rv-chip', '5s')
+      }
+    }, "\u8BB0\u5FC6\u7A33\u5B9A\u5EA6 \u2191"), /*#__PURE__*/React.createElement(Pulse, {
+      x: 258,
+      y: 119,
+      anim: "rv-pulse",
+      dur: "5s"
+    }), /*#__PURE__*/React.createElement(Cursor, {
+      move: "rv-cur",
+      press: "rv-press",
+      dur: "5s"
+    })),
+    /* 收件箱：速记打字 → ⌘Enter 实体键按下 → 内容化作卡片弧线落入收件箱，角标 3→4 */
+    inbox: /*#__PURE__*/React.createElement("div", {
+      style: {
+        position: 'absolute',
+        inset: 0,
+        ...kf('ib-wrap', '5.5s')
+      }
+    }, /*#__PURE__*/React.createElement(Field, null), /*#__PURE__*/React.createElement("div", {
+      style: {
+        position: 'absolute',
+        left: 56,
+        top: 30,
+        width: 150,
+        height: 32,
+        borderRadius: 10,
+        background: 'rgba(12,17,38,.9)',
+        border: '1px solid rgba(159,198,255,.25)',
+        display: 'flex',
+        alignItems: 'center',
+        padding: '0 12px'
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        height: 6,
+        borderRadius: 3,
+        background: 'rgba(159,198,255,.6)',
+        animation: `ib-type 5.5s steps(14) infinite`
+      }
+    })), /*#__PURE__*/React.createElement("span", {
+      className: "sr-tag",
+      style: {
+        left: 232,
+        top: 34,
+        padding: '7px 10px',
+        fontSize: 10.5,
+        borderRadius: 8,
+        border: '1px solid rgba(159,198,255,.25)',
+        ...kf('ib-key', '5.5s')
+      }
+    }, SRK.mac ? '⌘ Enter' : 'Ctrl+Enter'), /*#__PURE__*/React.createElement("span", {
+      style: {
+        position: 'absolute',
+        left: 70,
+        top: 36,
+        width: 96,
+        height: 20,
+        borderRadius: 7,
+        background: 'rgba(159,198,255,.16)',
+        border: '1px solid rgba(159,198,255,.4)',
+        willChange: 'transform',
+        ...kf('ib-chip', '5.5s')
+      }
+    }), /*#__PURE__*/React.createElement("div", {
+      style: {
+        position: 'absolute',
+        left: 125,
+        top: 106,
+        width: 110,
+        height: 30,
+        borderRadius: 9,
+        border: '1px dashed rgba(159,198,255,.35)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 7,
+        fontSize: 10,
+        color: '#8a94a8',
+        fontFamily: 'var(--font-mono)',
+        ...kf('ib-tray', '5.5s')
+      }
+    }, "\u6536\u4EF6\u7BB1", /*#__PURE__*/React.createElement("span", {
+      style: {
+        position: 'relative',
+        width: 16,
+        height: 16,
+        borderRadius: '50%',
+        background: 'rgba(255,217,138,.16)',
+        border: '1px solid rgba(255,217,138,.45)',
+        fontSize: 9,
+        color: '#ffd98a'
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        position: 'absolute',
+        inset: 0,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        ...kf('ib-n3', '5.5s')
+      }
+    }, "3"), /*#__PURE__*/React.createElement("span", {
+      style: {
+        position: 'absolute',
+        inset: 0,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        ...kf('ib-n4', '5.5s')
+      }
+    }, "4")))),
+    /* 编辑器：真实 markdown 语感——「# 」打出后转标题，「[] 」转待办再勾选 */
+    editor: /*#__PURE__*/React.createElement("div", {
+      style: {
+        position: 'absolute',
+        inset: 0,
+        ...kf('ed-wrap', '5.5s')
+      }
+    }, /*#__PURE__*/React.createElement(Field, null), /*#__PURE__*/React.createElement("div", {
+      style: {
+        position: 'absolute',
+        left: 46,
+        top: 36,
+        width: 260
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        alignItems: 'baseline',
+        fontWeight: 300,
+        letterSpacing: '.02em',
+        ...kf('ed-size', '5.5s')
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        display: 'inline-block',
+        overflow: 'hidden',
+        color: '#8a94a8',
+        fontFamily: 'var(--font-mono)',
+        ...kf('ed-hash', '5.5s')
+      }
+    }, "#\xA0"), /*#__PURE__*/React.createElement("span", {
+      style: {
+        display: 'inline-block',
+        whiteSpace: 'nowrap',
+        ...kf('ed-t1', '5.5s'),
+        animationTimingFunction: 'steps(6)'
+      }
+    }, "\u8D1D\u5C14\u4E0D\u7B49\u5F0F")), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: 8,
+        marginTop: 18,
+        ...kf('ed-l2', '5.5s')
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        display: 'inline-block',
+        overflow: 'hidden',
+        color: '#8a94a8',
+        fontSize: 12,
+        fontFamily: 'var(--font-mono)',
+        ...kf('ed-br', '5.5s')
+      }
+    }, "[]\xA0"), /*#__PURE__*/React.createElement("span", {
+      style: {
+        position: 'relative',
+        width: 14,
+        height: 14,
+        borderRadius: 4,
+        border: '1.5px solid rgba(159,198,255,.5)',
+        flex: 'none',
+        ...kf('ed-box', '5.5s'),
+        animationName: 'ed-box, ed-fill'
+      }
+    }, /*#__PURE__*/React.createElement("svg", {
+      width: "10",
+      height: "10",
+      viewBox: "0 0 12 12",
+      style: {
+        position: 'absolute',
+        left: 1,
+        top: 1
+      }
+    }, /*#__PURE__*/React.createElement("path", {
+      d: "M2 6 L5 9 L10 3",
+      fill: "none",
+      stroke: "#0a0e20",
+      strokeWidth: "2",
+      strokeLinecap: "round",
+      strokeLinejoin: "round",
+      strokeDasharray: "14",
+      style: kf('ed-check', '5.5s')
+    }))), /*#__PURE__*/React.createElement("span", {
+      style: {
+        display: 'inline-block',
+        whiteSpace: 'nowrap',
+        fontSize: 12.5,
+        color: '#c9d6f0',
+        ...kf('ed-t2', '5.5s'),
+        animationTimingFunction: 'steps(8)'
+      }
+    }, "\u590D\u73B0 CHSH \u63A8\u5BFC"), /*#__PURE__*/React.createElement("span", {
+      style: {
+        width: 2,
+        height: 14,
+        background: '#ffd98a',
+        ...kf('ed-blink', '1s'),
+        animationTimingFunction: 'step-end'
+      }
+    }))), /*#__PURE__*/React.createElement("span", {
+      className: "sr-tag",
+      style: {
+        left: 20,
+        top: 132,
+        background: 'transparent',
+        color: 'var(--text-3)',
+        padding: 0
+      }
+    }, '# 标题 · [] 待办 · ' + SRK.combo('F') + ' 查找')),
+    /* 视角：分段开关 星图 ⇄ 鸟瞰。热图格子逐格铺开（stagger），再切回 */
+    views: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+      style: {
+        position: 'absolute',
+        inset: 0,
+        ...kf('vw-map', '6s')
+      }
+    }, /*#__PURE__*/React.createElement(Field, null), /*#__PURE__*/React.createElement("span", {
+      className: "sr-star",
+      style: dot(120, 80, 12, '#ffd98a', '0 0 12px rgba(255,217,138,.6)')
+    }), /*#__PURE__*/React.createElement("span", {
+      className: "sr-star",
+      style: dot(210, 100, 8, '#9fc6ff', '0 0 8px rgba(159,198,255,.55)')
+    }), /*#__PURE__*/React.createElement("span", {
+      className: "sr-star",
+      style: dot(180, 52, 6, '#c7dcff')
+    }), /*#__PURE__*/React.createElement("span", {
+      className: "sr-star",
+      style: dot(76, 118, 5, '#bcd0ff')
+    })), /*#__PURE__*/React.createElement("div", {
+      style: {
+        position: 'absolute',
+        left: 24,
+        top: 46,
+        right: 24,
+        bottom: 20,
+        display: 'grid',
+        gridTemplateColumns: 'repeat(6,1fr)',
+        gridTemplateRows: 'repeat(3,1fr)',
+        gap: 5
+      }
+    }, ['#ffd98a', '#c9a86a', '#7896cd', '#46608f', '#9fc6ff', '#3a4a7a', '#c9a86a', '#ffd98a', '#46608f', '#5a74ad', '#7896cd', '#9fc6ff', '#3a4a7a', '#46608f', '#c9a86a', '#7896cd', '#9fc6ff', '#5a74ad'].map((c, i) => /*#__PURE__*/React.createElement("span", {
+      key: i,
+      style: {
+        borderRadius: 5,
+        background: c,
+        opacity: 0,
+        animation: `vw-cell 6s ${EO} ${i * 0.016}s infinite`
+      }
+    }))), /*#__PURE__*/React.createElement("div", {
+      style: {
+        position: 'absolute',
+        left: 248,
+        top: 14,
+        width: 96,
+        height: 26,
+        borderRadius: 999,
+        background: 'rgba(12,17,38,.92)',
+        border: '1px solid rgba(159,198,255,.28)'
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        position: 'absolute',
+        left: 3,
+        top: 3,
+        width: 44,
+        height: 18,
+        borderRadius: 999,
+        background: 'rgba(159,198,255,.16)',
+        ...kf('vw-thumb', '6s')
+      }
+    }), /*#__PURE__*/React.createElement("span", {
+      style: {
+        position: 'absolute',
+        left: 0,
+        top: 0,
+        width: 50,
+        height: 26,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontSize: 10,
+        ...kf('vw-lab1', '6s')
+      }
+    }, "\u661F\u56FE"), /*#__PURE__*/React.createElement("span", {
+      style: {
+        position: 'absolute',
+        right: 0,
+        top: 0,
+        width: 50,
+        height: 26,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontSize: 10,
+        ...kf('vw-lab2', '6s')
+      }
+    }, "\u9E1F\u77B0")), /*#__PURE__*/React.createElement(Pulse, {
+      x: 319,
+      y: 27,
+      anim: "vw-pulse1",
+      dur: "6s"
+    }), /*#__PURE__*/React.createElement(Pulse, {
+      x: 273,
+      y: 27,
+      anim: "vw-pulse2",
+      dur: "6s"
+    }), /*#__PURE__*/React.createElement(Cursor, {
+      move: "vw-cur",
+      press: "vw-press",
+      dur: "6s"
+    })),
+    /* 黑洞：按住拖星 → 松手 → 星自己螺旋坠入（吸积盘旋转、视界闪光）→ 重生闭环 */
+    trash: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Field, null), /*#__PURE__*/React.createElement("span", {
+      style: {
+        position: 'absolute',
+        left: 272,
+        top: 104,
+        width: 44,
+        height: 44,
+        margin: '-22px 0 0 -22px',
+        borderRadius: '50%',
+        background: 'radial-gradient(circle,#05060f 42%,rgba(159,198,255,.14) 72%,transparent)',
+        border: '1px solid rgba(159,198,255,.22)',
+        ...kf('tr-flash', '5.5s')
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        position: 'absolute',
+        inset: 3,
+        borderRadius: '50%',
+        border: '2px solid transparent',
+        borderTopColor: 'rgba(255,217,138,.65)',
+        borderRightColor: 'rgba(159,198,255,.4)',
+        animation: 'dm-spin 2.4s linear infinite'
+      }
+    }), /*#__PURE__*/React.createElement("span", {
+      style: {
+        position: 'absolute',
+        inset: -8,
+        animation: 'dm-spin 3.6s linear infinite'
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        position: 'absolute',
+        left: '50%',
+        top: 0,
+        width: 3,
+        height: 3,
+        marginLeft: -1.5,
+        borderRadius: '50%',
+        background: 'rgba(199,220,255,.8)'
+      }
+    }), /*#__PURE__*/React.createElement("span", {
+      style: {
+        position: 'absolute',
+        left: 2,
+        top: '62%',
+        width: 2.5,
+        height: 2.5,
+        borderRadius: '50%',
+        background: 'rgba(255,217,138,.7)'
+      }
+    }))), /*#__PURE__*/React.createElement("span", {
+      className: "sr-star",
+      style: {
+        position: 'absolute',
+        left: 0,
+        top: 0,
+        width: 14,
+        height: 14,
+        margin: '-7px 0 0 -7px',
+        background: '#9fc6ff',
+        boxShadow: '0 0 12px rgba(159,198,255,.7)',
+        willChange: 'transform',
+        ...kf('tr-star', '5.5s')
+      }
+    }), /*#__PURE__*/React.createElement(Cursor, {
+      move: "tr-cur",
+      press: "tr-press",
+      dur: "5.5s"
+    })),
+    /* 星际漫游：两座星系 · 金弧生长 · 光点旅行 · 落地收纳成新星 */
+    visit: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Field, null), [[74, 80, '#ffd98a', 'rgba(255,217,138'], [286, 82, '#9fc6ff', 'rgba(159,198,255']].map((g, i) => /*#__PURE__*/React.createElement(React.Fragment, {
+      key: i
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        position: 'absolute',
+        left: g[0],
+        top: g[1],
+        width: 64,
+        height: 64,
+        margin: '-32px 0 0 -32px',
+        borderRadius: '50%',
+        border: `1px solid ${g[3]},.18)`,
+        background: `radial-gradient(circle,${g[3]},.05),transparent 70%)`
+      }
+    }), /*#__PURE__*/React.createElement("span", {
+      className: "sr-star",
+      style: dot(g[0], g[1], 14, g[2], `0 0 13px ${g[3]},.6)`)
+    }), /*#__PURE__*/React.createElement("span", {
+      style: {
+        position: 'absolute',
+        left: g[0],
+        top: g[1],
+        width: 0,
+        height: 0,
+        animation: `dm-spin ${9 + i * 2}s linear infinite`
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "sr-star",
+      style: dot(22, 8, 5, '#c7dcff')
+    })))), /*#__PURE__*/React.createElement("svg", {
+      style: {
+        position: 'absolute',
+        left: 0,
+        top: 0
+      },
+      width: "360",
+      height: "160",
+      "aria-hidden": "true"
+    }, /*#__PURE__*/React.createElement("path", {
+      d: "M74 80 C 160 26, 216 26, 286 82",
+      fill: "none",
+      stroke: "#ffd98a",
+      strokeWidth: "1.5",
+      strokeDasharray: "300",
+      style: kf('vi-arc', '5.5s')
+    })), /*#__PURE__*/React.createElement("span", {
+      style: {
+        position: 'absolute',
+        width: 6,
+        height: 6,
+        margin: '-3px 0 0 -3px',
+        borderRadius: '50%',
+        background: '#fff4d6',
+        boxShadow: '0 0 10px rgba(255,217,138,.9)',
+        offsetPath: 'path("M74 80 C 160 26, 216 26, 286 82")',
+        ...kf('vi-dot', '5.5s')
+      }
+    }), /*#__PURE__*/React.createElement("span", {
+      className: "sr-star",
+      style: {
+        ...dot(302, 58, 9, '#ffd98a', '0 0 10px rgba(255,217,138,.8)'),
+        ...kf('vi-adopt', '5.5s')
+      }
+    }), /*#__PURE__*/React.createElement("span", {
+      style: {
+        position: 'absolute',
+        left: 302,
+        top: 58,
+        width: 12,
+        height: 12,
+        margin: '-6px 0 0 -6px',
+        borderRadius: '50%',
+        border: '1.5px solid rgba(255,217,138,.8)',
+        ...kf('vi-ring', '5.5s')
+      }
+    }), /*#__PURE__*/React.createElement("span", {
+      className: "sr-tag",
+      style: {
+        left: 236,
+        top: 30,
+        background: 'rgba(255,217,138,.12)',
+        border: '1px solid rgba(255,217,138,.4)',
+        color: '#ffd98a',
+        ...kf('vi-chip', '5.5s')
+      }
+    }, "\u6536\u7EB3 \xB7 \u661F\u5149\u5165\u57DF")),
+    /* 快捷键：实体键帽依次按下（底边压缩 + 金色亮起） */
+    shortcuts: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Field, null), [[SRK.combo('K'), 46, 0], [SRK.combo('F'), 124, 0.95], ['/', 202, 1.9], ['Esc', 258, 2.85]].map((k, i) => /*#__PURE__*/React.createElement("span", {
+      key: i,
+      style: {
+        position: 'absolute',
+        left: k[1],
+        top: 62,
+        minWidth: 40,
+        height: 32,
+        padding: '0 11px',
+        borderRadius: 8,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontFamily: 'var(--font-mono)',
+        fontSize: 12,
+        border: '1px solid rgba(159,198,255,.22)',
+        animation: `sc-key 4.8s ${EO} ${k[2]}s infinite`
+      }
+    }, k[0])), /*#__PURE__*/React.createElement("span", {
+      className: "sr-tag",
+      style: {
+        left: 46,
+        top: 116,
+        background: 'transparent',
+        color: 'var(--text-3)',
+        padding: 0
+      }
+    }, "\u8DF3\u8F6C \xB7 \u67E5\u627E \xB7 \u5757\u83DC\u5355 \xB7 \u6536\u8D77"))
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    className: 'sr-demo' + (reduce ? ' reduce' : ''),
+    "aria-hidden": "true",
+    "data-demo": id
+  }, scenes[id] || scenes.welcome);
+}
+function Onboarding({
+  onClose,
+  onSpotlight
+}) {
+  const [page, setPage] = React.useState(0);
+  const total = SR_GUIDE_PAGES.length;
+  const last = page === total - 1;
+  const p = SR_GUIDE_PAGES[page];
+  const modalRef = React.useRef(null);
+  (window.SRKit && window.SRKit.useModalFocus ? window.SRKit.useModalFocus : () => {})(modalRef, {
+    swallowCmdK: true
+  });
+  React.useEffect(() => {
+    const k = e => {
+      if (e.key === 'Escape') {
+        e.stopPropagation();
+        onClose();
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        setPage(v => Math.min(v + 1, total - 1));
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        setPage(v => Math.max(v - 1, 0));
+      }
+    };
+    document.addEventListener('keydown', k);
+    return () => document.removeEventListener('keydown', k);
+  }, [onClose, total]);
+  return /*#__PURE__*/React.createElement("div", {
+    ref: modalRef,
+    onMouseDown: onClose,
+    role: "dialog",
+    "aria-modal": "true",
+    "aria-label": "\u65B0\u624B\u5F15\u5BFC",
+    style: {
+      position: 'fixed',
+      inset: 0,
+      zIndex: 120,
+      background: 'rgba(3,4,12,0.55)',
+      backdropFilter: 'blur(4px)',
+      WebkitBackdropFilter: 'blur(4px)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: 20
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    onMouseDown: e => e.stopPropagation(),
+    style: {
+      width: 560,
+      maxWidth: '94vw',
+      height: 520,
+      maxHeight: '92vh',
+      animation: 'sr-cardin var(--dur-base) var(--ease-flight) both'
+    }
+  }, /*#__PURE__*/React.createElement(GlassPanel, {
+    strong: true,
+    radius: "lg",
+    pad: "none",
+    glow: true,
+    style: {
+      height: '100%',
+      overflow: 'hidden',
+      display: 'flex',
+      flexDirection: 'column'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      padding: '14px 18px',
+      flex: 'none'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 10,
+      letterSpacing: 'var(--ls-hud)',
+      textTransform: 'uppercase',
+      color: 'var(--text-3)',
+      fontFamily: 'var(--font-mono)'
+    }
+  }, p.kicker), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 6
+    }
+  }, SR_GUIDE_PAGES.map((_, i) => /*#__PURE__*/React.createElement("button", {
+    key: i,
+    type: "button",
+    onClick: () => setPage(i),
+    "aria-label": '第 ' + (i + 1) + ' 页',
+    style: {
+      width: i === page ? 16 : 7,
+      height: 7,
+      padding: 0,
+      border: 'none',
+      cursor: 'pointer',
+      borderRadius: 'var(--r-pill)',
+      background: i === page ? 'var(--gold)' : 'var(--text-3)',
+      opacity: i === page ? 1 : 0.4,
+      boxShadow: i === page ? '0 0 8px rgba(255,217,138,0.55)' : 'none',
+      transition: 'width var(--dur-base) var(--ease-flight), background var(--dur-fast), opacity var(--dur-fast)'
+    }
+  }))), /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    onClick: onClose,
+    style: {
+      background: 'none',
+      border: 'none',
+      cursor: 'pointer',
+      fontSize: 12.5,
+      color: 'var(--text-3)',
+      fontFamily: 'var(--font-sans)'
+    }
+  }, "\u8DF3\u8FC7")), /*#__PURE__*/React.createElement("div", {
+    key: page,
+    style: {
+      flex: 1,
+      minHeight: 0,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      textAlign: 'center',
+      padding: '8px 40px 20px',
+      animation: 'sr-cardin var(--dur-base) var(--ease-flight) both'
+    }
+  }, /*#__PURE__*/React.createElement(GuideDemo, {
+    id: p.id
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 22,
+      fontWeight: 300,
+      color: 'var(--text-1)',
+      marginTop: 20,
+      letterSpacing: '0.02em',
+      textShadow: '0 0 16px rgba(159,198,255,0.18)'
+    }
+  }, p.title), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 14,
+      color: 'var(--text-2)',
+      lineHeight: 1.85,
+      marginTop: 12,
+      maxWidth: 430
+    }
+  }, p.body)), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      padding: '14px 18px',
+      borderTop: '1px solid var(--line)',
+      flex: 'none'
+    }
+  }, /*#__PURE__*/React.createElement(Button, {
+    size: "sm",
+    variant: "ghost",
+    icon: "chevron-left",
+    disabled: page === 0,
+    onClick: () => setPage(v => Math.max(v - 1, 0))
+  }, "\u4E0A\u4E00\u9875"), last ? /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      gap: 10
+    }
+  }, /*#__PURE__*/React.createElement(Button, {
+    size: "sm",
+    variant: "ghost",
+    icon: "check",
+    onClick: onClose
+  }, "\u76F4\u63A5\u5F00\u59CB"), /*#__PURE__*/React.createElement(Button, {
+    size: "sm",
+    variant: "primary",
+    glow: true,
+    icon: "compass",
+    onClick: onSpotlight
+  }, "\u5B9E\u5730\u770B\u770B\u8FD9\u4E9B\u4F4D\u7F6E")) : /*#__PURE__*/React.createElement(Button, {
+    size: "sm",
+    variant: "primary",
+    icon: "chevron-right",
+    iconRight: true,
+    onClick: () => setPage(v => Math.min(v + 1, total - 1))
+  }, "\u4E0B\u4E00\u9875")))));
+}
+
+// 聚光步骤——逐处高亮真实界面上的功能位置；找不到的目标优雅跳过。
+const SR_TOUR_STEPS = [{
+  target: '[data-tour="search"]',
+  title: '随时跳转',
+  body: SRK.combo('K') + ' 或点这里，跳到任意一颗星、任意一个视图。'
+}, {
+  target: '[data-tour="nav-views"]',
+  title: '三种看法',
+  body: '星图是创作的画布，列表管理账目，时间轴回望来路。'
+}, {
+  target: '[data-tour="review"]',
+  title: '到期复习',
+  body: '角标是今天到期的星数。点它走一轮「忘了 · 模糊 · 记得」。'
+}, {
+  target: '[data-tour="inbox"]',
+  title: '收件箱',
+  body: SRK.combo('Enter') + ' 的速记与好友来信都落在这里，攒着慢慢归入星域。'
+}, {
+  target: '[data-tour="trash"]',
+  title: '黑洞',
+  body: '删掉的星在事件视界打转。随时捞回，位置与连接都还在。'
+}, {
+  target: '[data-tour="visit"]',
+  title: '星际漫游',
+  body: '凭分享码造访好友的星系，心动的星可以收进自己的星域。'
+}, {
+  target: '[data-tour="theme"]',
+  title: '黎明与深空',
+  body: '换一种天色看你的星空，语义不变：金色仍是奖励，星蓝仍是结构。'
+}, {
+  target: '[data-tour="checkup"]',
+  title: '知识体检',
+  body: '到期复习、待重燃、待整理——三行今日待办，一眼看完。'
+}, {
+  target: '[data-tour="hud"]',
+  title: '星空总览',
+  body: '知识星 · 已点亮 · 正发光 · 正变暗，你的星空一行读完。'
+}, {
+  target: '[data-tour="tools"]',
+  title: '换个视角',
+  body: '亮度鸟瞰与三维星系在这里切换，也能缩放、复位画布。'
+}, {
+  target: '[data-tour="hint"]',
+  title: '创作手势',
+  body: '拖空白平移 · 拖星移动 · 滚轮缩放 · 右键创建——都在这一行里。'
+}, {
+  target: '[data-tour="settings"]',
+  title: '回看这份引导',
+  body: '想重温手册，随时来这里：个人设置 →「上手引导」。'
+}];
+function OnboardingTour({
+  onClose
+}) {
+  const [i, setI] = React.useState(0);
+  const [rect, setRect] = React.useState(null);
+  const reduce = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // 定位当前步目标；找不到则跳过到下一个可见目标，全部找不到就结束。
+  const locate = React.useCallback(from => {
+    for (let j = from; j < SR_TOUR_STEPS.length; j++) {
+      const el = document.querySelector(SR_TOUR_STEPS[j].target);
+      if (el) {
+        const r = el.getBoundingClientRect();
+        if (r.width > 0 && r.height > 0) {
+          setI(j);
+          setRect(r);
+          return true;
+        }
+      }
+    }
+    return false;
+  }, []);
+  const didInit = React.useRef(false);
+  React.useEffect(() => {
+    if (didInit.current) return;
+    didInit.current = true;
+    if (!locate(0)) onClose();
+  }, [locate, onClose]);
+  React.useEffect(() => {
+    const k = e => {
+      if (e.key === 'Escape') {
+        e.stopPropagation();
+        onClose();
+      }
+    };
+    document.addEventListener('keydown', k);
+    return () => document.removeEventListener('keydown', k);
+  }, [onClose]);
+  if (!rect) return null;
+  const step = SR_TOUR_STEPS[i];
+  const last = i === SR_TOUR_STEPS.length - 1;
+  const next = () => {
+    if (last) onClose();else if (!locate(i + 1)) onClose();
+  };
+  const pad = 8;
+  const hole = {
+    left: rect.left - pad,
+    top: rect.top - pad,
+    width: rect.width + pad * 2,
+    height: rect.height + pad * 2
+  };
+  // 气泡四向自适应：右 → 左 → 下 → 上（宽目标如顶部 HUD 走上下，不遮挡光洞）
+  const BW = 280,
+    BH = 170,
+    M = 14;
+  const holeR = hole.left + hole.width,
+    holeB = hole.top + hole.height;
+  let bubbleLeft, bubbleTop;
+  if (holeR + M + BW <= window.innerWidth - 10) {
+    bubbleLeft = holeR + M;
+    bubbleTop = Math.min(Math.max(16, hole.top), window.innerHeight - BH);
+  } else if (hole.left - M - BW >= 10) {
+    bubbleLeft = hole.left - M - BW;
+    bubbleTop = Math.min(Math.max(16, hole.top), window.innerHeight - BH);
+  } else if (holeB + M + BH <= window.innerHeight) {
+    bubbleLeft = Math.min(Math.max(16, hole.left + hole.width / 2 - BW / 2), window.innerWidth - BW - 16);
+    bubbleTop = holeB + M;
+  } else {
+    bubbleLeft = Math.min(Math.max(16, hole.left + hole.width / 2 - BW / 2), window.innerWidth - BW - 16);
+    bubbleTop = Math.max(16, hole.top - M - BH);
+  }
+  return /*#__PURE__*/React.createElement("div", {
+    onMouseDown: onClose,
+    role: "dialog",
+    "aria-modal": "true",
+    "aria-label": "\u5B9E\u5730\u5BFC\u89C8",
+    style: {
+      position: 'fixed',
+      inset: 0,
+      zIndex: 140
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'fixed',
+      left: hole.left,
+      top: hole.top,
+      width: hole.width,
+      height: hole.height,
+      borderRadius: 'var(--r-md)',
+      boxShadow: '0 0 0 9999px rgba(3,4,12,0.66), 0 0 22px rgba(159,198,255,0.35)',
+      border: '1px solid rgba(159,198,255,0.6)',
+      pointerEvents: 'none',
+      transition: reduce ? 'none' : 'left var(--dur-base) var(--ease-flight), top var(--dur-base) var(--ease-flight), width var(--dur-base) var(--ease-flight), height var(--dur-base) var(--ease-flight)'
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    onMouseDown: e => e.stopPropagation(),
+    style: {
+      position: 'fixed',
+      left: bubbleLeft,
+      top: bubbleTop,
+      width: 280,
+      animation: reduce ? 'none' : 'sr-cardin var(--dur-base) var(--ease-flight) both'
+    }
+  }, /*#__PURE__*/React.createElement(GlassPanel, {
+    strong: true,
+    radius: "md",
+    pad: "none",
+    glow: true
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: '14px 16px'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 14.5,
+      color: 'var(--text-1)',
+      fontWeight: 300
+    }
+  }, step.title), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12.5,
+      color: 'var(--text-2)',
+      lineHeight: 1.75,
+      marginTop: 8
+    }
+  }, step.body), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      marginTop: 14
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontFamily: 'var(--font-mono)',
+      fontSize: 11,
+      color: 'var(--text-3)'
+    }
+  }, i + 1, " / ", SR_TOUR_STEPS.length), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      gap: 8
+    }
+  }, /*#__PURE__*/React.createElement(Button, {
+    size: "sm",
+    variant: "ghost",
+    onClick: onClose
+  }, "\u7ED3\u675F"), /*#__PURE__*/React.createElement(Button, {
+    size: "sm",
+    variant: "primary",
+    glow: true,
+    icon: last ? 'check' : 'chevron-right',
+    onClick: next
+  }, last ? '完成' : '下一步')))))));
+}
+window.SRKit = Object.assign(window.SRKit || {}, {
+  Onboarding,
+  OnboardingTour
+});
+})(); } catch (e) { __ds_ns.__errors.push({ path: "ui_kits/stellar-raft/Onboarding.jsx", error: String((e && e.message) || e) }); }
+
 // ui_kits/stellar-raft/ReviewSession.jsx
 try { (() => {
 /* ReviewSession — 复习会话（间隔重复的核心闭环）。
@@ -18344,7 +20453,7 @@ window.SRKit = Object.assign(window.SRKit || {}, {
 try { (() => {
 /* Settings — 用户设置覆盖层。居中玻璃 modal，左侧分区导航 + 右侧内容。
    由左下角头像点击打开。Esc / 点遮罩关闭，保存有 toast 反馈，无浏览器原生弹窗。
-   props: { onClose, theme, onToggleTheme } */
+   props: { onClose, theme, onToggleTheme, onReplayGuide, onOpenLogin } */
 const {
   Button,
   GlassPanel,
@@ -18375,29 +20484,30 @@ const SR_AVATARS = [{
 }];
 
 // 只列真实存在的快捷键——这页是承诺，不是愿望清单
+const SRK = window.SRKeys;
 const SR_SHORTCUTS = [{
-  keys: ['⌘', 'K'],
+  keys: [SRK.mod, 'K'],
   label: '全局搜索 · 跳转任意星或视图'
 }, {
-  keys: ['⌘', 'K'],
+  keys: [SRK.mod, 'K'],
   label: '编辑器内选中文字 · 添加链接'
 }, {
-  keys: ['⌘', 'F'],
+  keys: [SRK.mod, 'F'],
   label: '编辑器 · 笔记内查找 / 替换'
 }, {
-  keys: ['⌘', 'Z'],
-  label: '编辑器 · 撤销（加 ⇧ 重做）'
+  keys: [SRK.mod, 'Z'],
+  label: '编辑器 · 撤销（加 ' + SRK.shift + ' 重做）'
 }, {
   keys: ['/'],
   label: '编辑器内唤起块菜单'
 }, {
-  keys: ['⌥', '↑', '↓'],
+  keys: [SRK.alt, '↑', '↓'],
   label: '编辑器 · 上下移动当前块'
 }, {
   keys: ['Tab'],
-  label: '编辑器 · 列表缩进（⇧Tab 减少）'
+  label: '编辑器 · 列表缩进（' + SRK.shift + 'Tab 减少）'
 }, {
-  keys: ['⌘', 'Enter'],
+  keys: [SRK.mod, 'Enter'],
   label: '收件箱 · 捕捉当前草稿'
 }, {
   keys: ['Space'],
@@ -18425,6 +20535,10 @@ const SR_SET_NAV = [{
   id: 'keys',
   label: '快捷键',
   icon: 'keyboard'
+}, {
+  id: 'guide',
+  label: '上手引导',
+  icon: 'compass'
 }, {
   id: 'account',
   label: '账户',
@@ -18474,7 +20588,8 @@ function SRRow({
   title,
   hint,
   children,
-  align
+  align,
+  noLine
 }) {
   return /*#__PURE__*/React.createElement("div", {
     style: {
@@ -18483,7 +20598,7 @@ function SRRow({
       justifyContent: 'space-between',
       gap: 18,
       padding: '13px 0',
-      borderBottom: '1px solid var(--line)'
+      borderBottom: noLine ? 'none' : '1px solid var(--line)'
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
@@ -18560,12 +20675,21 @@ function SRSegment({
 function Settings({
   onClose,
   theme,
-  onToggleTheme
+  onToggleTheme,
+  onReplayGuide,
+  onOpenLogin
 }) {
   const dawn = theme === 'dawn';
   const [tab, setTab] = React.useState('profile');
   const [toast, setToast] = React.useState(null);
   const toastTimer = React.useRef(null);
+
+  // 账户 tab：改密行内展开 + 忙碌 / 报错态
+  const [pwOpen, setPwOpen] = React.useState(false);
+  const [oldPw, setOldPw] = React.useState('');
+  const [newPw, setNewPw] = React.useState('');
+  const [pwBusy, setPwBusy] = React.useState(false);
+  const [pwErr, setPwErr] = React.useState('');
 
   // 已保存的设置（本机浏览器）；昵称等身份信息以 D.account 为单一来源
   const D = window.SR_DATA;
@@ -18616,6 +20740,25 @@ function Settings({
     setToast(msg);
     if (toastTimer.current) clearTimeout(toastTimer.current);
     toastTimer.current = setTimeout(() => setToast(null), 2400);
+  };
+  const submitPwChange = async () => {
+    if (pwBusy) return;
+    setPwErr('');
+    setPwBusy(true);
+    try {
+      await window.SRNet.auth.changePassword({
+        old: oldPw,
+        new: newPw
+      });
+      setPwOpen(false);
+      setOldPw('');
+      setNewPw('');
+      flashToast('密码已更新');
+    } catch (err) {
+      setPwErr(err && err.message || '出了点问题，请再试一次');
+    } finally {
+      setPwBusy(false);
+    }
   };
   const avatarGrad = (SR_AVATARS.find(a => a.id === avatar) || SR_AVATARS[0]).grad;
   const avatarLetter = nickname.trim()[0] || '星';
@@ -19004,7 +21147,52 @@ function Settings({
       padding: '3px 7px',
       background: 'var(--input-bg, rgba(3,4,12,0.45))'
     }
-  }, k))))))), tab === 'account' && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(SRSectionTitle, null, "\u8D26\u6237"), /*#__PURE__*/React.createElement(SRRow, {
+  }, k))))))), tab === 'guide' && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(SRSectionTitle, null, "\u4E0A\u624B\u5F15\u5BFC"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: '14px 0 4px',
+      fontSize: 13,
+      color: 'var(--text-2)',
+      lineHeight: 1.85
+    }
+  }, "\u7B2C\u4E00\u6B21\u8FDB\u6765\u7684\u90A3\u672C\u300C\u661F\u56FE\u624B\u518C\u300D\u2014\u2014\u661F\u56FE\u3001\u70B9\u4EAE\u3001\u590D\u4E60\u3001\u6536\u4EF6\u7BB1\u3001\u9ED1\u6D1E\u3001\u6F2B\u6E38\uFF0C\u4E00\u9875\u9875\u8BB2\u6E05\u695A\u3002\u60F3\u91CD\u6E29\u968F\u65F6\u7FFB\u5F00\u3002"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 8
+    }
+  }, /*#__PURE__*/React.createElement(Button, {
+    size: "sm",
+    variant: "primary",
+    glow: true,
+    icon: "book-open",
+    onClick: () => {
+      if (onReplayGuide) onReplayGuide();
+    }
+  }, "\u91CD\u65B0\u89C2\u770B\u5F15\u5BFC"))), tab === 'account' && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(SRSectionTitle, null, "\u8D26\u6237"), !D.account.registered && /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: '14px 0 4px'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 13,
+      color: 'var(--text-2)',
+      lineHeight: 1.85,
+      marginBottom: 14
+    }
+  }, "\u767B\u5F55\u540E\uFF0C\u8FD9\u7247\u661F\u7A7A\u4F1A\u8DDF\u7740\u8D26\u53F7\u8D70\u2014\u2014\u6362\u53F0\u8BBE\u5907\u4E5F\u80FD\u56DE\u6765\u3002"), /*#__PURE__*/React.createElement(Button, {
+    variant: "primary",
+    glow: true,
+    icon: "log-in",
+    onClick: () => {
+      if (onOpenLogin) onOpenLogin();
+    }
+  }, "\u767B\u5F55 / \u6CE8\u518C")), D.account.registered && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(SRRow, {
+    title: "\u7528\u6237\u540D"
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 13,
+      color: 'var(--text-2)',
+      fontFamily: 'var(--font-mono)'
+    }
+  }, D.account.username)), /*#__PURE__*/React.createElement(SRRow, {
     title: "\u90AE\u7BB1"
   }, /*#__PURE__*/React.createElement("span", {
     style: {
@@ -19012,33 +21200,79 @@ function Settings({
       color: 'var(--text-2)',
       fontFamily: 'var(--font-mono)'
     }
-  }, D.account.email)), /*#__PURE__*/React.createElement(SRRow, {
-    title: "\u65B9\u6848"
-  }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      display: 'inline-flex',
-      alignItems: 'center',
-      gap: 6,
-      fontSize: 12.5,
-      color: 'var(--gold)',
-      border: '1px solid rgba(255,217,138,0.35)',
-      borderRadius: 'var(--r-pill)',
-      padding: '3px 11px',
-      background: 'rgba(255,217,138,0.1)'
-    }
-  }, /*#__PURE__*/React.createElement(Icon, {
-    name: "sparkles",
-    size: 13,
-    color: "var(--gold)"
-  }), D.account.plan)), /*#__PURE__*/React.createElement(SRRow, {
-    title: "\u52A0\u5165\u4E8E"
+  }, D.account.email || '未绑定')), /*#__PURE__*/React.createElement(SRRow, {
+    title: "\u6CE8\u518C\u4E8E"
   }, /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 13,
       color: 'var(--text-2)',
       fontFamily: 'var(--font-mono)'
     }
-  }, D.account.joined)), /*#__PURE__*/React.createElement(SRRow, {
+  }, (D.account.registeredAt || '').slice(0, 10))), /*#__PURE__*/React.createElement(SRRow, {
+    title: "\u4FEE\u6539\u5BC6\u7801",
+    hint: pwOpen ? undefined : '定期更换密码，让账号更安全。',
+    align: pwOpen ? 'flex-start' : 'center',
+    noLine: pwOpen
+  }, !pwOpen && /*#__PURE__*/React.createElement(Button, {
+    size: "sm",
+    variant: "ghost",
+    icon: "key-round",
+    onClick: () => {
+      setPwErr('');
+      setPwOpen(true);
+    }
+  }, "\u4FEE\u6539\u5BC6\u7801")), pwOpen && /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: '2px 0 14px',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 9,
+      borderBottom: '1px solid var(--line)'
+    }
+  }, /*#__PURE__*/React.createElement(Input, {
+    type: "password",
+    icon: "lock",
+    placeholder: "\u65E7\u5BC6\u7801",
+    autoComplete: "current-password",
+    value: oldPw,
+    onChange: e => setOldPw(e.target.value)
+  }), /*#__PURE__*/React.createElement(Input, {
+    type: "password",
+    icon: "lock",
+    placeholder: "\u65B0\u5BC6\u7801",
+    autoComplete: "new-password",
+    value: newPw,
+    onChange: e => setNewPw(e.target.value)
+  }), pwErr && /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: 'var(--danger)',
+      lineHeight: 1.6
+    }
+  }, pwErr), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      gap: 8,
+      marginTop: 2
+    }
+  }, /*#__PURE__*/React.createElement(Button, {
+    size: "sm",
+    variant: "primary",
+    glow: true,
+    disabled: pwBusy,
+    icon: pwBusy ? undefined : 'check',
+    onClick: submitPwChange
+  }, pwBusy ? '确认中…' : '确认'), /*#__PURE__*/React.createElement(Button, {
+    size: "sm",
+    variant: "ghost",
+    disabled: pwBusy,
+    onClick: () => {
+      setPwOpen(false);
+      setOldPw('');
+      setNewPw('');
+      setPwErr('');
+    }
+  }, "\u53D6\u6D88")))), /*#__PURE__*/React.createElement(SRRow, {
     title: "\u6211\u7684\u661F\u7A7A"
   }, /*#__PURE__*/React.createElement("span", {
     style: {
@@ -19080,14 +21314,16 @@ function Settings({
       setTimeout(() => URL.revokeObjectURL(a.href), 4000);
       flashToast('已导出你的星图数据（JSON 文件）');
     }
-  }, "\u5BFC\u51FA\u6570\u636E"), /*#__PURE__*/React.createElement(Button, {
+  }, "\u5BFC\u51FA\u6570\u636E"), D.account.registered && /*#__PURE__*/React.createElement(Button, {
     size: "sm",
     variant: "ghost",
     icon: "log-out",
     onClick: () => setConfirm({
-      message: '退出登录后，本设备上的星空将回到未登录状态。确定退出吗？',
+      message: '退出后，这台设备回到匿名状态；你的星空安全地留在账号里。',
       confirmLabel: '退出登录',
-      onYes: () => flashToast('已退出当前设备')
+      onYes: () => {
+        window.SRNet.logoutFlow();
+      }
     })
   }, "\u9000\u51FA\u767B\u5F55"))))), /*#__PURE__*/React.createElement("div", {
     style: {
@@ -19271,7 +21507,8 @@ function NavRow({
   collapsed,
   onClick,
   dawn,
-  tip
+  tip,
+  dataTour
 }) {
   const [hover, setHover] = React.useState(false);
   const lit = active || hover;
@@ -19281,6 +21518,7 @@ function NavRow({
     className: "sr-focus-ring",
     onClick: onClick,
     "data-tip": collapsed ? label : undefined,
+    "data-tour": dataTour,
     title: collapsed ? undefined : tip,
     onMouseEnter: () => setHover(true),
     onMouseLeave: () => setHover(false),
@@ -19326,18 +21564,25 @@ function NavRow({
   })));
 }
 
-/* footer user chip — opens personal settings on click */
+/* footer user chip — opens personal settings on click (logged in), or the login page (anonymous) */
 function UserChip({
   collapsed,
   dawn,
-  onClick
+  registered,
+  onClick,
+  onOpenLogin
 }) {
   const [hover, setHover] = React.useState(false);
+  const account = window.SR_DATA.account;
+  const primary = registered ? account.username || account.name : '星际旅客';
+  const secondary = registered ? `连续点亮 ${account.streak} 天` : '未登录 · 点击登录';
+  const avatarLetter = registered ? account.avatar : '旅';
   return /*#__PURE__*/React.createElement("button", {
     type: "button",
     className: "sr-focus-ring",
-    onClick: onClick,
-    title: "\u4E2A\u4EBA\u8BBE\u7F6E",
+    onClick: registered ? onClick : onOpenLogin,
+    title: registered ? '个人设置' : '登录 / 注册',
+    "data-tour": "settings",
     onMouseEnter: () => setHover(true),
     onMouseLeave: () => setHover(false),
     style: {
@@ -19369,7 +21614,7 @@ function UserChip({
       fontSize: 12,
       color: dawn ? '#1a2238' : 'var(--text-1)'
     }
-  }, window.SR_DATA.account.avatar), !collapsed && /*#__PURE__*/React.createElement("div", {
+  }, avatarLetter), !collapsed && /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       flexDirection: 'column',
@@ -19382,17 +21627,17 @@ function UserChip({
       fontSize: 13,
       color: 'var(--text-1)'
     }
-  }, window.SR_DATA.account.name), /*#__PURE__*/React.createElement("span", {
+  }, primary), /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 11,
       color: 'var(--text-3)'
     }
-  }, "\u8FDE\u7EED\u70B9\u4EAE ", window.SR_DATA.account.streak, " \u5929")), !collapsed && /*#__PURE__*/React.createElement("div", {
+  }, secondary)), !collapsed && /*#__PURE__*/React.createElement("div", {
     style: {
       flex: 1
     }
   }), !collapsed && /*#__PURE__*/React.createElement(Icon, {
-    name: "settings",
+    name: registered ? 'settings' : 'log-in',
     size: 15,
     color: hover ? 'var(--text-1)' : 'var(--text-3)'
   }));
@@ -19410,6 +21655,7 @@ function Sidebar({
   onCheckup,
   onAIConfig,
   onOpenSettings,
+  onOpenLogin,
   onReview
 }) {
   const D = window.SR_DATA;
@@ -19495,7 +21741,7 @@ function Sidebar({
     }
   }, collapsed ? /*#__PURE__*/React.createElement(IconButton, {
     name: "search",
-    title: "\u641C\u7D22 \u2318K",
+    title: '搜索 ' + window.SRKeys.combo('K'),
     onClick: onSearch
   }) :
   /*#__PURE__*/
@@ -19503,6 +21749,7 @@ function Sidebar({
      readOnly 让它保持可 Tab 聚焦（Input 自带聚焦发光），
      但不再吞字——键盘用户不会把「量子」打进一个死输入框 */
   React.createElement("div", {
+    "data-tour": "search",
     style: {
       cursor: 'pointer'
     },
@@ -19510,7 +21757,7 @@ function Sidebar({
   }, /*#__PURE__*/React.createElement(Input, {
     icon: "search",
     placeholder: "\u641C\u7D22\u4F60\u7684\u661F\u7A7A\u2026",
-    kbd: "\u2318K",
+    kbd: window.SRKeys.combo('K'),
     size: "sm",
     readOnly: true,
     value: "",
@@ -19525,6 +21772,7 @@ function Sidebar({
       }
     }
   }))), /*#__PURE__*/React.createElement("nav", {
+    "data-tour": "nav-views",
     style: {
       padding: collapsed ? '6px 8px' : '6px 12px',
       display: 'flex',
@@ -19566,7 +21814,8 @@ function Sidebar({
     collapsed: collapsed,
     dawn: dawn,
     onClick: onReview,
-    active: false
+    active: false,
+    dataTour: "review"
   }), /*#__PURE__*/React.createElement(NavRow, {
     icon: "inbox",
     label: "\u6536\u4EF6\u7BB1",
@@ -19575,7 +21824,8 @@ function Sidebar({
     collapsed: collapsed,
     dawn: dawn,
     onClick: () => onView('inbox'),
-    active: view === 'inbox'
+    active: view === 'inbox',
+    dataTour: "inbox"
   }), /*#__PURE__*/React.createElement(NavRow, {
     icon: "aperture",
     label: "\u9ED1\u6D1E",
@@ -19583,7 +21833,8 @@ function Sidebar({
     collapsed: collapsed,
     dawn: dawn,
     onClick: () => onView('blackhole'),
-    active: view === 'blackhole'
+    active: view === 'blackhole',
+    dataTour: "trash"
   }), /*#__PURE__*/React.createElement(NavRow, {
     icon: "telescope",
     label: "\u661F\u9645\u6F2B\u6E38",
@@ -19591,7 +21842,8 @@ function Sidebar({
     collapsed: collapsed,
     dawn: dawn,
     onClick: () => onView('visit'),
-    active: view === 'visit'
+    active: view === 'visit',
+    dataTour: "visit"
   })), !collapsed && /*#__PURE__*/React.createElement("div", {
     style: {
       flex: 1,
@@ -19639,7 +21891,8 @@ function Sidebar({
     label: dawn ? '切回深空' : '黎明模式',
     collapsed: collapsed,
     dawn: dawn,
-    onClick: onToggleTheme
+    onClick: onToggleTheme,
+    dataTour: "theme"
   }), /*#__PURE__*/React.createElement(NavRow, {
     icon: "activity",
     label: "\u77E5\u8BC6\u4F53\u68C0\u62A5\u544A",
@@ -19647,7 +21900,8 @@ function Sidebar({
     collapsed: collapsed,
     dawn: dawn,
     active: view === 'checkup',
-    onClick: onCheckup
+    onClick: onCheckup,
+    dataTour: "checkup"
   }), /*#__PURE__*/React.createElement(NavRow, {
     icon: "bot",
     label: "AI \u914D\u7F6E",
@@ -19657,7 +21911,9 @@ function Sidebar({
   }), /*#__PURE__*/React.createElement(UserChip, {
     collapsed: collapsed,
     dawn: dawn,
-    onClick: onOpenSettings
+    registered: !!D.account.registered,
+    onClick: onOpenSettings,
+    onOpenLogin: onOpenLogin
   })));
 }
 window.SRKit = Object.assign(window.SRKit || {}, {
@@ -21151,6 +23407,7 @@ function StarMap({
       color: 'var(--text-3)'
     }
   }, "\u4E5F\u53EF\u4EE5\u5728\u753B\u5E03\u4EFB\u610F\u5904\u53F3\u952E\u521B\u5EFA")), /*#__PURE__*/React.createElement("div", {
+    "data-tour": "hud",
     onMouseDown: e => e.stopPropagation(),
     style: {
       position: 'absolute',
@@ -21220,6 +23477,7 @@ function StarMap({
     value: cons.length,
     tone: "var(--star-blue)"
   }))), /*#__PURE__*/React.createElement("div", {
+    "data-tour": "hint",
     style: {
       position: 'absolute',
       bottom: 26,
@@ -21237,6 +23495,7 @@ function StarMap({
     size: 14,
     color: "currentColor"
   }), "\u62D6\u4E3B\u661F=\u6574\u4F53\u79FB\u52A8\u661F\u57DF \xB7 \u62D6\u7A7A\u767D=\u5E73\u79FB\u753B\u5E03 \xB7 \u62D6\u661F\u70B9=\u79FB\u52A8\u5355\u9897 \xB7 \u6EDA\u8F6E\u7F29\u653E \xB7 \u53F3\u952E\u521B\u5EFA"), /*#__PURE__*/React.createElement("div", {
+    "data-tour": "tools",
     onMouseDown: e => e.stopPropagation(),
     style: {
       position: 'absolute',
@@ -23981,7 +26240,10 @@ const {
   AIConfig,
   BlackHole,
   VisitView,
-  ReviewSession
+  ReviewSession,
+  Onboarding,
+  OnboardingTour,
+  LoginView
 } = window.SRKit;
 const {
   GlassPanel,
@@ -24004,8 +26266,19 @@ function App() {
   const [settingsOpen, setSettingsOpen] = React.useState(false); // 个人设置 modal
   const [reviewOpen, setReviewOpen] = React.useState(false); // 复习会话（间隔重复）
   const [aiConfigOpen, setAiConfigOpen] = React.useState(false); // AI 配置 modal
+  const [onboard, setOnboard] = React.useState(false); // 新手引导册
+  const [tour, setTour] = React.useState(false); // 聚光实地导览
+  const [login, setLogin] = React.useState(false);
+  const [authKnown, setAuthKnown] = React.useState(false); // 登录态尘埃落定前引导不闪现     // 全屏登录/注册页
   const [dataRev, setDataRev] = React.useState(0); // 数据库水合后整体重挂载
   const nonce = React.useRef(0);
+  const openLogin = () => setLogin(true);
+  const closeLogin = () => {
+    try {
+      localStorage.setItem('sr.login.skipped', '1');
+    } catch (e) {}
+    setLogin(false);
+  };
   React.useEffect(() => {
     const h = () => {
       setDataRev(r => r + 1);
@@ -24016,6 +26289,31 @@ function App() {
     return () => window.removeEventListener('sr-hydrated', h);
   }, []);
 
+  // 首启：水合完成后，服务器确认「未注册」且用户没跳过 → 弹全屏登录页
+  // （account.registered 仅在服务器 hello 成功后才为 false；后端未运行时是 undefined，不弹）
+  React.useEffect(() => {
+    const h = () => {
+      const A = window.SR_DATA && window.SR_DATA.account;
+      let skipped = false;
+      try {
+        skipped = localStorage.getItem('sr.login.skipped') === '1';
+      } catch (e) {}
+      if (A && A.registered === false && !skipped) setLogin(true);
+      if (A && A.registered !== undefined) setAuthKnown(true); // 服务器已表态，登录/引导取舍已定
+    };
+    h(); // 补查：本地后端很快，sr-hydrated 可能早于 React 挂载已经发过
+    const settled = () => {
+      h();
+      setAuthKnown(true);
+    }; // 水合尘埃落定（含离线 startFresh 路径）
+    window.addEventListener('sr-hydrated', settled);
+    const t = setTimeout(() => setAuthKnown(true), 3000); // 兜底：事件早于挂载已发过且后端离线
+    return () => {
+      window.removeEventListener('sr-hydrated', settled);
+      clearTimeout(t);
+    };
+  }, []);
+
   // 应用挂载完成：淡出 index.html 里的静态启动帧
   React.useEffect(() => {
     const b = document.getElementById('sr-boot');
@@ -24023,6 +26321,15 @@ function App() {
       b.setAttribute('data-done', '');
       setTimeout(() => b.remove(), 700);
     }
+  }, []);
+
+  // 首次打开自动弹出新手引导（看过/跳过后写标记，不再自动弹）
+  React.useEffect(() => {
+    let seen = false;
+    try {
+      seen = localStorage.getItem('sr.onboarded') === '1';
+    } catch (e) {}
+    if (!seen) setOnboard(true);
   }, []);
 
   // 主题切换：300ms 全局 crossfade（transition.js 注入的 html 层过渡类；
@@ -24041,14 +26348,14 @@ function App() {
   React.useEffect(() => {
     const h = e => {
       if ((e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K')) {
-        if (reviewOpen) return;
+        if (reviewOpen || onboard || tour || login) return;
         e.preventDefault();
         setCmd(c => !c);
       }
     };
     window.addEventListener('keydown', h);
     return () => window.removeEventListener('keydown', h);
-  }, [reviewOpen]);
+  }, [reviewOpen, onboard, tour, login]);
 
   // Esc 统一词汇：同一动作（离开当前浮层）在所有屏幕说同一句话。
   // 命令面板 / 设置 / AI 配置 / 复习会话自带 Esc，这里让位；
@@ -24058,7 +26365,7 @@ function App() {
   React.useEffect(() => {
     const h = e => {
       if (e.key !== 'Escape' || e.defaultPrevented) return;
-      if (cmd || settingsOpen || aiConfigOpen || reviewOpen) return;
+      if (cmd || settingsOpen || aiConfigOpen || reviewOpen || onboard || tour || login) return;
       if (feynman) {
         e.preventDefault();
         setFeynman(null);
@@ -24073,7 +26380,7 @@ function App() {
     };
     window.addEventListener('keydown', h, true);
     return () => window.removeEventListener('keydown', h, true);
-  }, [cmd, settingsOpen, aiConfigOpen, reviewOpen, feynman, view]);
+  }, [cmd, settingsOpen, aiConfigOpen, reviewOpen, onboard, tour, login, feynman, view]);
 
   // 切换视图前按真实时间重算全部星的 R（衰减模型），新挂载的视图读到的是当下的亮度
   const freshen = () => {
@@ -24163,6 +26470,21 @@ function App() {
     setAerial(false);
     setEditing(null);
   };
+  const finishOnboard = () => {
+    try {
+      localStorage.setItem('sr.onboarded', '1');
+    } catch (e) {}
+    setOnboard(false);
+  };
+  const startTour = () => {
+    finishOnboard();
+    backToMap();
+    setTour(true);
+  };
+  const replayGuide = () => {
+    setSettingsOpen(false);
+    setOnboard(true);
+  };
   // 稳定 ref：只在 <main> 真正重挂载（key 变化）时触发入场动画；
   // 内联箭头 ref 每次渲染都会重跑 enter，任何 setState 都会闪一次入场
   const mainEnter = React.useCallback(el => {
@@ -24191,7 +26513,8 @@ function App() {
     onCheckup: () => openView('checkup'),
     onAIConfig: () => setAiConfigOpen(true),
     onReview: openReview,
-    onOpenSettings: () => setSettingsOpen(true)
+    onOpenSettings: () => setSettingsOpen(true),
+    onOpenLogin: openLogin
   }), /*#__PURE__*/React.createElement("main", {
     key: `${view}|${aerial ? 'a' : ''}|${view === 'editor' ? editing : ''}`,
     ref: mainEnter,
@@ -24253,9 +26576,21 @@ function App() {
   }), settingsOpen && /*#__PURE__*/React.createElement(Settings, {
     onClose: () => setSettingsOpen(false),
     theme: theme,
-    onToggleTheme: toggleTheme
+    onToggleTheme: toggleTheme,
+    onReplayGuide: replayGuide,
+    onOpenLogin: () => {
+      setSettingsOpen(false);
+      openLogin();
+    }
   }), aiConfigOpen && /*#__PURE__*/React.createElement(AIConfig, {
     onClose: () => setAiConfigOpen(false)
+  }), onboard && !login && authKnown && /*#__PURE__*/React.createElement(Onboarding, {
+    onClose: finishOnboard,
+    onSpotlight: startTour
+  }), tour && !login && /*#__PURE__*/React.createElement(OnboardingTour, {
+    onClose: () => setTour(false)
+  }), login && /*#__PURE__*/React.createElement(LoginView, {
+    onClose: closeLogin
   }));
 }
 ReactDOM.createRoot(document.getElementById('root')).render(/*#__PURE__*/React.createElement(App, null));
@@ -26043,6 +28378,12 @@ window.SR_DATA = function () {
         account.name = r.user.name;
         account.avatar = r.user.avatar || account.avatar;
       }
+      if (r.account) Object.assign(account, {
+        registered: r.account.registered,
+        username: r.account.username,
+        email: r.account.email,
+        registeredAt: r.account.registeredAt
+      });
       return window.SRNet.api('/api/galaxy');
     }).then(r => {
       const d = r && r.data;
