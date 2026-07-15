@@ -87,7 +87,7 @@ function LoginView({ onClose }) {
       const r = tab === 'login'
         ? await N.auth.login({ id: idOrEmail.trim(), password: loginPass })
         : await N.auth.register({ username: username.trim(), email: email.trim() || undefined, password: regPass });
-      N.adoptSession(r.session);
+      await N.adoptSession(r.session);   // 内含冲刷未保存编辑，await 后再刷新
       location.reload();
     } catch (err) {
       setError((err && err.message) || '出了点问题，请再试一次');
@@ -133,20 +133,20 @@ function LoginView({ onClose }) {
 
             {tab === 'login' ? (
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                <Input icon="user" placeholder="用户名或邮箱" value={idOrEmail}
+                <Input icon="user" placeholder="用户名或邮箱" autoComplete="username" value={idOrEmail}
                   onChange={(e) => setIdOrEmail(e.target.value)} autoFocus />
-                <Input icon="lock" type="password" placeholder="密码" value={loginPass}
+                <Input icon="lock" type="password" placeholder="密码" autoComplete="current-password" value={loginPass}
                   onChange={(e) => setLoginPass(e.target.value)} />
               </div>
             ) : (
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                <Input icon="user" placeholder="用户名（2–24 位）" value={username}
+                <Input icon="user" placeholder="用户名（2–24 位）" autoComplete="username" value={username}
                   onChange={(e) => setUsername(e.target.value)} autoFocus />
-                <Input icon="mail" placeholder="邮箱（选填）" value={email}
+                <Input icon="mail" placeholder="邮箱（选填）" autoComplete="email" value={email}
                   onChange={(e) => setEmail(e.target.value)} />
-                <Input icon="lock" type="password" placeholder="密码（至少 6 位）" value={regPass}
+                <Input icon="lock" type="password" placeholder="密码（至少 6 位）" autoComplete="new-password" value={regPass}
                   onChange={(e) => setRegPass(e.target.value)} />
-                <Input icon="lock" type="password" placeholder="确认密码" value={regConfirm}
+                <Input icon="lock" type="password" placeholder="确认密码" autoComplete="new-password" value={regConfirm}
                   onChange={(e) => setRegConfirm(e.target.value)} />
               </div>
             )}

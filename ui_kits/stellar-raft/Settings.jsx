@@ -60,9 +60,9 @@ function SRToggle({ on, onChange, disabled }) {
 }
 
 /* 设置行：标题 + 说明 + 右侧控件 */
-function SRRow({ title, hint, children, align }) {
+function SRRow({ title, hint, children, align, noLine }) {
   return (
-    <div style={{ display: 'flex', alignItems: align || 'center', justifyContent: 'space-between', gap: 18, padding: '13px 0', borderBottom: '1px solid var(--line)' }}>
+    <div style={{ display: 'flex', alignItems: align || 'center', justifyContent: 'space-between', gap: 18, padding: '13px 0', borderBottom: noLine ? 'none' : '1px solid var(--line)' }}>
       <div style={{ minWidth: 0 }}>
         <div style={{ fontSize: 13.5, color: 'var(--text-1)' }}>{title}</div>
         {hint && <div style={{ fontSize: 11.5, color: 'var(--text-3)', marginTop: 3, lineHeight: 1.55 }}>{hint}</div>}
@@ -370,13 +370,13 @@ function Settings({ onClose, theme, onToggleTheme, onReplayGuide, onOpenLogin })
                       <SRRow title="邮箱"><span style={{ fontSize: 13, color: 'var(--text-2)', fontFamily: 'var(--font-mono)' }}>{D.account.email || '未绑定'}</span></SRRow>
                       <SRRow title="注册于"><span style={{ fontSize: 13, color: 'var(--text-2)', fontFamily: 'var(--font-mono)' }}>{(D.account.registeredAt || '').slice(0, 10)}</span></SRRow>
 
-                      <SRRow title="修改密码" hint={pwOpen ? undefined : '定期更换密码，让账号更安全。'} align={pwOpen ? 'flex-start' : 'center'}>
+                      <SRRow title="修改密码" hint={pwOpen ? undefined : '定期更换密码，让账号更安全。'} align={pwOpen ? 'flex-start' : 'center'} noLine={pwOpen}>
                         {!pwOpen && <Button size="sm" variant="ghost" icon="key-round" onClick={() => { setPwErr(''); setPwOpen(true); }}>修改密码</Button>}
                       </SRRow>
                       {pwOpen && (
                         <div style={{ padding: '2px 0 14px', display: 'flex', flexDirection: 'column', gap: 9, borderBottom: '1px solid var(--line)' }}>
-                          <Input type="password" icon="lock" placeholder="旧密码" value={oldPw} onChange={(e) => setOldPw(e.target.value)} />
-                          <Input type="password" icon="lock" placeholder="新密码" value={newPw} onChange={(e) => setNewPw(e.target.value)} />
+                          <Input type="password" icon="lock" placeholder="旧密码" autoComplete="current-password" value={oldPw} onChange={(e) => setOldPw(e.target.value)} />
+                          <Input type="password" icon="lock" placeholder="新密码" autoComplete="new-password" value={newPw} onChange={(e) => setNewPw(e.target.value)} />
                           {pwErr && <div style={{ fontSize: 12, color: 'var(--danger)', lineHeight: 1.6 }}>{pwErr}</div>}
                           <div style={{ display: 'flex', gap: 8, marginTop: 2 }}>
                             <Button size="sm" variant="primary" glow disabled={pwBusy} icon={pwBusy ? undefined : 'check'} onClick={submitPwChange}>{pwBusy ? '确认中…' : '确认'}</Button>

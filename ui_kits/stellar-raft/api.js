@@ -151,21 +151,34 @@ window.SRNet = (function () {
     changePassword: (p) => api('/api/auth/password', { method: 'POST', body: p }),
   };
   // 采用一个新会话（登录/注册成功后）：换 token + 清旧镜像，防旧账号本地数据覆盖新账号的服务器数据
-  const adoptSession = (t) => {
+  // 身份切换的本地卫生：清掉上一个身份的昵称/头像/简介残留（动效等设备偏好保留）
+  const stripLocalIdentity = () => {
+    try {
+      const prefs = JSON.parse(localStorage.getItem('sr.settings')) || {};
+      delete prefs.nickname; delete prefs.avatar; delete prefs.bio;
+      localStorage.setItem('sr.settings', JSON.stringify(prefs));
+    } catch (e) { }
+  };
+  const adoptSession = async (t) => {
+    try { await saveNow(); } catch (e) { }   // 冲刷防抖：注册前 1.2s 内的最后一笔编辑不落空
     token = t; localStorage.setItem(KEY, t);
     try { localStorage.removeItem(LS_GALAXY); } catch (e) {}   // 关键：清旧镜像，防覆盖新账号数据
+    stripLocalIdentity();
   };
-  // 登出流：删服务端 session → 换回全新匿名身份 → 清旧镜像 → 整页刷新重水合
+  // 登出流：冲刷未保存编辑 → 删服务端 session → 换回全新匿名身份 → 清旧镜像 → 整页刷新重水合
   const logoutFlow = async () => {
+    try { await saveNow(); } catch (e) { }
     try { await auth.logout(); } catch (e) {}
     const fresh = 'u-' + (crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).slice(2) + Date.now().toString(36));
     token = fresh; localStorage.setItem(KEY, fresh);
     try { localStorage.removeItem(LS_GALAXY); } catch (e) {}
+    stripLocalIdentity();
     location.reload();
   };
 
   return {
-    token, api, schedule, saveNow, snapshot, saveLocal, loadLocal, inbox,
+    get token() { return token; },   // live getter：adoptSession/logoutFlow 换身份后读到的永远是现值
+    api, schedule, saveNow, snapshot, saveLocal, loadLocal, inbox,
     isOnline: () => online,
     getStatus: () => ({ status, online, lastSync }),
     setReady: () => { ready = true; }, isReady: () => ready,

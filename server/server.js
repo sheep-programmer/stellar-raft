@@ -418,7 +418,8 @@ async function handleApi(req, res, url) {
     if (password.length < 6) return json(res, 400, { error: '密码至少 6 位' });
     if (q.userByUsername.get(username)) return json(res, 409, { error: '这个用户名已经有主人了' });
     if (email && q.userByEmail.get(email)) return json(res, 409, { error: '这个邮箱已经绑定过账号' });
-    q.registerUser.run(username, email || null, hashPass(password), me.id);
+    try { q.registerUser.run(username, email || null, hashPass(password), me.id); }
+    catch (e) { return json(res, 409, { error: '用户名或邮箱刚被占用，换一个试试' }); }   // 并发窗口撞唯一索引
     const session = newSession(me.id);
     return json(res, 200, { session, user: pubAccount(q.userById.get(me.id)) });
   }

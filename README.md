@@ -6,7 +6,7 @@
 *Other apps store notes in a warehouse — Stellar Raft grows them in a living deep space of knowledge, where knowledge is the only light.*
 
 ![Node](https://img.shields.io/badge/Node-%E2%89%A5%2022.5-9fc6ff?style=flat-square&labelColor=05060f)
-![Tests](https://img.shields.io/badge/tests-99%20passing-ffd98a?style=flat-square&labelColor=05060f)
+![Tests](https://img.shields.io/badge/tests-108%20passing-ffd98a?style=flat-square&labelColor=05060f)
 ![Build](https://img.shields.io/badge/build-zero--config-9fc6ff?style=flat-square&labelColor=05060f)
 ![Components](https://img.shields.io/badge/components-18%20primitives-9fc6ff?style=flat-square&labelColor=05060f)
 ![Backend](https://img.shields.io/badge/backend-zero--dependency-ffd98a?style=flat-square&labelColor=05060f)
@@ -56,6 +56,7 @@
 - **8 个高保真界面** — 星图主界面 · 亮度鸟瞰热图 · 三维星系(Three.js)· 近景语义缩放 · 费曼右抽屉 · 侧边栏 · 列表管理 · 专业块编辑器。
 - **专业块编辑器** — H1–H3 / 待办 / 列表 / 引用 / 代码 / LaTeX / 表格 / 图片,markdown 即时转换、⌘F 查找替换、导入导出、反向链接与大纲。
 - **新手引导** — 首次打开自动弹出的 11 页导览册 + 末页聚光实地导览,随时可在设置里回看。
+- **账号与多设备** — 用户名/邮箱登录(scrypt + sessions),注册把当前匿名星空原地收进账号,换台设备也能回来。
 - **零构建 · 零依赖** — 浏览器内 Babel 编译 JSX;后端仅用 Node 内置 `node:sqlite`,不装任何三方包。
 
 **English**
@@ -66,6 +67,7 @@
 - **8 hi-fi screens** — star map · aerial heat map · 3D galaxy (Three.js) · semantic-zoom card · Feynman drawer · sidebar · list management · pro block editor.
 - **Pro block editor** — headings / todos / lists / quote / code / LaTeX / tables / images, live markdown conversion, ⌘F find-and-replace, import/export, backlinks and outline.
 - **Onboarding guide** — an 11-page carousel on first run plus a spotlight walkthrough, re-openable from Settings anytime.
+- **Accounts & multi-device** — username/email login (scrypt + sessions); registering folds your anonymous galaxy into the account in place.
 - **Zero-build · zero-dependency** — JSX compiled in the browser by Babel; the backend uses only Node's built-in `node:sqlite`, no third-party packages.
 
 <div align="center">
@@ -139,7 +141,7 @@
 | 样式 · Styling | 原生 CSS 设计令牌 · 玻璃拟态 · `data-theme` 双主题 |
 | 记忆 · Memory | FSRS-lite(`R = exp(−Δt/S)`) |
 | 后端 · Backend | Node ≥ 22.5 内置 `node:sqlite`(零三方依赖) |
-| 测试 · Test | `node --test`(99 passing) · oxlint |
+| 测试 · Test | `node --test`(108 passing) · oxlint |
 
 ---
 
@@ -183,7 +185,7 @@ stellar-raft/
 ├─ assets/                 # <sr-starfield> 星场 web component + SRConnect 连接曲线
 ├─ components/             # 18 个可复用原语 · core / knowledge / overlay / form
 ├─ ui_kits/stellar-raft/   # 可交互桌面端 App（8 屏 + 记忆模型 + 点亮/复习 + 持久化 + 新手引导）
-├─ server/                 # 零依赖本地后端（node:sqlite：匿名令牌 · 整存整取 · 分享码）
+├─ server/                 # 零依赖本地后端（node:sqlite：账号/会话 · 匿名令牌 · 整存整取 · 分享码）
 ├─ docs/                   # 零构建静态文档站 + 截图
 ├─ guidelines/             # 15 张基础规范示例卡（颜色 / 字体 / 间距 / 图标 / 品牌）
 ├─ scripts/                # build · lint（构建产物由源码生成，勿手改 _ds_bundle.js）

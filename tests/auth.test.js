@@ -141,3 +141,18 @@ test('登出：session 失效，退回匿名语义', async () => {
   assert.equal(h.status, 200);
   assert.equal(h.body.account.registered, false); // 死 session 落回匿名建档
 });
+
+test('补充不变量：哈希不出库 · 双会话互异 · 旧匿名 token 双行为', async () => {
+  const r1 = await api(anon, 'POST', '/api/auth/login', { id: '林深', password: 'secret2' });
+  const r2 = await api(anon, 'POST', '/api/auth/login', { id: '林深', password: 'secret2' });
+  assert.equal(r1.status, 200); assert.equal(r2.status, 200);
+  assert.notEqual(r1.body.session, r2.body.session);              // 多设备：两次登录 token 互异
+  assert.ok(!JSON.stringify(r1.body).includes('scrypt:'));        // 密码哈希绝不出库
+  const h = await api(r1.body.session, 'POST', '/api/hello', {});
+  assert.ok(!JSON.stringify(h.body).includes('scrypt:'));
+  // 旧匿名 token = 该账号的遗留凭证：星系仍可读（设计使然），改密仍被拒（仅登录态）
+  const g = await api(anon, 'GET', '/api/galaxy');
+  assert.equal(g.status, 200);
+  assert.equal(g.body.data.stars[0].id, 'x1');
+  assert.equal((await api(anon, 'POST', '/api/auth/password', { old: 'secret2', new: 'secret9' })).status, 401);
+});

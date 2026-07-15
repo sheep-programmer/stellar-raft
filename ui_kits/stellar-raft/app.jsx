@@ -20,7 +20,8 @@ function App() {
   const [aiConfigOpen, setAiConfigOpen] = React.useState(false); // AI 配置 modal
   const [onboard, setOnboard] = React.useState(false); // 新手引导册
   const [tour, setTour] = React.useState(false);       // 聚光实地导览
-  const [login, setLogin] = React.useState(false);     // 全屏登录/注册页
+  const [login, setLogin] = React.useState(false);
+  const [authKnown, setAuthKnown] = React.useState(false); // 登录态尘埃落定前引导不闪现     // 全屏登录/注册页
   const [dataRev, setDataRev] = React.useState(0); // 数据库水合后整体重挂载
   const nonce = React.useRef(0);
 
@@ -40,10 +41,13 @@ function App() {
       const A = window.SR_DATA && window.SR_DATA.account;
       let skipped = false; try { skipped = localStorage.getItem('sr.login.skipped') === '1'; } catch (e) {}
       if (A && A.registered === false && !skipped) setLogin(true);
+      if (A && A.registered !== undefined) setAuthKnown(true);   // 服务器已表态，登录/引导取舍已定
     };
     h();   // 补查：本地后端很快，sr-hydrated 可能早于 React 挂载已经发过
-    window.addEventListener('sr-hydrated', h);
-    return () => window.removeEventListener('sr-hydrated', h);
+    const settled = () => { h(); setAuthKnown(true); };          // 水合尘埃落定（含离线 startFresh 路径）
+    window.addEventListener('sr-hydrated', settled);
+    const t = setTimeout(() => setAuthKnown(true), 3000);        // 兜底：事件早于挂载已发过且后端离线
+    return () => { window.removeEventListener('sr-hydrated', settled); clearTimeout(t); };
   }, []);
 
   // 应用挂载完成：淡出 index.html 里的静态启动帧
@@ -197,8 +201,8 @@ function App() {
       {settingsOpen && <Settings onClose={() => setSettingsOpen(false)} theme={theme} onToggleTheme={toggleTheme} onReplayGuide={replayGuide} onOpenLogin={() => { setSettingsOpen(false); openLogin(); }} />}
       {aiConfigOpen && <AIConfig onClose={() => setAiConfigOpen(false)} />}
       {/* 登录页与新手引导的焦点圈禁互斥：登录优先，登录页出现时引导整体让位（卸载），避免 Tab 焦点陷阱与 Esc 冲突 */}
-      {onboard && !login && <Onboarding onClose={finishOnboard} onSpotlight={startTour} />}
-      {tour && <OnboardingTour onClose={() => setTour(false)} />}
+      {onboard && !login && authKnown && <Onboarding onClose={finishOnboard} onSpotlight={startTour} />}
+      {tour && !login && <OnboardingTour onClose={() => setTour(false)} />}
       {login && <LoginView onClose={closeLogin} />}
     </div>
   );
