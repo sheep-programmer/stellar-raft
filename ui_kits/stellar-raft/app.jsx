@@ -1,7 +1,7 @@
 /* App — orchestrates the Stellar Raft kit as one interactive click-through.
    star map ⇄ list ⇄ editor ⇄ inbox ⇄ timeline, with Feynman drawer, ignite,
    aerial heat map, ⌘K command palette and a 知识体检 report — all via the sidebar. */
-const { Sidebar, StarMap, AerialView, FeynmanDrawer, ListView, Editor, Inbox, Timeline, CommandPalette, Checkup, Galaxy3D, Settings, AIConfig, BlackHole, VisitView, ReviewSession, Onboarding, OnboardingTour, LoginView } = window.SRKit;
+const { Sidebar, StarMap, AerialView, FeynmanDrawer, ListView, Editor, Inbox, Timeline, CommandPalette, Checkup, Galaxy3D, Settings, AIConfig, BlackHole, VisitView, ReviewSession, Onboarding, OnboardingTour, LoginView, KeysHelp } = window.SRKit;
 const { GlassPanel, Icon, IconButton, Button, MemoryBar } = window.StellarRaftDesignSystem_2866af;
 
 function App() {
@@ -18,6 +18,7 @@ function App() {
   const [settingsOpen, setSettingsOpen] = React.useState(false); // 个人设置 modal
   const [reviewOpen, setReviewOpen] = React.useState(false);     // 复习会话（间隔重复）
   const [aiConfigOpen, setAiConfigOpen] = React.useState(false); // AI 配置 modal
+  const [keysHelp, setKeysHelp] = React.useState(false); // 快捷键速查面板
   const [onboard, setOnboard] = React.useState(false); // 新手引导册
   const [tour, setTour] = React.useState(false);       // 聚光实地导览
   const [login, setLogin] = React.useState(false);
@@ -88,6 +89,20 @@ function App() {
     return () => window.removeEventListener('keydown', h);
   }, [reviewOpen, onboard, tour, login]);
 
+  // ? 打开快捷键速查（Shift+/）——正在输入框 / 可编辑区里打问号不受影响；
+  // 已有弹层置顶时不叠开（同 ⌘K 的互斥语义，速查自带 Esc / 点遮罩关闭）
+  React.useEffect(() => {
+    const h = (e) => {
+      if (e.key !== '?' || e.metaKey || e.ctrlKey || e.altKey) return;
+      const t = e.target;
+      if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+      if (cmd || settingsOpen || aiConfigOpen || reviewOpen || onboard || tour || login || keysHelp) return;
+      e.preventDefault(); setKeysHelp(true);
+    };
+    window.addEventListener('keydown', h);
+    return () => window.removeEventListener('keydown', h);
+  }, [cmd, settingsOpen, aiConfigOpen, reviewOpen, onboard, tour, login, keysHelp]);
+
   // Esc 统一词汇：同一动作（离开当前浮层）在所有屏幕说同一句话。
   // 命令面板 / 设置 / AI 配置 / 复习会话自带 Esc，这里让位；
   // 捕获阶段处理费曼抽屉——抽屉永远盖在视图内浮层（菜单、摘要卡）之上，Esc 先关它；
@@ -96,13 +111,13 @@ function App() {
   React.useEffect(() => {
     const h = (e) => {
       if (e.key !== 'Escape' || e.defaultPrevented) return;
-      if (cmd || settingsOpen || aiConfigOpen || reviewOpen || onboard || tour || login) return;
+      if (cmd || settingsOpen || aiConfigOpen || reviewOpen || onboard || tour || login || keysHelp) return;
       if (feynman) { e.preventDefault(); setFeynman(null); return; }
       if (view === 'checkup') { e.preventDefault(); freshen(); setView('map'); setAerial(false); }
     };
     window.addEventListener('keydown', h, true);
     return () => window.removeEventListener('keydown', h, true);
-  }, [cmd, settingsOpen, aiConfigOpen, reviewOpen, onboard, tour, login, feynman, view]);
+  }, [cmd, settingsOpen, aiConfigOpen, reviewOpen, onboard, tour, login, keysHelp, feynman, view]);
 
   // 切换视图前按真实时间重算全部星的 R（衰减模型），新挂载的视图读到的是当下的亮度
   const freshen = () => { const D = window.SR_DATA; if (D && D.refreshMemory) D.refreshMemory(); };
@@ -213,6 +228,7 @@ function App() {
       {cmd && <CommandPalette onClose={() => setCmd(false)} onOpenStar={openEditor} onOpenView={openView} onFocusCon={focusCon} />}
       {settingsOpen && <Settings onClose={() => setSettingsOpen(false)} theme={theme} onToggleTheme={toggleTheme} onReplayGuide={replayGuide} onOpenLogin={() => { setSettingsOpen(false); openLogin(); }} />}
       {aiConfigOpen && <AIConfig onClose={() => setAiConfigOpen(false)} />}
+      {keysHelp && <KeysHelp onClose={() => setKeysHelp(false)} />}
       {/* 登录页与新手引导的焦点圈禁互斥：登录优先，登录页出现时引导整体让位（卸载），避免 Tab 焦点陷阱与 Esc 冲突 */}
       {onboard && !login && authKnown && <Onboarding onClose={finishOnboard} onSpotlight={startTour} />}
       {tour && !login && <OnboardingTour onClose={closeTour} onNavigate={tourNavigate} />}
