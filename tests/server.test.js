@@ -461,3 +461,55 @@ test('路径穿越仍被挡：/../ 一律 403', async () => {
   const r3 = await fetch(baseUrl + '/..%2f..%2fetc%2fpasswd');
   assert.equal(r3.status, 403);
 });
+
+/* --------------------- beacon 乐观锁 · 造访主人简介 --------------------- */
+
+test('beacon 乐观锁：版本落后的末发被放弃，版本对齐的正常落库', async () => {
+  const T = 'token-beacon-lock';
+  await api(T, 'POST', '/api/hello', { name: '锁主', avatar: '锁' });
+  const put1 = await api(T, 'PUT', '/api/galaxy', { data: galaxyOf('锁主') });
+  const d2 = galaxyOf('锁主'); d2.stars[0].label = '第二版';
+  const put2 = await api(T, 'PUT', '/api/galaxy', { data: d2, baseVersion: put1.body.version });
+  assert.equal(put2.status, 200);
+
+  // 过期 baseVersion 的末发 → 服务器放弃写入，最新版不被覆盖
+  const stale = galaxyOf('锁主'); stale.stars[0].label = '过期末发';
+  const res = await fetch(`${baseUrl}/api/galaxy/beacon?token=${T}`, {
+    method: 'POST', body: JSON.stringify({ data: stale, baseVersion: put1.body.version }),
+  });
+  assert.equal(res.status, 200);
+  let get = await api(T, 'GET', '/api/galaxy');
+  assert.equal(get.body.data.stars[0].label, '第二版');
+
+  // 版本对齐的末发 → 正常落库；不带 baseVersion 的旧客户端仍按兜底放行
+  const fresh = galaxyOf('锁主'); fresh.stars[0].label = '末发落库';
+  await fetch(`${baseUrl}/api/galaxy/beacon?token=${T}`, {
+    method: 'POST', body: JSON.stringify({ data: fresh, baseVersion: put2.body.version }),
+  });
+  get = await api(T, 'GET', '/api/galaxy');
+  assert.equal(get.body.data.stars[0].label, '末发落库');
+});
+
+test('造访返回主人简介：剥 HTML、钳 160 字；偏好与 AI 配置绝不出库', async () => {
+  const O = 'token-bio-owner', V = 'token-bio-viewer';
+  await api(O, 'POST', '/api/hello', { name: '简介主', avatar: '简' });
+  await api(V, 'POST', '/api/hello', { name: '简介客', avatar: '客' });
+  const g = galaxyOf('简介主');
+  g.account.bio = '<b>观星</b>十年' + '长'.repeat(300);
+  g.prefs = { nickname: '简介主', remindTime: '20:00' };
+  g.aiConfig = { provider: 'openai', providers: { openai: { key: 'sk-secret-123' } } };
+  await api(O, 'PUT', '/api/galaxy', { data: g });
+
+  const share = await api(O, 'POST', '/api/share', { enabled: true, visibility: 'outline' });
+  const redeem = await api(V, 'POST', '/api/friends/redeem', { code: share.body.code });
+  assert.equal(redeem.status, 200);
+
+  const visit = await api(V, 'GET', `/api/visit/${redeem.body.friend.id}`);
+  assert.equal(visit.status, 200);
+  assert.ok(visit.body.owner.bio.startsWith('观星十年'), '简介应剥掉 HTML 标签保留文本');
+  assert.ok(!visit.body.owner.bio.includes('<'));
+  assert.ok(visit.body.owner.bio.length <= 160, '简介应钳长度');
+  const raw = JSON.stringify(visit.body);
+  assert.ok(!raw.includes('sk-secret-123'), 'AI 密钥绝不能出现在访客视图');
+  assert.ok(!raw.includes('remindTime'), '偏好不透传给访客');
+});

@@ -490,7 +490,12 @@ async function handleApi(req, res, url) {
   if (seg[1] === 'galaxy' && seg[2] === 'beacon' && req.method === 'POST') {
     if (body.data && Array.isArray(body.data.stars)) {
       const cur = q.getGalaxy.get(me.id);
-      q.putGalaxy.run(me.id, JSON.stringify(body.data), (cur ? (cur.version || 0) : 0) + 1);
+      const curVer = cur ? (cur.version || 0) : 0;
+      // 乐观锁与 PUT 同口径：末发版本落后说明其它设备/标签页已写入更新的星系——放弃这一发，
+      // 不让卸载兜底覆盖别人的新数据；不带 baseVersion 的旧客户端保持原行为
+      if (!(body.baseVersion != null && cur && Number(body.baseVersion) !== curVer)) {
+        q.putGalaxy.run(me.id, JSON.stringify(body.data), curVer + 1);
+      }
     }
     return json(res, 200, { ok: true });
   }
@@ -557,7 +562,10 @@ async function handleApi(req, res, url) {
     const g = q.getGalaxy.get(ownerId);
     if (!g) return json(res, 404, { error: '这片星空还是空的' });
     const owner = q.userById.get(ownerId);
-    return json(res, 200, { owner: { id: owner.id, name: owner.name, avatar: owner.avatar }, galaxy: sanitizeGalaxy(g.data, s.visibility) });
+    // 主人的星空简介（设置 → 个人简介）随造访视图展示；剥 HTML 并钳长度
+    let ownerBio = '';
+    try { ownerBio = cleanText((JSON.parse(g.data).account || {}).bio, 160); } catch { }
+    return json(res, 200, { owner: { id: owner.id, name: owner.name, avatar: owner.avatar, bio: ownerBio }, galaxy: sanitizeGalaxy(g.data, s.visibility) });
   }
 
   /* ——— 星际收件箱 ——— */

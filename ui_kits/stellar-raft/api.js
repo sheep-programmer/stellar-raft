@@ -27,13 +27,24 @@ window.SRNet = (function () {
   // 乐观锁版本号：GET 时由 data.js 写入，PUT 成功时更新；用于检测并发覆盖
   let version = 0;
 
+  // 随账号走的偏好：昵称/头像/简介/提醒相关设置。动效与星点闪烁是设备偏好，留在本机不同步。
+  const accountPrefs = () => {
+    try {
+      const p = JSON.parse(localStorage.getItem('sr.settings')) || {};
+      const { nickname, avatar, bio, remind, freq, remindTime, dimNudge } = p;
+      return { nickname, avatar, bio, remind, freq, remindTime, dimNudge };
+    } catch (e) { return {}; }
+  };
   const snapshot = () => {
     const D = window.SR_DATA; if (!D) return null;
+    let aiConfig = null;
+    try { aiConfig = window.SRAI ? window.SRAI.getConfig() : null; } catch (e) { }
     return {
       savedAt: Date.now(),   // 客户端时间戳：启动时本地 / 服务器两份快照按新者优先
       constellations: D.constellations, stars: D.stars, connections: D.connections,
       notes: D.notes, inbox: D.inbox, timeline: D.timeline, trash: D.trash,
-      account: { name: D.account.name, avatar: D.account.avatar },
+      account: { name: D.account.name, avatar: D.account.avatar, bio: D.account.bio || '' },
+      prefs: accountPrefs(), aiConfig,
     };
   };
 
@@ -115,7 +126,7 @@ window.SRNet = (function () {
     try {
       const data = snapshot(); if (!data) return;
       saveLocal(data);   // localStorage 是同步的，卸载前必然落下
-      const payload = JSON.stringify({ data });
+      const payload = JSON.stringify({ data, baseVersion: version });
       const url = '/api/galaxy/beacon?token=' + encodeURIComponent(token);
       // sendBeacon 有队列大小上限，塞不下时退回 keepalive fetch，别默默丢尾部编辑
       if (!navigator.sendBeacon(url, payload)) {
@@ -152,13 +163,19 @@ window.SRNet = (function () {
     changeEmail: (p) => api('/api/auth/email', { method: 'POST', body: p }),
   };
   // 采用一个新会话（登录/注册成功后）：换 token + 清旧镜像，防旧账号本地数据覆盖新账号的服务器数据
-  // 身份切换的本地卫生：清掉上一个身份的昵称/头像/简介残留（动效等设备偏好保留）
+  // 身份切换的本地卫生：清掉上一个身份的全部账号级残留——昵称/头像/简介/提醒偏好、
+  // AI 接入配置（密钥绝不能串到下一个账号）、提醒去重标记、好友密文备忘。动效等设备偏好保留。
   const stripLocalIdentity = () => {
     try {
       const prefs = JSON.parse(localStorage.getItem('sr.settings')) || {};
       delete prefs.nickname; delete prefs.avatar; delete prefs.bio;
+      delete prefs.remind; delete prefs.freq; delete prefs.remindTime; delete prefs.dimNudge;
       localStorage.setItem('sr.settings', JSON.stringify(prefs));
     } catch (e) { }
+    try { window.SRAI ? window.SRAI.clearConfig() : localStorage.removeItem('sr.aiConfig'); } catch (e) { }
+    ['sr.remind.last', 'sr.dimnudge.last', 'sr.visit.codes.v1'].forEach((k) => {
+      try { localStorage.removeItem(k); } catch (e) { }
+    });
   };
   const adoptSession = async (t) => {
     try { await saveNow(); } catch (e) { }   // 冲刷防抖：注册前 1.2s 内的最后一笔编辑不落空

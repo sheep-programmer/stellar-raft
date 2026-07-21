@@ -622,6 +622,12 @@ function VisitMap({ friend, onBack, onReady, flash }) {
           <Icon name="telescope" size={16} color="var(--gold)" />
           <span style={{ fontSize: 14, color: 'var(--text-1)' }}>{(state.owner && state.owner.name) || friend.name} 的星系</span>
           <Badge tone="gold">{outlineMode ? '可见大纲' : '仅星名'}</Badge>
+          {/* 主人的星空简介（设置 → 个人简介），服务端已剥 HTML 钳长度 */}
+          {state.owner && state.owner.bio && (
+            <span style={{ fontSize: 12, color: 'var(--text-3)', maxWidth: 320, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={state.owner.bio}>
+              「{state.owner.bio}」
+            </span>
+          )}
         </GlassPanel>
         <div style={{ flex: 1 }} />
         <GlassPanel radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', gap: 18, padding: '8px 18px', pointerEvents: 'auto' }}>

@@ -123,7 +123,7 @@ function Settings({ onClose, theme, onToggleTheme, onReplayGuide, onOpenLogin })
   // 个人资料
   const [nickname, setNickname] = React.useState(() => saved.nickname || D.account.name);
   const [avatar, setAvatar] = React.useState(() => saved.avatar || 'nebula');
-  const [bio, setBio] = React.useState(() => saved.bio != null ? saved.bio : '在深空里慢慢点亮自己的星。物理 / 数学 / 一点点哲学。');
+  const [bio, setBio] = React.useState(() => saved.bio != null ? saved.bio : (D.account.bio || ''));
 
   // 偏好
   const [motion, setMotion] = React.useState(() => saved.motion !== false);
@@ -174,9 +174,11 @@ function Settings({ onClose, theme, onToggleTheme, onReplayGuide, onOpenLogin })
   const save = () => {
     const name = nickname.trim();
     if (name) { D.account.name = name; D.account.avatar = name[0]; }
+    D.account.bio = bio.trim().slice(0, 120);
     try {
-      localStorage.setItem('sr.settings', JSON.stringify({ nickname: name || D.account.name, avatar, bio, motion, twinkle, remind, freq, remindTime, dimNudge }));
+      localStorage.setItem('sr.settings', JSON.stringify({ nickname: name || D.account.name, avatar, bio: D.account.bio, motion, twinkle, remind, freq, remindTime, dimNudge }));
     } catch (e) { }
+    D.persist();   // 昵称/头像/简介与提醒偏好进星系快照，随账号跨设备同步
     // 动效偏好即刻生效（index.html 里有对应 CSS 钩子）
     document.documentElement.dataset.motion = motion ? 'on' : 'off';
     document.documentElement.dataset.twinkle = (twinkle && motion) ? 'on' : 'off';
