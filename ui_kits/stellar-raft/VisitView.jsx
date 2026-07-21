@@ -18,6 +18,70 @@ const codeMemo = {
   set(id, code) { try { const m = this.read(); m[id] = code; localStorage.setItem(VISIT_CODE_KEY, JSON.stringify(m)); } catch (e) { } },
 };
 
+/* ---------- 访客足迹：lastVisit（UTC 'YYYY-MM-DD HH:MM:SS'）→ 相对时间 ----------
+   服务端给的是 SQLite datetime('now')，无时区后缀；补 'Z' 按 UTC 解析。
+   null / 解析失败一律「尚未造访」，不猜。 */
+function visitAgo(utc) {
+  if (!utc) return '尚未造访';
+  const t = Date.parse(String(utc).replace(' ', 'T') + 'Z');
+  if (!Number.isFinite(t)) return '尚未造访';
+  const min = Math.floor((Date.now() - t) / 60000);
+  if (min < 1) return '刚来过';
+  if (min < 60) return min + ' 分钟前来过';
+  const hr = Math.floor(min / 60);
+  if (hr < 24) return hr + ' 小时前来过';
+  const day = Math.floor(hr / 24);
+  if (day < 30) return day + ' 天前来过';
+  return Math.floor(day / 30) + ' 个月前来过';
+}
+
+/* ---------- 知识共鸣：造访的星系里，哪些知识我们都拥有 ----------
+   口径（纯客户端计算，双方正文都不经手）：
+   · 归一：星名与标签去首尾空白、转小写后再比较；
+   · 强共鸣：双方星名归一后完全相等——同一颗知识星；双方都点亮时另行标注；
+   · 弱共鸣：双方 tags 有交集，剔除「草稿」「星际来信」这类系统标签；
+   · 每颗对方星至多归一档，强共鸣优先；返回按强→弱排序。
+   我方点亮口径与 data.js 一致（sr.lit>0）；对方 lit 由服务端实时熄灭后给出。
+   对方 tags 仅在「星名+大纲」档下发——「仅星名」档自然只剩强共鸣。 */
+const RESONANCE_SKIP_TAGS = ['草稿', '星际来信'];
+const resNorm = (v) => String(v == null ? '' : v).trim().toLowerCase();
+function matchResonance(myStars, theirStars) {
+  const mine = (myStars || []).filter(s => s && s.label);
+  if (!mine.length || !theirStars || !theirStars.length) return [];
+  const skip = new Set(RESONANCE_SKIP_TAGS.map(resNorm));
+  const byLabel = new Map();   // 归一星名 → 我方星（重名取先见者）
+  const byTag = new Map();     // 归一标签 → 我方星列表
+  mine.forEach(s => {
+    const l = resNorm(s.label);
+    if (l && !byLabel.has(l)) byLabel.set(l, s);
+    (s.tags || []).forEach(t => {
+      const n = resNorm(t);
+      if (!n || skip.has(n)) return;
+      if (!byTag.has(n)) byTag.set(n, []);
+      byTag.get(n).push(s);
+    });
+  });
+  const out = [];
+  theirStars.forEach(ts => {
+    const twin = byLabel.get(resNorm(ts.label));
+    if (twin) {
+      out.push({ id: ts.id, kind: 'strong', theirLabel: ts.label, mineLabel: twin.label,
+        bothLit: !!ts.lit && !!(twin.sr && twin.sr.lit > 0) });
+      return;
+    }
+    const tags = [], names = [], seen = new Set();
+    (ts.tags || []).forEach(t => {
+      const n = resNorm(t);
+      if (!n || skip.has(n) || seen.has(n) || !byTag.has(n)) return;
+      seen.add(n); tags.push(t);
+      byTag.get(n).forEach(m => { if (names.indexOf(m.label) < 0) names.push(m.label); });
+    });
+    if (tags.length) out.push({ id: ts.id, kind: 'weak', theirLabel: ts.label, tags, mineLabels: names.slice(0, 3), bothLit: false });
+  });
+  out.sort((a, b) => (a.kind === b.kind ? 0 : a.kind === 'strong' ? -1 : 1));
+  return out;
+}
+
 /* ---------- 共享样式：远航坞 / 飞船 / 卡片 / 电波环 ---------- */
 function VisitStyle() {
   return (
@@ -29,14 +93,18 @@ function VisitStyle() {
       @keyframes sr-pad-flash { from { opacity: 0.85; transform: translateX(-50%) scale(0.4); } to { opacity: 0; transform: translateX(-50%) scale(2.4); } }
       @keyframes sr-ping      { from { transform: scale(0.55); opacity: 0.7; } to { transform: scale(2.2); opacity: 0; } }
       @keyframes sr-twk       { 0%,100% { opacity: 0.2; } 50% { opacity: 0.85; } }
+      @keyframes sr-res-pulse { 0%,100% { transform: scale(1); opacity: 0.6; } 50% { transform: scale(1.16); opacity: 1; } }
       .sr-ship-flame { animation: sr-ship-flame 0.32s ease-in-out infinite; }
+      .sr-res-ring   { animation: sr-res-pulse 2.8s ease-in-out infinite; }
       .sr-bay-ship   { animation: sr-bay-bob 2.6s var(--ease-flight) infinite; }
       .sr-bay-ship.launch { animation: sr-launch 1.05s cubic-bezier(0.55, 0, 0.9, 0.4) both; }
       .sr-bay-ship.launch .sr-ship-flame { animation-duration: 0.1s; }
       .sr-visit-card { transition: transform var(--dur-base) var(--ease-flight), border-color var(--dur-base); }
       .sr-visit-card:hover { transform: translateY(-3px); }
+      .sr-res-item { transition: border-color var(--dur-base), background var(--dur-base); }
+      .sr-res-item:hover, .sr-res-item:focus-visible { border-color: rgba(255,217,138,0.45); background: rgba(255,217,138,0.09); }
       @media (prefers-reduced-motion: reduce) {
-        .sr-bay-ship, .sr-ship-flame { animation: none; }
+        .sr-bay-ship, .sr-ship-flame, .sr-res-ring { animation: none; }
       }
     `}</style>
   );
@@ -247,9 +315,13 @@ function SharePanel({ flash, onGoFriends }) {
         {(share.visitors || []).map(v => (
           <div key={v.id} style={{ display: 'flex', alignItems: 'center', gap: 11, padding: '9px 2px' }}>
             <span style={{ width: 28, height: 28, borderRadius: '50%', background: 'linear-gradient(140deg, #2a3566, #56689c)', border: '1px solid var(--glass-border-strong)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, color: 'var(--text-1)', opacity: v.blocked ? 0.45 : 1 }}>{v.avatar}</span>
-            <div style={{ flex: 1 }}>
+            <div style={{ flex: 1, minWidth: 0 }}>
               <span style={{ fontSize: 13.5, color: v.blocked ? 'var(--text-3)' : 'var(--text-1)' }}>{v.name}</span>
               {v.blocked && <Badge tone="neutral" style={{ marginLeft: 8 }}>已隐身</Badge>}
+              {/* 访客足迹：lastVisit 由 /api/visit 落笔，主人在这里看到「谁刚来过」 */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: 5, marginTop: 3, fontSize: 11, color: 'var(--text-3)', opacity: v.lastVisit ? 1 : 0.7 }}>
+                <Icon name="footprints" size={11} color="currentColor" />{visitAgo(v.lastVisit)}
+              </div>
             </div>
             <Button size="sm" variant="ghost" icon={v.blocked ? 'eye' : 'eye-off'} onClick={() => toggleBlock(v)}>
               {v.blocked ? '恢复可见' : '对 TA 隐身'}
@@ -451,6 +523,13 @@ function VisitMap({ friend, onBack, onReady, flash }) {
   const [selected, setSelected] = React.useState(null);
   const [mode, setMode] = React.useState('map'); // map | 3d | aerial
   const [collecting, setCollecting] = React.useState(false);
+  const [resOpen, setResOpen] = React.useState(false);   // 共鸣清单面板
+  const [noteOpen, setNoteOpen] = React.useState(false); // 星语输入浮层
+  const [noteText, setNoteText] = React.useState('');
+  const [sendingNote, setSendingNote] = React.useState(false);
+  const [flying, setFlying] = React.useState(false);     // 飞往某颗星：世界层短暂带缓动
+  const flyT = React.useRef(null);
+  React.useEffect(() => () => clearTimeout(flyT.current), []);
 
   /* 收纳这颗星：POST /api/inbox/collect —— 服务端按主人的可见度生成 payload，
      投进「我自己」的收件箱（寄件人=星系主人）；重复收纳幂等，不重复入库 */
@@ -480,6 +559,9 @@ function VisitMap({ friend, onBack, onReady, flash }) {
   // 世界坐标：与 StarMap 相同的百分比 → 像素映射
   const stars = React.useMemo(() => (g ? g.stars.map(s => ({ ...s, wx: s.x / 100 * VWORLD.w, wy: s.y / 100 * VWORLD.h })) : []), [g]);
   const byId = React.useMemo(() => Object.fromEntries(stars.map(s => [s.id, s])), [stars]);
+  // 知识共鸣：我方星图 × 对方星系，纯客户端匹配（口径见 matchResonance）
+  const resonance = React.useMemo(() => matchResonance((window.SR_DATA || {}).stars, stars), [stars]);
+  const resById = React.useMemo(() => Object.fromEntries(resonance.map(r => [r.id, r])), [resonance]);
   // 注入给 3D / 鸟瞰的只读数据集（形状与 window.SR_DATA 对齐）
   const dataset = React.useMemo(() => (g ? {
     stars, constellations: g.constellations, connections: g.connections, byId,
@@ -503,6 +585,8 @@ function VisitMap({ friend, onBack, onReady, flash }) {
   const dragCleanup = React.useRef(null);
   React.useEffect(() => () => { if (dragCleanup.current) dragCleanup.current(); }, []);
   const bgDown = (e) => {
+    // 飞行途中开始拖拽：立刻收掉缓动，手感回到 1:1 跟手
+    clearTimeout(flyT.current); setFlying(false);
     drag.current = { sx: e.clientX, sy: e.clientY, ox: viewRef.current.x, oy: viewRef.current.y, moved: 0 };
     const move = (ev) => {
       const dcur = drag.current; if (!dcur) return;
@@ -531,6 +615,32 @@ function VisitMap({ friend, onBack, onReady, flash }) {
     return () => el.removeEventListener('wheel', onWheel);
   }, [state.galaxy]);
   const zoomBy = (f) => setView(v => ({ ...v, k: vclamp(v.k * f, 0.34, 2.6) }));
+
+  /* 飞到一颗星：选中 + 相机居中（保持当前缩放）。世界层短暂开缓动做飞行感，
+     data-motion="off" 时全局规则把 transition 收敛为瞬移，自然合规 */
+  const flyTo = (starId) => {
+    const s = byId[starId]; if (!s) return;
+    setSelected(starId); setResOpen(false);
+    const el = ref.current; if (!el) return;
+    setFlying(true);
+    setView(v => ({ ...v, x: el.clientWidth / 2 - s.wx * v.k, y: el.clientHeight / 2 - s.wy * v.k }));
+    clearTimeout(flyT.current);
+    flyT.current = setTimeout(() => setFlying(false), 750);
+  };
+
+  /* 星语留言：≤160 字纯文本，寄进主人的收件箱（kind 'note'）。
+     soften 语义：null=网络不可用；{error}=业务拒绝（非好友 / 太频繁 / 未读满 5 句） */
+  const sendNote = () => {
+    const text = noteText.trim().slice(0, 160);
+    const ownerId = state.owner && state.owner.id;
+    if (!text || sendingNote || !ownerId) return;
+    setSendingNote(true);
+    N.inbox.send(ownerId, 'note', null, { text }).then(r => {
+      if (!r) flash('星际网络暂不可用，稍后再试', 'danger');
+      else if (r.error) flash(r.error, 'danger');
+      else { flash('星语已寄出 ✦', 'gold'); setNoteText(''); setNoteOpen(false); }
+    }).finally(() => setSendingNote(false));
+  };
 
   if (state.loading) return <div style={{ flex: 1, padding: 60, textAlign: 'center', color: 'var(--text-3)', fontSize: 13 }}>正在飞往「{friend.name}」的星系…</div>;
   if (state.error) return (
@@ -571,7 +681,7 @@ function VisitMap({ friend, onBack, onReady, flash }) {
       <sr-starfield density="1"></sr-starfield>
 
       {/* 世界层：与 StarMap 相同的 translate+scale 相机 */}
-      <div style={{ position: 'absolute', left: 0, top: 0, transformOrigin: '0 0', transform: `translate(${view.x}px, ${view.y}px) scale(${view.k})`, willChange: 'transform' }}>
+      <div style={{ position: 'absolute', left: 0, top: 0, transformOrigin: '0 0', transform: `translate(${view.x}px, ${view.y}px) scale(${view.k})`, willChange: 'transform', transition: flying ? 'transform 0.7s var(--ease-flight)' : 'none' }}>
         {/* 星域：大气光圈 + 主星太阳 + 发光域名——与自己的星图同一套视觉语言，只是不可拖动 */}
         {geoms.map(({ con, cx, cy, r, count, col }) => (
           <div key={con.id}>
@@ -605,14 +715,29 @@ function VisitMap({ friend, onBack, onReady, flash }) {
           })}
         </svg>
 
-        {stars.map(s => (
-          <div key={s.id} onMouseDown={(e) => e.stopPropagation()} onClick={() => setSelected(s.id === selected ? null : s.id)}
-            style={{ position: 'absolute', left: s.wx, top: s.wy, zIndex: 4 }}>
-            <StarNode strength={s.strength} importance={s.importance || 1} label={s.label}
-              selected={selected === s.id}
-              style={{ left: 0, top: 0, transform: 'translate(-50%, calc(-50% + 11.5px))', cursor: 'pointer' }} />
-          </div>
-        ))}
+        {stars.map(s => {
+          const res = resById[s.id];
+          // 共鸣环外径：跟随星核尺寸（StarNode 的 core = 12×importance），强共鸣更亮
+          const ringR = (12 * (s.importance || 1) + 24) / 2;
+          return (
+            <div key={s.id} onMouseDown={(e) => e.stopPropagation()} onClick={() => { setResOpen(false); setSelected(s.id === selected ? null : s.id); }}
+              style={{ position: 'absolute', left: s.wx, top: s.wy, zIndex: 4 }}>
+              {res && (
+                <span className="sr-res-ring" style={{
+                  position: 'absolute', left: -ringR, top: -ringR, width: ringR * 2, height: ringR * 2,
+                  borderRadius: '50%', pointerEvents: 'none', zIndex: 3,
+                  border: res.kind === 'strong' ? '1.5px solid rgba(255,217,138,0.75)' : '1px solid rgba(255,217,138,0.45)',
+                  boxShadow: res.kind === 'strong'
+                    ? '0 0 16px rgba(255,217,138,0.4), inset 0 0 10px rgba(255,217,138,0.18)'
+                    : '0 0 10px rgba(255,217,138,0.22)',
+                }} />
+              )}
+              <StarNode strength={s.strength} importance={s.importance || 1} label={s.label}
+                selected={selected === s.id}
+                style={{ left: 0, top: 0, transform: 'translate(-50%, calc(-50% + 11.5px))', cursor: 'pointer' }} />
+            </div>
+          );
+        })}
       </div>
 
       {/* 顶部 HUD */}
@@ -630,6 +755,15 @@ function VisitMap({ friend, onBack, onReady, flash }) {
           )}
         </GlassPanel>
         <div style={{ flex: 1 }} />
+        {/* 知识共鸣 chip：有共鸣才出现，金=共同拥有的知识 */}
+        {!!resonance.length && (
+          <button type="button" title="你们俩都拥有的知识" aria-expanded={resOpen}
+            onClick={() => { setResOpen(o => !o); setSelected(null); }}
+            style={{ pointerEvents: 'auto', display: 'inline-flex', alignItems: 'center', gap: 7, padding: '8px 15px', font: 'inherit', fontSize: 12.5, cursor: 'pointer', borderRadius: 'var(--r-pill)', color: 'var(--gold-white)', border: '1px solid', borderColor: resOpen ? 'rgba(255,217,138,0.6)' : 'rgba(255,217,138,0.4)', background: resOpen ? 'rgba(255,217,138,0.16)' : 'rgba(255,217,138,0.1)', backdropFilter: 'blur(10px)', boxShadow: '0 0 14px rgba(255,217,138,0.12)' }}>
+            <Icon name="sparkles" size={14} color="var(--gold)" />
+            共鸣 <b style={{ fontWeight: 500, color: 'var(--gold)' }}>{resonance.length}</b> 处
+          </button>
+        )}
         <GlassPanel radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', gap: 18, padding: '8px 18px', pointerEvents: 'auto' }}>
           <span style={{ fontSize: 12, color: 'var(--text-3)' }}>知识星 <b style={{ color: 'var(--text-1)', fontWeight: 500 }}>{stars.length}</b></span>
           <span style={{ fontSize: 12, color: 'var(--text-3)' }}>星域 <b style={{ color: 'var(--star-blue)', fontWeight: 500 }}>{geoms.length}</b></span>
@@ -641,7 +775,11 @@ function VisitMap({ friend, onBack, onReady, flash }) {
       <div style={{ position: 'absolute', bottom: 26, left: 24, zIndex: 30, display: 'flex', alignItems: 'center', gap: 8, fontSize: 11.5, color: 'var(--text-3)', pointerEvents: 'none' }}>
         <Icon name="move" size={14} color="currentColor" />拖拽平移 · 滚轮缩放 · 点星看大纲 · 只读造访，笔记正文不会离开对方的数据库
       </div>
-      <div onMouseDown={(e) => e.stopPropagation()} style={{ position: 'absolute', bottom: 26, right: 24, zIndex: 30 }}>
+      <div onMouseDown={(e) => e.stopPropagation()} style={{ position: 'absolute', bottom: 26, right: 24, zIndex: 30, display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 10 }}>
+        {/* 星语留言：给主人留一句话，寄进对方的收件箱 */}
+        <GlassPanel radius="pill" pad="none" style={{ padding: '4px 6px' }}>
+          <Button size="sm" variant="ghost" icon="feather" onClick={() => setNoteOpen(o => !o)}>留下星语</Button>
+        </GlassPanel>
         <GlassPanel radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', gap: 2, padding: '6px 8px' }}>
           <IconButton name="minus" size="sm" title="缩小" onClick={() => zoomBy(0.85)} />
           <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--text-2)', minWidth: 42, textAlign: 'center' }}>{Math.round(view.k * 100)}%</span>
@@ -651,6 +789,67 @@ function VisitMap({ friend, onBack, onReady, flash }) {
           <IconButton name="satellite" size="sm" title="亮度鸟瞰" onClick={() => setMode('aerial')} />
         </GlassPanel>
       </div>
+
+      {/* 共鸣清单：对方星名 ↔ 我方星名 / 共同标签，点条目飞过去 */}
+      {resOpen && (
+        <div onMouseDown={(e) => e.stopPropagation()} style={{ position: 'absolute', right: 20, top: 68, width: 324, zIndex: 45, animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
+          <GlassPanel strong radius="lg" pad="md" glow>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <Icon name="sparkles" size={15} color="var(--gold)" />
+              <span style={{ flex: 1, fontSize: 14, color: 'var(--text-1)' }}>知识共鸣</span>
+              <Badge tone="gold">{resonance.length} 处</Badge>
+              <IconButton name="x" size="sm" title="关闭" onClick={() => setResOpen(false)} />
+            </div>
+            <div style={{ fontSize: 11.5, lineHeight: 1.6, color: 'var(--text-3)', margin: '7px 0 10px' }}>
+              这些知识你们俩都拥有——点一条，飞过去看看。
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 7, maxHeight: 336, overflowY: 'auto', paddingRight: 2 }}>
+              {resonance.map(r => (
+                <div key={r.id} className="sr-res-item" role="button" tabIndex={0}
+                  onClick={() => flyTo(r.id)}
+                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flyTo(r.id); } }}
+                  style={{ padding: '9px 11px', borderRadius: 'var(--r-md)', cursor: 'pointer', border: '1px solid var(--glass-border)', background: 'rgba(255,217,138,0.04)' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
+                    <Icon name={r.kind === 'strong' ? 'star' : 'hash'} size={12} color="var(--gold)" />
+                    <span style={{ flex: 1, fontSize: 13, color: 'var(--text-1)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{r.theirLabel}</span>
+                    {r.bothLit && <Badge tone="gold">你们都点亮了它</Badge>}
+                  </div>
+                  <div style={{ marginTop: 4, paddingLeft: 19, fontSize: 11.5, lineHeight: 1.6, color: 'var(--text-3)' }}>
+                    {r.kind === 'strong'
+                      ? <span>与你的「{r.mineLabel}」同名</span>
+                      : <span>共同标签 {r.tags.join(' · ')} ↔ 你的「{r.mineLabels.join('」「')}」</span>}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </GlassPanel>
+        </div>
+      )}
+
+      {/* 星语输入浮层：≤160 字，回车寄出，Esc 收起 */}
+      {noteOpen && (
+        <div onMouseDown={(e) => e.stopPropagation()} style={{ position: 'absolute', right: 24, bottom: 124, width: 324, zIndex: 45, animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
+          <GlassPanel strong radius="lg" pad="md" glow>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 7 }}>
+              <Icon name="feather" size={15} color="var(--gold)" />
+              <span style={{ flex: 1, fontSize: 14, color: 'var(--text-1)' }}>留下星语</span>
+              <IconButton name="x" size="sm" title="收起" onClick={() => setNoteOpen(false)} />
+            </div>
+            <div style={{ fontSize: 11.5, lineHeight: 1.6, color: 'var(--text-3)', marginBottom: 10 }}>
+              给 {(state.owner && state.owner.name) || friend.name} 留一句话，会寄进 TA 的收件箱。
+            </div>
+            <Input value={noteText} onChange={(e) => setNoteText(e.target.value.slice(0, 160))}
+              placeholder="一句星语…" icon="message-circle" size="md" autoFocus maxLength={160}
+              onKeyDown={(e) => { if (e.key === 'Enter') sendNote(); else if (e.key === 'Escape') setNoteOpen(false); }} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 10 }}>
+              <span style={{ flex: 1, fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-3)' }}>{noteText.length} / 160</span>
+              <Button size="sm" variant="primary" icon="send" glow disabled={sendingNote || !noteText.trim()} onClick={sendNote}>
+                {sendingNote ? '寄出中…' : '寄出'}
+              </Button>
+            </div>
+          </GlassPanel>
+        </div>
+      )}
 
       {/* 大纲卡（服务端已裁剪，这里拿到什么就只有什么） */}
       {sel && (
