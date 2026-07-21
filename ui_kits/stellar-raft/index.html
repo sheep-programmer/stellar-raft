@@ -5,7 +5,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>星图 · Stellar Raft</title>
-  <link rel="icon" href="data:,">
+  <!-- 品牌星标：暖金四芒主星 + 冷蓝伴星连线（标签页图标与启动屏共用同一枚） -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Cdefs%3E%3ClinearGradient%20id='g'%20x1='0'%20y1='0'%20x2='1'%20y2='1'%3E%3Cstop%20offset='0'%20stop-color='%23ffe9b8'/%3E%3Cstop%20offset='1'%20stop-color='%23ffb86b'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath%20d='M13%2049%20L24%2037%20M42%2020%20L52%2012'%20stroke='rgba(159,198,255,0.45)'%20stroke-width='1.2'/%3E%3Ccircle%20cx='13'%20cy='49'%20r='2.2'%20fill='%239fc6ff'%20opacity='0.9'/%3E%3Ccircle%20cx='52'%20cy='12'%20r='1.7'%20fill='%239fc6ff'%20opacity='0.75'/%3E%3Cpath%20d='M33%208%20C34.6%2023%2037.4%2025.8%2052%2027.5%20C37.4%2029.2%2034.6%2032%2033%2047%20C31.4%2032%2028.6%2029.2%2014%2027.5%20C28.6%2025.8%2031.4%2023%2033%208%20Z'%20fill='url(%23g)'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="../../styles.css?v=63">
   <style>
     html, body { margin: 0; height: 100%; background: var(--space-void); transition: background var(--dur-base); }
@@ -32,6 +33,19 @@
   <div id="sr-boot" role="status">
     <div class="sr-boot-stars" aria-hidden="true"></div>
     <div class="sr-boot-center">
+      <div class="sr-boot-logo" aria-hidden="true">
+        <svg viewBox="0 0 64 64" width="64" height="64">
+          <defs>
+            <linearGradient id="sr-logo-g" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#ffe9b8"/><stop offset="1" stop-color="#ffb86b"/>
+            </linearGradient>
+          </defs>
+          <path d="M13 49 L24 37 M42 20 L52 12" stroke="rgba(159,198,255,0.45)" stroke-width="1.2"/>
+          <circle cx="13" cy="49" r="2.2" fill="#9fc6ff" opacity="0.9"/>
+          <circle cx="52" cy="12" r="1.7" fill="#9fc6ff" opacity="0.75"/>
+          <path d="M33 8 C34.6 23 37.4 25.8 52 27.5 C37.4 29.2 34.6 32 33 47 C31.4 32 28.6 29.2 14 27.5 C28.6 25.8 31.4 23 33 8 Z" fill="url(#sr-logo-g)"/>
+        </svg>
+      </div>
       <div class="sr-boot-mark">星图</div>
       <div class="sr-boot-sub">STELLAR RAFT</div>
       <div class="sr-boot-msg" id="sr-boot-msg">正在点亮你的星空…</div>
@@ -46,6 +60,10 @@
       transition: opacity 560ms cubic-bezier(0.2, 0.8, 0.2, 1); }
     #sr-boot[data-done] { opacity: 0; pointer-events: none; }
     .sr-boot-center { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .sr-boot-logo { margin-bottom: 6px; filter: drop-shadow(0 0 14px rgba(255,217,138,0.35)) drop-shadow(0 0 30px rgba(159,198,255,0.18));
+      animation: sr-boot-logo 3.2s ease-in-out infinite; }
+    .sr-boot-logo svg { display: block; }
+    @keyframes sr-boot-logo { 0%, 100% { transform: scale(0.97); opacity: 0.9; } 50% { transform: scale(1.03); opacity: 1; } }
     .sr-boot-mark { font: 300 36px/1.25 Sora, "Noto Sans SC", -apple-system, sans-serif; letter-spacing: 0.08em;
       background: linear-gradient(176deg, #fff3da 0%, #ffffff 30%, #e9f0ff 62%, #b6cbf2 100%);
       -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
@@ -67,7 +85,7 @@
       animation: sr-boot-tw 3.6s ease-in-out infinite; }
     @keyframes sr-boot-pulse { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
     @keyframes sr-boot-tw { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
-    @media (prefers-reduced-motion: reduce) { .sr-boot-msg, .sr-boot-stars { animation: none; } }
+    @media (prefers-reduced-motion: reduce) { .sr-boot-msg, .sr-boot-stars, .sr-boot-logo { animation: none; } }
   </style>
   <script>
     // 兜底：CDN 断网 / 故障时不再是永远的黑幕
