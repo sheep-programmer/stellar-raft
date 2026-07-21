@@ -1,4 +1,4 @@
-/* @ds-bundle: {"format":3,"namespace":"StellarRaftDesignSystem_2866af","components":[{"name":"Badge","sourcePath":"components/core/Badge.jsx"},{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"GlassPanel","sourcePath":"components/core/GlassPanel.jsx"},{"name":"Icon","sourcePath":"components/core/Icon.jsx"},{"name":"IconButton","sourcePath":"components/core/IconButton.jsx"},{"name":"Input","sourcePath":"components/core/Input.jsx"},{"name":"Tag","sourcePath":"components/core/Tag.jsx"},{"name":"Checkbox","sourcePath":"components/form/Checkbox.jsx"},{"name":"Select","sourcePath":"components/form/Select.jsx"},{"name":"Switch","sourcePath":"components/form/Switch.jsx"},{"name":"Tabs","sourcePath":"components/form/Tabs.jsx"},{"name":"ConstellationItem","sourcePath":"components/knowledge/ConstellationItem.jsx"},{"name":"MemoryBar","sourcePath":"components/knowledge/MemoryBar.jsx"},{"name":"StarNode","sourcePath":"components/knowledge/StarNode.jsx"},{"name":"ContextMenu","sourcePath":"components/overlay/ContextMenu.jsx"},{"name":"Modal","sourcePath":"components/overlay/Modal.jsx"},{"name":"Toast","sourcePath":"components/overlay/Toast.jsx"},{"name":"Tooltip","sourcePath":"components/overlay/Tooltip.jsx"}],"sourceHashes":{"assets/starfield.js":"d776d2b45dc4","components/core/Badge.jsx":"b0bd9735d638","components/core/Button.jsx":"a1c387a07e86","components/core/GlassPanel.jsx":"299a19d8fbb4","components/core/Icon.jsx":"7505f83ab03d","components/core/IconButton.jsx":"24052f4eed78","components/core/Input.jsx":"54a6c9af7e3f","components/core/Tag.jsx":"d8513c07ea96","components/form/Checkbox.jsx":"38aa593157dd","components/form/Select.jsx":"86b8c1c71e12","components/form/Switch.jsx":"938c62be0664","components/form/Tabs.jsx":"ede2dbff1963","components/knowledge/ConstellationItem.jsx":"d73e999469b6","components/knowledge/MemoryBar.jsx":"a54c928d5065","components/knowledge/StarNode.jsx":"1bedee49f0bf","components/overlay/ContextMenu.jsx":"11783420e876","components/overlay/Modal.jsx":"0906de457544","components/overlay/Toast.jsx":"d22ad40680a6","components/overlay/Tooltip.jsx":"a042caa8970d","ui_kits/stellar-raft/AIConfig.jsx":"bbc66d05eebf","ui_kits/stellar-raft/AerialView.jsx":"8209eb6af395","ui_kits/stellar-raft/BlackHole.jsx":"2704c4a4e50c","ui_kits/stellar-raft/Checkup.jsx":"aa974821dc28","ui_kits/stellar-raft/CommandPalette.jsx":"3f1a9cdd2383","ui_kits/stellar-raft/Editor.jsx":"5eeb5ecb65c6","ui_kits/stellar-raft/EditorMenus.jsx":"fb80581f6bcc","ui_kits/stellar-raft/FeynmanDrawer.jsx":"6af036e0a904","ui_kits/stellar-raft/Galaxy3D.jsx":"2ce87e7da57d","ui_kits/stellar-raft/Inbox.jsx":"c2fc04361d44","ui_kits/stellar-raft/ListView.jsx":"e2550f598c82","ui_kits/stellar-raft/LoginView.jsx":"18d9c842c5c6","ui_kits/stellar-raft/Onboarding.jsx":"e1d27a7d28a7","ui_kits/stellar-raft/ReviewSession.jsx":"9092a3d9412c","ui_kits/stellar-raft/Settings.jsx":"4fb20de532d9","ui_kits/stellar-raft/Sidebar.jsx":"f61a222b9d49","ui_kits/stellar-raft/StarMap.jsx":"3f1c09e9e50e","ui_kits/stellar-raft/Timeline.jsx":"cda4e62fa57b","ui_kits/stellar-raft/VisitView.jsx":"19ff8ab7dbb7","ui_kits/stellar-raft/ai.js":"2f79eb3473c9","ui_kits/stellar-raft/app.jsx":"f08bc502367d","ui_kits/stellar-raft/codehl.js":"6fbdd0100deb","ui_kits/stellar-raft/data.js":"0ec0ed408dbf","ui_kits/stellar-raft/mdcore.js":"b82d5054c3b6","ui_kits/stellar-raft/sanitize.js":"88e63cd63253","ui_kits/stellar-raft/transition.js":"3725d8982dc5","ui_kits/stellar-raft/undocore.js":"7f8c94da35f9","ui_kits/stellar-raft/vault.js":"d7876f7f9981"},"inlinedExternals":[],"unexposedExports":[{"name":"memoryColor","sourcePath":"components/knowledge/MemoryBar.jsx"}],"exposedHelpers":[{"name":"toast","sourcePath":"components/overlay/Toast.jsx"}]} */
+/* @ds-bundle: {"format":3,"namespace":"StellarRaftDesignSystem_2866af","components":[{"name":"Badge","sourcePath":"components/core/Badge.jsx"},{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"GlassPanel","sourcePath":"components/core/GlassPanel.jsx"},{"name":"Icon","sourcePath":"components/core/Icon.jsx"},{"name":"IconButton","sourcePath":"components/core/IconButton.jsx"},{"name":"Input","sourcePath":"components/core/Input.jsx"},{"name":"Tag","sourcePath":"components/core/Tag.jsx"},{"name":"Checkbox","sourcePath":"components/form/Checkbox.jsx"},{"name":"Select","sourcePath":"components/form/Select.jsx"},{"name":"Switch","sourcePath":"components/form/Switch.jsx"},{"name":"Tabs","sourcePath":"components/form/Tabs.jsx"},{"name":"ConstellationItem","sourcePath":"components/knowledge/ConstellationItem.jsx"},{"name":"MemoryBar","sourcePath":"components/knowledge/MemoryBar.jsx"},{"name":"StarNode","sourcePath":"components/knowledge/StarNode.jsx"},{"name":"ContextMenu","sourcePath":"components/overlay/ContextMenu.jsx"},{"name":"Modal","sourcePath":"components/overlay/Modal.jsx"},{"name":"Toast","sourcePath":"components/overlay/Toast.jsx"},{"name":"Tooltip","sourcePath":"components/overlay/Tooltip.jsx"}],"sourceHashes":{"assets/starfield.js":"d776d2b45dc4","components/core/Badge.jsx":"b0bd9735d638","components/core/Button.jsx":"a1c387a07e86","components/core/GlassPanel.jsx":"299a19d8fbb4","components/core/Icon.jsx":"7505f83ab03d","components/core/IconButton.jsx":"24052f4eed78","components/core/Input.jsx":"54a6c9af7e3f","components/core/Tag.jsx":"d8513c07ea96","components/form/Checkbox.jsx":"38aa593157dd","components/form/Select.jsx":"86b8c1c71e12","components/form/Switch.jsx":"938c62be0664","components/form/Tabs.jsx":"ede2dbff1963","components/knowledge/ConstellationItem.jsx":"d73e999469b6","components/knowledge/MemoryBar.jsx":"a54c928d5065","components/knowledge/StarNode.jsx":"1bedee49f0bf","components/overlay/ContextMenu.jsx":"11783420e876","components/overlay/Modal.jsx":"0906de457544","components/overlay/Toast.jsx":"d22ad40680a6","components/overlay/Tooltip.jsx":"a042caa8970d","ui_kits/stellar-raft/AIConfig.jsx":"bbc66d05eebf","ui_kits/stellar-raft/AerialView.jsx":"8209eb6af395","ui_kits/stellar-raft/BlackHole.jsx":"2704c4a4e50c","ui_kits/stellar-raft/Checkup.jsx":"aa974821dc28","ui_kits/stellar-raft/CommandPalette.jsx":"3f1a9cdd2383","ui_kits/stellar-raft/Editor.jsx":"6bbc2ceb343b","ui_kits/stellar-raft/EditorMenus.jsx":"fb80581f6bcc","ui_kits/stellar-raft/FeynmanDrawer.jsx":"6af036e0a904","ui_kits/stellar-raft/Galaxy3D.jsx":"2ce87e7da57d","ui_kits/stellar-raft/Inbox.jsx":"c2fc04361d44","ui_kits/stellar-raft/ListView.jsx":"e2550f598c82","ui_kits/stellar-raft/LoginView.jsx":"18d9c842c5c6","ui_kits/stellar-raft/Onboarding.jsx":"e1d27a7d28a7","ui_kits/stellar-raft/ReviewSession.jsx":"9092a3d9412c","ui_kits/stellar-raft/Settings.jsx":"4fb20de532d9","ui_kits/stellar-raft/Sidebar.jsx":"f61a222b9d49","ui_kits/stellar-raft/StarMap.jsx":"3f1c09e9e50e","ui_kits/stellar-raft/Timeline.jsx":"cda4e62fa57b","ui_kits/stellar-raft/VisitView.jsx":"19ff8ab7dbb7","ui_kits/stellar-raft/ai.js":"2f79eb3473c9","ui_kits/stellar-raft/app.jsx":"f08bc502367d","ui_kits/stellar-raft/codehl.js":"6fbdd0100deb","ui_kits/stellar-raft/data.js":"0ec0ed408dbf","ui_kits/stellar-raft/mdcore.js":"b82d5054c3b6","ui_kits/stellar-raft/sanitize.js":"88e63cd63253","ui_kits/stellar-raft/transition.js":"3725d8982dc5","ui_kits/stellar-raft/undocore.js":"7f8c94da35f9","ui_kits/stellar-raft/vault.js":"d7876f7f9981"},"inlinedExternals":[],"unexposedExports":[{"name":"memoryColor","sourcePath":"components/knowledge/MemoryBar.jsx"}],"exposedHelpers":[{"name":"toast","sourcePath":"components/overlay/Toast.jsx"}]} */
 
 (() => {
 
@@ -8239,37 +8239,189 @@ const PROP_STATUS_TONE = {
   '待重燃': 'var(--gold-warm)'
 };
 
-/* 「下次复习」的日期选择：文字仍显示派生标签（今天/明天/x 天后），点击弹原生日历。
-   选定日期把星排入那天的复习队列；星自然变暗到期不会被推迟——遗忘不等人。 */
+/* ——— 属性面板的浮层基建 ———
+   属性面板容器带 overflow:hidden，普通下拉会被裁剪或把内容顶开；
+   这里的浮层一律 createPortal 到 body + fixed 定位：绝不参与布局、绝不被裁剪。
+   贴着触发元素定位，放不下时翻到上方；Esc / 点外部关闭。 */
+function PropPop({
+  anchorRef,
+  width,
+  height,
+  onClose,
+  children
+}) {
+  const [pos, setPos] = React.useState(null);
+  React.useLayoutEffect(() => {
+    const a = anchorRef.current;
+    if (!a) return;
+    const r = a.getBoundingClientRect();
+    let top = r.bottom + 8;
+    if (top + height > window.innerHeight - 12) top = Math.max(12, r.top - height - 8);
+    let left = Math.min(r.left, window.innerWidth - width - 12);
+    setPos({
+      top,
+      left: Math.max(12, left)
+    });
+  }, []);
+  React.useEffect(() => {
+    const key = e => {
+      if (e.key === 'Escape') {
+        e.stopPropagation();
+        onClose();
+      }
+    };
+    const down = e => {
+      if (!e.target.closest('[data-prop-pop]')) onClose();
+    };
+    document.addEventListener('keydown', key, true);
+    document.addEventListener('mousedown', down);
+    return () => {
+      document.removeEventListener('keydown', key, true);
+      document.removeEventListener('mousedown', down);
+    };
+  }, [onClose]);
+  if (!pos) return ReactDOM.createPortal(/*#__PURE__*/React.createElement("div", {
+    "data-prop-pop": true,
+    style: {
+      position: 'fixed',
+      opacity: 0
+    }
+  }), document.body);
+  return ReactDOM.createPortal(/*#__PURE__*/React.createElement("div", {
+    "data-prop-pop": true,
+    style: {
+      position: 'fixed',
+      top: pos.top,
+      left: pos.left,
+      width,
+      zIndex: 140,
+      animation: 'sr-cardin var(--dur-fast) var(--ease-flight) both'
+    }
+  }, /*#__PURE__*/React.createElement(GlassPanel, {
+    strong: true,
+    radius: "md",
+    pad: "none",
+    glow: true,
+    style: {
+      overflow: 'hidden'
+    }
+  }, children)), document.body);
+}
+
+/* 「类型」浮层菜单：预设 + 当前自定义值兜底，点选即生效（下拉的正常语义） */
+function TypePicker({
+  value,
+  onPick
+}) {
+  const [open, setOpen] = React.useState(false);
+  const btnRef = React.useRef(null);
+  const opts = PROP_TYPE_PRESETS.includes(value) || !value ? PROP_TYPE_PRESETS : [value, ...PROP_TYPE_PRESETS];
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("button", {
+    ref: btnRef,
+    type: "button",
+    className: "sr-focus-ring",
+    onClick: () => setOpen(o => !o),
+    "aria-haspopup": "listbox",
+    "aria-expanded": open,
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 6,
+      font: 'inherit',
+      fontSize: 12,
+      padding: '2px 9px',
+      borderRadius: 'var(--r-pill)',
+      border: '1px solid transparent',
+      background: 'rgba(159,198,255,0.12)',
+      color: 'var(--star-blue)',
+      cursor: 'pointer'
+    }
+  }, value || '选择类型…', /*#__PURE__*/React.createElement(Icon, {
+    name: "chevron-down",
+    size: 12,
+    color: "currentColor"
+  })), open && /*#__PURE__*/React.createElement(PropPop, {
+    anchorRef: btnRef,
+    width: 172,
+    height: opts.length * 34 + 12,
+    onClose: () => setOpen(false)
+  }, /*#__PURE__*/React.createElement("div", {
+    role: "listbox",
+    style: {
+      padding: 6
+    }
+  }, opts.map(t => /*#__PURE__*/React.createElement("div", {
+    key: t,
+    role: "option",
+    "aria-selected": t === value,
+    onClick: () => {
+      setOpen(false);
+      if (t !== value) onPick(t);
+    },
+    onMouseEnter: e => {
+      e.currentTarget.style.background = 'rgba(159,198,255,0.10)';
+    },
+    onMouseLeave: e => {
+      e.currentTarget.style.background = t === value ? 'rgba(255,217,138,0.10)' : 'transparent';
+    },
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 8,
+      padding: '7px 10px',
+      borderRadius: 'var(--r-sm)',
+      cursor: 'pointer',
+      fontSize: 13,
+      color: t === value ? 'var(--text-1)' : 'var(--text-2)',
+      background: t === value ? 'rgba(255,217,138,0.10)' : 'transparent'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      flex: 1
+    }
+  }, t), t === value && /*#__PURE__*/React.createElement(Icon, {
+    name: "check",
+    size: 14,
+    color: "var(--gold)"
+  }))))));
+}
+
+/* 「下次复习」的月历：亲手实现——点日期只是选中（金色高亮），按「确认」才排期，
+   翻月/挑选过程绝不触发任何设置。过去的日子不可选；星自然变暗到期不会被推迟。 */
 function ReviewPicker({
   label,
   iso,
   onPick
 }) {
-  const ref = React.useRef(null);
-  const d = new Date();
-  const todayIso = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
-  const openPicker = () => {
-    const el = ref.current;
-    if (!el) return;
-    el.value = iso || todayIso;
-    try {
-      el.showPicker();
-    } catch (e) {
-      el.focus();
-      el.click();
-    }
+  const [open, setOpen] = React.useState(false);
+  const btnRef = React.useRef(null);
+  const now = new Date();
+  const todayKey = now.getFullYear() * 10000 + (now.getMonth() + 1) * 100 + now.getDate();
+  const init = /^\d{4}-\d{2}-\d{2}$/.test(iso || '') ? iso : null;
+  const [ym, setYm] = React.useState(() => init ? [Number(init.slice(0, 4)), Number(init.slice(5, 7)) - 1] : [now.getFullYear(), now.getMonth()]);
+  const [sel, setSel] = React.useState(init);
+  const openPop = () => {
+    setSel(init);
+    setYm(init ? [Number(init.slice(0, 4)), Number(init.slice(5, 7)) - 1] : [now.getFullYear(), now.getMonth()]);
+    setOpen(true);
   };
-  return /*#__PURE__*/React.createElement("span", {
-    style: {
-      position: 'relative',
-      display: 'inline-flex',
-      alignItems: 'center'
-    }
-  }, /*#__PURE__*/React.createElement("button", {
+  const [y, m] = ym;
+  const firstDow = (new Date(y, m, 1).getDay() + 6) % 7; // 周一为一周之首
+  const lastDay = new Date(y, m + 1, 0).getDate();
+  const cells = [...Array(firstDow).fill(null), ...Array.from({
+    length: lastDay
+  }, (_, i) => i + 1)];
+  const isoOf = day => y + '-' + String(m + 1).padStart(2, '0') + '-' + String(day).padStart(2, '0');
+  const keyOf = day => y * 10000 + (m + 1) * 100 + day;
+  const shift = d => setYm(([yy, mm]) => {
+    const nd = new Date(yy, mm + d, 1);
+    return [nd.getFullYear(), nd.getMonth()];
+  });
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("button", {
+    ref: btnRef,
     type: "button",
     className: "sr-focus-ring",
-    onClick: openPicker,
+    onClick: openPop,
     title: "\u9009\u62E9\u65E5\u671F\uFF0C\u628A\u8FD9\u9897\u661F\u6392\u5165\u90A3\u5929\u7684\u590D\u4E60\uFF08\u661F\u81EA\u7136\u53D8\u6697\u5230\u671F\u4E0D\u4F1A\u88AB\u63A8\u8FDF\uFF09",
     style: {
       display: 'inline-flex',
@@ -8287,29 +8439,113 @@ function ReviewPicker({
     name: "calendar-days",
     size: 13,
     color: "var(--text-3)"
-  })), /*#__PURE__*/React.createElement("input", {
-    ref: ref,
-    type: "date",
-    min: todayIso,
-    defaultValue: iso || '',
-    "aria-label": "\u9009\u62E9\u4E0B\u6B21\u590D\u4E60\u65E5\u671F",
-    tabIndex: -1,
-    onChange: e => {
-      if (e.target.value) onPick && onPick(e.target.value);
-    },
+  })), open && /*#__PURE__*/React.createElement(PropPop, {
+    anchorRef: btnRef,
+    width: 264,
+    height: 332,
+    onClose: () => setOpen(false)
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
-      position: 'absolute',
-      left: 0,
-      bottom: 0,
-      width: 1,
-      height: 1,
-      opacity: 0,
-      border: 0,
-      padding: 0,
-      colorScheme: 'dark',
-      pointerEvents: 'none'
+      padding: '12px 14px 12px'
     }
-  }));
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      marginBottom: 10
+    }
+  }, /*#__PURE__*/React.createElement(IconButton, {
+    name: "chevron-left",
+    size: "sm",
+    title: "\u4E0A\u4E2A\u6708",
+    onClick: () => shift(-1)
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 13,
+      color: 'var(--text-1)',
+      fontFamily: 'var(--font-mono)'
+    }
+  }, y, " \u5E74 ", m + 1, " \u6708"), /*#__PURE__*/React.createElement(IconButton, {
+    name: "chevron-right",
+    size: "sm",
+    title: "\u4E0B\u4E2A\u6708",
+    onClick: () => shift(1)
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(7, 1fr)',
+      gap: 2,
+      marginBottom: 4
+    }
+  }, ['一', '二', '三', '四', '五', '六', '日'].map(w => /*#__PURE__*/React.createElement("span", {
+    key: w,
+    style: {
+      textAlign: 'center',
+      fontSize: 10.5,
+      color: 'var(--text-3)',
+      fontFamily: 'var(--font-mono)',
+      padding: '2px 0'
+    }
+  }, w))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(7, 1fr)',
+      gap: 2
+    }
+  }, cells.map((day, i) => {
+    if (day == null) return /*#__PURE__*/React.createElement("span", {
+      key: 'e' + i
+    });
+    const past = keyOf(day) < todayKey;
+    const isToday = keyOf(day) === todayKey;
+    const isSel = sel === isoOf(day);
+    return /*#__PURE__*/React.createElement("button", {
+      key: day,
+      type: "button",
+      disabled: past,
+      onClick: () => setSel(isoOf(day)),
+      style: {
+        height: 30,
+        font: 'inherit',
+        fontSize: 12.5,
+        borderRadius: 'var(--r-sm)',
+        cursor: past ? 'default' : 'pointer',
+        border: '1px solid ' + (isSel ? 'rgba(255,217,138,0.55)' : isToday ? 'var(--glass-border-strong)' : 'transparent'),
+        background: isSel ? 'rgba(255,217,138,0.16)' : 'transparent',
+        color: past ? 'var(--text-3)' : isSel ? 'var(--gold)' : 'var(--text-1)',
+        opacity: past ? 0.4 : 1,
+        boxShadow: isSel ? 'var(--glow-gold-soft)' : 'none'
+      }
+    }, day);
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 8,
+      marginTop: 12
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      flex: 1,
+      fontSize: 11,
+      color: 'var(--text-3)'
+    }
+  }, sel ? '排到 ' + sel.replace(/-/g, '/') : '点一天，再按确认'), /*#__PURE__*/React.createElement(Button, {
+    size: "sm",
+    variant: "ghost",
+    onClick: () => setOpen(false)
+  }, "\u53D6\u6D88"), /*#__PURE__*/React.createElement(Button, {
+    size: "sm",
+    variant: "primary",
+    glow: true,
+    icon: "check",
+    disabled: !sel,
+    onClick: () => {
+      setOpen(false);
+      if (sel) onPick && onPick(sel);
+    }
+  }, "\u786E\u8BA4")))));
 }
 function Properties({
   props,
@@ -8535,22 +8771,12 @@ function Properties({
       boxShadow: r.v === '牢固' || r.v === '待重燃' ? 'var(--glow-gold-soft)' : 'none'
     }
   }), r.v) : r.kind === 'select'
-  /* 类型用真下拉：预设 + 当前自定义值兜底 */ ? /*#__PURE__*/React.createElement(Select, {
-    size: "sm",
-    value: p.type || '草稿',
-    placeholder: "\u9009\u62E9\u7C7B\u578B\u2026",
-    options: (PROP_TYPE_PRESETS.includes(p.type) || !p.type ? PROP_TYPE_PRESETS : [p.type, ...PROP_TYPE_PRESETS]).map(t => ({
-      value: t,
-      label: t
-    })),
-    onChange: v => {
-      if (p.type === v) return;
+  /* 类型用浮层菜单（portal + fixed）：绝不把面板内容顶开，也不会被 overflow 裁剪 */ ? /*#__PURE__*/React.createElement(TypePicker, {
+    value: p.type || '',
+    onPick: v => {
       p.type = v;
       onCommit && onCommit();
       onFlash && onFlash('已更新类型');
-    },
-    style: {
-      maxWidth: 168
     }
   }) : r.kind === 'review' ? /*#__PURE__*/React.createElement(ReviewPicker, {
     label: r.v,
