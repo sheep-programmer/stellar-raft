@@ -145,3 +145,108 @@ test('round-trip：导出再导入，结构保真', () => {
   assert.equal(back[3].checked, true);
   assert.equal(back[5].code, 'print(1)');
 });
+
+/* --------------------- 真实 GFM 适配补齐 --------------------- */
+
+test('行内：\\* 转义按字面、***粗斜体***、带题链接、<自动链接>', () => {
+  const h = mdInline('\\*字面\\* 与 5 0 5 ***强调*** [题](https://a.b "注") <https://z.dev>');
+  assert.ok(h.includes('*字面*'), '反斜杠转义按字面输出');
+  assert.ok(h.includes('5 0 5'), '普通数字文本不被占位符误伤');
+  assert.ok(h.includes('<b><i>强调</i></b>'));
+  assert.ok(h.includes('href="https://a.b"'));
+  assert.ok(h.includes('href="https://z.dev"'));
+});
+
+test('parseMdBlocks：独行图片 → image 块；javascript: 协议降级为段落', () => {
+  const bs = parseMdBlocks('![示意](https://a.b/x.png "题注")\n\n![x](javascript:alert(1))');
+  assert.equal(bs[0].type, 'image');
+  assert.equal(bs[0].src, 'https://a.b/x.png');
+  assert.equal(bs[0].alt, '示意');
+  assert.equal(bs[1].type, 'p');
+});
+
+test('parseMdBlocks：#### 及更深折入 h3；Setext === 标题', () => {
+  const bs = parseMdBlocks('#### 四级\n###### 六级\n\n大标题\n===');
+  assert.deepEqual(bs.map(b => b.type), ['h3', 'h3', 'h1']);
+});
+
+test('parseMdBlocks：GFM 提示框 [!NOTE]/[!TIP] → callout，吸收续行', () => {
+  const bs = parseMdBlocks('> [!NOTE]\n> 第一行\n> 第二行\n\n> 普通引用');
+  assert.equal(bs[0].type, 'callout');
+  assert.equal(bs[0].tone, 'blue');
+  assert.ok(bs[0].text.includes('第一行') && bs[0].text.includes('第二行'));
+  assert.equal(bs[1].type, 'quote');
+  const tip = parseMdBlocks('> [!TIP] 一句话提示');
+  assert.equal(tip[0].tone, 'gold');
+});
+
+test('parseMdBlocks：<details> → toggle，与导出互逆', () => {
+  const bs = parseMdBlocks('<details>\n<summary>折叠标题</summary>\n\n里面的内容\n</details>');
+  assert.equal(bs[0].type, 'toggle');
+  assert.ok(bs[0].text.includes('折叠标题'));
+  assert.ok(bs[0].child.includes('里面的内容'));
+});
+
+test('表格：单元格含 | 导出转义、导入归位（round-trip）', () => {
+  const md = blocksToMd([{ id: 'x', type: 'table', head: ['A|B', 'C'], rows: [['a|b', 'c\nd']] }]);
+  assert.ok(md.includes('A\\|B'), '导出转义竖线');
+  assert.ok(!/c\nd/.test(md.split('\n').find(l => l.includes('c'))), '单元格换行折为空格');
+  const back = parseMdBlocks(md);
+  assert.equal(back[0].type, 'table');
+  assert.deepEqual(back[0].head, ['A|B', 'C']);
+  assert.deepEqual(back[0].rows, [['a|b', 'c d']]);
+});
+
+test('段落防歧义：以 # / - / 1. / --- 开头的正文 round-trip 后仍是段落', () => {
+  const blocks = [
+    { id: 'a', type: 'p', text: '# 不是标题' },
+    { id: 'b', type: 'p', text: '- 不是列表' },
+    { id: 'c', type: 'p', text: '1. 不是有序项' },
+    { id: 'd', type: 'p', text: '---' },
+  ];
+  const back = parseMdBlocks(blocksToMd(blocks));
+  assert.deepEqual(back.map(b => b.type), ['p', 'p', 'p', 'p']);
+  assert.ok(back[0].text.includes('# 不是标题'));
+  assert.ok(back[3].text.includes('---'));
+});
+
+test('callout / toggle / 图片 round-trip：类型与内容都回得来', () => {
+  const blocks = [
+    { id: 'a', type: 'callout', tone: 'blue', text: '要点标注' },
+    { id: 'b', type: 'callout', tone: 'gold', text: '一个技巧' },
+    { id: 'c', type: 'toggle', text: '展开看', child: '藏起来的话' },
+    { id: 'd', type: 'image', alt: '星图', src: 'https://a.b/star.png' },
+  ];
+  const md = blocksToMd(blocks);
+  assert.ok(md.includes('[!NOTE]') && md.includes('[!TIP]'), 'GitHub 需要大写提示框标记');
+  const back = parseMdBlocks(md);
+  assert.deepEqual(back.map(b => b.type), ['callout', 'callout', 'toggle', 'image']);
+  assert.equal(back[0].tone, 'blue');
+  assert.equal(back[1].tone, 'gold');
+  assert.ok(back[2].child.includes('藏起来的话'));
+  assert.equal(back[3].src, 'https://a.b/star.png');
+});
+
+test('图片导出：小 dataURL 内联（合法 Markdown），超大降级为无空格占位', () => {
+  const small = blocksToMd([{ id: 'a', type: 'image', alt: 'x', src: 'data:image/png;base64,AAAA' }]);
+  assert.ok(small.includes('](data:image/png;base64,AAAA)'));
+  const big = blocksToMd([{ id: 'b', type: 'image', alt: 'y', src: 'data:image/png;base64,' + 'A'.repeat(120000) }]);
+  assert.ok(!big.includes('base64,AAA'), '超大不内联');
+  assert.ok(!/\]\([^)]* [^)]*\)/.test(big), '占位 URL 不含空格');
+});
+
+test('行内代码含反引号：双反引号包裹，round-trip 不碎', () => {
+  const md = blocksToMd([{ id: 'a', type: 'p', text: '看 <code>a`b</code> 这个' }]);
+  assert.ok(md.includes('`` a`b ``'));
+  const back = parseMdBlocks(md);
+  assert.equal(back[0].type, 'p');
+});
+
+test('frontmatter：值含冒号加引号导出；块级 tags 列表也能读', () => {
+  const md = blocksToMd([], { props: { source: 'MIT 8.04: Quantum Physics' }, tags: ['量子'] });
+  assert.ok(/source: ".*"/.test(md), 'YAML 敏感值（ASCII 冒号）应加引号');
+  const fm = parseFrontmatter('---\ntags:\n  - 量子\n  - 熵\nsource: "x: y"\n---\n正文');
+  assert.deepEqual(fm.tags, ['量子', '熵']);
+  assert.equal(fm.props.source, 'x: y');
+  assert.equal(fm.body.trim(), '正文');
+});

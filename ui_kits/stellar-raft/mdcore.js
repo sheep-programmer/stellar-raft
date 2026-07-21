@@ -18,19 +18,29 @@
   // 行内代码的着色走主题 token（color-mix），黎明主题下同样成立
   const CODE_SPAN_CSS = 'font-family:var(--font-mono);font-size:0.92em;background:color-mix(in srgb, var(--star-blue) 14%, transparent);padding:1px 5px;border-radius:5px;';
 
-  /* ---- 行内标记 → HTML（整行解析，粘贴 / 导入用） ---- */
-  const mdInline = (s) => escHtml(s)
-    .replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>')
-    .replace(/(^|[^*])\*([^*\s][^*]*)\*/g, '$1<i>$2</i>')
-    .replace(/~~([^~]+)~~/g, '<s>$1</s>')
-    .replace(/`([^`]+)`/g, '<code style="' + CODE_SPAN_CSS + '">$1</code>')
-    // 链接协议白名单：javascript:/data: 等降级为纯文本（保留可见字样，去掉可点 href）
-    .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (mm, txt, url) => {
-      const ok = safeUrl(url);
-      return ok
-        ? '<a href="' + ok.replace(/"/g, '&quot;') + '" style="color:var(--star-blue);text-decoration:underline;text-underline-offset:3px;">' + txt + '</a>'
-        : txt;
-    });
+  /* ---- 行内标记 → HTML（整行解析，粘贴 / 导入用） ----
+     反斜杠转义先行提位（\* \| \# …按字面处理，不再被规则误吞），***x*** 粗斜体、
+     [t](url "标题") 带题链接、<https://…> 自动链接都对齐真实 Markdown。 */
+  const ESCAPABLE = /\\([\\`*_[\]()#+\-.!|>~${}])/g;
+  const LINK_A = (url, txt) => '<a href="' + url.replace(/"/g, '&quot;') + '" style="color:var(--star-blue);text-decoration:underline;text-underline-offset:3px;">' + txt + '</a>';
+  const mdInline = (s) => {
+    const toks = [];
+    const src = String(s == null ? '' : s).replace(ESCAPABLE, (mm, c) => { toks.push(c); return '\u0000' + (toks.length - 1) + '\u0000'; });
+    return escHtml(src)
+      .replace(/\*\*\*([^*]+)\*\*\*/g, '<b><i>$1</i></b>')
+      .replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>')
+      .replace(/(^|[^*])\*([^*\s][^*]*)\*/g, '$1<i>$2</i>')
+      .replace(/~~([^~]+)~~/g, '<s>$1</s>')
+      .replace(/`([^`]+)`/g, '<code style="' + CODE_SPAN_CSS + '">$1</code>')
+      // 链接协议白名单：javascript:/data: 等降级为纯文本（保留可见字样，去掉可点 href）
+      .replace(/\[([^\]]+)\]\(([^)\s]+)(?:\s+&quot;[^&]*&quot;|\s+"[^"]*")?\)/g, (mm, txt, url) => {
+        const ok = safeUrl(url);
+        return ok ? LINK_A(ok, txt) : txt;
+      })
+      // 自动链接 <https://…>（escHtml 之后尖括号已成实体）
+      .replace(/&lt;(https?:\/\/[^\s&]+)&gt;/g, (mm, url) => safeUrl(url) ? LINK_A(url, url) : url)
+      .replace(/\u0000(\d+)\u0000/g, (mm, n) => escHtml(toks[Number(n)]));
+  };
 
   /* ---- 打字即时转换：光标前缀里已闭合的行内标记（Typora 式，空格触发） ----
      顺序敏感：** 在 * 之前；斜体用 lookbehind 避免吃掉 ** 的一半。
@@ -96,15 +106,44 @@
           i++;
           out.push({ id: uid(), type: 'math', tex: buf.join('\n').trim() });
         }
-      } else if (/^\|.+\|$/.test(l)) {                                     // 表格
+      } else if (/^\|.+\|$/.test(l)) {                                     // 表格（\| 转义的竖线按字面归位）
         const rowsRaw = [];
         while (i < lines.length && /^\|.+\|$/.test(lines[i].trim())) { rowsRaw.push(lines[i].trim()); i++; }
-        const cells = (r) => r.slice(1, -1).split('|').map(c => c.trim());
+        const cells = (r) => r.slice(1, -1).split(/(?<!\\)\|/).map(c => c.trim().replace(/\\\|/g, '|'));
         const body = rowsRaw.slice(1).filter(r => !/^\|[\s:\-|]+\|$/.test(r)).map(cells);
         out.push({ id: uid(), type: 'table', head: cells(rowsRaw[0]), rows: body });
       }
-      else if ((m = l.match(/^(#{1,3})\s+(.*)/))) { out.push({ id: uid(), type: 'h' + m[1].length, text: mdInline(m[2]) }); i++; }
+      // 独占一行的图片 ![alt](url) / ![alt](url "题注") → 图片块；非法协议降级为纯文本段落
+      else if ((m = l.match(/^!\[([^\]]*)\]\(([^)\s]+)(?:\s+"[^"]*")?\)$/))) {
+        out.push(safeUrl(m[2]) ? { id: uid(), type: 'image', alt: m[1], src: m[2] } : { id: uid(), type: 'p', text: mdInline(l) });
+        i++;
+      }
+      // 标题支持到 ######：编辑器块模型只有三级，h4–h6 折入 h3（导出仍是合法 Markdown）
+      else if ((m = l.match(/^(#{1,6})\s+(.*)/))) { out.push({ id: uid(), type: 'h' + Math.min(3, m[1].length), text: mdInline(m[2]) }); i++; }
+      // GFM 提示框 > [!NOTE] / [!TIP]…（Obsidian 同语法）→ 标注块，吸收随后的 > 续行
+      else if ((m = l.match(/^>\s*\[!(\w+)\]\s*(.*)$/))) {
+        const buf = m[2] ? [m[2]] : [];
+        i++;
+        while (i < lines.length && /^>\s?/.test(lines[i].trim()) && !/^>\s*\[!/.test(lines[i].trim())) {
+          const t = lines[i].trim().replace(/^>\s?/, ''); if (t) buf.push(t); i++;
+        }
+        out.push({ id: uid(), type: 'callout', tone: m[1].toLowerCase() === 'tip' ? 'gold' : 'blue', text: mdInline(buf.join(' ')) });
+      }
       else if ((m = l.match(/^>\s?(.*)/))) { out.push({ id: uid(), type: 'quote', text: mdInline(m[1]) }); i++; }
+      // <details><summary>…</summary>…</details> → 折叠块（与导出的 toggle 语法互逆）
+      else if (/^<details>/i.test(l)) {
+        const buf = [raw];
+        if (!/<\/details>/i.test(l)) {
+          i++;
+          while (i < lines.length) { buf.push(lines[i]); if (/<\/details>/i.test(lines[i])) { i++; break; } i++; }
+        } else i++;
+        const all = buf.join('\n');
+        const sm = all.match(/<summary>([\s\S]*?)<\/summary>/i);
+        const child = all.replace(/<\/?details>/gi, '').replace(/<summary>[\s\S]*?<\/summary>/i, '').trim();
+        out.push({ id: uid(), type: 'toggle', text: mdInline(sm ? sm[1].trim() : '折叠'), child: mdInline(child) });
+      }
+      // Setext 标题：下一行全为 = 号 → 一级标题（真实 Markdown 的另一种写法）
+      else if (i + 1 < lines.length && /^=+$/.test(lines[i + 1].trim())) { out.push({ id: uid(), type: 'h1', text: mdInline(l) }); i += 2; }
       else { out.push({ id: uid(), type: 'p', text: mdInline(l) }); i++; }
     }
     return out;
@@ -117,14 +156,28 @@
     if (!m) return { props: null, tags: null, body: src };
     const props = {};
     let tags = null;
-    m[1].split('\n').forEach(line => {
-      const mm = line.match(/^([A-Za-z_一-鿿][\w一-鿿-]*)\s*:\s*(.*)$/);
-      if (!mm) return;
+    const fmLines = m[1].split('\n');
+    for (let li = 0; li < fmLines.length; li++) {
+      const mm = fmLines[li].match(/^([A-Za-z_一-鿿][\w一-鿿-]*)\s*:\s*(.*)$/);
+      if (!mm) continue;
       const k = mm[1];
       const v = mm[2].trim().replace(/^["']|["']$/g, '');
-      if (k === 'tags') { tags = v.replace(/^\[|\]$/g, '').split(',').map(s => s.trim()).filter(Boolean); return; }
+      if (k === 'tags') {
+        if (v) { tags = v.replace(/^\[|\]$/g, '').split(',').map(s => s.trim().replace(/^["']|["']$/g, '')).filter(Boolean); }
+        else {
+          // Obsidian 的块级列表写法：tags: 换行后跟若干「  - x」
+          tags = [];
+          while (li + 1 < fmLines.length && /^\s+-\s+/.test(fmLines[li + 1])) {
+            li++;
+            const t = fmLines[li].replace(/^\s+-\s+/, '').trim().replace(/^["']|["']$/g, '');
+            if (t) tags.push(t);
+          }
+          if (!tags.length) tags = null;
+        }
+        continue;
+      }
       if (v) props[k] = v;
-    });
+    }
     return { props: Object.keys(props).length ? props : null, tags, body: src.slice(m[0].length) };
   }
 
@@ -138,10 +191,16 @@
     .replace(/<(b|strong)[^>]*>([\s\S]*?)<\/\1>/gi, '**$2**')
     .replace(/<(i|em)[^>]*>([\s\S]*?)<\/\1>/gi, '*$2*')
     .replace(/<(s|strike|del)[^>]*>([\s\S]*?)<\/\1>/gi, '~~$2~~')
-    .replace(/<code[^>]*>([\s\S]*?)<\/code>/gi, '`$1`')
+    // 行内代码本身含反引号时用双反引号包裹（CommonMark 语义），round-trip 不碎
+    .replace(/<code[^>]*>([\s\S]*?)<\/code>/gi, (mm, c) => c.includes('`') ? '`` ' + c + ' ``' : '`' + c + '`')
     // 导出时同样过协议白名单：非法链接降级为纯文本，不把 javascript:/data: 带出仓
     .replace(/<a[^>]*href="([^"]*)"[^>]*>([\s\S]*?)<\/a>/gi, (mm, url, txt) => safeUrl(url) ? '[' + txt + '](' + url + ')' : txt)).trim();
 
+  // 段落导出的防歧义转义：正文若以 Markdown 结构记号开头（# > - 1. ``` $$ | 或整行 ---），
+  // 加反斜杠护住，round-trip 后仍是同一个段落，不会被真实解析器误读成结构
+  const escLead = (s) => String(s == null ? '' : s)
+    .replace(/^(#{1,6} |> ?|[-*+] |\d+[.)] |```|\$\$|\|)/, '\\$1')
+    .replace(/^(-{3,}|\*{3,}|={3,})$/, '\\$1');
   function blocksToMd(blocks, opts) {
     const o = opts || {};
     const lines = [];
@@ -154,10 +213,10 @@
         case 'h1': lines.push('# ' + htmlToMd(b.text)); break;
         case 'h2': lines.push('## ' + htmlToMd(b.text)); break;
         case 'h3': lines.push('### ' + htmlToMd(b.text)); break;
-        case 'p': lines.push(htmlToMd(b.text)); break;
+        case 'p': lines.push(escLead(htmlToMd(b.text))); break;
         case 'quote': lines.push('> ' + htmlToMd(b.text)); break;
-        // callout 用 admonition 语法并带 tone，round-trip 不再退化成普通引用
-        case 'callout': lines.push('> [!' + (b.tone === 'blue' ? 'note' : 'tip') + ']\n> ' + htmlToMd(b.text)); break;
+        // callout 用 GFM 提示框语法（大写才被 GitHub 渲染；Obsidian 大小写皆可）
+        case 'callout': lines.push('> [!' + (b.tone === 'blue' ? 'NOTE' : 'TIP') + ']\n> ' + htmlToMd(b.text)); break;
         case 'bulleted': lines.push(pad + '- ' + htmlToMd(b.text)); break;
         case 'numbered': {
           const lvl = b.indent || 0;
@@ -174,15 +233,24 @@
         case 'math': lines.push('$$\n' + (b.tex || '') + '\n$$'); break;
         case 'code': lines.push('```' + (b.lang || '') + '\n' + (b.code || '') + '\n```'); break;
         case 'divider': lines.push('---'); break;
-        // 本地上传的 dataURL 不把超大 base64 内联进 md，改为附件提示
-        case 'image': lines.push(/^data:/.test(b.src || '') ? '![' + (b.alt || '本地图片') + '](附件：本地上传的图片已略去内联数据)' : '![' + (b.alt || '') + '](' + (b.src || '') + ')'); break;
+        // 图片：本地上传的 dataURL 在 100KB 内直接内联（合法 Markdown，Typora/Obsidian/VS Code
+        // 都能显示）；超限才降级为附件占位（URL 无空格，真实解析器不碎）
+        case 'image': {
+          const src = b.src || '';
+          if (/^data:/.test(src) && src.length >= 100000) { lines.push('![' + (b.alt || '本地图片') + '](本地图片-过大未内联)'); break; }
+          lines.push('![' + (b.alt || '') + '](' + src + ')');
+          break;
+        }
         case 'table': {
           const head = b.head || [];
           const rows = b.rows || [];
           if (!head.length) break;
-          lines.push('| ' + head.join(' | ') + ' |');
-          lines.push('| ' + head.map(() => '---').join(' | ') + ' |');
-          rows.forEach(r => lines.push('| ' + r.join(' | ') + ' |'));
+          // 单元格里的竖线与换行按 GFM 规矩处理（\| 与空格），表格结构永不被内容撑破。
+          // 整张表作为一个块推入——行与行之间不能隔空行，否则真实解析器会把表拆碎
+          const cell = (c) => String(c == null ? '' : c).replace(/\r?\n/g, ' ').replace(/\|/g, '\\|');
+          const tbl = ['| ' + head.map(cell).join(' | ') + ' |', '| ' + head.map(() => '---').join(' | ') + ' |'];
+          rows.forEach(r => tbl.push('| ' + r.map(cell).join(' | ') + ' |'));
+          lines.push(tbl.join('\n'));
           break;
         }
         default: break;
@@ -191,7 +259,13 @@
     // YAML frontmatter：把结构化属性写出，round-trip 后属性不再丢失（对标 Obsidian）
     const p = o.props || {};
     const fm = [];
-    const pushFm = (k, v) => { if (v != null && String(v).trim() !== '' && v !== '—') fm.push(k + ': ' + v); };
+    // 值里带冒号 / 井号 / 引号等 YAML 敏感字符时加引号，Obsidian 属性面板读得回来
+    const pushFm = (k, v) => {
+      if (v == null) return;
+      const s = String(v).trim();
+      if (!s || s === '—') return;
+      fm.push(k + ': ' + (/[:#'"[\]{}|>&*!%@`]/.test(s) ? JSON.stringify(s) : s));
+    };
     pushFm('type', p.type); pushFm('status', p.status); pushFm('source', p.source);
     pushFm('alias', p.alias); pushFm('nextReview', p.nextReview);
     if (o.tags && o.tags.length) fm.push('tags: [' + o.tags.join(', ') + ']');
