@@ -6,7 +6,7 @@
 *Other apps store notes in a warehouse — Stellar Raft grows them in a living deep space of knowledge, where knowledge is the only light.*
 
 ![Node](https://img.shields.io/badge/Node-%E2%89%A5%2022.5-9fc6ff?style=flat-square&labelColor=05060f)
-![Tests](https://img.shields.io/badge/tests-126%20passing-ffd98a?style=flat-square&labelColor=05060f)
+![Tests](https://img.shields.io/badge/tests-139%20passing-ffd98a?style=flat-square&labelColor=05060f)
 ![Build](https://img.shields.io/badge/build-zero--config-9fc6ff?style=flat-square&labelColor=05060f)
 ![Components](https://img.shields.io/badge/components-18%20primitives-9fc6ff?style=flat-square&labelColor=05060f)
 ![Backend](https://img.shields.io/badge/backend-zero--dependency-ffd98a?style=flat-square&labelColor=05060f)
@@ -54,7 +54,8 @@
 - **费曼内化点亮** — 一颗星要在费曼模式里被「讲透」才真正**点亮**(金色高潮瞬间);点亮的星也会衰减,低于阈值熄灭为「待重燃」余烬态。
 - **间隔重复复习** — 到期卡片三档自评(忘了 / 模糊 / 记得),闭环驱动稳定度增长,让星不再悄悄熄灭。
 - **8 个高保真界面** — 星图主界面 · 亮度鸟瞰热图 · 三维星系(Three.js)· 近景语义缩放 · 费曼右抽屉 · 侧边栏 · 列表管理 · 专业块编辑器。
-- **专业块编辑器** — H1–H3 / 待办 / 列表 / 引用 / 代码 / LaTeX / 表格 / 图片,markdown 即时转换、⌘F 查找替换、导入导出、反向链接与大纲。
+- **专业块编辑器** — H1–H3 / 待办 / 列表 / 引用 / 代码 / LaTeX / 表格 / 图片,markdown 即时转换、⌘F 查找替换、反向链接与大纲;导入导出与真实 GFM 完全互逆(提示框/折叠块/表格转义/frontmatter 对齐 GitHub · Typora · Obsidian),跨块复制即得合法 Markdown。
+- **星际漫游与知识共鸣** — 星语密文造访好友星系(服务端裁剪,笔记正文永不出库);造访时自动高亮你们**共同拥有、甚至都点亮过**的知识(共鸣),可留一句星语、赠星、收纳;主人可见访客足迹与来信。
 - **真实 AI 接入** — 配置 OpenAI / Anthropic / 自定义网关(one-api、Ollama 等)后,费曼「AI 学生」由所配模型真实追问(性格/严格度进提示词),编辑器可生成摘要、推荐标签、建议跨星域连接;未配置时优雅回退本地规则学生。
 - **复习策略可选** — 随星变暗(遗忘曲线)/ 1·3·7·15 天间隔阶梯 / 每日固定 / 不提醒,四档策略真实驱动到期队列与桌面通知,星域整体变暗另有提醒。
 - **新手引导** — 首次打开自动弹出的 11 页导览册 + 末页聚光实地导览,随时可在设置里回看。
@@ -67,7 +68,8 @@
 - **Ignite by teaching** — a star is truly **lit** only after you explain it in Feynman mode (a golden ignition moment); lit stars decay too, extinguishing into a re-kindle "ember" state below threshold.
 - **Spaced-repetition review** — due cards, three-way self-grading (forgot / fuzzy / got it), closing the loop that keeps stars alive.
 - **8 hi-fi screens** — star map · aerial heat map · 3D galaxy (Three.js) · semantic-zoom card · Feynman drawer · sidebar · list management · pro block editor.
-- **Pro block editor** — headings / todos / lists / quote / code / LaTeX / tables / images, live markdown conversion, ⌘F find-and-replace, import/export, backlinks and outline.
+- **Pro block editor** — headings / todos / lists / quote / code / LaTeX / tables / images, live markdown conversion, ⌘F find-and-replace, backlinks and outline; import/export round-trips with real GFM (alerts, collapsible blocks, table escaping, frontmatter — GitHub · Typora · Obsidian aligned), and multi-block copy yields valid Markdown.
+- **Interstellar roaming & knowledge resonance** — visit friends' galaxies via share ciphers (server-side cropping; note bodies never leave the owner's database); while visiting, the stars you **both own — or both ignited** — light up as "resonance"; leave a one-line star-note, gift stars, collect them; owners see visitor footprints and mail.
 - **Real AI integration** — plug in OpenAI / Anthropic / any OpenAI-compatible gateway (one-api, Ollama…): the Feynman "AI student" asks real follow-up questions (persona & strictness shape the prompt), and the editor can summarize, suggest tags, and propose cross-constellation links; gracefully falls back to the local rule-based student when unconfigured.
 - **Selectable review strategies** — forgetting-curve cooling / classic 1·3·7·15-day ladder / daily / off, each genuinely driving the due queue and desktop notifications, plus a constellation-dimming nudge.
 - **Onboarding guide** — an 11-page carousel on first run plus a spotlight walkthrough, re-openable from Settings anytime.

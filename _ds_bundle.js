@@ -1,4 +1,4 @@
-/* @ds-bundle: {"format":3,"namespace":"StellarRaftDesignSystem_2866af","components":[{"name":"Badge","sourcePath":"components/core/Badge.jsx"},{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"GlassPanel","sourcePath":"components/core/GlassPanel.jsx"},{"name":"Icon","sourcePath":"components/core/Icon.jsx"},{"name":"IconButton","sourcePath":"components/core/IconButton.jsx"},{"name":"Input","sourcePath":"components/core/Input.jsx"},{"name":"Tag","sourcePath":"components/core/Tag.jsx"},{"name":"Checkbox","sourcePath":"components/form/Checkbox.jsx"},{"name":"Select","sourcePath":"components/form/Select.jsx"},{"name":"Switch","sourcePath":"components/form/Switch.jsx"},{"name":"Tabs","sourcePath":"components/form/Tabs.jsx"},{"name":"ConstellationItem","sourcePath":"components/knowledge/ConstellationItem.jsx"},{"name":"MemoryBar","sourcePath":"components/knowledge/MemoryBar.jsx"},{"name":"StarNode","sourcePath":"components/knowledge/StarNode.jsx"},{"name":"ContextMenu","sourcePath":"components/overlay/ContextMenu.jsx"},{"name":"Modal","sourcePath":"components/overlay/Modal.jsx"},{"name":"Toast","sourcePath":"components/overlay/Toast.jsx"},{"name":"Tooltip","sourcePath":"components/overlay/Tooltip.jsx"}],"sourceHashes":{"assets/starfield.js":"d776d2b45dc4","components/core/Badge.jsx":"b0bd9735d638","components/core/Button.jsx":"a1c387a07e86","components/core/GlassPanel.jsx":"299a19d8fbb4","components/core/Icon.jsx":"7505f83ab03d","components/core/IconButton.jsx":"24052f4eed78","components/core/Input.jsx":"54a6c9af7e3f","components/core/Tag.jsx":"d8513c07ea96","components/form/Checkbox.jsx":"38aa593157dd","components/form/Select.jsx":"86b8c1c71e12","components/form/Switch.jsx":"938c62be0664","components/form/Tabs.jsx":"ede2dbff1963","components/knowledge/ConstellationItem.jsx":"d73e999469b6","components/knowledge/MemoryBar.jsx":"a54c928d5065","components/knowledge/StarNode.jsx":"1bedee49f0bf","components/overlay/ContextMenu.jsx":"11783420e876","components/overlay/Modal.jsx":"0906de457544","components/overlay/Toast.jsx":"d22ad40680a6","components/overlay/Tooltip.jsx":"a042caa8970d","ui_kits/stellar-raft/AIConfig.jsx":"bbc66d05eebf","ui_kits/stellar-raft/AerialView.jsx":"c03956215464","ui_kits/stellar-raft/BlackHole.jsx":"17eb30e1a014","ui_kits/stellar-raft/Checkup.jsx":"432f59decbb5","ui_kits/stellar-raft/CommandPalette.jsx":"0e41e59f2e82","ui_kits/stellar-raft/Editor.jsx":"ecbcfd1865fa","ui_kits/stellar-raft/EditorMenus.jsx":"fb80581f6bcc","ui_kits/stellar-raft/FeynmanDrawer.jsx":"6af036e0a904","ui_kits/stellar-raft/Galaxy3D.jsx":"8e40ab3d2a66","ui_kits/stellar-raft/Inbox.jsx":"fb947f4edf7f","ui_kits/stellar-raft/ListView.jsx":"04333626cd62","ui_kits/stellar-raft/LoginView.jsx":"18d9c842c5c6","ui_kits/stellar-raft/Onboarding.jsx":"a0a8609b98bb","ui_kits/stellar-raft/ReviewSession.jsx":"8e0b3ed9e247","ui_kits/stellar-raft/Settings.jsx":"38e4752ebabe","ui_kits/stellar-raft/Sidebar.jsx":"8f3ca4c39abb","ui_kits/stellar-raft/StarMap.jsx":"26ebb8fc6e2f","ui_kits/stellar-raft/Timeline.jsx":"56d938b8201e","ui_kits/stellar-raft/VisitView.jsx":"8ab06897a78e","ui_kits/stellar-raft/ai.js":"2f79eb3473c9","ui_kits/stellar-raft/app.jsx":"e0e7b6a77961","ui_kits/stellar-raft/codehl.js":"6fbdd0100deb","ui_kits/stellar-raft/data.js":"f224c0e8a1d8","ui_kits/stellar-raft/mdcore.js":"297534e398c8","ui_kits/stellar-raft/sanitize.js":"88e63cd63253","ui_kits/stellar-raft/transition.js":"3725d8982dc5","ui_kits/stellar-raft/undocore.js":"7f8c94da35f9"},"inlinedExternals":[],"unexposedExports":[{"name":"memoryColor","sourcePath":"components/knowledge/MemoryBar.jsx"}],"exposedHelpers":[{"name":"toast","sourcePath":"components/overlay/Toast.jsx"}]} */
+/* @ds-bundle: {"format":3,"namespace":"StellarRaftDesignSystem_2866af","components":[{"name":"Badge","sourcePath":"components/core/Badge.jsx"},{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"GlassPanel","sourcePath":"components/core/GlassPanel.jsx"},{"name":"Icon","sourcePath":"components/core/Icon.jsx"},{"name":"IconButton","sourcePath":"components/core/IconButton.jsx"},{"name":"Input","sourcePath":"components/core/Input.jsx"},{"name":"Tag","sourcePath":"components/core/Tag.jsx"},{"name":"Checkbox","sourcePath":"components/form/Checkbox.jsx"},{"name":"Select","sourcePath":"components/form/Select.jsx"},{"name":"Switch","sourcePath":"components/form/Switch.jsx"},{"name":"Tabs","sourcePath":"components/form/Tabs.jsx"},{"name":"ConstellationItem","sourcePath":"components/knowledge/ConstellationItem.jsx"},{"name":"MemoryBar","sourcePath":"components/knowledge/MemoryBar.jsx"},{"name":"StarNode","sourcePath":"components/knowledge/StarNode.jsx"},{"name":"ContextMenu","sourcePath":"components/overlay/ContextMenu.jsx"},{"name":"Modal","sourcePath":"components/overlay/Modal.jsx"},{"name":"Toast","sourcePath":"components/overlay/Toast.jsx"},{"name":"Tooltip","sourcePath":"components/overlay/Tooltip.jsx"}],"sourceHashes":{"assets/starfield.js":"d776d2b45dc4","components/core/Badge.jsx":"b0bd9735d638","components/core/Button.jsx":"a1c387a07e86","components/core/GlassPanel.jsx":"299a19d8fbb4","components/core/Icon.jsx":"7505f83ab03d","components/core/IconButton.jsx":"24052f4eed78","components/core/Input.jsx":"54a6c9af7e3f","components/core/Tag.jsx":"d8513c07ea96","components/form/Checkbox.jsx":"38aa593157dd","components/form/Select.jsx":"86b8c1c71e12","components/form/Switch.jsx":"938c62be0664","components/form/Tabs.jsx":"ede2dbff1963","components/knowledge/ConstellationItem.jsx":"d73e999469b6","components/knowledge/MemoryBar.jsx":"a54c928d5065","components/knowledge/StarNode.jsx":"1bedee49f0bf","components/overlay/ContextMenu.jsx":"11783420e876","components/overlay/Modal.jsx":"0906de457544","components/overlay/Toast.jsx":"d22ad40680a6","components/overlay/Tooltip.jsx":"a042caa8970d","ui_kits/stellar-raft/AIConfig.jsx":"bbc66d05eebf","ui_kits/stellar-raft/AerialView.jsx":"c03956215464","ui_kits/stellar-raft/BlackHole.jsx":"17eb30e1a014","ui_kits/stellar-raft/Checkup.jsx":"432f59decbb5","ui_kits/stellar-raft/CommandPalette.jsx":"0e41e59f2e82","ui_kits/stellar-raft/Editor.jsx":"a6e1f059f5e7","ui_kits/stellar-raft/EditorMenus.jsx":"fb80581f6bcc","ui_kits/stellar-raft/FeynmanDrawer.jsx":"6af036e0a904","ui_kits/stellar-raft/Galaxy3D.jsx":"8e40ab3d2a66","ui_kits/stellar-raft/Inbox.jsx":"04631262c5c7","ui_kits/stellar-raft/ListView.jsx":"04333626cd62","ui_kits/stellar-raft/LoginView.jsx":"18d9c842c5c6","ui_kits/stellar-raft/Onboarding.jsx":"a0a8609b98bb","ui_kits/stellar-raft/ReviewSession.jsx":"8e0b3ed9e247","ui_kits/stellar-raft/Settings.jsx":"38e4752ebabe","ui_kits/stellar-raft/Sidebar.jsx":"8f3ca4c39abb","ui_kits/stellar-raft/StarMap.jsx":"26ebb8fc6e2f","ui_kits/stellar-raft/Timeline.jsx":"56d938b8201e","ui_kits/stellar-raft/VisitView.jsx":"cd9a544586ba","ui_kits/stellar-raft/ai.js":"2f79eb3473c9","ui_kits/stellar-raft/app.jsx":"e0e7b6a77961","ui_kits/stellar-raft/codehl.js":"6fbdd0100deb","ui_kits/stellar-raft/data.js":"f224c0e8a1d8","ui_kits/stellar-raft/mdcore.js":"b82d5054c3b6","ui_kits/stellar-raft/sanitize.js":"88e63cd63253","ui_kits/stellar-raft/transition.js":"3725d8982dc5","ui_kits/stellar-raft/undocore.js":"7f8c94da35f9"},"inlinedExternals":[],"unexposedExports":[{"name":"memoryColor","sourcePath":"components/knowledge/MemoryBar.jsx"}],"exposedHelpers":[{"name":"toast","sourcePath":"components/overlay/Toast.jsx"}]} */
 
 (() => {
 
@@ -6729,6 +6729,29 @@ function CodeBlock({
     onKeyDown: e => {
       if (e.key === 'Escape') {
         e.currentTarget.blur();
+        return;
+      }
+      // Tab 在代码里是缩进不是移焦：插入 4 空格；Shift+Tab 回退本行行首缩进
+      if (e.key === 'Tab') {
+        e.preventDefault();
+        const ta = e.currentTarget;
+        const v = ta.value,
+          s0 = ta.selectionStart,
+          e0 = ta.selectionEnd;
+        if (e.shiftKey) {
+          const ls = v.lastIndexOf('\n', s0 - 1) + 1;
+          const m = v.slice(ls).match(/^(\t| {1,4})/);
+          if (!m) return;
+          const nv = v.slice(0, ls) + v.slice(ls + m[1].length);
+          ta.value = nv;
+          ta.selectionStart = ta.selectionEnd = Math.max(ls, s0 - m[1].length);
+          setCode(nv);
+        } else {
+          const nv = v.slice(0, s0) + '    ' + v.slice(e0);
+          ta.value = nv;
+          ta.selectionStart = ta.selectionEnd = s0 + 4;
+          setCode(nv);
+        }
       }
     },
     style: {
@@ -8914,9 +8937,15 @@ function Editor({
     const fid = focusedBlockId();
     applyHistory(U.redo(undoRef.current, snapNow()), fid);
   };
+  // 「前缀 + 空格」刚转换出的块：块首 Backspace 可退回纯文本前缀（Typora 手感）。
+  // 继续输入或任何结构变更后即失效（onInput / mutateBlocks 里清掉）。
+  const prefixConvRef = React.useRef(null); // { id, prefix }
   // 结构变更映射前先把所有块的 DOM 文本同步进 state（否则相邻块正在输入、未落 state
   // 的文字会被这次 setBlocks 覆盖丢失）；withSynced 额外压一份撤销快照。
-  const mutateBlocks = fn => setBlocks(bs => fn(bs.map(syncBlock)));
+  const mutateBlocks = fn => {
+    prefixConvRef.current = null;
+    setBlocks(bs => fn(bs.map(syncBlock)));
+  };
   const withSynced = fn => {
     pushHistory();
     mutateBlocks(fn);
@@ -8984,8 +9013,14 @@ function Editor({
 
   // 结构变更需要同步提交（flushSync），随后立即聚焦——否则连续快速输入
   // 会赶在 React 提交/聚焦之前，把字符落进旧块
+  const flushMutate = fn => {
+    if (ReactDOM.flushSync) ReactDOM.flushSync(() => mutateBlocks(fn));else mutateBlocks(fn);
+  };
+  // flushMutate + 撤销快照。快照读的是当前 DOM——拆分/清前缀这类要先动 DOM 的操作，
+  // 应在动 DOM 之前自行 pushHistory 再用 flushMutate，快照才带着改动前的原文。
   const flushSynced = fn => {
-    if (ReactDOM.flushSync) ReactDOM.flushSync(() => withSynced(fn));else withSynced(fn);
+    pushHistory();
+    flushMutate(fn);
   };
   const placeCaret = (id, where) => {
     const el = refs.current[id];
@@ -9101,6 +9136,17 @@ function Editor({
     '[ ]': 'todo',
     '[x]': 'todo'
   };
+  // 列表/标题等块降级回正文：清掉不再适用的列表痕迹（缩进 / 勾选 / 起始序号）
+  const toPlainP = x => {
+    const y = {
+      ...x,
+      type: 'p'
+    };
+    delete y.indent;
+    delete y.checked;
+    delete y.start;
+    return y;
+  };
   const blockKeyDown = b => e => {
     if (slash || e.nativeEvent.isComposing) return;
     const el = refs.current[b.id];
@@ -9123,48 +9169,59 @@ function Editor({
       return;
     }
 
-    // 空格触发 Markdown 前缀转换（块里只有前缀本身时）。先清 DOM 再提交：
-    // React 对相同 __html 不会重设 innerHTML，前缀字符会残留
+    // 空格触发 Markdown 前缀转换（Typora / Notion 式）：光标前恰是前缀，即前缀
+    // 位于块首——前缀后已有的内容原样保留，不再要求块里只有前缀本身。
     if (e.key === ' ') {
-      const t = el.innerText.replace(/\n+$/, '');
-      let type = MD_PREFIX[t];
-      const extra = {};
-      // 任意起始序号的有序列表：`2.` / `3)` → numbered 并记住 start；`+` → 无序
-      const om = t.match(/^(\d+)[.)]$/);
-      if (!type && om) {
-        type = 'numbered';
-        const n0 = parseInt(om[1], 10);
-        if (n0 !== 1) extra.start = n0;
-      }
-      if (!type && t === '+') type = 'bulleted';
-      if (type) {
-        e.preventDefault();
-        el.innerHTML = '';
-        flushSynced(s => s.map(x => x.id === b.id ? {
-          ...x,
-          type,
-          text: '',
-          checked: t.toLowerCase() === '[x]',
-          ...extra
-        } : x));
-        focusBlock(b.id, 'start');
-        return;
-      }
-
-      // 行内 Markdown：光标前缀里已闭合的 **x** / *x* / `x` / ~~x~~，
-      // 按空格就地转为 <b>/<i>/<code>/<s>（Typora 式）。IME 组合期在函数
-      // 入口已被挡掉；行内代码里不再二次转换。
       const info0 = caretInfo(el);
       if (info0 && info0.collapsed) {
+        const pre = info0.range.cloneRange();
+        pre.selectNodeContents(el);
+        pre.setEnd(info0.range.startContainer, info0.range.startOffset);
+        const preRaw = pre.toString();
+        const t = preRaw.replace(/\u00a0/g, ' ');
+        let type = MD_PREFIX[t];
+        const extra = {};
+        // 任意起始序号的有序列表：`2.` / `3)` → numbered 并记住 start；`+` → 无序
+        const om = t.match(/^(\d+)[.)]$/);
+        if (!type && om) {
+          type = 'numbered';
+          const n0 = parseInt(om[1], 10);
+          if (n0 !== 1) extra.start = n0;
+        }
+        if (!type && t === '+') type = 'bulleted';
+        if (type) {
+          e.preventDefault();
+          // 先压快照（此刻 DOM 里还是字面前缀），⌘Z 能退回成纯文本；再清掉前缀字符——
+          // React 对相同 __html 不会重设 innerHTML，不清会残留
+          pushHistory();
+          try {
+            const r0 = document.createRange();
+            r0.setStart(el, 0);
+            r0.setEnd(info0.range.startContainer, info0.range.startOffset);
+            r0.deleteContents();
+          } catch (_) {}
+          flushMutate(s => s.map(x => x.id === b.id ? {
+            ...x,
+            type,
+            checked: t.toLowerCase() === '[x]',
+            ...extra
+          } : x));
+          prefixConvRef.current = {
+            id: b.id,
+            prefix: t
+          };
+          focusBlock(b.id, 'start');
+          return;
+        }
+
+        // 行内 Markdown：光标前缀里已闭合的 **x** / *x* / `x` / ~~x~~，
+        // 按空格就地转为 <b>/<i>/<code>/<s>（Typora 式）。IME 组合期在函数
+        // 入口已被挡掉；行内代码里不再二次转换。
         const anchorEl = info0.range.startContainer.nodeType === 1 ? info0.range.startContainer : info0.range.startContainer.parentElement;
         if (!(anchorEl && anchorEl.closest && anchorEl.closest('code'))) {
-          const pre = info0.range.cloneRange();
-          pre.selectNodeContents(el);
-          pre.setEnd(info0.range.startContainer, info0.range.startOffset);
-          const preText = pre.toString();
-          const hit = matchInlineMd(preText);
+          const hit = matchInlineMd(preRaw);
           if (hit) {
-            const sp = nodeAtOffset(el, preText.length - hit.len);
+            const sp = nodeAtOffset(el, preRaw.length - hit.len);
             if (sp) {
               e.preventDefault();
               pushExec();
@@ -9194,20 +9251,31 @@ function Editor({
       return;
     }
 
-    // Enter：在光标处拆分为新块（列表延续同类型；空列表项退出为正文）
+    // Enter：在光标处拆分为新块（列表/待办/引用延续同类型；空项退出为正文）
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       const listLike = ['bulleted', 'numbered', 'todo'].includes(b.type);
-      if (listLike && el.innerText.trim() === '') {
+      const contLike = listLike || b.type === 'quote'; // 引用也逐行延续（Typora 手感）
+      if (contLike && el.innerText.trim() === '') {
+        // 空的嵌套列表项先降一级缩进，到顶层再退出为正文（Notion / Typora 同款）
+        if (listLike && (b.indent || 0) > 0) {
+          flushSynced(s => s.map(x => x.id === b.id ? {
+            ...x,
+            indent: x.indent - 1
+          } : x));
+          focusBlock(b.id, 'start');
+          return;
+        }
         el.innerHTML = '';
-        flushSynced(s => s.map(x => x.id === b.id ? {
+        flushSynced(s => s.map(x => x.id === b.id ? toPlainP({
           ...x,
-          type: 'p',
           text: ''
-        } : x));
+        }) : x));
         focusBlock(b.id, 'start');
         return;
       }
+      // 先压快照再从 DOM 摘走尾巴——快照才带着拆分前的整块原文，⌘Z 能完整还原
+      pushHistory();
       let tail = '';
       const info = caretInfo(el);
       if (info) {
@@ -9220,14 +9288,14 @@ function Editor({
       }
       const nb = {
         id: uid(),
-        type: listLike ? b.type : 'p',
+        type: contLike ? b.type : 'p',
         text: tail,
         checked: false,
         ...(listLike && b.indent ? {
           indent: b.indent
         } : {})
       };
-      flushSynced(s => {
+      flushMutate(s => {
         const i = s.findIndex(x => x.id === b.id);
         return [...s.slice(0, i + 1), nb, ...s.slice(i + 1)];
       });
@@ -9235,16 +9303,31 @@ function Editor({
       return;
     }
 
-    // Backspace 在块首：先降级为正文，再删除/并入上一块
+    // Backspace 在块首：刚转换的块先退回字面前缀，嵌套列表先降一级缩进，
+    // 其余块型先降级为正文，之后才删除/并入上一块
     if (e.key === 'Backspace') {
       const info = caretInfo(el);
       if (!info || !info.collapsed || !info.atStart) return;
       if (b.type !== 'p') {
         e.preventDefault();
-        flushSynced(s => s.map(x => x.id === b.id ? {
-          ...x,
-          type: 'p'
-        } : x));
+        const pc = prefixConvRef.current;
+        if (pc && pc.id === b.id) {
+          // 「前缀 + 空格」刚转换出的块：退回纯文本前缀（Typora 手感），内容原样保留
+          prefixConvRef.current = null;
+          pushHistory();
+          el.innerHTML = escHtml(pc.prefix) + el.innerHTML;
+          flushMutate(s => s.map(x => x.id === b.id ? toPlainP(x) : x));
+          focusBlockAt(b.id, pc.prefix.length);
+          return;
+        }
+        if (['bulleted', 'numbered', 'todo'].includes(b.type) && (b.indent || 0) > 0) {
+          flushSynced(s => s.map(x => x.id === b.id ? {
+            ...x,
+            indent: x.indent - 1
+          } : x));
+        } else {
+          flushSynced(s => s.map(x => x.id === b.id ? toPlainP(x) : x));
+        }
         focusBlock(b.id, 'start');
         return;
       }
@@ -9281,6 +9364,45 @@ function Editor({
       setPendingAtomicDel(prev.id);
       scrollToBlock(prev.id);
       flash('已选中上方的' + blockTypeName(prev.type) + '块 · 再按 ⌫ 删除');
+      return;
+    }
+
+    // Delete 在块尾：并入下一块——Backspace 的镜像语义（Notion / Typora 皆然）
+    if (e.key === 'Delete') {
+      const info = caretInfo(el);
+      if (!info || !info.collapsed || !info.atEnd) return;
+      const cur = blocksRef.current;
+      const i = cur.findIndex(x => x.id === b.id);
+      const next = i >= 0 && i + 1 < cur.length ? cur[i + 1] : null;
+      if (!next) return;
+      e.preventDefault();
+      if (next.type === 'divider') {
+        flushSynced(s => s.filter(x => x.id !== next.id));
+        focusBlock(b.id, 'end');
+        return;
+      }
+      if (EDITABLE.includes(next.type)) {
+        // 空段落上按 Delete：删掉自己、光标落到下一块块首（保住下一块的块型）
+        if (b.type === 'p' && el.innerText.trim() === '') {
+          flushSynced(s => s.filter(x => x.id !== b.id));
+          focusBlock(next.id, 'start');
+          return;
+        }
+        const nel = refs.current[next.id];
+        const nextHtml = nel ? nel.innerHTML : sanHtml(next.text || '');
+        const joinAt = el.innerText.length;
+        flushSynced(s => s.filter(x => x.id !== next.id).map(x => x.id === b.id ? {
+          ...x,
+          text: sanHtml((x.text || '') + nextHtml)
+        } : x));
+        focusBlockAt(b.id, joinAt);
+        return;
+      }
+      // 下一块是 code / table / math / image 等原子块：与块首 Backspace 同一套引导
+      setFocusBlk(next.id);
+      setPendingAtomicDel(next.id);
+      scrollToBlock(next.id);
+      flash('已选中下方的' + blockTypeName(next.type) + '块 · 再按 ⌫ 删除');
       return;
     }
 
@@ -10075,19 +10197,67 @@ function Editor({
       if (!isChar && !del && !ent) return;
       doMerge(isChar ? escHtml(e.key) : '', e);
     };
-    const onCut = e => {
+    // 跨块选区的复制/剪切：text/plain 写合法 Markdown（经 blocksToMd，标题/列表/
+    // 代码等结构不再被压平成纯文本），text/html 带原富文本片段供富文本编辑器粘贴。
+    const rangeToMd = r => {
+      const startId = blockIdOfNode(r.startContainer),
+        endId = blockIdOfNode(r.endContainer);
+      if (!startId || !endId || startId === endId) return null; // 同块选区保持浏览器默认
+      const cur = blocksRef.current;
+      const si = cur.findIndex(x => x.id === startId),
+        ei = cur.findIndex(x => x.id === endId);
+      if (si < 0 || ei < 0 || si >= ei) return null;
+      const picked = cur.slice(si, ei + 1).map(syncBlock);
+      // 首尾块只取选区覆盖的那一截
+      const sEl = refs.current[startId],
+        eEl = refs.current[endId];
+      if (sEl && EDITABLE.includes(cur[si].type)) picked[0] = {
+        ...picked[0],
+        text: sanHtml(htmlSlice(sEl, r.startContainer, r.startOffset, false))
+      };
+      if (eEl && EDITABLE.includes(cur[ei].type)) picked[picked.length - 1] = {
+        ...picked[picked.length - 1],
+        text: sanHtml(htmlSlice(eEl, r.endContainer, r.endOffset, true))
+      };
+      return MD ? MD.blocksToMd(picked) : picked.map(x => stripTags(x.text || '')).filter(Boolean).join('\n\n');
+    };
+    const writeClipboard = e => {
       const sel = window.getSelection();
-      if (sel && sel.toString() && e.clipboardData) {
-        try {
-          e.clipboardData.setData('text/plain', sel.toString());
-        } catch (_) {}
+      if (!sel || !sel.rangeCount || sel.isCollapsed || !e.clipboardData) return false;
+      const r = sel.getRangeAt(0);
+      if (!root.contains(r.commonAncestorContainer)) return false;
+      const md = rangeToMd(r);
+      if (md == null) return false;
+      try {
+        e.clipboardData.setData('text/plain', md);
+        const div = document.createElement('div');
+        div.appendChild(r.cloneContents());
+        e.clipboardData.setData('text/html', div.innerHTML);
+      } catch (_) {
+        return false;
+      }
+      return true;
+    };
+    const onCopy = e => {
+      if (writeClipboard(e)) e.preventDefault();
+    };
+    const onCut = e => {
+      if (!writeClipboard(e)) {
+        const sel = window.getSelection();
+        if (sel && sel.toString() && e.clipboardData) {
+          try {
+            e.clipboardData.setData('text/plain', sel.toString());
+          } catch (_) {}
+        }
       }
       doMerge('', e);
     };
     root.addEventListener('keydown', onKey, true);
+    root.addEventListener('copy', onCopy, true);
     root.addEventListener('cut', onCut, true);
     return () => {
       root.removeEventListener('keydown', onKey, true);
+      root.removeEventListener('copy', onCopy, true);
       root.removeEventListener('cut', onCut, true);
     };
   }, []);
@@ -10149,6 +10319,7 @@ function Editor({
           scheduleTick();
           return;
         }
+        prefixConvRef.current = null; // 继续输入后，块首 Backspace 不再退回前缀
         noteTyping();
         scheduleTick();
         const t = e.currentTarget.innerText;
@@ -15502,9 +15673,10 @@ window.SRKit = Object.assign(window.SRKit || {}, {
 // ui_kits/stellar-raft/Inbox.jsx
 try { (() => {
 /* Inbox — 收件箱：两个标签页。
-   「待整理」顶部的「星际来信」：好友寄来的造访邀请（去造访 / 忽略）与赠星
-   （收纳到星域 / 忽略）——消息本体在服务器（GET /api/inbox），后端未运行时
-   整区隐藏不报错；收纳经 data.js 的 adoptShared 建星，从未点亮起步。
+   「待整理」顶部的「星际来信」：好友寄来的造访邀请（去造访 / 忽略）、赠星
+   （收纳到星域 / 忽略）与星语留言（收下 / 回一句 / 忽略）——消息本体在服务器
+   （GET /api/inbox），后端未运行时整区隐藏不报错；收纳经 data.js 的
+   adoptShared 建星，从未点亮起步；星语可就地回寄一句（≤160 字）。
    「待整理」：随手捕捉、尚未归入任何星域的想法草稿——
    · 归入即真的创建一颗知识星（落在该星域质心附近，星图/3D 立即可见）
    · 有建议的草稿一键「按建议归入」；批量勾选后可一次归入/忽略
@@ -15549,15 +15721,16 @@ function Inbox({
   const [sel, setSel] = React.useState([]); // 勾选的草稿 id
   const [picker, setPicker] = React.useState(null); // { id } 或 { batch: true }，正在选星域
   const [confirm, setConfirm] = React.useState(null);
-  const [toast, setToast] = React.useState(null); // { msg, con } — con 给「查看」用
+  const [toast, setToast] = React.useState(null); // { msg, con, tone } — con 给「查看」用
   const seq = React.useRef(0);
   const toastTimer = React.useRef(null);
-  // 带动作的 toast 多停一会儿（5s），纯文字的保持 2.6s
-  const flash = (msg, con) => {
+  // 带动作的 toast 多停一会儿（5s），纯文字的保持 2.6s；tone:'danger' 用于失败反馈
+  const flash = (msg, con, tone) => {
     clearTimeout(toastTimer.current);
     setToast({
       msg,
-      con
+      con,
+      tone
     });
     toastTimer.current = setTimeout(() => setToast(null), con ? 5000 : 2600);
   };
@@ -15660,11 +15833,12 @@ function Inbox({
     flash(its.length === 1 ? '已归入 · 写下内容，讲给 AI 学生，让它自己发光。' : `${its.length} 颗新星已按建议归入 · 讲给 AI 学生，让它们自己发光。`, cons.length === 1 ? cons[0] : null);
   };
 
-  /* ——— 星际来信：好友寄来的造访邀请与赠星（服务端收件箱）———
+  /* ——— 星际来信：好友寄来的造访邀请、赠星与星语留言（服务端收件箱）———
      打开视图即拉取一次（GET /api/inbox 的 SRNet 便捷方法）；
      后端未运行 → 镜像保持为空，整个区块隐藏、不报错。 */
   const [, bumpMail] = React.useReducer(x => x + 1, 0);
   const [mailPicker, setMailPicker] = React.useState(null); // 正在选星域收纳的来信 id
+  const [noteReply, setNoteReply] = React.useState(null); // { id, text, busy } — 正在回寄的星语
   React.useEffect(() => {
     if (D.refreshMail) D.refreshMail();
     const h = () => bumpMail();
@@ -15678,13 +15852,14 @@ function Inbox({
     return Number.isFinite(ts) ? D.ago(ts) : '刚刚';
   };
   const dismissMail = m => setConfirm({
-    message: m.kind === 'galaxy' ? '忽略后这封造访邀请会被删除。确定忽略吗？' : `忽略后「${m.payload && m.payload.label || '这颗星'}」的赠星来信会被删除，不会成为你的星。确定忽略吗？`,
+    message: m.kind === 'galaxy' ? '忽略后这封造访邀请会被删除。确定忽略吗？' : m.kind === 'note' ? `忽略后「${m.from && m.from.name || '好友'}」的这句星语会被删除。确定忽略吗？` : `忽略后「${m.payload && m.payload.label || '这颗星'}」的赠星来信会被删除，不会成为你的星。确定忽略吗？`,
     confirmLabel: '忽略',
     onYes: () => {
       if (window.SRNet && window.SRNet.inbox) window.SRNet.inbox.ack(m.id, 'dismiss'); // 静默降级
       const i = mail.indexOf(m);
       if (i >= 0) mail.splice(i, 1);
       if (mailPicker === m.id) setMailPicker(null);
+      setNoteReply(r => r && r.id === m.id ? null : r);
       window.dispatchEvent(new Event('sr-data')); // 侧栏角标即时对齐
       flash('已忽略这封来信');
     }
@@ -15707,6 +15882,43 @@ function Inbox({
     const star = D.adoptShared && D.adoptShared(m, conId);
     setMailPicker(null);
     if (star) flash(`已收纳「${star.label}」· 从未点亮起步，讲透它，才是你的星。`, conId);
+  };
+  // 收下星语：镜像置 claimed，未领取角标即时减一；文字留在原地，随时可回看
+  const claimNote = m => {
+    if (window.SRNet && window.SRNet.inbox) window.SRNet.inbox.ack(m.id, 'claim'); // 静默降级
+    m.claimed = true;
+    window.dispatchEvent(new Event('sr-data')); // 侧栏角标即时对齐
+    flash('已收下这句星语');
+  };
+  // 回一句：≤160 字纯文本，经 /api/inbox/send 寄回对方收件箱（kind 'note'）
+  const sendNoteReply = m => {
+    const text = (noteReply && noteReply.text || '').trim();
+    const N = window.SRNet;
+    if (!text || !N || !N.inbox || noteReply && noteReply.busy) return;
+    setNoteReply(r => r && {
+      ...r,
+      busy: true
+    });
+    N.inbox.send(m.from && m.from.id, 'note', null, {
+      text
+    }).then(r => {
+      if (!r) {
+        setNoteReply(x => x && {
+          ...x,
+          busy: false
+        });
+        flash('星际网络暂不可用，稍后再试', null, 'danger');
+      } else if (r.error) {
+        setNoteReply(x => x && {
+          ...x,
+          busy: false
+        });
+        flash(r.error, null, 'danger');
+      } else {
+        setNoteReply(null);
+        flash('星语已回寄');
+      }
+    });
   };
   const askDismiss = ids => setConfirm({
     message: ids.length === 1 ? '忽略后这条捕获会被丢弃，不会成为星。确定忽略吗？' : `确定忽略已选的 ${ids.length} 条捕获吗？它们不会成为星。`,
@@ -15916,7 +16128,7 @@ function Inbox({
       color: 'var(--text-3)',
       margin: '0 2px 10px'
     }
-  }, "\u6765\u81EA\u661F\u9645\u7684\u77E5\u8BC6\uFF0C\u6536\u7EB3\u540E\u4ECE\u672A\u70B9\u4EAE\u8D77\u6B65\u2014\u2014\u8BB2\u900F\u5B83\uFF0C\u624D\u662F\u4F60\u7684\u661F\u3002"), /*#__PURE__*/React.createElement("div", {
+  }, "\u6765\u81EA\u661F\u9645\u7684\u77E5\u8BC6\u4E0E\u5FC3\u610F\u2014\u2014\u8D60\u661F\u6536\u7EB3\u540E\u4ECE\u672A\u70B9\u4EAE\u8D77\u6B65\uFF0C\u8BB2\u900F\u5B83\uFF0C\u624D\u662F\u4F60\u7684\u661F\u3002"), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       flexDirection: 'column',
@@ -15924,9 +16136,11 @@ function Inbox({
     }
   }, mail.map(m => {
     const galaxy = m.kind === 'galaxy';
+    const note = m.kind === 'note';
     const p = m.payload || {};
     const from = m.from || {};
     const open = mailPicker === m.id;
+    const replying = noteReply && noteReply.id === m.id;
     return /*#__PURE__*/React.createElement(GlassPanel, {
       key: 'mail-' + m.id,
       radius: "md",
@@ -15984,12 +16198,12 @@ function Inbox({
         padding: '2.5px 9px'
       }
     }, /*#__PURE__*/React.createElement(Icon, {
-      name: galaxy ? 'radio-tower' : 'star',
+      name: galaxy ? 'radio-tower' : note ? 'quote' : 'star',
       size: 11,
       color: "currentColor"
-    }), galaxy ? '星系邀请' : '知识星'), m.claimed && /*#__PURE__*/React.createElement(Badge, {
+    }), galaxy ? '星系邀请' : note ? '星语' : '知识星'), m.claimed && /*#__PURE__*/React.createElement(Badge, {
       tone: "gold"
-    }, "\u5DF2\u6536\u7EB3"), /*#__PURE__*/React.createElement("div", {
+    }, note ? '已收下' : '已收纳'), /*#__PURE__*/React.createElement("div", {
       style: {
         flex: 1
       }
@@ -16006,7 +16220,33 @@ function Inbox({
       name: "clock",
       size: 12,
       color: "currentColor"
-    }), mailAgo(m.at))), galaxy ? /*#__PURE__*/React.createElement("div", {
+    }), mailAgo(m.at))), note ?
+    /*#__PURE__*/
+    /* 星语正文：引文样式——金色细竖线 + 楷斜体，一句话的仪式感 */
+    React.createElement("div", {
+      style: {
+        display: 'flex',
+        gap: 10,
+        marginTop: 8
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      "aria-hidden": "true",
+      style: {
+        flex: 'none',
+        width: 2,
+        borderRadius: 1,
+        background: 'linear-gradient(180deg, rgba(255,217,138,0.55), rgba(255,217,138,0.12))'
+      }
+    }), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 14.5,
+        lineHeight: 1.8,
+        color: 'var(--text-1)',
+        fontStyle: 'italic',
+        letterSpacing: '0.015em',
+        overflowWrap: 'anywhere'
+      }
+    }, p.text || '…')) : galaxy ? /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 13.5,
         lineHeight: 1.7,
@@ -16086,17 +16326,117 @@ function Inbox({
       icon: "rocket",
       glow: true,
       onClick: () => visitMail(m)
-    }, "\u53BB\u9020\u8BBF") : /*#__PURE__*/React.createElement(Button, {
+    }, "\u53BB\u9020\u8BBF") : note ? /*#__PURE__*/React.createElement(Button, {
+      size: "sm",
+      icon: "check",
+      glow: true,
+      onClick: () => claimNote(m)
+    }, "\u6536\u4E0B") : /*#__PURE__*/React.createElement(Button, {
       size: "sm",
       icon: "folder-input",
       glow: true,
       onClick: () => setMailPicker(open ? null : m.id)
-    }, "\u6536\u7EB3\u5230\u661F\u57DF")), /*#__PURE__*/React.createElement(Button, {
+    }, "\u6536\u7EB3\u5230\u661F\u57DF")), note && from.id != null && /*#__PURE__*/React.createElement(Button, {
+      size: "sm",
+      variant: "ghost",
+      icon: "corner-up-left",
+      onClick: () => setNoteReply(replying ? null : {
+        id: m.id,
+        text: '',
+        busy: false
+      })
+    }, "\u56DE\u4E00\u53E5"), /*#__PURE__*/React.createElement(Button, {
       size: "sm",
       variant: "ghost",
       icon: "x",
       onClick: () => dismissMail(m)
-    }, "\u5FFD\u7565")), open && !m.claimed && (D.constellations.length ? /*#__PURE__*/React.createElement(ConPicker, {
+    }, "\u5FFD\u7565")), note && replying &&
+    /*#__PURE__*/
+    /* 回寄小输入框：与快速捕捉同一套手感，160 字封顶 */
+    React.createElement("div", {
+      style: {
+        marginTop: 12,
+        paddingTop: 12,
+        borderTop: '1px solid var(--line)'
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        gap: 9
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "feather",
+      size: 14,
+      color: "var(--star-blue)",
+      style: {
+        marginTop: 5,
+        flex: 'none'
+      }
+    }), /*#__PURE__*/React.createElement("textarea", {
+      value: noteReply.text,
+      maxLength: 160,
+      autoFocus: true,
+      onChange: e => {
+        const v = e.target.value.slice(0, 160);
+        setNoteReply(r => r && {
+          ...r,
+          text: v
+        });
+      },
+      onKeyDown: e => {
+        if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
+          e.preventDefault();
+          sendNoteReply(m);
+        }
+      },
+      placeholder: `回一句星语给${from.name ? '「' + from.name + '」' : '对方'}…`,
+      "aria-label": "\u56DE\u4E00\u53E5\u661F\u8BED",
+      rows: 2,
+      style: {
+        flex: 1,
+        minWidth: 0,
+        resize: 'none',
+        background: 'transparent',
+        border: 'none',
+        outline: 'none',
+        color: 'var(--text-1)',
+        fontSize: 13.5,
+        lineHeight: 1.7,
+        fontFamily: 'var(--font-sans)',
+        padding: '2px 0'
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: 10,
+        marginTop: 7
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 11,
+        fontFamily: 'var(--font-mono)',
+        color: 'var(--text-3)'
+      }
+    }, window.SRKeys.combo('Enter'), " \u5BC4\u51FA \xB7 \u8FD8\u53EF\u5199 ", /*#__PURE__*/React.createElement("span", {
+      style: {
+        color: noteReply.text.length >= 150 ? 'var(--gold)' : 'inherit'
+      }
+    }, 160 - noteReply.text.length), " \u5B57"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        flex: 1
+      }
+    }), /*#__PURE__*/React.createElement(Button, {
+      size: "sm",
+      variant: "ghost",
+      onClick: () => setNoteReply(null)
+    }, "\u53D6\u6D88"), /*#__PURE__*/React.createElement(Button, {
+      size: "sm",
+      icon: "send",
+      glow: true,
+      disabled: !noteReply.text.trim() || noteReply.busy,
+      onClick: () => sendNoteReply(m)
+    }, noteReply.busy ? '寄出中…' : '回寄'))), open && !m.claimed && !galaxy && !note && (D.constellations.length ? /*#__PURE__*/React.createElement(ConPicker, {
       onPick: conId => adoptMail(m, conId),
       onCancel: () => setMailPicker(null)
     }) : /*#__PURE__*/React.createElement("div", {
@@ -16543,9 +16883,9 @@ function Inbox({
       padding: '10px 18px'
     }
   }, /*#__PURE__*/React.createElement(Icon, {
-    name: "check",
+    name: toast.tone === 'danger' ? 'circle-alert' : 'check',
     size: 16,
-    color: "var(--gold)"
+    color: toast.tone === 'danger' ? 'var(--danger)' : 'var(--gold)'
   }), /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 13.5,
@@ -24959,6 +25299,87 @@ const codeMemo = {
   }
 };
 
+/* ---------- 访客足迹：lastVisit（UTC 'YYYY-MM-DD HH:MM:SS'）→ 相对时间 ----------
+   服务端给的是 SQLite datetime('now')，无时区后缀；补 'Z' 按 UTC 解析。
+   null / 解析失败一律「尚未造访」，不猜。 */
+function visitAgo(utc) {
+  if (!utc) return '尚未造访';
+  const t = Date.parse(String(utc).replace(' ', 'T') + 'Z');
+  if (!Number.isFinite(t)) return '尚未造访';
+  const min = Math.floor((Date.now() - t) / 60000);
+  if (min < 1) return '刚来过';
+  if (min < 60) return min + ' 分钟前来过';
+  const hr = Math.floor(min / 60);
+  if (hr < 24) return hr + ' 小时前来过';
+  const day = Math.floor(hr / 24);
+  if (day < 30) return day + ' 天前来过';
+  return Math.floor(day / 30) + ' 个月前来过';
+}
+
+/* ---------- 知识共鸣：造访的星系里，哪些知识我们都拥有 ----------
+   口径（纯客户端计算，双方正文都不经手）：
+   · 归一：星名与标签去首尾空白、转小写后再比较；
+   · 强共鸣：双方星名归一后完全相等——同一颗知识星；双方都点亮时另行标注；
+   · 弱共鸣：双方 tags 有交集，剔除「草稿」「星际来信」这类系统标签；
+   · 每颗对方星至多归一档，强共鸣优先；返回按强→弱排序。
+   我方点亮口径与 data.js 一致（sr.lit>0）；对方 lit 由服务端实时熄灭后给出。
+   对方 tags 仅在「星名+大纲」档下发——「仅星名」档自然只剩强共鸣。 */
+const RESONANCE_SKIP_TAGS = ['草稿', '星际来信'];
+const resNorm = v => String(v == null ? '' : v).trim().toLowerCase();
+function matchResonance(myStars, theirStars) {
+  const mine = (myStars || []).filter(s => s && s.label);
+  if (!mine.length || !theirStars || !theirStars.length) return [];
+  const skip = new Set(RESONANCE_SKIP_TAGS.map(resNorm));
+  const byLabel = new Map(); // 归一星名 → 我方星（重名取先见者）
+  const byTag = new Map(); // 归一标签 → 我方星列表
+  mine.forEach(s => {
+    const l = resNorm(s.label);
+    if (l && !byLabel.has(l)) byLabel.set(l, s);
+    (s.tags || []).forEach(t => {
+      const n = resNorm(t);
+      if (!n || skip.has(n)) return;
+      if (!byTag.has(n)) byTag.set(n, []);
+      byTag.get(n).push(s);
+    });
+  });
+  const out = [];
+  theirStars.forEach(ts => {
+    const twin = byLabel.get(resNorm(ts.label));
+    if (twin) {
+      out.push({
+        id: ts.id,
+        kind: 'strong',
+        theirLabel: ts.label,
+        mineLabel: twin.label,
+        bothLit: !!ts.lit && !!(twin.sr && twin.sr.lit > 0)
+      });
+      return;
+    }
+    const tags = [],
+      names = [],
+      seen = new Set();
+    (ts.tags || []).forEach(t => {
+      const n = resNorm(t);
+      if (!n || skip.has(n) || seen.has(n) || !byTag.has(n)) return;
+      seen.add(n);
+      tags.push(t);
+      byTag.get(n).forEach(m => {
+        if (names.indexOf(m.label) < 0) names.push(m.label);
+      });
+    });
+    if (tags.length) out.push({
+      id: ts.id,
+      kind: 'weak',
+      theirLabel: ts.label,
+      tags,
+      mineLabels: names.slice(0, 3),
+      bothLit: false
+    });
+  });
+  out.sort((a, b) => a.kind === b.kind ? 0 : a.kind === 'strong' ? -1 : 1);
+  return out;
+}
+
 /* ---------- 共享样式：远航坞 / 飞船 / 卡片 / 电波环 ---------- */
 function VisitStyle() {
   return /*#__PURE__*/React.createElement("style", null, `
@@ -24969,14 +25390,18 @@ function VisitStyle() {
       @keyframes sr-pad-flash { from { opacity: 0.85; transform: translateX(-50%) scale(0.4); } to { opacity: 0; transform: translateX(-50%) scale(2.4); } }
       @keyframes sr-ping      { from { transform: scale(0.55); opacity: 0.7; } to { transform: scale(2.2); opacity: 0; } }
       @keyframes sr-twk       { 0%,100% { opacity: 0.2; } 50% { opacity: 0.85; } }
+      @keyframes sr-res-pulse { 0%,100% { transform: scale(1); opacity: 0.6; } 50% { transform: scale(1.16); opacity: 1; } }
       .sr-ship-flame { animation: sr-ship-flame 0.32s ease-in-out infinite; }
+      .sr-res-ring   { animation: sr-res-pulse 2.8s ease-in-out infinite; }
       .sr-bay-ship   { animation: sr-bay-bob 2.6s var(--ease-flight) infinite; }
       .sr-bay-ship.launch { animation: sr-launch 1.05s cubic-bezier(0.55, 0, 0.9, 0.4) both; }
       .sr-bay-ship.launch .sr-ship-flame { animation-duration: 0.1s; }
       .sr-visit-card { transition: transform var(--dur-base) var(--ease-flight), border-color var(--dur-base); }
       .sr-visit-card:hover { transform: translateY(-3px); }
+      .sr-res-item { transition: border-color var(--dur-base), background var(--dur-base); }
+      .sr-res-item:hover, .sr-res-item:focus-visible { border-color: rgba(255,217,138,0.45); background: rgba(255,217,138,0.09); }
       @media (prefers-reduced-motion: reduce) {
-        .sr-bay-ship, .sr-ship-flame { animation: none; }
+        .sr-bay-ship, .sr-ship-flame, .sr-res-ring { animation: none; }
       }
     `);
 }
@@ -25589,7 +26014,8 @@ function SharePanel({
     }
   }, v.avatar), /*#__PURE__*/React.createElement("div", {
     style: {
-      flex: 1
+      flex: 1,
+      minWidth: 0
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
@@ -25601,7 +26027,21 @@ function SharePanel({
     style: {
       marginLeft: 8
     }
-  }, "\u5DF2\u9690\u8EAB")), /*#__PURE__*/React.createElement(Button, {
+  }, "\u5DF2\u9690\u8EAB"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 5,
+      marginTop: 3,
+      fontSize: 11,
+      color: 'var(--text-3)',
+      opacity: v.lastVisit ? 1 : 0.7
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "footprints",
+    size: 11,
+    color: "currentColor"
+  }), visitAgo(v.lastVisit))), /*#__PURE__*/React.createElement(Button, {
     size: "sm",
     variant: "ghost",
     icon: v.blocked ? 'eye' : 'eye-off',
@@ -25977,6 +26417,13 @@ function VisitMap({
   const [selected, setSelected] = React.useState(null);
   const [mode, setMode] = React.useState('map'); // map | 3d | aerial
   const [collecting, setCollecting] = React.useState(false);
+  const [resOpen, setResOpen] = React.useState(false); // 共鸣清单面板
+  const [noteOpen, setNoteOpen] = React.useState(false); // 星语输入浮层
+  const [noteText, setNoteText] = React.useState('');
+  const [sendingNote, setSendingNote] = React.useState(false);
+  const [flying, setFlying] = React.useState(false); // 飞往某颗星：世界层短暂带缓动
+  const flyT = React.useRef(null);
+  React.useEffect(() => () => clearTimeout(flyT.current), []);
 
   /* 收纳这颗星：POST /api/inbox/collect —— 服务端按主人的可见度生成 payload，
      投进「我自己」的收件箱（寄件人=星系主人）；重复收纳幂等，不重复入库 */
@@ -26019,6 +26466,9 @@ function VisitMap({
     wy: s.y / 100 * VWORLD.h
   })) : [], [g]);
   const byId = React.useMemo(() => Object.fromEntries(stars.map(s => [s.id, s])), [stars]);
+  // 知识共鸣：我方星图 × 对方星系，纯客户端匹配（口径见 matchResonance）
+  const resonance = React.useMemo(() => matchResonance((window.SR_DATA || {}).stars, stars), [stars]);
+  const resById = React.useMemo(() => Object.fromEntries(resonance.map(r => [r.id, r])), [resonance]);
   // 注入给 3D / 鸟瞰的只读数据集（形状与 window.SR_DATA 对齐）
   const dataset = React.useMemo(() => g ? {
     stars,
@@ -26063,6 +26513,9 @@ function VisitMap({
     if (dragCleanup.current) dragCleanup.current();
   }, []);
   const bgDown = e => {
+    // 飞行途中开始拖拽：立刻收掉缓动，手感回到 1:1 跟手
+    clearTimeout(flyT.current);
+    setFlying(false);
     drag.current = {
       sx: e.clientX,
       sy: e.clientY,
@@ -26121,6 +26574,43 @@ function VisitMap({
     ...v,
     k: vclamp(v.k * f, 0.34, 2.6)
   }));
+
+  /* 飞到一颗星：选中 + 相机居中（保持当前缩放）。世界层短暂开缓动做飞行感，
+     data-motion="off" 时全局规则把 transition 收敛为瞬移，自然合规 */
+  const flyTo = starId => {
+    const s = byId[starId];
+    if (!s) return;
+    setSelected(starId);
+    setResOpen(false);
+    const el = ref.current;
+    if (!el) return;
+    setFlying(true);
+    setView(v => ({
+      ...v,
+      x: el.clientWidth / 2 - s.wx * v.k,
+      y: el.clientHeight / 2 - s.wy * v.k
+    }));
+    clearTimeout(flyT.current);
+    flyT.current = setTimeout(() => setFlying(false), 750);
+  };
+
+  /* 星语留言：≤160 字纯文本，寄进主人的收件箱（kind 'note'）。
+     soften 语义：null=网络不可用；{error}=业务拒绝（非好友 / 太频繁 / 未读满 5 句） */
+  const sendNote = () => {
+    const text = noteText.trim().slice(0, 160);
+    const ownerId = state.owner && state.owner.id;
+    if (!text || sendingNote || !ownerId) return;
+    setSendingNote(true);
+    N.inbox.send(ownerId, 'note', null, {
+      text
+    }).then(r => {
+      if (!r) flash('星际网络暂不可用，稍后再试', 'danger');else if (r.error) flash(r.error, 'danger');else {
+        flash('星语已寄出 ✦', 'gold');
+        setNoteText('');
+        setNoteOpen(false);
+      }
+    }).finally(() => setSendingNote(false));
+  };
   if (state.loading) return /*#__PURE__*/React.createElement("div", {
     style: {
       flex: 1,
@@ -26212,7 +26702,8 @@ function VisitMap({
       top: 0,
       transformOrigin: '0 0',
       transform: `translate(${view.x}px, ${view.y}px) scale(${view.k})`,
-      willChange: 'transform'
+      willChange: 'transform',
+      transition: flying ? 'transform 0.7s var(--ease-flight)' : 'none'
     }
   }, geoms.map(({
     con,
@@ -26307,28 +26798,50 @@ function VisitMap({
       stroke: cn.kind === 'cross' ? 'rgba(255,217,138,0.35)' : `rgba(159,198,255,${0.16 + lit * 0.2})`,
       strokeWidth: "1.1"
     });
-  })), stars.map(s => /*#__PURE__*/React.createElement("div", {
-    key: s.id,
-    onMouseDown: e => e.stopPropagation(),
-    onClick: () => setSelected(s.id === selected ? null : s.id),
-    style: {
-      position: 'absolute',
-      left: s.wx,
-      top: s.wy,
-      zIndex: 4
-    }
-  }, /*#__PURE__*/React.createElement(StarNode, {
-    strength: s.strength,
-    importance: s.importance || 1,
-    label: s.label,
-    selected: selected === s.id,
-    style: {
-      left: 0,
-      top: 0,
-      transform: 'translate(-50%, calc(-50% + 11.5px))',
-      cursor: 'pointer'
-    }
-  })))), /*#__PURE__*/React.createElement("div", {
+  })), stars.map(s => {
+    const res = resById[s.id];
+    // 共鸣环外径：跟随星核尺寸（StarNode 的 core = 12×importance），强共鸣更亮
+    const ringR = (12 * (s.importance || 1) + 24) / 2;
+    return /*#__PURE__*/React.createElement("div", {
+      key: s.id,
+      onMouseDown: e => e.stopPropagation(),
+      onClick: () => {
+        setResOpen(false);
+        setSelected(s.id === selected ? null : s.id);
+      },
+      style: {
+        position: 'absolute',
+        left: s.wx,
+        top: s.wy,
+        zIndex: 4
+      }
+    }, res && /*#__PURE__*/React.createElement("span", {
+      className: "sr-res-ring",
+      style: {
+        position: 'absolute',
+        left: -ringR,
+        top: -ringR,
+        width: ringR * 2,
+        height: ringR * 2,
+        borderRadius: '50%',
+        pointerEvents: 'none',
+        zIndex: 3,
+        border: res.kind === 'strong' ? '1.5px solid rgba(255,217,138,0.75)' : '1px solid rgba(255,217,138,0.45)',
+        boxShadow: res.kind === 'strong' ? '0 0 16px rgba(255,217,138,0.4), inset 0 0 10px rgba(255,217,138,0.18)' : '0 0 10px rgba(255,217,138,0.22)'
+      }
+    }), /*#__PURE__*/React.createElement(StarNode, {
+      strength: s.strength,
+      importance: s.importance || 1,
+      label: s.label,
+      selected: selected === s.id,
+      style: {
+        left: 0,
+        top: 0,
+        transform: 'translate(-50%, calc(-50% + 11.5px))',
+        cursor: 'pointer'
+      }
+    }));
+  })), /*#__PURE__*/React.createElement("div", {
     onMouseDown: e => e.stopPropagation(),
     style: {
       position: 'absolute',
@@ -26381,7 +26894,41 @@ function VisitMap({
     style: {
       flex: 1
     }
-  }), /*#__PURE__*/React.createElement(GlassPanel, {
+  }), !!resonance.length && /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    title: "\u4F60\u4EEC\u4FE9\u90FD\u62E5\u6709\u7684\u77E5\u8BC6",
+    "aria-expanded": resOpen,
+    onClick: () => {
+      setResOpen(o => !o);
+      setSelected(null);
+    },
+    style: {
+      pointerEvents: 'auto',
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 7,
+      padding: '8px 15px',
+      font: 'inherit',
+      fontSize: 12.5,
+      cursor: 'pointer',
+      borderRadius: 'var(--r-pill)',
+      color: 'var(--gold-white)',
+      border: '1px solid',
+      borderColor: resOpen ? 'rgba(255,217,138,0.6)' : 'rgba(255,217,138,0.4)',
+      background: resOpen ? 'rgba(255,217,138,0.16)' : 'rgba(255,217,138,0.1)',
+      backdropFilter: 'blur(10px)',
+      boxShadow: '0 0 14px rgba(255,217,138,0.12)'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "sparkles",
+    size: 14,
+    color: "var(--gold)"
+  }), "\u5171\u9E23 ", /*#__PURE__*/React.createElement("b", {
+    style: {
+      fontWeight: 500,
+      color: 'var(--gold)'
+    }
+  }, resonance.length), " \u5904"), /*#__PURE__*/React.createElement(GlassPanel, {
     radius: "pill",
     pad: "none",
     style: {
@@ -26444,9 +26991,24 @@ function VisitMap({
       position: 'absolute',
       bottom: 26,
       right: 24,
-      zIndex: 30
+      zIndex: 30,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'flex-end',
+      gap: 10
     }
   }, /*#__PURE__*/React.createElement(GlassPanel, {
+    radius: "pill",
+    pad: "none",
+    style: {
+      padding: '4px 6px'
+    }
+  }, /*#__PURE__*/React.createElement(Button, {
+    size: "sm",
+    variant: "ghost",
+    icon: "feather",
+    onClick: () => setNoteOpen(o => !o)
+  }, "\u7559\u4E0B\u661F\u8BED")), /*#__PURE__*/React.createElement(GlassPanel, {
     radius: "pill",
     pad: "none",
     style: {
@@ -26489,7 +27051,185 @@ function VisitMap({
     size: "sm",
     title: "\u4EAE\u5EA6\u9E1F\u77B0",
     onClick: () => setMode('aerial')
-  }))), sel && /*#__PURE__*/React.createElement("div", {
+  }))), resOpen && /*#__PURE__*/React.createElement("div", {
+    onMouseDown: e => e.stopPropagation(),
+    style: {
+      position: 'absolute',
+      right: 20,
+      top: 68,
+      width: 324,
+      zIndex: 45,
+      animation: 'sr-cardin var(--dur-base) var(--ease-flight) both'
+    }
+  }, /*#__PURE__*/React.createElement(GlassPanel, {
+    strong: true,
+    radius: "lg",
+    pad: "md",
+    glow: true
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 8
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "sparkles",
+    size: 15,
+    color: "var(--gold)"
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      flex: 1,
+      fontSize: 14,
+      color: 'var(--text-1)'
+    }
+  }, "\u77E5\u8BC6\u5171\u9E23"), /*#__PURE__*/React.createElement(Badge, {
+    tone: "gold"
+  }, resonance.length, " \u5904"), /*#__PURE__*/React.createElement(IconButton, {
+    name: "x",
+    size: "sm",
+    title: "\u5173\u95ED",
+    onClick: () => setResOpen(false)
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11.5,
+      lineHeight: 1.6,
+      color: 'var(--text-3)',
+      margin: '7px 0 10px'
+    }
+  }, "\u8FD9\u4E9B\u77E5\u8BC6\u4F60\u4EEC\u4FE9\u90FD\u62E5\u6709\u2014\u2014\u70B9\u4E00\u6761\uFF0C\u98DE\u8FC7\u53BB\u770B\u770B\u3002"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 7,
+      maxHeight: 336,
+      overflowY: 'auto',
+      paddingRight: 2
+    }
+  }, resonance.map(r => /*#__PURE__*/React.createElement("div", {
+    key: r.id,
+    className: "sr-res-item",
+    role: "button",
+    tabIndex: 0,
+    onClick: () => flyTo(r.id),
+    onKeyDown: e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        flyTo(r.id);
+      }
+    },
+    style: {
+      padding: '9px 11px',
+      borderRadius: 'var(--r-md)',
+      cursor: 'pointer',
+      border: '1px solid var(--glass-border)',
+      background: 'rgba(255,217,138,0.04)'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 7
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: r.kind === 'strong' ? 'star' : 'hash',
+    size: 12,
+    color: "var(--gold)"
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      flex: 1,
+      fontSize: 13,
+      color: 'var(--text-1)',
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis'
+    }
+  }, r.theirLabel), r.bothLit && /*#__PURE__*/React.createElement(Badge, {
+    tone: "gold"
+  }, "\u4F60\u4EEC\u90FD\u70B9\u4EAE\u4E86\u5B83")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 4,
+      paddingLeft: 19,
+      fontSize: 11.5,
+      lineHeight: 1.6,
+      color: 'var(--text-3)'
+    }
+  }, r.kind === 'strong' ? /*#__PURE__*/React.createElement("span", null, "\u4E0E\u4F60\u7684\u300C", r.mineLabel, "\u300D\u540C\u540D") : /*#__PURE__*/React.createElement("span", null, "\u5171\u540C\u6807\u7B7E ", r.tags.join(' · '), " \u2194 \u4F60\u7684\u300C", r.mineLabels.join('」「'), "\u300D"))))))), noteOpen && /*#__PURE__*/React.createElement("div", {
+    onMouseDown: e => e.stopPropagation(),
+    style: {
+      position: 'absolute',
+      right: 24,
+      bottom: 124,
+      width: 324,
+      zIndex: 45,
+      animation: 'sr-cardin var(--dur-base) var(--ease-flight) both'
+    }
+  }, /*#__PURE__*/React.createElement(GlassPanel, {
+    strong: true,
+    radius: "lg",
+    pad: "md",
+    glow: true
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 8,
+      marginBottom: 7
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "feather",
+    size: 15,
+    color: "var(--gold)"
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      flex: 1,
+      fontSize: 14,
+      color: 'var(--text-1)'
+    }
+  }, "\u7559\u4E0B\u661F\u8BED"), /*#__PURE__*/React.createElement(IconButton, {
+    name: "x",
+    size: "sm",
+    title: "\u6536\u8D77",
+    onClick: () => setNoteOpen(false)
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11.5,
+      lineHeight: 1.6,
+      color: 'var(--text-3)',
+      marginBottom: 10
+    }
+  }, "\u7ED9 ", state.owner && state.owner.name || friend.name, " \u7559\u4E00\u53E5\u8BDD\uFF0C\u4F1A\u5BC4\u8FDB TA \u7684\u6536\u4EF6\u7BB1\u3002"), /*#__PURE__*/React.createElement(Input, {
+    value: noteText,
+    onChange: e => setNoteText(e.target.value.slice(0, 160)),
+    placeholder: "\u4E00\u53E5\u661F\u8BED\u2026",
+    icon: "message-circle",
+    size: "md",
+    autoFocus: true,
+    maxLength: 160,
+    onKeyDown: e => {
+      if (e.key === 'Enter') sendNote();else if (e.key === 'Escape') setNoteOpen(false);
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 10,
+      marginTop: 10
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      flex: 1,
+      fontFamily: 'var(--font-mono)',
+      fontSize: 11,
+      color: 'var(--text-3)'
+    }
+  }, noteText.length, " / 160"), /*#__PURE__*/React.createElement(Button, {
+    size: "sm",
+    variant: "primary",
+    icon: "send",
+    glow: true,
+    disabled: sendingNote || !noteText.trim(),
+    onClick: sendNote
+  }, sendingNote ? '寄出中…' : '寄出')))), sel && /*#__PURE__*/React.createElement("div", {
     onMouseDown: e => e.stopPropagation(),
     style: {
       position: 'absolute',
@@ -29384,13 +30124,26 @@ try { (() => {
   // 行内代码的着色走主题 token（color-mix），黎明主题下同样成立
   const CODE_SPAN_CSS = 'font-family:var(--font-mono);font-size:0.92em;background:color-mix(in srgb, var(--star-blue) 14%, transparent);padding:1px 5px;border-radius:5px;';
 
-  /* ---- 行内标记 → HTML（整行解析，粘贴 / 导入用） ---- */
-  const mdInline = s => escHtml(s).replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>').replace(/(^|[^*])\*([^*\s][^*]*)\*/g, '$1<i>$2</i>').replace(/~~([^~]+)~~/g, '<s>$1</s>').replace(/`([^`]+)`/g, '<code style="' + CODE_SPAN_CSS + '">$1</code>')
-  // 链接协议白名单：javascript:/data: 等降级为纯文本（保留可见字样，去掉可点 href）
-  .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (mm, txt, url) => {
-    const ok = safeUrl(url);
-    return ok ? '<a href="' + ok.replace(/"/g, '&quot;') + '" style="color:var(--star-blue);text-decoration:underline;text-underline-offset:3px;">' + txt + '</a>' : txt;
-  });
+  /* ---- 行内标记 → HTML（整行解析，粘贴 / 导入用） ----
+     反斜杠转义先行提位（\* \| \# …按字面处理，不再被规则误吞），***x*** 粗斜体、
+     [t](url "标题") 带题链接、<https://…> 自动链接都对齐真实 Markdown。 */
+  const ESCAPABLE = /\\([\\`*_[\]()#+\-.!|>~${}])/g;
+  const LINK_A = (url, txt) => '<a href="' + url.replace(/"/g, '&quot;') + '" style="color:var(--star-blue);text-decoration:underline;text-underline-offset:3px;">' + txt + '</a>';
+  const mdInline = s => {
+    const toks = [];
+    const src = String(s == null ? '' : s).replace(ESCAPABLE, (mm, c) => {
+      toks.push(c);
+      return '\u0000' + (toks.length - 1) + '\u0000';
+    });
+    return escHtml(src).replace(/\*\*\*([^*]+)\*\*\*/g, '<b><i>$1</i></b>').replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>').replace(/(^|[^*])\*([^*\s][^*]*)\*/g, '$1<i>$2</i>').replace(/~~([^~]+)~~/g, '<s>$1</s>').replace(/`([^`]+)`/g, '<code style="' + CODE_SPAN_CSS + '">$1</code>')
+    // 链接协议白名单：javascript:/data: 等降级为纯文本（保留可见字样，去掉可点 href）
+    .replace(/\[([^\]]+)\]\(([^)\s]+)(?:\s+&quot;[^&]*&quot;|\s+"[^"]*")?\)/g, (mm, txt, url) => {
+      const ok = safeUrl(url);
+      return ok ? LINK_A(ok, txt) : txt;
+    })
+    // 自动链接 <https://…>（escHtml 之后尖括号已成实体）
+    .replace(/&lt;(https?:\/\/[^\s&]+)&gt;/g, (mm, url) => safeUrl(url) ? LINK_A(url, url) : url).replace(/\u0000(\d+)\u0000/g, (mm, n) => escHtml(toks[Number(n)]));
+  };
 
   /* ---- 打字即时转换：光标前缀里已闭合的行内标记（Typora 式，空格触发） ----
      顺序敏感：** 在 * 之前；斜体用 lookbehind 避免吃掉 ** 的一半。
@@ -29537,13 +30290,13 @@ try { (() => {
           });
         }
       } else if (/^\|.+\|$/.test(l)) {
-        // 表格
+        // 表格（\| 转义的竖线按字面归位）
         const rowsRaw = [];
         while (i < lines.length && /^\|.+\|$/.test(lines[i].trim())) {
           rowsRaw.push(lines[i].trim());
           i++;
         }
-        const cells = r => r.slice(1, -1).split('|').map(c => c.trim());
+        const cells = r => r.slice(1, -1).split(/(?<!\\)\|/).map(c => c.trim().replace(/\\\|/g, '|'));
         const body = rowsRaw.slice(1).filter(r => !/^\|[\s:\-|]+\|$/.test(r)).map(cells);
         out.push({
           id: uid(),
@@ -29551,13 +30304,45 @@ try { (() => {
           head: cells(rowsRaw[0]),
           rows: body
         });
-      } else if (m = l.match(/^(#{1,3})\s+(.*)/)) {
+      }
+      // 独占一行的图片 ![alt](url) / ![alt](url "题注") → 图片块；非法协议降级为纯文本段落
+      else if (m = l.match(/^!\[([^\]]*)\]\(([^)\s]+)(?:\s+"[^"]*")?\)$/)) {
+        out.push(safeUrl(m[2]) ? {
+          id: uid(),
+          type: 'image',
+          alt: m[1],
+          src: m[2]
+        } : {
+          id: uid(),
+          type: 'p',
+          text: mdInline(l)
+        });
+        i++;
+      }
+      // 标题支持到 ######：编辑器块模型只有三级，h4–h6 折入 h3（导出仍是合法 Markdown）
+      else if (m = l.match(/^(#{1,6})\s+(.*)/)) {
         out.push({
           id: uid(),
-          type: 'h' + m[1].length,
+          type: 'h' + Math.min(3, m[1].length),
           text: mdInline(m[2])
         });
         i++;
+      }
+      // GFM 提示框 > [!NOTE] / [!TIP]…（Obsidian 同语法）→ 标注块，吸收随后的 > 续行
+      else if (m = l.match(/^>\s*\[!(\w+)\]\s*(.*)$/)) {
+        const buf = m[2] ? [m[2]] : [];
+        i++;
+        while (i < lines.length && /^>\s?/.test(lines[i].trim()) && !/^>\s*\[!/.test(lines[i].trim())) {
+          const t = lines[i].trim().replace(/^>\s?/, '');
+          if (t) buf.push(t);
+          i++;
+        }
+        out.push({
+          id: uid(),
+          type: 'callout',
+          tone: m[1].toLowerCase() === 'tip' ? 'gold' : 'blue',
+          text: mdInline(buf.join(' '))
+        });
       } else if (m = l.match(/^>\s?(.*)/)) {
         out.push({
           id: uid(),
@@ -29565,6 +30350,39 @@ try { (() => {
           text: mdInline(m[1])
         });
         i++;
+      }
+      // <details><summary>…</summary>…</details> → 折叠块（与导出的 toggle 语法互逆）
+      else if (/^<details>/i.test(l)) {
+        const buf = [raw];
+        if (!/<\/details>/i.test(l)) {
+          i++;
+          while (i < lines.length) {
+            buf.push(lines[i]);
+            if (/<\/details>/i.test(lines[i])) {
+              i++;
+              break;
+            }
+            i++;
+          }
+        } else i++;
+        const all = buf.join('\n');
+        const sm = all.match(/<summary>([\s\S]*?)<\/summary>/i);
+        const child = all.replace(/<\/?details>/gi, '').replace(/<summary>[\s\S]*?<\/summary>/i, '').trim();
+        out.push({
+          id: uid(),
+          type: 'toggle',
+          text: mdInline(sm ? sm[1].trim() : '折叠'),
+          child: mdInline(child)
+        });
+      }
+      // Setext 标题：下一行全为 = 号 → 一级标题（真实 Markdown 的另一种写法）
+      else if (i + 1 < lines.length && /^=+$/.test(lines[i + 1].trim())) {
+        out.push({
+          id: uid(),
+          type: 'h1',
+          text: mdInline(l)
+        });
+        i += 2;
       } else {
         out.push({
           id: uid(),
@@ -29588,17 +30406,29 @@ try { (() => {
     };
     const props = {};
     let tags = null;
-    m[1].split('\n').forEach(line => {
-      const mm = line.match(/^([A-Za-z_一-鿿][\w一-鿿-]*)\s*:\s*(.*)$/);
-      if (!mm) return;
+    const fmLines = m[1].split('\n');
+    for (let li = 0; li < fmLines.length; li++) {
+      const mm = fmLines[li].match(/^([A-Za-z_一-鿿][\w一-鿿-]*)\s*:\s*(.*)$/);
+      if (!mm) continue;
       const k = mm[1];
       const v = mm[2].trim().replace(/^["']|["']$/g, '');
       if (k === 'tags') {
-        tags = v.replace(/^\[|\]$/g, '').split(',').map(s => s.trim()).filter(Boolean);
-        return;
+        if (v) {
+          tags = v.replace(/^\[|\]$/g, '').split(',').map(s => s.trim().replace(/^["']|["']$/g, '')).filter(Boolean);
+        } else {
+          // Obsidian 的块级列表写法：tags: 换行后跟若干「  - x」
+          tags = [];
+          while (li + 1 < fmLines.length && /^\s+-\s+/.test(fmLines[li + 1])) {
+            li++;
+            const t = fmLines[li].replace(/^\s+-\s+/, '').trim().replace(/^["']|["']$/g, '');
+            if (t) tags.push(t);
+          }
+          if (!tags.length) tags = null;
+        }
+        continue;
       }
       if (v) props[k] = v;
-    });
+    }
     return {
       props: Object.keys(props).length ? props : null,
       tags,
@@ -29610,9 +30440,15 @@ try { (() => {
      opts: { title, props, tags, summary }。frontmatter / admonition / <details> /
      列表缩进（2 空格一级）/ 协议白名单与 Editor 渲染语义一一对应。 */
   const stripTags = h => String(h == null ? '' : h).replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
-  const htmlToMd = h => stripTags(String(h == null ? '' : h).replace(/<br\s*\/?>/gi, '\n').replace(/<\/(p|div)>/gi, '\n').replace(/<(b|strong)[^>]*>([\s\S]*?)<\/\1>/gi, '**$2**').replace(/<(i|em)[^>]*>([\s\S]*?)<\/\1>/gi, '*$2*').replace(/<(s|strike|del)[^>]*>([\s\S]*?)<\/\1>/gi, '~~$2~~').replace(/<code[^>]*>([\s\S]*?)<\/code>/gi, '`$1`')
+  const htmlToMd = h => stripTags(String(h == null ? '' : h).replace(/<br\s*\/?>/gi, '\n').replace(/<\/(p|div)>/gi, '\n').replace(/<(b|strong)[^>]*>([\s\S]*?)<\/\1>/gi, '**$2**').replace(/<(i|em)[^>]*>([\s\S]*?)<\/\1>/gi, '*$2*').replace(/<(s|strike|del)[^>]*>([\s\S]*?)<\/\1>/gi, '~~$2~~')
+  // 行内代码本身含反引号时用双反引号包裹（CommonMark 语义），round-trip 不碎
+  .replace(/<code[^>]*>([\s\S]*?)<\/code>/gi, (mm, c) => c.includes('`') ? '`` ' + c + ' ``' : '`' + c + '`')
   // 导出时同样过协议白名单：非法链接降级为纯文本，不把 javascript:/data: 带出仓
   .replace(/<a[^>]*href="([^"]*)"[^>]*>([\s\S]*?)<\/a>/gi, (mm, url, txt) => safeUrl(url) ? '[' + txt + '](' + url + ')' : txt)).trim();
+
+  // 段落导出的防歧义转义：正文若以 Markdown 结构记号开头（# > - 1. ``` $$ | 或整行 ---），
+  // 加反斜杠护住，round-trip 后仍是同一个段落，不会被真实解析器误读成结构
+  const escLead = s => String(s == null ? '' : s).replace(/^(#{1,6} |> ?|[-*+] |\d+[.)] |```|\$\$|\|)/, '\\$1').replace(/^(-{3,}|\*{3,}|={3,})$/, '\\$1');
   function blocksToMd(blocks, opts) {
     const o = opts || {};
     const lines = [];
@@ -29634,14 +30470,14 @@ try { (() => {
           lines.push('### ' + htmlToMd(b.text));
           break;
         case 'p':
-          lines.push(htmlToMd(b.text));
+          lines.push(escLead(htmlToMd(b.text)));
           break;
         case 'quote':
           lines.push('> ' + htmlToMd(b.text));
           break;
-        // callout 用 admonition 语法并带 tone，round-trip 不再退化成普通引用
+        // callout 用 GFM 提示框语法（大写才被 GitHub 渲染；Obsidian 大小写皆可）
         case 'callout':
-          lines.push('> [!' + (b.tone === 'blue' ? 'note' : 'tip') + ']\n> ' + htmlToMd(b.text));
+          lines.push('> [!' + (b.tone === 'blue' ? 'NOTE' : 'TIP') + ']\n> ' + htmlToMd(b.text));
           break;
         case 'bulleted':
           lines.push(pad + '- ' + htmlToMd(b.text));
@@ -29672,18 +30508,29 @@ try { (() => {
         case 'divider':
           lines.push('---');
           break;
-        // 本地上传的 dataURL 不把超大 base64 内联进 md，改为附件提示
+        // 图片：本地上传的 dataURL 在 100KB 内直接内联（合法 Markdown，Typora/Obsidian/VS Code
+        // 都能显示）；超限才降级为附件占位（URL 无空格，真实解析器不碎）
         case 'image':
-          lines.push(/^data:/.test(b.src || '') ? '![' + (b.alt || '本地图片') + '](附件：本地上传的图片已略去内联数据)' : '![' + (b.alt || '') + '](' + (b.src || '') + ')');
-          break;
+          {
+            const src = b.src || '';
+            if (/^data:/.test(src) && src.length >= 100000) {
+              lines.push('![' + (b.alt || '本地图片') + '](本地图片-过大未内联)');
+              break;
+            }
+            lines.push('![' + (b.alt || '') + '](' + src + ')');
+            break;
+          }
         case 'table':
           {
             const head = b.head || [];
             const rows = b.rows || [];
             if (!head.length) break;
-            lines.push('| ' + head.join(' | ') + ' |');
-            lines.push('| ' + head.map(() => '---').join(' | ') + ' |');
-            rows.forEach(r => lines.push('| ' + r.join(' | ') + ' |'));
+            // 单元格里的竖线与换行按 GFM 规矩处理（\| 与空格），表格结构永不被内容撑破。
+            // 整张表作为一个块推入——行与行之间不能隔空行，否则真实解析器会把表拆碎
+            const cell = c => String(c == null ? '' : c).replace(/\r?\n/g, ' ').replace(/\|/g, '\\|');
+            const tbl = ['| ' + head.map(cell).join(' | ') + ' |', '| ' + head.map(() => '---').join(' | ') + ' |'];
+            rows.forEach(r => tbl.push('| ' + r.map(cell).join(' | ') + ' |'));
+            lines.push(tbl.join('\n'));
             break;
           }
         default:
@@ -29693,8 +30540,12 @@ try { (() => {
     // YAML frontmatter：把结构化属性写出，round-trip 后属性不再丢失（对标 Obsidian）
     const p = o.props || {};
     const fm = [];
+    // 值里带冒号 / 井号 / 引号等 YAML 敏感字符时加引号，Obsidian 属性面板读得回来
     const pushFm = (k, v) => {
-      if (v != null && String(v).trim() !== '' && v !== '—') fm.push(k + ': ' + v);
+      if (v == null) return;
+      const s = String(v).trim();
+      if (!s || s === '—') return;
+      fm.push(k + ': ' + (/[:#'"[\]{}|>&*!%@`]/.test(s) ? JSON.stringify(s) : s));
     };
     pushFm('type', p.type);
     pushFm('status', p.status);
