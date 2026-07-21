@@ -683,6 +683,180 @@ function MiniStarMap({ currentId, onPick }) {
   );
 }
 
+/* ── AI 助手（右栏小节）──
+   AI 配置面板里的三个开关（自动摘要 / 连接建议 / 标签推荐）在这里接成真实能力，
+   调用层是 window.SRAI（ai.js）。未配置服务商时整节只留一行引导；
+   监听 sr-ai-config，配置或开关一变就地刷新。 */
+const aiStripHtml = (h) => String(h || '').replace(/<[^>]*>/g, ' ').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+// 取一颗星的正文纯文本（与导出同一份数据源 star.body；代码 / 公式 / 表格也算内容）
+const aiBodyText = (s) => (((s && s.body) || []).map(b => {
+  if (!b) return '';
+  if (b.type === 'code') return b.code || '';
+  if (b.type === 'math') return b.tex || '';
+  if (b.type === 'table') return [(b.head || []).join(' ')].concat((b.rows || []).map(r => (r || []).join(' '))).join('\n');
+  const t = aiStripHtml(b.text || '');
+  return b.type === 'toggle' ? (t + ' ' + aiStripHtml(b.child || '')) : t;
+}).map(t => t.trim()).filter(Boolean).join('\n'));
+// 摘要清洗：只留第一行，剥引号与「摘要：」类前缀，硬截 60 字
+const aiTrimSummary = (out) => String(out || '').trim().split('\n')[0].trim()
+  .replace(/^(摘要|一句话摘要)[:：]\s*/, '')
+  .replace(/^["'“”‘’「」『』]+|["'“”‘’「」『』]+$/g, '').trim().slice(0, 60);
+// 生成一句话摘要——「生成摘要」按钮与关闭编辑器时的静默生成走同一条路径
+const aiSummarize = (s) => window.SRAI.chat([{
+  role: 'user',
+  content: '为下面这篇笔记写一句话中文摘要，直接输出摘要本身：不超过 60 字，不带引号，也不带「摘要：」之类前缀。\n\n标题：' + (s.label || '无标题') + '\n正文：\n' + aiBodyText(s).slice(0, 2000),
+}], { system: '你是克制的笔记摘要助手，只输出一句话，不解释。', maxTokens: 120, temperature: 0.3 }).then(aiTrimSummary);
+// 本会话已静默尝试过自动摘要的星——同一颗星只触发一次，失败也不再打扰
+const aiAutoTried = new Set();
+
+function AIAssist({ star, tags, connected, onAddTag, onAddConnection, onSummaryDone }) {
+  const D = window.SR_DATA;
+  const AI = window.SRAI;
+  const readAi = () => ({ ok: !!(AI && AI.isConfigured()), cfg: (AI && AI.active()) || {} });
+  const [ai, setAi] = React.useState(readAi);
+  React.useEffect(() => {
+    const h = () => setAi(readAi());
+    window.addEventListener('sr-ai-config', h);
+    return () => window.removeEventListener('sr-ai-config', h);
+  }, []);
+  const [sum, setSum] = React.useState({ busy: false, err: null, done: null, empty: false });
+  const [tagS, setTagS] = React.useState({ busy: false, err: null, list: null });
+  const [lnk, setLnk] = React.useState({ busy: false, err: null, list: null });
+
+  const genSummary = () => {
+    if (sum.busy) return;
+    if (!aiBodyText(star).trim()) { setSum({ busy: false, err: null, done: null, empty: true }); return; }
+    setSum({ busy: true, err: null, done: null, empty: false });
+    aiSummarize(star).then(line => {
+      if (!line) { setSum({ busy: false, err: '没有得到可用的摘要，请重试', done: null, empty: false }); return; }
+      star.summary = line;
+      D.touchNote(star.id);
+      setSum({ busy: false, err: null, done: line, empty: false });
+      if (onSummaryDone) onSummaryDone(line);
+    }).catch(e => setSum({ busy: false, err: (e && e.message) || '生成失败，请重试', done: null, empty: false }));
+  };
+
+  const genTags = () => {
+    if (tagS.busy) return;
+    setTagS({ busy: true, err: null, list: null });
+    AI.chatJSON([{
+      role: 'user',
+      content: '根据标题与正文，为这篇笔记推荐 3~5 个中文短标签（每个不超过 6 个字），只返回 JSON 字符串数组，例如 ["量子力学","入门"]。\n\n标题：' + (star.label || '无标题') + '\n正文：\n' + aiBodyText(star).slice(0, 2000),
+    }], { system: '你是标签推荐助手，只输出 JSON 数组，不解释。', maxTokens: 200, temperature: 0.4 })
+      .then(arr => {
+        const list = (Array.isArray(arr) ? arr : [])
+          .map(t => String(t == null ? '' : t).trim().replace(/^#/, ''))
+          .filter(t => t && t.length <= 6)
+          .filter((t, i, a) => a.indexOf(t) === i)
+          .slice(0, 5);
+        setTagS({ busy: false, err: null, list });
+      }).catch(e => setTagS({ busy: false, err: (e && e.message) || '推荐失败，请重试', list: null }));
+  };
+
+  const genLinks = () => {
+    if (lnk.busy) return;
+    const linked = new Set(connected.map(c => c.star.id));
+    // 候选：至多 40 颗未连接的其他星（id + 星名 + 摘要截 60 字）
+    const cands = D.stars.filter(s => s.id !== star.id && !linked.has(s.id)).slice(0, 40);
+    if (!cands.length) { setLnk({ busy: false, err: null, list: [] }); return; }
+    setLnk({ busy: true, err: null, list: null });
+    const brief = cands.map(s => ({ id: s.id, label: s.label, summary: String(s.summary || '').slice(0, 60) }));
+    AI.chatJSON([{
+      role: 'user',
+      content: '当前笔记：' + JSON.stringify({ label: star.label, summary: String(star.summary || '').slice(0, 120) })
+        + '\n候选笔记列表：' + JSON.stringify(brief)
+        + '\n\n从候选里挑出最值得与当前笔记建立连接的至多 3 篇，只返回 JSON 数组，元素形如 {"id":"候选的 id","rel":"一句中文关系描述，不超过 20 字"}；没有合适的就返回 []。',
+    }], { system: '你是知识连接助手，只输出 JSON 数组，不解释。', maxTokens: 300, temperature: 0.4 })
+      .then(arr => {
+        const byId = {};
+        cands.forEach(s => { byId[s.id] = s; });
+        const list = (Array.isArray(arr) ? arr : [])
+          .map(it => (it && byId[it.id]) ? { star: byId[it.id], rel: String(it.rel || '').trim().slice(0, 20) || '相关概念' } : null)
+          .filter(Boolean)
+          .filter((it, i, a) => a.findIndex(x => x.star.id === it.star.id) === i)
+          .slice(0, 3);
+        setLnk({ busy: false, err: null, list });
+      }).catch(e => setLnk({ busy: false, err: (e && e.message) || '获取建议失败，请重试', list: null }));
+  };
+
+  // 结果区就地过滤：已加的标签 / 已连上的星不再出现在建议里
+  const tagList = tagS.list ? tagS.list.filter(t => !tags.includes(t)) : null;
+  const lnkList = lnk.list ? lnk.list.filter(it => !connected.some(c => c.star.id === it.star.id)) : null;
+
+  const note = (msg, danger) => (
+    <div style={{ marginTop: 6, fontSize: 11.5, color: danger ? 'var(--danger)' : 'var(--text-3)', lineHeight: 1.6 }}>{msg}</div>
+  );
+  // 能力入口按钮：与右栏「新建连接」同一虚线语言；生成期间转等待态
+  const entryBtn = (icon, label, busy, onClick) => (
+    <button type="button" className="sr-focus-ring" disabled={busy} onClick={onClick}
+      style={{ display: 'flex', alignItems: 'center', gap: 7, width: '100%', font: 'inherit', textAlign: 'left', padding: '9px 12px', borderRadius: 'var(--r-md)', border: '1px dashed var(--line-strong)', background: 'transparent', color: busy ? 'var(--text-3)' : 'var(--text-2)', fontSize: 12.5, cursor: busy ? 'wait' : 'pointer' }}>
+      <span aria-hidden="true" className={busy ? 'sr-ed-spin' : ''} style={{ display: 'inline-flex', animation: busy ? 'sr-ed-spin 1.2s linear infinite' : 'none' }}>
+        <Icon name={busy ? 'loader' : icon} size={14} color="currentColor" />
+      </span>
+      {busy ? label + '…' : label}
+    </button>
+  );
+
+  return (
+    <section>
+      <RailHead icon="sparkles" title="AI 助手" />
+      {!ai.ok ? (
+        <div style={{ marginTop: 10, fontSize: 12, color: 'var(--text-3)', lineHeight: 1.7 }}>在 AI 配置中接入服务商后可用。</div>
+      ) : !(ai.cfg.autoSummary || ai.cfg.tagSuggest || ai.cfg.linkSuggest) ? (
+        <div style={{ marginTop: 10, fontSize: 12, color: 'var(--text-3)', lineHeight: 1.7 }}>三项助手能力都关着 · 可在 AI 配置中开启。</div>
+      ) : (
+        <div style={{ marginTop: 10, display: 'flex', flexDirection: 'column', gap: 12 }}>
+          {ai.cfg.autoSummary && (
+            <div>
+              {entryBtn('sparkles', sum.busy ? '正在生成摘要' : '生成摘要', sum.busy, genSummary)}
+              {sum.done != null && note('已写入摘要：' + sum.done)}
+              {sum.empty && note('正文还没有内容，先写点什么再来生成。')}
+              {sum.err && note(sum.err, true)}
+            </div>
+          )}
+          {ai.cfg.tagSuggest && (
+            <div>
+              {entryBtn('hash', tagS.busy ? '正在推荐标签' : '标签推荐', tagS.busy, genTags)}
+              {tagList && (tagList.length ? (
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 8 }}>
+                  {tagList.map(t => (
+                    <button type="button" key={t} className="sr-focus-ring" title={'添加标签「' + t + '」'} onClick={() => onAddTag(t)}
+                      style={{ display: 'inline-flex', alignItems: 'center', gap: 4, height: 24, padding: '0 10px', borderRadius: 'var(--r-pill)', border: '1px dashed rgba(159,198,255,0.45)', background: 'rgba(159,198,255,0.07)', color: 'var(--star-blue)', fontSize: 12, cursor: 'pointer', fontFamily: 'var(--font-sans)' }}>
+                      <Icon name="plus" size={11} color="currentColor" />{t}
+                    </button>
+                  ))}
+                </div>
+              ) : note('没有新的标签可推荐。'))}
+              {tagS.err && note(tagS.err, true)}
+            </div>
+          )}
+          {ai.cfg.linkSuggest && (
+            <div>
+              {entryBtn('waypoints', lnk.busy ? '正在寻找可连接的星' : '连接建议', lnk.busy, genLinks)}
+              {lnkList && (lnkList.length ? (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 8 }}>
+                  {lnkList.map(it => (
+                    <div key={it.star.id} style={{ padding: '9px 11px', borderRadius: 'var(--r-md)', background: 'rgba(159,198,255,0.04)', border: '1px solid var(--glass-border)' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
+                        <span style={{ width: 7, height: 7, borderRadius: '50%', flex: 'none', background: D.conColor(it.star.con), boxShadow: `0 0 6px ${D.conColor(it.star.con)}` }} />
+                        <span style={{ fontSize: 13, color: 'var(--text-1)', minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{it.star.label}</span>
+                        <button type="button" className="sr-focus-ring" onClick={() => onAddConnection(it.star, it.rel)}
+                          style={{ marginLeft: 'auto', flex: 'none', height: 24, padding: '0 11px', borderRadius: 'var(--r-pill)', border: '1px solid var(--glass-border-strong)', background: 'rgba(159,198,255,0.14)', color: 'var(--text-1)', fontSize: 11.5, cursor: 'pointer', fontFamily: 'var(--font-sans)' }}>连上</button>
+                      </div>
+                      <div style={{ fontSize: 11.5, color: 'var(--text-3)', lineHeight: 1.5, marginTop: 4, paddingLeft: 14 }}>{it.rel}</div>
+                    </div>
+                  ))}
+                </div>
+              ) : note('没有找到值得连接的星。'))}
+              {lnk.err && note(lnk.err, true)}
+            </div>
+          )}
+        </div>
+      )}
+    </section>
+  );
+}
+
 function Editor({ starId, onBack, onOpen, onExplore }) {
   const D = window.SR_DATA;
   const star = D.byId[starId] || D.stars[0];
@@ -846,6 +1020,22 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
     if (mountedRef.current) D.touchNote(star.id); else mountedRef.current = true;
   }, [blocks]);
   React.useEffect(() => () => persistBody(), []);
+  // 「自动摘要」的自动含义：开关开启、AI 已配置、这颗星还没有摘要、正文有实质内容时，
+  // 关闭编辑器（卸载 / 切换星）后台静默生成一次并写入；失败静默放弃，不打扰。
+  // 声明在 persistBody 的卸载 effect 之后——cleanup 按声明顺序执行，此时 star.body 已同步。
+  React.useEffect(() => () => {
+    try {
+      const AI = window.SRAI;
+      if (!AI || !AI.isConfigured() || !AI.active().autoSummary) return;
+      if (String(star.summary || '').trim() || aiAutoTried.has(star.id)) return;
+      if (aiBodyText(star).replace(/\s+/g, '').length < 30) return;
+      aiAutoTried.add(star.id);
+      aiSummarize(star).then(line => {
+        // 生成期间用户可能已回来手写了摘要——只在仍为空时写入
+        if (line && !String(star.summary || '').trim()) { star.summary = line; D.touchNote(star.id); }
+      }).catch(() => { });
+    } catch (e) { }
+  }, []);
   // 关标签页 / 切到后台：强制把编辑器 DOM flush 进 star.body，再交给 api.js 的
   // beforeunload beacon —— 否则最后一次 keystroke 后 350ms 内关闭会丢尾部输入。
   React.useEffect(() => {
@@ -1949,6 +2139,11 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
               )}
             </div>
           </section>
+          {/* AI 助手：能力入口按 AI 配置的三个开关渲染；加标签 / 建连接复用上面既有的数据路径 */}
+          <AIAssist star={star} tags={tags} connected={connected}
+            onAddTag={(t) => { if (!t || tags.includes(t)) return; setTags(ts => { if (ts.includes(t)) return ts; const nt = [...ts, t]; syncTags(nt); return nt; }); flash('已添加标签「' + t + '」'); }}
+            onAddConnection={(s, rel) => { addConnection(s, rel); D.persist(); }}
+            onSummaryDone={() => { bumpTick(); flash('已生成摘要'); }} />
           <section>
             <RailHead icon="corner-down-left" title="反向链接" extra={backlinks.length} />
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 10 }}>

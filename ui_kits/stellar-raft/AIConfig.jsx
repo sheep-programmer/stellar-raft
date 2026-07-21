@@ -36,37 +36,15 @@ const PROVIDERS = [
 ];
 
 const REVIEW_STRATEGIES = [
-  { id: 'cooling', label: '随星变暗', desc: '记忆温度下降到阈值时提醒，贴合遗忘曲线' },
-  { id: 'sm2',     label: '间隔重复', desc: '按 1·3·7·15 天的经典间隔安排复习' },
-  { id: 'daily',   label: '每日固定', desc: '每天傍晚汇总今日待回顾的星' },
-  { id: 'off',     label: '不提醒',   desc: '只在你主动进入复习时才唤醒 AI' },
+  { id: 'cooling', label: '随星变暗', desc: '记忆温度衰减到阈值的那一刻到期，贴合遗忘曲线' },
+  { id: 'sm2',     label: '间隔重复', desc: '按 1·3·7·15·30…天的经典间隔阶梯安排到期' },
+  { id: 'daily',   label: '每日固定', desc: '每颗星每天到期一次，傍晚汇总今日待回顾' },
+  { id: 'off',     label: '不提醒',   desc: '到期照常计算，但不再推送复习通知' },
 ];
 
-// ——— 配置持久化（仅存本机浏览器）———
-const CFG_KEY = 'sr.aiConfig';
-const CFG_DEFAULTS = {
-  provider: 'openai',
-  providers: {
-    openai:    { baseUrl: 'https://api.openai.com/v1',    key: '', model: 'gpt-5.1' },
-    anthropic: { baseUrl: 'https://api.anthropic.com/v1', key: '', model: 'claude-sonnet-5' },
-    custom:    { baseUrl: '', key: '', model: '' },
-  },
-  persona: 45, strictness: 60, strategy: 'cooling',
-  autoSummary: true, linkSuggest: true, tagSuggest: false,
-};
-function loadCfg() {
-  try {
-    const saved = JSON.parse(localStorage.getItem(CFG_KEY));
-    if (!saved) return { ...CFG_DEFAULTS };
-    return {
-      ...CFG_DEFAULTS, ...saved,
-      providers: Object.fromEntries(Object.keys(CFG_DEFAULTS.providers).map(k =>
-        [k, { ...CFG_DEFAULTS.providers[k], ...(saved.providers && saved.providers[k]) }]
-      )),
-    };
-  } catch { return { ...CFG_DEFAULTS }; }
-}
-function saveCfg(cfg) { try { localStorage.setItem(CFG_KEY, JSON.stringify(cfg)); } catch {} }
+// ——— 配置持久化：唯一读写入口在 SRAI（ai.js），费曼学生 / 编辑器助手 / 复习策略共用同一份 ———
+function loadCfg() { return window.SRAI.getConfig(); }
+function saveCfg(cfg) { window.SRAI.setConfig(cfg); }
 
 // ——— 受控开关 ———
 function Toggle({ on, onChange, label }) {
@@ -452,7 +430,7 @@ function AIConfig({ onClose }) {
 
             <Divider />
 
-            <Section icon="alarm-clock" title="复习提醒策略" hint="星会随记忆温度变暗。选择 AI 在何时把正在变暗的星重新带回你眼前。">
+            <Section icon="alarm-clock" title="复习提醒策略" hint="决定每颗星「何时算到期」：体检、复习队列与到期角标都按此计算。提醒送达的时刻与频率在 设置 → 复习提醒 里调整；选择「不提醒」则不再推送任何复习通知。">
               <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                 {REVIEW_STRATEGIES.map(s => {
                   const on = s.id === cfg.strategy;

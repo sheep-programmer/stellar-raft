@@ -4,8 +4,10 @@
    · 未点亮 → 点亮（金色时刻：IgniteBurst + 金 toast）
    · 待重燃 → 重燃（快速通道：门槛减半，同一金色时刻，toast「重燃 · 星光归位」）
    · 已点亮 → 巩固（按「记得」lit 档计，无爆发、蓝 toast——金色只属于状态跃迁）
-   「还没讲透」= 一次失败复习；对已点亮星模型会当场熄灭（extinguished），这里出冷色反馈。 */
-const { IconButton, Icon, Button, MemoryBar, Tag, Input } = window.StellarRaftDesignSystem_2866af;
+   「还没讲透」= 一次失败复习；对已点亮星模型会当场熄灭（extinguished），这里出冷色反馈。
+   学生双轨：接入 AI 服务（SRAI.isConfigured）时走真实对话追问，失败静默回退本地规则；
+   未接入时全程本地规则。无论哪轨，点亮门槛都只认 feyReady 的本地判据。 */
+const { IconButton, Icon, Button, MemoryBar, Tag, Input, Badge } = window.StellarRaftDesignSystem_2866af;
 
 function IgniteBurst() {
   // particle ring + flash, 1.3s
@@ -95,6 +97,35 @@ function studentText({ mode, targets, after, newly, round, tooShort, ready }) {
   return ack + q;
 }
 
+/* 真实 AI 学生的 system 提示：星的资料（星名 / 别名 / 摘要 / 要点 / 正文纯文本节选）
+   + 配置面板里的性格与较真度 + 说话规矩。资料整体截断在约 1500 字内，长文不噎模型。
+   注意：这里只塑造「学生说什么」——点亮门槛始终由 feyReady 的本地判据决定。 */
+function studentSystem(star, targets) {
+  const S = window.SRAI;
+  const a = S.active();
+  const bodyText = (star.body || [])
+    .filter((b) => ['p', 'bulleted', 'numbered', 'callout', 'h2', 'h3', 'quote', 'todo', 'toggle'].includes(b.type) && b.text)
+    .map((b) => String(b.text)).join('\n');
+  let brief = [
+    `星名：${star.label}`,
+    star.props && star.props.alias ? `别名：${star.props.alias}` : '',
+    star.summary ? `摘要：${star.summary}` : '',
+    targets.length ? `要点：${targets.join('、')}` : '',
+    bodyText ? `正文节选：\n${bodyText}` : '',
+  ].filter(Boolean).join('\n');
+  if (brief.length > 1500) brief = brief.slice(0, 1500) + '…';
+  return [
+    '你是一名学生，正在听用户用费曼学习法讲解一颗「知识星」。下面是这颗星的资料，仅供你判断对方讲得对不对、清不清楚——不要替对方讲解：',
+    brief,
+    `你的性格是「${S.personaWord(a.persona)}」，较真程度「${S.strictWord(a.strictness)}」。`,
+    '要求：',
+    '- 只用中文回复，口语化，每次 2～4 句；',
+    '- 始终以学生视角回应：对方讲得清楚，就确认你听懂了，并往更深一层追问一个问题；讲得含糊，就具体指出哪里没听懂；',
+    '- 较真程度越高，追问越刨根问底；',
+    '- 不要长篇大论，不要替用户讲解，不要用列表或标题格式。',
+  ].join('\n');
+}
+
 function FeynmanDrawer({ starId, onClose }) {
   const D = window.SR_DATA;
   const star = D.byId[starId] || D.stars[0];
@@ -131,9 +162,22 @@ function FeynmanDrawer({ starId, onClose }) {
       : `用最简单的话告诉我：${star.label} 到底在解决什么问题？`,
   }]));
 
+  // AI 学生接入态：已配置走真实对话，未配置走本地规则；配置面板保存时经 'sr-ai-config' 即时切换
+  const readAI = () => {
+    const S = window.SRAI;
+    return S && S.isConfigured() ? { on: true, model: S.active().model } : { on: false, model: '' };
+  };
+  const [aiMode, setAiMode] = React.useState(readAI);
+  React.useEffect(() => {
+    const h = () => setAiMode(readAI());
+    window.addEventListener('sr-ai-config', h);
+    return () => window.removeEventListener('sr-ai-config', h);
+  }, []);
+
   const scrollRef = React.useRef(null);
   const timers = React.useRef([]);
-  React.useEffect(() => () => timers.current.forEach(clearTimeout), []);
+  const alive = React.useRef(true); // 抽屉关闭后，迟到的 AI 回复不再落 setState
+  React.useEffect(() => () => { alive.current = false; timers.current.forEach(clearTimeout); }, []);
 
   // 抽屉即模态：移焦入内、Tab 圈禁、关闭还原焦点；Esc 关闭（全站一致）
   const drawerRef = React.useRef(null);
@@ -158,19 +202,35 @@ function FeynmanDrawer({ starId, onClose }) {
     const nextChars = effChars + (tooShort ? 0 : clean.length);
     const nextRounds = effRounds + (tooShort ? 0 : 1);
     const ready = canIgnite || feyReady(mode, nextChars, nextRounds, after.size, targets.length);
+    // 真实 AI 要带的对话历史，在追加本轮之前定格：用户讲解=user，学生回复=assistant。
+    // 只带最近 10 条；开场白是学生说的，接口要求首条必须是 user，故掐掉打头的 assistant。
+    const history = messages.map((m) => ({ role: m.who === 'me' ? 'user' : 'assistant', content: m.text })).slice(-10);
+    while (history.length && history[0].role !== 'user') history.shift();
     setMessages((m) => [...m, { who: 'me', text: txt }]);
     setInput('');
     setRound(r);
     setEffChars(nextChars);
     setEffRounds(nextRounds);
     setThinking(true);
-    const t = setTimeout(() => {
+    // 学生回复落地（真实 AI 文本或本地规则文本；note 是回退时附在气泡下的失败原因小字）
+    const land = (text, note) => {
+      if (!alive.current) return;
       setCovered(after);
       setThinking(false);
-      setMessages((m) => [...m, { who: 'ai', name: 'AI 学生', text: studentText({ mode, targets, after, newly, round: r, tooShort, ready }) }]);
+      setMessages((m) => [...m, { who: 'ai', name: 'AI 学生', text, note }]);
       if (ready) setCanIgnite(true);
-    }, 720 + Math.random() * 420);
-    timers.current.push(t);
+    };
+    const fallback = (note) => land(studentText({ mode, targets, after, newly, round: r, tooShort, ready }), note);
+    if (aiMode.on && window.SRAI && window.SRAI.isConfigured()) {
+      // 真实 AI 学生：失败 / 超时静默回退本地规则，不打断讲解流程——
+      // 点亮门槛（feyReady）始终是上面的本地判据，AI 只决定学生怎么说话
+      window.SRAI.chat([...history, { role: 'user', content: txt }], {
+        system: studentSystem(star, targets), maxTokens: 300, temperature: 0.8, timeout: 20000,
+      }).then((reply) => land(reply))
+        .catch((err) => fallback(`AI 学生暂时联系不上，已换本地回复 · ${(err && err.message) || 'AI 服务暂不可用'}`));
+    } else {
+      timers.current.push(setTimeout(() => fallback(), 720 + Math.random() * 420));
+    }
   };
 
   // 点亮 / 重燃 = 状态跃迁：S×(2.5+(1−R)·0.6) 封顶 365、R 回满、lit=now——
@@ -273,6 +333,12 @@ function FeynmanDrawer({ starId, onClose }) {
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '18px 20px 12px' }}>
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 12, letterSpacing: '0.06em', color: 'var(--text-3)', textTransform: 'uppercase', fontFamily: 'var(--font-mono)' }}>
             <Icon name="brain" size={16} color="var(--gold)" />费曼内化
+            {/* 学生模式徽章：接入真实 AI 时亮金并标出模型；未接入提示去 AI 配置开通 */}
+            {aiMode.on ? (
+              <Badge tone="gold" style={{ textTransform: 'none' }} title={`已接入真实 AI 学生 · ${aiMode.model}`}>AI 学生 · {aiMode.model}</Badge>
+            ) : (
+              <Badge tone="neutral" style={{ textTransform: 'none' }} title="在 AI 配置中接入服务商可获得真实 AI 追问">本地学生</Badge>
+            )}
           </span>
           <IconButton name="x" title="关闭" onClick={onClose} />
         </div>
@@ -338,7 +404,7 @@ function FeynmanDrawer({ starId, onClose }) {
           {/* AI student chat — 真实多轮滚动 */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
             {messages.map((m, i) => (
-              <Bubble key={i} who={m.who} name={m.name}>{m.text}</Bubble>
+              <Bubble key={i} who={m.who} name={m.name} note={m.note}>{m.text}</Bubble>
             ))}
             {thinking && <TypingBubble />}
           </div>
@@ -425,7 +491,7 @@ function TypingBubble() {
   );
 }
 
-function Bubble({ who, name, children }) {
+function Bubble({ who, name, note, children }) {
   const ai = who === 'ai';
   return (
     <div style={{ alignSelf: ai ? 'flex-start' : 'flex-end', maxWidth: '88%', animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
@@ -434,6 +500,8 @@ function Bubble({ who, name, children }) {
         background: ai ? 'rgba(159,198,255,0.08)' : 'rgba(255,217,138,0.10)',
         border: '1px solid', borderColor: ai ? 'var(--glass-border)' : 'rgba(255,217,138,0.24)',
         color: ai ? 'var(--text-2)' : 'var(--text-1)' }}>{children}</div>
+      {/* 回退注脚：AI 请求失败时的原因一行小字，不打断流程 */}
+      {note && <div style={{ fontSize: 11, color: 'var(--text-3)', marginTop: 4, marginLeft: 2 }}>{note}</div>}
     </div>
   );
 }
