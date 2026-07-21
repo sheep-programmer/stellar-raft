@@ -525,7 +525,7 @@ function ReviewPicker({ label, iso, onPick }) {
   return (
     <>
       <button ref={btnRef} type="button" className="sr-focus-ring" onClick={openPop}
-        title="选择日期，把这颗星排入那天的复习（星自然变暗到期不会被推迟）"
+        title="选择日期，把这颗星的下次复习定在那天（星的亮度仍随时间自然变暗）"
         style={{ display: 'inline-flex', alignItems: 'center', gap: 7, font: 'inherit', fontSize: 13, color: 'var(--text-1)', border: 'none', background: 'transparent', cursor: 'pointer', padding: '0 2px' }}>
         {label}
         <Icon name="calendar-days" size={13} color="var(--text-3)" />
@@ -2354,7 +2354,7 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
               D.pushTimeline('review', star.id, '排期复习 · ' + iso.slice(5).replace('-', '/'));
               D.touchNote(star.id);
               bumpTick();
-              flash('下次复习已排到 ' + iso.replace(/-/g, '/') + ' · 若星更早变暗会提前');
+              flash('下次复习已排到 ' + iso.replace(/-/g, '/'));
             }} />
 
           {/* blocks */}

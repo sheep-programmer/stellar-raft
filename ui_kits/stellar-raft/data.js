@@ -279,12 +279,14 @@ window.SR_DATA = (function () {
   };
   const dueTsOf = (s) => {
     ensureMemory(s);
+    // 手动指定的复习时刻（sr.due）是权威预约：提前或推迟都算数——星的亮度照样
+    // 按遗忘曲线变暗（那是另一条轴），但复习队列尊重用户亲手定的日子。
+    // 复习完成（成功/模糊/失败）都会清掉 due，之后回到策略的自然口径。
+    if (s.sr.due) return s.sr.due;
     const strat = strategyNow();
-    let natural;
-    if (strat === 'sm2') natural = s.sr.last + (SM2_LADDER.find(v => v <= s.sr.S) || 1) * DAY;
-    else if (strat === 'daily') natural = s.sr.last + DAY;
-    else natural = s.sr.last + s.sr.S * Math.log(1 / MEM.dueR) * DAY;
-    return s.sr.due ? Math.min(s.sr.due, natural) : natural;
+    if (strat === 'sm2') return s.sr.last + (SM2_LADDER.find(v => v <= s.sr.S) || 1) * DAY;
+    if (strat === 'daily') return s.sr.last + DAY;
+    return s.sr.last + s.sr.S * Math.log(1 / MEM.dueR) * DAY;
   };
   const reviewLabel = (due, now) => {
     const diff = due - now;

@@ -130,3 +130,14 @@ test('连续观星：pushTimeline 当场续上；空时间线为 0', () => {
   D.pushTimeline('review', 'st3', '测试');
   assert.equal(D.account.streak, 1);
 });
+
+test('手动排期是权威预约：推迟也算数；复习完成后清预约回自然口径', () => {
+  const D = fresh(null);
+  const s = makeStar(D, 'ap1', { S: 2.5 });          // 自然到期约 1.3 天（明天）
+  const target = Date.now() + 9 * DAY;
+  s.sr.due = target;
+  assert.equal(D.dueTsOf(s), target, '选到 9 天后就该是 9 天后，不被自然到期拉回明天');
+  assert.ok(!D.dueStars().includes(s), '预约未到，不进到期队列');
+  D.reviewSuccess('ap1');
+  assert.equal(s.sr.due, 0, '复习完成清掉预约');
+});
