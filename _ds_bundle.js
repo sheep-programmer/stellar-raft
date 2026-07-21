@@ -1,4 +1,4 @@
-/* @ds-bundle: {"format":3,"namespace":"StellarRaftDesignSystem_2866af","components":[{"name":"Badge","sourcePath":"components/core/Badge.jsx"},{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"GlassPanel","sourcePath":"components/core/GlassPanel.jsx"},{"name":"Icon","sourcePath":"components/core/Icon.jsx"},{"name":"IconButton","sourcePath":"components/core/IconButton.jsx"},{"name":"Input","sourcePath":"components/core/Input.jsx"},{"name":"Tag","sourcePath":"components/core/Tag.jsx"},{"name":"Checkbox","sourcePath":"components/form/Checkbox.jsx"},{"name":"Select","sourcePath":"components/form/Select.jsx"},{"name":"Switch","sourcePath":"components/form/Switch.jsx"},{"name":"Tabs","sourcePath":"components/form/Tabs.jsx"},{"name":"ConstellationItem","sourcePath":"components/knowledge/ConstellationItem.jsx"},{"name":"MemoryBar","sourcePath":"components/knowledge/MemoryBar.jsx"},{"name":"StarNode","sourcePath":"components/knowledge/StarNode.jsx"},{"name":"ContextMenu","sourcePath":"components/overlay/ContextMenu.jsx"},{"name":"Modal","sourcePath":"components/overlay/Modal.jsx"},{"name":"Toast","sourcePath":"components/overlay/Toast.jsx"},{"name":"Tooltip","sourcePath":"components/overlay/Tooltip.jsx"}],"sourceHashes":{"assets/starfield.js":"d776d2b45dc4","components/core/Badge.jsx":"b0bd9735d638","components/core/Button.jsx":"a1c387a07e86","components/core/GlassPanel.jsx":"299a19d8fbb4","components/core/Icon.jsx":"7505f83ab03d","components/core/IconButton.jsx":"24052f4eed78","components/core/Input.jsx":"54a6c9af7e3f","components/core/Tag.jsx":"d8513c07ea96","components/form/Checkbox.jsx":"38aa593157dd","components/form/Select.jsx":"86b8c1c71e12","components/form/Switch.jsx":"938c62be0664","components/form/Tabs.jsx":"ede2dbff1963","components/knowledge/ConstellationItem.jsx":"d73e999469b6","components/knowledge/MemoryBar.jsx":"a54c928d5065","components/knowledge/StarNode.jsx":"1bedee49f0bf","components/overlay/ContextMenu.jsx":"11783420e876","components/overlay/Modal.jsx":"0906de457544","components/overlay/Toast.jsx":"d22ad40680a6","components/overlay/Tooltip.jsx":"a042caa8970d","ui_kits/stellar-raft/AIConfig.jsx":"bbc66d05eebf","ui_kits/stellar-raft/AerialView.jsx":"8209eb6af395","ui_kits/stellar-raft/BlackHole.jsx":"2704c4a4e50c","ui_kits/stellar-raft/Checkup.jsx":"b7cbf7f0bbf9","ui_kits/stellar-raft/CommandPalette.jsx":"3f1a9cdd2383","ui_kits/stellar-raft/Editor.jsx":"2b09b768f90a","ui_kits/stellar-raft/EditorMenus.jsx":"fb80581f6bcc","ui_kits/stellar-raft/FeynmanDrawer.jsx":"6af036e0a904","ui_kits/stellar-raft/Galaxy3D.jsx":"2ce87e7da57d","ui_kits/stellar-raft/Inbox.jsx":"c2fc04361d44","ui_kits/stellar-raft/KeysHelp.jsx":"f4fc061886ee","ui_kits/stellar-raft/ListView.jsx":"e2550f598c82","ui_kits/stellar-raft/LoginView.jsx":"18d9c842c5c6","ui_kits/stellar-raft/Onboarding.jsx":"e1d27a7d28a7","ui_kits/stellar-raft/ReviewSession.jsx":"9092a3d9412c","ui_kits/stellar-raft/Settings.jsx":"947a5dc76b3a","ui_kits/stellar-raft/Sidebar.jsx":"f61a222b9d49","ui_kits/stellar-raft/StarMap.jsx":"3f1c09e9e50e","ui_kits/stellar-raft/Timeline.jsx":"cda4e62fa57b","ui_kits/stellar-raft/VisitView.jsx":"19ff8ab7dbb7","ui_kits/stellar-raft/ai.js":"2f79eb3473c9","ui_kits/stellar-raft/app.jsx":"2c557164c1c2","ui_kits/stellar-raft/codehl.js":"6fbdd0100deb","ui_kits/stellar-raft/data.js":"7c4d0fe5482e","ui_kits/stellar-raft/mdcore.js":"b82d5054c3b6","ui_kits/stellar-raft/sanitize.js":"88e63cd63253","ui_kits/stellar-raft/transition.js":"3725d8982dc5","ui_kits/stellar-raft/undocore.js":"7f8c94da35f9","ui_kits/stellar-raft/vault.js":"bfb5fdd87949"},"inlinedExternals":[],"unexposedExports":[{"name":"memoryColor","sourcePath":"components/knowledge/MemoryBar.jsx"}],"exposedHelpers":[{"name":"toast","sourcePath":"components/overlay/Toast.jsx"}]} */
+/* @ds-bundle: {"format":3,"namespace":"StellarRaftDesignSystem_2866af","components":[{"name":"Badge","sourcePath":"components/core/Badge.jsx"},{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"GlassPanel","sourcePath":"components/core/GlassPanel.jsx"},{"name":"Icon","sourcePath":"components/core/Icon.jsx"},{"name":"IconButton","sourcePath":"components/core/IconButton.jsx"},{"name":"Input","sourcePath":"components/core/Input.jsx"},{"name":"Tag","sourcePath":"components/core/Tag.jsx"},{"name":"Checkbox","sourcePath":"components/form/Checkbox.jsx"},{"name":"Select","sourcePath":"components/form/Select.jsx"},{"name":"Switch","sourcePath":"components/form/Switch.jsx"},{"name":"Tabs","sourcePath":"components/form/Tabs.jsx"},{"name":"ConstellationItem","sourcePath":"components/knowledge/ConstellationItem.jsx"},{"name":"MemoryBar","sourcePath":"components/knowledge/MemoryBar.jsx"},{"name":"StarNode","sourcePath":"components/knowledge/StarNode.jsx"},{"name":"ContextMenu","sourcePath":"components/overlay/ContextMenu.jsx"},{"name":"Modal","sourcePath":"components/overlay/Modal.jsx"},{"name":"Toast","sourcePath":"components/overlay/Toast.jsx"},{"name":"Tooltip","sourcePath":"components/overlay/Tooltip.jsx"}],"sourceHashes":{"assets/starfield.js":"d776d2b45dc4","components/core/Badge.jsx":"b0bd9735d638","components/core/Button.jsx":"a1c387a07e86","components/core/GlassPanel.jsx":"299a19d8fbb4","components/core/Icon.jsx":"7505f83ab03d","components/core/IconButton.jsx":"24052f4eed78","components/core/Input.jsx":"54a6c9af7e3f","components/core/Tag.jsx":"d8513c07ea96","components/form/Checkbox.jsx":"38aa593157dd","components/form/Select.jsx":"86b8c1c71e12","components/form/Switch.jsx":"938c62be0664","components/form/Tabs.jsx":"ede2dbff1963","components/knowledge/ConstellationItem.jsx":"d73e999469b6","components/knowledge/MemoryBar.jsx":"a54c928d5065","components/knowledge/StarNode.jsx":"1bedee49f0bf","components/overlay/ContextMenu.jsx":"11783420e876","components/overlay/Modal.jsx":"0906de457544","components/overlay/Toast.jsx":"d22ad40680a6","components/overlay/Tooltip.jsx":"a042caa8970d","ui_kits/stellar-raft/AIConfig.jsx":"bbc66d05eebf","ui_kits/stellar-raft/AerialView.jsx":"8209eb6af395","ui_kits/stellar-raft/BlackHole.jsx":"2704c4a4e50c","ui_kits/stellar-raft/Checkup.jsx":"b7cbf7f0bbf9","ui_kits/stellar-raft/CommandPalette.jsx":"3f1a9cdd2383","ui_kits/stellar-raft/Editor.jsx":"2b09b768f90a","ui_kits/stellar-raft/EditorMenus.jsx":"fb80581f6bcc","ui_kits/stellar-raft/FeynmanDrawer.jsx":"eb200ab5fe46","ui_kits/stellar-raft/Galaxy3D.jsx":"2ce87e7da57d","ui_kits/stellar-raft/Inbox.jsx":"c2fc04361d44","ui_kits/stellar-raft/KeysHelp.jsx":"f4fc061886ee","ui_kits/stellar-raft/ListView.jsx":"e2550f598c82","ui_kits/stellar-raft/LoginView.jsx":"18d9c842c5c6","ui_kits/stellar-raft/Onboarding.jsx":"e1d27a7d28a7","ui_kits/stellar-raft/ReviewSession.jsx":"9092a3d9412c","ui_kits/stellar-raft/Settings.jsx":"947a5dc76b3a","ui_kits/stellar-raft/Sidebar.jsx":"f61a222b9d49","ui_kits/stellar-raft/StarMap.jsx":"3f1c09e9e50e","ui_kits/stellar-raft/Timeline.jsx":"cda4e62fa57b","ui_kits/stellar-raft/VisitView.jsx":"19ff8ab7dbb7","ui_kits/stellar-raft/ai.js":"2f79eb3473c9","ui_kits/stellar-raft/app.jsx":"2c557164c1c2","ui_kits/stellar-raft/codehl.js":"6fbdd0100deb","ui_kits/stellar-raft/data.js":"7c4d0fe5482e","ui_kits/stellar-raft/mdcore.js":"b82d5054c3b6","ui_kits/stellar-raft/sanitize.js":"88e63cd63253","ui_kits/stellar-raft/transition.js":"3725d8982dc5","ui_kits/stellar-raft/undocore.js":"7f8c94da35f9","ui_kits/stellar-raft/vault.js":"bfb5fdd87949"},"inlinedExternals":[],"unexposedExports":[{"name":"memoryColor","sourcePath":"components/knowledge/MemoryBar.jsx"}],"exposedHelpers":[{"name":"toast","sourcePath":"components/overlay/Toast.jsx"}]} */
 
 (() => {
 
@@ -14794,23 +14794,37 @@ const feyToast = (msg, opts) => {
   if (t) t(msg, opts);
 };
 
-// 从一颗星里提取干净、可被讲解命中的「要点关键词」：别名的拉丁词、正文文本里的拉丁术语、再加标签兜底。
-// 只取有文本意义的块（跳过 code，避免把 import/numpy 之类代码词当要点）。
+// 从一颗星里提取可被讲解命中的「要点」，中文西文一视同仁：
+// ① 别名词 ② 正文加粗片段（讲解者亲手强调的，最强信号）③ h2/h3 小节标题
+// ④ 文本里的拉丁术语 ⑤ 标签兜底。全部先剥 HTML 再提取——不再把 style/font
+// 之类标签残渣当要点；跳过 code 块；长要点截短保持 chip 可读。
+const feyStripHtml = h => String(h == null ? '' : h).replace(/<[^>]*>/g, ' ').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
 function deriveKeyPoints(star) {
   const out = [];
   const push = w => {
-    w = (w || '').trim();
-    if (w && !out.includes(w)) out.push(w);
+    w = feyStripHtml(w).replace(/\s+/g, ' ').trim();
+    if (!w) return;
+    if (w.length > 12) w = w.slice(0, 12);
+    if (!out.some(x => x.toLowerCase() === w.toLowerCase())) out.push(w);
   };
   if (star.props && star.props.alias) star.props.alias.split(/\s+/).forEach(push);
+  (star.body || []).forEach(b => {
+    if (!b || !b.text) return;
+    (String(b.text).match(/<b[^>]*>([\s\S]*?)<\/b>/gi) || []).forEach(push); // 加粗片段
+    if (b.type === 'h2' || b.type === 'h3') push(b.text); // 小节标题
+  });
   const texts = [star.summary];
   (star.body || []).forEach(b => {
     if (['bulleted', 'callout', 'h2', 'h3', 'quote', 'todo'].includes(b.type) && b.text) texts.push(b.text);
   });
-  texts.forEach(t => (String(t).match(/[A-Za-z][A-Za-z]{2,}/g) || []).forEach(push));
+  texts.forEach(t => (feyStripHtml(t).match(/[A-Za-z][A-Za-z]{2,}/g) || []).forEach(push));
   (star.tags || []).forEach(push);
   return out.slice(0, 5);
 }
+
+/* 讲解会话缓存（应用会话内存，按星）：误触遮罩 / Esc 关掉抽屉不再丢进度，
+   重开原样接续；点亮 / 巩固 / 「还没讲透」收尾后清除，下次从头开始。 */
+const FEY_SESSIONS = new Map();
 
 /* 复述门槛（显式判据，抽屉里就地自解释）：
    · 常规（点亮 / 巩固）：有效讲解累计 ≥ 60 字（被判「太短」的轮次不计）
@@ -14896,14 +14910,19 @@ function FeynmanDrawer({
   const [deferred, setDeferred] = React.useState(false); // 「还没讲透」：按失败记
   const [extinguished, setExtinguished] = React.useState(false); // 「还没讲透」把已点亮星讲灭了
 
+  // 有可恢复的半程会话（同一模式）就原样接续，进度与对话都不丢
+  const resume = React.useMemo(() => {
+    const s = FEY_SESSIONS.get(star.id);
+    return s && s.mode === mode && !gated ? s : null;
+  }, [star.id]);
   const [input, setInput] = React.useState('');
-  const [round, setRound] = React.useState(0);
-  const [effChars, setEffChars] = React.useState(0); // 有效讲解累计字数（「太短」轮次不计）
-  const [effRounds, setEffRounds] = React.useState(0); // 有效轮次
-  const [covered, setCovered] = React.useState(() => new Set());
+  const [round, setRound] = React.useState(() => resume ? resume.round : 0);
+  const [effChars, setEffChars] = React.useState(() => resume ? resume.effChars : 0); // 有效讲解累计字数（「太短」轮次不计）
+  const [effRounds, setEffRounds] = React.useState(() => resume ? resume.effRounds : 0); // 有效轮次
+  const [covered, setCovered] = React.useState(() => new Set(resume ? resume.covered : []));
   const [thinking, setThinking] = React.useState(false);
-  const [canIgnite, setCanIgnite] = React.useState(false);
-  const [messages, setMessages] = React.useState(() => gated ? [] : [{
+  const [canIgnite, setCanIgnite] = React.useState(() => resume ? resume.canIgnite : false);
+  const [messages, setMessages] = React.useState(() => gated ? [] : resume ? resume.messages : [{
     who: 'ai',
     name: 'AI 学生',
     text: mode === 'relight' ? '上次你把它讲得很清楚，现在它暗下来了。再帮我回忆一遍——它到底在解决什么问题？' : `用最简单的话告诉我：${star.label} 到底在解决什么问题？`
@@ -14933,6 +14952,23 @@ function FeynmanDrawer({
     alive.current = false;
     timers.current.forEach(clearTimeout);
   }, []);
+
+  // 卸载时定格会话：讲过至少一轮且未收尾 → 存起来供下次接续；收尾了就清掉
+  const sessRef = React.useRef(null);
+  sessRef.current = {
+    mode,
+    messages,
+    round,
+    effChars,
+    effRounds,
+    covered: [...covered],
+    canIgnite,
+    done: lit || consolidated || deferred
+  };
+  React.useEffect(() => () => {
+    const s = sessRef.current;
+    if (s && s.round > 0 && !s.done) FEY_SESSIONS.set(star.id, s);else FEY_SESSIONS.delete(star.id);
+  }, [star.id]);
 
   // 抽屉即模态：移焦入内、Tab 圈禁、关闭还原焦点；Esc 关闭（全站一致）
   const drawerRef = React.useRef(null);
@@ -15045,13 +15081,39 @@ function FeynmanDrawer({
         }
       }));
     }, 250));
-    timers.current.push(setTimeout(() => {
+    // 结语：接入真实 AI 时让学生按你的讲解真实总结一句（失败退回固定句）；本地学生走固定句
+    const closingLine = () => {
+      if (!alive.current) return;
       setMessages(m => [...m, {
         who: 'ai',
         name: 'AI 学生',
         text: '这颗星亮了。只要按时复习，它就不会熄灭。'
       }]);
-    }, 900));
+    };
+    if (aiMode.on && window.SRAI && window.SRAI.isConfigured()) {
+      const history = messages.map(m => ({
+        role: m.who === 'me' ? 'user' : 'assistant',
+        content: m.text
+      })).slice(-8);
+      while (history.length && history[0].role !== 'user') history.shift();
+      window.SRAI.chat([...history, {
+        role: 'user',
+        content: '我讲完了，这颗星已经点亮。'
+      }], {
+        system: studentSystem(star, targets) + '\n现在讲解已经完成、星已点亮。请用一两句话指出对方这次讲得最好的一点，并道一声祝贺。不要再提问。',
+        maxTokens: 120,
+        temperature: 0.8,
+        timeout: 9000
+      }).then(reply => {
+        if (alive.current) setMessages(m => [...m, {
+          who: 'ai',
+          name: 'AI 学生',
+          text: reply
+        }]);
+      }).catch(closingLine);
+    } else {
+      timers.current.push(setTimeout(closingLine, 900));
+    }
     timers.current.push(setTimeout(() => setIgniting(false), 2600));
   };
 

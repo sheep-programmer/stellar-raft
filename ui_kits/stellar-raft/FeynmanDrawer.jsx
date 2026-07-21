@@ -35,20 +35,38 @@ const feyToast = (msg, opts) => {
   if (t) t(msg, opts);
 };
 
-// 从一颗星里提取干净、可被讲解命中的「要点关键词」：别名的拉丁词、正文文本里的拉丁术语、再加标签兜底。
-// 只取有文本意义的块（跳过 code，避免把 import/numpy 之类代码词当要点）。
+// 从一颗星里提取可被讲解命中的「要点」，中文西文一视同仁：
+// ① 别名词 ② 正文加粗片段（讲解者亲手强调的，最强信号）③ h2/h3 小节标题
+// ④ 文本里的拉丁术语 ⑤ 标签兜底。全部先剥 HTML 再提取——不再把 style/font
+// 之类标签残渣当要点；跳过 code 块；长要点截短保持 chip 可读。
+const feyStripHtml = (h) => String(h == null ? '' : h).replace(/<[^>]*>/g, ' ')
+  .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
 function deriveKeyPoints(star) {
   const out = [];
-  const push = (w) => { w = (w || '').trim(); if (w && !out.includes(w)) out.push(w); };
+  const push = (w) => {
+    w = feyStripHtml(w).replace(/\s+/g, ' ').trim();
+    if (!w) return;
+    if (w.length > 12) w = w.slice(0, 12);
+    if (!out.some((x) => x.toLowerCase() === w.toLowerCase())) out.push(w);
+  };
   if (star.props && star.props.alias) star.props.alias.split(/\s+/).forEach(push);
+  (star.body || []).forEach((b) => {
+    if (!b || !b.text) return;
+    (String(b.text).match(/<b[^>]*>([\s\S]*?)<\/b>/gi) || []).forEach(push);   // 加粗片段
+    if (b.type === 'h2' || b.type === 'h3') push(b.text);                      // 小节标题
+  });
   const texts = [star.summary];
   (star.body || []).forEach((b) => {
     if (['bulleted', 'callout', 'h2', 'h3', 'quote', 'todo'].includes(b.type) && b.text) texts.push(b.text);
   });
-  texts.forEach((t) => (String(t).match(/[A-Za-z][A-Za-z]{2,}/g) || []).forEach(push));
+  texts.forEach((t) => (feyStripHtml(t).match(/[A-Za-z][A-Za-z]{2,}/g) || []).forEach(push));
   (star.tags || []).forEach(push);
   return out.slice(0, 5);
 }
+
+/* 讲解会话缓存（应用会话内存，按星）：误触遮罩 / Esc 关掉抽屉不再丢进度，
+   重开原样接续；点亮 / 巩固 / 「还没讲透」收尾后清除，下次从头开始。 */
+const FEY_SESSIONS = new Map();
 
 /* 复述门槛（显式判据，抽屉里就地自解释）：
    · 常规（点亮 / 巩固）：有效讲解累计 ≥ 60 字（被判「太短」的轮次不计）
@@ -148,19 +166,24 @@ function FeynmanDrawer({ starId, onClose }) {
   const [deferred, setDeferred] = React.useState(false);          // 「还没讲透」：按失败记
   const [extinguished, setExtinguished] = React.useState(false);  // 「还没讲透」把已点亮星讲灭了
 
+  // 有可恢复的半程会话（同一模式）就原样接续，进度与对话都不丢
+  const resume = React.useMemo(() => {
+    const s = FEY_SESSIONS.get(star.id);
+    return s && s.mode === mode && !gated ? s : null;
+  }, [star.id]);
   const [input, setInput] = React.useState('');
-  const [round, setRound] = React.useState(0);
-  const [effChars, setEffChars] = React.useState(0);   // 有效讲解累计字数（「太短」轮次不计）
-  const [effRounds, setEffRounds] = React.useState(0); // 有效轮次
-  const [covered, setCovered] = React.useState(() => new Set());
+  const [round, setRound] = React.useState(() => (resume ? resume.round : 0));
+  const [effChars, setEffChars] = React.useState(() => (resume ? resume.effChars : 0));   // 有效讲解累计字数（「太短」轮次不计）
+  const [effRounds, setEffRounds] = React.useState(() => (resume ? resume.effRounds : 0)); // 有效轮次
+  const [covered, setCovered] = React.useState(() => new Set(resume ? resume.covered : []));
   const [thinking, setThinking] = React.useState(false);
-  const [canIgnite, setCanIgnite] = React.useState(false);
-  const [messages, setMessages] = React.useState(() => (gated ? [] : [{
+  const [canIgnite, setCanIgnite] = React.useState(() => (resume ? resume.canIgnite : false));
+  const [messages, setMessages] = React.useState(() => (gated ? [] : (resume ? resume.messages : [{
     who: 'ai', name: 'AI 学生',
     text: mode === 'relight'
       ? '上次你把它讲得很清楚，现在它暗下来了。再帮我回忆一遍——它到底在解决什么问题？'
       : `用最简单的话告诉我：${star.label} 到底在解决什么问题？`,
-  }]));
+  }])));
 
   // AI 学生接入态：已配置走真实对话，未配置走本地规则；配置面板保存时经 'sr-ai-config' 即时切换
   const readAI = () => {
@@ -178,6 +201,18 @@ function FeynmanDrawer({ starId, onClose }) {
   const timers = React.useRef([]);
   const alive = React.useRef(true); // 抽屉关闭后，迟到的 AI 回复不再落 setState
   React.useEffect(() => () => { alive.current = false; timers.current.forEach(clearTimeout); }, []);
+
+  // 卸载时定格会话：讲过至少一轮且未收尾 → 存起来供下次接续；收尾了就清掉
+  const sessRef = React.useRef(null);
+  sessRef.current = {
+    mode, messages, round, effChars, effRounds, covered: [...covered], canIgnite,
+    done: lit || consolidated || deferred,
+  };
+  React.useEffect(() => () => {
+    const s = sessRef.current;
+    if (s && s.round > 0 && !s.done) FEY_SESSIONS.set(star.id, s);
+    else FEY_SESSIONS.delete(star.id);
+  }, [star.id]);
 
   // 抽屉即模态：移焦入内、Tab 圈禁、关闭还原焦点；Esc 关闭（全站一致）
   const drawerRef = React.useRef(null);
@@ -249,9 +284,22 @@ function FeynmanDrawer({ starId, onClose }) {
       // 广播点亮事件：星图 / 三维星系等在场视图就地变暖，无需重新挂载
       window.dispatchEvent(new CustomEvent('sr-ignite', { detail: { id: star.id, strength: res.strength } }));
     }, 250));
-    timers.current.push(setTimeout(() => {
+    // 结语：接入真实 AI 时让学生按你的讲解真实总结一句（失败退回固定句）；本地学生走固定句
+    const closingLine = () => {
+      if (!alive.current) return;
       setMessages((m) => [...m, { who: 'ai', name: 'AI 学生', text: '这颗星亮了。只要按时复习，它就不会熄灭。' }]);
-    }, 900));
+    };
+    if (aiMode.on && window.SRAI && window.SRAI.isConfigured()) {
+      const history = messages.map((m) => ({ role: m.who === 'me' ? 'user' : 'assistant', content: m.text })).slice(-8);
+      while (history.length && history[0].role !== 'user') history.shift();
+      window.SRAI.chat([...history, { role: 'user', content: '我讲完了，这颗星已经点亮。' }], {
+        system: studentSystem(star, targets) + '\n现在讲解已经完成、星已点亮。请用一两句话指出对方这次讲得最好的一点，并道一声祝贺。不要再提问。',
+        maxTokens: 120, temperature: 0.8, timeout: 9000,
+      }).then((reply) => { if (alive.current) setMessages((m) => [...m, { who: 'ai', name: 'AI 学生', text: reply }]); })
+        .catch(closingLine);
+    } else {
+      timers.current.push(setTimeout(closingLine, 900));
+    }
     timers.current.push(setTimeout(() => setIgniting(false), 2600));
   };
 
