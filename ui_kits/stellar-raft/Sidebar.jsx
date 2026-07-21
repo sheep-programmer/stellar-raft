@@ -59,16 +59,17 @@ function NavRow({ icon, label, active, badge, collapsed, onClick, dawn, tip, dat
   );
 }
 
-/* footer user chip — opens personal settings on click (logged in), or the login page (anonymous) */
-function UserChip({ collapsed, dawn, registered, onClick, onOpenLogin }) {
+/* footer user chip — 永远打开个人设置；未登录时设置会落在「账户」页，登录入口就在那里。
+   （曾经未登录直点即跳登录页——代价是匿名用户进不了设置，动效/提醒/导出全被锁在门外。） */
+function UserChip({ collapsed, dawn, registered, onClick }) {
   const [hover, setHover] = React.useState(false);
   const account = window.SR_DATA.account;
   const primary = registered ? (account.username || account.name) : '星际旅客';
-  const secondary = registered ? `连续点亮 ${account.streak} 天` : '未登录 · 点击登录';
+  const secondary = registered ? `连续点亮 ${account.streak} 天` : '未登录 · 设置与登录';
   const avatarLetter = registered ? account.avatar : '旅';
   return (
-    <button type="button" className="sr-focus-ring" onClick={registered ? onClick : onOpenLogin}
-      title={registered ? '个人设置' : '登录 / 注册'} data-tour="settings"
+    <button type="button" className="sr-focus-ring" onClick={onClick}
+      title="个人设置" data-tour="settings"
       onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
       style={{
         display: 'flex', alignItems: 'center', gap: 10, width: '100%',
@@ -86,12 +87,12 @@ function UserChip({ collapsed, dawn, registered, onClick, onOpenLogin }) {
         </div>
       )}
       {!collapsed && <div style={{ flex: 1 }} />}
-      {!collapsed && <Icon name={registered ? 'settings' : 'log-in'} size={15} color={hover ? 'var(--text-1)' : 'var(--text-3)'} />}
+      {!collapsed && <Icon name="settings" size={15} color={hover ? 'var(--text-1)' : 'var(--text-3)'} />}
     </button>
   );
 }
 
-function Sidebar({ collapsed, onToggle, view, onView, focus, onFocus, theme, onToggleTheme, onSearch, onCheckup, onAIConfig, onOpenSettings, onOpenLogin, onReview }) {
+function Sidebar({ collapsed, onToggle, view, onView, focus, onFocus, theme, onToggleTheme, onSearch, onCheckup, onAIConfig, onOpenSettings, onReview }) {
   const D = window.SR_DATA;
   const dawn = theme === 'dawn';
   // 好友数 / 到期星数 / 黑洞·收件箱计数都随写操作变化：
@@ -192,7 +193,7 @@ function Sidebar({ collapsed, onToggle, view, onView, focus, onFocus, theme, onT
         <NavRow icon={dawn ? 'moon-star' : 'sunrise'} label={dawn ? '切回深空' : '黎明模式'} collapsed={collapsed} dawn={dawn} onClick={onToggleTheme} dataTour="theme" />
         <NavRow icon="activity" label="知识体检报告" badge={todoN || null} collapsed={collapsed} dawn={dawn} active={view === 'checkup'} onClick={onCheckup} dataTour="checkup" />
         <NavRow icon="bot" label="AI 配置" collapsed={collapsed} dawn={dawn} onClick={onAIConfig} />
-        <UserChip collapsed={collapsed} dawn={dawn} registered={!!D.account.registered} onClick={onOpenSettings} onOpenLogin={onOpenLogin} />
+        <UserChip collapsed={collapsed} dawn={dawn} registered={!!D.account.registered} onClick={onOpenSettings} />
       </div>
     </aside>
   );

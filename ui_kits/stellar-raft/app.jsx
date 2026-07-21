@@ -179,7 +179,7 @@ function App() {
         onAIConfig={() => setAiConfigOpen(true)}
         onReview={openReview}
         onOpenSettings={() => setSettingsOpen(true)}
-        onOpenLogin={openLogin} />
+        />
 
       {/* main stage — key 随视图变化：换视图重挂载一次，用 srTransition.enter 做
           元素级入场（淡入 + 上浮，240ms var(--ease-flight)，reduced-motion 直达）。

@@ -99,7 +99,8 @@ function SRSegment({ options, value, onChange }) {
 
 function Settings({ onClose, theme, onToggleTheme, onReplayGuide, onOpenLogin }) {
   const dawn = theme === 'dawn';
-  const [tab, setTab] = React.useState('profile');
+  // 未登录打开设置直接落在「账户」页——那里有醒目的「登录 / 注册」，入口不因胶囊改开设置而变深
+  const [tab, setTab] = React.useState(() => (window.SR_DATA.account.registered ? 'profile' : 'account'));
   const [toast, setToast] = React.useState(null);
   const toastTimer = React.useRef(null);
 
