@@ -113,7 +113,27 @@ function CodeBlock({ code: codeProp, lang: langProp, onCommitCode, onCommitLang,
         <textarea value={code} autoFocus spellCheck={false}
           onChange={(e) => setCode(e.target.value)}
           onBlur={() => { setEditingCode(false); if (onCommitCode) onCommitCode(code); }}
-          onKeyDown={(e) => { if (e.key === 'Escape') { e.currentTarget.blur(); } }}
+          onKeyDown={(e) => {
+            if (e.key === 'Escape') { e.currentTarget.blur(); return; }
+            // Tab 在代码里是缩进不是移焦：插入 4 空格；Shift+Tab 回退本行行首缩进
+            if (e.key === 'Tab') {
+              e.preventDefault();
+              const ta = e.currentTarget;
+              const v = ta.value, s0 = ta.selectionStart, e0 = ta.selectionEnd;
+              if (e.shiftKey) {
+                const ls = v.lastIndexOf('\n', s0 - 1) + 1;
+                const m = v.slice(ls).match(/^(\t| {1,4})/);
+                if (!m) return;
+                const nv = v.slice(0, ls) + v.slice(ls + m[1].length);
+                ta.value = nv; ta.selectionStart = ta.selectionEnd = Math.max(ls, s0 - m[1].length);
+                setCode(nv);
+              } else {
+                const nv = v.slice(0, s0) + '    ' + v.slice(e0);
+                ta.value = nv; ta.selectionStart = ta.selectionEnd = s0 + 4;
+                setCode(nv);
+              }
+            }
+          }}
           style={{ display: 'block', width: '100%', boxSizing: 'border-box', minHeight: Math.max(80, rows.length * 22 + 24), background: 'transparent', color: P.plain, border: 'none', outline: 'none', resize: 'vertical', fontFamily: 'var(--font-mono)', fontSize: 12.5, lineHeight: 1.85, padding: '12px 14px', tabSize: 4, borderRadius: '0 0 var(--r-md) var(--r-md)' }} />
       ) : (
         <div onClick={() => setEditingCode(true)} title="点击编辑代码" style={{ padding: '12px 14px', fontFamily: 'var(--font-mono)', fontSize: 12.5, lineHeight: 1.85, color: P.plain, overflowX: 'auto', cursor: 'text', minHeight: 24, borderRadius: '0 0 var(--r-md) var(--r-md)' }}>
@@ -997,9 +1017,12 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
     const fid = focusedBlockId();
     applyHistory(U.redo(undoRef.current, snapNow()), fid);
   };
+  // 「前缀 + 空格」刚转换出的块：块首 Backspace 可退回纯文本前缀（Typora 手感）。
+  // 继续输入或任何结构变更后即失效（onInput / mutateBlocks 里清掉）。
+  const prefixConvRef = React.useRef(null);   // { id, prefix }
   // 结构变更映射前先把所有块的 DOM 文本同步进 state（否则相邻块正在输入、未落 state
    // 的文字会被这次 setBlocks 覆盖丢失）；withSynced 额外压一份撤销快照。
-  const mutateBlocks = (fn) => setBlocks(bs => fn(bs.map(syncBlock)));
+  const mutateBlocks = (fn) => { prefixConvRef.current = null; setBlocks(bs => fn(bs.map(syncBlock))); };
   const withSynced = (fn) => { pushHistory(); mutateBlocks(fn); };
 
   const blocksRef = React.useRef(blocks); blocksRef.current = blocks;
@@ -1048,10 +1071,13 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
 
   // 结构变更需要同步提交（flushSync），随后立即聚焦——否则连续快速输入
   // 会赶在 React 提交/聚焦之前，把字符落进旧块
-  const flushSynced = (fn) => {
-    if (ReactDOM.flushSync) ReactDOM.flushSync(() => withSynced(fn));
-    else withSynced(fn);
+  const flushMutate = (fn) => {
+    if (ReactDOM.flushSync) ReactDOM.flushSync(() => mutateBlocks(fn));
+    else mutateBlocks(fn);
   };
+  // flushMutate + 撤销快照。快照读的是当前 DOM——拆分/清前缀这类要先动 DOM 的操作，
+  // 应在动 DOM 之前自行 pushHistory 再用 flushMutate，快照才带着改动前的原文。
+  const flushSynced = (fn) => { pushHistory(); flushMutate(fn); };
   const placeCaret = (id, where) => {
     const el = refs.current[id]; if (!el) return false;
     el.focus();
@@ -1119,6 +1145,8 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
 
   // Markdown 前缀 → 块类型（行首输入前缀后按空格触发，Typora / Notion 式）
   const MD_PREFIX = { '#': 'h1', '##': 'h2', '###': 'h3', '-': 'bulleted', '*': 'bulleted', '>': 'quote', '1.': 'numbered', '[]': 'todo', '[ ]': 'todo', '[x]': 'todo' };
+  // 列表/标题等块降级回正文：清掉不再适用的列表痕迹（缩进 / 勾选 / 起始序号）
+  const toPlainP = (x) => { const y = { ...x, type: 'p' }; delete y.indent; delete y.checked; delete y.start; return y; };
 
   const blockKeyDown = (b) => (e) => {
     if (slash || e.nativeEvent.isComposing) return;
@@ -1138,38 +1166,42 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
       return;
     }
 
-    // 空格触发 Markdown 前缀转换（块里只有前缀本身时）。先清 DOM 再提交：
-    // React 对相同 __html 不会重设 innerHTML，前缀字符会残留
+    // 空格触发 Markdown 前缀转换（Typora / Notion 式）：光标前恰是前缀，即前缀
+    // 位于块首——前缀后已有的内容原样保留，不再要求块里只有前缀本身。
     if (e.key === ' ') {
-      const t = el.innerText.replace(/\n+$/, '');
-      let type = MD_PREFIX[t];
-      const extra = {};
-      // 任意起始序号的有序列表：`2.` / `3)` → numbered 并记住 start；`+` → 无序
-      const om = t.match(/^(\d+)[.)]$/);
-      if (!type && om) { type = 'numbered'; const n0 = parseInt(om[1], 10); if (n0 !== 1) extra.start = n0; }
-      if (!type && t === '+') type = 'bulleted';
-      if (type) {
-        e.preventDefault();
-        el.innerHTML = '';
-        flushSynced(s => s.map(x => x.id === b.id ? { ...x, type, text: '', checked: t.toLowerCase() === '[x]', ...extra } : x));
-        focusBlock(b.id, 'start');
-        return;
-      }
-
-      // 行内 Markdown：光标前缀里已闭合的 **x** / *x* / `x` / ~~x~~，
-      // 按空格就地转为 <b>/<i>/<code>/<s>（Typora 式）。IME 组合期在函数
-      // 入口已被挡掉；行内代码里不再二次转换。
       const info0 = caretInfo(el);
       if (info0 && info0.collapsed) {
+        const pre = info0.range.cloneRange();
+        pre.selectNodeContents(el);
+        pre.setEnd(info0.range.startContainer, info0.range.startOffset);
+        const preRaw = pre.toString();
+        const t = preRaw.replace(/\u00a0/g, ' ');
+        let type = MD_PREFIX[t];
+        const extra = {};
+        // 任意起始序号的有序列表：`2.` / `3)` → numbered 并记住 start；`+` → 无序
+        const om = t.match(/^(\d+)[.)]$/);
+        if (!type && om) { type = 'numbered'; const n0 = parseInt(om[1], 10); if (n0 !== 1) extra.start = n0; }
+        if (!type && t === '+') type = 'bulleted';
+        if (type) {
+          e.preventDefault();
+          // 先压快照（此刻 DOM 里还是字面前缀），⌘Z 能退回成纯文本；再清掉前缀字符——
+          // React 对相同 __html 不会重设 innerHTML，不清会残留
+          pushHistory();
+          try { const r0 = document.createRange(); r0.setStart(el, 0); r0.setEnd(info0.range.startContainer, info0.range.startOffset); r0.deleteContents(); } catch (_) { }
+          flushMutate(s => s.map(x => x.id === b.id ? { ...x, type, checked: t.toLowerCase() === '[x]', ...extra } : x));
+          prefixConvRef.current = { id: b.id, prefix: t };
+          focusBlock(b.id, 'start');
+          return;
+        }
+
+        // 行内 Markdown：光标前缀里已闭合的 **x** / *x* / `x` / ~~x~~，
+        // 按空格就地转为 <b>/<i>/<code>/<s>（Typora 式）。IME 组合期在函数
+        // 入口已被挡掉；行内代码里不再二次转换。
         const anchorEl = info0.range.startContainer.nodeType === 1 ? info0.range.startContainer : info0.range.startContainer.parentElement;
         if (!(anchorEl && anchorEl.closest && anchorEl.closest('code'))) {
-          const pre = info0.range.cloneRange();
-          pre.selectNodeContents(el);
-          pre.setEnd(info0.range.startContainer, info0.range.startOffset);
-          const preText = pre.toString();
-          const hit = matchInlineMd(preText);
+          const hit = matchInlineMd(preRaw);
           if (hit) {
-            const sp = nodeAtOffset(el, preText.length - hit.len);
+            const sp = nodeAtOffset(el, preRaw.length - hit.len);
             if (sp) {
               e.preventDefault();
               pushExec();
@@ -1194,16 +1226,25 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
       return;
     }
 
-    // Enter：在光标处拆分为新块（列表延续同类型；空列表项退出为正文）
+    // Enter：在光标处拆分为新块（列表/待办/引用延续同类型；空项退出为正文）
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       const listLike = ['bulleted', 'numbered', 'todo'].includes(b.type);
-      if (listLike && el.innerText.trim() === '') {
+      const contLike = listLike || b.type === 'quote';   // 引用也逐行延续（Typora 手感）
+      if (contLike && el.innerText.trim() === '') {
+        // 空的嵌套列表项先降一级缩进，到顶层再退出为正文（Notion / Typora 同款）
+        if (listLike && (b.indent || 0) > 0) {
+          flushSynced(s => s.map(x => x.id === b.id ? { ...x, indent: x.indent - 1 } : x));
+          focusBlock(b.id, 'start');
+          return;
+        }
         el.innerHTML = '';
-        flushSynced(s => s.map(x => x.id === b.id ? { ...x, type: 'p', text: '' } : x));
+        flushSynced(s => s.map(x => x.id === b.id ? toPlainP({ ...x, text: '' }) : x));
         focusBlock(b.id, 'start');
         return;
       }
+      // 先压快照再从 DOM 摘走尾巴——快照才带着拆分前的整块原文，⌘Z 能完整还原
+      pushHistory();
       let tail = '';
       const info = caretInfo(el);
       if (info) {
@@ -1214,19 +1255,34 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
         tmp.appendChild(after.extractContents());
         tail = tmp.innerHTML;
       }
-      const nb = { id: uid(), type: listLike ? b.type : 'p', text: tail, checked: false, ...(listLike && b.indent ? { indent: b.indent } : {}) };
-      flushSynced(s => { const i = s.findIndex(x => x.id === b.id); return [...s.slice(0, i + 1), nb, ...s.slice(i + 1)]; });
+      const nb = { id: uid(), type: contLike ? b.type : 'p', text: tail, checked: false, ...(listLike && b.indent ? { indent: b.indent } : {}) };
+      flushMutate(s => { const i = s.findIndex(x => x.id === b.id); return [...s.slice(0, i + 1), nb, ...s.slice(i + 1)]; });
       focusBlock(nb.id, 'start');
       return;
     }
 
-    // Backspace 在块首：先降级为正文，再删除/并入上一块
+    // Backspace 在块首：刚转换的块先退回字面前缀，嵌套列表先降一级缩进，
+    // 其余块型先降级为正文，之后才删除/并入上一块
     if (e.key === 'Backspace') {
       const info = caretInfo(el);
       if (!info || !info.collapsed || !info.atStart) return;
       if (b.type !== 'p') {
         e.preventDefault();
-        flushSynced(s => s.map(x => x.id === b.id ? { ...x, type: 'p' } : x));
+        const pc = prefixConvRef.current;
+        if (pc && pc.id === b.id) {
+          // 「前缀 + 空格」刚转换出的块：退回纯文本前缀（Typora 手感），内容原样保留
+          prefixConvRef.current = null;
+          pushHistory();
+          el.innerHTML = escHtml(pc.prefix) + el.innerHTML;
+          flushMutate(s => s.map(x => x.id === b.id ? toPlainP(x) : x));
+          focusBlockAt(b.id, pc.prefix.length);
+          return;
+        }
+        if (['bulleted', 'numbered', 'todo'].includes(b.type) && (b.indent || 0) > 0) {
+          flushSynced(s => s.map(x => x.id === b.id ? { ...x, indent: x.indent - 1 } : x));
+        } else {
+          flushSynced(s => s.map(x => x.id === b.id ? toPlainP(x) : x));
+        }
         focusBlock(b.id, 'start');
         return;
       }
@@ -1252,6 +1308,38 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
       setPendingAtomicDel(prev.id);
       scrollToBlock(prev.id);
       flash('已选中上方的' + blockTypeName(prev.type) + '块 · 再按 ⌫ 删除');
+      return;
+    }
+
+    // Delete 在块尾：并入下一块——Backspace 的镜像语义（Notion / Typora 皆然）
+    if (e.key === 'Delete') {
+      const info = caretInfo(el);
+      if (!info || !info.collapsed || !info.atEnd) return;
+      const cur = blocksRef.current;
+      const i = cur.findIndex(x => x.id === b.id);
+      const next = i >= 0 && i + 1 < cur.length ? cur[i + 1] : null;
+      if (!next) return;
+      e.preventDefault();
+      if (next.type === 'divider') { flushSynced(s => s.filter(x => x.id !== next.id)); focusBlock(b.id, 'end'); return; }
+      if (EDITABLE.includes(next.type)) {
+        // 空段落上按 Delete：删掉自己、光标落到下一块块首（保住下一块的块型）
+        if (b.type === 'p' && el.innerText.trim() === '') {
+          flushSynced(s => s.filter(x => x.id !== b.id));
+          focusBlock(next.id, 'start');
+          return;
+        }
+        const nel = refs.current[next.id];
+        const nextHtml = nel ? nel.innerHTML : sanHtml(next.text || '');
+        const joinAt = el.innerText.length;
+        flushSynced(s => s.filter(x => x.id !== next.id).map(x => x.id === b.id ? { ...x, text: sanHtml((x.text || '') + nextHtml) } : x));
+        focusBlockAt(b.id, joinAt);
+        return;
+      }
+      // 下一块是 code / table / math / image 等原子块：与块首 Backspace 同一套引导
+      setFocusBlk(next.id);
+      setPendingAtomicDel(next.id);
+      scrollToBlock(next.id);
+      flash('已选中下方的' + blockTypeName(next.type) + '块 · 再按 ⌫ 删除');
       return;
     }
 
@@ -1774,16 +1862,49 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
       if (!isChar && !del && !ent) return;
       doMerge(isChar ? escHtml(e.key) : '', e);
     };
-    const onCut = (e) => {
+    // 跨块选区的复制/剪切：text/plain 写合法 Markdown（经 blocksToMd，标题/列表/
+    // 代码等结构不再被压平成纯文本），text/html 带原富文本片段供富文本编辑器粘贴。
+    const rangeToMd = (r) => {
+      const startId = blockIdOfNode(r.startContainer), endId = blockIdOfNode(r.endContainer);
+      if (!startId || !endId || startId === endId) return null;   // 同块选区保持浏览器默认
+      const cur = blocksRef.current;
+      const si = cur.findIndex(x => x.id === startId), ei = cur.findIndex(x => x.id === endId);
+      if (si < 0 || ei < 0 || si >= ei) return null;
+      const picked = cur.slice(si, ei + 1).map(syncBlock);
+      // 首尾块只取选区覆盖的那一截
+      const sEl = refs.current[startId], eEl = refs.current[endId];
+      if (sEl && EDITABLE.includes(cur[si].type)) picked[0] = { ...picked[0], text: sanHtml(htmlSlice(sEl, r.startContainer, r.startOffset, false)) };
+      if (eEl && EDITABLE.includes(cur[ei].type)) picked[picked.length - 1] = { ...picked[picked.length - 1], text: sanHtml(htmlSlice(eEl, r.endContainer, r.endOffset, true)) };
+      return MD ? MD.blocksToMd(picked) : picked.map(x => stripTags(x.text || '')).filter(Boolean).join('\n\n');
+    };
+    const writeClipboard = (e) => {
       const sel = window.getSelection();
-      if (sel && sel.toString() && e.clipboardData) {
-        try { e.clipboardData.setData('text/plain', sel.toString()); } catch (_) { }
+      if (!sel || !sel.rangeCount || sel.isCollapsed || !e.clipboardData) return false;
+      const r = sel.getRangeAt(0);
+      if (!root.contains(r.commonAncestorContainer)) return false;
+      const md = rangeToMd(r);
+      if (md == null) return false;
+      try {
+        e.clipboardData.setData('text/plain', md);
+        const div = document.createElement('div'); div.appendChild(r.cloneContents());
+        e.clipboardData.setData('text/html', div.innerHTML);
+      } catch (_) { return false; }
+      return true;
+    };
+    const onCopy = (e) => { if (writeClipboard(e)) e.preventDefault(); };
+    const onCut = (e) => {
+      if (!writeClipboard(e)) {
+        const sel = window.getSelection();
+        if (sel && sel.toString() && e.clipboardData) {
+          try { e.clipboardData.setData('text/plain', sel.toString()); } catch (_) { }
+        }
       }
       doMerge('', e);
     };
     root.addEventListener('keydown', onKey, true);
+    root.addEventListener('copy', onCopy, true);
     root.addEventListener('cut', onCut, true);
-    return () => { root.removeEventListener('keydown', onKey, true); root.removeEventListener('cut', onCut, true); };
+    return () => { root.removeEventListener('keydown', onKey, true); root.removeEventListener('copy', onCopy, true); root.removeEventListener('cut', onCut, true); };
   }, []);
   const applyLink = (url) => {
     const ld = linkDialog;
@@ -1818,6 +1939,7 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
       // "```" / "$$" / "---" transform in place (Typora-style)
       onInput: (e) => {
         if (e.nativeEvent && e.nativeEvent.isComposing) { scheduleTick(); return; }
+        prefixConvRef.current = null;   // 继续输入后，块首 Backspace 不再退回前缀
         noteTyping();
         scheduleTick();
         const t = e.currentTarget.innerText;
