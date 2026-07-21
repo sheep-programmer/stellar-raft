@@ -3,7 +3,9 @@
    翻开笔记摘要与大纲（翻开阶段），随后三档自评：
    忘了 (1/←) → D.reviewFail · 模糊 (2/↓) → D.reviewPartial · 记得 (3/→) → D.reviewSuccess。
    评分立即持久化（reviewX 内部走 touchNote → SRNet 防抖落盘），并广播 sr-memory
-   让星图 / 鸟瞰 / 侧栏角标就地读回新亮度。Esc 退出；reduced-motion 下卡片瞬切。 */
+   让星图 / 鸟瞰 / 侧栏角标就地读回新亮度。Esc 退出；reduced-motion 下卡片瞬切。
+   回忆阶段可选「AI 考一考」：已配置 AI 服务时出一道回忆检验题辅助主动回忆——
+   只提问不给答案，翻面与三档自评仍完全由用户自己完成；未配置则无任何相关 UI。 */
 const { GlassPanel, Icon, IconButton, Button } = window.StellarRaftDesignSystem_2866af;
 
 const RS_HUD = { fontSize: 10, letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: 'var(--text-3)', fontFamily: 'var(--font-mono)' };
@@ -23,6 +25,24 @@ const rsReduced = () =>
 const rsOutline = (star) => (star.body || [])
   .filter(b => ['h2', 'h3', 'bulleted', 'numbered'].includes(b.type) && b.text)
   .slice(0, 5);
+
+/* 「AI 考一考」的出题资料：星名 / 别名 / 摘要 / 正文纯文本节选，整体截 1200 字 */
+const rsQuizMaterial = (star) => {
+  const bodyText = (star.body || [])
+    .filter(b => ['p', 'bulleted', 'numbered', 'callout', 'h2', 'h3', 'quote', 'todo', 'toggle'].includes(b.type) && b.text)
+    .map(b => String(b.text)).join('\n');
+  let brief = [
+    `星名：${star.label}`,
+    star.props && star.props.alias ? `别名：${star.props.alias}` : '',
+    star.summary ? `摘要：${star.summary}` : '',
+    bodyText ? `正文节选：\n${bodyText}` : '',
+  ].filter(Boolean).join('\n');
+  if (brief.length > 1200) brief = brief.slice(0, 1200) + '…';
+  return brief;
+};
+
+// 出题 system：只提问不给答案——考察交给 AI，评分永远留给用户自评
+const RS_QUIZ_SYSTEM = '你是复习教练，根据资料出一道简短的回忆检验题（一两句话），只提问不给答案，中文，直接输出问题本身。';
 
 function RSKbd({ children, onScrim }) {
   return (
@@ -90,6 +110,21 @@ function ReviewSession({ onClose }) {
   const timers = React.useRef([]);
   React.useEffect(() => () => timers.current.forEach(clearTimeout), []);
 
+  // 「AI 考一考」：仅在已配置 AI 服务时出现；配置面板保存 / 清除时经 'sr-ai-config' 即时显隐
+  const [aiOn, setAiOn] = React.useState(() => !!(window.SRAI && window.SRAI.isConfigured()));
+  React.useEffect(() => {
+    const h = () => setAiOn(!!(window.SRAI && window.SRAI.isConfigured()));
+    window.addEventListener('sr-ai-config', h);
+    return () => window.removeEventListener('sr-ai-config', h);
+  }, []);
+  // 出题状态（每张卡独立）：idle → busy →（ok | err）；err 只在按钮旁小字提示，不打断复习
+  const [quiz, setQuiz] = React.useState({ phase: 'idle', text: '', err: '' });
+  // 迟到防护：卸载（alive）与换卡 / 换题（seq）后，在途回复一律丢弃
+  const quizAlive = React.useRef(true);
+  const quizSeq = React.useRef(0);
+  React.useEffect(() => () => { quizAlive.current = false; }, []);
+  React.useEffect(() => { quizSeq.current++; setQuiz({ phase: 'idle', text: '', err: '' }); }, [idx]);
+
   const done = total === 0 || idx >= total;
   const star = done ? null : queue[idx];
   // 当前卡的认证态：已点亮（差异呈现 + 熄灭警示）/ 待重燃（复习保温，重燃走费曼）
@@ -135,6 +170,24 @@ function ReviewSession({ onClose }) {
     const next = () => { setRevealed(false); setLeaving(false); setIdx(i => i + 1); };
     if (rsReduced()) next();
     else { setLeaving(true); timers.current.push(setTimeout(next, 340)); }
+  };
+
+  // 出一道回忆检验题（首次「AI 考一考」与「换一题」同一入口）；重出时旧题保留在场，避免闪空
+  const askQuiz = () => {
+    if (!star || quiz.phase === 'busy' || !(window.SRAI && window.SRAI.isConfigured())) return;
+    const seq = ++quizSeq.current;
+    setQuiz(q => ({ phase: 'busy', text: q.text, err: '' }));
+    window.SRAI.chat([{ role: 'user', content: rsQuizMaterial(star) }], {
+      system: RS_QUIZ_SYSTEM, maxTokens: 120, temperature: 0.9, timeout: 15000,
+    }).then((reply) => {
+      if (!quizAlive.current || seq !== quizSeq.current) return;
+      const text = String(reply || '').trim();
+      if (text) setQuiz({ phase: 'ok', text, err: '' });
+      else setQuiz(q => ({ phase: 'err', text: q.text, err: '这次没出成题，换一题试试' }));
+    }).catch((err) => {
+      if (!quizAlive.current || seq !== quizSeq.current) return;
+      setQuiz(q => ({ phase: 'err', text: q.text, err: (err && err.message) || '出题失败' }));
+    });
   };
 
   // 键盘：空格翻开 · 1/2/3 或 ←↓→ 评分 · Esc 退出（每次渲染重挂，闭包始终新鲜）
@@ -191,7 +244,8 @@ function ReviewSession({ onClose }) {
       style={{ position: 'fixed', inset: 0, zIndex: 70, display: 'flex', alignItems: 'center', justifyContent: 'center', outline: 'none' }}>
       <style>{`
         @keyframes sr-review-out { from { opacity: 1; transform: none; } to { opacity: 0; transform: translateY(-30px) scale(0.96); } }
-        @media (prefers-reduced-motion: reduce) { .sr-review-card { animation: none !important; } }
+        @keyframes sr-rq-spin { to { transform: rotate(360deg); } }
+        @media (prefers-reduced-motion: reduce) { .sr-review-card { animation: none !important; } .sr-rq-spin { animation: none !important; } }
       `}</style>
       {/* 压暗 + blur 的深空遮罩（同费曼抽屉 / 设置页惯例，但更沉浸） */}
       <div onClick={onClose} aria-hidden="true"
@@ -289,6 +343,35 @@ function ReviewSession({ onClose }) {
                 </div>
               )}
             </div>
+
+            {/* 回忆阶段的「AI 考一考」：出一道检验题帮回忆更主动；未配置 AI 时整块不存在 */}
+            {!revealed && aiOn && (
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, marginTop: -6 }}>
+                {quiz.text && (
+                  <div style={{ display: 'flex', alignItems: 'baseline', gap: 9, alignSelf: 'stretch', padding: '10px 14px',
+                    borderRadius: 'var(--r-md)', textAlign: 'left',
+                    border: '1px solid color-mix(in srgb, var(--gold) 28%, transparent)',
+                    background: 'color-mix(in srgb, var(--gold) 5%, transparent)' }}>
+                    <Icon name="sparkles" size={13} color="var(--gold)" style={{ flex: 'none', transform: 'translateY(1px)' }} />
+                    <span style={{ fontSize: 13, lineHeight: 1.7, color: 'var(--text-1)', minWidth: 0 }}>{quiz.text}</span>
+                  </div>
+                )}
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, maxWidth: '100%' }}>
+                  <Button variant="ghost" size="sm" icon={quiz.phase === 'busy' ? undefined : 'sparkles'}
+                    disabled={quiz.phase === 'busy'} onClick={askQuiz}>
+                    {quiz.phase === 'busy' && (
+                      <span className="sr-rq-spin" style={{ display: 'inline-flex', animation: 'sr-rq-spin 1.2s linear infinite' }} aria-hidden="true">
+                        <Icon name="loader" size={14} color="currentColor" />
+                      </span>
+                    )}
+                    {quiz.phase === 'busy' ? '正在出题…' : quiz.text ? '换一题' : 'AI 考一考'}
+                  </Button>
+                  {quiz.phase === 'err' && quiz.err && (
+                    <span role="status" style={{ fontSize: 11.5, color: 'var(--text-3)', lineHeight: 1.5, minWidth: 0 }}>{quiz.err}</span>
+                  )}
+                </div>
+              </div>
+            )}
 
             {!revealed && (
               <div style={{ display: 'flex', justifyContent: 'center', paddingBottom: 8 }}>
