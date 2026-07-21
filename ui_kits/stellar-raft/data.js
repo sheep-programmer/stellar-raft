@@ -650,7 +650,7 @@ window.SR_DATA = (function () {
 
   // 账户信息单一来源：Sidebar 与设置页共用。username/email/registeredAt 由 /api/hello 回填，
   // streak 由时间线实时推算，bio 随快照走——不保留任何展示用的伪造值。
-  const account = { name: '林深', avatar: '林', email: '', bio: '', streak: 0 };
+  const account = { name: '观星者', avatar: '观', email: '', bio: '', streak: 0 };
   // 社交状态：好友（可造访星系）数量，启动时取回、变更时由星际漫游视图刷新
   const social = { friends: 0 };
 
