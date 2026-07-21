@@ -6,7 +6,7 @@
 *Other apps store notes in a warehouse — Stellar Raft grows them in a living deep space of knowledge, where knowledge is the only light.*
 
 ![Node](https://img.shields.io/badge/Node-%E2%89%A5%2022.5-9fc6ff?style=flat-square&labelColor=05060f)
-![Tests](https://img.shields.io/badge/tests-108%20passing-ffd98a?style=flat-square&labelColor=05060f)
+![Tests](https://img.shields.io/badge/tests-126%20passing-ffd98a?style=flat-square&labelColor=05060f)
 ![Build](https://img.shields.io/badge/build-zero--config-9fc6ff?style=flat-square&labelColor=05060f)
 ![Components](https://img.shields.io/badge/components-18%20primitives-9fc6ff?style=flat-square&labelColor=05060f)
 ![Backend](https://img.shields.io/badge/backend-zero--dependency-ffd98a?style=flat-square&labelColor=05060f)
@@ -55,8 +55,10 @@
 - **间隔重复复习** — 到期卡片三档自评(忘了 / 模糊 / 记得),闭环驱动稳定度增长,让星不再悄悄熄灭。
 - **8 个高保真界面** — 星图主界面 · 亮度鸟瞰热图 · 三维星系(Three.js)· 近景语义缩放 · 费曼右抽屉 · 侧边栏 · 列表管理 · 专业块编辑器。
 - **专业块编辑器** — H1–H3 / 待办 / 列表 / 引用 / 代码 / LaTeX / 表格 / 图片,markdown 即时转换、⌘F 查找替换、导入导出、反向链接与大纲。
+- **真实 AI 接入** — 配置 OpenAI / Anthropic / 自定义网关(one-api、Ollama 等)后,费曼「AI 学生」由所配模型真实追问(性格/严格度进提示词),编辑器可生成摘要、推荐标签、建议跨星域连接;未配置时优雅回退本地规则学生。
+- **复习策略可选** — 随星变暗(遗忘曲线)/ 1·3·7·15 天间隔阶梯 / 每日固定 / 不提醒,四档策略真实驱动到期队列与桌面通知,星域整体变暗另有提醒。
 - **新手引导** — 首次打开自动弹出的 11 页导览册 + 末页聚光实地导览,随时可在设置里回看。
-- **账号与多设备** — 用户名/邮箱登录(scrypt + sessions),注册把当前匿名星空原地收进账号,换台设备也能回来。
+- **账号与多设备** — 用户名/邮箱登录(scrypt + sessions),注册把当前匿名星空原地收进账号,换台设备也能回来;偏好与 AI 配置随快照同步,切换账号时本机密钥等痕迹全部清理。
 - **零构建 · 零依赖** — 浏览器内 Babel 编译 JSX;后端仅用 Node 内置 `node:sqlite`,不装任何三方包。
 
 **English**
@@ -66,8 +68,10 @@
 - **Spaced-repetition review** — due cards, three-way self-grading (forgot / fuzzy / got it), closing the loop that keeps stars alive.
 - **8 hi-fi screens** — star map · aerial heat map · 3D galaxy (Three.js) · semantic-zoom card · Feynman drawer · sidebar · list management · pro block editor.
 - **Pro block editor** — headings / todos / lists / quote / code / LaTeX / tables / images, live markdown conversion, ⌘F find-and-replace, import/export, backlinks and outline.
+- **Real AI integration** — plug in OpenAI / Anthropic / any OpenAI-compatible gateway (one-api, Ollama…): the Feynman "AI student" asks real follow-up questions (persona & strictness shape the prompt), and the editor can summarize, suggest tags, and propose cross-constellation links; gracefully falls back to the local rule-based student when unconfigured.
+- **Selectable review strategies** — forgetting-curve cooling / classic 1·3·7·15-day ladder / daily / off, each genuinely driving the due queue and desktop notifications, plus a constellation-dimming nudge.
 - **Onboarding guide** — an 11-page carousel on first run plus a spotlight walkthrough, re-openable from Settings anytime.
-- **Accounts & multi-device** — username/email login (scrypt + sessions); registering folds your anonymous galaxy into the account in place.
+- **Accounts & multi-device** — username/email login (scrypt + sessions); registering folds your anonymous galaxy into the account in place; preferences and AI config travel with the snapshot, and every local trace (API keys included) is wiped on account switch.
 - **Zero-build · zero-dependency** — JSX compiled in the browser by Babel; the backend uses only Node's built-in `node:sqlite`, no third-party packages.
 
 <div align="center">
