@@ -1,4 +1,4 @@
-/* @ds-bundle: {"format":3,"namespace":"StellarRaftDesignSystem_2866af","components":[{"name":"Badge","sourcePath":"components/core/Badge.jsx"},{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"GlassPanel","sourcePath":"components/core/GlassPanel.jsx"},{"name":"Icon","sourcePath":"components/core/Icon.jsx"},{"name":"IconButton","sourcePath":"components/core/IconButton.jsx"},{"name":"Input","sourcePath":"components/core/Input.jsx"},{"name":"Tag","sourcePath":"components/core/Tag.jsx"},{"name":"Checkbox","sourcePath":"components/form/Checkbox.jsx"},{"name":"Select","sourcePath":"components/form/Select.jsx"},{"name":"Switch","sourcePath":"components/form/Switch.jsx"},{"name":"Tabs","sourcePath":"components/form/Tabs.jsx"},{"name":"ConstellationItem","sourcePath":"components/knowledge/ConstellationItem.jsx"},{"name":"MemoryBar","sourcePath":"components/knowledge/MemoryBar.jsx"},{"name":"StarNode","sourcePath":"components/knowledge/StarNode.jsx"},{"name":"ContextMenu","sourcePath":"components/overlay/ContextMenu.jsx"},{"name":"Modal","sourcePath":"components/overlay/Modal.jsx"},{"name":"Toast","sourcePath":"components/overlay/Toast.jsx"},{"name":"Tooltip","sourcePath":"components/overlay/Tooltip.jsx"}],"sourceHashes":{"assets/starfield.js":"d776d2b45dc4","components/core/Badge.jsx":"b0bd9735d638","components/core/Button.jsx":"a1c387a07e86","components/core/GlassPanel.jsx":"299a19d8fbb4","components/core/Icon.jsx":"7505f83ab03d","components/core/IconButton.jsx":"24052f4eed78","components/core/Input.jsx":"54a6c9af7e3f","components/core/Tag.jsx":"d8513c07ea96","components/form/Checkbox.jsx":"38aa593157dd","components/form/Select.jsx":"86b8c1c71e12","components/form/Switch.jsx":"938c62be0664","components/form/Tabs.jsx":"ede2dbff1963","components/knowledge/ConstellationItem.jsx":"d73e999469b6","components/knowledge/MemoryBar.jsx":"a54c928d5065","components/knowledge/StarNode.jsx":"1bedee49f0bf","components/overlay/ContextMenu.jsx":"11783420e876","components/overlay/Modal.jsx":"0906de457544","components/overlay/Toast.jsx":"d22ad40680a6","components/overlay/Tooltip.jsx":"a042caa8970d","ui_kits/stellar-raft/AIConfig.jsx":"ac3ebbc8c643","ui_kits/stellar-raft/AerialView.jsx":"c03956215464","ui_kits/stellar-raft/BlackHole.jsx":"17eb30e1a014","ui_kits/stellar-raft/Checkup.jsx":"432f59decbb5","ui_kits/stellar-raft/CommandPalette.jsx":"0e41e59f2e82","ui_kits/stellar-raft/Editor.jsx":"89c6b2358425","ui_kits/stellar-raft/EditorMenus.jsx":"fb80581f6bcc","ui_kits/stellar-raft/FeynmanDrawer.jsx":"22555e93116f","ui_kits/stellar-raft/Galaxy3D.jsx":"8e40ab3d2a66","ui_kits/stellar-raft/Inbox.jsx":"fb947f4edf7f","ui_kits/stellar-raft/ListView.jsx":"04333626cd62","ui_kits/stellar-raft/LoginView.jsx":"18d9c842c5c6","ui_kits/stellar-raft/Onboarding.jsx":"a0a8609b98bb","ui_kits/stellar-raft/ReviewSession.jsx":"8e0b3ed9e247","ui_kits/stellar-raft/Settings.jsx":"a5ce40624d0b","ui_kits/stellar-raft/Sidebar.jsx":"8f3ca4c39abb","ui_kits/stellar-raft/StarMap.jsx":"26ebb8fc6e2f","ui_kits/stellar-raft/Timeline.jsx":"56d938b8201e","ui_kits/stellar-raft/VisitView.jsx":"c59ff48bf477","ui_kits/stellar-raft/app.jsx":"e0e7b6a77961","ui_kits/stellar-raft/codehl.js":"6fbdd0100deb","ui_kits/stellar-raft/data.js":"d7d028d086cc","ui_kits/stellar-raft/mdcore.js":"297534e398c8","ui_kits/stellar-raft/sanitize.js":"88e63cd63253","ui_kits/stellar-raft/transition.js":"3725d8982dc5","ui_kits/stellar-raft/undocore.js":"7f8c94da35f9"},"inlinedExternals":[],"unexposedExports":[{"name":"memoryColor","sourcePath":"components/knowledge/MemoryBar.jsx"}],"exposedHelpers":[{"name":"toast","sourcePath":"components/overlay/Toast.jsx"}]} */
+/* @ds-bundle: {"format":3,"namespace":"StellarRaftDesignSystem_2866af","components":[{"name":"Badge","sourcePath":"components/core/Badge.jsx"},{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"GlassPanel","sourcePath":"components/core/GlassPanel.jsx"},{"name":"Icon","sourcePath":"components/core/Icon.jsx"},{"name":"IconButton","sourcePath":"components/core/IconButton.jsx"},{"name":"Input","sourcePath":"components/core/Input.jsx"},{"name":"Tag","sourcePath":"components/core/Tag.jsx"},{"name":"Checkbox","sourcePath":"components/form/Checkbox.jsx"},{"name":"Select","sourcePath":"components/form/Select.jsx"},{"name":"Switch","sourcePath":"components/form/Switch.jsx"},{"name":"Tabs","sourcePath":"components/form/Tabs.jsx"},{"name":"ConstellationItem","sourcePath":"components/knowledge/ConstellationItem.jsx"},{"name":"MemoryBar","sourcePath":"components/knowledge/MemoryBar.jsx"},{"name":"StarNode","sourcePath":"components/knowledge/StarNode.jsx"},{"name":"ContextMenu","sourcePath":"components/overlay/ContextMenu.jsx"},{"name":"Modal","sourcePath":"components/overlay/Modal.jsx"},{"name":"Toast","sourcePath":"components/overlay/Toast.jsx"},{"name":"Tooltip","sourcePath":"components/overlay/Tooltip.jsx"}],"sourceHashes":{"assets/starfield.js":"d776d2b45dc4","components/core/Badge.jsx":"b0bd9735d638","components/core/Button.jsx":"a1c387a07e86","components/core/GlassPanel.jsx":"299a19d8fbb4","components/core/Icon.jsx":"7505f83ab03d","components/core/IconButton.jsx":"24052f4eed78","components/core/Input.jsx":"54a6c9af7e3f","components/core/Tag.jsx":"d8513c07ea96","components/form/Checkbox.jsx":"38aa593157dd","components/form/Select.jsx":"86b8c1c71e12","components/form/Switch.jsx":"938c62be0664","components/form/Tabs.jsx":"ede2dbff1963","components/knowledge/ConstellationItem.jsx":"d73e999469b6","components/knowledge/MemoryBar.jsx":"a54c928d5065","components/knowledge/StarNode.jsx":"1bedee49f0bf","components/overlay/ContextMenu.jsx":"11783420e876","components/overlay/Modal.jsx":"0906de457544","components/overlay/Toast.jsx":"d22ad40680a6","components/overlay/Tooltip.jsx":"a042caa8970d","ui_kits/stellar-raft/AIConfig.jsx":"bbc66d05eebf","ui_kits/stellar-raft/AerialView.jsx":"c03956215464","ui_kits/stellar-raft/BlackHole.jsx":"17eb30e1a014","ui_kits/stellar-raft/Checkup.jsx":"432f59decbb5","ui_kits/stellar-raft/CommandPalette.jsx":"0e41e59f2e82","ui_kits/stellar-raft/Editor.jsx":"ecbcfd1865fa","ui_kits/stellar-raft/EditorMenus.jsx":"fb80581f6bcc","ui_kits/stellar-raft/FeynmanDrawer.jsx":"6af036e0a904","ui_kits/stellar-raft/Galaxy3D.jsx":"8e40ab3d2a66","ui_kits/stellar-raft/Inbox.jsx":"fb947f4edf7f","ui_kits/stellar-raft/ListView.jsx":"04333626cd62","ui_kits/stellar-raft/LoginView.jsx":"18d9c842c5c6","ui_kits/stellar-raft/Onboarding.jsx":"a0a8609b98bb","ui_kits/stellar-raft/ReviewSession.jsx":"8e0b3ed9e247","ui_kits/stellar-raft/Settings.jsx":"38e4752ebabe","ui_kits/stellar-raft/Sidebar.jsx":"8f3ca4c39abb","ui_kits/stellar-raft/StarMap.jsx":"26ebb8fc6e2f","ui_kits/stellar-raft/Timeline.jsx":"56d938b8201e","ui_kits/stellar-raft/VisitView.jsx":"8ab06897a78e","ui_kits/stellar-raft/ai.js":"2f79eb3473c9","ui_kits/stellar-raft/app.jsx":"e0e7b6a77961","ui_kits/stellar-raft/codehl.js":"6fbdd0100deb","ui_kits/stellar-raft/data.js":"f224c0e8a1d8","ui_kits/stellar-raft/mdcore.js":"297534e398c8","ui_kits/stellar-raft/sanitize.js":"88e63cd63253","ui_kits/stellar-raft/transition.js":"3725d8982dc5","ui_kits/stellar-raft/undocore.js":"7f8c94da35f9"},"inlinedExternals":[],"unexposedExports":[{"name":"memoryColor","sourcePath":"components/knowledge/MemoryBar.jsx"}],"exposedHelpers":[{"name":"toast","sourcePath":"components/overlay/Toast.jsx"}]} */
 
 (() => {
 
@@ -2589,73 +2589,27 @@ const PROVIDERS = [{
 const REVIEW_STRATEGIES = [{
   id: 'cooling',
   label: '随星变暗',
-  desc: '记忆温度下降到阈值时提醒，贴合遗忘曲线'
+  desc: '记忆温度衰减到阈值的那一刻到期，贴合遗忘曲线'
 }, {
   id: 'sm2',
   label: '间隔重复',
-  desc: '按 1·3·7·15 天的经典间隔安排复习'
+  desc: '按 1·3·7·15·30…天的经典间隔阶梯安排到期'
 }, {
   id: 'daily',
   label: '每日固定',
-  desc: '每天傍晚汇总今日待回顾的星'
+  desc: '每颗星每天到期一次，傍晚汇总今日待回顾'
 }, {
   id: 'off',
   label: '不提醒',
-  desc: '只在你主动进入复习时才唤醒 AI'
+  desc: '到期照常计算，但不再推送复习通知'
 }];
 
-// ——— 配置持久化（仅存本机浏览器）———
-const CFG_KEY = 'sr.aiConfig';
-const CFG_DEFAULTS = {
-  provider: 'openai',
-  providers: {
-    openai: {
-      baseUrl: 'https://api.openai.com/v1',
-      key: '',
-      model: 'gpt-5.1'
-    },
-    anthropic: {
-      baseUrl: 'https://api.anthropic.com/v1',
-      key: '',
-      model: 'claude-sonnet-5'
-    },
-    custom: {
-      baseUrl: '',
-      key: '',
-      model: ''
-    }
-  },
-  persona: 45,
-  strictness: 60,
-  strategy: 'cooling',
-  autoSummary: true,
-  linkSuggest: true,
-  tagSuggest: false
-};
+// ——— 配置持久化：唯一读写入口在 SRAI（ai.js），费曼学生 / 编辑器助手 / 复习策略共用同一份 ———
 function loadCfg() {
-  try {
-    const saved = JSON.parse(localStorage.getItem(CFG_KEY));
-    if (!saved) return {
-      ...CFG_DEFAULTS
-    };
-    return {
-      ...CFG_DEFAULTS,
-      ...saved,
-      providers: Object.fromEntries(Object.keys(CFG_DEFAULTS.providers).map(k => [k, {
-        ...CFG_DEFAULTS.providers[k],
-        ...(saved.providers && saved.providers[k])
-      }]))
-    };
-  } catch {
-    return {
-      ...CFG_DEFAULTS
-    };
-  }
+  return window.SRAI.getConfig();
 }
 function saveCfg(cfg) {
-  try {
-    localStorage.setItem(CFG_KEY, JSON.stringify(cfg));
-  } catch {}
+  window.SRAI.setConfig(cfg);
 }
 
 // ——— 受控开关 ———
@@ -3447,7 +3401,7 @@ function AIConfig({
   })))), /*#__PURE__*/React.createElement(Divider, null), /*#__PURE__*/React.createElement(Section, {
     icon: "alarm-clock",
     title: "\u590D\u4E60\u63D0\u9192\u7B56\u7565",
-    hint: "\u661F\u4F1A\u968F\u8BB0\u5FC6\u6E29\u5EA6\u53D8\u6697\u3002\u9009\u62E9 AI \u5728\u4F55\u65F6\u628A\u6B63\u5728\u53D8\u6697\u7684\u661F\u91CD\u65B0\u5E26\u56DE\u4F60\u773C\u524D\u3002"
+    hint: "\u51B3\u5B9A\u6BCF\u9897\u661F\u300C\u4F55\u65F6\u7B97\u5230\u671F\u300D\uFF1A\u4F53\u68C0\u3001\u590D\u4E60\u961F\u5217\u4E0E\u5230\u671F\u89D2\u6807\u90FD\u6309\u6B64\u8BA1\u7B97\u3002\u63D0\u9192\u9001\u8FBE\u7684\u65F6\u523B\u4E0E\u9891\u7387\u5728 \u8BBE\u7F6E \u2192 \u590D\u4E60\u63D0\u9192 \u91CC\u8C03\u6574\uFF1B\u9009\u62E9\u300C\u4E0D\u63D0\u9192\u300D\u5219\u4E0D\u518D\u63A8\u9001\u4EFB\u4F55\u590D\u4E60\u901A\u77E5\u3002"
   }, /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
@@ -8393,6 +8347,359 @@ function MiniStarMap({
     d: "M12 2v4M12 18v4M2 12h4M18 12h4"
   }))));
 }
+
+/* ── AI 助手（右栏小节）──
+   AI 配置面板里的三个开关（自动摘要 / 连接建议 / 标签推荐）在这里接成真实能力，
+   调用层是 window.SRAI（ai.js）。未配置服务商时整节只留一行引导；
+   监听 sr-ai-config，配置或开关一变就地刷新。 */
+const aiStripHtml = h => String(h || '').replace(/<[^>]*>/g, ' ').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+// 取一颗星的正文纯文本（与导出同一份数据源 star.body；代码 / 公式 / 表格也算内容）
+const aiBodyText = s => (s && s.body || []).map(b => {
+  if (!b) return '';
+  if (b.type === 'code') return b.code || '';
+  if (b.type === 'math') return b.tex || '';
+  if (b.type === 'table') return [(b.head || []).join(' ')].concat((b.rows || []).map(r => (r || []).join(' '))).join('\n');
+  const t = aiStripHtml(b.text || '');
+  return b.type === 'toggle' ? t + ' ' + aiStripHtml(b.child || '') : t;
+}).map(t => t.trim()).filter(Boolean).join('\n');
+// 摘要清洗：只留第一行，剥引号与「摘要：」类前缀，硬截 60 字
+const aiTrimSummary = out => String(out || '').trim().split('\n')[0].trim().replace(/^(摘要|一句话摘要)[:：]\s*/, '').replace(/^["'“”‘’「」『』]+|["'“”‘’「」『』]+$/g, '').trim().slice(0, 60);
+// 生成一句话摘要——「生成摘要」按钮与关闭编辑器时的静默生成走同一条路径
+const aiSummarize = s => window.SRAI.chat([{
+  role: 'user',
+  content: '为下面这篇笔记写一句话中文摘要，直接输出摘要本身：不超过 60 字，不带引号，也不带「摘要：」之类前缀。\n\n标题：' + (s.label || '无标题') + '\n正文：\n' + aiBodyText(s).slice(0, 2000)
+}], {
+  system: '你是克制的笔记摘要助手，只输出一句话，不解释。',
+  maxTokens: 120,
+  temperature: 0.3
+}).then(aiTrimSummary);
+// 本会话已静默尝试过自动摘要的星——同一颗星只触发一次，失败也不再打扰
+const aiAutoTried = new Set();
+function AIAssist({
+  star,
+  tags,
+  connected,
+  onAddTag,
+  onAddConnection,
+  onSummaryDone
+}) {
+  const D = window.SR_DATA;
+  const AI = window.SRAI;
+  const readAi = () => ({
+    ok: !!(AI && AI.isConfigured()),
+    cfg: AI && AI.active() || {}
+  });
+  const [ai, setAi] = React.useState(readAi);
+  React.useEffect(() => {
+    const h = () => setAi(readAi());
+    window.addEventListener('sr-ai-config', h);
+    return () => window.removeEventListener('sr-ai-config', h);
+  }, []);
+  const [sum, setSum] = React.useState({
+    busy: false,
+    err: null,
+    done: null,
+    empty: false
+  });
+  const [tagS, setTagS] = React.useState({
+    busy: false,
+    err: null,
+    list: null
+  });
+  const [lnk, setLnk] = React.useState({
+    busy: false,
+    err: null,
+    list: null
+  });
+  const genSummary = () => {
+    if (sum.busy) return;
+    if (!aiBodyText(star).trim()) {
+      setSum({
+        busy: false,
+        err: null,
+        done: null,
+        empty: true
+      });
+      return;
+    }
+    setSum({
+      busy: true,
+      err: null,
+      done: null,
+      empty: false
+    });
+    aiSummarize(star).then(line => {
+      if (!line) {
+        setSum({
+          busy: false,
+          err: '没有得到可用的摘要，请重试',
+          done: null,
+          empty: false
+        });
+        return;
+      }
+      star.summary = line;
+      D.touchNote(star.id);
+      setSum({
+        busy: false,
+        err: null,
+        done: line,
+        empty: false
+      });
+      if (onSummaryDone) onSummaryDone(line);
+    }).catch(e => setSum({
+      busy: false,
+      err: e && e.message || '生成失败，请重试',
+      done: null,
+      empty: false
+    }));
+  };
+  const genTags = () => {
+    if (tagS.busy) return;
+    setTagS({
+      busy: true,
+      err: null,
+      list: null
+    });
+    AI.chatJSON([{
+      role: 'user',
+      content: '根据标题与正文，为这篇笔记推荐 3~5 个中文短标签（每个不超过 6 个字），只返回 JSON 字符串数组，例如 ["量子力学","入门"]。\n\n标题：' + (star.label || '无标题') + '\n正文：\n' + aiBodyText(star).slice(0, 2000)
+    }], {
+      system: '你是标签推荐助手，只输出 JSON 数组，不解释。',
+      maxTokens: 200,
+      temperature: 0.4
+    }).then(arr => {
+      const list = (Array.isArray(arr) ? arr : []).map(t => String(t == null ? '' : t).trim().replace(/^#/, '')).filter(t => t && t.length <= 6).filter((t, i, a) => a.indexOf(t) === i).slice(0, 5);
+      setTagS({
+        busy: false,
+        err: null,
+        list
+      });
+    }).catch(e => setTagS({
+      busy: false,
+      err: e && e.message || '推荐失败，请重试',
+      list: null
+    }));
+  };
+  const genLinks = () => {
+    if (lnk.busy) return;
+    const linked = new Set(connected.map(c => c.star.id));
+    // 候选：至多 40 颗未连接的其他星（id + 星名 + 摘要截 60 字）
+    const cands = D.stars.filter(s => s.id !== star.id && !linked.has(s.id)).slice(0, 40);
+    if (!cands.length) {
+      setLnk({
+        busy: false,
+        err: null,
+        list: []
+      });
+      return;
+    }
+    setLnk({
+      busy: true,
+      err: null,
+      list: null
+    });
+    const brief = cands.map(s => ({
+      id: s.id,
+      label: s.label,
+      summary: String(s.summary || '').slice(0, 60)
+    }));
+    AI.chatJSON([{
+      role: 'user',
+      content: '当前笔记：' + JSON.stringify({
+        label: star.label,
+        summary: String(star.summary || '').slice(0, 120)
+      }) + '\n候选笔记列表：' + JSON.stringify(brief) + '\n\n从候选里挑出最值得与当前笔记建立连接的至多 3 篇，只返回 JSON 数组，元素形如 {"id":"候选的 id","rel":"一句中文关系描述，不超过 20 字"}；没有合适的就返回 []。'
+    }], {
+      system: '你是知识连接助手，只输出 JSON 数组，不解释。',
+      maxTokens: 300,
+      temperature: 0.4
+    }).then(arr => {
+      const byId = {};
+      cands.forEach(s => {
+        byId[s.id] = s;
+      });
+      const list = (Array.isArray(arr) ? arr : []).map(it => it && byId[it.id] ? {
+        star: byId[it.id],
+        rel: String(it.rel || '').trim().slice(0, 20) || '相关概念'
+      } : null).filter(Boolean).filter((it, i, a) => a.findIndex(x => x.star.id === it.star.id) === i).slice(0, 3);
+      setLnk({
+        busy: false,
+        err: null,
+        list
+      });
+    }).catch(e => setLnk({
+      busy: false,
+      err: e && e.message || '获取建议失败，请重试',
+      list: null
+    }));
+  };
+
+  // 结果区就地过滤：已加的标签 / 已连上的星不再出现在建议里
+  const tagList = tagS.list ? tagS.list.filter(t => !tags.includes(t)) : null;
+  const lnkList = lnk.list ? lnk.list.filter(it => !connected.some(c => c.star.id === it.star.id)) : null;
+  const note = (msg, danger) => /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 6,
+      fontSize: 11.5,
+      color: danger ? 'var(--danger)' : 'var(--text-3)',
+      lineHeight: 1.6
+    }
+  }, msg);
+  // 能力入口按钮：与右栏「新建连接」同一虚线语言；生成期间转等待态
+  const entryBtn = (icon, label, busy, onClick) => /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    className: "sr-focus-ring",
+    disabled: busy,
+    onClick: onClick,
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 7,
+      width: '100%',
+      font: 'inherit',
+      textAlign: 'left',
+      padding: '9px 12px',
+      borderRadius: 'var(--r-md)',
+      border: '1px dashed var(--line-strong)',
+      background: 'transparent',
+      color: busy ? 'var(--text-3)' : 'var(--text-2)',
+      fontSize: 12.5,
+      cursor: busy ? 'wait' : 'pointer'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    "aria-hidden": "true",
+    className: busy ? 'sr-ed-spin' : '',
+    style: {
+      display: 'inline-flex',
+      animation: busy ? 'sr-ed-spin 1.2s linear infinite' : 'none'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: busy ? 'loader' : icon,
+    size: 14,
+    color: "currentColor"
+  })), busy ? label + '…' : label);
+  return /*#__PURE__*/React.createElement("section", null, /*#__PURE__*/React.createElement(RailHead, {
+    icon: "sparkles",
+    title: "AI \u52A9\u624B"
+  }), !ai.ok ? /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 10,
+      fontSize: 12,
+      color: 'var(--text-3)',
+      lineHeight: 1.7
+    }
+  }, "\u5728 AI \u914D\u7F6E\u4E2D\u63A5\u5165\u670D\u52A1\u5546\u540E\u53EF\u7528\u3002") : !(ai.cfg.autoSummary || ai.cfg.tagSuggest || ai.cfg.linkSuggest) ? /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 10,
+      fontSize: 12,
+      color: 'var(--text-3)',
+      lineHeight: 1.7
+    }
+  }, "\u4E09\u9879\u52A9\u624B\u80FD\u529B\u90FD\u5173\u7740 \xB7 \u53EF\u5728 AI \u914D\u7F6E\u4E2D\u5F00\u542F\u3002") : /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 10,
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 12
+    }
+  }, ai.cfg.autoSummary && /*#__PURE__*/React.createElement("div", null, entryBtn('sparkles', sum.busy ? '正在生成摘要' : '生成摘要', sum.busy, genSummary), sum.done != null && note('已写入摘要：' + sum.done), sum.empty && note('正文还没有内容，先写点什么再来生成。'), sum.err && note(sum.err, true)), ai.cfg.tagSuggest && /*#__PURE__*/React.createElement("div", null, entryBtn('hash', tagS.busy ? '正在推荐标签' : '标签推荐', tagS.busy, genTags), tagList && (tagList.length ? /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      gap: 6,
+      marginTop: 8
+    }
+  }, tagList.map(t => /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    key: t,
+    className: "sr-focus-ring",
+    title: '添加标签「' + t + '」',
+    onClick: () => onAddTag(t),
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 4,
+      height: 24,
+      padding: '0 10px',
+      borderRadius: 'var(--r-pill)',
+      border: '1px dashed rgba(159,198,255,0.45)',
+      background: 'rgba(159,198,255,0.07)',
+      color: 'var(--star-blue)',
+      fontSize: 12,
+      cursor: 'pointer',
+      fontFamily: 'var(--font-sans)'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "plus",
+    size: 11,
+    color: "currentColor"
+  }), t))) : note('没有新的标签可推荐。')), tagS.err && note(tagS.err, true)), ai.cfg.linkSuggest && /*#__PURE__*/React.createElement("div", null, entryBtn('waypoints', lnk.busy ? '正在寻找可连接的星' : '连接建议', lnk.busy, genLinks), lnkList && (lnkList.length ? /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 8,
+      marginTop: 8
+    }
+  }, lnkList.map(it => /*#__PURE__*/React.createElement("div", {
+    key: it.star.id,
+    style: {
+      padding: '9px 11px',
+      borderRadius: 'var(--r-md)',
+      background: 'rgba(159,198,255,0.04)',
+      border: '1px solid var(--glass-border)'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 7
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      width: 7,
+      height: 7,
+      borderRadius: '50%',
+      flex: 'none',
+      background: D.conColor(it.star.con),
+      boxShadow: `0 0 6px ${D.conColor(it.star.con)}`
+    }
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 13,
+      color: 'var(--text-1)',
+      minWidth: 0,
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap'
+    }
+  }, it.star.label), /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    className: "sr-focus-ring",
+    onClick: () => onAddConnection(it.star, it.rel),
+    style: {
+      marginLeft: 'auto',
+      flex: 'none',
+      height: 24,
+      padding: '0 11px',
+      borderRadius: 'var(--r-pill)',
+      border: '1px solid var(--glass-border-strong)',
+      background: 'rgba(159,198,255,0.14)',
+      color: 'var(--text-1)',
+      fontSize: 11.5,
+      cursor: 'pointer',
+      fontFamily: 'var(--font-sans)'
+    }
+  }, "\u8FDE\u4E0A")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11.5,
+      color: 'var(--text-3)',
+      lineHeight: 1.5,
+      marginTop: 4,
+      paddingLeft: 14
+    }
+  }, it.rel)))) : note('没有找到值得连接的星。')), lnk.err && note(lnk.err, true))));
+}
 function Editor({
   starId,
   onBack,
@@ -8637,6 +8944,25 @@ function Editor({
     if (mountedRef.current) D.touchNote(star.id);else mountedRef.current = true;
   }, [blocks]);
   React.useEffect(() => () => persistBody(), []);
+  // 「自动摘要」的自动含义：开关开启、AI 已配置、这颗星还没有摘要、正文有实质内容时，
+  // 关闭编辑器（卸载 / 切换星）后台静默生成一次并写入；失败静默放弃，不打扰。
+  // 声明在 persistBody 的卸载 effect 之后——cleanup 按声明顺序执行，此时 star.body 已同步。
+  React.useEffect(() => () => {
+    try {
+      const AI = window.SRAI;
+      if (!AI || !AI.isConfigured() || !AI.active().autoSummary) return;
+      if (String(star.summary || '').trim() || aiAutoTried.has(star.id)) return;
+      if (aiBodyText(star).replace(/\s+/g, '').length < 30) return;
+      aiAutoTried.add(star.id);
+      aiSummarize(star).then(line => {
+        // 生成期间用户可能已回来手写了摘要——只在仍为空时写入
+        if (line && !String(star.summary || '').trim()) {
+          star.summary = line;
+          D.touchNote(star.id);
+        }
+      }).catch(() => {});
+    } catch (e) {}
+  }, []);
   // 关标签页 / 切到后台：强制把编辑器 DOM flush 进 star.body，再交给 api.js 的
   // beforeunload beacon —— 否则最后一次 keystroke 后 350ms 内关闭会丢尾部输入。
   React.useEffect(() => {
@@ -10877,7 +11203,29 @@ function Editor({
     name: "plus",
     size: 14,
     color: "currentColor"
-  }), "\u65B0\u5EFA\u8FDE\u63A5 \xB7 \u5199\u4E00\u53E5\u5173\u7CFB"))), /*#__PURE__*/React.createElement("section", null, /*#__PURE__*/React.createElement(RailHead, {
+  }), "\u65B0\u5EFA\u8FDE\u63A5 \xB7 \u5199\u4E00\u53E5\u5173\u7CFB"))), /*#__PURE__*/React.createElement(AIAssist, {
+    star: star,
+    tags: tags,
+    connected: connected,
+    onAddTag: t => {
+      if (!t || tags.includes(t)) return;
+      setTags(ts => {
+        if (ts.includes(t)) return ts;
+        const nt = [...ts, t];
+        syncTags(nt);
+        return nt;
+      });
+      flash('已添加标签「' + t + '」');
+    },
+    onAddConnection: (s, rel) => {
+      addConnection(s, rel);
+      D.persist();
+    },
+    onSummaryDone: () => {
+      bumpTick();
+      flash('已生成摘要');
+    }
+  }), /*#__PURE__*/React.createElement("section", null, /*#__PURE__*/React.createElement(RailHead, {
     icon: "corner-down-left",
     title: "\u53CD\u5411\u94FE\u63A5",
     extra: backlinks.length
@@ -12972,14 +13320,17 @@ try { (() => {
    · 未点亮 → 点亮（金色时刻：IgniteBurst + 金 toast）
    · 待重燃 → 重燃（快速通道：门槛减半，同一金色时刻，toast「重燃 · 星光归位」）
    · 已点亮 → 巩固（按「记得」lit 档计，无爆发、蓝 toast——金色只属于状态跃迁）
-   「还没讲透」= 一次失败复习；对已点亮星模型会当场熄灭（extinguished），这里出冷色反馈。 */
+   「还没讲透」= 一次失败复习；对已点亮星模型会当场熄灭（extinguished），这里出冷色反馈。
+   学生双轨：接入 AI 服务（SRAI.isConfigured）时走真实对话追问，失败静默回退本地规则；
+   未接入时全程本地规则。无论哪轨，点亮门槛都只认 feyReady 的本地判据。 */
 const {
   IconButton,
   Icon,
   Button,
   MemoryBar,
   Tag,
-  Input
+  Input,
+  Badge
 } = window.StellarRaftDesignSystem_2866af;
 function IgniteBurst() {
   // particle ring + flash, 1.3s
@@ -13109,6 +13460,18 @@ function studentText({
   }
   return ack + q;
 }
+
+/* 真实 AI 学生的 system 提示：星的资料（星名 / 别名 / 摘要 / 要点 / 正文纯文本节选）
+   + 配置面板里的性格与较真度 + 说话规矩。资料整体截断在约 1500 字内，长文不噎模型。
+   注意：这里只塑造「学生说什么」——点亮门槛始终由 feyReady 的本地判据决定。 */
+function studentSystem(star, targets) {
+  const S = window.SRAI;
+  const a = S.active();
+  const bodyText = (star.body || []).filter(b => ['p', 'bulleted', 'numbered', 'callout', 'h2', 'h3', 'quote', 'todo', 'toggle'].includes(b.type) && b.text).map(b => String(b.text)).join('\n');
+  let brief = [`星名：${star.label}`, star.props && star.props.alias ? `别名：${star.props.alias}` : '', star.summary ? `摘要：${star.summary}` : '', targets.length ? `要点：${targets.join('、')}` : '', bodyText ? `正文节选：\n${bodyText}` : ''].filter(Boolean).join('\n');
+  if (brief.length > 1500) brief = brief.slice(0, 1500) + '…';
+  return ['你是一名学生，正在听用户用费曼学习法讲解一颗「知识星」。下面是这颗星的资料，仅供你判断对方讲得对不对、清不清楚——不要替对方讲解：', brief, `你的性格是「${S.personaWord(a.persona)}」，较真程度「${S.strictWord(a.strictness)}」。`, '要求：', '- 只用中文回复，口语化，每次 2～4 句；', '- 始终以学生视角回应：对方讲得清楚，就确认你听懂了，并往更深一层追问一个问题；讲得含糊，就具体指出哪里没听懂；', '- 较真程度越高，追问越刨根问底；', '- 不要长篇大论，不要替用户讲解，不要用列表或标题格式。'].join('\n');
+}
 function FeynmanDrawer({
   starId,
   onClose
@@ -13143,9 +13506,31 @@ function FeynmanDrawer({
     name: 'AI 学生',
     text: mode === 'relight' ? '上次你把它讲得很清楚，现在它暗下来了。再帮我回忆一遍——它到底在解决什么问题？' : `用最简单的话告诉我：${star.label} 到底在解决什么问题？`
   }]);
+
+  // AI 学生接入态：已配置走真实对话，未配置走本地规则；配置面板保存时经 'sr-ai-config' 即时切换
+  const readAI = () => {
+    const S = window.SRAI;
+    return S && S.isConfigured() ? {
+      on: true,
+      model: S.active().model
+    } : {
+      on: false,
+      model: ''
+    };
+  };
+  const [aiMode, setAiMode] = React.useState(readAI);
+  React.useEffect(() => {
+    const h = () => setAiMode(readAI());
+    window.addEventListener('sr-ai-config', h);
+    return () => window.removeEventListener('sr-ai-config', h);
+  }, []);
   const scrollRef = React.useRef(null);
   const timers = React.useRef([]);
-  React.useEffect(() => () => timers.current.forEach(clearTimeout), []);
+  const alive = React.useRef(true); // 抽屉关闭后，迟到的 AI 回复不再落 setState
+  React.useEffect(() => () => {
+    alive.current = false;
+    timers.current.forEach(clearTimeout);
+  }, []);
 
   // 抽屉即模态：移焦入内、Tab 圈禁、关闭还原焦点；Esc 关闭（全站一致）
   const drawerRef = React.useRef(null);
@@ -13177,6 +13562,13 @@ function FeynmanDrawer({
     const nextChars = effChars + (tooShort ? 0 : clean.length);
     const nextRounds = effRounds + (tooShort ? 0 : 1);
     const ready = canIgnite || feyReady(mode, nextChars, nextRounds, after.size, targets.length);
+    // 真实 AI 要带的对话历史，在追加本轮之前定格：用户讲解=user，学生回复=assistant。
+    // 只带最近 10 条；开场白是学生说的，接口要求首条必须是 user，故掐掉打头的 assistant。
+    const history = messages.map(m => ({
+      role: m.who === 'me' ? 'user' : 'assistant',
+      content: m.text
+    })).slice(-10);
+    while (history.length && history[0].role !== 'user') history.shift();
     setMessages(m => [...m, {
       who: 'me',
       text: txt
@@ -13186,25 +13578,43 @@ function FeynmanDrawer({
     setEffChars(nextChars);
     setEffRounds(nextRounds);
     setThinking(true);
-    const t = setTimeout(() => {
+    // 学生回复落地（真实 AI 文本或本地规则文本；note 是回退时附在气泡下的失败原因小字）
+    const land = (text, note) => {
+      if (!alive.current) return;
       setCovered(after);
       setThinking(false);
       setMessages(m => [...m, {
         who: 'ai',
         name: 'AI 学生',
-        text: studentText({
-          mode,
-          targets,
-          after,
-          newly,
-          round: r,
-          tooShort,
-          ready
-        })
+        text,
+        note
       }]);
       if (ready) setCanIgnite(true);
-    }, 720 + Math.random() * 420);
-    timers.current.push(t);
+    };
+    const fallback = note => land(studentText({
+      mode,
+      targets,
+      after,
+      newly,
+      round: r,
+      tooShort,
+      ready
+    }), note);
+    if (aiMode.on && window.SRAI && window.SRAI.isConfigured()) {
+      // 真实 AI 学生：失败 / 超时静默回退本地规则，不打断讲解流程——
+      // 点亮门槛（feyReady）始终是上面的本地判据，AI 只决定学生怎么说话
+      window.SRAI.chat([...history, {
+        role: 'user',
+        content: txt
+      }], {
+        system: studentSystem(star, targets),
+        maxTokens: 300,
+        temperature: 0.8,
+        timeout: 20000
+      }).then(reply => land(reply)).catch(err => fallback(`AI 学生暂时联系不上，已换本地回复 · ${err && err.message || 'AI 服务暂不可用'}`));
+    } else {
+      timers.current.push(setTimeout(() => fallback(), 720 + Math.random() * 420));
+    }
   };
 
   // 点亮 / 重燃 = 状态跃迁：S×(2.5+(1−R)·0.6) 封顶 365、R 回满、lit=now——
@@ -13366,7 +13776,19 @@ function FeynmanDrawer({
     name: "brain",
     size: 16,
     color: "var(--gold)"
-  }), "\u8D39\u66FC\u5185\u5316"), /*#__PURE__*/React.createElement(IconButton, {
+  }), "\u8D39\u66FC\u5185\u5316", aiMode.on ? /*#__PURE__*/React.createElement(Badge, {
+    tone: "gold",
+    style: {
+      textTransform: 'none'
+    },
+    title: `已接入真实 AI 学生 · ${aiMode.model}`
+  }, "AI \u5B66\u751F \xB7 ", aiMode.model) : /*#__PURE__*/React.createElement(Badge, {
+    tone: "neutral",
+    style: {
+      textTransform: 'none'
+    },
+    title: "\u5728 AI \u914D\u7F6E\u4E2D\u63A5\u5165\u670D\u52A1\u5546\u53EF\u83B7\u5F97\u771F\u5B9E AI \u8FFD\u95EE"
+  }, "\u672C\u5730\u5B66\u751F")), /*#__PURE__*/React.createElement(IconButton, {
     name: "x",
     title: "\u5173\u95ED",
     onClick: onClose
@@ -13505,7 +13927,8 @@ function FeynmanDrawer({
   }, messages.map((m, i) => /*#__PURE__*/React.createElement(Bubble, {
     key: i,
     who: m.who,
-    name: m.name
+    name: m.name,
+    note: m.note
   }, m.text)), thinking && /*#__PURE__*/React.createElement(TypingBubble, null)), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
@@ -13663,6 +14086,7 @@ function TypingBubble() {
 function Bubble({
   who,
   name,
+  note,
   children
 }) {
   const ai = who === 'ai';
@@ -13690,7 +14114,14 @@ function Bubble({
       borderColor: ai ? 'var(--glass-border)' : 'rgba(255,217,138,0.24)',
       color: ai ? 'var(--text-2)' : 'var(--text-1)'
     }
-  }, children));
+  }, children), note && /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11,
+      color: 'var(--text-3)',
+      marginTop: 4,
+      marginLeft: 2
+    }
+  }, note));
 }
 window.SRKit = Object.assign(window.SRKit || {}, {
   FeynmanDrawer
@@ -20686,6 +21117,12 @@ function Settings({
 
   // 账户 tab：改密行内展开 + 忙碌 / 报错态
   const [pwOpen, setPwOpen] = React.useState(false);
+  const [emOpen, setEmOpen] = React.useState(false); // 邮箱绑定/修改行内展开
+  const [emPw, setEmPw] = React.useState('');
+  const [emVal, setEmVal] = React.useState('');
+  const [emErr, setEmErr] = React.useState('');
+  const [emBusy, setEmBusy] = React.useState(false);
+  const importRef = React.useRef(null); // 导入数据的隐藏 file input
   const [oldPw, setOldPw] = React.useState('');
   const [newPw, setNewPw] = React.useState('');
   const [pwBusy, setPwBusy] = React.useState(false);
@@ -20704,7 +21141,7 @@ function Settings({
   // 个人资料
   const [nickname, setNickname] = React.useState(() => saved.nickname || D.account.name);
   const [avatar, setAvatar] = React.useState(() => saved.avatar || 'nebula');
-  const [bio, setBio] = React.useState(() => saved.bio != null ? saved.bio : '在深空里慢慢点亮自己的星。物理 / 数学 / 一点点哲学。');
+  const [bio, setBio] = React.useState(() => saved.bio != null ? saved.bio : D.account.bio || '');
 
   // 偏好
   const [motion, setMotion] = React.useState(() => saved.motion !== false);
@@ -20768,11 +21205,12 @@ function Settings({
       D.account.name = name;
       D.account.avatar = name[0];
     }
+    D.account.bio = bio.trim().slice(0, 120);
     try {
       localStorage.setItem('sr.settings', JSON.stringify({
         nickname: name || D.account.name,
         avatar,
-        bio,
+        bio: D.account.bio,
         motion,
         twinkle,
         remind,
@@ -20781,6 +21219,7 @@ function Settings({
         dimNudge
       }));
     } catch (e) {}
+    D.persist(); // 昵称/头像/简介与提醒偏好进星系快照，随账号跨设备同步
     // 动效偏好即刻生效（index.html 里有对应 CSS 钩子）
     document.documentElement.dataset.motion = motion ? 'on' : 'off';
     document.documentElement.dataset.twinkle = twinkle && motion ? 'on' : 'off';
@@ -21055,10 +21494,18 @@ function Settings({
     }
   }, "\u82E5\u7CFB\u7EDF\u5DF2\u5F00\u542F\u300C\u51CF\u5C11\u52A8\u6001\u6548\u679C\u300D(prefers-reduced-motion)\uFF0C\u661F\u56FE\u4F1A\u81EA\u52A8\u6536\u655B\u6240\u6709\u52A8\u753B\uFF1B\u4E0A\u9762\u7684\u5F00\u5173\u4FDD\u5B58\u540E\u7ACB\u5373\u751F\u6548\uFF0C\u53EF\u968F\u65F6\u624B\u52A8\u63A7\u5236\u3002"))), tab === 'review' && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(SRSectionTitle, null, "\u590D\u4E60\u63D0\u9192"), /*#__PURE__*/React.createElement(SRRow, {
     title: "\u5F00\u542F\u63D0\u9192",
-    hint: "\u5230\u70B9\u63D0\u9192\u4F60\u56DE\u6765\u70B9\u4EAE\u6B63\u5728\u53D8\u6697\u7684\u661F\u3002"
+    hint: (() => {
+      if (typeof Notification === 'undefined') return '当前环境不支持系统通知。';
+      if (Notification.permission === 'denied') return '浏览器拦截了通知——到浏览器设置里允许本站通知后生效。';
+      if (Notification.permission === 'default') return '到点提醒你回来点亮正在变暗的星。开启后浏览器会询问通知权限。';
+      return '到点提醒你回来点亮正在变暗的星。页面开着时按设定时刻通知。';
+    })()
   }, /*#__PURE__*/React.createElement(SRToggle, {
     on: remind,
-    onChange: setRemind
+    onChange: v => {
+      setRemind(v);
+      if (v && typeof Notification !== 'undefined' && Notification.permission === 'default') Notification.requestPermission();
+    }
   })), /*#__PURE__*/React.createElement(SRRow, {
     title: "\u63D0\u9192\u9891\u7387"
   }, /*#__PURE__*/React.createElement(SRSegment, {
@@ -21193,14 +21640,97 @@ function Settings({
       fontFamily: 'var(--font-mono)'
     }
   }, D.account.username)), /*#__PURE__*/React.createElement(SRRow, {
-    title: "\u90AE\u7BB1"
+    title: "\u90AE\u7BB1",
+    noLine: emOpen
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 10
+    }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 13,
       color: 'var(--text-2)',
       fontFamily: 'var(--font-mono)'
     }
-  }, D.account.email || '未绑定')), /*#__PURE__*/React.createElement(SRRow, {
+  }, D.account.email || '未绑定'), !emOpen && /*#__PURE__*/React.createElement(Button, {
+    size: "sm",
+    variant: "ghost",
+    icon: "mail",
+    onClick: () => {
+      setEmErr('');
+      setEmVal(D.account.email || '');
+      setEmPw('');
+      setEmOpen(true);
+    }
+  }, D.account.email ? '修改' : '绑定'))), emOpen && /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: '2px 0 14px',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 9,
+      borderBottom: '1px solid var(--line)'
+    }
+  }, /*#__PURE__*/React.createElement(Input, {
+    icon: "mail",
+    placeholder: "\u65B0\u90AE\u7BB1",
+    autoComplete: "email",
+    value: emVal,
+    onChange: e => setEmVal(e.target.value)
+  }), /*#__PURE__*/React.createElement(Input, {
+    type: "password",
+    icon: "lock",
+    placeholder: "\u8D26\u53F7\u5BC6\u7801\uFF08\u786E\u8BA4\u662F\u4F60\u672C\u4EBA\uFF09",
+    autoComplete: "current-password",
+    value: emPw,
+    onChange: e => setEmPw(e.target.value)
+  }), emErr && /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: 'var(--danger)',
+      lineHeight: 1.6
+    }
+  }, emErr), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      gap: 8,
+      marginTop: 2
+    }
+  }, /*#__PURE__*/React.createElement(Button, {
+    size: "sm",
+    variant: "primary",
+    glow: true,
+    disabled: emBusy,
+    icon: emBusy ? undefined : 'check',
+    onClick: async () => {
+      if (emBusy) return;
+      setEmBusy(true);
+      setEmErr('');
+      try {
+        const r = await window.SRNet.auth.changeEmail({
+          password: emPw,
+          email: emVal.trim()
+        });
+        D.account.email = r.user && r.user.email || emVal.trim();
+        setEmOpen(false);
+        setEmPw('');
+        flashToast('邮箱已更新');
+      } catch (err) {
+        setEmErr(err && err.message || '出了点问题，请再试一次');
+      }
+      setEmBusy(false);
+    }
+  }, emBusy ? '确认中…' : '确认'), /*#__PURE__*/React.createElement(Button, {
+    size: "sm",
+    variant: "ghost",
+    disabled: emBusy,
+    onClick: () => {
+      setEmOpen(false);
+      setEmPw('');
+      setEmErr('');
+    }
+  }, "\u53D6\u6D88"))), /*#__PURE__*/React.createElement(SRRow, {
     title: "\u6CE8\u518C\u4E8E"
   }, /*#__PURE__*/React.createElement("span", {
     style: {
@@ -21314,7 +21844,55 @@ function Settings({
       setTimeout(() => URL.revokeObjectURL(a.href), 4000);
       flashToast('已导出你的星图数据（JSON 文件）');
     }
-  }, "\u5BFC\u51FA\u6570\u636E"), D.account.registered && /*#__PURE__*/React.createElement(Button, {
+  }, "\u5BFC\u51FA\u6570\u636E"), /*#__PURE__*/React.createElement(Button, {
+    size: "sm",
+    variant: "ghost",
+    icon: "upload",
+    onClick: () => importRef.current && importRef.current.click()
+  }, "\u5BFC\u5165\u6570\u636E"), /*#__PURE__*/React.createElement("input", {
+    ref: importRef,
+    type: "file",
+    accept: ".json,application/json",
+    style: {
+      display: 'none'
+    },
+    onChange: e => {
+      const f = e.target.files && e.target.files[0];
+      e.target.value = '';
+      if (!f) return;
+      const rd = new FileReader();
+      rd.onload = () => {
+        let data = null;
+        try {
+          data = JSON.parse(String(rd.result));
+        } catch (err) {}
+        if (!data || !Array.isArray(data.stars)) {
+          flashToast('这不是有效的星图数据文件');
+          return;
+        }
+        setConfirm({
+          message: `导入将替换当前星空（文件含 ${data.stars.length} 颗星），本机与账号里的现有数据都会被覆盖。确定导入吗？`,
+          confirmLabel: '导入并替换',
+          onYes: () => {
+            // 复用冲突收敛通道：hydrate + sr-hydrated 整体重挂载，再落库
+            window.dispatchEvent(new CustomEvent('sr-conflict', {
+              detail: data
+            }));
+            setTimeout(() => {
+              try {
+                window.SRNet.saveNow();
+              } catch (err) {}
+            }, 400);
+            const T = window.StellarRaftDesignSystem_2866af;
+            if (T && T.toast) T.toast('星空已导入 · ' + data.stars.length + ' 颗星就位', {
+              icon: 'check'
+            });
+          }
+        });
+      };
+      rd.readAsText(f);
+    }
+  }), D.account.registered && /*#__PURE__*/React.createElement(Button, {
     size: "sm",
     variant: "ghost",
     icon: "log-out",
@@ -25789,7 +26367,17 @@ function VisitMap({
     }
   }, state.owner && state.owner.name || friend.name, " \u7684\u661F\u7CFB"), /*#__PURE__*/React.createElement(Badge, {
     tone: "gold"
-  }, outlineMode ? '可见大纲' : '仅星名')), /*#__PURE__*/React.createElement("div", {
+  }, outlineMode ? '可见大纲' : '仅星名'), state.owner && state.owner.bio && /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 12,
+      color: 'var(--text-3)',
+      maxWidth: 320,
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap'
+    },
+    title: state.owner.bio
+  }, "\u300C", state.owner.bio, "\u300D")), /*#__PURE__*/React.createElement("div", {
     style: {
       flex: 1
     }
@@ -26218,6 +26806,222 @@ window.SRKit = Object.assign(window.SRKit || {}, {
   VisitView
 });
 })(); } catch (e) { __ds_ns.__errors.push({ path: "ui_kits/stellar-raft/VisitView.jsx", error: String((e && e.message) || e) }); }
+
+// ui_kits/stellar-raft/ai.js
+try { (() => {
+/* SRAI — AI 能力核心层（plain global，在 api.js 之后、data.js 之前加载）
+   - 配置的唯一读写入口：AIConfig 面板、费曼学生、编辑器 AI 助手、复习策略共用一份
+   - chat(): 真实调用所配端点（OpenAI /chat/completions 兼容规范，或 Anthropic /v1/messages）
+   - 未配置 / 请求失败时由调用方自行回退（费曼学生回退本地规则），这里只负责说清原因
+   - 密钥只保存在本机浏览器与账号快照里，请求只发往用户配置的地址 */
+window.SRAI = function () {
+  const CFG_KEY = 'sr.aiConfig';
+  const DEFAULTS = {
+    provider: 'openai',
+    providers: {
+      openai: {
+        baseUrl: 'https://api.openai.com/v1',
+        key: '',
+        model: 'gpt-5.1'
+      },
+      anthropic: {
+        baseUrl: 'https://api.anthropic.com/v1',
+        key: '',
+        model: 'claude-sonnet-5'
+      },
+      custom: {
+        baseUrl: '',
+        key: '',
+        model: ''
+      }
+    },
+    persona: 45,
+    strictness: 60,
+    strategy: 'cooling',
+    autoSummary: true,
+    linkSuggest: true,
+    tagSuggest: false
+  };
+  const getConfig = () => {
+    try {
+      const saved = JSON.parse(localStorage.getItem(CFG_KEY));
+      if (!saved) return JSON.parse(JSON.stringify(DEFAULTS));
+      return {
+        ...DEFAULTS,
+        ...saved,
+        providers: Object.fromEntries(Object.keys(DEFAULTS.providers).map(k => [k, {
+          ...DEFAULTS.providers[k],
+          ...(saved.providers && saved.providers[k])
+        }]))
+      };
+    } catch (e) {
+      return JSON.parse(JSON.stringify(DEFAULTS));
+    }
+  };
+  // 保存并广播：AIConfig 面板、数据层（复习策略）、编辑器助手都监听 sr-ai-config 就地刷新
+  const setConfig = cfg => {
+    try {
+      localStorage.setItem(CFG_KEY, JSON.stringify(cfg));
+    } catch (e) {}
+    try {
+      window.dispatchEvent(new CustomEvent('sr-ai-config'));
+    } catch (e) {}
+  };
+  const clearConfig = () => {
+    try {
+      localStorage.removeItem(CFG_KEY);
+    } catch (e) {}
+    try {
+      window.dispatchEvent(new CustomEvent('sr-ai-config'));
+    } catch (e) {}
+  };
+
+  // 当前生效的接入参数（服务商预设 + 用户覆写归并后）
+  const active = () => {
+    const cfg = getConfig();
+    const prov = cfg.providers[cfg.provider] || cfg.providers.openai;
+    return {
+      provider: cfg.provider,
+      baseUrl: String(prov.baseUrl || '').trim().replace(/\/+$/, ''),
+      key: String(prov.key || '').trim(),
+      model: String(prov.model || '').trim(),
+      persona: cfg.persona,
+      strictness: cfg.strictness,
+      strategy: cfg.strategy,
+      autoSummary: cfg.autoSummary,
+      linkSuggest: cfg.linkSuggest,
+      tagSuggest: cfg.tagSuggest
+    };
+  };
+  // 可用判定：有端点 + 模型即可（Ollama / 内网网关可以无密钥）；官方端点仍需密钥
+  const isConfigured = () => {
+    const a = active();
+    if (!a.baseUrl || !a.model) return false;
+    if ((a.provider === 'openai' || a.provider === 'anthropic') && !a.key) return false;
+    return true;
+  };
+
+  // 把滑块值翻译成提示词里的措辞（与 AIConfig 面板展示同一口径）
+  const personaWord = v => v < 33 ? '温和鼓励' : v < 67 ? '好奇求知' : '刨根问底';
+  const strictWord = v => v < 33 ? '宽松' : v < 67 ? '适中' : '严格';
+  const friendlyError = (e, status) => {
+    if (e && e.name === 'AbortError') return 'AI 响应超时，请稍后再试';
+    if (status === 401 || status === 403) return 'API 密钥无效或无权限';
+    if (status === 404) return '接口路径不对，Base URL 通常以 /v1 结尾';
+    if (status === 429) return '请求太频繁，稍等片刻再试';
+    if (e && e.message === 'Failed to fetch') return '无法访问 AI 服务（网络或 CORS）';
+    return e && e.message || 'AI 服务暂不可用';
+  };
+
+  /* 发起一次真实对话。
+     messages: [{ role: 'user' | 'assistant', content: '…' }]
+     opts: { system, maxTokens = 512, temperature = 0.7, timeout = 30000 }
+     返回 Promise<string>（助手回复文本）；失败抛 Error（message 已人话化，err.status 保留）。 */
+  const chat = async (messages, opts = {}) => {
+    const a = active();
+    if (!isConfigured()) {
+      const e = new Error('尚未配置 AI 服务');
+      e.code = 'unconfigured';
+      throw e;
+    }
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), opts.timeout || 30000);
+    try {
+      let url, headers, body, pick;
+      if (a.provider === 'anthropic') {
+        url = a.baseUrl + '/messages';
+        headers = {
+          'Content-Type': 'application/json',
+          'x-api-key': a.key,
+          'anthropic-version': '2023-06-01',
+          'anthropic-dangerous-direct-browser-access': 'true'
+        };
+        body = {
+          model: a.model,
+          max_tokens: opts.maxTokens || 512,
+          system: opts.system || undefined,
+          messages: messages.map(m => ({
+            role: m.role,
+            content: m.content
+          }))
+        };
+        if (opts.temperature != null) body.temperature = opts.temperature;
+        pick = d => Array.isArray(d.content) ? d.content.map(c => c.text || '').join('') : '';
+      } else {
+        url = a.baseUrl + '/chat/completions';
+        headers = {
+          'Content-Type': 'application/json'
+        };
+        if (a.key) headers.Authorization = 'Bearer ' + a.key;
+        body = {
+          model: a.model,
+          max_tokens: opts.maxTokens || 512,
+          messages: [...(opts.system ? [{
+            role: 'system',
+            content: opts.system
+          }] : []), ...messages.map(m => ({
+            role: m.role,
+            content: m.content
+          }))]
+        };
+        if (opts.temperature != null) body.temperature = opts.temperature;
+        pick = d => d.choices && d.choices[0] && d.choices[0].message && d.choices[0].message.content || '';
+      }
+      const res = await fetch(url, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify(body),
+        signal: ctrl.signal
+      });
+      const data = await res.json().catch(() => null);
+      if (!res.ok) {
+        const detail = data && (data.error && (data.error.message || data.error.type) || data.message);
+        const err = new Error(friendlyError(detail ? new Error(detail) : null, res.status));
+        err.status = res.status;
+        throw err;
+      }
+      const text = String(pick(data) || '').trim();
+      if (!text) throw new Error('AI 返回了空回复');
+      return text;
+    } catch (e) {
+      if (e.status || e.code) throw e;
+      const err = new Error(friendlyError(e));
+      err.cause = e;
+      throw err;
+    } finally {
+      clearTimeout(timer);
+    }
+  };
+
+  /* 要结构化结果的场景（标签推荐 / 连接建议）：从回复里剥出第一段 JSON。
+     模型偶尔会带 markdown 围栏或说明文字，这里做宽松提取，解析失败抛人话错误。 */
+  const chatJSON = async (messages, opts = {}) => {
+    const raw = await chat(messages, {
+      temperature: 0.3,
+      ...opts
+    });
+    const m = raw.match(/```(?:json)?\s*([\s\S]*?)```/) || raw.match(/([[{][\s\S]*[\]}])/);
+    try {
+      return JSON.parse(m ? m[1] : raw);
+    } catch (e) {
+      const err = new Error('AI 返回的结果无法解析');
+      err.raw = raw;
+      throw err;
+    }
+  };
+  return {
+    getConfig,
+    setConfig,
+    clearConfig,
+    active,
+    isConfigured,
+    chat,
+    chatJSON,
+    personaWord,
+    strictWord
+  };
+}();
+})(); } catch (e) { __ds_ns.__errors.push({ path: "ui_kits/stellar-raft/ai.js", error: String((e && e.message) || e) }); }
 
 // ui_kits/stellar-raft/app.jsx
 try { (() => {
@@ -27560,10 +28364,22 @@ window.SR_DATA = function () {
   // 稳定度封顶：曾点亮星 365；从未点亮星 max(当前S, 60)——旧档案里 S 已超 60 的星只封顶生长、不回缩
   const sCapOf = s => everLit(s) ? MEM.sMax : Math.max(s.sr.S, MEM.sMaxUnlit);
   const retrievability = (s, now) => Math.exp(-Math.max(0, (now || Date.now()) - s.sr.last) / DAY / s.sr.S);
-  // 到期时刻：R 自然衰减到 dueR 的那一刻；「加入复习队列」可把它提前
+  // 到期时刻按复习策略（AI 配置面板）计算；「加入复习队列」可把它提前。
+  // cooling（默认）= R 自然衰减到 dueR 的那一刻 · sm2 = 1·3·7·15·30…天阶梯（取不超过当前稳定度的最大档）
+  // daily = 上次复习一天后 · off = 到期照常按 cooling 算（只是不推送通知，见 maybeRemind）
+  const SM2_LADDER = [365, 240, 120, 60, 30, 15, 7, 3, 1];
+  const strategyNow = () => {
+    try {
+      return window.SRAI && window.SRAI.active().strategy || 'cooling';
+    } catch (e) {
+      return 'cooling';
+    }
+  };
   const dueTsOf = s => {
     ensureMemory(s);
-    const natural = s.sr.last + s.sr.S * Math.log(1 / MEM.dueR) * DAY;
+    const strat = strategyNow();
+    let natural;
+    if (strat === 'sm2') natural = s.sr.last + (SM2_LADDER.find(v => v <= s.sr.S) || 1) * DAY;else if (strat === 'daily') natural = s.sr.last + DAY;else natural = s.sr.last + s.sr.S * Math.log(1 / MEM.dueR) * DAY;
     return s.sr.due ? Math.min(s.sr.due, natural) : natural;
   };
   const reviewLabel = (due, now) => {
@@ -27601,6 +28417,7 @@ window.SR_DATA = function () {
       n.nextReview = s.props.nextReview;
     });
     syncCounts();
+    account.streak = computeStreak(now); // 跨天 / 取回快照后连续天数保持真实
     return now;
   };
   // 一次成功复习（费曼点亮/重燃 = ignite:true）：稳定度增长、R 回满，队列覆盖清除。
@@ -28146,20 +28963,40 @@ window.SR_DATA = function () {
       kind,
       note
     });
+    account.streak = computeStreak(); // 今天的第一条学习记录即续上连续天数
     persistRemote();
   };
   // [deprecated] 点亮的时间线现由 reviewSuccess(id, { ignite:true }) 内部写入（note 点亮/重燃），
   // 这里保留空实现只为兼容旧调用点，避免同一次点亮记两条时间线。
   const logIgnite = () => {};
 
-  // 账户信息单一来源：Sidebar 与设置页共用，别各存一份
+  // 连续观星天数：时间线上有主动学习记录（复习/点亮，dim 熄灭不算）的连续自然日。
+  // 今天还没开张不断签——从今天或昨天起往回数；按本地时区的自然日切分。
+  const dayKey = ts => {
+    const d = new Date(ts);
+    return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+  };
+  const computeStreak = now => {
+    now = now || Date.now();
+    const days = new Set(timeline.filter(t => t && t.ts && t.kind !== 'dim').map(t => dayKey(t.ts)));
+    let n = 0,
+      cur = now;
+    if (!days.has(dayKey(cur))) cur -= DAY;
+    while (days.has(dayKey(cur))) {
+      n++;
+      cur -= DAY;
+    }
+    return n;
+  };
+
+  // 账户信息单一来源：Sidebar 与设置页共用。username/email/registeredAt 由 /api/hello 回填，
+  // streak 由时间线实时推算，bio 随快照走——不保留任何展示用的伪造值。
   const account = {
     name: '林深',
     avatar: '林',
-    email: 'linshen@stellar.app',
-    plan: '观星者 · Pro',
-    joined: '2024 年 9 月 18 日',
-    streak: 14
+    email: '',
+    bio: '',
+    streak: 0
   };
   // 社交状态：好友（可造访星系）数量，启动时取回、变更时由星际漫游视图刷新
   const social = {
@@ -28297,11 +29134,57 @@ window.SR_DATA = function () {
 
   // 长时间停留：每分钟按真实时间重算一次，广播给在场视图就地更新数值——
   // 只改数值不加动画，自然兼容 prefers-reduced-motion / data-motion="off"，不会闪烁。
+  // 复习提醒：页面开着时，过了设定时刻且有到期星 → 一条系统通知。
+  // daily 每天最多一次 · weekly 每 7 天一次 · smart 到期 ≥5 颗才提醒（安静哲学）。
+  const maybeRemind = () => {
+    try {
+      if (typeof Notification === 'undefined' || Notification.permission !== 'granted') return;
+      const prefs = JSON.parse(localStorage.getItem('sr.settings')) || {};
+      if (strategyNow() === 'off') return; // 策略「不提醒」：到期照常计算，任何复习类通知都不再打扰
+      const now = new Date();
+      const today = now.toISOString().slice(0, 10);
+      // 星域变暗提醒（设置里的 dimNudge）：某个星域的记忆亮度均值跌破 0.35 → 每天至多提醒一次
+      if (prefs.dimNudge !== false) {
+        const dim = constellations.filter(c => c.count > 0 && c.health < 0.35);
+        if (dim.length && (localStorage.getItem('sr.dimnudge.last') || '') !== today) {
+          localStorage.setItem('sr.dimnudge.last', today);
+          new Notification('星图 · 星域正在变暗', {
+            body: '「' + dim[0].name + '」' + (dim.length > 1 ? '等 ' + dim.length + ' 个星域' : '') + '的记忆亮度明显下降，去看看它们。',
+            tag: 'sr-dimnudge'
+          });
+        }
+      }
+      if (prefs.remind === false) return;
+      const due = dueStars().length;
+      if (!due) return;
+      const freq = prefs.freq || 'daily';
+      if (freq === 'smart' && due < 5) return;
+      const [hh, mm] = String(prefs.remindTime || '21:00').split(':').map(Number);
+      if (now.getHours() < hh || now.getHours() === hh && now.getMinutes() < mm) return;
+      const last = localStorage.getItem('sr.remind.last') || '';
+      if (freq === 'weekly' ? last && Date.now() - Date.parse(last) < 6.5 * 864e5 : last === today) return;
+      localStorage.setItem('sr.remind.last', today);
+      new Notification('星图 · 复习提醒', {
+        body: '有 ' + due + ' 颗星到了回望的时刻。',
+        tag: 'sr-remind'
+      });
+    } catch (e) {}
+  };
+  if (typeof setTimeout !== 'undefined') setTimeout(maybeRemind, 8000); // 打开应用稍后先查一次（测试沙箱无 setTimeout）
   setInterval(() => {
     if (document.hidden) return;
     refreshMemory();
     window.dispatchEvent(new CustomEvent('sr-memory'));
+    maybeRemind();
   }, 60000);
+
+  // AI 配置变更（面板保存 / 快照回灌）：到期口径立刻按新策略重算，各视图角标就地对齐；
+  // 并把配置排进快照上传（水合前 ready=false 自然短路，不会把回灌又传一遍）
+  window.addEventListener('sr-ai-config', () => {
+    refreshMemory();
+    window.dispatchEvent(new CustomEvent('sr-memory'));
+    persistRemote();
+  });
 
   // 应用本机已保存的设置：昵称覆盖账户信息，动效偏好落到 <html> data 属性供 CSS 读取
   try {
@@ -28336,6 +29219,24 @@ window.SR_DATA = function () {
       account.name = d.account.name;
       account.avatar = d.account.avatar || account.avatar;
     }
+    if (d.account && d.account.bio != null) account.bio = d.account.bio;
+    // 偏好与 AI 配置随快照走：换设备 / 换账号后同一套设置与接入自动就位。
+    // 动效 / 星点闪烁是设备偏好，不进快照（见 SRNet.snapshot）——这里的归并不会碰它们。
+    if (d.prefs && typeof d.prefs === 'object') {
+      try {
+        const cur = JSON.parse(localStorage.getItem('sr.settings')) || {};
+        localStorage.setItem('sr.settings', JSON.stringify({
+          ...cur,
+          ...d.prefs
+        }));
+        if (d.prefs.nickname) {
+          account.name = d.prefs.nickname;
+          account.avatar = d.prefs.nickname.trim()[0] || account.avatar;
+        }
+        if (d.prefs.bio != null) account.bio = d.prefs.bio;
+      } catch (e) {}
+    }
+    if (d.aiConfig && typeof d.aiConfig === 'object' && window.SRAI) window.SRAI.setConfig(d.aiConfig);
     refreshMemory(); // 取回的星空立刻按真实时间重算 R —— 放几天不看真的变暗
     window.SRNet.setReady(); // 真实数据已就位，此后才允许上传
     window.dispatchEvent(new CustomEvent('sr-hydrated'));
