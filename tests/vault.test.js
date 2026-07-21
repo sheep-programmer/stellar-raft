@@ -113,3 +113,53 @@ test('buildZip：空清单也产出合法空 zip', () => {
   const files = readZip(bytes);
   assert.deepEqual(files, {});
 });
+
+/* --------------------- 反向导入：readZip + parseVault --------------------- */
+
+test('readZip：读回自家 store 法 zip，路径与内容逐一还原', async () => {
+  const entries = buildVault(GALAXY);
+  const back = await globalThis.SRVault.readZip(buildZip(entries, 0));
+  assert.equal(back.length, entries.length);
+  entries.forEach(e => {
+    const f = back.find(x => x.path === e.path);
+    assert.ok(f, e.path + ' 应存在');
+    assert.equal(f.text, e.text);
+  });
+});
+
+test('parseVault：导出→导入往返——星域/星/标签/属性/连线全部还原，索引跳过、标题行掐掉', async () => {
+  const entries = buildVault(GALAXY);
+  const plan = globalThis.SRVault.parseVault(entries);
+  assert.equal(plan.stars.length, 4, 'README 索引不算星');
+  const conNames = plan.constellations.map(c => c.name).sort();
+  assert.deepEqual(conNames, ['数学分析', '未分域', '量子力学']);
+  const s1 = plan.stars.find(s => s.label === '薛定谔方程');
+  assert.ok(s1);
+  assert.deepEqual(s1.tags, ['公式']);
+  assert.equal(s1.props.source, 'MIT 8.04: Quantum');
+  assert.ok(!s1.body.some(bk => bk.type === 'h1'), '与文件名相同的标题行已掐掉');
+  assert.ok(s1.body.some(bk => bk.type === 'h2'), '正文块保留');
+  assert.ok(!s1.body.some(bk => stripAll(bk.text).includes('[[')), '关联小节不进正文');
+  assert.equal(plan.connections.length, 1, 'wikilink 还原为连线');
+  const c = plan.connections[0];
+  const ids = [c.a, c.b].map(id => plan.stars.find(s => s.id === id).label).sort();
+  assert.deepEqual(ids, ['A B 极限 定义', '薛定谔方程']);
+  assert.equal(c.kind, 'cross');
+  assert.equal(c.rel, '是其分析基础');
+});
+
+function stripAll(h) { return String(h == null ? '' : h).replace(/<[^>]*>/g, ''); }
+
+test('parseVault：非自家仓库也能吃——散档归未分域、块级 tags、无关联小节', () => {
+  const plan = globalThis.SRVault.parseVault([
+    { path: '笔记.md', text: '---\ntags:\n  - 随笔\n---\n\n第一段是摘要。\n\n## 小节\n\n- 列表项\n' },
+    { path: '物理/力学.md', text: '# 另一个标题\n\n内容。\n' },
+  ]);
+  assert.equal(plan.stars.length, 2);
+  const loose = plan.stars.find(s => s.label === '笔记');
+  assert.equal(plan.constellations.find(c => c.id === loose.con).name, '未分域');
+  assert.deepEqual(loose.tags, ['随笔']);
+  assert.equal(loose.summary, '第一段是摘要。');
+  const mech = plan.stars.find(s => s.label === '力学');
+  assert.ok(mech.body.some(bk => bk.type === 'h1'), '标题与文件名不同则保留');
+});

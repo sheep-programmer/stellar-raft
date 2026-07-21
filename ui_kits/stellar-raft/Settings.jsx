@@ -112,6 +112,55 @@ function Settings({ onClose, theme, onToggleTheme, onReplayGuide, onOpenLogin })
   const [emErr, setEmErr] = React.useState('');
   const [emBusy, setEmBusy] = React.useState(false);
   const importRef = React.useRef(null);                 // 导入数据的隐藏 file input
+  const mdImportRef = React.useRef(null);               // 导入 Markdown 仓库（.zip / 多个 .md）的隐藏 file input
+
+  // Markdown 仓库并入星空：与 JSON 的「整体替换」不同，这是增量合并——
+  // 同名星域并入现有域，星按域心散布落位，连线补进；写完一次性落库
+  const mergeVaultPlan = (plan) => {
+    const PALETTE = ['#9fc6ff', '#ffd98a', '#b8a6ff', '#8fe3c0', '#f0a8b8', '#a8d8f0'];
+    const conMap = {};   // 计划域 id → 实际域 id
+    plan.constellations.forEach((c, i) => {
+      const exist = D.constellations.find(x => x.name === c.name);
+      if (exist) { conMap[c.id] = exist.id; return; }
+      const nc = { id: c.id, name: c.name, color: PALETTE[(D.constellations.length + i) % PALETTE.length], health: 0, count: 0 };
+      D.constellations.push(nc);
+      conMap[c.id] = nc.id;
+    });
+    // 每个域一个落点簇：域心随机、成员绕域心散布
+    const centers = {};
+    Object.values(conMap).forEach(id => { centers[id] = centers[id] || [22 + Math.random() * 56, 24 + Math.random() * 52]; });
+    plan.stars.forEach(s => {
+      s.con = conMap[s.con] || s.con;
+      const [cx, cy] = centers[s.con] || [50, 50];
+      const ang = Math.random() * Math.PI * 2, rad = 3 + Math.random() * 9;
+      s.x = Math.min(94, Math.max(6, cx + Math.cos(ang) * rad));
+      s.y = Math.min(92, Math.max(8, cy + Math.sin(ang) * rad));
+      D.addStar(s);
+    });
+    plan.connections.forEach(c => { D.connections.push(c); });
+    D.syncCounts();
+    D.persist();
+    window.dispatchEvent(new Event('sr-data'));
+  };
+  const handleMdImport = async (files) => {
+    try {
+      let entries = [];
+      for (const f of files) {
+        if (/\.zip$/i.test(f.name)) {
+          entries = entries.concat(await window.SRVault.readZip(new Uint8Array(await f.arrayBuffer())));
+        } else if (/\.md$/i.test(f.name)) {
+          entries.push({ path: (f.webkitRelativePath || f.name), text: await f.text() });
+        }
+      }
+      const plan = window.SRVault.parseVault(entries);
+      if (!plan.stars.length) { flashToast('没有找到可导入的 Markdown 笔记'); return; }
+      setConfirm({
+        message: `将导入 ${plan.stars.length} 颗星 · ${plan.constellations.length} 个星域 · ${plan.connections.length} 条连线，增量并入当前星空（不覆盖现有数据）。`,
+        confirmLabel: '并入星空',
+        onYes: () => { mergeVaultPlan(plan); flashToast(`已并入 ${plan.stars.length} 颗星 ✦ 从未点亮起步，讲透才发光`); },
+      });
+    } catch (err) { flashToast('导入失败 · ' + ((err && err.message) || '文件无法解析')); }
+  };
   const [oldPw, setOldPw] = React.useState('');
   const [newPw, setNewPw] = React.useState('');
   const [pwBusy, setPwBusy] = React.useState(false);
@@ -462,6 +511,9 @@ function Settings({ onClose, theme, onToggleTheme, onReplayGuide, onOpenLogin })
                       } catch (err) { flashToast('导出失败 · ' + ((err && err.message) || '稍后再试')); }
                     }}>导出 Markdown 仓库</Button>
                     <Button size="sm" variant="ghost" icon="upload" onClick={() => importRef.current && importRef.current.click()}>导入数据</Button>
+                    <Button size="sm" variant="ghost" icon="folder-up" onClick={() => mdImportRef.current && mdImportRef.current.click()}>导入 Markdown</Button>
+                    <input ref={mdImportRef} type="file" accept=".zip,.md,text/markdown,application/zip" multiple style={{ display: 'none' }}
+                      onChange={(e) => { const fs = Array.from(e.target.files || []); e.target.value = ''; if (fs.length) handleMdImport(fs); }} />
                     <input ref={importRef} type="file" accept=".json,application/json" style={{ display: 'none' }}
                       onChange={(e) => {
                         const f = e.target.files && e.target.files[0];

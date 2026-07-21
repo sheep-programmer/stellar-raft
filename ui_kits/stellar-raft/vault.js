@@ -153,7 +153,104 @@
     return entries;
   }
 
-  const api = { buildZip, buildVault, crc32, safeName };
+  /* ---------------- zip 读取（导入侧） ----------------
+     支持 store（我们自己导出的）与 deflate（用户用系统/Obsidian 重新压过的），
+     deflate 走浏览器/Node 原生 DecompressionStream，依旧零依赖。 */
+  async function readZip(bytes) {
+    const b = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes);
+    const rd16 = (p) => b[p] | (b[p + 1] << 8);
+    const rd32 = (p) => (b[p] | (b[p + 1] << 8) | (b[p + 2] << 16) | (b[p + 3] << 24)) >>> 0;
+    let eocd = -1;
+    for (let p = b.length - 22; p >= 0; p--) { if (rd32(p) === 0x06054b50) { eocd = p; break; } }
+    if (eocd < 0) throw new Error('不是有效的 zip 文件');
+    const count = rd16(eocd + 10);
+    let p = rd32(eocd + 16);
+    const dec = new TextDecoder();
+    const out = [];
+    for (let n = 0; n < count; n++) {
+      if (rd32(p) !== 0x02014b50) throw new Error('zip 目录损坏');
+      const method = rd16(p + 10);
+      const csize = rd32(p + 20);
+      const nameLen = rd16(p + 28), extraLen = rd16(p + 30), cmtLen = rd16(p + 32);
+      const off = rd32(p + 42);
+      const name = dec.decode(b.slice(p + 46, p + 46 + nameLen));
+      const start = off + 30 + rd16(off + 26) + rd16(off + 28);
+      let data = b.slice(start, start + csize);
+      if (method === 8) {
+        if (typeof DecompressionStream === 'undefined') throw new Error('这份压缩包用了压缩存储，当前环境无法解压');
+        const resp = new Response(new Blob([data]).stream().pipeThrough(new DecompressionStream('deflate-raw')));
+        data = new Uint8Array(await resp.arrayBuffer());
+      } else if (method !== 0) throw new Error('不支持的压缩方式（' + method + '）');
+      if (!name.endsWith('/')) out.push({ path: name, text: dec.decode(data) });
+      p += 46 + nameLen + extraLen + cmtLen;
+    }
+    return out;
+  }
+
+  /* ---------------- Markdown 仓库 → 星空导入计划 ----------------
+     entries: [{ path, text }]。规则与导出互逆：
+     - 一级文件夹 → 星域（根级散档归「未分域」）；根级 README.md 是索引，跳过
+     - 文件名 → 星名；与文件名相同的开头 H1（导出加的标题行）掐掉
+     - frontmatter → props / tags；正文首段（≤160 字）兼作摘要
+     - 「## 关联」小节的 [[wikilink]] 列表 → 连线（rel 为破折号后的关系语句），不入正文
+     返回 { constellations, stars, connections }——纯数据计划，由调用方并入星空
+     （位置/记忆状态由 addStar 与调用方补齐）。 */
+  const stripHtmlText = (h) => String(h == null ? '' : h).replace(/<[^>]*>/g, '')
+    .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').trim();
+  function parseVault(entries) {
+    const Md = (typeof globalThis !== 'undefined' && globalThis.SRMd) || (typeof window !== 'undefined' && window.SRMd);
+    if (!Md) throw new Error('SRMd 未加载');
+    const WIKI_RE = /\[\[([^\]]+)\]\]/;
+    const norm = (s) => String(s || '').trim().toLowerCase();
+    const stars = [];
+    const consByName = new Map();
+    const pending = [];   // 待还原的连线：{ fromName, targetName, rel }
+    (entries || []).forEach(e => {
+      if (!/\.md$/i.test(e.path)) return;
+      const parts = e.path.split('/').filter(Boolean);
+      const fname = parts[parts.length - 1].replace(/\.md$/i, '');
+      if (parts.length === 1 && /^readme$/i.test(fname)) return;
+      const folder = parts.length > 1 ? parts[0] : '未分域';
+      const fm = Md.parseFrontmatter(e.text);
+      let blocks = Md.parseMdBlocks(fm.body);
+      if (blocks.length && blocks[0].type === 'h1' && norm(stripHtmlText(blocks[0].text)) === norm(fname)) blocks = blocks.slice(1);
+      const relIdx = blocks.findIndex(bk => /^h[23]$/.test(bk.type) && stripHtmlText(bk.text) === '关联');
+      let bodyBlocks = blocks;
+      if (relIdx >= 0) {
+        bodyBlocks = blocks.slice(0, relIdx);
+        blocks.slice(relIdx + 1).forEach(bk => {
+          if (bk.type !== 'bulleted' && bk.type !== 'p') return;
+          const t = stripHtmlText(bk.text);
+          const m = t.match(WIKI_RE);
+          if (m) pending.push({ fromName: fname, targetName: m[1].trim(), rel: t.replace(WIKI_RE, '').replace(/^[\s—–-]+/, '').trim() });
+        });
+      }
+      if (!consByName.has(folder)) consByName.set(folder, { id: 'c' + Math.random().toString(36).slice(2, 7), name: folder });
+      const id = 's' + Math.random().toString(36).slice(2, 8);
+      const firstP = bodyBlocks.find(bk => bk.type === 'p' && stripHtmlText(bk.text));
+      stars.push({
+        id, con: consByName.get(folder).id, label: fname,
+        summary: firstP ? stripHtmlText(firstP.text).slice(0, 160) : '',
+        tags: fm.tags || [], props: fm.props || {},
+        importance: 1, strength: 0.5,
+        body: [{ id: id + '-r', type: 'rich' }, ...bodyBlocks, ...(bodyBlocks.length ? [] : [{ id: id + '-p', type: 'p', text: '' }])],
+      });
+    });
+    const byName = new Map(stars.map(s => [norm(s.label), s]));
+    const connections = [];
+    const seen = new Set();
+    pending.forEach(l => {
+      const a = byName.get(norm(l.fromName)), b2 = byName.get(norm(l.targetName));
+      if (!a || !b2 || a.id === b2.id) return;
+      const key = [a.id, b2.id].sort().join('~');
+      if (seen.has(key)) return;
+      seen.add(key);
+      connections.push({ a: a.id, b: b2.id, kind: a.con === b2.con ? 'intra' : 'cross', rel: l.rel || '' });
+    });
+    return { constellations: [...consByName.values()], stars, connections };
+  }
+
+  const api = { buildZip, buildVault, readZip, parseVault, crc32, safeName };
   if (typeof window !== 'undefined') window.SRVault = api;
   if (typeof globalThis !== 'undefined') globalThis.SRVault = api;
 })();
