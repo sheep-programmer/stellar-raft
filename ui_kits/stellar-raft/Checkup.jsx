@@ -20,6 +20,66 @@ function parseDelta(d) {
   return neg ? -n : n;
 }
 
+/* ===== 时间之窗 · 未来 7 天预演（组件外纯函数）=====
+   把遗忘从「事后发现」变成「事前预警」：
+   已点亮星 → R 衰减到熄灭阈值 0.35 的时刻 t = last + S·ln(1/0.35)·天；
+   未点亮星 → 到期时刻一律取 D.dueTsOf（策略感知，别在这里重算 due）。
+   只取 0 < t − now ≤ 7 天：已到期的星归上方「今日待办」管，不重复预警。 */
+const DAY_MS = 86400000;
+const EMBER_R = 0.35;   // 与 data.js 的 MEM.emberR 同一阈值
+function forecast7(D, now) {
+  const horizon = now + 7 * DAY_MS;
+  const rows = [];
+  (D.stars || []).forEach(s => {
+    if (D.isLit && D.isLit(s)) {
+      const t = s.sr.last + s.sr.S * Math.log(1 / EMBER_R) * DAY_MS;
+      if (t > now && t <= horizon) rows.push({ s, t, kind: 'ember' });
+    } else if (D.dueTsOf) {
+      const t = D.dueTsOf(s);
+      if (t > now && t <= horizon) rows.push({ s, t, kind: 'due' });
+    }
+  });
+  return rows.sort((a, b) => a.t - b.t);
+}
+// 熄灭类的紧迫感：越近越红（暖金 → 暗红）；到期类保持冷蓝
+const emberUrgency = (days) =>
+  `color-mix(in srgb, var(--danger) ${Math.round((7 - days) / 6 * 72)}%, var(--gold))`;
+// 「排入复习」的即时回执：手动队列已指向今天（半天内）
+const queuedToday = (s, now) => !!(s.sr && s.sr.due && s.sr.due - now < DAY_MS * 0.5);
+
+/* ===== 观星热力图（组件外纯函数）=====
+   时间线里带 ts 的记录按本地自然日聚合；dim（熄灭）是被动事件，不算主动观星。
+   种子行只有文字时间（如「今天 10:30」），无法落到具体日期，不参与统计。 */
+const heatDayKey = (d) => d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+function heatCounts(timeline) {
+  const map = {};
+  (timeline || []).forEach(t => {
+    if (!t || !t.ts || t.kind === 'dim') return;
+    const k = heatDayKey(new Date(t.ts));
+    map[k] = (map[k] || 0) + 1;
+  });
+  return map;
+}
+// 近 16 周：每列一周（周一为首行），最右一列是本周
+function heatWeeks(now) {
+  const today = new Date(now); today.setHours(0, 0, 0, 0);
+  const monday = new Date(today); monday.setDate(today.getDate() - ((today.getDay() + 6) % 7));
+  const weeks = [];
+  for (let w = 15; w >= 0; w--) {
+    const col = [];
+    for (let i = 0; i < 7; i++) {
+      const d = new Date(monday); d.setDate(monday.getDate() - w * 7 + i);
+      col.push(d);
+    }
+    weeks.push(col);
+  }
+  return weeks;
+}
+// 活动次数 → 金色浓度五档：0 近黑，越多越金
+const HEAT_ALPHA = [0, 0.15, 0.35, 0.6, 0.9];
+const heatAlpha = (n) => n <= 0 ? 0 : n === 1 ? 0.15 : n === 2 ? 0.35 : n <= 4 ? 0.6 : 0.9;
+const heatBg = (a) => a > 0 ? `rgba(255,217,138,${a})` : 'rgba(120,150,205,0.09)';
+
 const HUD = { fontSize: 10, letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: 'var(--text-3)', fontFamily: 'var(--font-mono)' };
 
 function SectionTitle({ icon, children, hint }) {
@@ -69,6 +129,8 @@ function Checkup({ onClose, onOpenStar, onFocusCon, onFeynman, onReview }) {
     ['sr-memory', 'sr-data', 'sr-ignite'].forEach(ev => window.addEventListener(ev, h));
     return () => ['sr-memory', 'sr-data', 'sr-ignite'].forEach(ev => window.removeEventListener(ev, h));
   }, []);
+  // 时间之窗折叠态：预演超过 8 行时先收起
+  const [foreOpen, setForeOpen] = React.useState(false);
   const stars = D.stars;
   const total = stars.length;
   const dueN = D.dueStars ? D.dueStars().length : 0;
@@ -128,6 +190,24 @@ function Checkup({ onClose, onOpenStar, onFocusCon, onFeynman, onReview }) {
   const areaPts = series.length
     ? `${px(0).toFixed(1)},${(SH - PAD).toFixed(1)} ${linePts} ${px(series.length - 1).toFixed(1)},${(SH - PAD).toFixed(1)}`
     : '';
+
+  // 时间之窗：未来 7 天将熄灭 / 到期的星（已到期的归上方「今日待办」，不重复）
+  const now = Date.now();
+  const fRows = forecast7(D, now);
+  const fShown = foreOpen ? fRows : fRows.slice(0, 8);
+  const fEmberN = fRows.filter(r => r.kind === 'ember').length;
+  const fDueN = fRows.length - fEmberN;
+  // 排入今日：与列表 / 编辑器的「加入复习队列」同一口径，广播后各在场视图就地对齐
+  const queueToday = (id) => {
+    D.queueReview(id, 0);
+    D.pushTimeline('review', id, '加入复习队列');
+    window.dispatchEvent(new CustomEvent('sr-memory'));
+  };
+
+  // 观星热力图：近 16 周的每日主动学习次数
+  const heat = heatCounts(D.timeline);
+  const weeks = heatWeeks(now);
+  const activeDays = Object.keys(heat).length;
 
   const card = { borderRadius: 'var(--r-lg)', border: '1px solid var(--glass-border)', background: 'var(--glass-bg-faint)', padding: 18 };
 
@@ -230,6 +310,100 @@ function Checkup({ onClose, onOpenStar, onFocusCon, onFeynman, onReview }) {
                   <div style={{ fontSize: 10.5, color: 'var(--text-3)', marginTop: 4, lineHeight: 1.5 }}>{b.desc}</div>
                 </div>
               ))}
+            </div>
+          </GlassPanel>
+        </div>
+
+        {/* forecast + heatmap row */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }}>
+
+          {/* 时间之窗 · 未来 7 天预演 */}
+          <GlassPanel radius="lg" pad="none" style={{ padding: 18 }}>
+            <SectionTitle icon="calendar-clock" hint={fRows.length ? '按剩余天数升序' : undefined}>时间之窗 · 未来 7 天</SectionTitle>
+            {fRows.length === 0 && (
+              <div style={{ padding: '24px 0', textAlign: 'center', color: 'var(--text-3)', fontSize: 13 }}>
+                未来 7 天你的星空安然无恙 ✦
+              </div>
+            )}
+            {fRows.length > 0 && (
+              <div style={{ fontSize: 12, color: 'var(--text-2)', lineHeight: 1.65, marginBottom: 10 }}>
+                若这 7 天不回望，将有
+                {fEmberN > 0 && <> <b style={{ fontFamily: 'var(--font-mono)', color: 'var(--gold)', fontWeight: 500 }}>{fEmberN}</b> 颗星熄灭</>}
+                {fEmberN > 0 && fDueN > 0 && '、'}
+                {fDueN > 0 && <> <b style={{ fontFamily: 'var(--font-mono)', color: 'var(--star-blue)', fontWeight: 500 }}>{fDueN}</b> 颗到期</>}
+                。
+              </div>
+            )}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+              {fShown.map(({ s, t, kind }) => {
+                const days = Math.max(1, Math.ceil((t - now) / DAY_MS));
+                const col = kind === 'ember' ? emberUrgency(days) : 'var(--star-blue)';
+                const queued = queuedToday(s, now);
+                return (
+                  <div key={s.id} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '9px 11px', borderRadius: 'var(--r-md)',
+                    border: '1px solid ' + (kind === 'ember' ? 'color-mix(in srgb, var(--gold) 16%, transparent)' : 'var(--glass-border)'),
+                    background: kind === 'ember' ? 'color-mix(in srgb, var(--gold) 4%, transparent)' : 'rgba(120,150,205,0.05)' }}>
+                    <span style={{ width: 8, height: 8, borderRadius: '50%', flex: 'none', background: col, boxShadow: `0 0 7px ${col}` }} />
+                    <div style={{ minWidth: 0, flex: 1 }}>
+                      <div style={{ fontSize: 13, color: 'var(--text-1)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{s.label}</div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 3 }}>
+                        <span style={{ fontSize: 11, color: 'var(--text-3)' }}>{D.conName(s.con) || '—'}</span>
+                        <span style={{ fontSize: 11, color: col }}>· {days} 天后{kind === 'ember' ? '熄灭' : '到期'}</span>
+                      </div>
+                    </div>
+                    <div style={{ width: 52, flex: 'none' }}><MemoryBar value={s.strength} height={4} fading={s.strength < 0.4} /></div>
+                    {queued
+                      ? <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, flex: 'none', fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--gold)' }}>
+                          <Icon name="check" size={12} color="var(--gold)" />已排入今日
+                        </span>
+                      : <Button size="sm" icon="repeat" onClick={() => queueToday(s.id)} style={{ flex: 'none' }}>排入复习</Button>}
+                  </div>
+                );
+              })}
+            </div>
+            {fRows.length > 8 && (
+              <Button variant="ghost" size="sm" icon={foreOpen ? 'chevron-up' : 'chevron-down'}
+                onClick={() => setForeOpen(v => !v)} style={{ marginTop: 8 }}>
+                {foreOpen ? '收起' : `还有 ${fRows.length - 8} 颗…`}
+              </Button>
+            )}
+          </GlassPanel>
+
+          {/* 观星热力图 */}
+          <GlassPanel radius="lg" pad="none" style={{ padding: 18 }}>
+            <SectionTitle icon="telescope" hint={`连续 ${D.account.streak} 天 · 共 ${activeDays} 个活动日`}>观星热力图</SectionTitle>
+            <div style={{ display: 'flex', gap: 8 }}>
+              {/* 周标尺：周一为首行 */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 3, flex: 'none' }}>
+                {['一', '', '三', '', '五', '', '日'].map((t, i) => (
+                  <span key={i} style={{ width: 12, height: 12, lineHeight: '12px', fontSize: 9, textAlign: 'center', color: 'var(--text-3)', fontFamily: 'var(--font-mono)' }}>{t}</span>
+                ))}
+              </div>
+              <div style={{ display: 'flex', gap: 3, minWidth: 0, overflowX: 'auto', paddingBottom: 2 }}>
+                {weeks.map((col, wi) => (
+                  <div key={wi} style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+                    {col.map((d, di) => {
+                      const future = d.getTime() > now;
+                      const n = heat[heatDayKey(d)] || 0;
+                      const a = heatAlpha(n);
+                      return (
+                        <div key={di}
+                          title={future ? undefined : `${d.getMonth() + 1} 月 ${d.getDate()} 日 · ${n} 次观星`}
+                          style={{ width: 12, height: 12, borderRadius: 3, background: heatBg(a),
+                            boxShadow: a >= 0.6 ? '0 0 5px rgba(255,217,138,0.35)' : 'none',
+                            visibility: future ? 'hidden' : 'visible' }} />
+                      );
+                    })}
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginTop: 12 }}>
+              <span style={{ fontSize: 10.5, color: 'var(--text-3)', marginRight: 3 }}>少</span>
+              {HEAT_ALPHA.map((a, i) => (
+                <span key={i} style={{ width: 10, height: 10, borderRadius: 2.5, background: heatBg(a) }} />
+              ))}
+              <span style={{ fontSize: 10.5, color: 'var(--text-3)', marginLeft: 3 }}>多</span>
             </div>
           </GlassPanel>
         </div>
