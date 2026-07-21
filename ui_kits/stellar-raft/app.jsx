@@ -220,7 +220,7 @@ function App() {
         {view === 'timeline' && <Timeline onOpen={openEditor} />}
         {view === 'checkup' && <Checkup onClose={backToMap} onOpenStar={openEditor} onFocusCon={focusCon} onFeynman={(id) => setFeynman(id)} onReview={openReview} />}
 
-        {feynman && <FeynmanDrawer starId={feynman} onClose={() => setFeynman(null)} />}
+        {feynman && <FeynmanDrawer starId={feynman} onClose={() => setFeynman(null)} onOpenAIConfig={() => setAiConfigOpen(true)} />}
       </main>
 
       {reviewOpen && <ReviewSession onClose={closeReview} />}

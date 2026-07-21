@@ -144,7 +144,7 @@ function studentSystem(star, targets) {
   ].join('\n');
 }
 
-function FeynmanDrawer({ starId, onClose }) {
+function FeynmanDrawer({ starId, onClose, onOpenAIConfig }) {
   const D = window.SR_DATA;
   const star = D.byId[starId] || D.stars[0];
   const targets = React.useMemo(() => deriveKeyPoints(star), [star.id]);
@@ -196,6 +196,17 @@ function FeynmanDrawer({ starId, onClose }) {
     window.addEventListener('sr-ai-config', h);
     return () => window.removeEventListener('sr-ai-config', h);
   }, []);
+  // AI 为主：未接入时先出引导卡，本地学生是低调的次级选择（选过一次就记住，不再拦）。
+  // 半程会话（round>0）不拦——讲到一半的人优先把话讲完。配置完成经 sr-ai-config 即时放行。
+  const [localOk, setLocalOk] = React.useState(() => {
+    try { return localStorage.getItem('sr.fey.localok') === '1'; } catch (e) { return false; }
+  });
+  const chooseLocal = () => {
+    try { localStorage.setItem('sr.fey.localok', '1'); } catch (e) { }
+    setLocalOk(true);
+  };
+  const aiGate = !aiMode.on && !localOk && !gated && round === 0 && !doneAny();
+  function doneAny() { return lit || consolidated || deferred; }
 
   const scrollRef = React.useRef(null);
   const timers = React.useRef([]);
@@ -429,6 +440,26 @@ function FeynmanDrawer({ starId, onClose }) {
             </div>
           )}
 
+          {/* AI 为主的引导卡：未接入时先请出真正的学生；本地学生是低调的次级选择 */}
+          {aiGate && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: '16px 15px', borderRadius: 'var(--r-md)',
+              border: '1px solid rgba(255,217,138,0.28)', background: 'rgba(255,217,138,0.06)' }}>
+              <div style={{ display: 'flex', gap: 9, alignItems: 'flex-start' }}>
+                <Icon name="bot" size={17} color="var(--gold)" style={{ marginTop: 2, flex: 'none' }} />
+                <div style={{ fontSize: 12.5, lineHeight: 1.75, color: 'var(--text-2)' }}>
+                  费曼内化以真实 AI 学生为主——它会真的听懂你的讲解，在含糊处追问、在讲透处确认。接入一次，费曼学生、编辑器助手、复习出题同时点亮。
+                </div>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                <Button size="sm" variant="primary" glow icon="plug-zap" onClick={() => { if (onOpenAIConfig) onOpenAIConfig(); }}>接入 AI 学生</Button>
+                <button type="button" className="sr-focus-ring" onClick={chooseLocal}
+                  style={{ font: 'inherit', fontSize: 12, color: 'var(--text-3)', border: 'none', background: 'transparent', cursor: 'pointer', textDecoration: 'underline', textUnderlineOffset: 3 }}>
+                  暂用本地学生讲解
+                </button>
+              </div>
+            </div>
+          )}
+
           {/* 要点：讲到时点亮成暖金 */}
           {targets.length > 0 && (
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center' }}>
@@ -449,13 +480,15 @@ function FeynmanDrawer({ starId, onClose }) {
             </div>
           )}
 
-          {/* AI student chat — 真实多轮滚动 */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-            {messages.map((m, i) => (
-              <Bubble key={i} who={m.who} name={m.name} note={m.note}>{m.text}</Bubble>
-            ))}
-            {thinking && <TypingBubble />}
-          </div>
+          {/* AI student chat — 真实多轮滚动（引导卡在场时先不开讲） */}
+          {!aiGate && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+              {messages.map((m, i) => (
+                <Bubble key={i} who={m.who} name={m.name} note={m.note}>{m.text}</Bubble>
+              ))}
+              {thinking && <TypingBubble />}
+            </div>
+          )}
 
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {(star.tags || []).slice(0, 3).map((t) => <Tag key={t} icon="hash">{t}</Tag>)}
@@ -471,13 +504,13 @@ function FeynmanDrawer({ starId, onClose }) {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={onKeyDown}
-                  placeholder={gated ? '先写下这颗星，再来讲给 AI 学生' : canIgnite ? '还想补充就继续讲…' : '把你的理解讲给 AI 学生…'}
+                  placeholder={gated ? '先写下这颗星，再来讲给 AI 学生' : aiGate ? '先接入 AI 学生，或选择本地学生' : canIgnite ? '还想补充就继续讲…' : '把你的理解讲给 AI 学生…'}
                   icon="message-circle"
                   size="md"
-                  disabled={thinking || gated}
+                  disabled={thinking || gated || aiGate}
                 />
               </div>
-              <IconButton name="send" title="讲给 AI 学生" onClick={send} disabled={!input.trim() || thinking || gated} />
+              <IconButton name="send" title="讲给 AI 学生" onClick={send} disabled={!input.trim() || thinking || gated || aiGate} />
             </div>
           )}
 
@@ -513,7 +546,7 @@ function FeynmanDrawer({ starId, onClose }) {
                 {extinguished ? '已熄灭 · 待重燃——把它讲透，光就会回来' : '这颗星还需要时间 — 已排回复习队列'}
               </div>
             ) : (
-              <Button variant="ghost" size="sm" icon="rotate-ccw" onClick={defer} disabled={gated} style={{ width: '100%' }}>
+              <Button variant="ghost" size="sm" icon="rotate-ccw" onClick={defer} disabled={gated || aiGate} style={{ width: '100%' }}>
                 还没讲透 · 之后再来
               </Button>
             )

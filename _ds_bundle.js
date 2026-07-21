@@ -1,4 +1,4 @@
-/* @ds-bundle: {"format":3,"namespace":"StellarRaftDesignSystem_2866af","components":[{"name":"Badge","sourcePath":"components/core/Badge.jsx"},{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"GlassPanel","sourcePath":"components/core/GlassPanel.jsx"},{"name":"Icon","sourcePath":"components/core/Icon.jsx"},{"name":"IconButton","sourcePath":"components/core/IconButton.jsx"},{"name":"Input","sourcePath":"components/core/Input.jsx"},{"name":"Tag","sourcePath":"components/core/Tag.jsx"},{"name":"Checkbox","sourcePath":"components/form/Checkbox.jsx"},{"name":"Select","sourcePath":"components/form/Select.jsx"},{"name":"Switch","sourcePath":"components/form/Switch.jsx"},{"name":"Tabs","sourcePath":"components/form/Tabs.jsx"},{"name":"ConstellationItem","sourcePath":"components/knowledge/ConstellationItem.jsx"},{"name":"MemoryBar","sourcePath":"components/knowledge/MemoryBar.jsx"},{"name":"StarNode","sourcePath":"components/knowledge/StarNode.jsx"},{"name":"ContextMenu","sourcePath":"components/overlay/ContextMenu.jsx"},{"name":"Modal","sourcePath":"components/overlay/Modal.jsx"},{"name":"Toast","sourcePath":"components/overlay/Toast.jsx"},{"name":"Tooltip","sourcePath":"components/overlay/Tooltip.jsx"}],"sourceHashes":{"assets/starfield.js":"d776d2b45dc4","components/core/Badge.jsx":"b0bd9735d638","components/core/Button.jsx":"a1c387a07e86","components/core/GlassPanel.jsx":"299a19d8fbb4","components/core/Icon.jsx":"7505f83ab03d","components/core/IconButton.jsx":"24052f4eed78","components/core/Input.jsx":"54a6c9af7e3f","components/core/Tag.jsx":"d8513c07ea96","components/form/Checkbox.jsx":"38aa593157dd","components/form/Select.jsx":"86b8c1c71e12","components/form/Switch.jsx":"938c62be0664","components/form/Tabs.jsx":"ede2dbff1963","components/knowledge/ConstellationItem.jsx":"d73e999469b6","components/knowledge/MemoryBar.jsx":"a54c928d5065","components/knowledge/StarNode.jsx":"1bedee49f0bf","components/overlay/ContextMenu.jsx":"11783420e876","components/overlay/Modal.jsx":"0906de457544","components/overlay/Toast.jsx":"d22ad40680a6","components/overlay/Tooltip.jsx":"a042caa8970d","ui_kits/stellar-raft/AIConfig.jsx":"bbc66d05eebf","ui_kits/stellar-raft/AerialView.jsx":"8209eb6af395","ui_kits/stellar-raft/BlackHole.jsx":"2704c4a4e50c","ui_kits/stellar-raft/Checkup.jsx":"b7cbf7f0bbf9","ui_kits/stellar-raft/CommandPalette.jsx":"3f1a9cdd2383","ui_kits/stellar-raft/Editor.jsx":"2b09b768f90a","ui_kits/stellar-raft/EditorMenus.jsx":"fb80581f6bcc","ui_kits/stellar-raft/FeynmanDrawer.jsx":"eb200ab5fe46","ui_kits/stellar-raft/Galaxy3D.jsx":"2ce87e7da57d","ui_kits/stellar-raft/Inbox.jsx":"c2fc04361d44","ui_kits/stellar-raft/KeysHelp.jsx":"f4fc061886ee","ui_kits/stellar-raft/ListView.jsx":"e2550f598c82","ui_kits/stellar-raft/LoginView.jsx":"18d9c842c5c6","ui_kits/stellar-raft/Onboarding.jsx":"e1d27a7d28a7","ui_kits/stellar-raft/ReviewSession.jsx":"9092a3d9412c","ui_kits/stellar-raft/Settings.jsx":"947a5dc76b3a","ui_kits/stellar-raft/Sidebar.jsx":"f61a222b9d49","ui_kits/stellar-raft/StarMap.jsx":"3f1c09e9e50e","ui_kits/stellar-raft/Timeline.jsx":"cda4e62fa57b","ui_kits/stellar-raft/VisitView.jsx":"19ff8ab7dbb7","ui_kits/stellar-raft/ai.js":"2f79eb3473c9","ui_kits/stellar-raft/app.jsx":"2c557164c1c2","ui_kits/stellar-raft/codehl.js":"6fbdd0100deb","ui_kits/stellar-raft/data.js":"7c4d0fe5482e","ui_kits/stellar-raft/mdcore.js":"b82d5054c3b6","ui_kits/stellar-raft/sanitize.js":"88e63cd63253","ui_kits/stellar-raft/transition.js":"3725d8982dc5","ui_kits/stellar-raft/undocore.js":"7f8c94da35f9","ui_kits/stellar-raft/vault.js":"bfb5fdd87949"},"inlinedExternals":[],"unexposedExports":[{"name":"memoryColor","sourcePath":"components/knowledge/MemoryBar.jsx"}],"exposedHelpers":[{"name":"toast","sourcePath":"components/overlay/Toast.jsx"}]} */
+/* @ds-bundle: {"format":3,"namespace":"StellarRaftDesignSystem_2866af","components":[{"name":"Badge","sourcePath":"components/core/Badge.jsx"},{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"GlassPanel","sourcePath":"components/core/GlassPanel.jsx"},{"name":"Icon","sourcePath":"components/core/Icon.jsx"},{"name":"IconButton","sourcePath":"components/core/IconButton.jsx"},{"name":"Input","sourcePath":"components/core/Input.jsx"},{"name":"Tag","sourcePath":"components/core/Tag.jsx"},{"name":"Checkbox","sourcePath":"components/form/Checkbox.jsx"},{"name":"Select","sourcePath":"components/form/Select.jsx"},{"name":"Switch","sourcePath":"components/form/Switch.jsx"},{"name":"Tabs","sourcePath":"components/form/Tabs.jsx"},{"name":"ConstellationItem","sourcePath":"components/knowledge/ConstellationItem.jsx"},{"name":"MemoryBar","sourcePath":"components/knowledge/MemoryBar.jsx"},{"name":"StarNode","sourcePath":"components/knowledge/StarNode.jsx"},{"name":"ContextMenu","sourcePath":"components/overlay/ContextMenu.jsx"},{"name":"Modal","sourcePath":"components/overlay/Modal.jsx"},{"name":"Toast","sourcePath":"components/overlay/Toast.jsx"},{"name":"Tooltip","sourcePath":"components/overlay/Tooltip.jsx"}],"sourceHashes":{"assets/starfield.js":"d776d2b45dc4","components/core/Badge.jsx":"b0bd9735d638","components/core/Button.jsx":"a1c387a07e86","components/core/GlassPanel.jsx":"299a19d8fbb4","components/core/Icon.jsx":"7505f83ab03d","components/core/IconButton.jsx":"24052f4eed78","components/core/Input.jsx":"54a6c9af7e3f","components/core/Tag.jsx":"d8513c07ea96","components/form/Checkbox.jsx":"38aa593157dd","components/form/Select.jsx":"86b8c1c71e12","components/form/Switch.jsx":"938c62be0664","components/form/Tabs.jsx":"ede2dbff1963","components/knowledge/ConstellationItem.jsx":"d73e999469b6","components/knowledge/MemoryBar.jsx":"a54c928d5065","components/knowledge/StarNode.jsx":"1bedee49f0bf","components/overlay/ContextMenu.jsx":"11783420e876","components/overlay/Modal.jsx":"0906de457544","components/overlay/Toast.jsx":"d22ad40680a6","components/overlay/Tooltip.jsx":"a042caa8970d","ui_kits/stellar-raft/AIConfig.jsx":"bbc66d05eebf","ui_kits/stellar-raft/AerialView.jsx":"8209eb6af395","ui_kits/stellar-raft/BlackHole.jsx":"2704c4a4e50c","ui_kits/stellar-raft/Checkup.jsx":"b7cbf7f0bbf9","ui_kits/stellar-raft/CommandPalette.jsx":"3f1a9cdd2383","ui_kits/stellar-raft/Editor.jsx":"2b09b768f90a","ui_kits/stellar-raft/EditorMenus.jsx":"fb80581f6bcc","ui_kits/stellar-raft/FeynmanDrawer.jsx":"ff65c7ccc0cf","ui_kits/stellar-raft/Galaxy3D.jsx":"2ce87e7da57d","ui_kits/stellar-raft/Inbox.jsx":"c2fc04361d44","ui_kits/stellar-raft/KeysHelp.jsx":"f4fc061886ee","ui_kits/stellar-raft/ListView.jsx":"e2550f598c82","ui_kits/stellar-raft/LoginView.jsx":"18d9c842c5c6","ui_kits/stellar-raft/Onboarding.jsx":"e1d27a7d28a7","ui_kits/stellar-raft/ReviewSession.jsx":"9092a3d9412c","ui_kits/stellar-raft/Settings.jsx":"947a5dc76b3a","ui_kits/stellar-raft/Sidebar.jsx":"f61a222b9d49","ui_kits/stellar-raft/StarMap.jsx":"3f1c09e9e50e","ui_kits/stellar-raft/Timeline.jsx":"cda4e62fa57b","ui_kits/stellar-raft/VisitView.jsx":"19ff8ab7dbb7","ui_kits/stellar-raft/ai.js":"2f79eb3473c9","ui_kits/stellar-raft/app.jsx":"a957f07956b7","ui_kits/stellar-raft/codehl.js":"6fbdd0100deb","ui_kits/stellar-raft/data.js":"7c4d0fe5482e","ui_kits/stellar-raft/mdcore.js":"b82d5054c3b6","ui_kits/stellar-raft/sanitize.js":"88e63cd63253","ui_kits/stellar-raft/transition.js":"3725d8982dc5","ui_kits/stellar-raft/undocore.js":"7f8c94da35f9","ui_kits/stellar-raft/vault.js":"bfb5fdd87949"},"inlinedExternals":[],"unexposedExports":[{"name":"memoryColor","sourcePath":"components/knowledge/MemoryBar.jsx"}],"exposedHelpers":[{"name":"toast","sourcePath":"components/overlay/Toast.jsx"}]} */
 
 (() => {
 
@@ -14890,7 +14890,8 @@ function studentSystem(star, targets) {
 }
 function FeynmanDrawer({
   starId,
-  onClose
+  onClose,
+  onOpenAIConfig
 }) {
   const D = window.SR_DATA;
   const star = D.byId[starId] || D.stars[0];
@@ -14945,6 +14946,25 @@ function FeynmanDrawer({
     window.addEventListener('sr-ai-config', h);
     return () => window.removeEventListener('sr-ai-config', h);
   }, []);
+  // AI 为主：未接入时先出引导卡，本地学生是低调的次级选择（选过一次就记住，不再拦）。
+  // 半程会话（round>0）不拦——讲到一半的人优先把话讲完。配置完成经 sr-ai-config 即时放行。
+  const [localOk, setLocalOk] = React.useState(() => {
+    try {
+      return localStorage.getItem('sr.fey.localok') === '1';
+    } catch (e) {
+      return false;
+    }
+  });
+  const chooseLocal = () => {
+    try {
+      localStorage.setItem('sr.fey.localok', '1');
+    } catch (e) {}
+    setLocalOk(true);
+  };
+  const aiGate = !aiMode.on && !localOk && !gated && round === 0 && !doneAny();
+  function doneAny() {
+    return lit || consolidated || deferred;
+  }
   const scrollRef = React.useRef(null);
   const timers = React.useRef([]);
   const alive = React.useRef(true); // 抽屉关闭后，迟到的 AI 回复不再落 setState
@@ -15351,7 +15371,65 @@ function FeynmanDrawer({
     style: {
       alignSelf: 'flex-start'
     }
-  }, "\u53BB\u5199\u7B14\u8BB0")), targets.length > 0 && /*#__PURE__*/React.createElement("div", {
+  }, "\u53BB\u5199\u7B14\u8BB0")), aiGate && /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 12,
+      padding: '16px 15px',
+      borderRadius: 'var(--r-md)',
+      border: '1px solid rgba(255,217,138,0.28)',
+      background: 'rgba(255,217,138,0.06)'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      gap: 9,
+      alignItems: 'flex-start'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "bot",
+    size: 17,
+    color: "var(--gold)",
+    style: {
+      marginTop: 2,
+      flex: 'none'
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12.5,
+      lineHeight: 1.75,
+      color: 'var(--text-2)'
+    }
+  }, "\u8D39\u66FC\u5185\u5316\u4EE5\u771F\u5B9E AI \u5B66\u751F\u4E3A\u4E3B\u2014\u2014\u5B83\u4F1A\u771F\u7684\u542C\u61C2\u4F60\u7684\u8BB2\u89E3\uFF0C\u5728\u542B\u7CCA\u5904\u8FFD\u95EE\u3001\u5728\u8BB2\u900F\u5904\u786E\u8BA4\u3002\u63A5\u5165\u4E00\u6B21\uFF0C\u8D39\u66FC\u5B66\u751F\u3001\u7F16\u8F91\u5668\u52A9\u624B\u3001\u590D\u4E60\u51FA\u9898\u540C\u65F6\u70B9\u4EAE\u3002")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 12
+    }
+  }, /*#__PURE__*/React.createElement(Button, {
+    size: "sm",
+    variant: "primary",
+    glow: true,
+    icon: "plug-zap",
+    onClick: () => {
+      if (onOpenAIConfig) onOpenAIConfig();
+    }
+  }, "\u63A5\u5165 AI \u5B66\u751F"), /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    className: "sr-focus-ring",
+    onClick: chooseLocal,
+    style: {
+      font: 'inherit',
+      fontSize: 12,
+      color: 'var(--text-3)',
+      border: 'none',
+      background: 'transparent',
+      cursor: 'pointer',
+      textDecoration: 'underline',
+      textUnderlineOffset: 3
+    }
+  }, "\u6682\u7528\u672C\u5730\u5B66\u751F\u8BB2\u89E3"))), targets.length > 0 && /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       gap: 6,
@@ -15382,7 +15460,7 @@ function FeynmanDrawer({
         boxShadow: on ? 'var(--glow-faint)' : 'none'
       }
     }, t);
-  })), /*#__PURE__*/React.createElement("div", {
+  })), !aiGate && /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       flexDirection: 'column',
@@ -15424,15 +15502,15 @@ function FeynmanDrawer({
     value: input,
     onChange: e => setInput(e.target.value),
     onKeyDown: onKeyDown,
-    placeholder: gated ? '先写下这颗星，再来讲给 AI 学生' : canIgnite ? '还想补充就继续讲…' : '把你的理解讲给 AI 学生…',
+    placeholder: gated ? '先写下这颗星，再来讲给 AI 学生' : aiGate ? '先接入 AI 学生，或选择本地学生' : canIgnite ? '还想补充就继续讲…' : '把你的理解讲给 AI 学生…',
     icon: "message-circle",
     size: "md",
-    disabled: thinking || gated
+    disabled: thinking || gated || aiGate
   })), /*#__PURE__*/React.createElement(IconButton, {
     name: "send",
     title: "\u8BB2\u7ED9 AI \u5B66\u751F",
     onClick: send,
-    disabled: !input.trim() || thinking || gated
+    disabled: !input.trim() || thinking || gated || aiGate
   })), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
@@ -15505,7 +15583,7 @@ function FeynmanDrawer({
     size: "sm",
     icon: "rotate-ccw",
     onClick: defer,
-    disabled: gated,
+    disabled: gated || aiGate,
     style: {
       width: '100%'
     }
@@ -30170,7 +30248,8 @@ function App() {
     onReview: openReview
   }), feynman && /*#__PURE__*/React.createElement(FeynmanDrawer, {
     starId: feynman,
-    onClose: () => setFeynman(null)
+    onClose: () => setFeynman(null),
+    onOpenAIConfig: () => setAiConfigOpen(true)
   })), reviewOpen && /*#__PURE__*/React.createElement(ReviewSession, {
     onClose: closeReview
   }), cmd && /*#__PURE__*/React.createElement(CommandPalette, {
