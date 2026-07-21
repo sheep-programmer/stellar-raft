@@ -3,7 +3,7 @@
    distribution (牢固 / 正常 / 正变暗 / 将熄灭), the stars most in need of review,
    a recent ignite trend drawn from the timeline, and weak-constellation nudges.
    Click a star to open it, click a constellation to fly there. */
-const { GlassPanel, Icon, IconButton, Button, MemoryBar } = window.StellarRaftDesignSystem_2866af;
+const { GlassPanel, Icon, IconButton, Button, MemoryBar, toast } = window.StellarRaftDesignSystem_2866af;
 
 // memory band — same thresholds the rest of the kit uses
 function band(s) {
@@ -80,14 +80,206 @@ const HEAT_ALPHA = [0, 0.15, 0.35, 0.6, 0.9];
 const heatAlpha = (n) => n <= 0 ? 0 : n === 1 ? 0.15 : n === 2 ? 0.35 : n <= 4 ? 0.6 : 0.9;
 const heatBg = (a) => a > 0 ? `rgba(255,217,138,${a})` : 'rgba(120,150,205,0.09)';
 
+/* ===== 星空周报卡（组件外纯函数）=====
+   一键把最近 7 天的学习战报画成一张 1080×1350 的竖版 PNG。
+   Canvas 里读不到 CSS 变量，设计系统色值硬编码为常量，来源 token 标注在旁。
+   星总数不猜「本周新增」——stars 没有创建时间，报现有总量更诚实。 */
+const CARD_W = 1080, CARD_H = 1350;
+const CARD_C = {
+  deep0: '#05060f',                    // --space-0 深空底（启动屏线性渐变首端）
+  deep1: '#03040c',                    // 启动屏线性渐变中段
+  deep2: '#04050e',                    // 启动屏线性渐变末端
+  blue: '#9fc6ff',                     // --star-blue 星蓝
+  gold: '#ffd98a',                     // --gold 暖金
+  goldDeep: '#ffb86b',                 // 品牌星标渐变暗端（index.html sr-logo-g）
+  goldHi: '#ffe9b8',                   // 品牌星标渐变亮端（index.html sr-logo-g）
+  text1: 'rgba(255,255,255,0.93)',     // --text-1 主文字
+  text2: 'rgba(208,220,255,0.66)',     // --text-2 次文字
+  text3: 'rgba(159,198,255,0.40)',     // --text-3 弱文字
+};
+const cardFont = (w, px) => `${w} ${px}px Sora, "Noto Sans SC", sans-serif`;
+const cardMono = (w, px) => `${w} ${px}px "JetBrains Mono", "Roboto Mono", monospace`;   // --font-mono
+
+// 近 7 天聚合：点亮数 / 复习数 / 按天活动小条（dim 是被动事件，不算主动学习）
+function weekStats(D, now) {
+  const start = new Date(now); start.setHours(0, 0, 0, 0); start.setDate(start.getDate() - 6);
+  const days = []; const idx = {};
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(start); d.setDate(start.getDate() + i);
+    idx[heatDayKey(d)] = i;
+    days.push({ week: '日一二三四五六'[d.getDay()], date: (d.getMonth() + 1) + '.' + d.getDate(), n: 0 });
+  }
+  let ignites = 0, reviews = 0;
+  (D.timeline || []).forEach(t => {
+    if (!t || !t.ts || t.ts < start.getTime() || t.ts > now) return;
+    if (t.kind === 'ignite') ignites++;
+    else if (t.kind === 'review') reviews++;
+    if (t.kind !== 'dim') {
+      const i = idx[heatDayKey(new Date(t.ts))];
+      if (i != null) days[i].n++;
+    }
+  });
+  return {
+    name: (D.account && D.account.name) || '观星者',
+    streak: (D.account && D.account.streak) || 0,
+    total: (D.stars || []).length,
+    ignites, reviews, days,
+    range: days[0].date + ' – ' + days[6].date,
+  };
+}
+
+// 四芒星品牌星标：index.html 里 sr-logo 的曲线四芒按比例移植成 canvas path
+function cardSparkPath(ctx, cx, cy, R) {
+  ctx.beginPath();
+  ctx.moveTo(cx, cy - R);
+  ctx.bezierCurveTo(cx + 0.084 * R, cy - 0.23 * R, cx + 0.23 * R, cy - 0.084 * R, cx + R, cy);
+  ctx.bezierCurveTo(cx + 0.23 * R, cy + 0.084 * R, cx + 0.084 * R, cy + 0.23 * R, cx, cy + R);
+  ctx.bezierCurveTo(cx - 0.084 * R, cy + 0.23 * R, cx - 0.23 * R, cy + 0.084 * R, cx - R, cy);
+  ctx.bezierCurveTo(cx - 0.23 * R, cy - 0.084 * R, cx - 0.084 * R, cy - 0.23 * R, cx, cy - R);
+  ctx.closePath();
+}
+const cardRRect = (ctx, x, y, w, h, r) => {
+  ctx.beginPath();
+  if (ctx.roundRect) ctx.roundRect(x, y, w, h, r); else ctx.rect(x, y, w, h);
+};
+
+function drawWeeklyCard(ctx, data) {
+  const W = CARD_W, H = CARD_H, C = CARD_C;
+
+  // 深空底：复刻启动屏的三层渐变（线性主底 + 两团蓝紫光晕）
+  const bg = ctx.createLinearGradient(0, 0, 0, H);
+  bg.addColorStop(0, C.deep0); bg.addColorStop(0.55, C.deep1); bg.addColorStop(1, C.deep2);
+  ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H);
+  const glow1 = ctx.createRadialGradient(W * 0.78, -H * 0.1, 0, W * 0.78, -H * 0.1, 900);
+  glow1.addColorStop(0, 'rgba(26,35,80,0.55)'); glow1.addColorStop(1, 'rgba(26,35,80,0)');
+  ctx.fillStyle = glow1; ctx.fillRect(0, 0, W, H);
+  const glow2 = ctx.createRadialGradient(W * 0.12, H * 1.1, 0, W * 0.12, H * 1.1, 760);
+  glow2.addColorStop(0, 'rgba(40,30,70,0.35)'); glow2.addColorStop(1, 'rgba(40,30,70,0)');
+  ctx.fillStyle = glow2; ctx.fillRect(0, 0, W, H);
+
+  // 散布小星点：白 / 蓝 / 金三色轮转，少数带十字星芒
+  const tints = ['rgba(214,230,255,', 'rgba(159,198,255,', 'rgba(255,231,176,'];
+  for (let i = 0; i < 40; i++) {
+    const x = Math.random() * W, y = Math.random() * H;
+    const r = 0.8 + Math.random() * 1.2, tint = tints[i % 3];
+    ctx.fillStyle = tint + (0.35 + Math.random() * 0.5).toFixed(2) + ')';
+    ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
+    if (i % 8 === 0) {
+      ctx.strokeStyle = tint + '0.28)'; ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(x - r * 5, y); ctx.lineTo(x + r * 5, y);
+      ctx.moveTo(x, y - r * 5); ctx.lineTo(x, y + r * 5);
+      ctx.stroke();
+    }
+  }
+
+  ctx.textAlign = 'center';
+
+  // 顶部品牌星标：暖金渐变四芒 + 柔光
+  const sx = W / 2, sy = 168, sR = 52;
+  const sg = ctx.createLinearGradient(sx - sR, sy - sR, sx + sR, sy + sR);
+  sg.addColorStop(0, C.goldHi); sg.addColorStop(1, C.goldDeep);
+  ctx.save();
+  ctx.shadowColor = 'rgba(255,217,138,0.55)'; ctx.shadowBlur = 36;
+  cardSparkPath(ctx, sx, sy, sR);
+  ctx.fillStyle = sg; ctx.fill();
+  ctx.restore();
+
+  // 标题与日期范围
+  ctx.fillStyle = C.text1;
+  ctx.font = cardFont(300, 58);
+  ctx.fillText('星图 · 星空周报', W / 2, 318);
+  ctx.fillStyle = 'rgba(159,198,255,0.55)';
+  ctx.font = cardMono(300, 26);
+  ctx.fillText(data.range + ' · 最近 7 天', W / 2, 372);
+
+  // 中部四枚大数字：金 / 蓝交替，2×2 网格
+  const stats = [
+    { v: data.ignites, t: '本周点亮', c: C.gold, glow: true },
+    { v: data.reviews, t: '本周复习', c: C.blue, glow: false },
+    { v: data.streak, t: '连续观星（天）', c: C.gold, glow: true },
+    { v: data.total, t: '知识星总数', c: C.blue, glow: false },
+  ];
+  stats.forEach((s, i) => {
+    const cx = i % 2 === 0 ? W * 0.28 : W * 0.72;
+    const by = i < 2 ? 560 : 780;
+    ctx.save();
+    if (s.glow) { ctx.shadowColor = 'rgba(255,217,138,0.35)'; ctx.shadowBlur = 22; }
+    ctx.fillStyle = s.c;
+    ctx.font = cardMono(200, 104);
+    ctx.fillText(String(s.v), cx, by);
+    ctx.restore();
+    ctx.fillStyle = C.text2;
+    ctx.font = cardFont(300, 26);
+    ctx.fillText(s.t, cx, by + 52);
+  });
+
+  // 下部 7 天活动条形：金色渐变柱，无活动的天画暗槽
+  const barW = 76, gap = 36, base = 1130, maxH = 150;
+  const x0 = (W - (barW * 7 + gap * 6)) / 2;
+  const maxN = Math.max(1, ...data.days.map(d => d.n));
+  ctx.strokeStyle = 'rgba(159,198,255,0.14)'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(x0 - 14, base + 1); ctx.lineTo(W - x0 + 14, base + 1); ctx.stroke();
+  data.days.forEach((d, i) => {
+    const x = x0 + i * (barW + gap), cx = x + barW / 2;
+    if (d.n > 0) {
+      const h = Math.max(16, d.n / maxN * maxH);
+      const bar = ctx.createLinearGradient(0, base - h, 0, base);
+      bar.addColorStop(0, C.gold); bar.addColorStop(1, 'rgba(255,184,107,0.45)');
+      cardRRect(ctx, x, base - h, barW, h, 8);
+      ctx.fillStyle = bar; ctx.fill();
+      ctx.fillStyle = C.gold;
+      ctx.font = cardMono(300, 24);
+      ctx.fillText(String(d.n), cx, base - h - 14);
+    } else {
+      cardRRect(ctx, x, base - 10, barW, 10, 5);
+      ctx.fillStyle = 'rgba(120,150,205,0.10)'; ctx.fill();
+    }
+    ctx.fillStyle = C.text3;
+    ctx.font = cardFont(300, 24);
+    ctx.fillText('周' + d.week, cx, base + 44);
+    ctx.fillStyle = 'rgba(159,198,255,0.30)';
+    ctx.font = cardMono(300, 19);
+    ctx.fillText(d.date, cx, base + 76);
+  });
+
+  // 底部署名行
+  ctx.fillStyle = C.text2;
+  ctx.font = cardFont(300, 31);
+  ctx.fillText('@' + data.name + ' 的深空', W / 2, 1272);
+  ctx.save();
+  try { ctx.letterSpacing = '8px'; } catch (e) { /* 旧内核没有 letterSpacing，退回默认字距 */ }
+  ctx.fillStyle = C.text3;
+  ctx.font = cardFont(300, 21);
+  ctx.fillText('STELLAR RAFT', W / 2 + 4, 1316);
+  ctx.restore();
+}
+
+// 入口：离屏画布 → toBlob → 触发下载（同步很快，无需 loading）
+function shareWeeklyCard(D) {
+  const canvas = document.createElement('canvas');
+  canvas.width = CARD_W; canvas.height = CARD_H;
+  drawWeeklyCard(canvas.getContext('2d'), weekStats(D, Date.now()));
+  canvas.toBlob(blob => {
+    if (!blob) { toast('周报卡生成失败，稍后再试', { tone: 'danger', icon: 'circle-alert' }); return; }
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = '星图-星空周报.png';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 4000);
+    toast('周报卡已保存 ✦', { icon: 'image-down' });
+  }, 'image/png');
+}
+
 const HUD = { fontSize: 10, letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: 'var(--text-3)', fontFamily: 'var(--font-mono)' };
 
-function SectionTitle({ icon, children, hint }) {
+function SectionTitle({ icon, children, hint, action }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 14 }}>
       {icon && <Icon name={icon} size={14} color="var(--star-blue)" />}
       <span style={HUD}>{children}</span>
       {hint && <span style={{ fontSize: 11.5, color: 'var(--text-3)', marginLeft: 'auto' }}>{hint}</span>}
+      {action && <span style={{ flex: 'none', marginLeft: hint ? 0 : 'auto' }}>{action}</span>}
     </div>
   );
 }
@@ -371,7 +563,10 @@ function Checkup({ onClose, onOpenStar, onFocusCon, onFeynman, onReview }) {
 
           {/* 观星热力图 */}
           <GlassPanel radius="lg" pad="none" style={{ padding: 18 }}>
-            <SectionTitle icon="telescope" hint={`连续 ${D.account.streak} 天 · 共 ${activeDays} 个活动日`}>观星热力图</SectionTitle>
+            <SectionTitle icon="telescope" hint={`连续 ${D.account.streak} 天 · 共 ${activeDays} 个活动日`}
+              action={<Button variant="ghost" size="sm" icon="image-down" onClick={() => shareWeeklyCard(D)}>生成周报卡</Button>}>
+              观星热力图
+            </SectionTitle>
             <div style={{ display: 'flex', gap: 8 }}>
               {/* 周标尺：周一为首行 */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: 3, flex: 'none' }}>
