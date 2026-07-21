@@ -1,4 +1,4 @@
-/* @ds-bundle: {"format":3,"namespace":"StellarRaftDesignSystem_2866af","components":[{"name":"Badge","sourcePath":"components/core/Badge.jsx"},{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"GlassPanel","sourcePath":"components/core/GlassPanel.jsx"},{"name":"Icon","sourcePath":"components/core/Icon.jsx"},{"name":"IconButton","sourcePath":"components/core/IconButton.jsx"},{"name":"Input","sourcePath":"components/core/Input.jsx"},{"name":"Tag","sourcePath":"components/core/Tag.jsx"},{"name":"Checkbox","sourcePath":"components/form/Checkbox.jsx"},{"name":"Select","sourcePath":"components/form/Select.jsx"},{"name":"Switch","sourcePath":"components/form/Switch.jsx"},{"name":"Tabs","sourcePath":"components/form/Tabs.jsx"},{"name":"ConstellationItem","sourcePath":"components/knowledge/ConstellationItem.jsx"},{"name":"MemoryBar","sourcePath":"components/knowledge/MemoryBar.jsx"},{"name":"StarNode","sourcePath":"components/knowledge/StarNode.jsx"},{"name":"ContextMenu","sourcePath":"components/overlay/ContextMenu.jsx"},{"name":"Modal","sourcePath":"components/overlay/Modal.jsx"},{"name":"Toast","sourcePath":"components/overlay/Toast.jsx"},{"name":"Tooltip","sourcePath":"components/overlay/Tooltip.jsx"}],"sourceHashes":{"assets/starfield.js":"d776d2b45dc4","components/core/Badge.jsx":"b0bd9735d638","components/core/Button.jsx":"a1c387a07e86","components/core/GlassPanel.jsx":"299a19d8fbb4","components/core/Icon.jsx":"7505f83ab03d","components/core/IconButton.jsx":"24052f4eed78","components/core/Input.jsx":"54a6c9af7e3f","components/core/Tag.jsx":"d8513c07ea96","components/form/Checkbox.jsx":"38aa593157dd","components/form/Select.jsx":"86b8c1c71e12","components/form/Switch.jsx":"938c62be0664","components/form/Tabs.jsx":"ede2dbff1963","components/knowledge/ConstellationItem.jsx":"d73e999469b6","components/knowledge/MemoryBar.jsx":"a54c928d5065","components/knowledge/StarNode.jsx":"1bedee49f0bf","components/overlay/ContextMenu.jsx":"11783420e876","components/overlay/Modal.jsx":"0906de457544","components/overlay/Toast.jsx":"d22ad40680a6","components/overlay/Tooltip.jsx":"a042caa8970d","ui_kits/stellar-raft/AIConfig.jsx":"bbc66d05eebf","ui_kits/stellar-raft/AerialView.jsx":"c03956215464","ui_kits/stellar-raft/BlackHole.jsx":"17eb30e1a014","ui_kits/stellar-raft/Checkup.jsx":"432f59decbb5","ui_kits/stellar-raft/CommandPalette.jsx":"0e41e59f2e82","ui_kits/stellar-raft/Editor.jsx":"a6e1f059f5e7","ui_kits/stellar-raft/EditorMenus.jsx":"fb80581f6bcc","ui_kits/stellar-raft/FeynmanDrawer.jsx":"6af036e0a904","ui_kits/stellar-raft/Galaxy3D.jsx":"8e40ab3d2a66","ui_kits/stellar-raft/Inbox.jsx":"04631262c5c7","ui_kits/stellar-raft/ListView.jsx":"04333626cd62","ui_kits/stellar-raft/LoginView.jsx":"18d9c842c5c6","ui_kits/stellar-raft/Onboarding.jsx":"a0a8609b98bb","ui_kits/stellar-raft/ReviewSession.jsx":"8e0b3ed9e247","ui_kits/stellar-raft/Settings.jsx":"38e4752ebabe","ui_kits/stellar-raft/Sidebar.jsx":"8f3ca4c39abb","ui_kits/stellar-raft/StarMap.jsx":"26ebb8fc6e2f","ui_kits/stellar-raft/Timeline.jsx":"56d938b8201e","ui_kits/stellar-raft/VisitView.jsx":"cd9a544586ba","ui_kits/stellar-raft/ai.js":"2f79eb3473c9","ui_kits/stellar-raft/app.jsx":"e0e7b6a77961","ui_kits/stellar-raft/codehl.js":"6fbdd0100deb","ui_kits/stellar-raft/data.js":"f224c0e8a1d8","ui_kits/stellar-raft/mdcore.js":"b82d5054c3b6","ui_kits/stellar-raft/sanitize.js":"88e63cd63253","ui_kits/stellar-raft/transition.js":"3725d8982dc5","ui_kits/stellar-raft/undocore.js":"7f8c94da35f9"},"inlinedExternals":[],"unexposedExports":[{"name":"memoryColor","sourcePath":"components/knowledge/MemoryBar.jsx"}],"exposedHelpers":[{"name":"toast","sourcePath":"components/overlay/Toast.jsx"}]} */
+/* @ds-bundle: {"format":3,"namespace":"StellarRaftDesignSystem_2866af","components":[{"name":"Badge","sourcePath":"components/core/Badge.jsx"},{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"GlassPanel","sourcePath":"components/core/GlassPanel.jsx"},{"name":"Icon","sourcePath":"components/core/Icon.jsx"},{"name":"IconButton","sourcePath":"components/core/IconButton.jsx"},{"name":"Input","sourcePath":"components/core/Input.jsx"},{"name":"Tag","sourcePath":"components/core/Tag.jsx"},{"name":"Checkbox","sourcePath":"components/form/Checkbox.jsx"},{"name":"Select","sourcePath":"components/form/Select.jsx"},{"name":"Switch","sourcePath":"components/form/Switch.jsx"},{"name":"Tabs","sourcePath":"components/form/Tabs.jsx"},{"name":"ConstellationItem","sourcePath":"components/knowledge/ConstellationItem.jsx"},{"name":"MemoryBar","sourcePath":"components/knowledge/MemoryBar.jsx"},{"name":"StarNode","sourcePath":"components/knowledge/StarNode.jsx"},{"name":"ContextMenu","sourcePath":"components/overlay/ContextMenu.jsx"},{"name":"Modal","sourcePath":"components/overlay/Modal.jsx"},{"name":"Toast","sourcePath":"components/overlay/Toast.jsx"},{"name":"Tooltip","sourcePath":"components/overlay/Tooltip.jsx"}],"sourceHashes":{"assets/starfield.js":"d776d2b45dc4","components/core/Badge.jsx":"b0bd9735d638","components/core/Button.jsx":"a1c387a07e86","components/core/GlassPanel.jsx":"299a19d8fbb4","components/core/Icon.jsx":"7505f83ab03d","components/core/IconButton.jsx":"24052f4eed78","components/core/Input.jsx":"54a6c9af7e3f","components/core/Tag.jsx":"d8513c07ea96","components/form/Checkbox.jsx":"38aa593157dd","components/form/Select.jsx":"86b8c1c71e12","components/form/Switch.jsx":"938c62be0664","components/form/Tabs.jsx":"ede2dbff1963","components/knowledge/ConstellationItem.jsx":"d73e999469b6","components/knowledge/MemoryBar.jsx":"a54c928d5065","components/knowledge/StarNode.jsx":"1bedee49f0bf","components/overlay/ContextMenu.jsx":"11783420e876","components/overlay/Modal.jsx":"0906de457544","components/overlay/Toast.jsx":"d22ad40680a6","components/overlay/Tooltip.jsx":"a042caa8970d","ui_kits/stellar-raft/AIConfig.jsx":"bbc66d05eebf","ui_kits/stellar-raft/AerialView.jsx":"c03956215464","ui_kits/stellar-raft/BlackHole.jsx":"17eb30e1a014","ui_kits/stellar-raft/Checkup.jsx":"dba065069a3e","ui_kits/stellar-raft/CommandPalette.jsx":"3f1a9cdd2383","ui_kits/stellar-raft/Editor.jsx":"a6e1f059f5e7","ui_kits/stellar-raft/EditorMenus.jsx":"fb80581f6bcc","ui_kits/stellar-raft/FeynmanDrawer.jsx":"6af036e0a904","ui_kits/stellar-raft/Galaxy3D.jsx":"8e40ab3d2a66","ui_kits/stellar-raft/Inbox.jsx":"04631262c5c7","ui_kits/stellar-raft/ListView.jsx":"04333626cd62","ui_kits/stellar-raft/LoginView.jsx":"18d9c842c5c6","ui_kits/stellar-raft/Onboarding.jsx":"a0a8609b98bb","ui_kits/stellar-raft/ReviewSession.jsx":"9092a3d9412c","ui_kits/stellar-raft/Settings.jsx":"27491a03aa51","ui_kits/stellar-raft/Sidebar.jsx":"8f3ca4c39abb","ui_kits/stellar-raft/StarMap.jsx":"26ebb8fc6e2f","ui_kits/stellar-raft/Timeline.jsx":"56d938b8201e","ui_kits/stellar-raft/VisitView.jsx":"cd9a544586ba","ui_kits/stellar-raft/ai.js":"2f79eb3473c9","ui_kits/stellar-raft/app.jsx":"e0e7b6a77961","ui_kits/stellar-raft/codehl.js":"6fbdd0100deb","ui_kits/stellar-raft/data.js":"f224c0e8a1d8","ui_kits/stellar-raft/mdcore.js":"b82d5054c3b6","ui_kits/stellar-raft/sanitize.js":"88e63cd63253","ui_kits/stellar-raft/transition.js":"3725d8982dc5","ui_kits/stellar-raft/undocore.js":"7f8c94da35f9","ui_kits/stellar-raft/vault.js":"d7876f7f9981"},"inlinedExternals":[],"unexposedExports":[{"name":"memoryColor","sourcePath":"components/knowledge/MemoryBar.jsx"}],"exposedHelpers":[{"name":"toast","sourcePath":"components/overlay/Toast.jsx"}]} */
 
 (() => {
 
@@ -5121,6 +5121,76 @@ function parseDelta(d) {
   const n = parseFloat(d.replace('−', '').replace('+', '').replace('-', '')) || 0;
   return neg ? -n : n;
 }
+
+/* ===== 时间之窗 · 未来 7 天预演（组件外纯函数）=====
+   把遗忘从「事后发现」变成「事前预警」：
+   已点亮星 → R 衰减到熄灭阈值 0.35 的时刻 t = last + S·ln(1/0.35)·天；
+   未点亮星 → 到期时刻一律取 D.dueTsOf（策略感知，别在这里重算 due）。
+   只取 0 < t − now ≤ 7 天：已到期的星归上方「今日待办」管，不重复预警。 */
+const DAY_MS = 86400000;
+const EMBER_R = 0.35; // 与 data.js 的 MEM.emberR 同一阈值
+function forecast7(D, now) {
+  const horizon = now + 7 * DAY_MS;
+  const rows = [];
+  (D.stars || []).forEach(s => {
+    if (D.isLit && D.isLit(s)) {
+      const t = s.sr.last + s.sr.S * Math.log(1 / EMBER_R) * DAY_MS;
+      if (t > now && t <= horizon) rows.push({
+        s,
+        t,
+        kind: 'ember'
+      });
+    } else if (D.dueTsOf) {
+      const t = D.dueTsOf(s);
+      if (t > now && t <= horizon) rows.push({
+        s,
+        t,
+        kind: 'due'
+      });
+    }
+  });
+  return rows.sort((a, b) => a.t - b.t);
+}
+// 熄灭类的紧迫感：越近越红（暖金 → 暗红）；到期类保持冷蓝
+const emberUrgency = days => `color-mix(in srgb, var(--danger) ${Math.round((7 - days) / 6 * 72)}%, var(--gold))`;
+// 「排入复习」的即时回执：手动队列已指向今天（半天内）
+const queuedToday = (s, now) => !!(s.sr && s.sr.due && s.sr.due - now < DAY_MS * 0.5);
+
+/* ===== 观星热力图（组件外纯函数）=====
+   时间线里带 ts 的记录按本地自然日聚合；dim（熄灭）是被动事件，不算主动观星。
+   种子行只有文字时间（如「今天 10:30」），无法落到具体日期，不参与统计。 */
+const heatDayKey = d => d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+function heatCounts(timeline) {
+  const map = {};
+  (timeline || []).forEach(t => {
+    if (!t || !t.ts || t.kind === 'dim') return;
+    const k = heatDayKey(new Date(t.ts));
+    map[k] = (map[k] || 0) + 1;
+  });
+  return map;
+}
+// 近 16 周：每列一周（周一为首行），最右一列是本周
+function heatWeeks(now) {
+  const today = new Date(now);
+  today.setHours(0, 0, 0, 0);
+  const monday = new Date(today);
+  monday.setDate(today.getDate() - (today.getDay() + 6) % 7);
+  const weeks = [];
+  for (let w = 15; w >= 0; w--) {
+    const col = [];
+    for (let i = 0; i < 7; i++) {
+      const d = new Date(monday);
+      d.setDate(monday.getDate() - w * 7 + i);
+      col.push(d);
+    }
+    weeks.push(col);
+  }
+  return weeks;
+}
+// 活动次数 → 金色浓度五档：0 近黑，越多越金
+const HEAT_ALPHA = [0, 0.15, 0.35, 0.6, 0.9];
+const heatAlpha = n => n <= 0 ? 0 : n === 1 ? 0.15 : n === 2 ? 0.35 : n <= 4 ? 0.6 : 0.9;
+const heatBg = a => a > 0 ? `rgba(255,217,138,${a})` : 'rgba(120,150,205,0.09)';
 const HUD = {
   fontSize: 10,
   letterSpacing: 'var(--ls-hud)',
@@ -5240,6 +5310,8 @@ function Checkup({
     ['sr-memory', 'sr-data', 'sr-ignite'].forEach(ev => window.addEventListener(ev, h));
     return () => ['sr-memory', 'sr-data', 'sr-ignite'].forEach(ev => window.removeEventListener(ev, h));
   }, []);
+  // 时间之窗折叠态：预演超过 8 行时先收起
+  const [foreOpen, setForeOpen] = React.useState(false);
   const stars = D.stars;
   const total = stars.length;
   const dueN = D.dueStars ? D.dueStars().length : 0;
@@ -5334,6 +5406,24 @@ function Checkup({
   const py = v => SH - PAD - (v - vMin) / span * (SH - PAD * 2);
   const linePts = series.map((p, i) => `${px(i).toFixed(1)},${py(p.v).toFixed(1)}`).join(' ');
   const areaPts = series.length ? `${px(0).toFixed(1)},${(SH - PAD).toFixed(1)} ${linePts} ${px(series.length - 1).toFixed(1)},${(SH - PAD).toFixed(1)}` : '';
+
+  // 时间之窗：未来 7 天将熄灭 / 到期的星（已到期的归上方「今日待办」，不重复）
+  const now = Date.now();
+  const fRows = forecast7(D, now);
+  const fShown = foreOpen ? fRows : fRows.slice(0, 8);
+  const fEmberN = fRows.filter(r => r.kind === 'ember').length;
+  const fDueN = fRows.length - fEmberN;
+  // 排入今日：与列表 / 编辑器的「加入复习队列」同一口径，广播后各在场视图就地对齐
+  const queueToday = id => {
+    D.queueReview(id, 0);
+    D.pushTimeline('review', id, '加入复习队列');
+    window.dispatchEvent(new CustomEvent('sr-memory'));
+  };
+
+  // 观星热力图：近 16 周的每日主动学习次数
+  const heat = heatCounts(D.timeline);
+  const weeks = heatWeeks(now);
+  const activeDays = Object.keys(heat).length;
   const card = {
     borderRadius: 'var(--r-lg)',
     border: '1px solid var(--glass-border)',
@@ -5612,6 +5702,241 @@ function Checkup({
       lineHeight: 1.5
     }
   }, b.desc)))))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'grid',
+      gridTemplateColumns: '1fr 1fr',
+      gap: 16,
+      marginBottom: 16
+    }
+  }, /*#__PURE__*/React.createElement(GlassPanel, {
+    radius: "lg",
+    pad: "none",
+    style: {
+      padding: 18
+    }
+  }, /*#__PURE__*/React.createElement(SectionTitle, {
+    icon: "calendar-clock",
+    hint: fRows.length ? '按剩余天数升序' : undefined
+  }, "\u65F6\u95F4\u4E4B\u7A97 \xB7 \u672A\u6765 7 \u5929"), fRows.length === 0 && /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: '24px 0',
+      textAlign: 'center',
+      color: 'var(--text-3)',
+      fontSize: 13
+    }
+  }, "\u672A\u6765 7 \u5929\u4F60\u7684\u661F\u7A7A\u5B89\u7136\u65E0\u6059 \u2726"), fRows.length > 0 && /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: 'var(--text-2)',
+      lineHeight: 1.65,
+      marginBottom: 10
+    }
+  }, "\u82E5\u8FD9 7 \u5929\u4E0D\u56DE\u671B\uFF0C\u5C06\u6709", fEmberN > 0 && /*#__PURE__*/React.createElement(React.Fragment, null, " ", /*#__PURE__*/React.createElement("b", {
+    style: {
+      fontFamily: 'var(--font-mono)',
+      color: 'var(--gold)',
+      fontWeight: 500
+    }
+  }, fEmberN), " \u9897\u661F\u7184\u706D"), fEmberN > 0 && fDueN > 0 && '、', fDueN > 0 && /*#__PURE__*/React.createElement(React.Fragment, null, " ", /*#__PURE__*/React.createElement("b", {
+    style: {
+      fontFamily: 'var(--font-mono)',
+      color: 'var(--star-blue)',
+      fontWeight: 500
+    }
+  }, fDueN), " \u9897\u5230\u671F"), "\u3002"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 6
+    }
+  }, fShown.map(({
+    s,
+    t,
+    kind
+  }) => {
+    const days = Math.max(1, Math.ceil((t - now) / DAY_MS));
+    const col = kind === 'ember' ? emberUrgency(days) : 'var(--star-blue)';
+    const queued = queuedToday(s, now);
+    return /*#__PURE__*/React.createElement("div", {
+      key: s.id,
+      style: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: 10,
+        padding: '9px 11px',
+        borderRadius: 'var(--r-md)',
+        border: '1px solid ' + (kind === 'ember' ? 'color-mix(in srgb, var(--gold) 16%, transparent)' : 'var(--glass-border)'),
+        background: kind === 'ember' ? 'color-mix(in srgb, var(--gold) 4%, transparent)' : 'rgba(120,150,205,0.05)'
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        width: 8,
+        height: 8,
+        borderRadius: '50%',
+        flex: 'none',
+        background: col,
+        boxShadow: `0 0 7px ${col}`
+      }
+    }), /*#__PURE__*/React.createElement("div", {
+      style: {
+        minWidth: 0,
+        flex: 1
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 13,
+        color: 'var(--text-1)',
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis'
+      }
+    }, s.label), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: 6,
+        marginTop: 3
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 11,
+        color: 'var(--text-3)'
+      }
+    }, D.conName(s.con) || '—'), /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 11,
+        color: col
+      }
+    }, "\xB7 ", days, " \u5929\u540E", kind === 'ember' ? '熄灭' : '到期'))), /*#__PURE__*/React.createElement("div", {
+      style: {
+        width: 52,
+        flex: 'none'
+      }
+    }, /*#__PURE__*/React.createElement(MemoryBar, {
+      value: s.strength,
+      height: 4,
+      fading: s.strength < 0.4
+    })), queued ? /*#__PURE__*/React.createElement("span", {
+      style: {
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: 5,
+        flex: 'none',
+        fontFamily: 'var(--font-mono)',
+        fontSize: 11,
+        color: 'var(--gold)'
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "check",
+      size: 12,
+      color: "var(--gold)"
+    }), "\u5DF2\u6392\u5165\u4ECA\u65E5") : /*#__PURE__*/React.createElement(Button, {
+      size: "sm",
+      icon: "repeat",
+      onClick: () => queueToday(s.id),
+      style: {
+        flex: 'none'
+      }
+    }, "\u6392\u5165\u590D\u4E60"));
+  })), fRows.length > 8 && /*#__PURE__*/React.createElement(Button, {
+    variant: "ghost",
+    size: "sm",
+    icon: foreOpen ? 'chevron-up' : 'chevron-down',
+    onClick: () => setForeOpen(v => !v),
+    style: {
+      marginTop: 8
+    }
+  }, foreOpen ? '收起' : `还有 ${fRows.length - 8} 颗…`)), /*#__PURE__*/React.createElement(GlassPanel, {
+    radius: "lg",
+    pad: "none",
+    style: {
+      padding: 18
+    }
+  }, /*#__PURE__*/React.createElement(SectionTitle, {
+    icon: "telescope",
+    hint: `连续 ${D.account.streak} 天 · 共 ${activeDays} 个活动日`
+  }, "\u89C2\u661F\u70ED\u529B\u56FE"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      gap: 8
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 3,
+      flex: 'none'
+    }
+  }, ['一', '', '三', '', '五', '', '日'].map((t, i) => /*#__PURE__*/React.createElement("span", {
+    key: i,
+    style: {
+      width: 12,
+      height: 12,
+      lineHeight: '12px',
+      fontSize: 9,
+      textAlign: 'center',
+      color: 'var(--text-3)',
+      fontFamily: 'var(--font-mono)'
+    }
+  }, t))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      gap: 3,
+      minWidth: 0,
+      overflowX: 'auto',
+      paddingBottom: 2
+    }
+  }, weeks.map((col, wi) => /*#__PURE__*/React.createElement("div", {
+    key: wi,
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 3
+    }
+  }, col.map((d, di) => {
+    const future = d.getTime() > now;
+    const n = heat[heatDayKey(d)] || 0;
+    const a = heatAlpha(n);
+    return /*#__PURE__*/React.createElement("div", {
+      key: di,
+      title: future ? undefined : `${d.getMonth() + 1} 月 ${d.getDate()} 日 · ${n} 次观星`,
+      style: {
+        width: 12,
+        height: 12,
+        borderRadius: 3,
+        background: heatBg(a),
+        boxShadow: a >= 0.6 ? '0 0 5px rgba(255,217,138,0.35)' : 'none',
+        visibility: future ? 'hidden' : 'visible'
+      }
+    });
+  }))))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 4,
+      marginTop: 12
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 10.5,
+      color: 'var(--text-3)',
+      marginRight: 3
+    }
+  }, "\u5C11"), HEAT_ALPHA.map((a, i) => /*#__PURE__*/React.createElement("span", {
+    key: i,
+    style: {
+      width: 10,
+      height: 10,
+      borderRadius: 2.5,
+      background: heatBg(a)
+    }
+  })), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 10.5,
+      color: 'var(--text-3)',
+      marginLeft: 3
+    }
+  }, "\u591A")))), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'grid',
       gridTemplateColumns: '1fr 1fr',
@@ -6108,11 +6433,101 @@ window.SRKit = Object.assign(window.SRKit || {}, {
 // ui_kits/stellar-raft/CommandPalette.jsx
 try { (() => {
 /* CommandPalette — 全局搜索 (⌘K): one box to jump to any star, constellation
-   or view. Arrow keys to move, Enter to go, Esc to close. */
+   or view. Arrow keys to move, Enter to go, Esc to close.
+   全文搜索：正文命中的星归入「笔记」组，行下给一段高亮片段。 */
 const {
   GlassPanel,
-  Icon
+  Icon,
+  Badge
 } = window.StellarRaftDesignSystem_2866af;
+
+// 剥掉 HTML 标签并还原基本实体，取纯文本参与索引
+function srStripHtml(s) {
+  return String(s == null ? '' : s).replace(/<[^>]*>/g, ' ').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
+}
+
+// 全文索引：每颗星一条记录。几百颗星线性扫足够，不做倒排。
+// nameLower / metaLower(别名+标签) / bodyLower(摘要+正文) 分层存，供排序分档；
+// bodyRaw 留原文，命中后截片段用。
+function srBuildIndex(stars) {
+  return (stars || []).map(s => {
+    const meta = [s.props && s.props.alias || ''].concat(s.tags || []).join(' ');
+    const parts = [];
+    if (s.summary) parts.push(s.summary);
+    (s.body || []).forEach(b => {
+      if (b.text) parts.push(b.text);
+      if (b.tex) parts.push(b.tex);
+      if (b.code) parts.push(b.code);
+    });
+    const bodyRaw = parts.map(srStripHtml).join(' ').replace(/\s+/g, ' ').trim();
+    const label = s.label || '';
+    return {
+      id: s.id,
+      label,
+      con: s.con,
+      nameLower: label.toLowerCase(),
+      metaLower: meta.toLowerCase(),
+      bodyRaw,
+      bodyLower: bodyRaw.toLowerCase(),
+      hay: (label + ' ' + meta + ' ' + bodyRaw).toLowerCase()
+    };
+  });
+}
+
+// 截取命中片段：首个命中词前后各约 24 字，按命中/未命中切成段，交给 React 渲染
+// （不拼 HTML 字符串，避免 dangerouslySetInnerHTML）。
+function srSnippet(raw, rawLower, tokens) {
+  let pos = -1,
+    len = 0;
+  tokens.forEach(t => {
+    const p = rawLower.indexOf(t);
+    if (p !== -1 && (pos === -1 || p < pos)) {
+      pos = p;
+      len = t.length;
+    }
+  });
+  if (pos === -1) return null;
+  const start = Math.max(0, pos - 24);
+  const end = Math.min(raw.length, pos + len + 24);
+  const text = raw.slice(start, end);
+  const lower = rawLower.slice(start, end);
+  const hitAt = i => {
+    let m = 0;
+    tokens.forEach(t => {
+      if (t && lower.startsWith(t, i) && t.length > m) m = t.length;
+    });
+    return m;
+  };
+  const segs = [];
+  let i = 0;
+  while (i < text.length) {
+    const m = hitAt(i);
+    if (m) {
+      segs.push({
+        t: text.slice(i, i + m),
+        hit: true
+      });
+      i += m;
+      continue;
+    }
+    let j = i + 1;
+    while (j < text.length && !hitAt(j)) j += 1;
+    segs.push({
+      t: text.slice(i, j),
+      hit: false
+    });
+    i = j;
+  }
+  if (start > 0) segs.unshift({
+    t: '…',
+    hit: false
+  });
+  if (end < raw.length) segs.push({
+    t: '…',
+    hit: false
+  });
+  return segs;
+}
 
 // 视图命令：label 与侧栏完全同名（搜索「时间轴视图」也要命中），补充说明放 sub
 const VIEW_CMDS = [{
@@ -6243,15 +6658,46 @@ function CommandPalette({
     icon: 'orbit',
     run: () => onFocusCon(c.id)
   }));
-  const stars = D.stars.filter(s => !q || s.label.toLowerCase().includes(q) || (s.tags || []).some(t => t.toLowerCase().includes(q))).map(s => ({
+
+  // 星的全文搜索。索引首次用到才建，缓存在 ref 里，面板关闭随组件一起丢弃。
+  const indexRef = React.useRef(null);
+  const asItem = (e, extra) => Object.assign({
     kind: 'star',
-    id: s.id,
-    label: s.label,
-    sub: D.conName(s.con),
-    color: D.conColor(s.con),
+    id: e.id,
+    label: e.label,
+    sub: D.conName(e.con),
+    color: D.conColor(e.con),
     icon: 'sparkles',
-    run: () => onOpenStar(s.id)
-  }));
+    run: () => onOpenStar(e.id)
+  }, extra);
+  let stars = [],
+    notes = [];
+  if (!q) {
+    stars = D.stars.map(s => asItem(s));
+  } else {
+    if (!indexRef.current) indexRef.current = srBuildIndex(D.stars);
+    const tokens = q.split(/\s+/).filter(Boolean);
+    const ranked = [];
+    indexRef.current.forEach(e => {
+      if (!tokens.every(t => e.hay.includes(t))) return;
+      // 0=星名命中 1=别名/标签命中 2=只有正文命中
+      const rank = tokens.every(t => e.nameLower.includes(t)) ? 0 : tokens.every(t => e.nameLower.includes(t) || e.metaLower.includes(t)) ? 1 : 2;
+      ranked.push({
+        e,
+        rank
+      });
+    });
+    ranked.sort((a, b) => a.rank - b.rank);
+    ranked.slice(0, 12).forEach(({
+      e,
+      rank
+    }) => {
+      if (rank === 2) notes.push(asItem(e, {
+        note: true,
+        snippet: srSnippet(e.bodyRaw, e.bodyLower, tokens)
+      }));else stars.push(asItem(e));
+    });
+  }
   const sections = [{
     title: '动作',
     items: actions
@@ -6264,6 +6710,9 @@ function CommandPalette({
   }, {
     title: '知识星',
     items: stars
+  }, {
+    title: '笔记',
+    items: notes
   }].filter(s => s.items.length);
   const flat = sections.reduce((a, s) => a.concat(s.items), []);
   React.useEffect(() => {
@@ -6344,8 +6793,8 @@ function CommandPalette({
     value: query,
     onChange: e => setQuery(e.target.value),
     onKeyDown: onKey,
-    "aria-label": "\u641C\u7D22\u661F\u3001\u661F\u57DF\u3001\u89C6\u56FE",
-    placeholder: "\u641C\u7D22\u661F\u3001\u661F\u57DF\u3001\u89C6\u56FE\u2026",
+    "aria-label": "\u641C\u7D22\u661F\u3001\u661F\u57DF\u3001\u89C6\u56FE\u3001\u7B14\u8BB0\u6B63\u6587",
+    placeholder: "\u641C\u7D22\u661F\u3001\u661F\u57DF\u3001\u89C6\u56FE\u3001\u7B14\u8BB0\u6B63\u6587\u2026",
     style: {
       flex: 1,
       background: 'transparent',
@@ -6402,13 +6851,16 @@ function CommandPalette({
       onMouseEnter: () => setActive(i),
       onClick: () => exec(item),
       style: {
-        display: 'flex',
-        alignItems: 'center',
-        gap: 11,
         padding: '9px 11px',
         borderRadius: 'var(--r-sm)',
         cursor: 'pointer',
         background: on ? 'color-mix(in srgb, var(--star-blue) 11%, transparent)' : 'transparent'
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: 11
       }
     }, item.color ? /*#__PURE__*/React.createElement("span", {
       style: {
@@ -6434,7 +6886,14 @@ function CommandPalette({
         fontSize: 13.5,
         color: on ? 'var(--text-1)' : 'var(--text-2)'
       }
-    }, item.label), /*#__PURE__*/React.createElement("span", {
+    }, item.label), item.note && /*#__PURE__*/React.createElement(Badge, {
+      tone: "fading",
+      style: {
+        fontSize: 10,
+        height: 16,
+        minWidth: 0
+      }
+    }, "\u6B63\u6587"), /*#__PURE__*/React.createElement("span", {
       style: {
         fontSize: 11,
         color: 'var(--text-3)'
@@ -6443,7 +6902,25 @@ function CommandPalette({
       name: "corner-down-left",
       size: 13,
       color: "var(--text-3)"
-    }));
+    })), item.snippet && /*#__PURE__*/React.createElement("div", {
+      style: {
+        margin: '3px 0 0 29px',
+        fontSize: 11.5,
+        lineHeight: 1.5,
+        color: 'var(--text-3)',
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis'
+      }
+    }, item.snippet.map((sg, k) => sg.hit ? /*#__PURE__*/React.createElement("b", {
+      key: k,
+      style: {
+        color: 'var(--gold)',
+        fontWeight: 600
+      }
+    }, sg.t) : /*#__PURE__*/React.createElement("span", {
+      key: k
+    }, sg.t))));
   })))))));
 }
 window.SRKit = Object.assign(window.SRKit || {}, {
@@ -20509,7 +20986,9 @@ try { (() => {
    翻开笔记摘要与大纲（翻开阶段），随后三档自评：
    忘了 (1/←) → D.reviewFail · 模糊 (2/↓) → D.reviewPartial · 记得 (3/→) → D.reviewSuccess。
    评分立即持久化（reviewX 内部走 touchNote → SRNet 防抖落盘），并广播 sr-memory
-   让星图 / 鸟瞰 / 侧栏角标就地读回新亮度。Esc 退出；reduced-motion 下卡片瞬切。 */
+   让星图 / 鸟瞰 / 侧栏角标就地读回新亮度。Esc 退出；reduced-motion 下卡片瞬切。
+   回忆阶段可选「AI 考一考」：已配置 AI 服务时出一道回忆检验题辅助主动回忆——
+   只提问不给答案，翻面与三档自评仍完全由用户自己完成；未配置则无任何相关 UI。 */
 const {
   GlassPanel,
   Icon,
@@ -20538,6 +21017,17 @@ const rsReduced = () => window.matchMedia && window.matchMedia('(prefers-reduced
 
 // 从笔记块里提炼一个克制的大纲：标题与前几条要点
 const rsOutline = star => (star.body || []).filter(b => ['h2', 'h3', 'bulleted', 'numbered'].includes(b.type) && b.text).slice(0, 5);
+
+/* 「AI 考一考」的出题资料：星名 / 别名 / 摘要 / 正文纯文本节选，整体截 1200 字 */
+const rsQuizMaterial = star => {
+  const bodyText = (star.body || []).filter(b => ['p', 'bulleted', 'numbered', 'callout', 'h2', 'h3', 'quote', 'todo', 'toggle'].includes(b.type) && b.text).map(b => String(b.text)).join('\n');
+  let brief = [`星名：${star.label}`, star.props && star.props.alias ? `别名：${star.props.alias}` : '', star.summary ? `摘要：${star.summary}` : '', bodyText ? `正文节选：\n${bodyText}` : ''].filter(Boolean).join('\n');
+  if (brief.length > 1200) brief = brief.slice(0, 1200) + '…';
+  return brief;
+};
+
+// 出题 system：只提问不给答案——考察交给 AI，评分永远留给用户自评
+const RS_QUIZ_SYSTEM = '你是复习教练，根据资料出一道简短的回忆检验题（一两句话），只提问不给答案，中文，直接输出问题本身。';
 function RSKbd({
   children,
   onScrim
@@ -20650,6 +21140,34 @@ function ReviewSession({
   const [relight, setRelight] = React.useState(null); // starId | null
   const timers = React.useRef([]);
   React.useEffect(() => () => timers.current.forEach(clearTimeout), []);
+
+  // 「AI 考一考」：仅在已配置 AI 服务时出现；配置面板保存 / 清除时经 'sr-ai-config' 即时显隐
+  const [aiOn, setAiOn] = React.useState(() => !!(window.SRAI && window.SRAI.isConfigured()));
+  React.useEffect(() => {
+    const h = () => setAiOn(!!(window.SRAI && window.SRAI.isConfigured()));
+    window.addEventListener('sr-ai-config', h);
+    return () => window.removeEventListener('sr-ai-config', h);
+  }, []);
+  // 出题状态（每张卡独立）：idle → busy →（ok | err）；err 只在按钮旁小字提示，不打断复习
+  const [quiz, setQuiz] = React.useState({
+    phase: 'idle',
+    text: '',
+    err: ''
+  });
+  // 迟到防护：卸载（alive）与换卡 / 换题（seq）后，在途回复一律丢弃
+  const quizAlive = React.useRef(true);
+  const quizSeq = React.useRef(0);
+  React.useEffect(() => () => {
+    quizAlive.current = false;
+  }, []);
+  React.useEffect(() => {
+    quizSeq.current++;
+    setQuiz({
+      phase: 'idle',
+      text: '',
+      err: ''
+    });
+  }, [idx]);
   const done = total === 0 || idx >= total;
   const star = done ? null : queue[idx];
   // 当前卡的认证态：已点亮（差异呈现 + 熄灭警示）/ 待重燃（复习保温，重燃走费曼）
@@ -20704,6 +21222,45 @@ function ReviewSession({
       setLeaving(true);
       timers.current.push(setTimeout(next, 340));
     }
+  };
+
+  // 出一道回忆检验题（首次「AI 考一考」与「换一题」同一入口）；重出时旧题保留在场，避免闪空
+  const askQuiz = () => {
+    if (!star || quiz.phase === 'busy' || !(window.SRAI && window.SRAI.isConfigured())) return;
+    const seq = ++quizSeq.current;
+    setQuiz(q => ({
+      phase: 'busy',
+      text: q.text,
+      err: ''
+    }));
+    window.SRAI.chat([{
+      role: 'user',
+      content: rsQuizMaterial(star)
+    }], {
+      system: RS_QUIZ_SYSTEM,
+      maxTokens: 120,
+      temperature: 0.9,
+      timeout: 15000
+    }).then(reply => {
+      if (!quizAlive.current || seq !== quizSeq.current) return;
+      const text = String(reply || '').trim();
+      if (text) setQuiz({
+        phase: 'ok',
+        text,
+        err: ''
+      });else setQuiz(q => ({
+        phase: 'err',
+        text: q.text,
+        err: '这次没出成题，换一题试试'
+      }));
+    }).catch(err => {
+      if (!quizAlive.current || seq !== quizSeq.current) return;
+      setQuiz(q => ({
+        phase: 'err',
+        text: q.text,
+        err: err && err.message || '出题失败'
+      }));
+    });
   };
 
   // 键盘：空格翻开 · 1/2/3 或 ←↓→ 评分 · Esc 退出（每次渲染重挂，闭包始终新鲜）
@@ -20791,7 +21348,8 @@ function ReviewSession({
     }
   }, /*#__PURE__*/React.createElement("style", null, `
         @keyframes sr-review-out { from { opacity: 1; transform: none; } to { opacity: 0; transform: translateY(-30px) scale(0.96); } }
-        @media (prefers-reduced-motion: reduce) { .sr-review-card { animation: none !important; } }
+        @keyframes sr-rq-spin { to { transform: rotate(360deg); } }
+        @media (prefers-reduced-motion: reduce) { .sr-review-card { animation: none !important; } .sr-rq-spin { animation: none !important; } }
       `), /*#__PURE__*/React.createElement("div", {
     onClick: onClose,
     "aria-hidden": "true",
@@ -21072,7 +21630,74 @@ function ReviewSession({
       marginTop: 14,
       lineHeight: 1.7
     }
-  }, "\u5148\u5728\u5FC3\u91CC\u56DE\u5FC6\uFF1A\u8FD9\u9897\u661F\u8BB2\u4E86\u4EC0\u4E48\uFF1F")), !revealed && /*#__PURE__*/React.createElement("div", {
+  }, "\u5148\u5728\u5FC3\u91CC\u56DE\u5FC6\uFF1A\u8FD9\u9897\u661F\u8BB2\u4E86\u4EC0\u4E48\uFF1F")), !revealed && aiOn && /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      gap: 8,
+      marginTop: -6
+    }
+  }, quiz.text && /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'baseline',
+      gap: 9,
+      alignSelf: 'stretch',
+      padding: '10px 14px',
+      borderRadius: 'var(--r-md)',
+      textAlign: 'left',
+      border: '1px solid color-mix(in srgb, var(--gold) 28%, transparent)',
+      background: 'color-mix(in srgb, var(--gold) 5%, transparent)'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "sparkles",
+    size: 13,
+    color: "var(--gold)",
+    style: {
+      flex: 'none',
+      transform: 'translateY(1px)'
+    }
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 13,
+      lineHeight: 1.7,
+      color: 'var(--text-1)',
+      minWidth: 0
+    }
+  }, quiz.text)), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 8,
+      maxWidth: '100%'
+    }
+  }, /*#__PURE__*/React.createElement(Button, {
+    variant: "ghost",
+    size: "sm",
+    icon: quiz.phase === 'busy' ? undefined : 'sparkles',
+    disabled: quiz.phase === 'busy',
+    onClick: askQuiz
+  }, quiz.phase === 'busy' && /*#__PURE__*/React.createElement("span", {
+    className: "sr-rq-spin",
+    style: {
+      display: 'inline-flex',
+      animation: 'sr-rq-spin 1.2s linear infinite'
+    },
+    "aria-hidden": "true"
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "loader",
+    size: 14,
+    color: "currentColor"
+  })), quiz.phase === 'busy' ? '正在出题…' : quiz.text ? '换一题' : 'AI 考一考'), quiz.phase === 'err' && quiz.err && /*#__PURE__*/React.createElement("span", {
+    role: "status",
+    style: {
+      fontSize: 11.5,
+      color: 'var(--text-3)',
+      lineHeight: 1.5,
+      minWidth: 0
+    }
+  }, quiz.err))), !revealed && /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       justifyContent: 'center',
@@ -22185,6 +22810,34 @@ function Settings({
       flashToast('已导出你的星图数据（JSON 文件）');
     }
   }, "\u5BFC\u51FA\u6570\u636E"), /*#__PURE__*/React.createElement(Button, {
+    size: "sm",
+    variant: "ghost",
+    icon: "folder-down",
+    onClick: () => {
+      // 整片星空 → Obsidian 风格 Markdown 仓库（zip）：每星一档、星域分夹、
+      // wikilink 关联、README 索引；知识随时带得走，不锁在应用里
+      try {
+        const entries = window.SRVault.buildVault({
+          stars: D.stars,
+          constellations: D.constellations,
+          connections: D.connections,
+          account: D.account
+        });
+        const bytes = window.SRVault.buildZip(entries, Date.now());
+        const blob = new Blob([bytes], {
+          type: 'application/zip'
+        });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = '星图-Markdown仓库.zip';
+        a.click();
+        setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+        flashToast('已导出 Markdown 仓库 · Obsidian 可直接打开');
+      } catch (err) {
+        flashToast('导出失败 · ' + (err && err.message || '稍后再试'));
+      }
+    }
+  }, "\u5BFC\u51FA Markdown \u4ED3\u5E93"), /*#__PURE__*/React.createElement(Button, {
     size: "sm",
     variant: "ghost",
     icon: "upload",
@@ -31048,6 +31701,175 @@ try { (() => {
   g.SRUndoCore = api;
 })(typeof globalThis !== 'undefined' ? globalThis : window);
 })(); } catch (e) { __ds_ns.__errors.push({ path: "ui_kits/stellar-raft/undocore.js", error: String((e && e.message) || e) }); }
+
+// ui_kits/stellar-raft/vault.js
+try { (() => {
+/* vault.js — window.SRVault：把整片星空导出为 Obsidian 风格的 Markdown 仓库（zip）。
+   纯字符串/字节实现，不依赖 DOM，Node 可直接 import 做单元测试（tests/vault.test.js）。
+   - buildVault(data)  → [{ path, text }]：每颗星一个 .md（frontmatter + 正文 + [[wikilink]] 关联），
+     按星域分文件夹，附一份 README.md 索引
+   - buildZip(entries, nowMs) → Uint8Array：零依赖 zip（store 存储法 + CRC32，UTF-8 文件名），
+     Typora / Obsidian / 系统解压器都能直接打开
+   正文序列化复用 SRMd.blocksToMd——与单星导出同一 GFM 保真口径。 */
+(function () {
+  'use strict';
+
+  /* ---------------- CRC32（标准查表法） ---------------- */
+  const CRC_TABLE = (() => {
+    const t = new Uint32Array(256);
+    for (let n = 0; n < 256; n++) {
+      let c = n;
+      for (let k = 0; k < 8; k++) c = c & 1 ? 0xedb88320 ^ c >>> 1 : c >>> 1;
+      t[n] = c >>> 0;
+    }
+    return t;
+  })();
+  const crc32 = bytes => {
+    let c = 0xffffffff;
+    for (let i = 0; i < bytes.length; i++) c = CRC_TABLE[(c ^ bytes[i]) & 0xff] ^ c >>> 8;
+    return (c ^ 0xffffffff) >>> 0;
+  };
+
+  /* ---------------- zip（store 法，无压缩） ----------------
+     知识仓库以文本为主，store 法免去 deflate 依赖；文件名带 UTF-8 标志位（bit 11），
+     中文星名/星域名在任何现代解压器里都不乱码。 */
+  const enc = new TextEncoder();
+  const dosTime = ms => {
+    const d = new Date(ms);
+    return {
+      time: d.getHours() << 11 | d.getMinutes() << 5 | Math.floor(d.getSeconds() / 2),
+      date: Math.max(0, d.getFullYear() - 1980) << 9 | d.getMonth() + 1 << 5 | d.getDate()
+    };
+  };
+  function buildZip(entries, nowMs) {
+    const {
+      time,
+      date
+    } = dosTime(nowMs || 0);
+    const chunks = [];
+    const central = [];
+    let offset = 0;
+    const push = buf => {
+      chunks.push(buf);
+      offset += buf.length;
+    };
+    const u16 = v => new Uint8Array([v & 0xff, v >>> 8 & 0xff]);
+    const u32 = v => new Uint8Array([v & 0xff, v >>> 8 & 0xff, v >>> 16 & 0xff, v >>> 24 & 0xff]);
+    const cat = arrs => {
+      const total = arrs.reduce((a, b) => a + b.length, 0);
+      const out = new Uint8Array(total);
+      let p = 0;
+      arrs.forEach(a => {
+        out.set(a, p);
+        p += a.length;
+      });
+      return out;
+    };
+    (entries || []).forEach(e => {
+      const name = enc.encode(e.path);
+      const data = enc.encode(String(e.text == null ? '' : e.text));
+      const crc = crc32(data);
+      const headerOffset = offset;
+      push(cat([u32(0x04034b50), u16(20), u16(0x0800), u16(0),
+      // 签名 · 版本 · UTF-8 标志 · store
+      u16(time), u16(date), u32(crc), u32(data.length), u32(data.length), u16(name.length), u16(0), name, data]));
+      central.push(cat([u32(0x02014b50), u16(20), u16(20), u16(0x0800), u16(0), u16(time), u16(date), u32(crc), u32(data.length), u32(data.length), u16(name.length), u16(0), u16(0), u16(0), u16(0), u32(0), u32(headerOffset), name]));
+    });
+    const cdStart = offset;
+    central.forEach(push);
+    const cdSize = offset - cdStart;
+    push(cat([u32(0x06054b50), u16(0), u16(0), u16(central.length), u16(central.length), u32(cdSize), u32(cdStart), u16(0)]));
+    return cat(chunks);
+  }
+
+  /* ---------------- 星空 → Markdown 仓库条目 ---------------- */
+  // 文件名卫生：去掉文件系统与 Obsidian 链接的敏感字符，钳长度；空名回退「未命名星」
+  const safeName = s => {
+    const n = String(s == null ? '' : s).replace(/[/\\:*?"<>|#^[\]\n\r\t]/g, ' ').replace(/\s+/g, ' ').trim().replace(/\.+$/, '').slice(0, 60).trim();
+    return n || '未命名星';
+  };
+  const stripHtml = h => String(h == null ? '' : h).replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+
+  /* data: { stars, constellations, connections, account } —— 与 SR_DATA / 快照同构。
+     返回 [{ path, text }]；同名星自动追加序号，wikilink 始终指向去重后的最终文件名。 */
+  function buildVault(data) {
+    const Md = typeof globalThis !== 'undefined' && globalThis.SRMd || typeof window !== 'undefined' && window.SRMd;
+    if (!Md) throw new Error('SRMd 未加载');
+    const stars = data.stars || [];
+    const cons = data.constellations || [];
+    const conns = data.connections || [];
+    const conName = id => (cons.find(c => c.id === id) || {}).name || '未分域';
+
+    // 第一遍：为每颗星定下唯一文件名（跨星域也不重名——Obsidian 的 [[链接]] 不带路径）
+    const nameOf = {};
+    const used = new Set();
+    stars.forEach(s => {
+      const base = safeName(s.label);
+      let name = base,
+        n = 2;
+      while (used.has(name)) {
+        name = base + ' ' + n;
+        n++;
+      }
+      used.add(name);
+      nameOf[s.id] = name;
+    });
+    const entries = [];
+    stars.forEach(s => {
+      // 关联小节：连线的对端星 → [[wikilink]] + 关系语句（跨仓库跳转在 Obsidian 里原生可点）
+      const related = conns.filter(c => c.a === s.id || c.b === s.id).map(c => {
+        const other = stars.find(x => x.id === (c.a === s.id ? c.b : c.a));
+        if (!other) return null;
+        const rel = stripHtml(c.rel || '').trim();
+        return '- [[' + nameOf[other.id] + ']]' + (rel ? ' — ' + rel : '');
+      }).filter(Boolean);
+      const bodyMd = Md.blocksToMd(s.body || [], {
+        title: stripHtml(s.label),
+        props: s.props,
+        tags: s.tags,
+        summary: stripHtml(s.summary || '')
+      });
+      const text = bodyMd + (related.length ? '\n## 关联\n\n' + related.join('\n') + '\n' : '');
+      entries.push({
+        path: safeName(conName(s.con)) + '/' + nameOf[s.id] + '.md',
+        text
+      });
+    });
+
+    // 索引：星域 → 星清单（wikilink），任何支持 Markdown 的工具都能作为入口浏览
+    const owner = data.account && data.account.name || '观星者';
+    const idx = ['# ' + owner + '的星空', '', '共 ' + stars.length + ' 颗知识星 · ' + cons.length + ' 个星域。', ''];
+    cons.forEach(c => {
+      const members = stars.filter(s => s.con === c.id);
+      if (!members.length) return;
+      idx.push('## ' + stripHtml(c.name));
+      idx.push('');
+      members.forEach(s => idx.push('- [[' + nameOf[s.id] + ']]'));
+      idx.push('');
+    });
+    const orphans = stars.filter(s => !cons.find(c => c.id === s.con));
+    if (orphans.length) {
+      idx.push('## 未分域');
+      idx.push('');
+      orphans.forEach(s => idx.push('- [[' + nameOf[s.id] + ']]'));
+      idx.push('');
+    }
+    entries.unshift({
+      path: 'README.md',
+      text: idx.join('\n')
+    });
+    return entries;
+  }
+  const api = {
+    buildZip,
+    buildVault,
+    crc32,
+    safeName
+  };
+  if (typeof window !== 'undefined') window.SRVault = api;
+  if (typeof globalThis !== 'undefined') globalThis.SRVault = api;
+})();
+})(); } catch (e) { __ds_ns.__errors.push({ path: "ui_kits/stellar-raft/vault.js", error: String((e && e.message) || e) }); }
 
 __ds_ns.Badge = __ds_scope.Badge;
 

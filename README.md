@@ -6,7 +6,7 @@
 *Other apps store notes in a warehouse — Stellar Raft grows them in a living deep space of knowledge, where knowledge is the only light.*
 
 ![Node](https://img.shields.io/badge/Node-%E2%89%A5%2022.5-9fc6ff?style=flat-square&labelColor=05060f)
-![Tests](https://img.shields.io/badge/tests-139%20passing-ffd98a?style=flat-square&labelColor=05060f)
+![Tests](https://img.shields.io/badge/tests-144%20passing-ffd98a?style=flat-square&labelColor=05060f)
 ![Build](https://img.shields.io/badge/build-zero--config-9fc6ff?style=flat-square&labelColor=05060f)
 ![Components](https://img.shields.io/badge/components-18%20primitives-9fc6ff?style=flat-square&labelColor=05060f)
 ![Backend](https://img.shields.io/badge/backend-zero--dependency-ffd98a?style=flat-square&labelColor=05060f)
@@ -57,7 +57,9 @@
 - **专业块编辑器** — H1–H3 / 待办 / 列表 / 引用 / 代码 / LaTeX / 表格 / 图片,markdown 即时转换、⌘F 查找替换、反向链接与大纲;导入导出与真实 GFM 完全互逆(提示框/折叠块/表格转义/frontmatter 对齐 GitHub · Typora · Obsidian),跨块复制即得合法 Markdown。
 - **星际漫游与知识共鸣** — 星语密文造访好友星系(服务端裁剪,笔记正文永不出库);造访时自动高亮你们**共同拥有、甚至都点亮过**的知识(共鸣),可留一句星语、赠星、收纳;主人可见访客足迹与来信。
 - **真实 AI 接入** — 配置 OpenAI / Anthropic / 自定义网关(one-api、Ollama 等)后,费曼「AI 学生」由所配模型真实追问(性格/严格度进提示词),编辑器可生成摘要、推荐标签、建议跨星域连接;未配置时优雅回退本地规则学生。
-- **复习策略可选** — 随星变暗(遗忘曲线)/ 1·3·7·15 天间隔阶梯 / 每日固定 / 不提醒,四档策略真实驱动到期队列与桌面通知,星域整体变暗另有提醒。
+- **复习策略可选** — 随星变暗(遗忘曲线)/ 1·3·7·15 天间隔阶梯 / 每日固定 / 不提醒,四档策略真实驱动到期队列与桌面通知,星域整体变暗另有提醒;复习卡上可让 AI「考一考」出回忆题(自评永远归你)。
+- **时间之窗 · 观星热力图** — 体检页预演未来 7 天哪些星将熄灭/到期,一键排入复习——把遗忘从事后发现变成事前预警;16 周观星热力图与连续天数由时间线实时派生。
+- **知识带得走** — ⌘K 全文搜索直达笔记正文(片段高亮);一键把整片星空导出为 Obsidian 风格 Markdown 仓库(zip):每星一档、星域分夹、[[wikilink]] 关联、README 索引,零依赖打包。
 - **新手引导** — 首次打开自动弹出的 11 页导览册 + 末页聚光实地导览,随时可在设置里回看。
 - **账号与多设备** — 用户名/邮箱登录(scrypt + sessions),注册把当前匿名星空原地收进账号,换台设备也能回来;偏好与 AI 配置随快照同步,切换账号时本机密钥等痕迹全部清理。
 - **零构建 · 零依赖** — 浏览器内 Babel 编译 JSX;后端仅用 Node 内置 `node:sqlite`,不装任何三方包。
@@ -71,7 +73,9 @@
 - **Pro block editor** — headings / todos / lists / quote / code / LaTeX / tables / images, live markdown conversion, ⌘F find-and-replace, backlinks and outline; import/export round-trips with real GFM (alerts, collapsible blocks, table escaping, frontmatter — GitHub · Typora · Obsidian aligned), and multi-block copy yields valid Markdown.
 - **Interstellar roaming & knowledge resonance** — visit friends' galaxies via share ciphers (server-side cropping; note bodies never leave the owner's database); while visiting, the stars you **both own — or both ignited** — light up as "resonance"; leave a one-line star-note, gift stars, collect them; owners see visitor footprints and mail.
 - **Real AI integration** — plug in OpenAI / Anthropic / any OpenAI-compatible gateway (one-api, Ollama…): the Feynman "AI student" asks real follow-up questions (persona & strictness shape the prompt), and the editor can summarize, suggest tags, and propose cross-constellation links; gracefully falls back to the local rule-based student when unconfigured.
-- **Selectable review strategies** — forgetting-curve cooling / classic 1·3·7·15-day ladder / daily / off, each genuinely driving the due queue and desktop notifications, plus a constellation-dimming nudge.
+- **Selectable review strategies** — forgetting-curve cooling / classic 1·3·7·15-day ladder / daily / off, each genuinely driving the due queue and desktop notifications, plus a constellation-dimming nudge; review cards can ask the AI to quiz you (grading always stays yours).
+- **Window of time · stargazing heatmap** — the checkup page previews which stars will extinguish or fall due within 7 days, one click queues them — forgetting becomes a forewarning, not a post-mortem; a 16-week activity heatmap and streak derive live from the timeline.
+- **Knowledge you can take away** — ⌘K full-text search reaches into note bodies (highlighted snippets); export your whole galaxy as an Obsidian-style Markdown vault (zip): one file per star, folders per constellation, [[wikilinks]], README index — zero-dependency packaging.
 - **Onboarding guide** — an 11-page carousel on first run plus a spotlight walkthrough, re-openable from Settings anytime.
 - **Accounts & multi-device** — username/email login (scrypt + sessions); registering folds your anonymous galaxy into the account in place; preferences and AI config travel with the snapshot, and every local trace (API keys included) is wiped on account switch.
 - **Zero-build · zero-dependency** — JSX compiled in the browser by Babel; the backend uses only Node's built-in `node:sqlite`, no third-party packages.
