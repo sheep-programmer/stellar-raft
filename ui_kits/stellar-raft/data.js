@@ -270,10 +270,20 @@ window.SR_DATA = (function () {
   // 稳定度封顶：曾点亮星 365；从未点亮星 max(当前S, 60)——旧档案里 S 已超 60 的星只封顶生长、不回缩
   const sCapOf = (s) => everLit(s) ? MEM.sMax : Math.max(s.sr.S, MEM.sMaxUnlit);
   const retrievability = (s, now) => Math.exp(-Math.max(0, (now || Date.now()) - s.sr.last) / DAY / s.sr.S);
-  // 到期时刻：R 自然衰减到 dueR 的那一刻；「加入复习队列」可把它提前
+  // 到期时刻按复习策略（AI 配置面板）计算；「加入复习队列」可把它提前。
+  // cooling（默认）= R 自然衰减到 dueR 的那一刻 · sm2 = 1·3·7·15·30…天阶梯（取不超过当前稳定度的最大档）
+  // daily = 上次复习一天后 · off = 到期照常按 cooling 算（只是不推送通知，见 maybeRemind）
+  const SM2_LADDER = [365, 240, 120, 60, 30, 15, 7, 3, 1];
+  const strategyNow = () => {
+    try { return (window.SRAI && window.SRAI.active().strategy) || 'cooling'; } catch (e) { return 'cooling'; }
+  };
   const dueTsOf = (s) => {
     ensureMemory(s);
-    const natural = s.sr.last + s.sr.S * Math.log(1 / MEM.dueR) * DAY;
+    const strat = strategyNow();
+    let natural;
+    if (strat === 'sm2') natural = s.sr.last + (SM2_LADDER.find(v => v <= s.sr.S) || 1) * DAY;
+    else if (strat === 'daily') natural = s.sr.last + DAY;
+    else natural = s.sr.last + s.sr.S * Math.log(1 / MEM.dueR) * DAY;
     return s.sr.due ? Math.min(s.sr.due, natural) : natural;
   };
   const reviewLabel = (due, now) => {
@@ -308,6 +318,7 @@ window.SR_DATA = (function () {
       n.strength = s.strength; n.nextReview = s.props.nextReview;
     });
     syncCounts();
+    account.streak = computeStreak(now);   // 跨天 / 取回快照后连续天数保持真实
     return now;
   };
   // 一次成功复习（费曼点亮/重燃 = ignite:true）：稳定度增长、R 回满，队列覆盖清除。
@@ -618,14 +629,28 @@ window.SR_DATA = (function () {
       delta: delta != null ? (delta >= 0 ? '+' : '−') + Math.abs(delta).toFixed(2) : '—',
       kind, note,
     });
+    account.streak = computeStreak();   // 今天的第一条学习记录即续上连续天数
     persistRemote();
   };
   // [deprecated] 点亮的时间线现由 reviewSuccess(id, { ignite:true }) 内部写入（note 点亮/重燃），
   // 这里保留空实现只为兼容旧调用点，避免同一次点亮记两条时间线。
   const logIgnite = () => { };
 
-  // 账户信息单一来源：Sidebar 与设置页共用，别各存一份
-  const account = { name: '林深', avatar: '林', email: 'linshen@stellar.app', plan: '观星者 · Pro', joined: '2024 年 9 月 18 日', streak: 14 };
+  // 连续观星天数：时间线上有主动学习记录（复习/点亮，dim 熄灭不算）的连续自然日。
+  // 今天还没开张不断签——从今天或昨天起往回数；按本地时区的自然日切分。
+  const dayKey = (ts) => { const d = new Date(ts); return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate(); };
+  const computeStreak = (now) => {
+    now = now || Date.now();
+    const days = new Set(timeline.filter(t => t && t.ts && t.kind !== 'dim').map(t => dayKey(t.ts)));
+    let n = 0, cur = now;
+    if (!days.has(dayKey(cur))) cur -= DAY;
+    while (days.has(dayKey(cur))) { n++; cur -= DAY; }
+    return n;
+  };
+
+  // 账户信息单一来源：Sidebar 与设置页共用。username/email/registeredAt 由 /api/hello 回填，
+  // streak 由时间线实时推算，bio 随快照走——不保留任何展示用的伪造值。
+  const account = { name: '林深', avatar: '林', email: '', bio: '', streak: 0 };
   // 社交状态：好友（可造访星系）数量，启动时取回、变更时由星际漫游视图刷新
   const social = { friends: 0 };
 
@@ -723,14 +748,26 @@ window.SR_DATA = (function () {
     try {
       if (typeof Notification === 'undefined' || Notification.permission !== 'granted') return;
       const prefs = JSON.parse(localStorage.getItem('sr.settings')) || {};
+      if (strategyNow() === 'off') return;   // 策略「不提醒」：到期照常计算，任何复习类通知都不再打扰
+      const now = new Date();
+      const today = now.toISOString().slice(0, 10);
+      // 星域变暗提醒（设置里的 dimNudge）：某个星域的记忆亮度均值跌破 0.35 → 每天至多提醒一次
+      if (prefs.dimNudge !== false) {
+        const dim = constellations.filter(c => c.count > 0 && c.health < 0.35);
+        if (dim.length && (localStorage.getItem('sr.dimnudge.last') || '') !== today) {
+          localStorage.setItem('sr.dimnudge.last', today);
+          new Notification('星图 · 星域正在变暗', {
+            body: '「' + dim[0].name + '」' + (dim.length > 1 ? '等 ' + dim.length + ' 个星域' : '') + '的记忆亮度明显下降，去看看它们。',
+            tag: 'sr-dimnudge',
+          });
+        }
+      }
       if (prefs.remind === false) return;
       const due = dueStars().length; if (!due) return;
       const freq = prefs.freq || 'daily';
       if (freq === 'smart' && due < 5) return;
-      const now = new Date();
       const [hh, mm] = String(prefs.remindTime || '21:00').split(':').map(Number);
       if (now.getHours() < hh || (now.getHours() === hh && now.getMinutes() < mm)) return;
-      const today = now.toISOString().slice(0, 10);
       const last = localStorage.getItem('sr.remind.last') || '';
       if (freq === 'weekly' ? (last && Date.now() - Date.parse(last) < 6.5 * 864e5) : last === today) return;
       localStorage.setItem('sr.remind.last', today);
@@ -744,6 +781,14 @@ window.SR_DATA = (function () {
     window.dispatchEvent(new CustomEvent('sr-memory'));
     maybeRemind();
   }, 60000);
+
+  // AI 配置变更（面板保存 / 快照回灌）：到期口径立刻按新策略重算，各视图角标就地对齐；
+  // 并把配置排进快照上传（水合前 ready=false 自然短路，不会把回灌又传一遍）
+  window.addEventListener('sr-ai-config', () => {
+    refreshMemory();
+    window.dispatchEvent(new CustomEvent('sr-memory'));
+    persistRemote();
+  });
 
   // 应用本机已保存的设置：昵称覆盖账户信息，动效偏好落到 <html> data 属性供 CSS 读取
   try {
@@ -770,6 +815,18 @@ window.SR_DATA = (function () {
     Object.keys(byId).forEach(k => delete byId[k]);
     stars.forEach(s => { byId[s.id] = s; });
     if (d.account && d.account.name) { account.name = d.account.name; account.avatar = d.account.avatar || account.avatar; }
+    if (d.account && d.account.bio != null) account.bio = d.account.bio;
+    // 偏好与 AI 配置随快照走：换设备 / 换账号后同一套设置与接入自动就位。
+    // 动效 / 星点闪烁是设备偏好，不进快照（见 SRNet.snapshot）——这里的归并不会碰它们。
+    if (d.prefs && typeof d.prefs === 'object') {
+      try {
+        const cur = JSON.parse(localStorage.getItem('sr.settings')) || {};
+        localStorage.setItem('sr.settings', JSON.stringify({ ...cur, ...d.prefs }));
+        if (d.prefs.nickname) { account.name = d.prefs.nickname; account.avatar = d.prefs.nickname.trim()[0] || account.avatar; }
+        if (d.prefs.bio != null) account.bio = d.prefs.bio;
+      } catch (e) { }
+    }
+    if (d.aiConfig && typeof d.aiConfig === 'object' && window.SRAI) window.SRAI.setConfig(d.aiConfig);
     refreshMemory();               // 取回的星空立刻按真实时间重算 R —— 放几天不看真的变暗
     window.SRNet.setReady();       // 真实数据已就位，此后才允许上传
     window.dispatchEvent(new CustomEvent('sr-hydrated'));
