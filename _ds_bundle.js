@@ -1,4 +1,4 @@
-/* @ds-bundle: {"format":3,"namespace":"StellarRaftDesignSystem_2866af","components":[{"name":"Badge","sourcePath":"components/core/Badge.jsx"},{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"GlassPanel","sourcePath":"components/core/GlassPanel.jsx"},{"name":"Icon","sourcePath":"components/core/Icon.jsx"},{"name":"IconButton","sourcePath":"components/core/IconButton.jsx"},{"name":"Input","sourcePath":"components/core/Input.jsx"},{"name":"Tag","sourcePath":"components/core/Tag.jsx"},{"name":"Checkbox","sourcePath":"components/form/Checkbox.jsx"},{"name":"Select","sourcePath":"components/form/Select.jsx"},{"name":"Switch","sourcePath":"components/form/Switch.jsx"},{"name":"Tabs","sourcePath":"components/form/Tabs.jsx"},{"name":"ConstellationItem","sourcePath":"components/knowledge/ConstellationItem.jsx"},{"name":"MemoryBar","sourcePath":"components/knowledge/MemoryBar.jsx"},{"name":"StarNode","sourcePath":"components/knowledge/StarNode.jsx"},{"name":"ContextMenu","sourcePath":"components/overlay/ContextMenu.jsx"},{"name":"Modal","sourcePath":"components/overlay/Modal.jsx"},{"name":"Toast","sourcePath":"components/overlay/Toast.jsx"},{"name":"Tooltip","sourcePath":"components/overlay/Tooltip.jsx"}],"sourceHashes":{"assets/starfield.js":"d776d2b45dc4","components/core/Badge.jsx":"b0bd9735d638","components/core/Button.jsx":"a1c387a07e86","components/core/GlassPanel.jsx":"299a19d8fbb4","components/core/Icon.jsx":"7505f83ab03d","components/core/IconButton.jsx":"24052f4eed78","components/core/Input.jsx":"54a6c9af7e3f","components/core/Tag.jsx":"d8513c07ea96","components/form/Checkbox.jsx":"38aa593157dd","components/form/Select.jsx":"86b8c1c71e12","components/form/Switch.jsx":"938c62be0664","components/form/Tabs.jsx":"ede2dbff1963","components/knowledge/ConstellationItem.jsx":"d73e999469b6","components/knowledge/MemoryBar.jsx":"a54c928d5065","components/knowledge/StarNode.jsx":"1bedee49f0bf","components/overlay/ContextMenu.jsx":"11783420e876","components/overlay/Modal.jsx":"0906de457544","components/overlay/Toast.jsx":"d22ad40680a6","components/overlay/Tooltip.jsx":"a042caa8970d","ui_kits/stellar-raft/AIConfig.jsx":"bbc66d05eebf","ui_kits/stellar-raft/AerialView.jsx":"8209eb6af395","ui_kits/stellar-raft/BlackHole.jsx":"2704c4a4e50c","ui_kits/stellar-raft/Checkup.jsx":"aa974821dc28","ui_kits/stellar-raft/CommandPalette.jsx":"3f1a9cdd2383","ui_kits/stellar-raft/Editor.jsx":"510b151a8c5c","ui_kits/stellar-raft/EditorMenus.jsx":"fb80581f6bcc","ui_kits/stellar-raft/FeynmanDrawer.jsx":"6af036e0a904","ui_kits/stellar-raft/Galaxy3D.jsx":"2ce87e7da57d","ui_kits/stellar-raft/Inbox.jsx":"c2fc04361d44","ui_kits/stellar-raft/ListView.jsx":"e2550f598c82","ui_kits/stellar-raft/LoginView.jsx":"18d9c842c5c6","ui_kits/stellar-raft/Onboarding.jsx":"e1d27a7d28a7","ui_kits/stellar-raft/ReviewSession.jsx":"9092a3d9412c","ui_kits/stellar-raft/Settings.jsx":"4fb20de532d9","ui_kits/stellar-raft/Sidebar.jsx":"f61a222b9d49","ui_kits/stellar-raft/StarMap.jsx":"3f1c09e9e50e","ui_kits/stellar-raft/Timeline.jsx":"cda4e62fa57b","ui_kits/stellar-raft/VisitView.jsx":"19ff8ab7dbb7","ui_kits/stellar-raft/ai.js":"2f79eb3473c9","ui_kits/stellar-raft/app.jsx":"f08bc502367d","ui_kits/stellar-raft/codehl.js":"6fbdd0100deb","ui_kits/stellar-raft/data.js":"7c4d0fe5482e","ui_kits/stellar-raft/mdcore.js":"b82d5054c3b6","ui_kits/stellar-raft/sanitize.js":"88e63cd63253","ui_kits/stellar-raft/transition.js":"3725d8982dc5","ui_kits/stellar-raft/undocore.js":"7f8c94da35f9","ui_kits/stellar-raft/vault.js":"d7876f7f9981"},"inlinedExternals":[],"unexposedExports":[{"name":"memoryColor","sourcePath":"components/knowledge/MemoryBar.jsx"}],"exposedHelpers":[{"name":"toast","sourcePath":"components/overlay/Toast.jsx"}]} */
+/* @ds-bundle: {"format":3,"namespace":"StellarRaftDesignSystem_2866af","components":[{"name":"Badge","sourcePath":"components/core/Badge.jsx"},{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"GlassPanel","sourcePath":"components/core/GlassPanel.jsx"},{"name":"Icon","sourcePath":"components/core/Icon.jsx"},{"name":"IconButton","sourcePath":"components/core/IconButton.jsx"},{"name":"Input","sourcePath":"components/core/Input.jsx"},{"name":"Tag","sourcePath":"components/core/Tag.jsx"},{"name":"Checkbox","sourcePath":"components/form/Checkbox.jsx"},{"name":"Select","sourcePath":"components/form/Select.jsx"},{"name":"Switch","sourcePath":"components/form/Switch.jsx"},{"name":"Tabs","sourcePath":"components/form/Tabs.jsx"},{"name":"ConstellationItem","sourcePath":"components/knowledge/ConstellationItem.jsx"},{"name":"MemoryBar","sourcePath":"components/knowledge/MemoryBar.jsx"},{"name":"StarNode","sourcePath":"components/knowledge/StarNode.jsx"},{"name":"ContextMenu","sourcePath":"components/overlay/ContextMenu.jsx"},{"name":"Modal","sourcePath":"components/overlay/Modal.jsx"},{"name":"Toast","sourcePath":"components/overlay/Toast.jsx"},{"name":"Tooltip","sourcePath":"components/overlay/Tooltip.jsx"}],"sourceHashes":{"assets/starfield.js":"d776d2b45dc4","components/core/Badge.jsx":"b0bd9735d638","components/core/Button.jsx":"a1c387a07e86","components/core/GlassPanel.jsx":"299a19d8fbb4","components/core/Icon.jsx":"7505f83ab03d","components/core/IconButton.jsx":"24052f4eed78","components/core/Input.jsx":"54a6c9af7e3f","components/core/Tag.jsx":"d8513c07ea96","components/form/Checkbox.jsx":"38aa593157dd","components/form/Select.jsx":"86b8c1c71e12","components/form/Switch.jsx":"938c62be0664","components/form/Tabs.jsx":"ede2dbff1963","components/knowledge/ConstellationItem.jsx":"d73e999469b6","components/knowledge/MemoryBar.jsx":"a54c928d5065","components/knowledge/StarNode.jsx":"1bedee49f0bf","components/overlay/ContextMenu.jsx":"11783420e876","components/overlay/Modal.jsx":"0906de457544","components/overlay/Toast.jsx":"d22ad40680a6","components/overlay/Tooltip.jsx":"a042caa8970d","ui_kits/stellar-raft/AIConfig.jsx":"bbc66d05eebf","ui_kits/stellar-raft/AerialView.jsx":"8209eb6af395","ui_kits/stellar-raft/BlackHole.jsx":"2704c4a4e50c","ui_kits/stellar-raft/Checkup.jsx":"aa974821dc28","ui_kits/stellar-raft/CommandPalette.jsx":"3f1a9cdd2383","ui_kits/stellar-raft/Editor.jsx":"2b09b768f90a","ui_kits/stellar-raft/EditorMenus.jsx":"fb80581f6bcc","ui_kits/stellar-raft/FeynmanDrawer.jsx":"6af036e0a904","ui_kits/stellar-raft/Galaxy3D.jsx":"2ce87e7da57d","ui_kits/stellar-raft/Inbox.jsx":"c2fc04361d44","ui_kits/stellar-raft/ListView.jsx":"e2550f598c82","ui_kits/stellar-raft/LoginView.jsx":"18d9c842c5c6","ui_kits/stellar-raft/Onboarding.jsx":"e1d27a7d28a7","ui_kits/stellar-raft/ReviewSession.jsx":"9092a3d9412c","ui_kits/stellar-raft/Settings.jsx":"4fb20de532d9","ui_kits/stellar-raft/Sidebar.jsx":"f61a222b9d49","ui_kits/stellar-raft/StarMap.jsx":"3f1c09e9e50e","ui_kits/stellar-raft/Timeline.jsx":"cda4e62fa57b","ui_kits/stellar-raft/VisitView.jsx":"19ff8ab7dbb7","ui_kits/stellar-raft/ai.js":"2f79eb3473c9","ui_kits/stellar-raft/app.jsx":"f08bc502367d","ui_kits/stellar-raft/codehl.js":"6fbdd0100deb","ui_kits/stellar-raft/data.js":"7c4d0fe5482e","ui_kits/stellar-raft/mdcore.js":"b82d5054c3b6","ui_kits/stellar-raft/sanitize.js":"88e63cd63253","ui_kits/stellar-raft/transition.js":"3725d8982dc5","ui_kits/stellar-raft/undocore.js":"7f8c94da35f9","ui_kits/stellar-raft/vault.js":"d7876f7f9981"},"inlinedExternals":[],"unexposedExports":[{"name":"memoryColor","sourcePath":"components/knowledge/MemoryBar.jsx"}],"exposedHelpers":[{"name":"toast","sourcePath":"components/overlay/Toast.jsx"}]} */
 
 (() => {
 
@@ -8311,16 +8311,21 @@ function PropPop({
 /* 「类型」浮层菜单：预设 + 当前自定义值兜底，点选即生效（下拉的正常语义） */
 function TypePicker({
   value,
-  onPick
+  onPick,
+  onPop
 }) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpenRaw] = React.useState(false);
+  const setOpen = v => {
+    setOpenRaw(v);
+    onPop && onPop(!!v);
+  };
   const btnRef = React.useRef(null);
   const opts = PROP_TYPE_PRESETS.includes(value) || !value ? PROP_TYPE_PRESETS : [value, ...PROP_TYPE_PRESETS];
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("button", {
     ref: btnRef,
     type: "button",
     className: "sr-focus-ring",
-    onClick: () => setOpen(o => !o),
+    onClick: () => setOpen(!open),
     "aria-haspopup": "listbox",
     "aria-expanded": open,
     style: {
@@ -8391,9 +8396,14 @@ function TypePicker({
 function ReviewPicker({
   label,
   iso,
-  onPick
+  onPick,
+  onPop
 }) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpenRaw] = React.useState(false);
+  const setOpen = v => {
+    setOpenRaw(v);
+    onPop && onPop(!!v);
+  };
   const btnRef = React.useRef(null);
   const now = new Date();
   const todayKey = now.getFullYear() * 10000 + (now.getMonth() + 1) * 100 + now.getDate();
@@ -8647,6 +8657,13 @@ function Properties({
   const [removed, setRemoved] = React.useState([]);
   const [hoverKey, setHoverKey] = React.useState(null);
   const [focusKey, setFocusKey] = React.useState(null); // 光标所在属性行，整行给选中态
+  // 浮层（类型菜单/月历）开着的行也算选中；浮层关闭时强制清除——portal 里的焦点
+  // 掉到 body 不会给行发失焦事件，不清会让选中圈永远留在行上
+  const [popKey, setPopKey] = React.useState(null);
+  const popToggle = key => open => {
+    setPopKey(open ? key : null);
+    if (!open) setFocusKey(null);
+  };
   // 值编辑在失焦时落到 star.props，让记忆栏/列表读到的是新值
   const commitVal = r => e => {
     const val = e.currentTarget.textContent.trim();
@@ -8788,8 +8805,8 @@ function Properties({
       padding: '5px 8px',
       margin: '0 -8px',
       borderRadius: 'var(--r-sm)',
-      background: focusKey === r.key ? 'rgba(159,198,255,0.07)' : hoverKey === r.key ? 'rgba(159,198,255,0.03)' : 'transparent',
-      boxShadow: focusKey === r.key ? '0 0 0 1.5px var(--focus)' : 'none',
+      background: focusKey === r.key || popKey === r.key ? 'rgba(159,198,255,0.07)' : hoverKey === r.key ? 'rgba(159,198,255,0.03)' : 'transparent',
+      boxShadow: focusKey === r.key || popKey === r.key ? '0 0 0 1.5px var(--focus)' : 'none',
       transition: 'background var(--dur-fast), box-shadow var(--dur-fast)'
     }
   }, /*#__PURE__*/React.createElement("div", {
@@ -8859,6 +8876,7 @@ function Properties({
   }), r.v) : r.kind === 'select'
   /* 类型用浮层菜单（portal + fixed）：绝不把面板内容顶开，也不会被 overflow 裁剪 */ ? /*#__PURE__*/React.createElement(TypePicker, {
     value: p.type || '',
+    onPop: popToggle(r.key),
     onPick: v => {
       p.type = v;
       onCommit && onCommit();
@@ -8867,6 +8885,7 @@ function Properties({
   }) : r.kind === 'review' ? /*#__PURE__*/React.createElement(ReviewPicker, {
     label: r.v,
     iso: reviewISO,
+    onPop: popToggle(r.key),
     onPick: onPickReview
   }) : /*#__PURE__*/React.createElement("span", {
     contentEditable: true,

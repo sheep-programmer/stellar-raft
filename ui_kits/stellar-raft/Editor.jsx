@@ -471,13 +471,14 @@ function PropPop({ anchorRef, width, height, onClose, children }) {
 }
 
 /* 「类型」浮层菜单：预设 + 当前自定义值兜底，点选即生效（下拉的正常语义） */
-function TypePicker({ value, onPick }) {
-  const [open, setOpen] = React.useState(false);
+function TypePicker({ value, onPick, onPop }) {
+  const [open, setOpenRaw] = React.useState(false);
+  const setOpen = (v) => { setOpenRaw(v); onPop && onPop(!!v); };
   const btnRef = React.useRef(null);
   const opts = PROP_TYPE_PRESETS.includes(value) || !value ? PROP_TYPE_PRESETS : [value, ...PROP_TYPE_PRESETS];
   return (
     <>
-      <button ref={btnRef} type="button" className="sr-focus-ring" onClick={() => setOpen(o => !o)} aria-haspopup="listbox" aria-expanded={open}
+      <button ref={btnRef} type="button" className="sr-focus-ring" onClick={() => setOpen(!open)} aria-haspopup="listbox" aria-expanded={open}
         style={{ display: 'inline-flex', alignItems: 'center', gap: 6, font: 'inherit', fontSize: 12, padding: '2px 9px', borderRadius: 'var(--r-pill)', border: '1px solid transparent', background: 'rgba(159,198,255,0.12)', color: 'var(--star-blue)', cursor: 'pointer' }}>
         {value || '选择类型…'}
         <Icon name="chevron-down" size={12} color="currentColor" />
@@ -504,8 +505,9 @@ function TypePicker({ value, onPick }) {
 
 /* 「下次复习」的月历：亲手实现——点日期只是选中（金色高亮），按「确认」才排期，
    翻月/挑选过程绝不触发任何设置。过去的日子不可选；星自然变暗到期不会被推迟。 */
-function ReviewPicker({ label, iso, onPick }) {
-  const [open, setOpen] = React.useState(false);
+function ReviewPicker({ label, iso, onPick, onPop }) {
+  const [open, setOpenRaw] = React.useState(false);
+  const setOpen = (v) => { setOpenRaw(v); onPop && onPop(!!v); };
   const btnRef = React.useRef(null);
   const now = new Date();
   const todayKey = now.getFullYear() * 10000 + (now.getMonth() + 1) * 100 + now.getDate();
@@ -638,6 +640,10 @@ function Properties({ props, onFlash, onConfirm, onCommit, reviewISO, onPickRevi
   const [removed, setRemoved] = React.useState([]);
   const [hoverKey, setHoverKey] = React.useState(null);
   const [focusKey, setFocusKey] = React.useState(null); // 光标所在属性行，整行给选中态
+  // 浮层（类型菜单/月历）开着的行也算选中；浮层关闭时强制清除——portal 里的焦点
+  // 掉到 body 不会给行发失焦事件，不清会让选中圈永远留在行上
+  const [popKey, setPopKey] = React.useState(null);
+  const popToggle = (key) => (open) => { setPopKey(open ? key : null); if (!open) setFocusKey(null); };
   // 值编辑在失焦时落到 star.props，让记忆栏/列表读到的是新值
   const commitVal = (r) => (e) => {
     const val = e.currentTarget.textContent.trim();
@@ -687,8 +693,8 @@ function Properties({ props, onFlash, onConfirm, onCommit, reviewISO, onPickRevi
               onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget)) setFocusKey(f => (f === r.key ? null : f)); }}
               onContextMenu={(e) => { e.preventDefault(); }}
               style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '5px 8px', margin: '0 -8px', borderRadius: 'var(--r-sm)',
-                background: focusKey === r.key ? 'rgba(159,198,255,0.07)' : (hoverKey === r.key ? 'rgba(159,198,255,0.03)' : 'transparent'),
-                boxShadow: focusKey === r.key ? '0 0 0 1.5px var(--focus)' : 'none',
+                background: (focusKey === r.key || popKey === r.key) ? 'rgba(159,198,255,0.07)' : (hoverKey === r.key ? 'rgba(159,198,255,0.03)' : 'transparent'),
+                boxShadow: (focusKey === r.key || popKey === r.key) ? '0 0 0 1.5px var(--focus)' : 'none',
                 transition: 'background var(--dur-fast), box-shadow var(--dur-fast)' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 7, width: 96, flex: 'none', color: 'var(--text-3)', fontSize: 12.5 }}>
                 <Icon name={r.icon} size={13} color="currentColor" />
@@ -711,9 +717,9 @@ function Properties({ props, onFlash, onConfirm, onCommit, reviewISO, onPickRevi
                     </span>
                   : r.kind === 'select'
                     /* 类型用浮层菜单（portal + fixed）：绝不把面板内容顶开，也不会被 overflow 裁剪 */
-                    ? <TypePicker value={p.type || ''} onPick={(v) => { p.type = v; onCommit && onCommit(); onFlash && onFlash('已更新类型'); }} />
+                    ? <TypePicker value={p.type || ''} onPop={popToggle(r.key)} onPick={(v) => { p.type = v; onCommit && onCommit(); onFlash && onFlash('已更新类型'); }} />
                     : r.kind === 'review'
-                      ? <ReviewPicker label={r.v} iso={reviewISO} onPick={onPickReview} />
+                      ? <ReviewPicker label={r.v} iso={reviewISO} onPop={popToggle(r.key)} onPick={onPickReview} />
                       : <span contentEditable suppressContentEditableWarning title="点击编辑" data-ph="点击填写"
                           onBlur={commitVal(r)}
                           style={{ outline: 'none', cursor: 'text', fontSize: 13, color: 'var(--text-1)', borderRadius: 4, padding: '0 2px', display: 'inline-block', minWidth: 42 }}>{r.v}</span>}
