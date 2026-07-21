@@ -512,7 +512,9 @@ function ReviewPicker({ label, iso, onPick }) {
   const init = /^\d{4}-\d{2}-\d{2}$/.test(iso || '') ? iso : null;
   const [ym, setYm] = React.useState(() => init ? [Number(init.slice(0, 4)), Number(init.slice(5, 7)) - 1] : [now.getFullYear(), now.getMonth()]);
   const [sel, setSel] = React.useState(init);
-  const openPop = () => { setSel(init); setYm(init ? [Number(init.slice(0, 4)), Number(init.slice(5, 7)) - 1] : [now.getFullYear(), now.getMonth()]); setOpen(true); };
+  // 视图层级：days 日 → 点标题进 months 月 → 再点年份进 years 年，选完逐级落回
+  const [mode, setMode] = React.useState('days');
+  const openPop = () => { setSel(init); setMode('days'); setYm(init ? [Number(init.slice(0, 4)), Number(init.slice(5, 7)) - 1] : [now.getFullYear(), now.getMonth()]); setOpen(true); };
   const [y, m] = ym;
   const firstDow = (new Date(y, m, 1).getDay() + 6) % 7;   // 周一为一周之首
   const lastDay = new Date(y, m + 1, 0).getDate();
@@ -532,34 +534,90 @@ function ReviewPicker({ label, iso, onPick }) {
         <PropPop anchorRef={btnRef} width={264} height={332} onClose={() => setOpen(false)}>
           <div style={{ padding: '12px 14px 12px' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
-              <IconButton name="chevron-left" size="sm" title="上个月" onClick={() => shift(-1)} />
-              <span style={{ fontSize: 13, color: 'var(--text-1)', fontFamily: 'var(--font-mono)' }}>{y} 年 {m + 1} 月</span>
-              <IconButton name="chevron-right" size="sm" title="下个月" onClick={() => shift(1)} />
+              <IconButton name="chevron-left" size="sm"
+                title={mode === 'days' ? '上个月' : mode === 'months' ? '上一年' : '前 12 年'}
+                onClick={() => mode === 'days' ? shift(-1) : setYm(([yy, mm]) => [yy - (mode === 'months' ? 1 : 12), mm])} />
+              {/* 标题即快速跳转：日历点进月份网格，月份网格点年份进年份网格 */}
+              <button type="button" className="sr-focus-ring"
+                title={mode === 'days' ? '点击快速选择月份' : mode === 'months' ? '点击快速选择年份' : ''}
+                onClick={() => setMode(md => md === 'days' ? 'months' : md === 'months' ? 'years' : 'years')}
+                style={{ font: 'inherit', fontSize: 13, color: 'var(--text-1)', fontFamily: 'var(--font-mono)', border: 'none', background: 'transparent', cursor: mode === 'years' ? 'default' : 'pointer', padding: '3px 10px', borderRadius: 'var(--r-sm)' }}
+                onMouseEnter={(e) => { if (mode !== 'years') e.currentTarget.style.background = 'rgba(159,198,255,0.08)'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; }}>
+                {mode === 'days' ? `${y} 年 ${m + 1} 月` : mode === 'months' ? `${y} 年` : `${y - (y % 12)} – ${y - (y % 12) + 11}`}
+              </button>
+              <IconButton name="chevron-right" size="sm"
+                title={mode === 'days' ? '下个月' : mode === 'months' ? '下一年' : '后 12 年'}
+                onClick={() => mode === 'days' ? shift(1) : setYm(([yy, mm]) => [yy + (mode === 'months' ? 1 : 12), mm])} />
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: 2, marginBottom: 4 }}>
-              {['一', '二', '三', '四', '五', '六', '日'].map(w => (
-                <span key={w} style={{ textAlign: 'center', fontSize: 10.5, color: 'var(--text-3)', fontFamily: 'var(--font-mono)', padding: '2px 0' }}>{w}</span>
-              ))}
-            </div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: 2 }}>
-              {cells.map((day, i) => {
-                if (day == null) return <span key={'e' + i} />;
-                const past = keyOf(day) < todayKey;
-                const isToday = keyOf(day) === todayKey;
-                const isSel = sel === isoOf(day);
-                return (
-                  <button key={day} type="button" disabled={past} onClick={() => setSel(isoOf(day))}
-                    style={{
-                      height: 30, font: 'inherit', fontSize: 12.5, borderRadius: 'var(--r-sm)', cursor: past ? 'default' : 'pointer',
-                      border: '1px solid ' + (isSel ? 'rgba(255,217,138,0.55)' : isToday ? 'var(--glass-border-strong)' : 'transparent'),
-                      background: isSel ? 'rgba(255,217,138,0.16)' : 'transparent',
-                      color: past ? 'var(--text-3)' : isSel ? 'var(--gold)' : 'var(--text-1)',
-                      opacity: past ? 0.4 : 1,
-                      boxShadow: isSel ? 'var(--glow-gold-soft)' : 'none',
-                    }}>{day}</button>
-                );
-              })}
-            </div>
+            {mode === 'days' && (
+              <>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: 2, marginBottom: 4 }}>
+                  {['一', '二', '三', '四', '五', '六', '日'].map(w => (
+                    <span key={w} style={{ textAlign: 'center', fontSize: 10.5, color: 'var(--text-3)', fontFamily: 'var(--font-mono)', padding: '2px 0' }}>{w}</span>
+                  ))}
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: 2 }}>
+                  {cells.map((day, i) => {
+                    if (day == null) return <span key={'e' + i} />;
+                    const past = keyOf(day) < todayKey;
+                    const isToday = keyOf(day) === todayKey;
+                    const isSel = sel === isoOf(day);
+                    return (
+                      <button key={day} type="button" disabled={past} onClick={() => setSel(isoOf(day))}
+                        style={{
+                          height: 30, font: 'inherit', fontSize: 12.5, borderRadius: 'var(--r-sm)', cursor: past ? 'default' : 'pointer',
+                          border: '1px solid ' + (isSel ? 'rgba(255,217,138,0.55)' : isToday ? 'var(--glass-border-strong)' : 'transparent'),
+                          background: isSel ? 'rgba(255,217,138,0.16)' : 'transparent',
+                          color: past ? 'var(--text-3)' : isSel ? 'var(--gold)' : 'var(--text-1)',
+                          opacity: past ? 0.4 : 1,
+                          boxShadow: isSel ? 'var(--glow-gold-soft)' : 'none',
+                        }}>{day}</button>
+                    );
+                  })}
+                </div>
+              </>
+            )}
+            {mode === 'months' && (
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 6, padding: '6px 0 22px' }}>
+                {Array.from({ length: 12 }, (_, i) => i).map(mi => {
+                  const pastM = y * 100 + mi < now.getFullYear() * 100 + now.getMonth();
+                  const isNowM = y === now.getFullYear() && mi === now.getMonth();
+                  const isCur = mi === m;
+                  return (
+                    <button key={mi} type="button" disabled={pastM}
+                      onClick={() => { setYm([y, mi]); setMode('days'); }}
+                      style={{
+                        height: 40, font: 'inherit', fontSize: 12.5, borderRadius: 'var(--r-sm)', cursor: pastM ? 'default' : 'pointer',
+                        border: '1px solid ' + (isCur ? 'rgba(255,217,138,0.55)' : isNowM ? 'var(--glass-border-strong)' : 'transparent'),
+                        background: isCur ? 'rgba(255,217,138,0.16)' : 'transparent',
+                        color: pastM ? 'var(--text-3)' : isCur ? 'var(--gold)' : 'var(--text-1)',
+                        opacity: pastM ? 0.4 : 1,
+                      }}>{mi + 1} 月</button>
+                  );
+                })}
+              </div>
+            )}
+            {mode === 'years' && (
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 6, padding: '6px 0 22px' }}>
+                {Array.from({ length: 12 }, (_, i) => y - (y % 12) + i).map(yy => {
+                  const pastY = yy < now.getFullYear();
+                  const isNowY = yy === now.getFullYear();
+                  const isCur = yy === y;
+                  return (
+                    <button key={yy} type="button" disabled={pastY}
+                      onClick={() => { setYm([yy, yy === now.getFullYear() && m < now.getMonth() ? now.getMonth() : m]); setMode('months'); }}
+                      style={{
+                        height: 40, font: 'inherit', fontSize: 12.5, fontFamily: 'var(--font-mono)', borderRadius: 'var(--r-sm)', cursor: pastY ? 'default' : 'pointer',
+                        border: '1px solid ' + (isCur ? 'rgba(255,217,138,0.55)' : isNowY ? 'var(--glass-border-strong)' : 'transparent'),
+                        background: isCur ? 'rgba(255,217,138,0.16)' : 'transparent',
+                        color: pastY ? 'var(--text-3)' : isCur ? 'var(--gold)' : 'var(--text-1)',
+                        opacity: pastY ? 0.4 : 1,
+                      }}>{yy}</button>
+                  );
+                })}
+              </div>
+            )}
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 12 }}>
               <span style={{ flex: 1, fontSize: 11, color: 'var(--text-3)' }}>{sel ? '排到 ' + sel.replace(/-/g, '/') : '点一天，再按确认'}</span>
               <Button size="sm" variant="ghost" onClick={() => setOpen(false)}>取消</Button>
