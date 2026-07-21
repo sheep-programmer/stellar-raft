@@ -141,9 +141,10 @@ window.SRNet = (function () {
      UI 可据此给出温和提示，也可与 null 一样按「暂不可用」处理。 */
   const soften = (p) => p.catch((e) => (e && e.status ? { error: e.message, status: e.status } : null));
   const inbox = {
-    // 造访邀请：inbox.send(toUserId, 'galaxy')；赠星：inbox.send(toUserId, 'star', starId)
-    send: (toUserId, kind, starId) =>
-      soften(api('/api/inbox/send', { method: 'POST', body: { toUserId, kind, starId } })),
+    // 造访邀请：inbox.send(toUserId, 'galaxy')；赠星：inbox.send(toUserId, 'star', starId)；
+    // 星语留言：inbox.send(toUserId, 'note', null, { text: '…' })
+    send: (toUserId, kind, starId, extra) =>
+      soften(api('/api/inbox/send', { method: 'POST', body: { toUserId, kind, starId, ...(extra || {}) } })),
     // 造访好友星系时收纳一颗可见的星（进自己的收件箱）
     collect: (code, starId) =>
       soften(api('/api/inbox/collect', { method: 'POST', body: { code, starId } })),

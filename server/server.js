@@ -81,6 +81,7 @@ ensureColumn('users', 'username', 'username TEXT');
 ensureColumn('users', 'email', 'email TEXT');
 ensureColumn('users', 'pass', 'pass TEXT');
 ensureColumn('users', 'registered_at', 'registered_at TEXT');
+ensureColumn('friendships', 'last_visit', 'last_visit TEXT');   // 访客足迹：这位访客上次造访的时刻
 db.exec(`
   CREATE UNIQUE INDEX IF NOT EXISTS idx_users_username ON users(username) WHERE username IS NOT NULL;
   CREATE UNIQUE INDEX IF NOT EXISTS idx_users_email ON users(email) WHERE email IS NOT NULL;
@@ -109,9 +110,10 @@ const q = {
   friendship: db.prepare('SELECT * FROM friendships WHERE owner_id = ? AND viewer_id = ?'),
   friendsOf: db.prepare(`SELECT u.id, u.name, u.avatar, f.blocked, f.added_at FROM friendships f
     JOIN users u ON u.id = f.owner_id WHERE f.viewer_id = ?`),
-  visitorsOf: db.prepare(`SELECT u.id, u.name, u.avatar, f.blocked, f.added_at FROM friendships f
+  visitorsOf: db.prepare(`SELECT u.id, u.name, u.avatar, f.blocked, f.added_at, f.last_visit FROM friendships f
     JOIN users u ON u.id = f.viewer_id WHERE f.owner_id = ?`),
   setBlocked: db.prepare('UPDATE friendships SET blocked = ? WHERE owner_id = ? AND viewer_id = ?'),
+  touchVisit: db.prepare(`UPDATE friendships SET last_visit = datetime('now') WHERE owner_id = ? AND viewer_id = ?`),
   inboxInsert: db.prepare('INSERT INTO inbox_messages (to_user, from_user, kind, payload) VALUES (?, ?, ?, ?)'),
   inboxList: db.prepare('SELECT * FROM inbox_messages WHERE to_user = ? ORDER BY id DESC'),
   inboxById: db.prepare('SELECT * FROM inbox_messages WHERE id = ?'),
@@ -233,11 +235,18 @@ const starInGalaxyOf = (userId, starId) => {
    ① 防重复 —— 同 (to, from, kind, starId) 已有未领取消息时幂等返回既有消息，不重复入库
    ② 速率 —— 只有真正入库才消耗投递者（actor）的配额 */
 const deliver = (res, actorId, fromId, toId, kind, starId, payload) => {
-  const dup = q.inboxUnclaimed.all(toId, fromId, kind).find(m => {
-    if (kind !== 'star') return true;
-    try { return JSON.parse(m.payload).starId === starId; } catch { return false; }
-  });
-  if (dup) return json(res, 200, { ok: true, duplicate: true, message: pubMsg(dup) });
+  // 星语允许多句并存，但同一寄件人的未读星语封顶 5 句——防刷屏也防骚扰
+  if (kind === 'note') {
+    if (q.inboxUnclaimed.all(toId, fromId, 'note').length >= 5) {
+      return json(res, 429, { error: '对方还有几句你的星语没读，稍后再寄' });
+    }
+  } else {
+    const dup = q.inboxUnclaimed.all(toId, fromId, kind).find(m => {
+      if (kind !== 'star') return true;
+      try { return JSON.parse(m.payload).starId === starId; } catch { return false; }
+    });
+    if (dup) return json(res, 200, { ok: true, duplicate: true, message: pubMsg(dup) });
+  }
   if (!rateHit(actorId)) return json(res, 429, { error: '来信太频繁，请稍后再寄' });
   const info = q.inboxInsert.run(toId, fromId, kind, JSON.stringify(payload));
   return json(res, 200, { ok: true, message: pubMsg(q.inboxById.get(Number(info.lastInsertRowid))) });
@@ -503,7 +512,7 @@ async function handleApi(req, res, url) {
   // GET /api/share — 我的分享状态与访客列表；POST /api/share — 开关/可见度/重置密文
   if (seg[1] === 'share' && seg.length === 2) {
     if (req.method === 'GET') {
-      return json(res, 200, { ...pubShare(shareOf(me.id)), visitors: q.visitorsOf.all(me.id).map(v => ({ id: v.id, name: v.name, avatar: v.avatar, blocked: !!v.blocked, addedAt: v.added_at })) });
+      return json(res, 200, { ...pubShare(shareOf(me.id)), visitors: q.visitorsOf.all(me.id).map(v => ({ id: v.id, name: v.name, avatar: v.avatar, blocked: !!v.blocked, addedAt: v.added_at, lastVisit: v.last_visit || null })) });
     }
     if (req.method === 'POST') {
       const cur = shareOf(me.id);
@@ -562,6 +571,7 @@ async function handleApi(req, res, url) {
     const g = q.getGalaxy.get(ownerId);
     if (!g) return json(res, 404, { error: '这片星空还是空的' });
     const owner = q.userById.get(ownerId);
+    q.touchVisit.run(ownerId, me.id);   // 访客足迹：主人在分享面板能看到「谁刚来过」
     // 主人的星空简介（设置 → 个人简介）随造访视图展示；剥 HTML 并钳长度
     let ownerBio = '';
     try { ownerBio = cleanText((JSON.parse(g.data).account || {}).bio, 160); } catch { }
@@ -591,6 +601,14 @@ async function handleApi(req, res, url) {
         starCount,
       };
       return deliver(res, me.id, me.id, toUser.id, 'galaxy', null, payload);
+    }
+
+    // 星语：造访时给对方留一句话（进对方收件箱）。文本剥 HTML 钳 160 字；
+    // 绕过「同类未领取即视为重复」的抑制（多句星语是常态），改由 deliver 内的未读上限兜底
+    if (body.kind === 'note') {
+      const text = cleanText(body.text, 160);
+      if (!text) return json(res, 400, { error: '星语不能是空的' });
+      return deliver(res, me.id, me.id, toUser.id, 'note', null, { text });
     }
 
     if (body.kind === 'star') {

@@ -513,3 +513,52 @@ test('造访返回主人简介：剥 HTML、钳 160 字；偏好与 AI 配置绝
   assert.ok(!raw.includes('sk-secret-123'), 'AI 密钥绝不能出现在访客视图');
   assert.ok(!raw.includes('remindTime'), '偏好不透传给访客');
 });
+
+/* --------------------- 星语留言 · 访客足迹 --------------------- */
+
+test('星语：好友可寄、陌生人 403、剥 HTML 钳 160、未读封顶 5 句', async () => {
+  const O = 'token-bio-owner', V = 'token-bio-viewer', S = 'token-note-stranger';
+  await api(S, 'POST', '/api/hello', { name: '陌生人', avatar: '陌' });
+  const hello = await api(O, 'POST', '/api/hello', {});
+  const ownerId = hello.body.user.id;
+
+  const forbid = await api(S, 'POST', '/api/inbox/send', { toUserId: ownerId, kind: 'note', text: '你好' });
+  assert.equal(forbid.status, 403);
+
+  const empty = await api(V, 'POST', '/api/inbox/send', { toUserId: ownerId, kind: 'note', text: '   ' });
+  assert.equal(empty.status, 400);
+
+  const long = '<b>星语</b>' + '很'.repeat(300);
+  const ok = await api(V, 'POST', '/api/inbox/send', { toUserId: ownerId, kind: 'note', text: long });
+  assert.equal(ok.status, 200);
+  assert.ok(ok.body.message.payload.text.startsWith('星语'), '剥 HTML');
+  assert.ok(ok.body.message.payload.text.length <= 160, '钳长度');
+
+  // 星语不受「同类未领取即重复」抑制：能连寄多句；未读到 5 句后 429
+  for (let k = 0; k < 4; k++) {
+    const r = await api(V, 'POST', '/api/inbox/send', { toUserId: ownerId, kind: 'note', text: '第' + k + '句' });
+    assert.equal(r.status, 200);
+    assert.ok(!r.body.duplicate, '星语不该被去重抑制');
+  }
+  const capped = await api(V, 'POST', '/api/inbox/send', { toUserId: ownerId, kind: 'note', text: '第六句' });
+  assert.equal(capped.status, 429);
+
+  // 主人收信并领取一句后，又能继续寄
+  const list = await api(O, 'GET', '/api/inbox');
+  const note = list.body.find(mm => mm.kind === 'note');
+  assert.ok(note);
+  const ack = await api(O, 'POST', '/api/inbox/ack', { id: note.id, action: 'claim' });
+  assert.equal(ack.status, 200);
+  const again = await api(V, 'POST', '/api/inbox/send', { toUserId: ownerId, kind: 'note', text: '又一句' });
+  assert.equal(again.status, 200);
+});
+
+test('访客足迹：造访后 share.visitors 带 lastVisit 时刻', async () => {
+  const O = 'token-bio-owner', V = 'token-bio-viewer';
+  const hello = await api(O, 'POST', '/api/hello', {});
+  await api(V, 'GET', `/api/visit/${hello.body.user.id}`);
+  const share = await api(O, 'GET', '/api/share');
+  const v = share.body.visitors.find(x => x.name === '简介客');
+  assert.ok(v, '访客列表应包含简介客');
+  assert.match(String(v.lastVisit), /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/, '足迹为 UTC 时刻');
+});

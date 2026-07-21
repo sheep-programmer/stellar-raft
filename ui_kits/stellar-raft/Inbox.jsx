@@ -1,7 +1,8 @@
 /* Inbox — 收件箱：两个标签页。
-   「待整理」顶部的「星际来信」：好友寄来的造访邀请（去造访 / 忽略）与赠星
-   （收纳到星域 / 忽略）——消息本体在服务器（GET /api/inbox），后端未运行时
-   整区隐藏不报错；收纳经 data.js 的 adoptShared 建星，从未点亮起步。
+   「待整理」顶部的「星际来信」：好友寄来的造访邀请（去造访 / 忽略）、赠星
+   （收纳到星域 / 忽略）与星语留言（收下 / 回一句 / 忽略）——消息本体在服务器
+   （GET /api/inbox），后端未运行时整区隐藏不报错；收纳经 data.js 的
+   adoptShared 建星，从未点亮起步；星语可就地回寄一句（≤160 字）。
    「待整理」：随手捕捉、尚未归入任何星域的想法草稿——
    · 归入即真的创建一颗知识星（落在该星域质心附近，星图/3D 立即可见）
    · 有建议的草稿一键「按建议归入」；批量勾选后可一次归入/忽略
@@ -34,13 +35,13 @@ function Inbox({ onFocusCon, onOpen }) {
   const [sel, setSel] = React.useState([]);            // 勾选的草稿 id
   const [picker, setPicker] = React.useState(null);    // { id } 或 { batch: true }，正在选星域
   const [confirm, setConfirm] = React.useState(null);
-  const [toast, setToast] = React.useState(null);      // { msg, con } — con 给「查看」用
+  const [toast, setToast] = React.useState(null);      // { msg, con, tone } — con 给「查看」用
   const seq = React.useRef(0);
   const toastTimer = React.useRef(null);
-  // 带动作的 toast 多停一会儿（5s），纯文字的保持 2.6s
-  const flash = (msg, con) => {
+  // 带动作的 toast 多停一会儿（5s），纯文字的保持 2.6s；tone:'danger' 用于失败反馈
+  const flash = (msg, con, tone) => {
     clearTimeout(toastTimer.current);
-    setToast({ msg, con });
+    setToast({ msg, con, tone });
     toastTimer.current = setTimeout(() => setToast(null), con ? 5000 : 2600);
   };
   React.useEffect(() => () => clearTimeout(toastTimer.current), []);
@@ -114,11 +115,12 @@ function Inbox({ onFocusCon, onOpen }) {
       : `${its.length} 颗新星已按建议归入 · 讲给 AI 学生，让它们自己发光。`, cons.length === 1 ? cons[0] : null);
   };
 
-  /* ——— 星际来信：好友寄来的造访邀请与赠星（服务端收件箱）———
+  /* ——— 星际来信：好友寄来的造访邀请、赠星与星语留言（服务端收件箱）———
      打开视图即拉取一次（GET /api/inbox 的 SRNet 便捷方法）；
      后端未运行 → 镜像保持为空，整个区块隐藏、不报错。 */
   const [, bumpMail] = React.useReducer(x => x + 1, 0);
   const [mailPicker, setMailPicker] = React.useState(null);   // 正在选星域收纳的来信 id
+  const [noteReply, setNoteReply] = React.useState(null);     // { id, text, busy } — 正在回寄的星语
   React.useEffect(() => {
     if (D.refreshMail) D.refreshMail();
     const h = () => bumpMail();
@@ -134,12 +136,15 @@ function Inbox({ onFocusCon, onOpen }) {
   const dismissMail = (m) => setConfirm({
     message: m.kind === 'galaxy'
       ? '忽略后这封造访邀请会被删除。确定忽略吗？'
-      : `忽略后「${(m.payload && m.payload.label) || '这颗星'}」的赠星来信会被删除，不会成为你的星。确定忽略吗？`,
+      : m.kind === 'note'
+        ? `忽略后「${(m.from && m.from.name) || '好友'}」的这句星语会被删除。确定忽略吗？`
+        : `忽略后「${(m.payload && m.payload.label) || '这颗星'}」的赠星来信会被删除，不会成为你的星。确定忽略吗？`,
     confirmLabel: '忽略',
     onYes: () => {
       if (window.SRNet && window.SRNet.inbox) window.SRNet.inbox.ack(m.id, 'dismiss');   // 静默降级
       const i = mail.indexOf(m); if (i >= 0) mail.splice(i, 1);
       if (mailPicker === m.id) setMailPicker(null);
+      setNoteReply(r => (r && r.id === m.id) ? null : r);
       window.dispatchEvent(new Event('sr-data'));   // 侧栏角标即时对齐
       flash('已忽略这封来信');
     },
@@ -155,6 +160,25 @@ function Inbox({ onFocusCon, onOpen }) {
     const star = D.adoptShared && D.adoptShared(m, conId);
     setMailPicker(null);
     if (star) flash(`已收纳「${star.label}」· 从未点亮起步，讲透它，才是你的星。`, conId);
+  };
+  // 收下星语：镜像置 claimed，未领取角标即时减一；文字留在原地，随时可回看
+  const claimNote = (m) => {
+    if (window.SRNet && window.SRNet.inbox) window.SRNet.inbox.ack(m.id, 'claim');   // 静默降级
+    m.claimed = true;
+    window.dispatchEvent(new Event('sr-data'));   // 侧栏角标即时对齐
+    flash('已收下这句星语');
+  };
+  // 回一句：≤160 字纯文本，经 /api/inbox/send 寄回对方收件箱（kind 'note'）
+  const sendNoteReply = (m) => {
+    const text = ((noteReply && noteReply.text) || '').trim();
+    const N = window.SRNet;
+    if (!text || !N || !N.inbox || (noteReply && noteReply.busy)) return;
+    setNoteReply(r => r && { ...r, busy: true });
+    N.inbox.send(m.from && m.from.id, 'note', null, { text }).then(r => {
+      if (!r) { setNoteReply(x => x && { ...x, busy: false }); flash('星际网络暂不可用，稍后再试', null, 'danger'); }
+      else if (r.error) { setNoteReply(x => x && { ...x, busy: false }); flash(r.error, null, 'danger'); }
+      else { setNoteReply(null); flash('星语已回寄'); }
+    });
   };
 
   const askDismiss = (ids) => setConfirm({
@@ -218,7 +242,7 @@ function Inbox({ onFocusCon, onOpen }) {
         {tab === 'fav' && <FavList D={D} onOpen={onOpen} onFocusCon={onFocusCon} onUnfav={(s) => { s.fav = false; D.persist(); bumpFav(); flash(`已取消收藏「${s.label}」`); }} />}
 
         {tab === 'triage' && <React.Fragment>
-        {/* 星际来信：好友寄来的造访邀请 / 赠星，置于本地捕捉之上，有来信才显示 */}
+        {/* 星际来信：好友寄来的造访邀请 / 赠星 / 星语，置于本地捕捉之上，有来信才显示 */}
         {mail.length > 0 && (
           <div style={{ marginBottom: 20 }}>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, margin: '0 2px 3px' }}>
@@ -227,14 +251,16 @@ function Inbox({ onFocusCon, onOpen }) {
               <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-3)' }}>{mail.filter(m => !m.claimed).length} 封未领取</span>
             </div>
             <div style={{ fontSize: 11.5, lineHeight: 1.7, color: 'var(--text-3)', margin: '0 2px 10px' }}>
-              来自星际的知识，收纳后从未点亮起步——讲透它，才是你的星。
+              来自星际的知识与心意——赠星收纳后从未点亮起步，讲透它，才是你的星。
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               {mail.map(m => {
                 const galaxy = m.kind === 'galaxy';
+                const note = m.kind === 'note';
                 const p = m.payload || {};
                 const from = m.from || {};
                 const open = mailPicker === m.id;
+                const replying = noteReply && noteReply.id === m.id;
                 return (
                   <GlassPanel key={'mail-' + m.id} radius="md" pad="none" style={{ padding: '13px 15px', opacity: m.claimed ? 0.62 : 1 }}>
                     <div style={{ display: 'flex', gap: 11 }}>
@@ -243,16 +269,24 @@ function Inbox({ onFocusCon, onOpen }) {
                       <div style={{ flex: 1, minWidth: 0 }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 9, flexWrap: 'wrap' }}>
                           <span style={{ fontSize: 13.5, color: 'var(--text-1)' }}>{from.name || '星际旅人'}</span>
-                          {/* 类型徽标：星系邀请 / 知识星（Lucide，星蓝——金色只留给点亮） */}
+                          {/* 类型徽标：星系邀请 / 星语 / 知识星（Lucide，星蓝——金色只留给点亮） */}
                           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: 11, color: 'var(--star-blue)', border: '1px solid rgba(159,198,255,0.28)', borderRadius: 'var(--r-pill)', padding: '2.5px 9px' }}>
-                            <Icon name={galaxy ? 'radio-tower' : 'star'} size={11} color="currentColor" />{galaxy ? '星系邀请' : '知识星'}
+                            <Icon name={galaxy ? 'radio-tower' : note ? 'quote' : 'star'} size={11} color="currentColor" />{galaxy ? '星系邀请' : note ? '星语' : '知识星'}
                           </span>
-                          {m.claimed && <Badge tone="gold">已收纳</Badge>}
+                          {m.claimed && <Badge tone="gold">{note ? '已收下' : '已收纳'}</Badge>}
                           <div style={{ flex: 1 }} />
                           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-3)' }}><Icon name="clock" size={12} color="currentColor" />{mailAgo(m.at)}</span>
                         </div>
 
-                        {galaxy ? (
+                        {note ? (
+                          /* 星语正文：引文样式——金色细竖线 + 楷斜体，一句话的仪式感 */
+                          <div style={{ display: 'flex', gap: 10, marginTop: 8 }}>
+                            <span aria-hidden="true" style={{ flex: 'none', width: 2, borderRadius: 1, background: 'linear-gradient(180deg, rgba(255,217,138,0.55), rgba(255,217,138,0.12))' }} />
+                            <div style={{ fontSize: 14.5, lineHeight: 1.8, color: 'var(--text-1)', fontStyle: 'italic', letterSpacing: '0.015em', overflowWrap: 'anywhere' }}>
+                              {p.text || '…'}
+                            </div>
+                          </div>
+                        ) : galaxy ? (
                           <div style={{ fontSize: 13.5, lineHeight: 1.7, color: 'var(--text-2)', marginTop: 7 }}>
                             邀请你造访「{p.galaxyName || '一片新的星空'}」
                             {p.starCount != null && <span style={{ color: 'var(--text-3)' }}> · {p.starCount} 颗星</span>}
@@ -277,10 +311,42 @@ function Inbox({ onFocusCon, onOpen }) {
                           <div style={{ flex: 1 }} />
                           {!m.claimed && (galaxy
                             ? <Button size="sm" icon="rocket" glow onClick={() => visitMail(m)}>去造访</Button>
-                            : <Button size="sm" icon="folder-input" glow onClick={() => setMailPicker(open ? null : m.id)}>收纳到星域</Button>)}
+                            : note
+                              ? <Button size="sm" icon="check" glow onClick={() => claimNote(m)}>收下</Button>
+                              : <Button size="sm" icon="folder-input" glow onClick={() => setMailPicker(open ? null : m.id)}>收纳到星域</Button>)}
+                          {note && from.id != null && (
+                            <Button size="sm" variant="ghost" icon="corner-up-left" onClick={() => setNoteReply(replying ? null : { id: m.id, text: '', busy: false })}>回一句</Button>
+                          )}
                           <Button size="sm" variant="ghost" icon="x" onClick={() => dismissMail(m)}>忽略</Button>
                         </div>
-                        {open && !m.claimed && (D.constellations.length
+                        {note && replying && (
+                          /* 回寄小输入框：与快速捕捉同一套手感，160 字封顶 */
+                          <div style={{ marginTop: 12, paddingTop: 12, borderTop: '1px solid var(--line)' }}>
+                            <div style={{ display: 'flex', gap: 9 }}>
+                              <Icon name="feather" size={14} color="var(--star-blue)" style={{ marginTop: 5, flex: 'none' }} />
+                              <textarea
+                                value={noteReply.text}
+                                maxLength={160}
+                                autoFocus
+                                onChange={(e) => { const v = e.target.value.slice(0, 160); setNoteReply(r => r && { ...r, text: v }); }}
+                                onKeyDown={(e) => { if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) { e.preventDefault(); sendNoteReply(m); } }}
+                                placeholder={`回一句星语给${from.name ? '「' + from.name + '」' : '对方'}…`}
+                                aria-label="回一句星语"
+                                rows={2}
+                                style={{ flex: 1, minWidth: 0, resize: 'none', background: 'transparent', border: 'none', outline: 'none',
+                                  color: 'var(--text-1)', fontSize: 13.5, lineHeight: 1.7, fontFamily: 'var(--font-sans)', padding: '2px 0' }} />
+                            </div>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 7 }}>
+                              <span style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-3)' }}>
+                                {window.SRKeys.combo('Enter')} 寄出 · 还可写 <span style={{ color: noteReply.text.length >= 150 ? 'var(--gold)' : 'inherit' }}>{160 - noteReply.text.length}</span> 字
+                              </span>
+                              <div style={{ flex: 1 }} />
+                              <Button size="sm" variant="ghost" onClick={() => setNoteReply(null)}>取消</Button>
+                              <Button size="sm" icon="send" glow disabled={!noteReply.text.trim() || noteReply.busy} onClick={() => sendNoteReply(m)}>{noteReply.busy ? '寄出中…' : '回寄'}</Button>
+                            </div>
+                          </div>
+                        )}
+                        {open && !m.claimed && !galaxy && !note && (D.constellations.length
                           ? <ConPicker onPick={(conId) => adoptMail(m, conId)} onCancel={() => setMailPicker(null)} />
                           : (
                             <div style={{ marginTop: 12, paddingTop: 12, borderTop: '1px solid var(--line)', fontSize: 12, lineHeight: 1.6, color: 'var(--text-3)' }}>
@@ -440,7 +506,7 @@ function Inbox({ onFocusCon, onOpen }) {
       {toast && (
         <div style={{ position: 'fixed', bottom: 26, left: '50%', transform: 'translateX(-50%)', zIndex: 95, animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
           <GlassPanel strong radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '10px 18px' }}>
-            <Icon name="check" size={16} color="var(--gold)" /><span style={{ fontSize: 13.5, color: 'var(--text-1)' }}>{toast.msg}</span>
+            <Icon name={toast.tone === 'danger' ? 'circle-alert' : 'check'} size={16} color={toast.tone === 'danger' ? 'var(--danger)' : 'var(--gold)'} /><span style={{ fontSize: 13.5, color: 'var(--text-1)' }}>{toast.msg}</span>
             {toast.con && onFocusCon && (
               <button type="button" onClick={() => onFocusCon(toast.con)} className="sr-focus-ring"
                 style={{ fontSize: 12.5, font: 'inherit', color: 'var(--star-blue)', cursor: 'pointer', background: 'none', border: 'none', padding: 0, borderBottom: '1px dashed rgba(159,198,255,0.5)' }}>在星图中查看</button>
