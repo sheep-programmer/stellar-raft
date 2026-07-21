@@ -442,6 +442,24 @@ function Settings({ onClose, theme, onToggleTheme, onReplayGuide, onOpenLogin })
                       setTimeout(() => URL.revokeObjectURL(a.href), 4000);
                       flashToast('已导出你的星图数据（JSON 文件）');
                     }}>导出数据</Button>
+                    <Button size="sm" variant="ghost" icon="folder-down" onClick={() => {
+                      // 整片星空 → Obsidian 风格 Markdown 仓库（zip）：每星一档、星域分夹、
+                      // wikilink 关联、README 索引；知识随时带得走，不锁在应用里
+                      try {
+                        const entries = window.SRVault.buildVault({
+                          stars: D.stars, constellations: D.constellations,
+                          connections: D.connections, account: D.account,
+                        });
+                        const bytes = window.SRVault.buildZip(entries, Date.now());
+                        const blob = new Blob([bytes], { type: 'application/zip' });
+                        const a = document.createElement('a');
+                        a.href = URL.createObjectURL(blob);
+                        a.download = '星图-Markdown仓库.zip';
+                        a.click();
+                        setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+                        flashToast('已导出 Markdown 仓库 · Obsidian 可直接打开');
+                      } catch (err) { flashToast('导出失败 · ' + ((err && err.message) || '稍后再试')); }
+                    }}>导出 Markdown 仓库</Button>
                     <Button size="sm" variant="ghost" icon="upload" onClick={() => importRef.current && importRef.current.click()}>导入数据</Button>
                     <input ref={importRef} type="file" accept=".json,application/json" style={{ display: 'none' }}
                       onChange={(e) => {
