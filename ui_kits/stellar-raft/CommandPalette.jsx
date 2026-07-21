@@ -1,6 +1,72 @@
 /* CommandPalette — 全局搜索 (⌘K): one box to jump to any star, constellation
-   or view. Arrow keys to move, Enter to go, Esc to close. */
-const { GlassPanel, Icon } = window.StellarRaftDesignSystem_2866af;
+   or view. Arrow keys to move, Enter to go, Esc to close.
+   全文搜索：正文命中的星归入「笔记」组，行下给一段高亮片段。 */
+const { GlassPanel, Icon, Badge } = window.StellarRaftDesignSystem_2866af;
+
+// 剥掉 HTML 标签并还原基本实体，取纯文本参与索引
+function srStripHtml(s) {
+  return String(s == null ? '' : s)
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
+}
+
+// 全文索引：每颗星一条记录。几百颗星线性扫足够，不做倒排。
+// nameLower / metaLower(别名+标签) / bodyLower(摘要+正文) 分层存，供排序分档；
+// bodyRaw 留原文，命中后截片段用。
+function srBuildIndex(stars) {
+  return (stars || []).map(s => {
+    const meta = [(s.props && s.props.alias) || ''].concat(s.tags || []).join(' ');
+    const parts = [];
+    if (s.summary) parts.push(s.summary);
+    (s.body || []).forEach(b => {
+      if (b.text) parts.push(b.text);
+      if (b.tex) parts.push(b.tex);
+      if (b.code) parts.push(b.code);
+    });
+    const bodyRaw = parts.map(srStripHtml).join(' ').replace(/\s+/g, ' ').trim();
+    const label = s.label || '';
+    return {
+      id: s.id, label, con: s.con,
+      nameLower: label.toLowerCase(),
+      metaLower: meta.toLowerCase(),
+      bodyRaw, bodyLower: bodyRaw.toLowerCase(),
+      hay: (label + ' ' + meta + ' ' + bodyRaw).toLowerCase(),
+    };
+  });
+}
+
+// 截取命中片段：首个命中词前后各约 24 字，按命中/未命中切成段，交给 React 渲染
+// （不拼 HTML 字符串，避免 dangerouslySetInnerHTML）。
+function srSnippet(raw, rawLower, tokens) {
+  let pos = -1, len = 0;
+  tokens.forEach(t => {
+    const p = rawLower.indexOf(t);
+    if (p !== -1 && (pos === -1 || p < pos)) { pos = p; len = t.length; }
+  });
+  if (pos === -1) return null;
+  const start = Math.max(0, pos - 24);
+  const end = Math.min(raw.length, pos + len + 24);
+  const text = raw.slice(start, end);
+  const lower = rawLower.slice(start, end);
+  const hitAt = (i) => {
+    let m = 0;
+    tokens.forEach(t => { if (t && lower.startsWith(t, i) && t.length > m) m = t.length; });
+    return m;
+  };
+  const segs = [];
+  let i = 0;
+  while (i < text.length) {
+    const m = hitAt(i);
+    if (m) { segs.push({ t: text.slice(i, i + m), hit: true }); i += m; continue; }
+    let j = i + 1;
+    while (j < text.length && !hitAt(j)) j += 1;
+    segs.push({ t: text.slice(i, j), hit: false });
+    i = j;
+  }
+  if (start > 0) segs.unshift({ t: '…', hit: false });
+  if (end < raw.length) segs.push({ t: '…', hit: false });
+  return segs;
+}
 
 // 视图命令：label 与侧栏完全同名（搜索「时间轴视图」也要命中），补充说明放 sub
 const VIEW_CMDS = [
@@ -50,13 +116,37 @@ function CommandPalette({ onClose, onOpenStar, onOpenView, onFocusCon }) {
   const views = VIEW_CMDS.filter(v => !q || v.label.toLowerCase().includes(q)).map(v => ({ ...v, run: () => onOpenView(v.id) }));
   const actions = ACTION_CMDS.filter(a => !q || a.label.toLowerCase().includes(q));
   const cons = D.constellations.filter(c => !q || c.name.toLowerCase().includes(q)).map(c => ({ kind: 'con', id: c.id, label: c.name, sub: c.count + ' 颗星', color: c.color, icon: 'orbit', run: () => onFocusCon(c.id) }));
-  const stars = D.stars.filter(s => !q || s.label.toLowerCase().includes(q) || (s.tags || []).some(t => t.toLowerCase().includes(q))).map(s => ({ kind: 'star', id: s.id, label: s.label, sub: D.conName(s.con), color: D.conColor(s.con), icon: 'sparkles', run: () => onOpenStar(s.id) }));
+
+  // 星的全文搜索。索引首次用到才建，缓存在 ref 里，面板关闭随组件一起丢弃。
+  const indexRef = React.useRef(null);
+  const asItem = (e, extra) => Object.assign({ kind: 'star', id: e.id, label: e.label, sub: D.conName(e.con), color: D.conColor(e.con), icon: 'sparkles', run: () => onOpenStar(e.id) }, extra);
+  let stars = [], notes = [];
+  if (!q) {
+    stars = D.stars.map(s => asItem(s));
+  } else {
+    if (!indexRef.current) indexRef.current = srBuildIndex(D.stars);
+    const tokens = q.split(/\s+/).filter(Boolean);
+    const ranked = [];
+    indexRef.current.forEach(e => {
+      if (!tokens.every(t => e.hay.includes(t))) return;
+      // 0=星名命中 1=别名/标签命中 2=只有正文命中
+      const rank = tokens.every(t => e.nameLower.includes(t)) ? 0
+        : tokens.every(t => e.nameLower.includes(t) || e.metaLower.includes(t)) ? 1 : 2;
+      ranked.push({ e, rank });
+    });
+    ranked.sort((a, b) => a.rank - b.rank);
+    ranked.slice(0, 12).forEach(({ e, rank }) => {
+      if (rank === 2) notes.push(asItem(e, { note: true, snippet: srSnippet(e.bodyRaw, e.bodyLower, tokens) }));
+      else stars.push(asItem(e));
+    });
+  }
 
   const sections = [
     { title: '动作', items: actions },
     { title: '视图', items: views },
     { title: '星域', items: cons },
     { title: '知识星', items: stars },
+    { title: '笔记', items: notes },
   ].filter(s => s.items.length);
   const flat = sections.reduce((a, s) => a.concat(s.items), []);
 
@@ -84,8 +174,8 @@ function CommandPalette({ onClose, onOpenStar, onOpenView, onFocusCon }) {
           <div style={{ display: 'flex', alignItems: 'center', gap: 11, padding: '15px 18px', borderBottom: '1px solid var(--line)' }}>
             <Icon name="search" size={19} color="var(--star-blue)" />
             <input value={query} onChange={(e) => setQuery(e.target.value)} onKeyDown={onKey}
-              aria-label="搜索星、星域、视图"
-              placeholder="搜索星、星域、视图…"
+              aria-label="搜索星、星域、视图、笔记正文"
+              placeholder="搜索星、星域、视图、笔记正文…"
               style={{ flex: 1, background: 'transparent', border: 'none', outline: 'none', color: 'var(--text-1)', fontSize: 16, fontFamily: 'var(--font-sans)' }} />
             <span style={{ fontFamily: 'var(--font-mono)', fontSize: 10.5, color: 'var(--text-3)', border: '1px solid var(--line-strong)', borderRadius: 6, padding: '2px 7px' }}>ESC</span>
           </div>
@@ -102,13 +192,23 @@ function CommandPalette({ onClose, onOpenStar, onOpenView, onFocusCon }) {
                   idx += 1; const i = idx; const on = i === active;
                   return (
                     <div key={item.kind + item.id} data-idx={i} onMouseEnter={() => setActive(i)} onClick={() => exec(item)}
-                      style={{ display: 'flex', alignItems: 'center', gap: 11, padding: '9px 11px', borderRadius: 'var(--r-sm)', cursor: 'pointer', background: on ? 'color-mix(in srgb, var(--star-blue) 11%, transparent)' : 'transparent' }}>
-                      {item.color
-                        ? <span style={{ width: 18, display: 'inline-flex', justifyContent: 'center' }}><span style={{ width: 8, height: 8, borderRadius: '50%', background: item.color, boxShadow: `0 0 7px ${item.color}` }} /></span>
-                        : <Icon name={item.icon} size={16} color={on ? 'var(--gold)' : 'var(--text-2)'} />}
-                      <span style={{ flex: 1, fontSize: 13.5, color: on ? 'var(--text-1)' : 'var(--text-2)' }}>{item.label}</span>
-                      <span style={{ fontSize: 11, color: 'var(--text-3)' }}>{item.sub}</span>
-                      {on && <Icon name="corner-down-left" size={13} color="var(--text-3)" />}
+                      style={{ padding: '9px 11px', borderRadius: 'var(--r-sm)', cursor: 'pointer', background: on ? 'color-mix(in srgb, var(--star-blue) 11%, transparent)' : 'transparent' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 11 }}>
+                        {item.color
+                          ? <span style={{ width: 18, display: 'inline-flex', justifyContent: 'center' }}><span style={{ width: 8, height: 8, borderRadius: '50%', background: item.color, boxShadow: `0 0 7px ${item.color}` }} /></span>
+                          : <Icon name={item.icon} size={16} color={on ? 'var(--gold)' : 'var(--text-2)'} />}
+                        <span style={{ flex: 1, fontSize: 13.5, color: on ? 'var(--text-1)' : 'var(--text-2)' }}>{item.label}</span>
+                        {item.note && <Badge tone="fading" style={{ fontSize: 10, height: 16, minWidth: 0 }}>正文</Badge>}
+                        <span style={{ fontSize: 11, color: 'var(--text-3)' }}>{item.sub}</span>
+                        {on && <Icon name="corner-down-left" size={13} color="var(--text-3)" />}
+                      </div>
+                      {item.snippet && (
+                        <div style={{ margin: '3px 0 0 29px', fontSize: 11.5, lineHeight: 1.5, color: 'var(--text-3)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                          {item.snippet.map((sg, k) => sg.hit
+                            ? <b key={k} style={{ color: 'var(--gold)', fontWeight: 600 }}>{sg.t}</b>
+                            : <span key={k}>{sg.t}</span>)}
+                        </div>
+                      )}
                     </div>
                   );
                 })}
