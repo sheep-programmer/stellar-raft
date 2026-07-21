@@ -1,4 +1,4 @@
-/* @ds-bundle: {"format":3,"namespace":"StellarRaftDesignSystem_2866af","components":[{"name":"Badge","sourcePath":"components/core/Badge.jsx"},{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"GlassPanel","sourcePath":"components/core/GlassPanel.jsx"},{"name":"Icon","sourcePath":"components/core/Icon.jsx"},{"name":"IconButton","sourcePath":"components/core/IconButton.jsx"},{"name":"Input","sourcePath":"components/core/Input.jsx"},{"name":"Tag","sourcePath":"components/core/Tag.jsx"},{"name":"Checkbox","sourcePath":"components/form/Checkbox.jsx"},{"name":"Select","sourcePath":"components/form/Select.jsx"},{"name":"Switch","sourcePath":"components/form/Switch.jsx"},{"name":"Tabs","sourcePath":"components/form/Tabs.jsx"},{"name":"ConstellationItem","sourcePath":"components/knowledge/ConstellationItem.jsx"},{"name":"MemoryBar","sourcePath":"components/knowledge/MemoryBar.jsx"},{"name":"StarNode","sourcePath":"components/knowledge/StarNode.jsx"},{"name":"ContextMenu","sourcePath":"components/overlay/ContextMenu.jsx"},{"name":"Modal","sourcePath":"components/overlay/Modal.jsx"},{"name":"Toast","sourcePath":"components/overlay/Toast.jsx"},{"name":"Tooltip","sourcePath":"components/overlay/Tooltip.jsx"}],"sourceHashes":{"assets/starfield.js":"d776d2b45dc4","components/core/Badge.jsx":"b0bd9735d638","components/core/Button.jsx":"a1c387a07e86","components/core/GlassPanel.jsx":"299a19d8fbb4","components/core/Icon.jsx":"7505f83ab03d","components/core/IconButton.jsx":"24052f4eed78","components/core/Input.jsx":"54a6c9af7e3f","components/core/Tag.jsx":"d8513c07ea96","components/form/Checkbox.jsx":"38aa593157dd","components/form/Select.jsx":"86b8c1c71e12","components/form/Switch.jsx":"938c62be0664","components/form/Tabs.jsx":"ede2dbff1963","components/knowledge/ConstellationItem.jsx":"d73e999469b6","components/knowledge/MemoryBar.jsx":"a54c928d5065","components/knowledge/StarNode.jsx":"1bedee49f0bf","components/overlay/ContextMenu.jsx":"11783420e876","components/overlay/Modal.jsx":"0906de457544","components/overlay/Toast.jsx":"d22ad40680a6","components/overlay/Tooltip.jsx":"a042caa8970d","ui_kits/stellar-raft/AIConfig.jsx":"bbc66d05eebf","ui_kits/stellar-raft/AerialView.jsx":"8209eb6af395","ui_kits/stellar-raft/BlackHole.jsx":"2704c4a4e50c","ui_kits/stellar-raft/Checkup.jsx":"aa974821dc28","ui_kits/stellar-raft/CommandPalette.jsx":"3f1a9cdd2383","ui_kits/stellar-raft/Editor.jsx":"2b09b768f90a","ui_kits/stellar-raft/EditorMenus.jsx":"fb80581f6bcc","ui_kits/stellar-raft/FeynmanDrawer.jsx":"6af036e0a904","ui_kits/stellar-raft/Galaxy3D.jsx":"2ce87e7da57d","ui_kits/stellar-raft/Inbox.jsx":"c2fc04361d44","ui_kits/stellar-raft/ListView.jsx":"e2550f598c82","ui_kits/stellar-raft/LoginView.jsx":"18d9c842c5c6","ui_kits/stellar-raft/Onboarding.jsx":"e1d27a7d28a7","ui_kits/stellar-raft/ReviewSession.jsx":"9092a3d9412c","ui_kits/stellar-raft/Settings.jsx":"4fb20de532d9","ui_kits/stellar-raft/Sidebar.jsx":"f61a222b9d49","ui_kits/stellar-raft/StarMap.jsx":"3f1c09e9e50e","ui_kits/stellar-raft/Timeline.jsx":"cda4e62fa57b","ui_kits/stellar-raft/VisitView.jsx":"19ff8ab7dbb7","ui_kits/stellar-raft/ai.js":"2f79eb3473c9","ui_kits/stellar-raft/app.jsx":"f08bc502367d","ui_kits/stellar-raft/codehl.js":"6fbdd0100deb","ui_kits/stellar-raft/data.js":"7c4d0fe5482e","ui_kits/stellar-raft/mdcore.js":"b82d5054c3b6","ui_kits/stellar-raft/sanitize.js":"88e63cd63253","ui_kits/stellar-raft/transition.js":"3725d8982dc5","ui_kits/stellar-raft/undocore.js":"7f8c94da35f9","ui_kits/stellar-raft/vault.js":"d7876f7f9981"},"inlinedExternals":[],"unexposedExports":[{"name":"memoryColor","sourcePath":"components/knowledge/MemoryBar.jsx"}],"exposedHelpers":[{"name":"toast","sourcePath":"components/overlay/Toast.jsx"}]} */
+/* @ds-bundle: {"format":3,"namespace":"StellarRaftDesignSystem_2866af","components":[{"name":"Badge","sourcePath":"components/core/Badge.jsx"},{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"GlassPanel","sourcePath":"components/core/GlassPanel.jsx"},{"name":"Icon","sourcePath":"components/core/Icon.jsx"},{"name":"IconButton","sourcePath":"components/core/IconButton.jsx"},{"name":"Input","sourcePath":"components/core/Input.jsx"},{"name":"Tag","sourcePath":"components/core/Tag.jsx"},{"name":"Checkbox","sourcePath":"components/form/Checkbox.jsx"},{"name":"Select","sourcePath":"components/form/Select.jsx"},{"name":"Switch","sourcePath":"components/form/Switch.jsx"},{"name":"Tabs","sourcePath":"components/form/Tabs.jsx"},{"name":"ConstellationItem","sourcePath":"components/knowledge/ConstellationItem.jsx"},{"name":"MemoryBar","sourcePath":"components/knowledge/MemoryBar.jsx"},{"name":"StarNode","sourcePath":"components/knowledge/StarNode.jsx"},{"name":"ContextMenu","sourcePath":"components/overlay/ContextMenu.jsx"},{"name":"Modal","sourcePath":"components/overlay/Modal.jsx"},{"name":"Toast","sourcePath":"components/overlay/Toast.jsx"},{"name":"Tooltip","sourcePath":"components/overlay/Tooltip.jsx"}],"sourceHashes":{"assets/starfield.js":"d776d2b45dc4","components/core/Badge.jsx":"b0bd9735d638","components/core/Button.jsx":"a1c387a07e86","components/core/GlassPanel.jsx":"299a19d8fbb4","components/core/Icon.jsx":"7505f83ab03d","components/core/IconButton.jsx":"24052f4eed78","components/core/Input.jsx":"54a6c9af7e3f","components/core/Tag.jsx":"d8513c07ea96","components/form/Checkbox.jsx":"38aa593157dd","components/form/Select.jsx":"86b8c1c71e12","components/form/Switch.jsx":"938c62be0664","components/form/Tabs.jsx":"ede2dbff1963","components/knowledge/ConstellationItem.jsx":"d73e999469b6","components/knowledge/MemoryBar.jsx":"a54c928d5065","components/knowledge/StarNode.jsx":"1bedee49f0bf","components/overlay/ContextMenu.jsx":"11783420e876","components/overlay/Modal.jsx":"0906de457544","components/overlay/Toast.jsx":"d22ad40680a6","components/overlay/Tooltip.jsx":"a042caa8970d","ui_kits/stellar-raft/AIConfig.jsx":"bbc66d05eebf","ui_kits/stellar-raft/AerialView.jsx":"8209eb6af395","ui_kits/stellar-raft/BlackHole.jsx":"2704c4a4e50c","ui_kits/stellar-raft/Checkup.jsx":"b7cbf7f0bbf9","ui_kits/stellar-raft/CommandPalette.jsx":"3f1a9cdd2383","ui_kits/stellar-raft/Editor.jsx":"2b09b768f90a","ui_kits/stellar-raft/EditorMenus.jsx":"fb80581f6bcc","ui_kits/stellar-raft/FeynmanDrawer.jsx":"6af036e0a904","ui_kits/stellar-raft/Galaxy3D.jsx":"2ce87e7da57d","ui_kits/stellar-raft/Inbox.jsx":"c2fc04361d44","ui_kits/stellar-raft/KeysHelp.jsx":"f4fc061886ee","ui_kits/stellar-raft/ListView.jsx":"e2550f598c82","ui_kits/stellar-raft/LoginView.jsx":"18d9c842c5c6","ui_kits/stellar-raft/Onboarding.jsx":"e1d27a7d28a7","ui_kits/stellar-raft/ReviewSession.jsx":"9092a3d9412c","ui_kits/stellar-raft/Settings.jsx":"947a5dc76b3a","ui_kits/stellar-raft/Sidebar.jsx":"f61a222b9d49","ui_kits/stellar-raft/StarMap.jsx":"3f1c09e9e50e","ui_kits/stellar-raft/Timeline.jsx":"cda4e62fa57b","ui_kits/stellar-raft/VisitView.jsx":"19ff8ab7dbb7","ui_kits/stellar-raft/ai.js":"2f79eb3473c9","ui_kits/stellar-raft/app.jsx":"2c557164c1c2","ui_kits/stellar-raft/codehl.js":"6fbdd0100deb","ui_kits/stellar-raft/data.js":"7c4d0fe5482e","ui_kits/stellar-raft/mdcore.js":"b82d5054c3b6","ui_kits/stellar-raft/sanitize.js":"88e63cd63253","ui_kits/stellar-raft/transition.js":"3725d8982dc5","ui_kits/stellar-raft/undocore.js":"7f8c94da35f9","ui_kits/stellar-raft/vault.js":"bfb5fdd87949"},"inlinedExternals":[],"unexposedExports":[{"name":"memoryColor","sourcePath":"components/knowledge/MemoryBar.jsx"}],"exposedHelpers":[{"name":"toast","sourcePath":"components/overlay/Toast.jsx"}]} */
 
 (() => {
 
@@ -5114,7 +5114,8 @@ const {
   Icon,
   IconButton,
   Button,
-  MemoryBar
+  MemoryBar,
+  toast
 } = window.StellarRaftDesignSystem_2866af;
 
 // memory band — same thresholds the rest of the kit uses
@@ -5217,6 +5218,279 @@ function heatWeeks(now) {
 const HEAT_ALPHA = [0, 0.15, 0.35, 0.6, 0.9];
 const heatAlpha = n => n <= 0 ? 0 : n === 1 ? 0.15 : n === 2 ? 0.35 : n <= 4 ? 0.6 : 0.9;
 const heatBg = a => a > 0 ? `rgba(255,217,138,${a})` : 'rgba(120,150,205,0.09)';
+
+/* ===== 星空周报卡（组件外纯函数）=====
+   一键把最近 7 天的学习战报画成一张 1080×1350 的竖版 PNG。
+   Canvas 里读不到 CSS 变量，设计系统色值硬编码为常量，来源 token 标注在旁。
+   星总数不猜「本周新增」——stars 没有创建时间，报现有总量更诚实。 */
+const CARD_W = 1080,
+  CARD_H = 1350;
+const CARD_C = {
+  deep0: '#05060f',
+  // --space-0 深空底（启动屏线性渐变首端）
+  deep1: '#03040c',
+  // 启动屏线性渐变中段
+  deep2: '#04050e',
+  // 启动屏线性渐变末端
+  blue: '#9fc6ff',
+  // --star-blue 星蓝
+  gold: '#ffd98a',
+  // --gold 暖金
+  goldDeep: '#ffb86b',
+  // 品牌星标渐变暗端（index.html sr-logo-g）
+  goldHi: '#ffe9b8',
+  // 品牌星标渐变亮端（index.html sr-logo-g）
+  text1: 'rgba(255,255,255,0.93)',
+  // --text-1 主文字
+  text2: 'rgba(208,220,255,0.66)',
+  // --text-2 次文字
+  text3: 'rgba(159,198,255,0.40)' // --text-3 弱文字
+};
+const cardFont = (w, px) => `${w} ${px}px Sora, "Noto Sans SC", sans-serif`;
+const cardMono = (w, px) => `${w} ${px}px "JetBrains Mono", "Roboto Mono", monospace`; // --font-mono
+
+// 近 7 天聚合：点亮数 / 复习数 / 按天活动小条（dim 是被动事件，不算主动学习）
+function weekStats(D, now) {
+  const start = new Date(now);
+  start.setHours(0, 0, 0, 0);
+  start.setDate(start.getDate() - 6);
+  const days = [];
+  const idx = {};
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(start);
+    d.setDate(start.getDate() + i);
+    idx[heatDayKey(d)] = i;
+    days.push({
+      week: '日一二三四五六'[d.getDay()],
+      date: d.getMonth() + 1 + '.' + d.getDate(),
+      n: 0
+    });
+  }
+  let ignites = 0,
+    reviews = 0;
+  (D.timeline || []).forEach(t => {
+    if (!t || !t.ts || t.ts < start.getTime() || t.ts > now) return;
+    if (t.kind === 'ignite') ignites++;else if (t.kind === 'review') reviews++;
+    if (t.kind !== 'dim') {
+      const i = idx[heatDayKey(new Date(t.ts))];
+      if (i != null) days[i].n++;
+    }
+  });
+  return {
+    name: D.account && D.account.name || '观星者',
+    streak: D.account && D.account.streak || 0,
+    total: (D.stars || []).length,
+    ignites,
+    reviews,
+    days,
+    range: days[0].date + ' – ' + days[6].date
+  };
+}
+
+// 四芒星品牌星标：index.html 里 sr-logo 的曲线四芒按比例移植成 canvas path
+function cardSparkPath(ctx, cx, cy, R) {
+  ctx.beginPath();
+  ctx.moveTo(cx, cy - R);
+  ctx.bezierCurveTo(cx + 0.084 * R, cy - 0.23 * R, cx + 0.23 * R, cy - 0.084 * R, cx + R, cy);
+  ctx.bezierCurveTo(cx + 0.23 * R, cy + 0.084 * R, cx + 0.084 * R, cy + 0.23 * R, cx, cy + R);
+  ctx.bezierCurveTo(cx - 0.084 * R, cy + 0.23 * R, cx - 0.23 * R, cy + 0.084 * R, cx - R, cy);
+  ctx.bezierCurveTo(cx - 0.23 * R, cy - 0.084 * R, cx - 0.084 * R, cy - 0.23 * R, cx, cy - R);
+  ctx.closePath();
+}
+const cardRRect = (ctx, x, y, w, h, r) => {
+  ctx.beginPath();
+  if (ctx.roundRect) ctx.roundRect(x, y, w, h, r);else ctx.rect(x, y, w, h);
+};
+function drawWeeklyCard(ctx, data) {
+  const W = CARD_W,
+    H = CARD_H,
+    C = CARD_C;
+
+  // 深空底：复刻启动屏的三层渐变（线性主底 + 两团蓝紫光晕）
+  const bg = ctx.createLinearGradient(0, 0, 0, H);
+  bg.addColorStop(0, C.deep0);
+  bg.addColorStop(0.55, C.deep1);
+  bg.addColorStop(1, C.deep2);
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, W, H);
+  const glow1 = ctx.createRadialGradient(W * 0.78, -H * 0.1, 0, W * 0.78, -H * 0.1, 900);
+  glow1.addColorStop(0, 'rgba(26,35,80,0.55)');
+  glow1.addColorStop(1, 'rgba(26,35,80,0)');
+  ctx.fillStyle = glow1;
+  ctx.fillRect(0, 0, W, H);
+  const glow2 = ctx.createRadialGradient(W * 0.12, H * 1.1, 0, W * 0.12, H * 1.1, 760);
+  glow2.addColorStop(0, 'rgba(40,30,70,0.35)');
+  glow2.addColorStop(1, 'rgba(40,30,70,0)');
+  ctx.fillStyle = glow2;
+  ctx.fillRect(0, 0, W, H);
+
+  // 散布小星点：白 / 蓝 / 金三色轮转，少数带十字星芒
+  const tints = ['rgba(214,230,255,', 'rgba(159,198,255,', 'rgba(255,231,176,'];
+  for (let i = 0; i < 40; i++) {
+    const x = Math.random() * W,
+      y = Math.random() * H;
+    const r = 0.8 + Math.random() * 1.2,
+      tint = tints[i % 3];
+    ctx.fillStyle = tint + (0.35 + Math.random() * 0.5).toFixed(2) + ')';
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, Math.PI * 2);
+    ctx.fill();
+    if (i % 8 === 0) {
+      ctx.strokeStyle = tint + '0.28)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(x - r * 5, y);
+      ctx.lineTo(x + r * 5, y);
+      ctx.moveTo(x, y - r * 5);
+      ctx.lineTo(x, y + r * 5);
+      ctx.stroke();
+    }
+  }
+  ctx.textAlign = 'center';
+
+  // 顶部品牌星标：暖金渐变四芒 + 柔光
+  const sx = W / 2,
+    sy = 168,
+    sR = 52;
+  const sg = ctx.createLinearGradient(sx - sR, sy - sR, sx + sR, sy + sR);
+  sg.addColorStop(0, C.goldHi);
+  sg.addColorStop(1, C.goldDeep);
+  ctx.save();
+  ctx.shadowColor = 'rgba(255,217,138,0.55)';
+  ctx.shadowBlur = 36;
+  cardSparkPath(ctx, sx, sy, sR);
+  ctx.fillStyle = sg;
+  ctx.fill();
+  ctx.restore();
+
+  // 标题与日期范围
+  ctx.fillStyle = C.text1;
+  ctx.font = cardFont(300, 58);
+  ctx.fillText('星图 · 星空周报', W / 2, 318);
+  ctx.fillStyle = 'rgba(159,198,255,0.55)';
+  ctx.font = cardMono(300, 26);
+  ctx.fillText(data.range + ' · 最近 7 天', W / 2, 372);
+
+  // 中部四枚大数字：金 / 蓝交替，2×2 网格
+  const stats = [{
+    v: data.ignites,
+    t: '本周点亮',
+    c: C.gold,
+    glow: true
+  }, {
+    v: data.reviews,
+    t: '本周复习',
+    c: C.blue,
+    glow: false
+  }, {
+    v: data.streak,
+    t: '连续观星（天）',
+    c: C.gold,
+    glow: true
+  }, {
+    v: data.total,
+    t: '知识星总数',
+    c: C.blue,
+    glow: false
+  }];
+  stats.forEach((s, i) => {
+    const cx = i % 2 === 0 ? W * 0.28 : W * 0.72;
+    const by = i < 2 ? 560 : 780;
+    ctx.save();
+    if (s.glow) {
+      ctx.shadowColor = 'rgba(255,217,138,0.35)';
+      ctx.shadowBlur = 22;
+    }
+    ctx.fillStyle = s.c;
+    ctx.font = cardMono(200, 104);
+    ctx.fillText(String(s.v), cx, by);
+    ctx.restore();
+    ctx.fillStyle = C.text2;
+    ctx.font = cardFont(300, 26);
+    ctx.fillText(s.t, cx, by + 52);
+  });
+
+  // 下部 7 天活动条形：金色渐变柱，无活动的天画暗槽
+  const barW = 76,
+    gap = 36,
+    base = 1130,
+    maxH = 150;
+  const x0 = (W - (barW * 7 + gap * 6)) / 2;
+  const maxN = Math.max(1, ...data.days.map(d => d.n));
+  ctx.strokeStyle = 'rgba(159,198,255,0.14)';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(x0 - 14, base + 1);
+  ctx.lineTo(W - x0 + 14, base + 1);
+  ctx.stroke();
+  data.days.forEach((d, i) => {
+    const x = x0 + i * (barW + gap),
+      cx = x + barW / 2;
+    if (d.n > 0) {
+      const h = Math.max(16, d.n / maxN * maxH);
+      const bar = ctx.createLinearGradient(0, base - h, 0, base);
+      bar.addColorStop(0, C.gold);
+      bar.addColorStop(1, 'rgba(255,184,107,0.45)');
+      cardRRect(ctx, x, base - h, barW, h, 8);
+      ctx.fillStyle = bar;
+      ctx.fill();
+      ctx.fillStyle = C.gold;
+      ctx.font = cardMono(300, 24);
+      ctx.fillText(String(d.n), cx, base - h - 14);
+    } else {
+      cardRRect(ctx, x, base - 10, barW, 10, 5);
+      ctx.fillStyle = 'rgba(120,150,205,0.10)';
+      ctx.fill();
+    }
+    ctx.fillStyle = C.text3;
+    ctx.font = cardFont(300, 24);
+    ctx.fillText('周' + d.week, cx, base + 44);
+    ctx.fillStyle = 'rgba(159,198,255,0.30)';
+    ctx.font = cardMono(300, 19);
+    ctx.fillText(d.date, cx, base + 76);
+  });
+
+  // 底部署名行
+  ctx.fillStyle = C.text2;
+  ctx.font = cardFont(300, 31);
+  ctx.fillText('@' + data.name + ' 的深空', W / 2, 1272);
+  ctx.save();
+  try {
+    ctx.letterSpacing = '8px';
+  } catch (e) {/* 旧内核没有 letterSpacing，退回默认字距 */}
+  ctx.fillStyle = C.text3;
+  ctx.font = cardFont(300, 21);
+  ctx.fillText('STELLAR RAFT', W / 2 + 4, 1316);
+  ctx.restore();
+}
+
+// 入口：离屏画布 → toBlob → 触发下载（同步很快，无需 loading）
+function shareWeeklyCard(D) {
+  const canvas = document.createElement('canvas');
+  canvas.width = CARD_W;
+  canvas.height = CARD_H;
+  drawWeeklyCard(canvas.getContext('2d'), weekStats(D, Date.now()));
+  canvas.toBlob(blob => {
+    if (!blob) {
+      toast('周报卡生成失败，稍后再试', {
+        tone: 'danger',
+        icon: 'circle-alert'
+      });
+      return;
+    }
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = '星图-星空周报.png';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 4000);
+    toast('周报卡已保存 ✦', {
+      icon: 'image-down'
+    });
+  }, 'image/png');
+}
 const HUD = {
   fontSize: 10,
   letterSpacing: 'var(--ls-hud)',
@@ -5227,7 +5501,8 @@ const HUD = {
 function SectionTitle({
   icon,
   children,
-  hint
+  hint,
+  action
 }) {
   return /*#__PURE__*/React.createElement("div", {
     style: {
@@ -5248,7 +5523,12 @@ function SectionTitle({
       color: 'var(--text-3)',
       marginLeft: 'auto'
     }
-  }, hint));
+  }, hint), action && /*#__PURE__*/React.createElement("span", {
+    style: {
+      flex: 'none',
+      marginLeft: hint ? 0 : 'auto'
+    }
+  }, action));
 }
 
 // 「去整理」直达收件箱：体检拿不到切视图的回调（app 层只下发了复习 / 费曼 / 星域），
@@ -5881,7 +6161,13 @@ function Checkup({
     }
   }, /*#__PURE__*/React.createElement(SectionTitle, {
     icon: "telescope",
-    hint: `连续 ${D.account.streak} 天 · 共 ${activeDays} 个活动日`
+    hint: `连续 ${D.account.streak} 天 · 共 ${activeDays} 个活动日`,
+    action: /*#__PURE__*/React.createElement(Button, {
+      variant: "ghost",
+      size: "sm",
+      icon: "image-down",
+      onClick: () => shareWeeklyCard(D)
+    }, "\u751F\u6210\u5468\u62A5\u5361")
   }, "\u89C2\u661F\u70ED\u529B\u56FE"), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
@@ -18070,6 +18356,316 @@ window.SRKit = Object.assign(window.SRKit || {}, {
 });
 })(); } catch (e) { __ds_ns.__errors.push({ path: "ui_kits/stellar-raft/Inbox.jsx", error: String((e && e.message) || e) }); }
 
+// ui_kits/stellar-raft/KeysHelp.jsx
+try { (() => {
+/* KeysHelp — 快捷键速查面板。任意视图按 ? 唤出的居中玻璃 modal，
+   分组罗列全站真实存在的按键（这页是承诺，不是愿望清单——新增快捷键
+   请先落地行为，再来这里登记）。Esc / 点遮罩关闭，焦点圈禁同设置页。
+   props: { onClose } */
+const {
+  GlassPanel,
+  Icon,
+  IconButton
+} = window.StellarRaftDesignSystem_2866af;
+const SRK = window.SRKeys;
+
+/* 分组数据：keys 里每个元素渲染成一枚键帽；跨平台说法交给 SRKeys
+   （macOS ⌘/⌥/⇧ 符号，其余系统 Ctrl/Alt/Shift 文字）。 */
+const SR_KEY_GROUPS = [{
+  id: 'global',
+  icon: 'globe',
+  title: '全局',
+  items: [{
+    keys: [SRK.mod, 'K'],
+    label: '命令面板 · 搜索星、星域、视图与笔记正文'
+  }, {
+    keys: ['?'],
+    label: '打开这张快捷键速查'
+  }, {
+    keys: ['Esc'],
+    label: '关闭浮层 / 收起摘要卡 / 返回星图'
+  }]
+}, {
+  id: 'palette',
+  icon: 'search',
+  title: '命令面板',
+  items: [{
+    keys: ['↑', '↓'],
+    label: '上下选择结果'
+  }, {
+    keys: ['Enter'],
+    label: '前往选中项'
+  }]
+}, {
+  id: 'editor',
+  icon: 'pen-line',
+  title: '编辑器',
+  items: [{
+    keys: [SRK.mod, 'F'],
+    label: '笔记内查找 / 替换'
+  }, {
+    keys: [SRK.mod, 'Z'],
+    label: '撤销 · 加 ' + SRK.shift + ' 为重做'
+  }, {
+    keys: [SRK.mod, 'B · I · U'],
+    label: '选中文字 · 加粗 / 斜体 / 下划线'
+  }, {
+    keys: [SRK.mod, 'K'],
+    label: '选中文字 · 添加链接'
+  }, {
+    keys: ['/'],
+    label: '唤起块菜单，插入或转换块'
+  }, {
+    keys: [SRK.alt, '↑', '↓'],
+    label: '上下移动当前块'
+  }, {
+    keys: ['Tab'],
+    label: '列表块缩进 · ' + SRK.shift + 'Tab 反向'
+  }, {
+    keys: ['Space'],
+    label: '块首 # / [] / - 等前缀后按空格，转换块类型'
+  }]
+}, {
+  id: 'review',
+  icon: 'repeat',
+  title: '复习会话',
+  items: [{
+    keys: ['Space'],
+    label: '翻开卡片'
+  }, {
+    keys: ['1', '←'],
+    label: '自评 · 忘了'
+  }, {
+    keys: ['2', '↓'],
+    label: '自评 · 模糊'
+  }, {
+    keys: ['3', '→'],
+    label: '自评 · 记得'
+  }]
+}, {
+  id: 'inbox',
+  icon: 'inbox',
+  title: '收件箱',
+  items: [{
+    keys: [SRK.mod, 'Enter'],
+    label: '捕捉当前草稿 / 寄出给好友的回信'
+  }]
+}];
+
+/* 键帽：等宽字体小方块，同设置页「快捷键」表的既有样子 */
+function SRKeyCap({
+  children
+}) {
+  return /*#__PURE__*/React.createElement("kbd", {
+    style: {
+      fontFamily: 'var(--font-mono)',
+      fontSize: 11.5,
+      color: 'var(--text-1)',
+      minWidth: 22,
+      textAlign: 'center',
+      border: '1px solid var(--line-strong)',
+      borderRadius: 6,
+      padding: '3px 7px',
+      lineHeight: 1.4,
+      background: 'var(--input-bg, rgba(3,4,12,0.45))',
+      whiteSpace: 'nowrap'
+    }
+  }, children);
+}
+function SRKeyGroup({
+  group
+}) {
+  return /*#__PURE__*/React.createElement("section", {
+    "aria-label": group.title
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 7,
+      marginBottom: 2
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: group.icon,
+    size: 13,
+    color: "var(--star-blue)"
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 10,
+      letterSpacing: 'var(--ls-hud)',
+      textTransform: 'uppercase',
+      color: 'var(--text-3)',
+      fontFamily: 'var(--font-mono)'
+    }
+  }, group.title)), group.items.map((s, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      gap: 16,
+      padding: '10px 0',
+      borderBottom: i === group.items.length - 1 ? 'none' : '1px solid var(--line)'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 13,
+      color: 'var(--text-2)',
+      lineHeight: 1.5
+    }
+  }, s.label), /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'flex',
+      gap: 5,
+      flex: 'none'
+    }
+  }, s.keys.map((k, j) => /*#__PURE__*/React.createElement(SRKeyCap, {
+    key: j
+  }, k))))));
+}
+function KeysHelp({
+  onClose
+}) {
+  // 模态焦点管理：移焦入内 · Tab 圈禁 · 关闭还原焦点；打开期间吞掉 ⌘K，
+  // 命令面板不叠在速查之上（同设置 / AI 配置的语义）
+  const modalRef = React.useRef(null);
+  (window.SRKit && window.SRKit.useModalFocus ? window.SRKit.useModalFocus : () => {})(modalRef, {
+    swallowCmdK: true
+  });
+  React.useEffect(() => {
+    const k = e => {
+      if (e.key === 'Escape') {
+        e.stopPropagation();
+        onClose();
+      }
+    };
+    document.addEventListener('keydown', k);
+    return () => document.removeEventListener('keydown', k);
+  }, [onClose]);
+
+  // 左右两栏：编辑器条目最多独占一栏，其余分组归到另一栏；窄屏时自动叠成单栏
+  const left = SR_KEY_GROUPS.filter(g => g.id === 'editor');
+  const right = SR_KEY_GROUPS.filter(g => g.id !== 'editor');
+  const col = {
+    flex: '1 1 280px',
+    minWidth: 0,
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 18
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    ref: modalRef,
+    onMouseDown: onClose,
+    onContextMenu: e => e.preventDefault(),
+    role: "dialog",
+    "aria-modal": "true",
+    "aria-label": "\u5FEB\u6377\u952E",
+    style: {
+      position: 'fixed',
+      inset: 0,
+      zIndex: 110,
+      background: 'rgba(3,4,12,0.55)',
+      backdropFilter: 'blur(4px)',
+      WebkitBackdropFilter: 'blur(4px)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: 20
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    onMouseDown: e => e.stopPropagation(),
+    style: {
+      width: 720,
+      maxWidth: '94vw',
+      maxHeight: '88vh',
+      display: 'flex',
+      animation: 'sr-cardin var(--dur-base) var(--ease-flight) both'
+    }
+  }, /*#__PURE__*/React.createElement(GlassPanel, {
+    strong: true,
+    radius: "lg",
+    pad: "none",
+    glow: true,
+    style: {
+      width: '100%',
+      overflow: 'hidden',
+      display: 'flex',
+      flexDirection: 'column'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      padding: '15px 18px',
+      borderBottom: '1px solid var(--line)',
+      flex: 'none'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 10
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "keyboard",
+    size: 18,
+    color: "var(--star-blue)"
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 15,
+      color: 'var(--text-1)',
+      fontWeight: 300,
+      letterSpacing: '0.02em'
+    }
+  }, "\u5FEB\u6377\u952E"), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 12,
+      color: 'var(--text-3)'
+    }
+  }, "\u4E0D\u79BB\u5F00\u952E\u76D8\uFF0C\u8D70\u904D\u6574\u7247\u661F\u7A7A")), /*#__PURE__*/React.createElement(IconButton, {
+    name: "x",
+    title: "\u5173\u95ED",
+    onClick: onClose
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1,
+      minHeight: 0,
+      overflow: 'auto',
+      padding: '16px 20px 20px',
+      display: 'flex',
+      flexWrap: 'wrap',
+      gap: '18px 28px',
+      alignContent: 'flex-start'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: col
+  }, left.map(g => /*#__PURE__*/React.createElement(SRKeyGroup, {
+    key: g.id,
+    group: g
+  }))), /*#__PURE__*/React.createElement("div", {
+    style: col
+  }, right.map(g => /*#__PURE__*/React.createElement(SRKeyGroup, {
+    key: g.id,
+    group: g
+  })))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: 7,
+      padding: '11px 18px',
+      borderTop: '1px solid var(--line)',
+      flex: 'none',
+      fontSize: 12,
+      color: 'var(--text-3)'
+    }
+  }, "\u6309 ", /*#__PURE__*/React.createElement(SRKeyCap, null, "?"), " \u968F\u65F6\u6253\u5F00"))));
+}
+window.SRKit = Object.assign(window.SRKit || {}, {
+  KeysHelp
+});
+})(); } catch (e) { __ds_ns.__errors.push({ path: "ui_kits/stellar-raft/KeysHelp.jsx", error: String((e && e.message) || e) }); }
+
 // ui_kits/stellar-raft/ListView.jsx
 try { (() => {
 /* ListView — 笔记管理界面 (俯瞰态·列表视图): flatten the universe into a
@@ -22656,6 +23252,80 @@ function Settings({
   const [emErr, setEmErr] = React.useState('');
   const [emBusy, setEmBusy] = React.useState(false);
   const importRef = React.useRef(null); // 导入数据的隐藏 file input
+  const mdImportRef = React.useRef(null); // 导入 Markdown 仓库（.zip / 多个 .md）的隐藏 file input
+
+  // Markdown 仓库并入星空：与 JSON 的「整体替换」不同，这是增量合并——
+  // 同名星域并入现有域，星按域心散布落位，连线补进；写完一次性落库
+  const mergeVaultPlan = plan => {
+    const PALETTE = ['#9fc6ff', '#ffd98a', '#b8a6ff', '#8fe3c0', '#f0a8b8', '#a8d8f0'];
+    const conMap = {}; // 计划域 id → 实际域 id
+    plan.constellations.forEach((c, i) => {
+      const exist = D.constellations.find(x => x.name === c.name);
+      if (exist) {
+        conMap[c.id] = exist.id;
+        return;
+      }
+      const nc = {
+        id: c.id,
+        name: c.name,
+        color: PALETTE[(D.constellations.length + i) % PALETTE.length],
+        health: 0,
+        count: 0
+      };
+      D.constellations.push(nc);
+      conMap[c.id] = nc.id;
+    });
+    // 每个域一个落点簇：域心随机、成员绕域心散布
+    const centers = {};
+    Object.values(conMap).forEach(id => {
+      centers[id] = centers[id] || [22 + Math.random() * 56, 24 + Math.random() * 52];
+    });
+    plan.stars.forEach(s => {
+      s.con = conMap[s.con] || s.con;
+      const [cx, cy] = centers[s.con] || [50, 50];
+      const ang = Math.random() * Math.PI * 2,
+        rad = 3 + Math.random() * 9;
+      s.x = Math.min(94, Math.max(6, cx + Math.cos(ang) * rad));
+      s.y = Math.min(92, Math.max(8, cy + Math.sin(ang) * rad));
+      D.addStar(s);
+    });
+    plan.connections.forEach(c => {
+      D.connections.push(c);
+    });
+    D.syncCounts();
+    D.persist();
+    window.dispatchEvent(new Event('sr-data'));
+  };
+  const handleMdImport = async files => {
+    try {
+      let entries = [];
+      for (const f of files) {
+        if (/\.zip$/i.test(f.name)) {
+          entries = entries.concat(await window.SRVault.readZip(new Uint8Array(await f.arrayBuffer())));
+        } else if (/\.md$/i.test(f.name)) {
+          entries.push({
+            path: f.webkitRelativePath || f.name,
+            text: await f.text()
+          });
+        }
+      }
+      const plan = window.SRVault.parseVault(entries);
+      if (!plan.stars.length) {
+        flashToast('没有找到可导入的 Markdown 笔记');
+        return;
+      }
+      setConfirm({
+        message: `将导入 ${plan.stars.length} 颗星 · ${plan.constellations.length} 个星域 · ${plan.connections.length} 条连线，增量并入当前星空（不覆盖现有数据）。`,
+        confirmLabel: '并入星空',
+        onYes: () => {
+          mergeVaultPlan(plan);
+          flashToast(`已并入 ${plan.stars.length} 颗星 ✦ 从未点亮起步，讲透才发光`);
+        }
+      });
+    } catch (err) {
+      flashToast('导入失败 · ' + (err && err.message || '文件无法解析'));
+    }
+  };
   const [oldPw, setOldPw] = React.useState('');
   const [newPw, setNewPw] = React.useState('');
   const [pwBusy, setPwBusy] = React.useState(false);
@@ -23410,7 +24080,25 @@ function Settings({
     variant: "ghost",
     icon: "upload",
     onClick: () => importRef.current && importRef.current.click()
-  }, "\u5BFC\u5165\u6570\u636E"), /*#__PURE__*/React.createElement("input", {
+  }, "\u5BFC\u5165\u6570\u636E"), /*#__PURE__*/React.createElement(Button, {
+    size: "sm",
+    variant: "ghost",
+    icon: "folder-up",
+    onClick: () => mdImportRef.current && mdImportRef.current.click()
+  }, "\u5BFC\u5165 Markdown"), /*#__PURE__*/React.createElement("input", {
+    ref: mdImportRef,
+    type: "file",
+    accept: ".zip,.md,text/markdown,application/zip",
+    multiple: true,
+    style: {
+      display: 'none'
+    },
+    onChange: e => {
+      const fs = Array.from(e.target.files || []);
+      e.target.value = '';
+      if (fs.length) handleMdImport(fs);
+    }
+  }), /*#__PURE__*/React.createElement("input", {
     ref: importRef,
     type: "file",
     accept: ".json,application/json",
@@ -29056,7 +29744,8 @@ const {
   ReviewSession,
   Onboarding,
   OnboardingTour,
-  LoginView
+  LoginView,
+  KeysHelp
 } = window.SRKit;
 const {
   GlassPanel,
@@ -29079,6 +29768,7 @@ function App() {
   const [settingsOpen, setSettingsOpen] = React.useState(false); // 个人设置 modal
   const [reviewOpen, setReviewOpen] = React.useState(false); // 复习会话（间隔重复）
   const [aiConfigOpen, setAiConfigOpen] = React.useState(false); // AI 配置 modal
+  const [keysHelp, setKeysHelp] = React.useState(false); // 快捷键速查面板
   const [onboard, setOnboard] = React.useState(false); // 新手引导册
   const [tour, setTour] = React.useState(false); // 聚光实地导览
   const [login, setLogin] = React.useState(false);
@@ -29170,6 +29860,21 @@ function App() {
     return () => window.removeEventListener('keydown', h);
   }, [reviewOpen, onboard, tour, login]);
 
+  // ? 打开快捷键速查（Shift+/）——正在输入框 / 可编辑区里打问号不受影响；
+  // 已有弹层置顶时不叠开（同 ⌘K 的互斥语义，速查自带 Esc / 点遮罩关闭）
+  React.useEffect(() => {
+    const h = e => {
+      if (e.key !== '?' || e.metaKey || e.ctrlKey || e.altKey) return;
+      const t = e.target;
+      if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+      if (cmd || settingsOpen || aiConfigOpen || reviewOpen || onboard || tour || login || keysHelp) return;
+      e.preventDefault();
+      setKeysHelp(true);
+    };
+    window.addEventListener('keydown', h);
+    return () => window.removeEventListener('keydown', h);
+  }, [cmd, settingsOpen, aiConfigOpen, reviewOpen, onboard, tour, login, keysHelp]);
+
   // Esc 统一词汇：同一动作（离开当前浮层）在所有屏幕说同一句话。
   // 命令面板 / 设置 / AI 配置 / 复习会话自带 Esc，这里让位；
   // 捕获阶段处理费曼抽屉——抽屉永远盖在视图内浮层（菜单、摘要卡）之上，Esc 先关它；
@@ -29178,7 +29883,7 @@ function App() {
   React.useEffect(() => {
     const h = e => {
       if (e.key !== 'Escape' || e.defaultPrevented) return;
-      if (cmd || settingsOpen || aiConfigOpen || reviewOpen || onboard || tour || login) return;
+      if (cmd || settingsOpen || aiConfigOpen || reviewOpen || onboard || tour || login || keysHelp) return;
       if (feynman) {
         e.preventDefault();
         setFeynman(null);
@@ -29193,7 +29898,7 @@ function App() {
     };
     window.addEventListener('keydown', h, true);
     return () => window.removeEventListener('keydown', h, true);
-  }, [cmd, settingsOpen, aiConfigOpen, reviewOpen, onboard, tour, login, feynman, view]);
+  }, [cmd, settingsOpen, aiConfigOpen, reviewOpen, onboard, tour, login, keysHelp, feynman, view]);
 
   // 切换视图前按真实时间重算全部星的 R（衰减模型），新挂载的视图读到的是当下的亮度
   const freshen = () => {
@@ -29422,6 +30127,8 @@ function App() {
     }
   }), aiConfigOpen && /*#__PURE__*/React.createElement(AIConfig, {
     onClose: () => setAiConfigOpen(false)
+  }), keysHelp && /*#__PURE__*/React.createElement(KeysHelp, {
+    onClose: () => setKeysHelp(false)
   }), onboard && !login && authKnown && /*#__PURE__*/React.createElement(Onboarding, {
     onClose: finishOnboard,
     onSpotlight: startTour
@@ -32506,9 +33213,145 @@ try { (() => {
     });
     return entries;
   }
+
+  /* ---------------- zip 读取（导入侧） ----------------
+     支持 store（我们自己导出的）与 deflate（用户用系统/Obsidian 重新压过的），
+     deflate 走浏览器/Node 原生 DecompressionStream，依旧零依赖。 */
+  async function readZip(bytes) {
+    const b = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes);
+    const rd16 = p => b[p] | b[p + 1] << 8;
+    const rd32 = p => (b[p] | b[p + 1] << 8 | b[p + 2] << 16 | b[p + 3] << 24) >>> 0;
+    let eocd = -1;
+    for (let p = b.length - 22; p >= 0; p--) {
+      if (rd32(p) === 0x06054b50) {
+        eocd = p;
+        break;
+      }
+    }
+    if (eocd < 0) throw new Error('不是有效的 zip 文件');
+    const count = rd16(eocd + 10);
+    let p = rd32(eocd + 16);
+    const dec = new TextDecoder();
+    const out = [];
+    for (let n = 0; n < count; n++) {
+      if (rd32(p) !== 0x02014b50) throw new Error('zip 目录损坏');
+      const method = rd16(p + 10);
+      const csize = rd32(p + 20);
+      const nameLen = rd16(p + 28),
+        extraLen = rd16(p + 30),
+        cmtLen = rd16(p + 32);
+      const off = rd32(p + 42);
+      const name = dec.decode(b.slice(p + 46, p + 46 + nameLen));
+      const start = off + 30 + rd16(off + 26) + rd16(off + 28);
+      let data = b.slice(start, start + csize);
+      if (method === 8) {
+        if (typeof DecompressionStream === 'undefined') throw new Error('这份压缩包用了压缩存储，当前环境无法解压');
+        const resp = new Response(new Blob([data]).stream().pipeThrough(new DecompressionStream('deflate-raw')));
+        data = new Uint8Array(await resp.arrayBuffer());
+      } else if (method !== 0) throw new Error('不支持的压缩方式（' + method + '）');
+      if (!name.endsWith('/')) out.push({
+        path: name,
+        text: dec.decode(data)
+      });
+      p += 46 + nameLen + extraLen + cmtLen;
+    }
+    return out;
+  }
+
+  /* ---------------- Markdown 仓库 → 星空导入计划 ----------------
+     entries: [{ path, text }]。规则与导出互逆：
+     - 一级文件夹 → 星域（根级散档归「未分域」）；根级 README.md 是索引，跳过
+     - 文件名 → 星名；与文件名相同的开头 H1（导出加的标题行）掐掉
+     - frontmatter → props / tags；正文首段（≤160 字）兼作摘要
+     - 「## 关联」小节的 [[wikilink]] 列表 → 连线（rel 为破折号后的关系语句），不入正文
+     返回 { constellations, stars, connections }——纯数据计划，由调用方并入星空
+     （位置/记忆状态由 addStar 与调用方补齐）。 */
+  const stripHtmlText = h => String(h == null ? '' : h).replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').trim();
+  function parseVault(entries) {
+    const Md = typeof globalThis !== 'undefined' && globalThis.SRMd || typeof window !== 'undefined' && window.SRMd;
+    if (!Md) throw new Error('SRMd 未加载');
+    const WIKI_RE = /\[\[([^\]]+)\]\]/;
+    const norm = s => String(s || '').trim().toLowerCase();
+    const stars = [];
+    const consByName = new Map();
+    const pending = []; // 待还原的连线：{ fromName, targetName, rel }
+    (entries || []).forEach(e => {
+      if (!/\.md$/i.test(e.path)) return;
+      const parts = e.path.split('/').filter(Boolean);
+      const fname = parts[parts.length - 1].replace(/\.md$/i, '');
+      if (parts.length === 1 && /^readme$/i.test(fname)) return;
+      const folder = parts.length > 1 ? parts[0] : '未分域';
+      const fm = Md.parseFrontmatter(e.text);
+      let blocks = Md.parseMdBlocks(fm.body);
+      if (blocks.length && blocks[0].type === 'h1' && norm(stripHtmlText(blocks[0].text)) === norm(fname)) blocks = blocks.slice(1);
+      const relIdx = blocks.findIndex(bk => /^h[23]$/.test(bk.type) && stripHtmlText(bk.text) === '关联');
+      let bodyBlocks = blocks;
+      if (relIdx >= 0) {
+        bodyBlocks = blocks.slice(0, relIdx);
+        blocks.slice(relIdx + 1).forEach(bk => {
+          if (bk.type !== 'bulleted' && bk.type !== 'p') return;
+          const t = stripHtmlText(bk.text);
+          const m = t.match(WIKI_RE);
+          if (m) pending.push({
+            fromName: fname,
+            targetName: m[1].trim(),
+            rel: t.replace(WIKI_RE, '').replace(/^[\s—–-]+/, '').trim()
+          });
+        });
+      }
+      if (!consByName.has(folder)) consByName.set(folder, {
+        id: 'c' + Math.random().toString(36).slice(2, 7),
+        name: folder
+      });
+      const id = 's' + Math.random().toString(36).slice(2, 8);
+      const firstP = bodyBlocks.find(bk => bk.type === 'p' && stripHtmlText(bk.text));
+      stars.push({
+        id,
+        con: consByName.get(folder).id,
+        label: fname,
+        summary: firstP ? stripHtmlText(firstP.text).slice(0, 160) : '',
+        tags: fm.tags || [],
+        props: fm.props || {},
+        importance: 1,
+        strength: 0.5,
+        body: [{
+          id: id + '-r',
+          type: 'rich'
+        }, ...bodyBlocks, ...(bodyBlocks.length ? [] : [{
+          id: id + '-p',
+          type: 'p',
+          text: ''
+        }])]
+      });
+    });
+    const byName = new Map(stars.map(s => [norm(s.label), s]));
+    const connections = [];
+    const seen = new Set();
+    pending.forEach(l => {
+      const a = byName.get(norm(l.fromName)),
+        b2 = byName.get(norm(l.targetName));
+      if (!a || !b2 || a.id === b2.id) return;
+      const key = [a.id, b2.id].sort().join('~');
+      if (seen.has(key)) return;
+      seen.add(key);
+      connections.push({
+        a: a.id,
+        b: b2.id,
+        kind: a.con === b2.con ? 'intra' : 'cross',
+        rel: l.rel || ''
+      });
+    });
+    return {
+      constellations: [...consByName.values()],
+      stars,
+      connections
+    };
+  }
   const api = {
     buildZip,
     buildVault,
+    readZip,
+    parseVault,
     crc32,
     safeName
   };
