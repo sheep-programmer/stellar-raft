@@ -318,7 +318,7 @@ function Checkup({ onClose, onOpenStar, onFocusCon, onFeynman, onReview }) {
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }}>
 
           {/* 时间之窗 · 未来 7 天预演 */}
-          <GlassPanel radius="lg" pad="none" style={{ padding: 18 }}>
+          <GlassPanel data-tour="checkup-window" radius="lg" pad="none" style={{ padding: 18 }}>
             <SectionTitle icon="calendar-clock" hint={fRows.length ? '按剩余天数升序' : undefined}>时间之窗 · 未来 7 天</SectionTitle>
             {fRows.length === 0 && (
               <div style={{ padding: '24px 0', textAlign: 'center', color: 'var(--text-3)', fontSize: 13 }}>

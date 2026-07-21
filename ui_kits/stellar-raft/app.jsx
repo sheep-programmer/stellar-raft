@@ -149,6 +149,19 @@ function App() {
     setOnboard(false);
   };
   const startTour = () => { finishOnboard(); backToMap(); setTour(true); };
+  // 聚光导览的领航员：导览走到某板块时替它切视图。编辑器要有星才进得去
+  // （返回 false 表示该步进不了，导览会略过它）；导览结束一律送回星图。
+  const tourNavigate = (v) => {
+    if (v === 'map') { backToMap(); return true; }
+    if (v === 'aerial') { openView('aerial'); return true; }
+    if (v === 'editor') {
+      const D = window.SR_DATA;
+      if (D && D.stars && D.stars.length) { openEditor(D.stars[0].id); return true; }
+      return false;
+    }
+    openView(v); return true;
+  };
+  const closeTour = () => { setTour(false); backToMap(); };
   const replayGuide = () => { setSettingsOpen(false); setOnboard(true); };
   // 稳定 ref：只在 <main> 真正重挂载（key 变化）时触发入场动画；
   // 内联箭头 ref 每次渲染都会重跑 enter，任何 setState 都会闪一次入场
@@ -202,7 +215,7 @@ function App() {
       {aiConfigOpen && <AIConfig onClose={() => setAiConfigOpen(false)} />}
       {/* 登录页与新手引导的焦点圈禁互斥：登录优先，登录页出现时引导整体让位（卸载），避免 Tab 焦点陷阱与 Esc 冲突 */}
       {onboard && !login && authKnown && <Onboarding onClose={finishOnboard} onSpotlight={startTour} />}
-      {tour && !login && <OnboardingTour onClose={() => setTour(false)} />}
+      {tour && !login && <OnboardingTour onClose={closeTour} onNavigate={tourNavigate} />}
       {login && <LoginView onClose={closeLogin} />}
     </div>
   );

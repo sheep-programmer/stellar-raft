@@ -1,7 +1,7 @@
 /* Onboarding — 星图手册 · 新手引导。
    分页玻璃导览册（Onboarding）+ 末页聚光实地导览（OnboardingTour）。
    首次打开自动弹出（app.jsx 判 localStorage['sr.onboarded']），设置里可回看。
-   props: Onboarding { onClose, onSpotlight } · OnboardingTour { onClose } */
+   props: Onboarding { onClose, onSpotlight } · OnboardingTour { onClose, onNavigate } */
 const { Button, GlassPanel, Icon } = window.StellarRaftDesignSystem_2866af;
 const SRK = window.SRKeys;  // 快捷键提示按系统说话（⌘K / Ctrl+K）
 
@@ -577,45 +577,78 @@ function Onboarding({ onClose, onSpotlight }) {
   );
 }
 
-// 聚光步骤——逐处高亮真实界面上的功能位置；找不到的目标优雅跳过。
+// 聚光步骤——自动走进每个板块实地打光。view 是该步所在的视图（由宿主的
+// onNavigate 领航切换），target 是视图内最有代表性的锚点；找不到的目标优雅跳过。
 const SR_TOUR_STEPS = [
-  { target: '[data-tour="search"]',    title: '随时跳转',   body: SRK.combo('K') + ' 或点这里，跳到任意一颗星、任意一个视图。' },
-  { target: '[data-tour="nav-views"]', title: '三种看法',   body: '星图是创作的画布，列表管理账目，时间轴回望来路。' },
-  { target: '[data-tour="review"]',    title: '到期复习',   body: '角标是今天到期的星数。点它走一轮「忘了 · 模糊 · 记得」。' },
-  { target: '[data-tour="inbox"]',     title: '收件箱',     body: SRK.combo('Enter') + ' 的速记与好友来信都落在这里，攒着慢慢归入星域。' },
-  { target: '[data-tour="trash"]',     title: '黑洞',       body: '删掉的星在事件视界打转。随时捞回，位置与连接都还在。' },
-  { target: '[data-tour="visit"]',     title: '星际漫游',   body: '凭分享码造访好友的星系，心动的星可以收进自己的星域。' },
-  { target: '[data-tour="theme"]',     title: '黎明与深空', body: '换一种天色看你的星空，语义不变：金色仍是奖励，星蓝仍是结构。' },
-  { target: '[data-tour="checkup"]',   title: '知识体检',   body: '到期复习、待重燃、待整理——三行今日待办，一眼看完。' },
-  { target: '[data-tour="hud"]',       title: '星空总览',   body: '知识星 · 已点亮 · 正发光 · 正变暗，你的星空一行读完。' },
-  { target: '[data-tour="tools"]',     title: '换个视角',   body: '亮度鸟瞰与三维星系在这里切换，也能缩放、复位画布。' },
-  { target: '[data-tour="hint"]',      title: '创作手势',   body: '拖空白平移 · 拖星移动 · 滚轮缩放 · 右键创建——都在这一行里。' },
-  { target: '[data-tour="settings"]',  title: '回看这份引导', body: '想重温手册，随时来这里：个人设置 →「上手引导」。' },
+  { view: 'map',       target: '[data-tour="search"]',          title: '随时跳转',   body: SRK.combo('K') + ' 或点这里，跳到任意一颗星、任意一个视图。' },
+  { view: 'map',       target: '[data-tour="hud"]',             title: '星空总览',   body: '知识星 · 已点亮 · 正发光 · 正变暗，你的星空一行读完。' },
+  { view: 'map',       target: '[data-tour="tools"]',           title: '创作的画布', body: '缩放与复位在这枚胶囊里，亮度鸟瞰与三维星系的入口也是——接下来带你都走一遍。' },
+  { view: 'aerial',    target: '[data-tour="aerial-hud"]',      title: '亮度鸟瞰',   body: '整片星空摊成一张热图，哪里正亮、哪里正暗，一眼看清。点击星域就能飞入。' },
+  { view: 'galaxy3d',  target: '[data-tour="g3d-hud"]',         title: '三维星系',   body: '在星海里绕行：拖拽旋转，滚轮缩放，金弧连着两端已点亮的融会贯通。' },
+  { view: 'list',      target: '[data-tour="list-filters"]',    title: '列表管理',   body: '按强度、星域、标签筛选，批量移动、加标签、加入复习——账目在这里一次理清。' },
+  { view: 'editor',    target: '[data-tour="editor-rail"]',     title: '块编辑器',   body: '左边安静写作，右边是这颗星的知识侧栏：大纲、连接的星、记忆心跳都在。' },
+  { view: 'map',       target: '[data-tour="review"]',          title: '到期复习',   body: '角标是今天到期的星数。点它走一轮「忘了 · 模糊 · 记得」。' },
+  { view: 'checkup',   target: '[data-tour="checkup-window"]',  title: '知识体检',   body: '时间之窗替你预演未来 7 天：哪些星将熄灭、哪些到期，提前一步安排回望。' },
+  { view: 'inbox',     target: '[data-tour="inbox-capture"]',   title: '收件箱',     body: '灵光一现先落在这里，' + SRK.combo('Enter') + ' 即刻捕捉，之后再慢慢归入星域。' },
+  { view: 'blackhole', target: '[data-tour="blackhole-stage"]', title: '黑洞',       body: '删掉的星在事件视界打转。随时捞回，位置与连接都还在。' },
+  { view: 'visit',     target: '[data-tour="visit-share"]',     title: '星际漫游',   body: '在这里开放你的星系、复制密文，也凭别人的密文去造访对方的深空。' },
+  { view: 'timeline',  target: '[data-tour="timeline-flow"]',   title: '时间轴',     body: '点亮、复习与变暗的每一颗星，都沿这条丝线记着。回望来路，就来这里。' },
+  { view: 'map',       target: '[data-tour="theme"]',           title: '黎明与深空', body: '换一种天色看你的星空，语义不变：金色仍是奖励，星蓝仍是结构。' },
+  { view: 'map',       target: '[data-tour="settings"]',        title: '回看这份引导', body: '想重温手册，随时来这里：个人设置 →「上手引导」。' },
 ];
 
-function OnboardingTour({ onClose }) {
+function OnboardingTour({ onClose, onNavigate }) {
   const [i, setI] = React.useState(0);
   const [rect, setRect] = React.useState(null);
   const reduce = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // 定位当前步目标；找不到则跳过到下一个可见目标，全部找不到就结束。
-  const locate = React.useCallback((from) => {
-    for (let j = from; j < SR_TOUR_STEPS.length; j++) {
-      const el = document.querySelector(SR_TOUR_STEPS[j].target);
-      if (el) {
-        const r = el.getBoundingClientRect();
-        if (r.width > 0 && r.height > 0) { setI(j); setRect(r); return true; }
-      }
-    }
-    return false;
+  const seq = React.useRef(0);        // 步进序号：切步或卸载后，过期轮询一律作废
+  const timer = React.useRef(null);
+  const navView = React.useRef(null); // 导览当前已领航到的视图
+
+  const clearTimer = React.useCallback(() => {
+    if (timer.current) { clearTimeout(timer.current); timer.current = null; }
   }, []);
+
+  // 进入第 from 步：该步视图不同则先让宿主领航切换（返回 false 的步骤直接略过，
+  // 比如没有任何星时进不了编辑器）；随后异步轮询锚点——新视图挂载要时间，
+  // Galaxy3D 首帧更慢，给它更长的窗口。超时按「找不到优雅跳过」语义继续向后，
+  // 全部走完就结束。
+  const goTo = React.useCallback((from) => {
+    const my = ++seq.current;
+    clearTimer();
+    const tryStep = (j) => {
+      if (my !== seq.current) return;
+      if (j >= SR_TOUR_STEPS.length) { onClose(); return; }
+      const step = SR_TOUR_STEPS[j];
+      if (onNavigate && step.view !== navView.current) {
+        if (onNavigate(step.view) === false) { tryStep(j + 1); return; }
+        navView.current = step.view;
+        setRect(null);   // 舞台换幕：旧光洞先收起，找到新锚点再亮
+      }
+      const deadline = Date.now() + (step.view === 'galaxy3d' ? 4000 : 2500);
+      const poll = () => {
+        if (my !== seq.current) return;
+        const el = document.querySelector(step.target);
+        if (el) {
+          const r = el.getBoundingClientRect();
+          if (r.width > 0 && r.height > 0) { setI(j); setRect(r); return; }
+        }
+        if (Date.now() >= deadline) { tryStep(j + 1); return; }
+        timer.current = setTimeout(poll, 120);
+      };
+      poll();
+    };
+    tryStep(from);
+  }, [clearTimer, onClose, onNavigate]);
 
   const didInit = React.useRef(false);
   React.useEffect(() => {
     if (didInit.current) return;
     didInit.current = true;
-    if (!locate(0)) onClose();
-  }, [locate, onClose]);
+    goTo(0);
+  }, [goTo]);
+  React.useEffect(() => () => { seq.current += 1; clearTimer(); }, [clearTimer]);
 
   React.useEffect(() => {
     const k = (e) => { if (e.key === 'Escape') { e.stopPropagation(); onClose(); } };
@@ -626,7 +659,7 @@ function OnboardingTour({ onClose }) {
   if (!rect) return null;
   const step = SR_TOUR_STEPS[i];
   const last = i === SR_TOUR_STEPS.length - 1;
-  const next = () => { if (last) onClose(); else if (!locate(i + 1)) onClose(); };
+  const next = () => { if (last) onClose(); else goTo(i + 1); };
 
   const pad = 8;
   const hole = { left: rect.left - pad, top: rect.top - pad, width: rect.width + pad * 2, height: rect.height + pad * 2 };

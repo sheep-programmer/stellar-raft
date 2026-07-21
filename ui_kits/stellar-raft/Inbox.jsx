@@ -363,7 +363,7 @@ function Inbox({ onFocusCon, onOpen }) {
         )}
 
         {/* 快速捕捉 */}
-        <GlassPanel radius="md" pad="none" style={{ padding: '13px 15px', marginBottom: 14 }}>
+        <GlassPanel data-tour="inbox-capture" radius="md" pad="none" style={{ padding: '13px 15px', marginBottom: 14 }}>
           <div style={{ display: 'flex', gap: 11 }}>
             <Icon name="feather" size={16} color="var(--star-blue)" style={{ marginTop: 6, flex: 'none' }} />
             <textarea

@@ -761,7 +761,7 @@ function Galaxy3D({ onClose, onOpenStar, onFeynman, dataset }) {
       )}
 
       {/* 顶部 HUD */}
-      <div style={{ position: 'absolute', top: 18, left: 24, zIndex: 30 }}>
+      <div data-tour="g3d-hud" style={{ position: 'absolute', top: 18, left: 24, zIndex: 30 }}>
         <GlassPanel radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', gap: 22, padding: '10px 24px' }}>
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 13, color: 'var(--text-2)' }}>
             <Icon name="orbit" size={17} color="var(--gold)" />三维星系

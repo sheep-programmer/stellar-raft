@@ -282,7 +282,7 @@ function BlackHole({ onOpenCon }) {
       {/* 左：正俯视的黑洞 + 可点击的碎屑轨道（滚轮缩放） */}
       <div ref={stageBoxRef} onClick={() => setPicked(null)}
         style={{ flex: 1, minWidth: 0, position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1, overflow: 'hidden' }}>
-        <div className="bh-stage" style={{ transform: `scale(${zoom})`, transition: 'transform 200ms var(--ease-flight)' }}>
+        <div data-tour="blackhole-stage" className="bh-stage" style={{ transform: `scale(${zoom})`, transition: 'transform 200ms var(--ease-flight)' }}>
           {/* 吸积盘：双层湍流条纹旋转 + 一层静态多普勒增亮 */}
           <div className="bh-disk" />
           <div className="bh-disk2" />

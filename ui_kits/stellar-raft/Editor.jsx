@@ -2186,7 +2186,7 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
       </div>
 
       {/* RIGHT — knowledge rail */}
-      <aside className="sr-ed-rail" style={{ width: 312, flex: 'none', borderLeft: '1px solid var(--glass-border)', background: 'var(--glass-bg)', WebkitBackdropFilter: 'blur(var(--glass-blur))', backdropFilter: 'blur(var(--glass-blur))', overflow: 'auto', position: 'relative', zIndex: 2 }}>
+      <aside data-tour="editor-rail" className="sr-ed-rail" style={{ width: 312, flex: 'none', borderLeft: '1px solid var(--glass-border)', background: 'var(--glass-bg)', WebkitBackdropFilter: 'blur(var(--glass-blur))', backdropFilter: 'blur(var(--glass-blur))', overflow: 'auto', position: 'relative', zIndex: 2 }}>
         <div style={{ padding: 20, display: 'flex', flexDirection: 'column', gap: 22 }}>
           <section>
             <RailHead icon="list-tree" title="大纲" />

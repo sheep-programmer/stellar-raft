@@ -1,4 +1,4 @@
-/* @ds-bundle: {"format":3,"namespace":"StellarRaftDesignSystem_2866af","components":[{"name":"Badge","sourcePath":"components/core/Badge.jsx"},{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"GlassPanel","sourcePath":"components/core/GlassPanel.jsx"},{"name":"Icon","sourcePath":"components/core/Icon.jsx"},{"name":"IconButton","sourcePath":"components/core/IconButton.jsx"},{"name":"Input","sourcePath":"components/core/Input.jsx"},{"name":"Tag","sourcePath":"components/core/Tag.jsx"},{"name":"Checkbox","sourcePath":"components/form/Checkbox.jsx"},{"name":"Select","sourcePath":"components/form/Select.jsx"},{"name":"Switch","sourcePath":"components/form/Switch.jsx"},{"name":"Tabs","sourcePath":"components/form/Tabs.jsx"},{"name":"ConstellationItem","sourcePath":"components/knowledge/ConstellationItem.jsx"},{"name":"MemoryBar","sourcePath":"components/knowledge/MemoryBar.jsx"},{"name":"StarNode","sourcePath":"components/knowledge/StarNode.jsx"},{"name":"ContextMenu","sourcePath":"components/overlay/ContextMenu.jsx"},{"name":"Modal","sourcePath":"components/overlay/Modal.jsx"},{"name":"Toast","sourcePath":"components/overlay/Toast.jsx"},{"name":"Tooltip","sourcePath":"components/overlay/Tooltip.jsx"}],"sourceHashes":{"assets/starfield.js":"d776d2b45dc4","components/core/Badge.jsx":"b0bd9735d638","components/core/Button.jsx":"a1c387a07e86","components/core/GlassPanel.jsx":"299a19d8fbb4","components/core/Icon.jsx":"7505f83ab03d","components/core/IconButton.jsx":"24052f4eed78","components/core/Input.jsx":"54a6c9af7e3f","components/core/Tag.jsx":"d8513c07ea96","components/form/Checkbox.jsx":"38aa593157dd","components/form/Select.jsx":"86b8c1c71e12","components/form/Switch.jsx":"938c62be0664","components/form/Tabs.jsx":"ede2dbff1963","components/knowledge/ConstellationItem.jsx":"d73e999469b6","components/knowledge/MemoryBar.jsx":"a54c928d5065","components/knowledge/StarNode.jsx":"1bedee49f0bf","components/overlay/ContextMenu.jsx":"11783420e876","components/overlay/Modal.jsx":"0906de457544","components/overlay/Toast.jsx":"d22ad40680a6","components/overlay/Tooltip.jsx":"a042caa8970d","ui_kits/stellar-raft/AIConfig.jsx":"bbc66d05eebf","ui_kits/stellar-raft/AerialView.jsx":"c03956215464","ui_kits/stellar-raft/BlackHole.jsx":"17eb30e1a014","ui_kits/stellar-raft/Checkup.jsx":"dba065069a3e","ui_kits/stellar-raft/CommandPalette.jsx":"3f1a9cdd2383","ui_kits/stellar-raft/Editor.jsx":"a6e1f059f5e7","ui_kits/stellar-raft/EditorMenus.jsx":"fb80581f6bcc","ui_kits/stellar-raft/FeynmanDrawer.jsx":"6af036e0a904","ui_kits/stellar-raft/Galaxy3D.jsx":"8e40ab3d2a66","ui_kits/stellar-raft/Inbox.jsx":"04631262c5c7","ui_kits/stellar-raft/ListView.jsx":"04333626cd62","ui_kits/stellar-raft/LoginView.jsx":"18d9c842c5c6","ui_kits/stellar-raft/Onboarding.jsx":"a0a8609b98bb","ui_kits/stellar-raft/ReviewSession.jsx":"9092a3d9412c","ui_kits/stellar-raft/Settings.jsx":"27491a03aa51","ui_kits/stellar-raft/Sidebar.jsx":"8f3ca4c39abb","ui_kits/stellar-raft/StarMap.jsx":"26ebb8fc6e2f","ui_kits/stellar-raft/Timeline.jsx":"56d938b8201e","ui_kits/stellar-raft/VisitView.jsx":"cd9a544586ba","ui_kits/stellar-raft/ai.js":"2f79eb3473c9","ui_kits/stellar-raft/app.jsx":"e0e7b6a77961","ui_kits/stellar-raft/codehl.js":"6fbdd0100deb","ui_kits/stellar-raft/data.js":"0ec0ed408dbf","ui_kits/stellar-raft/mdcore.js":"b82d5054c3b6","ui_kits/stellar-raft/sanitize.js":"88e63cd63253","ui_kits/stellar-raft/transition.js":"3725d8982dc5","ui_kits/stellar-raft/undocore.js":"7f8c94da35f9","ui_kits/stellar-raft/vault.js":"d7876f7f9981"},"inlinedExternals":[],"unexposedExports":[{"name":"memoryColor","sourcePath":"components/knowledge/MemoryBar.jsx"}],"exposedHelpers":[{"name":"toast","sourcePath":"components/overlay/Toast.jsx"}]} */
+/* @ds-bundle: {"format":3,"namespace":"StellarRaftDesignSystem_2866af","components":[{"name":"Badge","sourcePath":"components/core/Badge.jsx"},{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"GlassPanel","sourcePath":"components/core/GlassPanel.jsx"},{"name":"Icon","sourcePath":"components/core/Icon.jsx"},{"name":"IconButton","sourcePath":"components/core/IconButton.jsx"},{"name":"Input","sourcePath":"components/core/Input.jsx"},{"name":"Tag","sourcePath":"components/core/Tag.jsx"},{"name":"Checkbox","sourcePath":"components/form/Checkbox.jsx"},{"name":"Select","sourcePath":"components/form/Select.jsx"},{"name":"Switch","sourcePath":"components/form/Switch.jsx"},{"name":"Tabs","sourcePath":"components/form/Tabs.jsx"},{"name":"ConstellationItem","sourcePath":"components/knowledge/ConstellationItem.jsx"},{"name":"MemoryBar","sourcePath":"components/knowledge/MemoryBar.jsx"},{"name":"StarNode","sourcePath":"components/knowledge/StarNode.jsx"},{"name":"ContextMenu","sourcePath":"components/overlay/ContextMenu.jsx"},{"name":"Modal","sourcePath":"components/overlay/Modal.jsx"},{"name":"Toast","sourcePath":"components/overlay/Toast.jsx"},{"name":"Tooltip","sourcePath":"components/overlay/Tooltip.jsx"}],"sourceHashes":{"assets/starfield.js":"d776d2b45dc4","components/core/Badge.jsx":"b0bd9735d638","components/core/Button.jsx":"a1c387a07e86","components/core/GlassPanel.jsx":"299a19d8fbb4","components/core/Icon.jsx":"7505f83ab03d","components/core/IconButton.jsx":"24052f4eed78","components/core/Input.jsx":"54a6c9af7e3f","components/core/Tag.jsx":"d8513c07ea96","components/form/Checkbox.jsx":"38aa593157dd","components/form/Select.jsx":"86b8c1c71e12","components/form/Switch.jsx":"938c62be0664","components/form/Tabs.jsx":"ede2dbff1963","components/knowledge/ConstellationItem.jsx":"d73e999469b6","components/knowledge/MemoryBar.jsx":"a54c928d5065","components/knowledge/StarNode.jsx":"1bedee49f0bf","components/overlay/ContextMenu.jsx":"11783420e876","components/overlay/Modal.jsx":"0906de457544","components/overlay/Toast.jsx":"d22ad40680a6","components/overlay/Tooltip.jsx":"a042caa8970d","ui_kits/stellar-raft/AIConfig.jsx":"bbc66d05eebf","ui_kits/stellar-raft/AerialView.jsx":"d6340d392ab9","ui_kits/stellar-raft/BlackHole.jsx":"2704c4a4e50c","ui_kits/stellar-raft/Checkup.jsx":"aa974821dc28","ui_kits/stellar-raft/CommandPalette.jsx":"3f1a9cdd2383","ui_kits/stellar-raft/Editor.jsx":"cdf5da39533c","ui_kits/stellar-raft/EditorMenus.jsx":"fb80581f6bcc","ui_kits/stellar-raft/FeynmanDrawer.jsx":"6af036e0a904","ui_kits/stellar-raft/Galaxy3D.jsx":"3e0969f2ab38","ui_kits/stellar-raft/Inbox.jsx":"c2fc04361d44","ui_kits/stellar-raft/ListView.jsx":"e2550f598c82","ui_kits/stellar-raft/LoginView.jsx":"18d9c842c5c6","ui_kits/stellar-raft/Onboarding.jsx":"e1d27a7d28a7","ui_kits/stellar-raft/ReviewSession.jsx":"9092a3d9412c","ui_kits/stellar-raft/Settings.jsx":"27491a03aa51","ui_kits/stellar-raft/Sidebar.jsx":"8f3ca4c39abb","ui_kits/stellar-raft/StarMap.jsx":"26ebb8fc6e2f","ui_kits/stellar-raft/Timeline.jsx":"cda4e62fa57b","ui_kits/stellar-raft/VisitView.jsx":"dd1452b16d3e","ui_kits/stellar-raft/ai.js":"2f79eb3473c9","ui_kits/stellar-raft/app.jsx":"c7aceb5ae2e8","ui_kits/stellar-raft/codehl.js":"6fbdd0100deb","ui_kits/stellar-raft/data.js":"0ec0ed408dbf","ui_kits/stellar-raft/mdcore.js":"b82d5054c3b6","ui_kits/stellar-raft/sanitize.js":"88e63cd63253","ui_kits/stellar-raft/transition.js":"3725d8982dc5","ui_kits/stellar-raft/undocore.js":"7f8c94da35f9","ui_kits/stellar-raft/vault.js":"d7876f7f9981"},"inlinedExternals":[],"unexposedExports":[{"name":"memoryColor","sourcePath":"components/knowledge/MemoryBar.jsx"}],"exposedHelpers":[{"name":"toast","sourcePath":"components/overlay/Toast.jsx"}]} */
 
 (() => {
 
@@ -3882,6 +3882,7 @@ function AerialView({
       color: 'var(--text-2)'
     }
   }, "\u4F60\u7684\u661F\u7A7A\u8FD8\u5F88\u6697\u3002\u5199\u4E0B\u7B2C\u4E00\u9897\u661F\uFF0C\u8BA9\u5B83\u53D1\u5149\u3002")), /*#__PURE__*/React.createElement("div", {
+    "data-tour": "aerial-hud",
     style: {
       position: 'absolute',
       top: 18,
@@ -4471,6 +4472,7 @@ function BlackHole({
       overflow: 'hidden'
     }
   }, /*#__PURE__*/React.createElement("div", {
+    "data-tour": "blackhole-stage",
     className: "bh-stage",
     style: {
       transform: `scale(${zoom})`,
@@ -5709,6 +5711,7 @@ function Checkup({
       marginBottom: 16
     }
   }, /*#__PURE__*/React.createElement(GlassPanel, {
+    "data-tour": "checkup-window",
     radius: "lg",
     pad: "none",
     style: {
@@ -11501,6 +11504,7 @@ function Editor({
       cursor: 'text'
     }
   }))), /*#__PURE__*/React.createElement("aside", {
+    "data-tour": "editor-rail",
     className: "sr-ed-rail",
     style: {
       width: 312,
@@ -15815,6 +15819,7 @@ function Galaxy3D({
     icon: "corner-up-left",
     onClick: onClose
   }, "\u8FD4\u56DE\u661F\u56FE\u521B\u5EFA"))), /*#__PURE__*/React.createElement("div", {
+    "data-tour": "g3d-hud",
     style: {
       position: 'absolute',
       top: 18,
@@ -16927,6 +16932,7 @@ function Inbox({
       }
     }, "\u8FD8\u6CA1\u6709\u661F\u57DF\u53EF\u4EE5\u5B89\u653E\u5B83\u2014\u2014\u5148\u56DE\u661F\u56FE\u521B\u5EFA\u4E00\u4E2A\u661F\u57DF\uFF0C\u518D\u6765\u6536\u7EB3\u8FD9\u9897\u661F\u3002")))));
   }))), /*#__PURE__*/React.createElement(GlassPanel, {
+    "data-tour": "inbox-capture",
     radius: "md",
     pad: "none",
     style: {
@@ -18315,6 +18321,7 @@ function ListView({
       color: health >= 60 ? 'var(--gold)' : 'var(--star-blue-dim)'
     }
   }, "\u5065\u5EB7\u5EA6 ", health, "%"))), /*#__PURE__*/React.createElement("div", {
+    "data-tour": "list-filters",
     style: {
       display: 'flex',
       alignItems: 'center',
@@ -19329,7 +19336,7 @@ try { (() => {
 /* Onboarding — 星图手册 · 新手引导。
    分页玻璃导览册（Onboarding）+ 末页聚光实地导览（OnboardingTour）。
    首次打开自动弹出（app.jsx 判 localStorage['sr.onboarded']），设置里可回看。
-   props: Onboarding { onClose, onSpotlight } · OnboardingTour { onClose } */
+   props: Onboarding { onClose, onSpotlight } · OnboardingTour { onClose, onNavigate } */
 const {
   Button,
   GlassPanel,
@@ -20768,84 +20775,156 @@ function Onboarding({
   }, "\u4E0B\u4E00\u9875")))));
 }
 
-// 聚光步骤——逐处高亮真实界面上的功能位置；找不到的目标优雅跳过。
+// 聚光步骤——自动走进每个板块实地打光。view 是该步所在的视图（由宿主的
+// onNavigate 领航切换），target 是视图内最有代表性的锚点；找不到的目标优雅跳过。
 const SR_TOUR_STEPS = [{
+  view: 'map',
   target: '[data-tour="search"]',
   title: '随时跳转',
   body: SRK.combo('K') + ' 或点这里，跳到任意一颗星、任意一个视图。'
 }, {
-  target: '[data-tour="nav-views"]',
-  title: '三种看法',
-  body: '星图是创作的画布，列表管理账目，时间轴回望来路。'
-}, {
-  target: '[data-tour="review"]',
-  title: '到期复习',
-  body: '角标是今天到期的星数。点它走一轮「忘了 · 模糊 · 记得」。'
-}, {
-  target: '[data-tour="inbox"]',
-  title: '收件箱',
-  body: SRK.combo('Enter') + ' 的速记与好友来信都落在这里，攒着慢慢归入星域。'
-}, {
-  target: '[data-tour="trash"]',
-  title: '黑洞',
-  body: '删掉的星在事件视界打转。随时捞回，位置与连接都还在。'
-}, {
-  target: '[data-tour="visit"]',
-  title: '星际漫游',
-  body: '凭分享码造访好友的星系，心动的星可以收进自己的星域。'
-}, {
-  target: '[data-tour="theme"]',
-  title: '黎明与深空',
-  body: '换一种天色看你的星空，语义不变：金色仍是奖励，星蓝仍是结构。'
-}, {
-  target: '[data-tour="checkup"]',
-  title: '知识体检',
-  body: '到期复习、待重燃、待整理——三行今日待办，一眼看完。'
-}, {
+  view: 'map',
   target: '[data-tour="hud"]',
   title: '星空总览',
   body: '知识星 · 已点亮 · 正发光 · 正变暗，你的星空一行读完。'
 }, {
+  view: 'map',
   target: '[data-tour="tools"]',
-  title: '换个视角',
-  body: '亮度鸟瞰与三维星系在这里切换，也能缩放、复位画布。'
+  title: '创作的画布',
+  body: '缩放与复位在这枚胶囊里，亮度鸟瞰与三维星系的入口也是——接下来带你都走一遍。'
 }, {
-  target: '[data-tour="hint"]',
-  title: '创作手势',
-  body: '拖空白平移 · 拖星移动 · 滚轮缩放 · 右键创建——都在这一行里。'
+  view: 'aerial',
+  target: '[data-tour="aerial-hud"]',
+  title: '亮度鸟瞰',
+  body: '整片星空摊成一张热图，哪里正亮、哪里正暗，一眼看清。点击星域就能飞入。'
 }, {
+  view: 'galaxy3d',
+  target: '[data-tour="g3d-hud"]',
+  title: '三维星系',
+  body: '在星海里绕行：拖拽旋转，滚轮缩放，金弧连着两端已点亮的融会贯通。'
+}, {
+  view: 'list',
+  target: '[data-tour="list-filters"]',
+  title: '列表管理',
+  body: '按强度、星域、标签筛选，批量移动、加标签、加入复习——账目在这里一次理清。'
+}, {
+  view: 'editor',
+  target: '[data-tour="editor-rail"]',
+  title: '块编辑器',
+  body: '左边安静写作，右边是这颗星的知识侧栏：大纲、连接的星、记忆心跳都在。'
+}, {
+  view: 'map',
+  target: '[data-tour="review"]',
+  title: '到期复习',
+  body: '角标是今天到期的星数。点它走一轮「忘了 · 模糊 · 记得」。'
+}, {
+  view: 'checkup',
+  target: '[data-tour="checkup-window"]',
+  title: '知识体检',
+  body: '时间之窗替你预演未来 7 天：哪些星将熄灭、哪些到期，提前一步安排回望。'
+}, {
+  view: 'inbox',
+  target: '[data-tour="inbox-capture"]',
+  title: '收件箱',
+  body: '灵光一现先落在这里，' + SRK.combo('Enter') + ' 即刻捕捉，之后再慢慢归入星域。'
+}, {
+  view: 'blackhole',
+  target: '[data-tour="blackhole-stage"]',
+  title: '黑洞',
+  body: '删掉的星在事件视界打转。随时捞回，位置与连接都还在。'
+}, {
+  view: 'visit',
+  target: '[data-tour="visit-share"]',
+  title: '星际漫游',
+  body: '在这里开放你的星系、复制密文，也凭别人的密文去造访对方的深空。'
+}, {
+  view: 'timeline',
+  target: '[data-tour="timeline-flow"]',
+  title: '时间轴',
+  body: '点亮、复习与变暗的每一颗星，都沿这条丝线记着。回望来路，就来这里。'
+}, {
+  view: 'map',
+  target: '[data-tour="theme"]',
+  title: '黎明与深空',
+  body: '换一种天色看你的星空，语义不变：金色仍是奖励，星蓝仍是结构。'
+}, {
+  view: 'map',
   target: '[data-tour="settings"]',
   title: '回看这份引导',
   body: '想重温手册，随时来这里：个人设置 →「上手引导」。'
 }];
 function OnboardingTour({
-  onClose
+  onClose,
+  onNavigate
 }) {
   const [i, setI] = React.useState(0);
   const [rect, setRect] = React.useState(null);
   const reduce = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const seq = React.useRef(0); // 步进序号：切步或卸载后，过期轮询一律作废
+  const timer = React.useRef(null);
+  const navView = React.useRef(null); // 导览当前已领航到的视图
 
-  // 定位当前步目标；找不到则跳过到下一个可见目标，全部找不到就结束。
-  const locate = React.useCallback(from => {
-    for (let j = from; j < SR_TOUR_STEPS.length; j++) {
-      const el = document.querySelector(SR_TOUR_STEPS[j].target);
-      if (el) {
-        const r = el.getBoundingClientRect();
-        if (r.width > 0 && r.height > 0) {
-          setI(j);
-          setRect(r);
-          return true;
-        }
-      }
+  const clearTimer = React.useCallback(() => {
+    if (timer.current) {
+      clearTimeout(timer.current);
+      timer.current = null;
     }
-    return false;
   }, []);
+
+  // 进入第 from 步：该步视图不同则先让宿主领航切换（返回 false 的步骤直接略过，
+  // 比如没有任何星时进不了编辑器）；随后异步轮询锚点——新视图挂载要时间，
+  // Galaxy3D 首帧更慢，给它更长的窗口。超时按「找不到优雅跳过」语义继续向后，
+  // 全部走完就结束。
+  const goTo = React.useCallback(from => {
+    const my = ++seq.current;
+    clearTimer();
+    const tryStep = j => {
+      if (my !== seq.current) return;
+      if (j >= SR_TOUR_STEPS.length) {
+        onClose();
+        return;
+      }
+      const step = SR_TOUR_STEPS[j];
+      if (onNavigate && step.view !== navView.current) {
+        if (onNavigate(step.view) === false) {
+          tryStep(j + 1);
+          return;
+        }
+        navView.current = step.view;
+        setRect(null); // 舞台换幕：旧光洞先收起，找到新锚点再亮
+      }
+      const deadline = Date.now() + (step.view === 'galaxy3d' ? 4000 : 2500);
+      const poll = () => {
+        if (my !== seq.current) return;
+        const el = document.querySelector(step.target);
+        if (el) {
+          const r = el.getBoundingClientRect();
+          if (r.width > 0 && r.height > 0) {
+            setI(j);
+            setRect(r);
+            return;
+          }
+        }
+        if (Date.now() >= deadline) {
+          tryStep(j + 1);
+          return;
+        }
+        timer.current = setTimeout(poll, 120);
+      };
+      poll();
+    };
+    tryStep(from);
+  }, [clearTimer, onClose, onNavigate]);
   const didInit = React.useRef(false);
   React.useEffect(() => {
     if (didInit.current) return;
     didInit.current = true;
-    if (!locate(0)) onClose();
-  }, [locate, onClose]);
+    goTo(0);
+  }, [goTo]);
+  React.useEffect(() => () => {
+    seq.current += 1;
+    clearTimer();
+  }, [clearTimer]);
   React.useEffect(() => {
     const k = e => {
       if (e.key === 'Escape') {
@@ -20860,7 +20939,7 @@ function OnboardingTour({
   const step = SR_TOUR_STEPS[i];
   const last = i === SR_TOUR_STEPS.length - 1;
   const next = () => {
-    if (last) onClose();else if (!locate(i + 1)) onClose();
+    if (last) onClose();else goTo(i + 1);
   };
   const pad = 8;
   const hole = {
@@ -25610,6 +25689,7 @@ function Timeline({
       marginTop: 6
     }
   }, "\u6362\u4E2A\u7B5B\u9009\uFF0C\u6216\u56DE\u5230\u661F\u7A7A\u70B9\u4EAE\u4E00\u9897\u661F\u3002")) : /*#__PURE__*/React.createElement("div", {
+    "data-tour": "timeline-flow",
     style: {
       position: 'relative',
       paddingLeft: 30
@@ -26329,6 +26409,7 @@ function SharePanel({
       maxWidth: 620
     }
   }, /*#__PURE__*/React.createElement(GlassPanel, {
+    "data-tour": "visit-share",
     radius: "lg",
     pad: "md"
   }, /*#__PURE__*/React.createElement("div", {
@@ -28678,6 +28759,32 @@ function App() {
     backToMap();
     setTour(true);
   };
+  // 聚光导览的领航员：导览走到某板块时替它切视图。编辑器要有星才进得去
+  // （返回 false 表示该步进不了，导览会略过它）；导览结束一律送回星图。
+  const tourNavigate = v => {
+    if (v === 'map') {
+      backToMap();
+      return true;
+    }
+    if (v === 'aerial') {
+      openView('aerial');
+      return true;
+    }
+    if (v === 'editor') {
+      const D = window.SR_DATA;
+      if (D && D.stars && D.stars.length) {
+        openEditor(D.stars[0].id);
+        return true;
+      }
+      return false;
+    }
+    openView(v);
+    return true;
+  };
+  const closeTour = () => {
+    setTour(false);
+    backToMap();
+  };
   const replayGuide = () => {
     setSettingsOpen(false);
     setOnboard(true);
@@ -28785,7 +28892,8 @@ function App() {
     onClose: finishOnboard,
     onSpotlight: startTour
   }), tour && !login && /*#__PURE__*/React.createElement(OnboardingTour, {
-    onClose: () => setTour(false)
+    onClose: closeTour,
+    onNavigate: tourNavigate
   }), login && /*#__PURE__*/React.createElement(LoginView, {
     onClose: closeLogin
   }));

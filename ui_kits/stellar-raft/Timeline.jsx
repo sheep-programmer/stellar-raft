@@ -114,7 +114,7 @@ function Timeline({ onOpen }) {
             <div style={{ fontSize: 12.5, marginTop: 6 }}>换个筛选，或回到星空点亮一颗星。</div>
           </div>
         ) : (
-          <div style={{ position: 'relative', paddingLeft: 30 }}>
+          <div data-tour="timeline-flow" style={{ position: 'relative', paddingLeft: 30 }}>
             {/* 贯穿的发光丝线 */}
             <div style={{ position: 'absolute', left: 9, top: 6, bottom: 28, width: 1, background: 'linear-gradient(var(--gold), var(--star-blue), transparent)' }} />
 

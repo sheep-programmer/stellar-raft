@@ -45,10 +45,40 @@ test('无 emoji / 无杂色（品牌律）', () => {
 });
 
 test('聚光锚点在源码中成对存在', () => {
-  assert.match(ONB, /\[data-tour="search"\]/);
-  assert.match(ONB, /\[data-tour="review"\]/);
-  assert.match(ONB, /\[data-tour="tools"\]/);
-  assert.match(read('ui_kits/stellar-raft/Sidebar.jsx'), /data-tour="search"/);
-  assert.match(read('ui_kits/stellar-raft/Sidebar.jsx'), /dataTour="review"/);
-  assert.match(read('ui_kits/stellar-raft/StarMap.jsx'), /data-tour="tools"/);
+  // 导览已升级为「自动走进每个板块实地展示」：每步带 view（宿主领航切换视图）
+  // 与 target（视图内锚点）。这里从 SR_TOUR_STEPS 里解析出全部 (view, 锚点) 对，
+  // 逐一核对锚点确实写在对应视图的源码里——拼写漂移会在这里直接报警。
+  const block = ONB.match(/const SR_TOUR_STEPS = \[([\s\S]*?)\n\];/);
+  assert.ok(block, '找不到 SR_TOUR_STEPS 数组定义');
+  const steps = [...block[1].matchAll(/view:\s*'([a-z0-9]+)',\s*target:\s*'\[data-tour="([a-z0-9-]+)"\]'/g)]
+    .map(m => ({ view: m[1], anchor: m[2] }));
+  assert.equal(steps.length, 15, '期望 15 步实地导览，实得 ' + steps.length);
+
+  // view → 锚点可能落在的源文件（map 的锚点分布在侧栏与星图两处；
+  // 侧栏经 NavRow 透传，属性在源码里写作 dataTour="…"）
+  const VIEW_FILES = {
+    map: ['Sidebar.jsx', 'StarMap.jsx'],
+    aerial: ['AerialView.jsx'],
+    galaxy3d: ['Galaxy3D.jsx'],
+    list: ['ListView.jsx'],
+    editor: ['Editor.jsx'],
+    checkup: ['Checkup.jsx'],
+    inbox: ['Inbox.jsx'],
+    blackhole: ['BlackHole.jsx'],
+    visit: ['VisitView.jsx'],
+    timeline: ['Timeline.jsx'],
+  };
+  // 叙事编排：先星图，再逐板块实地走，最后回星图收尾
+  assert.equal(steps[0].view, 'map');
+  assert.equal(steps[steps.length - 1].view, 'map');
+  assert.equal(steps[steps.length - 1].anchor, 'settings');
+  for (const { view, anchor } of steps) {
+    const files = VIEW_FILES[view];
+    assert.ok(files, `锚点 "${anchor}" 所在步的 view '${view}' 不是合法视图`);
+    const hit = files.some(f => {
+      const src = read('ui_kits/stellar-raft/' + f);
+      return src.includes(`data-tour="${anchor}"`) || src.includes(`dataTour="${anchor}"`);
+    });
+    assert.ok(hit, `锚点 "${anchor}"（view: ${view}）在 ${files.join(' / ')} 中都不存在`);
+  }
 });

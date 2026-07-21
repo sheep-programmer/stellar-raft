@@ -339,7 +339,7 @@ function ListView({ onOpen, onOpenCon, onFeynman }) {
         </div>
 
         {/* filter bar */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12, flexWrap: 'wrap' }}>
+        <div data-tour="list-filters" style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12, flexWrap: 'wrap' }}>
           <div style={{ width: 240 }}><Input icon="search" placeholder="检索标题、标签…" size="sm" value={query} onChange={(e) => setQuery(e && e.target ? e.target.value : (e || ''))} /></div>
           <div style={{ display: 'flex', gap: 6 }}>
             {bands.map(f => <Tag key={f.id} active={band === f.id} onClick={() => setBand(f.id)}>{f.label}</Tag>)}

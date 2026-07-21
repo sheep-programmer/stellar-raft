@@ -184,7 +184,7 @@ function AerialView({ onClose, onOpenCon, dataset }) {
       )}
 
       {/* 顶部概览条 */}
-      <div style={{ position: 'absolute', top: 18, left: '50%', transform: 'translateX(-50%)', zIndex: 30 }}>
+      <div data-tour="aerial-hud" style={{ position: 'absolute', top: 18, left: '50%', transform: 'translateX(-50%)', zIndex: 30 }}>
         <GlassPanel radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', gap: 'var(--s-6)', padding: 'var(--s-2) var(--s-6)' }}>
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 'var(--s-2)', fontSize: 'var(--t-sm)', color: 'var(--text-2)' }}>
             <Icon name="satellite" size={17} color="var(--gold)" />亮度鸟瞰

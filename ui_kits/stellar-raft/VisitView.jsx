@@ -217,7 +217,7 @@ function SharePanel({ flash, onGoFriends }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 18, maxWidth: 620 }}>
-      <GlassPanel radius="lg" pad="md">
+      <GlassPanel data-tour="visit-share" radius="lg" pad="md">
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
           <span style={{ position: 'relative', width: 38, height: 38, borderRadius: 12, background: share.enabled ? 'rgba(255,217,138,0.12)' : 'rgba(159,198,255,0.08)', border: '1px solid', borderColor: share.enabled ? 'rgba(255,217,138,0.3)' : 'var(--glass-border)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <Icon name="radio-tower" size={19} color={share.enabled ? 'var(--gold)' : 'var(--text-3)'} />
