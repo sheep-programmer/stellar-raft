@@ -740,12 +740,12 @@ function VisitMap({ friend, onBack, onReady, flash }) {
         })}
       </div>
 
-      {/* 顶部 HUD */}
-      <div onMouseDown={(e) => e.stopPropagation()} style={{ position: 'absolute', top: 18, left: 22, right: 22, zIndex: 30, display: 'flex', alignItems: 'center', gap: 14, pointerEvents: 'none' }}>
-        <GlassPanel radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '8px 16px', pointerEvents: 'auto' }}>
+      {/* 顶部 HUD——窄窗防线：条目一律不折字，放不下时胶囊内先换行、两枚胶囊再整体换行 */}
+      <div onMouseDown={(e) => e.stopPropagation()} style={{ position: 'absolute', top: 18, left: 22, right: 22, zIndex: 30, display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 14, rowGap: 8, pointerEvents: 'none' }}>
+        <GlassPanel radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', rowGap: 4, gap: 10, padding: '8px 16px', pointerEvents: 'auto' }}>
           <IconButton name="corner-up-left" size="sm" title="返回好友列表" onClick={onBack} />
           <Icon name="telescope" size={16} color="var(--gold)" />
-          <span style={{ fontSize: 14, color: 'var(--text-1)' }}>{(state.owner && state.owner.name) || friend.name} 的星系</span>
+          <span style={{ fontSize: 14, color: 'var(--text-1)', whiteSpace: 'nowrap', maxWidth: 220, overflow: 'hidden', textOverflow: 'ellipsis' }}>{(state.owner && state.owner.name) || friend.name} 的星系</span>
           <Badge tone="gold">{outlineMode ? '可见大纲' : '仅星名'}</Badge>
           {/* 主人的星空简介（设置 → 个人简介），服务端已剥 HTML 钳长度 */}
           {state.owner && state.owner.bio && (
@@ -759,23 +759,25 @@ function VisitMap({ friend, onBack, onReady, flash }) {
         {!!resonance.length && (
           <button type="button" title="你们俩都拥有的知识" aria-expanded={resOpen}
             onClick={() => { setResOpen(o => !o); setSelected(null); }}
-            style={{ pointerEvents: 'auto', display: 'inline-flex', alignItems: 'center', gap: 7, padding: '8px 15px', font: 'inherit', fontSize: 12.5, cursor: 'pointer', borderRadius: 'var(--r-pill)', color: 'var(--gold-white)', border: '1px solid', borderColor: resOpen ? 'rgba(255,217,138,0.6)' : 'rgba(255,217,138,0.4)', background: resOpen ? 'rgba(255,217,138,0.16)' : 'rgba(255,217,138,0.1)', backdropFilter: 'blur(10px)', boxShadow: '0 0 14px rgba(255,217,138,0.12)' }}>
+            style={{ pointerEvents: 'auto', display: 'inline-flex', alignItems: 'center', gap: 7, flex: 'none', whiteSpace: 'nowrap', padding: '8px 15px', font: 'inherit', fontSize: 12.5, cursor: 'pointer', borderRadius: 'var(--r-pill)', color: 'var(--gold-white)', border: '1px solid', borderColor: resOpen ? 'rgba(255,217,138,0.6)' : 'rgba(255,217,138,0.4)', background: resOpen ? 'rgba(255,217,138,0.16)' : 'rgba(255,217,138,0.1)', backdropFilter: 'blur(10px)', boxShadow: '0 0 14px rgba(255,217,138,0.12)' }}>
             <Icon name="sparkles" size={14} color="var(--gold)" />
             共鸣 <b style={{ fontWeight: 500, color: 'var(--gold)' }}>{resonance.length}</b> 处
           </button>
         )}
-        <GlassPanel radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', gap: 18, padding: '8px 18px', pointerEvents: 'auto' }}>
-          <span style={{ fontSize: 12, color: 'var(--text-3)' }}>知识星 <b style={{ color: 'var(--text-1)', fontWeight: 500 }}>{stars.length}</b></span>
-          <span style={{ fontSize: 12, color: 'var(--text-3)' }}>星域 <b style={{ color: 'var(--star-blue)', fontWeight: 500 }}>{geoms.length}</b></span>
-          <span style={{ fontSize: 12, color: 'var(--text-3)' }}>连接 <b style={{ color: 'var(--gold)', fontWeight: 500 }}>{g.connections.length}</b></span>
+        <GlassPanel radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'flex-end', rowGap: 4, gap: 18, padding: '8px 18px', pointerEvents: 'auto' }}>
+          <span style={{ fontSize: 12, color: 'var(--text-3)', whiteSpace: 'nowrap' }}>知识星 <b style={{ color: 'var(--text-1)', fontWeight: 500 }}>{stars.length}</b></span>
+          <span style={{ fontSize: 12, color: 'var(--text-3)', whiteSpace: 'nowrap' }}>星域 <b style={{ color: 'var(--star-blue)', fontWeight: 500 }}>{geoms.length}</b></span>
+          <span style={{ fontSize: 12, color: 'var(--text-3)', whiteSpace: 'nowrap' }}>连接 <b style={{ color: 'var(--gold)', fontWeight: 500 }}>{g.connections.length}</b></span>
         </GlassPanel>
       </div>
 
       {/* 提示 + 缩放控件 */}
-      <div style={{ position: 'absolute', bottom: 26, left: 24, zIndex: 30, display: 'flex', alignItems: 'center', gap: 8, fontSize: 11.5, color: 'var(--text-3)', pointerEvents: 'none' }}>
-        <Icon name="move" size={14} color="currentColor" />拖拽平移 · 滚轮缩放 · 点星看大纲 · 只读造访，笔记正文不会离开对方的数据库
+      <div style={{ position: 'absolute', bottom: 26, left: 24, zIndex: 30, display: 'flex', alignItems: 'center', gap: 8, fontSize: 11.5, color: 'var(--text-3)', pointerEvents: 'none', maxWidth: 'calc(100% - 240px)' }}>
+        <Icon name="move" size={14} color="currentColor" />
+        {/* 窄窗时截断而不折行，避免与右下缩放/星语胶囊压叠 */}
+        <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>拖拽平移 · 滚轮缩放 · 点星看大纲 · 只读造访，笔记正文不会离开对方的数据库</span>
       </div>
-      <div onMouseDown={(e) => e.stopPropagation()} style={{ position: 'absolute', bottom: 26, right: 24, zIndex: 30, display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 10 }}>
+      <div onMouseDown={(e) => e.stopPropagation()} style={{ position: 'absolute', bottom: 26, right: 24, zIndex: 30, display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 10, whiteSpace: 'nowrap' }}>
         {/* 星语留言：给主人留一句话，寄进对方的收件箱 */}
         <GlassPanel radius="pill" pad="none" style={{ padding: '4px 6px' }}>
           <Button size="sm" variant="ghost" icon="feather" onClick={() => setNoteOpen(o => !o)}>留下星语</Button>
@@ -792,7 +794,7 @@ function VisitMap({ friend, onBack, onReady, flash }) {
 
       {/* 共鸣清单：对方星名 ↔ 我方星名 / 共同标签，点条目飞过去 */}
       {resOpen && (
-        <div onMouseDown={(e) => e.stopPropagation()} style={{ position: 'absolute', right: 20, top: 68, width: 324, zIndex: 45, animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
+        <div onMouseDown={(e) => e.stopPropagation()} style={{ position: 'absolute', right: 20, top: 68, width: 324, maxWidth: 'calc(100% - 40px)', zIndex: 45, animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
           <GlassPanel strong radius="lg" pad="md" glow>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
               <Icon name="sparkles" size={15} color="var(--gold)" />
@@ -828,7 +830,7 @@ function VisitMap({ friend, onBack, onReady, flash }) {
 
       {/* 星语输入浮层：≤160 字，回车寄出，Esc 收起 */}
       {noteOpen && (
-        <div onMouseDown={(e) => e.stopPropagation()} style={{ position: 'absolute', right: 24, bottom: 124, width: 324, zIndex: 45, animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
+        <div onMouseDown={(e) => e.stopPropagation()} style={{ position: 'absolute', right: 24, bottom: 124, width: 324, maxWidth: 'calc(100% - 48px)', zIndex: 45, animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
           <GlassPanel strong radius="lg" pad="md" glow>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 7 }}>
               <Icon name="feather" size={15} color="var(--gold)" />
@@ -853,7 +855,7 @@ function VisitMap({ friend, onBack, onReady, flash }) {
 
       {/* 大纲卡（服务端已裁剪，这里拿到什么就只有什么） */}
       {sel && (
-        <div onMouseDown={(e) => e.stopPropagation()} style={{ position: 'absolute', right: 20, top: 76, width: 292, zIndex: 40, animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
+        <div onMouseDown={(e) => e.stopPropagation()} style={{ position: 'absolute', right: 20, top: 76, width: 292, maxWidth: 'calc(100% - 40px)', zIndex: 40, animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
           <GlassPanel strong radius="lg" pad="md" glow>
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
               <div style={{ flex: 1 }}>
@@ -963,7 +965,7 @@ function VisitView() {
       )}
 
       {toast && (
-        <div style={{ position: 'fixed', bottom: 26, left: '50%', transform: 'translateX(-50%)', zIndex: 95, animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }} role="status">
+        <div style={{ position: 'fixed', bottom: 26, left: '50%', transform: 'translateX(-50%)', zIndex: 95, width: 'max-content', maxWidth: 'calc(100% - 32px)', animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }} role="status">
           <GlassPanel strong radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '10px 18px' }}>
             <Icon name={toast.tone === 'danger' ? 'circle-alert' : 'check'} size={16}
               color={toast.tone === 'danger' ? 'var(--danger)' : toast.tone === 'gold' ? 'var(--gold)' : 'var(--star-blue)'} />

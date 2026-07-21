@@ -50,8 +50,8 @@ function domainColor(con, stars) {
 
 function HudStat({ label, value, tone }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 2, minWidth: 64 }}>
-      <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--t-xs)', letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: 'var(--text-2)' }}>{label}</span>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 2, minWidth: 64, flex: 'none' }}>
+      <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--t-xs)', letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: 'var(--text-2)', whiteSpace: 'nowrap' }}>{label}</span>
       <span style={{ fontFamily: 'var(--font-mono)', fontSize: 18, color: tone || 'var(--text-1)' }}>{value}</span>
     </div>
   );
@@ -548,7 +548,7 @@ function StarMap({ selected, onSelect, onOpenEditor, onFeynman, onAerial, on3D, 
     const id = 's' + Math.random().toString(36).slice(2, 6);
     const ns = {
       id, con: dom.id, x: wx / WORLD.w * 100, y: wy / WORLD.h * 100, strength: 0.5, importance: 1, label,
-      summary: '一颗新点亮的星，等待你为它写下内容。', tags: ['草稿'],
+      summary: '', tags: ['草稿'],   // 摘要留空：编辑器里是灰色占位符，点击即写，不用先删一句假文字
       props: { type: '草稿', status: '正常', source: '手动创建', alias: '', nextReview: '明天' },
       body: [{ id: id + '-r', type: 'rich' }, { id: id + '-p', type: 'p', text: '' }],
     };
@@ -688,15 +688,15 @@ function StarMap({ selected, onSelect, onOpenEditor, onFeynman, onAerial, on3D, 
         </div>
       )}
 
-      {/* Top HUD */}
-      <div data-tour="hud" onMouseDown={(e) => e.stopPropagation()} style={{ position: 'absolute', top: 18, left: 22, right: 22, zIndex: 30, display: 'flex', alignItems: 'stretch', gap: 14, pointerEvents: 'none' }}>
-        <GlassPanel radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '8px 18px', pointerEvents: 'auto' }}>
+      {/* Top HUD——窄窗防线：条目一律不折字，放不下时胶囊内先换行、两枚胶囊再整体换行 */}
+      <div data-tour="hud" onMouseDown={(e) => e.stopPropagation()} style={{ position: 'absolute', top: 18, left: 22, right: 22, zIndex: 30, display: 'flex', alignItems: 'stretch', flexWrap: 'wrap', gap: 14, rowGap: 8, pointerEvents: 'none' }}>
+        <GlassPanel radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', rowGap: 4, gap: 10, padding: '8px 18px', pointerEvents: 'auto' }}>
           <Icon name="orbit" size={17} color="var(--gold)" />
-          <span style={{ fontSize: 14, color: 'var(--text-1)' }}>我的星空</span>
-          <span style={{ fontSize: 12, color: 'var(--text-3)' }}>创作态 · 中景</span>
+          <span style={{ fontSize: 14, color: 'var(--text-1)', whiteSpace: 'nowrap' }}>我的星空</span>
+          <span style={{ fontSize: 12, color: 'var(--text-3)', whiteSpace: 'nowrap' }}>创作态 · 中景</span>
         </GlassPanel>
         <div style={{ flex: 1 }} />
-        <GlassPanel radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', gap: 22, padding: '8px 22px', pointerEvents: 'auto' }}>
+        <GlassPanel radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'flex-end', rowGap: 4, gap: 22, padding: '8px 22px', pointerEvents: 'auto' }}>
           <HudStat label="知识星" value={stars.length} />
           <HudStat label="已点亮" value={stars.filter(litOf).length} tone="var(--gold)" />
           <HudStat label="正发光" value={stars.filter(s => s.strength >= 0.7).length} />
@@ -706,8 +706,10 @@ function StarMap({ selected, onSelect, onOpenEditor, onFeynman, onAerial, on3D, 
       </div>
 
       {/* hint */}
-      <div data-tour="hint" style={{ position: 'absolute', bottom: 26, left: 24, zIndex: 30, display: 'flex', alignItems: 'center', gap: 8, fontSize: 11.5, color: 'var(--text-3)', pointerEvents: 'none' }}>
-        <Icon name="move" size={14} color="currentColor" />拖主星=整体移动星域 · 拖空白=平移画布 · 拖星点=移动单颗 · 滚轮缩放 · 右键创建
+      <div data-tour="hint" style={{ position: 'absolute', bottom: 26, left: 24, zIndex: 30, display: 'flex', alignItems: 'center', gap: 8, fontSize: 11.5, color: 'var(--text-3)', pointerEvents: 'none', maxWidth: 'calc(100% - 280px)' }}>
+        <Icon name="move" size={14} color="currentColor" />
+        {/* 窄窗时截断而不折行，避免与右下工具胶囊压叠 */}
+        <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>拖主星=整体移动星域 · 拖空白=平移画布 · 拖星点=移动单颗 · 滚轮缩放 · 右键创建</span>
       </div>
 
       {/* zoom controls */}

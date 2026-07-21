@@ -760,14 +760,14 @@ function Galaxy3D({ onClose, onOpenStar, onFeynman, dataset }) {
         </div>
       )}
 
-      {/* 顶部 HUD */}
-      <div data-tour="g3d-hud" style={{ position: 'absolute', top: 18, left: 24, zIndex: 30 }}>
-        <GlassPanel radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', gap: 22, padding: '10px 24px' }}>
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 13, color: 'var(--text-2)' }}>
+      {/* 顶部 HUD——窄窗防线：条目一律不折字，放不下时整组换行，不让中文被 flex 压成竖排 */}
+      <div data-tour="g3d-hud" style={{ position: 'absolute', top: 18, left: 24, zIndex: 30, maxWidth: 'calc(100% - 48px)' }}>
+        <GlassPanel radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', rowGap: 4, gap: 22, padding: '10px 24px' }}>
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 13, color: 'var(--text-2)', whiteSpace: 'nowrap' }}>
             <Icon name="orbit" size={17} color="var(--gold)" />三维星系
           </span>
           {dataset && dataset.ownerName && (
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, fontSize: 12.5, color: 'var(--gold)', whiteSpace: 'nowrap' }}>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, fontSize: 12.5, color: 'var(--gold)', whiteSpace: 'nowrap', maxWidth: 180, overflow: 'hidden', textOverflow: 'ellipsis' }}>
               <Icon name="telescope" size={14} color="var(--gold)" />{dataset.ownerName} · 只读
             </span>
           )}
@@ -776,12 +776,12 @@ function Galaxy3D({ onClose, onOpenStar, onFeynman, dataset }) {
           <Stat n={totalStars} t="行星" />
           <Stat n={lit} t="已点亮" tone="var(--gold)" />
           <Sep />
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, flex: 'none', whiteSpace: 'nowrap' }}>
             <span style={{ fontSize: 10.5, color: 'var(--text-3)' }}>正变暗</span>
             <span style={{ width: 74, height: 5, borderRadius: 3, background: 'linear-gradient(90deg, var(--mem-dead), var(--mem-low), var(--mem-mid), var(--mem-high), var(--mem-full))' }} />
             <span style={{ fontSize: 10.5, color: 'var(--gold)' }}>已掌握</span>
           </span>
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7 }}>
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, flex: 'none', whiteSpace: 'nowrap' }}>
             <span style={{ width: 20, height: 0, borderTop: '2px solid var(--gold)', opacity: 0.8, borderRadius: 2 }} />
             <span style={{ fontSize: 10.5, color: 'var(--text-3)' }}>融会贯通</span>
           </span>
@@ -789,12 +789,14 @@ function Galaxy3D({ onClose, onOpenStar, onFeynman, dataset }) {
       </div>
 
       {/* 操作提示 */}
-      <div style={{ position: 'absolute', bottom: 26, left: 24, zIndex: 30, display: 'flex', alignItems: 'center', gap: 8, fontSize: 11.5, color: 'var(--text-3)', pointerEvents: 'none' }}>
-        <Icon name="move-3d" size={14} color="currentColor" />拖拽旋转 · 滚轮缩放 · 点击恒星飞近 · 点击行星查看 · 金弧 = 两端已点亮的融会贯通
+      <div style={{ position: 'absolute', bottom: 26, left: 24, zIndex: 30, display: 'flex', alignItems: 'center', gap: 8, fontSize: 11.5, color: 'var(--text-3)', pointerEvents: 'none', maxWidth: 'calc(100% - 320px)' }}>
+        <Icon name="move-3d" size={14} color="currentColor" />
+        {/* 窄窗时截断而不折行，避免与右下控制条压叠 */}
+        <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>拖拽旋转 · 滚轮缩放 · 点击恒星飞近 · 点击行星查看 · 金弧 = 两端已点亮的融会贯通</span>
       </div>
 
       {/* 右下控制：暂停/播放 · 回到全景 · 返回星图 */}
-      <div style={{ position: 'absolute', bottom: 26, right: 24, zIndex: 30, display: 'flex', alignItems: 'center', gap: 10 }}>
+      <div style={{ position: 'absolute', bottom: 26, right: 24, zIndex: 30, display: 'flex', alignItems: 'center', gap: 10, whiteSpace: 'nowrap' }}>
         <GlassPanel radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', gap: 4, padding: 6 }}>
           <IconButton name={playing ? 'pause' : 'play'} size="sm" title={playing ? '暂停公转' : '播放公转'} onClick={() => setPlaying(p => !p)} />
           <IconButton name="satellite" size="sm" title="俯瞰全局 · 与星图同一编排" onClick={() => apiRef.current && apiRef.current.flyTop()} />
@@ -805,8 +807,8 @@ function Galaxy3D({ onClose, onOpenStar, onFeynman, dataset }) {
 
       {/* 回到全景浮层提示(近景时) */}
       {closeup && (
-        <div style={{ position: 'absolute', top: 18, left: '50%', transform: 'translateX(-50%)', zIndex: 30 }}>
-          <GlassPanel radius="pill" pad="none" style={{ padding: '6px 8px' }}>
+        <div style={{ position: 'absolute', top: 18, left: '50%', transform: 'translateX(-50%)', zIndex: 30, width: 'max-content', maxWidth: 'calc(100% - 32px)' }}>
+          <GlassPanel radius="pill" pad="none" style={{ padding: '6px 8px', whiteSpace: 'nowrap' }}>
             <SRButton size="sm" icon="minimize-2" onClick={flyHome}>回到全景</SRButton>
           </GlassPanel>
         </div>
@@ -862,7 +864,7 @@ function Galaxy3D({ onClose, onOpenStar, onFeynman, dataset }) {
 function Sep() { return <span style={{ width: 1, height: 20, background: 'var(--line)' }} />; }
 function Stat({ n, t, tone }) {
   return (
-    <span style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
+    <span style={{ display: 'flex', alignItems: 'baseline', gap: 6, whiteSpace: 'nowrap', flex: 'none' }}>
       <span style={{ fontFamily: 'var(--font-mono)', fontSize: 17, color: tone || 'var(--text-1)' }}>{n}</span>
       <span style={{ fontSize: 11.5, color: 'var(--text-3)' }}>{t}</span>
     </span>

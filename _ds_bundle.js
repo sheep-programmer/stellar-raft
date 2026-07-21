@@ -1,4 +1,4 @@
-/* @ds-bundle: {"format":3,"namespace":"StellarRaftDesignSystem_2866af","components":[{"name":"Badge","sourcePath":"components/core/Badge.jsx"},{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"GlassPanel","sourcePath":"components/core/GlassPanel.jsx"},{"name":"Icon","sourcePath":"components/core/Icon.jsx"},{"name":"IconButton","sourcePath":"components/core/IconButton.jsx"},{"name":"Input","sourcePath":"components/core/Input.jsx"},{"name":"Tag","sourcePath":"components/core/Tag.jsx"},{"name":"Checkbox","sourcePath":"components/form/Checkbox.jsx"},{"name":"Select","sourcePath":"components/form/Select.jsx"},{"name":"Switch","sourcePath":"components/form/Switch.jsx"},{"name":"Tabs","sourcePath":"components/form/Tabs.jsx"},{"name":"ConstellationItem","sourcePath":"components/knowledge/ConstellationItem.jsx"},{"name":"MemoryBar","sourcePath":"components/knowledge/MemoryBar.jsx"},{"name":"StarNode","sourcePath":"components/knowledge/StarNode.jsx"},{"name":"ContextMenu","sourcePath":"components/overlay/ContextMenu.jsx"},{"name":"Modal","sourcePath":"components/overlay/Modal.jsx"},{"name":"Toast","sourcePath":"components/overlay/Toast.jsx"},{"name":"Tooltip","sourcePath":"components/overlay/Tooltip.jsx"}],"sourceHashes":{"assets/starfield.js":"d776d2b45dc4","components/core/Badge.jsx":"b0bd9735d638","components/core/Button.jsx":"a1c387a07e86","components/core/GlassPanel.jsx":"299a19d8fbb4","components/core/Icon.jsx":"7505f83ab03d","components/core/IconButton.jsx":"24052f4eed78","components/core/Input.jsx":"54a6c9af7e3f","components/core/Tag.jsx":"d8513c07ea96","components/form/Checkbox.jsx":"38aa593157dd","components/form/Select.jsx":"86b8c1c71e12","components/form/Switch.jsx":"938c62be0664","components/form/Tabs.jsx":"ede2dbff1963","components/knowledge/ConstellationItem.jsx":"d73e999469b6","components/knowledge/MemoryBar.jsx":"a54c928d5065","components/knowledge/StarNode.jsx":"1bedee49f0bf","components/overlay/ContextMenu.jsx":"11783420e876","components/overlay/Modal.jsx":"0906de457544","components/overlay/Toast.jsx":"d22ad40680a6","components/overlay/Tooltip.jsx":"a042caa8970d","ui_kits/stellar-raft/AIConfig.jsx":"bbc66d05eebf","ui_kits/stellar-raft/AerialView.jsx":"d6340d392ab9","ui_kits/stellar-raft/BlackHole.jsx":"2704c4a4e50c","ui_kits/stellar-raft/Checkup.jsx":"aa974821dc28","ui_kits/stellar-raft/CommandPalette.jsx":"3f1a9cdd2383","ui_kits/stellar-raft/Editor.jsx":"cdf5da39533c","ui_kits/stellar-raft/EditorMenus.jsx":"fb80581f6bcc","ui_kits/stellar-raft/FeynmanDrawer.jsx":"6af036e0a904","ui_kits/stellar-raft/Galaxy3D.jsx":"3e0969f2ab38","ui_kits/stellar-raft/Inbox.jsx":"c2fc04361d44","ui_kits/stellar-raft/ListView.jsx":"e2550f598c82","ui_kits/stellar-raft/LoginView.jsx":"18d9c842c5c6","ui_kits/stellar-raft/Onboarding.jsx":"e1d27a7d28a7","ui_kits/stellar-raft/ReviewSession.jsx":"9092a3d9412c","ui_kits/stellar-raft/Settings.jsx":"4fb20de532d9","ui_kits/stellar-raft/Sidebar.jsx":"f61a222b9d49","ui_kits/stellar-raft/StarMap.jsx":"26ebb8fc6e2f","ui_kits/stellar-raft/Timeline.jsx":"cda4e62fa57b","ui_kits/stellar-raft/VisitView.jsx":"dd1452b16d3e","ui_kits/stellar-raft/ai.js":"2f79eb3473c9","ui_kits/stellar-raft/app.jsx":"f08bc502367d","ui_kits/stellar-raft/codehl.js":"6fbdd0100deb","ui_kits/stellar-raft/data.js":"0ec0ed408dbf","ui_kits/stellar-raft/mdcore.js":"b82d5054c3b6","ui_kits/stellar-raft/sanitize.js":"88e63cd63253","ui_kits/stellar-raft/transition.js":"3725d8982dc5","ui_kits/stellar-raft/undocore.js":"7f8c94da35f9","ui_kits/stellar-raft/vault.js":"d7876f7f9981"},"inlinedExternals":[],"unexposedExports":[{"name":"memoryColor","sourcePath":"components/knowledge/MemoryBar.jsx"}],"exposedHelpers":[{"name":"toast","sourcePath":"components/overlay/Toast.jsx"}]} */
+/* @ds-bundle: {"format":3,"namespace":"StellarRaftDesignSystem_2866af","components":[{"name":"Badge","sourcePath":"components/core/Badge.jsx"},{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"GlassPanel","sourcePath":"components/core/GlassPanel.jsx"},{"name":"Icon","sourcePath":"components/core/Icon.jsx"},{"name":"IconButton","sourcePath":"components/core/IconButton.jsx"},{"name":"Input","sourcePath":"components/core/Input.jsx"},{"name":"Tag","sourcePath":"components/core/Tag.jsx"},{"name":"Checkbox","sourcePath":"components/form/Checkbox.jsx"},{"name":"Select","sourcePath":"components/form/Select.jsx"},{"name":"Switch","sourcePath":"components/form/Switch.jsx"},{"name":"Tabs","sourcePath":"components/form/Tabs.jsx"},{"name":"ConstellationItem","sourcePath":"components/knowledge/ConstellationItem.jsx"},{"name":"MemoryBar","sourcePath":"components/knowledge/MemoryBar.jsx"},{"name":"StarNode","sourcePath":"components/knowledge/StarNode.jsx"},{"name":"ContextMenu","sourcePath":"components/overlay/ContextMenu.jsx"},{"name":"Modal","sourcePath":"components/overlay/Modal.jsx"},{"name":"Toast","sourcePath":"components/overlay/Toast.jsx"},{"name":"Tooltip","sourcePath":"components/overlay/Tooltip.jsx"}],"sourceHashes":{"assets/starfield.js":"d776d2b45dc4","components/core/Badge.jsx":"b0bd9735d638","components/core/Button.jsx":"a1c387a07e86","components/core/GlassPanel.jsx":"299a19d8fbb4","components/core/Icon.jsx":"7505f83ab03d","components/core/IconButton.jsx":"24052f4eed78","components/core/Input.jsx":"54a6c9af7e3f","components/core/Tag.jsx":"d8513c07ea96","components/form/Checkbox.jsx":"38aa593157dd","components/form/Select.jsx":"86b8c1c71e12","components/form/Switch.jsx":"938c62be0664","components/form/Tabs.jsx":"ede2dbff1963","components/knowledge/ConstellationItem.jsx":"d73e999469b6","components/knowledge/MemoryBar.jsx":"a54c928d5065","components/knowledge/StarNode.jsx":"1bedee49f0bf","components/overlay/ContextMenu.jsx":"11783420e876","components/overlay/Modal.jsx":"0906de457544","components/overlay/Toast.jsx":"d22ad40680a6","components/overlay/Tooltip.jsx":"a042caa8970d","ui_kits/stellar-raft/AIConfig.jsx":"bbc66d05eebf","ui_kits/stellar-raft/AerialView.jsx":"8209eb6af395","ui_kits/stellar-raft/BlackHole.jsx":"2704c4a4e50c","ui_kits/stellar-raft/Checkup.jsx":"aa974821dc28","ui_kits/stellar-raft/CommandPalette.jsx":"3f1a9cdd2383","ui_kits/stellar-raft/Editor.jsx":"5eeb5ecb65c6","ui_kits/stellar-raft/EditorMenus.jsx":"fb80581f6bcc","ui_kits/stellar-raft/FeynmanDrawer.jsx":"6af036e0a904","ui_kits/stellar-raft/Galaxy3D.jsx":"2ce87e7da57d","ui_kits/stellar-raft/Inbox.jsx":"c2fc04361d44","ui_kits/stellar-raft/ListView.jsx":"e2550f598c82","ui_kits/stellar-raft/LoginView.jsx":"18d9c842c5c6","ui_kits/stellar-raft/Onboarding.jsx":"e1d27a7d28a7","ui_kits/stellar-raft/ReviewSession.jsx":"9092a3d9412c","ui_kits/stellar-raft/Settings.jsx":"4fb20de532d9","ui_kits/stellar-raft/Sidebar.jsx":"f61a222b9d49","ui_kits/stellar-raft/StarMap.jsx":"3f1c09e9e50e","ui_kits/stellar-raft/Timeline.jsx":"cda4e62fa57b","ui_kits/stellar-raft/VisitView.jsx":"19ff8ab7dbb7","ui_kits/stellar-raft/ai.js":"2f79eb3473c9","ui_kits/stellar-raft/app.jsx":"f08bc502367d","ui_kits/stellar-raft/codehl.js":"6fbdd0100deb","ui_kits/stellar-raft/data.js":"0ec0ed408dbf","ui_kits/stellar-raft/mdcore.js":"b82d5054c3b6","ui_kits/stellar-raft/sanitize.js":"88e63cd63253","ui_kits/stellar-raft/transition.js":"3725d8982dc5","ui_kits/stellar-raft/undocore.js":"7f8c94da35f9","ui_kits/stellar-raft/vault.js":"d7876f7f9981"},"inlinedExternals":[],"unexposedExports":[{"name":"memoryColor","sourcePath":"components/knowledge/MemoryBar.jsx"}],"exposedHelpers":[{"name":"toast","sourcePath":"components/overlay/Toast.jsx"}]} */
 
 (() => {
 
@@ -3888,7 +3888,9 @@ function AerialView({
       top: 18,
       left: '50%',
       transform: 'translateX(-50%)',
-      zIndex: 30
+      zIndex: 30,
+      width: 'max-content',
+      maxWidth: 'calc(100% - 32px)'
     }
   }, /*#__PURE__*/React.createElement(GlassPanel, {
     radius: "pill",
@@ -3896,6 +3898,9 @@ function AerialView({
     style: {
       display: 'flex',
       alignItems: 'center',
+      flexWrap: 'wrap',
+      justifyContent: 'center',
+      rowGap: 4,
       gap: 'var(--s-6)',
       padding: 'var(--s-2) var(--s-6)'
     }
@@ -3905,7 +3910,8 @@ function AerialView({
       alignItems: 'center',
       gap: 'var(--s-2)',
       fontSize: 'var(--t-sm)',
-      color: 'var(--text-2)'
+      color: 'var(--text-2)',
+      whiteSpace: 'nowrap'
     }
   }, /*#__PURE__*/React.createElement(Icon, {
     name: "satellite",
@@ -3942,7 +3948,11 @@ function AerialView({
   }), /*#__PURE__*/React.createElement(Sep, null), /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 'var(--t-sm)',
-      color: 'var(--text-2)'
+      color: 'var(--text-2)',
+      whiteSpace: 'nowrap',
+      maxWidth: 240,
+      overflow: 'hidden',
+      textOverflow: 'ellipsis'
     }
   }, "\u6700\u8584\u5F31\u661F\u57DF ", /*#__PURE__*/React.createElement("b", {
     style: {
@@ -3959,18 +3969,26 @@ function AerialView({
       alignItems: 'center',
       gap: 'var(--s-2)',
       fontSize: 'var(--t-xs)',
-      color: 'var(--text-2)'
+      color: 'var(--text-2)',
+      maxWidth: 'calc(50% - 90px)'
     }
   }, /*#__PURE__*/React.createElement(Icon, {
     name: "map",
     size: 14,
     color: "currentColor"
-  }), dataset ? `${dataset.ownerName ? dataset.ownerName + ' 的星空编排' : '对方的星空编排'} · 点击星域返回星图` : '与你的星图同一编排 · 点击星域飞入'), /*#__PURE__*/React.createElement("div", {
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis'
+    }
+  }, dataset ? `${dataset.ownerName ? dataset.ownerName + ' 的星空编排' : '对方的星空编排'} · 点击星域返回星图` : '与你的星图同一编排 · 点击星域飞入')), /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'absolute',
       bottom: 22,
       right: 24,
-      zIndex: 30
+      zIndex: 30,
+      maxWidth: 'calc(50% - 90px)'
     }
   }, /*#__PURE__*/React.createElement(GlassPanel, {
     radius: "pill",
@@ -3978,8 +3996,12 @@ function AerialView({
     style: {
       display: 'flex',
       alignItems: 'center',
+      flexWrap: 'wrap',
+      justifyContent: 'flex-end',
+      rowGap: 4,
       gap: 'var(--s-3)',
-      padding: 'var(--s-2) var(--s-4)'
+      padding: 'var(--s-2) var(--s-4)',
+      whiteSpace: 'nowrap'
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
@@ -4090,7 +4112,9 @@ function Stat({
     style: {
       display: 'flex',
       alignItems: 'baseline',
-      gap: 6
+      gap: 6,
+      whiteSpace: 'nowrap',
+      flex: 'none'
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
@@ -8205,11 +8229,95 @@ const PROP_KEYS = {
   alias: 'alias',
   review: 'nextReview'
 };
+// 类型下拉预设；状态按记忆模型五态着色（状态由 refreshStar 每次心跳覆写，只读展示）
+const PROP_TYPE_PRESETS = ['概念', '公式', '定理', '方法', '案例', '收纳', '草稿'];
+const PROP_STATUS_TONE = {
+  '牢固': 'var(--gold)',
+  '正常': 'var(--star-blue)',
+  '正变暗': 'var(--star-blue-dim)',
+  '将熄灭': '#e08a6d',
+  '待重燃': 'var(--gold-warm)'
+};
+
+/* 「下次复习」的日期选择：文字仍显示派生标签（今天/明天/x 天后），点击弹原生日历。
+   选定日期把星排入那天的复习队列；星自然变暗到期不会被推迟——遗忘不等人。 */
+function ReviewPicker({
+  label,
+  iso,
+  onPick
+}) {
+  const ref = React.useRef(null);
+  const d = new Date();
+  const todayIso = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  const openPicker = () => {
+    const el = ref.current;
+    if (!el) return;
+    el.value = iso || todayIso;
+    try {
+      el.showPicker();
+    } catch (e) {
+      el.focus();
+      el.click();
+    }
+  };
+  return /*#__PURE__*/React.createElement("span", {
+    style: {
+      position: 'relative',
+      display: 'inline-flex',
+      alignItems: 'center'
+    }
+  }, /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    className: "sr-focus-ring",
+    onClick: openPicker,
+    title: "\u9009\u62E9\u65E5\u671F\uFF0C\u628A\u8FD9\u9897\u661F\u6392\u5165\u90A3\u5929\u7684\u590D\u4E60\uFF08\u661F\u81EA\u7136\u53D8\u6697\u5230\u671F\u4E0D\u4F1A\u88AB\u63A8\u8FDF\uFF09",
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 7,
+      font: 'inherit',
+      fontSize: 13,
+      color: 'var(--text-1)',
+      border: 'none',
+      background: 'transparent',
+      cursor: 'pointer',
+      padding: '0 2px'
+    }
+  }, label, /*#__PURE__*/React.createElement(Icon, {
+    name: "calendar-days",
+    size: 13,
+    color: "var(--text-3)"
+  })), /*#__PURE__*/React.createElement("input", {
+    ref: ref,
+    type: "date",
+    min: todayIso,
+    defaultValue: iso || '',
+    "aria-label": "\u9009\u62E9\u4E0B\u6B21\u590D\u4E60\u65E5\u671F",
+    tabIndex: -1,
+    onChange: e => {
+      if (e.target.value) onPick && onPick(e.target.value);
+    },
+    style: {
+      position: 'absolute',
+      left: 0,
+      bottom: 0,
+      width: 1,
+      height: 1,
+      opacity: 0,
+      border: 0,
+      padding: 0,
+      colorScheme: 'dark',
+      pointerEvents: 'none'
+    }
+  }));
+}
 function Properties({
   props,
   onFlash,
   onConfirm,
-  onCommit
+  onCommit,
+  reviewISO,
+  onPickReview
 }) {
   const p = props || {};
   const [open, setOpen] = React.useState(true);
@@ -8230,32 +8338,32 @@ function Properties({
     key: 'type',
     icon: 'tag',
     k: '类型',
-    v: p.type || '—',
+    v: p.type || '',
     kind: 'select'
   }, {
     key: 'status',
     icon: 'circle-dot',
     k: '状态',
-    v: p.status || '—',
+    v: p.status || '正常',
     kind: 'status'
   }, {
     key: 'source',
     icon: 'book-open',
     k: '来源',
-    v: p.source || '—',
+    v: p.source || '',
     kind: 'text'
   }, {
     key: 'alias',
     icon: 'languages',
     k: '别名',
-    v: p.alias || '—',
+    v: p.alias || '',
     kind: 'text'
   }, {
     key: 'review',
     icon: 'calendar',
     k: '下次复习',
     v: p.nextReview || '—',
-    kind: 'text'
+    kind: 'review'
   }].filter(r => !removed.includes(r.key));
   const rows = [...base, ...extra];
   const addRow = () => {
@@ -8407,50 +8515,52 @@ function Properties({
       flex: 1,
       minWidth: 0
     }
-  }, r.kind === 'status' ? /*#__PURE__*/React.createElement("span", {
+  }, r.kind === 'status'
+  /* 状态是记忆模型的派生值（心跳会覆写），只读展示、按态着色 */ ? /*#__PURE__*/React.createElement("span", {
+    title: "\u7531\u8BB0\u5FC6\u6A21\u578B\u5B9E\u65F6\u6D3E\u751F\uFF0C\u968F\u590D\u4E60\u4E0E\u65F6\u95F4\u81EA\u52A8\u53D8\u5316",
     style: {
       display: 'inline-flex',
       alignItems: 'center',
       gap: 6,
       fontSize: 12.5,
-      color: 'var(--text-1)'
+      color: 'var(--text-1)',
+      cursor: 'default'
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
       width: 7,
       height: 7,
       borderRadius: '50%',
-      background: 'var(--gold)',
-      boxShadow: 'var(--glow-gold-soft)'
+      background: PROP_STATUS_TONE[r.v] || 'var(--star-blue)',
+      boxShadow: r.v === '牢固' || r.v === '待重燃' ? 'var(--glow-gold-soft)' : 'none'
     }
-  }), /*#__PURE__*/React.createElement("span", {
-    contentEditable: true,
-    suppressContentEditableWarning: true,
-    title: "\u70B9\u51FB\u7F16\u8F91",
-    onBlur: commitVal(r),
+  }), r.v) : r.kind === 'select'
+  /* 类型用真下拉：预设 + 当前自定义值兜底 */ ? /*#__PURE__*/React.createElement(Select, {
+    size: "sm",
+    value: p.type || '草稿',
+    placeholder: "\u9009\u62E9\u7C7B\u578B\u2026",
+    options: (PROP_TYPE_PRESETS.includes(p.type) || !p.type ? PROP_TYPE_PRESETS : [p.type, ...PROP_TYPE_PRESETS]).map(t => ({
+      value: t,
+      label: t
+    })),
+    onChange: v => {
+      if (p.type === v) return;
+      p.type = v;
+      onCommit && onCommit();
+      onFlash && onFlash('已更新类型');
+    },
     style: {
-      outline: 'none',
-      cursor: 'text'
+      maxWidth: 168
     }
-  }, r.v)) : r.kind === 'select' ? /*#__PURE__*/React.createElement("span", {
+  }) : r.kind === 'review' ? /*#__PURE__*/React.createElement(ReviewPicker, {
+    label: r.v,
+    iso: reviewISO,
+    onPick: onPickReview
+  }) : /*#__PURE__*/React.createElement("span", {
     contentEditable: true,
     suppressContentEditableWarning: true,
     title: "\u70B9\u51FB\u7F16\u8F91",
-    onBlur: commitVal(r),
-    style: {
-      outline: 'none',
-      cursor: 'text',
-      fontSize: 12,
-      padding: '2px 9px',
-      borderRadius: 'var(--r-pill)',
-      background: 'rgba(159,198,255,0.12)',
-      color: 'var(--star-blue)'
-    }
-  }, r.v) : /*#__PURE__*/React.createElement("span", {
-    contentEditable: true,
-    suppressContentEditableWarning: true,
-    title: "\u70B9\u51FB\u7F16\u8F91",
-    "data-ph": "\u7A7A",
+    "data-ph": "\u70B9\u51FB\u586B\u5199",
     onBlur: commitVal(r),
     style: {
       outline: 'none',
@@ -11387,6 +11497,14 @@ function Editor({
     contentEditable: true,
     suppressContentEditableWarning: true,
     "data-ph": "\u65E0\u6807\u9898",
+    onFocus: e => {
+      if (e.currentTarget.textContent.trim() !== '新的知识星') return;
+      const range = document.createRange();
+      range.selectNodeContents(e.currentTarget);
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+    },
     onBlur: e => {
       const t = e.currentTarget.textContent.trim();
       if (t && t !== star.label) {
@@ -11412,6 +11530,21 @@ function Editor({
     onCommit: () => {
       D.touchNote(star.id);
       bumpTick();
+    },
+    reviewISO: (() => {
+      const d = new Date(Math.max(D.dueTsOf(star), Date.now()));
+      return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    })(),
+    onPickReview: iso => {
+      const ts = Date.parse(iso + 'T20:00:00'); // 排到那天傍晚：白天还来得及复习
+      if (!Number.isFinite(ts)) return;
+      if (!(star.sr && star.sr.S > 0)) D.refreshMemory();
+      star.sr.due = ts;
+      D.refreshMemory();
+      D.pushTimeline('review', star.id, '排期复习 · ' + iso.slice(5).replace('-', '/'));
+      D.touchNote(star.id);
+      bumpTick();
+      flash('下次复习已排到 ' + iso.replace(/-/g, '/') + ' · 若星更早变暗会提前');
     }
   }), /*#__PURE__*/React.createElement("div", {
     style: {
@@ -15824,7 +15957,8 @@ function Galaxy3D({
       position: 'absolute',
       top: 18,
       left: 24,
-      zIndex: 30
+      zIndex: 30,
+      maxWidth: 'calc(100% - 48px)'
     }
   }, /*#__PURE__*/React.createElement(GlassPanel, {
     radius: "pill",
@@ -15832,6 +15966,8 @@ function Galaxy3D({
     style: {
       display: 'flex',
       alignItems: 'center',
+      flexWrap: 'wrap',
+      rowGap: 4,
       gap: 22,
       padding: '10px 24px'
     }
@@ -15841,7 +15977,8 @@ function Galaxy3D({
       alignItems: 'center',
       gap: 8,
       fontSize: 13,
-      color: 'var(--text-2)'
+      color: 'var(--text-2)',
+      whiteSpace: 'nowrap'
     }
   }, /*#__PURE__*/React.createElement(Icon, {
     name: "orbit",
@@ -15854,7 +15991,10 @@ function Galaxy3D({
       gap: 7,
       fontSize: 12.5,
       color: 'var(--gold)',
-      whiteSpace: 'nowrap'
+      whiteSpace: 'nowrap',
+      maxWidth: 180,
+      overflow: 'hidden',
+      textOverflow: 'ellipsis'
     }
   }, /*#__PURE__*/React.createElement(Icon, {
     name: "telescope",
@@ -15874,7 +16014,9 @@ function Galaxy3D({
     style: {
       display: 'inline-flex',
       alignItems: 'center',
-      gap: 8
+      gap: 8,
+      flex: 'none',
+      whiteSpace: 'nowrap'
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
@@ -15897,7 +16039,9 @@ function Galaxy3D({
     style: {
       display: 'inline-flex',
       alignItems: 'center',
-      gap: 7
+      gap: 7,
+      flex: 'none',
+      whiteSpace: 'nowrap'
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
@@ -15923,13 +16067,20 @@ function Galaxy3D({
       gap: 8,
       fontSize: 11.5,
       color: 'var(--text-3)',
-      pointerEvents: 'none'
+      pointerEvents: 'none',
+      maxWidth: 'calc(100% - 320px)'
     }
   }, /*#__PURE__*/React.createElement(Icon, {
     name: "move-3d",
     size: 14,
     color: "currentColor"
-  }), "\u62D6\u62FD\u65CB\u8F6C \xB7 \u6EDA\u8F6E\u7F29\u653E \xB7 \u70B9\u51FB\u6052\u661F\u98DE\u8FD1 \xB7 \u70B9\u51FB\u884C\u661F\u67E5\u770B \xB7 \u91D1\u5F27 = \u4E24\u7AEF\u5DF2\u70B9\u4EAE\u7684\u878D\u4F1A\u8D2F\u901A"), /*#__PURE__*/React.createElement("div", {
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis'
+    }
+  }, "\u62D6\u62FD\u65CB\u8F6C \xB7 \u6EDA\u8F6E\u7F29\u653E \xB7 \u70B9\u51FB\u6052\u661F\u98DE\u8FD1 \xB7 \u70B9\u51FB\u884C\u661F\u67E5\u770B \xB7 \u91D1\u5F27 = \u4E24\u7AEF\u5DF2\u70B9\u4EAE\u7684\u878D\u4F1A\u8D2F\u901A")), /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'absolute',
       bottom: 26,
@@ -15937,7 +16088,8 @@ function Galaxy3D({
       zIndex: 30,
       display: 'flex',
       alignItems: 'center',
-      gap: 10
+      gap: 10,
+      whiteSpace: 'nowrap'
     }
   }, /*#__PURE__*/React.createElement(GlassPanel, {
     radius: "pill",
@@ -15972,13 +16124,16 @@ function Galaxy3D({
       top: 18,
       left: '50%',
       transform: 'translateX(-50%)',
-      zIndex: 30
+      zIndex: 30,
+      width: 'max-content',
+      maxWidth: 'calc(100% - 32px)'
     }
   }, /*#__PURE__*/React.createElement(GlassPanel, {
     radius: "pill",
     pad: "none",
     style: {
-      padding: '6px 8px'
+      padding: '6px 8px',
+      whiteSpace: 'nowrap'
     }
   }, /*#__PURE__*/React.createElement(SRButton, {
     size: "sm",
@@ -16115,7 +16270,9 @@ function Stat({
     style: {
       display: 'flex',
       alignItems: 'baseline',
-      gap: 6
+      gap: 6,
+      whiteSpace: 'nowrap',
+      flex: 'none'
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
@@ -23662,7 +23819,8 @@ function HudStat({
       display: 'flex',
       flexDirection: 'column',
       gap: 2,
-      minWidth: 64
+      minWidth: 64,
+      flex: 'none'
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
@@ -23670,7 +23828,8 @@ function HudStat({
       fontSize: 'var(--t-xs)',
       letterSpacing: 'var(--ls-hud)',
       textTransform: 'uppercase',
-      color: 'var(--text-2)'
+      color: 'var(--text-2)',
+      whiteSpace: 'nowrap'
     }
   }, label), /*#__PURE__*/React.createElement("span", {
     style: {
@@ -24773,8 +24932,9 @@ function StarMap({
       strength: 0.5,
       importance: 1,
       label,
-      summary: '一颗新点亮的星，等待你为它写下内容。',
+      summary: '',
       tags: ['草稿'],
+      // 摘要留空：编辑器里是灰色占位符，点击即写，不用先删一句假文字
       props: {
         type: '草稿',
         status: '正常',
@@ -25066,7 +25226,9 @@ function StarMap({
       zIndex: 30,
       display: 'flex',
       alignItems: 'stretch',
+      flexWrap: 'wrap',
       gap: 14,
+      rowGap: 8,
       pointerEvents: 'none'
     }
   }, /*#__PURE__*/React.createElement(GlassPanel, {
@@ -25075,6 +25237,8 @@ function StarMap({
     style: {
       display: 'flex',
       alignItems: 'center',
+      flexWrap: 'wrap',
+      rowGap: 4,
       gap: 10,
       padding: '8px 18px',
       pointerEvents: 'auto'
@@ -25086,12 +25250,14 @@ function StarMap({
   }), /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 14,
-      color: 'var(--text-1)'
+      color: 'var(--text-1)',
+      whiteSpace: 'nowrap'
     }
   }, "\u6211\u7684\u661F\u7A7A"), /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 12,
-      color: 'var(--text-3)'
+      color: 'var(--text-3)',
+      whiteSpace: 'nowrap'
     }
   }, "\u521B\u4F5C\u6001 \xB7 \u4E2D\u666F")), /*#__PURE__*/React.createElement("div", {
     style: {
@@ -25103,6 +25269,9 @@ function StarMap({
     style: {
       display: 'flex',
       alignItems: 'center',
+      flexWrap: 'wrap',
+      justifyContent: 'flex-end',
+      rowGap: 4,
       gap: 22,
       padding: '8px 22px',
       pointerEvents: 'auto'
@@ -25137,13 +25306,20 @@ function StarMap({
       gap: 8,
       fontSize: 11.5,
       color: 'var(--text-3)',
-      pointerEvents: 'none'
+      pointerEvents: 'none',
+      maxWidth: 'calc(100% - 280px)'
     }
   }, /*#__PURE__*/React.createElement(Icon, {
     name: "move",
     size: 14,
     color: "currentColor"
-  }), "\u62D6\u4E3B\u661F=\u6574\u4F53\u79FB\u52A8\u661F\u57DF \xB7 \u62D6\u7A7A\u767D=\u5E73\u79FB\u753B\u5E03 \xB7 \u62D6\u661F\u70B9=\u79FB\u52A8\u5355\u9897 \xB7 \u6EDA\u8F6E\u7F29\u653E \xB7 \u53F3\u952E\u521B\u5EFA"), /*#__PURE__*/React.createElement("div", {
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis'
+    }
+  }, "\u62D6\u4E3B\u661F=\u6574\u4F53\u79FB\u52A8\u661F\u57DF \xB7 \u62D6\u7A7A\u767D=\u5E73\u79FB\u753B\u5E03 \xB7 \u62D6\u661F\u70B9=\u79FB\u52A8\u5355\u9897 \xB7 \u6EDA\u8F6E\u7F29\u653E \xB7 \u53F3\u952E\u521B\u5EFA")), /*#__PURE__*/React.createElement("div", {
     "data-tour": "tools",
     onMouseDown: e => e.stopPropagation(),
     style: {
@@ -27584,7 +27760,9 @@ function VisitMap({
       zIndex: 30,
       display: 'flex',
       alignItems: 'center',
+      flexWrap: 'wrap',
       gap: 14,
+      rowGap: 8,
       pointerEvents: 'none'
     }
   }, /*#__PURE__*/React.createElement(GlassPanel, {
@@ -27593,6 +27771,8 @@ function VisitMap({
     style: {
       display: 'flex',
       alignItems: 'center',
+      flexWrap: 'wrap',
+      rowGap: 4,
       gap: 10,
       padding: '8px 16px',
       pointerEvents: 'auto'
@@ -27609,7 +27789,11 @@ function VisitMap({
   }), /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 14,
-      color: 'var(--text-1)'
+      color: 'var(--text-1)',
+      whiteSpace: 'nowrap',
+      maxWidth: 220,
+      overflow: 'hidden',
+      textOverflow: 'ellipsis'
     }
   }, state.owner && state.owner.name || friend.name, " \u7684\u661F\u7CFB"), /*#__PURE__*/React.createElement(Badge, {
     tone: "gold"
@@ -27640,6 +27824,8 @@ function VisitMap({
       display: 'inline-flex',
       alignItems: 'center',
       gap: 7,
+      flex: 'none',
+      whiteSpace: 'nowrap',
       padding: '8px 15px',
       font: 'inherit',
       fontSize: 12.5,
@@ -27667,6 +27853,9 @@ function VisitMap({
     style: {
       display: 'flex',
       alignItems: 'center',
+      flexWrap: 'wrap',
+      justifyContent: 'flex-end',
+      rowGap: 4,
       gap: 18,
       padding: '8px 18px',
       pointerEvents: 'auto'
@@ -27674,7 +27863,8 @@ function VisitMap({
   }, /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 12,
-      color: 'var(--text-3)'
+      color: 'var(--text-3)',
+      whiteSpace: 'nowrap'
     }
   }, "\u77E5\u8BC6\u661F ", /*#__PURE__*/React.createElement("b", {
     style: {
@@ -27684,7 +27874,8 @@ function VisitMap({
   }, stars.length)), /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 12,
-      color: 'var(--text-3)'
+      color: 'var(--text-3)',
+      whiteSpace: 'nowrap'
     }
   }, "\u661F\u57DF ", /*#__PURE__*/React.createElement("b", {
     style: {
@@ -27694,7 +27885,8 @@ function VisitMap({
   }, geoms.length)), /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 12,
-      color: 'var(--text-3)'
+      color: 'var(--text-3)',
+      whiteSpace: 'nowrap'
     }
   }, "\u8FDE\u63A5 ", /*#__PURE__*/React.createElement("b", {
     style: {
@@ -27712,13 +27904,20 @@ function VisitMap({
       gap: 8,
       fontSize: 11.5,
       color: 'var(--text-3)',
-      pointerEvents: 'none'
+      pointerEvents: 'none',
+      maxWidth: 'calc(100% - 240px)'
     }
   }, /*#__PURE__*/React.createElement(Icon, {
     name: "move",
     size: 14,
     color: "currentColor"
-  }), "\u62D6\u62FD\u5E73\u79FB \xB7 \u6EDA\u8F6E\u7F29\u653E \xB7 \u70B9\u661F\u770B\u5927\u7EB2 \xB7 \u53EA\u8BFB\u9020\u8BBF\uFF0C\u7B14\u8BB0\u6B63\u6587\u4E0D\u4F1A\u79BB\u5F00\u5BF9\u65B9\u7684\u6570\u636E\u5E93"), /*#__PURE__*/React.createElement("div", {
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis'
+    }
+  }, "\u62D6\u62FD\u5E73\u79FB \xB7 \u6EDA\u8F6E\u7F29\u653E \xB7 \u70B9\u661F\u770B\u5927\u7EB2 \xB7 \u53EA\u8BFB\u9020\u8BBF\uFF0C\u7B14\u8BB0\u6B63\u6587\u4E0D\u4F1A\u79BB\u5F00\u5BF9\u65B9\u7684\u6570\u636E\u5E93")), /*#__PURE__*/React.createElement("div", {
     onMouseDown: e => e.stopPropagation(),
     style: {
       position: 'absolute',
@@ -27728,7 +27927,8 @@ function VisitMap({
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'flex-end',
-      gap: 10
+      gap: 10,
+      whiteSpace: 'nowrap'
     }
   }, /*#__PURE__*/React.createElement(GlassPanel, {
     radius: "pill",
@@ -27791,6 +27991,7 @@ function VisitMap({
       right: 20,
       top: 68,
       width: 324,
+      maxWidth: 'calc(100% - 40px)',
       zIndex: 45,
       animation: 'sr-cardin var(--dur-base) var(--ease-flight) both'
     }
@@ -27893,6 +28094,7 @@ function VisitMap({
       right: 24,
       bottom: 124,
       width: 324,
+      maxWidth: 'calc(100% - 48px)',
       zIndex: 45,
       animation: 'sr-cardin var(--dur-base) var(--ease-flight) both'
     }
@@ -27969,6 +28171,7 @@ function VisitMap({
       right: 20,
       top: 76,
       width: 292,
+      maxWidth: 'calc(100% - 40px)',
       zIndex: 40,
       animation: 'sr-cardin var(--dur-base) var(--ease-flight) both'
     }
@@ -28250,6 +28453,8 @@ function VisitView() {
         left: '50%',
         transform: 'translateX(-50%)',
         zIndex: 95,
+        width: 'max-content',
+        maxWidth: 'calc(100% - 32px)',
         animation: 'sr-cardin var(--dur-base) var(--ease-flight) both'
       },
       role: "status"

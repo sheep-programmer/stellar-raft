@@ -183,10 +183,11 @@ function AerialView({ onClose, onOpenCon, dataset }) {
         </div>
       )}
 
-      {/* 顶部概览条 */}
-      <div data-tour="aerial-hud" style={{ position: 'absolute', top: 18, left: '50%', transform: 'translateX(-50%)', zIndex: 30 }}>
-        <GlassPanel radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', gap: 'var(--s-6)', padding: 'var(--s-2) var(--s-6)' }}>
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 'var(--s-2)', fontSize: 'var(--t-sm)', color: 'var(--text-2)' }}>
+      {/* 顶部概览条——窄窗防线：条目一律不折字（nowrap），放不下就整组换行居中，
+          绝不出现中文被 flex 压成逐字竖排的病态 */}
+      <div data-tour="aerial-hud" style={{ position: 'absolute', top: 18, left: '50%', transform: 'translateX(-50%)', zIndex: 30, width: 'max-content', maxWidth: 'calc(100% - 32px)' }}>
+        <GlassPanel radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center', rowGap: 4, gap: 'var(--s-6)', padding: 'var(--s-2) var(--s-6)' }}>
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 'var(--s-2)', fontSize: 'var(--t-sm)', color: 'var(--text-2)', whiteSpace: 'nowrap' }}>
             <Icon name="satellite" size={17} color="var(--gold)" />亮度鸟瞰
           </span>
           {dataset && dataset.ownerName && (
@@ -200,17 +201,20 @@ function AerialView({ onClose, onOpenCon, dataset }) {
           {emberCount > 0 && <Stat n={emberCount} t="待重燃" tone="var(--gold-warm)" />}
           <Stat n={dimming} t="正变暗" tone="var(--star-blue-dim)" />
           <Sep />
-          <span style={{ fontSize: 'var(--t-sm)', color: 'var(--text-2)' }}>最薄弱星域 <b style={{ color: 'var(--star-blue-dim)', fontWeight: 500 }}>{weakest.name}</b></span>
+          <span style={{ fontSize: 'var(--t-sm)', color: 'var(--text-2)', whiteSpace: 'nowrap', maxWidth: 240, overflow: 'hidden', textOverflow: 'ellipsis' }}>最薄弱星域 <b style={{ color: 'var(--star-blue-dim)', fontWeight: 500 }}>{weakest.name}</b></span>
         </GlassPanel>
       </div>
 
       {/* 左下：说明；右下：记忆温度图例 */}
-      <div style={{ position: 'absolute', bottom: 26, left: 24, zIndex: 30, display: 'flex', alignItems: 'center', gap: 'var(--s-2)', fontSize: 'var(--t-xs)', color: 'var(--text-2)' }}>
-        <Icon name="map" size={14} color="currentColor" />{dataset ? `${dataset.ownerName ? dataset.ownerName + ' 的星空编排' : '对方的星空编排'} · 点击星域返回星图` : '与你的星图同一编排 · 点击星域飞入'}
+      <div style={{ position: 'absolute', bottom: 26, left: 24, zIndex: 30, display: 'flex', alignItems: 'center', gap: 'var(--s-2)', fontSize: 'var(--t-xs)', color: 'var(--text-2)', maxWidth: 'calc(50% - 90px)' }}>
+        <Icon name="map" size={14} color="currentColor" />
+        <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+          {dataset ? `${dataset.ownerName ? dataset.ownerName + ' 的星空编排' : '对方的星空编排'} · 点击星域返回星图` : '与你的星图同一编排 · 点击星域飞入'}
+        </span>
       </div>
-      <div style={{ position: 'absolute', bottom: 22, right: 24, zIndex: 30 }}>
-        {/* 图例小字统一收敛到 --t-xs 地板，颜色抬到 --text-2 保证对比 */}
-        <GlassPanel radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', gap: 'var(--s-3)', padding: 'var(--s-2) var(--s-4)' }}>
+      <div style={{ position: 'absolute', bottom: 22, right: 24, zIndex: 30, maxWidth: 'calc(50% - 90px)' }}>
+        {/* 图例小字统一收敛到 --t-xs 地板，颜色抬到 --text-2 保证对比；窄窗按组换行、不折字 */}
+        <GlassPanel radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'flex-end', rowGap: 4, gap: 'var(--s-3)', padding: 'var(--s-2) var(--s-4)', whiteSpace: 'nowrap' }}>
           <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--t-xs)', letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: 'var(--text-2)' }}>记忆温度</span>
           <span style={{ fontSize: 'var(--t-xs)', color: 'var(--text-2)' }}>正在变暗</span>
           <span style={{ width: 84, height: 5, borderRadius: 3, background: 'linear-gradient(90deg, var(--mem-dead), var(--mem-low), var(--mem-mid), var(--mem-high), var(--mem-full))' }} />
@@ -251,7 +255,7 @@ function AerialStyle() {
 function Sep() { return <span style={{ width: 1, height: 20, background: 'var(--line)' }} />; }
 function Stat({ n, t, tone }) {
   return (
-    <span style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
+    <span style={{ display: 'flex', alignItems: 'baseline', gap: 6, whiteSpace: 'nowrap', flex: 'none' }}>
       <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--t-body-lg)', color: tone || 'var(--text-1)' }}>{n}</span>
       <span style={{ fontSize: 'var(--t-xs)', color: 'var(--text-3)' }}>{t}</span>
     </span>

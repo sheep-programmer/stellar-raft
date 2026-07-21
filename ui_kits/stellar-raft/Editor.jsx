@@ -438,8 +438,37 @@ function TagChip({ label, onRemove }) {
 
 // 基础属性行 → star.props 字段名
 const PROP_KEYS = { type: 'type', status: 'status', source: 'source', alias: 'alias', review: 'nextReview' };
+// 类型下拉预设；状态按记忆模型五态着色（状态由 refreshStar 每次心跳覆写，只读展示）
+const PROP_TYPE_PRESETS = ['概念', '公式', '定理', '方法', '案例', '收纳', '草稿'];
+const PROP_STATUS_TONE = { '牢固': 'var(--gold)', '正常': 'var(--star-blue)', '正变暗': 'var(--star-blue-dim)', '将熄灭': '#e08a6d', '待重燃': 'var(--gold-warm)' };
 
-function Properties({ props, onFlash, onConfirm, onCommit }) {
+/* 「下次复习」的日期选择：文字仍显示派生标签（今天/明天/x 天后），点击弹原生日历。
+   选定日期把星排入那天的复习队列；星自然变暗到期不会被推迟——遗忘不等人。 */
+function ReviewPicker({ label, iso, onPick }) {
+  const ref = React.useRef(null);
+  const d = new Date();
+  const todayIso = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  const openPicker = () => {
+    const el = ref.current; if (!el) return;
+    el.value = iso || todayIso;
+    try { el.showPicker(); } catch (e) { el.focus(); el.click(); }
+  };
+  return (
+    <span style={{ position: 'relative', display: 'inline-flex', alignItems: 'center' }}>
+      <button type="button" className="sr-focus-ring" onClick={openPicker}
+        title="选择日期，把这颗星排入那天的复习（星自然变暗到期不会被推迟）"
+        style={{ display: 'inline-flex', alignItems: 'center', gap: 7, font: 'inherit', fontSize: 13, color: 'var(--text-1)', border: 'none', background: 'transparent', cursor: 'pointer', padding: '0 2px' }}>
+        {label}
+        <Icon name="calendar-days" size={13} color="var(--text-3)" />
+      </button>
+      <input ref={ref} type="date" min={todayIso} defaultValue={iso || ''} aria-label="选择下次复习日期" tabIndex={-1}
+        onChange={(e) => { if (e.target.value) onPick && onPick(e.target.value); }}
+        style={{ position: 'absolute', left: 0, bottom: 0, width: 1, height: 1, opacity: 0, border: 0, padding: 0, colorScheme: 'dark', pointerEvents: 'none' }} />
+    </span>
+  );
+}
+
+function Properties({ props, onFlash, onConfirm, onCommit, reviewISO, onPickReview }) {
   const p = props || {};
   const [open, setOpen] = React.useState(true);
   const [extra, setExtra] = React.useState([]);
@@ -456,11 +485,11 @@ function Properties({ props, onFlash, onConfirm, onCommit }) {
     onFlash && onFlash('已更新属性');
   };
   const base = [
-    { key: 'type', icon: 'tag', k: '类型', v: p.type || '—', kind: 'select' },
-    { key: 'status', icon: 'circle-dot', k: '状态', v: p.status || '—', kind: 'status' },
-    { key: 'source', icon: 'book-open', k: '来源', v: p.source || '—', kind: 'text' },
-    { key: 'alias', icon: 'languages', k: '别名', v: p.alias || '—', kind: 'text' },
-    { key: 'review', icon: 'calendar', k: '下次复习', v: p.nextReview || '—', kind: 'text' },
+    { key: 'type', icon: 'tag', k: '类型', v: p.type || '', kind: 'select' },
+    { key: 'status', icon: 'circle-dot', k: '状态', v: p.status || '正常', kind: 'status' },
+    { key: 'source', icon: 'book-open', k: '来源', v: p.source || '', kind: 'text' },
+    { key: 'alias', icon: 'languages', k: '别名', v: p.alias || '', kind: 'text' },
+    { key: 'review', icon: 'calendar', k: '下次复习', v: p.nextReview || '—', kind: 'review' },
   ].filter(r => !removed.includes(r.key));
   const rows = [...base, ...extra];
   const addRow = () => {
@@ -512,11 +541,22 @@ function Properties({ props, onFlash, onConfirm, onCommit }) {
               </div>
               <div style={{ flex: 1, minWidth: 0 }}>
                 {r.kind === 'status'
-                  ? <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12.5, color: 'var(--text-1)' }}><span style={{ width: 7, height: 7, borderRadius: '50%', background: 'var(--gold)', boxShadow: 'var(--glow-gold-soft)' }} /><span contentEditable suppressContentEditableWarning title="点击编辑" onBlur={commitVal(r)} style={{ outline: 'none', cursor: 'text' }}>{r.v}</span></span>
+                  /* 状态是记忆模型的派生值（心跳会覆写），只读展示、按态着色 */
+                  ? <span title="由记忆模型实时派生，随复习与时间自动变化" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12.5, color: 'var(--text-1)', cursor: 'default' }}>
+                      <span style={{ width: 7, height: 7, borderRadius: '50%', background: PROP_STATUS_TONE[r.v] || 'var(--star-blue)', boxShadow: (r.v === '牢固' || r.v === '待重燃') ? 'var(--glow-gold-soft)' : 'none' }} />
+                      {r.v}
+                    </span>
                   : r.kind === 'select'
-                    ? <span contentEditable suppressContentEditableWarning title="点击编辑" onBlur={commitVal(r)} style={{ outline: 'none', cursor: 'text', fontSize: 12, padding: '2px 9px', borderRadius: 'var(--r-pill)', background: 'rgba(159,198,255,0.12)', color: 'var(--star-blue)' }}>{r.v}</span>
-                    : <span contentEditable suppressContentEditableWarning title="点击编辑" data-ph="空" onBlur={commitVal(r)}
-                        style={{ outline: 'none', cursor: 'text', fontSize: 13, color: 'var(--text-1)', borderRadius: 4, padding: '0 2px', display: 'inline-block', minWidth: 42 }}>{r.v}</span>}
+                    /* 类型用真下拉：预设 + 当前自定义值兜底 */
+                    ? <Select size="sm" value={p.type || '草稿'} placeholder="选择类型…"
+                        options={(PROP_TYPE_PRESETS.includes(p.type) || !p.type ? PROP_TYPE_PRESETS : [p.type, ...PROP_TYPE_PRESETS]).map(t => ({ value: t, label: t }))}
+                        onChange={(v) => { if (p.type === v) return; p.type = v; onCommit && onCommit(); onFlash && onFlash('已更新类型'); }}
+                        style={{ maxWidth: 168 }} />
+                    : r.kind === 'review'
+                      ? <ReviewPicker label={r.v} iso={reviewISO} onPick={onPickReview} />
+                      : <span contentEditable suppressContentEditableWarning title="点击编辑" data-ph="点击填写"
+                          onBlur={commitVal(r)}
+                          style={{ outline: 'none', cursor: 'text', fontSize: 13, color: 'var(--text-1)', borderRadius: 4, padding: '0 2px', display: 'inline-block', minWidth: 42 }}>{r.v}</span>}
               </div>
               <button type="button" title="删除此属性" className="sr-focus-ring sr-hit40" onMouseDown={(e) => e.preventDefault()} onClick={() => delRow(r)}
                 style={{ flex: 'none', width: 22, height: 22, position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', border: 'none', background: 'transparent', cursor: 'pointer', color: 'var(--text-3)', opacity: (hoverKey === r.key || focusKey === r.key) ? 1 : 0, transition: 'opacity var(--dur-fast)' }}>
@@ -2125,8 +2165,13 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
             <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-3)' }}>编辑于 {(() => { const n = D.notes.find(x => x.id === star.id) || {}; return n.editedTs ? D.ago(n.editedTs) : (n.edited || '刚刚'); })()}</span>
           </div>
 
-          {/* title */}
+          {/* title：快速新建的默认名（新的知识星）聚焦即全选——打字直接替换，不用先删 */}
           <div contentEditable suppressContentEditableWarning data-ph="无标题"
+            onFocus={(e) => {
+              if (e.currentTarget.textContent.trim() !== '新的知识星') return;
+              const range = document.createRange(); range.selectNodeContents(e.currentTarget);
+              const sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(range);
+            }}
             onBlur={(e) => {
               const t = e.currentTarget.textContent.trim();
               if (t && t !== star.label) { D.renameStar(star.id, t); bumpTick(); flash('已重命名'); }
@@ -2135,7 +2180,22 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
             style={{ outline: 'none', fontSize: 32, fontWeight: 200, color: 'var(--text-1)', letterSpacing: '-0.01em', textShadow: 'var(--text-glow-cool)', marginBottom: 20, lineHeight: 1.2 }}>{star.label}</div>
 
           {/* properties (frontmatter) */}
-          <Properties props={star.props = star.props || {}} onFlash={flash} onConfirm={setConfirm} onCommit={() => { D.touchNote(star.id); bumpTick(); }} />
+          <Properties props={star.props = star.props || {}} onFlash={flash} onConfirm={setConfirm} onCommit={() => { D.touchNote(star.id); bumpTick(); }}
+            reviewISO={(() => {
+              const d = new Date(Math.max(D.dueTsOf(star), Date.now()));
+              return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+            })()}
+            onPickReview={(iso) => {
+              const ts = Date.parse(iso + 'T20:00:00');   // 排到那天傍晚：白天还来得及复习
+              if (!Number.isFinite(ts)) return;
+              if (!(star.sr && star.sr.S > 0)) D.refreshMemory();
+              star.sr.due = ts;
+              D.refreshMemory();
+              D.pushTimeline('review', star.id, '排期复习 · ' + iso.slice(5).replace('-', '/'));
+              D.touchNote(star.id);
+              bumpTick();
+              flash('下次复习已排到 ' + iso.replace(/-/g, '/') + ' · 若星更早变暗会提前');
+            }} />
 
           {/* blocks */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8, userSelect: dragBlk ? 'none' : 'auto' }} onMouseLeave={() => setHover(null)}>
