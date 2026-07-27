@@ -46,13 +46,43 @@ test('八个分区：TABS 登记的每一个都有对应的渲染分支', () => 
 
 test('管理台的数字全部来自服务端接口，没有写死的占位数据', () => {
   // 每个分区的取数路径都必须是真实的 /api/admin 接口
-  for (const p of ['/overview', '/trends?days=14', '/users?', '/guests?idleDays=7', '/shares', '/sessions', '/site', '/audit?limit=200']) {
+  for (const p of ['/overview', '/trends?days=14', '/users?', '/guests?idleDays=7', '/shares?', '/sessions?', '/site', '/audit?']) {
     assert.ok(ADMIN.includes(`'${p}`) || ADMIN.includes(`useAdminData('${p}`) || ADMIN.includes(p),
       '缺少取数路径 ' + p);
   }
   // 趋势条按真实峰值缩放，0 就是 0——不做插值也不铺底
   assert.match(ADMIN, /const peak = Math\.max\(1, \.\.\.buckets\.map/);
   assert.match(ADMIN, /v \? Math\.max\(3, Math\.round\(v \/ peak \* 52\)\) : 1/);
+});
+
+test('会变长的名单一律分页：旅客 / 游客 / 分享 / 会话 / 日志共用同一副翻页条', () => {
+  // 四个名单都带上 page/size，不再一次性把整张表拉下来
+  for (const p of ['/users?', '/shares?page=', '/sessions?page=', '/audit?page=', '/guests?idleDays=7&page=']) {
+    assert.ok(ADMIN.includes(p), '名单未分页：' + p);
+  }
+  // 翻页条只有一副（改分页体验时不会漏改某一个分区）
+  assert.match(ADMIN, /function AdmPager\(/);
+  assert.equal((ADMIN.match(/<AdmPager /g) || []).length, 5, '五个名单都要挂上翻页条');
+  // 只有一页时整条不出现
+  assert.match(ADMIN, /if \(!d \|\| !\(d\.pages > 1\)\) return null;/);
+});
+
+test('操作日志可以清空，且清空这件事本身也留痕', () => {
+  assert.match(ADMIN, /adminApi\('\/audit\/clear', \{ method: 'POST'/);
+  assert.match(ADMIN, /setClearing\(true\)/);          // 二次确认，不是点一下就没
+  assert.match(ADMIN_ROUTES, /seg\[3\] === 'clear'/);
+  assert.match(ADMIN_ROUTES, /q\.auditClear\.run\(\)/);
+  assert.match(ADMIN_ROUTES, /audit\(me, 'audit\.clear'/);   // 清完补记一条
+});
+
+test('收拢 WAL 报出真实收拢量；只搬字节的维护不写审计，销毁数据的才写', () => {
+  assert.match(ADMIN_ROUTES, /const before = walSize\(\)/);
+  assert.match(ADMIN_ROUTES, /freed = Math\.max\(0, before - walSize\(\)\)/);
+  assert.match(ADMIN_ROUTES, /busy: true/);
+  // checkpoint / vacuum 不留痕，prune-sessions 留痕
+  assert.equal(/audit\(me, 'db\.checkpoint'/.test(ADMIN_ROUTES), false, '收拢 WAL 不该写审计');
+  assert.equal(/audit\(me, 'db\.' \+ act/.test(ADMIN_ROUTES), false, '维护动作不该逐个留痕');
+  assert.match(ADMIN_ROUTES, /audit\(me, 'db\.prune-sessions'/);
 });
 
 test('游客治理：限额、门禁开关与清理都接到真实接口，清理有二次确认', () => {

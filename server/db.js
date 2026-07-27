@@ -147,8 +147,9 @@ const q = {
   setName: db.prepare('UPDATE users SET name = ?, avatar = ? WHERE id = ?'),
   setUsername: db.prepare('UPDATE users SET username = ? WHERE id = ?'),
   sessionsOf: db.prepare('SELECT * FROM sessions WHERE user_id = ? ORDER BY last_seen DESC'),
+  // 不设上限：会话列表在管理台里分页出库，截断会让「共 N 台设备」和实际能翻到的对不上
   allSessions: db.prepare(`SELECT s.token, s.user_id, s.created_at, s.last_seen, u.name, u.username, u.avatar, u.role, u.last_ip
-    FROM sessions s JOIN users u ON u.id = s.user_id ORDER BY s.last_seen DESC LIMIT 200`),
+    FROM sessions s JOIN users u ON u.id = s.user_id ORDER BY s.last_seen DESC`),
   // 趋势按天分桶要数全量登录，不能用上面那条带 LIMIT 的
   sessionTimes: db.prepare('SELECT created_at FROM sessions'),
   countSessionsOf: db.prepare('SELECT COUNT(*) AS n FROM sessions WHERE user_id = ?'),
@@ -166,6 +167,9 @@ const q = {
   dropUser: db.prepare('DELETE FROM users WHERE id = ?'),
   auditInsert: db.prepare('INSERT INTO admin_audit (actor_id, actor_name, action, target_id, target_name, detail) VALUES (?, ?, ?, ?, ?, ?)'),
   auditList: db.prepare('SELECT * FROM admin_audit ORDER BY id DESC LIMIT ?'),
+  auditCount: db.prepare('SELECT COUNT(*) AS n FROM admin_audit'),
+  auditPage: db.prepare('SELECT * FROM admin_audit ORDER BY id DESC LIMIT ? OFFSET ?'),
+  auditClear: db.prepare('DELETE FROM admin_audit'),
   auditPrune: db.prepare('DELETE FROM admin_audit WHERE id <= (SELECT MAX(id) - ? FROM admin_audit)'),
 };
 

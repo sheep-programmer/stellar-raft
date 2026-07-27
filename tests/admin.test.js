@@ -743,3 +743,72 @@ test('SR_ADMIN_USER / SR_ADMIN_PASS 覆盖默认凭据，且不再打「默认�
     fs.rmSync(other.tmpDir, { recursive: true, force: true });
   }
 });
+
+/* ——— 分页 ———
+   名单会随着站点长大而无限变长：旅客 / 分享 / 会话 / 日志一律分页出库。
+   四个接口共用一套口径（total / page / size / pages），前端才能共用一副翻页条。 */
+test('名单分页：四个接口口径一致，页号越界夹回最后一页', async () => {
+  // 造够跨页的数据：25 个账号 → 25 个会话（注册即建会话）
+  for (let i = 0; i < 25; i++) await makeUser('pager' + i, 'pw123456');
+
+  for (const [path, key] of [['/api/admin/users', 'users'], ['/api/admin/sessions', 'sessions'], ['/api/admin/audit', 'entries']]) {
+    const p1 = await api(admin, 'GET', `${path}?page=1&size=10`);
+    assert.equal(p1.status, 200, path);
+    for (const f of ['total', 'page', 'size', 'pages']) {
+      assert.ok(p1.body[f] != null, `${path} 缺少分页字段 ${f}`);
+    }
+    assert.equal(p1.body.size, 10);
+    assert.ok(p1.body[key].length <= 10, `${path} 一页不该超过 size 条`);
+    assert.equal(p1.body.pages, Math.max(1, Math.ceil(p1.body.total / 10)));
+
+    if (p1.body.pages > 1) {
+      const p2 = await api(admin, 'GET', `${path}?page=2&size=10`);
+      assert.notDeepEqual(p2.body[key], p1.body[key], `${path} 第二页应是不同的内容`);
+      // 页号越界：夹回最后一页，而不是给一片空白
+      const over = await api(admin, 'GET', `${path}?page=9999&size=10`);
+      assert.equal(over.body.page, over.body.pages, `${path} 越界页号应夹回最后一页`);
+      assert.ok(over.body[key].length > 0, `${path} 最后一页不该是空的`);
+    }
+  }
+});
+
+/* ——— 操作日志：可以清空，但清空本身也留痕 ——— */
+test('清空日志：全部删除后立刻补记一条，审计不会被无声抹掉', async () => {
+  await api(admin, 'POST', '/api/admin/site', { registrationOpen: true });   // 先制造几条留痕
+  const before = await api(admin, 'GET', '/api/admin/audit?page=1&size=5');
+  assert.ok(before.body.total > 0, '应当已有日志');
+
+  const cleared = await api(admin, 'POST', '/api/admin/audit/clear', {});
+  assert.equal(cleared.status, 200);
+  assert.equal(cleared.body.removed, before.body.total, '应报告清掉了多少条');
+
+  const after = await api(admin, 'GET', '/api/admin/audit?page=1&size=5');
+  assert.equal(after.body.total, 1, '清空后应只剩「清空」这一条本身');
+  assert.equal(after.body.entries[0].action, 'audit.clear');
+  assert.match(after.body.entries[0].detail, /清空 \d+ 条/);
+});
+
+/* ——— 收拢 WAL ———
+   每个请求都会写 last_seen / 会话时刻，WAL 因此永远不会真的空——「收拢」总能收到东西，
+   这是 SQLite 的常态，不是故障。要紧的是：它只搬字节、不动任何一条用户数据，
+   所以反复点不该把审计日志刷满，掩住真正要紧的停用与删号。 */
+test('收拢 WAL：报出真实收拢量，且反复点也不往审计里塞东西', async () => {
+  await api(admin, 'POST', '/api/admin/audit/clear', {});   // 从干净的日志起算
+  const base = (await api(admin, 'GET', '/api/admin/audit?page=1&size=50')).body.total;
+
+  for (let i = 0; i < 3; i++) {
+    const r = await api(admin, 'POST', '/api/admin/maintenance', { action: 'checkpoint' });
+    assert.equal(r.status, 200);
+    assert.ok(typeof r.body.freed === 'number', '应报告收拢了多少字节');
+    assert.ok(r.body.system && r.body.system.db, '应带回最新的库体积读数');
+  }
+  await api(admin, 'POST', '/api/admin/maintenance', { action: 'vacuum' });
+
+  const after = (await api(admin, 'GET', '/api/admin/audit?page=1&size=50')).body.total;
+  assert.equal(after, base, '收拢 / VACUUM 只搬字节，不该在日志里留下任何一条');
+
+  // 反过来：删会话是真销毁数据，那一条必须留痕
+  await api(admin, 'POST', '/api/admin/maintenance', { action: 'prune-sessions' });
+  const log = await api(admin, 'GET', '/api/admin/audit?page=1&size=50');
+  assert.ok(log.body.entries.some(e => e.action === 'db.prune-sessions'), '清理会话应当留痕');
+});

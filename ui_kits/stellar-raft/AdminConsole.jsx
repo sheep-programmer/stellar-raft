@@ -229,6 +229,25 @@ function TrendBars({ buckets, field, color, label }) {
 
 /* ============================ 总览 ============================ */
 
+/* 翻页条：所有名单共用一副。只有一页就整条不出现——
+   一个永远点不动的「1 / 1」除了占地方没有别的作用。
+   两端各给一个跳到首/末页的键：日志翻到第 30 页想回头时，不必按住上一页不放。 */
+function AdmPager({ d, page, onGo, unit = '条' }) {
+  if (!d || !(d.pages > 1)) return null;
+  return (
+    <div className="sr-adm-pager" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginTop: 16 }}>
+      <IconButton name="chevrons-left" title="第一页" disabled={page <= 1} onClick={() => onGo(1)} />
+      <IconButton name="chevron-left" title="上一页" disabled={page <= 1} onClick={() => onGo(page - 1)} />
+      <span style={{ fontSize: 12.5, color: 'var(--text-2)', fontFamily: 'var(--font-mono)', minWidth: 92, textAlign: 'center' }}>
+        {page} / {d.pages}
+        <span style={{ color: 'var(--text-3)' }}> · {d.total} {unit}</span>
+      </span>
+      <IconButton name="chevron-right" title="下一页" disabled={page >= d.pages} onClick={() => onGo(page + 1)} />
+      <IconButton name="chevrons-right" title="最后一页" disabled={page >= d.pages} onClick={() => onGo(d.pages)} />
+    </div>
+  );
+}
+
 function AdminOverview({ onGoto }) {
   const [d, loading, reload] = useAdminData('/overview');
   const [trend] = useAdminData('/trends?days=14');
@@ -405,13 +424,7 @@ function AdminUsers({ meId }) {
         </div>
       )}
 
-      {d && d.pages > 1 && (
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, marginTop: 16 }}>
-          <IconButton name="chevron-left" title="上一页" disabled={page <= 1} onClick={() => goto(page - 1)} />
-          <span style={{ fontSize: 12.5, color: 'var(--text-2)', fontFamily: 'var(--font-mono)' }}>{page} / {d.pages}</span>
-          <IconButton name="chevron-right" title="下一页" disabled={page >= d.pages} onClick={() => goto(page + 1)} />
-        </div>
-      )}
+      <AdmPager d={d} page={page} onGo={goto} unit="个账号" />
     </div>
   );
 }
@@ -713,7 +726,8 @@ const GATE_ITEMS = [
 ];
 
 function AdminGuests() {
-  const [d, loading, reload] = useAdminData('/guests?idleDays=7');
+  const [page, setPage] = React.useState(1);
+  const [d, loading, reload] = useAdminData(`/guests?idleDays=7&page=${page}&size=10`, [page]);
   const [site, , reloadSite] = useAdminData('/site');
   const [openIp, setOpenIp] = React.useState(null);
   const [perIp, setPerIp] = React.useState('');
@@ -811,7 +825,7 @@ function AdminGuests() {
 
       {/* 按 IP 的游客名单 */}
       <section>
-        <SectionHead icon="network" title="按来源 IP" note={d ? `${rows.length} 个地址` : undefined}
+        <SectionHead icon="network" title="按来源 IP" note={d ? `${d.ips} 个地址` : undefined}
           right={d && d.zombies ? (
             <Button variant="ghost" size="sm" icon="brush-cleaning" onClick={() => setPurge({ all: true })}>
               清理全部空游客 ({d.zombies})
@@ -888,6 +902,8 @@ function AdminGuests() {
           {purge && purge.ip && <><br />清理之后这个 IP 的游客名额随即空出来。</>}
         </div>
       </Modal>
+
+      <AdmPager d={d} page={page} onGo={setPage} unit="个地址" />
     </div>
   );
 }
@@ -895,7 +911,8 @@ function AdminGuests() {
 /* ============================ 分享 ============================ */
 
 function AdminShares() {
-  const [d, loading, reload] = useAdminData('/shares');
+  const [page, setPage] = React.useState(1);
+  const [d, loading, reload] = useAdminData(`/shares?page=${page}&size=20`, [page]);
   const [closing, setClosing] = React.useState(null);
 
   const close = async (row) => {
@@ -942,6 +959,9 @@ function AdminShares() {
         </div>
       )}
 
+
+      <AdmPager d={d} page={page} onGo={setPage} unit="片星系" />
+
       <Modal open={!!closing} onClose={() => setClosing(null)} title="强制关闭分享" icon="eye-off" width={420}
         footer={<><Button variant="ghost" onClick={() => setClosing(null)}>取消</Button>
           <Button variant="primary" onClick={() => close(closing)}>关闭分享</Button></>}>
@@ -957,11 +977,12 @@ function AdminShares() {
 /* ============================ 会话 ============================ */
 
 function AdminSessions() {
-  const [d, loading, reload] = useAdminData('/sessions');
+  const [page, setPage] = React.useState(1);
+  const [d, loading, reload] = useAdminData(`/sessions?page=${page}&size=20`, [page]);
   const rows = (d && d.sessions) || [];
   return (
     <div>
-      <SectionHead icon="monitor-smartphone" title="登录会话" note={d ? `${rows.length} 个活跃会话` : undefined}
+      <SectionHead icon="monitor-smartphone" title="登录会话" note={d ? `${d.total} 个活跃会话` : undefined}
         right={<IconButton name="refresh-cw" title="刷新" onClick={reload} />} />
       <div style={{ fontSize: 12, color: 'var(--text-3)', lineHeight: 1.7, marginBottom: 14 }}>
         每一行是一台登录过的设备。令牌只显示一小段指纹（完整令牌永不出库）；
@@ -996,6 +1017,8 @@ function AdminSessions() {
           ))}
         </div>
       )}
+
+      <AdmPager d={d} page={page} onGo={setPage} unit="个会话" />
     </div>
   );
 }
@@ -1225,12 +1248,23 @@ const ACTIONS = {
 };
 
 function AdminAudit() {
-  const [d, loading, reload] = useAdminData('/audit?limit=200');
+  const [page, setPage] = React.useState(1);
+  const [d, loading, reload] = useAdminData(`/audit?page=${page}&size=20`, [page]);
+  const [clearing, setClearing] = React.useState(false);
   const rows = (d && d.entries) || [];
+
+  const clearAll = async () => {
+    const r = await adminApi('/audit/clear', { method: 'POST', body: {} });
+    toast(`已清空 ${r && r.removed != null ? r.removed : ''} 条日志`, { icon: 'check' });
+    setClearing(false); setPage(1); reload();
+  };
   return (
     <div>
-      <SectionHead icon="scroll-text" title="操作日志" note="最近 200 条管理动作"
-        right={<IconButton name="refresh-cw" title="刷新" onClick={reload} />} />
+      <SectionHead icon="scroll-text" title="操作日志" note={d ? `共 ${d.total} 条` : undefined}
+        right={<span style={{ display: 'inline-flex', gap: 6 }}>
+          <IconButton name="refresh-cw" title="刷新" onClick={reload} />
+          <IconButton name="trash-2" title="清空日志" disabled={!d || !d.total} onClick={() => setClearing(true)} />
+        </span>} />
       <div style={{ fontSize: 12, color: 'var(--text-3)', lineHeight: 1.7, marginBottom: 14 }}>
         每一次停用、删号、改密与站点变更都留在这里，服务器只保留最近 2000 条。
       </div>
@@ -1259,6 +1293,17 @@ function AdminAudit() {
           })}
         </div>
       )}
+
+      <AdmPager d={d} page={page} onGo={setPage} unit="条" />
+
+      <Modal open={clearing} onClose={() => setClearing(false)} title="清空操作日志" width={440}
+        footer={<><Button variant="ghost" onClick={() => setClearing(false)}>取消</Button>
+          <Button variant="danger" onClick={clearAll}>清空</Button></>}>
+        <div style={{ fontSize: 13, lineHeight: 1.8, color: 'var(--text-2)' }}>
+          将删除全部 <b style={{ color: 'var(--text-1)' }}>{d ? d.total : 0}</b> 条留痕，不可撤销。
+          <br />清空这件事本身会作为一条新日志记下来——审计日志不该被无声抹掉。
+        </div>
+      </Modal>
     </div>
   );
 }

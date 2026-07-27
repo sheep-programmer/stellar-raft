@@ -1,4 +1,4 @@
-/* @ds-bundle: {"format":3,"namespace":"StellarRaftDesignSystem_2866af","components":[{"name":"Badge","sourcePath":"components/core/Badge.jsx"},{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"GlassPanel","sourcePath":"components/core/GlassPanel.jsx"},{"name":"Icon","sourcePath":"components/core/Icon.jsx"},{"name":"IconButton","sourcePath":"components/core/IconButton.jsx"},{"name":"Input","sourcePath":"components/core/Input.jsx"},{"name":"Tag","sourcePath":"components/core/Tag.jsx"},{"name":"Checkbox","sourcePath":"components/form/Checkbox.jsx"},{"name":"Select","sourcePath":"components/form/Select.jsx"},{"name":"Switch","sourcePath":"components/form/Switch.jsx"},{"name":"Tabs","sourcePath":"components/form/Tabs.jsx"},{"name":"ConstellationItem","sourcePath":"components/knowledge/ConstellationItem.jsx"},{"name":"MemoryBar","sourcePath":"components/knowledge/MemoryBar.jsx"},{"name":"StarNode","sourcePath":"components/knowledge/StarNode.jsx"},{"name":"ContextMenu","sourcePath":"components/overlay/ContextMenu.jsx"},{"name":"Modal","sourcePath":"components/overlay/Modal.jsx"},{"name":"Toast","sourcePath":"components/overlay/Toast.jsx"},{"name":"Tooltip","sourcePath":"components/overlay/Tooltip.jsx"}],"sourceHashes":{"assets/starfield.js":"d776d2b45dc4","components/core/Badge.jsx":"b0bd9735d638","components/core/Button.jsx":"a1c387a07e86","components/core/GlassPanel.jsx":"299a19d8fbb4","components/core/Icon.jsx":"7505f83ab03d","components/core/IconButton.jsx":"24052f4eed78","components/core/Input.jsx":"54a6c9af7e3f","components/core/Tag.jsx":"d8513c07ea96","components/form/Checkbox.jsx":"38aa593157dd","components/form/Select.jsx":"86b8c1c71e12","components/form/Switch.jsx":"938c62be0664","components/form/Tabs.jsx":"ede2dbff1963","components/knowledge/ConstellationItem.jsx":"d73e999469b6","components/knowledge/MemoryBar.jsx":"a54c928d5065","components/knowledge/StarNode.jsx":"1bedee49f0bf","components/overlay/ContextMenu.jsx":"11783420e876","components/overlay/Modal.jsx":"6119273e95da","components/overlay/Toast.jsx":"d22ad40680a6","components/overlay/Tooltip.jsx":"a042caa8970d","ui_kits/stellar-raft/AIConfig.jsx":"0408b943b28a","ui_kits/stellar-raft/AdminConsole.jsx":"9201df2c170f","ui_kits/stellar-raft/AerialView.jsx":"8209eb6af395","ui_kits/stellar-raft/BlackHole.jsx":"5e67807d3617","ui_kits/stellar-raft/Checkup.jsx":"786135b78aa7","ui_kits/stellar-raft/CommandPalette.jsx":"90f10790166c","ui_kits/stellar-raft/Editor.jsx":"f73d4772f7a3","ui_kits/stellar-raft/EditorMenus.jsx":"489f22c71b48","ui_kits/stellar-raft/FeynmanDrawer.jsx":"591b225e555a","ui_kits/stellar-raft/Galaxy3D.jsx":"2ce87e7da57d","ui_kits/stellar-raft/Inbox.jsx":"c4a70ad0bf9a","ui_kits/stellar-raft/KeysHelp.jsx":"948b00f411ed","ui_kits/stellar-raft/ListView.jsx":"f79c250bd947","ui_kits/stellar-raft/LoginView.jsx":"18d9c842c5c6","ui_kits/stellar-raft/MobileShell.jsx":"932bb48e2e9e","ui_kits/stellar-raft/Onboarding.jsx":"40b71668b69b","ui_kits/stellar-raft/ReviewSession.jsx":"45fa602fc39c","ui_kits/stellar-raft/Settings.jsx":"da9bff94d318","ui_kits/stellar-raft/Sidebar.jsx":"672d753c5efb","ui_kits/stellar-raft/StarMap.jsx":"76c3b4f2e35e","ui_kits/stellar-raft/Timeline.jsx":"1602ca5b6c95","ui_kits/stellar-raft/VisitView.jsx":"e50b2aae82af","ui_kits/stellar-raft/ai.js":"2f79eb3473c9","ui_kits/stellar-raft/app.jsx":"c28140011769","ui_kits/stellar-raft/codehl.js":"6fbdd0100deb","ui_kits/stellar-raft/data.js":"84c708c519f0","ui_kits/stellar-raft/mdcore.js":"b82d5054c3b6","ui_kits/stellar-raft/responsive.js":"29feedf6c503","ui_kits/stellar-raft/sanitize.js":"88e63cd63253","ui_kits/stellar-raft/transition.js":"3725d8982dc5","ui_kits/stellar-raft/undocore.js":"7f8c94da35f9","ui_kits/stellar-raft/vault.js":"bfb5fdd87949"},"inlinedExternals":[],"unexposedExports":[{"name":"memoryColor","sourcePath":"components/knowledge/MemoryBar.jsx"}],"exposedHelpers":[{"name":"toast","sourcePath":"components/overlay/Toast.jsx"}]} */
+/* @ds-bundle: {"format":3,"namespace":"StellarRaftDesignSystem_2866af","components":[{"name":"Badge","sourcePath":"components/core/Badge.jsx"},{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"GlassPanel","sourcePath":"components/core/GlassPanel.jsx"},{"name":"Icon","sourcePath":"components/core/Icon.jsx"},{"name":"IconButton","sourcePath":"components/core/IconButton.jsx"},{"name":"Input","sourcePath":"components/core/Input.jsx"},{"name":"Tag","sourcePath":"components/core/Tag.jsx"},{"name":"Checkbox","sourcePath":"components/form/Checkbox.jsx"},{"name":"Select","sourcePath":"components/form/Select.jsx"},{"name":"Switch","sourcePath":"components/form/Switch.jsx"},{"name":"Tabs","sourcePath":"components/form/Tabs.jsx"},{"name":"ConstellationItem","sourcePath":"components/knowledge/ConstellationItem.jsx"},{"name":"MemoryBar","sourcePath":"components/knowledge/MemoryBar.jsx"},{"name":"StarNode","sourcePath":"components/knowledge/StarNode.jsx"},{"name":"ContextMenu","sourcePath":"components/overlay/ContextMenu.jsx"},{"name":"Modal","sourcePath":"components/overlay/Modal.jsx"},{"name":"Toast","sourcePath":"components/overlay/Toast.jsx"},{"name":"Tooltip","sourcePath":"components/overlay/Tooltip.jsx"}],"sourceHashes":{"assets/starfield.js":"d776d2b45dc4","components/core/Badge.jsx":"b0bd9735d638","components/core/Button.jsx":"a1c387a07e86","components/core/GlassPanel.jsx":"299a19d8fbb4","components/core/Icon.jsx":"7505f83ab03d","components/core/IconButton.jsx":"24052f4eed78","components/core/Input.jsx":"54a6c9af7e3f","components/core/Tag.jsx":"d8513c07ea96","components/form/Checkbox.jsx":"38aa593157dd","components/form/Select.jsx":"86b8c1c71e12","components/form/Switch.jsx":"938c62be0664","components/form/Tabs.jsx":"ede2dbff1963","components/knowledge/ConstellationItem.jsx":"d73e999469b6","components/knowledge/MemoryBar.jsx":"a54c928d5065","components/knowledge/StarNode.jsx":"1bedee49f0bf","components/overlay/ContextMenu.jsx":"11783420e876","components/overlay/Modal.jsx":"6119273e95da","components/overlay/Toast.jsx":"d22ad40680a6","components/overlay/Tooltip.jsx":"a042caa8970d","ui_kits/stellar-raft/AIConfig.jsx":"0408b943b28a","ui_kits/stellar-raft/AdminConsole.jsx":"ac04bb2e6499","ui_kits/stellar-raft/AerialView.jsx":"8209eb6af395","ui_kits/stellar-raft/BlackHole.jsx":"5e67807d3617","ui_kits/stellar-raft/Checkup.jsx":"786135b78aa7","ui_kits/stellar-raft/CommandPalette.jsx":"90f10790166c","ui_kits/stellar-raft/Editor.jsx":"f73d4772f7a3","ui_kits/stellar-raft/EditorMenus.jsx":"489f22c71b48","ui_kits/stellar-raft/FeynmanDrawer.jsx":"591b225e555a","ui_kits/stellar-raft/Galaxy3D.jsx":"2ce87e7da57d","ui_kits/stellar-raft/Inbox.jsx":"c4a70ad0bf9a","ui_kits/stellar-raft/KeysHelp.jsx":"948b00f411ed","ui_kits/stellar-raft/ListView.jsx":"f79c250bd947","ui_kits/stellar-raft/LoginView.jsx":"18d9c842c5c6","ui_kits/stellar-raft/MobileShell.jsx":"932bb48e2e9e","ui_kits/stellar-raft/Onboarding.jsx":"40b71668b69b","ui_kits/stellar-raft/ReviewSession.jsx":"45fa602fc39c","ui_kits/stellar-raft/Settings.jsx":"da9bff94d318","ui_kits/stellar-raft/Sidebar.jsx":"672d753c5efb","ui_kits/stellar-raft/StarMap.jsx":"76c3b4f2e35e","ui_kits/stellar-raft/Timeline.jsx":"1602ca5b6c95","ui_kits/stellar-raft/VisitView.jsx":"e50b2aae82af","ui_kits/stellar-raft/ai.js":"2f79eb3473c9","ui_kits/stellar-raft/app.jsx":"c28140011769","ui_kits/stellar-raft/codehl.js":"6fbdd0100deb","ui_kits/stellar-raft/data.js":"84c708c519f0","ui_kits/stellar-raft/mdcore.js":"b82d5054c3b6","ui_kits/stellar-raft/responsive.js":"29feedf6c503","ui_kits/stellar-raft/sanitize.js":"88e63cd63253","ui_kits/stellar-raft/transition.js":"3725d8982dc5","ui_kits/stellar-raft/undocore.js":"7f8c94da35f9","ui_kits/stellar-raft/vault.js":"bfb5fdd87949"},"inlinedExternals":[],"unexposedExports":[{"name":"memoryColor","sourcePath":"components/knowledge/MemoryBar.jsx"}],"exposedHelpers":[{"name":"toast","sourcePath":"components/overlay/Toast.jsx"}]} */
 
 (() => {
 
@@ -4030,6 +4030,59 @@ function TrendBars({
 
 /* ============================ 总览 ============================ */
 
+/* 翻页条：所有名单共用一副。只有一页就整条不出现——
+   一个永远点不动的「1 / 1」除了占地方没有别的作用。
+   两端各给一个跳到首/末页的键：日志翻到第 30 页想回头时，不必按住上一页不放。 */
+function AdmPager({
+  d,
+  page,
+  onGo,
+  unit = '条'
+}) {
+  if (!d || !(d.pages > 1)) return null;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sr-adm-pager",
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: 8,
+      marginTop: 16
+    }
+  }, /*#__PURE__*/React.createElement(IconButton, {
+    name: "chevrons-left",
+    title: "\u7B2C\u4E00\u9875",
+    disabled: page <= 1,
+    onClick: () => onGo(1)
+  }), /*#__PURE__*/React.createElement(IconButton, {
+    name: "chevron-left",
+    title: "\u4E0A\u4E00\u9875",
+    disabled: page <= 1,
+    onClick: () => onGo(page - 1)
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 12.5,
+      color: 'var(--text-2)',
+      fontFamily: 'var(--font-mono)',
+      minWidth: 92,
+      textAlign: 'center'
+    }
+  }, page, " / ", d.pages, /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: 'var(--text-3)'
+    }
+  }, " \xB7 ", d.total, " ", unit)), /*#__PURE__*/React.createElement(IconButton, {
+    name: "chevron-right",
+    title: "\u4E0B\u4E00\u9875",
+    disabled: page >= d.pages,
+    onClick: () => onGo(page + 1)
+  }), /*#__PURE__*/React.createElement(IconButton, {
+    name: "chevrons-right",
+    title: "\u6700\u540E\u4E00\u9875",
+    disabled: page >= d.pages,
+    onClick: () => onGo(d.pages)
+  }));
+}
 function AdminOverview({
   onGoto
 }) {
@@ -4472,31 +4525,12 @@ function AdminUsers({
     open: open === u.id,
     onToggle: () => setOpen(open === u.id ? null : u.id),
     onChanged: reload
-  }))), d && d.pages > 1 && /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      gap: 10,
-      marginTop: 16
-    }
-  }, /*#__PURE__*/React.createElement(IconButton, {
-    name: "chevron-left",
-    title: "\u4E0A\u4E00\u9875",
-    disabled: page <= 1,
-    onClick: () => goto(page - 1)
-  }), /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 12.5,
-      color: 'var(--text-2)',
-      fontFamily: 'var(--font-mono)'
-    }
-  }, page, " / ", d.pages), /*#__PURE__*/React.createElement(IconButton, {
-    name: "chevron-right",
-    title: "\u4E0B\u4E00\u9875",
-    disabled: page >= d.pages,
-    onClick: () => goto(page + 1)
-  })));
+  }))), /*#__PURE__*/React.createElement(AdmPager, {
+    d: d,
+    page: page,
+    onGo: goto,
+    unit: "\u4E2A\u8D26\u53F7"
+  }));
 }
 
 /* 一行用户：折叠时是一览，展开后在同一张卡里长出详情与操作区——
@@ -5237,7 +5271,8 @@ const GATE_ITEMS = [{
   note: '造访好友、收纳与来信（服务端硬拦）'
 }];
 function AdminGuests() {
-  const [d, loading, reload] = useAdminData('/guests?idleDays=7');
+  const [page, setPage] = React.useState(1);
+  const [d, loading, reload] = useAdminData(`/guests?idleDays=7&page=${page}&size=10`, [page]);
   const [site,, reloadSite] = useAdminData('/site');
   const [openIp, setOpenIp] = React.useState(null);
   const [perIp, setPerIp] = React.useState('');
@@ -5431,7 +5466,7 @@ function AdminGuests() {
   }))))), /*#__PURE__*/React.createElement("section", null, /*#__PURE__*/React.createElement(SectionHead, {
     icon: "network",
     title: "\u6309\u6765\u6E90 IP",
-    note: d ? `${rows.length} 个地址` : undefined,
+    note: d ? `${d.ips} 个地址` : undefined,
     right: d && d.zombies ? /*#__PURE__*/React.createElement(Button, {
       variant: "ghost",
       size: "sm",
@@ -5648,13 +5683,19 @@ function AdminGuests() {
     style: {
       color: 'var(--text-1)'
     }
-  }, "\u4ECE\u6CA1\u5B58\u8FC7\u4EFB\u4F55\u661F\u7CFB\u3001\u4E14 7 \u5929\u6CA1\u6709\u9732\u9762"), "\u7684\u533F\u540D\u8D26\u53F7\u3002", /*#__PURE__*/React.createElement("br", null), "\u5B58\u8FC7\u661F\u7A7A\u7684\u6E38\u5BA2\u4E00\u4E2A\u90FD\u4E0D\u4F1A\u52A8\u2014\u2014\u54EA\u6015\u53EA\u6709\u4E00\u9897\u661F\u3002", purge && purge.ip && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("br", null), "\u6E05\u7406\u4E4B\u540E\u8FD9\u4E2A IP \u7684\u6E38\u5BA2\u540D\u989D\u968F\u5373\u7A7A\u51FA\u6765\u3002"))));
+  }, "\u4ECE\u6CA1\u5B58\u8FC7\u4EFB\u4F55\u661F\u7CFB\u3001\u4E14 7 \u5929\u6CA1\u6709\u9732\u9762"), "\u7684\u533F\u540D\u8D26\u53F7\u3002", /*#__PURE__*/React.createElement("br", null), "\u5B58\u8FC7\u661F\u7A7A\u7684\u6E38\u5BA2\u4E00\u4E2A\u90FD\u4E0D\u4F1A\u52A8\u2014\u2014\u54EA\u6015\u53EA\u6709\u4E00\u9897\u661F\u3002", purge && purge.ip && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("br", null), "\u6E05\u7406\u4E4B\u540E\u8FD9\u4E2A IP \u7684\u6E38\u5BA2\u540D\u989D\u968F\u5373\u7A7A\u51FA\u6765\u3002"))), /*#__PURE__*/React.createElement(AdmPager, {
+    d: d,
+    page: page,
+    onGo: setPage,
+    unit: "\u4E2A\u5730\u5740"
+  }));
 }
 
 /* ============================ 分享 ============================ */
 
 function AdminShares() {
-  const [d, loading, reload] = useAdminData('/shares');
+  const [page, setPage] = React.useState(1);
+  const [d, loading, reload] = useAdminData(`/shares?page=${page}&size=20`, [page]);
   const [closing, setClosing] = React.useState(null);
   const close = async row => {
     await adminApi('/shares/close', {
@@ -5762,7 +5803,12 @@ function AdminShares() {
     onClick: () => setClosing(r)
   }, "\u5173\u95ED") : /*#__PURE__*/React.createElement(Badge, {
     tone: "neutral"
-  }, "\u672A\u5F00\u653E"))))), /*#__PURE__*/React.createElement(Modal, {
+  }, "\u672A\u5F00\u653E"))))), /*#__PURE__*/React.createElement(AdmPager, {
+    d: d,
+    page: page,
+    onGo: setPage,
+    unit: "\u7247\u661F\u7CFB"
+  }), /*#__PURE__*/React.createElement(Modal, {
     open: !!closing,
     onClose: () => setClosing(null),
     title: "\u5F3A\u5236\u5173\u95ED\u5206\u4EAB",
@@ -5791,12 +5837,13 @@ function AdminShares() {
 /* ============================ 会话 ============================ */
 
 function AdminSessions() {
-  const [d, loading, reload] = useAdminData('/sessions');
+  const [page, setPage] = React.useState(1);
+  const [d, loading, reload] = useAdminData(`/sessions?page=${page}&size=20`, [page]);
   const rows = d && d.sessions || [];
   return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(SectionHead, {
     icon: "monitor-smartphone",
     title: "\u767B\u5F55\u4F1A\u8BDD",
-    note: d ? `${rows.length} 个活跃会话` : undefined,
+    note: d ? `${d.total} 个活跃会话` : undefined,
     right: /*#__PURE__*/React.createElement(IconButton, {
       name: "refresh-cw",
       title: "\u5237\u65B0",
@@ -5878,7 +5925,12 @@ function AdminSessions() {
       color: 'var(--text-3)',
       textAlign: 'right'
     }
-  }, "\u767B\u5F55\u4E8E ", ago(s.createdAt))))));
+  }, "\u767B\u5F55\u4E8E ", ago(s.createdAt))))), /*#__PURE__*/React.createElement(AdmPager, {
+    d: d,
+    page: page,
+    onGo: setPage,
+    unit: "\u4E2A\u4F1A\u8BDD"
+  }));
 }
 
 /* ============================ 广播 ============================ */
@@ -6420,17 +6472,41 @@ const ACTIONS = {
   }
 };
 function AdminAudit() {
-  const [d, loading, reload] = useAdminData('/audit?limit=200');
+  const [page, setPage] = React.useState(1);
+  const [d, loading, reload] = useAdminData(`/audit?page=${page}&size=20`, [page]);
+  const [clearing, setClearing] = React.useState(false);
   const rows = d && d.entries || [];
+  const clearAll = async () => {
+    const r = await adminApi('/audit/clear', {
+      method: 'POST',
+      body: {}
+    });
+    toast(`已清空 ${r && r.removed != null ? r.removed : ''} 条日志`, {
+      icon: 'check'
+    });
+    setClearing(false);
+    setPage(1);
+    reload();
+  };
   return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(SectionHead, {
     icon: "scroll-text",
     title: "\u64CD\u4F5C\u65E5\u5FD7",
-    note: "\u6700\u8FD1 200 \u6761\u7BA1\u7406\u52A8\u4F5C",
-    right: /*#__PURE__*/React.createElement(IconButton, {
+    note: d ? `共 ${d.total} 条` : undefined,
+    right: /*#__PURE__*/React.createElement("span", {
+      style: {
+        display: 'inline-flex',
+        gap: 6
+      }
+    }, /*#__PURE__*/React.createElement(IconButton, {
       name: "refresh-cw",
       title: "\u5237\u65B0",
       onClick: reload
-    })
+    }), /*#__PURE__*/React.createElement(IconButton, {
+      name: "trash-2",
+      title: "\u6E05\u7A7A\u65E5\u5FD7",
+      disabled: !d || !d.total,
+      onClick: () => setClearing(true)
+    }))
   }), /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 12,
@@ -6504,7 +6580,34 @@ function AdminAudit() {
         marginTop: 3
       }
     }, ago(e.at), " \xB7 ", fullTime(e.at))));
-  })));
+  })), /*#__PURE__*/React.createElement(AdmPager, {
+    d: d,
+    page: page,
+    onGo: setPage,
+    unit: "\u6761"
+  }), /*#__PURE__*/React.createElement(Modal, {
+    open: clearing,
+    onClose: () => setClearing(false),
+    title: "\u6E05\u7A7A\u64CD\u4F5C\u65E5\u5FD7",
+    width: 440,
+    footer: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Button, {
+      variant: "ghost",
+      onClick: () => setClearing(false)
+    }, "\u53D6\u6D88"), /*#__PURE__*/React.createElement(Button, {
+      variant: "danger",
+      onClick: clearAll
+    }, "\u6E05\u7A7A"))
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 13,
+      lineHeight: 1.8,
+      color: 'var(--text-2)'
+    }
+  }, "\u5C06\u5220\u9664\u5168\u90E8 ", /*#__PURE__*/React.createElement("b", {
+    style: {
+      color: 'var(--text-1)'
+    }
+  }, d ? d.total : 0), " \u6761\u7559\u75D5\uFF0C\u4E0D\u53EF\u64A4\u9500\u3002", /*#__PURE__*/React.createElement("br", null), "\u6E05\u7A7A\u8FD9\u4EF6\u4E8B\u672C\u8EAB\u4F1A\u4F5C\u4E3A\u4E00\u6761\u65B0\u65E5\u5FD7\u8BB0\u4E0B\u6765\u2014\u2014\u5BA1\u8BA1\u65E5\u5FD7\u4E0D\u8BE5\u88AB\u65E0\u58F0\u62B9\u6389\u3002")));
 }
 
 /* ============================ 公告横幅 ============================ */

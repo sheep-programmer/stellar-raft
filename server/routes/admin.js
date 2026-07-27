@@ -47,12 +47,21 @@ const galaxyStats = (userId) => {
   };
 };
 
+/* 分页口径统一在这里：?page 从 1 起、?size 夹在 5–100，出库形状与旅客名单一致
+   （total / page / size / pages），前端一套翻页控件就能通吃所有名单。
+   越界的页号夹回最后一页——删到只剩一页时仍停在第 7 页会看见一片空白。 */
+const paginate = (rows, url, defSize = 20) => {
+  const size = Math.min(100, Math.max(5, Number(url.searchParams.get('size')) || defSize));
+  const total = rows.length;
+  const pages = Math.max(1, Math.ceil(total / size));
+  const page = Math.min(pages, Math.max(1, Number(url.searchParams.get('page')) || 1));
+  return { total, page, size, pages, slice: rows.slice((page - 1) * size, page * size) };
+};
+
 /* 返回 true 表示已应答；返回 false 交回 server.js 继续派发。 */
 async function handleAdmin(ctx) {
   const { req, res, url, seg, body, me, sess, isAdmin, token, site } = ctx;
   if (seg[1] !== 'admin') return false;
-  if (!sess || !isAdmin) return json(res, 403, { error: '需要管理员权限' });
-
   if (!sess || !isAdmin) return json(res, 403, { error: '需要管理员权限' });
 
   // ——— 总览：一次算清全站家底 ———
@@ -110,8 +119,6 @@ async function handleAdmin(ctx) {
     const kw = String(url.searchParams.get('q') || '').trim().toLowerCase();
     const sort = ['id', 'name', 'stars', 'lastSeen', 'created'].includes(url.searchParams.get('sort')) ? url.searchParams.get('sort') : 'id';
     const desc = url.searchParams.get('order') !== 'asc';
-    const page = Math.max(1, Number(url.searchParams.get('page')) || 1);
-    const size = Math.min(100, Math.max(5, Number(url.searchParams.get('size')) || 20));
     const filter = url.searchParams.get('filter') || 'all';   // all | registered | anonymous | admin | banned
 
     let rows = q.allUsers.all().map(u => {
@@ -134,8 +141,8 @@ async function handleAdmin(ctx) {
     const key = { id: r => r.id, name: r => String(r.username || r.name).toLowerCase(), stars: r => r.stars,
       lastSeen: r => r.lastSeen || '', created: r => r.createdAt || '' }[sort];
     rows.sort((a, b) => { const x = key(a), y = key(b); return (x < y ? -1 : x > y ? 1 : 0) * (desc ? -1 : 1); });
-    const total = rows.length;
-    return json(res, 200, { total, page, size, pages: Math.max(1, Math.ceil(total / size)), users: rows.slice((page - 1) * size, page * size) });
+    const p = paginate(rows, url);
+    return json(res, 200, { total: p.total, page: p.page, size: p.size, pages: p.pages, users: p.slice });
   }
 
   // ——— 用户详情：星域分布 + 分享 + 会话 + 来信，够判断「这个人在干什么」———
@@ -269,11 +276,18 @@ async function handleAdmin(ctx) {
       zombies: guests.filter(g => g.zombie).length,
       lastSeen: guests.map(g => g.lastSeen).sort().pop() || null,
     })).sort((a, b) => b.count - a.count || (b.lastSeen || '').localeCompare(a.lastSeen || ''));
+    // 汇总读数按全量算（顶部三个数字要说的是全站，不是这一页）
+    const summary = {
+      ips: rows.length,
+      guests: rows.reduce((a, r) => a + r.count, 0),
+      zombies: rows.reduce((a, r) => a + r.zombies, 0),
+    };
+    const p = paginate(rows, url, 10);   // 每个 IP 一张卡、卡里还嵌着游客明细，一页 10 组足够
     return json(res, 200, {
       limit: site.guestPerIp, trustProxy: TRUST_PROXY, idleDays: days,
-      ips: rows.length, guests: rows.reduce((a, r) => a + r.count, 0),
-      zombies: rows.reduce((a, r) => a + r.zombies, 0),
-      rows,
+      ...summary,
+      total: p.total, page: p.page, size: p.size, pages: p.pages,
+      rows: p.slice,
     });
   }
 
@@ -327,29 +341,31 @@ async function handleAdmin(ctx) {
 
   // ——— 会话总览与单条吊销 ———
   if (seg[2] === 'sessions' && seg.length === 3 && req.method === 'GET') {
-    return json(res, 200, {
-      // 会话令牌只出一段指纹（够肉眼区分同一人的多台设备），完整 token 绝不出库；
-      // 要断开就用 users/:id/revoke 踢掉那个人的全部会话
-      sessions: q.allSessions.all().map(s => ({
-        fingerprint: s.token.slice(2, 10), ip: s.last_ip || null,
-        userId: s.user_id, name: s.name, username: s.username || null, avatar: s.avatar, role: s.role || 'user',
-        createdAt: s.created_at, lastSeen: s.last_seen, current: s.token === token,
-      })),
-    });
+    // 会话令牌只出一段指纹（够肉眼区分同一人的多台设备），完整 token 绝不出库；
+    // 要断开就用 users/:id/revoke 踢掉那个人的全部会话
+    const all = q.allSessions.all().map(s => ({
+      fingerprint: s.token.slice(2, 10), ip: s.last_ip || null,
+      userId: s.user_id, name: s.name, username: s.username || null, avatar: s.avatar, role: s.role || 'user',
+      createdAt: s.created_at, lastSeen: s.last_seen, current: s.token === token,
+    }));
+    const p = paginate(all, url);
+    return json(res, 200, { total: p.total, page: p.page, size: p.size, pages: p.pages, sessions: p.slice });
   }
 
   // ——— 分享总览：谁把星系开给了外面 ———
   if (seg[2] === 'shares' && seg.length === 3 && req.method === 'GET') {
-    return json(res, 200, {
-      shares: q.allShares.all().map(s => {
-        const u = q.userById.get(s.user_id);
-        return {
-          userId: s.user_id, name: u ? u.name : '（已删除）', username: u ? (u.username || null) : null, avatar: u ? u.avatar : '星',
-          enabled: !!s.enabled, code: s.code, visibility: s.visibility,
-          visitors: q.countVisitorsOf.get(s.user_id).n,
-        };
-      }),
+    const all = q.allShares.all().map(s => {
+      const u = q.userById.get(s.user_id);
+      return {
+        userId: s.user_id, name: u ? u.name : '（已删除）', username: u ? (u.username || null) : null, avatar: u ? u.avatar : '星',
+        enabled: !!s.enabled, code: s.code, visibility: s.visibility,
+        visitors: q.countVisitorsOf.get(s.user_id).n,
+      };
     });
+    // 开着的排前面，其次按访客多寡——翻页时最该管的那些始终在第一页
+    all.sort((a, b) => (b.enabled - a.enabled) || (b.visitors - a.visitors) || (a.userId - b.userId));
+    const p = paginate(all, url);
+    return json(res, 200, { total: p.total, page: p.page, size: p.size, pages: p.pages, shares: p.slice });
   }
   if (seg[2] === 'shares' && seg[3] === 'close' && req.method === 'POST') {
     const target = q.userById.get(Number(body.userId));
@@ -393,21 +409,45 @@ async function handleAdmin(ctx) {
   }
 
   // ——— 操作日志 ———
-  if (seg[2] === 'audit' && req.method === 'GET') {
-    const limit = Math.min(500, Math.max(10, Number(url.searchParams.get('limit')) || 100));
+  if (seg[2] === 'audit' && seg.length === 3 && req.method === 'GET') {
+    // 日志可能上千条：分页走 SQL 的 LIMIT/OFFSET，不把整张表读进内存再切
+    const size = Math.min(100, Math.max(5, Number(url.searchParams.get('size')) || 20));
+    const total = q.auditCount.get().n;
+    const pages = Math.max(1, Math.ceil(total / size));
+    const page = Math.min(pages, Math.max(1, Number(url.searchParams.get('page')) || 1));
     return json(res, 200, {
-      entries: q.auditList.all(limit).map(a => ({
+      total, page, size, pages,
+      entries: q.auditPage.all(size, (page - 1) * size).map(a => ({
         id: a.id, actor: a.actor_name, action: a.action,
         target: a.target_name, targetId: a.target_id, detail: a.detail, at: a.created_at,
       })),
     });
   }
 
+  /* 清空日志。审计日志被清这件事本身也要留痕——清完立刻补写一条，
+     写明清掉了多少、谁清的。否则「日志能被人无声抹掉」，它就不再是审计。 */
+  if (seg[2] === 'audit' && seg[3] === 'clear' && req.method === 'POST') {
+    const n = q.auditCount.get().n;
+    q.auditClear.run();
+    audit(me, 'audit.clear', null, '清空 ' + n + ' 条');
+    return json(res, 200, { ok: true, removed: n });
+  }
+
   // ——— 数据库维护 ———
   if (seg[2] === 'maintenance' && req.method === 'POST') {
     const act = body.action;
+    const walSize = () => { try { return fs.statSync(DB_PATH + '-wal').size; } catch { return 0; } };
     try {
-      if (act === 'checkpoint') { db.exec('PRAGMA wal_checkpoint(TRUNCATE)'); }
+      if (act === 'checkpoint') {
+        /* 收拢 WAL 是幂等的：没东西可收时它照样「成功」。以前无论收没收到都写一条
+           审计并回一句 ok，于是反复点就反复刷屏，日志里全是无内容的 db.checkpoint。
+           现在按真实结果说话——量一下 WAL 收缩了多少，没收到就明说，也不写审计。 */
+        const before = walSize();
+        const r = db.prepare('PRAGMA wal_checkpoint(TRUNCATE)').get() || {};
+        const freed = Math.max(0, before - walSize());
+        if (Number(r.busy)) return json(res, 200, { ok: false, busy: true, freed: 0, system: systemInfo() });
+        return json(res, 200, { ok: true, freed, pages: Number(r.log) || 0, system: systemInfo() });
+      }
       else if (act === 'vacuum') { db.exec('VACUUM'); }
       else if (act === 'prune-sessions') {
         // 90 天没露面的会话按失效清掉（登录态本就不该无限期）
@@ -417,7 +457,10 @@ async function handleAdmin(ctx) {
       }
       else return json(res, 400, { error: '未知的维护操作' });
     } catch (e) { return json(res, 500, { error: String(e.message || e) }); }
-    audit(me, 'db.' + act, null, '');
+    /* 收拢 WAL 与 VACUUM 都只是搬运字节，不动任何一条用户数据，而且随时可以再来一次。
+       给它们逐次留痕，只会让真正要紧的停用 / 删号 / 改密被淹掉——何况每个请求都在写
+       last_seen，WAL 永远不会真的空，于是「收拢」永远收得到东西、永远写得出一条。
+       删会话的 prune-sessions 确实销毁数据，那一条仍然留痕（在上面各自返回）。 */
     return json(res, 200, { ok: true, system: systemInfo() });
   }
 
