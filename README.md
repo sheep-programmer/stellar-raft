@@ -2,191 +2,263 @@
 
 # 星图 · Stellar Raft
 
-**别人的笔记是仓库,星图是一片活着的「知识深空」。**
-*Other apps store notes in a warehouse — Stellar Raft grows them in a living deep space of knowledge, where knowledge is the only light.*
+**别人的笔记是仓库，星图是一片活着的「知识深空」。**
 
 ![Node](https://img.shields.io/badge/Node-%E2%89%A5%2022.5-9fc6ff?style=flat-square&labelColor=05060f)
-![Tests](https://img.shields.io/badge/tests-148%20passing-ffd98a?style=flat-square&labelColor=05060f)
+![Tests](https://img.shields.io/badge/tests-236%20passing-ffd98a?style=flat-square&labelColor=05060f)
 ![Build](https://img.shields.io/badge/build-zero--config-9fc6ff?style=flat-square&labelColor=05060f)
 ![Components](https://img.shields.io/badge/components-18%20primitives-9fc6ff?style=flat-square&labelColor=05060f)
 ![Backend](https://img.shields.io/badge/backend-zero--dependency-ffd98a?style=flat-square&labelColor=05060f)
 ![Status](https://img.shields.io/badge/status-private-8a94a8?style=flat-square&labelColor=05060f)
 
+[English](README.en.md) · 中文
+
 <br/>
 
-<img src="docs/screenshots/starmap.png" alt="星图主界面 · 深空知识画布" width="860"/>
+<img src="docs/screenshots/starmap.webp" alt="星图主界面 · 深空知识画布" width="860"/>
 
 </div>
 
 ---
 
-## 目录 · Table of Contents
+## 这是什么
 
-- [简介 · Overview](#简介--overview)
-- [核心特性 · Features](#核心特性--features)
-- [设计哲学 · Design Philosophy](#设计哲学--design-philosophy)
-- [记忆模型 · The Memory Model](#记忆模型--the-memory-model)
-- [架构 · Architecture](#架构--architecture)
-- [技术栈 · Tech Stack](#技术栈--tech-stack)
-- [快速开始 · Getting Started](#快速开始--getting-started)
-- [项目结构 · Project Structure](#项目结构--project-structure)
-- [脚本 · Scripts](#脚本--scripts)
-- [许可 · License](#许可--license)
+**星图 Stellar Raft** 是一款面向大学生（尤其理工科）的知识笔记应用的**品牌与设计系统**。
 
----
+它把知识可视化成一片会呼吸的深空：每则笔记是一颗星，记得越牢越亮，久不回望便冷却、变暗，直至熄灭。
 
-## 简介 · Overview
+本仓库同时是三样东西：
 
-**中文** — **星图 Stellar Raft** 是一款面向大学生(尤其理工科)的知识笔记应用的**品牌与设计系统**。它把知识可视化成一片会呼吸的深空星图:每则笔记是一颗星,记得越牢越亮,久不回望便冷却、变暗,直至熄灭。本仓库既是这套设计系统的**唯一真源**(设计令牌 + 组件库 + 文档站),也包含一个覆盖全部 8 个高保真界面的**可交互桌面端 UI Kit**,以及一个**零依赖的本地后端**。
+- **设计系统的唯一真源** — 设计令牌 + 18 个组件原语 + 零构建文档站
+- **可交互的完整应用** — 覆盖全部 8 个高保真界面，桌面 / 平板 / 手机三档断点
+- **零依赖的本地后端** — 只用 Node 内置的 `node:sqlite`，不装任何三方包
 
-**English** — **Stellar Raft** is the brand and **design system** for a knowledge-notes app aimed at STEM-leaning university students. Knowledge becomes a living deep-space star map: every note is a star that blazes when remembered and cools, dims, and finally goes dark when neglected. This repository is the **single source of truth** for the system (design tokens + component library + docs site), and ships an **interactive desktop UI kit** recreating all 8 hi-fi screens plus a **zero-dependency local backend**.
-
-> 核心承诺 · Core promise — 一张**既生长也遗忘**的知识地图:让记忆变得可见。
-> A knowledge map that both **grows and forgets** — memory made visible.
+> **核心承诺** — 一张**既生长也遗忘**的知识地图：让记忆变得可见。
 
 ---
 
-## 核心特性 · Features
+## 目录
 
-**中文**
-
-- **会遗忘的知识星图** — 记忆强度 `R = exp(−Δt / S)` 按真实时间衰减,直接驱动每颗星的亮度与色温(冷蓝=正在遗忘 → 暖金白=已掌握)。
-- **费曼内化点亮** — 一颗星要在费曼模式里被「讲透」才真正**点亮**(金色高潮瞬间);点亮的星也会衰减,低于阈值熄灭为「待重燃」余烬态。
-- **间隔重复复习** — 到期卡片三档自评(忘了 / 模糊 / 记得),闭环驱动稳定度增长,让星不再悄悄熄灭。
-- **8 个高保真界面** — 星图主界面 · 亮度鸟瞰热图 · 三维星系(Three.js)· 近景语义缩放 · 费曼右抽屉 · 侧边栏 · 列表管理 · 专业块编辑器。
-- **专业块编辑器** — H1–H3 / 待办 / 列表 / 引用 / 代码 / LaTeX / 表格 / 图片,markdown 即时转换、⌘F 查找替换、反向链接与大纲;导入导出与真实 GFM 完全互逆(提示框/折叠块/表格转义/frontmatter 对齐 GitHub · Typora · Obsidian),跨块复制即得合法 Markdown。
-- **星际漫游与知识共鸣** — 星语密文造访好友星系(服务端裁剪,笔记正文永不出库);造访时自动高亮你们**共同拥有、甚至都点亮过**的知识(共鸣),可留一句星语、赠星、收纳;主人可见访客足迹与来信。
-- **真实 AI 接入** — 配置 OpenAI / Anthropic / 自定义网关(one-api、Ollama 等)后,费曼「AI 学生」由所配模型真实追问(性格/严格度进提示词),编辑器可生成摘要、推荐标签、建议跨星域连接;未配置时优雅回退本地规则学生。
-- **复习策略可选** — 随星变暗(遗忘曲线)/ 1·3·7·15 天间隔阶梯 / 每日固定 / 不提醒,四档策略真实驱动到期队列与桌面通知,星域整体变暗另有提醒;复习卡上可让 AI「考一考」出回忆题(自评永远归你)。
-- **时间之窗 · 观星热力图** — 体检页预演未来 7 天哪些星将熄灭/到期,一键排入复习——把遗忘从事后发现变成事前预警;16 周观星热力图与连续天数由时间线实时派生。
-- **知识可进可出** — ⌘K 全文搜索直达笔记正文(片段高亮);一键导出 Obsidian 风格 Markdown 仓库(zip,零依赖打包),也能把 .zip / 一批 .md **反向导入**长成星空(文件夹→星域、frontmatter→属性、[[wikilink]]→连线,增量并入不覆盖);按 `?` 弹出全站快捷键速查;体检页一键生成本周「星空周报」分享卡(PNG)。
-- **新手引导** — 首次打开自动弹出的 11 页导览册 + 末页聚光实地导览,随时可在设置里回看。
-- **账号与多设备** — 用户名/邮箱登录(scrypt + sessions),注册把当前匿名星空原地收进账号,换台设备也能回来;偏好与 AI 配置随快照同步,切换账号时本机密钥等痕迹全部清理。
-- **零构建 · 零依赖** — 浏览器内 Babel 编译 JSX;后端仅用 Node 内置 `node:sqlite`,不装任何三方包。
-
-**English**
-
-- **A star map that forgets** — retrievability `R = exp(−Δt / S)` decays against real time and drives each star's brightness and color temperature (cold blue = forgetting → warm gold-white = mastered).
-- **Ignite by teaching** — a star is truly **lit** only after you explain it in Feynman mode (a golden ignition moment); lit stars decay too, extinguishing into a re-kindle "ember" state below threshold.
-- **Spaced-repetition review** — due cards, three-way self-grading (forgot / fuzzy / got it), closing the loop that keeps stars alive.
-- **8 hi-fi screens** — star map · aerial heat map · 3D galaxy (Three.js) · semantic-zoom card · Feynman drawer · sidebar · list management · pro block editor.
-- **Pro block editor** — headings / todos / lists / quote / code / LaTeX / tables / images, live markdown conversion, ⌘F find-and-replace, backlinks and outline; import/export round-trips with real GFM (alerts, collapsible blocks, table escaping, frontmatter — GitHub · Typora · Obsidian aligned), and multi-block copy yields valid Markdown.
-- **Interstellar roaming & knowledge resonance** — visit friends' galaxies via share ciphers (server-side cropping; note bodies never leave the owner's database); while visiting, the stars you **both own — or both ignited** — light up as "resonance"; leave a one-line star-note, gift stars, collect them; owners see visitor footprints and mail.
-- **Real AI integration** — plug in OpenAI / Anthropic / any OpenAI-compatible gateway (one-api, Ollama…): the Feynman "AI student" asks real follow-up questions (persona & strictness shape the prompt), and the editor can summarize, suggest tags, and propose cross-constellation links; gracefully falls back to the local rule-based student when unconfigured.
-- **Selectable review strategies** — forgetting-curve cooling / classic 1·3·7·15-day ladder / daily / off, each genuinely driving the due queue and desktop notifications, plus a constellation-dimming nudge; review cards can ask the AI to quiz you (grading always stays yours).
-- **Window of time · stargazing heatmap** — the checkup page previews which stars will extinguish or fall due within 7 days, one click queues them — forgetting becomes a forewarning, not a post-mortem; a 16-week activity heatmap and streak derive live from the timeline.
-- **Knowledge flows both ways** — ⌘K full-text search reaches into note bodies (highlighted snippets); export your galaxy as an Obsidian-style Markdown vault (zip, zero-dependency packaging), and **import one back** — a .zip or a batch of .md files grows into a galaxy (folders→constellations, frontmatter→props, [[wikilinks]]→connections, merged incrementally); press `?` for a full shortcut cheatsheet; the checkup page renders a shareable weekly-report PNG card.
-- **Onboarding guide** — an 11-page carousel on first run plus a spotlight walkthrough, re-openable from Settings anytime.
-- **Accounts & multi-device** — username/email login (scrypt + sessions); registering folds your anonymous galaxy into the account in place; preferences and AI config travel with the snapshot, and every local trace (API keys included) is wiped on account switch.
-- **Zero-build · zero-dependency** — JSX compiled in the browser by Babel; the backend uses only Node's built-in `node:sqlite`, no third-party packages.
-
-<div align="center">
-<img src="docs/screenshots/onboarding.png" alt="新手引导 · 星图手册" width="720"/>
-<br/>
-<sub>新手引导「星图手册」· The onboarding guide</sub>
-</div>
-
----
-
-## 设计哲学 · Design Philosophy
-
-**中文** — 星图是一件*作品*,不是又一个白底办公笔记本。四条美学法则贯穿始终:
-
-1. **每个视觉元素都承载信息,而非纯装饰** — 亮度=记忆强度 · 大小=重要度 · 距离=关联度 · 色温=年龄。美,必须*可读*。
-2. **少即是多** — 全局 ≤ 3–4 种色相,无彩虹、无卡通、无拟物俗气。
-3. **暗场优先** — 大胆的黑色负空间,低信息密度,留出呼吸的余地。空账户几乎全黑,知识是唯一被引入的光。
-4. **编辑器专业可用第一,美观第二** — 但美从不掉线。
-
-**English** — Stellar Raft is a *work of art*, not another white-background office notebook. Four aesthetic laws hold throughout:
-
-1. **Every visual element carries information, never mere decoration** — brightness = memory strength · size = importance · distance = relatedness · color temperature = age. Beauty must be *readable*.
-2. **Less is more** — ≤ 3–4 hues total; no rainbow, no cartoon, no skeuomorphic kitsch.
-3. **Dark stage first** — bold black negative space, low density, room to breathe. An empty account is almost entirely black; knowledge is the only light introduced.
-4. **The editor is professional-first, beautiful-second** — but beauty never drops out.
-
-**调色板 · Palette**
-
-| 角色 · Role | 色值 · Value | 语义 · Meaning |
-| --- | --- | --- |
-| 星蓝 · Star-blue | `#9fc6ff` | 结构、连接、默认图标 · structure, links, default icons |
-| 暖金 · Gold | `#ffd98a → #ffb86b` | 奖励、点亮、掌握 · reward, ignition, mastery |
-| 深空 · Deep space | `#03040c → #05060f` | 背景星场 · the backdrop field |
-
----
-
-## 记忆模型 · The Memory Model
-
-**中文** — 每颗星维护 `sr = { S 稳定度, last 上次复习, lit 点亮时刻, ember 熄灭时刻 }`。可提取率 `R = exp(−Δt天 / S)` 直接作为亮度,每次打开、切视图、每分钟心跳都按真实时间重算。**点亮**是一条独立于亮度的认证轴:
-
-**English** — Each star holds `sr = { S stability, last review, lit timestamp, ember timestamp }`. Retrievability `R = exp(−Δt / S)` is used directly as brightness and recomputed on every open, view switch, and per-minute heartbeat. **Ignition** is a certification axis independent of brightness:
-
-<div align="center">
-<img src="docs/diagrams/ignite-state.svg" alt="点亮状态机 · Ignite state machine" width="820"/>
-</div>
-
-> 亮度 `R = exp(−Δt / S)`:冷蓝(遗忘)→ 暖金白(掌握)。复习成功 `S ×= 增长因子 + (1−R)·0.6`,失败 `×0.45`。曾点亮的星稳定度封顶 365 天,从未点亮的封顶 60 天。
-> Brightness `R = exp(−Δt / S)`: cold blue (forgetting) → warm gold-white (mastered). On success `S ×= growth + (1−R)·0.6`, on failure `×0.45`. Stability caps at 365 days once lit, 60 days if never lit.
-
----
-
-## 架构 · Architecture
-
-**中文** — 自下而上分层:设计令牌 → 组件库 → 应用 UI Kit,旁挂零依赖后端与零构建文档站。
-
-**English** — Layered bottom-up: design tokens → component library → app UI kit, with a zero-dependency backend and a zero-build docs site alongside.
-
-<div align="center">
-<img src="docs/diagrams/architecture.svg" alt="分层架构 · Architecture" width="820"/>
-</div>
-
----
-
-## 技术栈 · Tech Stack
-
-| 层 · Layer | 技术 · Technology |
+| | |
 | --- | --- |
-| UI | React 18(浏览器内 `@babel/standalone` 编译 · 零构建) |
-| 3D | Three.js(三维星系 Galaxy3D) |
-| 图标 · Icons | Lucide(线性图标 · 无 emoji) |
-| 样式 · Styling | 原生 CSS 设计令牌 · 玻璃拟态 · `data-theme` 双主题 |
-| 记忆 · Memory | FSRS-lite(`R = exp(−Δt/S)`) |
-| 后端 · Backend | Node ≥ 22.5 内置 `node:sqlite`(零三方依赖) |
-| 测试 · Test | `node --test`(108 passing) · oxlint |
+| [快速开始](#快速开始) · [技术栈](#技术栈) · [项目结构](#项目结构) · [脚本](#脚本) | 上手 |
+| [记忆模型](#记忆模型) · [设计哲学](#设计哲学) | 它为什么这样设计 |
+| [功能全景](#功能全景) · [移动端](#移动端) · [星港管理台](#星港管理台) | 它能做什么 |
 
 ---
 
-## 快速开始 · Getting Started
+## 快速开始
 
-**前置 · Prerequisites** — Node.js **≥ 22.5**(需要内置 `node:sqlite`)。
+**前置** — Node.js **≥ 22.5**（需要内置的 `node:sqlite`）。
 
 ```bash
-# 安装（仅开发依赖：Babel standalone、oxlint）
-# Install (dev-only deps: Babel standalone, oxlint)
-npm install
-
-# 启动本地服务（静态托管 + API）
-# Start the local server (static + API)
-npm run serve
-
-# 运行测试套件 · Run the test suite
-npm test
-
-# 从源码重建设计系统产物 _ds_bundle.js / _ds_manifest.json
-# Rebuild the design-system bundle from sources
-npm run build
-
-# 代码规范检查 · Lint
-npm run lint
+npm install     # 仅两个开发依赖：Babel standalone、oxlint
+npm run serve   # 启动本地后端 + 静态托管
 ```
 
-打开浏览器访问 **http://localhost:8756/ui_kits/stellar-raft/**,即可点击体验完整应用。
-Then open **http://localhost:8756/ui_kits/stellar-raft/** to click through the full app.
+打开 **http://localhost:8756/ui_kits/stellar-raft/** 即可点击体验完整应用。
 
-> 换端口 · Custom port:`PORT=xxxx npm run serve`
+服务器**首次启动**会自动入户一个管理员账号，凭据打在控制台上（默认 `admin` / `stellar-admin`）。要部署到公网，用环境变量在第一次启动前指定，默认密码从一开始就不存在：
+
+```bash
+SR_ADMIN_USER=captain SR_ADMIN_PASS='换成你自己的强密码' npm run serve
+```
+
+**环境变量**
+
+| 变量 | 作用 |
+| --- | --- |
+| `PORT` | 监听端口（默认 `8756`） |
+| `SR_DB` | 数据库落点（默认 `server/stellar.db`；父目录不存在会自动建出来） |
+| `SR_ADMIN_USER` / `SR_ADMIN_PASS` | 首次启动时的管理员凭据 |
+| `SR_TRUST_PROXY=1` | 信任 `X-Forwarded-For` 首跳作为来源 IP（**反向代理后必开**） |
+| `SR_GUEST_PER_IP` | 每 IP 游客数初值（默认 `1`，`0` = 不限；之后以管理台设置为准） |
+| `SR_GUEST_GATES=off` | 四项功能门禁的初值整体关掉（默认全开） |
+
+> 部署时把 `SR_DB` 指到数据盘，升级换代码就不必搬数据；本地想同时跑第二个实例做验证，给它一份临时库即可，不会碰到手上这份：
+>
+> ```bash
+> PORT=8757 SR_DB=/tmp/probe/stellar.db npm run serve
+> ```
 
 ---
 
-## 项目结构 · Project Structure
+## 记忆模型
+
+每颗星维护一组状态 `sr = { S 稳定度, last 上次复习, lit 点亮时刻, ember 熄灭时刻 }`。
+
+**可提取率** `R = exp(−Δt天 / S)` 直接作为亮度——每次打开、每次切视图、每分钟心跳，都按真实时间重算。你不复习，星就真的会暗下去。
+
+```
+亮度 R = exp(−Δt / S)        冷蓝（正在遗忘）→ 暖金白（已掌握）
+复习成功  S ×= 增长因子 + (1−R)·0.6
+复习失败  S ×= 0.45
+稳定度上限  曾点亮 365 天 · 从未点亮 60 天
+```
+
+**点亮**是一条独立于亮度的认证轴——一颗星要在费曼模式里被「讲透」才算真正点亮。点亮的星同样会衰减，低于阈值熄灭为「待重燃」的余烬态。
+
+<div align="center">
+<img src="docs/diagrams/ignite-state.svg" alt="点亮状态机" width="820"/>
+</div>
+
+**四档复习策略**（真实驱动到期队列与桌面通知）：随星变暗（遗忘曲线）· 1·3·7·15 天间隔阶梯 · 每日固定 · 不提醒。
+
+---
+
+## 设计哲学
+
+星图是一件*作品*，不是又一个白底办公笔记本。四条美学法则贯穿始终：
+
+1. **每个视觉元素都承载信息，而非纯装饰** — 亮度=记忆强度 · 大小=重要度 · 距离=关联度 · 色温=年龄。美，必须*可读*。
+2. **少即是多** — 全局 ≤ 3–4 种色相，无彩虹、无卡通、无拟物俗气。
+3. **暗场优先** — 大胆的黑色负空间，低信息密度，留出呼吸的余地。空账户几乎全黑，**知识是唯一被引入的光**。
+4. **编辑器专业可用第一，美观第二** — 但美从不掉线。
+
+**调色板**
+
+| 角色 | 色值 | 语义 |
+| --- | --- | --- |
+| 星蓝 | `#9fc6ff` | 结构、连接、默认图标 |
+| 暖金 | `#ffd98a → #ffb86b` | 奖励、点亮、掌握 |
+| 深空 | `#03040c → #05060f` | 背景星场 |
+
+---
+
+## 功能全景
+
+### 知识本身
+
+- **会遗忘的知识星图** — 记忆强度按真实时间衰减，直接驱动每颗星的亮度与色温。
+- **费曼内化点亮** — 讲透一颗星，它才真正亮起来（金色高潮瞬间）。
+- **间隔重复复习** — 到期卡片三档自评（忘了 / 模糊 / 记得），闭环驱动稳定度增长。
+- **时间之窗** — 体检页预演未来 7 天哪些星将熄灭或到期，一键排入复习；把遗忘从**事后发现**变成**事前预警**。16 周观星热力图与连续天数由时间线实时派生。
+
+### 写与读
+
+- **8 个高保真界面** — 星图主界面 · 亮度鸟瞰热图 · 三维星系（Three.js）· 近景语义缩放 · 费曼右抽屉 · 侧边栏 · 列表管理 · 专业块编辑器。
+- **专业块编辑器** — H1–H3 / 待办 / 列表 / 引用 / 代码 / LaTeX / 表格 / 图片，markdown 即时转换、⌘F 查找替换、反向链接与大纲。
+- **知识可进可出** — ⌘K 全文搜索直达笔记正文（片段高亮）；一键导出 Obsidian 风格 Markdown 仓库（zip，零依赖打包），也能把 .zip / 一批 .md **反向导入**长成星空（文件夹→星域、frontmatter→属性、`[[wikilink]]`→连线，增量并入不覆盖）。导入导出与真实 GFM 完全互逆，对齐 GitHub · Typora · Obsidian。
+- **按 `?`** 随时弹出全站快捷键速查面板。
+
+### 社交与 AI
+
+- **星际漫游与知识共鸣** — 用星语密文造访好友星系（服务端裁剪，**笔记正文永不出库**）；造访时自动高亮你们共同拥有、甚至都点亮过的知识；可留一句星语、赠星、收纳；主人可见访客足迹与来信。
+- **真实 AI 接入** — 配置 OpenAI / Anthropic / 自定义网关（one-api、Ollama 等）后，费曼「AI 学生」由所配模型真实追问，编辑器可生成摘要、推荐标签、建议跨星域连接。未配置时优雅回退本地规则学生。
+
+### 账号与工程
+
+- **账号与多设备** — 用户名 / 邮箱登录（scrypt + sessions）；注册把当前匿名星空**原地收进账号**，一颗星都不丢；切换账号时本机密钥等痕迹全部清理。
+- **新手引导** — 首次打开自动弹出的 11 页导览册 + 末页聚光实地导览，随时可在设置里回看。
+- **零构建 · 零依赖** — 浏览器内 Babel 编译 JSX；后端仅用 Node 内置 `node:sqlite`。
+
+<div align="center">
+<img src="docs/screenshots/onboarding.webp" alt="新手引导 · 星图手册" width="720"/>
+<br/>
+<sub>新手引导「星图手册」</sub>
+</div>
+
+---
+
+## 移动端
+
+整套 kit 原本按 1440×900 桌面画。现在一套断点贯穿全站——手机上换的是**布局与手势**，不是另做一个阉割版。
+
+| 断点 | 宽度 | 布局 |
+| --- | --- | --- |
+| `phone` | ≤ 720px | 侧栏收进左侧抽屉 · 底部标签栏（星图/列表/复习/收件箱/更多）· 顶部条 · 视图单列 · 弹层铺满 |
+| `tablet` | ≤ 1024px | 侧栏可折叠 · 编辑器右侧知识栏让位 |
+| `desktop` | > 1024px | 原本的桌面布局，一切照旧 |
+
+**手势** — 星图从鼠标事件整体换成指针事件，触摸这才真的能用：
+
+| 动作 | 手机 | 桌面 |
+| --- | --- | --- |
+| 平移画布 | 拖动空白 | 拖动空白 |
+| 缩放 | 双指捏合 | 滚轮 |
+| 新建星域 / 知识星 | 长按空白 520ms | 右键 |
+| 移动一颗星 / 整个星域 | 拖动星点 / 主星 | 同左 |
+| 看某颗星 | 点一下（摘要卡贴屏底，不挡星空） | 点一下（卡片跟着星） |
+
+**几处刻意的取舍**
+
+- **不禁用捏合放大** — `user-scalable=no` 是无障碍红线。星图自己的缩放走双指手势，与浏览器缩放并不冲突。
+- **安全区集中在 `--sr-safe-*` 四个变量里**，组件不各自写 `env()`；顶部条吃掉刘海、底部栏吃掉 Home 条，视图拿到的是一块干净矩形。
+- **`100vh` 会被地址栏吞掉** — 优先 `100dvh`，老浏览器退回实测的 `--sr-vh`。
+- **断点只有一处真源**（`responsive.js` 的 `SRScreen`），组件一律 `SRKit.useScreen()`；测试里有一条专门盯着「有没有人偷偷自己写 matchMedia」。
+- **编辑器不挂底部标签栏** — 键盘弹起时它只会碍事，返回入口在编辑器自己的顶部。
+
+---
+
+## 星港管理台
+
+登录管理员账号后，侧边栏底部会出现 **星港管理台**（只有管理员看得见）。管理员在应用里与普通用户**完全一样**——一样建星、点亮、复习、漫游；管理台只是多出来的一层。
+
+只要还在用出厂密码，管理台顶部和侧边栏入口就一直挂着提醒，直到你在 **设置 → 账户 → 修改密码** 换掉为止。
+
+**八个分区**
+
+| 分区 | 能做什么 |
+| --- | --- |
+| **总览** | 账号构成 · 全站星数与点亮数 · 近 14 天新到访/注册/登录趋势 · 游客与来源 IP · 分享与来信 · 进程与磁盘 · 站点开关现状，每 10 秒刷新运行读数 |
+| **旅客** | 搜索（名字/用户名/邮箱/IP）、筛选、排序、分页；展开任一行看这个人的星域分布、记忆强度、来源 IP、最近登录、分享、访客与会话；停用、任免管理员、重置密码、改资料、强制下线、级联删号 |
+| **游客** | 按来源 IP 聚合的匿名游客名单 · 每 IP 限额调节 · 四项功能门禁的逐项开关 · 一键清理「从没存过星系且 7 天没露面」的空账号（存过东西的一个都不动） |
+| **分享** | 全站谁把星系开给了外面、开到什么程度、有多少访客；可强制关闭（密文保留，主人能自己再开） |
+| **会话** | 每台登录过的设备；令牌只出一段指纹，完整令牌永不出库 |
+| **广播** | 全站公告（三档语气 + 实时预览，用户读过一次就不再打扰）· 新账号注册开关 · 维护模式 |
+| **系统** | 数据库体积明细 · 一键备份下载（完整 `.db`）· 收拢 WAL · VACUUM 压缩 · 清理过期会话 |
+| **日志** | 每一次停用、删号、改密与站点变更的审计留痕（保留最近 2000 条） |
+
+每个数字都由服务端当场从库里算出，不缓存也不估算。
+
+**几条硬规矩** — 管理员不能停用或删除自己；最后一位管理员不能被撤职；要停用或删除另一位管理员，得先撤销对方的管理员身份；删号要求原样敲一遍对方用户名；停用即刻踢下线，被停用的人只剩「退出登录」这一条路。
+
+> 每个 `/api/admin/*` 在服务端都有独立守卫——把前端的布尔值改成 `true`，拿不到任何数据。
+
+### 游客与功能门禁
+
+**每个 IP 一个游客** — 同一来源地址上只允许存在一个未注册的匿名账号。第二位访客会被拦下并被请去登录或注册；注册之后账号不再算游客，这个 IP 的名额立刻空出来。限额在管理台的**游客**分区里可调（填 `0` = 不限）。
+
+> **反向代理下必读** — 星图默认按 socket 直连地址判定来源。跑在 nginx / Caddy 后面时所有请求都长着 `127.0.0.1`，限额会把整台服务器锁成一个游客。这种部署要用 `SR_TRUST_PROXY=1` 启动，改读 `X-Forwarded-For` 的第一跳——**前面确实有你自己的代理时才开**，这个头是可以伪造的。
+
+**四项功能需要账号**（默认全开，可逐项关闭）
+
+| 门禁 | 拦在哪 | 为什么 |
+| --- | --- | --- |
+| 写笔记 | 前端入口 | 笔记是要长期回来看的东西，值得有个能带走的账号 |
+| Markdown 仓库进出 | 前端入口 | 整片星空的批量导入导出 |
+| 分享星系 | **服务端硬拦** | 密文发出去，别人就能循着它找到你——先得有个主人 |
+| 星际漫游 | **服务端硬拦** | 造访会在对方星系留下足迹，也让对方能回信 |
+
+游客点到受限功能时，不会看到坏掉的按钮，而是一张说明卡加一句「注册会把你现在的星空原地收进账号，一颗星都不会丢」，登录页随即递到手边。
+
+---
+
+## 架构
+
+自下而上分层：设计令牌 → 组件库 → 应用 UI Kit，旁挂零依赖后端与零构建文档站。
+
+<div align="center">
+<img src="docs/diagrams/architecture.svg" alt="分层架构" width="820"/>
+</div>
+
+---
+
+## 技术栈
+
+| 层 | 技术 |
+| --- | --- |
+| UI | React 18（浏览器内 `@babel/standalone` 编译 · 零构建） |
+| 3D | Three.js（三维星系 Galaxy3D） |
+| 图标 | Lucide（线性图标 · 无 emoji） |
+| 样式 | 原生 CSS 设计令牌 · 玻璃拟态 · `data-theme` 双主题 |
+| 记忆 | FSRS-lite（`R = exp(−Δt/S)`） |
+| 后端 | Node ≥ 22.5 内置 `node:sqlite`（零三方依赖） |
+| 测试 | `node --test`（18 个套件 236 项）· oxlint |
+
+---
+
+## 项目结构
 
 ```text
 stellar-raft/
@@ -194,43 +266,40 @@ stellar-raft/
 ├─ tokens/                 # 设计令牌：colors · spacing · typography · effects · themes(黎明 Dawn)
 ├─ assets/                 # <sr-starfield> 星场 web component + SRConnect 连接曲线
 ├─ components/             # 18 个可复用原语 · core / knowledge / overlay / form
-├─ ui_kits/stellar-raft/   # 可交互桌面端 App（8 屏 + 记忆模型 + 点亮/复习 + 持久化 + 新手引导）
-├─ server/                 # 零依赖本地后端（node:sqlite：账号/会话 · 匿名令牌 · 整存整取 · 分享码）
-├─ docs/                   # 零构建静态文档站 + 截图
+├─ ui_kits/stellar-raft/   # 可交互 App（8 屏 + 管理台 · 三档断点 · 记忆模型 · 点亮/复习 · 持久化）
+├─ server/                 # 零依赖本地后端（node:sqlite：账号/会话 · 管理员与站点设置 · 分享码）
+├─ docs/                   # 零构建静态文档站 + 截图 + 架构图
 ├─ guidelines/             # 15 张基础规范示例卡（颜色 / 字体 / 间距 / 图标 / 品牌）
-├─ scripts/                # build · lint（构建产物由源码生成，勿手改 _ds_bundle.js）
-├─ tests/                  # node --test：server / tokens / bundle / mdcore / onboarding
-└─ SKILL.md                # 设计系统的 Agent-Skill 封装（技能清单）
+├─ scripts/                # build · lint（产物由源码生成，勿手改 _ds_bundle.js）
+└─ tests/                  # node --test：18 个套件（server / auth / admin / responsive / compile / tokens …）
 ```
 
-**组件库 · Design System** — 18 个原语挂在命名空间 `window.StellarRaftDesignSystem_2866af`:
+**组件库** — 18 个原语挂在命名空间 `window.StellarRaftDesignSystem_2866af`：
 
 - `core/` — Icon · IconButton · Button · GlassPanel · Badge · Tag · Input
-- `knowledge/` — MemoryBar(+ memoryColor)· StarNode · ConstellationItem
-- `overlay/` — Modal · Toast(+ imperative `toast()`)· Tooltip · ContextMenu
+- `knowledge/` — MemoryBar（+ memoryColor）· StarNode · ConstellationItem
+- `overlay/` — Modal · Toast（+ 命令式 `toast()`）· Tooltip · ContextMenu
 - `form/` — Select · Switch · Checkbox · Tabs
 
 ---
 
-## 脚本 · Scripts
+## 脚本
 
-| 命令 · Command | 作用 · What it does |
+| 命令 | 作用 |
 | --- | --- |
-| `npm run serve` | 启动本地后端 + 静态托管(`server/server.js`) |
-| `npm test` | 运行 `node --test`(server / tokens / bundle / mdcore / onboarding) |
+| `npm run serve` | 启动本地后端 + 静态托管（`server/server.js`） |
+| `npm test` | 运行 `node --test`，18 个套件 236 项 |
 | `npm run build` | 从源码重建 `_ds_bundle.js` + `_ds_manifest.json` |
-| `npm run build:check` | 检测产物与源码是否漂移(CI 用) |
+| `npm run build:check` | 检测产物与源码是否漂移（CI 用） |
 | `npm run lint` | 以派生的规范配置运行 oxlint |
 
 ---
 
-## 许可 · License
+## 许可
 
-**中文** — 本仓库当前为**私有项目,保留所有权利**;尚未附带开源许可证。如需开放,请在根目录添加 `LICENSE` 文件。
-
-**English** — This repository is currently **private and all rights are reserved**; no open-source license is attached yet. To open it up, add a `LICENSE` file at the root.
+本仓库当前为**私有项目，保留所有权利**，尚未附带开源许可证。如需开放，请在根目录添加 `LICENSE` 文件。
 
 <div align="center">
 <br/>
-<sub>星图 · Stellar Raft — 记忆,让它发光。 · Memory, made to shine.</sub>
+<sub>星图 · Stellar Raft — 记忆，让它发光。</sub>
 </div>
