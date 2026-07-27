@@ -172,6 +172,7 @@ function ReviewSession({ onClose, onOpenStar }) {
   // 结束页回看：星 id → 这一轮给它的自评。队列顺序就是复习顺序，回看照原序摊开
   const [grades, setGrades] = React.useState({});
   const [recapOpen, setRecapOpen] = React.useState(null); // 展开中的星 id | null
+  const [listOpen, setListOpen] = React.useState(false);  // 回看清单整体是否展开
   // 结束页「去重燃」：在会话之上就地打开费曼抽屉（重燃是恢复，出口留在结束页，不打断卡序）
   const [relight, setRelight] = React.useState(null); // starId | null
   const timers = React.useRef([]);
@@ -363,23 +364,29 @@ function ReviewSession({ onClose, onOpenStar }) {
             <div style={{ fontSize: 12.5, color: 'var(--text-3)', marginTop: 10, lineHeight: 1.7 }}>
               {stats.fail > 0 ? '暗下去的星已排回队列，它们会在合适的时候等你。' : '星光已经归位。'}
             </div>
-            {/* 本轮复习过的星：照复习顺序回看，点开即摊开摘要与大纲 */}
+            {/* 本轮复习过的星：默认收起，结束页保持一句话收尾；展开后照复习顺序回看 */}
             {recap.length > 0 && (
               <div style={{ marginTop: 18, paddingTop: 16, borderTop: '1px solid var(--line)', textAlign: 'left' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 7, fontSize: 12.5, color: 'var(--text-2)', marginBottom: 10 }}>
+                <button type="button" className="sr-focus-ring" onClick={() => setListOpen(v => !v)}
+                  aria-expanded={listOpen} aria-controls="sr-recap-list"
+                  style={{ width: '100%', display: 'flex', alignItems: 'center', gap: 7, padding: '4px 2px',
+                    background: 'transparent', border: 'none', cursor: 'pointer', textAlign: 'left',
+                    fontSize: 12.5, color: 'var(--text-2)', fontFamily: 'inherit' }}>
                   <Icon name="list" size={14} color="var(--star-blue)" />
-                  本轮复习过的 {recap.length} 颗星——点开可以再看一眼。
-                </div>
-                {/* 高度跟着视口给：展开一条要占近 300px，卡死在固定值上会让「3 颗星」
-                    只看得见 2 条，且没有任何可滚动的提示。超出才滚动。 */}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 6, maxHeight: '46vh', overflowY: 'auto' }}>
-                  {recap.map(s => (
-                    <RSRecapRow key={s.id} star={s} grade={grades[s.id]}
-                      open={recapOpen === s.id}
-                      onToggle={() => setRecapOpen(id => (id === s.id ? null : s.id))}
-                      onOpenStar={onOpenStar} />
-                  ))}
-                </div>
+                  <span style={{ flex: 1, minWidth: 0 }}>本轮复习过的 {recap.length} 颗星</span>
+                  <Icon name={listOpen ? 'chevron-up' : 'chevron-down'} size={14} color="var(--text-3)" />
+                </button>
+                {listOpen && (
+                  /* 展开一条要占近 300px，高度按视口给，超出才滚动 */
+                  <div id="sr-recap-list" style={{ display: 'flex', flexDirection: 'column', gap: 6, marginTop: 10, maxHeight: '46vh', overflowY: 'auto' }}>
+                    {recap.map(s => (
+                      <RSRecapRow key={s.id} star={s} grade={grades[s.id]}
+                        open={recapOpen === s.id}
+                        onToggle={() => setRecapOpen(id => (id === s.id ? null : s.id))}
+                        onOpenStar={onOpenStar} />
+                    ))}
+                  </div>
+                )}
               </div>
             )}
             {/* 本轮的熄灭 / 待重燃：逐颗给出「去重燃」出口（费曼快速通道，就地打开） */}

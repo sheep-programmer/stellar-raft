@@ -1,4 +1,4 @@
-/* @ds-bundle: {"format":3,"namespace":"StellarRaftDesignSystem_2866af","components":[{"name":"Badge","sourcePath":"components/core/Badge.jsx"},{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"GlassPanel","sourcePath":"components/core/GlassPanel.jsx"},{"name":"Icon","sourcePath":"components/core/Icon.jsx"},{"name":"IconButton","sourcePath":"components/core/IconButton.jsx"},{"name":"Input","sourcePath":"components/core/Input.jsx"},{"name":"Tag","sourcePath":"components/core/Tag.jsx"},{"name":"Checkbox","sourcePath":"components/form/Checkbox.jsx"},{"name":"Select","sourcePath":"components/form/Select.jsx"},{"name":"Switch","sourcePath":"components/form/Switch.jsx"},{"name":"Tabs","sourcePath":"components/form/Tabs.jsx"},{"name":"ConstellationItem","sourcePath":"components/knowledge/ConstellationItem.jsx"},{"name":"MemoryBar","sourcePath":"components/knowledge/MemoryBar.jsx"},{"name":"StarNode","sourcePath":"components/knowledge/StarNode.jsx"},{"name":"ContextMenu","sourcePath":"components/overlay/ContextMenu.jsx"},{"name":"Modal","sourcePath":"components/overlay/Modal.jsx"},{"name":"Toast","sourcePath":"components/overlay/Toast.jsx"},{"name":"Tooltip","sourcePath":"components/overlay/Tooltip.jsx"}],"sourceHashes":{"assets/starfield.js":"d776d2b45dc4","components/core/Badge.jsx":"b0bd9735d638","components/core/Button.jsx":"a1c387a07e86","components/core/GlassPanel.jsx":"299a19d8fbb4","components/core/Icon.jsx":"7505f83ab03d","components/core/IconButton.jsx":"24052f4eed78","components/core/Input.jsx":"54a6c9af7e3f","components/core/Tag.jsx":"d8513c07ea96","components/form/Checkbox.jsx":"38aa593157dd","components/form/Select.jsx":"86b8c1c71e12","components/form/Switch.jsx":"938c62be0664","components/form/Tabs.jsx":"ede2dbff1963","components/knowledge/ConstellationItem.jsx":"d73e999469b6","components/knowledge/MemoryBar.jsx":"a54c928d5065","components/knowledge/StarNode.jsx":"1bedee49f0bf","components/overlay/ContextMenu.jsx":"11783420e876","components/overlay/Modal.jsx":"6119273e95da","components/overlay/Toast.jsx":"d22ad40680a6","components/overlay/Tooltip.jsx":"a042caa8970d","ui_kits/stellar-raft/AIConfig.jsx":"0408b943b28a","ui_kits/stellar-raft/AdminConsole.jsx":"ac04bb2e6499","ui_kits/stellar-raft/AerialView.jsx":"8209eb6af395","ui_kits/stellar-raft/BlackHole.jsx":"5e67807d3617","ui_kits/stellar-raft/Checkup.jsx":"786135b78aa7","ui_kits/stellar-raft/CommandPalette.jsx":"90f10790166c","ui_kits/stellar-raft/Editor.jsx":"f73d4772f7a3","ui_kits/stellar-raft/EditorMenus.jsx":"489f22c71b48","ui_kits/stellar-raft/FeynmanDrawer.jsx":"591b225e555a","ui_kits/stellar-raft/Galaxy3D.jsx":"2ce87e7da57d","ui_kits/stellar-raft/Inbox.jsx":"c4a70ad0bf9a","ui_kits/stellar-raft/KeysHelp.jsx":"948b00f411ed","ui_kits/stellar-raft/ListView.jsx":"f79c250bd947","ui_kits/stellar-raft/LoginView.jsx":"18d9c842c5c6","ui_kits/stellar-raft/MobileShell.jsx":"932bb48e2e9e","ui_kits/stellar-raft/Onboarding.jsx":"40b71668b69b","ui_kits/stellar-raft/ReviewSession.jsx":"45fa602fc39c","ui_kits/stellar-raft/Settings.jsx":"da9bff94d318","ui_kits/stellar-raft/Sidebar.jsx":"672d753c5efb","ui_kits/stellar-raft/StarMap.jsx":"76c3b4f2e35e","ui_kits/stellar-raft/Timeline.jsx":"1602ca5b6c95","ui_kits/stellar-raft/VisitView.jsx":"e50b2aae82af","ui_kits/stellar-raft/ai.js":"2f79eb3473c9","ui_kits/stellar-raft/app.jsx":"c28140011769","ui_kits/stellar-raft/codehl.js":"6fbdd0100deb","ui_kits/stellar-raft/data.js":"84c708c519f0","ui_kits/stellar-raft/mdcore.js":"b82d5054c3b6","ui_kits/stellar-raft/responsive.js":"29feedf6c503","ui_kits/stellar-raft/sanitize.js":"88e63cd63253","ui_kits/stellar-raft/transition.js":"3725d8982dc5","ui_kits/stellar-raft/undocore.js":"7f8c94da35f9","ui_kits/stellar-raft/vault.js":"bfb5fdd87949"},"inlinedExternals":[],"unexposedExports":[{"name":"memoryColor","sourcePath":"components/knowledge/MemoryBar.jsx"}],"exposedHelpers":[{"name":"toast","sourcePath":"components/overlay/Toast.jsx"}]} */
+/* @ds-bundle: {"format":3,"namespace":"StellarRaftDesignSystem_2866af","components":[{"name":"Badge","sourcePath":"components/core/Badge.jsx"},{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"GlassPanel","sourcePath":"components/core/GlassPanel.jsx"},{"name":"Icon","sourcePath":"components/core/Icon.jsx"},{"name":"IconButton","sourcePath":"components/core/IconButton.jsx"},{"name":"Input","sourcePath":"components/core/Input.jsx"},{"name":"Tag","sourcePath":"components/core/Tag.jsx"},{"name":"Checkbox","sourcePath":"components/form/Checkbox.jsx"},{"name":"Select","sourcePath":"components/form/Select.jsx"},{"name":"Switch","sourcePath":"components/form/Switch.jsx"},{"name":"Tabs","sourcePath":"components/form/Tabs.jsx"},{"name":"ConstellationItem","sourcePath":"components/knowledge/ConstellationItem.jsx"},{"name":"MemoryBar","sourcePath":"components/knowledge/MemoryBar.jsx"},{"name":"StarNode","sourcePath":"components/knowledge/StarNode.jsx"},{"name":"ContextMenu","sourcePath":"components/overlay/ContextMenu.jsx"},{"name":"Modal","sourcePath":"components/overlay/Modal.jsx"},{"name":"Toast","sourcePath":"components/overlay/Toast.jsx"},{"name":"Tooltip","sourcePath":"components/overlay/Tooltip.jsx"}],"sourceHashes":{"assets/starfield.js":"d776d2b45dc4","components/core/Badge.jsx":"b0bd9735d638","components/core/Button.jsx":"a1c387a07e86","components/core/GlassPanel.jsx":"299a19d8fbb4","components/core/Icon.jsx":"7505f83ab03d","components/core/IconButton.jsx":"24052f4eed78","components/core/Input.jsx":"54a6c9af7e3f","components/core/Tag.jsx":"d8513c07ea96","components/form/Checkbox.jsx":"38aa593157dd","components/form/Select.jsx":"86b8c1c71e12","components/form/Switch.jsx":"938c62be0664","components/form/Tabs.jsx":"ede2dbff1963","components/knowledge/ConstellationItem.jsx":"d73e999469b6","components/knowledge/MemoryBar.jsx":"a54c928d5065","components/knowledge/StarNode.jsx":"1bedee49f0bf","components/overlay/ContextMenu.jsx":"11783420e876","components/overlay/Modal.jsx":"6119273e95da","components/overlay/Toast.jsx":"d22ad40680a6","components/overlay/Tooltip.jsx":"a042caa8970d","ui_kits/stellar-raft/AIConfig.jsx":"0408b943b28a","ui_kits/stellar-raft/AdminConsole.jsx":"ac04bb2e6499","ui_kits/stellar-raft/AerialView.jsx":"8209eb6af395","ui_kits/stellar-raft/BlackHole.jsx":"5e67807d3617","ui_kits/stellar-raft/Checkup.jsx":"786135b78aa7","ui_kits/stellar-raft/CommandPalette.jsx":"90f10790166c","ui_kits/stellar-raft/Editor.jsx":"f73d4772f7a3","ui_kits/stellar-raft/EditorMenus.jsx":"489f22c71b48","ui_kits/stellar-raft/FeynmanDrawer.jsx":"591b225e555a","ui_kits/stellar-raft/Galaxy3D.jsx":"2ce87e7da57d","ui_kits/stellar-raft/Inbox.jsx":"c4a70ad0bf9a","ui_kits/stellar-raft/KeysHelp.jsx":"948b00f411ed","ui_kits/stellar-raft/ListView.jsx":"f79c250bd947","ui_kits/stellar-raft/LoginView.jsx":"18d9c842c5c6","ui_kits/stellar-raft/MobileShell.jsx":"932bb48e2e9e","ui_kits/stellar-raft/Onboarding.jsx":"40b71668b69b","ui_kits/stellar-raft/ReviewSession.jsx":"35ab7d4bff9c","ui_kits/stellar-raft/Settings.jsx":"da9bff94d318","ui_kits/stellar-raft/Sidebar.jsx":"672d753c5efb","ui_kits/stellar-raft/StarMap.jsx":"76c3b4f2e35e","ui_kits/stellar-raft/Timeline.jsx":"1602ca5b6c95","ui_kits/stellar-raft/VisitView.jsx":"e50b2aae82af","ui_kits/stellar-raft/ai.js":"2f79eb3473c9","ui_kits/stellar-raft/app.jsx":"c28140011769","ui_kits/stellar-raft/codehl.js":"6fbdd0100deb","ui_kits/stellar-raft/data.js":"84c708c519f0","ui_kits/stellar-raft/mdcore.js":"b82d5054c3b6","ui_kits/stellar-raft/responsive.js":"29feedf6c503","ui_kits/stellar-raft/sanitize.js":"88e63cd63253","ui_kits/stellar-raft/transition.js":"3725d8982dc5","ui_kits/stellar-raft/undocore.js":"7f8c94da35f9","ui_kits/stellar-raft/vault.js":"bfb5fdd87949"},"inlinedExternals":[],"unexposedExports":[{"name":"memoryColor","sourcePath":"components/knowledge/MemoryBar.jsx"}],"exposedHelpers":[{"name":"toast","sourcePath":"components/overlay/Toast.jsx"}]} */
 
 (() => {
 
@@ -26500,6 +26500,7 @@ function ReviewSession({
   // 结束页回看：星 id → 这一轮给它的自评。队列顺序就是复习顺序，回看照原序摊开
   const [grades, setGrades] = React.useState({});
   const [recapOpen, setRecapOpen] = React.useState(null); // 展开中的星 id | null
+  const [listOpen, setListOpen] = React.useState(false); // 回看清单整体是否展开
   // 结束页「去重燃」：在会话之上就地打开费曼抽屉（重燃是恢复，出口留在结束页，不打断卡序）
   const [relight, setRelight] = React.useState(null); // starId | null
   const timers = React.useRef([]);
@@ -26873,24 +26874,49 @@ function ReviewSession({
       borderTop: '1px solid var(--line)',
       textAlign: 'left'
     }
-  }, /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    className: "sr-focus-ring",
+    onClick: () => setListOpen(v => !v),
+    "aria-expanded": listOpen,
+    "aria-controls": "sr-recap-list",
     style: {
+      width: '100%',
       display: 'flex',
       alignItems: 'center',
       gap: 7,
+      padding: '4px 2px',
+      background: 'transparent',
+      border: 'none',
+      cursor: 'pointer',
+      textAlign: 'left',
       fontSize: 12.5,
       color: 'var(--text-2)',
-      marginBottom: 10
+      fontFamily: 'inherit'
     }
   }, /*#__PURE__*/React.createElement(Icon, {
     name: "list",
     size: 14,
     color: "var(--star-blue)"
-  }), "\u672C\u8F6E\u590D\u4E60\u8FC7\u7684 ", recap.length, " \u9897\u661F\u2014\u2014\u70B9\u5F00\u53EF\u4EE5\u518D\u770B\u4E00\u773C\u3002"), /*#__PURE__*/React.createElement("div", {
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      flex: 1,
+      minWidth: 0
+    }
+  }, "\u672C\u8F6E\u590D\u4E60\u8FC7\u7684 ", recap.length, " \u9897\u661F"), /*#__PURE__*/React.createElement(Icon, {
+    name: listOpen ? 'chevron-up' : 'chevron-down',
+    size: 14,
+    color: "var(--text-3)"
+  })), listOpen &&
+  /*#__PURE__*/
+  /* 展开一条要占近 300px，高度按视口给，超出才滚动 */
+  React.createElement("div", {
+    id: "sr-recap-list",
     style: {
       display: 'flex',
       flexDirection: 'column',
       gap: 6,
+      marginTop: 10,
       maxHeight: '46vh',
       overflowY: 'auto'
     }
