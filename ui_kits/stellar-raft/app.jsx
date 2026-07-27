@@ -369,7 +369,8 @@ function App() {
         )}
       </main>
 
-      {reviewOpen && <ReviewSession onClose={closeReview} />}
+      {/* 结束页回看里点「打开笔记」：会话是模态，得先收起来，否则编辑器开在它底下看不见 */}
+      {reviewOpen && <ReviewSession onClose={closeReview} onOpenStar={(id) => { closeReview(); openEditor(id); }} />}
 
       {cmd && <CommandPalette onClose={() => setCmd(false)} onOpenStar={openEditor} onOpenView={openView} onFocusCon={focusCon} />}
       {settingsOpen && <Settings onClose={() => setSettingsOpen(false)} theme={theme} onToggleTheme={toggleTheme} onReplayGuide={replayGuide} onOpenLogin={() => { setSettingsOpen(false); openLogin(); }} />}
