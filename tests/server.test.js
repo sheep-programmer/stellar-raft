@@ -1,8 +1,7 @@
 /* 星图 Stellar Raft — 本地后端 REST 流程测试
-   server/server.js 是零依赖的（node:http + node:sqlite），其 DB 路径固定为
-   `path.join(__dirname, 'stellar.db')`、端口取 PORT 环境变量。为了不污染仓库
-   数据库，测试把 server.js 原样复制进一个临时目录再启动 —— __dirname 随之
-   落在临时目录里，数据库也就写在那儿；端口用先探测的空闲端口注入。
+   server/server.js 是零依赖的（node:http + node:sqlite）。测试直接启动仓库里的
+   那一份，用 SR_DB 把库指到临时目录，端口用先探测的空闲端口注入 —— 既不污染
+   仓库数据库，跑的又是真实代码（而不是一份复制品）。
 
    覆盖：注册（hello）→ 存/取星系 → 开启分享 → 兑换分享码 → 可见度剥离
    （outline / stars，正文与摘要永不出库）→ 拉黑/解除 → 关闭分享 → 重置密文
@@ -48,19 +47,14 @@ async function api(token, method, pathName, body) {
 
 test.before(async () => {
   tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'stellar-raft-test-'));
-  fs.mkdirSync(path.join(tmpDir, 'server'));
-  fs.copyFileSync(path.join(ROOT, 'server', 'server.js'), path.join(tmpDir, 'server', 'server.js'));
-  // 静态目录回退测试桩：tmpDir 即临时 ROOT，放一个 docs/index.html
-  fs.mkdirSync(path.join(tmpDir, 'docs'));
-  fs.writeFileSync(path.join(tmpDir, 'docs', 'index.html'), '<h1>docs stub</h1>');
 
   const port = await freePort();
   baseUrl = `http://127.0.0.1:${port}`;
-  child = spawn(process.execPath, ['--no-warnings', path.join(tmpDir, 'server', 'server.js')], {
+  child = spawn(process.execPath, ['--no-warnings', path.join(ROOT, 'server', 'server.js')], {
     // 这套用例以匿名旅客的身份跑分享 / 造访 / 来信协议本身：关掉「每 IP 一个游客」
     // 的限额与「社交需要账号」的门禁（都是管理台里可关的真实配置）。
     // 限额与门禁的行为本身在 tests/admin.test.js 里单独覆盖。
-    env: { ...process.env, PORT: String(port), SR_GUEST_PER_IP: '0', SR_GUEST_GATES: 'off' },
+    env: { ...process.env, PORT: String(port), SR_DB: path.join(tmpDir, 'stellar.db'), SR_GUEST_PER_IP: '0', SR_GUEST_GATES: 'off' },
     stdio: ['ignore', 'pipe', 'pipe'],
   });
   let logs = '';
@@ -454,7 +448,7 @@ test('目录路径回退：/docs/ 返回 index.html（200）', async () => {
   const r = await fetch(baseUrl + '/docs/');
   assert.equal(r.status, 200);
   assert.match(r.headers.get('content-type') || '', /text\/html/);
-  assert.match(await r.text(), /docs stub/);
+  assert.match(await r.text(), /Stellar Raft/);   // 落到仓库真实的 docs/index.html
 });
 
 test('路径穿越仍被挡：/../ 一律 403', async () => {

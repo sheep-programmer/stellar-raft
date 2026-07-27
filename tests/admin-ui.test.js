@@ -22,6 +22,8 @@ const API = read('ui_kits/stellar-raft/api.js');
 const SETTINGS = read('ui_kits/stellar-raft/Settings.jsx');
 const HTML = read('ui_kits/stellar-raft/index.html');
 const SERVER = read('server/server.js');
+const CORE = read('server/core.js');
+const ADMIN_ROUTES = read('server/routes/admin.js');
 
 /* ---------------------------- 组件本体 ---------------------------- */
 
@@ -160,13 +162,15 @@ test('服务端：门禁与游客限额都拦在路由之前，且不会把响�
   const shareRoute = SERVER.indexOf("if (seg[1] === 'share' && seg.length === 2)");
   assert.ok(gate > 0 && gate < shareRoute, '门禁必须排在分享路由之前');
 
-  // needAccount 自己应答后返回 true，调用方 return —— 不能写成 return json(...)，
-  // 因为 json() 不返回值，那样会漏进真正的路由把同一个响应再写一次
-  assert.match(SERVER, /const needAccount = \(feature\) => \{[\s\S]*?return true;\n {2}\};/);
-  assert.equal(/return json\(res, 403, \{\n\s+error: '这项功能需要一个账号/.test(SERVER), false);
+  // 「已应答」这件事全靠 json() 回 true 来传递：门禁把它转发给调用方，调用方立刻
+  // return。任何一环把返回值吞掉，请求都会漏进真正的路由，把同一个响应再写一次。
+  assert.match(CORE, /const json = \(res, code, obj\) => \{[\s\S]*?return true;\n\};/);
+  assert.match(SERVER, /const needAccount = \(feature\) => \{[\s\S]*?return json\(res, 403, \{/);
+  assert.match(SERVER, /needAccount\('share'\)\) return;/);
+  assert.match(SERVER, /needAccount\('visit'\)\) return;/);
 
   assert.match(SERVER, /guestLimit: true/);
-  assert.match(SERVER, /countGuestsAtIp/);
+  assert.match(CORE, /countGuestsAtIp/);
 });
 
 test('服务端：登录与退出排在身份解析之前——维护中、名额已满、被停用都还能进出', () => {
@@ -183,41 +187,44 @@ test('服务端：登录与退出排在身份解析之前——维护中、名�
 /* ---------------------------- 服务端守卫 ---------------------------- */
 
 test('服务端：所有 /api/admin/* 处理都在权限守卫之内', () => {
-  const start = SERVER.indexOf("if (seg[1] === 'admin') {");
-  assert.ok(start > 0, '找不到 admin 路由块');
-  const guard = SERVER.indexOf("if (!sess || !isAdmin) return json(res, 403", start);
-  assert.ok(guard > start && guard - start < 400, '守卫必须是 admin 块里的第一件事');
+  // 管理台自成一个模块：进门先认身份，认不过一步都走不下去
+  const entry = ADMIN_ROUTES.indexOf('async function handleAdmin');
+  assert.ok(entry > 0, '找不到 handleAdmin 入口');
+  const guard = ADMIN_ROUTES.indexOf("if (!sess || !isAdmin) return json(res, 403", entry);
+  assert.ok(guard > entry && guard - entry < 400, '守卫必须是 handleAdmin 里的第一件事');
 
-  // admin 块之外不该再出现任何 seg[2] 级别的管理接口处理
-  const before = SERVER.slice(0, start);
-  assert.equal(/seg\[1\] === 'admin'/.test(before), false, 'admin 路由不该在守卫之前出现');
+  // 守卫之前不得出现任何 seg[2] 级别的管理接口处理
+  assert.equal(/seg\[2\] ===/.test(ADMIN_ROUTES.slice(entry, guard)), false, '守卫之前不该有路由分支');
+  // 管理接口只此一处：主管线除了把请求交出去，不自己处理 admin
+  assert.equal(/seg\[1\] === 'admin'/.test(SERVER), false, 'server.js 不该自己处理 admin 路由');
+  assert.match(SERVER, /await handleAdmin\(/);
 });
 
 test('服务端：停用拦截在路由之前，退出登录先于拦截放行', () => {
   const logout = SERVER.indexOf("seg[2] === 'logout'");
   const banCheck = SERVER.indexOf('if (me.banned)');
   const maint = SERVER.indexOf('site.maintenance.enabled && !isAdmin');
-  const admin = SERVER.indexOf("if (seg[1] === 'admin') {");
+  const admin = SERVER.indexOf('await handleAdmin(');
   assert.ok(logout > 0 && banCheck > logout, '退出登录必须先于停用拦截');
   assert.ok(maint > banCheck, '维护模式拦截排在停用之后');
   assert.ok(admin > maint, '两道拦截都在管理路由之前');
 });
 
 test('服务端：默认管理员只种一次，凭据可由环境变量覆盖', () => {
-  assert.match(SERVER, /process\.env\.SR_ADMIN_USER \|\| 'admin'/);
-  assert.match(SERVER, /process\.env\.SR_ADMIN_PASS \|\| 'stellar-admin'/);
-  assert.match(SERVER, /if \(q\.metaGet\.get\('admin_seeded'\)\) return null/);
+  assert.match(CORE, /process\.env\.SR_ADMIN_USER \|\| 'admin'/);
+  assert.match(CORE, /process\.env\.SR_ADMIN_PASS \|\| 'stellar-admin'/);
+  assert.match(CORE, /if \(q\.metaGet\.get\('admin_seeded'\)\) return null/);
   // 同名账号已存在时绝不覆盖别人的密码
-  assert.match(SERVER, /if \(q\.userByUsername\.get\(ADMIN_USER\)\) return null/);
+  assert.match(CORE, /if \(q\.userByUsername\.get\(ADMIN_USER\)\) return null/);
 });
 
 test('服务端：会话与用户的敏感字段不进管理台响应', () => {
-  const block = SERVER.slice(SERVER.indexOf("seg[2] === 'sessions'"), SERVER.indexOf("seg[2] === 'shares'"));
+  const block = ADMIN_ROUTES.slice(ADMIN_ROUTES.indexOf("seg[2] === 'sessions'"), ADMIN_ROUTES.indexOf("seg[2] === 'shares'"));
   assert.equal(/token:\s*s\.token[^.]/.test(block), false, '完整会话令牌不得出库');
   assert.match(block, /fingerprint: s\.token\.slice/);
 
   // adminUser 是用户出库的唯一形态：不带 token，也不带密码哈希
-  const au = SERVER.slice(SERVER.indexOf('const adminUser = (u) =>'), SERVER.indexOf('const galaxyStats'));
+  const au = ADMIN_ROUTES.slice(ADMIN_ROUTES.indexOf('const adminUser = (u) =>'), ADMIN_ROUTES.indexOf('const galaxyStats'));
   assert.equal(/\btoken\b/.test(au), false);
   assert.equal(/\bpass\b/.test(au), false);
 });

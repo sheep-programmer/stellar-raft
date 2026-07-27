@@ -40,15 +40,13 @@ async function api(token, method, pathName, body) {
 
 test.before(async () => {
   tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'stellar-raft-auth-test-'));
-  fs.mkdirSync(path.join(tmpDir, 'server'));
-  fs.copyFileSync(path.join(ROOT, 'server', 'server.js'), path.join(tmpDir, 'server', 'server.js'));
 
   const port = await freePort();
   baseUrl = `http://127.0.0.1:${port}`;
-  child = spawn(process.execPath, ['--no-warnings', path.join(tmpDir, 'server', 'server.js')], {
+  child = spawn(process.execPath, ['--no-warnings', path.join(ROOT, 'server', 'server.js')], {
     // 这几套用例都要从同一个回环地址建多个匿名旅客，关掉「每 IP 一个游客」的限额
     // （限额本身在 tests/admin.test.js 里单独覆盖）
-    env: { ...process.env, PORT: String(port), SR_GUEST_PER_IP: '0' },
+    env: { ...process.env, PORT: String(port), SR_DB: path.join(tmpDir, 'stellar.db'), SR_GUEST_PER_IP: '0' },
     stdio: ['ignore', 'pipe', 'pipe'],
   });
   let logs = '';

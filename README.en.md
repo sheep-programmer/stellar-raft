@@ -267,7 +267,13 @@ stellar-raft/
 ├─ assets/                 # <sr-starfield> web component + SRConnect link curves
 ├─ components/             # 18 reusable primitives · core / knowledge / overlay / form
 ├─ ui_kits/stellar-raft/   # the interactive app (8 screens + console · 3 breakpoints · memory model)
-├─ server/                 # zero-dependency backend (node:sqlite: accounts/sessions · admin · share codes)
+├─ server/                 # zero-dependency backend (node:sqlite)
+│   ├─ server.js           #   request pipeline: identity → ban/maintenance/gates → dispatch
+│   ├─ config.js           #   port, paths, database location (env vars only)
+│   ├─ db.js               #   schema, migrations, every prepared statement
+│   ├─ core.js             #   shared: replies · identity · site settings · audit · decay · delivery
+│   ├─ seed.js             #   first-boot seeds: demo friend and default admin
+│   └─ routes/admin.js     #   admin console (/api/admin/*, guard runs first)
 ├─ docs/                   # zero-build static docs site + screenshots + diagrams
 ├─ guidelines/             # 15 foundation spec cards (color / type / spacing / icons / brand)
 ├─ scripts/                # build · lint (artifacts are generated — never hand-edit _ds_bundle.js)

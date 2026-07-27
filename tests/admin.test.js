@@ -35,12 +35,10 @@ function freePort() {
 /* 起一台隔离的星图服务器，返回 { baseUrl, child, tmpDir, logs } */
 async function startServer(env) {
   const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'stellar-raft-admin-test-'));
-  fs.mkdirSync(path.join(tmpDir, 'server'));
-  fs.copyFileSync(path.join(ROOT, 'server', 'server.js'), path.join(tmpDir, 'server', 'server.js'));
   const port = await freePort();
   const baseUrl = `http://127.0.0.1:${port}`;
-  const child = spawn(process.execPath, ['--no-warnings', path.join(tmpDir, 'server', 'server.js')], {
-    env: { ...process.env, PORT: String(port), ...(env || {}) },
+  const child = spawn(process.execPath, ['--no-warnings', path.join(ROOT, 'server', 'server.js')], {
+    env: { ...process.env, PORT: String(port), SR_DB: path.join(tmpDir, 'stellar.db'), ...(env || {}) },
     stdio: ['ignore', 'pipe', 'pipe'],
   });
   const box = { logs: '' };

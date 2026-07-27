@@ -267,7 +267,13 @@ stellar-raft/
 ├─ assets/                 # <sr-starfield> 星场 web component + SRConnect 连接曲线
 ├─ components/             # 18 个可复用原语 · core / knowledge / overlay / form
 ├─ ui_kits/stellar-raft/   # 可交互 App（8 屏 + 管理台 · 三档断点 · 记忆模型 · 点亮/复习 · 持久化）
-├─ server/                 # 零依赖本地后端（node:sqlite：账号/会话 · 管理员与站点设置 · 分享码）
+├─ server/                 # 零依赖本地后端（node:sqlite）
+│   ├─ server.js           #   请求管线：解析身份 → 封禁/维护/门禁三道闸 → 派发路由
+│   ├─ config.js           #   端口、路径、数据库落点（只读环境变量）
+│   ├─ db.js               #   建表、旧库迁移、全部预编译语句
+│   ├─ core.js             #   跨路由共用：应答 · 身份 · 站点设置 · 审计 · 记忆衰减 · 投递
+│   ├─ seed.js             #   新装库的种子：演示好友与默认管理员
+│   └─ routes/admin.js     #   星港管理台（/api/admin/*，进门先过权限守卫）
 ├─ docs/                   # 零构建静态文档站 + 截图 + 架构图
 ├─ guidelines/             # 15 张基础规范示例卡（颜色 / 字体 / 间距 / 图标 / 品牌）
 ├─ scripts/                # build · lint（产物由源码生成，勿手改 _ds_bundle.js）
