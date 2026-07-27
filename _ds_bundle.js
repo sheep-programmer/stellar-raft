@@ -1,4 +1,4 @@
-/* @ds-bundle: {"format":3,"namespace":"StellarRaftDesignSystem_2866af","components":[{"name":"Badge","sourcePath":"components/core/Badge.jsx"},{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"GlassPanel","sourcePath":"components/core/GlassPanel.jsx"},{"name":"Icon","sourcePath":"components/core/Icon.jsx"},{"name":"IconButton","sourcePath":"components/core/IconButton.jsx"},{"name":"Input","sourcePath":"components/core/Input.jsx"},{"name":"Tag","sourcePath":"components/core/Tag.jsx"},{"name":"Checkbox","sourcePath":"components/form/Checkbox.jsx"},{"name":"Select","sourcePath":"components/form/Select.jsx"},{"name":"Switch","sourcePath":"components/form/Switch.jsx"},{"name":"Tabs","sourcePath":"components/form/Tabs.jsx"},{"name":"ConstellationItem","sourcePath":"components/knowledge/ConstellationItem.jsx"},{"name":"MemoryBar","sourcePath":"components/knowledge/MemoryBar.jsx"},{"name":"StarNode","sourcePath":"components/knowledge/StarNode.jsx"},{"name":"ContextMenu","sourcePath":"components/overlay/ContextMenu.jsx"},{"name":"Modal","sourcePath":"components/overlay/Modal.jsx"},{"name":"Toast","sourcePath":"components/overlay/Toast.jsx"},{"name":"Tooltip","sourcePath":"components/overlay/Tooltip.jsx"}],"sourceHashes":{"assets/starfield.js":"d776d2b45dc4","components/core/Badge.jsx":"b0bd9735d638","components/core/Button.jsx":"a1c387a07e86","components/core/GlassPanel.jsx":"299a19d8fbb4","components/core/Icon.jsx":"7505f83ab03d","components/core/IconButton.jsx":"24052f4eed78","components/core/Input.jsx":"54a6c9af7e3f","components/core/Tag.jsx":"d8513c07ea96","components/form/Checkbox.jsx":"38aa593157dd","components/form/Select.jsx":"86b8c1c71e12","components/form/Switch.jsx":"938c62be0664","components/form/Tabs.jsx":"ede2dbff1963","components/knowledge/ConstellationItem.jsx":"d73e999469b6","components/knowledge/MemoryBar.jsx":"a54c928d5065","components/knowledge/StarNode.jsx":"1bedee49f0bf","components/overlay/ContextMenu.jsx":"11783420e876","components/overlay/Modal.jsx":"6119273e95da","components/overlay/Toast.jsx":"d22ad40680a6","components/overlay/Tooltip.jsx":"a042caa8970d","ui_kits/stellar-raft/AIConfig.jsx":"0408b943b28a","ui_kits/stellar-raft/AdminConsole.jsx":"ac04bb2e6499","ui_kits/stellar-raft/AerialView.jsx":"8209eb6af395","ui_kits/stellar-raft/BlackHole.jsx":"5e67807d3617","ui_kits/stellar-raft/Checkup.jsx":"786135b78aa7","ui_kits/stellar-raft/CommandPalette.jsx":"90f10790166c","ui_kits/stellar-raft/Editor.jsx":"f73d4772f7a3","ui_kits/stellar-raft/EditorMenus.jsx":"489f22c71b48","ui_kits/stellar-raft/FeynmanDrawer.jsx":"591b225e555a","ui_kits/stellar-raft/Galaxy3D.jsx":"2ce87e7da57d","ui_kits/stellar-raft/Inbox.jsx":"c4a70ad0bf9a","ui_kits/stellar-raft/KeysHelp.jsx":"948b00f411ed","ui_kits/stellar-raft/ListView.jsx":"f79c250bd947","ui_kits/stellar-raft/LoginView.jsx":"18d9c842c5c6","ui_kits/stellar-raft/MobileShell.jsx":"932bb48e2e9e","ui_kits/stellar-raft/Onboarding.jsx":"40b71668b69b","ui_kits/stellar-raft/ReviewSession.jsx":"a695c407739b","ui_kits/stellar-raft/Settings.jsx":"da9bff94d318","ui_kits/stellar-raft/Sidebar.jsx":"672d753c5efb","ui_kits/stellar-raft/StarMap.jsx":"76c3b4f2e35e","ui_kits/stellar-raft/Timeline.jsx":"1602ca5b6c95","ui_kits/stellar-raft/VisitView.jsx":"e50b2aae82af","ui_kits/stellar-raft/ai.js":"2f79eb3473c9","ui_kits/stellar-raft/app.jsx":"c28140011769","ui_kits/stellar-raft/codehl.js":"6fbdd0100deb","ui_kits/stellar-raft/data.js":"6f78c1b4d43b","ui_kits/stellar-raft/mdcore.js":"b82d5054c3b6","ui_kits/stellar-raft/responsive.js":"29feedf6c503","ui_kits/stellar-raft/sanitize.js":"88e63cd63253","ui_kits/stellar-raft/transition.js":"3725d8982dc5","ui_kits/stellar-raft/undocore.js":"7f8c94da35f9","ui_kits/stellar-raft/vault.js":"bfb5fdd87949"},"inlinedExternals":[],"unexposedExports":[{"name":"memoryColor","sourcePath":"components/knowledge/MemoryBar.jsx"}],"exposedHelpers":[{"name":"toast","sourcePath":"components/overlay/Toast.jsx"}]} */
+/* @ds-bundle: {"format":3,"namespace":"StellarRaftDesignSystem_2866af","components":[{"name":"Badge","sourcePath":"components/core/Badge.jsx"},{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"GlassPanel","sourcePath":"components/core/GlassPanel.jsx"},{"name":"Icon","sourcePath":"components/core/Icon.jsx"},{"name":"IconButton","sourcePath":"components/core/IconButton.jsx"},{"name":"Input","sourcePath":"components/core/Input.jsx"},{"name":"Tag","sourcePath":"components/core/Tag.jsx"},{"name":"Checkbox","sourcePath":"components/form/Checkbox.jsx"},{"name":"Select","sourcePath":"components/form/Select.jsx"},{"name":"Switch","sourcePath":"components/form/Switch.jsx"},{"name":"Tabs","sourcePath":"components/form/Tabs.jsx"},{"name":"ConstellationItem","sourcePath":"components/knowledge/ConstellationItem.jsx"},{"name":"MemoryBar","sourcePath":"components/knowledge/MemoryBar.jsx"},{"name":"StarNode","sourcePath":"components/knowledge/StarNode.jsx"},{"name":"ContextMenu","sourcePath":"components/overlay/ContextMenu.jsx"},{"name":"Modal","sourcePath":"components/overlay/Modal.jsx"},{"name":"Toast","sourcePath":"components/overlay/Toast.jsx"},{"name":"Tooltip","sourcePath":"components/overlay/Tooltip.jsx"}],"sourceHashes":{"assets/starfield.js":"d776d2b45dc4","components/core/Badge.jsx":"b0bd9735d638","components/core/Button.jsx":"a1c387a07e86","components/core/GlassPanel.jsx":"299a19d8fbb4","components/core/Icon.jsx":"7505f83ab03d","components/core/IconButton.jsx":"24052f4eed78","components/core/Input.jsx":"54a6c9af7e3f","components/core/Tag.jsx":"d8513c07ea96","components/form/Checkbox.jsx":"38aa593157dd","components/form/Select.jsx":"86b8c1c71e12","components/form/Switch.jsx":"938c62be0664","components/form/Tabs.jsx":"ede2dbff1963","components/knowledge/ConstellationItem.jsx":"d73e999469b6","components/knowledge/MemoryBar.jsx":"a54c928d5065","components/knowledge/StarNode.jsx":"1bedee49f0bf","components/overlay/ContextMenu.jsx":"11783420e876","components/overlay/Modal.jsx":"6119273e95da","components/overlay/Toast.jsx":"d22ad40680a6","components/overlay/Tooltip.jsx":"a042caa8970d","ui_kits/stellar-raft/AIConfig.jsx":"0408b943b28a","ui_kits/stellar-raft/AdminConsole.jsx":"ac04bb2e6499","ui_kits/stellar-raft/AerialView.jsx":"8209eb6af395","ui_kits/stellar-raft/BlackHole.jsx":"5e67807d3617","ui_kits/stellar-raft/Checkup.jsx":"786135b78aa7","ui_kits/stellar-raft/CommandPalette.jsx":"90f10790166c","ui_kits/stellar-raft/Editor.jsx":"f73d4772f7a3","ui_kits/stellar-raft/EditorMenus.jsx":"489f22c71b48","ui_kits/stellar-raft/FeynmanDrawer.jsx":"591b225e555a","ui_kits/stellar-raft/Galaxy3D.jsx":"2ce87e7da57d","ui_kits/stellar-raft/Inbox.jsx":"c4a70ad0bf9a","ui_kits/stellar-raft/KeysHelp.jsx":"948b00f411ed","ui_kits/stellar-raft/ListView.jsx":"f79c250bd947","ui_kits/stellar-raft/LoginView.jsx":"18d9c842c5c6","ui_kits/stellar-raft/MobileShell.jsx":"932bb48e2e9e","ui_kits/stellar-raft/Onboarding.jsx":"40b71668b69b","ui_kits/stellar-raft/ReviewSession.jsx":"a695c407739b","ui_kits/stellar-raft/Settings.jsx":"da9bff94d318","ui_kits/stellar-raft/Sidebar.jsx":"672d753c5efb","ui_kits/stellar-raft/StarMap.jsx":"76c3b4f2e35e","ui_kits/stellar-raft/Timeline.jsx":"1602ca5b6c95","ui_kits/stellar-raft/VisitView.jsx":"e50b2aae82af","ui_kits/stellar-raft/ai.js":"2f79eb3473c9","ui_kits/stellar-raft/app.jsx":"c28140011769","ui_kits/stellar-raft/codehl.js":"6fbdd0100deb","ui_kits/stellar-raft/data.js":"8c17e6eda183","ui_kits/stellar-raft/mdcore.js":"b82d5054c3b6","ui_kits/stellar-raft/responsive.js":"29feedf6c503","ui_kits/stellar-raft/sanitize.js":"88e63cd63253","ui_kits/stellar-raft/transition.js":"3725d8982dc5","ui_kits/stellar-raft/undocore.js":"7f8c94da35f9","ui_kits/stellar-raft/vault.js":"bfb5fdd87949"},"inlinedExternals":[],"unexposedExports":[{"name":"memoryColor","sourcePath":"components/knowledge/MemoryBar.jsx"}],"exposedHelpers":[{"name":"toast","sourcePath":"components/overlay/Toast.jsx"}]} */
 
 (() => {
 
@@ -36308,35 +36308,80 @@ window.SR_DATA = function () {
     persistRemote();
     return entry;
   };
-  // 从黑洞恢复：星回到原星域（若星域已不存在则落入第一个星域），星域整体归位
+  // 黑洞里还留着谁：星条目与星域条目里的成员都算
+  const trashedHolderOf = starId => trash.find(t => t.kind === 'star' && t.payload.star.id === starId || t.kind === 'domain' && t.payload.stars.some(s => s.id === starId));
+
+  /* 一端还在黑洞里的连线不能直接丢：挂到那一端的黑洞条目上，
+     等它被恢复时再试一次。否则连线的存活取决于恢复顺序。 */
+  const stashConnection = c => {
+    for (const id of [c.a, c.b]) {
+      if (byId[id]) continue;
+      const holder = trashedHolderOf(id);
+      if (!holder) continue;
+      const dup = holder.payload.connections.some(x => x.a === c.a && x.b === c.b);
+      if (!dup) holder.payload.connections.push(c);
+      return;
+    }
+  };
+  const restoreConnections = list => {
+    list.forEach(c => {
+      if (byId[c.a] && byId[c.b]) connections.push(c);else stashConnection(c);
+    });
+  };
+
+  /* 从黑洞恢复。星保留自己的 con：星域若还在黑洞里，连壳一起带回来，
+     之后恢复整个星域时补齐属性、把其余成员并进同一个星域。
+     星域已被彻底销毁时才退回「未分域」，绝不塞进某个不相干的星域。 */
+  const ORPHAN_CON = {
+    id: 'orphan',
+    name: '未分域',
+    color: '#8a94a8'
+  };
+  const homeFor = s => {
+    if (constellations.find(c => c.id === s.con)) return true;
+    const holder = trash.find(t => t.kind === 'domain' && t.payload.con.id === s.con);
+    if (holder) {
+      constellations.push({
+        ...holder.payload.con,
+        count: 0,
+        health: 0,
+        litRatio: 0
+      });
+      return true;
+    }
+    if (!constellations.find(c => c.id === ORPHAN_CON.id)) constellations.push({
+      ...ORPHAN_CON,
+      count: 0,
+      health: 0,
+      litRatio: 0
+    });
+    s.con = ORPHAN_CON.id;
+    return true;
+  };
   const restoreTrash = entryId => {
     const i = trash.findIndex(t => t.id === entryId);
     if (i < 0) return null;
     const t = trash[i];
+    trash.splice(i, 1);
     if (t.kind === 'star') {
       const s = t.payload.star;
-      if (!constellations.find(c => c.id === s.con)) {
-        if (!constellations.length) return null;
-        s.con = constellations[0].id;
-      }
-      trash.splice(i, 1);
+      homeFor(s);
       stars.push(s);
       byId[s.id] = s;
-      t.payload.connections.forEach(c => {
-        if (byId[c.a] && byId[c.b]) connections.push(c);
-      });
+      restoreConnections(t.payload.connections);
       notes.unshift(noteFor(s));
     } else {
-      trash.splice(i, 1);
-      constellations.push(t.payload.con);
+      const con = t.payload.con;
+      const exist = constellations.find(c => c.id === con.id);
+      if (exist) Object.assign(exist, con); // 壳已被先恢复的星带回来过
+      else constellations.push(con);
       t.payload.stars.forEach(s => {
+        if (byId[s.id]) return; // 这颗星先被单独恢复过
         stars.push(s);
         byId[s.id] = s;
+        notes.unshift(noteFor(s));
       });
-      t.payload.connections.forEach(c => {
-        if (byId[c.a] && byId[c.b]) connections.push(c);
-      });
-      t.payload.stars.forEach(s => notes.unshift(noteFor(s)));
+      restoreConnections(t.payload.connections);
     }
     refreshMemory(); // 恢复的星按真实时间重新点算亮度（含 syncCounts）
     persistRemote();

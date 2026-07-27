@@ -495,26 +495,60 @@ window.SR_DATA = (function () {
     persistRemote();
     return entry;
   };
-  // 从黑洞恢复：星回到原星域（若星域已不存在则落入第一个星域），星域整体归位
+  // 黑洞里还留着谁：星条目与星域条目里的成员都算
+  const trashedHolderOf = (starId) => trash.find(t =>
+    (t.kind === 'star' && t.payload.star.id === starId) ||
+    (t.kind === 'domain' && t.payload.stars.some(s => s.id === starId)));
+
+  /* 一端还在黑洞里的连线不能直接丢：挂到那一端的黑洞条目上，
+     等它被恢复时再试一次。否则连线的存活取决于恢复顺序。 */
+  const stashConnection = (c) => {
+    for (const id of [c.a, c.b]) {
+      if (byId[id]) continue;
+      const holder = trashedHolderOf(id);
+      if (!holder) continue;
+      const dup = holder.payload.connections.some(x => x.a === c.a && x.b === c.b);
+      if (!dup) holder.payload.connections.push(c);
+      return;
+    }
+  };
+  const restoreConnections = (list) => {
+    list.forEach(c => { if (byId[c.a] && byId[c.b]) connections.push(c); else stashConnection(c); });
+  };
+
+  /* 从黑洞恢复。星保留自己的 con：星域若还在黑洞里，连壳一起带回来，
+     之后恢复整个星域时补齐属性、把其余成员并进同一个星域。
+     星域已被彻底销毁时才退回「未分域」，绝不塞进某个不相干的星域。 */
+  const ORPHAN_CON = { id: 'orphan', name: '未分域', color: '#8a94a8' };
+  const homeFor = (s) => {
+    if (constellations.find(c => c.id === s.con)) return true;
+    const holder = trash.find(t => t.kind === 'domain' && t.payload.con.id === s.con);
+    if (holder) { constellations.push({ ...holder.payload.con, count: 0, health: 0, litRatio: 0 }); return true; }
+    if (!constellations.find(c => c.id === ORPHAN_CON.id)) constellations.push({ ...ORPHAN_CON, count: 0, health: 0, litRatio: 0 });
+    s.con = ORPHAN_CON.id;
+    return true;
+  };
   const restoreTrash = (entryId) => {
     const i = trash.findIndex(t => t.id === entryId); if (i < 0) return null;
     const t = trash[i];
+    trash.splice(i, 1);
     if (t.kind === 'star') {
       const s = t.payload.star;
-      if (!constellations.find(c => c.id === s.con)) {
-        if (!constellations.length) return null;
-        s.con = constellations[0].id;
-      }
-      trash.splice(i, 1);
+      homeFor(s);
       stars.push(s); byId[s.id] = s;
-      t.payload.connections.forEach(c => { if (byId[c.a] && byId[c.b]) connections.push(c); });
+      restoreConnections(t.payload.connections);
       notes.unshift(noteFor(s));
     } else {
-      trash.splice(i, 1);
-      constellations.push(t.payload.con);
-      t.payload.stars.forEach(s => { stars.push(s); byId[s.id] = s; });
-      t.payload.connections.forEach(c => { if (byId[c.a] && byId[c.b]) connections.push(c); });
-      t.payload.stars.forEach(s => notes.unshift(noteFor(s)));
+      const con = t.payload.con;
+      const exist = constellations.find(c => c.id === con.id);
+      if (exist) Object.assign(exist, con);   // 壳已被先恢复的星带回来过
+      else constellations.push(con);
+      t.payload.stars.forEach(s => {
+        if (byId[s.id]) return;               // 这颗星先被单独恢复过
+        stars.push(s); byId[s.id] = s;
+        notes.unshift(noteFor(s));
+      });
+      restoreConnections(t.payload.connections);
     }
     refreshMemory();   // 恢复的星按真实时间重新点算亮度（含 syncCounts）
     persistRemote();
