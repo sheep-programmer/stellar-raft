@@ -4,6 +4,32 @@
    - 每次上传前先把快照镜像进 localStorage（sr.galaxy.v1）——
      无 server（file:// 打开 / 后端未启动）时它就是唯一的真实存储
    - 页面卸载时 localStorage 同步落一份 + sendBeacon 补最后一发，不丢尾部编辑 */
+/* SRGate — 游客功能门禁的前端一侧。
+   门禁表由服务器随 /api/hello 下发（SR_DATA.site.gates），管理员在星港管理台里
+   逐项开关。这里只负责「拦一下并把人请去登录」——分享与造访在服务端另有硬拦，
+   编辑器与 Markdown 导入导出没有专属接口，拦的就是入口本身。 */
+window.SRGate = {
+  // 这项功能现在是否需要账号（true = 需要，当前身份还没有）
+  gated(feature) {
+    const D = window.SR_DATA;
+    if (!D || !D.site || !D.site.gates) return false;
+    if (D.account && D.account.registered) return false;
+    return !!D.site.gates[feature];
+  },
+  /* 用法：if (!SRGate.require('editor', '记笔记')) return;
+     被拦下时给一句说明并唤起登录页，返回 false。 */
+  require(feature, what) {
+    if (!this.gated(feature)) return true;
+    const NS = window.StellarRaftDesignSystem_2866af;
+    if (NS && NS.toast) {
+      NS.toast((what ? what + '需要一个账号' : '这项功能需要一个账号') + ' · 注册后星空原地跟着你走',
+        { icon: 'user-plus', tone: 'gold', duration: 4200 });
+    }
+    try { window.dispatchEvent(new CustomEvent('sr-need-login', { detail: { feature } })); } catch (e) { }
+    return false;
+  },
+};
+
 window.SRNet = (function () {
   const KEY = 'sr.token';
   const LS_GALAXY = 'sr.galaxy.v1';
@@ -20,7 +46,18 @@ window.SRNet = (function () {
       body: opts.body ? JSON.stringify(opts.body) : undefined,
     });
     const data = await res.json().catch(() => null);
-    if (!res.ok) { const e = new Error((data && data.error) || 'HTTP ' + res.status); e.status = res.status; e.data = data; throw e; }
+    if (!res.ok) {
+      // 服务器对这个身份关了门（账号被管理员停用 / 全站维护中）：广播出去，
+      // 由 app 切到一张说明页——否则用户只会看到一堆无声失败的请求
+      if (data && (data.banned || data.maintenance)) {
+        try {
+          window.dispatchEvent(new CustomEvent('sr-blocked', {
+            detail: { kind: data.banned ? 'banned' : 'maintenance', message: data.error || '' },
+          }));
+        } catch (e) { }
+      }
+      const e = new Error((data && data.error) || 'HTTP ' + res.status); e.status = res.status; e.data = data; throw e;
+    }
     return data;
   };
 

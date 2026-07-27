@@ -307,7 +307,7 @@ function AIConfig({ onClose }) {
 
       <div
         onMouseDown={(e) => e.stopPropagation()}
-        style={{ width: 640, maxWidth: '94vw', maxHeight: '88vh', display: 'flex', animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }}
+        className="sr-modal-panel" style={{ width: 640, maxWidth: '94vw', maxHeight: '88vh', display: 'flex', animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }}
       >
         <GlassPanel strong radius="xl" pad="none" glow style={{ display: 'flex', flexDirection: 'column', width: '100%', overflow: 'hidden' }}>
           {/* header */}

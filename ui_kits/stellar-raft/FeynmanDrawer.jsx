@@ -146,6 +146,7 @@ function studentSystem(star, targets) {
 
 function FeynmanDrawer({ starId, onClose, onOpenAIConfig }) {
   const D = window.SR_DATA;
+  const phone = window.SRKit.useScreen().phone;   // 手机上抽屉铺满整屏
   const star = D.byId[starId] || D.stars[0];
   const targets = React.useMemo(() => deriveKeyPoints(star), [star.id]);
   // 会话模式在进场时定格（认证态是状态机上的边，不在会话中途换轨）：
@@ -385,9 +386,11 @@ function FeynmanDrawer({ starId, onClose, onOpenAIConfig }) {
       {igniting && <IgniteBurst />}
       <div style={{ position: 'absolute', inset: 0, zIndex: 60, background: 'rgba(3,4,12,0.45)', backdropFilter: 'blur(2px)' }} onClick={onClose} aria-hidden="true" />
       <div ref={drawerRef} role="dialog" aria-modal="true" aria-label={'费曼内化 · ' + star.label}
-        style={{ position: 'absolute', top: 0, right: 0, bottom: 0, width: 392, zIndex: 62, boxShadow: 'var(--shadow-drawer)',
+        /* 手机上抽屉铺满：392px 在窄屏只剩一条缝，讲解框根本写不下一句话。
+           铺满后左边不再需要那条描边，改由遮罩承担边界。 */
+        style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: phone ? 0 : 'auto', width: phone ? 'auto' : 392, zIndex: 62, boxShadow: 'var(--shadow-drawer)',
         animation: 'sr-drawerin var(--dur-base) var(--ease-flight) both', display: 'flex', flexDirection: 'column',
-        background: 'var(--glass-bg-strong)', WebkitBackdropFilter: 'blur(var(--glass-blur)) saturate(1.2)', backdropFilter: 'blur(var(--glass-blur)) saturate(1.2)', borderLeft: '1px solid var(--glass-border-strong)' }}>
+        background: 'var(--glass-bg-strong)', WebkitBackdropFilter: 'blur(var(--glass-blur)) saturate(1.2)', backdropFilter: 'blur(var(--glass-blur)) saturate(1.2)', borderLeft: phone ? 'none' : '1px solid var(--glass-border-strong)' }}>
         {/* header */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '18px 20px 12px' }}>
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 12, letterSpacing: '0.06em', color: 'var(--text-3)', textTransform: 'uppercase', fontFamily: 'var(--font-mono)' }}>

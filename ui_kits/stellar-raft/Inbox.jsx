@@ -221,7 +221,7 @@ function Inbox({ onFocusCon, onOpen }) {
   );
 
   return (
-    <div onContextMenu={(e) => e.preventDefault()} style={{ position: 'relative', flex: 1, minWidth: 0, overflow: 'auto', padding: '28px 30px 48px' }}>
+    <div onContextMenu={(e) => e.preventDefault()} className="sr-view" style={{ position: 'relative', flex: 1, minWidth: 0, overflow: 'auto', padding: '28px 30px 48px' }}>
       <sr-starfield density="0.6"></sr-starfield>
       <div style={{ position: 'relative', zIndex: 2, maxWidth: 760, margin: '0 auto' }}>
         <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, marginBottom: 14 }}>
@@ -338,7 +338,7 @@ function Inbox({ onFocusCon, onOpen }) {
                             </div>
                             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 7 }}>
                               <span style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-3)' }}>
-                                {window.SRKeys.combo('Enter')} 寄出 · 还可写 <span style={{ color: noteReply.text.length >= 150 ? 'var(--gold)' : 'inherit' }}>{160 - noteReply.text.length}</span> 字
+                                <span className="sr-kbd-only">{window.SRKeys.combo('Enter')} 寄出 · </span>还可写 <span style={{ color: noteReply.text.length >= 150 ? 'var(--gold)' : 'inherit' }}>{160 - noteReply.text.length}</span> 字
                               </span>
                               <div style={{ flex: 1 }} />
                               <Button size="sm" variant="ghost" onClick={() => setNoteReply(null)}>取消</Button>
@@ -377,7 +377,7 @@ function Inbox({ onFocusCon, onOpen }) {
                 color: 'var(--text-1)', fontSize: 14, lineHeight: 1.7, fontFamily: 'var(--font-sans)', padding: '3px 0' }} />
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 8, paddingTop: 10, borderTop: '1px solid var(--line)' }}>
-            <span style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-3)' }}>{window.SRKeys.combo('Enter') + ' 捕捉'}</span>
+            <span className="sr-kbd-only" style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-3)' }}>{window.SRKeys.combo('Enter') + ' 捕捉'}</span>
             <div style={{ flex: 1 }} />
             <Button size="sm" icon="plus" glow disabled={!draft.trim()} onClick={capture}>捕捉</Button>
           </div>

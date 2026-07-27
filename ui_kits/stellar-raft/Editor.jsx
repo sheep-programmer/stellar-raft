@@ -2288,6 +2288,25 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
         @media (max-width: 1180px) {
           .sr-ed-find { right: 24px !important; }
         }
+        /* ——— 手机 ———
+           正文区的 52px 左右留白在窄屏会把每行挤成七八个字，收到 16px；
+           顶部让出刘海，底部留一段余量给系统手势条与输入法。 */
+        html[data-screen="phone"] .sr-ed-page {
+          padding: calc(var(--sr-safe-top) + 12px) 16px 96px !important;
+        }
+        html[data-screen="phone"] .sr-ed-find {
+          left: 10px !important; right: 10px !important; width: auto !important;
+          top: calc(var(--sr-safe-top) + 8px) !important;
+        }
+        /* 状态栏在手机上只留最要紧的一段，其余项本来就归 .sr-ed-status-opt 管 */
+        html[data-screen="phone"] .sr-ed-status { padding-left: 12px !important; padding-right: 12px !important; }
+        /* 块手柄在桌面挂在正文左侧 52px 的留白里；手机上那块留白没了，
+           改浮到块的右上角。它们本来就随「聚焦的块」出现，手指点进去即可见——
+           触摸端没有 hover，靠的是 focusBlk 这条路。 */
+        html[data-screen="phone"] .sr-blk-tools {
+          left: auto !important; right: 0 !important; top: -26px !important;
+          background: var(--glass-bg-strong); border-radius: var(--r-sm); padding: 2px;
+        }
         /* 笔记内查找高亮（CSS Custom Highlight，不进块 DOM / 不进持久化） */
         ::highlight(sr-find) { background: color-mix(in srgb, var(--star-blue) 25%, transparent); }
         ::highlight(sr-find-cur) { background: color-mix(in srgb, var(--star-blue) 55%, transparent); }
@@ -2303,7 +2322,7 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
 
       {/* MIDDLE — editor */}
       <div ref={scrollRef} onMouseUp={onMouseUp} onDragOver={onEditorDragOver} onDrop={onEditorDrop} style={{ flex: 1, minWidth: 0, overflow: 'auto', position: 'relative', zIndex: 2 }}>
-        <div style={{ maxWidth: 720, margin: '0 auto', padding: '20px 52px 24px' }}>
+        <div className="sr-ed-page" style={{ maxWidth: 720, margin: '0 auto', padding: '20px 52px 24px' }}>
           {/* top bar */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 22 }}>
             <Button variant="ghost" size="sm" icon="corner-up-left" onClick={onBack}>星图</Button>
@@ -2389,7 +2408,7 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
                   transition: 'background var(--dur-fast), opacity var(--dur-fast), box-shadow var(--dur-fast)' }}>
                 {/* ⊕/⋮⋮ 块手柄：hover/聚焦时淡入 + 轻微滑入（150–220ms 口径，--ease-flight）；
                     隐藏时关掉指针事件，看不见的手柄不再吃到误点击 */}
-                <div style={{ position: 'absolute', left: -52, top: 1, display: 'flex', gap: 1,
+                <div className="sr-blk-tools" style={{ position: 'absolute', left: -52, top: 1, display: 'flex', gap: 1,
                   opacity: (hover === b.id || focusBlk === b.id) ? 1 : 0,
                   transform: (hover === b.id || focusBlk === b.id) ? 'none' : 'translateX(-5px)',
                   pointerEvents: (hover === b.id || focusBlk === b.id) ? 'auto' : 'none',

@@ -106,7 +106,7 @@ function KeysHelp({ onClose }) {
       role="dialog" aria-modal="true" aria-label="快捷键"
       style={{ position: 'fixed', inset: 0, zIndex: 110, background: 'rgba(3,4,12,0.55)', backdropFilter: 'blur(4px)', WebkitBackdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
       <div onMouseDown={(e) => e.stopPropagation()}
-        style={{ width: 720, maxWidth: '94vw', maxHeight: '88vh', display: 'flex', animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
+        className="sr-modal-panel" style={{ width: 720, maxWidth: '94vw', maxHeight: '88vh', display: 'flex', animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
         <GlassPanel strong radius="lg" pad="none" glow style={{ width: '100%', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
 
           {/* header */}

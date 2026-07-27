@@ -66,7 +66,7 @@ function Timeline({ onOpen }) {
   const pickKind = id => { setKind(id); setShown(TL_PAGE); };
 
   return (
-    <div style={{ position: 'relative', flex: 1, minWidth: 0, overflow: 'auto', padding: '28px 30px 48px' }}
+    <div className="sr-view" style={{ position: 'relative', flex: 1, minWidth: 0, overflow: 'auto', padding: '28px 30px 48px' }}
       onContextMenu={e => e.preventDefault()}>
       <sr-starfield density="0.6"></sr-starfield>
       <div style={{ position: 'relative', zIndex: 2, maxWidth: 680, margin: '0 auto' }}>

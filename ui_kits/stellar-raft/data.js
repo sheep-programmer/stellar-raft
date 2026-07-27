@@ -655,6 +655,10 @@ window.SR_DATA = (function () {
   const account = { name: '观星者', avatar: '观', email: '', bio: '', streak: 0 };
   // 社交状态：好友（可造访星系）数量，启动时取回、变更时由星际漫游视图刷新
   const social = { friends: 0 };
+  /* 站点状态：管理员在管理台发布的全站公告、以及游客功能门禁，由 /api/hello 下发。
+     gates[x] = true 表示「这项功能需要账号」。后端未运行 / file:// 打开时四项全 false——
+     离线把玩一份本地星空不该被登录挡住，真正牵扯到服务器的操作本来也走不通。 */
+  const site = { announcement: null, registrationOpen: true, gates: { editor: false, share: false, visit: false, vault: false } };
 
   const conName = id => (constellations.find(c => c.id === id) || {}).name;
   const conColor = id => (constellations.find(c => c.id === id) || {}).color;
@@ -855,9 +859,22 @@ window.SR_DATA = (function () {
       .then(r => {
         if (r.user && r.user.name) { account.name = r.user.name; account.avatar = r.user.avatar || account.avatar; }
         if (r.account) Object.assign(account, {
+          // id：管理台据此认出「这一行就是我自己」，把停用/删除/改角色对自己藏起来
+          id: r.account.id,
           registered: r.account.registered, username: r.account.username,
           email: r.account.email, registeredAt: r.account.registeredAt,
+          // 管理员身份由服务器说了算：前端只据此决定「星港管理台」入口显不显示，
+          // 每个 /api/admin/* 在服务端另有一道守卫，改这里的布尔值拿不到任何数据
+          role: r.account.role || 'user', admin: !!r.account.admin,
         });
+        // 站点状态（全站公告 / 出厂密码提醒）随握手下发，广播给横幅与管理台
+        if (r.site) {
+          site.announcement = r.site.announcement || null;
+          site.registrationOpen = r.site.registrationOpen !== false;
+          if (r.site.gates) site.gates = r.site.gates;
+          account.defaultPass = !!r.site.defaultPass;
+          window.dispatchEvent(new CustomEvent('sr-site'));
+        }
         return window.SRNet.api('/api/galaxy');
       })
       .then(r => {
@@ -895,7 +912,7 @@ window.SR_DATA = (function () {
     constellations, stars, connections, byId, notes, inbox, timeline,
     conName, conColor, relatedStars, backlinksOf,
     trash, trashStar, trashDomain, restoreTrash, purgeTrash,
-    addStar, renameStar, touchNote, logIgnite, pushTimeline, syncCounts, account, social, ago, loadDemo,
+    addStar, renameStar, touchNote, logIgnite, pushTimeline, syncCounts, account, social, site, ago, loadDemo,
     mail, refreshMail, unclaimedMail, adoptShared,
     refreshMemory, reviewSuccess, reviewFail, reviewPartial, queueReview, dueTsOf, dueStars,
     isLit, isEmber, hasSubstance, emberStars, todayTodo,

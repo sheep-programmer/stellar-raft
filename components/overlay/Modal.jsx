@@ -68,6 +68,7 @@ export function Modal({
   return (
     <div
       onMouseDown={closeOnMask ? onClose : undefined}
+      className="sr-modal-mask"
       style={{
         position: 'fixed', inset: 0, zIndex: 'var(--z-modal)',
         background: 'rgba(3,4,12,0.55)',
@@ -82,7 +83,7 @@ export function Modal({
         aria-modal="true"
         aria-labelledby={title ? titleId : undefined}
         tabIndex={-1}
-        className="sr-focus-ring"
+        className="sr-focus-ring sr-modal-panel"
         onMouseDown={(e) => e.stopPropagation()}
         style={{
           width, maxWidth: '94vw', maxHeight: '90vh',

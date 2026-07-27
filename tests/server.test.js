@@ -57,7 +57,10 @@ test.before(async () => {
   const port = await freePort();
   baseUrl = `http://127.0.0.1:${port}`;
   child = spawn(process.execPath, ['--no-warnings', path.join(tmpDir, 'server', 'server.js')], {
-    env: { ...process.env, PORT: String(port) },
+    // 这套用例以匿名旅客的身份跑分享 / 造访 / 来信协议本身：关掉「每 IP 一个游客」
+    // 的限额与「社交需要账号」的门禁（都是管理台里可关的真实配置）。
+    // 限额与门禁的行为本身在 tests/admin.test.js 里单独覆盖。
+    env: { ...process.env, PORT: String(port), SR_GUEST_PER_IP: '0', SR_GUEST_GATES: 'off' },
     stdio: ['ignore', 'pipe', 'pipe'],
   });
   let logs = '';
@@ -67,8 +70,10 @@ test.before(async () => {
   // 等待就绪（最多 10s）
   for (let i = 0; ; i++) {
     try {
-      const r = await fetch(baseUrl + '/api/hello?token=warmup', { method: 'POST' });
-      if (r.status === 200) break;
+      // 就绪探测走静态根路径：/api/hello 会给探测令牌建一个游客账号，
+      // 把「每 IP 一个游客」的名额提前吃掉
+      const r = await fetch(baseUrl + '/', { redirect: 'manual' });
+      if (r.status) break;
     } catch {
       /* not up yet */
     }
@@ -562,3 +567,4 @@ test('访客足迹：造访后 share.visitors 带 lastVisit 时刻', async () =>
   assert.ok(v, '访客列表应包含简介客');
   assert.match(String(v.lastVisit), /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/, '足迹为 UTC 时刻');
 });
+

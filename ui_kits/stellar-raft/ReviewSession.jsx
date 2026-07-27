@@ -44,9 +44,11 @@ const rsQuizMaterial = (star) => {
 // 出题 system：只提问不给答案——考察交给 AI，评分永远留给用户自评
 const RS_QUIZ_SYSTEM = '你是复习教练，根据资料出一道简短的回忆检验题（一两句话），只提问不给答案，中文，直接输出问题本身。';
 
+/* 键帽：触摸端整枚隐去（.sr-kbd-only）——手机上没有空格键，
+   印一枚「空格」只会让人找一个不存在的东西。 */
 function RSKbd({ children, onScrim }) {
   return (
-    <span style={{
+    <span className="sr-kbd-only" style={{
       fontFamily: 'var(--font-mono)', fontSize: 10, lineHeight: 1,
       color: onScrim ? RS_SCRIM_INK_DIM : 'var(--text-3)',
       border: '1px solid ' + (onScrim ? 'rgba(208,220,255,0.28)' : 'var(--glass-border)'),
@@ -418,9 +420,9 @@ function ReviewSession({ onClose }) {
           </GlassPanel>
         )}
 
-        {/* 键位提示 */}
+        {/* 键位提示（触摸端整条不出现） */}
         {star && (
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 14, ...RS_HUD_SCRIM }} aria-hidden="true">
+          <div className="sr-kbd-only" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 14, ...RS_HUD_SCRIM }} aria-hidden="true">
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}><RSKbd onScrim>空格</RSKbd>翻开</span>
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}><RSKbd onScrim>1 · 2 · 3</RSKbd>评分</span>
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}><RSKbd onScrim>Esc</RSKbd>退出</span>

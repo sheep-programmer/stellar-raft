@@ -145,7 +145,7 @@ function DomainHalos({ stars, cons, k, onDomainDown, onDomainKey }) {
               boxShadow: `0 0 60px ${col}28, inset 0 0 80px ${col}1f`,
               pointerEvents: 'none' }} />
             {/* the domain's SUN — its name as a single warm, hot-glowing star. Drag it to move the whole 星域. */}
-            <div onMouseDown={(e) => { if (e.button === 0) { e.stopPropagation(); onDomainDown(e, c); } }}
+            <div onPointerDown={(e) => { if (e.button === 0) { e.stopPropagation(); onDomainDown(e, c); } }}
               role="button" tabIndex={0} className="sr-focus-ring"
               aria-label={`星域「${c.name}」· ${count} 颗星 · 已点亮 ${st.lit} 颗 · 回车打开菜单`}
               onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onDomainKey(c); } }}
@@ -188,11 +188,22 @@ function SummaryCard({ star, onOpen, onFeynman, onClose, screen }) {
   const D = window.SR_DATA;
   // 认证态（点亮/待重燃）随状态就地自解释；重燃 = 待重燃星的费曼快速通道
   const lit = litOf(star), ember = emberOf(star);
-  return (
-    <div ref={boxRef} onMouseDown={(e) => e.stopPropagation()}
-      style={{ position: 'fixed', left: pos ? pos.left : screen.x, top: pos ? pos.top : screen.y,
+  /* 手机上不跟着星飘：那张 260px 的卡片在 375px 的屏上会挡住半个星空，
+     而且手指按住的正是星本身。改成贴着底部标签栏的一张卡，星始终可见。 */
+  const phone = window.SRScreen && window.SRScreen.isPhone();
+  const frame = phone
+    ? {
+        position: 'fixed', left: 10, right: 10, width: 'auto',
+        bottom: 'calc(var(--sr-tabbar) + var(--sr-safe-bottom) + 10px)', zIndex: 28,
+        animation: 'sr-m-up var(--dur-base) var(--ease-flight) both',
+      }
+    : {
+        position: 'fixed', left: pos ? pos.left : screen.x, top: pos ? pos.top : screen.y,
         visibility: pos ? 'visible' : 'hidden', width: 260, zIndex: 28,
-        animation: pos ? 'sr-cardin var(--dur-base) var(--ease-flight) both' : 'none' }}>
+        animation: pos ? 'sr-cardin var(--dur-base) var(--ease-flight) both' : 'none',
+      };
+  return (
+    <div ref={boxRef} onPointerDown={(e) => e.stopPropagation()} style={frame}>
       <GlassPanel strong radius="lg" pad="md" glow>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 4 }}>
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 11, color: 'var(--text-3)' }}>
@@ -273,7 +284,7 @@ function PopMenu({ x, y, width = 228, header, footer, items, onClose }) {
   }, [x, y, items.length]);
   return (
     <div ref={ref} role="menu" tabIndex={-1} className="sr-focus-ring" onKeyDown={onKey}
-      onMouseDown={(e) => e.stopPropagation()} onContextMenu={(e) => e.preventDefault()}
+      onPointerDown={(e) => e.stopPropagation()} onContextMenu={(e) => e.preventDefault()}
       style={{ position: 'fixed', left: pos ? pos.left : x, top: pos ? pos.top : y,
         visibility: pos ? 'visible' : 'hidden', width, zIndex: 60, outline: 'none' }}>
       <GlassPanel strong radius="md" pad="none" glow style={{ padding: 6 }}>
@@ -306,8 +317,8 @@ function PopMenu({ x, y, width = 228, header, footer, items, onClose }) {
 function ConfirmDialog({ message, confirmLabel, onYes, onClose }) {
   React.useEffect(() => { const k = (e) => { if (e.key === 'Escape' && !e.defaultPrevented) { e.preventDefault(); onClose(); } }; document.addEventListener('keydown', k); return () => document.removeEventListener('keydown', k); }, []);
   return (
-    <div onMouseDown={onClose} onContextMenu={(e) => e.preventDefault()} style={{ position: 'fixed', inset: 0, zIndex: 120, background: 'rgba(3,4,12,0.55)', backdropFilter: 'blur(3px)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <div onMouseDown={(e) => e.stopPropagation()} style={{ width: 348, maxWidth: '90vw', animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
+    <div onPointerDown={onClose} onContextMenu={(e) => e.preventDefault()} style={{ position: 'fixed', inset: 0, zIndex: 120, background: 'rgba(3,4,12,0.55)', backdropFilter: 'blur(3px)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <div onPointerDown={(e) => e.stopPropagation()} style={{ width: 348, maxWidth: '90vw', animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
         <GlassPanel strong radius="lg" pad="md" glow>
           <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12, marginBottom: 18 }}>
             <span style={{ flex: 'none', width: 34, height: 34, borderRadius: '50%', background: 'rgba(232,145,122,0.14)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Icon name="alert-triangle" size={18} color="var(--danger)" /></span>
@@ -325,6 +336,9 @@ function ConfirmDialog({ message, confirmLabel, onYes, onClose }) {
 
 function StarMap({ selected, onSelect, onOpenEditor, onFeynman, onAerial, on3D, igniteId, focusReq }) {
   const D = window.SR_DATA;
+  // 断点：手机上 HUD 精简、工具条上抬、摘要卡沉底；touch 还决定手势提示的说法
+  const scr = window.SRKit.useScreen();
+  const phone = scr.phone;
   const ref = React.useRef(null);
   const [view, setView] = React.useState({ x: 0, y: 0, k: 0.82 });
   const [stars, setStars] = React.useState(() => D.stars.map(s => ({ ...s, wx: s.wx != null ? s.wx : s.x / 100 * WORLD.w, wy: s.wy != null ? s.wy : s.y / 100 * WORLD.h })));
@@ -371,12 +385,43 @@ function StarMap({ selected, onSelect, onOpenEditor, onFeynman, onAerial, on3D, 
   // which domain (if any) contains a world point
   const domainAt = (wx, wy) => cons.find(c => { const g = domainGeom(c, stars); return Math.hypot(wx - g.cx, wy - g.cy) <= g.r; }) || null;
 
+  /* 取景：按「星空实际占多大」算缩放，而不是写死一个倍率。
+     从前是固定 k=0.82 再把 1680×1040 的世界摆中间——在 1440 宽的桌面上勉强够看，
+     到了 390 宽的手机就只剩世界的一角，落地即是一片近景。
+     现在量出所有星与星域晕的包围盒，让它整个收进视口：屏幕越小，落地越远，
+     一眼先看见星空的形状，再决定往哪儿走。 */
+  const fitView = React.useCallback((el) => {
+    const w = el.clientWidth, h = el.clientHeight;
+    if (!w || !h) return null;
+    const pad = phone ? 26 : 56;              // 四周留白：手机寸土寸金，留少些
+    const boxes = [];
+    stars.forEach(s => boxes.push({ x: s.wx, y: s.wy, r: 58 }));           // 星点 + 标签的大致占位
+    cons.forEach(c => { const g = domainGeom(c, stars); boxes.push({ x: g.cx, y: g.cy, r: g.r }); });
+
+    // 空星空：没有内容可框，把世界中心摆正，取一个能看见「很空」的远景
+    if (!boxes.length) {
+      const k = clamp(Math.min(w / WORLD.w, h / WORLD.h) * 1.5, 0.34, 0.82);
+      return { k, x: w / 2 - WORLD.w / 2 * k, y: h / 2 - WORLD.h / 2 * k };
+    }
+    const minX = Math.min(...boxes.map(b => b.x - b.r)), maxX = Math.max(...boxes.map(b => b.x + b.r));
+    const minY = Math.min(...boxes.map(b => b.y - b.r)), maxY = Math.max(...boxes.map(b => b.y + b.r));
+    const cx = (minX + maxX) / 2, cy = (minY + maxY) / 2;
+    /* 上限刻意不超过从前那个写死的 0.82：取景只该把镜头往后拉，不该往前推。
+       星空很小（只有一两颗星）时若按包围盒放大，落地就是一张糊在脸上的近景，
+       反而看不出「这片星空还很空」。下限沿用手势缩放的同一个底 0.34。 */
+    const k = clamp(
+      Math.min((w - pad * 2) / Math.max(1, maxX - minX), (h - pad * 2) / Math.max(1, maxY - minY)),
+      0.34, phone ? 0.7 : 0.82);
+    return { k, x: w / 2 - cx * k, y: h / 2 - cy * k };
+  }, [stars, cons, phone]);
+  const fitRef = React.useRef(fitView); fitRef.current = fitView;
+
   React.useEffect(() => {
     const el = ref.current; if (!el) return;
     const fit = () => {
       if (inited.current) return; const w = el.clientWidth, h = el.clientHeight; if (!w) return;
       inited.current = true;
-      setView({ k: 0.82, x: (w - WORLD.w * 0.82) / 2, y: (h - WORLD.h * 0.82) / 2 });
+      const v = fitRef.current(el); if (v) setView(v);
     };
     const ro = new ResizeObserver(fit); ro.observe(el); fit();
     return () => ro.disconnect();
@@ -475,7 +520,27 @@ function StarMap({ selected, onSelect, onOpenEditor, onFeynman, onAerial, on3D, 
 
   React.useEffect(() => {
     const move = (e) => {
+      // 先更新这根指针的位置：捏合要靠两根指针的实时间距
+      if (touches.current.has(e.pointerId)) touches.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      const p = pinch.current;
+      if (p && touches.current.size >= 2) {
+        const [a, b] = [...touches.current.values()];
+        const dist = Math.hypot(a.x - b.x, a.y - b.y);
+        if (dist > 0 && p.dist > 0) {
+          const el = ref.current; if (!el) return;
+          const r = el.getBoundingClientRect();
+          const mx = (a.x + b.x) / 2 - r.left, my = (a.y + b.y) / 2 - r.top;
+          const k = clamp(p.k * (dist / p.dist), 0.34, 2.6);
+          // 以两指中点为锚：手指按住的那块星空不会从指缝里滑走
+          setView({ k, x: mx - (mx - p.view.x) * (k / p.view.k), y: my - (my - p.view.y) * (k / p.view.k) });
+        }
+        return;
+      }
       const d = drag.current; if (!d) return;
+      // 动了就不是长按
+      if (longPress.current && Math.abs(e.clientX - d.sx) + Math.abs(e.clientY - d.sy) > 8) {
+        clearTimeout(longPress.current); longPress.current = null;
+      }
       if (Math.abs(e.clientX - d.sx) + Math.abs(e.clientY - d.sy) > 3) d.moved = true;
       if (d.mode === 'pan') setView(v => ({ ...v, x: d.ox + (e.clientX - d.sx), y: d.oy + (e.clientY - d.sy) }));
       else if (d.mode === 'star') {
@@ -495,21 +560,69 @@ function StarMap({ selected, onSelect, onOpenEditor, onFeynman, onAerial, on3D, 
       }
     };
     const up = (e) => {
+      touches.current.delete(e.pointerId);
+      if (touches.current.size < 2) pinch.current = null;   // 松开一根手指，捏合结束
       const d = drag.current; drag.current = null;
+      if (longPress.current) { clearTimeout(longPress.current); longPress.current = null; }
       if (d && d.mode === 'domain' && !d.moved && e.button === 0) { if (pickRef.current) pickRef.current(d.con, e.clientX, e.clientY); }
       else if (d && d.mode === 'pan' && !d.moved && e.button === 0) onSelect(null);
       document.body.style.cursor = '';
     };
-    window.addEventListener('mousemove', move); window.addEventListener('mouseup', up);
-    return () => { window.removeEventListener('mousemove', move); window.removeEventListener('mouseup', up); };
+    // 指针事件统吃鼠标 / 触摸 / 笔——触摸端不再需要第二套 touch 处理
+    window.addEventListener('pointermove', move); window.addEventListener('pointerup', up);
+    window.addEventListener('pointercancel', up);
+    return () => {
+      window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', up);
+      window.removeEventListener('pointercancel', up);
+    };
   }, [onSelect]);
+
+  /* ——— 触摸手势 ———
+     touches：当前按在画布上的指针。两根手指同时落下就进捏合模式：
+     缩放跟着两指间距，画布中心跟着两指中点走（与滚轮缩放同一套 clamp）。
+     捏合期间取消一切拖拽——否则会一边缩放一边把星拖到天边。 */
+  const touches = React.useRef(new Map());
+  const pinch = React.useRef(null);
+  const longPress = React.useRef(null);
+  const trackDown = (e) => {
+    touches.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (touches.current.size === 2) {
+      const [a, b] = [...touches.current.values()];
+      drag.current = null;                       // 第二根手指落下 = 这不是拖拽
+      if (longPress.current) { clearTimeout(longPress.current); longPress.current = null; }
+      pinch.current = { dist: Math.hypot(a.x - b.x, a.y - b.y), k: viewRef.current.k, view: { ...viewRef.current } };
+    }
+  };
+
+  /* 触摸端没有右键：长按 520ms 当作「在这里新建」的右键菜单。
+     指针一动超过 8px 就取消（那是平移，不是长按）。 */
+  const armLongPress = (e) => {
+    if (e.pointerType === 'mouse') return;
+    if (touches.current.size >= 2) return;   // 多指在场时不装长按（第二道保险）
+    const { clientX, clientY } = e;
+    if (longPress.current) clearTimeout(longPress.current);
+    longPress.current = setTimeout(() => {
+      longPress.current = null;
+      drag.current = null;
+      const w = toWorld(clientX, clientY);
+      setMenu({ x: clientX, y: clientY, wx: w.wx, wy: w.wy, inDomain: domainAt(w.wx, w.wy) });
+      setNaming(null);
+      if (navigator.vibrate) { try { navigator.vibrate(12); } catch (err) { } }
+    }, 520);
+  };
 
   // press anywhere that isn't the sun or a star → pan the canvas
   const bgDown = (e) => {
     if (e.button !== 0) return;
     setMenu(null); setNaming(null); setStarMenu(null);
+    /* 已经有第二根手指在画布上 = 这是捏合，不是拖拽也不是长按。
+       （trackDown 会先清掉长按计时，但它跑在 bgDown 之前——这里若不拦，
+        紧接着又会把计时重新装上：双指停顿半秒，「在此创建」菜单就会中途
+        弹出来打断缩放。） */
+    if (touches.current.size >= 2) { drag.current = null; return; }
     drag.current = { mode: 'pan', sx: e.clientX, sy: e.clientY, ox: view.x, oy: view.y, moved: false };
     document.body.style.cursor = 'grabbing';
+    armLongPress(e);
   };
   // press the domain's sun → drag moves the whole 星域; a click (no drag) opens its create menu
   const domainDown = (e, con) => {
@@ -603,7 +716,8 @@ function StarMap({ selected, onSelect, onOpenEditor, onFeynman, onAerial, on3D, 
     flash('星域已移入黑洞 · 可随时恢复');
   };
 
-  const resetView = () => { const el = ref.current; const w = el.clientWidth, h = el.clientHeight; setView({ k: 0.82, x: (w - WORLD.w * 0.82) / 2, y: (h - WORLD.h * 0.82) / 2 }); onSelect(null); };
+  // 复位 = 回到落地时那一帧：与初始取景走同一个 fitView，不再各算各的
+  const resetView = () => { const el = ref.current; if (!el) return; const v = fitView(el); if (v) setView(v); onSelect(null); };
   const sel = stars.find(s => s.id === selected);
 
   // 键盘打开星域菜单：Enter 落在主星上时，菜单出现在主星的屏幕位置
@@ -629,8 +743,12 @@ function StarMap({ selected, onSelect, onOpenEditor, onFeynman, onAerial, on3D, 
   const empty = stars.length === 0 && cons.length === 0;
 
   return (
-    <div ref={ref} onMouseDown={bgDown} onContextMenu={onContext}
-      style={{ position: 'relative', flex: 1, minWidth: 0, overflow: 'hidden', cursor: 'grab', userSelect: 'none' }}>
+    <div ref={ref} onPointerDown={(e) => { trackDown(e); bgDown(e); }} onContextMenu={onContext}
+      style={{
+        position: 'relative', flex: 1, minWidth: 0, overflow: 'hidden', cursor: 'grab', userSelect: 'none',
+        // 画布自己接管全部手势：不交给浏览器去滚动/双击缩放，否则一拖就整页跟着走
+        touchAction: 'none',
+      }}>
       <sr-starfield density="1"></sr-starfield>
 
       {/* world layer */}
@@ -641,7 +759,7 @@ function StarMap({ selected, onSelect, onOpenEditor, onFeynman, onAerial, on3D, 
           if (!vis(s.wx, s.wy) && selected !== s.id) return null; // 视口外剔除
           const litS = litOf(s), emberS = emberOf(s);
           return (
-          <div key={s.id} onMouseDown={(e) => starDown(e, s)} onDoubleClick={() => onOpenEditor(s.id)}
+          <div key={s.id} onPointerDown={(e) => { trackDown(e); starDown(e, s); }} onDoubleClick={() => onOpenEditor(s.id)}
             onContextMenu={(e) => { e.preventDefault(); e.stopPropagation(); setMenu(null); setStarMenu({ x: e.clientX, y: e.clientY, id: s.id }); }}
             style={{ position: 'absolute', left: s.wx, top: s.wy, zIndex: 4 /* 行星的点击层级高于星域主星 */ }}>
             {/* 认证环（叠加在亮度分层之上的正交维度）：已点亮 = 发丝金环（不加常驻辉光）；
@@ -688,42 +806,57 @@ function StarMap({ selected, onSelect, onOpenEditor, onFeynman, onAerial, on3D, 
         </div>
       )}
 
-      {/* Top HUD——窄窗防线：条目一律不折字，放不下时胶囊内先换行、两枚胶囊再整体换行 */}
-      <div data-tour="hud" onMouseDown={(e) => e.stopPropagation()} style={{ position: 'absolute', top: 18, left: 22, right: 22, zIndex: 30, display: 'flex', alignItems: 'stretch', flexWrap: 'wrap', gap: 14, rowGap: 8, pointerEvents: 'none' }}>
-        <GlassPanel radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', rowGap: 4, gap: 10, padding: '8px 18px', pointerEvents: 'auto' }}>
-          <Icon name="orbit" size={17} color="var(--gold)" />
-          <span style={{ fontSize: 14, color: 'var(--text-1)', whiteSpace: 'nowrap' }}>我的星空</span>
-          <span style={{ fontSize: 12, color: 'var(--text-3)', whiteSpace: 'nowrap' }}>创作态 · 中景</span>
-        </GlassPanel>
+      {/* Top HUD——窄窗防线：条目一律不折字，放不下时胶囊内先换行、两枚胶囊再整体换行。
+          手机上左边那枚「我的星空」让位给顶部条（那儿已经写着视图名），
+          右边五项读数压成三项：星数 · 已点亮 · 正变暗——其余在体检页看。 */}
+      <div data-tour="hud" onPointerDown={(e) => e.stopPropagation()} style={{ position: 'absolute', top: phone ? 10 : 18, left: phone ? 10 : 22, right: phone ? 10 : 22, zIndex: 30, display: 'flex', alignItems: 'stretch', flexWrap: 'wrap', gap: 14, rowGap: 8, pointerEvents: 'none' }}>
+        {!phone && (
+          <GlassPanel radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', rowGap: 4, gap: 10, padding: '8px 18px', pointerEvents: 'auto' }}>
+            <Icon name="orbit" size={17} color="var(--gold)" />
+            <span style={{ fontSize: 14, color: 'var(--text-1)', whiteSpace: 'nowrap' }}>我的星空</span>
+            <span style={{ fontSize: 12, color: 'var(--text-3)', whiteSpace: 'nowrap' }}>创作态 · 中景</span>
+          </GlassPanel>
+        )}
         <div style={{ flex: 1 }} />
-        <GlassPanel radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'flex-end', rowGap: 4, gap: 22, padding: '8px 22px', pointerEvents: 'auto' }}>
+        <GlassPanel radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'flex-end', rowGap: 4, gap: phone ? 14 : 22, padding: phone ? '6px 14px' : '8px 22px', pointerEvents: 'auto' }}>
           <HudStat label="知识星" value={stars.length} />
           <HudStat label="已点亮" value={stars.filter(litOf).length} tone="var(--gold)" />
-          <HudStat label="正发光" value={stars.filter(s => s.strength >= 0.7).length} />
+          {!phone && <HudStat label="正发光" value={stars.filter(s => s.strength >= 0.7).length} />}
           <HudStat label="正变暗" value={stars.filter(s => s.strength < 0.4).length} tone="var(--star-blue-dim)" />
-          <HudStat label="星域" value={cons.length} tone="var(--star-blue)" />
+          {!phone && <HudStat label="星域" value={cons.length} tone="var(--star-blue)" />}
         </GlassPanel>
       </div>
 
-      {/* hint */}
-      <div data-tour="hint" style={{ position: 'absolute', bottom: 26, left: 24, zIndex: 30, display: 'flex', alignItems: 'center', gap: 8, fontSize: 11.5, color: 'var(--text-3)', pointerEvents: 'none', maxWidth: 'calc(100% - 280px)' }}>
+      {/* hint——手势说法随输入方式变：手指没有滚轮，也没有右键。
+          手机上摘要卡就贴在屏底，两者会叠在一起：卡片一出现，提示就让位。 */}
+      {!(phone && sel) && (
+      <div data-tour="hint" style={{ position: 'absolute', bottom: phone ? 20 : 26, left: phone ? 12 : 24, zIndex: 30, display: 'flex', alignItems: 'center', gap: 8, fontSize: 11.5, color: 'var(--text-3)', pointerEvents: 'none', maxWidth: phone ? 'calc(100% - 84px)' : 'calc(100% - 280px)' }}>
         <Icon name="move" size={14} color="currentColor" />
         {/* 窄窗时截断而不折行，避免与右下工具胶囊压叠 */}
-        <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>拖主星=整体移动星域 · 拖空白=平移画布 · 拖星点=移动单颗 · 滚轮缩放 · 右键创建</span>
+        <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+          {scr.touch
+            ? '拖动=平移 · 双指捏合=缩放 · 长按空白=新建'
+            : '拖主星=整体移动星域 · 拖空白=平移画布 · 拖星点=移动单颗 · 滚轮缩放 · 右键创建'}
+        </span>
       </div>
+      )}
 
-      {/* zoom controls */}
-      <div data-tour="tools" onMouseDown={(e) => e.stopPropagation()} style={{ position: 'absolute', bottom: 26, right: 24, zIndex: 30 }}>
+      {/* zoom controls——手机上抬到标签栏之上，并收起两个次要入口（抽屉里都有）。
+          摘要卡占住屏底时整枚收起：缩放在触摸端本来就有双指捏合，
+          留一枚压在卡片上的胶囊只会挡住「费曼内化」那颗按钮。 */}
+      {!(phone && sel) && (
+      <div data-tour="tools" onPointerDown={(e) => e.stopPropagation()} style={{ position: 'absolute', bottom: phone ? 14 : 26, right: phone ? 12 : 24, zIndex: 30 }}>
         <GlassPanel radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', gap: 2, padding: '6px 8px' }}>
           <IconButton name="minus" size="sm" title="缩小" onClick={() => setView(v => ({ ...v, k: clamp(v.k * 0.85, 0.34, 2.6) }))} />
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--text-2)', minWidth: 42, textAlign: 'center' }}>{Math.round(view.k * 100)}%</span>
+          {!phone && <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--text-2)', minWidth: 42, textAlign: 'center' }}>{Math.round(view.k * 100)}%</span>}
           <IconButton name="plus" size="sm" title="放大" onClick={() => setView(v => ({ ...v, k: clamp(v.k * 1.18, 0.34, 2.6) }))} />
           <span style={{ width: 1, height: 18, background: 'var(--line)' }} />
-          <IconButton name="box" size="sm" title="三维星系（2D / 3D）" onClick={on3D} />
-          <IconButton name="satellite" size="sm" title="亮度鸟瞰" onClick={onAerial} />
+          {!phone && <IconButton name="box" size="sm" title="三维星系（2D / 3D）" onClick={on3D} />}
+          {!phone && <IconButton name="satellite" size="sm" title="亮度鸟瞰" onClick={onAerial} />}
           <IconButton name="locate-fixed" size="sm" title="复位视图" onClick={resetView} />
         </GlassPanel>
       </div>
+      )}
 
       <SummaryCard star={sel} screen={selScreen} onOpen={() => onOpenEditor(sel.id)} onFeynman={() => onFeynman(sel.id)} onClose={() => onSelect(null)} />
 
@@ -773,7 +906,7 @@ function StarMap({ selected, onSelect, onOpenEditor, onFeynman, onAerial, on3D, 
           renameDomain: { title: '重命名星域', ph: '输入新名字…', ok: '保存' },
         }[naming.kind || 'domain'];
         return (
-        <div style={{ position: 'fixed', left: Math.min(naming.x, window.innerWidth - 240), top: Math.min(naming.y, window.innerHeight - 130), zIndex: 60, width: 220 }} onMouseDown={(e) => e.stopPropagation()}>
+        <div style={{ position: 'fixed', left: Math.min(naming.x, window.innerWidth - 240), top: Math.min(naming.y, window.innerHeight - 130), zIndex: 60, width: 220 }} onPointerDown={(e) => e.stopPropagation()}>
           <GlassPanel strong radius="md" pad="sm" glow>
             <div style={{ fontSize: 11, color: 'var(--text-3)', marginBottom: 7 }}>{meta.title}</div>
             <input autoFocus className="sr-focus-ring" value={draftName} onChange={(e) => setDraftName(e.target.value)}

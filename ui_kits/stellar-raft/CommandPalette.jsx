@@ -113,7 +113,11 @@ function CommandPalette({ onClose, onOpenStar, onOpenView, onFocusCon }) {
   ];
 
   const q = query.trim().toLowerCase();
-  const views = VIEW_CMDS.filter(v => !q || v.label.toLowerCase().includes(q)).map(v => ({ ...v, run: () => onOpenView(v.id) }));
+  // 管理员多一个去处：星港管理台。非管理员这一项根本不进候选，搜也搜不出来
+  const viewCmds = D.account.admin
+    ? [...VIEW_CMDS, { kind: 'view', id: 'admin', label: '星港管理台', icon: 'shield', sub: '管理' }]
+    : VIEW_CMDS;
+  const views = viewCmds.filter(v => !q || v.label.toLowerCase().includes(q)).map(v => ({ ...v, run: () => onOpenView(v.id) }));
   const actions = ACTION_CMDS.filter(a => !q || a.label.toLowerCase().includes(q));
   const cons = D.constellations.filter(c => !q || c.name.toLowerCase().includes(q)).map(c => ({ kind: 'con', id: c.id, label: c.name, sub: c.count + ' 颗星', color: c.color, icon: 'orbit', run: () => onFocusCon(c.id) }));
 
@@ -167,8 +171,9 @@ function CommandPalette({ onClose, onOpenStar, onOpenView, onFocusCon }) {
   let idx = -1;
   return (
     <div ref={rootRef} onMouseDown={onClose} role="dialog" aria-modal="true" aria-label="全局搜索"
+      className="sr-cmd-mask"
       style={{ position: 'fixed', inset: 0, zIndex: 100, background: 'rgba(3,4,12,0.55)', backdropFilter: 'blur(3px)', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', paddingTop: '13vh' }}>
-      <div onMouseDown={(e) => e.stopPropagation()} style={{ width: 560, maxWidth: '92vw', animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
+      <div onMouseDown={(e) => e.stopPropagation()} className="sr-cmd-panel" style={{ width: 560, maxWidth: '92vw', animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
         <GlassPanel strong radius="lg" pad="none" glow style={{ overflow: 'hidden' }}>
           {/* input */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 11, padding: '15px 18px', borderBottom: '1px solid var(--line)' }}>

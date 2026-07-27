@@ -404,7 +404,7 @@ function Checkup({ onClose, onOpenStar, onFocusCon, onFeynman, onReview }) {
   const card = { borderRadius: 'var(--r-lg)', border: '1px solid var(--glass-border)', background: 'var(--glass-bg-faint)', padding: 18 };
 
   return (
-    <div onContextMenu={e => e.preventDefault()} style={{ position: 'relative', flex: 1, minWidth: 0, overflow: 'auto', padding: '22px 30px 56px' }}>
+    <div onContextMenu={e => e.preventDefault()} className="sr-view" style={{ position: 'relative', flex: 1, minWidth: 0, overflow: 'auto', padding: '22px 30px 56px' }}>
       <sr-starfield density="0.55"></sr-starfield>
       <div style={{ position: 'relative', zIndex: 2, maxWidth: 1080, margin: '0 auto' }}>
 
@@ -460,7 +460,7 @@ function Checkup({ onClose, onOpenStar, onFocusCon, onFeynman, onReview }) {
         </GlassPanel>
 
         {/* hero row: big health number + distribution */}
-        <div style={{ display: 'grid', gridTemplateColumns: '300px 1fr', gap: 16, marginBottom: 16 }}>
+        <div className="sr-ck-2col" style={{ display: 'grid', gridTemplateColumns: '300px 1fr', gap: 16, marginBottom: 16 }}>
           {/* overall */}
           <GlassPanel strong radius="lg" pad="none" glow style={{ padding: 22, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
             <div style={HUD}>整体记忆健康度</div>
@@ -491,7 +491,7 @@ function Checkup({ onClose, onOpenStar, onFocusCon, onFeynman, onReview }) {
                 <div key={b.key} title={`${b.t} · ${b.n}`} style={{ width: `${b.n / total * 100}%`, background: b.c, boxShadow: b.key === 'solid' ? '0 0 8px rgba(255,217,138,0.5)' : 'none' }} />
               ))}
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12 }}>
+            <div className="sr-ck-4col" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12 }}>
               {counts.map(b => (
                 <div key={b.key} style={{ borderRadius: 'var(--r-md)', border: '1px solid var(--glass-border)', background: 'rgba(159,198,255,0.03)', padding: '12px 13px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
@@ -507,7 +507,7 @@ function Checkup({ onClose, onOpenStar, onFocusCon, onFeynman, onReview }) {
         </div>
 
         {/* forecast + heatmap row */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }}>
+        <div className="sr-ck-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }}>
 
           {/* 时间之窗 · 未来 7 天预演 */}
           <GlassPanel data-tour="checkup-window" radius="lg" pad="none" style={{ padding: 18 }}>
@@ -604,7 +604,7 @@ function Checkup({ onClose, onOpenStar, onFocusCon, onFeynman, onReview }) {
         </div>
 
         {/* main grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+        <div className="sr-ck-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
 
           {/* per-domain health */}
           <GlassPanel radius="lg" pad="none" style={{ padding: 18 }}>

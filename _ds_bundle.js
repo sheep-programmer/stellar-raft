@@ -1,4 +1,4 @@
-/* @ds-bundle: {"format":3,"namespace":"StellarRaftDesignSystem_2866af","components":[{"name":"Badge","sourcePath":"components/core/Badge.jsx"},{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"GlassPanel","sourcePath":"components/core/GlassPanel.jsx"},{"name":"Icon","sourcePath":"components/core/Icon.jsx"},{"name":"IconButton","sourcePath":"components/core/IconButton.jsx"},{"name":"Input","sourcePath":"components/core/Input.jsx"},{"name":"Tag","sourcePath":"components/core/Tag.jsx"},{"name":"Checkbox","sourcePath":"components/form/Checkbox.jsx"},{"name":"Select","sourcePath":"components/form/Select.jsx"},{"name":"Switch","sourcePath":"components/form/Switch.jsx"},{"name":"Tabs","sourcePath":"components/form/Tabs.jsx"},{"name":"ConstellationItem","sourcePath":"components/knowledge/ConstellationItem.jsx"},{"name":"MemoryBar","sourcePath":"components/knowledge/MemoryBar.jsx"},{"name":"StarNode","sourcePath":"components/knowledge/StarNode.jsx"},{"name":"ContextMenu","sourcePath":"components/overlay/ContextMenu.jsx"},{"name":"Modal","sourcePath":"components/overlay/Modal.jsx"},{"name":"Toast","sourcePath":"components/overlay/Toast.jsx"},{"name":"Tooltip","sourcePath":"components/overlay/Tooltip.jsx"}],"sourceHashes":{"assets/starfield.js":"d776d2b45dc4","components/core/Badge.jsx":"b0bd9735d638","components/core/Button.jsx":"a1c387a07e86","components/core/GlassPanel.jsx":"299a19d8fbb4","components/core/Icon.jsx":"7505f83ab03d","components/core/IconButton.jsx":"24052f4eed78","components/core/Input.jsx":"54a6c9af7e3f","components/core/Tag.jsx":"d8513c07ea96","components/form/Checkbox.jsx":"38aa593157dd","components/form/Select.jsx":"86b8c1c71e12","components/form/Switch.jsx":"938c62be0664","components/form/Tabs.jsx":"ede2dbff1963","components/knowledge/ConstellationItem.jsx":"d73e999469b6","components/knowledge/MemoryBar.jsx":"a54c928d5065","components/knowledge/StarNode.jsx":"1bedee49f0bf","components/overlay/ContextMenu.jsx":"11783420e876","components/overlay/Modal.jsx":"0906de457544","components/overlay/Toast.jsx":"d22ad40680a6","components/overlay/Tooltip.jsx":"a042caa8970d","ui_kits/stellar-raft/AIConfig.jsx":"bbc66d05eebf","ui_kits/stellar-raft/AerialView.jsx":"8209eb6af395","ui_kits/stellar-raft/BlackHole.jsx":"2704c4a4e50c","ui_kits/stellar-raft/Checkup.jsx":"b7cbf7f0bbf9","ui_kits/stellar-raft/CommandPalette.jsx":"3f1a9cdd2383","ui_kits/stellar-raft/Editor.jsx":"2b09b768f90a","ui_kits/stellar-raft/EditorMenus.jsx":"fb80581f6bcc","ui_kits/stellar-raft/FeynmanDrawer.jsx":"ff65c7ccc0cf","ui_kits/stellar-raft/Galaxy3D.jsx":"2ce87e7da57d","ui_kits/stellar-raft/Inbox.jsx":"c2fc04361d44","ui_kits/stellar-raft/KeysHelp.jsx":"f4fc061886ee","ui_kits/stellar-raft/ListView.jsx":"e2550f598c82","ui_kits/stellar-raft/LoginView.jsx":"18d9c842c5c6","ui_kits/stellar-raft/Onboarding.jsx":"e1d27a7d28a7","ui_kits/stellar-raft/ReviewSession.jsx":"9092a3d9412c","ui_kits/stellar-raft/Settings.jsx":"947a5dc76b3a","ui_kits/stellar-raft/Sidebar.jsx":"f61a222b9d49","ui_kits/stellar-raft/StarMap.jsx":"3f1c09e9e50e","ui_kits/stellar-raft/Timeline.jsx":"cda4e62fa57b","ui_kits/stellar-raft/VisitView.jsx":"19ff8ab7dbb7","ui_kits/stellar-raft/ai.js":"2f79eb3473c9","ui_kits/stellar-raft/app.jsx":"a957f07956b7","ui_kits/stellar-raft/codehl.js":"6fbdd0100deb","ui_kits/stellar-raft/data.js":"7c4d0fe5482e","ui_kits/stellar-raft/mdcore.js":"b82d5054c3b6","ui_kits/stellar-raft/sanitize.js":"88e63cd63253","ui_kits/stellar-raft/transition.js":"3725d8982dc5","ui_kits/stellar-raft/undocore.js":"7f8c94da35f9","ui_kits/stellar-raft/vault.js":"bfb5fdd87949"},"inlinedExternals":[],"unexposedExports":[{"name":"memoryColor","sourcePath":"components/knowledge/MemoryBar.jsx"}],"exposedHelpers":[{"name":"toast","sourcePath":"components/overlay/Toast.jsx"}]} */
+/* @ds-bundle: {"format":3,"namespace":"StellarRaftDesignSystem_2866af","components":[{"name":"Badge","sourcePath":"components/core/Badge.jsx"},{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"GlassPanel","sourcePath":"components/core/GlassPanel.jsx"},{"name":"Icon","sourcePath":"components/core/Icon.jsx"},{"name":"IconButton","sourcePath":"components/core/IconButton.jsx"},{"name":"Input","sourcePath":"components/core/Input.jsx"},{"name":"Tag","sourcePath":"components/core/Tag.jsx"},{"name":"Checkbox","sourcePath":"components/form/Checkbox.jsx"},{"name":"Select","sourcePath":"components/form/Select.jsx"},{"name":"Switch","sourcePath":"components/form/Switch.jsx"},{"name":"Tabs","sourcePath":"components/form/Tabs.jsx"},{"name":"ConstellationItem","sourcePath":"components/knowledge/ConstellationItem.jsx"},{"name":"MemoryBar","sourcePath":"components/knowledge/MemoryBar.jsx"},{"name":"StarNode","sourcePath":"components/knowledge/StarNode.jsx"},{"name":"ContextMenu","sourcePath":"components/overlay/ContextMenu.jsx"},{"name":"Modal","sourcePath":"components/overlay/Modal.jsx"},{"name":"Toast","sourcePath":"components/overlay/Toast.jsx"},{"name":"Tooltip","sourcePath":"components/overlay/Tooltip.jsx"}],"sourceHashes":{"assets/starfield.js":"d776d2b45dc4","components/core/Badge.jsx":"b0bd9735d638","components/core/Button.jsx":"a1c387a07e86","components/core/GlassPanel.jsx":"299a19d8fbb4","components/core/Icon.jsx":"7505f83ab03d","components/core/IconButton.jsx":"24052f4eed78","components/core/Input.jsx":"54a6c9af7e3f","components/core/Tag.jsx":"d8513c07ea96","components/form/Checkbox.jsx":"38aa593157dd","components/form/Select.jsx":"86b8c1c71e12","components/form/Switch.jsx":"938c62be0664","components/form/Tabs.jsx":"ede2dbff1963","components/knowledge/ConstellationItem.jsx":"d73e999469b6","components/knowledge/MemoryBar.jsx":"a54c928d5065","components/knowledge/StarNode.jsx":"1bedee49f0bf","components/overlay/ContextMenu.jsx":"11783420e876","components/overlay/Modal.jsx":"6119273e95da","components/overlay/Toast.jsx":"d22ad40680a6","components/overlay/Tooltip.jsx":"a042caa8970d","ui_kits/stellar-raft/AIConfig.jsx":"0408b943b28a","ui_kits/stellar-raft/AdminConsole.jsx":"9201df2c170f","ui_kits/stellar-raft/AerialView.jsx":"8209eb6af395","ui_kits/stellar-raft/BlackHole.jsx":"75e4cac9d614","ui_kits/stellar-raft/Checkup.jsx":"5c6c3ce479a1","ui_kits/stellar-raft/CommandPalette.jsx":"90f10790166c","ui_kits/stellar-raft/Editor.jsx":"f73d4772f7a3","ui_kits/stellar-raft/EditorMenus.jsx":"489f22c71b48","ui_kits/stellar-raft/FeynmanDrawer.jsx":"591b225e555a","ui_kits/stellar-raft/Galaxy3D.jsx":"2ce87e7da57d","ui_kits/stellar-raft/Inbox.jsx":"c4a70ad0bf9a","ui_kits/stellar-raft/KeysHelp.jsx":"948b00f411ed","ui_kits/stellar-raft/ListView.jsx":"f79c250bd947","ui_kits/stellar-raft/LoginView.jsx":"18d9c842c5c6","ui_kits/stellar-raft/MobileShell.jsx":"2b0ece6e1b35","ui_kits/stellar-raft/Onboarding.jsx":"40b71668b69b","ui_kits/stellar-raft/ReviewSession.jsx":"a8668fb5c356","ui_kits/stellar-raft/Settings.jsx":"da9bff94d318","ui_kits/stellar-raft/Sidebar.jsx":"672d753c5efb","ui_kits/stellar-raft/StarMap.jsx":"76c3b4f2e35e","ui_kits/stellar-raft/Timeline.jsx":"1602ca5b6c95","ui_kits/stellar-raft/VisitView.jsx":"e50b2aae82af","ui_kits/stellar-raft/ai.js":"2f79eb3473c9","ui_kits/stellar-raft/app.jsx":"0a7e98ab962a","ui_kits/stellar-raft/codehl.js":"6fbdd0100deb","ui_kits/stellar-raft/data.js":"84c708c519f0","ui_kits/stellar-raft/mdcore.js":"b82d5054c3b6","ui_kits/stellar-raft/responsive.js":"29feedf6c503","ui_kits/stellar-raft/sanitize.js":"88e63cd63253","ui_kits/stellar-raft/transition.js":"3725d8982dc5","ui_kits/stellar-raft/undocore.js":"7f8c94da35f9","ui_kits/stellar-raft/vault.js":"bfb5fdd87949"},"inlinedExternals":[],"unexposedExports":[{"name":"memoryColor","sourcePath":"components/knowledge/MemoryBar.jsx"}],"exposedHelpers":[{"name":"toast","sourcePath":"components/overlay/Toast.jsx"}]} */
 
 (() => {
 
@@ -2137,6 +2137,7 @@ function Modal({
   if (!open) return null;
   return /*#__PURE__*/React.createElement("div", {
     onMouseDown: closeOnMask ? onClose : undefined,
+    className: "sr-modal-mask",
     style: {
       position: 'fixed',
       inset: 0,
@@ -2155,7 +2156,7 @@ function Modal({
     "aria-modal": "true",
     "aria-labelledby": title ? titleId : undefined,
     tabIndex: -1,
-    className: "sr-focus-ring",
+    className: "sr-focus-ring sr-modal-panel",
     onMouseDown: e => e.stopPropagation(),
     style: {
       width,
@@ -3109,6 +3110,7 @@ function AIConfig({
         .sr-aicfg-range{ scrollbar-width:none; }
       `), /*#__PURE__*/React.createElement("div", {
     onMouseDown: e => e.stopPropagation(),
+    className: "sr-modal-panel",
     style: {
       width: 640,
       maxWidth: '94vw',
@@ -3579,6 +3581,3235 @@ window.SRKit = Object.assign(window.SRKit || {}, {
   AIConfig
 });
 })(); } catch (e) { __ds_ns.__errors.push({ path: "ui_kits/stellar-raft/AIConfig.jsx", error: String((e && e.message) || e) }); }
+
+// ui_kits/stellar-raft/AdminConsole.jsx
+try { (() => {
+/* AdminConsole — 星港管理台。整页仪表盘，只有 role='admin' 的账号能进
+   （侧边栏底部出现「星港管理台」入口，服务端每个 /api/admin/* 也各自守一道）。
+   七个分区：总览 · 旅客 · 分享 · 会话 · 广播 · 系统 · 日志。
+
+   一条贯穿的原则：管理台展示的每个数字都由服务端实时算出，不缓存、不估算——
+   刷新按钮拿到的就是此刻这台服务器的真实状态。危险操作（停用 / 删号 / 维护模式）
+   一律走二次确认，删号还要求原样敲一遍用户名。 */
+const {
+  Icon,
+  IconButton,
+  Button,
+  Input,
+  Badge,
+  Tag,
+  Switch,
+  Select,
+  Modal,
+  toast
+} = window.StellarRaftDesignSystem_2866af;
+
+/* ============================ 小工具 ============================ */
+
+// sqlite 的 datetime('now') 是 UTC 且不带时区标记，补 Z 才不会被当成本地时间
+const parseTs = s => s ? Date.parse(String(s).replace(' ', 'T') + (String(s).endsWith('Z') ? '' : 'Z')) || 0 : 0;
+const MIN = 60000,
+  HOUR = 3600000,
+  DAY = 86400000;
+const ago = s => {
+  const t = parseTs(s);
+  if (!t) return '—';
+  const d = Date.now() - t;
+  if (d < MIN) return '刚刚';
+  if (d < HOUR) return Math.floor(d / MIN) + ' 分钟前';
+  if (d < DAY) return Math.floor(d / HOUR) + ' 小时前';
+  if (d < 30 * DAY) return Math.floor(d / DAY) + ' 天前';
+  return new Date(t).toLocaleDateString('zh-CN');
+};
+const fullTime = s => parseTs(s) ? new Date(parseTs(s)).toLocaleString('zh-CN') : '—';
+const bytes = n => {
+  if (!n) return '0 B';
+  if (n < 1024) return n + ' B';
+  if (n < 1024 * 1024) return (n / 1024).toFixed(1) + ' KB';
+  return (n / 1024 / 1024).toFixed(2) + ' MB';
+};
+const duration = ms => {
+  const s = Math.floor(ms / 1000);
+  if (s < 60) return s + ' 秒';
+  if (s < 3600) return Math.floor(s / 60) + ' 分 ' + s % 60 + ' 秒';
+  if (s < 86400) return Math.floor(s / 3600) + ' 小时 ' + Math.floor(s % 3600 / 60) + ' 分';
+  return Math.floor(s / 86400) + ' 天 ' + Math.floor(s % 86400 / 3600) + ' 小时';
+};
+const num = n => n == null ? '—' : Number(n).toLocaleString('zh-CN');
+
+// 全部管理请求走这里：失败统一冒一个 toast，调用方只管拿数据
+const adminApi = async (path, opts) => {
+  try {
+    return await window.SRNet.api('/api/admin' + path, opts);
+  } catch (e) {
+    toast(e && e.message || '管理接口暂不可达', {
+      tone: 'danger',
+      icon: 'triangle-alert'
+    });
+    throw e;
+  }
+};
+
+/* 每个分区共用的取数 hook：挂载即取，返回 [data, loading, reload]。
+   error 不单独出态——adminApi 已经 toast 过，界面保留上一次的可用数据。 */
+function useAdminData(path, deps) {
+  const [data, setData] = React.useState(null);
+  const [loading, setLoading] = React.useState(true);
+  const alive = React.useRef(true);
+  const load = React.useCallback(() => {
+    setLoading(true);
+    return adminApi(path).then(d => {
+      if (alive.current) setData(d);
+    }).catch(() => {}).finally(() => {
+      if (alive.current) setLoading(false);
+    });
+  }, [path]);
+  React.useEffect(() => {
+    alive.current = true;
+    load();
+    return () => {
+      alive.current = false;
+    };
+  }, deps || [path]); // eslint-disable-line react-hooks/exhaustive-deps
+  return [data, loading, load];
+}
+
+/* ============================ 通用零件 ============================ */
+
+const panel = {
+  borderRadius: 'var(--r-lg)',
+  border: '1px solid var(--glass-border)',
+  background: 'var(--glass-bg-faint)'
+};
+const hud = {
+  fontSize: 10,
+  letterSpacing: 'var(--ls-hud)',
+  textTransform: 'uppercase',
+  color: 'var(--text-3)',
+  fontFamily: 'var(--font-mono)'
+};
+
+/* 统计卡：一个大数字 + 一行注解。tone 决定数字的色温——
+   gold 用于「有分量的成果」（点亮的星、管理员），blue 是常规读数，
+   danger 只在真的有事时出现（被停用的账号、错误计数）。 */
+function StatCard({
+  icon,
+  label,
+  value,
+  unit,
+  sub,
+  tone,
+  wide
+}) {
+  const color = tone === 'gold' ? 'var(--gold)' : tone === 'danger' ? 'var(--danger)' : 'var(--text-1)';
+  const glow = tone === 'gold' ? '0 0 18px rgba(255,217,138,0.28)' : tone === 'danger' ? '0 0 16px rgba(232,145,122,0.22)' : '0 0 16px rgba(159,198,255,0.14)';
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      ...panel,
+      padding: '15px 17px',
+      flex: wide ? '1 1 100%' : '1 1 168px',
+      minWidth: 0
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 7,
+      marginBottom: 10
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: icon,
+    size: 13,
+    color: tone === 'gold' ? 'var(--gold)' : 'var(--star-blue)'
+  }), /*#__PURE__*/React.createElement("span", {
+    style: hud
+  }, label)), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'baseline',
+      gap: 5
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 27,
+      fontWeight: 300,
+      color,
+      textShadow: glow,
+      fontFamily: 'var(--font-sans)',
+      lineHeight: 1.1
+    }
+  }, value), unit && /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 12,
+      color: 'var(--text-3)'
+    }
+  }, unit)), sub && /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11.5,
+      color: 'var(--text-2)',
+      marginTop: 7,
+      lineHeight: 1.5
+    }
+  }, sub));
+}
+
+// 分区标题：图标 + 标题 + 右侧插槽
+function SectionHead({
+  icon,
+  title,
+  note,
+  right
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 10,
+      marginBottom: 13
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: icon,
+    size: 15,
+    color: "var(--star-blue)"
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 14.5,
+      color: 'var(--text-1)',
+      fontWeight: 300
+    }
+  }, title), note && /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 12,
+      color: 'var(--text-3)'
+    }
+  }, note), /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1
+    }
+  }), right);
+}
+
+// 头像圆片：与侧边栏 UserChip 同一枚，管理员镀金边
+function Avatar({
+  user,
+  size
+}) {
+  const s = size || 30;
+  const admin = user.role === 'admin';
+  return /*#__PURE__*/React.createElement("span", {
+    style: {
+      width: s,
+      height: s,
+      flex: 'none',
+      borderRadius: '50%',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      fontSize: s * 0.42,
+      color: 'var(--text-1)',
+      background: admin ? 'linear-gradient(140deg, #5a4520, #8d6c2c)' : 'linear-gradient(140deg, #2a3566, #56689c)',
+      border: '1px solid ' + (admin ? 'rgba(255,217,138,0.42)' : 'var(--glass-border-strong)'),
+      opacity: user.banned ? 0.45 : 1,
+      filter: user.banned ? 'grayscale(0.7)' : 'none'
+    }
+  }, user.avatar || '星');
+}
+
+// 角色 / 状态徽章组
+function UserBadges({
+  u
+}) {
+  return /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'inline-flex',
+      gap: 5,
+      alignItems: 'center'
+    }
+  }, u.role === 'admin' && /*#__PURE__*/React.createElement(Badge, {
+    tone: "gold"
+  }, "\u7BA1\u7406\u5458"), !u.registered && /*#__PURE__*/React.createElement(Badge, {
+    tone: "neutral"
+  }, "\u533F\u540D"), u.banned && /*#__PURE__*/React.createElement(Badge, {
+    tone: "fading"
+  }, "\u5DF2\u505C\u7528"));
+}
+
+// 空态：不留白板，说清「这里为什么是空的」
+function Empty({
+  icon,
+  text
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: '46px 20px',
+      textAlign: 'center',
+      color: 'var(--text-3)'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: icon || 'telescope',
+    size: 26,
+    color: "var(--text-disabled)"
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 13,
+      marginTop: 12,
+      lineHeight: 1.6
+    }
+  }, text));
+}
+function Loading({
+  text
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: '46px 20px',
+      textAlign: 'center',
+      color: 'var(--text-3)',
+      fontSize: 13
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "sr-admin-pulse"
+  }, text || '正在读取星港状态…'));
+}
+
+// 一行「键 — 值」，系统页与详情页共用
+function Row({
+  k,
+  v,
+  mono,
+  tone
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'baseline',
+      justifyContent: 'space-between',
+      gap: 14,
+      padding: '7px 0',
+      borderBottom: '1px solid var(--line)'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 12.5,
+      color: 'var(--text-3)',
+      flex: 'none'
+    }
+  }, k), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 12.5,
+      color: tone === 'danger' ? 'var(--danger)' : tone === 'gold' ? 'var(--gold)' : 'var(--text-1)',
+      fontFamily: mono ? 'var(--font-mono)' : 'var(--font-sans)',
+      textAlign: 'right',
+      wordBreak: 'break-all'
+    }
+  }, v));
+}
+
+/* 比例条：一条 hairline 里按份额铺色块，用来把「注册/匿名」这类分解
+   一眼看完，不必读两个数字再心算。 */
+function SplitBar({
+  parts
+}) {
+  const total = parts.reduce((a, p) => a + p.value, 0) || 1;
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      height: 5,
+      borderRadius: 3,
+      overflow: 'hidden',
+      background: 'rgba(159,198,255,0.08)'
+    }
+  }, parts.map((p, i) => /*#__PURE__*/React.createElement("span", {
+    key: i,
+    style: {
+      width: p.value / total * 100 + '%',
+      background: p.color,
+      transition: 'width var(--dur-base)'
+    }
+  }))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      gap: '4px 14px',
+      marginTop: 9
+    }
+  }, parts.map((p, i) => /*#__PURE__*/React.createElement("span", {
+    key: i,
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 5,
+      fontSize: 11.5,
+      color: 'var(--text-2)'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      width: 6,
+      height: 6,
+      borderRadius: '50%',
+      background: p.color,
+      flex: 'none'
+    }
+  }), p.label, " ", /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: 'var(--text-1)',
+      fontFamily: 'var(--font-mono)'
+    }
+  }, num(p.value))))));
+}
+
+/* 趋势条：每天一根，高度按当日计数占区间峰值的比例。
+   没有平滑、没有插值——某天是 0 就画成一条底线，因为它确实是 0。
+   与体检页的观星热力图同一套视觉语汇（冷蓝 = 有活动，越亮越多）。 */
+function TrendBars({
+  buckets,
+  field,
+  color,
+  label
+}) {
+  const peak = Math.max(1, ...buckets.map(b => b[field]));
+  const total = buckets.reduce((a, b) => a + b[field], 0);
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: '1 1 220px',
+      minWidth: 0
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'baseline',
+      justifyContent: 'space-between',
+      marginBottom: 9
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: hud
+  }, label), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 12,
+      color: 'var(--text-2)',
+      fontFamily: 'var(--font-mono)'
+    }
+  }, num(total), " ", /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: 'var(--text-3)'
+    }
+  }, "\xB7 \u5CF0\u503C ", peak))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'flex-end',
+      gap: 3,
+      height: 52
+    }
+  }, buckets.map((b, i) => {
+    const v = b[field];
+    const h = v ? Math.max(3, Math.round(v / peak * 52)) : 1;
+    return /*#__PURE__*/React.createElement("span", {
+      key: b.day,
+      title: `${b.day} · ${v}`,
+      style: {
+        flex: 1,
+        minWidth: 0,
+        height: h,
+        borderRadius: 2,
+        background: v ? color : 'rgba(159,198,255,0.10)',
+        opacity: v ? 0.45 + 0.55 * (v / peak) : 1,
+        transition: 'height var(--dur-base) var(--ease-flight)'
+      }
+    });
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      marginTop: 6,
+      fontSize: 10,
+      color: 'var(--text-3)',
+      fontFamily: 'var(--font-mono)'
+    }
+  }, /*#__PURE__*/React.createElement("span", null, buckets[0] && buckets[0].day.slice(5)), /*#__PURE__*/React.createElement("span", null, "\u4ECA\u5929")));
+}
+
+/* ============================ 总览 ============================ */
+
+function AdminOverview({
+  onGoto
+}) {
+  const [d, loading, reload] = useAdminData('/overview');
+  const [trend] = useAdminData('/trends?days=14');
+  // 系统读数每 10 秒自刷一次：管理台开着不动的时候，uptime 与内存也是活的
+  React.useEffect(() => {
+    const t = setInterval(reload, 10000);
+    return () => clearInterval(t);
+  }, [reload]);
+  if (!d) return loading ? /*#__PURE__*/React.createElement(Loading, null) : /*#__PURE__*/React.createElement(Empty, {
+    icon: "server-crash",
+    text: "\u8BFB\u4E0D\u5230\u670D\u52A1\u5668\u72B6\u6001\uFF0C\u68C0\u67E5\u540E\u7AEF\u662F\u5426\u8FD8\u5728\u8FD0\u884C\u3002"
+  });
+  const u = d.users,
+    k = d.knowledge,
+    s = d.social,
+    sys = d.system;
+  const litRatio = k.stars ? Math.round(k.lit / k.stars * 100) : 0;
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 22
+    }
+  }, /*#__PURE__*/React.createElement("section", null, /*#__PURE__*/React.createElement(SectionHead, {
+    icon: "users",
+    title: "\u65C5\u5BA2",
+    note: "\u8FD9\u53F0\u670D\u52A1\u5668\u4E0A\u7684\u4EBA",
+    right: /*#__PURE__*/React.createElement(Button, {
+      variant: "ghost",
+      size: "sm",
+      icon: "arrow-right",
+      onClick: () => onGoto('users')
+    }, "\u9010\u4E2A\u67E5\u770B")
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      gap: 12
+    }
+  }, /*#__PURE__*/React.createElement(StatCard, {
+    icon: "user",
+    label: "\u8D26\u53F7\u603B\u6570",
+    value: num(u.total),
+    sub: `已注册 ${u.registered} · 匿名 ${u.anonymous}`
+  }), /*#__PURE__*/React.createElement(StatCard, {
+    icon: "sunrise",
+    label: "\u4ECA\u65E5\u6D3B\u8DC3",
+    value: num(u.activeToday),
+    sub: `本周 ${u.activeThisWeek} 人回来过`
+  }), /*#__PURE__*/React.createElement(StatCard, {
+    icon: "user-plus",
+    label: "\u672C\u5468\u65B0\u589E",
+    value: num(u.newThisWeek),
+    tone: u.newThisWeek ? 'gold' : undefined
+  }), /*#__PURE__*/React.createElement(StatCard, {
+    icon: "shield",
+    label: "\u7BA1\u7406\u5458",
+    value: num(u.admins),
+    tone: "gold"
+  }), /*#__PURE__*/React.createElement(StatCard, {
+    icon: "user-x",
+    label: "\u5DF2\u505C\u7528",
+    value: num(u.banned),
+    tone: u.banned ? 'danger' : undefined
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      ...panel,
+      padding: '14px 17px',
+      marginTop: 12
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      ...hud,
+      marginBottom: 10
+    }
+  }, "\u8D26\u53F7\u6784\u6210"), /*#__PURE__*/React.createElement(SplitBar, {
+    parts: [{
+      label: '已注册',
+      value: u.registered,
+      color: 'var(--gold)'
+    }, {
+      label: '匿名',
+      value: u.anonymous,
+      color: 'var(--star-blue-deep)'
+    }]
+  }))), trend && /*#__PURE__*/React.createElement("section", null, /*#__PURE__*/React.createElement(SectionHead, {
+    icon: "chart-no-axes-column",
+    title: "\u8FD1 14 \u5929",
+    note: "\u6309 UTC \u81EA\u7136\u65E5\u5206\u6876"
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      ...panel,
+      padding: '16px 18px',
+      display: 'flex',
+      flexWrap: 'wrap',
+      gap: '20px 28px'
+    }
+  }, /*#__PURE__*/React.createElement(TrendBars, {
+    buckets: trend.buckets,
+    field: "joined",
+    color: "var(--star-blue)",
+    label: "\u65B0\u5230\u8BBF"
+  }), /*#__PURE__*/React.createElement(TrendBars, {
+    buckets: trend.buckets,
+    field: "registered",
+    color: "var(--gold)",
+    label: "\u6CE8\u518C"
+  }), /*#__PURE__*/React.createElement(TrendBars, {
+    buckets: trend.buckets,
+    field: "logins",
+    color: "var(--star-blue-dim)",
+    label: "\u767B\u5F55"
+  }))), /*#__PURE__*/React.createElement("section", null, /*#__PURE__*/React.createElement(SectionHead, {
+    icon: "user-round-search",
+    title: "\u6E38\u5BA2",
+    note: "\u672A\u6CE8\u518C\u7684\u533F\u540D\u65C5\u5BA2",
+    right: /*#__PURE__*/React.createElement(Button, {
+      variant: "ghost",
+      size: "sm",
+      icon: "arrow-right",
+      onClick: () => onGoto('guests')
+    }, "\u6E38\u5BA2\u6CBB\u7406")
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      gap: 12
+    }
+  }, /*#__PURE__*/React.createElement(StatCard, {
+    icon: "users",
+    label: "\u6E38\u5BA2\u8D26\u53F7",
+    value: num(d.guests.total),
+    sub: `来自 ${num(d.guests.ips)} 个 IP`
+  }), /*#__PURE__*/React.createElement(StatCard, {
+    icon: "shield-alert",
+    label: "\u540D\u989D\u5DF2\u6EE1\u7684 IP",
+    value: num(d.guests.atLimit),
+    tone: d.guests.atLimit ? 'gold' : undefined,
+    sub: d.guests.perIp ? `每 IP 上限 ${d.guests.perIp} 个` : '当前不限额'
+  }), /*#__PURE__*/React.createElement(StatCard, {
+    icon: "network",
+    label: "\u6765\u6E90 IP \u5224\u5B9A",
+    value: d.guests.trustProxy ? '反代头' : '直连',
+    sub: d.guests.trustProxy ? 'X-Forwarded-For 首跳' : 'socket 地址'
+  }))), /*#__PURE__*/React.createElement("section", null, /*#__PURE__*/React.createElement(SectionHead, {
+    icon: "sparkles",
+    title: "\u77E5\u8BC6",
+    note: "\u5168\u7AD9\u661F\u7A7A\u7684\u603B\u91CF"
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      gap: 12
+    }
+  }, /*#__PURE__*/React.createElement(StatCard, {
+    icon: "star",
+    label: "\u661F\u603B\u6570",
+    value: num(k.stars),
+    sub: `分布在 ${num(k.constellations)} 个星域`
+  }), /*#__PURE__*/React.createElement(StatCard, {
+    icon: "flame",
+    label: "\u5DF2\u70B9\u4EAE",
+    value: num(k.lit),
+    tone: "gold",
+    sub: `占全站 ${litRatio}%`
+  }), /*#__PURE__*/React.createElement(StatCard, {
+    icon: "moon",
+    label: "\u5F85\u91CD\u71C3",
+    value: num(k.ember),
+    sub: k.ember ? '有星正在熄灭' : '没有熄灭的星'
+  }), /*#__PURE__*/React.createElement(StatCard, {
+    icon: "database",
+    label: "\u661F\u7CFB\u5FEB\u7167",
+    value: bytes(k.snapshotBytes),
+    sub: `${k.galaxies} 片星空`
+  }))), /*#__PURE__*/React.createElement("section", null, /*#__PURE__*/React.createElement(SectionHead, {
+    icon: "telescope",
+    title: "\u661F\u9645",
+    note: "\u5206\u4EAB\u4E0E\u6765\u5F80",
+    right: /*#__PURE__*/React.createElement(Button, {
+      variant: "ghost",
+      size: "sm",
+      icon: "arrow-right",
+      onClick: () => onGoto('shares')
+    }, "\u5206\u4EAB\u7BA1\u7406")
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      gap: 12
+    }
+  }, /*#__PURE__*/React.createElement(StatCard, {
+    icon: "share-2",
+    label: "\u5F00\u653E\u5206\u4EAB",
+    value: num(s.sharesOpen),
+    sub: `累计生成 ${s.sharesTotal} 份密文`
+  }), /*#__PURE__*/React.createElement(StatCard, {
+    icon: "link",
+    label: "\u8BBF\u95EE\u5173\u7CFB",
+    value: num(s.friendships)
+  }), /*#__PURE__*/React.createElement(StatCard, {
+    icon: "mail",
+    label: "\u661F\u9645\u6765\u4FE1",
+    value: num(s.mail)
+  }))), /*#__PURE__*/React.createElement("section", null, /*#__PURE__*/React.createElement(SectionHead, {
+    icon: "activity",
+    title: "\u8FD0\u884C",
+    note: "\u8FDB\u7A0B\u4E0E\u78C1\u76D8",
+    right: /*#__PURE__*/React.createElement(Button, {
+      variant: "ghost",
+      size: "sm",
+      icon: "arrow-right",
+      onClick: () => onGoto('system')
+    }, "\u7CFB\u7EDF\u7EF4\u62A4")
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      gap: 12
+    }
+  }, /*#__PURE__*/React.createElement(StatCard, {
+    icon: "timer",
+    label: "\u5DF2\u8FD0\u884C",
+    value: duration(sys.uptimeMs)
+  }), /*#__PURE__*/React.createElement(StatCard, {
+    icon: "radio",
+    label: "\u8BF7\u6C42\u6570",
+    value: num(sys.requests),
+    sub: `API ${num(sys.apiRequests)} · 错误 ${sys.errors}`,
+    tone: sys.errors ? 'danger' : undefined
+  }), /*#__PURE__*/React.createElement(StatCard, {
+    icon: "cpu",
+    label: "\u5185\u5B58\u5360\u7528",
+    value: bytes(sys.rss),
+    sub: `堆内 ${bytes(sys.heapUsed)}`
+  }), /*#__PURE__*/React.createElement(StatCard, {
+    icon: "hard-drive",
+    label: "\u6570\u636E\u5E93",
+    value: bytes(sys.db.size + sys.db.wal + sys.db.shm),
+    sub: `主库 ${bytes(sys.db.size)} · WAL ${bytes(sys.db.wal)}`
+  }))), /*#__PURE__*/React.createElement("section", null, /*#__PURE__*/React.createElement(SectionHead, {
+    icon: "megaphone",
+    title: "\u7AD9\u70B9",
+    note: "\u5BF9\u6240\u6709\u4EBA\u751F\u6548\u7684\u5F00\u5173",
+    right: /*#__PURE__*/React.createElement(Button, {
+      variant: "ghost",
+      size: "sm",
+      icon: "arrow-right",
+      onClick: () => onGoto('broadcast')
+    }, "\u53BB\u8BBE\u7F6E")
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      ...panel,
+      padding: '4px 17px 12px'
+    }
+  }, /*#__PURE__*/React.createElement(Row, {
+    k: "\u65B0\u8D26\u53F7\u6CE8\u518C",
+    v: d.site.registrationOpen ? '开放' : '已关闭',
+    tone: d.site.registrationOpen ? undefined : 'danger'
+  }), /*#__PURE__*/React.createElement(Row, {
+    k: "\u7EF4\u62A4\u6A21\u5F0F",
+    v: d.site.maintenance.enabled ? '进行中 · 普通用户被挡在门外' : '未开启',
+    tone: d.site.maintenance.enabled ? 'danger' : undefined
+  }), /*#__PURE__*/React.createElement(Row, {
+    k: "\u5168\u7AD9\u516C\u544A",
+    v: d.site.announcement.enabled ? d.site.announcement.text : '未发布',
+    tone: d.site.announcement.enabled ? 'gold' : undefined
+  }))));
+}
+
+/* ============================ 旅客（用户管理）============================ */
+
+const FILTERS = [{
+  id: 'all',
+  label: '全部'
+}, {
+  id: 'registered',
+  label: '已注册'
+}, {
+  id: 'anonymous',
+  label: '匿名'
+}, {
+  id: 'admin',
+  label: '管理员'
+}, {
+  id: 'banned',
+  label: '已停用'
+}];
+const SORTS = [{
+  value: 'id',
+  label: '按加入时间'
+}, {
+  value: 'stars',
+  label: '按星的数量'
+}, {
+  value: 'lastSeen',
+  label: '按最近活跃'
+}, {
+  value: 'name',
+  label: '按名字'
+}];
+function AdminUsers({
+  meId
+}) {
+  const [kw, setKw] = React.useState('');
+  const [debounced, setDebounced] = React.useState('');
+  const [filter, setFilter] = React.useState('all');
+  const [sort, setSort] = React.useState('id');
+  const [page, setPage] = React.useState(1);
+  const [open, setOpen] = React.useState(null); // 展开详情的 userId
+
+  // 搜索防抖 260ms：边打字边打服务器没必要
+  React.useEffect(() => {
+    const t = setTimeout(() => {
+      setDebounced(kw.trim());
+      setPage(1);
+    }, 260);
+    return () => clearTimeout(t);
+  }, [kw]);
+  const path = `/users?q=${encodeURIComponent(debounced)}&filter=${filter}&sort=${sort}&page=${page}&size=20`;
+  const [d, loading, reload] = useAdminData(path, [path]);
+  const goto = p => {
+    setPage(p);
+    setOpen(null);
+  };
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(SectionHead, {
+    icon: "users",
+    title: "\u65C5\u5BA2",
+    note: d ? `${num(d.total)} 个账号` : undefined,
+    right: /*#__PURE__*/React.createElement(IconButton, {
+      name: "refresh-cw",
+      title: "\u5237\u65B0",
+      onClick: reload
+    })
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      gap: 10,
+      alignItems: 'center',
+      marginBottom: 14
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: '1 1 240px',
+      minWidth: 0
+    }
+  }, /*#__PURE__*/React.createElement(Input, {
+    icon: "search",
+    size: "sm",
+    placeholder: "\u641C\u7D22\u540D\u5B57 / \u7528\u6237\u540D / \u90AE\u7BB1\u2026",
+    value: kw,
+    onChange: e => setKw(e.target.value)
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      gap: 6,
+      flexWrap: 'wrap'
+    }
+  }, FILTERS.map(f => /*#__PURE__*/React.createElement(Tag, {
+    key: f.id,
+    active: filter === f.id,
+    onClick: () => {
+      setFilter(f.id);
+      setPage(1);
+      setOpen(null);
+    }
+  }, f.label))), /*#__PURE__*/React.createElement(Select, {
+    size: "sm",
+    value: sort,
+    options: SORTS,
+    onChange: v => {
+      setSort(v);
+      setPage(1);
+    },
+    style: {
+      width: 148
+    }
+  })), !d && loading && /*#__PURE__*/React.createElement(Loading, {
+    text: "\u6B63\u5728\u6E05\u70B9\u65C5\u5BA2\u2026"
+  }), d && !d.users.length && /*#__PURE__*/React.createElement(Empty, {
+    icon: "user-round-search",
+    text: debounced ? `没有匹配「${debounced}」的账号。` : '这一档下还没有账号。'
+  }), d && !!d.users.length && /*#__PURE__*/React.createElement("div", {
+    style: {
+      ...panel,
+      overflow: 'hidden'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sr-adm-head",
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 12,
+      padding: '9px 16px',
+      borderBottom: '1px solid var(--line-strong)',
+      background: 'rgba(159,198,255,0.03)'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      ...hud,
+      flex: '1 1 190px'
+    }
+  }, "\u65C5\u5BA2"), /*#__PURE__*/React.createElement("span", {
+    style: {
+      ...hud,
+      width: 118,
+      flex: 'none'
+    }
+  }, "\u661F\u7A7A"), /*#__PURE__*/React.createElement("span", {
+    style: {
+      ...hud,
+      width: 112,
+      flex: 'none'
+    }
+  }, "\u6765\u6E90 IP"), /*#__PURE__*/React.createElement("span", {
+    style: {
+      ...hud,
+      width: 92,
+      flex: 'none'
+    }
+  }, "\u6700\u8FD1\u6D3B\u8DC3"), /*#__PURE__*/React.createElement("span", {
+    style: {
+      ...hud,
+      width: 62,
+      flex: 'none',
+      textAlign: 'right'
+    }
+  }, "\u4F1A\u8BDD"), /*#__PURE__*/React.createElement("span", {
+    style: {
+      width: 30,
+      flex: 'none'
+    }
+  })), d.users.map(u => /*#__PURE__*/React.createElement(UserRow, {
+    key: u.id,
+    u: u,
+    meId: meId,
+    open: open === u.id,
+    onToggle: () => setOpen(open === u.id ? null : u.id),
+    onChanged: reload
+  }))), d && d.pages > 1 && /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: 10,
+      marginTop: 16
+    }
+  }, /*#__PURE__*/React.createElement(IconButton, {
+    name: "chevron-left",
+    title: "\u4E0A\u4E00\u9875",
+    disabled: page <= 1,
+    onClick: () => goto(page - 1)
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 12.5,
+      color: 'var(--text-2)',
+      fontFamily: 'var(--font-mono)'
+    }
+  }, page, " / ", d.pages), /*#__PURE__*/React.createElement(IconButton, {
+    name: "chevron-right",
+    title: "\u4E0B\u4E00\u9875",
+    disabled: page >= d.pages,
+    onClick: () => goto(page + 1)
+  })));
+}
+
+/* 一行用户：折叠时是一览，展开后在同一张卡里长出详情与操作区——
+   不用抽屉，视线不必离开这一行。 */
+function UserRow({
+  u,
+  meId,
+  open,
+  onToggle,
+  onChanged
+}) {
+  const [hover, setHover] = React.useState(false);
+  const self = u.id === meId;
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      borderBottom: '1px solid var(--line)'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    role: "button",
+    tabIndex: 0,
+    className: "sr-focus-ring",
+    onClick: onToggle,
+    onKeyDown: e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        onToggle();
+      }
+    },
+    onMouseEnter: () => setHover(true),
+    onMouseLeave: () => setHover(false),
+    className: "sr-adm-row",
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 12,
+      padding: '11px 16px',
+      cursor: 'pointer',
+      background: open ? 'rgba(159,198,255,0.06)' : hover ? 'rgba(159,198,255,0.035)' : 'transparent',
+      transition: 'background var(--dur-fast)'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sr-adm-cell sr-adm-name",
+    style: {
+      flex: '1 1 190px',
+      minWidth: 0,
+      display: 'flex',
+      alignItems: 'center',
+      gap: 10
+    }
+  }, /*#__PURE__*/React.createElement(Avatar, {
+    user: u
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      minWidth: 0
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 7,
+      minWidth: 0
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 13.5,
+      color: 'var(--text-1)',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap'
+    }
+  }, u.username || u.name), /*#__PURE__*/React.createElement(UserBadges, {
+    u: u
+  }), self && /*#__PURE__*/React.createElement(Badge, {
+    tone: "blue"
+  }, "\u4F60")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11.5,
+      color: 'var(--text-3)',
+      marginTop: 2,
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap'
+    }
+  }, u.username ? u.name : '未注册', u.email ? ' · ' + u.email : '', " \xB7 #", u.id))), /*#__PURE__*/React.createElement("div", {
+    className: "sr-adm-cell",
+    "data-k": "\u661F\u7A7A",
+    style: {
+      width: 118,
+      flex: 'none'
+    }
+  }, u.stars ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12.5,
+      color: 'var(--text-1)',
+      fontFamily: 'var(--font-mono)'
+    }
+  }, u.stars, " ", /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: 'var(--text-3)',
+      fontSize: 11
+    }
+  }, "\u9897"), !!u.lit && /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: 'var(--gold)',
+      marginLeft: 6
+    }
+  }, u.lit, " \u4EAE")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11,
+      color: 'var(--text-3)',
+      marginTop: 2
+    }
+  }, u.constellations, " \u4E2A\u661F\u57DF")) : /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 12,
+      color: 'var(--text-disabled)'
+    }
+  }, "\u7A7A")), /*#__PURE__*/React.createElement("div", {
+    className: "sr-adm-cell",
+    "data-k": "IP",
+    style: {
+      width: 112,
+      flex: 'none',
+      minWidth: 0
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11.5,
+      fontFamily: 'var(--font-mono)',
+      color: u.lastIp ? 'var(--text-2)' : 'var(--text-disabled)',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis'
+    }
+  }, u.lastIp || '—'), u.ip && u.lastIp && u.ip !== u.lastIp && /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 10.5,
+      fontFamily: 'var(--font-mono)',
+      color: 'var(--text-3)',
+      marginTop: 2,
+      overflow: 'hidden',
+      textOverflow: 'ellipsis'
+    }
+  }, "\u5EFA\u6863 ", u.ip)), /*#__PURE__*/React.createElement("div", {
+    className: "sr-adm-cell",
+    "data-k": "\u6D3B\u8DC3",
+    style: {
+      width: 92,
+      flex: 'none',
+      fontSize: 12,
+      color: 'var(--text-2)'
+    }
+  }, ago(u.lastSeen)), /*#__PURE__*/React.createElement("div", {
+    className: "sr-adm-cell",
+    "data-k": "\u4F1A\u8BDD",
+    style: {
+      width: 62,
+      flex: 'none',
+      textAlign: 'right',
+      fontSize: 12,
+      color: u.sessions ? 'var(--star-blue)' : 'var(--text-disabled)',
+      fontFamily: 'var(--font-mono)'
+    }
+  }, u.sessions || '—'), /*#__PURE__*/React.createElement("span", {
+    className: "sr-adm-caret",
+    style: {
+      width: 30,
+      flex: 'none',
+      display: 'flex',
+      justifyContent: 'flex-end'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: open ? 'chevron-up' : 'chevron-down',
+    size: 15,
+    color: "var(--text-3)"
+  }))), open && /*#__PURE__*/React.createElement(UserDetail, {
+    user: u,
+    meId: meId,
+    onChanged: onChanged
+  }));
+}
+
+/* 展开区：左边是这个人的星空实况，右边是能对他做的事。
+   每个危险动作都先弹确认框，说清后果，再执行。 */
+function UserDetail({
+  user,
+  meId,
+  onChanged
+}) {
+  const [d, loading, reload] = useAdminData('/users/' + user.id, [user.id]);
+  const [dialog, setDialog] = React.useState(null); // ban | unban | role | password | profile | delete | revoke
+  const [busy, setBusy] = React.useState(false);
+  const [reason, setReason] = React.useState('');
+  const [pw, setPw] = React.useState('');
+  const [confirmText, setConfirmText] = React.useState('');
+  const [name, setName] = React.useState(user.name);
+  const [username, setUsername] = React.useState(user.username || '');
+  const self = user.id === meId;
+  const close = () => {
+    setDialog(null);
+    setReason('');
+    setPw('');
+    setConfirmText('');
+  };
+
+  // gone=true 表示这个人已经不存在了（删号）——只刷新列表，不再去取详情，
+  // 否则紧跟着一个 404 会冒出「用户不存在」的错误提示，把成功盖掉
+  const act = async (path, body, okMsg, gone) => {
+    setBusy(true);
+    try {
+      await adminApi(`/users/${user.id}/${path}`, {
+        method: 'POST',
+        body: body || {}
+      });
+      toast(okMsg, {
+        icon: 'check'
+      });
+      close();
+      if (!gone) reload();
+      onChanged();
+    } catch (e) {/* adminApi 已经提示过 */} finally {
+      setBusy(false);
+    }
+  };
+  const btn = {
+    flex: '1 1 auto'
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: '4px 16px 18px',
+      background: 'rgba(3,4,12,0.28)',
+      borderTop: '1px solid var(--line)'
+    }
+  }, !d && loading && /*#__PURE__*/React.createElement(Loading, {
+    text: "\u6B63\u5728\u53D6\u56DE\u8FD9\u7247\u661F\u7A7A\u2026"
+  }), d && /*#__PURE__*/React.createElement("div", {
+    className: "sr-adm-detail",
+    style: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      gap: 20,
+      paddingTop: 14
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: '1 1 300px',
+      minWidth: 0
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      ...hud,
+      marginBottom: 8
+    }
+  }, "\u661F\u7A7A"), d.galaxy ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      gap: 8,
+      marginBottom: 12
+    }
+  }, /*#__PURE__*/React.createElement(MiniStat, {
+    label: "\u661F",
+    value: d.galaxy.stars
+  }), /*#__PURE__*/React.createElement(MiniStat, {
+    label: "\u5DF2\u70B9\u4EAE",
+    value: d.galaxy.lit,
+    tone: "gold"
+  }), /*#__PURE__*/React.createElement(MiniStat, {
+    label: "\u5F85\u91CD\u71C3",
+    value: d.galaxy.ember
+  }), /*#__PURE__*/React.createElement(MiniStat, {
+    label: "\u661F\u57DF",
+    value: d.galaxy.constellations
+  }), /*#__PURE__*/React.createElement(MiniStat, {
+    label: "\u7B14\u8BB0",
+    value: d.galaxy.notes
+  }), /*#__PURE__*/React.createElement(MiniStat, {
+    label: "\u9ED1\u6D1E",
+    value: d.galaxy.trash
+  })), !!d.galaxy.breakdown.length && /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      gap: 6,
+      marginBottom: 12
+    }
+  }, d.galaxy.breakdown.map(c => /*#__PURE__*/React.createElement(Tag, {
+    key: c.id,
+    dot: c.color
+  }, c.name, " \xB7 ", c.count))), /*#__PURE__*/React.createElement(Row, {
+    k: "\u5E73\u5747\u8BB0\u5FC6\u5F3A\u5EA6",
+    v: Math.round(d.galaxy.avgStrength * 100) + '%',
+    mono: true
+  }), /*#__PURE__*/React.createElement(Row, {
+    k: "\u5FEB\u7167\u4F53\u79EF",
+    v: bytes(d.galaxy.snapshotBytes),
+    mono: true
+  }), /*#__PURE__*/React.createElement(Row, {
+    k: "\u6700\u540E\u540C\u6B65",
+    v: `${ago(d.galaxy.updatedAt)} · v${d.galaxy.version}`
+  })) : /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12.5,
+      color: 'var(--text-3)',
+      padding: '6px 0 14px'
+    }
+  }, "\u8FD8\u6CA1\u6709\u5B58\u8FC7\u4EFB\u4F55\u661F\u7A7A\u3002"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      ...hud,
+      margin: '16px 0 8px'
+    }
+  }, "\u8D26\u53F7"), /*#__PURE__*/React.createElement(Row, {
+    k: "\u52A0\u5165\u65F6\u95F4",
+    v: fullTime(d.user.createdAt)
+  }), d.user.registeredAt && /*#__PURE__*/React.createElement(Row, {
+    k: "\u6CE8\u518C\u65F6\u95F4",
+    v: fullTime(d.user.registeredAt)
+  }), /*#__PURE__*/React.createElement(Row, {
+    k: "\u6700\u8FD1\u6D3B\u8DC3",
+    v: fullTime(d.user.lastSeen)
+  }), /*#__PURE__*/React.createElement(Row, {
+    k: "\u6700\u8FD1\u767B\u5F55",
+    v: d.user.lastLogin ? fullTime(d.user.lastLogin) : '从未用密码登录过'
+  }), /*#__PURE__*/React.createElement(Row, {
+    k: "\u5EFA\u6863 IP",
+    v: d.user.ip || '—',
+    mono: true
+  }), /*#__PURE__*/React.createElement(Row, {
+    k: "\u6700\u8FD1 IP",
+    v: d.user.lastIp || '—',
+    mono: true
+  }), /*#__PURE__*/React.createElement(Row, {
+    k: "\u661F\u7CFB\u5206\u4EAB",
+    v: d.share.enabled ? `${d.share.visibility === 'outline' ? '星名+大纲' : '仅星名'} · ${d.share.code}` : '未开启',
+    mono: d.share.enabled
+  }), /*#__PURE__*/React.createElement(Row, {
+    k: "\u8BBF\u5BA2 / \u597D\u53CB",
+    v: `${d.visitors.length} / ${d.friends.length}`,
+    mono: true
+  }), /*#__PURE__*/React.createElement(Row, {
+    k: "\u6765\u4FE1",
+    v: num(d.mail),
+    mono: true
+  }), d.user.banned && /*#__PURE__*/React.createElement(Row, {
+    k: "\u505C\u7528\u7406\u7531",
+    v: d.user.banReason || '—',
+    tone: "danger"
+  }), !!d.sessions.length && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      ...hud,
+      margin: '16px 0 8px'
+    }
+  }, "\u5728\u7EBF\u4F1A\u8BDD \xB7 ", d.sessions.length), d.sessions.map((s, i) => /*#__PURE__*/React.createElement(Row, {
+    key: i,
+    k: s.current ? '本次登录' : '设备 ' + (i + 1),
+    v: `${ago(s.lastSeen)} · 建于 ${fullTime(s.createdAt)}`
+  })))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: '0 1 250px',
+      minWidth: 210
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      ...hud,
+      marginBottom: 10
+    }
+  }, "\u7BA1\u7406\u64CD\u4F5C"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 8
+    }
+  }, /*#__PURE__*/React.createElement(Button, {
+    variant: "secondary",
+    size: "sm",
+    icon: "pen-line",
+    style: btn,
+    onClick: () => setDialog('profile')
+  }, "\u4FEE\u6539\u8D44\u6599"), d.user.registered && /*#__PURE__*/React.createElement(Button, {
+    variant: "secondary",
+    size: "sm",
+    icon: "key-round",
+    style: btn,
+    onClick: () => setDialog('password')
+  }, "\u91CD\u7F6E\u5BC6\u7801"), /*#__PURE__*/React.createElement(Button, {
+    variant: "secondary",
+    size: "sm",
+    icon: "log-out",
+    style: btn,
+    disabled: !d.sessions.length,
+    onClick: () => setDialog('revoke')
+  }, "\u5F3A\u5236\u4E0B\u7EBF", d.sessions.length ? ` (${d.sessions.length})` : ''), d.share.enabled && /*#__PURE__*/React.createElement(Button, {
+    variant: "secondary",
+    size: "sm",
+    icon: "share-2",
+    style: btn,
+    onClick: async () => {
+      await adminApi('/shares/close', {
+        method: 'POST',
+        body: {
+          userId: user.id
+        }
+      });
+      toast('已关闭这片星系的分享', {
+        icon: 'check'
+      });
+      reload();
+      onChanged();
+    }
+  }, "\u5173\u95ED\u661F\u7CFB\u5206\u4EAB"), !self && d.user.registered && /*#__PURE__*/React.createElement(Button, {
+    variant: "secondary",
+    size: "sm",
+    icon: d.user.role === 'admin' ? 'shield-off' : 'shield',
+    style: btn,
+    onClick: () => setDialog('role')
+  }, d.user.role === 'admin' ? '撤销管理员' : '任命为管理员'), !self && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      height: 1,
+      background: 'var(--line)',
+      margin: '4px 0'
+    }
+  }), /*#__PURE__*/React.createElement(Button, {
+    variant: "ghost",
+    size: "sm",
+    icon: d.user.banned ? 'user-check' : 'user-x',
+    style: {
+      ...btn,
+      color: d.user.banned ? 'var(--star-blue)' : 'var(--danger)'
+    },
+    onClick: () => setDialog(d.user.banned ? 'unban' : 'ban')
+  }, d.user.banned ? '解除停用' : '停用账号'), /*#__PURE__*/React.createElement(Button, {
+    variant: "ghost",
+    size: "sm",
+    icon: "trash-2",
+    style: {
+      ...btn,
+      color: 'var(--danger)'
+    },
+    onClick: () => setDialog('delete')
+  }, "\u5220\u9664\u8D26\u53F7")), self && /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11.5,
+      color: 'var(--text-3)',
+      lineHeight: 1.6,
+      marginTop: 4
+    }
+  }, "\u8FD9\u662F\u4F60\u81EA\u5DF1\u7684\u8D26\u53F7\u2014\u2014\u505C\u7528\u3001\u5220\u9664\u4E0E\u89D2\u8272\u53D8\u66F4\u90FD\u4E0D\u5BF9\u81EA\u5DF1\u5F00\u653E\u3002")))), /*#__PURE__*/React.createElement(Modal, {
+    open: dialog === 'profile',
+    onClose: close,
+    title: "\u4FEE\u6539\u8D44\u6599",
+    icon: "pen-line",
+    width: 420,
+    footer: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Button, {
+      variant: "ghost",
+      onClick: close
+    }, "\u53D6\u6D88"), /*#__PURE__*/React.createElement(Button, {
+      variant: "primary",
+      disabled: busy,
+      onClick: () => act('profile', {
+        name,
+        avatar: name.trim()[0] || '星',
+        username: username || undefined
+      }, '资料已更新')
+    }, "\u4FDD\u5B58"))
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 12
+    }
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      ...hud,
+      marginBottom: 6
+    }
+  }, "\u6635\u79F0"), /*#__PURE__*/React.createElement(Input, {
+    value: name,
+    onChange: e => setName(e.target.value),
+    placeholder: "\u6635\u79F0"
+  })), user.registered && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      ...hud,
+      marginBottom: 6
+    }
+  }, "\u7528\u6237\u540D\uFF08\u767B\u5F55\u7528\uFF09"), /*#__PURE__*/React.createElement(Input, {
+    value: username,
+    onChange: e => setUsername(e.target.value),
+    placeholder: "\u7528\u6237\u540D"
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11.5,
+      color: 'var(--text-3)',
+      marginTop: 6,
+      lineHeight: 1.6
+    }
+  }, "\u6539\u52A8\u7528\u6237\u540D\u540E\uFF0C\u5BF9\u65B9\u8981\u7528\u65B0\u7684\u7528\u6237\u540D\u767B\u5F55\u3002")))), /*#__PURE__*/React.createElement(Modal, {
+    open: dialog === 'password',
+    onClose: close,
+    title: "\u91CD\u7F6E\u5BC6\u7801",
+    icon: "key-round",
+    width: 420,
+    footer: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Button, {
+      variant: "ghost",
+      onClick: close
+    }, "\u53D6\u6D88"), /*#__PURE__*/React.createElement(Button, {
+      variant: "primary",
+      disabled: busy || pw.length < 6,
+      onClick: () => act('password', {
+        password: pw
+      }, '密码已重置，该账号全部会话已断开')
+    }, "\u91CD\u7F6E"))
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12.5,
+      color: 'var(--text-2)',
+      lineHeight: 1.7,
+      marginBottom: 12
+    }
+  }, "\u7ED9 ", /*#__PURE__*/React.createElement("b", {
+    style: {
+      color: 'var(--text-1)'
+    }
+  }, user.username || user.name), " \u8BBE\u4E00\u4E2A\u65B0\u5BC6\u7801\u3002\u65E7\u7684\u767B\u5F55\u4F1A\u8BDD\u4F1A\u5168\u90E8\u65AD\u5F00\uFF0C\u9700\u8981\u7528\u65B0\u5BC6\u7801\u91CD\u65B0\u767B\u5F55\u3002"), /*#__PURE__*/React.createElement(Input, {
+    type: "password",
+    icon: "lock",
+    value: pw,
+    onChange: e => setPw(e.target.value),
+    placeholder: "\u65B0\u5BC6\u7801\uFF08\u81F3\u5C11 6 \u4F4D\uFF09",
+    autoFocus: true
+  })), /*#__PURE__*/React.createElement(Modal, {
+    open: dialog === 'revoke',
+    onClose: close,
+    title: "\u5F3A\u5236\u4E0B\u7EBF",
+    icon: "log-out",
+    width: 400,
+    footer: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Button, {
+      variant: "ghost",
+      onClick: close
+    }, "\u53D6\u6D88"), /*#__PURE__*/React.createElement(Button, {
+      variant: "primary",
+      disabled: busy,
+      onClick: () => act('revoke', {}, '已断开该账号的全部登录')
+    }, "\u65AD\u5F00\u5168\u90E8\u4F1A\u8BDD"))
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12.5,
+      color: 'var(--text-2)',
+      lineHeight: 1.7
+    }
+  }, "\u65AD\u5F00 ", /*#__PURE__*/React.createElement("b", {
+    style: {
+      color: 'var(--text-1)'
+    }
+  }, user.username || user.name), " \u5728\u6240\u6709\u8BBE\u5907\u4E0A\u7684\u767B\u5F55\u3002 \u5BF9\u65B9\u4E0B\u6B21\u64CD\u4F5C\u65F6\u4F1A\u88AB\u8981\u6C42\u91CD\u65B0\u767B\u5F55\uFF0C\u661F\u7A7A\u6570\u636E\u4E0D\u53D7\u5F71\u54CD\u3002")), /*#__PURE__*/React.createElement(Modal, {
+    open: dialog === 'role',
+    onClose: close,
+    title: user.role === 'admin' ? '撤销管理员' : '任命为管理员',
+    icon: "shield",
+    width: 420,
+    footer: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Button, {
+      variant: "ghost",
+      onClick: close
+    }, "\u53D6\u6D88"), /*#__PURE__*/React.createElement(Button, {
+      variant: "primary",
+      disabled: busy,
+      onClick: () => act('role', {
+        role: user.role === 'admin' ? 'user' : 'admin'
+      }, user.role === 'admin' ? '已撤销管理员' : '已任命为管理员')
+    }, "\u786E\u8BA4"))
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12.5,
+      color: 'var(--text-2)',
+      lineHeight: 1.7
+    }
+  }, user.role === 'admin' ? /*#__PURE__*/React.createElement(React.Fragment, null, "\u64A4\u9500\u540E ", /*#__PURE__*/React.createElement("b", {
+    style: {
+      color: 'var(--text-1)'
+    }
+  }, user.username), " \u5C06\u5931\u53BB\u7BA1\u7406\u53F0\u7684\u5168\u90E8\u6743\u9650\uFF0C\u8D26\u53F7\u4E0E\u661F\u7A7A\u4FDD\u6301\u539F\u6837\u3002") : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("b", {
+    style: {
+      color: 'var(--text-1)'
+    }
+  }, user.username), " \u5C06\u80FD\u8FDB\u5165\u661F\u6E2F\u7BA1\u7406\u53F0\uFF0C\u770B\u5230\u5168\u7AD9\u6570\u636E\uFF0C\u5E76\u80FD\u505C\u7528\u6216\u5220\u9664\u5176\u4ED6\u8D26\u53F7\u2014\u2014\u8FD9\u4EFD\u6743\u67C4\u53EA\u4EA4\u7ED9\u4F60\u4FE1\u5F97\u8FC7\u7684\u4EBA\u3002"))), /*#__PURE__*/React.createElement(Modal, {
+    open: dialog === 'ban',
+    onClose: close,
+    title: "\u505C\u7528\u8D26\u53F7",
+    icon: "user-x",
+    width: 430,
+    footer: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Button, {
+      variant: "ghost",
+      onClick: close
+    }, "\u53D6\u6D88"), /*#__PURE__*/React.createElement(Button, {
+      variant: "primary",
+      disabled: busy,
+      onClick: () => act('ban', {
+        banned: true,
+        reason
+      }, '账号已停用')
+    }, "\u505C\u7528"))
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12.5,
+      color: 'var(--text-2)',
+      lineHeight: 1.7,
+      marginBottom: 12
+    }
+  }, "\u505C\u7528\u540E ", /*#__PURE__*/React.createElement("b", {
+    style: {
+      color: 'var(--text-1)'
+    }
+  }, user.username || user.name), " \u7ACB\u523B\u88AB\u8E22\u4E0B\u7EBF\u4E14\u65E0\u6CD5\u518D\u767B\u5F55\uFF0C\u4F1A\u770B\u5230\u4F60\u5199\u7684\u8FD9\u53E5\u7406\u7531\u3002 \u661F\u7A7A\u6570\u636E\u5B8C\u6574\u4FDD\u7559\uFF0C\u968F\u65F6\u53EF\u4EE5\u89E3\u9664\u3002"), /*#__PURE__*/React.createElement(Input, {
+    value: reason,
+    onChange: e => setReason(e.target.value),
+    placeholder: "\u505C\u7528\u7406\u7531\uFF08\u5BF9\u65B9\u53EF\u89C1\uFF0C\u9009\u586B\uFF09",
+    autoFocus: true
+  })), /*#__PURE__*/React.createElement(Modal, {
+    open: dialog === 'unban',
+    onClose: close,
+    title: "\u89E3\u9664\u505C\u7528",
+    icon: "user-check",
+    width: 400,
+    footer: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Button, {
+      variant: "ghost",
+      onClick: close
+    }, "\u53D6\u6D88"), /*#__PURE__*/React.createElement(Button, {
+      variant: "primary",
+      disabled: busy,
+      onClick: () => act('ban', {
+        banned: false
+      }, '已解除停用')
+    }, "\u89E3\u9664"))
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12.5,
+      color: 'var(--text-2)',
+      lineHeight: 1.7
+    }
+  }, "\u6062\u590D ", /*#__PURE__*/React.createElement("b", {
+    style: {
+      color: 'var(--text-1)'
+    }
+  }, user.username || user.name), " \u7684\u767B\u5F55\u3002\u5BF9\u65B9\u9700\u8981\u91CD\u65B0\u767B\u5F55\u4E00\u6B21\u3002")), /*#__PURE__*/React.createElement(Modal, {
+    open: dialog === 'delete',
+    onClose: close,
+    title: "\u5220\u9664\u8D26\u53F7",
+    icon: "trash-2",
+    width: 440,
+    footer: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Button, {
+      variant: "ghost",
+      onClick: close
+    }, "\u53D6\u6D88"), /*#__PURE__*/React.createElement(Button, {
+      variant: "primary",
+      disabled: busy || confirmText !== (user.username || user.name),
+      onClick: () => act('delete', {
+        confirm: confirmText
+      }, '账号与其全部数据已删除', true)
+    }, "\u6C38\u4E45\u5220\u9664"))
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12.5,
+      color: 'var(--danger)',
+      lineHeight: 1.7,
+      marginBottom: 6
+    }
+  }, "\u8FD9\u4E00\u6B65\u4E0D\u53EF\u64A4\u9500\uFF0C\u661F\u56FE\u7684\u9ED1\u6D1E\u4E5F\u635E\u4E0D\u56DE\u6765\u3002"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12.5,
+      color: 'var(--text-2)',
+      lineHeight: 1.7,
+      marginBottom: 12
+    }
+  }, "\u5C06\u8FDE\u540C\u8FD9\u4E2A\u8D26\u53F7\u7684\u661F\u7CFB\u5FEB\u7167\u3001\u5206\u4EAB\u5BC6\u6587\u3001\u5168\u90E8\u8BBF\u95EE\u5173\u7CFB\u4E0E\u661F\u9645\u6765\u4FE1\u4E00\u5E76\u62B9\u9664", user.stars ? /*#__PURE__*/React.createElement(React.Fragment, null, "\u2014\u2014\u90A3\u662F ", /*#__PURE__*/React.createElement("b", {
+    style: {
+      color: 'var(--text-1)'
+    }
+  }, user.stars, " \u9897\u661F"), "\u3002") : '。', "\u82E5\u53EA\u662F\u60F3\u8BA9\u5BF9\u65B9\u8FDB\u4E0D\u6765\uFF0C\u7528\u300C\u505C\u7528\u8D26\u53F7\u300D\uFF0C\u6570\u636E\u4F1A\u7559\u7740\u3002"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      ...hud,
+      marginBottom: 6
+    }
+  }, "\u8F93\u5165\u300C", user.username || user.name, "\u300D\u4EE5\u786E\u8BA4"), /*#__PURE__*/React.createElement(Input, {
+    value: confirmText,
+    onChange: e => setConfirmText(e.target.value),
+    placeholder: user.username || user.name,
+    autoFocus: true
+  })));
+}
+function MiniStat({
+  label,
+  value,
+  tone
+}) {
+  return /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'inline-flex',
+      alignItems: 'baseline',
+      gap: 5,
+      padding: '5px 10px',
+      borderRadius: 'var(--r-pill)',
+      border: '1px solid var(--line-strong)',
+      background: 'var(--input-bg, rgba(3,4,12,0.45))'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 14,
+      fontFamily: 'var(--font-mono)',
+      color: tone === 'gold' ? 'var(--gold)' : 'var(--text-1)'
+    }
+  }, value), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 11,
+      color: 'var(--text-3)'
+    }
+  }, label));
+}
+
+/* ============================ 游客 ============================ */
+
+const GATE_ITEMS = [{
+  id: 'editor',
+  label: '写笔记',
+  icon: 'pen-line',
+  note: '打开块编辑器（前端门禁：拦的是入口）'
+}, {
+  id: 'vault',
+  label: 'Markdown 仓库进出',
+  icon: 'folder-down',
+  note: '导出 / 导入整片星空（前端门禁）'
+}, {
+  id: 'share',
+  label: '分享星系',
+  icon: 'radio-tower',
+  note: '生成密文把星系开出去（服务端硬拦）'
+}, {
+  id: 'visit',
+  label: '星际漫游',
+  icon: 'telescope',
+  note: '造访好友、收纳与来信（服务端硬拦）'
+}];
+function AdminGuests() {
+  const [d, loading, reload] = useAdminData('/guests?idleDays=7');
+  const [site,, reloadSite] = useAdminData('/site');
+  const [openIp, setOpenIp] = React.useState(null);
+  const [perIp, setPerIp] = React.useState('');
+  const [busy, setBusy] = React.useState(false);
+  const [purge, setPurge] = React.useState(null); // { ip } | { all: true }
+
+  React.useEffect(() => {
+    if (site) setPerIp(String(site.guestPerIp));
+  }, [site]);
+  const saveSite = async (patch, msg) => {
+    setBusy(true);
+    try {
+      await adminApi('/site', {
+        method: 'POST',
+        body: patch
+      });
+      toast(msg, {
+        icon: 'check'
+      });
+      reloadSite();
+      reload();
+    } catch (e) {/* 已提示 */} finally {
+      setBusy(false);
+    }
+  };
+  const runPurge = async () => {
+    setBusy(true);
+    try {
+      const r = await adminApi('/guests/purge', {
+        method: 'POST',
+        body: {
+          idleDays: 7,
+          ip: purge.ip || undefined
+        }
+      });
+      toast(r.removed ? `已清理 ${r.removed} 个空游客` : '没有符合条件的空游客', {
+        icon: 'check'
+      });
+      setPurge(null);
+      reload();
+    } catch (e) {/* 已提示 */} finally {
+      setBusy(false);
+    }
+  };
+  const rows = d && d.rows || [];
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 24
+    }
+  }, /*#__PURE__*/React.createElement("section", null, /*#__PURE__*/React.createElement(SectionHead, {
+    icon: "user-round-search",
+    title: "\u6E38\u5BA2",
+    note: d ? `${num(d.guests)} 个账号 · ${num(d.ips)} 个来源` : undefined,
+    right: /*#__PURE__*/React.createElement(IconButton, {
+      name: "refresh-cw",
+      title: "\u5237\u65B0",
+      onClick: reload
+    })
+  }), d && /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      gap: 12
+    }
+  }, /*#__PURE__*/React.createElement(StatCard, {
+    icon: "users",
+    label: "\u6E38\u5BA2\u8D26\u53F7",
+    value: num(d.guests)
+  }), /*#__PURE__*/React.createElement(StatCard, {
+    icon: "network",
+    label: "\u6765\u6E90 IP",
+    value: num(d.ips)
+  }), /*#__PURE__*/React.createElement(StatCard, {
+    icon: "wind",
+    label: "\u7A7A\u6E38\u5BA2",
+    value: num(d.zombies),
+    tone: d.zombies ? 'gold' : undefined,
+    sub: "\u4ECE\u6CA1\u5B58\u8FC7\u661F\u7CFB\uFF0C\u4E14 7 \u5929\u6CA1\u9732\u9762"
+  }))), /*#__PURE__*/React.createElement("section", null, /*#__PURE__*/React.createElement(SectionHead, {
+    icon: "shield-alert",
+    title: "\u6BCF\u4E2A IP \u5141\u8BB8\u51E0\u4E2A\u6E38\u5BA2"
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      ...panel,
+      padding: 17
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12.5,
+      color: 'var(--text-2)',
+      lineHeight: 1.75,
+      marginBottom: 14
+    }
+  }, "\u8D85\u51FA\u9650\u989D\u7684\u65B0\u8BBF\u5BA2\u4F1A\u88AB\u6321\u5728\u95E8\u5916\uFF0C\u5E76\u88AB\u8BF7\u53BB\u767B\u5F55\u6216\u6CE8\u518C\u2014\u2014\u6CE8\u518C\u4E4B\u540E\u8D26\u53F7\u4E0D\u518D\u7B97\u6E38\u5BA2\uFF0C \u8FD9\u4E2A IP \u7684\u540D\u989D\u7ACB\u523B\u91CA\u653E\u3002\u586B ", /*#__PURE__*/React.createElement("b", {
+    style: {
+      color: 'var(--text-1)'
+    }
+  }, "0"), " \u8868\u793A\u4E0D\u9650\u3002", d && !d.trustProxy && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("br", null), "\u5F53\u524D\u6309 ", /*#__PURE__*/React.createElement("b", {
+    style: {
+      color: 'var(--text-1)'
+    }
+  }, "socket \u76F4\u8FDE\u5730\u5740"), " \u5224\u5B9A\u6765\u6E90\u3002 \u5982\u679C\u661F\u56FE\u8DD1\u5728 nginx / Caddy \u4E4B\u7C7B\u7684\u53CD\u5411\u4EE3\u7406\u540E\u9762\uFF0C\u6240\u6709\u4EBA\u90FD\u4F1A\u957F\u7740\u540C\u4E00\u4E2A IP\u2014\u2014 \u90A3\u79CD\u60C5\u51B5\u4E0B\u8981\u7528 ", /*#__PURE__*/React.createElement("code", {
+    style: {
+      fontFamily: 'var(--font-mono)',
+      color: 'var(--gold)'
+    }
+  }, "SR_TRUST_PROXY=1"), " \u542F\u52A8\uFF0C \u5426\u5219\u6574\u53F0\u670D\u52A1\u5668\u4F1A\u88AB\u9501\u6210\u4E00\u4E2A\u6E38\u5BA2\u3002"), d && d.trustProxy && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("br", null), "\u5F53\u524D\u4FE1\u4EFB ", /*#__PURE__*/React.createElement("code", {
+    style: {
+      fontFamily: 'var(--font-mono)',
+      color: 'var(--gold)'
+    }
+  }, "X-Forwarded-For"), " \u7684\u7B2C\u4E00\u8DF3\u2014\u2014 \u8BF7\u786E\u8BA4\u524D\u9762\u786E\u5B9E\u6709\u4E00\u5C42\u4F60\u81EA\u5DF1\u7684\u53CD\u5411\u4EE3\u7406\uFF0C\u5426\u5219\u8FD9\u4E2A\u5934\u53EF\u4EE5\u88AB\u4F2A\u9020\u3002")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      gap: 10,
+      alignItems: 'center',
+      flexWrap: 'wrap'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      width: 110
+    }
+  }, /*#__PURE__*/React.createElement(Input, {
+    type: "number",
+    size: "sm",
+    value: perIp,
+    onChange: e => setPerIp(e.target.value)
+  })), /*#__PURE__*/React.createElement(Button, {
+    variant: "secondary",
+    size: "sm",
+    icon: "save",
+    disabled: busy || site == null || String(site.guestPerIp) === perIp,
+    onClick: () => saveSite({
+      guestPerIp: Number(perIp) || 0
+    }, Number(perIp) > 0 ? `每 IP 最多 ${Number(perIp)} 个游客` : '已取消游客限额')
+  }, "\u4FDD\u5B58"), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 11.5,
+      color: 'var(--text-3)'
+    }
+  }, site ? site.guestPerIp > 0 ? `当前：每 IP ${site.guestPerIp} 个` : '当前：不限' : '')))), /*#__PURE__*/React.createElement("section", null, /*#__PURE__*/React.createElement(SectionHead, {
+    icon: "lock",
+    title: "\u54EA\u4E9B\u529F\u80FD\u9700\u8981\u8D26\u53F7",
+    note: "\u53EA\u5BF9\u6E38\u5BA2\u751F\u6548"
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      ...panel,
+      padding: '6px 17px 14px'
+    }
+  }, GATE_ITEMS.map((g, i) => /*#__PURE__*/React.createElement("div", {
+    key: g.id,
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 14,
+      padding: '13px 0',
+      borderBottom: i === GATE_ITEMS.length - 1 ? 'none' : '1px solid var(--line)'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: g.icon,
+    size: 15,
+    color: site && site.guestGates[g.id] ? 'var(--gold)' : 'var(--text-3)'
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1,
+      minWidth: 0
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 13.5,
+      color: 'var(--text-1)'
+    }
+  }, g.label), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11.5,
+      color: 'var(--text-3)',
+      marginTop: 3,
+      lineHeight: 1.55
+    }
+  }, g.note)), /*#__PURE__*/React.createElement(Switch, {
+    checked: !!(site && site.guestGates[g.id]),
+    disabled: busy || !site,
+    onChange: v => saveSite({
+      guestGates: {
+        [g.id]: v
+      }
+    }, v ? `「${g.label}」现在需要账号` : `「${g.label}」已对游客开放`),
+    label: site && site.guestGates[g.id] ? '需要账号' : '游客可用'
+  }))))), /*#__PURE__*/React.createElement("section", null, /*#__PURE__*/React.createElement(SectionHead, {
+    icon: "network",
+    title: "\u6309\u6765\u6E90 IP",
+    note: d ? `${rows.length} 个地址` : undefined,
+    right: d && d.zombies ? /*#__PURE__*/React.createElement(Button, {
+      variant: "ghost",
+      size: "sm",
+      icon: "brush-cleaning",
+      onClick: () => setPurge({
+        all: true
+      })
+    }, "\u6E05\u7406\u5168\u90E8\u7A7A\u6E38\u5BA2 (", d.zombies, ")") : undefined
+  }), !d && loading && /*#__PURE__*/React.createElement(Loading, {
+    text: "\u6B63\u5728\u6E05\u70B9\u6E38\u5BA2\u2026"
+  }), d && !rows.length && /*#__PURE__*/React.createElement(Empty, {
+    icon: "user-round-search",
+    text: "\u8FD8\u6CA1\u6709\u533F\u540D\u6E38\u5BA2\u2014\u2014\u6240\u6709\u4EBA\u90FD\u6CE8\u518C\u4E86\u8D26\u53F7\u3002"
+  }), d && !!rows.length && /*#__PURE__*/React.createElement("div", {
+    style: {
+      ...panel,
+      overflow: 'hidden'
+    }
+  }, rows.map((r, i) => {
+    const open = openIp === r.ip;
+    const full = d.limit > 0 && r.count >= d.limit;
+    return /*#__PURE__*/React.createElement("div", {
+      key: r.ip,
+      style: {
+        borderBottom: i === rows.length - 1 ? 'none' : '1px solid var(--line)'
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      role: "button",
+      tabIndex: 0,
+      className: "sr-focus-ring",
+      onClick: () => setOpenIp(open ? null : r.ip),
+      onKeyDown: e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          setOpenIp(open ? null : r.ip);
+        }
+      },
+      className: "sr-adm-row",
+      style: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: 12,
+        padding: '12px 16px',
+        cursor: 'pointer',
+        background: open ? 'rgba(159,198,255,0.06)' : 'transparent'
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "sr-adm-cell"
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "network",
+      size: 15,
+      color: full ? 'var(--gold)' : 'var(--star-blue)'
+    })), /*#__PURE__*/React.createElement("span", {
+      className: "sr-adm-cell sr-adm-name",
+      style: {
+        flex: '1 1 140px',
+        minWidth: 0,
+        fontFamily: 'var(--font-mono)',
+        fontSize: 13,
+        color: 'var(--text-1)'
+      }
+    }, r.ip), /*#__PURE__*/React.createElement("span", {
+      className: "sr-adm-cell",
+      style: {
+        width: 92,
+        flex: 'none',
+        fontSize: 12,
+        color: 'var(--text-2)'
+      }
+    }, r.count, " \u4E2A\u6E38\u5BA2", full && /*#__PURE__*/React.createElement("span", {
+      style: {
+        color: 'var(--gold)'
+      }
+    }, " \xB7 \u6EE1")), /*#__PURE__*/React.createElement("span", {
+      className: "sr-adm-cell",
+      style: {
+        width: 76,
+        flex: 'none',
+        fontSize: 12,
+        color: r.stars ? 'var(--text-2)' : 'var(--text-disabled)'
+      }
+    }, r.stars, " \u9897\u661F"), /*#__PURE__*/React.createElement("span", {
+      className: "sr-adm-cell",
+      style: {
+        width: 84,
+        flex: 'none',
+        fontSize: 12,
+        color: r.zombies ? 'var(--gold)' : 'var(--text-disabled)'
+      }
+    }, r.zombies ? r.zombies + ' 个空' : '—'), /*#__PURE__*/React.createElement("span", {
+      className: "sr-adm-cell",
+      style: {
+        width: 96,
+        flex: 'none',
+        fontSize: 12,
+        color: 'var(--text-3)',
+        textAlign: 'right'
+      }
+    }, ago(r.lastSeen)), /*#__PURE__*/React.createElement("span", {
+      className: "sr-adm-cell",
+      style: {
+        width: 26,
+        flex: 'none',
+        display: 'flex',
+        justifyContent: 'flex-end'
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: open ? 'chevron-up' : 'chevron-down',
+      size: 15,
+      color: "var(--text-3)"
+    }))), open && /*#__PURE__*/React.createElement("div", {
+      style: {
+        padding: '4px 16px 16px',
+        background: 'rgba(3,4,12,0.28)'
+      }
+    }, r.guests.map(g => /*#__PURE__*/React.createElement("div", {
+      key: g.id,
+      className: "sr-adm-row",
+      style: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: 10,
+        padding: '9px 0',
+        borderBottom: '1px solid var(--line)'
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "sr-adm-cell"
+    }, /*#__PURE__*/React.createElement(Avatar, {
+      user: g,
+      size: 24
+    })), /*#__PURE__*/React.createElement("span", {
+      className: "sr-adm-cell sr-adm-name",
+      style: {
+        flex: 1,
+        minWidth: 0,
+        fontSize: 12.5,
+        color: 'var(--text-1)'
+      }
+    }, g.name, " ", /*#__PURE__*/React.createElement("span", {
+      style: {
+        color: 'var(--text-3)'
+      }
+    }, "#", g.id), g.zombie && /*#__PURE__*/React.createElement("span", {
+      style: {
+        color: 'var(--text-3)'
+      }
+    }, " \xB7 \u7A7A\u8D26\u53F7"), g.banned && /*#__PURE__*/React.createElement("span", {
+      style: {
+        color: 'var(--danger)'
+      }
+    }, " \xB7 \u5DF2\u505C\u7528")), /*#__PURE__*/React.createElement("span", {
+      className: "sr-adm-cell",
+      style: {
+        width: 70,
+        flex: 'none',
+        fontSize: 12,
+        color: g.stars ? 'var(--text-2)' : 'var(--text-disabled)'
+      }
+    }, g.stars, " \u9897\u661F"), /*#__PURE__*/React.createElement("span", {
+      className: "sr-adm-cell",
+      style: {
+        width: 92,
+        flex: 'none',
+        fontSize: 12,
+        color: 'var(--text-3)',
+        textAlign: 'right'
+      }
+    }, ago(g.lastSeen || g.createdAt)))), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        gap: 9,
+        marginTop: 12,
+        alignItems: 'center'
+      }
+    }, /*#__PURE__*/React.createElement(Button, {
+      variant: "ghost",
+      size: "sm",
+      icon: "brush-cleaning",
+      disabled: !r.zombies,
+      onClick: () => setPurge({
+        ip: r.ip
+      })
+    }, r.zombies ? `清理这个 IP 的 ${r.zombies} 个空游客` : '没有可清理的空账号'), /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 11.5,
+        color: 'var(--text-3)'
+      }
+    }, "\u5B58\u8FC7\u661F\u7A7A\u7684\u8D26\u53F7\u4E0D\u5728\u6E05\u7406\u8303\u56F4\u5185"))));
+  }))), /*#__PURE__*/React.createElement(Modal, {
+    open: !!purge,
+    onClose: () => setPurge(null),
+    title: "\u6E05\u7406\u7A7A\u6E38\u5BA2",
+    icon: "brush-cleaning",
+    width: 430,
+    footer: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Button, {
+      variant: "ghost",
+      onClick: () => setPurge(null)
+    }, "\u53D6\u6D88"), /*#__PURE__*/React.createElement(Button, {
+      variant: "primary",
+      disabled: busy,
+      onClick: runPurge
+    }, "\u6E05\u7406"))
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12.5,
+      color: 'var(--text-2)',
+      lineHeight: 1.75
+    }
+  }, "\u5C06\u5220\u9664", purge && purge.ip ? /*#__PURE__*/React.createElement(React.Fragment, null, " ", /*#__PURE__*/React.createElement("b", {
+    style: {
+      color: 'var(--text-1)'
+    }
+  }, purge.ip), " \u4E0B") : '全站', /*#__PURE__*/React.createElement("b", {
+    style: {
+      color: 'var(--text-1)'
+    }
+  }, "\u4ECE\u6CA1\u5B58\u8FC7\u4EFB\u4F55\u661F\u7CFB\u3001\u4E14 7 \u5929\u6CA1\u6709\u9732\u9762"), "\u7684\u533F\u540D\u8D26\u53F7\u3002", /*#__PURE__*/React.createElement("br", null), "\u5B58\u8FC7\u661F\u7A7A\u7684\u6E38\u5BA2\u4E00\u4E2A\u90FD\u4E0D\u4F1A\u52A8\u2014\u2014\u54EA\u6015\u53EA\u6709\u4E00\u9897\u661F\u3002", purge && purge.ip && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("br", null), "\u6E05\u7406\u4E4B\u540E\u8FD9\u4E2A IP \u7684\u6E38\u5BA2\u540D\u989D\u968F\u5373\u7A7A\u51FA\u6765\u3002"))));
+}
+
+/* ============================ 分享 ============================ */
+
+function AdminShares() {
+  const [d, loading, reload] = useAdminData('/shares');
+  const [closing, setClosing] = React.useState(null);
+  const close = async row => {
+    await adminApi('/shares/close', {
+      method: 'POST',
+      body: {
+        userId: row.userId
+      }
+    });
+    toast('已关闭这片星系的对外分享', {
+      icon: 'check'
+    });
+    setClosing(null);
+    reload();
+  };
+  const rows = d && d.shares || [];
+  const open = rows.filter(r => r.enabled);
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(SectionHead, {
+    icon: "share-2",
+    title: "\u661F\u7CFB\u5206\u4EAB",
+    note: d ? `${open.length} 片星系正对外开放` : undefined,
+    right: /*#__PURE__*/React.createElement(IconButton, {
+      name: "refresh-cw",
+      title: "\u5237\u65B0",
+      onClick: reload
+    })
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: 'var(--text-3)',
+      lineHeight: 1.7,
+      marginBottom: 14
+    }
+  }, "\u5206\u4EAB\u7531\u661F\u7CFB\u4E3B\u4EBA\u81EA\u5DF1\u5F00\u542F\u3002\u8FD9\u91CC\u80FD\u770B\u5230\u8C01\u5F00\u7740\u3001\u5F00\u5230\u4EC0\u4E48\u7A0B\u5EA6\uFF0C\u5FC5\u8981\u65F6\u53EF\u4EE5\u5F3A\u5236\u5173\u95ED\u2014\u2014 \u5BC6\u6587\u4F1A\u4FDD\u7559\uFF0C\u4E3B\u4EBA\u968F\u65F6\u80FD\u81EA\u5DF1\u518D\u6253\u5F00\u3002"), !d && loading && /*#__PURE__*/React.createElement(Loading, null), d && !rows.length && /*#__PURE__*/React.createElement(Empty, {
+    icon: "share-2",
+    text: "\u8FD8\u6CA1\u6709\u4EBA\u5F00\u542F\u661F\u7CFB\u5206\u4EAB\u3002"
+  }), d && !!rows.length && /*#__PURE__*/React.createElement("div", {
+    style: {
+      ...panel,
+      overflow: 'hidden'
+    }
+  }, rows.map((r, i) => /*#__PURE__*/React.createElement("div", {
+    key: r.userId,
+    className: "sr-adm-row",
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 12,
+      padding: '12px 16px',
+      borderBottom: i === rows.length - 1 ? 'none' : '1px solid var(--line)'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "sr-adm-cell"
+  }, /*#__PURE__*/React.createElement(Avatar, {
+    user: r
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "sr-adm-cell sr-adm-name",
+    style: {
+      flex: '1 1 160px',
+      minWidth: 0
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 13.5,
+      color: 'var(--text-1)',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap'
+    }
+  }, r.username || r.name), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11.5,
+      color: 'var(--text-3)',
+      marginTop: 2
+    }
+  }, r.enabled ? r.visibility === 'outline' ? '星名 + 标签 + 大纲' : '仅星名与星域' : '已关闭')), /*#__PURE__*/React.createElement("span", {
+    className: "sr-adm-cell",
+    "data-k": "\u5BC6\u6587",
+    style: {
+      fontFamily: 'var(--font-mono)',
+      fontSize: 12,
+      color: r.enabled ? 'var(--gold)' : 'var(--text-disabled)',
+      flex: 'none'
+    }
+  }, r.code), /*#__PURE__*/React.createElement("span", {
+    className: "sr-adm-cell",
+    style: {
+      width: 76,
+      flex: 'none',
+      textAlign: 'right',
+      fontSize: 12,
+      color: 'var(--text-2)'
+    }
+  }, r.visitors, " \u4F4D\u8BBF\u5BA2"), /*#__PURE__*/React.createElement("span", {
+    className: "sr-adm-cell",
+    style: {
+      width: 92,
+      flex: 'none',
+      display: 'flex',
+      justifyContent: 'flex-end'
+    }
+  }, r.enabled ? /*#__PURE__*/React.createElement(Button, {
+    variant: "ghost",
+    size: "sm",
+    icon: "eye-off",
+    onClick: () => setClosing(r)
+  }, "\u5173\u95ED") : /*#__PURE__*/React.createElement(Badge, {
+    tone: "neutral"
+  }, "\u672A\u5F00\u653E"))))), /*#__PURE__*/React.createElement(Modal, {
+    open: !!closing,
+    onClose: () => setClosing(null),
+    title: "\u5F3A\u5236\u5173\u95ED\u5206\u4EAB",
+    icon: "eye-off",
+    width: 420,
+    footer: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Button, {
+      variant: "ghost",
+      onClick: () => setClosing(null)
+    }, "\u53D6\u6D88"), /*#__PURE__*/React.createElement(Button, {
+      variant: "primary",
+      onClick: () => close(closing)
+    }, "\u5173\u95ED\u5206\u4EAB"))
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12.5,
+      color: 'var(--text-2)',
+      lineHeight: 1.7
+    }
+  }, "\u5173\u95ED\u540E\uFF0C\u6301\u6709\u5BC6\u6587\u7684\u8BBF\u5BA2\u5C06\u65E0\u6CD5\u518D\u9020\u8BBF ", /*#__PURE__*/React.createElement("b", {
+    style: {
+      color: 'var(--text-1)'
+    }
+  }, closing && (closing.username || closing.name)), " \u7684\u661F\u7CFB\u3002 \u5BC6\u6587\u672C\u8EAB\u4FDD\u7559\uFF0C\u4E3B\u4EBA\u53EF\u4EE5\u5728\u81EA\u5DF1\u7684\u8BBE\u7F6E\u91CC\u91CD\u65B0\u5F00\u542F\u3002")));
+}
+
+/* ============================ 会话 ============================ */
+
+function AdminSessions() {
+  const [d, loading, reload] = useAdminData('/sessions');
+  const rows = d && d.sessions || [];
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(SectionHead, {
+    icon: "monitor-smartphone",
+    title: "\u767B\u5F55\u4F1A\u8BDD",
+    note: d ? `${rows.length} 个活跃会话` : undefined,
+    right: /*#__PURE__*/React.createElement(IconButton, {
+      name: "refresh-cw",
+      title: "\u5237\u65B0",
+      onClick: reload
+    })
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: 'var(--text-3)',
+      lineHeight: 1.7,
+      marginBottom: 14
+    }
+  }, "\u6BCF\u4E00\u884C\u662F\u4E00\u53F0\u767B\u5F55\u8FC7\u7684\u8BBE\u5907\u3002\u4EE4\u724C\u53EA\u663E\u793A\u4E00\u5C0F\u6BB5\u6307\u7EB9\uFF08\u5B8C\u6574\u4EE4\u724C\u6C38\u4E0D\u51FA\u5E93\uFF09\uFF1B \u8981\u65AD\u5F00\u67D0\u4E2A\u4EBA\u7684\u767B\u5F55\uFF0C\u53BB\u300C\u65C5\u5BA2\u300D\u91CC\u5BF9\u4ED6\u7528\u300C\u5F3A\u5236\u4E0B\u7EBF\u300D\u3002"), !d && loading && /*#__PURE__*/React.createElement(Loading, null), d && !rows.length && /*#__PURE__*/React.createElement(Empty, {
+    icon: "monitor-off",
+    text: "\u5F53\u524D\u6CA1\u6709\u4EFB\u4F55\u767B\u5F55\u4F1A\u8BDD\u3002"
+  }), d && !!rows.length && /*#__PURE__*/React.createElement("div", {
+    style: {
+      ...panel,
+      overflow: 'hidden'
+    }
+  }, rows.map((s, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "sr-adm-row",
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 12,
+      padding: '11px 16px',
+      borderBottom: i === rows.length - 1 ? 'none' : '1px solid var(--line)',
+      background: s.current ? 'rgba(255,217,138,0.05)' : 'transparent'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "sr-adm-cell"
+  }, /*#__PURE__*/React.createElement(Avatar, {
+    user: s,
+    size: 26
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "sr-adm-cell sr-adm-name",
+    style: {
+      flex: '1 1 160px',
+      minWidth: 0
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 7
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 13,
+      color: 'var(--text-1)'
+    }
+  }, s.username || s.name), s.role === 'admin' && /*#__PURE__*/React.createElement(Badge, {
+    tone: "gold"
+  }, "\u7BA1\u7406\u5458"), s.current && /*#__PURE__*/React.createElement(Badge, {
+    tone: "blue"
+  }, "\u5F53\u524D\u8BBE\u5907")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11.5,
+      color: 'var(--text-3)',
+      marginTop: 2,
+      fontFamily: 'var(--font-mono)'
+    }
+  }, s.fingerprint, s.ip ? ' · ' + s.ip : '')), /*#__PURE__*/React.createElement("span", {
+    className: "sr-adm-cell",
+    style: {
+      width: 120,
+      flex: 'none',
+      fontSize: 12,
+      color: 'var(--text-2)'
+    }
+  }, "\u6D3B\u8DC3\u4E8E ", ago(s.lastSeen)), /*#__PURE__*/React.createElement("span", {
+    className: "sr-adm-cell",
+    style: {
+      width: 130,
+      flex: 'none',
+      fontSize: 12,
+      color: 'var(--text-3)',
+      textAlign: 'right'
+    }
+  }, "\u767B\u5F55\u4E8E ", ago(s.createdAt))))));
+}
+
+/* ============================ 广播 ============================ */
+
+const TONES = [{
+  value: 'info',
+  label: '寻常 · 冷蓝'
+}, {
+  value: 'warn',
+  label: '提醒 · 暖金'
+}, {
+  value: 'danger',
+  label: '要紧 · 警示'
+}];
+function AdminBroadcast() {
+  const [d, loading, reload] = useAdminData('/site');
+  const [text, setText] = React.useState('');
+  const [tone, setTone] = React.useState('info');
+  const [enabled, setEnabled] = React.useState(false);
+  const [regOpen, setRegOpen] = React.useState(true);
+  const [maint, setMaint] = React.useState(false);
+  const [maintMsg, setMaintMsg] = React.useState('');
+  const [confirmMaint, setConfirmMaint] = React.useState(false);
+  const [busy, setBusy] = React.useState(false);
+
+  // 服务端为准：取回后一次性灌进表单（之后随用户编辑走）
+  React.useEffect(() => {
+    if (!d) return;
+    setText(d.announcement.text || '');
+    setTone(d.announcement.tone || 'info');
+    setEnabled(!!d.announcement.enabled);
+    setRegOpen(!!d.registrationOpen);
+    setMaint(!!d.maintenance.enabled);
+    setMaintMsg(d.maintenance.message || '');
+  }, [d]);
+  const save = async (patch, msg) => {
+    setBusy(true);
+    try {
+      await adminApi('/site', {
+        method: 'POST',
+        body: patch
+      });
+      toast(msg, {
+        icon: 'check'
+      });
+      reload();
+    } catch (e) {/* 已提示 */} finally {
+      setBusy(false);
+    }
+  };
+  if (!d && loading) return /*#__PURE__*/React.createElement(Loading, null);
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 24
+    }
+  }, /*#__PURE__*/React.createElement("section", null, /*#__PURE__*/React.createElement(SectionHead, {
+    icon: "megaphone",
+    title: "\u5168\u7AD9\u516C\u544A",
+    note: "\u6240\u6709\u4EBA\u6253\u5F00\u661F\u56FE\u65F6\u770B\u5230\u7684\u4E00\u6761\u6A2A\u5E45"
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      ...panel,
+      padding: 17
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      ...hud,
+      marginBottom: 7
+    }
+  }, "\u516C\u544A\u5185\u5BB9"), /*#__PURE__*/React.createElement(Input, {
+    value: text,
+    onChange: e => setText(e.target.value),
+    placeholder: "\u4F8B\u5982\uFF1A\u672C\u5468\u65E5 02:00 \u670D\u52A1\u5668\u7EF4\u62A4\uFF0C\u5C4A\u65F6\u661F\u56FE\u4F1A\u77ED\u6682\u4E0D\u53EF\u7528\u3002"
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      gap: 14,
+      alignItems: 'center',
+      marginTop: 14
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: '0 0 auto'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      ...hud,
+      marginBottom: 6
+    }
+  }, "\u8BED\u6C14"), /*#__PURE__*/React.createElement(Select, {
+    size: "sm",
+    value: tone,
+    options: TONES,
+    onChange: setTone,
+    style: {
+      width: 148
+    }
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1,
+      minWidth: 140,
+      paddingTop: 16
+    }
+  }, /*#__PURE__*/React.createElement(Switch, {
+    checked: enabled,
+    onChange: setEnabled,
+    label: enabled ? '正在展示' : '暂不展示'
+  }))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      ...hud,
+      margin: '18px 0 8px'
+    }
+  }, "\u9884\u89C8"), text.trim() ? /*#__PURE__*/React.createElement(AnnouncementBanner, {
+    announcement: {
+      text: text.trim(),
+      tone
+    },
+    preview: true
+  }) : /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: 'var(--text-disabled)',
+      padding: '10px 0'
+    }
+  }, "\u5199\u70B9\u4EC0\u4E48\uFF0C\u8FD9\u91CC\u4F1A\u663E\u793A\u7528\u6237\u770B\u5230\u7684\u6837\u5B50\u3002"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      gap: 10,
+      marginTop: 16
+    }
+  }, /*#__PURE__*/React.createElement(Button, {
+    variant: "primary",
+    size: "sm",
+    icon: "send",
+    disabled: busy,
+    onClick: () => save({
+      announcement: {
+        text,
+        tone,
+        enabled
+      }
+    }, enabled && text.trim() ? '公告已发布' : '公告已保存')
+  }, "\u4FDD\u5B58\u516C\u544A"), d && d.announcement.enabled && /*#__PURE__*/React.createElement(Button, {
+    variant: "ghost",
+    size: "sm",
+    icon: "eye-off",
+    disabled: busy,
+    onClick: () => {
+      setEnabled(false);
+      save({
+        announcement: {
+          text,
+          tone,
+          enabled: false
+        }
+      }, '公告已撤下');
+    }
+  }, "\u64A4\u4E0B"), d && d.announcement.updatedAt && /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 11.5,
+      color: 'var(--text-3)',
+      alignSelf: 'center'
+    }
+  }, "\u4E0A\u6B21\u66F4\u65B0 ", ago(d.announcement.updatedAt.replace('T', ' ').slice(0, 19)))))), /*#__PURE__*/React.createElement("section", null, /*#__PURE__*/React.createElement(SectionHead, {
+    icon: "user-plus",
+    title: "\u65B0\u8D26\u53F7\u6CE8\u518C"
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      ...panel,
+      padding: 17,
+      display: 'flex',
+      alignItems: 'center',
+      gap: 16,
+      flexWrap: 'wrap'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: '1 1 260px',
+      fontSize: 12.5,
+      color: 'var(--text-2)',
+      lineHeight: 1.7
+    }
+  }, "\u5173\u95ED\u540E\uFF0C\u65B0\u8BBF\u5BA2\u4ECD\u53EF\u4EE5\u533F\u540D\u8BD5\u7528\u661F\u56FE\uFF0C\u4F46\u65E0\u6CD5\u6CE8\u518C\u6210\u8D26\u53F7\u3002\u5DF2\u6709\u8D26\u53F7\u4E0D\u53D7\u5F71\u54CD\u3002"), /*#__PURE__*/React.createElement(Switch, {
+    checked: regOpen,
+    onChange: v => {
+      setRegOpen(v);
+      save({
+        registrationOpen: v
+      }, v ? '已开放注册' : '已关闭注册');
+    },
+    label: regOpen ? '开放注册' : '已关闭'
+  }))), /*#__PURE__*/React.createElement("section", null, /*#__PURE__*/React.createElement(SectionHead, {
+    icon: "construction",
+    title: "\u7EF4\u62A4\u6A21\u5F0F"
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      ...panel,
+      padding: 17,
+      border: maint ? '1px solid rgba(232,145,122,0.34)' : undefined
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 16,
+      flexWrap: 'wrap'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: '1 1 260px',
+      fontSize: 12.5,
+      color: 'var(--text-2)',
+      lineHeight: 1.7
+    }
+  }, "\u5F00\u542F\u540E\uFF0C\u9664\u7BA1\u7406\u5458\u5916\u6240\u6709\u4EBA\u7684\u8BF7\u6C42\u90FD\u4F1A\u88AB\u6321\u4E0B\u5E76\u770B\u5230\u4E0B\u9762\u8FD9\u53E5\u8BDD\u3002 \u672C\u5730\u5DF2\u7ECF\u6253\u5F00\u7684\u661F\u56FE\u4ECD\u80FD\u79BB\u7EBF\u7F16\u8F91\uFF0C\u6062\u590D\u540E\u81EA\u52A8\u8865\u5199\u2014\u2014\u4E0D\u4F1A\u4E22\u6570\u636E\u3002"), /*#__PURE__*/React.createElement(Switch, {
+    checked: maint,
+    onChange: v => {
+      if (v) {
+        setConfirmMaint(true);
+      } else {
+        setMaint(false);
+        save({
+          maintenance: {
+            enabled: false,
+            message: maintMsg
+          }
+        }, '维护模式已结束');
+      }
+    },
+    label: maint ? '维护中' : '未开启'
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      ...hud,
+      margin: '16px 0 7px'
+    }
+  }, "\u7EF4\u62A4\u8BF4\u660E"), /*#__PURE__*/React.createElement(Input, {
+    value: maintMsg,
+    onChange: e => setMaintMsg(e.target.value),
+    placeholder: "\u661F\u56FE\u6B63\u5728\u7EF4\u62A4\uFF0C\u7A0D\u540E\u56DE\u6765\u770B\u770B\u3002"
+  }), /*#__PURE__*/React.createElement(Button, {
+    variant: "secondary",
+    size: "sm",
+    icon: "save",
+    style: {
+      marginTop: 12
+    },
+    disabled: busy,
+    onClick: () => save({
+      maintenance: {
+        enabled: maint,
+        message: maintMsg
+      }
+    }, '维护说明已保存')
+  }, "\u4FDD\u5B58\u8BF4\u660E"))), /*#__PURE__*/React.createElement(Modal, {
+    open: confirmMaint,
+    onClose: () => setConfirmMaint(false),
+    title: "\u5F00\u542F\u7EF4\u62A4\u6A21\u5F0F",
+    icon: "construction",
+    width: 430,
+    footer: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Button, {
+      variant: "ghost",
+      onClick: () => setConfirmMaint(false)
+    }, "\u53D6\u6D88"), /*#__PURE__*/React.createElement(Button, {
+      variant: "primary",
+      onClick: () => {
+        setMaint(true);
+        setConfirmMaint(false);
+        save({
+          maintenance: {
+            enabled: true,
+            message: maintMsg
+          }
+        }, '维护模式已开启');
+      }
+    }, "\u5F00\u542F"))
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12.5,
+      color: 'var(--text-2)',
+      lineHeight: 1.7
+    }
+  }, "\u5F00\u542F\u540E\uFF0C", /*#__PURE__*/React.createElement("b", {
+    style: {
+      color: 'var(--text-1)'
+    }
+  }, "\u9664\u7BA1\u7406\u5458\u5916\u7684\u6240\u6709\u4EBA"), "\u90FD\u4F1A\u88AB\u6321\u5728\u95E8\u5916\uFF0C\u6B63\u5728\u4F7F\u7528\u7684\u4EBA\u4E0B\u4E00\u6B21\u540C\u6B65\u5C31\u4F1A\u770B\u5230\u7EF4\u62A4\u63D0\u793A\u3002 \u8BB0\u5F97\u529E\u5B8C\u4E8B\u56DE\u6765\u5173\u6389\u5B83\u3002")));
+}
+
+/* ============================ 系统 ============================ */
+
+function AdminSystem() {
+  const [d, loading, reload] = useAdminData('/overview');
+  const [busy, setBusy] = React.useState('');
+  const [confirmVacuum, setConfirmVacuum] = React.useState(false);
+  React.useEffect(() => {
+    const t = setInterval(reload, 10000);
+    return () => clearInterval(t);
+  }, [reload]);
+  const run = async (action, msg) => {
+    setBusy(action);
+    try {
+      const r = await adminApi('/maintenance', {
+        method: 'POST',
+        body: {
+          action
+        }
+      });
+      toast(typeof msg === 'function' ? msg(r) : msg, {
+        icon: 'check'
+      });
+      reload();
+    } catch (e) {/* 已提示 */} finally {
+      setBusy('');
+      setConfirmVacuum(false);
+    }
+  };
+
+  // 备份走浏览器下载：带 token 的 URL 直接开新窗口，二进制不经过 fetch
+  const backup = () => {
+    const url = '/api/admin/backup?token=' + encodeURIComponent(window.SRNet.token);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = '';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    toast('正在下载数据库备份…', {
+      icon: 'download'
+    });
+  };
+  if (!d && loading) return /*#__PURE__*/React.createElement(Loading, null);
+  if (!d) return /*#__PURE__*/React.createElement(Empty, {
+    icon: "server-crash",
+    text: "\u8BFB\u4E0D\u5230\u670D\u52A1\u5668\u72B6\u6001\u3002"
+  });
+  const sys = d.system;
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 24
+    }
+  }, /*#__PURE__*/React.createElement("section", null, /*#__PURE__*/React.createElement(SectionHead, {
+    icon: "server",
+    title: "\u8FD0\u884C\u72B6\u6001",
+    note: "\u6BCF 10 \u79D2\u81EA\u52A8\u5237\u65B0"
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      gap: 12,
+      marginBottom: 12
+    }
+  }, /*#__PURE__*/React.createElement(StatCard, {
+    icon: "timer",
+    label: "\u5DF2\u8FD0\u884C",
+    value: duration(sys.uptimeMs)
+  }), /*#__PURE__*/React.createElement(StatCard, {
+    icon: "cpu",
+    label: "\u5185\u5B58\u5360\u7528",
+    value: bytes(sys.rss),
+    sub: `堆内 ${bytes(sys.heapUsed)}`
+  }), /*#__PURE__*/React.createElement(StatCard, {
+    icon: "radio",
+    label: "\u8BF7\u6C42\u603B\u6570",
+    value: num(sys.requests),
+    sub: `API ${num(sys.apiRequests)}`
+  }), /*#__PURE__*/React.createElement(StatCard, {
+    icon: "triangle-alert",
+    label: "\u9519\u8BEF",
+    value: num(sys.errors),
+    tone: sys.errors ? 'danger' : undefined
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      ...panel,
+      padding: '4px 17px 12px'
+    }
+  }, /*#__PURE__*/React.createElement(Row, {
+    k: "Node \u7248\u672C",
+    v: sys.node,
+    mono: true
+  }), /*#__PURE__*/React.createElement(Row, {
+    k: "\u5E73\u53F0",
+    v: sys.platform,
+    mono: true
+  }), /*#__PURE__*/React.createElement(Row, {
+    k: "\u8FDB\u7A0B PID",
+    v: sys.pid,
+    mono: true
+  }), /*#__PURE__*/React.createElement(Row, {
+    k: "\u76D1\u542C\u7AEF\u53E3",
+    v: sys.port,
+    mono: true
+  }))), /*#__PURE__*/React.createElement("section", null, /*#__PURE__*/React.createElement(SectionHead, {
+    icon: "database",
+    title: "\u6570\u636E\u5E93",
+    note: sys.db.path
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      ...panel,
+      padding: '4px 17px 14px'
+    }
+  }, /*#__PURE__*/React.createElement(Row, {
+    k: "\u4E3B\u5E93",
+    v: bytes(sys.db.size),
+    mono: true
+  }), /*#__PURE__*/React.createElement(Row, {
+    k: "WAL \u65E5\u5FD7",
+    v: bytes(sys.db.wal),
+    mono: true,
+    tone: sys.db.wal > 8 * 1024 * 1024 ? 'gold' : undefined
+  }), /*#__PURE__*/React.createElement(Row, {
+    k: "\u5171\u4EAB\u5185\u5B58 (SHM)",
+    v: bytes(sys.db.shm),
+    mono: true
+  }), /*#__PURE__*/React.createElement(Row, {
+    k: "\u5408\u8BA1\u5360\u7528",
+    v: bytes(sys.db.size + sys.db.wal + sys.db.shm),
+    mono: true
+  }), /*#__PURE__*/React.createElement(Row, {
+    k: "\u661F\u7CFB\u5FEB\u7167",
+    v: `${d.knowledge.galaxies} 片 · ${bytes(d.knowledge.snapshotBytes)}`
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      gap: 9,
+      marginTop: 16
+    }
+  }, /*#__PURE__*/React.createElement(Button, {
+    variant: "primary",
+    size: "sm",
+    icon: "download",
+    onClick: backup
+  }, "\u4E0B\u8F7D\u5907\u4EFD"), /*#__PURE__*/React.createElement(Button, {
+    variant: "secondary",
+    size: "sm",
+    icon: "fold-vertical",
+    disabled: !!busy,
+    onClick: () => run('checkpoint', 'WAL 已收进主库')
+  }, busy === 'checkpoint' ? '收拢中…' : '收拢 WAL'), /*#__PURE__*/React.createElement(Button, {
+    variant: "secondary",
+    size: "sm",
+    icon: "minimize-2",
+    disabled: !!busy,
+    onClick: () => setConfirmVacuum(true)
+  }, "\u538B\u7F29\u6570\u636E\u5E93"), /*#__PURE__*/React.createElement(Button, {
+    variant: "secondary",
+    size: "sm",
+    icon: "brush-cleaning",
+    disabled: !!busy,
+    onClick: () => run('prune-sessions', r => r.removed ? `清掉 ${r.removed} 个过期会话` : '没有过期会话')
+  }, "\u6E05\u7406\u8FC7\u671F\u4F1A\u8BDD")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11.5,
+      color: 'var(--text-3)',
+      lineHeight: 1.7,
+      marginTop: 12
+    }
+  }, "\u5907\u4EFD\u4F1A\u5148\u628A WAL \u6536\u8FDB\u4E3B\u5E93\uFF0C\u4E0B\u8F7D\u5230\u7684\u662F\u4E00\u4E2A\u53EF\u76F4\u63A5\u66FF\u6362\u4F7F\u7528\u7684\u5B8C\u6574 .db \u6587\u4EF6\u3002 \u538B\u7F29\uFF08VACUUM\uFF09\u4F1A\u91CD\u5EFA\u6574\u4E2A\u6570\u636E\u5E93\u6587\u4EF6\u56DE\u6536\u7A7A\u6D1E\uFF0C\u671F\u95F4\u77ED\u6682\u963B\u585E\u5199\u5165\u2014\u2014\u5EFA\u8BAE\u5728\u6CA1\u4EBA\u7528\u7684\u65F6\u5019\u505A\u3002 \u6E05\u7406\u4F1A\u5220\u6389 90 \u5929\u6CA1\u9732\u9762\u7684\u767B\u5F55\u4F1A\u8BDD\u3002"))));
+}
+
+/* ============================ 日志 ============================ */
+
+// 动作 → 中文说法与图标；未登记的动作原样显示，不假装认识
+const ACTIONS = {
+  'user.ban': {
+    t: '停用了账号',
+    i: 'user-x',
+    c: 'var(--danger)'
+  },
+  'user.unban': {
+    t: '解除了停用',
+    i: 'user-check',
+    c: 'var(--star-blue)'
+  },
+  'user.promote': {
+    t: '任命了管理员',
+    i: 'shield',
+    c: 'var(--gold)'
+  },
+  'user.demote': {
+    t: '撤销了管理员',
+    i: 'shield-off',
+    c: 'var(--text-2)'
+  },
+  'user.password': {
+    t: '重置了密码',
+    i: 'key-round',
+    c: 'var(--star-blue)'
+  },
+  'user.profile': {
+    t: '修改了资料',
+    i: 'pen-line',
+    c: 'var(--star-blue)'
+  },
+  'user.revoke': {
+    t: '强制下线',
+    i: 'log-out',
+    c: 'var(--star-blue)'
+  },
+  'user.delete': {
+    t: '删除了账号',
+    i: 'trash-2',
+    c: 'var(--danger)'
+  },
+  'share.close': {
+    t: '关闭了星系分享',
+    i: 'eye-off',
+    c: 'var(--star-blue)'
+  },
+  'site.update': {
+    t: '改动了站点设置',
+    i: 'megaphone',
+    c: 'var(--gold)'
+  },
+  'db.checkpoint': {
+    t: '收拢了 WAL',
+    i: 'fold-vertical',
+    c: 'var(--text-2)'
+  },
+  'db.vacuum': {
+    t: '压缩了数据库',
+    i: 'minimize-2',
+    c: 'var(--text-2)'
+  },
+  'db.backup': {
+    t: '下载了备份',
+    i: 'download',
+    c: 'var(--text-2)'
+  },
+  'db.prune-sessions': {
+    t: '清理了过期会话',
+    i: 'brush-cleaning',
+    c: 'var(--text-2)'
+  }
+};
+function AdminAudit() {
+  const [d, loading, reload] = useAdminData('/audit?limit=200');
+  const rows = d && d.entries || [];
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(SectionHead, {
+    icon: "scroll-text",
+    title: "\u64CD\u4F5C\u65E5\u5FD7",
+    note: "\u6700\u8FD1 200 \u6761\u7BA1\u7406\u52A8\u4F5C",
+    right: /*#__PURE__*/React.createElement(IconButton, {
+      name: "refresh-cw",
+      title: "\u5237\u65B0",
+      onClick: reload
+    })
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: 'var(--text-3)',
+      lineHeight: 1.7,
+      marginBottom: 14
+    }
+  }, "\u6BCF\u4E00\u6B21\u505C\u7528\u3001\u5220\u53F7\u3001\u6539\u5BC6\u4E0E\u7AD9\u70B9\u53D8\u66F4\u90FD\u7559\u5728\u8FD9\u91CC\uFF0C\u670D\u52A1\u5668\u53EA\u4FDD\u7559\u6700\u8FD1 2000 \u6761\u3002"), !d && loading && /*#__PURE__*/React.createElement(Loading, null), d && !rows.length && /*#__PURE__*/React.createElement(Empty, {
+    icon: "scroll-text",
+    text: "\u8FD8\u6CA1\u6709\u4EFB\u4F55\u7BA1\u7406\u64CD\u4F5C\u3002"
+  }), d && !!rows.length && /*#__PURE__*/React.createElement("div", {
+    style: {
+      ...panel,
+      padding: '6px 18px 14px'
+    }
+  }, rows.map((e, i) => {
+    const a = ACTIONS[e.action] || {
+      t: e.action,
+      i: 'dot',
+      c: 'var(--text-2)'
+    };
+    return /*#__PURE__*/React.createElement("div", {
+      key: e.id,
+      style: {
+        display: 'flex',
+        gap: 12,
+        padding: '11px 0',
+        borderBottom: i === rows.length - 1 ? 'none' : '1px solid var(--line)'
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        flex: 'none',
+        paddingTop: 1
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: a.i,
+      size: 14,
+      color: a.c
+    })), /*#__PURE__*/React.createElement("div", {
+      style: {
+        flex: 1,
+        minWidth: 0
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 13,
+        color: 'var(--text-1)',
+        lineHeight: 1.5
+      }
+    }, /*#__PURE__*/React.createElement("b", {
+      style: {
+        fontWeight: 400,
+        color: 'var(--gold)'
+      }
+    }, e.actor), /*#__PURE__*/React.createElement("span", {
+      style: {
+        color: 'var(--text-2)'
+      }
+    }, " ", a.t, " "), e.target && /*#__PURE__*/React.createElement("b", {
+      style: {
+        fontWeight: 400
+      }
+    }, e.target), e.detail && /*#__PURE__*/React.createElement("span", {
+      style: {
+        color: 'var(--text-3)'
+      }
+    }, " \xB7 ", e.detail)), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 11.5,
+        color: 'var(--text-3)',
+        marginTop: 3
+      }
+    }, ago(e.at), " \xB7 ", fullTime(e.at))));
+  })));
+}
+
+/* ============================ 公告横幅 ============================ */
+/* 普通用户视角的那条横幅，也用作管理台里的预览——同一个组件，
+   预览就不可能与真实展示长得不一样。 */
+function AnnouncementBanner({
+  announcement,
+  onDismiss,
+  preview
+}) {
+  if (!announcement || !announcement.text) return null;
+  const tone = announcement.tone || 'info';
+  const skin = {
+    info: {
+      c: 'var(--star-blue)',
+      bg: 'rgba(159,198,255,0.10)',
+      bd: 'rgba(159,198,255,0.26)',
+      icon: 'info'
+    },
+    warn: {
+      c: 'var(--gold)',
+      bg: 'rgba(255,217,138,0.10)',
+      bd: 'rgba(255,217,138,0.30)',
+      icon: 'triangle-alert'
+    },
+    danger: {
+      c: 'var(--danger)',
+      bg: 'rgba(232,145,122,0.12)',
+      bd: 'rgba(232,145,122,0.34)',
+      icon: 'octagon-alert'
+    }
+  }[tone];
+  return /*#__PURE__*/React.createElement("div", {
+    role: "status",
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 10,
+      padding: '9px 14px',
+      background: skin.bg,
+      border: '1px solid ' + skin.bd,
+      borderRadius: 'var(--r-sm)',
+      backdropFilter: 'blur(var(--glass-blur))',
+      WebkitBackdropFilter: 'blur(var(--glass-blur))'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: skin.icon,
+    size: 15,
+    color: skin.c
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      flex: 1,
+      minWidth: 0,
+      fontSize: 12.5,
+      color: 'var(--text-1)',
+      lineHeight: 1.6
+    }
+  }, announcement.text), preview && /*#__PURE__*/React.createElement(Badge, {
+    tone: "neutral"
+  }, "\u9884\u89C8"), onDismiss && /*#__PURE__*/React.createElement(IconButton, {
+    name: "x",
+    size: "sm",
+    title: "\u77E5\u9053\u4E86",
+    onClick: onDismiss
+  }));
+}
+
+/* ============================ 主体 ============================ */
+
+const TABS = [{
+  id: 'overview',
+  label: '总览',
+  icon: 'layout-dashboard'
+}, {
+  id: 'users',
+  label: '旅客',
+  icon: 'users'
+}, {
+  id: 'guests',
+  label: '游客',
+  icon: 'user-round-search'
+}, {
+  id: 'shares',
+  label: '分享',
+  icon: 'share-2'
+}, {
+  id: 'sessions',
+  label: '会话',
+  icon: 'monitor-smartphone'
+}, {
+  id: 'broadcast',
+  label: '广播',
+  icon: 'megaphone'
+}, {
+  id: 'system',
+  label: '系统',
+  icon: 'server'
+}, {
+  id: 'audit',
+  label: '日志',
+  icon: 'scroll-text'
+}];
+const SR_ADMIN_CSS = `
+@keyframes sr-admin-pulse { 0%, 100% { opacity: .45; } 50% { opacity: 1; } }
+.sr-admin-pulse { animation: sr-admin-pulse 1.6s ease-in-out infinite; }
+
+/* ——— 手机 ———
+   管理台的行是「表格」：定宽列在 375px 上必然挤成一坨。窄屏改成卡片式——
+   行内换行、列宽作废、表头整条隐去（每格自带 data-k 标签说明自己是什么）。 */
+html[data-screen="phone"] .sr-adm-head { display: none !important; }
+html[data-screen="phone"] .sr-adm-row { flex-wrap: wrap !important; row-gap: 8px; padding: 12px 13px !important; }
+html[data-screen="phone"] .sr-adm-cell { width: auto !important; flex: 0 0 auto !important; text-align: left !important; }
+/* 每格前缀一个小标签，替代被隐去的表头 */
+html[data-screen="phone"] .sr-adm-cell[data-k]::before {
+  content: attr(data-k) ' '; font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: var(--ls-hud); text-transform: uppercase; color: var(--text-3); margin-right: 4px;
+}
+/* 标签是内联的，可格子里的值有的是纯文本（活跃 / 会话）、有的是块级 <div>（星空 / IP）。
+   块级子元素必然另起一行，标签就被独自撂在上一行——同一行卡片里几个格子基线参差。
+   把首个子元素拉回内联，让它与标签同行；第二行（「N 个星域」「建档 IP」）照旧堆在下面。 */
+html[data-screen="phone"] .sr-adm-cell[data-k] > :first-child {
+  display: inline-block !important; vertical-align: baseline; max-width: 100%;
+}
+html[data-screen="phone"] .sr-adm-name { flex: 1 1 100% !important; min-width: 0 !important; }
+/* 展开箭头：卡片里的格子换行后它常被挤到新的一行，孤零零靠左像是没对齐的意外。
+   推到行尾去，它才读得出「点我展开」的意思。 */
+html[data-screen="phone"] .sr-adm-caret { margin-left: auto; }
+/* 名字那一格里还嵌着「星名 + 标签 + 大纲」这类说明：不给它换行机会，
+   它就会在被压窄时一个字一行地竖下来 */
+html[data-screen="phone"] .sr-adm-name > * { white-space: normal !important; }
+/* 页头：标题与「回到我的星图」在窄屏上下叠，别互相挤 */
+html[data-screen="phone"] .sr-adm-head-bar { flex-direction: column !important; align-items: stretch !important; gap: 10px !important; }
+html[data-screen="phone"] .sr-adm-head-bar h1 { font-size: 20px !important; }
+/* 分区切换在窄屏横向滚动，不折成三行 */
+html[data-screen="phone"] .sr-admin-tabs {
+  flex-wrap: nowrap !important; overflow-x: auto; padding-bottom: 10px !important; margin-bottom: 12px !important;
+}
+html[data-screen="phone"] .sr-admin-tab { flex: none; }
+/* 详情区两栏 → 一栏 */
+html[data-screen="phone"] .sr-adm-detail { flex-direction: column !important; }
+.sr-admin-tab { display: flex; align-items: center; gap: 7px; height: 32px; padding: 0 13px; cursor: pointer;
+  border-radius: var(--r-pill); border: 1px solid transparent; background: transparent; color: var(--text-2);
+  font-size: 13px; font-family: var(--font-sans); white-space: nowrap;
+  transition: background var(--dur-fast), color var(--dur-fast), border-color var(--dur-fast); }
+.sr-admin-tab:hover { background: rgba(159,198,255,0.06); color: var(--text-1); }
+.sr-admin-tab[aria-selected="true"] { background: rgba(255,217,138,0.13); border-color: rgba(255,217,138,0.28); color: var(--gold); }
+`;
+function injectAdminCss() {
+  if (typeof document === 'undefined' || document.getElementById('sr-admin-css')) return;
+  const s = document.createElement('style');
+  s.id = 'sr-admin-css';
+  s.textContent = SR_ADMIN_CSS;
+  document.head.appendChild(s);
+}
+function AdminConsole({
+  onClose
+}) {
+  const [tab, setTab] = React.useState('overview');
+  const A = window.SR_DATA && window.SR_DATA.account || {};
+  const [defaultPass, setDefaultPass] = React.useState(!!A.defaultPass);
+  React.useEffect(() => {
+    injectAdminCss();
+  }, []);
+
+  // 稳定 ref：只在分区真正重挂载（key 变化）时跑一次入场
+  const sectionEnter = React.useCallback(el => {
+    const T = window.srTransition;
+    if (el && T && T.enter) T.enter(el);
+  }, []);
+
+  // 出厂密码警告：改密成功后 Settings 会广播 sr-account，这里跟着摘掉红条
+  React.useEffect(() => {
+    const h = () => setDefaultPass(!!(window.SR_DATA.account || {}).defaultPass);
+    window.addEventListener('sr-account', h);
+    return () => window.removeEventListener('sr-account', h);
+  }, []);
+
+  // 越权兜底：非管理员不该走到这里（侧栏不给入口），真到了也只看到一句话
+  if (!A.admin) {
+    return /*#__PURE__*/React.createElement("div", {
+      style: {
+        flex: 1,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }
+    }, /*#__PURE__*/React.createElement(Empty, {
+      icon: "shield-off",
+      text: "\u8FD9\u7247\u533A\u57DF\u53EA\u5BF9\u7BA1\u7406\u5458\u5F00\u653E\u3002"
+    }));
+  }
+  return /*#__PURE__*/React.createElement("div", {
+    onContextMenu: e => e.preventDefault(),
+    className: "sr-view",
+    style: {
+      position: 'relative',
+      flex: 1,
+      minWidth: 0,
+      overflow: 'auto',
+      padding: '22px 30px 56px'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sr-adm-head-bar",
+    style: {
+      display: 'flex',
+      alignItems: 'flex-start',
+      gap: 14,
+      marginBottom: 18
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1,
+      minWidth: 0
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 10
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "shield",
+    size: 19,
+    color: "var(--gold)"
+  }), /*#__PURE__*/React.createElement("h1", {
+    style: {
+      margin: 0,
+      fontSize: 22,
+      fontWeight: 300,
+      letterSpacing: '0.02em',
+      color: 'var(--text-1)'
+    }
+  }, "\u661F\u6E2F\u7BA1\u7406\u53F0"), /*#__PURE__*/React.createElement(Badge, {
+    tone: "gold"
+  }, A.username || A.name)), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12.5,
+      color: 'var(--text-3)',
+      marginTop: 7,
+      lineHeight: 1.6
+    }
+  }, "\u8FD9\u53F0\u670D\u52A1\u5668\u4E0A\u7684\u6BCF\u4E00\u7247\u661F\u7A7A\u3001\u6BCF\u4E00\u6B21\u767B\u5F55\u3001\u6BCF\u4E00\u6761\u6765\u4FE1\u2014\u2014\u90FD\u5728\u8FD9\u91CC\u3002")), /*#__PURE__*/React.createElement(Button, {
+    variant: "ghost",
+    size: "sm",
+    icon: "arrow-left",
+    onClick: onClose
+  }, "\u56DE\u5230\u6211\u7684\u661F\u56FE")), defaultPass && /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 10,
+      padding: '11px 15px',
+      marginBottom: 16,
+      borderRadius: 'var(--r-sm)',
+      border: '1px solid rgba(232,145,122,0.34)',
+      background: 'rgba(232,145,122,0.10)'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "triangle-alert",
+    size: 16,
+    color: "var(--danger)"
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      flex: 1,
+      fontSize: 12.5,
+      color: 'var(--text-1)',
+      lineHeight: 1.6
+    }
+  }, "\u7BA1\u7406\u5458\u8D26\u53F7\u8FD8\u5728\u7528\u51FA\u5382\u5BC6\u7801\u3002\u90E8\u7F72\u5230\u516C\u7F51\u524D\uFF0C\u8BF7\u5230\u300C\u8BBE\u7F6E \u2192 \u8D26\u6237 \u2192 \u4FEE\u6539\u5BC6\u7801\u300D\u6362\u6389\u5B83\u3002")), /*#__PURE__*/React.createElement("div", {
+    role: "tablist",
+    "aria-label": "\u7BA1\u7406\u5206\u533A",
+    className: "sr-admin-tabs",
+    style: {
+      display: 'flex',
+      gap: 5,
+      flexWrap: 'wrap',
+      paddingBottom: 16,
+      marginBottom: 18,
+      borderBottom: '1px solid var(--line)'
+    }
+  }, TABS.map(t => /*#__PURE__*/React.createElement("button", {
+    key: t.id,
+    type: "button",
+    role: "tab",
+    "aria-selected": tab === t.id,
+    className: "sr-admin-tab sr-focus-ring",
+    onClick: () => setTab(t.id)
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: t.icon,
+    size: 14,
+    color: "currentColor"
+  }), t.label))), /*#__PURE__*/React.createElement("div", {
+    key: tab,
+    ref: sectionEnter
+  }, tab === 'overview' && /*#__PURE__*/React.createElement(AdminOverview, {
+    onGoto: setTab
+  }), tab === 'users' && /*#__PURE__*/React.createElement(AdminUsers, {
+    meId: A.id
+  }), tab === 'guests' && /*#__PURE__*/React.createElement(AdminGuests, null), tab === 'shares' && /*#__PURE__*/React.createElement(AdminShares, null), tab === 'sessions' && /*#__PURE__*/React.createElement(AdminSessions, null), tab === 'broadcast' && /*#__PURE__*/React.createElement(AdminBroadcast, null), tab === 'system' && /*#__PURE__*/React.createElement(AdminSystem, null), tab === 'audit' && /*#__PURE__*/React.createElement(AdminAudit, null)));
+}
+window.SRKit = Object.assign(window.SRKit || {}, {
+  AdminConsole,
+  AnnouncementBanner
+});
+})(); } catch (e) { __ds_ns.__errors.push({ path: "ui_kits/stellar-raft/AdminConsole.jsx", error: String((e && e.message) || e) }); }
 
 // ui_kits/stellar-raft/AerialView.jsx
 try { (() => {
@@ -4472,6 +7703,7 @@ function BlackHole({
   });
   return /*#__PURE__*/React.createElement("div", {
     onContextMenu: e => e.preventDefault(),
+    className: "sr-bh-stage",
     style: {
       position: 'relative',
       flex: 1,
@@ -4479,12 +7711,22 @@ function BlackHole({
       overflow: 'hidden',
       display: 'flex'
     }
-  }, /*#__PURE__*/React.createElement("sr-starfield", {
+  }, /*#__PURE__*/React.createElement("style", null, `
+        /* 手机：404px 的右侧列表在 360px 屏上会把黑洞视觉挤成 0 宽。
+           改成上下叠——黑洞留一块能看清的方形，列表在下面继续滚。 */
+        html[data-screen="phone"] .sr-bh-stage { flex-direction: column !important; overflow: auto !important; }
+        html[data-screen="phone"] .sr-bh-visual { flex: none !important; height: 42vh; min-height: 220px; }
+        html[data-screen="phone"] .sr-bh-list {
+          width: 100% !important; flex: none !important;
+          border-left: none !important; border-top: 1px solid var(--glass-border);
+        }
+      `), /*#__PURE__*/React.createElement("sr-starfield", {
     density: "0.5",
     warm: "0.05"
   }), /*#__PURE__*/React.createElement(BlackHoleStyle, null), /*#__PURE__*/React.createElement("div", {
     ref: stageBoxRef,
     onClick: () => setPicked(null),
+    className: "sr-bh-visual",
     style: {
       flex: 1,
       minWidth: 0,
@@ -4697,6 +7939,7 @@ function BlackHole({
     title: "\u590D\u4F4D",
     onClick: () => setZoom(1)
   })))), /*#__PURE__*/React.createElement("aside", {
+    className: "sr-bh-list",
     style: {
       width: 404,
       flex: 'none',
@@ -5738,6 +8981,7 @@ function Checkup({
   };
   return /*#__PURE__*/React.createElement("div", {
     onContextMenu: e => e.preventDefault(),
+    className: "sr-view",
     style: {
       position: 'relative',
       flex: 1,
@@ -5865,6 +9109,7 @@ function Checkup({
       onClick: goInbox
     }, "\u53BB\u6574\u7406")
   }))), /*#__PURE__*/React.createElement("div", {
+    className: "sr-ck-2col",
     style: {
       display: 'grid',
       gridTemplateColumns: '300px 1fr',
@@ -5959,6 +9204,7 @@ function Checkup({
       boxShadow: b.key === 'solid' ? '0 0 8px rgba(255,217,138,0.5)' : 'none'
     }
   }))), /*#__PURE__*/React.createElement("div", {
+    className: "sr-ck-4col",
     style: {
       display: 'grid',
       gridTemplateColumns: 'repeat(4, 1fr)',
@@ -6008,6 +9254,7 @@ function Checkup({
       lineHeight: 1.5
     }
   }, b.desc)))))), /*#__PURE__*/React.createElement("div", {
+    className: "sr-ck-2col",
     style: {
       display: 'grid',
       gridTemplateColumns: '1fr 1fr',
@@ -6250,6 +9497,7 @@ function Checkup({
       marginLeft: 3
     }
   }, "\u591A")))), /*#__PURE__*/React.createElement("div", {
+    className: "sr-ck-2col",
     style: {
       display: 'grid',
       gridTemplateColumns: '1fr 1fr',
@@ -6957,7 +10205,15 @@ function CommandPalette({
     run: newStar
   }];
   const q = query.trim().toLowerCase();
-  const views = VIEW_CMDS.filter(v => !q || v.label.toLowerCase().includes(q)).map(v => ({
+  // 管理员多一个去处：星港管理台。非管理员这一项根本不进候选，搜也搜不出来
+  const viewCmds = D.account.admin ? [...VIEW_CMDS, {
+    kind: 'view',
+    id: 'admin',
+    label: '星港管理台',
+    icon: 'shield',
+    sub: '管理'
+  }] : VIEW_CMDS;
+  const views = viewCmds.filter(v => !q || v.label.toLowerCase().includes(q)).map(v => ({
     ...v,
     run: () => onOpenView(v.id)
   }));
@@ -7064,6 +10320,7 @@ function CommandPalette({
     role: "dialog",
     "aria-modal": "true",
     "aria-label": "\u5168\u5C40\u641C\u7D22",
+    className: "sr-cmd-mask",
     style: {
       position: 'fixed',
       inset: 0,
@@ -7077,6 +10334,7 @@ function CommandPalette({
     }
   }, /*#__PURE__*/React.createElement("div", {
     onMouseDown: e => e.stopPropagation(),
+    className: "sr-cmd-panel",
     style: {
       width: 560,
       maxWidth: '92vw',
@@ -11955,6 +15213,25 @@ function Editor({
         @media (max-width: 1180px) {
           .sr-ed-find { right: 24px !important; }
         }
+        /* ——— 手机 ———
+           正文区的 52px 左右留白在窄屏会把每行挤成七八个字，收到 16px；
+           顶部让出刘海，底部留一段余量给系统手势条与输入法。 */
+        html[data-screen="phone"] .sr-ed-page {
+          padding: calc(var(--sr-safe-top) + 12px) 16px 96px !important;
+        }
+        html[data-screen="phone"] .sr-ed-find {
+          left: 10px !important; right: 10px !important; width: auto !important;
+          top: calc(var(--sr-safe-top) + 8px) !important;
+        }
+        /* 状态栏在手机上只留最要紧的一段，其余项本来就归 .sr-ed-status-opt 管 */
+        html[data-screen="phone"] .sr-ed-status { padding-left: 12px !important; padding-right: 12px !important; }
+        /* 块手柄在桌面挂在正文左侧 52px 的留白里；手机上那块留白没了，
+           改浮到块的右上角。它们本来就随「聚焦的块」出现，手指点进去即可见——
+           触摸端没有 hover，靠的是 focusBlk 这条路。 */
+        html[data-screen="phone"] .sr-blk-tools {
+          left: auto !important; right: 0 !important; top: -26px !important;
+          background: var(--glass-bg-strong); border-radius: var(--r-sm); padding: 2px;
+        }
         /* 笔记内查找高亮（CSS Custom Highlight，不进块 DOM / 不进持久化） */
         ::highlight(sr-find) { background: color-mix(in srgb, var(--star-blue) 25%, transparent); }
         ::highlight(sr-find-cur) { background: color-mix(in srgb, var(--star-blue) 55%, transparent); }
@@ -11980,6 +15257,7 @@ function Editor({
       zIndex: 2
     }
   }, /*#__PURE__*/React.createElement("div", {
+    className: "sr-ed-page",
     style: {
       maxWidth: 720,
       margin: '0 auto',
@@ -12219,6 +15497,7 @@ function Editor({
       transition: 'background var(--dur-fast), opacity var(--dur-fast), box-shadow var(--dur-fast)'
     }
   }, /*#__PURE__*/React.createElement("div", {
+    className: "sr-blk-tools",
     style: {
       position: 'absolute',
       left: -52,
@@ -13518,6 +16797,11 @@ function useModalFocus(rootRef, opts) {
    键盘可达：role=menu、↑↓/Home/End 在 [role=menuitem] 间漫游、Enter/Space 激活
    （原生 button）、Esc 关闭并把焦点还给打开它的元素。autoFocus 为菜单（非 SlashMenu
    的输入框场景）进场移焦到首项。reduced-motion 下不播开合动画。 */
+/* Floating — 跟着鼠标落点飘的浮动菜单。
+
+   手机上这套「算坐标 + 视口夹取」的浮层不好用：屏幕就那么大，菜单要么贴边、
+   要么盖住你刚点的东西，还得跟正文抢层叠顺序。所以窄屏整条路换掉——
+   同样的菜单项，改从屏幕底部推上来（sheet），坐标一概不参与。 */
 function Floating({
   x,
   y,
@@ -13526,15 +16810,21 @@ function Floating({
   children,
   anchor = 'left',
   autoFocus = false,
-  role = 'menu'
+  role = 'menu',
+  title
 }) {
+  const phone = window.SRScreen && window.SRScreen.isPhone();
+  const Sheet = window.SRKit && window.SRKit.MobileSheet;
   const ref = React.useRef(null);
+  // Hook 顺序不能因分支变化：所有 hook 照常执行，只在最后决定渲染哪一种
+  const sheetMode = phone && !!Sheet;
   const [pos, setPos] = React.useState({
     left: x,
     top: y
   });
   const reduce = typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
   React.useLayoutEffect(() => {
+    if (sheetMode) return; // 底部弹层不算坐标
     const el = ref.current;
     if (!el) return;
     const r = el.getBoundingClientRect();
@@ -13551,6 +16841,7 @@ function Floating({
     });
   }, [x, y]);
   React.useEffect(() => {
+    if (sheetMode) return; // sheet 自带遮罩与 Esc，不再挂全局关闭
     const prev = document.activeElement;
     if (autoFocus && ref.current) {
       const items = ref.current.querySelectorAll('[role="menuitem"], button:not([disabled])');
@@ -13575,13 +16866,28 @@ function Floating({
   }, [onClose]);
   const onKeyDown = e => {
     if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp' && e.key !== 'Home' && e.key !== 'End') return;
-    const items = Array.from(ref.current.querySelectorAll('[role="menuitem"]')).filter(el => el.offsetParent !== null);
+    // sheet 模式下 ref 没有挂到任何元素上：从事件本身找容器，别去解一个 null
+    const root = ref.current || e.currentTarget;
+    if (!root) return;
+    const items = Array.from(root.querySelectorAll('[role="menuitem"]')).filter(el => el.offsetParent !== null);
     if (!items.length) return;
     const i = items.indexOf(document.activeElement);
     if (i < 0) return; // 焦点不在菜单项上（如 SlashMenu 的搜索框）：交回原处理
     e.preventDefault();
     if (e.key === 'ArrowDown') items[(i + 1 + items.length) % items.length].focus();else if (e.key === 'ArrowUp') items[(i - 1 + items.length) % items.length].focus();else if (e.key === 'Home') items[0].focus();else items[items.length - 1].focus();
   };
+  // 手机：同一批菜单项，从底部推上来。不算坐标、不抢层叠、拇指够得着
+  if (sheetMode) {
+    return /*#__PURE__*/React.createElement(Sheet, {
+      open: true,
+      onClose: onClose,
+      title: title
+    }, /*#__PURE__*/React.createElement("div", {
+      role: role,
+      onKeyDown: onKeyDown
+    }, children));
+  }
+
   // 菜单内部的 mousedown 不冒泡到 document——否则父菜单/兄弟子菜单的
   // "点击外部关闭"会抢在 click 之前卸载整棵菜单，导致子菜单项点了没反应
   return /*#__PURE__*/React.createElement("div", {
@@ -13646,7 +16952,7 @@ function Row({
       alignItems: 'center',
       gap: 11,
       padding: '9px 9px',
-      minHeight: 40,
+      minHeight: window.SRScreen && window.SRScreen.isTouch() ? 46 : 40,
       boxSizing: 'border-box',
       borderRadius: 'var(--r-sm)',
       cursor: 'pointer',
@@ -13778,7 +17084,8 @@ function SlashMenu({
     x: x,
     y: y,
     width: 252,
-    onClose: onClose
+    onClose: onClose,
+    title: "\u63D2\u5165\u5757"
   }, /*#__PURE__*/React.createElement("div", {
     style: {
       padding: '3px 5px 6px'
@@ -14008,7 +17315,8 @@ function ColorMenu({
     y: y,
     width: 200,
     onClose: onClose,
-    autoFocus: autoFocus
+    autoFocus: autoFocus,
+    title: "\u5757\u64CD\u4F5C"
   }, /*#__PURE__*/React.createElement(Label, null, "\u6587\u5B57\u989C\u8272"), TEXT_COLORS.map(c => swatch(c, 'text')), /*#__PURE__*/React.createElement(Divider, null), /*#__PURE__*/React.createElement(Label, null, "\u80CC\u666F"), BG_COLORS.map(c => swatch(c, 'bg')));
 }
 
@@ -14040,7 +17348,8 @@ function ContextMenu({
     y: y,
     width: 238,
     onClose: onClose,
-    autoFocus: true
+    autoFocus: true,
+    title: "\u8FD9\u4E2A\u5757"
   }, /*#__PURE__*/React.createElement(Row, {
     icon: "refresh-cw",
     label: "\u8F6C\u6362\u4E3A",
@@ -14095,7 +17404,8 @@ function ContextMenu({
     y: subPos.y,
     width: 208,
     onClose: () => setSub(null),
-    autoFocus: subAuto
+    autoFocus: subAuto,
+    title: "\u8F6C\u6362\u4E3A"
   }, /*#__PURE__*/React.createElement(Label, null, "\u8F6C\u6362\u4E3A"), /*#__PURE__*/React.createElement("div", {
     style: {
       maxHeight: 300,
@@ -14114,7 +17424,8 @@ function ContextMenu({
     y: subPos.y,
     width: 190,
     onClose: () => setSub(null),
-    autoFocus: subAuto
+    autoFocus: subAuto,
+    title: "\u79FB\u52A8\u5230\u661F\u57DF"
   }, /*#__PURE__*/React.createElement(Label, null, "\u79FB\u52A8\u5230\u661F\u57DF"), constellations.map(c => /*#__PURE__*/React.createElement(MoveRow, {
     key: c.id,
     color: c.color,
@@ -14421,7 +17732,8 @@ function EditorMoreMenu({
     width: 236,
     anchor: "right",
     onClose: onClose,
-    autoFocus: true
+    autoFocus: true,
+    title: "\u8FD9\u9897\u661F"
   }, /*#__PURE__*/React.createElement(Row, {
     icon: "star",
     tone: fav ? 'gold' : undefined,
@@ -14466,7 +17778,8 @@ function EditorMoreMenu({
     width: 190,
     anchor: "right",
     onClose: () => setSub(null),
-    autoFocus: subAuto
+    autoFocus: subAuto,
+    title: "\u79FB\u52A8\u5230\u661F\u57DF"
   }, /*#__PURE__*/React.createElement(Label, null, "\u79FB\u52A8\u5230\u661F\u57DF"), constellations.map(c => /*#__PURE__*/React.createElement(MoveRow, {
     key: c.id,
     color: c.color,
@@ -14894,6 +18207,7 @@ function FeynmanDrawer({
   onOpenAIConfig
 }) {
   const D = window.SR_DATA;
+  const phone = window.SRKit.useScreen().phone; // 手机上抽屉铺满整屏
   const star = D.byId[starId] || D.stars[0];
   const targets = React.useMemo(() => deriveKeyPoints(star), [star.id]);
   // 会话模式在进场时定格（认证态是状态机上的边，不在会话中途换轨）：
@@ -15221,13 +18535,16 @@ function FeynmanDrawer({
     ref: drawerRef,
     role: "dialog",
     "aria-modal": "true",
-    "aria-label": '费曼内化 · ' + star.label,
+    "aria-label": '费曼内化 · ' + star.label
+    /* 手机上抽屉铺满：392px 在窄屏只剩一条缝，讲解框根本写不下一句话。
+       铺满后左边不再需要那条描边，改由遮罩承担边界。 */,
     style: {
       position: 'absolute',
       top: 0,
       right: 0,
       bottom: 0,
-      width: 392,
+      left: phone ? 0 : 'auto',
+      width: phone ? 'auto' : 392,
       zIndex: 62,
       boxShadow: 'var(--shadow-drawer)',
       animation: 'sr-drawerin var(--dur-base) var(--ease-flight) both',
@@ -15236,7 +18553,7 @@ function FeynmanDrawer({
       background: 'var(--glass-bg-strong)',
       WebkitBackdropFilter: 'blur(var(--glass-blur)) saturate(1.2)',
       backdropFilter: 'blur(var(--glass-blur)) saturate(1.2)',
-      borderLeft: '1px solid var(--glass-border-strong)'
+      borderLeft: phone ? 'none' : '1px solid var(--glass-border-strong)'
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
@@ -17420,6 +20737,7 @@ function Inbox({
   }, "\u53D6\u6D88")));
   return /*#__PURE__*/React.createElement("div", {
     onContextMenu: e => e.preventDefault(),
+    className: "sr-view",
     style: {
       position: 'relative',
       flex: 1,
@@ -17814,7 +21132,9 @@ function Inbox({
         fontFamily: 'var(--font-mono)',
         color: 'var(--text-3)'
       }
-    }, window.SRKeys.combo('Enter'), " \u5BC4\u51FA \xB7 \u8FD8\u53EF\u5199 ", /*#__PURE__*/React.createElement("span", {
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "sr-kbd-only"
+    }, window.SRKeys.combo('Enter'), " \u5BC4\u51FA \xB7 "), "\u8FD8\u53EF\u5199 ", /*#__PURE__*/React.createElement("span", {
       style: {
         color: noteReply.text.length >= 150 ? 'var(--gold)' : 'inherit'
       }
@@ -17901,6 +21221,7 @@ function Inbox({
       borderTop: '1px solid var(--line)'
     }
   }, /*#__PURE__*/React.createElement("span", {
+    className: "sr-kbd-only",
     style: {
       fontSize: 11,
       fontFamily: 'var(--font-mono)',
@@ -18713,6 +22034,7 @@ function KeysHelp({
     }
   }, /*#__PURE__*/React.createElement("div", {
     onMouseDown: e => e.stopPropagation(),
+    className: "sr-modal-panel",
     style: {
       width: 720,
       maxWidth: '94vw',
@@ -19423,7 +22745,7 @@ function ListView({
   }) => /*#__PURE__*/React.createElement("button", {
     type: "button",
     onClick: onClick,
-    className: "sr-focus-ring",
+    className: "sr-focus-ring sr-hit-pad",
     role: "checkbox",
     "aria-checked": dash && !on ? 'mixed' : !!on,
     "aria-label": label || '选择',
@@ -19473,6 +22795,7 @@ function ListView({
     }
   }, children);
   return /*#__PURE__*/React.createElement("div", {
+    className: "sr-view",
     style: {
       position: 'relative',
       flex: 1,
@@ -19481,7 +22804,42 @@ function ListView({
       padding: '26px 30px 40px'
     },
     onContextMenu: e => e.preventDefault()
-  }, /*#__PURE__*/React.createElement("sr-starfield", {
+  }, /*#__PURE__*/React.createElement("style", null, `
+        /* ——— 手机：表格改卡片 ———
+           桌面这张表有六列固定宽（30+156+150+116+78 = 530px 再加 5 道 14px 间距），
+           在 414px 的屏上「标题」那一列的 1fr 会被压到几乎 0 宽——标签于是被逼成
+           一字一行。窄屏放弃网格，改成每行一张卡：
+             第一行  ☑ 标题（＋点亮/待重燃/待复习徽标、标签）
+             第二行  记忆强度长条
+             第三行  星域 · 下次复习 · 连接数
+           表头随之隐去：没有列，就没有列名。 */
+        html[data-screen="phone"] .sr-list-head { display: none !important; }
+        html[data-screen="phone"] .sr-list-row {
+          display: flex !important; flex-wrap: wrap; align-items: center;
+          gap: 8px 10px !important; padding: 12px 13px !important;
+        }
+        html[data-screen="phone"] .sr-lc-check { flex: none; }
+        html[data-screen="phone"] .sr-lc-title { flex: 1 1 0; min-width: 0; }
+        html[data-screen="phone"] .sr-lc-mem   { flex: 1 1 100%; }
+        html[data-screen="phone"] .sr-lc-con   { flex: 1 1 auto; }
+        html[data-screen="phone"] .sr-lc-review,
+        html[data-screen="phone"] .sr-lc-links { flex: none; }
+        /* 悬浮快捷操作在触摸端没有 hover 可依，卡片本身点开即可——不再叠一层渐变遮罩 */
+        html[data-pointer="coarse"] .sr-list-row > div[style*="linear-gradient(90deg"] { display: none !important; }
+
+        /* 概览：标题与健康度胶囊在窄屏上下叠，别互相挤 */
+        html[data-screen="phone"] .sr-list-summary { flex-direction: column !important; align-items: stretch !important; gap: 10px !important; }
+
+        /* 筛选：搜索框铺满；七档亮度胶囊横向滚动，不折成两行高的方块 */
+        html[data-screen="phone"] .sr-list-search { width: 100% !important; }
+        html[data-screen="phone"] .sr-list-bands {
+          overflow-x: auto; flex: 1 1 100%; padding-bottom: 2px;
+          scrollbar-width: none;
+        }
+        html[data-screen="phone"] .sr-list-bands::-webkit-scrollbar { display: none; }
+        html[data-screen="phone"] .sr-list-bands > * { flex: none; white-space: nowrap; }
+        html[data-screen="phone"] .sr-list-filters > * { white-space: nowrap; }
+      `), /*#__PURE__*/React.createElement("sr-starfield", {
     density: "0.5"
   }), /*#__PURE__*/React.createElement("div", {
     style: {
@@ -19491,6 +22849,7 @@ function ListView({
       margin: '0 auto'
     }
   }, /*#__PURE__*/React.createElement("div", {
+    className: "sr-list-summary",
     style: {
       display: 'flex',
       alignItems: 'center',
@@ -19546,6 +22905,7 @@ function ListView({
     }
   }, "\u5065\u5EB7\u5EA6 ", health, "%"))), /*#__PURE__*/React.createElement("div", {
     "data-tour": "list-filters",
+    className: "sr-list-filters",
     style: {
       display: 'flex',
       alignItems: 'center',
@@ -19554,6 +22914,7 @@ function ListView({
       flexWrap: 'wrap'
     }
   }, /*#__PURE__*/React.createElement("div", {
+    className: "sr-list-search",
     style: {
       width: 240
     }
@@ -19564,6 +22925,7 @@ function ListView({
     value: query,
     onChange: e => setQuery(e && e.target ? e.target.value : e || '')
   })), /*#__PURE__*/React.createElement("div", {
+    className: "sr-list-bands",
     style: {
       display: 'flex',
       gap: 6
@@ -19714,6 +23076,7 @@ function ListView({
     icon: "trash-2",
     onClick: batchDelete
   }, "\u5220\u9664")), /*#__PURE__*/React.createElement("div", {
+    className: "sr-list-head",
     style: {
       display: 'grid',
       gridTemplateColumns: GRID,
@@ -19849,6 +23212,7 @@ function ListView({
       onBlur: e => {
         if (!e.currentTarget.contains(e.relatedTarget)) setHoverId(h => h === n.id ? null : h);
       },
+      className: "sr-list-row",
       style: {
         position: 'relative',
         display: 'grid',
@@ -19865,6 +23229,8 @@ function ListView({
         opacity: dim ? 0.8 : 1,
         transition: 'background var(--dur-fast), border-color var(--dur-fast)'
       }
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "sr-lc-check"
     }, /*#__PURE__*/React.createElement(Checkbox, {
       on: checked,
       label: '选择「' + n.title + '」',
@@ -19872,7 +23238,8 @@ function ListView({
         e.stopPropagation();
         toggle(n.id);
       }
-    }), /*#__PURE__*/React.createElement("div", {
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "sr-lc-title",
       style: {
         minWidth: 0
       }
@@ -19980,6 +23347,7 @@ function ListView({
         color: 'var(--text-3)'
       }
     }, "#", t)))), /*#__PURE__*/React.createElement("div", {
+      className: "sr-lc-mem",
       style: {
         display: 'flex',
         alignItems: 'center',
@@ -20000,6 +23368,7 @@ function ListView({
         width: 38
       }
     }, sl.t)), /*#__PURE__*/React.createElement("span", {
+      className: "sr-lc-con",
       onClick: e => {
         e.stopPropagation();
         onOpenCon && onOpenCon(n.con);
@@ -20029,12 +23398,14 @@ function ListView({
         textOverflow: 'ellipsis'
       }
     }, D.conName(n.con))), /*#__PURE__*/React.createElement("span", {
+      className: "sr-lc-review",
       style: {
         fontFamily: 'var(--font-mono)',
         fontSize: 12,
         color: reviewColor(n.nextReview)
       }
     }, n.nextReview), /*#__PURE__*/React.createElement("span", {
+      className: "sr-lc-links",
       style: {
         display: 'inline-flex',
         alignItems: 'center',
@@ -20554,6 +23925,370 @@ window.SRKit = Object.assign(window.SRKit || {}, {
   LoginView
 });
 })(); } catch (e) { __ds_ns.__errors.push({ path: "ui_kits/stellar-raft/LoginView.jsx", error: String((e && e.message) || e) }); }
+
+// ui_kits/stellar-raft/MobileShell.jsx
+try { (() => {
+/* MobileShell — 手机上的外壳：顶部条 · 底部标签栏 · 侧栏抽屉。
+
+   桌面端 260px 的常驻侧栏在 375px 宽的屏幕上会吃掉七成版面，所以手机上换一套
+   导航：最常去的四个地方沉到底部（拇指够得着），完整的侧栏收进左侧抽屉。
+   这三件都只在 phone 断点出现，平板与桌面完全不渲染——不是隐藏，是不挂载。
+
+   安全区：顶部条自己吃掉刘海高度，底部标签栏吃掉 Home 指示条的高度，
+   视图内容拿到的是一块干净的矩形。 */
+const {
+  Icon,
+  IconButton,
+  Badge
+} = window.StellarRaftDesignSystem_2866af;
+const SR_MOBILE_CSS = `
+.sr-m-top, .sr-m-tab {
+  position: absolute; left: 0; right: 0; z-index: 40;
+  background: var(--glass-bg-strong);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.2);
+  backdrop-filter: blur(var(--glass-blur)) saturate(1.2);
+}
+.sr-m-top { top: 0; height: calc(var(--sr-topbar) + var(--sr-safe-top)); padding-top: var(--sr-safe-top);
+  border-bottom: 1px solid var(--glass-border); display: flex; align-items: center; gap: 6; padding-left: 6px; padding-right: 6px; }
+.sr-m-tab { bottom: 0; height: calc(var(--sr-tabbar) + var(--sr-safe-bottom)); padding-bottom: var(--sr-safe-bottom);
+  border-top: 1px solid var(--glass-border); display: flex; align-items: stretch; }
+
+.sr-m-tabbtn { flex: 1; min-width: 0; border: none; background: transparent; cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
+  padding: 0; color: rgba(159,198,255,0.66); font-family: var(--font-sans); font-size: 10.5px; position: relative;
+  -webkit-tap-highlight-color: transparent; transition: color var(--dur-fast); }
+.sr-m-tabbtn[aria-current="page"] { color: var(--gold); }
+/* 选中态的那一点光：底部一道短横，比整块底色更克制 */
+.sr-m-tabbtn[aria-current="page"]::after { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 22px; height: 2px; border-radius: 0 0 2px 2px; background: var(--gold); box-shadow: 0 0 8px rgba(255,217,138,0.6); }
+.sr-m-tabbtn:active { transform: scale(0.94); }
+.sr-m-badge { position: absolute; top: 6px; left: 50%; margin-left: 5px; }
+
+/* 抽屉：遮罩淡入 + 面板滑出，跟随 reduced-motion */
+.sr-m-mask { position: fixed; inset: 0; z-index: 120; background: rgba(3,4,12,0.6);
+  -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); animation: sr-m-fade var(--dur-base) ease both; }
+/* 抽屉宽度：始终给右侧留一条 68px 的活口——那条缝既是「这是一层浮层、点它就关」
+   的视觉交代，也让你一眼还看得见自己的星空。窄屏上 282px 会吃掉九成屏幕，
+   看起来就像整页跳转，那不是抽屉该有的样子。 */
+.sr-m-panel { position: fixed; top: 0; bottom: 0; left: 0; z-index: 121;
+  width: min(282px, calc(100vw - 68px));
+  padding-left: var(--sr-safe-left); display: flex;
+  animation: sr-m-slide var(--dur-base) var(--ease-flight) both; }
+@keyframes sr-m-fade { from { opacity: 0 } to { opacity: 1 } }
+@keyframes sr-m-slide { from { transform: translateX(-100%) } to { transform: none } }
+@media (prefers-reduced-motion: reduce) {
+  .sr-m-mask, .sr-m-panel { animation: none !important; }
+  .sr-m-tabbtn:active { transform: none; }
+}
+
+/* 底部弹层（摘要卡 / 菜单在手机上的落点）：从下方推上来，顶部一根抓手 */
+.sr-m-sheet { position: fixed; left: 0; right: 0; bottom: 0; z-index: 130;
+  padding-bottom: var(--sr-safe-bottom); border-radius: var(--r-lg) var(--r-lg) 0 0;
+  background: var(--glass-bg-strong); border-top: 1px solid var(--glass-border-strong);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.2); backdrop-filter: blur(var(--glass-blur)) saturate(1.2);
+  box-shadow: 0 -18px 48px rgba(0,0,0,0.5); max-height: 78vh; display: flex; flex-direction: column;
+  animation: sr-m-up var(--dur-base) var(--ease-flight) both; }
+@keyframes sr-m-up { from { transform: translateY(100%) } to { transform: none } }
+@media (prefers-reduced-motion: reduce) { .sr-m-sheet { animation: none !important; } }
+.sr-m-grip { width: 36px; height: 4px; border-radius: 2px; background: rgba(159,198,255,0.28); margin: 9px auto 4px; flex: none; }
+
+/* ═══════════ 窄屏总调整 ═══════════
+   各视图的根容器都挂 .sr-view；这里一处收掉桌面的 30px 留白。
+   用 !important 是刻意的：这些视图的内边距写在内联 style 上，
+   不加就压不过——而逐个改成 className 会把八个文件搅一遍。 */
+html[data-screen="phone"] .sr-view { padding: 14px 14px 32px !important; }
+
+/* 两栏 / 三栏统统压成一列。auto-fill minmax(...) 那种网格会自己适应，
+   只有写死列数的需要在这里收口。 */
+html[data-screen="phone"] .sr-cols-1,
+html[data-screen="phone"] .sr-ck-2col { grid-template-columns: 1fr !important; }
+/* 体检页的四格分布：手机上两两一排，不挤成四条竖线 */
+html[data-screen="phone"] .sr-ck-4col { grid-template-columns: 1fr 1fr !important; }
+
+/* 大标题在 375px 上会占掉两行：整体降一档 */
+html[data-screen="phone"] .sr-view h1 { font-size: 23px !important; }
+
+/* 触摸端的点击热区：用一层看不见的 ::after 把可点范围撑到 34px，
+   元素自己的盒子一点不动。
+   走过两次弯路，都是同一个错误——拿「会改变盒子」的属性去做热区：
+     ① button.sr-focus-ring { min-height: 36px } → 17×17 的复选框被拉成竖条；
+     ② padding + 负 margin → 边框和底色本来就画在按钮上，撑大内边距等于把
+        那个方框整个放大，于是复选框变成一个大方块。
+   热区只该是「感应面积」，不该是「可见尺寸」。 */
+html[data-pointer="coarse"] .sr-hit-pad { position: relative; }
+html[data-pointer="coarse"] .sr-hit-pad::after {
+  content: ''; position: absolute; top: 50%; left: 50%;
+  width: 34px; height: 34px; transform: translate(-50%, -50%);
+}
+
+/* 键盘提示：手机上没有物理键盘，印一枚「空格 / ⌘K」只会让人去找一个
+   不存在的东西。挂了这个类的元素在触摸端整个不出现。 */
+html[data-pointer="coarse"] .sr-kbd-only { display: none !important; }
+
+/* 弹层：手机上一律铺满屏幕（480px 的对话框在 375px 屏上会被裁掉两边），
+   贴着安全区，圆角只留顶部两个——像一张从底部推上来的纸。 */
+html[data-screen="phone"] .sr-modal-panel {
+  width: 100% !important; max-width: 100% !important; max-height: 100% !important;
+  height: 100%; border-radius: 0 !important;
+  padding-top: var(--sr-safe-top); padding-bottom: var(--sr-safe-bottom);
+}
+html[data-screen="phone"] .sr-modal-mask { padding: 0 !important; align-items: stretch !important; }
+
+/* 设置页：左侧 168px 的分区导航在手机上横过来，变成顶部一条可横滑的标签行 */
+html[data-screen="phone"] .sr-set-body { flex-direction: column !important; }
+html[data-screen="phone"] .sr-set-nav {
+  width: 100% !important; flex-direction: row !important; overflow-x: auto !important; overflow-y: hidden !important;
+  border-right: none !important; border-bottom: 1px solid var(--line);
+  padding: 8px 10px !important; gap: 6px !important; flex: none !important;
+}
+html[data-screen="phone"] .sr-set-nav > button { flex: none !important; white-space: nowrap; }
+
+/* 命令面板：手机上从顶部落下来，铺满宽度（13vh 的留白在小屏是浪费） */
+html[data-screen="phone"] .sr-cmd-panel { width: 100% !important; max-width: 100% !important; }
+html[data-screen="phone"] .sr-cmd-mask { padding-top: calc(var(--sr-safe-top) + 8px) !important; padding-left: 8px; padding-right: 8px; }
+`;
+function injectMobileCss() {
+  if (typeof document === 'undefined' || document.getElementById('sr-mobile-css')) return;
+  const s = document.createElement('style');
+  s.id = 'sr-mobile-css';
+  s.textContent = SR_MOBILE_CSS;
+  document.head.appendChild(s);
+}
+
+/* ---------- 顶部条 ---------- */
+function MobileTopBar({
+  title,
+  sub,
+  onMenu,
+  onSearch,
+  onBack
+}) {
+  React.useEffect(() => {
+    injectMobileCss();
+  }, []);
+  return /*#__PURE__*/React.createElement("header", {
+    className: "sr-m-top"
+  }, onBack ? /*#__PURE__*/React.createElement(IconButton, {
+    name: "corner-up-left",
+    title: "\u8FD4\u56DE",
+    onClick: onBack
+  }) : /*#__PURE__*/React.createElement(IconButton, {
+    name: "menu",
+    title: "\u6253\u5F00\u83DC\u5355",
+    onClick: onMenu
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1,
+      minWidth: 0,
+      display: 'flex',
+      flexDirection: 'column',
+      lineHeight: 1.15,
+      paddingLeft: 2
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 15,
+      fontWeight: 300,
+      color: 'var(--text-1)',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap'
+    }
+  }, title), sub && /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 10.5,
+      color: 'var(--text-3)',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap'
+    }
+  }, sub)), onSearch && /*#__PURE__*/React.createElement(IconButton, {
+    name: "search",
+    title: "\u641C\u7D22",
+    onClick: onSearch
+  }));
+}
+
+/* ---------- 底部标签栏 ----------
+   四个去处 + 一个「更多」。星图是家，永远在最左。 */
+function MobileTabBar({
+  view,
+  onView,
+  onReview,
+  onMore,
+  dueN,
+  inboxN,
+  drawerOpen
+}) {
+  const items = [{
+    id: 'map',
+    label: '星图',
+    icon: 'orbit'
+  }, {
+    id: 'list',
+    label: '列表',
+    icon: 'list'
+  }, {
+    id: 'review',
+    label: '复习',
+    icon: 'repeat',
+    badge: dueN
+  }, {
+    id: 'inbox',
+    label: '收件箱',
+    icon: 'inbox',
+    badge: inboxN
+  }, {
+    id: 'more',
+    label: '更多',
+    icon: 'menu'
+  }];
+  const current = drawerOpen ? 'more' : view;
+  return /*#__PURE__*/React.createElement("nav", {
+    className: "sr-m-tab",
+    "aria-label": "\u4E3B\u5BFC\u822A"
+  }, items.map(it => /*#__PURE__*/React.createElement("button", {
+    key: it.id,
+    type: "button",
+    className: "sr-m-tabbtn",
+    "aria-current": current === it.id ? 'page' : undefined,
+    "aria-label": it.label + (it.badge ? `（${it.badge}）` : ''),
+    onClick: () => {
+      if (it.id === 'more') onMore();else if (it.id === 'review') onReview();else onView(it.id);
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: it.icon,
+    size: 20,
+    color: "currentColor"
+  }), /*#__PURE__*/React.createElement("span", null, it.label), !!it.badge && /*#__PURE__*/React.createElement("span", {
+    className: "sr-m-badge"
+  }, /*#__PURE__*/React.createElement(Badge, {
+    dot: true,
+    tone: "gold"
+  })))));
+}
+
+/* ---------- 抽屉 ----------
+   装的就是桌面那套完整侧栏，不做第二份导航——两边永远同步。
+   点遮罩 / 按 Esc / 选中任一目的地都关。 */
+function MobileDrawer({
+  open,
+  onClose,
+  children
+}) {
+  React.useEffect(() => {
+    injectMobileCss();
+  }, []);
+  React.useEffect(() => {
+    if (!open) return;
+    const k = e => {
+      if (e.key === 'Escape') {
+        e.stopPropagation();
+        onClose();
+      }
+    };
+    document.addEventListener('keydown', k);
+    return () => document.removeEventListener('keydown', k);
+  }, [open, onClose]);
+  if (!open) return null;
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    className: "sr-m-mask",
+    onClick: onClose
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "sr-m-panel",
+    role: "dialog",
+    "aria-modal": "true",
+    "aria-label": "\u5BFC\u822A\u83DC\u5355"
+  }, children));
+}
+
+/* ---------- 底部弹层 ----------
+   手机上代替「浮在鼠标旁的卡片 / 菜单」。title 可省，省了就只有一根抓手。 */
+function MobileSheet({
+  open,
+  onClose,
+  title,
+  children,
+  footer
+}) {
+  React.useEffect(() => {
+    injectMobileCss();
+  }, []);
+  React.useEffect(() => {
+    if (!open) return;
+    const k = e => {
+      if (e.key === 'Escape') {
+        e.stopPropagation();
+        onClose();
+      }
+    };
+    document.addEventListener('keydown', k);
+    return () => document.removeEventListener('keydown', k);
+  }, [open, onClose]);
+  if (!open) return null;
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    className: "sr-m-mask",
+    style: {
+      zIndex: 129
+    },
+    onClick: onClose,
+    onContextMenu: e => e.preventDefault()
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "sr-m-sheet",
+    role: "dialog",
+    "aria-modal": "true",
+    "aria-label": title || '面板'
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sr-m-grip",
+    "aria-hidden": "true"
+  }), title && /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 8,
+      padding: '4px 14px 10px',
+      borderBottom: '1px solid var(--line)',
+      flex: 'none'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      flex: 1,
+      minWidth: 0,
+      fontSize: 14.5,
+      fontWeight: 300,
+      color: 'var(--text-1)',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap'
+    }
+  }, title), /*#__PURE__*/React.createElement(IconButton, {
+    name: "x",
+    size: "sm",
+    title: "\u5173\u95ED",
+    onClick: onClose
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1,
+      minHeight: 0,
+      overflow: 'auto',
+      padding: '12px 14px 16px'
+    }
+  }, children), footer && /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 'none',
+      padding: '10px 14px',
+      borderTop: '1px solid var(--line)'
+    }
+  }, footer)));
+}
+window.SRKit = Object.assign(window.SRKit || {}, {
+  MobileTopBar,
+  MobileTabBar,
+  MobileDrawer,
+  MobileSheet,
+  injectMobileCss
+});
+})(); } catch (e) { __ds_ns.__errors.push({ path: "ui_kits/stellar-raft/MobileShell.jsx", error: String((e && e.message) || e) }); }
 
 // ui_kits/stellar-raft/Onboarding.jsx
 try { (() => {
@@ -21859,6 +25594,7 @@ function Onboarding({
     }
   }, /*#__PURE__*/React.createElement("div", {
     onMouseDown: e => e.stopPropagation(),
+    className: "sr-modal-panel",
     style: {
       width: 560,
       maxWidth: '94vw',
@@ -22331,11 +26067,15 @@ const rsQuizMaterial = star => {
 
 // 出题 system：只提问不给答案——考察交给 AI，评分永远留给用户自评
 const RS_QUIZ_SYSTEM = '你是复习教练，根据资料出一道简短的回忆检验题（一两句话），只提问不给答案，中文，直接输出问题本身。';
+
+/* 键帽：触摸端整枚隐去（.sr-kbd-only）——手机上没有空格键，
+   印一枚「空格」只会让人找一个不存在的东西。 */
 function RSKbd({
   children,
   onScrim
 }) {
   return /*#__PURE__*/React.createElement("span", {
+    className: "sr-kbd-only",
     style: {
       fontFamily: 'var(--font-mono)',
       fontSize: 10,
@@ -23106,6 +26846,7 @@ function ReviewSession({
     border: "rgba(159,198,255,0.5)",
     onClick: () => grade('ok')
   })))), star && /*#__PURE__*/React.createElement("div", {
+    className: "sr-kbd-only",
     style: {
       display: 'flex',
       justifyContent: 'center',
@@ -23230,10 +26971,13 @@ const SR_SET_NAV = [{
   id: 'review',
   label: '复习提醒',
   icon: 'bell'
-}, {
+},
+// 触摸端没有物理键盘，这一整页（连同它列出的十来条组合键）都没有意义
+{
   id: 'keys',
   label: '快捷键',
-  icon: 'keyboard'
+  icon: 'keyboard',
+  desktopOnly: true
 }, {
   id: 'guide',
   label: '上手引导',
@@ -23534,6 +27278,12 @@ function Settings({
       setOldPw('');
       setNewPw('');
       flashToast('密码已更新');
+      // 管理员刚换掉出厂密码：广播出去，管理台顶部那条警告随即消失
+      const A = window.SR_DATA && window.SR_DATA.account;
+      if (A && A.defaultPass) {
+        A.defaultPass = false;
+        window.dispatchEvent(new CustomEvent('sr-account'));
+      }
     } catch (err) {
       setPwErr(err && err.message || '出了点问题，请再试一次');
     } finally {
@@ -23590,6 +27340,7 @@ function Settings({
     }
   }, /*#__PURE__*/React.createElement("div", {
     onMouseDown: e => e.stopPropagation(),
+    className: "sr-modal-panel",
     style: {
       width: 760,
       maxWidth: '94vw',
@@ -23639,12 +27390,14 @@ function Settings({
     title: "\u5173\u95ED",
     onClick: onClose
   })), /*#__PURE__*/React.createElement("div", {
+    className: "sr-set-body",
     style: {
       flex: 1,
       minHeight: 0,
       display: 'flex'
     }
   }, /*#__PURE__*/React.createElement("nav", {
+    className: "sr-set-nav",
     style: {
       width: 168,
       flex: 'none',
@@ -23655,7 +27408,7 @@ function Settings({
       gap: 3,
       overflow: 'auto'
     }
-  }, SR_SET_NAV.map(n => {
+  }, SR_SET_NAV.filter(n => !(n.desktopOnly && window.SRScreen.isTouch())).map(n => {
     const on = tab === n.id;
     return /*#__PURE__*/React.createElement("button", {
       key: n.id,
@@ -24193,7 +27946,9 @@ function Settings({
     icon: "folder-down",
     onClick: () => {
       // 整片星空 → Obsidian 风格 Markdown 仓库（zip）：每星一档、星域分夹、
-      // wikilink 关联、README 索引；知识随时带得走，不锁在应用里
+      // wikilink 关联、README 索引；知识随时带得走，不锁在应用里。
+      // Markdown 仓库进出可由管理台设成「需要账号」（游客点了会被请去登录）
+      if (!window.SRGate.require('vault', 'Markdown 仓库导出')) return;
       try {
         const entries = window.SRVault.buildVault({
           stars: D.stars,
@@ -24224,7 +27979,10 @@ function Settings({
     size: "sm",
     variant: "ghost",
     icon: "folder-up",
-    onClick: () => mdImportRef.current && mdImportRef.current.click()
+    onClick: () => {
+      if (!window.SRGate.require('vault', 'Markdown 仓库导入')) return;
+      if (mdImportRef.current) mdImportRef.current.click();
+    }
   }, "\u5BFC\u5165 Markdown"), /*#__PURE__*/React.createElement("input", {
     ref: mdImportRef,
     type: "file",
@@ -24475,7 +28233,8 @@ function NavRow({
   onClick,
   dawn,
   tip,
-  dataTour
+  dataTour,
+  h
 }) {
   const [hover, setHover] = React.useState(false);
   const lit = active || hover;
@@ -24494,7 +28253,7 @@ function NavRow({
       alignItems: 'center',
       gap: 11,
       width: '100%',
-      height: 40,
+      height: h || 40,
       padding: collapsed ? 0 : '0 11px',
       justifyContent: collapsed ? 'center' : 'flex-start',
       borderRadius: 'var(--r-sm)',
@@ -24622,10 +28381,14 @@ function Sidebar({
   onCheckup,
   onAIConfig,
   onOpenSettings,
-  onReview
+  onReview,
+  onAdmin,
+  mobile
 }) {
   const D = window.SR_DATA;
   const dawn = theme === 'dawn';
+  // 手指的落点比鼠标大一圈：手机上每一行都撑到 46px（≈ 触摸目标下限）
+  const rowH = mobile ? 46 : 40;
   // 好友数 / 到期星数 / 黑洞·收件箱计数都随写操作变化：
   // sr-friends（好友异步取回）、sr-memory（每分钟心跳）之外，
   // 写操作（删除/恢复/建星）即时广播 sr-data——角标不再等心跳才对齐
@@ -24659,227 +28422,264 @@ function Sidebar({
   // 体检 = 统一今日待办：到期复习 + 待重燃 + 收件箱待整理（三行计数，due 与 ember 可重叠）
   const todo = D.todayTodo ? D.todayTodo() : null;
   const todoN = todo ? todo.due + todo.ember + todo.inbox : 0;
-  return /*#__PURE__*/React.createElement("aside", {
-    style: {
-      width: collapsed ? 64 : 260,
-      flex: 'none',
-      height: '100%',
-      display: 'flex',
-      flexDirection: 'column',
-      position: 'relative',
-      zIndex: 5,
-      background: 'var(--glass-bg-strong)',
-      WebkitBackdropFilter: 'blur(var(--glass-blur)) saturate(1.2)',
-      backdropFilter: 'blur(var(--glass-blur)) saturate(1.2)',
-      borderRight: '1px solid var(--glass-border)',
-      transition: 'width var(--dur-base) var(--ease-flight)'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      height: 60,
-      padding: collapsed ? '0' : '0 14px',
-      flex: 'none',
-      justifyContent: collapsed ? 'center' : 'space-between'
-    }
-  }, /*#__PURE__*/React.createElement(SRLogo, {
-    collapsed: collapsed,
-    theme: theme
-  }), !collapsed && /*#__PURE__*/React.createElement(IconButton, {
-    name: "panel-left-close",
-    title: "\u6298\u53E0",
-    onClick: onToggle
-  })), collapsed && /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      justifyContent: 'center',
-      marginBottom: 6
-    }
-  }, /*#__PURE__*/React.createElement(IconButton, {
-    name: "panel-left-open",
-    title: "\u5C55\u5F00",
-    onClick: onToggle
-  })), /*#__PURE__*/React.createElement("div", {
-    style: {
-      padding: collapsed ? '0 12px 8px' : '0 14px 10px',
-      flex: 'none'
-    }
-  }, collapsed ? /*#__PURE__*/React.createElement(IconButton, {
-    name: "search",
-    title: '搜索 ' + window.SRKeys.combo('K'),
-    onClick: onSearch
-  }) :
-  /*#__PURE__*/
-  /* 搜索入口：点击 / Enter / 直接开始输入 都打开命令面板。
-     readOnly 让它保持可 Tab 聚焦（Input 自带聚焦发光），
-     但不再吞字——键盘用户不会把「量子」打进一个死输入框 */
-  React.createElement("div", {
-    "data-tour": "search",
-    style: {
-      cursor: 'pointer'
-    },
-    onClick: onSearch
-  }, /*#__PURE__*/React.createElement(Input, {
-    icon: "search",
-    placeholder: "\u641C\u7D22\u4F60\u7684\u661F\u7A7A\u2026",
-    kbd: window.SRKeys.combo('K'),
-    size: "sm",
-    readOnly: true,
-    value: "",
-    "aria-label": "\u641C\u7D22\u4F60\u7684\u661F\u7A7A\uFF08\u6253\u5F00\u547D\u4EE4\u9762\u677F\uFF09",
-    inputStyle: {
-      cursor: 'pointer'
-    },
-    onKeyDown: e => {
-      if (e.key === 'Enter' || e.key === ' ' || e.key.length === 1 && !e.metaKey && !e.ctrlKey && !e.altKey) {
-        e.preventDefault();
-        onSearch();
+  return (
+    /*#__PURE__*/
+    /* 手机上这块被塞进抽屉：铺满抽屉宽度、顶部让出刘海、底部让出 Home 条，
+       不再画右侧那条分隔线（抽屉自己有边界），也不做宽度过渡（会跟滑入动画打架） */
+    React.createElement("aside", {
+      style: {
+        width: mobile ? '100%' : collapsed ? 64 : 260,
+        flex: mobile ? 1 : 'none',
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        position: 'relative',
+        zIndex: 5,
+        background: 'var(--glass-bg-strong)',
+        WebkitBackdropFilter: 'blur(var(--glass-blur)) saturate(1.2)',
+        backdropFilter: 'blur(var(--glass-blur)) saturate(1.2)',
+        borderRight: mobile ? 'none' : '1px solid var(--glass-border)',
+        paddingTop: mobile ? 'var(--sr-safe-top)' : 0,
+        paddingBottom: mobile ? 'var(--sr-safe-bottom)' : 0,
+        boxSizing: 'border-box',
+        /* 手机上整条侧栏一起滚：桌面那套「导航固定 + 星域内滚 + 页脚钉底」在
+           手机高度下会把中间的星域挤成两行、还被页脚的分隔线拦腰截断。
+           内容比屏幕高是常态，让它整体滚动才是老实的做法。 */
+        overflowY: mobile ? 'auto' : 'visible',
+        transition: mobile ? 'none' : 'width var(--dur-base) var(--ease-flight)'
       }
-    }
-  }))), /*#__PURE__*/React.createElement("nav", {
-    "data-tour": "nav-views",
-    style: {
-      padding: collapsed ? '6px 8px' : '6px 12px',
-      display: 'flex',
-      flexDirection: 'column',
-      gap: 3,
-      flex: 'none'
-    }
-  }, /*#__PURE__*/React.createElement(NavRow, {
-    icon: "orbit",
-    label: "\u661F\u56FE\u89C6\u56FE",
-    active: view === 'map',
-    collapsed: collapsed,
-    dawn: dawn,
-    onClick: () => onView('map')
-  }), /*#__PURE__*/React.createElement(NavRow, {
-    icon: "list",
-    label: "\u5217\u8868\u89C6\u56FE",
-    active: view === 'list',
-    collapsed: collapsed,
-    dawn: dawn,
-    onClick: () => onView('list')
-  }), /*#__PURE__*/React.createElement(NavRow, {
-    icon: "git-commit-horizontal",
-    label: "\u65F6\u95F4\u8F74\u89C6\u56FE",
-    active: view === 'timeline',
-    collapsed: collapsed,
-    dawn: dawn,
-    onClick: () => onView('timeline')
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      height: 1,
-      background: 'var(--line)',
-      margin: '8px 4px'
-    }
-  }), /*#__PURE__*/React.createElement(NavRow, {
-    icon: "repeat",
-    label: "\u590D\u4E60",
-    badge: dueN || null,
-    collapsed: collapsed,
-    dawn: dawn,
-    onClick: onReview,
-    active: false,
-    dataTour: "review"
-  }), /*#__PURE__*/React.createElement(NavRow, {
-    icon: "inbox",
-    label: "\u6536\u4EF6\u7BB1",
-    badge: inboxN || null,
-    tip: `本地捕捉 ${D.inbox.length} 条 + 未领取来信 ${mailN} 封`,
-    collapsed: collapsed,
-    dawn: dawn,
-    onClick: () => onView('inbox'),
-    active: view === 'inbox',
-    dataTour: "inbox"
-  }), /*#__PURE__*/React.createElement(NavRow, {
-    icon: "aperture",
-    label: "\u9ED1\u6D1E",
-    badge: D.trash.length || null,
-    collapsed: collapsed,
-    dawn: dawn,
-    onClick: () => onView('blackhole'),
-    active: view === 'blackhole',
-    dataTour: "trash"
-  }), /*#__PURE__*/React.createElement(NavRow, {
-    icon: "telescope",
-    label: "\u661F\u9645\u6F2B\u6E38",
-    badge: D.social && D.social.friends || null,
-    collapsed: collapsed,
-    dawn: dawn,
-    onClick: () => onView('visit'),
-    active: view === 'visit',
-    dataTour: "visit"
-  })), !collapsed && /*#__PURE__*/React.createElement("div", {
-    style: {
-      flex: 1,
-      minHeight: 0,
-      overflow: 'auto',
-      padding: '10px 12px 0'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 10,
-      letterSpacing: 'var(--ls-hud)',
-      textTransform: 'uppercase',
-      color: 'var(--text-3)',
-      padding: '0 6px 8px',
-      fontFamily: 'var(--font-mono)'
-    }
-  }, "\u6211\u7684\u661F\u57DF"), /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      flexDirection: 'column',
-      gap: 2
-    }
-  }, D.constellations.map(c => /*#__PURE__*/React.createElement(ConstellationItem, {
-    key: c.id,
-    name: c.name,
-    color: c.color,
-    count: c.count,
-    active: focus === c.id,
-    onClick: () => onFocus(c.id)
-  })))), collapsed && /*#__PURE__*/React.createElement("div", {
-    style: {
-      flex: 1
-    }
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      flex: 'none',
-      padding: collapsed ? '10px 8px' : '12px',
-      borderTop: '1px solid var(--line)',
-      display: 'flex',
-      flexDirection: 'column',
-      gap: 4
-    }
-  }, /*#__PURE__*/React.createElement(NavRow, {
-    icon: dawn ? 'moon-star' : 'sunrise',
-    label: dawn ? '切回深空' : '黎明模式',
-    collapsed: collapsed,
-    dawn: dawn,
-    onClick: onToggleTheme,
-    dataTour: "theme"
-  }), /*#__PURE__*/React.createElement(NavRow, {
-    icon: "activity",
-    label: "\u77E5\u8BC6\u4F53\u68C0\u62A5\u544A",
-    badge: todoN || null,
-    collapsed: collapsed,
-    dawn: dawn,
-    active: view === 'checkup',
-    onClick: onCheckup,
-    dataTour: "checkup"
-  }), /*#__PURE__*/React.createElement(NavRow, {
-    icon: "bot",
-    label: "AI \u914D\u7F6E",
-    collapsed: collapsed,
-    dawn: dawn,
-    onClick: onAIConfig
-  }), /*#__PURE__*/React.createElement(UserChip, {
-    collapsed: collapsed,
-    dawn: dawn,
-    registered: !!D.account.registered,
-    onClick: onOpenSettings
-  })));
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        alignItems: 'center',
+        height: 60,
+        padding: collapsed && !mobile ? '0' : '0 14px',
+        flex: 'none',
+        justifyContent: collapsed && !mobile ? 'center' : 'space-between',
+        position: mobile ? 'sticky' : 'static',
+        top: 0,
+        zIndex: 2,
+        background: mobile ? 'var(--glass-bg-strong)' : 'transparent'
+      }
+    }, /*#__PURE__*/React.createElement(SRLogo, {
+      collapsed: collapsed,
+      theme: theme
+    }), !collapsed && /*#__PURE__*/React.createElement(IconButton, {
+      name: mobile ? 'x' : 'panel-left-close',
+      title: mobile ? '关闭菜单' : '折叠',
+      onClick: onToggle
+    })), collapsed && /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        justifyContent: 'center',
+        marginBottom: 6
+      }
+    }, /*#__PURE__*/React.createElement(IconButton, {
+      name: "panel-left-open",
+      title: "\u5C55\u5F00",
+      onClick: onToggle
+    })), /*#__PURE__*/React.createElement("div", {
+      style: {
+        padding: collapsed ? '0 12px 8px' : '0 14px 10px',
+        flex: 'none'
+      }
+    }, collapsed ? /*#__PURE__*/React.createElement(IconButton, {
+      name: "search",
+      title: mobile ? '搜索' : '搜索 ' + window.SRKeys.combo('K'),
+      onClick: onSearch
+    }) :
+    /*#__PURE__*/
+    /* 搜索入口：点击 / Enter / 直接开始输入 都打开命令面板。
+       readOnly 让它保持可 Tab 聚焦（Input 自带聚焦发光），
+       但不再吞字——键盘用户不会把「量子」打进一个死输入框 */
+    React.createElement("div", {
+      "data-tour": "search",
+      style: {
+        cursor: 'pointer'
+      },
+      onClick: onSearch
+    }, /*#__PURE__*/React.createElement(Input, {
+      icon: "search",
+      placeholder: "\u641C\u7D22\u4F60\u7684\u661F\u7A7A\u2026",
+      kbd: mobile ? undefined : window.SRKeys.combo('K'),
+      size: "sm",
+      readOnly: true,
+      value: "",
+      "aria-label": "\u641C\u7D22\u4F60\u7684\u661F\u7A7A\uFF08\u6253\u5F00\u547D\u4EE4\u9762\u677F\uFF09",
+      inputStyle: {
+        cursor: 'pointer'
+      },
+      onKeyDown: e => {
+        if (e.key === 'Enter' || e.key === ' ' || e.key.length === 1 && !e.metaKey && !e.ctrlKey && !e.altKey) {
+          e.preventDefault();
+          onSearch();
+        }
+      }
+    }))), /*#__PURE__*/React.createElement("nav", {
+      "data-tour": "nav-views",
+      style: {
+        padding: collapsed ? '6px 8px' : '6px 12px',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 3,
+        flex: 'none'
+      }
+    }, /*#__PURE__*/React.createElement(NavRow, {
+      h: rowH,
+      icon: "orbit",
+      label: "\u661F\u56FE\u89C6\u56FE",
+      active: view === 'map',
+      collapsed: collapsed,
+      dawn: dawn,
+      onClick: () => onView('map')
+    }), /*#__PURE__*/React.createElement(NavRow, {
+      h: rowH,
+      icon: "list",
+      label: "\u5217\u8868\u89C6\u56FE",
+      active: view === 'list',
+      collapsed: collapsed,
+      dawn: dawn,
+      onClick: () => onView('list')
+    }), /*#__PURE__*/React.createElement(NavRow, {
+      h: rowH,
+      icon: "git-commit-horizontal",
+      label: "\u65F6\u95F4\u8F74\u89C6\u56FE",
+      active: view === 'timeline',
+      collapsed: collapsed,
+      dawn: dawn,
+      onClick: () => onView('timeline')
+    }), /*#__PURE__*/React.createElement("div", {
+      style: {
+        height: 1,
+        background: 'var(--line)',
+        margin: '8px 4px'
+      }
+    }), /*#__PURE__*/React.createElement(NavRow, {
+      h: rowH,
+      icon: "repeat",
+      label: "\u590D\u4E60",
+      badge: dueN || null,
+      collapsed: collapsed,
+      dawn: dawn,
+      onClick: onReview,
+      active: false,
+      dataTour: "review"
+    }), /*#__PURE__*/React.createElement(NavRow, {
+      h: rowH,
+      icon: "inbox",
+      label: "\u6536\u4EF6\u7BB1",
+      badge: inboxN || null,
+      tip: `本地捕捉 ${D.inbox.length} 条 + 未领取来信 ${mailN} 封`,
+      collapsed: collapsed,
+      dawn: dawn,
+      onClick: () => onView('inbox'),
+      active: view === 'inbox',
+      dataTour: "inbox"
+    }), /*#__PURE__*/React.createElement(NavRow, {
+      h: rowH,
+      icon: "aperture",
+      label: "\u9ED1\u6D1E",
+      badge: D.trash.length || null,
+      collapsed: collapsed,
+      dawn: dawn,
+      onClick: () => onView('blackhole'),
+      active: view === 'blackhole',
+      dataTour: "trash"
+    }), /*#__PURE__*/React.createElement(NavRow, {
+      h: rowH,
+      icon: "telescope",
+      label: "\u661F\u9645\u6F2B\u6E38",
+      badge: D.social && D.social.friends || null,
+      collapsed: collapsed,
+      dawn: dawn,
+      onClick: () => onView('visit'),
+      active: view === 'visit',
+      dataTour: "visit"
+    })), !collapsed && /*#__PURE__*/React.createElement("div", {
+      style: {
+        flex: mobile ? 'none' : 1,
+        minHeight: 0,
+        overflow: mobile ? 'visible' : 'auto',
+        padding: '10px 12px 0'
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 10,
+        letterSpacing: 'var(--ls-hud)',
+        textTransform: 'uppercase',
+        color: 'var(--text-3)',
+        padding: '0 6px 8px',
+        fontFamily: 'var(--font-mono)'
+      }
+    }, "\u6211\u7684\u661F\u57DF"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 2
+      }
+    }, D.constellations.map(c => /*#__PURE__*/React.createElement(ConstellationItem, {
+      key: c.id,
+      name: c.name,
+      color: c.color,
+      count: c.count,
+      active: focus === c.id,
+      onClick: () => onFocus(c.id)
+    })))), collapsed && /*#__PURE__*/React.createElement("div", {
+      style: {
+        flex: 1
+      }
+    }), /*#__PURE__*/React.createElement("div", {
+      style: {
+        flex: 'none',
+        marginTop: mobile ? 10 : 0,
+        padding: collapsed ? '10px 8px' : '12px',
+        borderTop: '1px solid var(--line)',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 4
+      }
+    }, /*#__PURE__*/React.createElement(NavRow, {
+      h: rowH,
+      icon: dawn ? 'moon-star' : 'sunrise',
+      label: dawn ? '切回深空' : '黎明模式',
+      collapsed: collapsed,
+      dawn: dawn,
+      onClick: onToggleTheme,
+      dataTour: "theme"
+    }), /*#__PURE__*/React.createElement(NavRow, {
+      h: rowH,
+      icon: "activity",
+      label: "\u77E5\u8BC6\u4F53\u68C0\u62A5\u544A",
+      badge: todoN || null,
+      collapsed: collapsed,
+      dawn: dawn,
+      active: view === 'checkup',
+      onClick: onCheckup,
+      dataTour: "checkup"
+    }), /*#__PURE__*/React.createElement(NavRow, {
+      h: rowH,
+      icon: "bot",
+      label: "AI \u914D\u7F6E",
+      collapsed: collapsed,
+      dawn: dawn,
+      onClick: onAIConfig
+    }), D.account.admin && /*#__PURE__*/React.createElement(NavRow, {
+      h: rowH,
+      icon: "shield",
+      label: "\u661F\u6E2F\u7BA1\u7406\u53F0",
+      badge: D.account.defaultPass ? '!' : null,
+      tip: D.account.defaultPass ? '管理员账号仍在用出厂密码' : '全站用户、分享、会话与系统状态',
+      collapsed: collapsed,
+      dawn: dawn,
+      active: view === 'admin',
+      onClick: onAdmin
+    }), /*#__PURE__*/React.createElement(UserChip, {
+      collapsed: collapsed,
+      dawn: dawn,
+      registered: !!D.account.registered,
+      onClick: onOpenSettings
+    })))
+  );
 }
 window.SRKit = Object.assign(window.SRKit || {}, {
   Sidebar
@@ -25172,7 +28972,7 @@ function DomainHalos({
         pointerEvents: 'none'
       }
     }), /*#__PURE__*/React.createElement("div", {
-      onMouseDown: e => {
+      onPointerDown: e => {
         if (e.button === 0) {
           e.stopPropagation();
           onDomainDown(e, c);
@@ -25272,18 +29072,30 @@ function SummaryCard({
   // 认证态（点亮/待重燃）随状态就地自解释；重燃 = 待重燃星的费曼快速通道
   const lit = litOf(star),
     ember = emberOf(star);
+  /* 手机上不跟着星飘：那张 260px 的卡片在 375px 的屏上会挡住半个星空，
+     而且手指按住的正是星本身。改成贴着底部标签栏的一张卡，星始终可见。 */
+  const phone = window.SRScreen && window.SRScreen.isPhone();
+  const frame = phone ? {
+    position: 'fixed',
+    left: 10,
+    right: 10,
+    width: 'auto',
+    bottom: 'calc(var(--sr-tabbar) + var(--sr-safe-bottom) + 10px)',
+    zIndex: 28,
+    animation: 'sr-m-up var(--dur-base) var(--ease-flight) both'
+  } : {
+    position: 'fixed',
+    left: pos ? pos.left : screen.x,
+    top: pos ? pos.top : screen.y,
+    visibility: pos ? 'visible' : 'hidden',
+    width: 260,
+    zIndex: 28,
+    animation: pos ? 'sr-cardin var(--dur-base) var(--ease-flight) both' : 'none'
+  };
   return /*#__PURE__*/React.createElement("div", {
     ref: boxRef,
-    onMouseDown: e => e.stopPropagation(),
-    style: {
-      position: 'fixed',
-      left: pos ? pos.left : screen.x,
-      top: pos ? pos.top : screen.y,
-      visibility: pos ? 'visible' : 'hidden',
-      width: 260,
-      zIndex: 28,
-      animation: pos ? 'sr-cardin var(--dur-base) var(--ease-flight) both' : 'none'
-    }
+    onPointerDown: e => e.stopPropagation(),
+    style: frame
   }, /*#__PURE__*/React.createElement(GlassPanel, {
     strong: true,
     radius: "lg",
@@ -25477,7 +29289,7 @@ function PopMenu({
     tabIndex: -1,
     className: "sr-focus-ring",
     onKeyDown: onKey,
-    onMouseDown: e => e.stopPropagation(),
+    onPointerDown: e => e.stopPropagation(),
     onContextMenu: e => e.preventDefault(),
     style: {
       position: 'fixed',
@@ -25579,7 +29391,7 @@ function ConfirmDialog({
     return () => document.removeEventListener('keydown', k);
   }, []);
   return /*#__PURE__*/React.createElement("div", {
-    onMouseDown: onClose,
+    onPointerDown: onClose,
     onContextMenu: e => e.preventDefault(),
     style: {
       position: 'fixed',
@@ -25592,7 +29404,7 @@ function ConfirmDialog({
       justifyContent: 'center'
     }
   }, /*#__PURE__*/React.createElement("div", {
-    onMouseDown: e => e.stopPropagation(),
+    onPointerDown: e => e.stopPropagation(),
     style: {
       width: 348,
       maxWidth: '90vw',
@@ -25670,6 +29482,9 @@ function StarMap({
   focusReq
 }) {
   const D = window.SR_DATA;
+  // 断点：手机上 HUD 精简、工具条上抬、摘要卡沉底；touch 还决定手势提示的说法
+  const scr = window.SRKit.useScreen();
+  const phone = scr.phone;
   const ref = React.useRef(null);
   const [view, setView] = React.useState({
     x: 0,
@@ -25755,6 +29570,59 @@ function StarMap({
     const g = domainGeom(c, stars);
     return Math.hypot(wx - g.cx, wy - g.cy) <= g.r;
   }) || null;
+
+  /* 取景：按「星空实际占多大」算缩放，而不是写死一个倍率。
+     从前是固定 k=0.82 再把 1680×1040 的世界摆中间——在 1440 宽的桌面上勉强够看，
+     到了 390 宽的手机就只剩世界的一角，落地即是一片近景。
+     现在量出所有星与星域晕的包围盒，让它整个收进视口：屏幕越小，落地越远，
+     一眼先看见星空的形状，再决定往哪儿走。 */
+  const fitView = React.useCallback(el => {
+    const w = el.clientWidth,
+      h = el.clientHeight;
+    if (!w || !h) return null;
+    const pad = phone ? 26 : 56; // 四周留白：手机寸土寸金，留少些
+    const boxes = [];
+    stars.forEach(s => boxes.push({
+      x: s.wx,
+      y: s.wy,
+      r: 58
+    })); // 星点 + 标签的大致占位
+    cons.forEach(c => {
+      const g = domainGeom(c, stars);
+      boxes.push({
+        x: g.cx,
+        y: g.cy,
+        r: g.r
+      });
+    });
+
+    // 空星空：没有内容可框，把世界中心摆正，取一个能看见「很空」的远景
+    if (!boxes.length) {
+      const k = clamp(Math.min(w / WORLD.w, h / WORLD.h) * 1.5, 0.34, 0.82);
+      return {
+        k,
+        x: w / 2 - WORLD.w / 2 * k,
+        y: h / 2 - WORLD.h / 2 * k
+      };
+    }
+    const minX = Math.min(...boxes.map(b => b.x - b.r)),
+      maxX = Math.max(...boxes.map(b => b.x + b.r));
+    const minY = Math.min(...boxes.map(b => b.y - b.r)),
+      maxY = Math.max(...boxes.map(b => b.y + b.r));
+    const cx = (minX + maxX) / 2,
+      cy = (minY + maxY) / 2;
+    /* 上限刻意不超过从前那个写死的 0.82：取景只该把镜头往后拉，不该往前推。
+       星空很小（只有一两颗星）时若按包围盒放大，落地就是一张糊在脸上的近景，
+       反而看不出「这片星空还很空」。下限沿用手势缩放的同一个底 0.34。 */
+    const k = clamp(Math.min((w - pad * 2) / Math.max(1, maxX - minX), (h - pad * 2) / Math.max(1, maxY - minY)), 0.34, phone ? 0.7 : 0.82);
+    return {
+      k,
+      x: w / 2 - cx * k,
+      y: h / 2 - cy * k
+    };
+  }, [stars, cons, phone]);
+  const fitRef = React.useRef(fitView);
+  fitRef.current = fitView;
   React.useEffect(() => {
     const el = ref.current;
     if (!el) return;
@@ -25764,11 +29632,8 @@ function StarMap({
         h = el.clientHeight;
       if (!w) return;
       inited.current = true;
-      setView({
-        k: 0.82,
-        x: (w - WORLD.w * 0.82) / 2,
-        y: (h - WORLD.h * 0.82) / 2
-      });
+      const v = fitRef.current(el);
+      if (v) setView(v);
     };
     const ro = new ResizeObserver(fit);
     ro.observe(el);
@@ -25911,8 +29776,38 @@ function StarMap({
   }, []);
   React.useEffect(() => {
     const move = e => {
+      // 先更新这根指针的位置：捏合要靠两根指针的实时间距
+      if (touches.current.has(e.pointerId)) touches.current.set(e.pointerId, {
+        x: e.clientX,
+        y: e.clientY
+      });
+      const p = pinch.current;
+      if (p && touches.current.size >= 2) {
+        const [a, b] = [...touches.current.values()];
+        const dist = Math.hypot(a.x - b.x, a.y - b.y);
+        if (dist > 0 && p.dist > 0) {
+          const el = ref.current;
+          if (!el) return;
+          const r = el.getBoundingClientRect();
+          const mx = (a.x + b.x) / 2 - r.left,
+            my = (a.y + b.y) / 2 - r.top;
+          const k = clamp(p.k * (dist / p.dist), 0.34, 2.6);
+          // 以两指中点为锚：手指按住的那块星空不会从指缝里滑走
+          setView({
+            k,
+            x: mx - (mx - p.view.x) * (k / p.view.k),
+            y: my - (my - p.view.y) * (k / p.view.k)
+          });
+        }
+        return;
+      }
       const d = drag.current;
       if (!d) return;
+      // 动了就不是长按
+      if (longPress.current && Math.abs(e.clientX - d.sx) + Math.abs(e.clientY - d.sy) > 8) {
+        clearTimeout(longPress.current);
+        longPress.current = null;
+      }
       if (Math.abs(e.clientX - d.sx) + Math.abs(e.clientY - d.sy) > 3) d.moved = true;
       if (d.mode === 'pan') setView(v => ({
         ...v,
@@ -25947,20 +29842,88 @@ function StarMap({
       }
     };
     const up = e => {
+      touches.current.delete(e.pointerId);
+      if (touches.current.size < 2) pinch.current = null; // 松开一根手指，捏合结束
       const d = drag.current;
       drag.current = null;
+      if (longPress.current) {
+        clearTimeout(longPress.current);
+        longPress.current = null;
+      }
       if (d && d.mode === 'domain' && !d.moved && e.button === 0) {
         if (pickRef.current) pickRef.current(d.con, e.clientX, e.clientY);
       } else if (d && d.mode === 'pan' && !d.moved && e.button === 0) onSelect(null);
       document.body.style.cursor = '';
     };
-    window.addEventListener('mousemove', move);
-    window.addEventListener('mouseup', up);
+    // 指针事件统吃鼠标 / 触摸 / 笔——触摸端不再需要第二套 touch 处理
+    window.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', up);
+    window.addEventListener('pointercancel', up);
     return () => {
-      window.removeEventListener('mousemove', move);
-      window.removeEventListener('mouseup', up);
+      window.removeEventListener('pointermove', move);
+      window.removeEventListener('pointerup', up);
+      window.removeEventListener('pointercancel', up);
     };
   }, [onSelect]);
+
+  /* ——— 触摸手势 ———
+     touches：当前按在画布上的指针。两根手指同时落下就进捏合模式：
+     缩放跟着两指间距，画布中心跟着两指中点走（与滚轮缩放同一套 clamp）。
+     捏合期间取消一切拖拽——否则会一边缩放一边把星拖到天边。 */
+  const touches = React.useRef(new Map());
+  const pinch = React.useRef(null);
+  const longPress = React.useRef(null);
+  const trackDown = e => {
+    touches.current.set(e.pointerId, {
+      x: e.clientX,
+      y: e.clientY
+    });
+    if (touches.current.size === 2) {
+      const [a, b] = [...touches.current.values()];
+      drag.current = null; // 第二根手指落下 = 这不是拖拽
+      if (longPress.current) {
+        clearTimeout(longPress.current);
+        longPress.current = null;
+      }
+      pinch.current = {
+        dist: Math.hypot(a.x - b.x, a.y - b.y),
+        k: viewRef.current.k,
+        view: {
+          ...viewRef.current
+        }
+      };
+    }
+  };
+
+  /* 触摸端没有右键：长按 520ms 当作「在这里新建」的右键菜单。
+     指针一动超过 8px 就取消（那是平移，不是长按）。 */
+  const armLongPress = e => {
+    if (e.pointerType === 'mouse') return;
+    if (touches.current.size >= 2) return; // 多指在场时不装长按（第二道保险）
+    const {
+      clientX,
+      clientY
+    } = e;
+    if (longPress.current) clearTimeout(longPress.current);
+    longPress.current = setTimeout(() => {
+      longPress.current = null;
+      drag.current = null;
+      const w = toWorld(clientX, clientY);
+      setMenu({
+        x: clientX,
+        y: clientY,
+        wx: w.wx,
+        wy: w.wy,
+        inDomain: domainAt(w.wx, w.wy)
+      });
+      setNaming(null);
+      if (navigator.vibrate) {
+        try {
+          navigator.vibrate(12);
+        } catch (err) {}
+      }
+    }, 520);
+  };
 
   // press anywhere that isn't the sun or a star → pan the canvas
   const bgDown = e => {
@@ -25968,6 +29931,14 @@ function StarMap({
     setMenu(null);
     setNaming(null);
     setStarMenu(null);
+    /* 已经有第二根手指在画布上 = 这是捏合，不是拖拽也不是长按。
+       （trackDown 会先清掉长按计时，但它跑在 bgDown 之前——这里若不拦，
+        紧接着又会把计时重新装上：双指停顿半秒，「在此创建」菜单就会中途
+        弹出来打断缩放。） */
+    if (touches.current.size >= 2) {
+      drag.current = null;
+      return;
+    }
     drag.current = {
       mode: 'pan',
       sx: e.clientX,
@@ -25977,6 +29948,7 @@ function StarMap({
       moved: false
     };
     document.body.style.cursor = 'grabbing';
+    armLongPress(e);
   };
   // press the domain's sun → drag moves the whole 星域; a click (no drag) opens its create menu
   const domainDown = (e, con) => {
@@ -26183,15 +30155,13 @@ function StarMap({
     if (selected && memberIds.includes(selected)) onSelect(null);
     flash('星域已移入黑洞 · 可随时恢复');
   };
+
+  // 复位 = 回到落地时那一帧：与初始取景走同一个 fitView，不再各算各的
   const resetView = () => {
     const el = ref.current;
-    const w = el.clientWidth,
-      h = el.clientHeight;
-    setView({
-      k: 0.82,
-      x: (w - WORLD.w * 0.82) / 2,
-      y: (h - WORLD.h * 0.82) / 2
-    });
+    if (!el) return;
+    const v = fitView(el);
+    if (v) setView(v);
     onSelect(null);
   };
   const sel = stars.find(s => s.id === selected);
@@ -26220,7 +30190,10 @@ function StarMap({
   const empty = stars.length === 0 && cons.length === 0;
   return /*#__PURE__*/React.createElement("div", {
     ref: ref,
-    onMouseDown: bgDown,
+    onPointerDown: e => {
+      trackDown(e);
+      bgDown(e);
+    },
     onContextMenu: onContext,
     style: {
       position: 'relative',
@@ -26228,7 +30201,9 @@ function StarMap({
       minWidth: 0,
       overflow: 'hidden',
       cursor: 'grab',
-      userSelect: 'none'
+      userSelect: 'none',
+      // 画布自己接管全部手势：不交给浏览器去滚动/双击缩放，否则一拖就整页跟着走
+      touchAction: 'none'
     }
   }, /*#__PURE__*/React.createElement("sr-starfield", {
     density: "1"
@@ -26259,7 +30234,10 @@ function StarMap({
       emberS = emberOf(s);
     return /*#__PURE__*/React.createElement("div", {
       key: s.id,
-      onMouseDown: e => starDown(e, s),
+      onPointerDown: e => {
+        trackDown(e);
+        starDown(e, s);
+      },
       onDoubleClick: () => onOpenEditor(s.id),
       onContextMenu: e => {
         e.preventDefault();
@@ -26376,12 +30354,12 @@ function StarMap({
     }
   }, "\u4E5F\u53EF\u4EE5\u5728\u753B\u5E03\u4EFB\u610F\u5904\u53F3\u952E\u521B\u5EFA")), /*#__PURE__*/React.createElement("div", {
     "data-tour": "hud",
-    onMouseDown: e => e.stopPropagation(),
+    onPointerDown: e => e.stopPropagation(),
     style: {
       position: 'absolute',
-      top: 18,
-      left: 22,
-      right: 22,
+      top: phone ? 10 : 18,
+      left: phone ? 10 : 22,
+      right: phone ? 10 : 22,
       zIndex: 30,
       display: 'flex',
       alignItems: 'stretch',
@@ -26390,7 +30368,7 @@ function StarMap({
       rowGap: 8,
       pointerEvents: 'none'
     }
-  }, /*#__PURE__*/React.createElement(GlassPanel, {
+  }, !phone && /*#__PURE__*/React.createElement(GlassPanel, {
     radius: "pill",
     pad: "none",
     style: {
@@ -26431,8 +30409,8 @@ function StarMap({
       flexWrap: 'wrap',
       justifyContent: 'flex-end',
       rowGap: 4,
-      gap: 22,
-      padding: '8px 22px',
+      gap: phone ? 14 : 22,
+      padding: phone ? '6px 14px' : '8px 22px',
       pointerEvents: 'auto'
     }
   }, /*#__PURE__*/React.createElement(HudStat, {
@@ -26442,23 +30420,23 @@ function StarMap({
     label: "\u5DF2\u70B9\u4EAE",
     value: stars.filter(litOf).length,
     tone: "var(--gold)"
-  }), /*#__PURE__*/React.createElement(HudStat, {
+  }), !phone && /*#__PURE__*/React.createElement(HudStat, {
     label: "\u6B63\u53D1\u5149",
     value: stars.filter(s => s.strength >= 0.7).length
   }), /*#__PURE__*/React.createElement(HudStat, {
     label: "\u6B63\u53D8\u6697",
     value: stars.filter(s => s.strength < 0.4).length,
     tone: "var(--star-blue-dim)"
-  }), /*#__PURE__*/React.createElement(HudStat, {
+  }), !phone && /*#__PURE__*/React.createElement(HudStat, {
     label: "\u661F\u57DF",
     value: cons.length,
     tone: "var(--star-blue)"
-  }))), /*#__PURE__*/React.createElement("div", {
+  }))), !(phone && sel) && /*#__PURE__*/React.createElement("div", {
     "data-tour": "hint",
     style: {
       position: 'absolute',
-      bottom: 26,
-      left: 24,
+      bottom: phone ? 20 : 26,
+      left: phone ? 12 : 24,
       zIndex: 30,
       display: 'flex',
       alignItems: 'center',
@@ -26466,7 +30444,7 @@ function StarMap({
       fontSize: 11.5,
       color: 'var(--text-3)',
       pointerEvents: 'none',
-      maxWidth: 'calc(100% - 280px)'
+      maxWidth: phone ? 'calc(100% - 84px)' : 'calc(100% - 280px)'
     }
   }, /*#__PURE__*/React.createElement(Icon, {
     name: "move",
@@ -26478,13 +30456,13 @@ function StarMap({
       overflow: 'hidden',
       textOverflow: 'ellipsis'
     }
-  }, "\u62D6\u4E3B\u661F=\u6574\u4F53\u79FB\u52A8\u661F\u57DF \xB7 \u62D6\u7A7A\u767D=\u5E73\u79FB\u753B\u5E03 \xB7 \u62D6\u661F\u70B9=\u79FB\u52A8\u5355\u9897 \xB7 \u6EDA\u8F6E\u7F29\u653E \xB7 \u53F3\u952E\u521B\u5EFA")), /*#__PURE__*/React.createElement("div", {
+  }, scr.touch ? '拖动=平移 · 双指捏合=缩放 · 长按空白=新建' : '拖主星=整体移动星域 · 拖空白=平移画布 · 拖星点=移动单颗 · 滚轮缩放 · 右键创建')), !(phone && sel) && /*#__PURE__*/React.createElement("div", {
     "data-tour": "tools",
-    onMouseDown: e => e.stopPropagation(),
+    onPointerDown: e => e.stopPropagation(),
     style: {
       position: 'absolute',
-      bottom: 26,
-      right: 24,
+      bottom: phone ? 14 : 26,
+      right: phone ? 12 : 24,
       zIndex: 30
     }
   }, /*#__PURE__*/React.createElement(GlassPanel, {
@@ -26504,7 +30482,7 @@ function StarMap({
       ...v,
       k: clamp(v.k * 0.85, 0.34, 2.6)
     }))
-  }), /*#__PURE__*/React.createElement("span", {
+  }), !phone && /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: 'var(--font-mono)',
       fontSize: 12,
@@ -26526,12 +30504,12 @@ function StarMap({
       height: 18,
       background: 'var(--line)'
     }
-  }), /*#__PURE__*/React.createElement(IconButton, {
+  }), !phone && /*#__PURE__*/React.createElement(IconButton, {
     name: "box",
     size: "sm",
     title: "\u4E09\u7EF4\u661F\u7CFB\uFF082D / 3D\uFF09",
     onClick: on3D
-  }), /*#__PURE__*/React.createElement(IconButton, {
+  }), !phone && /*#__PURE__*/React.createElement(IconButton, {
     name: "satellite",
     size: "sm",
     title: "\u4EAE\u5EA6\u9E1F\u77B0",
@@ -26695,7 +30673,7 @@ function StarMap({
         zIndex: 60,
         width: 220
       },
-      onMouseDown: e => e.stopPropagation()
+      onPointerDown: e => e.stopPropagation()
     }, /*#__PURE__*/React.createElement(GlassPanel, {
       strong: true,
       radius: "md",
@@ -26868,6 +30846,7 @@ function Timeline({
     setShown(TL_PAGE);
   };
   return /*#__PURE__*/React.createElement("div", {
+    className: "sr-view",
     style: {
       position: 'relative',
       flex: 1,
@@ -27667,6 +31646,69 @@ const VISIBILITY_OPTS = [{
   desc: '访客只能看到星与连线的形状'
 }];
 
+/* 门禁提示卡：游客撞上「需要账号」的功能时代替面板出现。
+   只讲清楚为什么需要账号，并把登录页递到手边——不说教，也不假装功能坏了。 */
+function GateNotice({
+  icon,
+  title,
+  body
+}) {
+  return /*#__PURE__*/React.createElement(GlassPanel, {
+    radius: "lg",
+    pad: "md",
+    style: {
+      maxWidth: 520
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      gap: 14
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      flex: 'none',
+      width: 38,
+      height: 38,
+      borderRadius: 12,
+      background: 'rgba(255,217,138,0.10)',
+      border: '1px solid rgba(255,217,138,0.28)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: icon || 'user-plus',
+    size: 19,
+    color: "var(--gold)"
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      minWidth: 0
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 15,
+      color: 'var(--text-1)',
+      fontWeight: 300
+    }
+  }, title), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12.5,
+      color: 'var(--text-2)',
+      lineHeight: 1.75,
+      marginTop: 8
+    }
+  }, body), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 14
+    }
+  }, /*#__PURE__*/React.createElement(Button, {
+    size: "sm",
+    variant: "primary",
+    icon: "sparkles",
+    onClick: () => window.dispatchEvent(new CustomEvent('sr-need-login'))
+  }, "\u767B\u5F55 / \u6CE8\u518C")))));
+}
+
 /* ---------- 我的分享 ---------- */
 function SharePanel({
   flash,
@@ -27728,6 +31770,16 @@ function SharePanel({
       load();
     }).catch(e => flash(e.message, 'danger'));
   };
+
+  // 门禁：把星系开出去意味着别人能找到你，这需要一个真名。被拦时给出去处，
+  // 而不是让面板静默空着（管理台关掉 share 门禁后这一段就不会出现）
+  if (window.SRGate.gated('share')) {
+    return /*#__PURE__*/React.createElement(GateNotice, {
+      icon: "radio-tower",
+      title: "\u5206\u4EAB\u661F\u7CFB\u9700\u8981\u4E00\u4E2A\u8D26\u53F7",
+      body: "\u5BC6\u6587\u4E00\u65E6\u53D1\u51FA\u53BB\uFF0C\u522B\u4EBA\u5C31\u80FD\u5FAA\u7740\u5B83\u627E\u5230\u8FD9\u7247\u661F\u7A7A\u2014\u2014\u6240\u4EE5\u5B83\u5F97\u5148\u6709\u4E2A\u4E3B\u4EBA\u3002\u6CE8\u518C\u4F1A\u628A\u4F60\u73B0\u5728\u7684\u661F\u7A7A\u539F\u5730\u6536\u8FDB\u8D26\u53F7\uFF0C\u4E00\u9897\u661F\u90FD\u4E0D\u4F1A\u4E22\u3002"
+    });
+  }
   if (!share) return /*#__PURE__*/React.createElement("div", {
     style: {
       padding: 40,
@@ -28124,6 +32176,7 @@ function FriendsPanel({
   launching
 }) {
   const N = window.SRNet;
+  const gated = window.SRGate.gated('visit');
   const [friends, setFriends] = React.useState([]);
   const [code, setCode] = React.useState('');
   const [busy, setBusy] = React.useState(false);
@@ -28187,6 +32240,15 @@ function FriendsPanel({
       }).catch(e => flash(e.message, 'danger'));
     }
   });
+
+  // 门禁：造访要在对方的访客名单上留名，游客没有可留的名字
+  if (gated) {
+    return /*#__PURE__*/React.createElement(GateNotice, {
+      icon: "telescope",
+      title: "\u661F\u9645\u6F2B\u6E38\u9700\u8981\u4E00\u4E2A\u8D26\u53F7",
+      body: "\u9020\u8BBF\u4F1A\u5728\u5BF9\u65B9\u7684\u661F\u7CFB\u91CC\u7559\u4E0B\u4F60\u7684\u8DB3\u8FF9\uFF0C\u4E5F\u8BA9\u4ED6\u80FD\u7ED9\u4F60\u56DE\u4FE1\u2014\u2014\u8FD9\u4E9B\u90FD\u8981\u8BA4\u5F97\u51FA\u300C\u4F60\u300D\u662F\u8C01\u3002\u6CE8\u518C\u4E4B\u540E\uFF0C\u73B0\u5728\u8FD9\u7247\u661F\u7A7A\u4F1A\u539F\u5730\u8DDF\u7740\u4F60\u8D70\u3002"
+    });
+  }
   return /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
@@ -29524,6 +33586,7 @@ function VisitView() {
       density: "0.8",
       meteors: "0"
     }), /*#__PURE__*/React.createElement("div", {
+      className: "sr-view",
       style: {
         position: 'relative',
         zIndex: 1,
@@ -29885,7 +33948,13 @@ const {
   Onboarding,
   OnboardingTour,
   LoginView,
-  KeysHelp
+  KeysHelp,
+  AdminConsole,
+  AnnouncementBanner,
+  MobileTopBar,
+  MobileTabBar,
+  MobileDrawer,
+  useScreen
 } = window.SRKit;
 const {
   GlassPanel,
@@ -29914,7 +33983,19 @@ function App() {
   const [login, setLogin] = React.useState(false);
   const [authKnown, setAuthKnown] = React.useState(false); // 登录态尘埃落定前引导不闪现     // 全屏登录/注册页
   const [dataRev, setDataRev] = React.useState(0); // 数据库水合后整体重挂载
+  const [banner, setBanner] = React.useState(null); // 管理员发布的全站公告
+  const [blocked, setBlocked] = React.useState(null); // { kind: 'banned' | 'maintenance', message }
+  const [drawer, setDrawer] = React.useState(false); // 手机：侧栏抽屉
   const nonce = React.useRef(0);
+
+  // 断点：phone 走抽屉 + 底部标签栏那一套；平板与桌面保持常驻侧栏
+  const scr = useScreen();
+  const phone = scr.phone;
+  const closeDrawer = React.useCallback(() => setDrawer(false), []);
+  // 换到桌面宽度时把抽屉收掉，否则遮罩会挂在一个已经常驻的侧栏上
+  React.useEffect(() => {
+    if (!phone) setDrawer(false);
+  }, [phone]);
   const openLogin = () => setLogin(true);
   const closeLogin = () => {
     try {
@@ -29955,6 +34036,47 @@ function App() {
       window.removeEventListener('sr-hydrated', settled);
       clearTimeout(t);
     };
+  }, []);
+
+  /* 全站公告：管理员在管理台发布后，所有人下次握手就带回来。
+     同一条公告只提醒一次——按内容指纹记在本机，读过就不再挡视线；
+     管理员改了文案（指纹变化）会重新出现。 */
+  React.useEffect(() => {
+    const h = () => {
+      const a = window.SR_DATA && window.SR_DATA.site && window.SR_DATA.site.announcement;
+      if (!a || !a.text) {
+        setBanner(null);
+        return;
+      }
+      let dismissed = '';
+      try {
+        dismissed = localStorage.getItem('sr.notice.read') || '';
+      } catch (e) {}
+      setBanner(dismissed === a.text ? null : a);
+    };
+    h();
+    window.addEventListener('sr-site', h);
+    return () => window.removeEventListener('sr-site', h);
+  }, []);
+  const dismissBanner = () => {
+    try {
+      localStorage.setItem('sr.notice.read', banner.text);
+    } catch (e) {}
+    setBanner(null);
+  };
+
+  // 账号被停用 / 全站维护：服务器关门的那一刻由 SRNet 广播，这里换上一张说明页
+  React.useEffect(() => {
+    const h = e => setBlocked(e.detail || null);
+    window.addEventListener('sr-blocked', h);
+    return () => window.removeEventListener('sr-blocked', h);
+  }, []);
+
+  // 游客撞上功能门禁（SRGate.require）：直接把登录页请出来，人已经在门口了
+  React.useEffect(() => {
+    const h = () => setLogin(true);
+    window.addEventListener('sr-need-login', h);
+    return () => window.removeEventListener('sr-need-login', h);
   }, []);
 
   // 应用挂载完成：淡出 index.html 里的静态启动帧
@@ -30029,7 +34151,7 @@ function App() {
         setFeynman(null);
         return;
       }
-      if (view === 'checkup') {
+      if (view === 'checkup' || view === 'admin') {
         e.preventDefault();
         freshen();
         setView('map');
@@ -30054,8 +34176,11 @@ function App() {
     if (T && T.flight) T.flight(fn);else fn();
   };
 
-  // 视图切换统一收掉费曼抽屉——抽屉属于打开它的那个上下文，不跨视图滞留
+  // 视图切换统一收掉费曼抽屉——抽屉属于打开它的那个上下文，不跨视图滞留。
+  // 编辑器与星际漫游是可门禁的功能：游客点进来先被请去登录（门禁由管理台掌控，
+  // 关掉之后这两行就是透明的）。
   const openEditor = id => {
+    if (!window.SRGate.require('editor', '写笔记')) return;
     freshen();
     setFeynman(null);
     setEditing(id);
@@ -30111,6 +34236,7 @@ function App() {
   };
   const openView = v => {
     if (v === 'aerial' ? view === 'map' && aerial : v === view && !aerial && !editing) return; // 已在目标视图，不空跳
+    if (v === 'visit' && !window.SRGate.require('visit', '星际漫游')) return;
     freshen();
     setFeynman(null);
     if (v === 'aerial') {
@@ -30169,12 +34295,162 @@ function App() {
     setSettingsOpen(false);
     setOnboard(true);
   };
+  /* 手机顶部条的标题 / 副标题，以及底部标签栏的角标。
+     角标口径与侧边栏完全一致（同样读 D.dueStars / D.inbox + 未领取来信），
+     两处导航不会各说各话；随 sr-data / sr-memory 心跳刷新。 */
+  // 依赖里放的是计数值 tick，不是 dispatch——dispatch 是稳定引用，
+  // 拿它当依赖等于把这个 memo 焊死，角标永远停在第一次算出来的数
+  const [tick, tabTick] = React.useReducer(x => x + 1, 0);
+  React.useEffect(() => {
+    if (!phone) return;
+    ['sr-data', 'sr-memory', 'sr-friends'].forEach(e => window.addEventListener(e, tabTick));
+    return () => ['sr-data', 'sr-memory', 'sr-friends'].forEach(e => window.removeEventListener(e, tabTick));
+  }, [phone]);
+  const tabCounts = React.useMemo(() => {
+    const D = window.SR_DATA;
+    if (!D) return {
+      due: 0,
+      inbox: 0
+    };
+    return {
+      due: D.dueStars ? D.dueStars().length : 0,
+      inbox: (D.inbox ? D.inbox.length : 0) + (D.unclaimedMail ? D.unclaimedMail() : 0)
+    };
+  }, [phone, view, dataRev, tick]); // eslint-disable-line react-hooks/exhaustive-deps
+  const VIEW_TITLES = {
+    map: ['星图', '记得越牢，越亮'],
+    list: ['列表', null],
+    timeline: ['时间轴', null],
+    inbox: ['收件箱', null],
+    blackhole: ['黑洞', null],
+    visit: ['星际漫游', null],
+    checkup: ['知识体检', null],
+    galaxy3d: ['三维星系', null],
+    admin: ['星港管理台', null]
+  };
+  const [viewTitle, viewSub] = aerial ? ['亮度鸟瞰', null] : VIEW_TITLES[view] || ['星图', null];
+
   // 稳定 ref：只在 <main> 真正重挂载（key 变化）时触发入场动画；
   // 内联箭头 ref 每次渲染都会重跑 enter，任何 setState 都会闪一次入场
   const mainEnter = React.useCallback(el => {
     const T = window.srTransition;
     if (el && T && T.enter) T.enter(el);
   }, []);
+
+  /* 停用 / 维护：整屏说明页。停用是终局（只能退出登录换个身份），
+     维护是暂时的（留一颗「再试一次」按钮，恢复了就能进来）。
+     两种情况本机星空都完好——离线编辑照常，恢复后自动补写。 */
+  if (blocked) {
+    const banned = blocked.kind === 'banned';
+    return /*#__PURE__*/React.createElement("div", {
+      style: {
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 24,
+        background: 'radial-gradient(1200px 800px at 78% -10%, rgba(26,35,80,0.55), transparent 60%), linear-gradient(180deg, #05060f 0%, #03040c 55%, #04050e 100%)'
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        width: 420,
+        maxWidth: '94vw',
+        textAlign: 'center'
+      }
+    }, /*#__PURE__*/React.createElement(GlassPanel, {
+      strong: true,
+      radius: "lg",
+      glow: true,
+      style: {
+        padding: '34px 28px 26px'
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: banned ? 'user-x' : 'construction',
+      size: 30,
+      color: banned ? 'var(--danger)' : 'var(--gold)'
+    }), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 19,
+        fontWeight: 300,
+        color: 'var(--text-1)',
+        marginTop: 16
+      }
+    }, banned ? '这个账号已被停用' : '星图正在维护'), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 13,
+        color: 'var(--text-2)',
+        marginTop: 12,
+        lineHeight: 1.8
+      }
+    }, blocked.message || (banned ? '如有疑问，请联系这台服务器的管理员。' : '稍后回来看看。')), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 12,
+        color: 'var(--text-3)',
+        marginTop: 14,
+        lineHeight: 1.7
+      }
+    }, "\u4F60\u5728\u672C\u673A\u7684\u661F\u7A7A\u5B8C\u597D\u65E0\u635F\uFF0C\u4EC0\u4E48\u90FD\u6CA1\u6709\u4E22\u3002"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        gap: 10,
+        justifyContent: 'center',
+        marginTop: 22
+      }
+    }, !banned && /*#__PURE__*/React.createElement(Button, {
+      variant: "primary",
+      icon: "refresh-cw",
+      onClick: () => location.reload()
+    }, "\u518D\u8BD5\u4E00\u6B21"), /*#__PURE__*/React.createElement(Button, {
+      variant: banned ? 'primary' : 'ghost',
+      icon: "log-out",
+      onClick: () => window.SRNet.logoutFlow()
+    }, "\u9000\u51FA\u767B\u5F55")))));
+  }
+
+  /* 侧栏：桌面/平板常驻，手机收进抽屉。两处渲染的是同一个组件、同一份状态——
+     手机上任选一个目的地就顺手把抽屉关掉，不必再点一次遮罩。 */
+  const sidebar = /*#__PURE__*/React.createElement(Sidebar, {
+    collapsed: phone ? false : collapsed,
+    onToggle: () => phone ? setDrawer(false) : setCollapsed(c => !c),
+    view: view === 'editor' ? 'map' : view,
+    onView: v => {
+      closeDrawer();
+      openView(v);
+    },
+    focus: focus,
+    onFocus: id => {
+      closeDrawer();
+      focusCon(id);
+    },
+    theme: theme,
+    onToggleTheme: toggleTheme,
+    onSearch: () => {
+      closeDrawer();
+      setCmd(true);
+    },
+    onCheckup: () => {
+      closeDrawer();
+      openView('checkup');
+    },
+    onAIConfig: () => {
+      closeDrawer();
+      setAiConfigOpen(true);
+    },
+    onReview: () => {
+      closeDrawer();
+      openReview();
+    },
+    onOpenSettings: () => {
+      closeDrawer();
+      setSettingsOpen(true);
+    },
+    onAdmin: () => {
+      closeDrawer();
+      openView('admin');
+    },
+    mobile: phone
+  });
   return /*#__PURE__*/React.createElement("div", {
     key: dataRev,
     style: {
@@ -30184,20 +34460,14 @@ function App() {
       position: 'relative',
       overflow: 'hidden'
     }
-  }, /*#__PURE__*/React.createElement(Sidebar, {
-    collapsed: collapsed,
-    onToggle: () => setCollapsed(c => !c),
-    view: view === 'editor' ? 'map' : view,
-    onView: openView,
-    focus: focus,
-    onFocus: focusCon,
-    theme: theme,
-    onToggleTheme: toggleTheme,
-    onSearch: () => setCmd(true),
-    onCheckup: () => openView('checkup'),
-    onAIConfig: () => setAiConfigOpen(true),
-    onReview: openReview,
-    onOpenSettings: () => setSettingsOpen(true)
+  }, !phone && sidebar, phone && /*#__PURE__*/React.createElement(MobileDrawer, {
+    open: drawer,
+    onClose: closeDrawer
+  }, sidebar), phone && view !== 'editor' && /*#__PURE__*/React.createElement(MobileTopBar, {
+    title: viewTitle,
+    sub: viewSub,
+    onMenu: () => setDrawer(true),
+    onSearch: () => setCmd(true)
   }), /*#__PURE__*/React.createElement("main", {
     key: `${view}|${aerial ? 'a' : ''}|${view === 'editor' ? editing : ''}`,
     ref: mainEnter,
@@ -30205,7 +34475,12 @@ function App() {
       flex: 1,
       minWidth: 0,
       position: 'relative',
-      display: 'flex'
+      display: 'flex',
+      // 手机上给顶部条与底部标签栏让位（编辑器没有顶部条，也不挂标签栏——
+      // 键盘弹起时底部栏只会碍事）
+      paddingTop: phone && view !== 'editor' ? 'calc(var(--sr-topbar) + var(--sr-safe-top))' : 0,
+      paddingBottom: phone && view !== 'editor' ? 'calc(var(--sr-tabbar) + var(--sr-safe-bottom))' : 0,
+      boxSizing: 'border-box'
     }
   }, view === 'map' && !aerial && /*#__PURE__*/React.createElement(StarMap, {
     selected: selected,
@@ -30246,11 +34521,43 @@ function App() {
     onFocusCon: focusCon,
     onFeynman: id => setFeynman(id),
     onReview: openReview
+  }), view === 'admin' && /*#__PURE__*/React.createElement(AdminConsole, {
+    onClose: backToMap
   }), feynman && /*#__PURE__*/React.createElement(FeynmanDrawer, {
     starId: feynman,
     onClose: () => setFeynman(null),
     onOpenAIConfig: () => setAiConfigOpen(true)
-  })), reviewOpen && /*#__PURE__*/React.createElement(ReviewSession, {
+  }), phone && view !== 'editor' && /*#__PURE__*/React.createElement(MobileTabBar, {
+    view: aerial ? 'map' : view,
+    onView: openView,
+    onReview: openReview,
+    onMore: () => setDrawer(true),
+    drawerOpen: drawer,
+    dueN: tabCounts.due,
+    inboxN: tabCounts.inbox
+  }), banner && /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'absolute',
+      top: 14,
+      left: 0,
+      right: 0,
+      display: 'flex',
+      justifyContent: 'center',
+      pointerEvents: 'none',
+      zIndex: 40,
+      padding: '0 20px'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      maxWidth: 620,
+      width: '100%',
+      pointerEvents: 'auto',
+      animation: 'sr-cardin var(--dur-base) var(--ease-flight) both'
+    }
+  }, /*#__PURE__*/React.createElement(AnnouncementBanner, {
+    announcement: banner,
+    onDismiss: dismissBanner
+  })))), reviewOpen && /*#__PURE__*/React.createElement(ReviewSession, {
     onClose: closeReview
   }), cmd && /*#__PURE__*/React.createElement(CommandPalette, {
     onClose: () => setCmd(false),
@@ -31889,6 +36196,19 @@ window.SR_DATA = function () {
   const social = {
     friends: 0
   };
+  /* 站点状态：管理员在管理台发布的全站公告、以及游客功能门禁，由 /api/hello 下发。
+     gates[x] = true 表示「这项功能需要账号」。后端未运行 / file:// 打开时四项全 false——
+     离线把玩一份本地星空不该被登录挡住，真正牵扯到服务器的操作本来也走不通。 */
+  const site = {
+    announcement: null,
+    registrationOpen: true,
+    gates: {
+      editor: false,
+      share: false,
+      visit: false,
+      vault: false
+    }
+  };
   const conName = id => (constellations.find(c => c.id === id) || {}).name;
   const conColor = id => (constellations.find(c => c.id === id) || {}).color;
 
@@ -32167,11 +36487,25 @@ window.SR_DATA = function () {
         account.avatar = r.user.avatar || account.avatar;
       }
       if (r.account) Object.assign(account, {
+        // id：管理台据此认出「这一行就是我自己」，把停用/删除/改角色对自己藏起来
+        id: r.account.id,
         registered: r.account.registered,
         username: r.account.username,
         email: r.account.email,
-        registeredAt: r.account.registeredAt
+        registeredAt: r.account.registeredAt,
+        // 管理员身份由服务器说了算：前端只据此决定「星港管理台」入口显不显示，
+        // 每个 /api/admin/* 在服务端另有一道守卫，改这里的布尔值拿不到任何数据
+        role: r.account.role || 'user',
+        admin: !!r.account.admin
       });
+      // 站点状态（全站公告 / 出厂密码提醒）随握手下发，广播给横幅与管理台
+      if (r.site) {
+        site.announcement = r.site.announcement || null;
+        site.registrationOpen = r.site.registrationOpen !== false;
+        if (r.site.gates) site.gates = r.site.gates;
+        account.defaultPass = !!r.site.defaultPass;
+        window.dispatchEvent(new CustomEvent('sr-site'));
+      }
       return window.SRNet.api('/api/galaxy');
     }).then(r => {
       const d = r && r.data;
@@ -32226,6 +36560,7 @@ window.SR_DATA = function () {
     syncCounts,
     account,
     social,
+    site,
     ago,
     loadDemo,
     mail,
@@ -32717,6 +37052,124 @@ try { (() => {
   if (typeof globalThis !== 'undefined') globalThis.SRMd = api;
 })();
 })(); } catch (e) { __ds_ns.__errors.push({ path: "ui_kits/stellar-raft/mdcore.js", error: String((e && e.message) || e) }); }
+
+// ui_kits/stellar-raft/responsive.js
+try { (() => {
+/* SRScreen — 星图的响应式底座（plain global，在所有 .jsx 之前加载）
+
+   一套断点，全站共用；组件不要各自写 matchMedia，否则同一个「窄屏」在不同
+   视图里会是不同的宽度：
+     phone   ≤ 720px   手机竖屏：单列、抽屉侧栏、底部标签栏
+     tablet  ≤ 1024px  平板 / 分屏：侧栏可折叠，右侧栏让位
+     desktop  >1024px  原本的 1440×900 桌面布局
+
+   另外提供 coarse（粗指针 = 手指）——它与宽度是两件事：外接触摸屏的大屏也是
+   coarse，需要更大的点击区，但不需要单列布局。
+
+   横屏矮屏（landscape 且 height ≤ 480）单独标出来：手机横过来时高度只剩一点，
+   顶部条 + 底部栏会把内容挤没，这种时候两条都收起来。 */
+window.SRScreen = function () {
+  const BP = {
+    phone: 720,
+    tablet: 1024,
+    shortSide: 480
+  };
+  const mq = q => typeof matchMedia === 'function' ? matchMedia(q) : {
+    matches: false,
+    addEventListener() {},
+    removeEventListener() {}
+  };
+  const queries = {
+    phone: mq(`(max-width: ${BP.phone}px)`),
+    tablet: mq(`(max-width: ${BP.tablet}px)`),
+    coarse: mq('(pointer: coarse)'),
+    short: mq(`(max-height: ${BP.shortSide}px) and (orientation: landscape)`)
+  };
+  const read = () => ({
+    phone: queries.phone.matches,
+    tablet: queries.tablet.matches,
+    // 注意：phone 也满足 tablet
+    desktop: !queries.tablet.matches,
+    coarse: queries.coarse.matches,
+    short: queries.short.matches,
+    touch: queries.coarse.matches || queries.phone.matches
+  });
+  let state = read();
+  const subs = new Set();
+  const emit = () => {
+    const next = read();
+    // 只在真正跨过断点时广播，resize 抖动不触发整树重渲染
+    if (Object.keys(next).every(k => next[k] === state[k])) return;
+    state = next;
+    subs.forEach(fn => {
+      try {
+        fn(state);
+      } catch (e) {}
+    });
+    try {
+      window.dispatchEvent(new CustomEvent('sr-screen', {
+        detail: state
+      }));
+    } catch (e) {}
+    applyAttrs();
+  };
+  Object.values(queries).forEach(q => {
+    if (q.addEventListener) q.addEventListener('change', emit);else if (q.addListener) q.addListener(emit); // 老 Safari
+  });
+
+  /* html 上落两个属性，纯 CSS 也能挂钩（.jsx 里的内联样式之外，
+     styles.css / 各组件注入的 <style> 用 html[data-screen="phone"] 选择） */
+  const applyAttrs = () => {
+    if (typeof document === 'undefined' || !document.documentElement) return;
+    const el = document.documentElement;
+    el.dataset.screen = state.phone ? 'phone' : state.tablet ? 'tablet' : 'desktop';
+    if (state.touch) el.dataset.pointer = 'coarse';else delete el.dataset.pointer;
+    if (state.short) el.dataset.short = '';else delete el.dataset.short;
+  };
+  applyAttrs();
+
+  /* 视口高度：移动端浏览器的地址栏会吞掉 100vh，用 --sr-vh 兜底。
+     支持 dvh 的浏览器（iOS 16+ / Chrome 108+）直接用 dvh，这里只是给老设备垫底。 */
+  const syncVh = () => {
+    if (typeof document === 'undefined') return;
+    document.documentElement.style.setProperty('--sr-vh', window.innerHeight * 0.01 + 'px');
+  };
+  syncVh();
+  addEventListener('resize', () => {
+    syncVh();
+    emit();
+  });
+  addEventListener('orientationchange', () => setTimeout(() => {
+    syncVh();
+    emit();
+  }, 60));
+  return {
+    BP,
+    get: () => state,
+    // 订阅断点变化，返回退订函数
+    subscribe(fn) {
+      subs.add(fn);
+      return () => subs.delete(fn);
+    },
+    // 便捷判断（非 React 语境用）
+    isPhone: () => state.phone,
+    isTablet: () => state.tablet,
+    isTouch: () => state.touch
+  };
+}();
+
+/* React 侧的入口：SRKit.useScreen() —— 组件里只写
+     const scr = useScreen();
+     scr.phone ? <单列> : <双栏>
+   跨断点时才重渲染。注册进 SRKit 而不是各自 import，是因为整个 kit 走全局命名空间。 */
+window.SRKit = Object.assign(window.SRKit || {}, {
+  useScreen() {
+    const [s, set] = React.useState(window.SRScreen.get());
+    React.useEffect(() => window.SRScreen.subscribe(set), []);
+    return s;
+  }
+});
+})(); } catch (e) { __ds_ns.__errors.push({ path: "ui_kits/stellar-raft/responsive.js", error: String((e && e.message) || e) }); }
 
 // ui_kits/stellar-raft/sanitize.js
 try { (() => {

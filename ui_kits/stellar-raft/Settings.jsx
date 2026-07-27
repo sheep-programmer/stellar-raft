@@ -33,7 +33,8 @@ const SR_SET_NAV = [
   { id: 'profile', label: '个人资料', icon: 'user' },
   { id: 'prefs',   label: '偏好',     icon: 'sliders-horizontal' },
   { id: 'review',  label: '复习提醒', icon: 'bell' },
-  { id: 'keys',    label: '快捷键',   icon: 'keyboard' },
+  // 触摸端没有物理键盘，这一整页（连同它列出的十来条组合键）都没有意义
+  { id: 'keys',    label: '快捷键',   icon: 'keyboard', desktopOnly: true },
   { id: 'guide',   label: '上手引导', icon: 'compass' },
   { id: 'account', label: '账户',     icon: 'shield' },
 ];
@@ -211,6 +212,9 @@ function Settings({ onClose, theme, onToggleTheme, onReplayGuide, onOpenLogin })
       await window.SRNet.auth.changePassword({ old: oldPw, new: newPw });
       setPwOpen(false); setOldPw(''); setNewPw('');
       flashToast('密码已更新');
+      // 管理员刚换掉出厂密码：广播出去，管理台顶部那条警告随即消失
+      const A = window.SR_DATA && window.SR_DATA.account;
+      if (A && A.defaultPass) { A.defaultPass = false; window.dispatchEvent(new CustomEvent('sr-account')); }
     } catch (err) {
       setPwErr((err && err.message) || '出了点问题，请再试一次');
     } finally {
@@ -242,7 +246,7 @@ function Settings({ onClose, theme, onToggleTheme, onReplayGuide, onOpenLogin })
       role="dialog" aria-modal="true" aria-label="设置"
       style={{ position: 'fixed', inset: 0, zIndex: 110, background: 'rgba(3,4,12,0.55)', backdropFilter: 'blur(4px)', WebkitBackdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
       <div onMouseDown={(e) => e.stopPropagation()}
-        style={{ width: 760, maxWidth: '94vw', height: 560, maxHeight: '92vh', animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
+        className="sr-modal-panel" style={{ width: 760, maxWidth: '94vw', height: 560, maxHeight: '92vh', animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
         <GlassPanel strong radius="lg" pad="none" glow style={{ height: '100%', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
 
           {/* header */}
@@ -255,10 +259,10 @@ function Settings({ onClose, theme, onToggleTheme, onReplayGuide, onOpenLogin })
           </div>
 
           {/* body: nav + content */}
-          <div style={{ flex: 1, minHeight: 0, display: 'flex' }}>
+          <div className="sr-set-body" style={{ flex: 1, minHeight: 0, display: 'flex' }}>
             {/* left nav */}
-            <nav style={{ width: 168, flex: 'none', borderRight: '1px solid var(--line)', padding: '12px 10px', display: 'flex', flexDirection: 'column', gap: 3, overflow: 'auto' }}>
-              {SR_SET_NAV.map(n => {
+            <nav className="sr-set-nav" style={{ width: 168, flex: 'none', borderRight: '1px solid var(--line)', padding: '12px 10px', display: 'flex', flexDirection: 'column', gap: 3, overflow: 'auto' }}>
+              {SR_SET_NAV.filter(n => !(n.desktopOnly && window.SRScreen.isTouch())).map(n => {
                 const on = tab === n.id;
                 return (
                   <button key={n.id} type="button" onClick={() => setTab(n.id)}
@@ -494,7 +498,9 @@ function Settings({ onClose, theme, onToggleTheme, onReplayGuide, onOpenLogin })
                     }}>导出数据</Button>
                     <Button size="sm" variant="ghost" icon="folder-down" onClick={() => {
                       // 整片星空 → Obsidian 风格 Markdown 仓库（zip）：每星一档、星域分夹、
-                      // wikilink 关联、README 索引；知识随时带得走，不锁在应用里
+                      // wikilink 关联、README 索引；知识随时带得走，不锁在应用里。
+                      // Markdown 仓库进出可由管理台设成「需要账号」（游客点了会被请去登录）
+                      if (!window.SRGate.require('vault', 'Markdown 仓库导出')) return;
                       try {
                         const entries = window.SRVault.buildVault({
                           stars: D.stars, constellations: D.constellations,
@@ -511,7 +517,7 @@ function Settings({ onClose, theme, onToggleTheme, onReplayGuide, onOpenLogin })
                       } catch (err) { flashToast('导出失败 · ' + ((err && err.message) || '稍后再试')); }
                     }}>导出 Markdown 仓库</Button>
                     <Button size="sm" variant="ghost" icon="upload" onClick={() => importRef.current && importRef.current.click()}>导入数据</Button>
-                    <Button size="sm" variant="ghost" icon="folder-up" onClick={() => mdImportRef.current && mdImportRef.current.click()}>导入 Markdown</Button>
+                    <Button size="sm" variant="ghost" icon="folder-up" onClick={() => { if (!window.SRGate.require('vault', 'Markdown 仓库导入')) return; if (mdImportRef.current) mdImportRef.current.click(); }}>导入 Markdown</Button>
                     <input ref={mdImportRef} type="file" accept=".zip,.md,text/markdown,application/zip" multiple style={{ display: 'none' }}
                       onChange={(e) => { const fs = Array.from(e.target.files || []); e.target.value = ''; if (fs.length) handleMdImport(fs); }} />
                     <input ref={importRef} type="file" accept=".json,application/json" style={{ display: 'none' }}

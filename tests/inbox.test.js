@@ -57,7 +57,10 @@ test.before(async () => {
   const port = await freePort();
   baseUrl = `http://127.0.0.1:${port}`;
   child = spawn(process.execPath, ['--no-warnings', path.join(tmpDir, 'server', 'server.js')], {
-    env: { ...process.env, PORT: String(port) },
+    // 这套用例以匿名旅客的身份跑分享 / 造访 / 来信协议本身：关掉「每 IP 一个游客」
+    // 的限额与「社交需要账号」的门禁（都是管理台里可关的真实配置）。
+    // 限额与门禁的行为本身在 tests/admin.test.js 里单独覆盖。
+    env: { ...process.env, PORT: String(port), SR_GUEST_PER_IP: '0', SR_GUEST_GATES: 'off' },
     stdio: ['ignore', 'pipe', 'pipe'],
   });
   let logs = '';

@@ -46,7 +46,9 @@ test.before(async () => {
   const port = await freePort();
   baseUrl = `http://127.0.0.1:${port}`;
   child = spawn(process.execPath, ['--no-warnings', path.join(tmpDir, 'server', 'server.js')], {
-    env: { ...process.env, PORT: String(port) },
+    // 这几套用例都要从同一个回环地址建多个匿名旅客，关掉「每 IP 一个游客」的限额
+    // （限额本身在 tests/admin.test.js 里单独覆盖）
+    env: { ...process.env, PORT: String(port), SR_GUEST_PER_IP: '0' },
     stdio: ['ignore', 'pipe', 'pipe'],
   });
   let logs = '';
@@ -56,8 +58,10 @@ test.before(async () => {
   // 等待就绪（最多 10s）
   for (let i = 0; ; i++) {
     try {
-      const r = await fetch(baseUrl + '/api/hello?token=warmup', { method: 'POST' });
-      if (r.status === 200) break;
+      // 就绪探测走静态根路径：/api/hello 会给探测令牌建一个游客账号，
+      // 把「每 IP 一个游客」的名额提前吃掉
+      const r = await fetch(baseUrl + '/', { redirect: 'manual' });
+      if (r.status) break;
     } catch {
       /* not up yet */
     }

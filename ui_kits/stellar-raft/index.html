@@ -3,7 +3,12 @@
 <html lang="zh">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- viewport-fit=cover：内容铺到刘海/圆角之下，安全区由 env(safe-area-inset-*) 让回来。
+       不写 user-scalable=no —— 捏合放大是无障碍底线，星图自己的缩放另有手势。 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#05060f">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>星图 · Stellar Raft</title>
   <!-- 品牌星标：暖金四芒主星 + 冷蓝伴星连线（标签页图标与启动屏共用同一枚） -->
   <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Cdefs%3E%3ClinearGradient%20id='g'%20x1='0'%20y1='0'%20x2='1'%20y2='1'%3E%3Cstop%20offset='0'%20stop-color='%23ffe9b8'/%3E%3Cstop%20offset='1'%20stop-color='%23ffb86b'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath%20d='M13%2049%20L24%2037%20M42%2020%20L52%2012'%20stroke='rgba(159,198,255,0.45)'%20stroke-width='1.2'/%3E%3Ccircle%20cx='13'%20cy='49'%20r='2.2'%20fill='%239fc6ff'%20opacity='0.9'/%3E%3Ccircle%20cx='52'%20cy='12'%20r='1.7'%20fill='%239fc6ff'%20opacity='0.75'/%3E%3Cpath%20d='M33%208%20C34.6%2023%2037.4%2025.8%2052%2027.5%20C37.4%2029.2%2034.6%2032%2033%2047%20C31.4%2032%2028.6%2029.2%2014%2027.5%20C28.6%2025.8%2031.4%2023%2033%208%20Z'%20fill='url(%23g)'/%3E%3C/svg%3E">
@@ -11,6 +16,39 @@
   <style>
     html, body { margin: 0; height: 100%; background: var(--space-void); transition: background var(--dur-base); }
     #root { width: 100vw; height: 100vh; font-family: var(--font-sans); }
+
+    /* ——— 移动端底座 ———
+       安全区变量集中在这里，组件只读 var(--sr-safe-*)，不各自写 env()。 */
+    :root {
+      --sr-safe-top: env(safe-area-inset-top, 0px);
+      --sr-safe-bottom: env(safe-area-inset-bottom, 0px);
+      --sr-safe-left: env(safe-area-inset-left, 0px);
+      --sr-safe-right: env(safe-area-inset-right, 0px);
+      --sr-topbar: 52px;    /* 移动端顶部条高度 */
+      --sr-tabbar: 58px;    /* 移动端底部标签栏高度（不含安全区） */
+    }
+    /* 地址栏会吞掉 100vh：优先 dvh，老浏览器退回 responsive.js 量出来的 --sr-vh */
+    @supports (height: 100dvh) { #root { height: 100dvh; } }
+    @supports not (height: 100dvh) { #root { height: calc(var(--sr-vh, 1vh) * 100); } }
+
+    html[data-screen="phone"], html[data-screen="tablet"] {
+      /* 横屏旋转后 iOS 会自作主张放大字号 */
+      -webkit-text-size-adjust: 100%; text-size-adjust: 100%;
+    }
+    html[data-pointer="coarse"] body {
+      /* 整页不跟手下拉（视图内部各自开滚动），也别在双击时缩放 */
+      overscroll-behavior: none;
+      touch-action: manipulation;
+    }
+    /* 触摸端点击不留灰色高亮方块 */
+    html[data-pointer="coarse"] * { -webkit-tap-highlight-color: transparent; }
+    /* 触摸端的滚动容器给惯性滚动 */
+    html[data-pointer="coarse"] [style*="overflow: auto"],
+    html[data-pointer="coarse"] [style*="overflow-y: auto"] { -webkit-overflow-scrolling: touch; }
+    /* 手指够不着 hover：把 hover 才出现的悬浮工具在触摸端常驻（各视图用这个类标记） */
+    html[data-pointer="coarse"] .sr-hover-only { opacity: 1 !important; }
+    /* 移动端滚动条留给系统，别再画一条占地方的 */
+    html[data-screen="phone"] ::-webkit-scrollbar { width: 0; height: 0; }
     .sr-stage { width: 100%; height: 100%; background: var(--bg-deepspace); }
     ::-webkit-scrollbar { width: 9px; height: 9px; }
     ::-webkit-scrollbar-thumb { background: rgba(159,198,255,0.16); border-radius: 6px; }
@@ -107,6 +145,7 @@
   <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+  <script src="responsive.js?v=1"></script>
   <script src="../../assets/starfield.js?v=6"></script>
   <script src="codehl.js"></script>
   <script src="sanitize.js?v=1"></script>
@@ -126,32 +165,34 @@
     })();
   </script>
   <script src="../../_ds_bundle.js"></script>
-  <script src="api.js?v=75"></script>
+  <script src="api.js?v=77"></script>
   <script src="ai.js?v=1"></script>
   <script src="tip.js?v=5"></script>
   <script src="transition.js?v=2"></script>
   <script src="undocore.js?v=1"></script>
-  <script src="data.js?v=79"></script>
-  <script type="text/babel" src="Sidebar.jsx?v=77"></script>
-  <script type="text/babel" src="StarMap.jsx?v=73"></script>
+  <script src="data.js?v=81"></script>
+  <script type="text/babel" src="MobileShell.jsx?v=5"></script>
+  <script type="text/babel" src="Sidebar.jsx?v=81"></script>
+  <script type="text/babel" src="StarMap.jsx?v=77"></script>
   <script type="text/babel" src="AerialView.jsx?v=78"></script>
-  <script type="text/babel" src="FeynmanDrawer.jsx?v=71"></script>
-  <script type="text/babel" src="ListView.jsx?v=68"></script>
-  <script type="text/babel" src="EditorMenus.jsx?v=71"></script>
-  <script type="text/babel" src="Editor.jsx?v=88"></script>
-  <script type="text/babel" src="Inbox.jsx?v=71"></script>
-  <script type="text/babel" src="BlackHole.jsx?v=69"></script>
-  <script type="text/babel" src="VisitView.jsx?v=82"></script>
-  <script type="text/babel" src="Timeline.jsx?v=68"></script>
-  <script type="text/babel" src="CommandPalette.jsx?v=67"></script>
-  <script type="text/babel" src="Checkup.jsx?v=71"></script>
-  <script type="text/babel" src="ReviewSession.jsx?v=4"></script>
+  <script type="text/babel" src="FeynmanDrawer.jsx?v=72"></script>
+  <script type="text/babel" src="ListView.jsx?v=72"></script>
+  <script type="text/babel" src="EditorMenus.jsx?v=72"></script>
+  <script type="text/babel" src="Editor.jsx?v=89"></script>
+  <script type="text/babel" src="Inbox.jsx?v=73"></script>
+  <script type="text/babel" src="BlackHole.jsx?v=70"></script>
+  <script type="text/babel" src="VisitView.jsx?v=84"></script>
+  <script type="text/babel" src="Timeline.jsx?v=69"></script>
+  <script type="text/babel" src="CommandPalette.jsx?v=69"></script>
+  <script type="text/babel" src="Checkup.jsx?v=73"></script>
+  <script type="text/babel" src="ReviewSession.jsx?v=5"></script>
   <script type="text/babel" src="Galaxy3D.jsx?v=74"></script>
-  <script type="text/babel" src="Settings.jsx?v=76"></script>
+  <script type="text/babel" src="Settings.jsx?v=80"></script>
   <script type="text/babel" src="LoginView.jsx?v=2"></script>
-  <script type="text/babel" src="Onboarding.jsx?v=9"></script>
-  <script type="text/babel" src="AIConfig.jsx?v=66"></script>
-  <script type="text/babel" src="KeysHelp.jsx?v=1"></script>
-  <script type="text/babel" src="app.jsx?v=86"></script>
+  <script type="text/babel" src="Onboarding.jsx?v=10"></script>
+  <script type="text/babel" src="AIConfig.jsx?v=67"></script>
+  <script type="text/babel" src="KeysHelp.jsx?v=2"></script>
+  <script type="text/babel" src="AdminConsole.jsx?v=6"></script>
+  <script type="text/babel" src="app.jsx?v=89"></script>
 </body>
 </html>

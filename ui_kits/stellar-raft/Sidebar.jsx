@@ -34,7 +34,7 @@ function SRLogo({ collapsed, theme }) {
   );
 }
 
-function NavRow({ icon, label, active, badge, collapsed, onClick, dawn, tip, dataTour }) {
+function NavRow({ icon, label, active, badge, collapsed, onClick, dawn, tip, dataTour, h }) {
   const [hover, setHover] = React.useState(false);
   const lit = active || hover;
   const idle = dawn ? 'rgba(22,30,56,0.82)' : 'rgba(159,198,255,0.72)';
@@ -43,7 +43,7 @@ function NavRow({ icon, label, active, badge, collapsed, onClick, dawn, tip, dat
       title={collapsed ? undefined : tip}
       onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
       style={{
-        display: 'flex', alignItems: 'center', gap: 11, width: '100%', height: 40,
+        display: 'flex', alignItems: 'center', gap: 11, width: '100%', height: h || 40,
         padding: collapsed ? 0 : '0 11px', justifyContent: collapsed ? 'center' : 'flex-start',
         borderRadius: 'var(--r-sm)', cursor: 'pointer', position: 'relative',
         border: '1px solid', borderColor: active ? 'var(--glass-border-strong)' : 'transparent',
@@ -92,9 +92,11 @@ function UserChip({ collapsed, dawn, registered, onClick }) {
   );
 }
 
-function Sidebar({ collapsed, onToggle, view, onView, focus, onFocus, theme, onToggleTheme, onSearch, onCheckup, onAIConfig, onOpenSettings, onReview }) {
+function Sidebar({ collapsed, onToggle, view, onView, focus, onFocus, theme, onToggleTheme, onSearch, onCheckup, onAIConfig, onOpenSettings, onReview, onAdmin, mobile }) {
   const D = window.SR_DATA;
   const dawn = theme === 'dawn';
+  // 手指的落点比鼠标大一圈：手机上每一行都撑到 46px（≈ 触摸目标下限）
+  const rowH = mobile ? 46 : 40;
   // 好友数 / 到期星数 / 黑洞·收件箱计数都随写操作变化：
   // sr-friends（好友异步取回）、sr-memory（每分钟心跳）之外，
   // 写操作（删除/恢复/建星）即时广播 sr-data——角标不再等心跳才对齐
@@ -122,18 +124,33 @@ function Sidebar({ collapsed, onToggle, view, onView, focus, onFocus, theme, onT
   const todo = D.todayTodo ? D.todayTodo() : null;
   const todoN = todo ? (todo.due + todo.ember + todo.inbox) : 0;
   return (
+    /* 手机上这块被塞进抽屉：铺满抽屉宽度、顶部让出刘海、底部让出 Home 条，
+       不再画右侧那条分隔线（抽屉自己有边界），也不做宽度过渡（会跟滑入动画打架） */
     <aside style={{
-      width: collapsed ? 64 : 260, flex: 'none', height: '100%',
+      width: mobile ? '100%' : (collapsed ? 64 : 260), flex: mobile ? 1 : 'none', height: '100%',
       display: 'flex', flexDirection: 'column', position: 'relative', zIndex: 5,
       background: 'var(--glass-bg-strong)',
       WebkitBackdropFilter: 'blur(var(--glass-blur)) saturate(1.2)', backdropFilter: 'blur(var(--glass-blur)) saturate(1.2)',
-      borderRight: '1px solid var(--glass-border)',
-      transition: 'width var(--dur-base) var(--ease-flight)',
+      borderRight: mobile ? 'none' : '1px solid var(--glass-border)',
+      paddingTop: mobile ? 'var(--sr-safe-top)' : 0,
+      paddingBottom: mobile ? 'var(--sr-safe-bottom)' : 0,
+      boxSizing: 'border-box',
+      /* 手机上整条侧栏一起滚：桌面那套「导航固定 + 星域内滚 + 页脚钉底」在
+         手机高度下会把中间的星域挤成两行、还被页脚的分隔线拦腰截断。
+         内容比屏幕高是常态，让它整体滚动才是老实的做法。 */
+      overflowY: mobile ? 'auto' : 'visible',
+      transition: mobile ? 'none' : 'width var(--dur-base) var(--ease-flight)',
     }}>
       {/* header */}
-      <div style={{ display: 'flex', alignItems: 'center', height: 60, padding: collapsed ? '0' : '0 14px', flex: 'none', justifyContent: collapsed ? 'center' : 'space-between' }}>
+      {/* 手机上整条侧栏会滚动，把这一行钉在顶部——关闭按钮任何时候都够得着 */}
+      <div style={{
+        display: 'flex', alignItems: 'center', height: 60, padding: collapsed && !mobile ? '0' : '0 14px', flex: 'none',
+        justifyContent: collapsed && !mobile ? 'center' : 'space-between',
+        position: mobile ? 'sticky' : 'static', top: 0, zIndex: 2,
+        background: mobile ? 'var(--glass-bg-strong)' : 'transparent',
+      }}>
         <SRLogo collapsed={collapsed} theme={theme} />
-        {!collapsed && <IconButton name="panel-left-close" title="折叠" onClick={onToggle} />}
+        {!collapsed && <IconButton name={mobile ? 'x' : 'panel-left-close'} title={mobile ? '关闭菜单' : '折叠'} onClick={onToggle} />}
       </div>
       {collapsed && (
         <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 6 }}>
@@ -144,13 +161,13 @@ function Sidebar({ collapsed, onToggle, view, onView, focus, onFocus, theme, onT
       {/* search */}
       <div style={{ padding: collapsed ? '0 12px 8px' : '0 14px 10px', flex: 'none' }}>
         {collapsed
-          ? <IconButton name="search" title={'搜索 ' + window.SRKeys.combo('K')} onClick={onSearch} />
+          ? <IconButton name="search" title={mobile ? '搜索' : ('搜索 ' + window.SRKeys.combo('K'))} onClick={onSearch} />
           : (
             /* 搜索入口：点击 / Enter / 直接开始输入 都打开命令面板。
                readOnly 让它保持可 Tab 聚焦（Input 自带聚焦发光），
                但不再吞字——键盘用户不会把「量子」打进一个死输入框 */
             <div data-tour="search" style={{ cursor: 'pointer' }} onClick={onSearch}>
-              <Input icon="search" placeholder="搜索你的星空…" kbd={window.SRKeys.combo('K')} size="sm"
+              <Input icon="search" placeholder="搜索你的星空…" kbd={mobile ? undefined : window.SRKeys.combo('K')} size="sm"
                 readOnly value="" aria-label="搜索你的星空（打开命令面板）"
                 inputStyle={{ cursor: 'pointer' }}
                 onKeyDown={(e) => {
@@ -164,19 +181,19 @@ function Sidebar({ collapsed, onToggle, view, onView, focus, onFocus, theme, onT
 
       {/* views */}
       <nav data-tour="nav-views" style={{ padding: collapsed ? '6px 8px' : '6px 12px', display: 'flex', flexDirection: 'column', gap: 3, flex: 'none' }}>
-        <NavRow icon="orbit"   label="星图视图"   active={view === 'map'}  collapsed={collapsed} dawn={dawn} onClick={() => onView('map')} />
-        <NavRow icon="list"    label="列表视图"   active={view === 'list'} collapsed={collapsed} dawn={dawn} onClick={() => onView('list')} />
-        <NavRow icon="git-commit-horizontal" label="时间轴视图" active={view === 'timeline'} collapsed={collapsed} dawn={dawn} onClick={() => onView('timeline')} />
+        <NavRow h={rowH} icon="orbit"   label="星图视图"   active={view === 'map'}  collapsed={collapsed} dawn={dawn} onClick={() => onView('map')} />
+        <NavRow h={rowH} icon="list"    label="列表视图"   active={view === 'list'} collapsed={collapsed} dawn={dawn} onClick={() => onView('list')} />
+        <NavRow h={rowH} icon="git-commit-horizontal" label="时间轴视图" active={view === 'timeline'} collapsed={collapsed} dawn={dawn} onClick={() => onView('timeline')} />
         <div style={{ height: 1, background: 'var(--line)', margin: '8px 4px' }} />
-        <NavRow icon="repeat"   label="复习"   badge={dueN || null} collapsed={collapsed} dawn={dawn} onClick={onReview} active={false} dataTour="review" />
-        <NavRow icon="inbox"    label="收件箱" badge={inboxN || null} tip={`本地捕捉 ${D.inbox.length} 条 + 未领取来信 ${mailN} 封`} collapsed={collapsed} dawn={dawn} onClick={() => onView('inbox')} active={view === 'inbox'} dataTour="inbox" />
-        <NavRow icon="aperture" label="黑洞"   badge={D.trash.length || null} collapsed={collapsed} dawn={dawn} onClick={() => onView('blackhole')} active={view === 'blackhole'} dataTour="trash" />
-        <NavRow icon="telescope" label="星际漫游" badge={(D.social && D.social.friends) || null} collapsed={collapsed} dawn={dawn} onClick={() => onView('visit')} active={view === 'visit'} dataTour="visit" />
+        <NavRow h={rowH} icon="repeat"   label="复习"   badge={dueN || null} collapsed={collapsed} dawn={dawn} onClick={onReview} active={false} dataTour="review" />
+        <NavRow h={rowH} icon="inbox"    label="收件箱" badge={inboxN || null} tip={`本地捕捉 ${D.inbox.length} 条 + 未领取来信 ${mailN} 封`} collapsed={collapsed} dawn={dawn} onClick={() => onView('inbox')} active={view === 'inbox'} dataTour="inbox" />
+        <NavRow h={rowH} icon="aperture" label="黑洞"   badge={D.trash.length || null} collapsed={collapsed} dawn={dawn} onClick={() => onView('blackhole')} active={view === 'blackhole'} dataTour="trash" />
+        <NavRow h={rowH} icon="telescope" label="星际漫游" badge={(D.social && D.social.friends) || null} collapsed={collapsed} dawn={dawn} onClick={() => onView('visit')} active={view === 'visit'} dataTour="visit" />
       </nav>
 
       {/* constellations */}
       {!collapsed && (
-        <div style={{ flex: 1, minHeight: 0, overflow: 'auto', padding: '10px 12px 0' }}>
+        <div style={{ flex: mobile ? 'none' : 1, minHeight: 0, overflow: mobile ? 'visible' : 'auto', padding: '10px 12px 0' }}>
           <div style={{ fontSize: 10, letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: 'var(--text-3)', padding: '0 6px 8px', fontFamily: 'var(--font-mono)' }}>我的星域</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
             {D.constellations.map(c => (
@@ -189,10 +206,17 @@ function Sidebar({ collapsed, onToggle, view, onView, focus, onFocus, theme, onT
       {collapsed && <div style={{ flex: 1 }} />}
 
       {/* footer */}
-      <div style={{ flex: 'none', padding: collapsed ? '10px 8px' : '12px', borderTop: '1px solid var(--line)', display: 'flex', flexDirection: 'column', gap: 4 }}>
-        <NavRow icon={dawn ? 'moon-star' : 'sunrise'} label={dawn ? '切回深空' : '黎明模式'} collapsed={collapsed} dawn={dawn} onClick={onToggleTheme} dataTour="theme" />
-        <NavRow icon="activity" label="知识体检报告" badge={todoN || null} collapsed={collapsed} dawn={dawn} active={view === 'checkup'} onClick={onCheckup} dataTour="checkup" />
-        <NavRow icon="bot" label="AI 配置" collapsed={collapsed} dawn={dawn} onClick={onAIConfig} />
+      <div style={{ flex: 'none', marginTop: mobile ? 10 : 0, padding: collapsed ? '10px 8px' : '12px', borderTop: '1px solid var(--line)', display: 'flex', flexDirection: 'column', gap: 4 }}>
+        <NavRow h={rowH} icon={dawn ? 'moon-star' : 'sunrise'} label={dawn ? '切回深空' : '黎明模式'} collapsed={collapsed} dawn={dawn} onClick={onToggleTheme} dataTour="theme" />
+        <NavRow h={rowH} icon="activity" label="知识体检报告" badge={todoN || null} collapsed={collapsed} dawn={dawn} active={view === 'checkup'} onClick={onCheckup} dataTour="checkup" />
+        <NavRow h={rowH} icon="bot" label="AI 配置" collapsed={collapsed} dawn={dawn} onClick={onAIConfig} />
+        {/* 星港管理台：只有服务器确认的管理员看得到这一行（服务端另有守卫，
+            前端这个布尔值被改也拿不到任何数据）；出厂密码未改时挂一个金点提醒 */}
+        {D.account.admin && (
+          <NavRow h={rowH} icon="shield" label="星港管理台" badge={D.account.defaultPass ? '!' : null}
+            tip={D.account.defaultPass ? '管理员账号仍在用出厂密码' : '全站用户、分享、会话与系统状态'}
+            collapsed={collapsed} dawn={dawn} active={view === 'admin'} onClick={onAdmin} />
+        )}
         <UserChip collapsed={collapsed} dawn={dawn} registered={!!D.account.registered} onClick={onOpenSettings} />
       </div>
     </aside>

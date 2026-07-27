@@ -173,6 +173,28 @@ const VISIBILITY_OPTS = [
   { id: 'stars', label: '仅星名', desc: '访客只能看到星与连线的形状' },
 ];
 
+/* 门禁提示卡：游客撞上「需要账号」的功能时代替面板出现。
+   只讲清楚为什么需要账号，并把登录页递到手边——不说教，也不假装功能坏了。 */
+function GateNotice({ icon, title, body }) {
+  return (
+    <GlassPanel radius="lg" pad="md" style={{ maxWidth: 520 }}>
+      <div style={{ display: 'flex', gap: 14 }}>
+        <span style={{ flex: 'none', width: 38, height: 38, borderRadius: 12, background: 'rgba(255,217,138,0.10)', border: '1px solid rgba(255,217,138,0.28)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <Icon name={icon || 'user-plus'} size={19} color="var(--gold)" />
+        </span>
+        <div style={{ minWidth: 0 }}>
+          <div style={{ fontSize: 15, color: 'var(--text-1)', fontWeight: 300 }}>{title}</div>
+          <div style={{ fontSize: 12.5, color: 'var(--text-2)', lineHeight: 1.75, marginTop: 8 }}>{body}</div>
+          <div style={{ marginTop: 14 }}>
+            <Button size="sm" variant="primary" icon="sparkles"
+              onClick={() => window.dispatchEvent(new CustomEvent('sr-need-login'))}>登录 / 注册</Button>
+          </div>
+        </div>
+      </div>
+    </GlassPanel>
+  );
+}
+
 /* ---------- 我的分享 ---------- */
 function SharePanel({ flash, onGoFriends }) {
   const N = window.SRNet;
@@ -212,6 +234,13 @@ function SharePanel({ flash, onGoFriends }) {
       .then(() => { flash(v.blocked ? `已恢复「${v.name}」的访问` : `已对「${v.name}」隐身`); load(); })
       .catch(e => flash(e.message, 'danger'));
   };
+
+  // 门禁：把星系开出去意味着别人能找到你，这需要一个真名。被拦时给出去处，
+  // 而不是让面板静默空着（管理台关掉 share 门禁后这一段就不会出现）
+  if (window.SRGate.gated('share')) {
+    return <GateNotice icon="radio-tower" title="分享星系需要一个账号"
+      body="密文一旦发出去，别人就能循着它找到这片星空——所以它得先有个主人。注册会把你现在的星空原地收进账号，一颗星都不会丢。" />;
+  }
 
   if (!share) return <div style={{ padding: 40, color: 'var(--text-3)', fontSize: 13 }}>正在连接星际网络…（后端未运行时此页不可用）</div>;
 
@@ -336,6 +365,7 @@ function SharePanel({ flash, onGoFriends }) {
 /* ---------- 好友星系列表 + 兑换 ---------- */
 function FriendsPanel({ flash, onVisit, launching }) {
   const N = window.SRNet;
+  const gated = window.SRGate.gated('visit');
   const [friends, setFriends] = React.useState([]);
   const [code, setCode] = React.useState('');
   const [busy, setBusy] = React.useState(false);
@@ -379,6 +409,12 @@ function FriendsPanel({ flash, onVisit, launching }) {
         .then(() => { flash(`已移除「${f.name}」的星系`); load(); }).catch(e => flash(e.message, 'danger'));
     },
   });
+
+  // 门禁：造访要在对方的访客名单上留名，游客没有可留的名字
+  if (gated) {
+    return <GateNotice icon="telescope" title="星际漫游需要一个账号"
+      body="造访会在对方的星系里留下你的足迹，也让他能给你回信——这些都要认得出「你」是谁。注册之后，现在这片星空会原地跟着你走。" />;
+  }
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
@@ -940,7 +976,7 @@ function VisitView() {
       ) : (
         <div style={{ flex: 1, minWidth: 0, height: '100%', overflow: 'auto', position: 'relative' }}>
           <sr-starfield density="0.8" meteors="0"></sr-starfield>
-          <div style={{ position: 'relative', zIndex: 1, maxWidth: 960, margin: '0 auto', padding: '34px 32px 24px' }}>
+          <div className="sr-view" style={{ position: 'relative', zIndex: 1, maxWidth: 960, margin: '0 auto', padding: '34px 32px 24px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 13, marginBottom: 8 }}>
               <Icon name="telescope" size={26} color="var(--gold)" />
               <h1 style={{ fontSize: 30, fontWeight: 200, letterSpacing: '0.04em', background: 'linear-gradient(100deg, var(--gold), var(--gold-white) 45%, var(--star-blue))', WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent' }}>星际漫游</h1>

@@ -1,7 +1,7 @@
 /* App — orchestrates the Stellar Raft kit as one interactive click-through.
    star map ⇄ list ⇄ editor ⇄ inbox ⇄ timeline, with Feynman drawer, ignite,
    aerial heat map, ⌘K command palette and a 知识体检 report — all via the sidebar. */
-const { Sidebar, StarMap, AerialView, FeynmanDrawer, ListView, Editor, Inbox, Timeline, CommandPalette, Checkup, Galaxy3D, Settings, AIConfig, BlackHole, VisitView, ReviewSession, Onboarding, OnboardingTour, LoginView, KeysHelp } = window.SRKit;
+const { Sidebar, StarMap, AerialView, FeynmanDrawer, ListView, Editor, Inbox, Timeline, CommandPalette, Checkup, Galaxy3D, Settings, AIConfig, BlackHole, VisitView, ReviewSession, Onboarding, OnboardingTour, LoginView, KeysHelp, AdminConsole, AnnouncementBanner, MobileTopBar, MobileTabBar, MobileDrawer, useScreen } = window.SRKit;
 const { GlassPanel, Icon, IconButton, Button, MemoryBar } = window.StellarRaftDesignSystem_2866af;
 
 function App() {
@@ -24,7 +24,17 @@ function App() {
   const [login, setLogin] = React.useState(false);
   const [authKnown, setAuthKnown] = React.useState(false); // 登录态尘埃落定前引导不闪现     // 全屏登录/注册页
   const [dataRev, setDataRev] = React.useState(0); // 数据库水合后整体重挂载
+  const [banner, setBanner] = React.useState(null);  // 管理员发布的全站公告
+  const [blocked, setBlocked] = React.useState(null); // { kind: 'banned' | 'maintenance', message }
+  const [drawer, setDrawer] = React.useState(false);   // 手机：侧栏抽屉
   const nonce = React.useRef(0);
+
+  // 断点：phone 走抽屉 + 底部标签栏那一套；平板与桌面保持常驻侧栏
+  const scr = useScreen();
+  const phone = scr.phone;
+  const closeDrawer = React.useCallback(() => setDrawer(false), []);
+  // 换到桌面宽度时把抽屉收掉，否则遮罩会挂在一个已经常驻的侧栏上
+  React.useEffect(() => { if (!phone) setDrawer(false); }, [phone]);
 
   const openLogin = () => setLogin(true);
   const closeLogin = () => { try { localStorage.setItem('sr.login.skipped', '1'); } catch (e) {} setLogin(false); };
@@ -49,6 +59,40 @@ function App() {
     window.addEventListener('sr-hydrated', settled);
     const t = setTimeout(() => setAuthKnown(true), 3000);        // 兜底：事件早于挂载已发过且后端离线
     return () => { window.removeEventListener('sr-hydrated', settled); clearTimeout(t); };
+  }, []);
+
+  /* 全站公告：管理员在管理台发布后，所有人下次握手就带回来。
+     同一条公告只提醒一次——按内容指纹记在本机，读过就不再挡视线；
+     管理员改了文案（指纹变化）会重新出现。 */
+  React.useEffect(() => {
+    const h = () => {
+      const a = window.SR_DATA && window.SR_DATA.site && window.SR_DATA.site.announcement;
+      if (!a || !a.text) { setBanner(null); return; }
+      let dismissed = '';
+      try { dismissed = localStorage.getItem('sr.notice.read') || ''; } catch (e) {}
+      setBanner(dismissed === a.text ? null : a);
+    };
+    h();
+    window.addEventListener('sr-site', h);
+    return () => window.removeEventListener('sr-site', h);
+  }, []);
+  const dismissBanner = () => {
+    try { localStorage.setItem('sr.notice.read', banner.text); } catch (e) {}
+    setBanner(null);
+  };
+
+  // 账号被停用 / 全站维护：服务器关门的那一刻由 SRNet 广播，这里换上一张说明页
+  React.useEffect(() => {
+    const h = (e) => setBlocked(e.detail || null);
+    window.addEventListener('sr-blocked', h);
+    return () => window.removeEventListener('sr-blocked', h);
+  }, []);
+
+  // 游客撞上功能门禁（SRGate.require）：直接把登录页请出来，人已经在门口了
+  React.useEffect(() => {
+    const h = () => setLogin(true);
+    window.addEventListener('sr-need-login', h);
+    return () => window.removeEventListener('sr-need-login', h);
   }, []);
 
   // 应用挂载完成：淡出 index.html 里的静态启动帧
@@ -113,7 +157,7 @@ function App() {
       if (e.key !== 'Escape' || e.defaultPrevented) return;
       if (cmd || settingsOpen || aiConfigOpen || reviewOpen || onboard || tour || login || keysHelp) return;
       if (feynman) { e.preventDefault(); setFeynman(null); return; }
-      if (view === 'checkup') { e.preventDefault(); freshen(); setView('map'); setAerial(false); }
+      if (view === 'checkup' || view === 'admin') { e.preventDefault(); freshen(); setView('map'); setAerial(false); }
     };
     window.addEventListener('keydown', h, true);
     return () => window.removeEventListener('keydown', h, true);
@@ -130,8 +174,13 @@ function App() {
     if (T && T.flight) T.flight(fn); else fn();
   };
 
-  // 视图切换统一收掉费曼抽屉——抽屉属于打开它的那个上下文，不跨视图滞留
-  const openEditor = (id) => { freshen(); setFeynman(null); setEditing(id); setView('editor'); setAerial(false); };
+  // 视图切换统一收掉费曼抽屉——抽屉属于打开它的那个上下文，不跨视图滞留。
+  // 编辑器与星际漫游是可门禁的功能：游客点进来先被请去登录（门禁由管理台掌控，
+  // 关掉之后这两行就是透明的）。
+  const openEditor = (id) => {
+    if (!window.SRGate.require('editor', '写笔记')) return;
+    freshen(); setFeynman(null); setEditing(id); setView('editor'); setAerial(false);
+  };
   const openReview = () => { freshen(); setFeynman(null); setReviewOpen(true); };
   const closeReview = () => { setReviewOpen(false); freshen(); };
   const focusCon = (id) => {
@@ -153,6 +202,7 @@ function App() {
   };
   const openView = (v) => {
     if (v === 'aerial' ? (view === 'map' && aerial) : (v === view && !aerial && !editing)) return; // 已在目标视图，不空跳
+    if (v === 'visit' && !window.SRGate.require('visit', '星际漫游')) return;
     freshen(); setFeynman(null);
     if (v === 'aerial') { setView('map'); setAerial(true); setEditing(null); return; }
     setView(v); setAerial(false); setEditing(null);
@@ -178,23 +228,95 @@ function App() {
   };
   const closeTour = () => { setTour(false); backToMap(); };
   const replayGuide = () => { setSettingsOpen(false); setOnboard(true); };
+  /* 手机顶部条的标题 / 副标题，以及底部标签栏的角标。
+     角标口径与侧边栏完全一致（同样读 D.dueStars / D.inbox + 未领取来信），
+     两处导航不会各说各话；随 sr-data / sr-memory 心跳刷新。 */
+  // 依赖里放的是计数值 tick，不是 dispatch——dispatch 是稳定引用，
+  // 拿它当依赖等于把这个 memo 焊死，角标永远停在第一次算出来的数
+  const [tick, tabTick] = React.useReducer(x => x + 1, 0);
+  React.useEffect(() => {
+    if (!phone) return;
+    ['sr-data', 'sr-memory', 'sr-friends'].forEach(e => window.addEventListener(e, tabTick));
+    return () => ['sr-data', 'sr-memory', 'sr-friends'].forEach(e => window.removeEventListener(e, tabTick));
+  }, [phone]);
+  const tabCounts = React.useMemo(() => {
+    const D = window.SR_DATA;
+    if (!D) return { due: 0, inbox: 0 };
+    return {
+      due: D.dueStars ? D.dueStars().length : 0,
+      inbox: (D.inbox ? D.inbox.length : 0) + (D.unclaimedMail ? D.unclaimedMail() : 0),
+    };
+  }, [phone, view, dataRev, tick]);   // eslint-disable-line react-hooks/exhaustive-deps
+  const VIEW_TITLES = {
+    map: ['星图', '记得越牢，越亮'], list: ['列表', null], timeline: ['时间轴', null],
+    inbox: ['收件箱', null], blackhole: ['黑洞', null], visit: ['星际漫游', null],
+    checkup: ['知识体检', null], galaxy3d: ['三维星系', null], admin: ['星港管理台', null],
+  };
+  const [viewTitle, viewSub] = (aerial ? ['亮度鸟瞰', null] : (VIEW_TITLES[view] || ['星图', null]));
+
   // 稳定 ref：只在 <main> 真正重挂载（key 变化）时触发入场动画；
   // 内联箭头 ref 每次渲染都会重跑 enter，任何 setState 都会闪一次入场
   const mainEnter = React.useCallback((el) => { const T = window.srTransition; if (el && T && T.enter) T.enter(el); }, []);
 
+  /* 停用 / 维护：整屏说明页。停用是终局（只能退出登录换个身份），
+     维护是暂时的（留一颗「再试一次」按钮，恢复了就能进来）。
+     两种情况本机星空都完好——离线编辑照常，恢复后自动补写。 */
+  if (blocked) {
+    const banned = blocked.kind === 'banned';
+    return (
+      <div style={{
+        width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24,
+        background: 'radial-gradient(1200px 800px at 78% -10%, rgba(26,35,80,0.55), transparent 60%), linear-gradient(180deg, #05060f 0%, #03040c 55%, #04050e 100%)',
+      }}>
+        <div style={{ width: 420, maxWidth: '94vw', textAlign: 'center' }}>
+          <GlassPanel strong radius="lg" glow style={{ padding: '34px 28px 26px' }}>
+            <Icon name={banned ? 'user-x' : 'construction'} size={30} color={banned ? 'var(--danger)' : 'var(--gold)'} />
+            <div style={{ fontSize: 19, fontWeight: 300, color: 'var(--text-1)', marginTop: 16 }}>
+              {banned ? '这个账号已被停用' : '星图正在维护'}
+            </div>
+            <div style={{ fontSize: 13, color: 'var(--text-2)', marginTop: 12, lineHeight: 1.8 }}>
+              {blocked.message || (banned ? '如有疑问，请联系这台服务器的管理员。' : '稍后回来看看。')}
+            </div>
+            <div style={{ fontSize: 12, color: 'var(--text-3)', marginTop: 14, lineHeight: 1.7 }}>
+              你在本机的星空完好无损，什么都没有丢。
+            </div>
+            <div style={{ display: 'flex', gap: 10, justifyContent: 'center', marginTop: 22 }}>
+              {!banned && <Button variant="primary" icon="refresh-cw" onClick={() => location.reload()}>再试一次</Button>}
+              <Button variant={banned ? 'primary' : 'ghost'} icon="log-out"
+                onClick={() => window.SRNet.logoutFlow()}>退出登录</Button>
+            </div>
+          </GlassPanel>
+        </div>
+      </div>
+    );
+  }
+
+  /* 侧栏：桌面/平板常驻，手机收进抽屉。两处渲染的是同一个组件、同一份状态——
+     手机上任选一个目的地就顺手把抽屉关掉，不必再点一次遮罩。 */
+  const sidebar = (
+    <Sidebar
+      collapsed={phone ? false : collapsed} onToggle={() => (phone ? setDrawer(false) : setCollapsed(c => !c))}
+      view={view === 'editor' ? 'map' : view} onView={(v) => { closeDrawer(); openView(v); }}
+      focus={focus} onFocus={(id) => { closeDrawer(); focusCon(id); }}
+      theme={theme} onToggleTheme={toggleTheme}
+      onSearch={() => { closeDrawer(); setCmd(true); }}
+      onCheckup={() => { closeDrawer(); openView('checkup'); }}
+      onAIConfig={() => { closeDrawer(); setAiConfigOpen(true); }}
+      onReview={() => { closeDrawer(); openReview(); }}
+      onOpenSettings={() => { closeDrawer(); setSettingsOpen(true); }}
+      onAdmin={() => { closeDrawer(); openView('admin'); }}
+      mobile={phone}
+    />
+  );
+
   return (
     <div key={dataRev} style={{ display: 'flex', width: '100%', height: '100%', position: 'relative', overflow: 'hidden' }}>
-      <Sidebar
-        collapsed={collapsed} onToggle={() => setCollapsed(c => !c)}
-        view={view === 'editor' ? 'map' : view} onView={openView}
-        focus={focus} onFocus={focusCon}
-        theme={theme} onToggleTheme={toggleTheme}
-        onSearch={() => setCmd(true)}
-        onCheckup={() => openView('checkup')}
-        onAIConfig={() => setAiConfigOpen(true)}
-        onReview={openReview}
-        onOpenSettings={() => setSettingsOpen(true)}
-        />
+      {!phone && sidebar}
+      {phone && <MobileDrawer open={drawer} onClose={closeDrawer}>{sidebar}</MobileDrawer>}
+      {/* 手机顶部条：编辑器自带返回与标题，不叠第二层；复习/引导是模态，也不需要 */}
+      {phone && view !== 'editor' && (
+        <MobileTopBar title={viewTitle} sub={viewSub} onMenu={() => setDrawer(true)} onSearch={() => setCmd(true)} />
+      )}
 
       {/* main stage — key 随视图变化：换视图重挂载一次，用 srTransition.enter 做
           元素级入场（淡入 + 上浮，240ms var(--ease-flight)，reduced-motion 直达）。
@@ -203,7 +325,14 @@ function App() {
           弹层（摘要卡 / 右键菜单）的坐标系就从视口变成 main，整体偏移一个侧栏宽度 */}
       <main key={`${view}|${aerial ? 'a' : ''}|${view === 'editor' ? editing : ''}`}
         ref={mainEnter}
-        style={{ flex: 1, minWidth: 0, position: 'relative', display: 'flex' }}>
+        style={{
+          flex: 1, minWidth: 0, position: 'relative', display: 'flex',
+          // 手机上给顶部条与底部标签栏让位（编辑器没有顶部条，也不挂标签栏——
+          // 键盘弹起时底部栏只会碍事）
+          paddingTop: phone && view !== 'editor' ? 'calc(var(--sr-topbar) + var(--sr-safe-top))' : 0,
+          paddingBottom: phone && view !== 'editor' ? 'calc(var(--sr-tabbar) + var(--sr-safe-bottom))' : 0,
+          boxSizing: 'border-box',
+        }}>
         {view === 'map' && !aerial && (
           <StarMap selected={selected} onSelect={setSelected}
             onOpenEditor={openEditor} onFeynman={(id) => setFeynman(id)}
@@ -219,8 +348,25 @@ function App() {
         {view === 'visit' && <VisitView />}
         {view === 'timeline' && <Timeline onOpen={openEditor} />}
         {view === 'checkup' && <Checkup onClose={backToMap} onOpenStar={openEditor} onFocusCon={focusCon} onFeynman={(id) => setFeynman(id)} onReview={openReview} />}
+        {view === 'admin' && <AdminConsole onClose={backToMap} />}
 
         {feynman && <FeynmanDrawer starId={feynman} onClose={() => setFeynman(null)} onOpenAIConfig={() => setAiConfigOpen(true)} />}
+
+        {/* 手机上的底部标签栏：贴在 main 内部，跟着安全区走 */}
+        {phone && view !== 'editor' && (
+          <MobileTabBar view={aerial ? 'map' : view} onView={openView} onReview={openReview}
+            onMore={() => setDrawer(true)} drawerOpen={drawer}
+            dueN={tabCounts.due} inboxN={tabCounts.inbox} />
+        )}
+
+        {/* 全站公告：浮在舞台顶部居中，不占版面、不挡操作，读过一次就不再出现 */}
+        {banner && (
+          <div style={{ position: 'absolute', top: 14, left: 0, right: 0, display: 'flex', justifyContent: 'center', pointerEvents: 'none', zIndex: 40, padding: '0 20px' }}>
+            <div style={{ maxWidth: 620, width: '100%', pointerEvents: 'auto', animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
+              <AnnouncementBanner announcement={banner} onDismiss={dismissBanner} />
+            </div>
+          </div>
+        )}
       </main>
 
       {reviewOpen && <ReviewSession onClose={closeReview} />}

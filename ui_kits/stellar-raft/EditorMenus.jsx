@@ -75,11 +75,21 @@ function useModalFocus(rootRef, opts) {
    键盘可达：role=menu、↑↓/Home/End 在 [role=menuitem] 间漫游、Enter/Space 激活
    （原生 button）、Esc 关闭并把焦点还给打开它的元素。autoFocus 为菜单（非 SlashMenu
    的输入框场景）进场移焦到首项。reduced-motion 下不播开合动画。 */
-function Floating({ x, y, width = 240, onClose, children, anchor = 'left', autoFocus = false, role = 'menu' }) {
+/* Floating — 跟着鼠标落点飘的浮动菜单。
+
+   手机上这套「算坐标 + 视口夹取」的浮层不好用：屏幕就那么大，菜单要么贴边、
+   要么盖住你刚点的东西，还得跟正文抢层叠顺序。所以窄屏整条路换掉——
+   同样的菜单项，改从屏幕底部推上来（sheet），坐标一概不参与。 */
+function Floating({ x, y, width = 240, onClose, children, anchor = 'left', autoFocus = false, role = 'menu', title }) {
+  const phone = window.SRScreen && window.SRScreen.isPhone();
+  const Sheet = window.SRKit && window.SRKit.MobileSheet;
   const ref = React.useRef(null);
+  // Hook 顺序不能因分支变化：所有 hook 照常执行，只在最后决定渲染哪一种
+  const sheetMode = phone && !!Sheet;
   const [pos, setPos] = React.useState({ left: x, top: y });
   const reduce = typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
   React.useLayoutEffect(() => {
+    if (sheetMode) return;                 // 底部弹层不算坐标
     const el = ref.current; if (!el) return;
     const r = el.getBoundingClientRect();
     let left = anchor === 'right' ? x - r.width : x;
@@ -91,6 +101,7 @@ function Floating({ x, y, width = 240, onClose, children, anchor = 'left', autoF
     setPos({ left, top });
   }, [x, y]);
   React.useEffect(() => {
+    if (sheetMode) return;                 // sheet 自带遮罩与 Esc，不再挂全局关闭
     const prev = document.activeElement;
     if (autoFocus && ref.current) {
       const items = ref.current.querySelectorAll('[role="menuitem"], button:not([disabled])');
@@ -106,7 +117,10 @@ function Floating({ x, y, width = 240, onClose, children, anchor = 'left', autoF
   }, [onClose]);
   const onKeyDown = (e) => {
     if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp' && e.key !== 'Home' && e.key !== 'End') return;
-    const items = Array.from(ref.current.querySelectorAll('[role="menuitem"]')).filter(el => el.offsetParent !== null);
+    // sheet 模式下 ref 没有挂到任何元素上：从事件本身找容器，别去解一个 null
+    const root = ref.current || e.currentTarget;
+    if (!root) return;
+    const items = Array.from(root.querySelectorAll('[role="menuitem"]')).filter(el => el.offsetParent !== null);
     if (!items.length) return;
     const i = items.indexOf(document.activeElement);
     if (i < 0) return;   // 焦点不在菜单项上（如 SlashMenu 的搜索框）：交回原处理
@@ -116,6 +130,15 @@ function Floating({ x, y, width = 240, onClose, children, anchor = 'left', autoF
     else if (e.key === 'Home') items[0].focus();
     else items[items.length - 1].focus();
   };
+  // 手机：同一批菜单项，从底部推上来。不算坐标、不抢层叠、拇指够得着
+  if (sheetMode) {
+    return (
+      <Sheet open onClose={onClose} title={title}>
+        <div role={role} onKeyDown={onKeyDown}>{children}</div>
+      </Sheet>
+    );
+  }
+
   // 菜单内部的 mousedown 不冒泡到 document——否则父菜单/兄弟子菜单的
   // "点击外部关闭"会抢在 click 之前卸载整棵菜单，导致子菜单项点了没反应
   return (
@@ -134,7 +157,8 @@ function Row({ icon, label, hint, chevron, danger, tone, active, onClick, onMous
     <button type="button" role="menuitem" tabIndex={-1} className="sr-focus-ring" onClick={onClick}
       onMouseEnter={(e) => { setH(true); onMouseEnter && onMouseEnter(e); }} onMouseLeave={() => setH(false)}
       onFocus={(e) => { setH(true); onFocus && onFocus(e); }} onBlur={() => setH(false)}
-      style={{ width: '100%', textAlign: 'left', font: 'inherit', display: 'flex', alignItems: 'center', gap: 11, padding: '9px 9px', minHeight: 40, boxSizing: 'border-box', borderRadius: 'var(--r-sm)', cursor: 'pointer', border: 'none',
+      style={{ width: '100%', textAlign: 'left', font: 'inherit', display: 'flex', alignItems: 'center', gap: 11, padding: '9px 9px',
+        minHeight: (window.SRScreen && window.SRScreen.isTouch()) ? 46 : 40, boxSizing: 'border-box', borderRadius: 'var(--r-sm)', cursor: 'pointer', border: 'none',
         background: on ? (danger ? 'color-mix(in srgb, var(--danger) 12%, transparent)' : 'color-mix(in srgb, var(--star-blue) 9%, transparent)') : 'transparent', color }}>
       {icon && <SRIcon name={icon} size={16} color="currentColor" />}
       <span style={{ flex: 1, fontSize: 13, color: danger ? 'var(--danger)' : on ? 'var(--text-1)' : 'var(--text-2)' }}>{label}</span>
@@ -174,7 +198,7 @@ function SlashMenu({ x, y, onPick, onClose }) {
     else if (e.key === 'Enter') { e.preventDefault(); if (list[ai]) onPick(list[ai].type); }
   };
   return (
-    <Floating x={x} y={y} width={252} onClose={onClose}>
+    <Floating x={x} y={y} width={252} onClose={onClose} title="插入块">
       <div style={{ padding: '3px 5px 6px' }}>
         <input autoFocus value={q} onChange={(e) => setQ(e.target.value)} onKeyDown={onKey} placeholder="筛选块类型…"
           style={{ width: '100%', boxSizing: 'border-box', background: 'var(--input-bg, rgba(3,4,12,0.45))', border: '1px solid var(--glass-border-strong)', borderRadius: 'var(--r-sm)', color: 'var(--text-1)', fontSize: 13, padding: '7px 10px', outline: 'none', fontFamily: 'var(--font-sans)' }} />
@@ -246,7 +270,7 @@ function ColorMenu({ x, y, onClose, onPick, autoFocus = false }) {
     </button>
   );
   return (
-    <Floating x={x} y={y} width={200} onClose={onClose} autoFocus={autoFocus}>
+    <Floating x={x} y={y} width={200} onClose={onClose} autoFocus={autoFocus} title="块操作">
       <Label>文字颜色</Label>
       {TEXT_COLORS.map(c => swatch(c, 'text'))}
       <Divider />
@@ -265,7 +289,7 @@ function ContextMenu({ x, y, onClose, onAction, constellations }) {
 
   return (
     <React.Fragment>
-      <Floating x={x} y={y} width={238} onClose={onClose} autoFocus>
+      <Floating x={x} y={y} width={238} onClose={onClose} autoFocus title="这个块">
         <Row icon="refresh-cw" label="转换为" chevron onMouseEnter={(e) => openSub('turn', e)} onFocus={(e) => openSub('turn', e)} onClick={(e) => openSub('turn', e, true)} />
         <Row icon="copy" label="复制为副本" onClick={() => onAction('duplicate')} />
         <Row icon="link" label="复制块链接" onClick={() => onAction('copyLink')} />
@@ -281,7 +305,7 @@ function ContextMenu({ x, y, onClose, onAction, constellations }) {
       </Floating>
 
       {sub === 'turn' && (
-        <Floating x={subPos.x} y={subPos.y} width={208} onClose={() => setSub(null)} autoFocus={subAuto}>
+        <Floating x={subPos.x} y={subPos.y} width={208} onClose={() => setSub(null)} autoFocus={subAuto} title="转换为">
           <Label>转换为</Label>
           <div style={{ maxHeight: 300, overflow: 'auto' }}>
             {BLOCK_TYPES.filter(b => b.type !== 'divider' && b.type !== 'image').map(b => (
@@ -291,7 +315,7 @@ function ContextMenu({ x, y, onClose, onAction, constellations }) {
         </Floating>
       )}
       {sub === 'move' && (
-        <Floating x={subPos.x} y={subPos.y} width={190} onClose={() => setSub(null)} autoFocus={subAuto}>
+        <Floating x={subPos.x} y={subPos.y} width={190} onClose={() => setSub(null)} autoFocus={subAuto} title="移动到星域">
           <Label>移动到星域</Label>
           {constellations.map(c => (
             <MoveRow key={c.id} color={c.color} name={c.name} onClick={() => { onAction('move', c.id); onClose(); }} />
@@ -367,7 +391,7 @@ function EditorMoreMenu({ x, y, fav, constellations, onAction, onClose }) {
   const openSub = (name, e, auto) => { const r = e.currentTarget.getBoundingClientRect(); setSubPos({ x: r.left - 4, y: r.top - 6 }); setSub(name); setSubAuto(!!auto); };
   return (
     <React.Fragment>
-      <Floating x={x} y={y} width={236} anchor="right" onClose={onClose} autoFocus>
+      <Floating x={x} y={y} width={236} anchor="right" onClose={onClose} autoFocus title="这颗星">
         <Row icon="star" tone={fav ? 'gold' : undefined} active={fav} label={fav ? '取消收藏' : '收藏这颗星'} onClick={() => onAction('fav')} />
         <Divider />
         <Row icon="copy" label="创建星的副本" onClick={() => onAction('dup')} />
@@ -380,7 +404,7 @@ function EditorMoreMenu({ x, y, fav, constellations, onAction, onClose }) {
         <Row icon="trash-2" label="删除这颗星" danger onClick={() => onAction('delete')} />
       </Floating>
       {sub === 'move' && (
-        <Floating x={subPos.x} y={subPos.y} width={190} anchor="right" onClose={() => setSub(null)} autoFocus={subAuto}>
+        <Floating x={subPos.x} y={subPos.y} width={190} anchor="right" onClose={() => setSub(null)} autoFocus={subAuto} title="移动到星域">
           <Label>移动到星域</Label>
           {constellations.map(c => (
             <MoveRow key={c.id} color={c.color} name={c.name} onClick={() => { onAction('move', c.id); onClose(); }} />

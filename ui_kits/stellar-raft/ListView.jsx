@@ -302,7 +302,7 @@ function ListView({ onOpen, onOpenCon, onFeynman }) {
   };
 
   const Checkbox = ({ on, dash, onClick, label }) => (
-    <button type="button" onClick={onClick} className="sr-focus-ring"
+    <button type="button" onClick={onClick} className="sr-focus-ring sr-hit-pad"
       role="checkbox" aria-checked={dash && !on ? 'mixed' : !!on} aria-label={label || '选择'}
       style={{ width: 17, height: 17, borderRadius: 5, border: '1px solid', cursor: 'pointer', padding: 0,
         borderColor: on || dash ? 'var(--gold)' : 'var(--line-strong)', background: on || dash ? 'var(--gold)' : 'transparent',
@@ -321,13 +321,49 @@ function ListView({ onOpen, onOpenCon, onFeynman }) {
   );
 
   return (
-    <div style={{ position: 'relative', flex: 1, minWidth: 0, overflow: 'auto', padding: '26px 30px 40px' }}
+    <div className="sr-view" style={{ position: 'relative', flex: 1, minWidth: 0, overflow: 'auto', padding: '26px 30px 40px' }}
       onContextMenu={(e) => e.preventDefault()}>
+      <style>{`
+        /* ——— 手机：表格改卡片 ———
+           桌面这张表有六列固定宽（30+156+150+116+78 = 530px 再加 5 道 14px 间距），
+           在 414px 的屏上「标题」那一列的 1fr 会被压到几乎 0 宽——标签于是被逼成
+           一字一行。窄屏放弃网格，改成每行一张卡：
+             第一行  ☑ 标题（＋点亮/待重燃/待复习徽标、标签）
+             第二行  记忆强度长条
+             第三行  星域 · 下次复习 · 连接数
+           表头随之隐去：没有列，就没有列名。 */
+        html[data-screen="phone"] .sr-list-head { display: none !important; }
+        html[data-screen="phone"] .sr-list-row {
+          display: flex !important; flex-wrap: wrap; align-items: center;
+          gap: 8px 10px !important; padding: 12px 13px !important;
+        }
+        html[data-screen="phone"] .sr-lc-check { flex: none; }
+        html[data-screen="phone"] .sr-lc-title { flex: 1 1 0; min-width: 0; }
+        html[data-screen="phone"] .sr-lc-mem   { flex: 1 1 100%; }
+        html[data-screen="phone"] .sr-lc-con   { flex: 1 1 auto; }
+        html[data-screen="phone"] .sr-lc-review,
+        html[data-screen="phone"] .sr-lc-links { flex: none; }
+        /* 悬浮快捷操作在触摸端没有 hover 可依，卡片本身点开即可——不再叠一层渐变遮罩 */
+        html[data-pointer="coarse"] .sr-list-row > div[style*="linear-gradient(90deg"] { display: none !important; }
+
+        /* 概览：标题与健康度胶囊在窄屏上下叠，别互相挤 */
+        html[data-screen="phone"] .sr-list-summary { flex-direction: column !important; align-items: stretch !important; gap: 10px !important; }
+
+        /* 筛选：搜索框铺满；七档亮度胶囊横向滚动，不折成两行高的方块 */
+        html[data-screen="phone"] .sr-list-search { width: 100% !important; }
+        html[data-screen="phone"] .sr-list-bands {
+          overflow-x: auto; flex: 1 1 100%; padding-bottom: 2px;
+          scrollbar-width: none;
+        }
+        html[data-screen="phone"] .sr-list-bands::-webkit-scrollbar { display: none; }
+        html[data-screen="phone"] .sr-list-bands > * { flex: none; white-space: nowrap; }
+        html[data-screen="phone"] .sr-list-filters > * { white-space: nowrap; }
+      `}</style>
       <sr-starfield density="0.5"></sr-starfield>
       <div style={{ position: 'relative', zIndex: 2, maxWidth: 1080, margin: '0 auto' }}>
 
         {/* health summary */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 18 }}>
+        <div className="sr-list-summary" style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 18 }}>
           <div style={{ flex: 1 }}>
             <div style={{ fontSize: 23, fontWeight: 300, color: 'var(--text-1)' }}>笔记管理</div>
             <div style={{ fontSize: 13, color: 'var(--text-3)', marginTop: 2 }}>{total} 颗星 · <span style={{ color: litTotal ? 'var(--gold)' : 'inherit' }}>{litTotal} 已点亮</span> · {dimming} 颗偏暗</div>
@@ -339,9 +375,9 @@ function ListView({ onOpen, onOpenCon, onFeynman }) {
         </div>
 
         {/* filter bar */}
-        <div data-tour="list-filters" style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12, flexWrap: 'wrap' }}>
-          <div style={{ width: 240 }}><Input icon="search" placeholder="检索标题、标签…" size="sm" value={query} onChange={(e) => setQuery(e && e.target ? e.target.value : (e || ''))} /></div>
-          <div style={{ display: 'flex', gap: 6 }}>
+        <div data-tour="list-filters" className="sr-list-filters" style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12, flexWrap: 'wrap' }}>
+          <div className="sr-list-search" style={{ width: 240 }}><Input icon="search" placeholder="检索标题、标签…" size="sm" value={query} onChange={(e) => setQuery(e && e.target ? e.target.value : (e || ''))} /></div>
+          <div className="sr-list-bands" style={{ display: 'flex', gap: 6 }}>
             {bands.map(f => <Tag key={f.id} active={band === f.id} onClick={() => setBand(f.id)}>{f.label}</Tag>)}
           </div>
 
@@ -399,7 +435,7 @@ function ListView({ onOpen, onOpenCon, onFeynman }) {
         )}
 
         {/* table head */}
-        <div style={{ display: 'grid', gridTemplateColumns: GRID, gap: 14, padding: '0 16px 10px', fontFamily: 'var(--font-mono)', fontSize: 10, letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase' }}>
+        <div className="sr-list-head" style={{ display: 'grid', gridTemplateColumns: GRID, gap: 14, padding: '0 16px 10px', fontFamily: 'var(--font-mono)', fontSize: 10, letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase' }}>
           <Checkbox on={allChecked} dash={!allChecked && someChecked} onClick={selectAll} />
           <HeadCell k="title">标题</HeadCell>
           <HeadCell k="strength">记忆强度</HeadCell>
@@ -445,6 +481,7 @@ function ListView({ onOpen, onOpenCon, onFeynman }) {
                 onMouseEnter={() => setHoverId(n.id)} onMouseLeave={() => setHoverId(h => h === n.id ? null : h)}
                 onFocus={() => setHoverId(n.id)}
                 onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget)) setHoverId(h => h === n.id ? null : h); }}
+                className="sr-list-row"
                 style={{ position: 'relative', display: 'grid', gridTemplateColumns: GRID, gap: 14, alignItems: 'center',
                   padding: '13px 16px', borderRadius: 'var(--r-md)', cursor: 'pointer',
                   // 变暗的星降低整行「存在感」而不是叠深色底——黎明主题下深底会把整行糊死
@@ -454,9 +491,9 @@ function ListView({ onOpen, onOpenCon, onFeynman }) {
                   border: '1px solid', borderColor: checked ? 'rgba(255,217,138,0.24)' : 'var(--glass-border)',
                   opacity: dim ? 0.8 : 1, transition: 'background var(--dur-fast), border-color var(--dur-fast)' }}>
 
-                <Checkbox on={checked} label={'选择「' + n.title + '」'} onClick={(e) => { e.stopPropagation(); toggle(n.id); }} />
+                <span className="sr-lc-check"><Checkbox on={checked} label={'选择「' + n.title + '」'} onClick={(e) => { e.stopPropagation(); toggle(n.id); }} /></span>
 
-                <div style={{ minWidth: 0 }}>
+                <div className="sr-lc-title" style={{ minWidth: 0 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
                     {renameId === n.id ? (
                       <input autoFocus value={renameDraft}
@@ -476,20 +513,20 @@ function ListView({ onOpen, onOpenCon, onFeynman }) {
                   <div style={{ display: 'flex', gap: 5, marginTop: 4 }}>{(n.tags || []).map(t => <span key={t} style={{ fontSize: 10.5, color: 'var(--text-3)' }}>#{t}</span>)}</div>
                 </div>
 
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                <div className="sr-lc-mem" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                   <div style={{ flex: 1 }}><MemoryBar value={n.strength} height={5} fading={dim} /></div>
                   <span style={{ fontSize: 11, color: sl.c, width: 38 }}>{sl.t}</span>
                 </div>
 
-                <span onClick={(e) => { e.stopPropagation(); onOpenCon && onOpenCon(n.con); }} title="在星图中聚焦该星域"
+                <span className="sr-lc-con" onClick={(e) => { e.stopPropagation(); onOpenCon && onOpenCon(n.con); }} title="在星图中聚焦该星域"
                   style={{ display: 'inline-flex', alignItems: 'center', gap: 7, fontSize: 12.5, color: 'var(--text-2)', minWidth: 0 }}>
                   <span style={{ flex: 'none', width: 7, height: 7, borderRadius: '50%', background: D.conColor(n.con), boxShadow: `0 0 6px ${D.conColor(n.con)}` }} />
                   <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{D.conName(n.con)}</span>
                 </span>
 
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: reviewColor(n.nextReview) }}>{n.nextReview}</span>
+                <span className="sr-lc-review" style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: reviewColor(n.nextReview) }}>{n.nextReview}</span>
 
-                <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--text-3)' }}><Icon name="link" size={13} color="currentColor" />{n.links}</span>
+                <span className="sr-lc-links" style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--text-3)' }}><Icon name="link" size={13} color="currentColor" />{n.links}</span>
 
                 {/* hover quick actions */}
                 {hov && (

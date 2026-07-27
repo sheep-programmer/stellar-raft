@@ -275,12 +275,23 @@ function BlackHole({ onOpenCon }) {
   });
 
   return (
-    <div onContextMenu={(e) => e.preventDefault()} style={{ position: 'relative', flex: 1, minWidth: 0, overflow: 'hidden', display: 'flex' }}>
+    <div onContextMenu={(e) => e.preventDefault()} className="sr-bh-stage" style={{ position: 'relative', flex: 1, minWidth: 0, overflow: 'hidden', display: 'flex' }}>
+      <style>{`
+        /* 手机：404px 的右侧列表在 360px 屏上会把黑洞视觉挤成 0 宽。
+           改成上下叠——黑洞留一块能看清的方形，列表在下面继续滚。 */
+        html[data-screen="phone"] .sr-bh-stage { flex-direction: column !important; overflow: auto !important; }
+        html[data-screen="phone"] .sr-bh-visual { flex: none !important; height: 42vh; min-height: 220px; }
+        html[data-screen="phone"] .sr-bh-list {
+          width: 100% !important; flex: none !important;
+          border-left: none !important; border-top: 1px solid var(--glass-border);
+        }
+      `}</style>
       <sr-starfield density="0.5" warm="0.05"></sr-starfield>
       <BlackHoleStyle />
 
       {/* 左：正俯视的黑洞 + 可点击的碎屑轨道（滚轮缩放） */}
       <div ref={stageBoxRef} onClick={() => setPicked(null)}
+        className="sr-bh-visual"
         style={{ flex: 1, minWidth: 0, position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1, overflow: 'hidden' }}>
         <div data-tour="blackhole-stage" className="bh-stage" style={{ transform: `scale(${zoom})`, transition: 'transform 200ms var(--ease-flight)' }}>
           {/* 吸积盘：双层湍流条纹旋转 + 一层静态多普勒增亮 */}
@@ -379,7 +390,7 @@ function BlackHole({ onOpenCon }) {
       </div>
 
       {/* 右：被吞噬列表 */}
-      <aside style={{ width: 404, flex: 'none', borderLeft: '1px solid var(--glass-border)', background: 'var(--glass-bg)', WebkitBackdropFilter: 'blur(var(--glass-blur))', backdropFilter: 'blur(var(--glass-blur))', overflow: 'auto', position: 'relative', zIndex: 2 }}>
+      <aside className="sr-bh-list" style={{ width: 404, flex: 'none', borderLeft: '1px solid var(--glass-border)', background: 'var(--glass-bg)', WebkitBackdropFilter: 'blur(var(--glass-blur))', backdropFilter: 'blur(var(--glass-blur))', overflow: 'auto', position: 'relative', zIndex: 2 }}>
         <div style={{ padding: 22, display: 'flex', flexDirection: 'column', gap: 14 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
             <Icon name="aperture" size={18} color="var(--gold)" />
