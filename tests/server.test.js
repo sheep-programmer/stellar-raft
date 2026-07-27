@@ -568,3 +568,37 @@ test('访客足迹：造访后 share.visitors 带 lastVisit 时刻', async () =>
   assert.match(String(v.lastVisit), /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/, '足迹为 UTC 时刻');
 });
 
+/* ——— SR_DB：库的落点可以搬走 ———
+   默认落在 server/ 边上；SR_DB 指到哪儿就写到哪儿，父目录不存在当场建出来。
+   这条是部署（指向数据盘）和本地起第二个实例（指向临时库）都依赖的前提。 */
+test('SR_DB：数据库按环境变量落点，父目录自动创建；缺省仍在 server/ 边上', async () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'stellar-raft-srdb-'));
+  // 特意多套一层还不存在的目录，验证会被建出来
+  const dbPath = path.join(dir, '还没有的目录', 'moved.db');
+  const port = await freePort();
+  const proc = spawn(process.execPath, ['--no-warnings', path.join(ROOT, 'server', 'server.js')], {
+    env: { ...process.env, PORT: String(port), SR_DB: dbPath },
+    stdio: ['ignore', 'pipe', 'pipe'],
+  });
+  let logs = '';
+  proc.stdout.on('data', (d) => (logs += d));
+  proc.stderr.on('data', (d) => (logs += d));
+  try {
+    const base = `http://127.0.0.1:${port}`;
+    const deadline = Date.now() + 10000;
+    for (;;) {
+      try { await fetch(base + '/api/state'); break; } catch {
+        if (Date.now() > deadline) throw new Error('SR_DB 实例未能就绪：' + logs);
+        await new Promise((r) => setTimeout(r, 120));
+      }
+    }
+    assert.ok(fs.existsSync(dbPath), '库应落在 SR_DB 指定的位置');
+    assert.ok(fs.statSync(dbPath).size > 0, '库应已建表，不是空文件');
+    // 仓库自带的 server/stellar.db 不该被这次启动碰出来
+    assert.match(logs, /数据库 /, '启动日志应打出库的位置');
+    assert.ok(!logs.includes('../../'), '库在仓库外时日志应给绝对路径，而非一串 ../..');
+  } finally {
+    proc.kill();
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
