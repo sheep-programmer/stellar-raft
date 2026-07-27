@@ -1,4 +1,4 @@
-/* @ds-bundle: {"format":3,"namespace":"StellarRaftDesignSystem_2866af","components":[{"name":"Badge","sourcePath":"components/core/Badge.jsx"},{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"GlassPanel","sourcePath":"components/core/GlassPanel.jsx"},{"name":"Icon","sourcePath":"components/core/Icon.jsx"},{"name":"IconButton","sourcePath":"components/core/IconButton.jsx"},{"name":"Input","sourcePath":"components/core/Input.jsx"},{"name":"Tag","sourcePath":"components/core/Tag.jsx"},{"name":"Checkbox","sourcePath":"components/form/Checkbox.jsx"},{"name":"Select","sourcePath":"components/form/Select.jsx"},{"name":"Switch","sourcePath":"components/form/Switch.jsx"},{"name":"Tabs","sourcePath":"components/form/Tabs.jsx"},{"name":"ConstellationItem","sourcePath":"components/knowledge/ConstellationItem.jsx"},{"name":"MemoryBar","sourcePath":"components/knowledge/MemoryBar.jsx"},{"name":"StarNode","sourcePath":"components/knowledge/StarNode.jsx"},{"name":"ContextMenu","sourcePath":"components/overlay/ContextMenu.jsx"},{"name":"Modal","sourcePath":"components/overlay/Modal.jsx"},{"name":"Toast","sourcePath":"components/overlay/Toast.jsx"},{"name":"Tooltip","sourcePath":"components/overlay/Tooltip.jsx"}],"sourceHashes":{"assets/starfield.js":"d776d2b45dc4","components/core/Badge.jsx":"b0bd9735d638","components/core/Button.jsx":"a1c387a07e86","components/core/GlassPanel.jsx":"299a19d8fbb4","components/core/Icon.jsx":"7505f83ab03d","components/core/IconButton.jsx":"24052f4eed78","components/core/Input.jsx":"54a6c9af7e3f","components/core/Tag.jsx":"d8513c07ea96","components/form/Checkbox.jsx":"38aa593157dd","components/form/Select.jsx":"86b8c1c71e12","components/form/Switch.jsx":"938c62be0664","components/form/Tabs.jsx":"ede2dbff1963","components/knowledge/ConstellationItem.jsx":"d73e999469b6","components/knowledge/MemoryBar.jsx":"a54c928d5065","components/knowledge/StarNode.jsx":"1bedee49f0bf","components/overlay/ContextMenu.jsx":"11783420e876","components/overlay/Modal.jsx":"6119273e95da","components/overlay/Toast.jsx":"d22ad40680a6","components/overlay/Tooltip.jsx":"a042caa8970d","ui_kits/stellar-raft/AIConfig.jsx":"0408b943b28a","ui_kits/stellar-raft/AdminConsole.jsx":"9201df2c170f","ui_kits/stellar-raft/AerialView.jsx":"8209eb6af395","ui_kits/stellar-raft/BlackHole.jsx":"75e4cac9d614","ui_kits/stellar-raft/Checkup.jsx":"5c6c3ce479a1","ui_kits/stellar-raft/CommandPalette.jsx":"90f10790166c","ui_kits/stellar-raft/Editor.jsx":"f73d4772f7a3","ui_kits/stellar-raft/EditorMenus.jsx":"489f22c71b48","ui_kits/stellar-raft/FeynmanDrawer.jsx":"591b225e555a","ui_kits/stellar-raft/Galaxy3D.jsx":"2ce87e7da57d","ui_kits/stellar-raft/Inbox.jsx":"c4a70ad0bf9a","ui_kits/stellar-raft/KeysHelp.jsx":"948b00f411ed","ui_kits/stellar-raft/ListView.jsx":"f79c250bd947","ui_kits/stellar-raft/LoginView.jsx":"18d9c842c5c6","ui_kits/stellar-raft/MobileShell.jsx":"2b0ece6e1b35","ui_kits/stellar-raft/Onboarding.jsx":"40b71668b69b","ui_kits/stellar-raft/ReviewSession.jsx":"45fa602fc39c","ui_kits/stellar-raft/Settings.jsx":"da9bff94d318","ui_kits/stellar-raft/Sidebar.jsx":"672d753c5efb","ui_kits/stellar-raft/StarMap.jsx":"76c3b4f2e35e","ui_kits/stellar-raft/Timeline.jsx":"1602ca5b6c95","ui_kits/stellar-raft/VisitView.jsx":"e50b2aae82af","ui_kits/stellar-raft/ai.js":"2f79eb3473c9","ui_kits/stellar-raft/app.jsx":"c28140011769","ui_kits/stellar-raft/codehl.js":"6fbdd0100deb","ui_kits/stellar-raft/data.js":"84c708c519f0","ui_kits/stellar-raft/mdcore.js":"b82d5054c3b6","ui_kits/stellar-raft/responsive.js":"29feedf6c503","ui_kits/stellar-raft/sanitize.js":"88e63cd63253","ui_kits/stellar-raft/transition.js":"3725d8982dc5","ui_kits/stellar-raft/undocore.js":"7f8c94da35f9","ui_kits/stellar-raft/vault.js":"bfb5fdd87949"},"inlinedExternals":[],"unexposedExports":[{"name":"memoryColor","sourcePath":"components/knowledge/MemoryBar.jsx"}],"exposedHelpers":[{"name":"toast","sourcePath":"components/overlay/Toast.jsx"}]} */
+/* @ds-bundle: {"format":3,"namespace":"StellarRaftDesignSystem_2866af","components":[{"name":"Badge","sourcePath":"components/core/Badge.jsx"},{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"GlassPanel","sourcePath":"components/core/GlassPanel.jsx"},{"name":"Icon","sourcePath":"components/core/Icon.jsx"},{"name":"IconButton","sourcePath":"components/core/IconButton.jsx"},{"name":"Input","sourcePath":"components/core/Input.jsx"},{"name":"Tag","sourcePath":"components/core/Tag.jsx"},{"name":"Checkbox","sourcePath":"components/form/Checkbox.jsx"},{"name":"Select","sourcePath":"components/form/Select.jsx"},{"name":"Switch","sourcePath":"components/form/Switch.jsx"},{"name":"Tabs","sourcePath":"components/form/Tabs.jsx"},{"name":"ConstellationItem","sourcePath":"components/knowledge/ConstellationItem.jsx"},{"name":"MemoryBar","sourcePath":"components/knowledge/MemoryBar.jsx"},{"name":"StarNode","sourcePath":"components/knowledge/StarNode.jsx"},{"name":"ContextMenu","sourcePath":"components/overlay/ContextMenu.jsx"},{"name":"Modal","sourcePath":"components/overlay/Modal.jsx"},{"name":"Toast","sourcePath":"components/overlay/Toast.jsx"},{"name":"Tooltip","sourcePath":"components/overlay/Tooltip.jsx"}],"sourceHashes":{"assets/starfield.js":"d776d2b45dc4","components/core/Badge.jsx":"b0bd9735d638","components/core/Button.jsx":"a1c387a07e86","components/core/GlassPanel.jsx":"299a19d8fbb4","components/core/Icon.jsx":"7505f83ab03d","components/core/IconButton.jsx":"24052f4eed78","components/core/Input.jsx":"54a6c9af7e3f","components/core/Tag.jsx":"d8513c07ea96","components/form/Checkbox.jsx":"38aa593157dd","components/form/Select.jsx":"86b8c1c71e12","components/form/Switch.jsx":"938c62be0664","components/form/Tabs.jsx":"ede2dbff1963","components/knowledge/ConstellationItem.jsx":"d73e999469b6","components/knowledge/MemoryBar.jsx":"a54c928d5065","components/knowledge/StarNode.jsx":"1bedee49f0bf","components/overlay/ContextMenu.jsx":"11783420e876","components/overlay/Modal.jsx":"6119273e95da","components/overlay/Toast.jsx":"d22ad40680a6","components/overlay/Tooltip.jsx":"a042caa8970d","ui_kits/stellar-raft/AIConfig.jsx":"0408b943b28a","ui_kits/stellar-raft/AdminConsole.jsx":"9201df2c170f","ui_kits/stellar-raft/AerialView.jsx":"8209eb6af395","ui_kits/stellar-raft/BlackHole.jsx":"5e67807d3617","ui_kits/stellar-raft/Checkup.jsx":"786135b78aa7","ui_kits/stellar-raft/CommandPalette.jsx":"90f10790166c","ui_kits/stellar-raft/Editor.jsx":"f73d4772f7a3","ui_kits/stellar-raft/EditorMenus.jsx":"489f22c71b48","ui_kits/stellar-raft/FeynmanDrawer.jsx":"591b225e555a","ui_kits/stellar-raft/Galaxy3D.jsx":"2ce87e7da57d","ui_kits/stellar-raft/Inbox.jsx":"c4a70ad0bf9a","ui_kits/stellar-raft/KeysHelp.jsx":"948b00f411ed","ui_kits/stellar-raft/ListView.jsx":"f79c250bd947","ui_kits/stellar-raft/LoginView.jsx":"18d9c842c5c6","ui_kits/stellar-raft/MobileShell.jsx":"932bb48e2e9e","ui_kits/stellar-raft/Onboarding.jsx":"40b71668b69b","ui_kits/stellar-raft/ReviewSession.jsx":"45fa602fc39c","ui_kits/stellar-raft/Settings.jsx":"da9bff94d318","ui_kits/stellar-raft/Sidebar.jsx":"672d753c5efb","ui_kits/stellar-raft/StarMap.jsx":"76c3b4f2e35e","ui_kits/stellar-raft/Timeline.jsx":"1602ca5b6c95","ui_kits/stellar-raft/VisitView.jsx":"e50b2aae82af","ui_kits/stellar-raft/ai.js":"2f79eb3473c9","ui_kits/stellar-raft/app.jsx":"c28140011769","ui_kits/stellar-raft/codehl.js":"6fbdd0100deb","ui_kits/stellar-raft/data.js":"84c708c519f0","ui_kits/stellar-raft/mdcore.js":"b82d5054c3b6","ui_kits/stellar-raft/responsive.js":"29feedf6c503","ui_kits/stellar-raft/sanitize.js":"88e63cd63253","ui_kits/stellar-raft/transition.js":"3725d8982dc5","ui_kits/stellar-raft/undocore.js":"7f8c94da35f9","ui_kits/stellar-raft/vault.js":"bfb5fdd87949"},"inlinedExternals":[],"unexposedExports":[{"name":"memoryColor","sourcePath":"components/knowledge/MemoryBar.jsx"}],"exposedHelpers":[{"name":"toast","sourcePath":"components/overlay/Toast.jsx"}]} */
 
 (() => {
 
@@ -7714,6 +7714,20 @@ function BlackHole({
   }, /*#__PURE__*/React.createElement("style", null, `
         /* 手机：404px 的右侧列表在 360px 屏上会把黑洞视觉挤成 0 宽。
            改成上下叠——黑洞留一块能看清的方形，列表在下面继续滚。 */
+        /* 提示条本是一行不换行的居中长句：390px 上两头都出界，右半截还被缩放控件压住。
+           窄屏让它换行、收进安全宽度，并挪到缩放控件上方去。 */
+        html[data-screen="phone"] .sr-bh-hint {
+          white-space: normal !important; text-align: center; line-height: 1.55;
+          width: auto; max-width: calc(100% - 28px); bottom: 12px !important;
+          align-items: center !important; justify-content: center;
+          /* 压在发光的吸积盘上就读不清了：给一层深色底衬把字托住 */
+          padding: 6px 12px; border-radius: var(--r-pill);
+          background: rgba(3, 4, 12, 0.62); backdrop-filter: blur(6px);
+        }
+        /* 「彻底销毁前都可随时恢复」下方的说明段落已经讲了一遍，窄屏不必重复占两行 */
+        html[data-screen="phone"] .sr-bh-hint-more { display: none; }
+        /* 缩放控件让开，别再压在提示上 */
+        html[data-screen="phone"] .sr-bh-zoom { bottom: 58px !important; }
         html[data-screen="phone"] .sr-bh-stage { flex-direction: column !important; overflow: auto !important; }
         html[data-screen="phone"] .sr-bh-visual { flex: none !important; height: 42vh; min-height: 220px; }
         html[data-screen="phone"] .sr-bh-list {
@@ -7826,6 +7840,7 @@ function BlackHole({
       }
     }, nameOf(t)));
   })), /*#__PURE__*/React.createElement("div", {
+    className: "sr-bh-hint",
     style: {
       position: 'absolute',
       bottom: 26,
@@ -7842,7 +7857,13 @@ function BlackHole({
     name: "mouse-pointer-click",
     size: 13,
     color: "currentColor"
-  }), "\u70B9\u51FB\u7ED5\u884C\u7684\u788E\u5C51\u53EF\u76F4\u63A5\u6062\u590D\u6216\u9500\u6BC1 \xB7 \u6EDA\u8F6E\u7F29\u653E \xB7 \u5F7B\u5E95\u9500\u6BC1\u524D\u90FD\u53EF\u968F\u65F6\u6062\u590D"), toast &&
+  }), /*#__PURE__*/React.createElement("span", null, "\u70B9\u51FB\u7ED5\u884C\u7684\u788E\u5C51\u53EF\u76F4\u63A5\u6062\u590D\u6216\u9500\u6BC1 \xB7", ' ', /*#__PURE__*/React.createElement("span", {
+    className: "sr-kbd-only"
+  }, "\u6EDA\u8F6E\u7F29\u653E"), /*#__PURE__*/React.createElement("span", {
+    className: "sr-touch-only"
+  }, "\u53CC\u6307\u634F\u5408\u7F29\u653E"), /*#__PURE__*/React.createElement("span", {
+    className: "sr-bh-hint-more"
+  }, " \xB7 \u5F7B\u5E95\u9500\u6BC1\u524D\u90FD\u53EF\u968F\u65F6\u6062\u590D"))), toast &&
   /*#__PURE__*/
   /* 定位层与动画层分离：sr-cardin 结束帧的 transform:none 会覆盖居中的 translateX。
      role=status：恢复/销毁的反馈读屏也听得到；动作是真按钮，键盘可达 */
@@ -7894,6 +7915,7 @@ function BlackHole({
       borderBottom: '1px dashed rgba(159,198,255,0.5)'
     }
   }, "\u5728\u661F\u56FE\u4E2D\u67E5\u770B")))), /*#__PURE__*/React.createElement("div", {
+    className: "sr-bh-zoom",
     onClick: e => e.stopPropagation(),
     style: {
       position: 'absolute',
@@ -8793,6 +8815,7 @@ function TodoRow({
   ember
 }) {
   return /*#__PURE__*/React.createElement("div", {
+    className: "sr-ck-todo",
     style: {
       display: 'flex',
       alignItems: 'center',
@@ -8810,6 +8833,7 @@ function TodoRow({
       flex: 'none'
     }
   }), /*#__PURE__*/React.createElement("div", {
+    className: "sr-ck-todo-text",
     style: {
       flex: 1,
       minWidth: 0
@@ -8839,6 +8863,7 @@ function TodoRow({
       lineHeight: 1.6
     }
   }, desc)), action && /*#__PURE__*/React.createElement("div", {
+    className: "sr-ck-todo-action",
     style: {
       flex: 'none'
     }
@@ -8991,7 +9016,25 @@ function Checkup({
     }
   }, /*#__PURE__*/React.createElement("sr-starfield", {
     density: "0.55"
-  }), /*#__PURE__*/React.createElement("div", {
+  }), /*#__PURE__*/React.createElement("style", null, `
+        /* ——— 手机 ———
+           体检页原本按桌面的宽度画：每行待办是「图标 + 说明 + 右侧按钮」的横排，
+           窄屏上按钮吃掉一半宽度，说明文字只能从它底下穿过去。窄屏改成竖排：
+           说明占满一行，动作按钮沉到下面铺满——顺手也把点击区做大。 */
+        html[data-screen="phone"] .sr-view { padding: 16px 14px 72px !important; }
+        html[data-screen="phone"] .sr-ck-todo { flex-wrap: wrap; row-gap: 10px; }
+        html[data-screen="phone"] .sr-ck-todo-text { flex: 1 1 calc(100% - 28px) !important; }
+        html[data-screen="phone"] .sr-ck-todo-action { flex: 1 1 100% !important; }
+        html[data-screen="phone"] .sr-ck-todo-action > button { width: 100%; justify-content: center; }
+        /* 右上角那行英文 HUD 在 390px 上必然被裁掉半个词；标题已经写着「知识体检报告」，
+           它只是装饰，窄屏直接不出现，比切一半体面 */
+        html[data-screen="phone"] .sr-ck-hud { display: none !important; }
+        /* 页尾三个并列动作在 390px 上排不下，第三个整个被推出屏外（点都点不到）。
+           窄屏改成竖排铺满；中间那根撑开的弹簧在竖排里没有意义，收掉。 */
+        html[data-screen="phone"] .sr-ck-actions { flex-direction: column !important; align-items: stretch !important; }
+        html[data-screen="phone"] .sr-ck-actions > button { width: 100%; justify-content: center; }
+        html[data-screen="phone"] .sr-ck-actions > div:empty { display: none !important; }
+      `), /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'relative',
       zIndex: 2,
@@ -9015,6 +9058,7 @@ function Checkup({
       flex: 1
     }
   }), /*#__PURE__*/React.createElement("span", {
+    className: "sr-ck-hud",
     style: {
       display: 'inline-flex',
       alignItems: 'center',
@@ -9951,6 +9995,7 @@ function Checkup({
       cursor: 'pointer'
     }
   }, c.weakStar.label), "\u300D") : null, "\u3002 \u5EFA\u8BAE\u4F18\u5148\u56DE\u770B\u8FD9\u7247\u661F\u57DF\uFF0C\u628A\u5149\u5EA6\u627E\u56DE\u6765\u3002")))))), /*#__PURE__*/React.createElement("div", {
+    className: "sr-ck-actions",
     style: {
       display: 'flex',
       alignItems: 'center',
@@ -24024,6 +24069,10 @@ html[data-pointer="coarse"] .sr-hit-pad::after {
 /* 键盘提示：手机上没有物理键盘，印一枚「空格 / ⌘K」只会让人去找一个
    不存在的东西。挂了这个类的元素在触摸端整个不出现。 */
 html[data-pointer="coarse"] .sr-kbd-only { display: none !important; }
+/* 反过来的一半：只对手指说的话（「双指捏合」这类）在有鼠标的地方不出现。
+   两个类成对，改一处操作说明时不会漏掉另一端。 */
+.sr-touch-only { display: none; }
+html[data-pointer="coarse"] .sr-touch-only { display: inline; }
 
 /* 弹层：手机上一律铺满屏幕（480px 的对话框在 375px 屏上会被裁掉两边），
    贴着安全区，圆角只留顶部两个——像一张从底部推上来的纸。 */

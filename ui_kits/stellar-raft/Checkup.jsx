@@ -296,18 +296,18 @@ function goInbox() {
    待重燃行用暗金发丝边——「曾获认证」的残迹属于点亮语义本身，其余保持冷色。 */
 function TodoRow({ icon, iconColor, title, count, desc, action, ember }) {
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '11px 13px', borderRadius: 'var(--r-md)',
+    <div className="sr-ck-todo" style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '11px 13px', borderRadius: 'var(--r-md)',
       border: '1px solid ' + (ember ? 'color-mix(in srgb, var(--gold) 16%, transparent)' : 'var(--glass-border)'),
       background: ember ? 'color-mix(in srgb, var(--gold) 4%, transparent)' : 'rgba(120,150,205,0.05)' }}>
       <Icon name={icon} size={16} color={iconColor} style={{ flex: 'none' }} />
-      <div style={{ flex: 1, minWidth: 0 }}>
+      <div className="sr-ck-todo-text" style={{ flex: 1, minWidth: 0 }}>
         <div style={{ display: 'flex', alignItems: 'baseline', gap: 8 }}>
           <span style={{ fontSize: 13.5, color: 'var(--text-1)' }}>{title}</span>
           <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: ember ? 'color-mix(in srgb, var(--gold) 72%, var(--text-3))' : 'var(--star-blue)' }}>{count}</span>
         </div>
         <div style={{ fontSize: 11.5, color: 'var(--text-3)', marginTop: 3, lineHeight: 1.6 }}>{desc}</div>
       </div>
-      {action && <div style={{ flex: 'none' }}>{action}</div>}
+      {action && <div className="sr-ck-todo-action" style={{ flex: 'none' }}>{action}</div>}
     </div>
   );
 }
@@ -406,13 +406,32 @@ function Checkup({ onClose, onOpenStar, onFocusCon, onFeynman, onReview }) {
   return (
     <div onContextMenu={e => e.preventDefault()} className="sr-view" style={{ position: 'relative', flex: 1, minWidth: 0, overflow: 'auto', padding: '22px 30px 56px' }}>
       <sr-starfield density="0.55"></sr-starfield>
+      <style>{`
+        /* ——— 手机 ———
+           体检页原本按桌面的宽度画：每行待办是「图标 + 说明 + 右侧按钮」的横排，
+           窄屏上按钮吃掉一半宽度，说明文字只能从它底下穿过去。窄屏改成竖排：
+           说明占满一行，动作按钮沉到下面铺满——顺手也把点击区做大。 */
+        html[data-screen="phone"] .sr-view { padding: 16px 14px 72px !important; }
+        html[data-screen="phone"] .sr-ck-todo { flex-wrap: wrap; row-gap: 10px; }
+        html[data-screen="phone"] .sr-ck-todo-text { flex: 1 1 calc(100% - 28px) !important; }
+        html[data-screen="phone"] .sr-ck-todo-action { flex: 1 1 100% !important; }
+        html[data-screen="phone"] .sr-ck-todo-action > button { width: 100%; justify-content: center; }
+        /* 右上角那行英文 HUD 在 390px 上必然被裁掉半个词；标题已经写着「知识体检报告」，
+           它只是装饰，窄屏直接不出现，比切一半体面 */
+        html[data-screen="phone"] .sr-ck-hud { display: none !important; }
+        /* 页尾三个并列动作在 390px 上排不下，第三个整个被推出屏外（点都点不到）。
+           窄屏改成竖排铺满；中间那根撑开的弹簧在竖排里没有意义，收掉。 */
+        html[data-screen="phone"] .sr-ck-actions { flex-direction: column !important; align-items: stretch !important; }
+        html[data-screen="phone"] .sr-ck-actions > button { width: 100%; justify-content: center; }
+        html[data-screen="phone"] .sr-ck-actions > div:empty { display: none !important; }
+      `}</style>
       <div style={{ position: 'relative', zIndex: 2, maxWidth: 1080, margin: '0 auto' }}>
 
         {/* header with back */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 22 }}>
           <Button variant="ghost" size="sm" icon="arrow-left" onClick={onClose}>返回</Button>
           <div style={{ flex: 1 }} />
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, ...HUD }}>
+          <span className="sr-ck-hud" style={{ display: 'inline-flex', alignItems: 'center', gap: 7, ...HUD }}>
             <Icon name="activity" size={13} color="var(--gold)" />KNOWLEDGE CHECKUP
           </span>
         </div>
@@ -752,7 +771,7 @@ function Checkup({ onClose, onOpenStar, onFocusCon, onFeynman, onReview }) {
         </div>
 
         {/* actions */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginTop: 22 }}>
+        <div className="sr-ck-actions" style={{ display: 'flex', alignItems: 'center', gap: 12, marginTop: 22 }}>
           {total === 0 ? (
             <Button variant="primary" size="md" icon="orbit" glow onClick={onClose}>
               回到星图，写下第一颗星

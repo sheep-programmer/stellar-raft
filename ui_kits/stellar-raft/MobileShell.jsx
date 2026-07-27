@@ -91,6 +91,10 @@ html[data-pointer="coarse"] .sr-hit-pad::after {
 /* 键盘提示：手机上没有物理键盘，印一枚「空格 / ⌘K」只会让人去找一个
    不存在的东西。挂了这个类的元素在触摸端整个不出现。 */
 html[data-pointer="coarse"] .sr-kbd-only { display: none !important; }
+/* 反过来的一半：只对手指说的话（「双指捏合」这类）在有鼠标的地方不出现。
+   两个类成对，改一处操作说明时不会漏掉另一端。 */
+.sr-touch-only { display: none; }
+html[data-pointer="coarse"] .sr-touch-only { display: inline; }
 
 /* 弹层：手机上一律铺满屏幕（480px 的对话框在 375px 屏上会被裁掉两边），
    贴着安全区，圆角只留顶部两个——像一张从底部推上来的纸。 */

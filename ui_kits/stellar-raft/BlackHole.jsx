@@ -279,6 +279,20 @@ function BlackHole({ onOpenCon }) {
       <style>{`
         /* 手机：404px 的右侧列表在 360px 屏上会把黑洞视觉挤成 0 宽。
            改成上下叠——黑洞留一块能看清的方形，列表在下面继续滚。 */
+        /* 提示条本是一行不换行的居中长句：390px 上两头都出界，右半截还被缩放控件压住。
+           窄屏让它换行、收进安全宽度，并挪到缩放控件上方去。 */
+        html[data-screen="phone"] .sr-bh-hint {
+          white-space: normal !important; text-align: center; line-height: 1.55;
+          width: auto; max-width: calc(100% - 28px); bottom: 12px !important;
+          align-items: center !important; justify-content: center;
+          /* 压在发光的吸积盘上就读不清了：给一层深色底衬把字托住 */
+          padding: 6px 12px; border-radius: var(--r-pill);
+          background: rgba(3, 4, 12, 0.62); backdrop-filter: blur(6px);
+        }
+        /* 「彻底销毁前都可随时恢复」下方的说明段落已经讲了一遍，窄屏不必重复占两行 */
+        html[data-screen="phone"] .sr-bh-hint-more { display: none; }
+        /* 缩放控件让开，别再压在提示上 */
+        html[data-screen="phone"] .sr-bh-zoom { bottom: 58px !important; }
         html[data-screen="phone"] .sr-bh-stage { flex-direction: column !important; overflow: auto !important; }
         html[data-screen="phone"] .sr-bh-visual { flex: none !important; height: 42vh; min-height: 220px; }
         html[data-screen="phone"] .sr-bh-list {
@@ -355,8 +369,13 @@ function BlackHole({ onOpenCon }) {
         </div>
 
         {/* 底部提示 */}
-        <div style={{ position: 'absolute', bottom: 26, left: '50%', transform: 'translateX(-50%)', display: 'flex', alignItems: 'center', gap: 8, fontSize: 11.5, color: 'var(--text-3)', whiteSpace: 'nowrap' }}>
-          <Icon name="mouse-pointer-click" size={13} color="currentColor" />点击绕行的碎屑可直接恢复或销毁 · 滚轮缩放 · 彻底销毁前都可随时恢复
+        <div className="sr-bh-hint" style={{ position: 'absolute', bottom: 26, left: '50%', transform: 'translateX(-50%)', display: 'flex', alignItems: 'center', gap: 8, fontSize: 11.5, color: 'var(--text-3)', whiteSpace: 'nowrap' }}>
+          <Icon name="mouse-pointer-click" size={13} color="currentColor" />
+          <span>
+            点击绕行的碎屑可直接恢复或销毁 ·{' '}
+            <span className="sr-kbd-only">滚轮缩放</span><span className="sr-touch-only">双指捏合缩放</span>
+            <span className="sr-bh-hint-more"> · 彻底销毁前都可随时恢复</span>
+          </span>
         </div>
 
         {toast && (
@@ -376,7 +395,7 @@ function BlackHole({ onOpenCon }) {
         )}
 
         {/* 缩放控件 */}
-        <div onClick={(e) => e.stopPropagation()} style={{ position: 'absolute', bottom: 22, right: 20 }}>
+        <div className="sr-bh-zoom" onClick={(e) => e.stopPropagation()} style={{ position: 'absolute', bottom: 22, right: 20 }}>
           <GlassPanel radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', gap: 2, padding: '6px 8px' }}>
             <IconButton name="minus" size="sm" title="缩小" onClick={() => setZoom(z => Math.max(0.55, z * 0.85))} />
             <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--text-2)', minWidth: 42, textAlign: 'center' }}>{Math.round(zoom * 100)}%</span>
