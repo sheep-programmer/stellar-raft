@@ -1,4 +1,4 @@
-/* @ds-bundle: {"format":3,"namespace":"StellarRaftDesignSystem_2866af","components":[{"name":"Badge","sourcePath":"components/core/Badge.jsx"},{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"GlassPanel","sourcePath":"components/core/GlassPanel.jsx"},{"name":"Icon","sourcePath":"components/core/Icon.jsx"},{"name":"IconButton","sourcePath":"components/core/IconButton.jsx"},{"name":"Input","sourcePath":"components/core/Input.jsx"},{"name":"Tag","sourcePath":"components/core/Tag.jsx"},{"name":"Checkbox","sourcePath":"components/form/Checkbox.jsx"},{"name":"Select","sourcePath":"components/form/Select.jsx"},{"name":"Switch","sourcePath":"components/form/Switch.jsx"},{"name":"Tabs","sourcePath":"components/form/Tabs.jsx"},{"name":"ConstellationItem","sourcePath":"components/knowledge/ConstellationItem.jsx"},{"name":"MemoryBar","sourcePath":"components/knowledge/MemoryBar.jsx"},{"name":"StarNode","sourcePath":"components/knowledge/StarNode.jsx"},{"name":"ContextMenu","sourcePath":"components/overlay/ContextMenu.jsx"},{"name":"Modal","sourcePath":"components/overlay/Modal.jsx"},{"name":"Toast","sourcePath":"components/overlay/Toast.jsx"},{"name":"Tooltip","sourcePath":"components/overlay/Tooltip.jsx"}],"sourceHashes":{"assets/starfield.js":"d776d2b45dc4","components/core/Badge.jsx":"b0bd9735d638","components/core/Button.jsx":"a1c387a07e86","components/core/GlassPanel.jsx":"299a19d8fbb4","components/core/Icon.jsx":"7505f83ab03d","components/core/IconButton.jsx":"24052f4eed78","components/core/Input.jsx":"54a6c9af7e3f","components/core/Tag.jsx":"d8513c07ea96","components/form/Checkbox.jsx":"38aa593157dd","components/form/Select.jsx":"86b8c1c71e12","components/form/Switch.jsx":"938c62be0664","components/form/Tabs.jsx":"ede2dbff1963","components/knowledge/ConstellationItem.jsx":"d73e999469b6","components/knowledge/MemoryBar.jsx":"a54c928d5065","components/knowledge/StarNode.jsx":"1bedee49f0bf","components/overlay/ContextMenu.jsx":"11783420e876","components/overlay/Modal.jsx":"6119273e95da","components/overlay/Toast.jsx":"d22ad40680a6","components/overlay/Tooltip.jsx":"a042caa8970d","ui_kits/stellar-raft/AIConfig.jsx":"0408b943b28a","ui_kits/stellar-raft/AdminConsole.jsx":"ac04bb2e6499","ui_kits/stellar-raft/AerialView.jsx":"8209eb6af395","ui_kits/stellar-raft/BlackHole.jsx":"5e67807d3617","ui_kits/stellar-raft/Checkup.jsx":"786135b78aa7","ui_kits/stellar-raft/CommandPalette.jsx":"90f10790166c","ui_kits/stellar-raft/Editor.jsx":"f73d4772f7a3","ui_kits/stellar-raft/EditorMenus.jsx":"489f22c71b48","ui_kits/stellar-raft/FeynmanDrawer.jsx":"591b225e555a","ui_kits/stellar-raft/Galaxy3D.jsx":"2ce87e7da57d","ui_kits/stellar-raft/Inbox.jsx":"c4a70ad0bf9a","ui_kits/stellar-raft/KeysHelp.jsx":"948b00f411ed","ui_kits/stellar-raft/ListView.jsx":"f79c250bd947","ui_kits/stellar-raft/LoginView.jsx":"18d9c842c5c6","ui_kits/stellar-raft/MobileShell.jsx":"932bb48e2e9e","ui_kits/stellar-raft/Onboarding.jsx":"40b71668b69b","ui_kits/stellar-raft/ReviewSession.jsx":"35ab7d4bff9c","ui_kits/stellar-raft/Settings.jsx":"da9bff94d318","ui_kits/stellar-raft/Sidebar.jsx":"672d753c5efb","ui_kits/stellar-raft/StarMap.jsx":"76c3b4f2e35e","ui_kits/stellar-raft/Timeline.jsx":"1602ca5b6c95","ui_kits/stellar-raft/VisitView.jsx":"e50b2aae82af","ui_kits/stellar-raft/ai.js":"2f79eb3473c9","ui_kits/stellar-raft/app.jsx":"c28140011769","ui_kits/stellar-raft/codehl.js":"6fbdd0100deb","ui_kits/stellar-raft/data.js":"84c708c519f0","ui_kits/stellar-raft/mdcore.js":"b82d5054c3b6","ui_kits/stellar-raft/responsive.js":"29feedf6c503","ui_kits/stellar-raft/sanitize.js":"88e63cd63253","ui_kits/stellar-raft/transition.js":"3725d8982dc5","ui_kits/stellar-raft/undocore.js":"7f8c94da35f9","ui_kits/stellar-raft/vault.js":"bfb5fdd87949"},"inlinedExternals":[],"unexposedExports":[{"name":"memoryColor","sourcePath":"components/knowledge/MemoryBar.jsx"}],"exposedHelpers":[{"name":"toast","sourcePath":"components/overlay/Toast.jsx"}]} */
+/* @ds-bundle: {"format":3,"namespace":"StellarRaftDesignSystem_2866af","components":[{"name":"Badge","sourcePath":"components/core/Badge.jsx"},{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"GlassPanel","sourcePath":"components/core/GlassPanel.jsx"},{"name":"Icon","sourcePath":"components/core/Icon.jsx"},{"name":"IconButton","sourcePath":"components/core/IconButton.jsx"},{"name":"Input","sourcePath":"components/core/Input.jsx"},{"name":"Tag","sourcePath":"components/core/Tag.jsx"},{"name":"Checkbox","sourcePath":"components/form/Checkbox.jsx"},{"name":"Select","sourcePath":"components/form/Select.jsx"},{"name":"Switch","sourcePath":"components/form/Switch.jsx"},{"name":"Tabs","sourcePath":"components/form/Tabs.jsx"},{"name":"ConstellationItem","sourcePath":"components/knowledge/ConstellationItem.jsx"},{"name":"MemoryBar","sourcePath":"components/knowledge/MemoryBar.jsx"},{"name":"StarNode","sourcePath":"components/knowledge/StarNode.jsx"},{"name":"ContextMenu","sourcePath":"components/overlay/ContextMenu.jsx"},{"name":"Modal","sourcePath":"components/overlay/Modal.jsx"},{"name":"Toast","sourcePath":"components/overlay/Toast.jsx"},{"name":"Tooltip","sourcePath":"components/overlay/Tooltip.jsx"}],"sourceHashes":{"assets/starfield.js":"d776d2b45dc4","components/core/Badge.jsx":"b0bd9735d638","components/core/Button.jsx":"a1c387a07e86","components/core/GlassPanel.jsx":"299a19d8fbb4","components/core/Icon.jsx":"7505f83ab03d","components/core/IconButton.jsx":"24052f4eed78","components/core/Input.jsx":"54a6c9af7e3f","components/core/Tag.jsx":"d8513c07ea96","components/form/Checkbox.jsx":"38aa593157dd","components/form/Select.jsx":"86b8c1c71e12","components/form/Switch.jsx":"938c62be0664","components/form/Tabs.jsx":"ede2dbff1963","components/knowledge/ConstellationItem.jsx":"d73e999469b6","components/knowledge/MemoryBar.jsx":"a54c928d5065","components/knowledge/StarNode.jsx":"1bedee49f0bf","components/overlay/ContextMenu.jsx":"11783420e876","components/overlay/Modal.jsx":"6119273e95da","components/overlay/Toast.jsx":"d22ad40680a6","components/overlay/Tooltip.jsx":"a042caa8970d","ui_kits/stellar-raft/AIConfig.jsx":"0408b943b28a","ui_kits/stellar-raft/AdminConsole.jsx":"ac04bb2e6499","ui_kits/stellar-raft/AerialView.jsx":"8209eb6af395","ui_kits/stellar-raft/BlackHole.jsx":"5e67807d3617","ui_kits/stellar-raft/Checkup.jsx":"786135b78aa7","ui_kits/stellar-raft/CommandPalette.jsx":"90f10790166c","ui_kits/stellar-raft/Editor.jsx":"f73d4772f7a3","ui_kits/stellar-raft/EditorMenus.jsx":"489f22c71b48","ui_kits/stellar-raft/FeynmanDrawer.jsx":"591b225e555a","ui_kits/stellar-raft/Galaxy3D.jsx":"2ce87e7da57d","ui_kits/stellar-raft/Inbox.jsx":"c4a70ad0bf9a","ui_kits/stellar-raft/KeysHelp.jsx":"948b00f411ed","ui_kits/stellar-raft/ListView.jsx":"f79c250bd947","ui_kits/stellar-raft/LoginView.jsx":"18d9c842c5c6","ui_kits/stellar-raft/MobileShell.jsx":"932bb48e2e9e","ui_kits/stellar-raft/Onboarding.jsx":"40b71668b69b","ui_kits/stellar-raft/ReviewSession.jsx":"a695c407739b","ui_kits/stellar-raft/Settings.jsx":"da9bff94d318","ui_kits/stellar-raft/Sidebar.jsx":"672d753c5efb","ui_kits/stellar-raft/StarMap.jsx":"76c3b4f2e35e","ui_kits/stellar-raft/Timeline.jsx":"1602ca5b6c95","ui_kits/stellar-raft/VisitView.jsx":"e50b2aae82af","ui_kits/stellar-raft/ai.js":"2f79eb3473c9","ui_kits/stellar-raft/app.jsx":"c28140011769","ui_kits/stellar-raft/codehl.js":"6fbdd0100deb","ui_kits/stellar-raft/data.js":"6f78c1b4d43b","ui_kits/stellar-raft/mdcore.js":"b82d5054c3b6","ui_kits/stellar-raft/responsive.js":"29feedf6c503","ui_kits/stellar-raft/sanitize.js":"88e63cd63253","ui_kits/stellar-raft/transition.js":"3725d8982dc5","ui_kits/stellar-raft/undocore.js":"7f8c94da35f9","ui_kits/stellar-raft/vault.js":"bfb5fdd87949"},"inlinedExternals":[],"unexposedExports":[{"name":"memoryColor","sourcePath":"components/knowledge/MemoryBar.jsx"}],"exposedHelpers":[{"name":"toast","sourcePath":"components/overlay/Toast.jsx"}]} */
 
 (() => {
 
@@ -26423,6 +26423,79 @@ function RSRecapRow({
   }, "\u6253\u5F00\u7B14\u8BB0"))));
 }
 
+/* 今天复习过的星：默认收起，只占一行；展开后照复习先后逐颗回看。 */
+function RSRecapPanel({
+  stars,
+  open,
+  onToggle,
+  openId,
+  onOpenRow,
+  onOpenStar
+}) {
+  if (!stars.length) return null;
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 18,
+      paddingTop: 16,
+      borderTop: '1px solid var(--line)',
+      textAlign: 'left'
+    }
+  }, /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    className: "sr-focus-ring",
+    onClick: onToggle,
+    "aria-expanded": open,
+    "aria-controls": "sr-recap-list",
+    style: {
+      width: '100%',
+      display: 'flex',
+      alignItems: 'center',
+      gap: 7,
+      padding: '4px 2px',
+      background: 'transparent',
+      border: 'none',
+      cursor: 'pointer',
+      textAlign: 'left',
+      fontSize: 12.5,
+      color: 'var(--text-2)',
+      fontFamily: 'inherit'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "list",
+    size: 14,
+    color: "var(--star-blue)"
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      flex: 1,
+      minWidth: 0
+    }
+  }, "\u4ECA\u5929\u590D\u4E60\u8FC7\u7684 ", stars.length, " \u9897\u661F"), /*#__PURE__*/React.createElement(Icon, {
+    name: open ? 'chevron-up' : 'chevron-down',
+    size: 14,
+    color: "var(--text-3)"
+  })), open &&
+  /*#__PURE__*/
+  /* 展开一条要占近 300px，高度按视口给，超出才滚动 */
+  React.createElement("div", {
+    id: "sr-recap-list",
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 6,
+      marginTop: 10,
+      maxHeight: '46vh',
+      overflowY: 'auto'
+    }
+  }, stars.map(s => /*#__PURE__*/React.createElement(RSRecapRow, {
+    key: s.id,
+    star: s,
+    grade: s.sr && s.sr.grade,
+    open: openId === s.id,
+    onToggle: () => onOpenRow(s.id),
+    onOpenStar: onOpenStar
+  }))));
+}
+
 /* 三档自评按钮：忘了 / 模糊 / 记得 —— 玻璃底 + 发丝边，色彩各归其位 */
 function RSGrade({
   label,
@@ -26497,10 +26570,9 @@ function ReviewSession({
     hazy: 0,
     fail: 0
   });
-  // 结束页回看：星 id → 这一轮给它的自评。队列顺序就是复习顺序，回看照原序摊开
-  const [grades, setGrades] = React.useState({});
   const [recapOpen, setRecapOpen] = React.useState(null); // 展开中的星 id | null
   const [listOpen, setListOpen] = React.useState(false); // 回看清单整体是否展开
+  const [tick, bumpTick] = React.useReducer(x => x + 1, 0); // 每次评分后重取今日清单
   // 结束页「去重燃」：在会话之上就地打开费曼抽屉（重燃是恢复，出口留在结束页，不打断卡序）
   const [relight, setRelight] = React.useState(null); // starId | null
   const timers = React.useRef([]);
@@ -26540,8 +26612,16 @@ function ReviewSession({
   const starEmber = !!(star && D.isEmber && D.isEmber(star));
   // 结束页口径：本轮队列里此刻仍待重燃的星（含本轮被「忘了」讲灭的）——重燃成功即从这里消失
   const emberLeft = done ? queue.filter(s => D.isEmber && D.isEmber(s)) : [];
-  // 回看清单：本轮真正评过分的星，保持队列（=复习）原序。中途退出也只列已评过的
-  const recap = done ? queue.filter(s => grades[s.id]) : [];
+  // 清单取自 sr.reviewedAt，随星系快照持久化，会话关闭后重开仍在
+  const recap = React.useMemo(() => D.reviewedToday ? D.reviewedToday() : [], [tick, done]);
+  const recapPanel = /*#__PURE__*/React.createElement(RSRecapPanel, {
+    stars: recap,
+    open: listOpen,
+    onToggle: () => setListOpen(v => !v),
+    openId: recapOpen,
+    onOpenRow: id => setRecapOpen(cur => cur === id ? null : id),
+    onOpenStar: onOpenStar
+  });
 
   // 焦点管理：会话即模态——进场移焦到舞台，退场还给原处
   const stageRef = React.useRef(null);
@@ -26580,10 +26660,7 @@ function ReviewSession({
       ...s,
       [kind === 'fail' ? 'fail' : kind === 'hazy' ? 'hazy' : 'ok']: s[kind === 'fail' ? 'fail' : kind === 'hazy' ? 'hazy' : 'ok'] + 1
     }));
-    setGrades(g => ({
-      ...g,
-      [star.id]: kind
-    }));
+    bumpTick();
     const next = () => {
       setRevealed(false);
       setLeaving(false);
@@ -26815,14 +26892,14 @@ function ReviewSession({
       color: 'var(--text-1)',
       marginTop: 14
     }
-  }, "\u6CA1\u6709\u5230\u671F\u7684\u661F"), /*#__PURE__*/React.createElement("div", {
+  }, recap.length ? '今天的复习已经做完' : '没有到期的星'), /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 13,
       color: 'var(--text-3)',
       marginTop: 8,
       lineHeight: 1.7
     }
-  }, "\u661F\u7A7A\u660E\u4EAE\uFF0C\u6B64\u523B\u65E0\u9700\u590D\u4E60\u3002\u4FDD\u6301\u8282\u594F\uFF0C\u6539\u5929\u518D\u6765\u3002"), /*#__PURE__*/React.createElement("div", {
+  }, recap.length ? '这些星今天都回望过了，明天它们会再暗一点点。' : '星空明亮，此刻无需复习。保持节奏，改天再来。'), recapPanel, /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: 22
     }
@@ -26867,67 +26944,7 @@ function ReviewSession({
       marginTop: 10,
       lineHeight: 1.7
     }
-  }, stats.fail > 0 ? '暗下去的星已排回队列，它们会在合适的时候等你。' : '星光已经归位。'), recap.length > 0 && /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginTop: 18,
-      paddingTop: 16,
-      borderTop: '1px solid var(--line)',
-      textAlign: 'left'
-    }
-  }, /*#__PURE__*/React.createElement("button", {
-    type: "button",
-    className: "sr-focus-ring",
-    onClick: () => setListOpen(v => !v),
-    "aria-expanded": listOpen,
-    "aria-controls": "sr-recap-list",
-    style: {
-      width: '100%',
-      display: 'flex',
-      alignItems: 'center',
-      gap: 7,
-      padding: '4px 2px',
-      background: 'transparent',
-      border: 'none',
-      cursor: 'pointer',
-      textAlign: 'left',
-      fontSize: 12.5,
-      color: 'var(--text-2)',
-      fontFamily: 'inherit'
-    }
-  }, /*#__PURE__*/React.createElement(Icon, {
-    name: "list",
-    size: 14,
-    color: "var(--star-blue)"
-  }), /*#__PURE__*/React.createElement("span", {
-    style: {
-      flex: 1,
-      minWidth: 0
-    }
-  }, "\u672C\u8F6E\u590D\u4E60\u8FC7\u7684 ", recap.length, " \u9897\u661F"), /*#__PURE__*/React.createElement(Icon, {
-    name: listOpen ? 'chevron-up' : 'chevron-down',
-    size: 14,
-    color: "var(--text-3)"
-  })), listOpen &&
-  /*#__PURE__*/
-  /* 展开一条要占近 300px，高度按视口给，超出才滚动 */
-  React.createElement("div", {
-    id: "sr-recap-list",
-    style: {
-      display: 'flex',
-      flexDirection: 'column',
-      gap: 6,
-      marginTop: 10,
-      maxHeight: '46vh',
-      overflowY: 'auto'
-    }
-  }, recap.map(s => /*#__PURE__*/React.createElement(RSRecapRow, {
-    key: s.id,
-    star: s,
-    grade: grades[s.id],
-    open: recapOpen === s.id,
-    onToggle: () => setRecapOpen(id => id === s.id ? null : s.id),
-    onOpenStar: onOpenStar
-  })))), emberLeft.length > 0 && /*#__PURE__*/React.createElement("div", {
+  }, stats.fail > 0 ? '暗下去的星已排回队列，它们会在合适的时候等你。' : '星光已经归位。'), recapPanel, emberLeft.length > 0 && /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: 18,
       paddingTop: 16,
@@ -36023,6 +36040,8 @@ window.SR_DATA = function () {
     s.sr.S = clampN(s.sr.S * (base + (1 - before) * 0.6), MEM.sMin, cap);
     s.sr.last = now;
     s.sr.due = 0;
+    s.sr.reviewedAt = now;
+    s.sr.grade = ignite ? 'ignite' : 'ok';
     if (ignite) {
       s.sr.lit = now;
       s.sr.ember = 0;
@@ -36050,6 +36069,8 @@ window.SR_DATA = function () {
     s.sr.S = clampN(s.sr.S * MEM.growPartial, MEM.sMin, sCapOf(s));
     s.sr.last = Math.round(now - Math.log(1 / MEM.partialR) * s.sr.S * DAY);
     s.sr.due = 0;
+    s.sr.reviewedAt = now;
+    s.sr.grade = 'hazy';
     refreshStar(s, now);
     syncCounts();
     touchNote(id);
@@ -36058,6 +36079,17 @@ window.SR_DATA = function () {
       stability: s.sr.S
     };
   };
+  /* 今天复习过的星，按复习先后升序。sr.last 在「模糊 / 忘了」两档会被回拨用来定亮度，
+     判断「今天复习过」只认 sr.reviewedAt。跨自然日后自然为空。 */
+  const dayKeyOf = ts => {
+    const d = new Date(ts);
+    return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+  };
+  const reviewedToday = now => {
+    const today = dayKeyOf(now || Date.now());
+    return stars.filter(s => s.sr && s.sr.reviewedAt && dayKeyOf(s.sr.reviewedAt) === today).sort((a, b) => a.sr.reviewedAt - b.sr.reviewedAt);
+  };
+
   // 到期队列：R 已衰减到阈值（或被手动排入且已到时）的星，按到期先后升序
   const dueStars = now => {
     now = now || Date.now();
@@ -36081,6 +36113,8 @@ window.SR_DATA = function () {
     s.sr.S = Math.max(MEM.sMin, s.sr.S * (wasLit ? MEM.shrinkFailLit : MEM.shrinkFail));
     s.sr.last = Math.round(now - Math.log(1 / before) * s.sr.S * DAY);
     s.sr.due = 0;
+    s.sr.reviewedAt = now;
+    s.sr.grade = 'fail';
     if (wasLit) {
       s.sr.lit = 0;
       s.sr.ember = now; // 先于 refreshStar 落定，避免阈值检测重复写时间线
@@ -36966,6 +37000,7 @@ window.SR_DATA = function () {
     queueReview,
     dueTsOf,
     dueStars,
+    reviewedToday,
     isLit,
     isEmber,
     hasSubstance,

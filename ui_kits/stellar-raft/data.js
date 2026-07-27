@@ -338,6 +338,7 @@ window.SR_DATA = (function () {
     const cap = ignite ? MEM.sMax : sCapOf(s);   // 点亮当场获得 365 档上限
     s.sr.S = clampN(s.sr.S * (base + (1 - before) * 0.6), MEM.sMin, cap);
     s.sr.last = now; s.sr.due = 0;
+    s.sr.reviewedAt = now; s.sr.grade = ignite ? 'ignite' : 'ok';
     if (ignite) {
       s.sr.lit = now; s.sr.ember = 0;
       pushTimeline('ignite', id, relit ? '重燃' : '点亮', Math.max(0, MEM.rMax - before));
@@ -357,11 +358,22 @@ window.SR_DATA = (function () {
     s.sr.S = clampN(s.sr.S * MEM.growPartial, MEM.sMin, sCapOf(s));
     s.sr.last = Math.round(now - Math.log(1 / MEM.partialR) * s.sr.S * DAY);
     s.sr.due = 0;
+    s.sr.reviewedAt = now; s.sr.grade = 'hazy';
     refreshStar(s, now);
     syncCounts();
     touchNote(id);
     return { strength: s.strength, stability: s.sr.S };
   };
+  /* 今天复习过的星，按复习先后升序。sr.last 在「模糊 / 忘了」两档会被回拨用来定亮度，
+     判断「今天复习过」只认 sr.reviewedAt。跨自然日后自然为空。 */
+  const dayKeyOf = (ts) => { const d = new Date(ts); return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate(); };
+  const reviewedToday = (now) => {
+    const today = dayKeyOf(now || Date.now());
+    return stars
+      .filter(s => s.sr && s.sr.reviewedAt && dayKeyOf(s.sr.reviewedAt) === today)
+      .sort((a, b) => a.sr.reviewedAt - b.sr.reviewedAt);
+  };
+
   // 到期队列：R 已衰减到阈值（或被手动排入且已到时）的星，按到期先后升序
   const dueStars = (now) => {
     now = now || Date.now();
@@ -385,6 +397,7 @@ window.SR_DATA = (function () {
     s.sr.S = Math.max(MEM.sMin, s.sr.S * (wasLit ? MEM.shrinkFailLit : MEM.shrinkFail));
     s.sr.last = Math.round(now - Math.log(1 / before) * s.sr.S * DAY);
     s.sr.due = 0;
+    s.sr.reviewedAt = now; s.sr.grade = 'fail';
     if (wasLit) {
       s.sr.lit = 0; s.sr.ember = now;   // 先于 refreshStar 落定，避免阈值检测重复写时间线
       pushTimeline('dim', id, '熄灭 · 待重燃');
@@ -914,7 +927,7 @@ window.SR_DATA = (function () {
     trash, trashStar, trashDomain, restoreTrash, purgeTrash,
     addStar, renameStar, touchNote, logIgnite, pushTimeline, syncCounts, account, social, site, ago, loadDemo,
     mail, refreshMail, unclaimedMail, adoptShared,
-    refreshMemory, reviewSuccess, reviewFail, reviewPartial, queueReview, dueTsOf, dueStars,
+    refreshMemory, reviewSuccess, reviewFail, reviewPartial, queueReview, dueTsOf, dueStars, reviewedToday,
     isLit, isEmber, hasSubstance, emberStars, todayTodo,
     persist: persistRemote,
   };
