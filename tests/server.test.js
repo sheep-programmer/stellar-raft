@@ -264,6 +264,36 @@ test('拉黑访客：访问被拒、再兑换也被拒；解除后恢复', async
   assert.equal(restored.status, 200);
 });
 
+test('被隐身的访客不能靠「移除好友再重新兑换」自助解除隐身', async () => {
+  const before = await api(A, 'GET', '/api/share');
+  const visitor = before.body.visitors.find((v) => v.name === '访客乙');
+  assert.ok(visitor, '访客列表应包含访客乙');
+
+  // 主人隐身 → 访客移除好友（这一侧照常返回 200）→ 同一段密文重新兑换
+  await api(A, 'POST', '/api/share/block', { viewerId: visitor.id, blocked: true });
+  const rm = await api(B, 'POST', '/api/friends/remove', { friendId: ownerId });
+  assert.equal(rm.status, 200);
+  const re = await api(B, 'POST', '/api/friends/redeem', { code: shareCode });
+  assert.equal(re.status, 403, '隐身状态必须挺过 移除→重兑换，不能落回 blocked=0');
+  const denied = await api(B, 'GET', `/api/visit/${ownerId}`);
+  assert.equal(denied.status, 403);
+
+  // 行还在（隐身记录没有丢），主人解除后一切恢复
+  const list = await api(B, 'GET', '/api/friends');
+  assert.ok(list.body.friends.some((f) => f.id === ownerId && f.blocked), '被隐身的行应留在库里');
+  await api(A, 'POST', '/api/share/block', { viewerId: visitor.id, blocked: false });
+  assert.equal((await api(B, 'GET', `/api/visit/${ownerId}`)).status, 200);
+
+  // 未被隐身的正常移除不受影响：删掉即真的删掉
+  const rm2 = await api(B, 'POST', '/api/friends/remove', { friendId: ownerId });
+  assert.equal(rm2.status, 200);
+  const list2 = await api(B, 'GET', '/api/friends');
+  assert.ok(!list2.body.friends.some((f) => f.id === ownerId), '正常移除应当真的消失');
+  // 把关系加回来，别影响后面的测试
+  const re2 = await api(B, 'POST', '/api/friends/redeem', { code: shareCode });
+  assert.equal(re2.status, 200);
+});
+
 test('关闭分享后访客即刻失去访问；重置密文换新码', async () => {
   const off = await api(A, 'POST', '/api/share', { enabled: false });
   assert.equal(off.body.enabled, false);
@@ -309,6 +339,78 @@ test('演示好友种子可兑换（XING-DEMO-2333）', async () => {
   assert.equal(visit.status, 200);
   assert.equal(visit.body.galaxy.visibility, 'outline');
   assert.ok(visit.body.galaxy.stars.length >= 6);
+});
+
+/* 畸形请求体不该把服务器打成 500。
+   曾经的漏洞是最朴素的那种：请求体写一个字面量 `null` —— 合法 JSON，JSON.parse
+   欣然返回 null，而每个路由紧接着就读 body.xxx。一行 `curl -d null` 就能让每个
+   POST 接口回一句「Cannot read properties of null」。5xx 是「服务器自己出了错」，
+   把用户送来的垃圾算在自己头上，既误导排查，也把内部报错原样吐了出去。 */
+test('畸形请求体：null / 数组 / 类型全错，一律 4xx 而不是 5xx', async () => {
+  const junk = [
+    null, 42, '"字符串"', '[]',                                   // 合法 JSON 但不是对象
+    '{"id":{},"password":[]}', '{"data":"不是对象"}', '{"data":{"stars":"不是数组"}}',
+    '{"toUserId":{},"kind":{}}', '{"code":{},"starId":[]}', '{"id":"NaN","action":{}}',
+    '{"viewerId":{},"blocked":{}}', '{"friendId":{}}', '{"enabled":{},"visibility":{}}',
+    '{"username":{},"email":[],"password":{}}', '{"old":{},"new":[]}', '{"name":{},"avatar":[]}',
+  ];
+  const posts = [
+    '/api/hello', '/api/auth/register', '/api/auth/login', '/api/auth/password', '/api/auth/email',
+    '/api/auth/handover', '/api/share', '/api/share/block', '/api/friends/redeem', '/api/friends/remove',
+    '/api/inbox/send', '/api/inbox/collect', '/api/inbox/ack',
+  ];
+  const bad = [];
+  for (const p of posts) {
+    for (const raw of junk) {
+      const res = await fetch(baseUrl + p, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + A },
+        body: typeof raw === 'string' ? raw : JSON.stringify(raw),
+      });
+      if (res.status >= 500) bad.push(`POST ${p} <- ${typeof raw === 'string' ? raw : JSON.stringify(raw)} => ${res.status}`);
+    }
+  }
+  // PUT /api/galaxy 同样过一遍（它是唯一的 PUT）
+  for (const raw of junk) {
+    const res = await fetch(baseUrl + '/api/galaxy', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + A },
+      body: typeof raw === 'string' ? raw : JSON.stringify(raw),
+    });
+    if (res.status >= 500) bad.push(`PUT /api/galaxy <- ${typeof raw === 'string' ? raw : JSON.stringify(raw)} => ${res.status}`);
+  }
+  assert.deepEqual(bad, [], '这些请求把服务器打成了 5xx：\n' + bad.join('\n'));
+
+  // 真正的坏 JSON 仍然要被明确拒绝（400），而不是当成空对象放行
+  const broken = await fetch(baseUrl + '/api/hello', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + A },
+    body: '{ 这不是 json',
+  });
+  assert.equal(broken.status, 400);
+});
+
+/* 超大请求体：说清是「太大了」，而不是含混的「格式错误」。
+   星图是整片星空一次整存，所以这条 8MB 的线同时也是「一片星空能有多大」——
+   笔记里内联一张手机原图就能顶穿它。客户端据 413 给一句人话（去压那张图），
+   若混成 400 或网络错误，用户只会一直等一个永远不会到来的「网络恢复」。 */
+test('请求体超过 8MB：413 + tooLarge，而不是 400 或直接断开', async () => {
+  const huge = JSON.stringify({ data: { stars: [], constellations: [], blob: 'x'.repeat(9 * 1024 * 1024) } });
+  const res = await fetch(baseUrl + '/api/galaxy', {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + A },
+    body: huge,
+  });
+  assert.equal(res.status, 413);
+  const j = await res.json();
+  assert.equal(j.tooLarge, true);
+  assert.match(j.error, /8MB/);
+  assert.match(j.error, /图/, '要指出多半是内联大图，人才知道下一步做什么');
+
+  // 被拒之后原来的星系分毫未动
+  const still = await api(A, 'GET', '/api/galaxy');
+  assert.equal(still.status, 200);
+  assert.ok(Array.isArray(still.body.data.stars));
 });
 
 test('未知接口 404', async () => {
@@ -511,6 +613,44 @@ test('造访返回主人简介：剥 HTML、钳 160 字；偏好与 AI 配置绝
   const raw = JSON.stringify(visit.body);
   assert.ok(!raw.includes('sk-secret-123'), 'AI 密钥绝不能出现在访客视图');
   assert.ok(!raw.includes('remindTime'), '偏好不透传给访客');
+});
+
+test('嵌套投毒：快照里数组的坏成员拖不垮访客视图（每层都兜底）', async () => {
+  const O = 'token-poison-owner', V = 'token-poison-viewer';
+  await api(O, 'POST', '/api/hello', { name: '毒库主', avatar: '毒' });
+  await api(V, 'POST', '/api/hello', { name: '造访者', avatar: '访' });
+
+  // 顶层数组都合法（写入端校验放行），坏的是**成员**：null、字符串、
+  // body 是字符串的星、tags 是字符串的星、null 星域、null 连线
+  await api(O, 'PUT', '/api/galaxy', {
+    data: {
+      constellations: [null, 'oops', { id: 'c1', name: '好域' }],
+      connections: [null, { a: 'good', b: 'good', kind: 'intra' }],
+      stars: [
+        null,
+        'oops',
+        { id: 'good', con: 'c1', x: 1, y: 1, label: '好星', body: [{ type: 'h2', text: '<b>标题</b>' }, null], tags: ['好'] },
+        { id: 'badbody', con: 'c1', x: 2, y: 2, label: '坏身星', body: 'not-an-array', tags: 'not-an-array' },
+      ],
+    },
+  });
+
+  const share = await api(O, 'POST', '/api/share', { enabled: true, visibility: 'outline' });
+  const redeem = await api(V, 'POST', '/api/friends/redeem', { code: share.body.code });
+  assert.equal(redeem.status, 200);
+
+  const visit = await api(V, 'GET', `/api/visit/${redeem.body.friend.id}`);
+  assert.equal(visit.status, 200, '嵌套坏数据不该把造访打成 500');
+  const labels = visit.body.galaxy.stars.map((s) => s.label);
+  assert.ok(labels.includes('好星') && labels.includes('坏身星'), '好星与带病星都该留下（坏字段被剥离）');
+  const bad = visit.body.galaxy.stars.find((s) => s.label === '坏身星');
+  assert.deepEqual(bad.tags, [], '字符串 tags 应被剥成空数组');
+  assert.deepEqual(bad.outline, [], '字符串 body 应被剥成空大纲');
+  const good = visit.body.galaxy.stars.find((s) => s.label === '好星');
+  assert.equal(good.outline.length, 1, '好星的大纲只留合法块（null 块剔除）');
+  assert.equal(good.outline[0].text, '标题', '大纲剥 HTML');
+  assert.equal(visit.body.galaxy.constellations.length, 1, 'null/字符串星域剔除');
+  assert.equal(visit.body.galaxy.connections.length, 1, 'null 连线剔除');
 });
 
 /* --------------------- 星语留言 · 访客足迹 --------------------- */

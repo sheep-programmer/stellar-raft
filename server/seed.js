@@ -41,15 +41,27 @@ function runSeeds() {
   console.log('[seed] 演示好友「星图伙伴」已就绪，分享码', DEMO_CODE);
 })();
 
-/* 默认管理员入户：新装 DB 首次启动时建号并把凭据打在控制台上（只此一次） */
+/* 默认管理员入户：新装 DB 首次启动时建号并把凭据打在控制台上（只此一次）。
+   出厂凭据是公开知识（README 与这段日志里都有），所以第一次登录会被交接卡拦住，
+   当场把用户名与密码一起换掉；SR_ADMIN_USER / SR_ADMIN_PASS 指定过的不算出厂凭据，
+   那是运维自己挑的，不再拦。 */
   (function announceAdmin() {
   const a = seedAdmin();
   if (!a) return;
   console.log('');
   console.log('  ┌─ 星港管理员已入户 ───────────────────────────────');
   console.log('  │  用户名   ' + a.username);
-  console.log('  │  密码     ' + a.password + (ADMIN_IS_DEFAULT ? '   ← 默认密码，登录后请尽快修改' : ''));
-  console.log('  │  登录后侧边栏底部出现「星港管理台」入口');
+  console.log('  │  密码     ' + a.password);
+  console.log('  │');
+  if (ADMIN_IS_DEFAULT) {
+    console.log('  │  这是出厂凭据，公开在 README 里 —— 第一次登录会要求你');
+    console.log('  │  当场把用户名与密码一起换掉，换完请记牢：星图不发找回邮件。');
+    console.log('  │  想跳过这一步，下次装机前先指定自己的凭据：');
+    console.log('  │      SR_ADMIN_USER=captain SR_ADMIN_PASS=\'你的强密码\' npm run serve');
+  } else {
+    console.log('  │  凭据由 SR_ADMIN_USER / SR_ADMIN_PASS 指定，不是出厂值。');
+  }
+  console.log('  │  登录后侧边栏底部出现「星港管理台」入口。');
   console.log('  └──────────────────────────────────────────────────');
   console.log('');
 })();

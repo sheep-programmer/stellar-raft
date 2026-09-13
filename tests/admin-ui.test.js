@@ -20,6 +20,7 @@ const SIDEBAR = read('ui_kits/stellar-raft/Sidebar.jsx');
 const DATA = read('ui_kits/stellar-raft/data.js');
 const API = read('ui_kits/stellar-raft/api.js');
 const SETTINGS = read('ui_kits/stellar-raft/Settings.jsx');
+const HANDOVER = read('ui_kits/stellar-raft/AdminHandover.jsx');
 const HTML = read('ui_kits/stellar-raft/index.html');
 const SERVER = read('server/server.js');
 const CORE = read('server/core.js');
@@ -160,6 +161,92 @@ test('index.html 在 app.jsx 之前加载 AdminConsole.jsx', () => {
   const app = HTML.indexOf('app.jsx?v=');
   assert.ok(admin > 0, 'index.html 没有登记 AdminConsole.jsx');
   assert.ok(admin < app, 'AdminConsole.jsx 必须先于 app.jsx 加载');
+});
+
+/* ---------------------------- 星港交接 ----------------------------
+   出厂管理员一登录就撞上交接卡：用户名与密码一起换，换完才放行。
+   这一组盯的是「关不掉」与「必须亲手确认记住」这两件事没被后来的改动磨平。 */
+
+test('AdminHandover 注册到 SRKit，并在 app.jsx 之前加载', () => {
+  assert.match(HANDOVER, /window\.SRKit\s*=\s*Object\.assign\(\s*window\.SRKit\s*\|\|\s*\{\}\s*,\s*\{\s*AdminHandover\s*\}\s*\)/);
+  const card = HTML.indexOf('AdminHandover.jsx');
+  const app = HTML.indexOf('app.jsx?v=');
+  assert.ok(card > 0, 'index.html 没有登记 AdminHandover.jsx');
+  assert.ok(card < app, 'AdminHandover.jsx 必须先于 app.jsx 加载');
+});
+
+test('交接卡只对「出厂凭据还当值的管理员」出现，且压在所有浮层之上', () => {
+  assert.match(APP, /setHandover\(!!\(A && A\.admin && A\.defaultPass\)\)/);
+  assert.match(APP, /\{handover && <AdminHandover onDone=/);
+  // 服务器改口（sr-site / sr-account）之后要跟着变，不能只在挂载时看一眼
+  for (const ev of ['sr-site', 'sr-account', 'sr-hydrated']) {
+    assert.ok(APP.includes(`window.addEventListener('${ev}', h)`), '交接卡没有跟住 ' + ev);
+  }
+  // 新手引导给它让位（同登录页的取舍），⌘K / ? / Esc 一律不在它之上开第二层
+  assert.match(APP, /\{onboard && !login && !handover && authKnown && <Onboarding/);
+  /* ⌘K / ? / Esc 三处守卫都要认得交接卡。认「这一行里有没有 handover」而不是
+     锁死它是不是最后一项——守卫清单本来就会随浮层增减而变长。 */
+  const guards = [...APP.matchAll(/if \(([a-zA-Z|\s!.]*handover[a-zA-Z|\s!.]*)\) return;/g)];
+  assert.equal(guards.length, 3, '⌘K / ? / Esc 三处守卫都要认得交接卡，实得 ' + guards.length);
+  // zIndex 压过登录页（150）
+  const z = HANDOVER.match(/zIndex:\s*(\d+)/);
+  assert.ok(z && Number(z[1]) > 150, '交接卡要压在登录页之上');
+});
+
+test('交接卡关不掉：没有 onClose，Esc 被就地吃掉，唯一出口是退出登录', () => {
+  assert.equal(/onClose/.test(HANDOVER), false, '交接卡不该有「关闭」这条路');
+  // Esc 在捕获阶段拦下并吞掉，而不是转手关闭
+  assert.match(HANDOVER, /e\.key === 'Escape'.*preventDefault\(\);\s*e\.stopPropagation\(\);/s);
+  assert.match(HANDOVER, /addEventListener\('keydown', k, true\)/);
+  assert.match(HANDOVER, /window\.SRNet\.logoutFlow\(\)/);
+});
+
+test('交接卡：用户名与密码一起换，且必须亲手勾上「我已记下」才提交得了', () => {
+  // 三个输入：新用户名、新密码、确认密码
+  assert.equal((HANDOVER.match(/<Input\b/g) || []).length, 3);
+  assert.match(HANDOVER, /autoComplete="username"/);
+  assert.equal((HANDOVER.match(/autoComplete="new-password"/g) || []).length, 2);
+  // 「记住」是一枚闸：没勾上 ready 就是 false，提交键是灰的
+  assert.match(HANDOVER, /const ready = !localErr\(\) && remembered && !busy/);
+  assert.match(HANDOVER, /disabled=\{!ready\}/);
+  assert.match(HANDOVER, /<Checkbox checked=\{remembered\}/);
+  // 本地校验与服务端同一口径（出厂用户名 / 密码下限 / 两次一致）
+  assert.match(HANDOVER, /SR_ADMIN_PASS_MIN = 8/);
+  assert.match(HANDOVER, /\^\[\\w一-龥-\]\{2,24\}\$/);
+  assert.match(HANDOVER, /pw !== confirm/);
+});
+
+test('交接成功后换钥匙而不是换身份：本地星空镜像与账号偏好原样留下', () => {
+  assert.match(HANDOVER, /window\.SRNet\.auth\.handover\(/);
+  assert.match(HANDOVER, /window\.SRNet\.renewSession\(r\.session\)/);
+  assert.equal(/adoptSession/.test(HANDOVER), false, 'adoptSession 会清掉这个人自己的镜像与偏好');
+  // renewSession 只换令牌：既不清 galaxy 镜像，也不走 stripLocalIdentity
+  const rn = API.slice(API.indexOf('const renewSession'), API.indexOf('const adoptSession'));
+  assert.match(rn, /localStorage\.setItem\(KEY, t\)/);
+  assert.equal(/removeItem\(LS_GALAXY\)|stripLocalIdentity/.test(rn), false);
+  // 交接后就地摘掉红条
+  assert.match(HANDOVER, /acc\.defaultPass = false/);
+  assert.match(HANDOVER, /'sr-account'/);
+});
+
+test('服务端：交接接口三道守卫，两样一起换，善后是吊销全部会话', () => {
+  const block = SERVER.slice(SERVER.indexOf("seg[2] === 'handover'"), SERVER.indexOf("seg[1] === 'hello'"));
+  assert.match(block, /if \(!sess \|\| !me\.username \|\| !me\.pass\)/, '必须是真登录态');
+  assert.match(block, /if \(!isAdmin\)/, '必须是管理员');
+  assert.match(block, /if \(!adminDefaultPass\(\)\)/, '交接过一次就不再开门');
+  // 出厂用户名与出厂密码都不许留
+  assert.match(block, /username\.toLowerCase\(\) === ADMIN_USER\.toLowerCase\(\)/);
+  assert.match(block, /password === ADMIN_PASS/);
+  assert.match(block, /password\.length < ADMIN_PASS_MIN/);
+  // 两样一起落库，标记摘掉，旧会话全清，再发一把新的
+  assert.match(block, /q\.setUsername\.run/);
+  assert.match(block, /q\.setPass\.run\(hashPass\(password\), me\.id\)/);
+  assert.match(block, /clearAdminDefaultPass\(\)/);
+  assert.match(block, /q\.dropSessionsOf\.run\(me\.id\)/);
+  assert.match(block, /audit\(fresh, 'admin\.handover'/);
+  assert.match(block, /session: newSession\(me\.id\)/);
+  // 管理员密码下限比普通账号严一档
+  assert.match(CORE, /const ADMIN_PASS_MIN = 8;/);
 });
 
 /* ---------------------------- 游客门禁 ---------------------------- */

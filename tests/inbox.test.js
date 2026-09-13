@@ -301,6 +301,32 @@ test('幂等：同 (to,from,kind,starId) 未领取时返回既有消息，不重
   assert.notEqual(fresh.body.message.id, dupId);
 });
 
+test('重置密文后重寄邀请：好友那封未领取的邀请被刷成新密文（不再是死码）', async () => {
+  /* 死锁场景：主人重置密文 → 重寄命中去重 → 好友收件箱里躺着的仍是旧密文，
+     「去造访」必 404，而主人这边看到的却是「等待领取」。现在去重照做，
+     但把那封未领取邀请的 payload 刷成最新密文。 */
+  const oldCode = shareCode;
+  const reset = await api(OWNER, 'POST', '/api/share', { enabled: true, reset: true });
+  assert.equal(reset.status, 200);
+  assert.notEqual(reset.body.code, oldCode);
+  shareCode = reset.body.code;   // 后面的用例都认这个新码
+
+  const resend = await api(OWNER, 'POST', '/api/inbox/send', { toUserId: friendId, kind: 'galaxy' });
+  assert.equal(resend.status, 200);
+  assert.equal(resend.body.duplicate, true, '仍是幂等命中，不重复入库');
+
+  const box = await api(FRIEND, 'GET', '/api/inbox');
+  const invite = box.body.find(m => m.kind === 'galaxy' && !m.claimed && m.from && m.from.id === ownerId);
+  assert.ok(invite, '未领取的造访邀请应还在');
+  assert.equal(invite.payload.code, shareCode, '邀请里的密文必须是最新的');
+  assert.notEqual(invite.payload.code, oldCode);
+
+  // 新码是真的能用：陌生丙拿它兑换成功（顺手把关系清掉，别影响后面的用例）
+  const redeem = await api(STRANGER, 'POST', '/api/friends/redeem', { code: invite.payload.code });
+  assert.equal(redeem.status, 200);
+  await api(STRANGER, 'POST', '/api/friends/remove', { friendId: ownerId });
+});
+
 /* ------------------------------- collect ------------------------------- */
 
 test('collect（outline 档）：label + keyPoints，无 summary；投进自己收件箱，from=主人', async () => {

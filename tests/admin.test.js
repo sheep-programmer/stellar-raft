@@ -158,6 +158,88 @@ test('总览：账号 / 知识 / 星际 / 运行 / 站点五组读数齐全且�
   assert.equal(d.defaultPass, true);
 });
 
+/* 管理台为了不在每次请求里把每个人的快照重新解析一遍，缓存了「解析结果的形状」
+   （每颗星参与计算的那几个字段），按 (version, updated_at) 判新鲜。
+   缓存最危险的地方只有一个：陈旧。这两条分别盯住它的两面——
+   人一保存，数字就得跟上；而随时间变的量（亮度/点亮/熄灭）必须仍然当场算，
+   不能被冻在上一次保存的那一刻。 */
+
+test('缓存不陈旧：用户刚保存完，管理台的读数立刻跟上', async () => {
+  const u = await makeUser('cachey', 'passw0rd');
+  const starsOf = async () => {
+    const r = await api(admin, 'GET', '/api/admin/users?q=cachey');
+    return r.body.users[0];
+  };
+
+  await api(u.session, 'PUT', '/api/galaxy', {
+    data: { constellations: [{ id: 'c1', name: '域一' }], stars: [{ id: 'a', con: 'c1', label: '一' }] },
+  });
+  const before = await starsOf();
+  assert.equal(before.stars, 1);
+  const bytesBefore = before.snapshotBytes;
+  assert.ok(bytesBefore > 0, '快照体积要真的量出来');
+
+  // 同一个人再存一次，多两颗星 —— 版本号变了，缓存必须作废
+  await api(u.session, 'PUT', '/api/galaxy', {
+    data: {
+      constellations: [{ id: 'c1', name: '域一' }, { id: 'c2', name: '域二' }],
+      stars: [{ id: 'a', con: 'c1', label: '一' }, { id: 'b', con: 'c2', label: '二' }, { id: 'c', con: 'c2', label: '三' }],
+    },
+  });
+  const after = await starsOf();
+  assert.equal(after.stars, 3, '新存进去的星要立刻算数');
+  assert.equal(after.constellations, 2);
+  assert.ok(after.snapshotBytes > bytesBefore, '体积也得跟着这一版走');
+
+  // 详情页与总览走的是同一套读数，不该各说各话
+  const detail = await api(admin, 'GET', '/api/admin/users/' + u.id);
+  assert.equal(detail.body.galaxy.stars, 3);
+  assert.equal(detail.body.galaxy.breakdown.find(c => c.id === 'c2').count, 2);
+});
+
+test('随时间变的量仍然当场算：点亮与熄灭不被冻在上一次保存', async () => {
+  const u = await makeUser('emberish', 'passw0rd');
+  const DAY_MS = 86400000;
+  /* 两颗都「曾经点亮」的星，差别只在多久没复习：
+     一颗昨天刚复习（R≈1，仍然亮着），一颗放了 60 天（R 远低于熄灭阈值 0.35）。
+     这两个数字都不在快照里，只能由服务端按此刻的时间算出来。 */
+  await api(u.session, 'PUT', '/api/galaxy', {
+    data: {
+      constellations: [{ id: 'c1', name: '域' }],
+      stars: [
+        { id: 'fresh', con: 'c1', label: '刚复习过', strength: 0.9, sr: { S: 10, last: Date.now() - DAY_MS, lit: Date.now() - 5 * DAY_MS } },
+        { id: 'cold', con: 'c1', label: '放很久了', strength: 0.9, sr: { S: 10, last: Date.now() - 60 * DAY_MS, lit: Date.now() - 90 * DAY_MS } },
+      ],
+    },
+  });
+  const r = await api(admin, 'GET', '/api/admin/users/' + u.id);
+  assert.equal(r.body.galaxy.stars, 2);
+  assert.equal(r.body.galaxy.lit, 1, '只有那颗刚复习过的还算点亮');
+  assert.equal(r.body.galaxy.ember, 1, '放了 60 天的那颗该判成待重燃');
+  // 快照里写的 strength 都是 0.9，出库的均值必须是按真实时间重算过的，明显低于 0.9
+  assert.ok(r.body.galaxy.avgStrength < 0.9, '均值应当是衰减后的，而不是快照里的静态值');
+});
+
+test('嵌套投毒：快照里数组的坏成员拖不垮管理台（总览 / 名单 / 详情都 200）', async () => {
+  // 顶层数组合法（写入端放行），坏的是成员：null 星、字符串星、null 星域
+  const u = await makeUser('nested', 'passw0rd');
+  await api(u.session, 'PUT', '/api/galaxy', {
+    data: {
+      constellations: [null, { id: 'c1', name: '好域' }],
+      connections: [null],
+      stars: [null, 'oops', { id: 'ok', con: 'c1', label: '好星', strength: 0.8 }],
+    },
+  });
+  const overview = await api(admin, 'GET', '/api/admin/overview');
+  assert.equal(overview.status, 200, '总览不该被嵌套坏数据打成 500');
+  const list = await api(admin, 'GET', '/api/admin/users?sort=stars&q=nested');
+  assert.equal(list.status, 200);
+  assert.equal(list.body.users[0].stars, 1, '只有那颗合法星算数');
+  const detail = await api(admin, 'GET', '/api/admin/users/' + u.id);
+  assert.equal(detail.status, 200);
+  assert.equal(detail.body.galaxy.constellations, 1);
+});
+
 /* ---------------------------- 用户列表与详情 ---------------------------- */
 
 test('用户列表：搜索 / 筛选 / 分页各自生效，且每行带真实星系读数', async () => {
@@ -329,6 +411,131 @@ test('重置密码：新密码可登录、旧密码作废，并默认踢掉全�
 
   const tooShort = await api(admin, 'POST', `/api/admin/users/${u.id}/password`, { password: '123' });
   assert.equal(tooShort.status, 400);
+});
+
+test('给管理员重置密码走更高的下限（与交接卡同一条线），普通用户仍是 6 位', async () => {
+  // 普通用户：6 位就行
+  const u = await makeUser('sixok', 'passw0rd');
+  assert.equal((await api(admin, 'POST', `/api/admin/users/${u.id}/password`, { password: '123456' })).status, 200);
+
+  // 升任管理员后：7 位拒收、8 位才放行（core.js ADMIN_PASS_MIN）
+  await api(admin, 'POST', `/api/admin/users/${u.id}/role`, { role: 'admin' });
+  const seven = await api(admin, 'POST', `/api/admin/users/${u.id}/password`, { password: '1234567' });
+  assert.equal(seven.status, 400, '管理员密码 7 位应当拒收');
+  const eight = await api(admin, 'POST', `/api/admin/users/${u.id}/password`, { password: '12345678' });
+  assert.equal(eight.status, 200);
+  assert.equal((await api('anon-sixok', 'POST', '/api/auth/login', { id: 'sixok', password: '12345678' })).status, 200);
+});
+
+test('管理员自己改密：不再 500，出厂密码警告当场摘掉，新旧密码即刻交替', async () => {
+  // 单开一台：改的是这台服务器上那位出厂管理员的密码，别牵连同文件里共用的那台
+  const one = await startServer({ SR_GUEST_PER_IP: '0' });
+  try {
+    const call = (token, method, p, body) => fetch(one.baseUrl + p, {
+      method, headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+      body: body === undefined ? undefined : JSON.stringify(body),
+    }).then(async r => ({ status: r.status, body: await r.json() }));
+
+    const sess = (await call('a', 'POST', '/api/auth/login', { id: 'admin', password: 'stellar-admin' })).body.session;
+    assert.equal((await call(sess, 'POST', '/api/hello', {})).body.site.defaultPass, true);
+
+    // README 指的就是这条路：设置 → 账户 → 修改密码。它一度 500（ADMIN_USER 未导入），
+    // 密码其实已经改掉，用户看到的却是一句报错——再拿旧密码重试只会「旧密码不对」
+    const chg = await call(sess, 'POST', '/api/auth/password', { old: 'stellar-admin', new: 'a-brand-new-key' });
+    assert.equal(chg.status, 200, '管理员改自己的密码不该报错');
+
+    assert.equal((await call(sess, 'POST', '/api/hello', {})).body.site.defaultPass, false, '不再是出厂密码，顶部那条红警告该摘掉');
+    assert.equal((await call('b', 'POST', '/api/auth/login', { id: 'admin', password: 'stellar-admin' })).status, 401);
+    assert.equal((await call('c', 'POST', '/api/auth/login', { id: 'admin', password: 'a-brand-new-key' })).status, 200);
+  } finally {
+    one.child.kill('SIGKILL');
+    fs.rmSync(one.tmpDir, { recursive: true, force: true });
+  }
+});
+
+/* ---------------------------- 星港交接 ----------------------------
+   出厂凭据（admin / stellar-admin）写在 README 与启动日志里，谁都看得见。
+   所以第一次登录要求把用户名与密码一起换掉：只换密码，出厂用户名还留着，
+   等于把门牌号也交出去。这一组盯的是服务端这一侧的口径与善后。 */
+
+test('星港交接：出厂管理员把用户名与密码一起换掉，旧凭据与旧会话一起作废', async () => {
+  const one = await startServer({ SR_GUEST_PER_IP: '0' });
+  try {
+    const call = (token, method, p, body) => fetch(one.baseUrl + p, {
+      method, headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+      body: body === undefined ? undefined : JSON.stringify(body),
+    }).then(async r => ({ status: r.status, body: await r.json() }));
+
+    const sess = (await call('h0', 'POST', '/api/auth/login', { id: 'admin', password: 'stellar-admin' })).body.session;
+    const older = (await call('h1', 'POST', '/api/auth/login', { id: 'admin', password: 'stellar-admin' })).body.session;
+    assert.equal((await call(sess, 'POST', '/api/hello', {})).body.site.defaultPass, true);
+
+    // ——— 守卫：匿名与普通账号都不该碰得到这个接口 ———
+    assert.equal((await call('anon-h', 'POST', '/api/auth/handover', { username: 'x', password: 'whatever12' })).status, 401);
+    await call('anon-p', 'POST', '/api/hello', { name: '路人' });
+    const plain = await call('anon-p', 'POST', '/api/auth/register', { username: '路人甲', password: 'passw0rd' });
+    assert.equal((await call(plain.body.session, 'POST', '/api/auth/handover', { username: 'newname', password: 'passw0rd12' })).status, 403);
+
+    // ——— 校验：出厂的那两样都不许留，密码另有一档更严的下限 ———
+    const bad = async (body) => (await call(sess, 'POST', '/api/auth/handover', body)).status;
+    assert.equal(await bad({ username: 'admin', password: 'a-strong-key' }), 400, '出厂用户名不能留');
+    assert.equal(await bad({ username: 'ADMIN', password: 'a-strong-key' }), 400, '大小写换一下也还是那个名字');
+    assert.equal(await bad({ username: 'captain', password: 'stellar-admin' }), 400, '出厂密码不能留');
+    assert.equal(await bad({ username: 'captain', password: 'short1' }), 400, '管理员密码至少 8 位');
+    assert.equal(await bad({ username: 'captain', password: 'captain' }), 400, '密码不能和用户名一样');
+    assert.equal(await bad({ username: 'a', password: 'a-strong-key' }), 400, '用户名太短');
+    assert.equal(await bad({ username: '带 空格', password: 'a-strong-key' }), 400, '用户名字符集');
+    assert.equal(await bad({ username: '路人甲', password: 'a-strong-key' }), 409, '撞上别人的用户名');
+    // 都没改成：出厂凭据仍然当值
+    assert.equal((await call(sess, 'POST', '/api/hello', {})).body.site.defaultPass, true);
+
+    // ——— 交接 ———
+    const done = await call(sess, 'POST', '/api/auth/handover', { username: 'captain', password: 'a-strong-key' });
+    assert.equal(done.status, 200, JSON.stringify(done.body));
+    assert.equal(done.body.user.username, 'captain');
+    assert.ok(done.body.session, '要发一把新钥匙回来');
+
+    // 旧凭据两样都作废，新凭据能登
+    assert.equal((await call('h2', 'POST', '/api/auth/login', { id: 'admin', password: 'stellar-admin' })).status, 401);
+    assert.equal((await call('h3', 'POST', '/api/auth/login', { id: 'admin', password: 'a-strong-key' })).status, 401);
+    assert.equal((await call('h4', 'POST', '/api/auth/login', { id: 'captain', password: 'stellar-admin' })).status, 401);
+    assert.equal((await call('h5', 'POST', '/api/auth/login', { id: 'captain', password: 'a-strong-key' })).status, 200);
+
+    // 出厂凭据配出去的会话一把都不留：交接时用的那把也在内
+    assert.equal((await call(older, 'GET', '/api/admin/overview')).status, 401, '别处那把出厂钥匙该被请下去');
+    assert.equal((await call(sess, 'GET', '/api/admin/overview')).status, 401, '交接时用的那把也一并吊销');
+
+    // 新钥匙照常通行，红条摘掉，交接不可重放
+    const fresh = done.body.session;
+    assert.equal((await call(fresh, 'GET', '/api/admin/overview')).status, 200);
+    assert.equal((await call(fresh, 'POST', '/api/hello', {})).body.site.defaultPass, false);
+    assert.equal((await call(fresh, 'POST', '/api/auth/handover', { username: 'captain2', password: 'another-strong-key' })).status, 409);
+    assert.equal((await call(fresh, 'POST', '/api/hello', {})).body.account.username, 'captain', '409 之后名字没被改动');
+
+    // 审计留痕
+    const log = await call(fresh, 'GET', '/api/admin/audit?size=50');
+    assert.ok(log.body.entries.some(e => e.action === 'admin.handover'), '交接要在操作日志里留痕');
+  } finally {
+    one.child.kill('SIGKILL');
+    fs.rmSync(one.tmpDir, { recursive: true, force: true });
+  }
+});
+
+test('星港交接：凭据由环境变量指定时不拦 —— 那是运维自己挑的，不是出厂值', async () => {
+  const other = await startServer({ SR_ADMIN_USER: 'captain', SR_ADMIN_PASS: 'a-very-private-key' });
+  try {
+    const call = (token, p, body) => fetch(other.baseUrl + p, {
+      method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+      body: JSON.stringify(body),
+    }).then(async r => ({ status: r.status, body: await r.json() }));
+
+    const sess = (await call('e1', '/api/auth/login', { id: 'captain', password: 'a-very-private-key' })).body.session;
+    assert.equal((await call(sess, '/api/hello', {})).body.site.defaultPass, false, '不该被请去交接');
+    assert.equal((await call(sess, '/api/auth/handover', { username: 'other', password: 'yet-another-key' })).status, 409);
+  } finally {
+    other.child.kill('SIGKILL');
+    fs.rmSync(other.tmpDir, { recursive: true, force: true });
+  }
 });
 
 test('改资料：昵称与用户名可改，撞名被挡下', async () => {
@@ -572,6 +779,55 @@ test('清理空游客：只删「从没存过星系且很久没来」的，存�
 
   assert.equal((await api(empty, 'POST', '/api/hello', {})).status, 200);
   assert.equal((await api(kept, 'GET', '/api/galaxy')).body.data.stars.length, 1);
+});
+
+/* 上面那条只证明了「今天刚来的不清」——因为一切都是新建的，removed 恒为 0，
+   清理循环里的三道闸门一道也没走到。于是把 `if (galaxyStats(u.id)) continue;`
+   整行删掉，测试照样全绿，而那一行守的是「存过东西的游客不该被抹掉」，
+   下游是 dropUser：不可逆。
+   要让闸门真正受考，就得有账号落在截止线之外——API 没法把时间往回拨，
+   所以直接改库里的 last_seen / created_at。服务器是 WAL，第二个连接写得进去。 */
+test('清理僵尸游客：只动「空且久未露面」的匿名号，另外两类一个不碰', async () => {
+  const { DatabaseSync } = await import('node:sqlite');
+
+  const oldEmpty = 'guest-old-empty-' + Math.random().toString(36).slice(2);
+  const oldFull = 'guest-old-full-' + Math.random().toString(36).slice(2);
+  const freshEmpty = 'guest-new-empty-' + Math.random().toString(36).slice(2);
+  for (const t of [oldEmpty, oldFull, freshEmpty]) await api(t, 'POST', '/api/hello', {});
+  await api(oldFull, 'PUT', '/api/galaxy', { data: { stars: [{ id: 'x', label: '写过东西' }], constellations: [] } });
+  // 久未露面但已注册的账号：它有 username，第一道闸门就该把它挡在外面
+  const oldMember = await makeUser('purge-survivor', 'passw0rd');
+
+  const db = new DatabaseSync(path.join(srv.tmpDir, 'stellar.db'));
+  const backdate = db.prepare("UPDATE users SET last_seen = datetime('now','-30 days'), created_at = datetime('now','-30 days') WHERE token = ? OR id = ?");
+  const idOf = db.prepare('SELECT id FROM users WHERE token = ?');
+  for (const t of [oldEmpty, oldFull]) backdate.run(t, -1);
+  backdate.run('__none__', oldMember.id);
+  const ids = { oldEmpty: idOf.get(oldEmpty).id, oldFull: idOf.get(oldFull).id, fresh: idOf.get(freshEmpty).id };
+  db.close();
+
+  const r = await api(admin, 'POST', '/api/admin/guests/purge', { idleDays: 7 });
+  assert.equal(r.status, 200);
+  assert.equal(r.body.removed, 1, '只该清掉那个「空且久未露面」的游客：' + JSON.stringify(r.body));
+
+  // ① 写过东西的游客：星还在（这条钉的就是 galaxyStats 那道闸门）
+  const kept = await api(oldFull, 'GET', '/api/galaxy');
+  assert.equal(kept.status, 200);
+  assert.equal(kept.body.data.stars.length, 1, '存过星系的游客被清掉了');
+
+  // ② 已注册的账号：哪怕三十天没来也不能动
+  assert.equal((await api(oldMember.session, 'POST', '/api/hello', {})).status, 200, '注册用户被当成僵尸游客清掉了');
+
+  // ③ 今天刚来的空游客：不在范围内
+  assert.equal((await api(freshEmpty, 'POST', '/api/hello', {})).status, 200);
+
+  // 被清掉的那一位：行本身没了（拿同一个令牌再来会是一位全新的旅客，不是旧的那个 id）
+  const db2 = new DatabaseSync(path.join(srv.tmpDir, 'stellar.db'));
+  assert.equal(db2.prepare('SELECT COUNT(*) n FROM users WHERE id = ?').get(ids.oldEmpty).n, 0, '空游客应当被删除');
+  for (const k of ['oldFull', 'fresh']) {
+    assert.equal(db2.prepare('SELECT COUNT(*) n FROM users WHERE id = ?').get(ids[k]).n, 1, k + ' 不该被删');
+  }
+  db2.close();
 });
 
 test('每 IP 一个游客：第二位游客被挡下并被请去登录，注册后名额立刻释放', async () => {

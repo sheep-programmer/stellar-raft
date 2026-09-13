@@ -137,11 +137,21 @@ test('改密码：未登录 401 · 旧密码错 401 · 成功后新旧交替生�
   assert.equal((await api(anon, 'POST', '/api/auth/login', { id: '林深', password: 'secret2' })).status, 200);
 });
 
-test('登出：session 失效，退回匿名语义', async () => {
+test('登出：会话当场作废，那把死令牌不会悄悄变成一位新游客', async () => {
   assert.equal((await api(session1, 'POST', '/api/auth/logout', {})).status, 200);
+
+  /* 这里曾经的行为是「死 session 落回匿名建档」：拿着已经作废的 s_… 再来一次，
+     服务器会用它当匿名令牌新开一位旅行者。管理员强制下线时这一点尤其难看——
+     人被请下线，看到的却是一片崭新的空星空，还白占掉这个 IP 的游客名额。
+     现在明说会话没了，客户端据此换回全新的匿名身份或去登录。 */
   const h = await api(session1, 'POST', '/api/hello', {});
-  assert.equal(h.status, 200);
-  assert.equal(h.body.account.registered, false); // 死 session 落回匿名建档
+  assert.equal(h.status, 401);
+  assert.equal(h.body.sessionExpired, true);
+
+  // 换一把全新的匿名令牌，一切照常——「退出登录」之后仍然能以游客身份逛
+  const anonAgain = await api('u-after-logout-' + Math.random().toString(36).slice(2), 'POST', '/api/hello', {});
+  assert.equal(anonAgain.status, 200);
+  assert.equal(anonAgain.body.account.registered, false);
 });
 
 test('补充不变量：哈希不出库 · 双会话互异 · 旧匿名 token 双行为', async () => {

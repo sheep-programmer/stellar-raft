@@ -81,6 +81,9 @@ ensureColumn('users', 'last_login', 'last_login TEXT');               // 最近�
 ensureColumn('friendships', 'last_visit', 'last_visit TEXT');   // 访客足迹：这位访客上次造访的时刻
 db.exec(`
   CREATE UNIQUE INDEX IF NOT EXISTS idx_users_username ON users(username) WHERE username IS NOT NULL;
+  /* 覆盖索引：galaxies 的一行里塞着几百 KB 正文，任何全表扫描都要翻过那些页。
+     管理台只要 (user_id, version, updated_at)，让它整条查询都在索引里走完。 */
+  CREATE INDEX IF NOT EXISTS idx_galaxies_meta ON galaxies(user_id, version, updated_at);
   CREATE UNIQUE INDEX IF NOT EXISTS idx_users_email ON users(email) WHERE email IS NOT NULL;
   CREATE TABLE IF NOT EXISTS sessions (
     token      TEXT PRIMARY KEY,
@@ -96,6 +99,13 @@ const q = {
   insertUser: db.prepare('INSERT INTO users (token, name, avatar) VALUES (?, ?, ?)'),
   updateUser: db.prepare('UPDATE users SET name = ?, avatar = ? WHERE id = ?'),
   getGalaxy: db.prepare('SELECT data, updated_at, version FROM galaxies WHERE user_id = ?'),
+  /* 只要「这份快照是哪一版」，不碰正文。管理台按版本号判断缓存是否还新鲜，
+     命中就不必再读 data —— 全站扫一遍的代价从「搬运几十 MB」降成「读一条索引」。
+
+     刻意不带 LENGTH(data)：对 TEXT 求长度要把整份正文读出来数字符，实测在 46MB 的
+     库上就是这一个函数让这条查询从 11ms 涨到 49ms。体积改成随解析结果一起缓存。 */
+  galaxyMeta: db.prepare('SELECT user_id, version, updated_at FROM galaxies WHERE user_id = ?'),
+  allGalaxyMeta: db.prepare('SELECT user_id, version, updated_at FROM galaxies'),
   putGalaxy: db.prepare(`INSERT INTO galaxies (user_id, data, version, updated_at) VALUES (?, ?, ?, datetime('now'))
     ON CONFLICT(user_id) DO UPDATE SET data = excluded.data, version = excluded.version, updated_at = excluded.updated_at`),
   getShare: db.prepare('SELECT * FROM shares WHERE user_id = ?'),
@@ -103,7 +113,10 @@ const q = {
   upsertShare: db.prepare(`INSERT INTO shares (user_id, enabled, code, visibility) VALUES (?, ?, ?, ?)
     ON CONFLICT(user_id) DO UPDATE SET enabled = excluded.enabled, code = excluded.code, visibility = excluded.visibility`),
   addFriend: db.prepare('INSERT OR IGNORE INTO friendships (owner_id, viewer_id) VALUES (?, ?)'),
-  removeFriend: db.prepare('DELETE FROM friendships WHERE owner_id = ? AND viewer_id = ?'),
+  /* 隐身（blocked=1）的行不许被访客自己删掉：删了再拿同一段密文重新兑换，
+     INSERT OR IGNORE 会建出一条 blocked=0 的新行——主人设置的「对 TA 隐身」
+     就被对方自助解除了，而主人那边毫无知觉。blocked 的解除权只在主人手里。 */
+  removeFriend: db.prepare('DELETE FROM friendships WHERE owner_id = ? AND viewer_id = ? AND blocked = 0'),
   friendship: db.prepare('SELECT * FROM friendships WHERE owner_id = ? AND viewer_id = ?'),
   friendsOf: db.prepare(`SELECT u.id, u.name, u.avatar, f.blocked, f.added_at FROM friendships f
     JOIN users u ON u.id = f.owner_id WHERE f.viewer_id = ?`),
@@ -116,6 +129,7 @@ const q = {
   inboxById: db.prepare('SELECT * FROM inbox_messages WHERE id = ?'),
   inboxUnclaimed: db.prepare('SELECT * FROM inbox_messages WHERE to_user = ? AND from_user = ? AND kind = ? AND claimed = 0 ORDER BY id DESC'),
   inboxClaim: db.prepare('UPDATE inbox_messages SET claimed = 1 WHERE id = ?'),
+  inboxRefresh: db.prepare('UPDATE inbox_messages SET payload = ? WHERE id = ?'),
   inboxDelete: db.prepare('DELETE FROM inbox_messages WHERE id = ?'),
   metaGet: db.prepare('SELECT value FROM meta WHERE key = ?'),
   metaSet: db.prepare('INSERT OR REPLACE INTO meta (key, value) VALUES (?, ?)'),
@@ -153,6 +167,11 @@ const q = {
   // 趋势按天分桶要数全量登录，不能用上面那条带 LIMIT 的
   sessionTimes: db.prepare('SELECT created_at FROM sessions'),
   countSessionsOf: db.prepare('SELECT COUNT(*) AS n FROM sessions WHERE user_id = ?'),
+  /* 名单页要给每一行标会话数 / 访客数 / 有没有开分享。逐行各来一次查询就是
+     3N 次往返；一次 GROUP BY 拿全表，页面再从 Map 里取。 */
+  sessionCounts: db.prepare('SELECT user_id, COUNT(*) AS n FROM sessions GROUP BY user_id'),
+  visitorCounts: db.prepare('SELECT owner_id AS user_id, COUNT(*) AS n FROM friendships GROUP BY owner_id'),
+  shareFlags: db.prepare('SELECT user_id, enabled FROM shares'),
   dropSessionsOf: db.prepare('DELETE FROM sessions WHERE user_id = ?'),
   allShares: db.prepare('SELECT * FROM shares WHERE code IS NOT NULL'),
   countVisitorsOf: db.prepare('SELECT COUNT(*) AS n FROM friendships WHERE owner_id = ?'),

@@ -133,20 +133,22 @@ function LoginView({ onClose }) {
 
             {tab === 'login' ? (
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                <Input icon="user" placeholder="用户名或邮箱" autoComplete="username" value={idOrEmail}
-                  onChange={(e) => setIdOrEmail(e.target.value)} autoFocus />
-                <Input icon="lock" type="password" placeholder="密码" autoComplete="current-password" value={loginPass}
+                {/* 不用原生 autoFocus：它在 commit 阶段抢焦点，useModalFocus 捕到的 prev
+                    就变成弹层自己，关闭时焦点无从还原。进场移焦交给 useModalFocus。 */}
+                <Input icon="user" placeholder="用户名或邮箱" autoComplete="username" aria-label="用户名或邮箱" value={idOrEmail}
+                  onChange={(e) => setIdOrEmail(e.target.value)} />
+                <Input icon="lock" type="password" placeholder="密码" autoComplete="current-password" aria-label="密码" value={loginPass}
                   onChange={(e) => setLoginPass(e.target.value)} />
               </div>
             ) : (
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                <Input icon="user" placeholder="用户名（2–24 位）" autoComplete="username" value={username}
-                  onChange={(e) => setUsername(e.target.value)} autoFocus />
-                <Input icon="mail" placeholder="邮箱（选填）" autoComplete="email" value={email}
+                <Input icon="user" placeholder="用户名（2–24 位）" autoComplete="username" aria-label="用户名" value={username}
+                  onChange={(e) => setUsername(e.target.value)} />
+                <Input icon="mail" placeholder="邮箱（选填）" autoComplete="email" aria-label="邮箱（选填）" value={email}
                   onChange={(e) => setEmail(e.target.value)} />
-                <Input icon="lock" type="password" placeholder="密码（至少 6 位）" autoComplete="new-password" value={regPass}
+                <Input icon="lock" type="password" placeholder="密码（至少 6 位）" autoComplete="new-password" aria-label="密码（至少 6 位）" value={regPass}
                   onChange={(e) => setRegPass(e.target.value)} />
-                <Input icon="lock" type="password" placeholder="确认密码" autoComplete="new-password" value={regConfirm}
+                <Input icon="lock" type="password" placeholder="确认密码" autoComplete="new-password" aria-label="确认密码" value={regConfirm}
                   onChange={(e) => setRegConfirm(e.target.value)} />
               </div>
             )}

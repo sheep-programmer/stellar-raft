@@ -5,9 +5,9 @@ const fs = require('node:fs');
 const { DB_PATH } = require('../config');
 const { db, q } = require('../db');
 const {
-  json, audit, cleanText, sqlTs, shareOf, siteGet, siteSet, hashPass,
+  json, audit, arr, objArr, cleanText, sqlTs, shareOf, siteGet, siteSet, hashPass,
   adminDefaultPass, clearAdminDefaultPass, systemInfo, decayedStrength, litFlags, DAY,
-  ADMIN_USER, SITE_DEFAULT, TRUST_PROXY,
+  ADMIN_USER, ADMIN_PASS_MIN, SITE_DEFAULT, TRUST_PROXY,
 } = require('../core');
 
 
@@ -19,30 +19,95 @@ const adminUser = (u) => ({
   ip: u.ip || null, lastIp: u.last_ip || null, lastLogin: u.last_login || null,
 });
 
-// 解析某人的星系快照，算出管理台要展示的读数。快照损坏 / 不存在 → null
-const galaxyStats = (userId) => {
+/* ——— 星系快照的「形状」缓存 ———
+   管理台的总览与名单都要把每个人的快照读一遍。300 个用户、46MB 快照时，一次
+   /api/admin/overview 要 270ms —— 而它每 10 秒轮询一次。Node 是单线程的，这 270ms
+   里全站所有人的请求都在排队等着。
+
+   但缓存不能缓存「数字」：亮度、点亮、熄灭都随时间变，README 承诺的是「每个数字
+   都由服务端当场算出」。所以缓存的是**解析结果的形状**——每颗星里参与计算的那几个
+   字段（con / strength / sr），它只在这个人保存星系时才变；随时间变的那部分仍然
+   每次请求现算。
+
+   新鲜度按 (version, updated_at) 判：任何一次保存都会让它变，于是缓存自动作废。
+   拿这个签名只需要一条不含 data 的轻查询，命中时那几百 KB 正文根本不出库。 */
+/* 按「缓存了多少颗星」封顶，而不是按「缓存了多少个人」：一个人可能有 20 颗星，
+   也可能有 2000 颗，按条数封顶的话内存上限会差两个数量级。40 万颗星大约十几 MB，
+   放得下一个中等站点的全部快照形状；超出就按先进先出腾地方——真超了也只是退回
+   「用到谁再解析谁」，慢一点，不会错。 */
+const SHAPE_STAR_BUDGET = 400000;
+const shapeCache = new Map();   // userId -> { sig, shape, n }
+let shapeStars = 0;             // 当前缓存里的星数合计
+const sigOf = (meta) => String(meta.version || 0) + '|' + (meta.updated_at || '');
+const shapeEvict = (userId) => {
+  const old = shapeCache.get(userId);
+  if (old) { shapeStars -= old.n; shapeCache.delete(userId); }
+};
+
+const shapeOf = (userId, meta) => {
+  const sig = sigOf(meta);
+  const hit = shapeCache.get(userId);
+  if (hit && hit.sig === sig) return hit.shape;
   const g = q.getGalaxy.get(userId);
   if (!g) return null;
   let d; try { d = JSON.parse(g.data); } catch { return null; }
-  const stars = d.stars || [];
+  // 只留下参与计算的字段：一颗星从几 KB 收成几十字节
+  // objArr：数组里的每一项还得是对象——null/字符串成员照样让 .con 抛 TypeError
+  const shape = {
+    bytes: Buffer.byteLength(g.data),   // 体积跟着这一版走，省掉每次请求的 LENGTH(data) 全表扫描
+    stars: objArr(d.stars).map(s => ({
+      con: s.con,
+      strength: s.strength,
+      sr: s.sr ? { S: s.sr.S, last: s.sr.last, lit: s.sr.lit, ember: s.sr.ember } : undefined,
+    })),
+    cons: objArr(d.constellations).map(c => ({ id: c.id, name: cleanText(c.name, 60), color: c.color })),
+    notes: arr(d.notes).length,
+    trash: arr(d.trash).length,
+  };
+  shapeEvict(userId);   // 同一个人换了新版本：先把旧的那份从账上减掉
+  shapeCache.set(userId, { sig, shape, n: shape.stars.length });
+  shapeStars += shape.stars.length;
+  while (shapeStars > SHAPE_STAR_BUDGET && shapeCache.size > 1) {
+    const oldest = shapeCache.keys().next().value;
+    if (oldest === userId) break;   // 别把刚放进去的这份挤掉
+    shapeEvict(oldest);
+  }
+  return shape;
+};
+
+// 解析某人的星系快照，算出管理台要展示的读数。快照损坏 / 不存在 → null
+const galaxyStats = (userId, meta) => {
+  const m = meta || q.galaxyMeta.get(userId);
+  if (!m) return null;
+  const shape = shapeOf(userId, m);
+  if (!shape) return null;
+  const stars = shape.stars;
   const now = Date.now();
-  const strengths = stars.map(s => decayedStrength(s, now)).filter(v => Number.isFinite(v));
-  const flags = stars.map((s, i) => litFlags(s, strengths[i]));
-  const breakdown = (d.constellations || []).map(c => ({
-    id: c.id, name: cleanText(c.name, 60), color: c.color,
-    count: stars.filter(s => s.con === c.id).length,
-  })).sort((a, b) => b.count - a.count).slice(0, 12);
+  /* 一趟走完：衰减、点亮/熄灭、星域计数、强度求和。原来是三个 map 加一次
+     per-constellation 的全量 filter——对几万颗星来说，省下的是成串的中间数组。 */
+  const perCon = new Map();
+  let litN = 0, emberN = 0, sum = 0, n = 0;
+  for (const s of stars) {
+    const r = decayedStrength(s, now);
+    if (Number.isFinite(r)) { sum += r; n++; }
+    const f = litFlags(s, r);
+    if (f.lit) litN++;
+    if (f.ember) emberN++;
+    perCon.set(s.con, (perCon.get(s.con) || 0) + 1);
+  }
+  const breakdown = shape.cons.map(c => ({ id: c.id, name: c.name, color: c.color, count: perCon.get(c.id) || 0 }))
+    .sort((a, b) => b.count - a.count).slice(0, 12);
   return {
     stars: stars.length,
-    lit: flags.filter(f => f.lit).length,
-    ember: flags.filter(f => f.ember).length,
-    cons: (d.constellations || []).length,
-    notes: (d.notes || []).length,
-    trash: (d.trash || []).length,
-    bytes: Buffer.byteLength(g.data),
-    updatedAt: g.updated_at,
-    version: g.version || 0,
-    avgStrength: strengths.length ? Math.round(strengths.reduce((a, b) => a + b, 0) / strengths.length * 1000) / 1000 : 0,
+    lit: litN,
+    ember: emberN,
+    cons: shape.cons.length,
+    notes: shape.notes,
+    trash: shape.trash,
+    bytes: shape.bytes || 0,
+    updatedAt: m.updated_at,
+    version: m.version || 0,
+    avgStrength: n ? Math.round(sum / n * 1000) / 1000 : 0,
     breakdown,
   };
 };
@@ -70,8 +135,12 @@ async function handleAdmin(ctx) {
     const now = Date.now();
     const within = (ts, days) => ts && (now - Date.parse(String(ts).replace(' ', 'T') + 'Z')) < days * DAY;
     let stars = 0, lit = 0, ember = 0, cons = 0, notes = 0, bytes = 0, galaxies = 0;
-    for (const u of users) {
-      const st = galaxyStats(u.id);
+    /* 按「有快照的人」遍历，而不是按全部用户逐个去问有没有快照；每条 meta 只带
+       版本与体积，正文只在形状缓存失效时才真的读出来。 */
+    const alive = new Set(users.map(u => u.id));
+    for (const meta of q.allGalaxyMeta.all()) {
+      if (!alive.has(meta.user_id)) continue;   // 主人已被删掉的孤儿快照不计入
+      const st = galaxyStats(meta.user_id, meta);
       if (!st) continue;
       galaxies++; stars += st.stars; lit += st.lit; ember += st.ember; cons += st.cons; notes += st.notes; bytes += st.bytes;
     }
@@ -121,28 +190,40 @@ async function handleAdmin(ctx) {
     const desc = url.searchParams.get('order') !== 'asc';
     const filter = url.searchParams.get('filter') || 'all';   // all | registered | anonymous | admin | banned
 
-    let rows = q.allUsers.all().map(u => {
-      const st = galaxyStats(u.id) || { stars: 0, lit: 0, cons: 0, bytes: 0, savedAt: null };
-      return {
-        ...adminUser(u),
-        stars: st.stars, lit: st.lit, constellations: st.cons, snapshotBytes: st.bytes,
-        lastSaved: st.updatedAt || null,
-        sessions: q.countSessionsOf.get(u.id).n,
-        visitors: q.countVisitorsOf.get(u.id).n,
-        shareEnabled: !!shareOf(u.id).enabled,
-      };
-    });
+    /* 三张计数表各来一次 GROUP BY，而不是逐行三次查询（原来是 3N 次往返） */
+    const nOf = (rowsArr) => { const m = new Map(); for (const r of rowsArr) m.set(r.user_id, r.n); return m; };
+    const sessN = nOf(q.sessionCounts.all());
+    const visN = nOf(q.visitorCounts.all());
+    const shareOn = new Set(q.shareFlags.all().filter(r => r.enabled).map(r => r.user_id));
+    const metaOf = new Map(q.allGalaxyMeta.all().map(m => [m.user_id, m]));
+
+    let rows = q.allUsers.all().map(u => ({
+      ...adminUser(u),
+      sessions: sessN.get(u.id) || 0,
+      visitors: visN.get(u.id) || 0,
+      shareEnabled: shareOn.has(u.id),
+    }));
     if (filter === 'registered') rows = rows.filter(r => r.registered);
     else if (filter === 'anonymous') rows = rows.filter(r => !r.registered);
     else if (filter === 'admin') rows = rows.filter(r => r.role === 'admin');
     else if (filter === 'banned') rows = rows.filter(r => r.banned);
     // 搜索兼收 IP：排查「这个地址上都有谁」时不必换一个页面
     if (kw) rows = rows.filter(r => [r.name, r.username, r.email, r.ip, r.lastIp].some(v => String(v || '').toLowerCase().includes(kw)));
+
+    /* 星系读数只给真正要出库的那 20 行算。
+       例外是「按星数排序」——那得先知道每个人有多少颗星，才排得出先后。 */
+    const withStats = (r) => {
+      const st = galaxyStats(r.id, metaOf.get(r.id)) || { stars: 0, lit: 0, cons: 0, bytes: 0, updatedAt: null };
+      return { ...r, stars: st.stars, lit: st.lit, constellations: st.cons, snapshotBytes: st.bytes, lastSaved: st.updatedAt || null };
+    };
+    if (sort === 'stars') rows = rows.map(withStats);
+
     const key = { id: r => r.id, name: r => String(r.username || r.name).toLowerCase(), stars: r => r.stars,
       lastSeen: r => r.lastSeen || '', created: r => r.createdAt || '' }[sort];
     rows.sort((a, b) => { const x = key(a), y = key(b); return (x < y ? -1 : x > y ? 1 : 0) * (desc ? -1 : 1); });
     const p = paginate(rows, url);
-    return json(res, 200, { total: p.total, page: p.page, size: p.size, pages: p.pages, users: p.slice });
+    const users2 = sort === 'stars' ? p.slice : p.slice.map(withStats);
+    return json(res, 200, { total: p.total, page: p.page, size: p.size, pages: p.pages, users: users2 });
   }
 
   // ——— 用户详情：星域分布 + 分享 + 会话 + 来信，够判断「这个人在干什么」———
@@ -199,7 +280,9 @@ async function handleAdmin(ctx) {
 
     if (action === 'password') {
       const pw = String(body.password || '');
-      if (pw.length < 6) return json(res, 400, { error: '密码至少 6 位' });
+      // 管理员的钥匙开的是全站所有人的星空，下限与交接卡同一条线（core.js ADMIN_PASS_MIN）
+      const min = (target.role || 'user') === 'admin' ? ADMIN_PASS_MIN : 6;
+      if (pw.length < min) return json(res, 400, { error: `密码至少 ${min} 位` });
       if (!target.username) return json(res, 400, { error: '匿名用户没有账号密码' });
       q.setPass.run(hashPass(pw), target.id);
       if (body.revoke !== false) q.dropSessionsOf.run(target.id);   // 改密默认踢掉全部旧会话
@@ -450,13 +533,18 @@ async function handleAdmin(ctx) {
       }
       else if (act === 'vacuum') { db.exec('VACUUM'); }
       else if (act === 'prune-sessions') {
-        // 90 天没露面的会话按失效清掉（登录态本就不该无限期）
+        // 与 core.js 的 SESSION_TTL_DAYS 同一条线：那边在使用时就地判失效，
+        // 这里只是把已经死掉的行从表里扫走——不点也不影响安全
         const info = db.prepare("DELETE FROM sessions WHERE last_seen < datetime('now', '-90 days')").run();
         audit(me, 'db.prune-sessions', null, Number(info.changes) + ' 个');
         return json(res, 200, { ok: true, removed: Number(info.changes), system: systemInfo() });
       }
       else return json(res, 400, { error: '未知的维护操作' });
-    } catch (e) { return json(res, 500, { error: String(e.message || e) }); }
+    } catch (e) {
+      // sqlite 的报错里常带着库表结构与文件绝对路径：详情进控制台，出门只留一句话
+      console.error('[stellar-raft] 数据库维护失败：', e);
+      return json(res, 500, { error: '这次维护没能跑完，详情见服务器日志' });
+    }
     /* 收拢 WAL 与 VACUUM 都只是搬运字节，不动任何一条用户数据，而且随时可以再来一次。
        给它们逐次留痕，只会让真正要紧的停用 / 删号 / 改密被淹掉——何况每个请求都在写
        last_seen，WAL 永远不会真的空，于是「收拢」永远收得到东西、永远写得出一条。
@@ -475,7 +563,9 @@ async function handleAdmin(ctx) {
       'Content-Length': st.size,
       'Content-Disposition': `attachment; filename="stellar-raft-${stamp}.db"`,
     });
-    return fs.createReadStream(DB_PATH).pipe(res);
+    const stream = fs.createReadStream(DB_PATH);
+    stream.on('error', () => { try { res.destroy(); } catch { /* 已经断了 */ } });   // 读到一半出错不带走进程
+    return stream.pipe(res);
   }
 
   return json(res, 404, { error: '未知接口' });
