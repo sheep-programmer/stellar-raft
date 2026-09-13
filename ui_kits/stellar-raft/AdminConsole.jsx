@@ -55,12 +55,17 @@ function useAdminData(path, deps) {
   const [data, setData] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
   const alive = React.useRef(true);
+  /* seq 防 stale：alive 是共享的，path 一变 cleanup 置 false、新 effect 立刻置回
+     true——旧 path 的在飞请求随后 resolve 时看到的仍是 true，旧数据盖掉新分区。
+     每次取数领一个序号，迟到的回复序号对不上就丢。 */
+  const seq = React.useRef(0);
   const load = React.useCallback(() => {
+    const my = ++seq.current;
     setLoading(true);
     return adminApi(path)
-      .then(d => { if (alive.current) setData(d); })
+      .then(d => { if (alive.current && seq.current === my) setData(d); })
       .catch(() => { })
-      .finally(() => { if (alive.current) setLoading(false); });
+      .finally(() => { if (alive.current && seq.current === my) setLoading(false); });
   }, [path]);
   React.useEffect(() => {
     alive.current = true;

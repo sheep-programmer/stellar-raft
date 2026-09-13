@@ -562,6 +562,7 @@ async function handleAdmin(ctx) {
       'Content-Type': 'application/octet-stream',
       'Content-Length': st.size,
       'Content-Disposition': `attachment; filename="stellar-raft-${stamp}.db"`,
+      'Cache-Control': 'no-store',   // 整库文件（哈希、会话、笔记）不该在任何共享缓存里留副本
     });
     const stream = fs.createReadStream(DB_PATH);
     stream.on('error', () => { try { res.destroy(); } catch { /* 已经断了 */ } });   // 读到一半出错不带走进程

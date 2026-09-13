@@ -42,11 +42,15 @@ function makeWorld({ ready = true } = {}) {
     }));
   };
   const listeners = {};
+  const beacons = [];
+  let reloads = 0;
   const ctx = {
     console,
     localStorage,
     fetch,
-    navigator: {},
+    navigator: { sendBeacon: (url, payload) => { beacons.push({ url, payload }); return true; } },
+    location: { reload: () => { reloads++; } },
+    AbortController,
     crypto: { randomUUID: () => 'uuid-' + Math.random().toString(36).slice(2, 8) },
     setTimeout, clearTimeout, setInterval: () => 0, clearInterval: () => { },
     addEventListener: (ev, fn) => { (listeners[ev] = listeners[ev] || []).push(fn); },
@@ -67,7 +71,8 @@ function makeWorld({ ready = true } = {}) {
   if (ready) N.setReady();
   const mirror = () => { const m = store.get('sr.galaxy.v1'); return m ? JSON.parse(m) : null; };
   const puts = () => fetchCalls.filter(c => c.url === '/api/galaxy' && c.opts.method === 'PUT');
-  return { N, store, script, mirror, puts, ctx };
+  const fire = (ev, e) => (listeners[ev] || []).forEach(fn => fn(e || {}));
+  return { N, store, script, mirror, puts, ctx, beacons, fire, reloads: () => reloads };
 }
 
 test('PUT 成功：镜像先 pending 后确认，syncVer 跟进服务器的版本', async () => {
@@ -138,4 +143,46 @@ test('启动因果比较（镜像语义）：syncVer 相等且 pending = 别处�
   assert.equal(m.pending, true);
   w.N.saveLocal({ savedAt: 2, stars: [], constellations: [] }, 7, false);
   assert.equal(w.mirror().pending, false);
+});
+
+test('pagehide 与 beforeunload 都会把尾部编辑推出去（移动端靠前者活命）', async () => {
+  /* iOS Safari 切后台直接回收页面，beforeunload 常常根本不触发；
+     bfcache 冻结→丢弃同样不经过它。两个事件都得挂上同一个冲刷。 */
+  for (const ev of ['pagehide', 'beforeunload']) {
+    const w = makeWorld();
+    w.script.push(() => ({ status: 200, body: { version: 1 } }));   // 留给 1.2s 后的防抖落地
+    w.N.schedule();   // 记一笔 dirty（防抖定时器还没触发，正是「尾部编辑」）
+    assert.equal(w.beacons.length, 0);
+    w.fire(ev);
+    assert.equal(w.beacons.length, 1, ev + ' 该把 beacon 发出去');
+    assert.match(w.beacons[0].url, /^\/api\/galaxy\/beacon\?token=/);
+    assert.equal(w.mirror().pending, true, ev + ' 之后本机镜像是 pending（服务器未确认）');
+  }
+});
+
+test('另一个标签页换了身份（sr.token 被改写）：本页跟随刷新，不再往旧账号写', async () => {
+  const w = makeWorld();
+  assert.equal(w.reloads(), 0);
+  w.fire('storage', { key: 'sr.token', newValue: 'someone-else' });
+  assert.equal(w.reloads(), 1, '钥匙变了就要跟随刷新');
+  w.fire('storage', { key: 'sr.token', newValue: w.N.token });   // 同值：别的 tab 写回同一把钥匙
+  w.fire('storage', { key: 'sr.settings', newValue: '{}' });     // 别的 key
+  w.fire('storage', { key: null, newValue: null });              // clear() 全清：key 为 null 也包含 sr.token…但无从分辨，保守不刷
+  assert.equal(w.reloads(), 1, '同值 / 别的 key 不该触发刷新');
+});
+
+test('保存请求带 AbortSignal 与超时：黑洞网络下到点放弃，走镜像+心跳的老路', async () => {
+  const w = makeWorld();
+  w.script.push(() => ({ status: 200, body: { version: 3 } }));
+  await w.N.saveNow();
+  assert.equal(w.puts().length, 1);
+  assert.ok(w.puts()[0].opts.signal instanceof AbortSignal, 'PUT /api/galaxy 必须带 signal，超时才掐得断');
+});
+
+test('400 不装成「服务器不可达」：online 保持 true，心跳不会每 20s 重试同一发', async () => {
+  const w = makeWorld();
+  w.script.push(() => ({ status: 400, body: { error: '请求体格式错误' } }));
+  await w.N.saveNow();
+  assert.equal(w.N.isOnline(), true, '400 是客户端问题，标 offline 只会让心跳无限重试');
+  assert.equal(w.mirror().pending, true, '内容在本机镜像里安然无恙');
 });

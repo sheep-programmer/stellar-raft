@@ -4,6 +4,12 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const PORT = Number(process.env.PORT || 8756);
+/* 端口先说人话：PORT=abc 或 99999 会一路带到 listen() 才炸出一句
+   ERR_SOCKET_BAD_PORT，而那时 seed 都跑完了。在这里就拦下来。 */
+if (!Number.isInteger(PORT) || PORT < 1 || PORT > 65535) {
+  console.error(`[星图] PORT 必须是 1-65535 的整数，收到的是「${process.env.PORT}」`);
+  process.exit(1);
+}
 /* 监听地址。默认只听回环——这台机器之外谁也碰不到，是最稳妥的起点。
    想用手机 / 平板打开（README 里那一整套断点与手势正是为它们写的），就得让它
    听得见局域网：`SR_HOST=0.0.0.0 npm run serve`。

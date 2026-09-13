@@ -58,3 +58,15 @@ test('typing 语义：一次输入突发只压一次栈；结构操作或撤销�
   assert.equal(U.noteTyping(h, 't4'), true);
   assert.equal(U.canRedo(h), false);              // noteTyping 同样清空 redo 分支
 });
+
+test('不变量：future 栈永不超过 cap（撤销只能消耗 past，而 past 已封顶）', () => {
+  /* 快照是整篇克隆。这条钉住内存上界：past + future 任何时候都 ≤ 2 × cap 份——
+     撤销链再长，future 也只能长到 past 的存量那么多。 */
+  const h = U.create(3);
+  ['a', 'b', 'c', 'd', 'e', 'f'].forEach(s => U.push(h, s));
+  let cur = 'now';
+  let s;
+  while ((s = U.undo(h, cur)) !== null) { assert.ok(h.future.length <= 3); cur = s; }
+  while ((s = U.redo(h, cur)) !== null) { assert.ok(h.past.length <= 3); cur = s; }
+  assert.ok(h.future.length <= 3 && h.past.length <= 3);
+});

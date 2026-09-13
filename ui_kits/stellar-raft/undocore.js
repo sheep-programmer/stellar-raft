@@ -34,6 +34,9 @@
   function undo(h, current) {
     if (!h.past.length) return null;
     h.future.push(current);
+    /* future 同样封顶：快照是整篇克隆，cap=120 时 past+future 最坏 240 份——
+       一篇 1MB 的笔记就是 ~240MB。超出丢最旧（离现在最远的那个重做端）。 */
+    if (h.future.length > h.cap) h.future.shift();
     h.typing = false;
     return h.past.pop();
   }
@@ -42,6 +45,7 @@
   function redo(h, current) {
     if (!h.future.length) return null;
     h.past.push(current);
+    if (h.past.length > h.cap) h.past.shift();
     h.typing = false;
     return h.future.pop();
   }

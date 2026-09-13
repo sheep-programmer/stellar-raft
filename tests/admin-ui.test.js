@@ -46,9 +46,11 @@ test('八个分区：TABS 登记的每一个都有对应的渲染分支', () => 
 });
 
 test('管理台的数字全部来自服务端接口，没有写死的占位数据', () => {
-  // 每个分区的取数路径都必须是真实的 /api/admin 接口
+  // 每个分区的取数路径都必须是真实的 /api/admin 接口；
+  // 路径必须紧跟在引号或反引号之后（字符串/模板字面量的开头），
+  // 不接受「子串碰巧出现在别处」——那样占位数据也能蒙混过关
   for (const p of ['/overview', '/trends?days=14', '/users?', '/guests?idleDays=7', '/shares?', '/sessions?', '/site', '/audit?']) {
-    assert.ok(ADMIN.includes(`'${p}`) || ADMIN.includes(`useAdminData('${p}`) || ADMIN.includes(p),
+    assert.ok(ADMIN.includes(`'${p}`) || ADMIN.includes('`' + p),
       '缺少取数路径 ' + p);
   }
   // 趋势条按真实峰值缩放，0 就是 0——不做插值也不铺底

@@ -33,18 +33,33 @@ window.SRGate = {
 window.SRNet = (function () {
   const KEY = 'sr.token';
   const LS_GALAXY = 'sr.galaxy.v1';
-  let token = localStorage.getItem(KEY);
+  /* 存储被禁用（沙箱 iframe、极端隐私模式）时裸调 localStorage 会整个抛掉，
+     SRNet 不复存在、应用退化成连演示都没有的白板。钥匙拿不到就用一次性
+     随机身份，本会话内可用，刷新即新客——比起不来强。 */
+  let token = null;
+  try { token = localStorage.getItem(KEY); } catch (e) { }
   if (!token) {
     token = 'u-' + (crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).slice(2) + Date.now().toString(36));
-    localStorage.setItem(KEY, token);
+    try { localStorage.setItem(KEY, token); } catch (e) { }
   }
 
   const api = async (path, opts = {}) => {
-    const res = await fetch(path, {
-      method: opts.method || 'GET',
-      headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
-      body: opts.raw != null ? opts.raw : (opts.body ? JSON.stringify(opts.body) : undefined),
-    });
+    /* 每个请求都有超时（默认 30s，保存 45s）：黑洞网络（丢包而非断连）下
+       fetch 能挂到浏览器 TCP 超时——几分钟。期间保存链路的 inflight 一直
+       占着，本机镜像停更，浏览器一崩，挂起窗口里的编辑全丢。超时到点就
+       放弃，按「暂不可达」走镜像 + 心跳补写的老路。 */
+    const ctl = typeof AbortController !== 'undefined' ? new AbortController() : null;
+    const ms = opts.timeout || 30000;
+    const to = ctl ? setTimeout(() => ctl.abort(), ms) : null;
+    let res;
+    try {
+      res = await fetch(path, {
+        method: opts.method || 'GET',
+        headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+        body: opts.raw != null ? opts.raw : (opts.body ? JSON.stringify(opts.body) : undefined),
+        signal: ctl ? ctl.signal : undefined,
+      });
+    } finally { if (to) clearTimeout(to); }
     const data = await res.json().catch(() => null);
     if (!res.ok) {
       /* 服务器对这个身份关了门：账号被停用 / 全站维护 / 这台设备的登录已失效
@@ -113,7 +128,7 @@ window.SRNet = (function () {
 
   // ——— 保存状态（给顶栏「保存指示」与离线提示用）———
   // status: saving（正在落盘）| saved（两端已同步）| local（仅本机，服务器暂不可达）| error（连本机都没存下）
-  let status = 'saved', lastSync = 0, offlineToldAt = 0, localFullTold = false, tooBigTold = false;
+  let status = 'saved', lastSync = 0, offlineToldAt = 0, localFullTold = false, tooBigTold = false, saveRejTold = false;
   const dsToast = (msg, opts) => {
     const NS = window.StellarRaftDesignSystem_2866af;
     if (NS && NS.toast) NS.toast(msg, opts);
@@ -152,7 +167,7 @@ window.SRNet = (function () {
       localFullTold = true;
       dsToast('本机存储写入失败 · 请导出数据以防丢失', { tone: 'danger', icon: 'triangle-alert', duration: 5200 });
     }
-    const p = api('/api/galaxy', { method: 'PUT', raw: '{"data":' + dataStr + ',"baseVersion":' + version + '}' })
+    const p = api('/api/galaxy', { method: 'PUT', timeout: 45000, raw: '{"data":' + dataStr + ',"baseVersion":' + version + '}' })
       .then((r) => {
         online = true; lastSync = Date.now();
         if (r && r.version != null) version = r.version;
@@ -191,6 +206,18 @@ window.SRNet = (function () {
             tooBigTold = true;
             dsToast((err.data && err.data.error) || '这片星空太大了，服务器没收下',
               { tone: 'danger', icon: 'triangle-alert', duration: 6600 });
+          }
+          return;
+        }
+        /* 400：服务器认为这份请求本身就违法（格式错误）。这是客户端 bug，
+           不是网络问题——标 offline 的话心跳会每 20s 重试同一发直到永远。
+           内容在本机镜像里安然无恙，明说一次，别装成「暂不可达」。 */
+        if (err && err.status === 400) {
+          online = true;
+          emit(localOk ? 'local' : 'error');
+          if (!saveRejTold) {
+            saveRejTold = true;
+            dsToast('服务器拒绝了这份数据 · 已保存在本机，建议导出备份', { tone: 'danger', icon: 'triangle-alert', duration: 6600 });
           }
           return;
         }
@@ -238,7 +265,7 @@ window.SRNet = (function () {
     saveNow();
   }, 20000);
 
-  addEventListener('beforeunload', () => {
+  const flushOnLeave = () => {
     /* !ready 也要落本机镜像：水合窗口内关页，以前这里直接 return，
        那几秒的编辑连 localStorage 都没留下 */
     if (ready && !dirty && !inflight) return;
@@ -253,6 +280,18 @@ window.SRNet = (function () {
         fetch(url, { method: 'POST', body: payload, keepalive: true }).catch(() => { });
       }
     } catch (e) { }
+  };
+  /* pagehide 与 beforeunload 都要：移动端把页面切后台后系统直接回收
+     （iOS Safari 尤其常见 beforeunload 根本不触发），bfcache 冻结→丢弃
+     同样不经过 beforeunload。两者幂等，各发一遍无妨。 */
+  addEventListener('beforeunload', flushOnLeave);
+  addEventListener('pagehide', flushOnLeave);
+
+  /* 另一个标签页登录/登出/交接（那边写完 sr.token 自己 reload 了）：本标签页
+     内存里还是旧身份的钥匙，继续保存会落进旧账号、把刚清掉的共享镜像重新填满。
+     钥匙变了就跟随刷新——上面的 flushOnLeave 会先把没落盘的编辑推出去。 */
+  addEventListener('storage', (e) => {
+    if (e && e.key === KEY && e.newValue !== token) location.reload();
   });
 
   /* ——— 星际收件箱便捷方法 ———

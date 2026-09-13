@@ -88,8 +88,28 @@ test('SR_HOST=0.0.0.0：手机 / 平板能从局域网打开，且日志把地�
   } finally { srv.stop(); }
 });
 
-/* ---------------------------- 剪贴板 ---------------------------- */
+test('PORT 不是合法端口时立刻说人话退出，而不是 listen 时才炸栈', async () => {
+  for (const bad of ['abc', '99999', '0']) {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'stellar-raft-badport-'));
+    try {
+      const res = await new Promise((resolve) => {
+        const child = spawn(process.execPath, ['--no-warnings', path.join(ROOT, 'server', 'server.js')], {
+          env: { ...process.env, PORT: bad, SR_DB: path.join(tmp, 'stellar.db') },
+          stdio: ['ignore', 'pipe', 'pipe'],
+        });
+        let logs = '';
+        child.stdout.on('data', d => (logs += d));
+        child.stderr.on('data', d => (logs += d));
+        child.on('exit', (code) => resolve({ code, logs }));
+      });
+      assert.equal(res.code, 1, `PORT=${bad} 应当退出码 1`);
+      assert.match(res.logs, /PORT 必须是 1-65535 的整数/, '要给出能看懂的提示，而不是 ERR_SOCKET_BAD_PORT');
+      assert.doesNotMatch(res.logs, /ERR_SOCKET_BAD_PORT/, '不该走到 listen 才炸');
+    } finally { fs.rmSync(tmp, { recursive: true, force: true }); }
+  }
+});
 
+/* ---------------------------- 剪贴板 ---------------------------- */
 // 在受控环境里加载 clipboard.js，可以摆布 navigator / execCommand
 function loadCopy({ modern, modernFails, legacyOk }) {
   const calls = { legacy: 0 };

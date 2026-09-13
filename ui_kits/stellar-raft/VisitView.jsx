@@ -610,9 +610,13 @@ function VisitMap({ friend, onBack, onReady, flash }) {
   const readyRef = React.useRef(onReady); readyRef.current = onReady;
 
   React.useEffect(() => {
+    /* 换好友是 props 更新（组件不重挂载）：A 的慢响应晚于 B 到达时，
+       会把 B 的屏幕整片换成 A 的星系。迟到的回复直接丢。 */
+    let alive = true;
     N.api('/api/visit/' + friend.id)
-      .then(r => { setState({ galaxy: r.galaxy, owner: r.owner }); readyRef.current && readyRef.current(); })
-      .catch(e => { setState({ error: e.message }); readyRef.current && readyRef.current(); });
+      .then(r => { if (!alive) return; setState({ galaxy: r.galaxy, owner: r.owner }); readyRef.current && readyRef.current(); })
+      .catch(e => { if (!alive) return; setState({ error: e.message }); readyRef.current && readyRef.current(); });
+    return () => { alive = false; };
   }, [friend.id]);
 
   const g = state.galaxy;
