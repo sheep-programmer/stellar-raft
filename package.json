@@ -5,7 +5,7 @@
   "type": "module",
   "description": "星图 Stellar Raft — 深空知识笔记应用的品牌与组件库（design system + local server）",
   "engines": {
-    "node": ">=22.5"
+    "node": ">=22.13"
   },
   "scripts": {
     "build": "node scripts/build-bundle.mjs",

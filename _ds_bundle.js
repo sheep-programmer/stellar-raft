@@ -1,4 +1,4 @@
-/* @ds-bundle: {"format":3,"namespace":"StellarRaftDesignSystem_2866af","components":[{"name":"Badge","sourcePath":"components/core/Badge.jsx"},{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"GlassPanel","sourcePath":"components/core/GlassPanel.jsx"},{"name":"Icon","sourcePath":"components/core/Icon.jsx"},{"name":"IconButton","sourcePath":"components/core/IconButton.jsx"},{"name":"Input","sourcePath":"components/core/Input.jsx"},{"name":"Tag","sourcePath":"components/core/Tag.jsx"},{"name":"Checkbox","sourcePath":"components/form/Checkbox.jsx"},{"name":"Select","sourcePath":"components/form/Select.jsx"},{"name":"Switch","sourcePath":"components/form/Switch.jsx"},{"name":"Tabs","sourcePath":"components/form/Tabs.jsx"},{"name":"ConstellationItem","sourcePath":"components/knowledge/ConstellationItem.jsx"},{"name":"MemoryBar","sourcePath":"components/knowledge/MemoryBar.jsx"},{"name":"StarNode","sourcePath":"components/knowledge/StarNode.jsx"},{"name":"ContextMenu","sourcePath":"components/overlay/ContextMenu.jsx"},{"name":"Modal","sourcePath":"components/overlay/Modal.jsx"},{"name":"Toast","sourcePath":"components/overlay/Toast.jsx"},{"name":"Tooltip","sourcePath":"components/overlay/Tooltip.jsx"}],"sourceHashes":{"assets/starfield.js":"d776d2b45dc4","components/core/Badge.jsx":"b0bd9735d638","components/core/Button.jsx":"a1c387a07e86","components/core/GlassPanel.jsx":"299a19d8fbb4","components/core/Icon.jsx":"7505f83ab03d","components/core/IconButton.jsx":"24052f4eed78","components/core/Input.jsx":"54a6c9af7e3f","components/core/Tag.jsx":"d8513c07ea96","components/form/Checkbox.jsx":"38aa593157dd","components/form/Select.jsx":"86b8c1c71e12","components/form/Switch.jsx":"938c62be0664","components/form/Tabs.jsx":"ede2dbff1963","components/knowledge/ConstellationItem.jsx":"d73e999469b6","components/knowledge/MemoryBar.jsx":"a54c928d5065","components/knowledge/StarNode.jsx":"1bedee49f0bf","components/overlay/ContextMenu.jsx":"11783420e876","components/overlay/Modal.jsx":"6119273e95da","components/overlay/Toast.jsx":"d22ad40680a6","components/overlay/Tooltip.jsx":"a042caa8970d","ui_kits/stellar-raft/AIConfig.jsx":"0408b943b28a","ui_kits/stellar-raft/AdminConsole.jsx":"ac04bb2e6499","ui_kits/stellar-raft/AerialView.jsx":"8209eb6af395","ui_kits/stellar-raft/BlackHole.jsx":"5e67807d3617","ui_kits/stellar-raft/Checkup.jsx":"786135b78aa7","ui_kits/stellar-raft/CommandPalette.jsx":"90f10790166c","ui_kits/stellar-raft/Editor.jsx":"f73d4772f7a3","ui_kits/stellar-raft/EditorMenus.jsx":"489f22c71b48","ui_kits/stellar-raft/FeynmanDrawer.jsx":"591b225e555a","ui_kits/stellar-raft/Galaxy3D.jsx":"2ce87e7da57d","ui_kits/stellar-raft/Inbox.jsx":"c4a70ad0bf9a","ui_kits/stellar-raft/KeysHelp.jsx":"948b00f411ed","ui_kits/stellar-raft/ListView.jsx":"f79c250bd947","ui_kits/stellar-raft/LoginView.jsx":"18d9c842c5c6","ui_kits/stellar-raft/MobileShell.jsx":"932bb48e2e9e","ui_kits/stellar-raft/Onboarding.jsx":"40b71668b69b","ui_kits/stellar-raft/ReviewSession.jsx":"a695c407739b","ui_kits/stellar-raft/Settings.jsx":"da9bff94d318","ui_kits/stellar-raft/Sidebar.jsx":"672d753c5efb","ui_kits/stellar-raft/StarMap.jsx":"76c3b4f2e35e","ui_kits/stellar-raft/Timeline.jsx":"1602ca5b6c95","ui_kits/stellar-raft/VisitView.jsx":"e50b2aae82af","ui_kits/stellar-raft/ai.js":"2f79eb3473c9","ui_kits/stellar-raft/app.jsx":"c28140011769","ui_kits/stellar-raft/codehl.js":"6fbdd0100deb","ui_kits/stellar-raft/data.js":"8c17e6eda183","ui_kits/stellar-raft/mdcore.js":"b82d5054c3b6","ui_kits/stellar-raft/responsive.js":"29feedf6c503","ui_kits/stellar-raft/sanitize.js":"88e63cd63253","ui_kits/stellar-raft/transition.js":"3725d8982dc5","ui_kits/stellar-raft/undocore.js":"7f8c94da35f9","ui_kits/stellar-raft/vault.js":"bfb5fdd87949"},"inlinedExternals":[],"unexposedExports":[{"name":"memoryColor","sourcePath":"components/knowledge/MemoryBar.jsx"}],"exposedHelpers":[{"name":"toast","sourcePath":"components/overlay/Toast.jsx"}]} */
+/* @ds-bundle: {"format":3,"namespace":"StellarRaftDesignSystem_2866af","components":[{"name":"Badge","sourcePath":"components/core/Badge.jsx"},{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"GlassPanel","sourcePath":"components/core/GlassPanel.jsx"},{"name":"Icon","sourcePath":"components/core/Icon.jsx"},{"name":"IconButton","sourcePath":"components/core/IconButton.jsx"},{"name":"Input","sourcePath":"components/core/Input.jsx"},{"name":"Tag","sourcePath":"components/core/Tag.jsx"},{"name":"Checkbox","sourcePath":"components/form/Checkbox.jsx"},{"name":"Select","sourcePath":"components/form/Select.jsx"},{"name":"Switch","sourcePath":"components/form/Switch.jsx"},{"name":"Tabs","sourcePath":"components/form/Tabs.jsx"},{"name":"ConstellationItem","sourcePath":"components/knowledge/ConstellationItem.jsx"},{"name":"MemoryBar","sourcePath":"components/knowledge/MemoryBar.jsx"},{"name":"StarNode","sourcePath":"components/knowledge/StarNode.jsx"},{"name":"ContextMenu","sourcePath":"components/overlay/ContextMenu.jsx"},{"name":"Modal","sourcePath":"components/overlay/Modal.jsx"},{"name":"Toast","sourcePath":"components/overlay/Toast.jsx"},{"name":"Tooltip","sourcePath":"components/overlay/Tooltip.jsx"}],"sourceHashes":{"assets/starfield.js":"d776d2b45dc4","components/core/Badge.jsx":"b0bd9735d638","components/core/Button.jsx":"a1c387a07e86","components/core/GlassPanel.jsx":"bd96f4ac54dd","components/core/Icon.jsx":"7505f83ab03d","components/core/IconButton.jsx":"24052f4eed78","components/core/Input.jsx":"54a6c9af7e3f","components/core/Tag.jsx":"d8513c07ea96","components/form/Checkbox.jsx":"38aa593157dd","components/form/Select.jsx":"8e1bf646cee1","components/form/Switch.jsx":"938c62be0664","components/form/Tabs.jsx":"ede2dbff1963","components/knowledge/ConstellationItem.jsx":"d73e999469b6","components/knowledge/MemoryBar.jsx":"a54c928d5065","components/knowledge/StarNode.jsx":"0dff2f392dd3","components/overlay/ContextMenu.jsx":"e84d3f1048c3","components/overlay/Modal.jsx":"6119273e95da","components/overlay/Toast.jsx":"d22ad40680a6","components/overlay/Tooltip.jsx":"98039e5d50b2","ui_kits/stellar-raft/AIConfig.jsx":"e9267a256811","ui_kits/stellar-raft/AdminConsole.jsx":"abab476c59c3","ui_kits/stellar-raft/AdminHandover.jsx":"4c32a00059bf","ui_kits/stellar-raft/AerialView.jsx":"7d00f8d9029b","ui_kits/stellar-raft/BlackHole.jsx":"f324d5b64e4c","ui_kits/stellar-raft/Boundary.jsx":"790ffda4d159","ui_kits/stellar-raft/Checkup.jsx":"c54c77da001e","ui_kits/stellar-raft/CommandPalette.jsx":"82ea907819de","ui_kits/stellar-raft/Editor.jsx":"48262de656a7","ui_kits/stellar-raft/EditorMenus.jsx":"76441391edba","ui_kits/stellar-raft/FeynmanDrawer.jsx":"e8b94b5b055c","ui_kits/stellar-raft/Galaxy3D.jsx":"e678c2343672","ui_kits/stellar-raft/Inbox.jsx":"ea34b6d490f5","ui_kits/stellar-raft/KeysHelp.jsx":"2373dec4a232","ui_kits/stellar-raft/ListView.jsx":"e685b8c1482f","ui_kits/stellar-raft/LoginView.jsx":"d5ec28487e98","ui_kits/stellar-raft/MobileShell.jsx":"c9e8f872f9c0","ui_kits/stellar-raft/Onboarding.jsx":"49393b450681","ui_kits/stellar-raft/ReviewSession.jsx":"cb3d52a765a1","ui_kits/stellar-raft/Settings.jsx":"8ff063d1c022","ui_kits/stellar-raft/Sidebar.jsx":"e4bf63cdf14e","ui_kits/stellar-raft/StarMap.jsx":"36fbde9556b0","ui_kits/stellar-raft/Timeline.jsx":"601d5fa7c241","ui_kits/stellar-raft/VisitView.jsx":"e06be97cd901","ui_kits/stellar-raft/ai.js":"2f79eb3473c9","ui_kits/stellar-raft/app.jsx":"cfe81477b9d2","ui_kits/stellar-raft/clipboard.js":"c3ebf5f9310c","ui_kits/stellar-raft/codehl.js":"57a79e683031","ui_kits/stellar-raft/data.js":"7fc75044f02e","ui_kits/stellar-raft/mdcore.js":"1bd261d4d0a8","ui_kits/stellar-raft/responsive.js":"664811eedaac","ui_kits/stellar-raft/sanitize.js":"17154d7e6b6d","ui_kits/stellar-raft/transition.js":"3725d8982dc5","ui_kits/stellar-raft/undocore.js":"7f8c94da35f9","ui_kits/stellar-raft/vault.js":"15af4ae0efde"},"inlinedExternals":[],"unexposedExports":[],"exposedHelpers":[{"name":"memoryColor","sourcePath":"components/knowledge/MemoryBar.jsx"},{"name":"toast","sourcePath":"components/overlay/Toast.jsx"}]} */
 
 (() => {
 
@@ -1751,6 +1751,12 @@ function StarNode({
   label,
   selected = false,
   breathe = true,
+  /* 触摸端的热区直径，单位是「本地 px」（0 = 不加）。
+     星核只有 12×importance，画布又整层 scale(k)，落地取景常在 0.34~0.7——
+     于是屏幕上只剩 4~12px，手指根本按不着一颗星。调用方按 44 / k 传进来，
+     缩放多少都还是屏幕上的 44px。它是一层透明圆：点击冒泡回这个节点，
+     pointerdown / 双击 / 右键继续冒泡给画布，拖动与菜单一件不少。 */
+  hit = 0,
   onClick,
   onMouseEnter,
   onMouseLeave,
@@ -1795,7 +1801,19 @@ function StarNode({
       transform: 'translate(-50%, -50%)',
       ...style
     }
-  }, selected && /*#__PURE__*/React.createElement("span", {
+  }, onClick && hit > core && /*#__PURE__*/React.createElement("span", {
+    "aria-hidden": "true",
+    style: {
+      position: 'absolute',
+      top: core / 2,
+      left: '50%',
+      width: hit,
+      height: hit,
+      transform: 'translate(-50%, -50%)',
+      borderRadius: '50%',
+      zIndex: 0
+    }
+  }), selected && /*#__PURE__*/React.createElement("span", {
     style: {
       position: 'absolute',
       top: core / 2,
@@ -2793,6 +2811,8 @@ function ModelDropdown({
 }) {
   const [open, setOpen] = React.useState(false);
   const ref = React.useRef(null);
+  const triggerRef = React.useRef(null);
+  const listRef = React.useRef(null);
   const customEntry = {
     id: '__custom',
     name: '自定义模型 ID',
@@ -2812,16 +2832,49 @@ function ModelDropdown({
     document.addEventListener('mousedown', close);
     return () => document.removeEventListener('mousedown', close);
   }, [open]);
+
+  /* 键盘路径（menu 模式）：打开时焦点落到当前选中项；↑↓ 在选项间移动，
+     Enter/Space 选定，Esc 关闭并把焦点还给触发钮。选项 tabIndex=-1——
+     焦点由方向键程序化管理，不给外层焦点圈禁添一串多余 Tab 停靠点。 */
+  React.useEffect(() => {
+    if (!open || !listRef.current) return;
+    const cur2 = listRef.current.querySelector('[aria-selected="true"]') || listRef.current.querySelector('[data-oid]');
+    if (cur2) cur2.focus();
+  }, [open]);
+  const onOptKey = (e, i, id) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      onChange(id === '__custom' ? '' : id);
+      setOpen(false);
+      if (triggerRef.current) triggerRef.current.focus();
+    } else if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      const next = listRef.current && listRef.current.querySelector(`[data-oid="${e.key === 'ArrowDown' ? i + 1 : i - 1}"]`);
+      if (next) next.focus();
+    } else if (e.key === 'Escape') {
+      e.preventDefault();
+      e.stopPropagation();
+      setOpen(false);
+      if (triggerRef.current) triggerRef.current.focus();
+    }
+  };
   return /*#__PURE__*/React.createElement("div", {
     ref: ref,
     style: {
       position: 'relative'
     }
   }, /*#__PURE__*/React.createElement("button", {
+    ref: triggerRef,
     type: "button",
     onClick: () => setOpen(o => !o),
     "aria-haspopup": "listbox",
     "aria-expanded": open,
+    onKeyDown: e => {
+      if (!open && (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ')) {
+        e.preventDefault();
+        setOpen(true);
+      }
+    },
     style: {
       width: '100%',
       textAlign: 'left',
@@ -2888,19 +2941,23 @@ function ModelDropdown({
     }
   }, /*#__PURE__*/React.createElement("div", {
     role: "listbox",
+    ref: listRef,
     style: {
       padding: 6
     }
-  }, list.map(m => {
+  }, list.map((m, i) => {
     const on = m.id === '__custom' ? !isPreset : m.id === value;
     return /*#__PURE__*/React.createElement("div", {
       key: m.id,
       role: "option",
       "aria-selected": on,
+      tabIndex: -1,
+      "data-oid": i,
       onClick: () => {
         onChange(m.id === '__custom' ? '' : m.id);
         setOpen(false);
       },
+      onKeyDown: e => onOptKey(e, i, m.id),
       onMouseEnter: e => {
         if (!on) e.currentTarget.style.background = 'rgba(159,198,255,0.08)';
       },
@@ -3095,8 +3152,8 @@ function AIConfig({
       inset: 0,
       zIndex: 100,
       background: 'rgba(3,4,12,0.58)',
-      backdropFilter: 'blur(3px)',
       WebkitBackdropFilter: 'blur(3px)',
+      backdropFilter: 'blur(3px)',
       display: 'flex',
       alignItems: 'flex-start',
       justifyContent: 'center',
@@ -3223,6 +3280,7 @@ function AIConfig({
     placeholder: provider.baseUrl || 'https://your-gateway.example.com/v1',
     icon: "globe",
     size: "md",
+    "aria-label": "Base URL",
     style: {
       flex: 1,
       fontFamily: 'var(--font-mono)'
@@ -3254,6 +3312,7 @@ function AIConfig({
     icon: "lock",
     type: showKey ? 'text' : 'password',
     size: "md",
+    "aria-label": "API Key",
     style: {
       flex: 1
     }
@@ -3281,6 +3340,7 @@ function AIConfig({
     disabled: test.state === 'testing',
     onClick: testConnection
   }, test.state === 'testing' ? '测试中…' : '测试连接'), test.state === 'ok' && /*#__PURE__*/React.createElement("span", {
+    role: "status",
     style: {
       display: 'inline-flex',
       alignItems: 'center',
@@ -3293,6 +3353,7 @@ function AIConfig({
     size: 14,
     color: "var(--gold)"
   }), test.msg), test.state === 'err' && /*#__PURE__*/React.createElement("span", {
+    role: "alert",
     style: {
       display: 'inline-flex',
       alignItems: 'center',
@@ -3305,6 +3366,7 @@ function AIConfig({
     size: 14,
     color: "var(--danger)"
   }), test.msg), saved && test.state === 'idle' && /*#__PURE__*/React.createElement("span", {
+    role: "status",
     style: {
       display: 'inline-flex',
       alignItems: 'center',
@@ -3416,9 +3478,19 @@ function AIConfig({
       key: s.id,
       role: "radio",
       "aria-checked": on,
+      tabIndex: 0,
+      className: "sr-focus-ring",
       onClick: () => set({
         strategy: s.id
       }),
+      onKeyDown: e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          set({
+            strategy: s.id
+          });
+        }
+      },
       style: {
         display: 'flex',
         alignItems: 'flex-start',
@@ -4551,7 +4623,7 @@ function UserRow({
   }, /*#__PURE__*/React.createElement("div", {
     role: "button",
     tabIndex: 0,
-    className: "sr-focus-ring",
+    className: "sr-focus-ring sr-adm-row",
     onClick: onToggle,
     onKeyDown: e => {
       if (e.key === 'Enter' || e.key === ' ') {
@@ -4561,7 +4633,6 @@ function UserRow({
     },
     onMouseEnter: () => setHover(true),
     onMouseLeave: () => setHover(false),
-    className: "sr-adm-row",
     style: {
       display: 'flex',
       alignItems: 'center',
@@ -5496,7 +5567,7 @@ function AdminGuests() {
     }, /*#__PURE__*/React.createElement("div", {
       role: "button",
       tabIndex: 0,
-      className: "sr-focus-ring",
+      className: "sr-focus-ring sr-adm-row",
       onClick: () => setOpenIp(open ? null : r.ip),
       onKeyDown: e => {
         if (e.key === 'Enter' || e.key === ' ') {
@@ -5504,7 +5575,6 @@ function AdminGuests() {
           setOpenIp(open ? null : r.ip);
         }
       },
-      className: "sr-adm-row",
       style: {
         display: 'flex',
         alignItems: 'center',
@@ -6386,14 +6456,14 @@ function AdminSystem() {
     icon: "brush-cleaning",
     disabled: !!busy,
     onClick: () => run('prune-sessions', r => r.removed ? `清掉 ${r.removed} 个过期会话` : '没有过期会话')
-  }, "\u6E05\u7406\u8FC7\u671F\u4F1A\u8BDD")), /*#__PURE__*/React.createElement("div", {
+  }, "\u626B\u6389\u8FC7\u671F\u4F1A\u8BDD")), /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 11.5,
       color: 'var(--text-3)',
       lineHeight: 1.7,
       marginTop: 12
     }
-  }, "\u5907\u4EFD\u4F1A\u5148\u628A WAL \u6536\u8FDB\u4E3B\u5E93\uFF0C\u4E0B\u8F7D\u5230\u7684\u662F\u4E00\u4E2A\u53EF\u76F4\u63A5\u66FF\u6362\u4F7F\u7528\u7684\u5B8C\u6574 .db \u6587\u4EF6\u3002 \u538B\u7F29\uFF08VACUUM\uFF09\u4F1A\u91CD\u5EFA\u6574\u4E2A\u6570\u636E\u5E93\u6587\u4EF6\u56DE\u6536\u7A7A\u6D1E\uFF0C\u671F\u95F4\u77ED\u6682\u963B\u585E\u5199\u5165\u2014\u2014\u5EFA\u8BAE\u5728\u6CA1\u4EBA\u7528\u7684\u65F6\u5019\u505A\u3002 \u6E05\u7406\u4F1A\u5220\u6389 90 \u5929\u6CA1\u9732\u9762\u7684\u767B\u5F55\u4F1A\u8BDD\u3002"))));
+  }, "\u5907\u4EFD\u4F1A\u5148\u628A WAL \u6536\u8FDB\u4E3B\u5E93\uFF0C\u4E0B\u8F7D\u5230\u7684\u662F\u4E00\u4E2A\u53EF\u76F4\u63A5\u66FF\u6362\u4F7F\u7528\u7684\u5B8C\u6574 .db \u6587\u4EF6\u3002 \u538B\u7F29\uFF08VACUUM\uFF09\u4F1A\u91CD\u5EFA\u6574\u4E2A\u6570\u636E\u5E93\u6587\u4EF6\u56DE\u6536\u7A7A\u6D1E\uFF0C\u671F\u95F4\u77ED\u6682\u963B\u585E\u5199\u5165\u2014\u2014\u5EFA\u8BAE\u5728\u6CA1\u4EBA\u7528\u7684\u65F6\u5019\u505A\u3002 90 \u5929\u6CA1\u9732\u9762\u7684\u4F1A\u8BDD\u5728\u4E0B\u6B21\u88AB\u4F7F\u7528\u65F6\u5C31\u5730\u5931\u6548\uFF0C\u8FD9\u91CC\u53EA\u662F\u987A\u624B\u628A\u90A3\u4E9B\u6B7B\u884C\u4ECE\u8868\u91CC\u626B\u6389\u2014\u2014\u4E0D\u70B9\u4E5F\u4E0D\u5F71\u54CD\u5B89\u5168\u3002"))));
 }
 
 /* ============================ 日志 ============================ */
@@ -6650,8 +6720,8 @@ function AnnouncementBanner({
       background: skin.bg,
       border: '1px solid ' + skin.bd,
       borderRadius: 'var(--r-sm)',
-      backdropFilter: 'blur(var(--glass-blur))',
-      WebkitBackdropFilter: 'blur(var(--glass-blur))'
+      WebkitBackdropFilter: 'blur(var(--glass-blur))',
+      backdropFilter: 'blur(var(--glass-blur))'
     }
   }, /*#__PURE__*/React.createElement(Icon, {
     name: skin.icon,
@@ -6778,7 +6848,7 @@ function AdminConsole({
     if (el && T && T.enter) T.enter(el);
   }, []);
 
-  // 出厂密码警告：改密成功后 Settings 会广播 sr-account，这里跟着摘掉红条
+  // 出厂凭据警告：交接卡（或设置里的改密）成功后广播 sr-account，这里跟着摘掉红条
   React.useEffect(() => {
     const h = () => setDefaultPass(!!(window.SR_DATA.account || {}).defaultPass);
     window.addEventListener('sr-account', h);
@@ -6876,7 +6946,7 @@ function AdminConsole({
       color: 'var(--text-1)',
       lineHeight: 1.6
     }
-  }, "\u7BA1\u7406\u5458\u8D26\u53F7\u8FD8\u5728\u7528\u51FA\u5382\u5BC6\u7801\u3002\u90E8\u7F72\u5230\u516C\u7F51\u524D\uFF0C\u8BF7\u5230\u300C\u8BBE\u7F6E \u2192 \u8D26\u6237 \u2192 \u4FEE\u6539\u5BC6\u7801\u300D\u6362\u6389\u5B83\u3002")), /*#__PURE__*/React.createElement("div", {
+  }, "\u7BA1\u7406\u5458\u8D26\u53F7\u8FD8\u5728\u7528\u51FA\u5382\u7684\u7528\u6237\u540D\u4E0E\u5BC6\u7801 \u2014\u2014 \u4E24\u6837\u90FD\u5199\u5728 README \u548C\u542F\u52A8\u65E5\u5FD7\u91CC\u3002\u5237\u65B0\u9875\u9762\u4F1A\u5F39\u51FA\u4EA4\u63A5\u5361\uFF0C\u628A\u5B83\u4EEC\u4E00\u8D77\u6362\u6389\u3002")), /*#__PURE__*/React.createElement("div", {
     role: "tablist",
     "aria-label": "\u7BA1\u7406\u5206\u533A",
     className: "sr-admin-tabs",
@@ -6913,6 +6983,299 @@ window.SRKit = Object.assign(window.SRKit || {}, {
   AnnouncementBanner
 });
 })(); } catch (e) { __ds_ns.__errors.push({ path: "ui_kits/stellar-raft/AdminConsole.jsx", error: String((e && e.message) || e) }); }
+
+// ui_kits/stellar-raft/AdminHandover.jsx
+try { (() => {
+/* AdminHandover — 星港交接卡。出厂管理员（用户名与密码都写在 README 和启动日志里）
+   一登录就撞上它，交接完成前什么都做不了：没有 Esc、没有遮罩点击、没有关闭按钮。
+   唯一的出口是「退出登录」——误登进来的人不该被困住，但也不许绕过去。
+
+   为什么用户名也要换：出厂密码换掉、用户名留着，等于把门牌号交给对方，
+   攻击者省下的正是「先猜中是谁」这一步。两样一起换，服务端同一个接口里校验。
+
+   「我已记下这组凭据」是一枚必须亲手勾上的闸：星图不发找回邮件，忘了只能从
+   服务器上重置。勾选之前提交键是灰的——这是这张卡唯一一处刻意的摩擦。
+
+   props: { onDone } —— 交接成功后调用（app 据此收起这张卡）。 */
+const {
+  Button,
+  GlassPanel,
+  Icon,
+  Input,
+  Checkbox
+} = window.StellarRaftDesignSystem_2866af;
+
+// 与服务端 core.js 的 ADMIN_PASS_MIN 同一个数：管理员这把钥匙开的是全站所有人的星空
+const SR_ADMIN_PASS_MIN = 8;
+function AdminHandover({
+  onDone
+}) {
+  const A = window.SR_DATA && window.SR_DATA.account || {};
+  const [username, setUsername] = React.useState('');
+  const [pw, setPw] = React.useState('');
+  const [confirm, setConfirm] = React.useState('');
+  const [remembered, setRemembered] = React.useState(false);
+  const [busy, setBusy] = React.useState(false);
+  const [error, setError] = React.useState('');
+  const [copied, setCopied] = React.useState(false);
+
+  // 焦点圈禁 + 吞掉 ⌘K：这张卡在的时候，命令面板也不该被唤出来
+  const modalRef = React.useRef(null);
+  (window.SRKit && window.SRKit.useModalFocus ? window.SRKit.useModalFocus : () => {})(modalRef, {
+    swallowCmdK: true
+  });
+
+  // Esc 在捕获阶段就地吃掉：不给任何下层 Esc 处理器机会，这张卡关不掉
+  React.useEffect(() => {
+    const k = e => {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    };
+    document.addEventListener('keydown', k, true);
+    return () => document.removeEventListener('keydown', k, true);
+  }, []);
+  const uname = username.trim();
+  // 本地先照一遍服务端的口径，省掉一个来回；真正说了算的仍是服务器
+  const localErr = () => {
+    if (!/^[\w一-龥-]{2,24}$/.test(uname)) return '用户名需 2–24 个字符（中英文、数字、_ 或 -）';
+    if (A.username && uname.toLowerCase() === String(A.username).toLowerCase()) return '换一个用户名 —— 出厂的那个是公开的';
+    if (pw.length < SR_ADMIN_PASS_MIN) return `管理员密码至少 ${SR_ADMIN_PASS_MIN} 位`;
+    if (pw.toLowerCase() === uname.toLowerCase()) return '密码不能和用户名一样';
+    if (pw !== confirm) return '两次输入的密码不一致';
+    return '';
+  };
+  const ready = !localErr() && remembered && !busy;
+  const copyPair = async () => {
+    const text = `星图 · 星港管理员\n用户名：${uname}\n密码：${pw}`;
+    const ok = await window.SRCopy.copy(text);
+    if (ok) {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2200);
+    } else setError('这台设备不允许自动复制，请手抄一份');
+  };
+  const submit = async e => {
+    if (e) e.preventDefault();
+    if (busy) return;
+    const bad = localErr();
+    if (bad) {
+      setError(bad);
+      return;
+    }
+    if (!remembered) {
+      setError('请先确认你已经记下这组凭据');
+      return;
+    }
+    setError('');
+    setBusy(true);
+    try {
+      const r = await window.SRNet.auth.handover({
+        username: uname,
+        password: pw
+      });
+      // 服务器把这个账号的全部会话连同当前这把一起吊销了，只发回一把新的：换上它，
+      // 本地星空镜像与账号偏好原样留下（这不是换人，是同一个人换了钥匙）
+      await window.SRNet.renewSession(r.session);
+      const acc = window.SR_DATA && window.SR_DATA.account;
+      if (acc) {
+        acc.username = r.user && r.user.username || uname;
+        acc.defaultPass = false;
+        window.dispatchEvent(new CustomEvent('sr-account'));
+      }
+      const NS = window.StellarRaftDesignSystem_2866af;
+      if (NS && NS.toast) NS.toast('星港已经交到你手上 · 别处的登录已全部失效', {
+        icon: 'shield-check',
+        tone: 'gold',
+        duration: 4600
+      });
+      onDone();
+    } catch (err) {
+      setError(err && err.message || '出了点问题，请再试一次');
+      setBusy(false);
+    }
+  };
+  const hint = t => /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11.5,
+      color: 'var(--text-3)',
+      lineHeight: 1.7
+    }
+  }, t);
+  return /*#__PURE__*/React.createElement("div", {
+    ref: modalRef,
+    role: "dialog",
+    "aria-modal": "true",
+    "aria-label": "\u4EA4\u63A5\u661F\u6E2F\u7BA1\u7406\u5458\u51ED\u636E",
+    style: {
+      position: 'fixed',
+      inset: 0,
+      zIndex: 200,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      // 这张卡关不掉，所以更不能有一角落在刘海或 Home 条底下够不着；
+      // 安全区只读 --sr-safe-*（组件不各自写 env()，同全站口径）
+      padding: 'calc(var(--sr-safe-top) + 20px) calc(var(--sr-safe-right) + 16px) calc(var(--sr-safe-bottom) + 20px) calc(var(--sr-safe-left) + 16px)',
+      overflow: 'auto',
+      boxSizing: 'border-box',
+      background: 'radial-gradient(1200px 800px at 78% -10%, rgba(60,40,26,0.45), transparent 60%), linear-gradient(180deg, #05060f 0%, #03040c 55%, #04050e 100%)'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      width: 440,
+      maxWidth: '94vw',
+      margin: 'auto',
+      animation: 'sr-cardin var(--dur-base) var(--ease-flight) both'
+    }
+  }, /*#__PURE__*/React.createElement(GlassPanel, {
+    strong: true,
+    radius: "lg",
+    glow: true,
+    style: {
+      padding: '30px 28px 24px'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 10,
+      marginBottom: 14
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "shield-alert",
+    size: 20,
+    color: "var(--gold)"
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 19,
+      fontWeight: 300,
+      letterSpacing: '0.02em',
+      color: 'var(--text-1)'
+    }
+  }, "\u5148\u628A\u661F\u6E2F\u4EA4\u5230\u4F60\u624B\u4E0A")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12.5,
+      color: 'var(--text-2)',
+      lineHeight: 1.8,
+      marginBottom: 16
+    }
+  }, "\u8FD9\u4E2A\u7BA1\u7406\u5458\u8D26\u53F7\u662F\u88C5\u673A\u65F6\u81EA\u52A8\u5EFA\u7684\uFF0C\u7528\u6237\u540D ", /*#__PURE__*/React.createElement("b", {
+    style: {
+      color: 'var(--gold)'
+    }
+  }, A.username || 'admin'), " \u548C\u5B83\u7684\u5BC6\u7801 \u90FD\u5199\u5728 README \u4E0E\u542F\u52A8\u65E5\u5FD7\u91CC \u2014\u2014 \u62FF\u5230\u8FD9\u53F0\u670D\u52A1\u5668\u5730\u5740\u7684\u4EBA\u90FD\u77E5\u9053\u3002 \u73B0\u5728\u6362\u6210\u53EA\u6709\u4F60\u77E5\u9053\u7684\u4E00\u7EC4\uFF0C\u4E24\u6837\u4E00\u8D77\u6362\uFF1A\u7559\u7740\u51FA\u5382\u7528\u6237\u540D\uFF0C\u7B49\u4E8E\u628A\u95E8\u724C\u53F7\u4E5F\u7559\u7ED9\u5BF9\u65B9\u3002"), /*#__PURE__*/React.createElement("form", {
+    onSubmit: submit
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 12
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 6
+    }
+  }, /*#__PURE__*/React.createElement(Input, {
+    icon: "user",
+    placeholder: "\u65B0\u7684\u7BA1\u7406\u5458\u7528\u6237\u540D\uFF082\u201324 \u4F4D\uFF09",
+    autoComplete: "username",
+    value: username,
+    onChange: ev => setUsername(ev.target.value),
+    autoFocus: true
+  }), hint('中英文、数字、_ 或 -。这是你以后登录管理台用的名字。')), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 6
+    }
+  }, /*#__PURE__*/React.createElement(Input, {
+    icon: "lock",
+    type: "password",
+    placeholder: `新密码（至少 ${SR_ADMIN_PASS_MIN} 位）`,
+    autoComplete: "new-password",
+    value: pw,
+    onChange: ev => setPw(ev.target.value)
+  }), hint('管理员密码比普通账号严一档 —— 它开的是这台服务器上所有人的星空。')), /*#__PURE__*/React.createElement(Input, {
+    icon: "lock",
+    type: "password",
+    placeholder: "\u518D\u8F93\u4E00\u6B21\u65B0\u5BC6\u7801",
+    autoComplete: "new-password",
+    value: confirm,
+    onChange: ev => setConfirm(ev.target.value)
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 16,
+      padding: '12px 14px',
+      borderRadius: 'var(--r-sm)',
+      border: '1px solid rgba(255,217,138,0.28)',
+      background: 'rgba(255,217,138,0.07)'
+    }
+  }, /*#__PURE__*/React.createElement(Checkbox, {
+    checked: remembered,
+    onChange: setRemembered,
+    label: "\u6211\u5DF2\u7ECF\u628A\u8FD9\u7EC4\u7528\u6237\u540D\u548C\u5BC6\u7801\u8BB0\u4E0B\u6765\u4E86"
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11.5,
+      color: 'var(--text-3)',
+      lineHeight: 1.75,
+      marginTop: 8
+    }
+  }, "\u661F\u56FE\u4E0D\u5B58\u627E\u56DE\u90AE\u7BB1\u3001\u4E5F\u4E0D\u53D1\u91CD\u7F6E\u90AE\u4EF6\u3002\u8FD9\u7EC4\u51ED\u636E\u5FD8\u4E86\uFF0C\u53EA\u80FD\u5230\u670D\u52A1\u5668\u4E0A\u91CD\u7F6E\u6570\u636E\u5E93\u91CC\u7684\u8FD9\u4E00\u884C\u3002"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 10
+    }
+  }, /*#__PURE__*/React.createElement(Button, {
+    variant: "ghost",
+    size: "sm",
+    icon: copied ? 'check' : 'copy',
+    disabled: !uname || !pw,
+    onClick: copyPair
+  }, copied ? '已复制到剪贴板' : '复制这组凭据'))), error && /*#__PURE__*/React.createElement("div", {
+    role: "alert",
+    style: {
+      fontSize: 12.5,
+      color: 'var(--danger)',
+      marginTop: 12,
+      lineHeight: 1.6
+    }
+  }, error), /*#__PURE__*/React.createElement(Button, {
+    type: "submit",
+    variant: "primary",
+    glow: true,
+    disabled: !ready,
+    icon: busy ? undefined : 'shield-check',
+    style: {
+      width: '100%',
+      marginTop: 16
+    }
+  }, busy ? '正在交接…' : '完成交接')), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11.5,
+      color: 'var(--text-3)',
+      lineHeight: 1.7,
+      marginTop: 14,
+      textAlign: 'center'
+    }
+  }, "\u4EA4\u63A5\u5B8C\u6210\u540E\uFF0C\u522B\u5904\u7528\u51FA\u5382\u51ED\u636E\u767B\u8FDB\u6765\u7684\u4F1A\u8BDD\u4F1A\u88AB\u4E00\u8D77\u8BF7\u4E0B\u53BB\u3002"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      textAlign: 'center',
+      marginTop: 6
+    }
+  }, /*#__PURE__*/React.createElement(Button, {
+    variant: "ghost",
+    size: "sm",
+    icon: "log-out",
+    onClick: () => window.SRNet.logoutFlow()
+  }, "\u4E0D\u662F\u6211\uFF0C\u9000\u51FA\u767B\u5F55")))));
+}
+window.SRKit = Object.assign(window.SRKit || {}, {
+  AdminHandover
+});
+})(); } catch (e) { __ds_ns.__errors.push({ path: "ui_kits/stellar-raft/AdminHandover.jsx", error: String((e && e.message) || e) }); }
 
 // ui_kits/stellar-raft/AerialView.jsx
 try { (() => {
@@ -7029,15 +7392,29 @@ function AerialView({
     };
   }).filter(Boolean);
 
-  // 等比取景：把（含光晕的）整片星空收进一屏，只缩放、不变形
+  // 等比取景：把（含光晕的）整片星空收进一屏，只缩放、不变形。
+  // 包围盒走一趟循环而不是 Math.min(...arr)：spread 会把整个数组铺成实参，
+  // 星一多就是 Maximum call stack size exceeded（与星图 fitView 修过的同款）
   let X = () => 0,
     Y = () => 0,
     k = 1;
   if (box && sp.length) {
-    const minX = Math.min(...doms.map(d => d.cx - d.r), ...sp.map(s => s.x));
-    const maxX = Math.max(...doms.map(d => d.cx + d.r), ...sp.map(s => s.x));
-    const minY = Math.min(...doms.map(d => d.cy - d.r), ...sp.map(s => s.y));
-    const maxY = Math.max(...doms.map(d => d.cy + d.r), ...sp.map(s => s.y));
+    let minX = Infinity,
+      maxX = -Infinity,
+      minY = Infinity,
+      maxY = -Infinity;
+    for (const s of sp) {
+      if (s.x < minX) minX = s.x;
+      if (s.x > maxX) maxX = s.x;
+      if (s.y < minY) minY = s.y;
+      if (s.y > maxY) maxY = s.y;
+    }
+    for (const d of doms) {
+      if (d.cx - d.r < minX) minX = d.cx - d.r;
+      if (d.cx + d.r > maxX) maxX = d.cx + d.r;
+      if (d.cy - d.r < minY) minY = d.cy - d.r;
+      if (d.cy + d.r > maxY) maxY = d.cy + d.r;
+    }
     const W = Math.max(1, maxX - minX),
       H = Math.max(1, maxY - minY);
     const padX = 70,
@@ -7083,9 +7460,19 @@ function AerialView({
     return /*#__PURE__*/React.createElement("div", {
       key: g.id,
       onClick: () => onOpenCon && onOpenCon(g.id),
+      role: "button",
+      tabIndex: 0,
+      className: "sr-focus-ring",
+      onKeyDown: e => {
+        if ((e.key === 'Enter' || e.key === ' ') && onOpenCon) {
+          e.preventDefault();
+          onOpenCon(g.id);
+        }
+      },
       onMouseEnter: () => setHoverCon(g.id),
       onMouseLeave: () => setHoverCon(null),
       title: `飞入「${g.name}」`,
+      "aria-label": `飞入星域「${g.name}」`,
       style: {
         position: 'absolute',
         left: X(g.cx),
@@ -7264,22 +7651,22 @@ function AerialView({
     name: "telescope",
     size: 14,
     color: "var(--gold)"
-  }), dataset.ownerName, " \xB7 \u53EA\u8BFB"), /*#__PURE__*/React.createElement(Sep, null), /*#__PURE__*/React.createElement(Stat, {
+  }), dataset.ownerName, " \xB7 \u53EA\u8BFB"), /*#__PURE__*/React.createElement(AerialSep, null), /*#__PURE__*/React.createElement(AerialStat, {
     n: D.stars.length,
     t: "\u77E5\u8BC6\u661F"
-  }), /*#__PURE__*/React.createElement(Stat, {
+  }), /*#__PURE__*/React.createElement(AerialStat, {
     n: litCount,
     t: "\u5DF2\u70B9\u4EAE",
     tone: "var(--gold)"
-  }), emberCount > 0 && /*#__PURE__*/React.createElement(Stat, {
+  }), emberCount > 0 && /*#__PURE__*/React.createElement(AerialStat, {
     n: emberCount,
     t: "\u5F85\u91CD\u71C3",
     tone: "var(--gold-warm)"
-  }), /*#__PURE__*/React.createElement(Stat, {
+  }), /*#__PURE__*/React.createElement(AerialStat, {
     n: dimming,
     t: "\u6B63\u53D8\u6697",
     tone: "var(--star-blue-dim)"
-  }), /*#__PURE__*/React.createElement(Sep, null), /*#__PURE__*/React.createElement("span", {
+  }), /*#__PURE__*/React.createElement(AerialSep, null), /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 'var(--t-sm)',
       color: 'var(--text-2)',
@@ -7428,7 +7815,7 @@ function AerialStyle() {
     }
     `);
 }
-function Sep() {
+function AerialSep() {
   return /*#__PURE__*/React.createElement("span", {
     style: {
       width: 1,
@@ -7437,7 +7824,7 @@ function Sep() {
     }
   });
 }
-function Stat({
+function AerialStat({
   n,
   t,
   tone
@@ -7825,12 +8212,13 @@ function BlackHole({
           align-items: center !important; justify-content: center;
           /* 压在发光的吸积盘上就读不清了：给一层深色底衬把字托住 */
           padding: 6px 12px; border-radius: var(--r-pill);
-          background: rgba(3, 4, 12, 0.62); backdrop-filter: blur(6px);
+          background: rgba(3, 4, 12, 0.62); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
         }
         /* 「彻底销毁前都可随时恢复」下方的说明段落已经讲了一遍，窄屏不必重复占两行 */
         html[data-screen="phone"] .sr-bh-hint-more { display: none; }
-        /* 缩放控件让开，别再压在提示上 */
-        html[data-screen="phone"] .sr-bh-zoom { bottom: 58px !important; }
+        /* 缩放控件让开，别再压在提示上。58 差 2px——提示换成两行后正好顶上来，
+           两枚胶囊的圆角贴在一起像粘住了；给足一指的余地。 */
+        html[data-screen="phone"] .sr-bh-zoom { bottom: 70px !important; }
         html[data-screen="phone"] .sr-bh-stage { flex-direction: column !important; overflow: auto !important; }
         html[data-screen="phone"] .sr-bh-visual { flex: none !important; height: 42vh; min-height: 220px; }
         html[data-screen="phone"] .sr-bh-list {
@@ -8470,8 +8858,179 @@ window.SRKit = Object.assign(window.SRKit || {}, {
 });
 })(); } catch (e) { __ds_ns.__errors.push({ path: "ui_kits/stellar-raft/BlackHole.jsx", error: String((e && e.message) || e) }); }
 
+// ui_kits/stellar-raft/Boundary.jsx
+try { (() => {
+/* Boundary — 崩溃兜底卡。
+
+   零构建、浏览器里现场编译的代价之一：任何一个组件在渲染里抛出异常，React 会把
+   整棵树卸载掉。用户看到的是一整屏纯黑——没有一句话，也无从判断「我刚写的东西
+   还在不在」。这张卡替那片黑说三件事：出了什么事、数据在哪儿、怎么回去。
+
+   两处使用（见 app.jsx）：
+   · 整个 App 外面一层 —— 最后的防线，连侧栏都挂了的时候还能给出刷新的入口；
+   · <main> 里的视图一层 —— 一个视图崩了，侧栏与其它视图照常可用。回得去，就不算绝路。
+     视图那层带 key={view}，换个目的地即自动重挂载，不必手动清状态。
+
+   props: { title?, onReset?, resetLabel? } —— onReset 给了才出现那颗返回键。 */
+const {
+  Button,
+  GlassPanel,
+  Icon
+} = window.StellarRaftDesignSystem_2866af;
+class Boundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      err: null,
+      stack: '',
+      copied: false
+    };
+  }
+  static getDerivedStateFromError(err) {
+    return {
+      err
+    };
+  }
+  componentDidCatch(err, info) {
+    // 控制台留全量堆栈：卡片上只给一句摘要，真要排查还是得看这里
+    try {
+      console.error('[星图] 渲染时崩了：', err, info && info.componentStack);
+    } catch (e) {}
+    this.setState({
+      stack: info && info.componentStack || ''
+    });
+  }
+  diagnostics() {
+    const e = this.state.err || {};
+    return ['星图 · 崩溃诊断', '位置：' + (this.props.title || '应用'), '时间：' + new Date().toISOString(), '错误：' + (e.name ? e.name + ': ' : '') + (e.message || String(e)), '', (e.stack || '').trim(), '', '组件栈：' + (this.state.stack || '（无）').trim()].join('\n');
+  }
+  copy() {
+    // 统一走 SRCopy：现代 API 不可用（非安全上下文）时它自己退回老办法
+    window.SRCopy.copy(this.diagnostics()).then(ok => {
+      if (!ok) return;
+      this.setState({
+        copied: true
+      });
+      setTimeout(() => this.setState({
+        copied: false
+      }), 2200);
+    });
+  }
+  render() {
+    if (!this.state.err) return this.props.children;
+    const msg = String(this.state.err && this.state.err.message || this.state.err || '未知错误');
+    return /*#__PURE__*/React.createElement("div", {
+      role: "alert",
+      style: {
+        flex: 1,
+        minWidth: 0,
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 24,
+        overflow: 'auto',
+        background: 'radial-gradient(1200px 800px at 78% -10%, rgba(60,26,34,0.38), transparent 60%), linear-gradient(180deg, #05060f 0%, #03040c 55%, #04050e 100%)'
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        width: 460,
+        maxWidth: '94vw',
+        margin: 'auto'
+      }
+    }, /*#__PURE__*/React.createElement(GlassPanel, {
+      strong: true,
+      radius: "lg",
+      glow: true,
+      style: {
+        padding: '30px 26px 24px',
+        textAlign: 'center'
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "triangle-alert",
+      size: 28,
+      color: "var(--danger)"
+    }), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 18,
+        fontWeight: 300,
+        color: 'var(--text-1)',
+        marginTop: 14
+      }
+    }, this.props.title ? this.props.title + '碎了' : '这一块星图碎了'), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 12.5,
+        color: 'var(--text-2)',
+        marginTop: 12,
+        lineHeight: 1.8
+      }
+    }, "\u8FD9\u662F\u661F\u56FE\u81EA\u5DF1\u7684\u95EE\u9898\uFF0C\u4E0D\u662F\u4F60\u54EA\u91CC\u70B9\u9519\u4E86\u3002"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 12,
+        color: 'var(--text-3)',
+        marginTop: 10,
+        lineHeight: 1.75
+      }
+    }, /*#__PURE__*/React.createElement("b", {
+      style: {
+        color: 'var(--star-blue)'
+      }
+    }, "\u4F60\u7684\u661F\u7A7A\u6CA1\u4E8B"), " \u2014\u2014 \u6BCF\u6B21\u6539\u52A8\u90FD\u540C\u65F6\u843D\u5728\u672C\u673A\u4E0E\u670D\u52A1\u5668\u4E0A\uFF0C \u8FD9\u6B21\u5D29\u6E83\u53D1\u751F\u5728\u753B\u9762\u8FD9\u4E00\u5C42\uFF0C\u78B0\u4E0D\u5230\u5DF2\u7ECF\u5B58\u4E0B\u7684\u4E1C\u897F\u3002"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        marginTop: 16,
+        padding: '10px 12px',
+        textAlign: 'left',
+        borderRadius: 'var(--r-sm)',
+        border: '1px solid var(--line)',
+        background: 'var(--space-1)',
+        fontFamily: 'var(--font-mono)',
+        fontSize: 11.5,
+        lineHeight: 1.7,
+        color: 'var(--text-2)',
+        maxHeight: 132,
+        overflow: 'auto',
+        userSelect: 'text',
+        wordBreak: 'break-word'
+      }
+    }, msg), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        gap: 10,
+        justifyContent: 'center',
+        flexWrap: 'wrap',
+        marginTop: 18
+      }
+    }, this.props.onReset && /*#__PURE__*/React.createElement(Button, {
+      variant: "primary",
+      icon: "arrow-left",
+      onClick: this.props.onReset
+    }, this.props.resetLabel || '回到星图'), /*#__PURE__*/React.createElement(Button, {
+      variant: "secondary",
+      icon: "refresh-cw",
+      onClick: () => location.reload()
+    }, "\u5237\u65B0\u9875\u9762"), /*#__PURE__*/React.createElement(Button, {
+      variant: "ghost",
+      icon: this.state.copied ? 'check' : 'clipboard',
+      onClick: () => this.copy()
+    }, this.state.copied ? '已复制' : '复制诊断信息')), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 11,
+        color: 'var(--text-3)',
+        marginTop: 14,
+        lineHeight: 1.7
+      }
+    }, "\u5B8C\u6574\u5806\u6808\u5DF2\u7ECF\u6253\u5728\u6D4F\u89C8\u5668\u63A7\u5236\u53F0\u91CC\u3002"))));
+  }
+}
+window.SRKit = Object.assign(window.SRKit || {}, {
+  Boundary
+});
+})(); } catch (e) { __ds_ns.__errors.push({ path: "ui_kits/stellar-raft/Boundary.jsx", error: String((e && e.message) || e) }); }
+
 // ui_kits/stellar-raft/Checkup.jsx
 try { (() => {
+function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 /* Checkup — 知识体检报告 (整页仪表盘): a full-stage dashboard that reads the whole
    universe's memory health. Overall health, per-constellation bars, the memory
    distribution (牢固 / 正常 / 正变暗 / 将熄灭), the stars most in need of review,
@@ -9604,9 +10163,20 @@ function Checkup({
     const future = d.getTime() > now;
     const n = heat[heatDayKey(d)] || 0;
     const a = heatAlpha(n);
-    return /*#__PURE__*/React.createElement("div", {
+    /* 格子只靠金色浓度说话——读屏与触摸用户拿不到逐日数据。
+       role=img + aria-label 让每格在读屏浏览模式下报得出
+       「几月几日 · 几次观星」，但不进 Tab 序列（一年三百多个
+       停靠点是灾难，不是可达性）；摘要文字在图例后补上。 */
+    const dayLabel = `${d.getMonth() + 1} 月 ${d.getDate()} 日 · ${n} 次观星`;
+    return /*#__PURE__*/React.createElement("div", _extends({
       key: di,
-      title: future ? undefined : `${d.getMonth() + 1} 月 ${d.getDate()} 日 · ${n} 次观星`,
+      title: future ? undefined : dayLabel
+    }, future ? {
+      'aria-hidden': 'true'
+    } : {
+      role: 'img',
+      'aria-label': dayLabel
+    }, {
       style: {
         width: 12,
         height: 12,
@@ -9615,7 +10185,7 @@ function Checkup({
         boxShadow: a >= 0.6 ? '0 0 5px rgba(255,217,138,0.35)' : 'none',
         visibility: future ? 'hidden' : 'visible'
       }
-    });
+    }));
   }))))), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
@@ -9643,7 +10213,28 @@ function Checkup({
       color: 'var(--text-3)',
       marginLeft: 3
     }
-  }, "\u591A")))), /*#__PURE__*/React.createElement("div", {
+  }, "\u591A")), (() => {
+    const days = Object.entries(heat);
+    const total = days.reduce((a, [, n]) => a + n, 0);
+    const busiest = days.sort((a, b) => b[1] - a[1])[0];
+    const fmt = k => {
+      const [y, m, d] = k.split('-');
+      return `${y} 年 ${m} 月 ${d} 日`;
+    };
+    const text = total === 0 ? '近一年还没有观星记录' : `近一年共 ${total} 次观星` + (busiest ? `，最活跃的一天是 ${fmt(busiest[0])} · ${busiest[1]} 次` : '');
+    return /*#__PURE__*/React.createElement("div", {
+      role: "status",
+      style: {
+        position: 'absolute',
+        width: 1,
+        height: 1,
+        overflow: 'hidden',
+        clip: 'rect(0 0 0 0)',
+        clipPath: 'inset(50%)',
+        whiteSpace: 'nowrap'
+      }
+    }, text);
+  })())), /*#__PURE__*/React.createElement("div", {
     className: "sr-ck-2col",
     style: {
       display: 'grid',
@@ -10277,6 +10868,18 @@ const VIEW_CMDS = [{
   sub: '视图'
 }, {
   kind: 'view',
+  id: 'checkup',
+  label: '知识体检报告',
+  icon: 'activity',
+  sub: '视图'
+}, {
+  kind: 'view',
+  id: 'galaxy3d',
+  label: '三维星系',
+  icon: 'globe',
+  sub: '视图'
+}, {
+  kind: 'view',
   id: 'visit',
   label: '星际漫游',
   icon: 'telescope',
@@ -10474,6 +11077,7 @@ function CommandPalette({
       inset: 0,
       zIndex: 100,
       background: 'rgba(3,4,12,0.55)',
+      WebkitBackdropFilter: 'blur(3px)',
       backdropFilter: 'blur(3px)',
       display: 'flex',
       alignItems: 'flex-start',
@@ -10481,7 +11085,10 @@ function CommandPalette({
       paddingTop: '13vh'
     }
   }, /*#__PURE__*/React.createElement("div", {
-    onMouseDown: e => e.stopPropagation(),
+    onMouseDown: e => {
+      e.preventDefault();
+      e.stopPropagation();
+    },
     className: "sr-cmd-panel",
     style: {
       width: 560,
@@ -10512,6 +11119,10 @@ function CommandPalette({
     value: query,
     onChange: e => setQuery(e.target.value),
     onKeyDown: onKey,
+    role: "combobox",
+    "aria-expanded": "true",
+    "aria-controls": "sr-cmd-list",
+    "aria-activedescendant": flat.length ? 'sr-cmd-opt-' + active : undefined,
     "aria-label": "\u641C\u7D22\u661F\u3001\u661F\u57DF\u3001\u89C6\u56FE\u3001\u7B14\u8BB0\u6B63\u6587",
     placeholder: "\u641C\u7D22\u661F\u3001\u661F\u57DF\u3001\u89C6\u56FE\u3001\u7B14\u8BB0\u6B63\u6587\u2026",
     style: {
@@ -10534,12 +11145,15 @@ function CommandPalette({
     }
   }, "ESC")), /*#__PURE__*/React.createElement("div", {
     ref: listRef,
+    role: "listbox",
+    id: "sr-cmd-list",
     style: {
       maxHeight: 380,
       overflow: 'auto',
       padding: 8
     }
   }, flat.length === 0 && /*#__PURE__*/React.createElement("div", {
+    role: "status",
     style: {
       padding: '32px 0',
       textAlign: 'center',
@@ -10567,6 +11181,9 @@ function CommandPalette({
     return /*#__PURE__*/React.createElement("div", {
       key: item.kind + item.id,
       "data-idx": i,
+      id: 'sr-cmd-opt-' + i,
+      role: "option",
+      "aria-selected": on,
       onMouseEnter: () => setActive(i),
       onClick: () => exec(item),
       style: {
@@ -10683,11 +11300,17 @@ const EDITABLE = ['p', 'h1', 'h2', 'h3', 'bulleted', 'numbered', 'todo', 'quote'
 
 // 新建/转换为结构块时初始化真实空结构——否则 CodeBlock/DataTable 会兜底渲染演示
 // 内容（「看到」的不等于「存下」的），导出也把演示表当真数据写出。
+// 互转时把内容一起带过去：代码→正文不该得到空段落，正文→代码也不该把原文藏进
+// 块对象里用户却「看到内容没了」。内容是用户的，转换只是换个容器。
 const typeExtras = (type, existing) => {
   const e = existing || {};
+  // 这块里现存的纯文本（不管它现在住在哪个字段）：text 是 HTML 要先剥标签，
+  // code/tex/child 本来就是纯文本
+  const stripLite = h => String(h || '').replace(/<br\s*\/?>/gi, ' ').replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+  const plain = () => stripLite(e.text) || String(e.code || e.tex || e.child || '');
   const x = {};
   if (type === 'code' && e.code == null) {
-    x.code = '';
+    x.code = plain();
     x.lang = e.lang || 'python';
     x._new = true;
   }
@@ -10696,12 +11319,18 @@ const typeExtras = (type, existing) => {
     x.rows = [['', ''], ['', '']];
   }
   if (type === 'math' && e.tex == null) {
-    x.tex = '';
+    x.tex = plain();
     x._new = true;
   }
   if (type === 'toggle' && e.child == null) {
     x.child = '';
     x.open = true;
+  }
+  // 转成文本类块（p/h1-h3/quote/callout/bulleted/numbered/todo）而 text 为空时，接住内容
+  const TEXTY = ['p', 'h1', 'h2', 'h3', 'quote', 'callout', 'bulleted', 'numbered', 'todo'];
+  if (TEXTY.includes(type) && (e.text == null || e.text === '')) {
+    const t = plain();
+    if (t) x.text = escHtml(t);
   }
   return x;
 };
@@ -10826,6 +11455,16 @@ function CodeBlock({
   const sample = HL && (HL.SAMPLES[lang] || HL.GENERIC) || '';
   const [code, setCode] = React.useState(codeProp != null ? codeProp : sample);
   const [editingCode, setEditingCode] = React.useState(!!autoEdit);
+  /* 撤销/重做是「改 blocks 再回放」，块的 key 不变，本组件不会重挂载——
+     不跟着 props 同步的话，⌘Z 对代码块完全失效：别的块都退回去了，唯独这里纹丝不动；
+     更糟的是之后一次失焦会把这份陈旧的 code 重新提交，等于把撤销掉的编辑又写了一遍。
+     同文件的 MathBlock 早就是这么同步的，这里是漏写。 */
+  React.useEffect(() => {
+    if (codeProp != null) setCode(codeProp);
+  }, [codeProp]);
+  React.useEffect(() => {
+    if (langProp) setLangState(langProp);
+  }, [langProp]);
   const rows = HL ? HL.tokenize(code, lang) : code.split('\n').map(line => [{
     t: line,
     c: 'plain'
@@ -10893,8 +11532,8 @@ function CodeBlock({
           if (onCopyFail) onCopyFail();
         }
       };
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(code).then(done).catch(fallback);
+      if (window.SRCopy) {
+        window.SRCopy.copy(code).then(ok => ok ? done() : fallback());
       } else fallback();
     },
     title: "\u590D\u5236\u4EE3\u7801",
@@ -10970,6 +11609,16 @@ function CodeBlock({
   }) : /*#__PURE__*/React.createElement("div", {
     onClick: () => setEditingCode(true),
     title: "\u70B9\u51FB\u7F16\u8F91\u4EE3\u7801",
+    role: "button",
+    tabIndex: 0,
+    className: "sr-focus-ring",
+    "aria-label": "\u7F16\u8F91\u4EE3\u7801",
+    onKeyDown: e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        setEditingCode(true);
+      }
+    },
     style: {
       padding: '12px 14px',
       fontFamily: 'var(--font-mono)',
@@ -11777,6 +12426,16 @@ function MathBlock({
   return /*#__PURE__*/React.createElement("div", {
     onClick: () => setEditing(true),
     title: viewErrs.length ? 'LaTeX 可能有语法错误：' + viewErrs.join('；') + ' · 点击进入源码编辑' : '点击编辑 LaTeX 源码',
+    role: "button",
+    tabIndex: 0,
+    className: "sr-focus-ring",
+    "aria-label": "\u7F16\u8F91 LaTeX \u516C\u5F0F",
+    onKeyDown: e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        setEditing(true);
+      }
+    },
     style: {
       display: 'flex',
       justifyContent: 'center',
@@ -11800,22 +12459,159 @@ function MathBlock({
   }));
 }
 
+/* ——— 插图的分寸 ———
+   星图的持久化是「整片星空一次整存」：笔记里的图以 dataURL 内联在快照里，跟着每
+   一次保存整体上传。所以一张 12MB 的手机原图不是「这条笔记变大了」，而是整片星空
+   越过服务器 8MB 的请求体上限、也越过 localStorage 的配额——此后每一次保存都失败，
+   用户看到的却只是一句「服务器暂不可达」，两头都存不下，还不知道为什么。
+
+   于是在它进笔记之前先量一量：
+   · 小图原样保留 —— 截图、示意图这类本来就小，重编码只会掉画质；
+   · 大图按长边 1600 缩一次，再逐档降质，直到进得了预算（webp 优先，保住透明通道）；
+   · GIF / SVG 不便重编码（一个会掉动画，一个本就是文本），只判大小、不动内容；
+   · 实在压不下去的明说一声，而不是让它悄悄毁掉整片星空的同步。 */
+const SR_IMG = {
+  keepUnder: 600 * 1024,
+  // 小于这个就原样收下，不重编码
+  maxEdge: 1600,
+  // 缩放后的长边（够 2× 视网膜屏铺满正文栏）
+  budget: 700 * 1024,
+  // 压缩目标
+  hardCap: 2 * 1024 * 1024 // 越过这条线就不收——一片星空塞不下几张这样的图
+};
+const srBytes = f => f && f.size || 0;
+const srKB = n => n >= 1024 * 1024 ? (n / 1024 / 1024).toFixed(1) + 'MB' : Math.max(1, Math.round(n / 1024)) + 'KB';
+// dataURL 的字符数约等于字节数的 4/3（base64），用它反推「压到多少字节」
+const srDataUrlBytes = u => Math.round((String(u).length - (String(u).indexOf(',') + 1)) * 0.75);
+function srShrinkImage(file) {
+  return new Promise((resolve, reject) => {
+    const url = URL.createObjectURL(file);
+    const img = new Image();
+    img.onload = () => {
+      URL.revokeObjectURL(url);
+      /* 整段包起来：canvas 分配不出来、toDataURL 被安全策略拒绝，都是在这个
+         回调里同步抛出的——外面的 Promise 接不到，就永远不落定，界面卡在
+         「正在压缩这张图…」再也不动。 */
+      try {
+        const scale = Math.min(1, SR_IMG.maxEdge / Math.max(img.naturalWidth, img.naturalHeight));
+        const cv = document.createElement('canvas');
+        cv.width = Math.max(1, Math.round(img.naturalWidth * scale));
+        cv.height = Math.max(1, Math.round(img.naturalHeight * scale));
+        const ctx = cv.getContext('2d');
+        if (!ctx) throw new Error('这台设备的浏览器没给出画布，压不了这张图');
+        ctx.drawImage(img, 0, 0, cv.width, cv.height);
+        // webp 保得住透明通道；浏览器不认时它会悄悄回吐 png，那就改用 jpeg
+        let type = 'image/webp';
+        let out = cv.toDataURL(type, 0.86);
+        if (!out.startsWith('data:image/webp')) {
+          type = 'image/jpeg';
+          out = cv.toDataURL(type, 0.86);
+        }
+        for (let q = 0.74; srDataUrlBytes(out) > SR_IMG.budget && q >= 0.4; q -= 0.12) out = cv.toDataURL(type, q);
+        /* 画布太大时某些浏览器不报错，只回一条 'data:,' —— 那不是图片，是一块
+           什么都没有的占位。放它进笔记，用户会得到一个永远加载失败的图块。 */
+        if (!/^data:image\/[a-z+]+;base64,/.test(out) || out.length < 256) {
+          throw new Error('这张图太大，浏览器没能画出来 —— 先自行压缩一下');
+        }
+        resolve(out);
+      } catch (e) {
+        reject(e instanceof Error ? e : new Error('这张图处理不了'));
+      }
+    };
+    img.onerror = () => {
+      URL.revokeObjectURL(url);
+      reject(new Error('这个文件不是浏览器认得的图片'));
+    };
+    img.src = url;
+  });
+}
+
+// FileReader 的 Promise 版：小图原样收下时走它
+function srReadDataUrl(file) {
+  return new Promise((resolve, reject) => {
+    const rd = new FileReader();
+    rd.onload = () => resolve(rd.result);
+    rd.onerror = () => reject(new Error('这个文件读不出来'));
+    rd.readAsDataURL(file);
+  });
+}
+
+/* 一个文件 → 可以放进笔记的 dataURL。不合格就抛出一句能直接给人看的话。
+   图片块的「点击上传 / 拖进来」与编辑器整页的拖放都走这里，规则只写一处。
+   返回 { src, note }：note 是压缩后那句「8.4MB → 420KB」，没压过就是空的。 */
+async function srPrepareImage(file) {
+  if (!file) throw new Error('没拿到文件');
+  if (!/^image\//.test(file.type || '')) throw new Error('这不是一张图片');
+  const raw = srBytes(file);
+  // GIF 与 SVG 不重编码：一个会被压成单帧，一个本来就是几 KB 的文本
+  const asIs = /gif|svg/.test(file.type);
+  if (raw <= SR_IMG.keepUnder || asIs) {
+    if (raw > SR_IMG.hardCap) {
+      throw new Error(`这张图 ${srKB(raw)}，太大了 —— ${asIs ? '动图与矢量图不便压缩，' : ''}请先压到 ${srKB(SR_IMG.hardCap)} 以内`);
+    }
+    return {
+      src: await srReadDataUrl(file),
+      note: ''
+    };
+  }
+  const out = await srShrinkImage(file);
+  const got = srDataUrlBytes(out);
+  if (got > SR_IMG.hardCap) throw new Error(`这张图压到 ${srKB(got)} 仍然太大，换一张或先自行压缩`);
+  return {
+    src: out,
+    note: `图片已压缩：${srKB(raw)} → ${srKB(got)}（长边 ${SR_IMG.maxEdge}px）`
+  };
+}
+
 /* 图片块：src 失效（外链挂掉 / 图床死链）时给出可见的失败态占位，
-   而不是一条 0 高度的隐形横线；重新上传即可替换。 */
+   而不是一条 0 高度的隐形横线；重新上传即可替换。
+   两条入口（点击选文件 / 真的拖进来）汇到同一个 accept —— 之前那句
+   「拖入图片」是句空话：<label> 上放开文件并不会触发里面的 input。 */
 function ImageBlock({
   b,
   onSrc
 }) {
   const [err, setErr] = React.useState(false);
+  const [busy, setBusy] = React.useState(false);
+  const [note, setNote] = React.useState('');
+  const [over, setOver] = React.useState(false);
   React.useEffect(() => {
     setErr(false);
   }, [b.src]);
-  const pick = e => {
-    const f = e.target.files && e.target.files[0];
+  const say = msg => {
+    const NS = window.StellarRaftDesignSystem_2866af;
+    if (NS && NS.toast) NS.toast(msg, {
+      tone: 'blue',
+      icon: 'image',
+      duration: 4200
+    });else setNote(msg);
+  };
+  const accept = async f => {
     if (!f) return;
-    const rd = new FileReader();
-    rd.onload = () => onSrc(rd.result);
-    rd.readAsDataURL(f);
+    setNote(''); // 上一次的提示不该跟着下一张图
+    setBusy(true);
+    try {
+      const {
+        src,
+        note: n
+      } = await srPrepareImage(f);
+      onSrc(src);
+      if (n) say(n);
+    } catch (e) {
+      say(e && e.message || '这张图处理不了');
+    } finally {
+      setBusy(false);
+    }
+  };
+  const pick = e => {
+    accept(e.target.files && e.target.files[0]);
+    e.target.value = '';
+  };
+  const drop = e => {
+    e.preventDefault();
+    setOver(false);
+    const dt = e.dataTransfer;
+    accept(dt && dt.files && dt.files[0]);
   };
   if (b.src && !err) {
     return /*#__PURE__*/React.createElement("img", {
@@ -11830,7 +12626,14 @@ function ImageBlock({
       }
     });
   }
+  const edge = err ? 'color-mix(in srgb, var(--danger) 45%, transparent)' : over ? 'var(--star-blue)' : 'var(--line-strong)';
   return /*#__PURE__*/React.createElement("label", {
+    onDragOver: e => {
+      e.preventDefault();
+      setOver(true);
+    },
+    onDragLeave: () => setOver(false),
+    onDrop: drop,
     style: {
       display: 'flex',
       flexDirection: 'column',
@@ -11839,31 +12642,42 @@ function ImageBlock({
       gap: 8,
       height: 120,
       borderRadius: 'var(--r-md)',
-      border: '1px dashed ' + (err ? 'color-mix(in srgb, var(--danger) 45%, transparent)' : 'var(--line-strong)'),
+      border: '1px dashed ' + edge,
       color: 'var(--text-3)',
-      cursor: 'pointer',
-      background: err ? 'color-mix(in srgb, var(--danger) 5%, transparent)' : 'transparent'
+      cursor: busy ? 'progress' : 'pointer',
+      background: err ? 'color-mix(in srgb, var(--danger) 5%, transparent)' : over ? 'rgba(159,198,255,0.06)' : 'transparent',
+      transition: 'border-color var(--dur-fast), background var(--dur-fast)'
     }
   }, /*#__PURE__*/React.createElement(Icon, {
-    name: err ? 'image-off' : 'image',
+    name: busy ? 'loader' : err ? 'image-off' : 'image',
     size: 22,
-    color: err ? 'var(--danger)' : 'currentColor'
+    color: err ? 'var(--danger)' : over ? 'var(--star-blue)' : 'currentColor'
   }), /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 13,
       color: err ? 'var(--text-2)' : 'inherit'
     }
-  }, err ? '图片加载失败 · 原链接已失效' : '拖入图片，或点击上传'), err && /*#__PURE__*/React.createElement("span", {
+  }, busy ? '正在压缩这张图…' : err ? '图片加载失败 · 原链接已失效' : over ? '放开即插入' : '拖入图片，或点击上传'), err && !busy && /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 11.5
     }
-  }, "\u70B9\u51FB\u91CD\u65B0\u4E0A\u4F20\uFF0C\u66FF\u6362\u8FD9\u5F20\u56FE"), /*#__PURE__*/React.createElement("input", {
+  }, "\u70B9\u51FB\u91CD\u65B0\u4E0A\u4F20\uFF0C\u66FF\u6362\u8FD9\u5F20\u56FE"), !err && !busy && !note && /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 11
+    }
+  }, "\u5927\u56FE\u4F1A\u81EA\u52A8\u538B\u5230\u957F\u8FB9 ", SR_IMG.maxEdge, "px \u2014\u2014 \u6574\u7247\u661F\u7A7A\u8981\u8DDF\u7740\u6BCF\u6B21\u4FDD\u5B58\u4E00\u8D77\u4E0A\u4F20"), note && /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 11.5,
+      color: 'var(--text-2)'
+    }
+  }, note), /*#__PURE__*/React.createElement("input", {
     type: "file",
     accept: "image/*",
     style: {
       display: 'none'
     },
-    onChange: pick
+    onChange: pick,
+    disabled: busy
   }));
 }
 
@@ -12000,7 +12814,8 @@ function PropPop({
   }, children)), document.body);
 }
 
-/* 「类型」浮层菜单：预设 + 当前自定义值兜底，点选即生效（下拉的正常语义） */
+/* 「类型」浮层菜单：预设 + 当前自定义值兜底，点选即生效（下拉的正常语义）。
+   键盘走 menu 模式：打开落焦当前项，↑↓ 移动，Enter/Space 选定，Esc 收层还焦点 */
 function TypePicker({
   value,
   onPick,
@@ -12012,7 +12827,30 @@ function TypePicker({
     onPop && onPop(!!v);
   };
   const btnRef = React.useRef(null);
+  const listRef = React.useRef(null);
   const opts = PROP_TYPE_PRESETS.includes(value) || !value ? PROP_TYPE_PRESETS : [value, ...PROP_TYPE_PRESETS];
+  React.useEffect(() => {
+    if (!open || !listRef.current) return;
+    const cur = listRef.current.querySelector('[aria-selected="true"]') || listRef.current.querySelector('[data-oid]');
+    if (cur) cur.focus();
+  }, [open]);
+  const onOptKey = (e, i, t) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      setOpen(false);
+      if (t !== value) onPick(t);
+      if (btnRef.current) btnRef.current.focus();
+    } else if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      const next = listRef.current && listRef.current.querySelector(`[data-oid="${e.key === 'ArrowDown' ? i + 1 : i - 1}"]`);
+      if (next) next.focus();
+    } else if (e.key === 'Escape') {
+      e.preventDefault();
+      e.stopPropagation();
+      setOpen(false);
+      if (btnRef.current) btnRef.current.focus();
+    }
+  };
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("button", {
     ref: btnRef,
     type: "button",
@@ -12020,6 +12858,12 @@ function TypePicker({
     onClick: () => setOpen(!open),
     "aria-haspopup": "listbox",
     "aria-expanded": open,
+    onKeyDown: e => {
+      if (!open && (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ')) {
+        e.preventDefault();
+        setOpen(true);
+      }
+    },
     style: {
       display: 'inline-flex',
       alignItems: 'center',
@@ -12044,17 +12888,21 @@ function TypePicker({
     onClose: () => setOpen(false)
   }, /*#__PURE__*/React.createElement("div", {
     role: "listbox",
+    ref: listRef,
     style: {
       padding: 6
     }
-  }, opts.map(t => /*#__PURE__*/React.createElement("div", {
+  }, opts.map((t, i) => /*#__PURE__*/React.createElement("div", {
     key: t,
     role: "option",
     "aria-selected": t === value,
+    tabIndex: -1,
+    "data-oid": i,
     onClick: () => {
       setOpen(false);
       if (t !== value) onPick(t);
     },
+    onKeyDown: e => onOptKey(e, i, t),
     onMouseEnter: e => {
       e.currentTarget.style.background = 'rgba(159,198,255,0.10)';
     },
@@ -13352,6 +14200,7 @@ function Editor({
   const [focusBlk, setFocusBlk] = React.useState(null); // 光标所在块，给选中态视觉
   const [ctx, setCtx] = React.useState(null); // {x,y,id}
   const [slash, setSlash] = React.useState(null); // {x,y,id}
+  const [starLink, setStarLink] = React.useState(null); // [[ 唤出的选星器：{x,y,id,at}
   const [sel, setSel] = React.useState(null); // {x,y}
   const [colorPop, setColorPop] = React.useState(null);
   const [toast, setToast] = React.useState(null);
@@ -13371,6 +14220,14 @@ function Editor({
   const [confirm, setConfirm] = React.useState(null); // {message, confirmLabel, onYes}
   const [linkDialog, setLinkDialog] = React.useState(null); // {range}
   const [more, setMore] = React.useState(null); // page-level 「更多」 dropdown {x,y}
+  const [railOpen, setRailOpen] = React.useState(false); // 窄屏：知识栏装成底部弹层
+  /* 窄到右侧知识栏摆不下（≤1180px）。用共享断点而不是自己写 matchMedia：
+     CSS 那边靠 html[data-narrow] 收栏，两边认同一个数才不会出现
+     「栏已经藏了、按钮还没出来」的那段真空。 */
+  const narrow = window.SRKit.useScreen().narrow;
+  const {
+    MobileSheet
+  } = window.SRKit;
   const [history, setHistory] = React.useState(false); // version-history dialog (mock)
   const [explore, setExplore] = React.useState(null); // 迷你星图点选的星（待确认「探索星系」）{id,label,con}
   const [con, setCon] = React.useState(star.con); // constellation, mutable via 「移动到星域」
@@ -13384,6 +14241,7 @@ function Editor({
   };
   const {
     SlashMenu,
+    StarLinkMenu,
     SelectionToolbar,
     ContextMenu,
     ColorMenu,
@@ -13508,6 +14366,26 @@ function Editor({
     if (!U || u.typing) return;
     U.noteTyping(u, snapState());
   };
+  // 一次输入突发只属于一个块：焦点换块时给突发封口——否则跨块打字被并成
+  // 同一个突发，一次 ⌘Z 把两个块里刚打的字一起抹掉（undocore 的 typing
+  // 只在 push/undo/redo 时复位）。
+  // 封口必须把 DOM 里的字收进 **blocks state** 而不只是 blocksRef：
+  // 同一个 onFocus 里的 setFocusBlk 立刻触发重渲染，渲染体里
+  // `blocksRef.current = blocks` 会把刚同步的 blocksRef 回填成旧的 state——
+  // 新突发的起点快照就跟着丢了刚打下的字。
+  const lastFocusBlk = React.useRef(null);
+  const sealBurstOnFocus = id => {
+    if (lastFocusBlk.current === id) return;
+    lastFocusBlk.current = id;
+    if (undoRef.current && undoRef.current.typing) {
+      const synced = blocksRef.current.map(syncBlock);
+      blocksRef.current = synced;
+      star.body = synced;
+      D.touchNote(star.id);
+      setBlocks(synced.map(cloneBlk)); // __html 与 DOM 相同串不重置，光标在别的块里不受影响
+      undoRef.current.typing = false;
+    }
+  };
   const focusedBlockId = () => {
     const a = document.activeElement;
     const w = a && a.closest && a.closest('[id^="blk-"]');
@@ -13559,9 +14437,18 @@ function Editor({
     prefixConvRef.current = null;
     setBlocks(bs => fn(bs.map(syncBlock)));
   };
+  // 压栈 + 变更，但空操作不压栈（⌥↑ 顶到第一块、拖拽放回原位、提交无变更）：
+  // 没有变化的历史只是噪音——用户按 ⌘Z 却发现「什么都没撤掉」，会以为撤销坏了
   const withSynced = fn => {
+    prefixConvRef.current = null;
+    const before = blocksRef.current.map(syncBlock);
+    const after = fn(before);
+    if (JSON.stringify(after) === JSON.stringify(before)) {
+      setBlocks(after.map(cloneBlk));
+      return;
+    }
     pushHistory();
-    mutateBlocks(fn);
+    setBlocks(after.map(cloneBlk));
   };
   const blocksRef = React.useRef(blocks);
   blocksRef.current = blocks;
@@ -13573,8 +14460,12 @@ function Editor({
   // 「已自动保存」的实现：正文回写到 star.body。
   // 结构变更（增删/转换/排序）时 blocks 已同步，直接落盘；
   // 纯打字停留在 DOM，由输入防抖与卸载时的 persistBody 收拢。
+  // blocksRef 也一并换成 DOM 同步后的数组：撤销栈的突发快照从这里取，
+  // 「打字 → 换块」封口时，新突发的起点快照必须带着刚打下的字。
   const persistBody = () => {
-    star.body = blocksRef.current.map(syncBlock);
+    const synced = blocksRef.current.map(syncBlock);
+    blocksRef.current = synced;
+    star.body = synced;
     D.touchNote(star.id);
   };
   // 块数组任何变化（结构变更 / 待办勾选 / 折叠开合 / 表格与代码提交）都落盘：
@@ -13769,6 +14660,11 @@ function Editor({
     if (e.altKey && (e.key === 'ArrowUp' || e.key === 'ArrowDown')) {
       e.preventDefault();
       const dir = e.key === 'ArrowUp' ? -1 : 1;
+      // 顶到头就什么都不做——也不压撤销栈（空历史会吃掉用户的一次 ⌘Z）
+      const cur0 = blocksRef.current;
+      const i0 = cur0.findIndex(x => x.id === b.id);
+      const j0 = i0 + dir;
+      if (i0 < 0 || j0 < 0 || j0 >= cur0.length) return;
       flushSynced(s => {
         const i = s.findIndex(x => x.id === b.id);
         const j = i + dir;
@@ -13880,10 +14776,23 @@ function Editor({
           return;
         }
         el.innerHTML = '';
-        flushSynced(s => s.map(x => x.id === b.id ? toPlainP({
-          ...x,
-          text: ''
-        }) : x));
+        /* toggle 在块首按 ⌫ 降级为正文时，折叠着的 child 会变成孤儿数据（任何界面
+           都不渲染，却留在 star.body 里持久化）——把它并成紧随其后的正文段落 */
+        flushSynced(s => s.flatMap(x => {
+          if (x.id !== b.id) return [x];
+          const base = toPlainP({
+            ...x,
+            text: ''
+          });
+          const child = x.type === 'toggle' ? x.child || '' : '';
+          delete base.child;
+          delete base.open;
+          return stripTags(child).trim() ? [base, {
+            id: uid(),
+            type: 'p',
+            text: child
+          }] : [base];
+        }));
         focusBlock(b.id, 'start');
         return;
       }
@@ -13955,8 +14864,13 @@ function Editor({
         return;
       }
       if (el.innerText.trim() === '') {
+        /* 上一块是原子块（code/math/table/image）时没有可聚焦的 ref——焦点会掉进
+           body，键盘输入无声无息。改投「下一个可编辑块」，没有再往回找。 */
+        const nextEd = cur.slice(i + 1).find(x => EDITABLE.includes(x.type));
+        const prevEd = cur.slice(0, i).reverse().find(x => EDITABLE.includes(x.type));
         flushSynced(s => s.filter(x => x.id !== b.id));
-        focusBlock(prev.id, 'end');
+        const target = EDITABLE.includes(prev.type) ? prev : nextEd || prevEd;
+        if (target) focusBlock(target.id, nextEd && !EDITABLE.includes(prev.type) ? 'start' : 'end');
         return;
       }
       if (EDITABLE.includes(prev.type)) {
@@ -14042,6 +14956,32 @@ function Editor({
     if (!cd) return;
     const text = cd.getData('text/plain') || '';
     const html = cd.getData('text/html') || '';
+
+    /* 剪贴板里是图片（截图工具、右键复制图片）：直接落成图片块。
+       和拖进来走同一条 srPrepareImage —— 大图照样先压，规则只有一处。 */
+    const imgFile = [...(cd.files || [])].find(f => /^image\//.test(f.type || '')) || [...(cd.items || [])].filter(it => it.kind === 'file' && /^image\//.test(it.type || '')).map(it => it.getAsFile()).find(Boolean);
+    if (imgFile && !text.trim()) {
+      e.preventDefault();
+      dropImage(imgFile);
+      return;
+    }
+
+    /* 选中一段文字再粘一个网址 = 给这段文字加链接。
+       这是 Notion / Obsidian / Typora 都有的动作，手指记得住；没有它就得
+       「复制 → 选中 → ⌘K → 再粘一次」，多绕三步。 */
+    const oneLineUrl = !text.includes('\n') && /^(https?:\/\/|mailto:)\S+$/i.test(text.trim());
+    if (oneLineUrl && EDITABLE.includes(b.type)) {
+      const selNow = window.getSelection();
+      const inBlock = selNow && selNow.rangeCount && refs.current[b.id] && refs.current[b.id].contains(selNow.getRangeAt(0).commonAncestorContainer);
+      if (inBlock && !selNow.isCollapsed && safeUrl(text.trim())) {
+        e.preventDefault();
+        pushExec(); // 可撤销
+        document.execCommand('createLink', false, text.trim());
+        persistBody();
+        flash('已把选中的文字变成链接');
+        return;
+      }
+    }
     const md = /(^|\n)(#{1,3} |[-*] |\d+[.)] |> |```|\$\$|(-{3,}|\*{3,})$|\|.+\|)/.test(text);
     // 多行或含 Markdown → 解析为块
     if (text.includes('\n') || md) {
@@ -14227,16 +15167,80 @@ function Editor({
     e.target.value = '';
     if (f) readMdFile(f);
   };
+  /* 正文里的链接得真的点得动。
+     contentEditable 里浏览器不会替你导航（点击只是放光标），而 stellar-raft://
+     这个协议它更是不认识 —— 不接这一下，[[ 插进去的星链接就是一段蓝色的死字。
+     · 星链接 → 就地打开那颗星（与 Obsidian / Notion 的「点击即前往」一致）
+     · http(s) / mailto → 新标签页打开，编辑器留在原地
+     想把光标放进链接文字里改写它，用键盘方向键或选中它再改（同 Obsidian）。 */
+  const onEditorClick = e => {
+    const a = e.target && e.target.closest && e.target.closest('a[href]');
+    if (!a) return;
+    const href = a.getAttribute('href') || '';
+    const star2 = href.match(/^stellar-raft:\/\/star\/([^#?]+)/);
+    if (star2) {
+      e.preventDefault();
+      const id = decodeURIComponent(star2[1]);
+      if (!D.byId[id]) {
+        flash('这颗星已经不在星图里了');
+        return;
+      }
+      if (id === star.id) {
+        flash('就是当前这颗星');
+        return;
+      }
+      onOpen(id);
+      return;
+    }
+    if (/^(https?:|mailto:)/i.test(href) && safeUrl(href)) {
+      e.preventDefault();
+      try {
+        window.open(href, '_blank', 'noopener,noreferrer');
+      } catch (_) {/* 被拦就算了 */}
+    }
+  };
   const onEditorDragOver = e => {
     if (e.dataTransfer && Array.from(e.dataTransfer.items || []).some(it => it.kind === 'file')) e.preventDefault();
   };
+  // 拖进来的图片：压过之后追加成一个图片块（追加而不是插在落点，是因为落点
+  // 要靠命中测试去猜，猜错比追加更难理解；提示里会说清它去了哪儿）
+  const dropImage = async f => {
+    try {
+      const {
+        src,
+        note
+      } = await srPrepareImage(f);
+      const nb = {
+        id: uid(),
+        type: 'image',
+        text: '',
+        src
+      };
+      withSynced(bs => [...bs, nb]);
+      flash(note ? note + ' · 已插到笔记末尾' : '图片已插到笔记末尾');
+    } catch (err) {
+      flash(err && err.message || '这张图处理不了');
+    }
+  };
   const onEditorDrop = e => {
     const fs = e.dataTransfer && e.dataTransfer.files ? Array.from(e.dataTransfer.files) : [];
-    const f = fs.find(x => /\.(md|markdown|txt)$/i.test(x.name) || x.type === 'text/markdown');
-    if (!f) return;
+    if (!fs.length) return;
+    /* 只要落下的是文件就先拦住。默认行为是让浏览器导航到那个文件——整个编辑器
+       连同还没落盘的编辑一起没了，而人只是手一抖没对准。认不出来的类型宁可
+       什么都不做，也不能把人带走。 */
     e.preventDefault();
     e.stopPropagation();
-    readMdFile(f);
+    const md = fs.find(x => /\.(md|markdown|txt)$/i.test(x.name) || x.type === 'text/markdown');
+    if (md) {
+      readMdFile(md);
+      return;
+    }
+    const img = fs.find(x => /^image\//.test(x.type || ''));
+    if (img) {
+      dropImage(img);
+      return;
+    }
+    flash('只认得 Markdown 文件与图片');
   };
 
   // ---- 笔记内查找 / 替换（⌘F）----
@@ -14433,7 +15437,14 @@ function Editor({
     if (action === 'fav') {
       toggleFav();
     } else if (action === 'dup') {
-      const id2 = 's' + Math.random().toString(36).slice(2, 6);
+      // 先把还停在 DOM 里的字（350ms 防抖窗口内的输入）收进 star.body 再读——
+      // 否则手快的人「打完就复制」，副本缺结尾（exportMd 与「在星图中探索」都先 flush）
+      persistBody();
+      // 与 StarMap 同一口径：8 位 + 查重，4 位的碰撞率在几百颗星时就不可忽略
+      let id2;
+      do {
+        id2 = 's' + Math.random().toString(36).slice(2, 10);
+      } while (D.byId[id2]);
       const src = D.byId[star.id] || star;
       const copy = {
         ...src,
@@ -14456,10 +15467,9 @@ function Editor({
       D.addStar(copy);
       flash('已创建副本 ·「' + copy.label + '」');
     } else if (action === 'copyLink') {
-      try {
-        navigator.clipboard && navigator.clipboard.writeText('stellar-raft://star/' + star.id);
-      } catch (e) {}
-      flash('已复制星链接');
+      // 复制成没成由 SRCopy 说了算：手机上（非安全上下文）剪贴板 API 根本不存在，
+      // 以前这里不管成不成都弹「已复制」
+      window.SRCopy.copy('stellar-raft://star/' + star.id).then(ok => flash(ok ? '已复制星链接' : '这台设备不允许自动复制，请长按选择'));
     } else if (action === 'export') exportMd();else if (action === 'import') {
       if (importInputRef.current) importInputRef.current.click();
     } else if (action === 'move') {
@@ -14501,10 +15511,7 @@ function Editor({
       ...b,
       bg: arg.id
     } : b));else if (action === 'copyLink') {
-      try {
-        navigator.clipboard && navigator.clipboard.writeText('stellar-raft://star/' + star.id + '#' + id);
-      } catch (e) {}
-      flash('已复制块链接');
+      window.SRCopy.copy('stellar-raft://star/' + star.id + '#' + id).then(ok => flash(ok ? '已复制块链接' : '这台设备不允许自动复制，请长按选择'));
     } else if (action === 'move') {
       moveToCon(arg);
     } else if (action === 'review') {
@@ -14515,16 +15522,21 @@ function Editor({
     }
     setCtx(null);
   };
-  const insertAfter = (id, type = 'p') => withSynced(s => {
-    const i = s.findIndex(b => b.id === id);
+  const insertAfter = (id, type = 'p') => {
     const nb = {
       id: uid(),
       type,
       text: '',
       ...typeExtras(type)
     };
-    return [...s.slice(0, i + 1), nb, ...s.slice(i + 1)];
-  });
+    // 插入即聚焦：与回车分裂、--- 转换的行为一致，不该让用户再点一次。
+    // flushSynced 同步提交，聚焦时 refs 已就位（withSynced 的异步提交会抢跑）
+    flushSynced(s => {
+      const i = s.findIndex(b => b.id === id);
+      return [...s.slice(0, i + 1), nb, ...s.slice(i + 1)];
+    });
+    if (EDITABLE.includes(type)) focusBlock(nb.id, 'start');
+  };
   // 删光所有块后不再是死局：占位空态点击/回车即插入一个可输入的正文块并聚焦。
   const seedFirstBlock = () => {
     const nb = {
@@ -14800,7 +15812,7 @@ function Editor({
       if (ReactDOM.flushSync) ReactDOM.flushSync(() => setBlocks(next.map(cloneBlk)));else setBlocks(next.map(cloneBlk));
       focusBlockAt(survivorId, caretOff);
       persistBody();
-      return true;
+      return survivorId;
     };
     const onKey = e => {
       if (e.metaKey || e.ctrlKey || e.altKey || e.isComposing) return;
@@ -14865,6 +15877,43 @@ function Editor({
       }
       doMerge('', e);
     };
+    /* 跨块选区的粘贴：keydown/copy/cut 都接管了，唯独 paste 漏着——浏览器原生
+       删除跨 contentEditable 选区会把整块 DOM 移除，React reconcile 时
+       NotFoundError；多行粘贴还会「粘了一份、选中的还在」。
+       这里先走 doMerge 把选区收成存活块（同一份撤销快照），再亲手插入。 */
+    const onPaste = e => {
+      const sel = window.getSelection();
+      if (!sel || !sel.rangeCount || sel.isCollapsed) return;
+      const r = sel.getRangeAt(0);
+      if (!root.contains(r.commonAncestorContainer)) return;
+      const startId = blockIdOfNode(r.startContainer),
+        endId = blockIdOfNode(r.endContainer);
+      if (!startId || !endId || startId === endId) return; // 同块交给块级 blockPaste
+      const cd = e.clipboardData;
+      const text = cd && cd.getData('text/plain') || '';
+      const html = cd && cd.getData('text/html') || '';
+      const sid = doMerge('', e); // 已 preventDefault + 压栈
+      if (!sid) return;
+      e.stopPropagation();
+      const multi = text.includes('\n') || /(^|\n)(#{1,3} |[-*] |\d+[.)] |> |```|\$\$|(-{3,}|\*{3,})$|\|.+\|)/.test(text);
+      if (multi) {
+        const nbs = parseMdBlocks(text);
+        if (!nbs.length) return;
+        flushSynced(s => {
+          const i = s.findIndex(x => x.id === sid);
+          return i < 0 ? s : [...s.slice(0, i + 1), ...nbs, ...s.slice(i + 1)];
+        });
+        focusBlock(nbs[nbs.length - 1].id, 'end');
+        flash('已粘贴为 ' + nbs.length + ' 个块');
+        return;
+      }
+      const clean = html ? sanHtml(html) : escHtml(text);
+      if (!clean) return;
+      undoRef.current.typing = true; // 插入与删除共用同一份快照，一次 ⌘Z 撤掉整次粘贴
+      document.execCommand('insertHTML', false, clean);
+      persistBody();
+    };
+    root.addEventListener('paste', onPaste, true);
     root.addEventListener('keydown', onKey, true);
     root.addEventListener('copy', onCopy, true);
     root.addEventListener('cut', onCut, true);
@@ -14872,6 +15921,7 @@ function Editor({
       root.removeEventListener('keydown', onKey, true);
       root.removeEventListener('copy', onCopy, true);
       root.removeEventListener('cut', onCut, true);
+      root.removeEventListener('paste', onPaste, true);
     };
   }, []);
   const applyLink = url => {
@@ -14938,7 +15988,39 @@ function Editor({
         const t = e.currentTarget.innerText;
         // 斜杠菜单：任意位置输入 /（行首或前一字符为空白）都触发，不再要求块里只有「/」。
         // IME 组合期在上面已挡；行内代码里不触发。
-        const justSlash = e.nativeEvent && (e.nativeEvent.data === '/' || e.nativeEvent.data == null && t.replace(/\n+$/, '') === '/');
+        /* [[ 唤出选星器：与「/」同一套做法（看光标前的文本，不看整块内容）。
+           第二个 [ 落下的那一刻触发；IME 组合期在上面已挡，行内代码里不触发。 */
+        if (e.nativeEvent && e.nativeEvent.data === '[' && EDITABLE.includes(b.type)) {
+          const info2 = caretInfo(e.currentTarget);
+          if (info2 && info2.collapsed) {
+            const anchor2 = info2.range.startContainer.nodeType === 1 ? info2.range.startContainer : info2.range.startContainer.parentElement;
+            if (!(anchor2 && anchor2.closest && anchor2.closest('code'))) {
+              const pre2 = info2.range.cloneRange();
+              pre2.selectNodeContents(e.currentTarget);
+              pre2.setEnd(info2.range.startContainer, info2.range.startOffset);
+              const preText2 = pre2.toString().replace(/\u00a0/g, ' ');
+              if (/\[\[$/.test(preText2)) {
+                let rect2;
+                try {
+                  const r = window.getSelection().getRangeAt(0).getBoundingClientRect();
+                  if (r && (r.left || r.top)) rect2 = r;
+                } catch (_) {}
+                if (!rect2) rect2 = e.currentTarget.getBoundingClientRect();
+                setStarLink({
+                  x: rect2.left,
+                  y: rect2.bottom + 6,
+                  id: b.id,
+                  at: preText2.length
+                });
+                return;
+              }
+            }
+          }
+        }
+        /* 只在「插入了一个 /」时弹斜杠菜单：退格把「/x」删成「/」时 inputType 是
+           deleteContentBackward——那是删除不是输入（原先只看 data==null 会误弹）。
+           data 为 null 的插入路径（部分输入法/触摸键盘）仍兼容。 */
+        const justSlash = e.nativeEvent && (e.nativeEvent.data === '/' || e.nativeEvent.data == null && /^insert/.test(e.nativeEvent.inputType || '') && t.replace(/\n+$/, '') === '/');
         const info = justSlash ? caretInfo(e.currentTarget) : null;
         if (info && info.collapsed) {
           const anchorEl = info.range.startContainer.nodeType === 1 ? info.range.startContainer : info.range.startContainer.parentElement;
@@ -15264,7 +16346,7 @@ function Editor({
             "data-ph": "\u6298\u53E0\u5185\u5BB9\u2026",
             onBlur: e => {
               const h = sanHtml(e.currentTarget.innerHTML);
-              if (h !== (b.child || '')) mutateBlocks(s => s.map(x => x.id === b.id ? {
+              if (h !== (b.child || '')) withSynced(s => s.map(x => x.id === b.id ? {
                 ...x,
                 child: h
               } : x));
@@ -15282,46 +16364,58 @@ function Editor({
             }
           }));
         }
+      /* 原子块的提交也进撤销栈（withSynced = 先压快照再改）：否则 ⌘Z 撤不掉
+         表格/代码/公式的修改，更糟的是一次针对打字的撤销会把栈外更晚发生的
+         表格修改连带抹掉——撤销回滚了一个比目标更晚的操作。折叠开合是视图态，
+         不进栈（⌘Z 不该花在开合上）。 */
       case 'math':
         return /*#__PURE__*/React.createElement(MathBlock, {
           tex: b.tex,
           autoEdit: b._new,
-          onCommit: t => mutateBlocks(s => s.map(x => x.id === b.id ? {
-            ...x,
-            tex: t,
-            _new: false
-          } : x))
+          onCommit: t => {
+            if (t !== (b.tex || '')) withSynced(s => s.map(x => x.id === b.id ? {
+              ...x,
+              tex: t,
+              _new: false
+            } : x));
+          }
         });
       case 'code':
         return /*#__PURE__*/React.createElement(CodeBlock, {
           code: b.code,
           lang: b.lang,
           autoEdit: b._new,
-          onCommitCode: c => mutateBlocks(s => s.map(x => x.id === b.id ? {
-            ...x,
-            code: c,
-            _new: false
-          } : x)),
-          onCommitLang: lg => mutateBlocks(s => s.map(x => x.id === b.id ? {
-            ...x,
-            lang: lg
-          } : x)),
+          onCommitCode: c => {
+            if (c !== (b.code || '')) withSynced(s => s.map(x => x.id === b.id ? {
+              ...x,
+              code: c,
+              _new: false
+            } : x));
+          },
+          onCommitLang: lg => {
+            if (lg !== b.lang) withSynced(s => s.map(x => x.id === b.id ? {
+              ...x,
+              lang: lg
+            } : x));
+          },
           onCopyFail: () => flash('复制失败 · 请手动选择代码复制')
         });
       case 'table':
         return /*#__PURE__*/React.createElement(DataTable, {
           head: b.head,
           rows: b.rows,
-          onCommit: (head, rows) => mutateBlocks(s => s.map(x => x.id === b.id ? {
-            ...x,
-            head,
-            rows
-          } : x))
+          onCommit: (head, rows) => {
+            if (JSON.stringify(head) !== JSON.stringify(b.head || []) || JSON.stringify(rows) !== JSON.stringify(b.rows || [])) withSynced(s => s.map(x => x.id === b.id ? {
+              ...x,
+              head,
+              rows
+            } : x));
+          }
         });
       case 'image':
         return /*#__PURE__*/React.createElement(ImageBlock, {
           b: b,
-          onSrc: src => mutateBlocks(s => s.map(x => x.id === b.id ? {
+          onSrc: src => withSynced(s => s.map(x => x.id === b.id ? {
             ...x,
             src
           } : x))
@@ -15338,363 +16432,11 @@ function Editor({
         return null;
     }
   };
-  return /*#__PURE__*/React.createElement("div", {
-    onContextMenu: e => e.preventDefault(),
-    style: {
-      position: 'relative',
-      flex: 1,
-      minWidth: 0,
-      display: 'flex',
-      overflow: 'hidden'
-    }
-  }, /*#__PURE__*/React.createElement("style", null, `
-        /* 1024–1180px：正文优先——右侧知识栏让位，状态栏铺满 */
-        @media (max-width: 1180px) {
-          .sr-ed-rail { display: none; }
-          .sr-ed-status { right: 0 !important; }
-        }
-        /* 小宽度下按优先级收敛状态栏低价值项，别把「UTF-8」硬截成「UTF-」 */
-        @media (max-width: 1280px) {
-          .sr-ed-status-opt { display: none !important; }
-        }
-        /* 查找条：右栏让位时跟着贴边 */
-        @media (max-width: 1180px) {
-          .sr-ed-find { right: 24px !important; }
-        }
-        /* ——— 手机 ———
-           正文区的 52px 左右留白在窄屏会把每行挤成七八个字，收到 16px；
-           顶部让出刘海，底部留一段余量给系统手势条与输入法。 */
-        html[data-screen="phone"] .sr-ed-page {
-          padding: calc(var(--sr-safe-top) + 12px) 16px 96px !important;
-        }
-        html[data-screen="phone"] .sr-ed-find {
-          left: 10px !important; right: 10px !important; width: auto !important;
-          top: calc(var(--sr-safe-top) + 8px) !important;
-        }
-        /* 状态栏在手机上只留最要紧的一段，其余项本来就归 .sr-ed-status-opt 管 */
-        html[data-screen="phone"] .sr-ed-status { padding-left: 12px !important; padding-right: 12px !important; }
-        /* 块手柄在桌面挂在正文左侧 52px 的留白里；手机上那块留白没了，
-           改浮到块的右上角。它们本来就随「聚焦的块」出现，手指点进去即可见——
-           触摸端没有 hover，靠的是 focusBlk 这条路。 */
-        html[data-screen="phone"] .sr-blk-tools {
-          left: auto !important; right: 0 !important; top: -26px !important;
-          background: var(--glass-bg-strong); border-radius: var(--r-sm); padding: 2px;
-        }
-        /* 笔记内查找高亮（CSS Custom Highlight，不进块 DOM / 不进持久化） */
-        ::highlight(sr-find) { background: color-mix(in srgb, var(--star-blue) 25%, transparent); }
-        ::highlight(sr-find-cur) { background: color-mix(in srgb, var(--star-blue) 55%, transparent); }
-        /* 正文空块的引导文案：只在光标所在块淡入（其余空块保持安静的黑） */
-        .sr-blk-ph:empty:before { opacity: 0; transition: opacity 160ms var(--ease-flight); }
-        .sr-blk-ph:empty:focus:before { opacity: 1; }
-        @media (prefers-reduced-motion: reduce) { .sr-blk-ph:empty:before { transition: none; } }
-        /* 保存中指示的旋转——只表状态，reduced-motion / 设置关动效时静止 */
-        @keyframes sr-ed-spin { to { transform: rotate(360deg); } }
-        @media (prefers-reduced-motion: reduce) { .sr-ed-spin { animation: none !important; } }
-      `), /*#__PURE__*/React.createElement("sr-starfield", {
-    density: "0.4"
-  }), /*#__PURE__*/React.createElement("div", {
-    ref: scrollRef,
-    onMouseUp: onMouseUp,
-    onDragOver: onEditorDragOver,
-    onDrop: onEditorDrop,
-    style: {
-      flex: 1,
-      minWidth: 0,
-      overflow: 'auto',
-      position: 'relative',
-      zIndex: 2
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sr-ed-page",
-    style: {
-      maxWidth: 720,
-      margin: '0 auto',
-      padding: '20px 52px 24px'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: 10,
-      marginBottom: 22
-    }
-  }, /*#__PURE__*/React.createElement(Button, {
-    variant: "ghost",
-    size: "sm",
-    icon: "corner-up-left",
-    onClick: onBack
-  }, "\u661F\u56FE"), /*#__PURE__*/React.createElement("span", {
-    style: {
-      color: 'var(--text-3)'
-    }
-  }, "/"), /*#__PURE__*/React.createElement("span", {
-    style: {
-      display: 'inline-flex',
-      alignItems: 'center',
-      gap: 6,
-      fontSize: 13,
-      color: 'var(--text-2)',
-      whiteSpace: 'nowrap',
-      flex: 'none'
-    }
-  }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      width: 7,
-      height: 7,
-      borderRadius: '50%',
-      background: D.conColor(con),
-      boxShadow: `0 0 7px ${D.conColor(con)}`
-    }
-  }), D.conName(con)), /*#__PURE__*/React.createElement("div", {
-    style: {
-      flex: 1
-    }
-  }), /*#__PURE__*/React.createElement(IconButton, {
-    name: "star",
-    active: fav,
-    title: fav ? '已收藏 · 点击取消' : '收藏这颗星',
-    onClick: toggleFav
-  }), /*#__PURE__*/React.createElement(IconButton, {
-    name: "more-horizontal",
-    title: "\u66F4\u591A",
-    onClick: e => {
-      const r = e.currentTarget.getBoundingClientRect();
-      setMore({
-        x: r.right,
-        y: r.bottom + 6
-      });
-    }
-  })), /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: 10,
-      marginBottom: 16,
-      flexWrap: 'wrap'
-    }
-  }, tags.map(t => /*#__PURE__*/React.createElement(TagChip, {
-    key: t,
-    label: t,
-    onRemove: () => removeTag(t)
-  })), addingTag ? /*#__PURE__*/React.createElement("input", {
-    autoFocus: true,
-    value: tagDraft,
-    onChange: e => setTagDraft(e.target.value),
-    onBlur: commitTag,
-    onKeyDown: e => {
-      if (e.key === 'Enter') commitTag();
-      if (e.key === 'Escape') {
-        setTagDraft('');
-        setAddingTag(false);
-      }
-    },
-    placeholder: "\u6807\u7B7E\u540D\u2026",
-    style: {
-      height: 26,
-      width: 96,
-      boxSizing: 'border-box',
-      background: 'var(--input-bg, rgba(3,4,12,0.45))',
-      border: '1px solid var(--glass-border-strong)',
-      borderRadius: 'var(--r-pill)',
-      color: 'var(--text-1)',
-      fontSize: 12.5,
-      padding: '0 10px',
-      outline: 'none',
-      fontFamily: 'var(--font-sans)'
-    }
-  }) : /*#__PURE__*/React.createElement("span", {
-    onClick: () => {
-      setTagDraft('');
-      setAddingTag(true);
-    },
-    style: {
-      display: 'inline-flex',
-      alignItems: 'center',
-      gap: 5,
-      height: 26,
-      padding: '0 10px',
-      borderRadius: 'var(--r-pill)',
-      border: '1px dashed var(--line-strong)',
-      color: 'var(--text-3)',
-      fontSize: 12.5,
-      cursor: 'pointer'
-    }
-  }, /*#__PURE__*/React.createElement(Icon, {
-    name: "plus",
-    size: 13,
-    color: "currentColor"
-  }), "\u6807\u7B7E"), /*#__PURE__*/React.createElement("div", {
-    style: {
-      flex: 1
-    }
-  }), /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontFamily: 'var(--font-mono)',
-      fontSize: 11,
-      color: 'var(--text-3)'
-    }
-  }, "\u7F16\u8F91\u4E8E ", (() => {
-    const n = D.notes.find(x => x.id === star.id) || {};
-    return n.editedTs ? D.ago(n.editedTs) : n.edited || '刚刚';
-  })())), /*#__PURE__*/React.createElement("div", {
-    contentEditable: true,
-    suppressContentEditableWarning: true,
-    "data-ph": "\u65E0\u6807\u9898",
-    onFocus: e => {
-      if (e.currentTarget.textContent.trim() !== '新的知识星') return;
-      const range = document.createRange();
-      range.selectNodeContents(e.currentTarget);
-      const sel = window.getSelection();
-      sel.removeAllRanges();
-      sel.addRange(range);
-    },
-    onBlur: e => {
-      const t = e.currentTarget.textContent.trim();
-      if (t && t !== star.label) {
-        D.renameStar(star.id, t);
-        bumpTick();
-        flash('已重命名');
-      } else if (!t) e.currentTarget.textContent = star.label;
-    },
-    style: {
-      outline: 'none',
-      fontSize: 32,
-      fontWeight: 200,
-      color: 'var(--text-1)',
-      letterSpacing: '-0.01em',
-      textShadow: 'var(--text-glow-cool)',
-      marginBottom: 20,
-      lineHeight: 1.2
-    }
-  }, star.label), /*#__PURE__*/React.createElement(Properties, {
-    props: star.props = star.props || {},
-    onFlash: flash,
-    onConfirm: setConfirm,
-    onCommit: () => {
-      D.touchNote(star.id);
-      bumpTick();
-    },
-    reviewISO: (() => {
-      const d = new Date(Math.max(D.dueTsOf(star), Date.now()));
-      return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
-    })(),
-    onPickReview: iso => {
-      const ts = Date.parse(iso + 'T20:00:00'); // 排到那天傍晚：白天还来得及复习
-      if (!Number.isFinite(ts)) return;
-      if (!(star.sr && star.sr.S > 0)) D.refreshMemory();
-      star.sr.due = ts;
-      D.refreshMemory();
-      D.pushTimeline('review', star.id, '排期复习 · ' + iso.slice(5).replace('-', '/'));
-      D.touchNote(star.id);
-      bumpTick();
-      flash('下次复习已排到 ' + iso.replace(/-/g, '/'));
-    }
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      flexDirection: 'column',
-      gap: 8,
-      userSelect: dragBlk ? 'none' : 'auto'
-    },
-    onMouseLeave: () => setHover(null)
-  }, blocks.length === 0 && /*#__PURE__*/React.createElement("div", {
-    role: "button",
-    tabIndex: 0,
-    className: "sr-focus-ring",
-    onClick: seedFirstBlock,
-    onKeyDown: e => {
-      if (e.key === 'Enter' || e.key === ' ' || e.key === '/') {
-        e.preventDefault();
-        seedFirstBlock();
-      }
-    },
-    style: {
-      padding: '14px 8px',
-      margin: '0 -8px',
-      borderRadius: 'var(--r-sm)',
-      color: 'var(--text-3)',
-      cursor: 'text',
-      fontSize: 16.5,
-      lineHeight: 1.85
-    }
-  }, "\u5199\u4E0B\u7B2C\u4E00\u884C\uFF0C\u6216\u6309 / \u9009\u62E9\u5757\u7C7B\u578B\u2026"), blocks.map((b, bi) => /*#__PURE__*/React.createElement("div", {
-    key: b.id,
-    id: 'blk-' + b.id,
-    onMouseEnter: () => setHover(b.id),
-    onFocus: () => setFocusBlk(b.id),
-    onBlur: e => {
-      if (!e.currentTarget.contains(e.relatedTarget)) setFocusBlk(f => f === b.id ? null : f);
-    },
-    onContextMenu: e => {
-      e.preventDefault();
-      setCtx({
-        x: e.clientX,
-        y: e.clientY,
-        id: b.id
-      });
-    },
-    style: {
-      position: 'relative',
-      borderRadius: 'var(--r-sm)',
-      padding: b.bg && b.bg !== 'none' ? '8px 12px' : '2px 8px',
-      margin: b.bg && b.bg !== 'none' ? 0 : '0 -8px',
-      background: focusBlk === b.id ? b.bg && b.bg !== 'none' ? BG[b.bg] : 'rgba(159,198,255,0.07)' : hover === b.id ? b.bg && b.bg !== 'none' ? BG[b.bg] : 'rgba(159,198,255,0.025)' : b.bg ? BG[b.bg] : 'transparent',
-      opacity: dragBlk === b.id ? 0.4 : 1,
-      // 选中态：整块包围的高亮环，一眼看清光标在哪个块里
-      boxShadow: dragBlk && dragBlk !== b.id && dropIdx === bi ? 'inset 0 2px 0 var(--gold)' : pendingAtomicDel === b.id ? '0 0 0 1.5px var(--danger)' : focusBlk === b.id ? '0 0 0 1.5px var(--focus), 0 0 14px color-mix(in srgb, var(--focus) 24%, transparent)' : 'none',
-      transition: 'background var(--dur-fast), opacity var(--dur-fast), box-shadow var(--dur-fast)'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sr-blk-tools",
-    style: {
-      position: 'absolute',
-      left: -52,
-      top: 1,
-      display: 'flex',
-      gap: 1,
-      opacity: hover === b.id || focusBlk === b.id ? 1 : 0,
-      transform: hover === b.id || focusBlk === b.id ? 'none' : 'translateX(-5px)',
-      pointerEvents: hover === b.id || focusBlk === b.id ? 'auto' : 'none',
-      transition: 'opacity 180ms var(--ease-flight), transform 180ms var(--ease-flight)'
-    }
-  }, /*#__PURE__*/React.createElement(Handle, {
-    icon: "plus",
-    title: "\u5728\u4E0B\u65B9\u63D2\u5165\u5757",
-    onClick: () => insertAfter(b.id)
-  }), /*#__PURE__*/React.createElement(Handle, {
-    icon: "grip-vertical",
-    title: "\u62D6\u52A8\u6392\u5E8F \xB7 \u70B9\u51FB\u6253\u5F00\u83DC\u5355 \xB7 Alt+\u2191\u2193 \u79FB\u52A8",
-    onMouseDown: e => startDrag(e, b.id)
-  })), renderInner(b))), dragBlk && dropIdx === blocks.length && /*#__PURE__*/React.createElement("div", {
-    style: {
-      height: 2,
-      background: 'var(--gold)',
-      borderRadius: 1,
-      boxShadow: 'var(--glow-gold-soft)'
-    }
-  })), blocks.length > 0 && /*#__PURE__*/React.createElement("div", {
-    "aria-hidden": "true",
-    onClick: appendTailBlock,
-    style: {
-      height: 96,
-      margin: '0 -8px',
-      cursor: 'text'
-    }
-  }))), /*#__PURE__*/React.createElement("aside", {
-    "data-tour": "editor-rail",
-    className: "sr-ed-rail",
-    style: {
-      width: 312,
-      flex: 'none',
-      borderLeft: '1px solid var(--glass-border)',
-      background: 'var(--glass-bg)',
-      WebkitBackdropFilter: 'blur(var(--glass-blur))',
-      backdropFilter: 'blur(var(--glass-blur))',
-      overflow: 'auto',
-      position: 'relative',
-      zIndex: 2
-    }
-  }, /*#__PURE__*/React.createElement("div", {
+
+  /* 知识栏的栏体：宽屏挂在右侧 <aside>，窄屏原样塞进底部弹层。
+     抽成常量而不是复制一份，是因为这六块里有 MiniStarMap、反向链接这类
+     带自己状态的东西——两份 JSX 迟早会长歪，而它们本来就该是同一个东西。 */
+  const railBody = /*#__PURE__*/React.createElement("div", {
     style: {
       padding: 20,
       display: 'flex',
@@ -16221,7 +16963,390 @@ function Editor({
       color: 'var(--text-3)',
       lineHeight: 1.6
     }
-  }, "\u70B9\u51FB\u4EFB\u610F\u661F\uFF0C\u8DC3\u8FC1\u5230\u661F\u56FE\u4E2D\u63A2\u7D22\u5B83\u7684\u661F\u7CFB\u3002")))), /*#__PURE__*/React.createElement("div", {
+  }, "\u70B9\u51FB\u4EFB\u610F\u661F\uFF0C\u8DC3\u8FC1\u5230\u661F\u56FE\u4E2D\u63A2\u7D22\u5B83\u7684\u661F\u7CFB\u3002")));
+  return /*#__PURE__*/React.createElement("div", {
+    onContextMenu: e => e.preventDefault(),
+    style: {
+      position: 'relative',
+      flex: 1,
+      minWidth: 0,
+      display: 'flex',
+      overflow: 'hidden'
+    }
+  }, /*#__PURE__*/React.createElement("style", null, `
+        /* 窄到多栏摆不下（data-narrow = SRScreen.BP.narrow，1180px）：
+           正文优先——右侧知识栏让位，状态栏铺满。栏里的六块不是就此消失：
+           头部会多出一枚「知识栏」按钮，把它们原样装进底部弹层。 */
+        html[data-narrow] .sr-ed-rail { display: none; }
+        html[data-narrow] .sr-ed-status { right: 0 !important; }
+        /* 小宽度下按优先级收敛状态栏低价值项，别把「UTF-8」硬截成「UTF-」 */
+        @media (max-width: 1280px) {
+          .sr-ed-status-opt { display: none !important; }
+        }
+        /* 查找条：右栏让位时跟着贴边 */
+        html[data-narrow] .sr-ed-find { right: 24px !important; }
+        /* ——— 手机 ———
+           正文区的 52px 左右留白在窄屏会把每行挤成七八个字，收到 16px；
+           顶部让出刘海，底部留一段余量给系统手势条与输入法。 */
+        html[data-screen="phone"] .sr-ed-page {
+          padding: calc(var(--sr-safe-top) + 12px) 16px 96px !important;
+        }
+        html[data-screen="phone"] .sr-ed-find {
+          left: 10px !important; right: 10px !important; width: auto !important;
+          top: calc(var(--sr-safe-top) + 8px) !important;
+        }
+        /* 状态栏在手机上只留最要紧的一段，其余项本来就归 .sr-ed-status-opt 管 */
+        /* 状态栏在手机上只留最要紧的一段，其余项本来就归 .sr-ed-status-opt 管。
+           底部还要让开 Home 指示条：它贴着 bottom:0，而那 34px 归系统——
+           字会被那道白条横穿，更糟的是往那儿滑是「回主屏」，不是滑我的笔记。 */
+        html[data-screen="phone"] .sr-ed-status {
+          padding-left: 12px !important; padding-right: 12px !important;
+          padding-bottom: calc(7px + var(--sr-safe-bottom)) !important;
+        }
+        /* 块手柄在桌面挂在正文左侧 52px 的留白里；手机上那块留白没了，
+           改浮到块的右上角。它们本来就随「聚焦的块」出现，手指点进去即可见——
+           触摸端没有 hover，靠的是 focusBlk 这条路。 */
+        html[data-screen="phone"] .sr-blk-tools {
+          left: auto !important; right: 0 !important; top: -26px !important;
+          background: var(--glass-bg-strong); border-radius: var(--r-sm); padding: 2px;
+        }
+        /* 笔记内查找高亮（CSS Custom Highlight，不进块 DOM / 不进持久化） */
+        ::highlight(sr-find) { background: color-mix(in srgb, var(--star-blue) 25%, transparent); }
+        ::highlight(sr-find-cur) { background: color-mix(in srgb, var(--star-blue) 55%, transparent); }
+        /* 正文空块的引导文案：只在光标所在块淡入（其余空块保持安静的黑） */
+        .sr-blk-ph:empty:before { opacity: 0; transition: opacity 160ms var(--ease-flight); }
+        .sr-blk-ph:empty:focus:before { opacity: 1; }
+        @media (prefers-reduced-motion: reduce) { .sr-blk-ph:empty:before { transition: none; } }
+        /* 保存中指示的旋转——只表状态，reduced-motion / 设置关动效时静止 */
+        @keyframes sr-ed-spin { to { transform: rotate(360deg); } }
+        @media (prefers-reduced-motion: reduce) { .sr-ed-spin { animation: none !important; } }
+      `), /*#__PURE__*/React.createElement("sr-starfield", {
+    density: "0.4"
+  }), /*#__PURE__*/React.createElement("div", {
+    ref: scrollRef,
+    onMouseUp: onMouseUp,
+    onClick: onEditorClick,
+    onDragOver: onEditorDragOver,
+    onDrop: onEditorDrop,
+    style: {
+      flex: 1,
+      minWidth: 0,
+      overflow: 'auto',
+      position: 'relative',
+      zIndex: 2
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sr-ed-page",
+    style: {
+      maxWidth: 720,
+      margin: '0 auto',
+      padding: '20px 52px 24px'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 10,
+      marginBottom: 22
+    }
+  }, /*#__PURE__*/React.createElement(Button, {
+    variant: "ghost",
+    size: "sm",
+    icon: "corner-up-left",
+    onClick: onBack
+  }, "\u661F\u56FE"), /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: 'var(--text-3)'
+    }
+  }, "/"), /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 6,
+      fontSize: 13,
+      color: 'var(--text-2)',
+      whiteSpace: 'nowrap',
+      flex: 'none'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      width: 7,
+      height: 7,
+      borderRadius: '50%',
+      background: D.conColor(con),
+      boxShadow: `0 0 7px ${D.conColor(con)}`
+    }
+  }), D.conName(con)), /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1
+    }
+  }), narrow && /*#__PURE__*/React.createElement(IconButton, {
+    name: "panel-right",
+    title: "\u77E5\u8BC6\u680F \xB7 \u5927\u7EB2 / \u8FDE\u63A5 / \u8BB0\u5FC6",
+    onClick: () => setRailOpen(true)
+  }), /*#__PURE__*/React.createElement(IconButton, {
+    name: "star",
+    active: fav,
+    title: fav ? '已收藏 · 点击取消' : '收藏这颗星',
+    onClick: toggleFav
+  }), /*#__PURE__*/React.createElement(IconButton, {
+    name: "more-horizontal",
+    title: "\u66F4\u591A",
+    onClick: e => {
+      const r = e.currentTarget.getBoundingClientRect();
+      setMore({
+        x: r.right,
+        y: r.bottom + 6
+      });
+    }
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 10,
+      marginBottom: 16,
+      flexWrap: 'wrap'
+    }
+  }, tags.map(t => /*#__PURE__*/React.createElement(TagChip, {
+    key: t,
+    label: t,
+    onRemove: () => removeTag(t)
+  })), addingTag ? /*#__PURE__*/React.createElement("input", {
+    autoFocus: true,
+    value: tagDraft,
+    onChange: e => setTagDraft(e.target.value),
+    onBlur: commitTag,
+    onKeyDown: e => {
+      if (e.key === 'Enter') commitTag();
+      if (e.key === 'Escape') {
+        setTagDraft('');
+        setAddingTag(false);
+      }
+    },
+    placeholder: "\u6807\u7B7E\u540D\u2026",
+    style: {
+      height: 26,
+      width: 96,
+      boxSizing: 'border-box',
+      background: 'var(--input-bg, rgba(3,4,12,0.45))',
+      border: '1px solid var(--glass-border-strong)',
+      borderRadius: 'var(--r-pill)',
+      color: 'var(--text-1)',
+      fontSize: 12.5,
+      padding: '0 10px',
+      outline: 'none',
+      fontFamily: 'var(--font-sans)'
+    }
+  }) : /*#__PURE__*/React.createElement("span", {
+    role: "button",
+    tabIndex: 0,
+    className: "sr-focus-ring",
+    onClick: () => {
+      setTagDraft('');
+      setAddingTag(true);
+    },
+    onKeyDown: e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        setTagDraft('');
+        setAddingTag(true);
+      }
+    },
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 5,
+      height: 26,
+      padding: '0 10px',
+      borderRadius: 'var(--r-pill)',
+      border: '1px dashed var(--line-strong)',
+      color: 'var(--text-3)',
+      fontSize: 12.5,
+      cursor: 'pointer'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "plus",
+    size: 13,
+    color: "currentColor"
+  }), "\u6807\u7B7E"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1
+    }
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontFamily: 'var(--font-mono)',
+      fontSize: 11,
+      color: 'var(--text-3)'
+    }
+  }, "\u7F16\u8F91\u4E8E ", (() => {
+    const n = D.notes.find(x => x.id === star.id) || {};
+    return n.editedTs ? D.ago(n.editedTs) : n.edited || '刚刚';
+  })())), /*#__PURE__*/React.createElement("div", {
+    contentEditable: true,
+    suppressContentEditableWarning: true,
+    "data-ph": "\u65E0\u6807\u9898",
+    onFocus: e => {
+      if (e.currentTarget.textContent.trim() !== '新的知识星') return;
+      const range = document.createRange();
+      range.selectNodeContents(e.currentTarget);
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+    },
+    onBlur: e => {
+      const t = e.currentTarget.textContent.trim();
+      if (t && t !== star.label) {
+        D.renameStar(star.id, t);
+        bumpTick();
+        flash('已重命名');
+      } else if (!t) e.currentTarget.textContent = star.label;
+    },
+    style: {
+      outline: 'none',
+      fontSize: 32,
+      fontWeight: 200,
+      color: 'var(--text-1)',
+      letterSpacing: '-0.01em',
+      textShadow: 'var(--text-glow-cool)',
+      marginBottom: 20,
+      lineHeight: 1.2
+    }
+  }, star.label), /*#__PURE__*/React.createElement(Properties, {
+    props: star.props = star.props || {},
+    onFlash: flash,
+    onConfirm: setConfirm,
+    onCommit: () => {
+      D.touchNote(star.id);
+      bumpTick();
+    },
+    reviewISO: (() => {
+      const d = new Date(Math.max(D.dueTsOf(star), Date.now()));
+      return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    })(),
+    onPickReview: iso => {
+      const ts = Date.parse(iso + 'T20:00:00'); // 排到那天傍晚：白天还来得及复习
+      if (!Number.isFinite(ts)) return;
+      if (!(star.sr && star.sr.S > 0)) D.refreshMemory();
+      star.sr.due = ts;
+      D.refreshMemory();
+      D.pushTimeline('review', star.id, '排期复习 · ' + iso.slice(5).replace('-', '/'));
+      D.touchNote(star.id);
+      bumpTick();
+      flash('下次复习已排到 ' + iso.replace(/-/g, '/'));
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 8,
+      userSelect: dragBlk ? 'none' : 'auto'
+    },
+    onMouseLeave: () => setHover(null)
+  }, blocks.length === 0 && /*#__PURE__*/React.createElement("div", {
+    role: "button",
+    tabIndex: 0,
+    className: "sr-focus-ring",
+    onClick: seedFirstBlock,
+    onKeyDown: e => {
+      if (e.key === 'Enter' || e.key === ' ' || e.key === '/') {
+        e.preventDefault();
+        seedFirstBlock();
+      }
+    },
+    style: {
+      padding: '14px 8px',
+      margin: '0 -8px',
+      borderRadius: 'var(--r-sm)',
+      color: 'var(--text-3)',
+      cursor: 'text',
+      fontSize: 16.5,
+      lineHeight: 1.85
+    }
+  }, "\u5199\u4E0B\u7B2C\u4E00\u884C\uFF0C\u6216\u6309 / \u9009\u62E9\u5757\u7C7B\u578B\u2026"), blocks.map((b, bi) => /*#__PURE__*/React.createElement("div", {
+    key: b.id,
+    id: 'blk-' + b.id,
+    onMouseEnter: () => setHover(b.id),
+    onFocus: () => {
+      setFocusBlk(b.id);
+      sealBurstOnFocus(b.id);
+    },
+    onBlur: e => {
+      if (!e.currentTarget.contains(e.relatedTarget)) setFocusBlk(f => f === b.id ? null : f);
+    },
+    onContextMenu: e => {
+      e.preventDefault();
+      setCtx({
+        x: e.clientX,
+        y: e.clientY,
+        id: b.id
+      });
+    },
+    style: {
+      position: 'relative',
+      borderRadius: 'var(--r-sm)',
+      padding: b.bg && b.bg !== 'none' ? '8px 12px' : '2px 8px',
+      margin: b.bg && b.bg !== 'none' ? 0 : '0 -8px',
+      background: focusBlk === b.id ? b.bg && b.bg !== 'none' ? BG[b.bg] : 'rgba(159,198,255,0.07)' : hover === b.id ? b.bg && b.bg !== 'none' ? BG[b.bg] : 'rgba(159,198,255,0.025)' : b.bg ? BG[b.bg] : 'transparent',
+      opacity: dragBlk === b.id ? 0.4 : 1,
+      // 选中态：整块包围的高亮环，一眼看清光标在哪个块里
+      boxShadow: dragBlk && dragBlk !== b.id && dropIdx === bi ? 'inset 0 2px 0 var(--gold)' : pendingAtomicDel === b.id ? '0 0 0 1.5px var(--danger)' : focusBlk === b.id ? '0 0 0 1.5px var(--focus), 0 0 14px color-mix(in srgb, var(--focus) 24%, transparent)' : 'none',
+      transition: 'background var(--dur-fast), opacity var(--dur-fast), box-shadow var(--dur-fast)'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sr-blk-tools",
+    style: {
+      position: 'absolute',
+      left: -52,
+      top: 1,
+      display: 'flex',
+      gap: 1,
+      opacity: hover === b.id || focusBlk === b.id ? 1 : 0,
+      transform: hover === b.id || focusBlk === b.id ? 'none' : 'translateX(-5px)',
+      pointerEvents: hover === b.id || focusBlk === b.id ? 'auto' : 'none',
+      transition: 'opacity 180ms var(--ease-flight), transform 180ms var(--ease-flight)'
+    }
+  }, /*#__PURE__*/React.createElement(Handle, {
+    icon: "plus",
+    title: "\u5728\u4E0B\u65B9\u63D2\u5165\u5757",
+    onClick: () => insertAfter(b.id)
+  }), /*#__PURE__*/React.createElement(Handle, {
+    icon: "grip-vertical",
+    title: "\u62D6\u52A8\u6392\u5E8F \xB7 \u70B9\u51FB\u6253\u5F00\u83DC\u5355 \xB7 Alt+\u2191\u2193 \u79FB\u52A8",
+    onMouseDown: e => startDrag(e, b.id)
+  })), renderInner(b))), dragBlk && dropIdx === blocks.length && /*#__PURE__*/React.createElement("div", {
+    style: {
+      height: 2,
+      background: 'var(--gold)',
+      borderRadius: 1,
+      boxShadow: 'var(--glow-gold-soft)'
+    }
+  })), blocks.length > 0 && /*#__PURE__*/React.createElement("div", {
+    "aria-hidden": "true",
+    onClick: appendTailBlock,
+    style: {
+      height: 96,
+      margin: '0 -8px',
+      cursor: 'text'
+    }
+  }))), /*#__PURE__*/React.createElement("aside", {
+    "data-tour": "editor-rail",
+    className: "sr-ed-rail",
+    style: {
+      width: 312,
+      flex: 'none',
+      borderLeft: '1px solid var(--glass-border)',
+      background: 'var(--glass-bg)',
+      WebkitBackdropFilter: 'blur(var(--glass-blur))',
+      backdropFilter: 'blur(var(--glass-blur))',
+      overflow: 'auto',
+      position: 'relative',
+      zIndex: 2
+    }
+  }, railBody), narrow && railOpen && /*#__PURE__*/React.createElement(MobileSheet, {
+    open: true,
+    onClose: () => setRailOpen(false),
+    title: "\u77E5\u8BC6\u680F"
+  }, railBody), /*#__PURE__*/React.createElement("div", {
     className: "sr-ed-status",
     style: {
       position: 'absolute',
@@ -16283,6 +17408,7 @@ function Editor({
     size: 12,
     color: "currentColor"
   }), window.SRKeys.combo('F'), " \u67E5\u627E"), /*#__PURE__*/React.createElement("span", {
+    className: "sr-kbd-only",
     title: window.SRKeys.combo('K') + ' 打开命令面板；在编辑器内选中文字时 ' + window.SRKeys.combo('K') + ' 为「添加链接」',
     style: {
       display: 'inline-flex',
@@ -16301,6 +17427,50 @@ function Editor({
     constellations: D.constellations,
     onClose: () => setCtx(null),
     onAction: act(ctx.id)
+  }), starLink && /*#__PURE__*/React.createElement(StarLinkMenu, {
+    x: starLink.x,
+    y: starLink.y,
+    stars: D.stars.filter(x => x.id !== star.id).map(x => ({
+      id: x.id,
+      label: x.label,
+      conName: D.conName(x.con),
+      tags: x.tags
+    })),
+    onClose: () => {
+      // 不选直接关：把那两个方括号留着，光标回到它们后面继续打字
+      const sid = starLink.id,
+        at = starLink.at;
+      setStarLink(null);
+      const a = document.activeElement;
+      if (sid && refs.current[sid] && (!a || a === document.body)) focusBlockAt(sid, at);
+    },
+    onPick: picked => {
+      const sid = starLink.id,
+        at = starLink.at;
+      setStarLink(null);
+      const el = refs.current[sid];
+      if (!el) return;
+      // 先把触发用的那两个 [ 删掉，再插链接——留着它们就成了 [[星名](链接)
+      const s2 = nodeAtOffset(el, at - 2),
+        e2 = nodeAtOffset(el, at);
+      pushHistory();
+      if (s2 && e2) {
+        try {
+          const r = document.createRange();
+          r.setStart(s2.node, s2.off);
+          r.setEnd(e2.node, e2.off);
+          r.deleteContents();
+          const sel2 = window.getSelection();
+          sel2.removeAllRanges();
+          sel2.addRange(r);
+        } catch (_) {/* 选区没法定位就退回追加在末尾 */}
+      }
+      el.focus();
+      const href = 'stellar-raft://star/' + picked.id;
+      document.execCommand('insertHTML', false, '<a href="' + href + '" style="color:var(--star-blue);text-decoration:underline;text-underline-offset:3px;">' + escHtml(picked.label) + '</a>&nbsp;');
+      persistBody();
+      flash('已链到「' + picked.label + '」· 点击即可前往');
+    }
   }), slash && /*#__PURE__*/React.createElement(SlashMenu, {
     x: slash.x,
     y: slash.y,
@@ -16762,6 +17932,8 @@ try { (() => {
 /* EditorMenus — professional editor overlays: slash menu, selection toolbar,
    and the block right-click context menu with 转换为 / 颜色 / 移动到 submenus.
    The selection toolbar drives real document.execCommand formatting. */
+/* 本文件的私有小组件一律带 EdMenu 前缀：浏览器里所有 .jsx 共享同一个全局作用域，
+   叫 Row / Divider 这种通名必然和别的文件撞车，而且是「后加载者静悄悄覆盖前者」。 */
 const {
   GlassPanel: SRGlass,
   Icon: SRIcon,
@@ -17061,7 +18233,7 @@ function Floating({
     }
   }, children));
 }
-function Row({
+function EdMenuRow({
   icon,
   label,
   hint,
@@ -17192,7 +18364,7 @@ function Label({
     }
   }, children);
 }
-function Divider() {
+function EdMenuDivider() {
   return /*#__PURE__*/React.createElement("div", {
     style: {
       height: 1,
@@ -17261,7 +18433,7 @@ function SlashMenu({
       maxHeight: 320,
       overflow: 'auto'
     }
-  }, /*#__PURE__*/React.createElement(Label, null, "\u57FA\u7840\u5757"), list.length ? list.map((b, i) => /*#__PURE__*/React.createElement(Row, {
+  }, /*#__PURE__*/React.createElement(Label, null, "\u57FA\u7840\u5757"), list.length ? list.map((b, i) => /*#__PURE__*/React.createElement(EdMenuRow, {
     key: b.type,
     icon: b.icon,
     label: b.label,
@@ -17276,6 +18448,89 @@ function SlashMenu({
       color: 'var(--text-3)'
     }
   }, "\u6CA1\u6709\u5339\u914D\u7684\u5757\u7C7B\u578B")));
+}
+
+/* ---- StarLinkMenu：正文里打 [[ 唤出的「链到另一颗星」选择器 ----
+   Obsidian 的招牌动作，而这个应用本来就有对应的东西：星与星之间的连线、
+   导出仓库时写成的 [[wikilink]]、以及「复制星链接」给出的 stellar-raft://star/<id>。
+   缺的只是正文里那个入口 —— 以前要引用另一颗星，得先去复制链接再回来 ⌘K。
+
+   只做一件事：列出星、按输入筛、选中后把链接交回去。插入与删掉那两个方括号
+   由编辑器负责（它才知道光标在哪）。 */
+function StarLinkMenu({
+  x,
+  y,
+  stars,
+  onPick,
+  onClose
+}) {
+  const [q, setQ] = React.useState('');
+  const [ai, setAi] = React.useState(0);
+  const s = q.trim().toLowerCase();
+  const list = (stars || []).filter(st => !s || String(st.label || '').toLowerCase().includes(s) || String(st.conName || '').toLowerCase().includes(s) || (st.tags || []).some(t => String(t).toLowerCase().includes(s))).slice(0, 40);
+  React.useEffect(() => {
+    setAi(0);
+  }, [q]);
+  const onKey = e => {
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setAi(i => Math.min(list.length - 1, i + 1));
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setAi(i => Math.max(0, i - 1));
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      if (list[ai]) onPick(list[ai]);
+    }
+  };
+  return /*#__PURE__*/React.createElement(Floating, {
+    x: x,
+    y: y,
+    width: 286,
+    onClose: onClose,
+    title: "\u94FE\u5230\u53E6\u4E00\u9897\u661F"
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: '3px 5px 6px'
+    }
+  }, /*#__PURE__*/React.createElement("input", {
+    autoFocus: true,
+    value: q,
+    onChange: e => setQ(e.target.value),
+    onKeyDown: onKey,
+    placeholder: "\u641C\u661F\u540D\u3001\u661F\u57DF\u6216\u6807\u7B7E\u2026",
+    style: {
+      width: '100%',
+      boxSizing: 'border-box',
+      background: 'var(--input-bg, rgba(3,4,12,0.45))',
+      border: '1px solid var(--glass-border-strong)',
+      borderRadius: 'var(--r-sm)',
+      color: 'var(--text-1)',
+      fontSize: 13,
+      padding: '7px 10px',
+      outline: 'none',
+      fontFamily: 'var(--font-sans)'
+    }
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      maxHeight: 300,
+      overflow: 'auto'
+    }
+  }, list.length ? list.map((st, i) => /*#__PURE__*/React.createElement(EdMenuRow, {
+    key: st.id,
+    icon: "star",
+    label: st.label,
+    hint: st.conName,
+    active: i === ai,
+    onMouseEnter: () => setAi(i),
+    onClick: () => onPick(st)
+  })) : /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: '8px 11px',
+      fontSize: 12.5,
+      color: 'var(--text-3)'
+    }
+  }, "\u6CA1\u6709\u5339\u914D\u7684\u661F")));
 }
 
 /* ---- Selection mini toolbar — wired to real execCommand via onFormat ---- */
@@ -17465,7 +18720,7 @@ function ColorMenu({
     onClose: onClose,
     autoFocus: autoFocus,
     title: "\u5757\u64CD\u4F5C"
-  }, /*#__PURE__*/React.createElement(Label, null, "\u6587\u5B57\u989C\u8272"), TEXT_COLORS.map(c => swatch(c, 'text')), /*#__PURE__*/React.createElement(Divider, null), /*#__PURE__*/React.createElement(Label, null, "\u80CC\u666F"), BG_COLORS.map(c => swatch(c, 'bg')));
+  }, /*#__PURE__*/React.createElement(Label, null, "\u6587\u5B57\u989C\u8272"), TEXT_COLORS.map(c => swatch(c, 'text')), /*#__PURE__*/React.createElement(EdMenuDivider, null), /*#__PURE__*/React.createElement(Label, null, "\u80CC\u666F"), BG_COLORS.map(c => swatch(c, 'bg')));
 }
 
 /* ---- Block context menu (right-click / ⋮⋮ handle) ---- */
@@ -17498,40 +18753,40 @@ function ContextMenu({
     onClose: onClose,
     autoFocus: true,
     title: "\u8FD9\u4E2A\u5757"
-  }, /*#__PURE__*/React.createElement(Row, {
+  }, /*#__PURE__*/React.createElement(EdMenuRow, {
     icon: "refresh-cw",
     label: "\u8F6C\u6362\u4E3A",
     chevron: true,
     onMouseEnter: e => openSub('turn', e),
     onFocus: e => openSub('turn', e),
     onClick: e => openSub('turn', e, true)
-  }), /*#__PURE__*/React.createElement(Row, {
+  }), /*#__PURE__*/React.createElement(EdMenuRow, {
     icon: "copy",
     label: "\u590D\u5236\u4E3A\u526F\u672C",
     onClick: () => onAction('duplicate')
-  }), /*#__PURE__*/React.createElement(Row, {
+  }), /*#__PURE__*/React.createElement(EdMenuRow, {
     icon: "link",
     label: "\u590D\u5236\u5757\u94FE\u63A5",
     onClick: () => onAction('copyLink')
-  }), /*#__PURE__*/React.createElement(Row, {
+  }), /*#__PURE__*/React.createElement(EdMenuRow, {
     icon: "corner-up-right",
     label: "\u79FB\u52A8\u5230\u661F\u57DF",
     chevron: true,
     onMouseEnter: e => openSub('move', e),
     onFocus: e => openSub('move', e),
     onClick: e => openSub('move', e, true)
-  }), /*#__PURE__*/React.createElement(Divider, null), /*#__PURE__*/React.createElement(Row, {
+  }), /*#__PURE__*/React.createElement(EdMenuDivider, null), /*#__PURE__*/React.createElement(EdMenuRow, {
     icon: "palette",
     label: "\u989C\u8272",
     chevron: true,
     onMouseEnter: e => openSub('color', e),
     onFocus: e => openSub('color', e),
     onClick: e => openSub('color', e, true)
-  }), /*#__PURE__*/React.createElement(Row, {
+  }), /*#__PURE__*/React.createElement(EdMenuRow, {
     icon: "bookmark",
     label: "\u52A0\u5165\u590D\u4E60\u961F\u5217",
     onClick: () => onAction('review')
-  }), /*#__PURE__*/React.createElement(Divider, null), /*#__PURE__*/React.createElement(Row, {
+  }), /*#__PURE__*/React.createElement(EdMenuDivider, null), /*#__PURE__*/React.createElement(EdMenuRow, {
     icon: "trash-2",
     label: "\u5220\u9664",
     danger: true,
@@ -17559,7 +18814,7 @@ function ContextMenu({
       maxHeight: 300,
       overflow: 'auto'
     }
-  }, BLOCK_TYPES.filter(b => b.type !== 'divider' && b.type !== 'image').map(b => /*#__PURE__*/React.createElement(Row, {
+  }, BLOCK_TYPES.filter(b => b.type !== 'divider' && b.type !== 'image').map(b => /*#__PURE__*/React.createElement(EdMenuRow, {
     key: b.type,
     icon: b.icon,
     label: b.label,
@@ -17624,6 +18879,7 @@ function ConfirmDialog({
       inset: 0,
       zIndex: 'var(--z-modal)',
       background: 'rgba(3,4,12,0.55)',
+      WebkitBackdropFilter: 'blur(3px)',
       backdropFilter: 'blur(3px)',
       display: 'flex',
       alignItems: 'center',
@@ -17748,6 +19004,7 @@ function LinkDialog({
       inset: 0,
       zIndex: 'var(--z-modal)',
       background: 'rgba(3,4,12,0.5)',
+      WebkitBackdropFilter: 'blur(3px)',
       backdropFilter: 'blur(3px)',
       display: 'flex',
       alignItems: 'center',
@@ -17803,6 +19060,7 @@ function LinkDialog({
       fontFamily: 'var(--font-sans)'
     }
   }), bad && /*#__PURE__*/React.createElement("div", {
+    role: "alert",
     style: {
       marginTop: 8,
       fontSize: 12,
@@ -17882,40 +19140,40 @@ function EditorMoreMenu({
     onClose: onClose,
     autoFocus: true,
     title: "\u8FD9\u9897\u661F"
-  }, /*#__PURE__*/React.createElement(Row, {
+  }, /*#__PURE__*/React.createElement(EdMenuRow, {
     icon: "star",
     tone: fav ? 'gold' : undefined,
     active: fav,
     label: fav ? '取消收藏' : '收藏这颗星',
     onClick: () => onAction('fav')
-  }), /*#__PURE__*/React.createElement(Divider, null), /*#__PURE__*/React.createElement(Row, {
+  }), /*#__PURE__*/React.createElement(EdMenuDivider, null), /*#__PURE__*/React.createElement(EdMenuRow, {
     icon: "copy",
     label: "\u521B\u5EFA\u661F\u7684\u526F\u672C",
     onClick: () => onAction('dup')
-  }), /*#__PURE__*/React.createElement(Row, {
+  }), /*#__PURE__*/React.createElement(EdMenuRow, {
     icon: "link",
     label: "\u590D\u5236\u661F\u94FE\u63A5",
     onClick: () => onAction('copyLink')
-  }), /*#__PURE__*/React.createElement(Row, {
+  }), /*#__PURE__*/React.createElement(EdMenuRow, {
     icon: "file-down",
     label: "\u5BFC\u51FA Markdown",
     onClick: () => onAction('export')
-  }), /*#__PURE__*/React.createElement(Row, {
+  }), /*#__PURE__*/React.createElement(EdMenuRow, {
     icon: "file-up",
     label: "\u5BFC\u5165 Markdown",
     onClick: () => onAction('import')
-  }), /*#__PURE__*/React.createElement(Row, {
+  }), /*#__PURE__*/React.createElement(EdMenuRow, {
     icon: "corner-up-right",
     label: "\u79FB\u52A8\u5230\u661F\u57DF",
     chevron: true,
     onMouseEnter: e => openSub('move', e),
     onFocus: e => openSub('move', e),
     onClick: e => openSub('move', e, true)
-  }), /*#__PURE__*/React.createElement(Row, {
+  }), /*#__PURE__*/React.createElement(EdMenuRow, {
     icon: "history",
     label: "\u67E5\u770B\u5386\u53F2",
     onClick: () => onAction('history')
-  }), /*#__PURE__*/React.createElement(Divider, null), /*#__PURE__*/React.createElement(Row, {
+  }), /*#__PURE__*/React.createElement(EdMenuDivider, null), /*#__PURE__*/React.createElement(EdMenuRow, {
     icon: "trash-2",
     label: "\u5220\u9664\u8FD9\u9897\u661F",
     danger: true,
@@ -17988,6 +19246,7 @@ function HistoryDialog({
       inset: 0,
       zIndex: 'var(--z-modal)',
       background: 'rgba(3,4,12,0.55)',
+      WebkitBackdropFilter: 'blur(3px)',
       backdropFilter: 'blur(3px)',
       display: 'flex',
       alignItems: 'center',
@@ -18161,6 +19420,7 @@ function HistoryDialog({
 }
 window.SRKit = Object.assign(window.SRKit || {}, {
   SlashMenu,
+  StarLinkMenu,
   SelectionToolbar,
   ContextMenu,
   ColorMenu,
@@ -18454,7 +19714,11 @@ function FeynmanDrawer({
 
   // 抽屉即模态：移焦入内、Tab 圈禁、关闭还原焦点；Esc 关闭（全站一致）
   const drawerRef = React.useRef(null);
-  (window.SRKit && window.SRKit.useModalFocus ? window.SRKit.useModalFocus : () => {})(drawerRef);
+  // swallowCmdK：抽屉开着时 ⌘K 不该再叠出命令面板 —— 两层焦点圈禁会打架，
+  // 而且此时一次 Esc 会顺着冒泡把面板和抽屉一起关掉（抽屉里没提交的讲解也就没了）
+  (window.SRKit && window.SRKit.useModalFocus ? window.SRKit.useModalFocus : () => {})(drawerRef, {
+    swallowCmdK: true
+  });
   React.useEffect(() => {
     const k = e => {
       if (e.key === 'Escape') {
@@ -18675,6 +19939,7 @@ function FeynmanDrawer({
       inset: 0,
       zIndex: 60,
       background: 'rgba(3,4,12,0.45)',
+      WebkitBackdropFilter: 'blur(2px)',
       backdropFilter: 'blur(2px)'
     },
     onClick: onClose,
@@ -19501,17 +20766,16 @@ function Galaxy3D({
       sysGroup.position.set(cx, cy, cz);
       scene.add(sysGroup);
 
-      // 恒星本体
+      // 恒星本体（reg 入册：几何体与材质随卸载释放——renderer.dispose() 不管场景内对象）
       const sunR = 2.6 + Math.sqrt(c.count || members.length) * 0.72;
-      const sunGeo = new THREE.SphereGeometry(sunR, 40, 40);
-      const sunMat = new THREE.MeshStandardMaterial({
+      const sun = reg(new THREE.Mesh(new THREE.SphereGeometry(sunR, 40, 40), new THREE.MeshStandardMaterial({
         color: 0x2a1606,
         emissive: new THREE.Color('#ffb060'),
         emissiveIntensity: 1.5,
         roughness: 0.5,
         metalness: 0.0
-      });
-      const sun = new THREE.Mesh(sunGeo, sunMat);
+      })));
+      const sunMat = sun.material;
       sun.userData = {
         kind: 'sun',
         con: c,
@@ -20068,6 +21332,11 @@ function Galaxy3D({
       mats.forEach(m => m.dispose());
       texs.forEach(tx => tx.dispose());
       renderer.dispose();
+      // dispose() 不销毁 WebGL context——浏览器对活动上下文有上限（约 16 个），
+      // 快速反复进出三维星系会撞上 "Too many active WebGL contexts"
+      try {
+        renderer.forceContextLoss();
+      } catch {/* 已销毁 */}
       if (selBox.parentNode) selBox.parentNode.removeChild(selBox);
       if (el.parentNode) el.parentNode.removeChild(el);
     };
@@ -20610,9 +21879,16 @@ function Inbox({
   const capture = () => {
     const text = draft.trim();
     if (!text) return;
-    seq.current += 1;
+    /* seq 只是这个组件实例的计数器，而旧草稿随快照持久化——切视图重挂后
+       seq 从 0 重新数，新捕捉会撞上库里已有的 cap-N：同 id 的两条草稿
+       会被 removeItems 一起删掉、被编辑一起改写。跳过已占用的号。 */
+    let id;
+    do {
+      seq.current += 1;
+      id = 'cap-' + seq.current;
+    } while (D.inbox.some(x => x.id === id));
     const item = {
-      id: 'cap-' + seq.current,
+      id,
       text,
       captured: '刚刚',
       suggest: null
@@ -22022,6 +23298,15 @@ const SR_KEY_GROUPS = [{
     keys: [SRK.mod, 'K'],
     label: '选中文字 · 添加链接'
   }, {
+    keys: ['[', '['],
+    label: '链到另一颗星（搜星名 / 星域 / 标签）'
+  }, {
+    keys: ['点击'],
+    label: '正文里的链接：星链接就地前往，外链新标签页打开'
+  }, {
+    keys: ['粘贴'],
+    label: '选中文字时粘网址 = 加链接 · 剪贴板里是图片就直接落成图片块'
+  }, {
     keys: ['/'],
     label: '唤起块菜单，插入或转换块'
   }, {
@@ -22173,8 +23458,8 @@ function KeysHelp({
       inset: 0,
       zIndex: 110,
       background: 'rgba(3,4,12,0.55)',
-      backdropFilter: 'blur(4px)',
       WebkitBackdropFilter: 'blur(4px)',
+      backdropFilter: 'blur(4px)',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -22378,6 +23663,7 @@ function ActionDialog({
       inset: 0,
       zIndex: 120,
       background: 'rgba(3,4,12,0.55)',
+      WebkitBackdropFilter: 'blur(3px)',
       backdropFilter: 'blur(3px)',
       display: 'flex',
       alignItems: 'center',
@@ -22465,12 +23751,26 @@ function ActionDialog({
 }
 
 // A small glass dropdown anchored under its trigger; closes on outside click.
+// 键盘走 menu 模式：打开落焦第一项，↑↓ 移动，Enter/Space 选定，Esc 收层；
+// 关闭时焦点还给打开它的元素（触发钮就是打开那一刻的 activeElement）。
 function Menu({
   open,
   onClose,
   width,
   children
 }) {
+  const listRef = React.useRef(null);
+  const prevRef = React.useRef(null);
+  React.useEffect(() => {
+    if (!open) return;
+    prevRef.current = document.activeElement;
+    const first = listRef.current && listRef.current.querySelector('[role="menuitem"]');
+    if (first) first.focus();
+    return () => {
+      const p = prevRef.current;
+      if (p && p.focus && document.contains(p)) p.focus();
+    };
+  }, [open]);
   if (!open) return null;
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     onMouseDown: onClose,
@@ -22480,7 +23780,16 @@ function Menu({
       zIndex: 60
     }
   }), /*#__PURE__*/React.createElement("div", {
+    ref: listRef,
+    role: "menu",
     onContextMenu: e => e.preventDefault(),
+    onKeyDown: e => {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        e.stopPropagation();
+        onClose();
+      }
+    },
     style: {
       position: 'absolute',
       top: 'calc(100% + 7px)',
@@ -22505,7 +23814,22 @@ function MenuRow({
   children
 }) {
   const [h, setH] = React.useState(false);
+  const onKey = e => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      onClick && onClick(e);
+    } else if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      const rows = Array.from(e.currentTarget.parentElement.querySelectorAll('[role="menuitem"]'));
+      const i = rows.indexOf(e.currentTarget);
+      const next = rows[e.key === 'ArrowDown' ? i + 1 : i - 1];
+      if (next) next.focus();
+    }
+  };
   return /*#__PURE__*/React.createElement("div", {
+    role: "menuitem",
+    tabIndex: -1,
+    onKeyDown: onKey,
     onMouseDown: e => e.stopPropagation(),
     onClick: onClick,
     onMouseEnter: () => setH(true),
@@ -22953,25 +24277,25 @@ function ListView({
     },
     onContextMenu: e => e.preventDefault()
   }, /*#__PURE__*/React.createElement("style", null, `
-        /* ——— 手机：表格改卡片 ———
-           桌面这张表有六列固定宽（30+156+150+116+78 = 530px 再加 5 道 14px 间距），
-           在 414px 的屏上「标题」那一列的 1fr 会被压到几乎 0 宽——标签于是被逼成
-           一字一行。窄屏放弃网格，改成每行一张卡：
-             第一行  ☑ 标题（＋点亮/待重燃/待复习徽标、标签）
-             第二行  记忆强度长条
-             第三行  星域 · 下次复习 · 连接数
-           表头随之隐去：没有列，就没有列名。 */
-        html[data-screen="phone"] .sr-list-head { display: none !important; }
-        html[data-screen="phone"] .sr-list-row {
+        /* ——— 窄屏：表格改卡片 ———
+           桌面这张表有六列固定宽（30+156+150+116+78 = 530px 再加 5 道 14px 间距 = 600px），
+           剩下的才归「标题」那一列的 1fr。于是有一段谁都没想到的死区：
+           量出来是 1180px 以下标题只剩 70px、900px 以下**直接是 0**——
+           标题整个消失，一行里只剩两枚标签竖着排。手机（≤720）早就换了卡片所以没事，
+           真正受害的是中间那一段：iPad 竖屏 768 / 810、手机横屏 844、半屏窗口。
+           所以这条不挂 data-screen，改挂 data-narrow——它就是「多栏摆不下」那条线
+           （SRScreen.BP.narrow = 1180），与编辑器知识栏让位用的是同一个数。 */
+        html[data-narrow] .sr-list-head { display: none !important; }
+        html[data-narrow] .sr-list-row {
           display: flex !important; flex-wrap: wrap; align-items: center;
           gap: 8px 10px !important; padding: 12px 13px !important;
         }
-        html[data-screen="phone"] .sr-lc-check { flex: none; }
-        html[data-screen="phone"] .sr-lc-title { flex: 1 1 0; min-width: 0; }
-        html[data-screen="phone"] .sr-lc-mem   { flex: 1 1 100%; }
-        html[data-screen="phone"] .sr-lc-con   { flex: 1 1 auto; }
-        html[data-screen="phone"] .sr-lc-review,
-        html[data-screen="phone"] .sr-lc-links { flex: none; }
+        html[data-narrow] .sr-lc-check { flex: none; }
+        html[data-narrow] .sr-lc-title { flex: 1 1 0; min-width: 0; }
+        html[data-narrow] .sr-lc-mem   { flex: 1 1 100%; }
+        html[data-narrow] .sr-lc-con   { flex: 1 1 auto; }
+        html[data-narrow] .sr-lc-review,
+        html[data-narrow] .sr-lc-links { flex: none; }
         /* 悬浮快捷操作在触摸端没有 hover 可依，卡片本身点开即可——不再叠一层渐变遮罩 */
         html[data-pointer="coarse"] .sr-list-row > div[style*="linear-gradient(90deg"] { display: none !important; }
 
@@ -23164,7 +24488,16 @@ function ListView({
       color: 'var(--gold)'
     }
   }, " \xB7 \u9009 ", sel.length)), anyFilter && /*#__PURE__*/React.createElement("span", {
+    role: "button",
+    tabIndex: 0,
+    className: "sr-focus-ring",
     onClick: resetFilters,
+    onKeyDown: e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        resetFilters();
+      }
+    },
     style: {
       display: 'inline-flex',
       alignItems: 'center',
@@ -23347,7 +24680,7 @@ function ListView({
       onClick: () => onOpen(n.id),
       role: "button",
       tabIndex: 0,
-      className: "sr-focus-ring",
+      className: "sr-focus-ring sr-list-row",
       onKeyDown: e => {
         if ((e.key === 'Enter' || e.key === ' ') && e.target === e.currentTarget) {
           e.preventDefault();
@@ -23360,7 +24693,6 @@ function ListView({
       onBlur: e => {
         if (!e.currentTarget.contains(e.relatedTarget)) setHoverId(h => h === n.id ? null : h);
       },
-      className: "sr-list-row",
       style: {
         position: 'relative',
         display: 'grid',
@@ -23714,6 +25046,7 @@ function ListView({
     onYes: confirm.onYes,
     onClose: () => setConfirm(null)
   }), toast && /*#__PURE__*/React.createElement("div", {
+    role: "status",
     style: {
       position: 'fixed',
       bottom: 26,
@@ -23998,14 +25331,15 @@ function LoginView({
     icon: "user",
     placeholder: "\u7528\u6237\u540D\u6216\u90AE\u7BB1",
     autoComplete: "username",
+    "aria-label": "\u7528\u6237\u540D\u6216\u90AE\u7BB1",
     value: idOrEmail,
-    onChange: e => setIdOrEmail(e.target.value),
-    autoFocus: true
+    onChange: e => setIdOrEmail(e.target.value)
   }), /*#__PURE__*/React.createElement(Input, {
     icon: "lock",
     type: "password",
     placeholder: "\u5BC6\u7801",
     autoComplete: "current-password",
+    "aria-label": "\u5BC6\u7801",
     value: loginPass,
     onChange: e => setLoginPass(e.target.value)
   })) : /*#__PURE__*/React.createElement("div", {
@@ -24018,13 +25352,14 @@ function LoginView({
     icon: "user",
     placeholder: "\u7528\u6237\u540D\uFF082\u201324 \u4F4D\uFF09",
     autoComplete: "username",
+    "aria-label": "\u7528\u6237\u540D",
     value: username,
-    onChange: e => setUsername(e.target.value),
-    autoFocus: true
+    onChange: e => setUsername(e.target.value)
   }), /*#__PURE__*/React.createElement(Input, {
     icon: "mail",
     placeholder: "\u90AE\u7BB1\uFF08\u9009\u586B\uFF09",
     autoComplete: "email",
+    "aria-label": "\u90AE\u7BB1\uFF08\u9009\u586B\uFF09",
     value: email,
     onChange: e => setEmail(e.target.value)
   }), /*#__PURE__*/React.createElement(Input, {
@@ -24032,6 +25367,7 @@ function LoginView({
     type: "password",
     placeholder: "\u5BC6\u7801\uFF08\u81F3\u5C11 6 \u4F4D\uFF09",
     autoComplete: "new-password",
+    "aria-label": "\u5BC6\u7801\uFF08\u81F3\u5C11 6 \u4F4D\uFF09",
     value: regPass,
     onChange: e => setRegPass(e.target.value)
   }), /*#__PURE__*/React.createElement(Input, {
@@ -24039,6 +25375,7 @@ function LoginView({
     type: "password",
     placeholder: "\u786E\u8BA4\u5BC6\u7801",
     autoComplete: "new-password",
+    "aria-label": "\u786E\u8BA4\u5BC6\u7801",
     value: regConfirm,
     onChange: e => setRegConfirm(e.target.value)
   })), error && /*#__PURE__*/React.createElement("div", {
@@ -24094,7 +25431,7 @@ const SR_MOBILE_CSS = `
   position: absolute; left: 0; right: 0; z-index: 40;
   background: var(--glass-bg-strong);
   -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.2);
-  backdrop-filter: blur(var(--glass-blur)) saturate(1.2);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.2); backdrop-filter: blur(var(--glass-blur)) saturate(1.2);
 }
 .sr-m-top { top: 0; height: calc(var(--sr-topbar) + var(--sr-safe-top)); padding-top: var(--sr-safe-top);
   border-bottom: 1px solid var(--glass-border); display: flex; align-items: center; gap: 6; padding-left: 6px; padding-right: 6px; }
@@ -24114,7 +25451,7 @@ const SR_MOBILE_CSS = `
 
 /* 抽屉：遮罩淡入 + 面板滑出，跟随 reduced-motion */
 .sr-m-mask { position: fixed; inset: 0; z-index: 120; background: rgba(3,4,12,0.6);
-  -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); animation: sr-m-fade var(--dur-base) ease both; }
+  -webkit-backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); animation: sr-m-fade var(--dur-base) ease both; }
 /* 抽屉宽度：始终给右侧留一条 68px 的活口——那条缝既是「这是一层浮层、点它就关」
    的视觉交代，也让你一眼还看得见自己的星空。窄屏上 282px 会吃掉九成屏幕，
    看起来就像整页跳转，那不是抽屉该有的样子。 */
@@ -24133,7 +25470,7 @@ const SR_MOBILE_CSS = `
 .sr-m-sheet { position: fixed; left: 0; right: 0; bottom: 0; z-index: 130;
   padding-bottom: var(--sr-safe-bottom); border-radius: var(--r-lg) var(--r-lg) 0 0;
   background: var(--glass-bg-strong); border-top: 1px solid var(--glass-border-strong);
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.2); backdrop-filter: blur(var(--glass-blur)) saturate(1.2);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.2); -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.2); backdrop-filter: blur(var(--glass-blur)) saturate(1.2);
   box-shadow: 0 -18px 48px rgba(0,0,0,0.5); max-height: 78vh; display: flex; flex-direction: column;
   animation: sr-m-up var(--dur-base) var(--ease-flight) both; }
 @keyframes sr-m-up { from { transform: translateY(100%) } to { transform: none } }
@@ -24166,7 +25503,17 @@ html[data-screen="phone"] .sr-view h1 { font-size: 23px !important; }
 html[data-pointer="coarse"] .sr-hit-pad { position: relative; }
 html[data-pointer="coarse"] .sr-hit-pad::after {
   content: ''; position: absolute; top: 50%; left: 50%;
-  width: 34px; height: 34px; transform: translate(-50%, -50%);
+  width: 44px; height: 44px; transform: translate(-50%, -50%);
+}
+
+/* iOS 的一条硬规矩：聚焦一个字号小于 16px 的输入框，Safari 会把整页放大去凑那 16px，
+   而且**不会自己缩回来**——于是点一下搜索框，整个星图就歪在一边，还得自己双指捏回去。
+   站里的输入框本来是 13/14/14.5px（桌面上刚好），在触摸端一律抬到 16px：
+   这不是为了好看，是为了页面别自己动。行高一并给足，否则 16px 的字会顶到边框。 */
+html[data-pointer="coarse"] input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+html[data-pointer="coarse"] textarea,
+html[data-pointer="coarse"] select {
+  font-size: 16px !important; line-height: 1.45;
 }
 
 /* 键盘提示：手机上没有物理键盘，印一枚「空格 / ⌘K」只会让人去找一个
@@ -24186,6 +25533,11 @@ html[data-screen="phone"] .sr-modal-panel {
 }
 html[data-screen="phone"] .sr-modal-mask { padding: 0 !important; align-items: stretch !important; }
 
+/* 星际漫游的兑换行：密文输入框与「连接」并排时，前者在 390px 上只剩两百像素，
+   14 个字符的密文本身都排不下。窄屏拆两行，各自占满。 */
+html[data-screen="phone"] .sr-visit-redeem { flex-wrap: wrap; }
+html[data-screen="phone"] .sr-visit-redeem > * { flex: 1 1 100% !important; }
+
 /* 设置页：左侧 168px 的分区导航在手机上横过来，变成顶部一条可横滑的标签行 */
 html[data-screen="phone"] .sr-set-body { flex-direction: column !important; }
 html[data-screen="phone"] .sr-set-nav {
@@ -24199,6 +25551,15 @@ html[data-screen="phone"] .sr-set-nav > button { flex: none !important; white-sp
 html[data-screen="phone"] .sr-cmd-panel { width: 100% !important; max-width: 100% !important; }
 html[data-screen="phone"] .sr-cmd-mask { padding-top: calc(var(--sr-safe-top) + 8px) !important; padding-left: 8px; padding-right: 8px; }
 `;
+
+/* 这份样式表从前只由下面三个组件在 useEffect 里注入——而它们只在 phone 断点挂载。
+   于是整份表在别的尺寸上根本不存在，后果是两头的：
+     · 桌面：`.sr-touch-only { display: none }` 不存在，黑洞的提示条把两句互斥的话
+       一起印了出来——「滚轮缩放双指捏合缩放」，连在一起，谁都读不通；
+     · 平板 / 触摸大屏：`data-pointer="coarse"` 明明是 true，可 `.sr-hit-pad` 的热区、
+       `.sr-kbd-only` 的隐藏、输入框 16px 那条全是空文——iPad 什么触摸照顾都没享受到。
+   表里每一条都自带 html[data-screen] / html[data-pointer] 的前缀，本来就是自己看门的，
+   所以正确的做法是加载即注入，让选择器去决定生效与否，而不是由「谁挂载了」决定。 */
 function injectMobileCss() {
   if (typeof document === 'undefined' || document.getElementById('sr-mobile-css')) return;
   const s = document.createElement('style');
@@ -24440,6 +25801,7 @@ window.SRKit = Object.assign(window.SRKit || {}, {
   MobileSheet,
   injectMobileCss
 });
+injectMobileCss(); // 加载即注入：见上，别再让「谁挂载了」决定触摸端有没有样式
 })(); } catch (e) { __ds_ns.__errors.push({ path: "ui_kits/stellar-raft/MobileShell.jsx", error: String((e && e.message) || e) }); }
 
 // ui_kits/stellar-raft/Onboarding.jsx
@@ -25737,8 +27099,8 @@ function Onboarding({
       inset: 0,
       zIndex: 120,
       background: 'rgba(3,4,12,0.55)',
-      backdropFilter: 'blur(4px)',
       WebkitBackdropFilter: 'blur(4px)',
+      backdropFilter: 'blur(4px)',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -26037,6 +27399,22 @@ function OnboardingTour({
     seq.current += 1;
     clearTimer();
   }, [clearTimer]);
+
+  // 焦点圈禁与归还（与主引导同一套语义）。autoFocus:false——第一步的光洞还没
+  // 定位到锚点前气泡不渲染，进场移焦由 rect 就位后的那个 effect 完成
+  const bubbleRef = React.useRef(null);
+  (window.SRKit && window.SRKit.useModalFocus ? window.SRKit.useModalFocus : () => {})(bubbleRef, {
+    swallowCmdK: true,
+    autoFocus: false
+  });
+  React.useEffect(() => {
+    if (!rect) return;
+    const b = bubbleRef.current;
+    if (b && !b.contains(document.activeElement)) {
+      const first = b.querySelector('button:not([disabled])');
+      if (first) first.focus();
+    }
+  }, [rect]);
   React.useEffect(() => {
     const k = e => {
       if (e.key === 'Escape') {
@@ -26104,6 +27482,7 @@ function OnboardingTour({
       transition: reduce ? 'none' : 'left var(--dur-base) var(--ease-flight), top var(--dur-base) var(--ease-flight), width var(--dur-base) var(--ease-flight), height var(--dur-base) var(--ease-flight)'
     }
   }), /*#__PURE__*/React.createElement("div", {
+    ref: bubbleRef,
     onMouseDown: e => e.stopPropagation(),
     style: {
       position: 'fixed',
@@ -26258,7 +27637,9 @@ function RSCertChip({
   }, ember ? '待重燃' : '已点亮');
 }
 
-/* 三档自评在结束页的回看口径：与卡上的按钮同名同色，回看时一眼对得上 */
+/* 三档自评在结束页的回看口径：与卡上的按钮同名同色，回看时一眼对得上。
+   ignite 档：今天经费曼点亮的星同样写 reviewedAt（grade='ignite'），
+   没有它会落进 ok 兜底、被误标成「记得」 */
 const RS_GRADE_META = {
   fail: {
     label: '忘了',
@@ -26277,6 +27658,12 @@ const RS_GRADE_META = {
     icon: 'check',
     color: 'var(--star-blue)',
     tint: 'rgba(159,198,255,0.34)'
+  },
+  ignite: {
+    label: '点亮',
+    icon: 'zap',
+    color: 'var(--gold)',
+    tint: 'rgba(255,217,138,0.30)'
   }
 };
 
@@ -27528,6 +28915,8 @@ function Settings({
   onOpenLogin
 }) {
   const dawn = theme === 'dawn';
+  // 危险操作复用 EditorMenus 的 ConfirmDialog（danger 样式）；与 ListView / BlackHole 同一取法
+  const ConfirmDialog = window.SRKit && window.SRKit.ConfirmDialog;
   // 未登录打开设置直接落在「账户」页——那里有醒目的「登录 / 注册」，入口不因胶囊改开设置而变深
   const [tab, setTab] = React.useState(() => window.SR_DATA.account.registered ? 'profile' : 'account');
   const [toast, setToast] = React.useState(null);
@@ -27589,6 +28978,12 @@ function Settings({
     try {
       let entries = [];
       for (const f of files) {
+        // 64MB 与 vault.js 解压上限同口径：纯文本笔记仓库远到不了这里，
+        // 超出的东西读进来只会先把标签页内存吃光
+        if (f.size > 64 * 1024 * 1024) {
+          flashToast(`「${f.name}」超过 64MB，不像是笔记仓库`);
+          continue;
+        }
         if (/\.zip$/i.test(f.name)) {
           entries = entries.concat(await window.SRVault.readZip(new Uint8Array(await f.arrayBuffer())));
         } else if (/\.md$/i.test(f.name)) {
@@ -27683,7 +29078,7 @@ function Settings({
       setOldPw('');
       setNewPw('');
       flashToast('密码已更新');
-      // 管理员刚换掉出厂密码：广播出去，管理台顶部那条警告随即消失
+      // 管理员刚换掉出厂密码：广播出去，管理台顶部那条警告随即消失（交接卡走的是同一个标记）
       const A = window.SR_DATA && window.SR_DATA.account;
       if (A && A.defaultPass) {
         A.defaultPass = false;
@@ -27736,8 +29131,8 @@ function Settings({
       inset: 0,
       zIndex: 110,
       background: 'rgba(3,4,12,0.55)',
-      backdropFilter: 'blur(4px)',
       WebkitBackdropFilter: 'blur(4px)',
+      backdropFilter: 'blur(4px)',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -27907,7 +29302,8 @@ function Settings({
     value: nickname,
     onChange: e => setNickname(e.target.value),
     placeholder: "\u4F60\u7684\u540D\u5B57",
-    icon: "user"
+    icon: "user",
+    "aria-label": "\u6635\u79F0"
   })), /*#__PURE__*/React.createElement("div", {
     style: {
       paddingTop: 16
@@ -27917,6 +29313,7 @@ function Settings({
     onChange: e => setBio(e.target.value),
     rows: 3,
     placeholder: "\u7528\u4E00\u4E24\u53E5\u8BDD\u63CF\u8FF0\u4F60\u7684\u661F\u7A7A\u2026",
+    "aria-label": "\u4E2A\u4EBA\u7B80\u4ECB",
     onContextMenu: e => e.stopPropagation(),
     style: {
       width: '100%',
@@ -28030,6 +29427,7 @@ function Settings({
     value: remindTime,
     onChange: e => setRemindTime(e.target.value),
     disabled: !remind,
+    "aria-label": "\u63D0\u9192\u65F6\u95F4",
     style: {
       height: 30,
       padding: '0 10px',
@@ -28474,7 +29872,7 @@ function Settings({
     icon: "check",
     glow: true,
     onClick: save
-  }, "\u4FDD\u5B58\u66F4\u6539")))), confirm && window.SRKit.ConfirmDialog && /*#__PURE__*/React.createElement(window.SRKit.ConfirmDialog, {
+  }, "\u4FDD\u5B58\u66F4\u6539")))), confirm && ConfirmDialog && /*#__PURE__*/React.createElement(ConfirmDialog, {
     message: confirm.message,
     confirmLabel: confirm.confirmLabel,
     onYes: () => {
@@ -28483,6 +29881,7 @@ function Settings({
     },
     onClose: () => setConfirm(null)
   }), toast && /*#__PURE__*/React.createElement("div", {
+    role: "status",
     onMouseDown: e => e.stopPropagation(),
     style: {
       position: 'fixed',
@@ -29073,7 +30472,7 @@ function Sidebar({
       icon: "shield",
       label: "\u661F\u6E2F\u7BA1\u7406\u53F0",
       badge: D.account.defaultPass ? '!' : null,
-      tip: D.account.defaultPass ? '管理员账号仍在用出厂密码' : '全站用户、分享、会话与系统状态',
+      tip: D.account.defaultPass ? '管理员账号仍在用出厂的用户名与密码' : '全站用户、分享、会话与系统状态',
       collapsed: collapsed,
       dawn: dawn,
       active: view === 'admin',
@@ -29347,10 +30746,13 @@ function DomainHalos({
   stars,
   cons,
   k,
+  touch,
   onDomainDown,
   onDomainKey
 }) {
   const nameOpacity = clamp(1.4 - k, 0.25, 1); // semantic zoom: names louder when far
+  // 星域主星 30px，缩放后同样按不着；和知识星用同一个算法撑到屏幕 44px
+  const hit = touch ? Math.max(30, 44 / Math.max(0.2, k)) : 0;
   return /*#__PURE__*/React.createElement(React.Fragment, null, cons.map(c => {
     const {
       cx,
@@ -29406,7 +30808,19 @@ function DomainHalos({
         cursor: 'grab',
         zIndex: 3
       }
-    }, /*#__PURE__*/React.createElement("span", {
+    }, hit > 30 && /*#__PURE__*/React.createElement("span", {
+      "aria-hidden": "true",
+      style: {
+        position: 'absolute',
+        top: 15,
+        left: '50%',
+        width: hit,
+        height: hit,
+        transform: 'translate(-50%, -50%)',
+        borderRadius: '50%',
+        zIndex: 0
+      }
+    }), /*#__PURE__*/React.createElement("span", {
       className: "sr-breathe",
       style: {
         width: 30,
@@ -29778,104 +31192,11 @@ function PopMenu({
   }, footer)));
 }
 
-/* in-canvas confirm dialog (no browser confirm/alert) */
-function ConfirmDialog({
-  message,
-  confirmLabel,
-  onYes,
-  onClose
-}) {
-  React.useEffect(() => {
-    const k = e => {
-      if (e.key === 'Escape' && !e.defaultPrevented) {
-        e.preventDefault();
-        onClose();
-      }
-    };
-    document.addEventListener('keydown', k);
-    return () => document.removeEventListener('keydown', k);
-  }, []);
-  return /*#__PURE__*/React.createElement("div", {
-    onPointerDown: onClose,
-    onContextMenu: e => e.preventDefault(),
-    style: {
-      position: 'fixed',
-      inset: 0,
-      zIndex: 120,
-      background: 'rgba(3,4,12,0.55)',
-      backdropFilter: 'blur(3px)',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    onPointerDown: e => e.stopPropagation(),
-    style: {
-      width: 348,
-      maxWidth: '90vw',
-      animation: 'sr-cardin var(--dur-base) var(--ease-flight) both'
-    }
-  }, /*#__PURE__*/React.createElement(GlassPanel, {
-    strong: true,
-    radius: "lg",
-    pad: "md",
-    glow: true
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      alignItems: 'flex-start',
-      gap: 12,
-      marginBottom: 18
-    }
-  }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      flex: 'none',
-      width: 34,
-      height: 34,
-      borderRadius: '50%',
-      background: 'rgba(232,145,122,0.14)',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center'
-    }
-  }, /*#__PURE__*/React.createElement(Icon, {
-    name: "alert-triangle",
-    size: 18,
-    color: "var(--danger)"
-  })), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 14,
-      lineHeight: 1.65,
-      color: 'var(--text-1)',
-      paddingTop: 5
-    }
-  }, message)), /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      gap: 10,
-      justifyContent: 'flex-end'
-    }
-  }, /*#__PURE__*/React.createElement(Button, {
-    size: "sm",
-    autoFocus: true,
-    onClick: onClose
-  }, "\u53D6\u6D88"), /*#__PURE__*/React.createElement("button", {
-    type: "button",
-    className: "sr-focus-ring",
-    onClick: onYes,
-    style: {
-      height: 32,
-      padding: '0 16px',
-      borderRadius: 'var(--r-pill)',
-      border: '1px solid rgba(232,145,122,0.5)',
-      background: 'rgba(232,145,122,0.16)',
-      color: 'var(--danger)',
-      fontSize: 13,
-      cursor: 'pointer',
-      fontFamily: 'var(--font-sans)'
-    }
-  }, confirmLabel || '删除')))));
-}
+/* 确认弹窗用全站共用的那一个（EditorMenus 注册进 SRKit，ListView / BlackHole /
+   设置页同样这么取）。这里原本另写了一份同名的 ConfirmDialog —— 而浏览器里所有
+   .jsx 共享一个全局作用域（Babel standalone 把转译产物塞进普通 <script>），
+   后加载的 EditorMenus 早就把它整个盖掉了，那份副本从来没有生效过。 */
+
 function StarMap({
   selected,
   onSelect,
@@ -29912,7 +31233,8 @@ function StarMap({
   const [selScreen, setSelScreen] = React.useState(null);
   const [starMenu, setStarMenu] = React.useState(null); // {x,y,id}
   const [gift, setGift] = React.useState(null); // {x,y,id,label} 赠星好友选择器
-  const [confirm, setConfirm] = React.useState(null); // {message, confirmLabel, onYes}
+  const [confirm, setConfirm] = React.useState(null);
+  const SRConfirmDialog = window.SRKit && window.SRKit.ConfirmDialog; // {message, confirmLabel, onYes}
   // 轻量操作反馈走 DS 的 toast()：自带 role=status/aria-live 栈，读屏也听得到
   const flash = msg => toast(msg);
 
@@ -30010,10 +31332,19 @@ function StarMap({
         y: h / 2 - WORLD.h / 2 * k
       };
     }
-    const minX = Math.min(...boxes.map(b => b.x - b.r)),
-      maxX = Math.max(...boxes.map(b => b.x + b.r));
-    const minY = Math.min(...boxes.map(b => b.y - b.r)),
-      maxY = Math.max(...boxes.map(b => b.y + b.r));
+    /* 一趟求包围盒。原来是四次 spread —— Math.min(...arr) 会把整个数组铺成实参，
+       星一多就是「Maximum call stack size exceeded」，而这是落地时必经的一步；
+       顺带省掉四个和星数一样长的中间数组。 */
+    let minX = Infinity,
+      maxX = -Infinity,
+      minY = Infinity,
+      maxY = -Infinity;
+    for (const b of boxes) {
+      if (b.x - b.r < minX) minX = b.x - b.r;
+      if (b.x + b.r > maxX) maxX = b.x + b.r;
+      if (b.y - b.r < minY) minY = b.y - b.r;
+      if (b.y + b.r > maxY) maxY = b.y + b.r;
+    }
     const cx = (minX + maxX) / 2,
       cy = (minY + maxY) / 2;
     /* 上限刻意不超过从前那个写死的 0.82：取景只该把镜头往后拉，不该往前推。
@@ -30181,6 +31512,13 @@ function StarMap({
   }, []);
   React.useEffect(() => {
     const move = e => {
+      /* 拖出浏览器窗口再松手：window 收不到那次 pointerup，拖拽会卡死
+         （光标永久 grabbing、回窗后画布跟着光标空跑）。鼠标移动事件带着
+         buttons 状态——拖着的指针一颗键都没按了，就按「已抬起」收尾。 */
+      if (e.pointerType === 'mouse' && e.buttons === 0 && drag.current) {
+        up(e);
+        return;
+      }
       // 先更新这根指针的位置：捏合要靠两根指针的实时间距
       if (touches.current.has(e.pointerId)) touches.current.set(e.pointerId, {
         x: e.clientX,
@@ -30249,7 +31587,12 @@ function StarMap({
     const up = e => {
       touches.current.delete(e.pointerId);
       if (touches.current.size < 2) pinch.current = null; // 松开一根手指，捏合结束
+      /* 只有「发起拖拽的那根指针的左键抬起」才结束拖拽：
+         - 鼠标是单指针：右键/中键的 pointerup（e.button!==0）不该腰斩左键平移；
+         - 触摸是多指针：指 B 点一下 HUD 抬起，不该杀掉指 A 正在拖的星。 */
+      if (e.type === 'pointerup' && e.button !== 0) return;
       const d = drag.current;
+      if (d && d.pid != null && e.pointerId !== d.pid) return;
       drag.current = null;
       if (longPress.current) {
         clearTimeout(longPress.current);
@@ -30268,6 +31611,13 @@ function StarMap({
       window.removeEventListener('pointermove', move);
       window.removeEventListener('pointerup', up);
       window.removeEventListener('pointercancel', up);
+      /* 卸载时把全局痕迹收干净：按住画布切走视图（快捷键换视图会卸载本组件），
+         光标不能永远停在 grabbing，长按计时器也不能在卸载后对着虚空触发 */
+      document.body.style.cursor = '';
+      if (longPress.current) {
+        clearTimeout(longPress.current);
+        longPress.current = null;
+      }
     };
   }, [onSelect]);
 
@@ -30346,6 +31696,7 @@ function StarMap({
     }
     drag.current = {
       mode: 'pan',
+      pid: e.pointerId,
       sx: e.clientX,
       sy: e.clientY,
       ox: view.x,
@@ -30368,6 +31719,7 @@ function StarMap({
     }));
     drag.current = {
       mode: 'domain',
+      pid: e.pointerId,
       con,
       conId: con.id,
       members,
@@ -30385,6 +31737,7 @@ function StarMap({
     onSelect(s.id);
     drag.current = {
       mode: 'star',
+      pid: e.pointerId,
       id: s.id,
       sx: e.clientX,
       sy: e.clientY,
@@ -30459,7 +31812,12 @@ function StarMap({
     setDraftName(label || '');
   };
   const doCreateStar = (label, wx, wy, dom) => {
-    const id = 's' + Math.random().toString(36).slice(2, 6);
+    /* 4 位 base36 只有 167 万个值，500 颗星的累计碰撞率就到 7%（生日界）——
+       撞上是静默覆盖。8 位 + 对现有 id 查重，把这件事压到可以忽略。 */
+    let id;
+    do {
+      id = 's' + Math.random().toString(36).slice(2, 10);
+    } while (D.byId[id]);
     const ns = {
       id,
       con: dom.id,
@@ -30525,7 +31883,10 @@ function StarMap({
     } else {
       const dn = name || '新星域';
       const color = NEW_COLORS[D.constellations.length % NEW_COLORS.length];
-      const cid = 'c' + Math.random().toString(36).slice(2, 6);
+      let cid;
+      do {
+        cid = 'c' + Math.random().toString(36).slice(2, 10);
+      } while (D.constellations.some(c => c.id === cid));
       D.constellations.push({
         id: cid,
         name: dn,
@@ -30593,6 +31954,10 @@ function StarMap({
   const dense = stars.length > 120;
   const showLabels = !dense || view.k >= 0.9;
   const empty = stars.length === 0 && cons.length === 0;
+  /* 手指的热区：星核在世界坐标里只有 12px，整层还 scale(view.k)，
+     所以要除回去——44 是 Apple 给的下限，除完是「屏幕上的 44px」。
+     只给触摸端：鼠标本来就点得准，给它加一圈反而会抢掉画布的平移。 */
+  const touchHit = scr.touch ? 44 / Math.max(0.2, view.k) : 0;
   return /*#__PURE__*/React.createElement("div", {
     ref: ref,
     onPointerDown: e => {
@@ -30625,7 +31990,11 @@ function StarMap({
     stars: stars,
     cons: cons,
     k: view.k,
-    onDomainDown: domainDown,
+    touch: scr.touch,
+    onDomainDown: (e, c) => {
+      trackDown(e);
+      domainDown(e, c);
+    },
     onDomainKey: onDomainKey
   }), /*#__PURE__*/React.createElement(Connections, {
     stars: stars,
@@ -30682,6 +32051,7 @@ function StarMap({
       strength: s.id === igniteId ? 0.96 : s.strength,
       importance: s.importance,
       label: showLabels || selected === s.id ? s.label : undefined,
+      hit: touchHit,
       onClick: () => onSelect(s.id),
       selected: selected === s.id,
       style: {
@@ -31039,7 +32409,7 @@ function StarMap({
       label: f.name,
       onClick: () => giftStar(f, gift.id)
     }))
-  }), confirm && /*#__PURE__*/React.createElement(ConfirmDialog, {
+  }), confirm && SRConfirmDialog && /*#__PURE__*/React.createElement(SRConfirmDialog, {
     message: confirm.message,
     confirmLabel: confirm.confirmLabel,
     onYes: () => {
@@ -31073,8 +32443,8 @@ function StarMap({
     return /*#__PURE__*/React.createElement("div", {
       style: {
         position: 'fixed',
-        left: Math.min(naming.x, window.innerWidth - 240),
-        top: Math.min(naming.y, window.innerHeight - 130),
+        left: Math.max(8, Math.min(naming.x, window.innerWidth - 240)),
+        top: Math.max(8, Math.min(naming.y, window.innerHeight - 130)),
         zIndex: 60,
         width: 220
       },
@@ -31186,9 +32556,24 @@ const TL_BUCKETS = [{
   label: '更早'
 }];
 
-// 把一条事件归入某个时段：优先用显式 bucket，否则从 when 文案推断。
+// 把一条事件归入某个时段：优先用显式 bucket；真实事件都带着写入时刻的 ts，
+// 按日历日归位（when 恒为「刚刚」，靠文案推断会把所有真实事件都落进「本周」）；
+// 没有 ts 的种子数据再走文案推断。
 function tlBucketOf(ev) {
   if (ev.bucket) return ev.bucket;
+  if (ev.ts) {
+    const midnight = t => {
+      const d = new Date(t);
+      d.setHours(0, 0, 0, 0);
+      return d.getTime();
+    };
+    // 两端都取本地零点再相减：夏令时那天差 23/25 小时，round 归位成天
+    const days = Math.round((midnight(Date.now()) - midnight(ev.ts)) / 86400000);
+    if (days <= 0) return 'today';
+    if (days === 1) return 'yesterday';
+    if (days <= 6) return 'week';
+    return 'earlier';
+  }
   const w = ev.when || '';
   if (w.indexOf('今天') === 0) return 'today';
   if (w.indexOf('昨天') === 0) return 'yesterday';
@@ -31197,7 +32582,10 @@ function tlBucketOf(ev) {
   if (m) return +m[1] <= 6 ? 'week' : 'earlier';
   return 'week';
 }
-const tlIsUp = ev => ev.delta.indexOf('−') !== 0 && ev.delta.indexOf('-') !== 0;
+
+// 只有真的涨了（+0.xx）才算上行：无 delta 的熄灭事件兜底是 '—'，
+// 它不以 − 开头，若按「非负即上行」判会被染成点亮专属的金色
+const tlIsUp = ev => ev.delta.indexOf('+') === 0;
 const TL_PAGE = 6; // 每次展示/加载的条目数
 
 function Timeline({
@@ -32156,12 +33544,8 @@ function SharePanel({
     }).catch(e => flash(e.message, 'danger')).finally(() => setBusy(false));
   };
   const copyCode = () => {
-    try {
-      navigator.clipboard.writeText(share.code);
-      flash('密文已复制 · 发给朋友即可造访你的星系');
-    } catch (e) {
-      flash('复制失败，请手动选择', 'danger');
-    }
+    // writeText 返回的是 Promise，被拒时同步 try/catch 接不住；SRCopy 统一给布尔值
+    window.SRCopy.copy(share.code).then(ok => flash(ok ? '密文已复制 · 发给朋友即可造访你的星系' : '这台设备不允许自动复制，请长按选择密文', ok ? undefined : 'danger'));
   };
   const toggleBlock = v => {
     N.api('/api/share/block', {
@@ -32327,9 +33711,19 @@ function SharePanel({
       key: o.id,
       role: "radio",
       "aria-checked": on,
+      tabIndex: 0,
+      className: "sr-focus-ring",
       onClick: () => !on && post({
         visibility: o.id
       }, `可见度已改为「${o.label}」`),
+      onKeyDown: e => {
+        if (!on && (e.key === 'Enter' || e.key === ' ')) {
+          e.preventDefault();
+          post({
+            visibility: o.id
+          }, `可见度已改为「${o.label}」`);
+        }
+      },
       style: {
         display: 'flex',
         alignItems: 'flex-start',
@@ -32581,9 +33975,12 @@ function FriendsPanel({
   launching
 }) {
   const N = window.SRNet;
+  // 移除好友这类不可逆操作复用 ConfirmDialog（danger 样式）
+  const ConfirmDialog = window.SRKit && window.SRKit.ConfirmDialog;
   const gated = window.SRGate.gated('visit');
   const [friends, setFriends] = React.useState([]);
   const [code, setCode] = React.useState('');
+  const narrow = window.SRKit.useScreen().phone;
   const [busy, setBusy] = React.useState(false);
   const load = () => N.api('/api/friends').then(r => {
     const list = r.friends || [];
@@ -32627,6 +34024,16 @@ function FriendsPanel({
       flash(`已连接「${r.friend.name}」的星系`, 'gold');
       setCode('');
       load();
+      /* 连接成功 = 邀请已兑现：把收件箱里那封来自这个人的造访邀请领掉，
+         否则「未领取」角标永远多一枚，它还占着服务端的去重位。静默降级。 */
+      const D = window.SR_DATA;
+      const mail = D && D.mail && D.mail.list || [];
+      const invite = mail.find(m => !m.claimed && m.kind === 'galaxy' && m.from && m.from.id === r.friend.id);
+      if (invite) {
+        if (N.inbox) N.inbox.ack(invite.id, 'claim');
+        invite.claimed = true;
+        window.dispatchEvent(new Event('sr-data'));
+      }
     }).catch(e => flash(e.message, 'danger')).finally(() => setBusy(false));
   };
   const [confirm, setConfirm] = React.useState(null); // {message, confirmLabel, onYes}
@@ -32672,7 +34079,8 @@ function FriendsPanel({
       color: 'var(--text-3)',
       marginBottom: 8
     }
-  }, "\u8F93\u5165\u670B\u53CB\u7684\u661F\u7CFB\u5BC6\u6587\uFF0C\u8FDE\u63A5\u4E00\u7247\u65B0\u7684\u661F\u7A7A"), /*#__PURE__*/React.createElement("div", {
+  }, "\u8F93\u5165\u670B\u53CB\u7684\u661F\u7CFB\u5BC6\u6587\uFF0C\u8FDE\u63A5\u4E00\u7247\u65B0\u7684\u661F\u7A7A", narrow ? '（试试演示密文 XING-DEMO-2333）' : ''), /*#__PURE__*/React.createElement("div", {
+    className: "sr-visit-redeem",
     style: {
       display: 'flex',
       gap: 8
@@ -32680,11 +34088,12 @@ function FriendsPanel({
   }, /*#__PURE__*/React.createElement(Input, {
     value: code,
     onChange: e => setCode(e.target.value),
-    placeholder: "XING-XXXX-XXXX\uFF08\u8BD5\u8BD5\u6F14\u793A\u5BC6\u6587 XING-DEMO-2333\uFF09",
+    placeholder: narrow ? 'XING-XXXX-XXXX' : 'XING-XXXX-XXXX（试试演示密文 XING-DEMO-2333）',
     icon: "key-round",
     size: "md",
     style: {
       flex: 1,
+      minWidth: 0,
       fontFamily: 'var(--font-mono)'
     },
     onKeyDown: e => {
@@ -32810,7 +34219,7 @@ function FriendsPanel({
     }, launching && launching.id === f.id ? '点火中…' : '造访'))));
   })), /*#__PURE__*/React.createElement(LaunchBay, {
     launching: launching
-  }), confirm && window.SRKit.ConfirmDialog && /*#__PURE__*/React.createElement(window.SRKit.ConfirmDialog, {
+  }), confirm && ConfirmDialog && /*#__PURE__*/React.createElement(ConfirmDialog, {
     message: confirm.message,
     confirmLabel: confirm.confirmLabel,
     onYes: () => {
@@ -33461,6 +34870,7 @@ function VisitMap({
       border: '1px solid',
       borderColor: resOpen ? 'rgba(255,217,138,0.6)' : 'rgba(255,217,138,0.4)',
       background: resOpen ? 'rgba(255,217,138,0.16)' : 'rgba(255,217,138,0.1)',
+      WebkitBackdropFilter: 'blur(10px)',
       backdropFilter: 'blur(10px)',
       boxShadow: '0 0 14px rgba(255,217,138,0.12)'
     }
@@ -34355,6 +35765,8 @@ const {
   LoginView,
   KeysHelp,
   AdminConsole,
+  AdminHandover,
+  Boundary,
   AnnouncementBanner,
   MobileTopBar,
   MobileTabBar,
@@ -34390,6 +35802,11 @@ function App() {
   const [dataRev, setDataRev] = React.useState(0); // 数据库水合后整体重挂载
   const [banner, setBanner] = React.useState(null); // 管理员发布的全站公告
   const [blocked, setBlocked] = React.useState(null); // { kind: 'banned' | 'maintenance', message }
+  const [handover, setHandover] = React.useState(false); // 出厂管理员未交接：强制换用户名与密码
+  /* 崩溃兜底卡的重置计数：Boundary 是类组件，错误态只能靠 key 变化重挂载来清。
+     光靠 view 拼 key 不够——最常见的崩溃恰恰是默认视图星图自己崩了，此时
+     backToMap() 不改变 view，key 不变，那颗「回到星图」就是个死键。 */
+  const [boundaryNonce, setBoundaryNonce] = React.useState(0);
   const [drawer, setDrawer] = React.useState(false); // 手机：侧栏抽屉
   const nonce = React.useRef(0);
 
@@ -34477,6 +35894,25 @@ function App() {
     return () => window.removeEventListener('sr-blocked', h);
   }, []);
 
+  /* 星港交接：管理员账号还在用出厂凭据（用户名与密码都是公开知识）时，
+     一登录就把交接卡请出来，换完之前不放行。判据由服务器随 /api/hello 下发
+     （site.defaultPass，只发给管理员），交接成功后 AdminHandover 广播 sr-account。 */
+  React.useEffect(() => {
+    const h = () => {
+      const A = window.SR_DATA && window.SR_DATA.account;
+      setHandover(!!(A && A.admin && A.defaultPass));
+    };
+    h();
+    window.addEventListener('sr-site', h);
+    window.addEventListener('sr-account', h);
+    window.addEventListener('sr-hydrated', h);
+    return () => {
+      window.removeEventListener('sr-site', h);
+      window.removeEventListener('sr-account', h);
+      window.removeEventListener('sr-hydrated', h);
+    };
+  }, []);
+
   // 游客撞上功能门禁（SRGate.require）：直接把登录页请出来，人已经在门口了
   React.useEffect(() => {
     const h = () => setLogin(true);
@@ -34518,14 +35954,14 @@ function App() {
   React.useEffect(() => {
     const h = e => {
       if ((e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K')) {
-        if (reviewOpen || onboard || tour || login) return;
+        if (reviewOpen || onboard || tour || login || handover || feynman) return;
         e.preventDefault();
         setCmd(c => !c);
       }
     };
     window.addEventListener('keydown', h);
     return () => window.removeEventListener('keydown', h);
-  }, [reviewOpen, onboard, tour, login]);
+  }, [reviewOpen, onboard, tour, login, handover, feynman]);
 
   // ? 打开快捷键速查（Shift+/）——正在输入框 / 可编辑区里打问号不受影响；
   // 已有弹层置顶时不叠开（同 ⌘K 的互斥语义，速查自带 Esc / 点遮罩关闭）
@@ -34534,13 +35970,13 @@ function App() {
       if (e.key !== '?' || e.metaKey || e.ctrlKey || e.altKey) return;
       const t = e.target;
       if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
-      if (cmd || settingsOpen || aiConfigOpen || reviewOpen || onboard || tour || login || keysHelp) return;
+      if (cmd || settingsOpen || aiConfigOpen || reviewOpen || onboard || tour || login || keysHelp || handover || feynman) return;
       e.preventDefault();
       setKeysHelp(true);
     };
     window.addEventListener('keydown', h);
     return () => window.removeEventListener('keydown', h);
-  }, [cmd, settingsOpen, aiConfigOpen, reviewOpen, onboard, tour, login, keysHelp]);
+  }, [cmd, settingsOpen, aiConfigOpen, reviewOpen, onboard, tour, login, keysHelp, handover, feynman]);
 
   // Esc 统一词汇：同一动作（离开当前浮层）在所有屏幕说同一句话。
   // 命令面板 / 设置 / AI 配置 / 复习会话自带 Esc，这里让位；
@@ -34550,7 +35986,7 @@ function App() {
   React.useEffect(() => {
     const h = e => {
       if (e.key !== 'Escape' || e.defaultPrevented) return;
-      if (cmd || settingsOpen || aiConfigOpen || reviewOpen || onboard || tour || login || keysHelp) return;
+      if (cmd || settingsOpen || aiConfigOpen || reviewOpen || onboard || tour || login || keysHelp || handover) return;
       if (feynman) {
         e.preventDefault();
         setFeynman(null);
@@ -34565,7 +36001,7 @@ function App() {
     };
     window.addEventListener('keydown', h, true);
     return () => window.removeEventListener('keydown', h, true);
-  }, [cmd, settingsOpen, aiConfigOpen, reviewOpen, onboard, tour, login, keysHelp, feynman, view]);
+  }, [cmd, settingsOpen, aiConfigOpen, reviewOpen, onboard, tour, login, keysHelp, handover, feynman, view]);
 
   // 切换视图前按真实时间重算全部星的 R（衰减模型），新挂载的视图读到的是当下的亮度
   const freshen = () => {
@@ -34742,11 +36178,29 @@ function App() {
     if (el && T && T.enter) T.enter(el);
   }, []);
 
-  /* 停用 / 维护：整屏说明页。停用是终局（只能退出登录换个身份），
-     维护是暂时的（留一颗「再试一次」按钮，恢复了就能进来）。
-     两种情况本机星空都完好——离线编辑照常，恢复后自动补写。 */
+  /* 停用 / 维护 / 登录失效：整屏说明页。停用是终局（只能退出登录换个身份），
+     维护是暂时的（留一颗「再试一次」按钮，恢复了就能进来），登录失效则是这台设备
+     的钥匙没了——管理员请你下线、账号被删、或者太久没露面被判过期，重新登录即可。
+     三种情况本机星空都完好——离线编辑照常，恢复后自动补写。 */
   if (blocked) {
     const banned = blocked.kind === 'banned';
+    const expired = blocked.kind === 'expired';
+    const ICON = {
+      banned: 'user-x',
+      expired: 'key-round',
+      maintenance: 'construction'
+    };
+    const TITLE = {
+      banned: '这个账号已被停用',
+      expired: '这台设备的登录已失效',
+      maintenance: '星图正在维护'
+    };
+    const SUB = {
+      banned: '如有疑问，请联系这台服务器的管理员。',
+      expired: '可能是管理员请你重新登录，也可能是这个登录态太久没用过了。重新登录就好。',
+      maintenance: '稍后回来看看。'
+    };
+    const kind = blocked.kind === 'banned' || blocked.kind === 'expired' ? blocked.kind : 'maintenance';
     return /*#__PURE__*/React.createElement("div", {
       style: {
         width: '100%',
@@ -34771,7 +36225,7 @@ function App() {
         padding: '34px 28px 26px'
       }
     }, /*#__PURE__*/React.createElement(Icon, {
-      name: banned ? 'user-x' : 'construction',
+      name: ICON[kind],
       size: 30,
       color: banned ? 'var(--danger)' : 'var(--gold)'
     }), /*#__PURE__*/React.createElement("div", {
@@ -34781,14 +36235,14 @@ function App() {
         color: 'var(--text-1)',
         marginTop: 16
       }
-    }, banned ? '这个账号已被停用' : '星图正在维护'), /*#__PURE__*/React.createElement("div", {
+    }, TITLE[kind]), /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 13,
         color: 'var(--text-2)',
         marginTop: 12,
         lineHeight: 1.8
       }
-    }, blocked.message || (banned ? '如有疑问，请联系这台服务器的管理员。' : '稍后回来看看。')), /*#__PURE__*/React.createElement("div", {
+    }, expired ? SUB.expired : blocked.message || SUB[kind]), /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 12,
         color: 'var(--text-3)',
@@ -34802,15 +36256,15 @@ function App() {
         justifyContent: 'center',
         marginTop: 22
       }
-    }, !banned && /*#__PURE__*/React.createElement(Button, {
+    }, kind === 'maintenance' && /*#__PURE__*/React.createElement(Button, {
       variant: "primary",
       icon: "refresh-cw",
       onClick: () => location.reload()
     }, "\u518D\u8BD5\u4E00\u6B21"), /*#__PURE__*/React.createElement(Button, {
-      variant: banned ? 'primary' : 'ghost',
-      icon: "log-out",
+      variant: kind === 'maintenance' ? 'ghost' : 'primary',
+      icon: expired ? 'log-in' : 'log-out',
       onClick: () => window.SRNet.logoutFlow()
-    }, "\u9000\u51FA\u767B\u5F55")))));
+    }, expired ? '重新登录' : '退出登录')))));
   }
 
   /* 侧栏：桌面/平板常驻，手机收进抽屉。两处渲染的是同一个组件、同一份状态——
@@ -34887,6 +36341,15 @@ function App() {
       paddingBottom: phone && view !== 'editor' ? 'calc(var(--sr-tabbar) + var(--sr-safe-bottom))' : 0,
       boxSizing: 'border-box'
     }
+  }, /*#__PURE__*/React.createElement(Boundary, {
+    key: `b|${view}|${aerial ? 'a' : ''}|${boundaryNonce}`,
+    title: `「${viewTitle}」`,
+    onReset: () => {
+      setSelected(null);
+      setEditing(null);
+      backToMap();
+      setBoundaryNonce(n => n + 1);
+    }
   }, view === 'map' && !aerial && /*#__PURE__*/React.createElement(StarMap, {
     selected: selected,
     onSelect: setSelected,
@@ -34928,11 +36391,16 @@ function App() {
     onReview: openReview
   }), view === 'admin' && /*#__PURE__*/React.createElement(AdminConsole, {
     onClose: backToMap
-  }), feynman && /*#__PURE__*/React.createElement(FeynmanDrawer, {
+  })), feynman && /*#__PURE__*/React.createElement(Boundary, {
+    key: `fey|${feynman}`,
+    title: "\u300C\u8D39\u66FC\u8BB2\u89E3\u300D",
+    resetLabel: "\u6536\u8D77\u62BD\u5C49",
+    onReset: () => setFeynman(null)
+  }, /*#__PURE__*/React.createElement(FeynmanDrawer, {
     starId: feynman,
     onClose: () => setFeynman(null),
     onOpenAIConfig: () => setAiConfigOpen(true)
-  }), phone && view !== 'editor' && /*#__PURE__*/React.createElement(MobileTabBar, {
+  })), phone && view !== 'editor' && /*#__PURE__*/React.createElement(MobileTabBar, {
     view: aerial ? 'map' : view,
     onView: openView,
     onReview: openReview,
@@ -34986,7 +36454,7 @@ function App() {
     onClose: () => setAiConfigOpen(false)
   }), keysHelp && /*#__PURE__*/React.createElement(KeysHelp, {
     onClose: () => setKeysHelp(false)
-  }), onboard && !login && authKnown && /*#__PURE__*/React.createElement(Onboarding, {
+  }), onboard && !login && !handover && authKnown && /*#__PURE__*/React.createElement(Onboarding, {
     onClose: finishOnboard,
     onSpotlight: startTour
   }), tour && !login && /*#__PURE__*/React.createElement(OnboardingTour, {
@@ -34994,20 +36462,105 @@ function App() {
     onNavigate: tourNavigate
   }), login && /*#__PURE__*/React.createElement(LoginView, {
     onClose: closeLogin
+  }), handover && /*#__PURE__*/React.createElement(AdminHandover, {
+    onDone: () => setHandover(false)
   }));
 }
-ReactDOM.createRoot(document.getElementById('root')).render(/*#__PURE__*/React.createElement(App, null));
+
+/* 根层的最后一道防线：连侧栏、断点、水合这些外围也崩了的时候，至少还有一张
+   说明卡和一颗刷新键——而不是一整屏无从解释的黑。 */
+ReactDOM.createRoot(document.getElementById('root')).render(/*#__PURE__*/React.createElement(Boundary, {
+  title: "\u661F\u56FE"
+}, /*#__PURE__*/React.createElement(App, null)));
 if (window.lucide) window.lucide.createIcons();
 })(); } catch (e) { __ds_ns.__errors.push({ path: "ui_kits/stellar-raft/app.jsx", error: String((e && e.message) || e) }); }
+
+// ui_kits/stellar-raft/clipboard.js
+try { (() => {
+/* SRCopy — 复制到剪贴板，并且如实回答「到底成没成」。
+
+   为什么值得单开一个文件：`navigator.clipboard` 只在**安全上下文**里存在
+   （https，或 localhost）。而星图那一整套手机断点与手势，面向的恰恰是
+   「用手机打开 http://192.168.x.x:8756」这个场景 —— 在那里它是 undefined。
+
+   以前各处是 `try { navigator.clipboard && navigator.clipboard.writeText(x) } catch {}`
+   紧跟一句 flash('已复制')：手机上什么都没复制，却照样告诉你复制好了。
+   更隐蔽的是 writeText 返回的是 Promise，权限被拒时同步的 try/catch 也接不住。
+
+   这里把三件事收在一处：
+   · 优先用现代 API；
+   · 不可用 / 被拒时退回 execCommand('copy')（非安全上下文里仍然有效）；
+   · 返回 Promise<boolean>，调用方据此决定说「已复制」还是「请手动选择」。 */
+window.SRCopy = function () {
+  // 老办法：塞一个离屏 textarea、选中、execCommand。iOS Safari 需要 contentEditable
+  // + 手动 Range 才选得中，光 select() 不够。
+  const legacy = text => {
+    try {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.setAttribute('readonly', '');
+      ta.contentEditable = 'true';
+      // 不能 display:none / visibility:hidden —— 那样选不中；挪出视口即可
+      Object.assign(ta.style, {
+        position: 'fixed',
+        top: '0',
+        left: '-9999px',
+        opacity: '0'
+      });
+      document.body.appendChild(ta);
+      const r = document.createRange();
+      r.selectNodeContents(ta);
+      const sel = window.getSelection();
+      const saved = sel && sel.rangeCount ? sel.getRangeAt(0) : null; // 用户原来的选区别弄丢
+      if (sel) {
+        sel.removeAllRanges();
+        sel.addRange(r);
+      }
+      ta.setSelectionRange(0, text.length);
+      const ok = document.execCommand('copy');
+      ta.remove();
+      if (sel) {
+        sel.removeAllRanges();
+        if (saved) sel.addRange(saved);
+      }
+      return !!ok;
+    } catch (e) {
+      return false;
+    }
+  };
+
+  /* 复制。总是 resolve，never reject —— 调用方只需要一个布尔值。 */
+  const copy = text => {
+    const s = String(text == null ? '' : text);
+    if (!s) return Promise.resolve(false);
+    const nav = typeof navigator !== 'undefined' ? navigator : null;
+    if (nav && nav.clipboard && nav.clipboard.writeText) {
+      return nav.clipboard.writeText(s).then(() => true, () => legacy(s));
+    }
+    return Promise.resolve(legacy(s));
+  };
+
+  // 这台设备现在到底能不能用现代剪贴板（UI 想提前说明时用）
+  const isSecure = () => typeof window !== 'undefined' && window.isSecureContext !== false;
+  return {
+    copy,
+    legacy,
+    isSecure
+  };
+}();
+})(); } catch (e) { __ds_ns.__errors.push({ path: "ui_kits/stellar-raft/clipboard.js", error: String((e && e.message) || e) }); }
 
 // ui_kits/stellar-raft/codehl.js
 try { (() => {
 /* codehl.js — lightweight, language-aware syntax highlighter for the editor's
    code block. window.SR_HL = { DEFS, SAMPLES, GENERIC, LANGS, tokenize }.
    tokenize(code, lang) → array of lines, each an array of {t, c} tokens where
-   c ∈ kw|fn|str|num|com|plain. Unknown language (no DEF) → everything plain. */
+   c ∈ kw|fn|str|num|com|plain. Unknown language (no DEF) → everything plain.
+   纯字符串实现、不碰 DOM，所以也从 globalThis 导出一份（与 mdcore.js 同样的做法），
+   node --test 里可以直接 import 进来验分词。 */
 (function () {
-  if (window.SR_HL) return;
+  const G = typeof globalThis === 'undefined' ? window : globalThis;
+  if (G.SR_HL) return;
   const DEFS = {};
   // def(aliases, keywords, lineComment, [blockOpen, blockClose])
   const def = (names, kw, line, block) => {
@@ -35196,13 +36749,15 @@ try { (() => {
 
   // ordered display list for the dropdown
   const LANGS = ['python', 'javascript', 'typescript', 'java', 'c', 'c++', 'c#', 'go', 'rust', 'ruby', 'php', 'swift', 'kotlin', 'scala', 'dart', 'r', 'julia', 'haskell', 'elixir', 'erlang', 'clojure', 'lisp', 'lua', 'perl', 'groovy', 'nim', 'crystal', 'zig', 'objective-c', 'fortran', 'matlab', 'sql', 'bash', 'powershell', 'fish', 'graphql', 'solidity', 'dockerfile', 'makefile', 'assembly', 'vim', 'html', 'css', 'scss', 'xml', 'yaml', 'toml', 'ini', 'json', 'markdown', 'latex', 'plaintext', 'text', 'txt', 'log', 'diff', 'csv', 'env'];
-  window.SR_HL = {
+  const api = {
     DEFS,
     SAMPLES,
     GENERIC,
     LANGS,
     tokenize
   };
+  if (typeof window !== 'undefined') window.SR_HL = api;
+  G.SR_HL = api;
 })();
 })(); } catch (e) { __ds_ns.__errors.push({ path: "ui_kits/stellar-raft/codehl.js", error: String((e && e.message) || e) }); }
 
@@ -36020,6 +37575,7 @@ window.SR_DATA = function () {
       n.nextReview = s.props.nextReview;
     });
     syncCounts();
+    syncLinks(); // 顺带修好历史快照里对不上的反向链接计数
     account.streak = computeStreak(now); // 跨天 / 取回快照后连续天数保持真实
     return now;
   };
@@ -36267,6 +37823,7 @@ window.SR_DATA = function () {
     };
     trash.unshift(entry);
     syncCounts();
+    syncLinks(); // 连线跟着走了，幸存的对端得重新数一遍
     persistRemote();
     return entry;
   };
@@ -36305,6 +37862,7 @@ window.SR_DATA = function () {
     };
     trash.unshift(entry);
     syncCounts();
+    syncLinks(); // 同上：整域带走的连线，对端的计数也要落回来
     persistRemote();
     return entry;
   };
@@ -36375,13 +37933,18 @@ window.SR_DATA = function () {
       const exist = constellations.find(c => c.id === con.id);
       if (exist) Object.assign(exist, con); // 壳已被先恢复的星带回来过
       else constellations.push(con);
+      /* 顺序要紧：先让成员落位、再把连线接回来，最后才建 note。
+         noteFor 里的 links 是当场数 connections 数出来的——先建 note 的话，
+         随星域恢复的成员链接数一律是 0（单星分支本来就是这个顺序，这里漏了）。 */
+      const revived = [];
       t.payload.stars.forEach(s => {
         if (byId[s.id]) return; // 这颗星先被单独恢复过
         stars.push(s);
         byId[s.id] = s;
-        notes.unshift(noteFor(s));
+        revived.push(s);
       });
       restoreConnections(t.payload.connections);
+      revived.forEach(s => notes.unshift(noteFor(s)));
     }
     refreshMemory(); // 恢复的星按真实时间重新点算亮度（含 syncCounts）
     persistRemote();
@@ -36533,13 +38096,32 @@ window.SR_DATA = function () {
   // 星域的 count / health / litRatio 始终按现存成员实时重算，不留手写快照。
   // health 保持「记忆亮度均值」单一语义不变；点亮维度独立为 litRatio（已点亮成员占比），
   // 星域光环转金判据 = litRatio ≥ 0.5 ∧ health ≥ 0.5。
+  /* 星域的成员数 / 健康度 / 点亮占比。
+     原来是「对每个星域把全部星过一遍」，而且过三遍（filter + reduce + filter）——
+     20 个星域 2000 颗星就是 12 万次比较，还挂在每次切视图与每分钟心跳上。
+     改成对星走一趟、按星域累加，代价回到 O(星)。 */
   const syncCounts = () => {
-    constellations.forEach(c => {
-      const members = stars.filter(s => s.con === c.id);
-      c.count = members.length;
-      c.health = members.length ? members.reduce((a, s) => a + s.strength, 0) / members.length : 0;
-      c.litRatio = members.length ? members.filter(isLit).length / members.length : 0;
-    });
+    const acc = new Map();
+    for (const s of stars) {
+      let a = acc.get(s.con);
+      if (!a) {
+        a = {
+          n: 0,
+          sum: 0,
+          lit: 0
+        };
+        acc.set(s.con, a);
+      }
+      a.n++;
+      a.sum += s.strength;
+      if (isLit(s)) a.lit++;
+    }
+    for (const c of constellations) {
+      const a = acc.get(c.id);
+      c.count = a ? a.n : 0;
+      c.health = a && a.n ? a.sum / a.n : 0;
+      c.litRatio = a && a.n ? a.lit / a.n : 0;
+    }
   };
   // 待重燃队列：曾点亮但已熄灭的星（体检「今日待办」第二行），按熄灭先后升序
   const emberStars = () => stars.filter(isEmber).sort((a, b) => (a.sr.ember || 0) - (b.sr.ember || 0));
@@ -36557,6 +38139,19 @@ window.SR_DATA = function () {
     if (String(star.summary || '').replace(/\s+/g, '').length >= 20) return true;
     const texty = (star.body || []).filter(b => b && !['rich', 'divider', 'code'].includes(b.type) && String(b.text || b.tex || '').trim());
     return texty.length >= 2;
+  };
+  /* 反向链接计数：notes[].links 是 connections 的派生值，可它跟着快照落盘，
+     于是某次增删连线漏同步，错值就一直躺在那儿——心跳只同步亮度，从不碰它。
+     这里对连线走一趟按端点计数，再把 notes 对上；自连只算一次（与 noteFor 同口径）。
+     跟着心跳跑，顺带把老快照里已经错掉的值一并治好。 */
+  const syncLinks = () => {
+    const n = new Map();
+    for (const c of connections) {
+      if (!c) continue;
+      n.set(c.a, (n.get(c.a) || 0) + 1);
+      if (c.b !== c.a) n.set(c.b, (n.get(c.b) || 0) + 1);
+    }
+    for (const note of notes) note.links = n.get(note.id) || 0;
   };
   const noteFor = s => ({
     id: s.id,
@@ -36628,6 +38223,10 @@ window.SR_DATA = function () {
       kind,
       note
     });
+    /* 封顶 2000 条：时间线是 append-only 的，而星空是「整片一次整存」——不封顶的话
+       快照会随岁月单调膨胀，每次防抖落盘的序列化越来越贵，最终撞上 413。
+       2000 条 ≈ 全年每天 5 次学习事件：体检页的一年热力图仍然数得满。 */
+    if (timeline.length > 2000) timeline.length = 2000;
     account.streak = computeStreak(); // 今天的第一条学习记录即续上连续天数
     persistRemote();
   };
@@ -36644,12 +38243,20 @@ window.SR_DATA = function () {
   const computeStreak = now => {
     now = now || Date.now();
     const days = new Set(timeline.filter(t => t && t.ts && t.kind !== 'dim').map(t => dayKey(t.ts)));
+    /* 按日历日往回退，不是按 86400000 毫秒。
+       进夏令时那天只有 23 小时：在午夜后一小时内计算的话，减掉整整 24 小时会
+       一步跨过一整个日历日，连续天数凭空断档。 */
+    const prevDay = t => {
+      const d = new Date(t);
+      d.setDate(d.getDate() - 1);
+      return d.getTime();
+    };
     let n = 0,
       cur = now;
-    if (!days.has(dayKey(cur))) cur -= DAY;
+    if (!days.has(dayKey(cur))) cur = prevDay(cur);
     while (days.has(dayKey(cur))) {
       n++;
-      cur -= DAY;
+      cur = prevDay(cur);
     }
     return n;
   };
@@ -36969,7 +38576,7 @@ window.SR_DATA = function () {
         role: r.account.role || 'user',
         admin: !!r.account.admin
       });
-      // 站点状态（全站公告 / 出厂密码提醒）随握手下发，广播给横幅与管理台
+      // 站点状态（全站公告 / 出厂凭据未交接）随握手下发，广播给横幅、交接卡与管理台
       if (r.site) {
         site.announcement = r.site.announcement || null;
         site.registrationOpen = r.site.registrationOpen !== false;
@@ -36982,10 +38589,32 @@ window.SR_DATA = function () {
       const d = r && r.data;
       if (r && r.version != null) window.SRNet.setVersion(r.version); // 乐观锁基准版本
       const remoteOk = looksLikeGalaxy(d);
+      /* 因果比较，不再比客户端时钟：镜像里的 syncVer 是这份内容「基于的服务器版本」，
+         pending 标记「这版内容还没被服务器确认过」。
+         · syncVer 相等 且 pending：别处没人写过，镜像里是没推上去的编辑 → 本地为准并回推；
+         · syncVer 相等 且非 pending：镜像是服务器内容的回声 → 内容一致，无需回推；
+         · syncVer 不等：另一台设备写过 → 服务器为准，镜像跟着对齐。
+         两台设备的系统时钟谁快谁慢，从此不再左右谁赢。
+         旧版镜像没有 syncVer：退回 savedAt 比较（跨设备时钟问题仅存在于旧数据）。 */
+      if (remoteOk && localOk && local.syncVer != null) {
+        if (r.version === local.syncVer) {
+          if (local.pending) {
+            hydrate(local.data);
+            persistRemote(); // 离线攒下的编辑回推给服务器
+          } else {
+            hydrate(d); // 内容一致： hydrate 哪边都一样，不必回推
+          }
+        } else {
+          hydrate(d);
+          window.SRNet.saveLocal(d, r.version); // 镜像同步到服务器这一版
+        }
+        return;
+      }
       // 服务器快照时间：优先 data 内嵌的客户端 savedAt，缺失时退回 sqlite 的 updated_at（UTC）
       const remoteTs = remoteOk && d.savedAt || (remoteOk && r.updatedAt ? Date.parse(String(r.updatedAt).replace(' ', 'T') + 'Z') || 1 : remoteOk ? 1 : 0);
       if (remoteOk && (!localOk || remoteTs >= local.savedAt)) {
         hydrate(d);
+        if (r.version != null) window.SRNet.saveLocal(d, r.version); // 顺手把镜像带进 syncVer 时代
       } else if (localOk) {
         hydrate(local.data); // 本地较新（或服务器为空）：以本地为准
         persistRemote(); // 并把它回推给服务器
@@ -37089,14 +38718,22 @@ try { (() => {
       toks.push(c);
       return '\u0000' + (toks.length - 1) + '\u0000';
     });
+    /* 链接正则是这条管线上唯一的回溯风险：「开括号多、闭括号少」的输入
+       （粘进来的日志、代码）会让无界的 [^\]]+ / [^)\s]+ 逐位回溯——实测
+       '['×10万 要 4.2s，×100万 直接冻页。两道闸：没有 ' ](' 的文本根本不
+       可能有链接，整个正则跳过；量词有界（文字 ≤300 / URL ≤2000），每个
+       候选位的失败成本从 O(n) 收成 O(1)。超限链接降级为字面文本。 */
+    const withLinks = src.includes('](');
     return escHtml(src).replace(/\*\*\*([^*]+)\*\*\*/g, '<b><i>$1</i></b>').replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>').replace(/(^|[^*])\*([^*\s][^*]*)\*/g, '$1<i>$2</i>').replace(/~~([^~]+)~~/g, '<s>$1</s>').replace(/`([^`]+)`/g, '<code style="' + CODE_SPAN_CSS + '">$1</code>')
     // 链接协议白名单：javascript:/data: 等降级为纯文本（保留可见字样，去掉可点 href）
-    .replace(/\[([^\]]+)\]\(([^)\s]+)(?:\s+&quot;[^&]*&quot;|\s+"[^"]*")?\)/g, (mm, txt, url) => {
+    .replace(withLinks ? /\[([^\]]{1,300})\]\(([^)\s]{1,2000})(?:\s+&quot;[^&]{0,300}&quot;|\s+"[^"]{0,300}")?\)/g : /$a/, (mm, txt, url) => {
       const ok = safeUrl(url);
       return ok ? LINK_A(ok, txt) : txt;
     })
     // 自动链接 <https://…>（escHtml 之后尖括号已成实体）
-    .replace(/&lt;(https?:\/\/[^\s&]+)&gt;/g, (mm, url) => safeUrl(url) ? LINK_A(url, url) : url).replace(/\u0000(\d+)\u0000/g, (mm, n) => escHtml(toks[Number(n)]));
+    .replace(/&lt;(https?:\/\/[^\s&]+)&gt;/g, (mm, url) => safeUrl(url) ? LINK_A(url, url) : url)
+    // oxlint-disable-next-line no-control-regex -- \u0000 是本文件自己埋的占位哨兵，正则必须认得它
+    .replace(/\u0000(\d+)\u0000/g, (mm, n) => escHtml(toks[Number(n)]));
   };
 
   /* ---- 打字即时转换：光标前缀里已闭合的行内标记（Typora 式，空格触发） ----
@@ -37151,13 +38788,17 @@ try { (() => {
       const ind = indent ? {
         indent
       } : {};
-      if (m = l.match(/^```(\w*)/)) {
-        // 代码围栏
+      if (m = l.match(/^(`{3,})([\w+#.-]*)/)) {
+        // 代码围栏（长度可变；语言号认 C++ / c# 这类字符）
         const buf = [];
         i++;
         let closed = false;
+        /* 收尾的围栏至少要和开头一样长（CommonMark）。只认死三个反引号的话，
+           内容里那行 ``` 会把代码块提前关掉，剩下的代码掉进正文。 */
+        const fenceLen = m[1].length;
+        const closeRe = new RegExp('^`{' + fenceLen + ',}\\s*$');
         while (i < lines.length) {
-          if (/^```/.test(lines[i].trim())) {
+          if (closeRe.test(lines[i].trim())) {
             closed = true;
             i++;
             break;
@@ -37166,18 +38807,19 @@ try { (() => {
           i++;
         }
         // 只有真正围起了内容才建代码块——文本末尾一个孤零零的 ``` 不再遗留空 code 块
+        // m[1] 现在是围栏本身，语言在 m[2]
         if (closed || buf.length) out.push({
           id: uid(),
           type: 'code',
-          lang: (m[1] || 'plaintext').toLowerCase(),
+          lang: (m[2] || 'plaintext').toLowerCase(),
           code: buf.join('\n')
         });
-      } else if (m = l.match(/^[-*+]\s+\[( |x|X)\]\s+(.*)/)) {
+      } else if (m = l.match(/^[-*+]\s+\[( |x|X)\](?:\s+(.*)|$)/)) {
         out.push({
           id: uid(),
           type: 'todo',
           checked: m[1].toLowerCase() === 'x',
-          text: mdInline(m[2]),
+          text: mdInline(m[2] || ''),
           ...ind
         });
         i++;
@@ -37187,19 +38829,21 @@ try { (() => {
           type: 'divider'
         });
         i++;
-      } else if (m = l.match(/^[-*+]\s+(.*)/)) {
+      }
+      // 裸标记（`-` / `1.` 无内容）也是合法的空列表项——与导出端的空块互逆
+      else if (m = l.match(/^[-*+](?:\s+(.*)|$)/)) {
         out.push({
           id: uid(),
           type: 'bulleted',
-          text: mdInline(m[1]),
+          text: mdInline(m[1] || ''),
           ...ind
         });
         i++;
-      } else if (m = l.match(/^(\d+)[.)]\s+(.*)/)) {
+      } else if (m = l.match(/^(\d+)[.)](?:\s+(.*)|$)/)) {
         out.push({
           id: uid(),
           type: 'numbered',
-          text: mdInline(m[2]),
+          text: mdInline(m[2] || ''),
           ...ind,
           ...(m[1] !== '1' ? {
             start: parseInt(m[1], 10)
@@ -37230,9 +38874,11 @@ try { (() => {
           });
           i++;
         } else {
+          /* 收尾只认「整行就是 $$」——内容行里含 $$（如 TeX 的 a $$ b）不能当
+             结束符，否则公式被从中间截断、后半截掉进正文，导出再导入即丢内容 */
           const buf = [];
           i++;
-          while (i < lines.length && !/\$\$/.test(lines[i])) {
+          while (i < lines.length && !/^\$\$\s*$/.test(lines[i].trim())) {
             buf.push(lines[i]);
             i++;
           }
@@ -37251,7 +38897,10 @@ try { (() => {
           i++;
         }
         const cells = r => r.slice(1, -1).split(/(?<!\\)\|/).map(c => c.trim().replace(/\\\|/g, '|'));
-        const body = rowsRaw.slice(1).filter(r => !/^\|[\s:\-|]+\|$/.test(r)).map(cells);
+        /* 分隔行只认第二行这个位置——GFM 表格的分隔线本来就必须紧跟表头。
+           之前是「任何全由 -|: 组成的行都过滤」，于是一行 --- 的**数据行**被静默丢掉 */
+        const hasSep = rowsRaw.length > 1 && /^\|[\s:\-|]+\|$/.test(rowsRaw[1]);
+        const body = rowsRaw.slice(hasSep ? 2 : 1).map(cells);
         out.push({
           id: uid(),
           type: 'table',
@@ -37259,13 +38908,15 @@ try { (() => {
           rows: body
         });
       }
-      // 独占一行的图片 ![alt](url) / ![alt](url "题注") → 图片块；非法协议降级为纯文本段落
-      else if (m = l.match(/^!\[([^\]]*)\]\(([^)\s]+)(?:\s+"[^"]*")?\)$/)) {
-        out.push(safeUrl(m[2]) ? {
+      // 独占一行的图片 ![alt](url) / ![alt](<url 带括号或空格>) / ![alt](url "题注") → 图片块；非法协议降级为纯文本段落
+      else if (m = l.match(/^!\[((?:\\[[\]]|[^\]])*)\]\((<[^>\n]+>|[^)\s]+)(?:\s+"[^"]*")?\)$/)) {
+        const alt = m[1].replace(/\\([[\]])/g, '$1');
+        const src = m[2].replace(/^<|>$/g, '');
+        out.push(safeUrl(src) ? {
           id: uid(),
           type: 'image',
-          alt: m[1],
-          src: m[2]
+          alt,
+          src
         } : {
           id: uid(),
           type: 'p',
@@ -37273,12 +38924,13 @@ try { (() => {
         });
         i++;
       }
-      // 标题支持到 ######：编辑器块模型只有三级，h4–h6 折入 h3（导出仍是合法 Markdown）
-      else if (m = l.match(/^(#{1,6})\s+(.*)/)) {
+      // 标题支持到 ######：编辑器块模型只有三级，h4–h6 折入 h3（导出仍是合法 Markdown）。
+      // 裸「##」也是合法的空标题（CommonMark）——字面值段落由导出端 escLead 转义护住
+      else if (m = l.match(/^(#{1,6})(?:\s+(.*)|\s*$)/)) {
         out.push({
           id: uid(),
           type: 'h' + Math.min(3, m[1].length),
-          text: mdInline(m[2])
+          text: mdInline(m[2] || '')
         });
         i++;
       }
@@ -37350,6 +39002,17 @@ try { (() => {
   }
 
   /* ---- YAML frontmatter（--- 包围的 k: v 段）→ { props, tags, body } ---- */
+  /* 值的解引号：导出端用 JSON.stringify 加引（"说\"话"、"a\nb"），
+     这里必须真按 JSON 解——只剥一层引号会把 \" 和 \n 原样留在值里 */
+  const unq = v => {
+    const s = String(v == null ? '' : v).trim();
+    if (s.length >= 2 && s[0] === '"' && s[s.length - 1] === '"') {
+      try {
+        return JSON.parse(s);
+      } catch {/* 落回裸剥 */}
+    }
+    return s.replace(/^["']|["']$/g, '');
+  };
   function parseFrontmatter(text) {
     const src = String(text == null ? '' : text).replace(/\r\n?/g, '\n');
     const m = src.match(/^---\n([\s\S]*?)\n---\n?/);
@@ -37365,23 +39028,35 @@ try { (() => {
       const mm = fmLines[li].match(/^([A-Za-z_一-鿿][\w一-鿿-]*)\s*:\s*(.*)$/);
       if (!mm) continue;
       const k = mm[1];
-      const v = mm[2].trim().replace(/^["']|["']$/g, '');
+      const v = mm[2].trim();
       if (k === 'tags') {
         if (v) {
-          tags = v.replace(/^\[|\]$/g, '').split(',').map(s => s.trim().replace(/^["']|["']$/g, '')).filter(Boolean);
+          // 导出端写的是 JSON 数组（"b,c" 这样的标签不会被逗号劈开）；
+          // 外来的裸写法 [a, b] 仍按逗号切（YAML flow 的兼容路径）
+          let arr = null;
+          if (/^\[/.test(v)) {
+            try {
+              const j = JSON.parse(v);
+              if (Array.isArray(j)) arr = j.map(String);
+            } catch {}
+          }
+          if (!arr) arr = v.replace(/^\[|\]$/g, '').split(',').map(unq);
+          tags = arr.map(s => String(s).trim()).filter(Boolean);
+          if (!tags.length) tags = null;
         } else {
           // Obsidian 的块级列表写法：tags: 换行后跟若干「  - x」
           tags = [];
           while (li + 1 < fmLines.length && /^\s+-\s+/.test(fmLines[li + 1])) {
             li++;
-            const t = fmLines[li].replace(/^\s+-\s+/, '').trim().replace(/^["']|["']$/g, '');
+            const t = unq(fmLines[li].replace(/^\s+-\s+/, ''));
             if (t) tags.push(t);
           }
           if (!tags.length) tags = null;
         }
         continue;
       }
-      if (v) props[k] = v;
+      const pv = unq(v);
+      if (pv) props[k] = pv;
     }
     return {
       props: Object.keys(props).length ? props : null,
@@ -37402,7 +39077,12 @@ try { (() => {
 
   // 段落导出的防歧义转义：正文若以 Markdown 结构记号开头（# > - 1. ``` $$ | 或整行 ---），
   // 加反斜杠护住，round-trip 后仍是同一个段落，不会被真实解析器误读成结构
-  const escLead = s => String(s == null ? '' : s).replace(/^(#{1,6} |> ?|[-*+] |\d+[.)] |```|\$\$|\|)/, '\\$1').replace(/^(-{3,}|\*{3,}|={3,})$/, '\\$1');
+  const escLead = s => String(s == null ? '' : s)
+  /* 有序列表单独一档：Markdown 的转义位置是分隔符本身（`1\. `），不是数字前面。
+     写成 `\1. ` 既护不住（真实解析器照样当列表），导入时也还原不回来——
+     ESCAPABLE 的字符集里没有数字，那个反斜杠会原样留在正文里。 */.replace(/^(\d{1,9})([.)])(?=\s|$)/, '$1\\$2').replace(/^(#{1,6} |> ?|[-*+] |```|\$\$|\|)/, '\\$1').replace(/^(-{3,}|\*{3,}|={3,})$/, '\\$1')
+  // 裸标记也是结构（空标题 `##`、空列表项 `-`）：整行就是标记本身的段落同样护住
+  .replace(/^(#{1,6}|[-*+])$/, '\\$1');
   function blocksToMd(blocks, opts) {
     const o = opts || {};
     const lines = [];
@@ -37412,8 +39092,18 @@ try { (() => {
       const pad = '  '.repeat(b.indent || 0);
       switch (b.type) {
         case 'rich':
-          if (o.summary) lines.push(o.summary);
-          break;
+          {
+            /* 摘要写成正文开头的第一段。导入时 parseVault 会把第一段认成摘要**并保留在正文里**，
+               于是下一次导出就有了两份、再下一次三份——每来回一次多复制一遍。
+               这里在导出端掐断：正文里紧跟着的第一个段落如果就是摘要本身，就不再多写一遍。 */
+            if (!o.summary) break;
+            const firstP = (blocks || []).find(x => x && x.type === 'p' && String(x.text || '').trim());
+            const same = firstP && htmlToMd(firstP.text).trim() === String(o.summary).trim();
+            /* 摘要是纯文本，写进 Markdown 必须逐行过 escLead：一句以 ``` 或 # 开头的
+               摘要会开启围栏/变成标题，把整个文件剩余部分（含「## 关联」与连线）吞掉 */
+            if (!same) lines.push(String(o.summary).split('\n').map(escLead).join('\n'));
+            break;
+          }
         case 'h1':
           lines.push('# ' + htmlToMd(b.text));
           break;
@@ -37426,15 +39116,17 @@ try { (() => {
         case 'p':
           lines.push(escLead(htmlToMd(b.text)));
           break;
+        // 引用/列表文本若以 [ 开头（[!NOTE]、[ ] 之类），转义护住——
+        // 否则导入端会把引用误认成 callout、把列表项误认成 todo
         case 'quote':
-          lines.push('> ' + htmlToMd(b.text));
+          lines.push('> ' + htmlToMd(b.text).replace(/^\[!/, '\\[!'));
           break;
         // callout 用 GFM 提示框语法（大写才被 GitHub 渲染；Obsidian 大小写皆可）
         case 'callout':
-          lines.push('> [!' + (b.tone === 'blue' ? 'NOTE' : 'TIP') + ']\n> ' + htmlToMd(b.text));
+          lines.push('> [!' + (b.tone === 'blue' ? 'NOTE' : 'TIP') + ']\n> ' + htmlToMd(b.text).replace(/^\[!/, '\\[!'));
           break;
         case 'bulleted':
-          lines.push(pad + '- ' + htmlToMd(b.text));
+          lines.push(pad + '- ' + htmlToMd(b.text).replace(/^\[/, '\\['));
           break;
         case 'numbered':
           {
@@ -37443,7 +39135,7 @@ try { (() => {
             if (counters[lvl] == null) counters[lvl] = 0;
             if (counters[lvl] === 0 && b.start) counters[lvl] = b.start - 1;
             counters[lvl] += 1;
-            lines.push(pad + counters[lvl] + '. ' + htmlToMd(b.text));
+            lines.push(pad + counters[lvl] + '. ' + htmlToMd(b.text).replace(/^\[/, '\\['));
             break;
           }
         case 'todo':
@@ -37457,21 +39149,35 @@ try { (() => {
           lines.push('$$\n' + (b.tex || '') + '\n$$');
           break;
         case 'code':
-          lines.push('```' + (b.lang || '') + '\n' + (b.code || '') + '\n```');
-          break;
+          {
+            /* 围栏要比内容里最长的一串反引号更长（CommonMark 的规矩）。
+               笔记里贴一段 Markdown 示例是常事，而固定三个反引号会被内容里的
+               ``` 提前关掉——导出再导入，这个代码块会被劈成三块、中间的内容丢掉。 */
+            const body = b.code || '';
+            const longest = (body.match(/`+/g) || []).reduce((n, r) => Math.max(n, r.length), 0);
+            const fence = '`'.repeat(Math.max(3, longest + 1));
+            // 语言号收进 [\w+#.-]：C++ / c# 合法；换行/空格会劈开信息行，取首个词再消毒
+            const lang = String(b.lang || '').split(/\s/)[0].replace(/[^\w+#.-]/g, '');
+            lines.push(fence + lang + '\n' + body + '\n' + fence);
+            break;
+          }
         case 'divider':
           lines.push('---');
           break;
         // 图片：本地上传的 dataURL 在 100KB 内直接内联（合法 Markdown，Typora/Obsidian/VS Code
-        // 都能显示）；超限才降级为附件占位（URL 无空格，真实解析器不碎）
+        // 都能显示）；超限才降级为附件占位（URL 无空格，真实解析器不碎）。
+        // alt 里的 ] 与换行、src 里的空格与括号（维基百科式 URL 很常见）按 CommonMark 转义/
+        // <…> 包裹——否则导出的图片行在导入时降级为段落，图丢了
         case 'image':
           {
-            const src = b.src || '';
-            if (/^data:/.test(src) && src.length >= 100000) {
-              lines.push('![' + (b.alt || '本地图片') + '](本地图片-过大未内联)');
+            const src0 = b.src || '';
+            const alt = String(b.alt || '').replace(/\r?\n/g, ' ').replace(/([[\]])/g, '\\$1');
+            if (/^data:/.test(src0) && src0.length >= 100000) {
+              lines.push('![' + (alt || '本地图片') + '](本地图片-过大未内联)');
               break;
             }
-            lines.push('![' + (b.alt || '') + '](' + src + ')');
+            const src = /[\s()]/.test(src0) ? '<' + src0.replace(/[<>]/g, '') + '>' : src0;
+            lines.push('![' + alt + '](' + src + ')');
             break;
           }
         case 'table':
@@ -37494,21 +39200,24 @@ try { (() => {
     // YAML frontmatter：把结构化属性写出，round-trip 后属性不再丢失（对标 Obsidian）
     const p = o.props || {};
     const fm = [];
-    // 值里带冒号 / 井号 / 引号等 YAML 敏感字符时加引号，Obsidian 属性面板读得回来
+    /* 值里带 YAML 敏感字符或**换行**时按 JSON 加引写出（解析端用 JSON.parse 解回）。
+       换行最要命：不加引会把一个值写成两行，导入只读回第一行，后半静默丢 */
     const pushFm = (k, v) => {
       if (v == null) return;
       const s = String(v).trim();
       if (!s || s === '—') return;
-      fm.push(k + ': ' + (/[:#'"[\]{}|>&*!%@`]/.test(s) ? JSON.stringify(s) : s));
+      fm.push(k + ': ' + (/[:#'"[\]{}|>&*!%@`\n\r]/.test(s) ? JSON.stringify(s) : s));
     };
     pushFm('type', p.type);
     pushFm('status', p.status);
     pushFm('source', p.source);
     pushFm('alias', p.alias);
     pushFm('nextReview', p.nextReview);
-    if (o.tags && o.tags.length) fm.push('tags: [' + o.tags.join(', ') + ']');
+    // tags 恒写 JSON 数组（合法 YAML flow）——「a,b」这样的标签不会被逗号劈成两个
+    if (o.tags && o.tags.length) fm.push('tags: ' + JSON.stringify(o.tags.map(String)));
     const front = fm.length ? '---\n' + fm.join('\n') + '\n---\n\n' : '';
-    const title = o.title ? '# ' + o.title + '\n\n' : '';
+    // 标题恒为一行：换行会把后半截劈进正文
+    const title = o.title ? '# ' + String(o.title).replace(/\s*\n\s*/g, ' ').trim() + '\n\n' : '';
     return front + title + lines.filter(l => l != null && l !== '').join('\n\n') + '\n';
   }
   const api = {
@@ -37535,6 +39244,13 @@ try { (() => {
      tablet  ≤ 1024px  平板 / 分屏：侧栏可折叠，右侧栏让位
      desktop  >1024px  原本的 1440×900 桌面布局
 
+   还有一个与宽度档次无关、但两处布局都要用的阈值：narrow ≤ 1180px。
+   它是「多栏还摆不摆得下」的那条线——编辑器的知识栏、列表页的六列表格，
+   都在这里让位。它比 tablet 宽：1100px 的窗口不是平板，但那张表已经塌了
+   （标题列被固定列挤成 0 宽，整整一段 721~1180px 的死区）。
+   写成断点而不是各自 matchMedia，是为了 JS 与 CSS 认同一个数：
+   html[data-narrow] 给样式用，state.narrow 给组件用，改一处两边同时动。
+
    另外提供 coarse（粗指针 = 手指）——它与宽度是两件事：外接触摸屏的大屏也是
    coarse，需要更大的点击区，但不需要单列布局。
 
@@ -37544,6 +39260,7 @@ window.SRScreen = function () {
   const BP = {
     phone: 720,
     tablet: 1024,
+    narrow: 1180,
     shortSide: 480
   };
   const mq = q => typeof matchMedia === 'function' ? matchMedia(q) : {
@@ -37554,6 +39271,7 @@ window.SRScreen = function () {
   const queries = {
     phone: mq(`(max-width: ${BP.phone}px)`),
     tablet: mq(`(max-width: ${BP.tablet}px)`),
+    narrow: mq(`(max-width: ${BP.narrow}px)`),
     coarse: mq('(pointer: coarse)'),
     short: mq(`(max-height: ${BP.shortSide}px) and (orientation: landscape)`)
   };
@@ -37561,6 +39279,8 @@ window.SRScreen = function () {
     phone: queries.phone.matches,
     tablet: queries.tablet.matches,
     // 注意：phone 也满足 tablet
+    narrow: queries.narrow.matches,
+    // 多栏摆不下（编辑器知识栏 / 列表六列表格让位）
     desktop: !queries.tablet.matches,
     coarse: queries.coarse.matches,
     short: queries.short.matches,
@@ -37596,6 +39316,7 @@ window.SRScreen = function () {
     const el = document.documentElement;
     el.dataset.screen = state.phone ? 'phone' : state.tablet ? 'tablet' : 'desktop';
     if (state.touch) el.dataset.pointer = 'coarse';else delete el.dataset.pointer;
+    if (state.narrow) el.dataset.narrow = '';else delete el.dataset.narrow;
     if (state.short) el.dataset.short = '';else delete el.dataset.short;
   };
   applyAttrs();
@@ -37626,7 +39347,8 @@ window.SRScreen = function () {
     // 便捷判断（非 React 语境用）
     isPhone: () => state.phone,
     isTablet: () => state.tablet,
-    isTouch: () => state.touch
+    isTouch: () => state.touch,
+    isNarrow: () => state.narrow
   };
 }();
 
@@ -37750,6 +39472,7 @@ try { (() => {
     const u = String(url).trim();
     if (!u) return null;
     // 浏览器解析 scheme 时忽略控制字符/空白，实体也会先解码——按同样规则嗅探
+    // oxlint-disable-next-line no-control-regex -- 控制字符正是要剥掉的东西：浏览器解析 scheme 时会忽略它们
     const sniff = decodeEntities(u).replace(/[\u0000-\u0020]/g, '').toLowerCase();
     const m = sniff.match(/^([a-z][a-z0-9+.-]*):/);
     if (m) return SAFE_SCHEMES[m[1]] ? u : null;
@@ -38243,7 +39966,10 @@ try { (() => {
         return '- [[' + nameOf[other.id] + ']]' + (rel ? ' — ' + rel : '');
       }).filter(Boolean);
       const bodyMd = Md.blocksToMd(s.body || [], {
-        title: stripHtml(s.label),
+        /* 标题必须写「落盘的文件名」而不是原始 label：label 经 safeName 消毒/去重后
+           可能与原名不同（`a/b`、超长、重名），导入端按文件名掐掉开头那行 H1——
+           两者不一致时 H1 掐不掉，每往返一次正文就多出一行标题 */
+        title: nameOf[s.id],
         props: s.props,
         tags: s.tags,
         summary: stripHtml(s.summary || '')
@@ -38282,7 +40008,11 @@ try { (() => {
 
   /* ---------------- zip 读取（导入侧） ----------------
      支持 store（我们自己导出的）与 deflate（用户用系统/Obsidian 重新压过的），
-     deflate 走浏览器/Node 原生 DecompressionStream，依旧零依赖。 */
+     deflate 走浏览器/Node 原生 DecompressionStream，依旧零依赖。
+     入口是「用户选中一个文件」，但文件本身可能来自任何地方——必须有界：
+     条目数与解压后的总字节都设上限，否则一个 zip 炸弹就能把标签页内存吃光。 */
+  const MAX_ZIP_ENTRIES = 20000;
+  const MAX_ZIP_BYTES = 64 * 1024 * 1024; // 解压后总量 64MB——纯文本笔记仓库远到不了这里
   async function readZip(bytes) {
     const b = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes);
     const rd16 = p => b[p] | b[p + 1] << 8;
@@ -38296,9 +40026,11 @@ try { (() => {
     }
     if (eocd < 0) throw new Error('不是有效的 zip 文件');
     const count = rd16(eocd + 10);
+    if (count > MAX_ZIP_ENTRIES) throw new Error('压缩包条目过多（超过 ' + MAX_ZIP_ENTRIES + '），不像是笔记仓库');
     let p = rd32(eocd + 16);
     const dec = new TextDecoder();
     const out = [];
+    let total = 0;
     for (let n = 0; n < count; n++) {
       if (rd32(p) !== 0x02014b50) throw new Error('zip 目录损坏');
       const method = rd16(p + 10);
@@ -38315,6 +40047,8 @@ try { (() => {
         const resp = new Response(new Blob([data]).stream().pipeThrough(new DecompressionStream('deflate-raw')));
         data = new Uint8Array(await resp.arrayBuffer());
       } else if (method !== 0) throw new Error('不支持的压缩方式（' + method + '）');
+      total += data.length;
+      if (total > MAX_ZIP_BYTES) throw new Error('解压后超过 64MB，不像是笔记仓库');
       if (!name.endsWith('/')) out.push({
         path: name,
         text: dec.decode(data)
@@ -38461,6 +40195,8 @@ __ds_ns.Modal = __ds_scope.Modal;
 __ds_ns.Toast = __ds_scope.Toast;
 
 __ds_ns.Tooltip = __ds_scope.Tooltip;
+
+__ds_ns.memoryColor = __ds_scope.memoryColor;
 
 __ds_ns.toast = __ds_scope.toast;
 

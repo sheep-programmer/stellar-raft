@@ -26,6 +26,47 @@ if (!fs.existsSync(OXLINT)) {
 const config = JSON.parse(fs.readFileSync(SRC, 'utf8'));
 for (const key of Object.keys(config)) if (key.startsWith('x-')) delete config[key];
 
+/* ——— 仓库自带的加固层 ———
+   生成的规范配置只声明了 react / import 两个插件，而 oxlint 的 plugins 是「换掉」
+   而非「追加」默认值——于是 eslint / unicorn 那组 correctness 规则全部离线，
+   `npm run lint` 几乎什么都查不出来。这里把它们补回去。
+
+   no-undef 是重点：server.js 里 ADMIN_USER 漏导入，管理员一改密码就 500，
+   正是这条规则能在提交前当场拦下的那类错。
+
+   与本仓库既有写法冲突的几条先关掉，不为了 lint 去改几百处与本次无关的旧代码：
+     · no-unused-vars        —— 全站 `catch (e) { }` 的降级写法（约 90 处）
+     · no-unused-expressions —— `cond && fn()` 这种副作用短路（约 26 处）
+     · no-useless-fallback-in-spread —— `...(x || {})` 是本仓库一贯的显式兜底写法
+     · prefer-string-starts-ends-with —— 纯风格，mdcore 的正则与相邻几条同族，留作一体
+     · react-hooks/exhaustive-deps —— 全站 52 处，多数是刻意省略的依赖；机械补齐会改行为
+   生成配置里的规则后合入，永远盖过这里的默认值。 */
+const HARDEN = {
+  plugins: ['eslint', 'unicorn', 'oxc'],
+  env: { browser: true, node: true, es2024: true },
+  globals: { React: 'readonly', ReactDOM: 'readonly' },   // 浏览器内 Babel 编译，React 走全局
+  categories: { correctness: 'error' },
+  rules: {
+    'no-undef': 'error',
+    'no-unused-vars': 'off',
+    'no-unused-expressions': 'off',
+    'unicorn/no-useless-fallback-in-spread': 'off',
+    'unicorn/prefer-string-starts-ends-with': 'off',
+    'react-hooks/exhaustive-deps': 'off',
+  },
+};
+/* 测试里的 api(token, method, path, body) 是一个通吃的小助手，GET 传进去的 body
+   实际是 undefined；规则只看得见字面量，拦的是假阳性。应用代码里这条继续开着。 */
+const HARDEN_OVERRIDES = [
+  { files: ['tests/**'], rules: { 'unicorn/no-invalid-fetch-options': 'off' } },
+];
+config.plugins = [...new Set([...HARDEN.plugins, ...(config.plugins || [])])];
+config.env = { ...HARDEN.env, ...(config.env || {}) };
+config.globals = { ...HARDEN.globals, ...(config.globals || {}) };
+config.categories = { ...HARDEN.categories, ...(config.categories || {}) };
+config.rules = { ...HARDEN.rules, ...(config.rules || {}) };
+config.overrides = [...HARDEN_OVERRIDES, ...(config.overrides || [])];
+
 const dropRule = (name) => {
   delete (config.rules || {})[name];
   for (const ov of config.overrides || []) delete (ov.rules || {})[name];
@@ -38,7 +79,7 @@ const runArgs = (extra) => ['--config', DERIVED, ...extra];
 let result;
 for (let attempt = 0; attempt < 20; attempt++) {
   fs.writeFileSync(DERIVED, JSON.stringify(config, null, 2));
-  result = spawnSync(OXLINT, runArgs(targets.length ? targets : ['scripts', 'server', 'tests', 'components', 'assets']), {
+  result = spawnSync(OXLINT, runArgs(targets.length ? targets : ['scripts', 'server', 'tests', 'components', 'assets', 'ui_kits', 'docs', 'guidelines']), {
     cwd: ROOT,
     encoding: 'utf8',
   });

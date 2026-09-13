@@ -71,8 +71,12 @@ const UI_KIT_EXCLUDE = new Set(['api.js', 'tip.js']);
 /* Non-component exports that must still be re-exported on the public
    namespace (imperative helpers the cards / consumers call directly).
    Everything else that doesn't match its file basename stays private
-   (`unexposedExports`, e.g. memoryColor). */
-const EXPOSED_HELPERS = new Set(['components/overlay/Toast.jsx::toast']);
+   (`unexposedExports`). */
+const EXPOSED_HELPERS = new Set([
+  'components/overlay/Toast.jsx::toast',
+  // d.ts 与登记表都把 memoryColor 当公共 API 承诺出去（用法示例直接调用它）
+  'components/knowledge/MemoryBar.jsx::memoryColor',
+]);
 
 const args = process.argv.slice(2);
 const CHECK = args.includes('--check');

@@ -1,6 +1,6 @@
 # 星图 Stellar Raft — CI
-# lint → build（重新生成 _ds_bundle.js / _ds_manifest.json）→ node:test 测试套件
-# server 测试依赖 node:sqlite（Node 22.5+），构建依赖 devDependency @babel/standalone。
+# lint → build:check（_ds_bundle.js / _ds_manifest.json 与源码是否一致）→ node:test 测试套件
+# server 测试依赖 node:sqlite（Node 22.13+ 才不需要 --experimental-sqlite），构建依赖 devDependency @babel/standalone。
 name: CI
 
 on:
@@ -24,8 +24,10 @@ jobs:
       - name: Lint
         run: npm run lint
 
-      - name: Build design-system bundle
-        run: npm run build
+      # build:check 而不是 build：重建一次只会把产物盖成最新的，
+      # 「改了源码忘了重建」这种漂移要靠 --check 才会当场失败。
+      - name: Check design-system artifacts are in sync
+        run: npm run build:check
 
       - name: Test
         run: npm test
