@@ -231,3 +231,47 @@ test('readZip：解压后总量超过 64MB 拒绝（zip 炸弹防爆）', async 
   assert.ok(zip.length < 1024 * 1024, '压缩包本身很小，危险全在解压后');
   await assert.rejects(() => globalThis.SRVault.readZip(zip), /超过 64MB/);
 }, { timeout: 30000 });
+
+test('parseVault：正文里的星链接按 frontmatter 旧 id 重指到新 id，fav 随仓库往返', () => {
+  /* 回导时每颗星拿全新随机 id，正文里的 stellar-raft://star/<旧id> 曾全部
+     变成死链（只得到「这颗星已经不在星图里了」）。导出端把旧 id 写进
+     frontmatter，导入端据此重建指向。 */
+  const data = {
+    stars: [
+      { id: 'sA', con: 'c1', label: '甲星', fav: true, body: [{ id: 'r', type: 'rich' }, { id: 'p1', type: 'p', text: '去看 <a href="stellar-raft://star/sB" style="color:x">乙星</a>' }] },
+      { id: 'sB', con: 'c1', label: '乙星', body: [{ id: 'r', type: 'rich' }, { id: 'p1', type: 'p', text: '内容' }] },
+    ],
+    constellations: [{ id: 'c1', name: '域一' }],
+    connections: [{ a: 'sA', b: 'sB', rel: '参照' }],
+    account: { name: '我' },
+  };
+  const plan = globalThis.SRVault.parseVault(globalThis.SRVault.buildVault(data));
+  const a = plan.stars.find(s => s.label === '甲星');
+  const b = plan.stars.find(s => s.label === '乙星');
+  assert.equal(a.fav, true, 'fav 该随仓库往返');
+  assert.equal(b.fav, undefined);
+  assert.ok(a.body.some(bk => typeof bk.text === 'string' && bk.text.includes('stellar-raft://star/' + b.id)),
+    '正文星链接要重指到新 id');
+  assert.ok(!a.body.some(bk => typeof bk.text === 'string' && bk.text.includes('stellar-raft://star/sB')),
+    '旧 id 不该残留');
+  assert.equal(a.props.id, undefined, 'id/fav 是往返字段，不该混进用户 props');
+  assert.equal(a.props.fav, undefined);
+  assert.equal(plan.connections.length, 1, '连线照常按名重建');
+  // 老导出文件（frontmatter 无 id）：行为与从前一致，不炸
+  const legacy = globalThis.SRVault.parseVault([{ path: '域/X.md', text: '# X\n\n[链接](stellar-raft://star/sOld)\n' }]);
+  assert.equal(legacy.stars.length, 1);
+});
+
+test('parseVault：「关联」小节只认文末最后一个，其后的外来内容不丢', () => {
+  /* 外来仓库若恰好有同名小节，曾把其后到文末的全部正文（含无关小节）一起
+     截掉。现在要求「之后再无其它标题」，且小节内不像连线条目的块留在正文。 */
+  const foreign = [{ path: '域/X.md', text: '# X\n\n正文\n\n## 关联\n\n- [[别的星]] — 有关系\n\n这张表要活着\n\n| a | b |\n| --- | --- |\n| 1 | 2 |\n' }];
+  const plan = globalThis.SRVault.parseVault(foreign);
+  const x = plan.stars[0];
+  assert.ok(x.body.some(bk => bk.type === 'table'), '关联小节后的表格不该被吞');
+  assert.ok(!x.body.some(bk => typeof bk.text === 'string' && bk.text.includes('别的星')), '连线条目本身不留在正文');
+  // 同名小节后面还有别的标题 → 那不是连线区，整个当正文
+  const mid = globalThis.SRVault.parseVault([{ path: '域/Y.md', text: '# Y\n\n## 关联\n\n- [[谁]] — x\n\n## 后话\n\n还在\n' }]);
+  const y = mid.stars[0];
+  assert.ok(y.body.some(bk => typeof bk.text === 'string' && bk.text.includes('后话')), '中段的「关联」小节不构成截断点');
+});

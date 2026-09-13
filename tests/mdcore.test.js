@@ -297,3 +297,61 @@ test('摘要不会每来回一次就在正文里多复制一遍', () => {
   const other = blocksToMd([{ id: 'r', type: 'rich' }, { id: 'h', type: 'h2', text: '小节' }], { summary });
   assert.match(other, /^定域隐变量/);
 });
+
+test('dataURL 图片回导不蒸发：导出内联的小图，导入原样回来', () => {
+  /* 导出端把 ≤100KB 的本地图片以 dataURL 内联（合法 Markdown），但导入端的
+     协议白名单曾把 data: 一概拒之门外——回导时整张图静默蒸发，正文只剩 "!x"。
+     现在 image 块单独放行 data:image/*;base64。 */
+  const img = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==';
+  const md = blocksToMd([{ id: 'b1', type: 'image', alt: '像素', src: img }], {});
+  const back = parseMdBlocks(md);
+  assert.equal(back[0].type, 'image');
+  assert.equal(back[0].src, img);
+  assert.equal(back[0].alt, '像素');
+  // data: 的其它形态（非图片/非 base64）仍然拒收——开口只给图片
+  const evil = parseMdBlocks('![x](data:text/html;base64,PHNjcmlwdD4=)');
+  assert.equal(evil[0].type, 'p');
+});
+
+test('超限图片占位：回导成一段读得懂的说明，而不是一张永久裂图', () => {
+  const md = blocksToMd([{ id: 'b1', type: 'image', alt: '大图', src: 'data:image/png;base64,' + 'A'.repeat(100001) }], {});
+  assert.ok(!md.includes('](') || !/!\[[^\]]*\]\((?!>)/.test(md.split('\n').find(l => l.includes('100KB')) || ''), '占位不能写成图片语法');
+  const back = parseMdBlocks(md);
+  assert.equal(back[0].type, 'quote');
+  assert.match(back[0].text, /100KB/);
+});
+
+test('多行块 round-trip：引用 / 列表 / 待办 / 标注的续行不再掉出结构', () => {
+  /* htmlToMd 把 <br> 还原成 \n，但导出曾只给首行加结构前缀——回导时第二行起
+     掉出结构变成独立段落，块被静默拆开。导出端逐行补前缀，导入端把续行并回。 */
+  const blocks = [
+    { id: 'q', type: 'quote', text: '第一行<br>第二行' },
+    { id: 'b', type: 'bulleted', text: '甲<br>甲续' },
+    { id: 'n', type: 'numbered', text: '乙<br>乙续' },
+    { id: 't', type: 'todo', checked: true, text: '丙<br>丙续' },
+    { id: 'c', type: 'callout', tone: 'blue', text: '丁<br>丁续' },
+  ];
+  const md = blocksToMd(blocks, {});
+  assert.match(md, /> 第一行\n> 第二行/, '引用续行也要带 > 前缀');
+  assert.match(md, /- 甲\n {2}甲续/, '列表续行缩进到与首行文字对齐');
+  const back = parseMdBlocks(md);
+  assert.deepEqual(back.map(b => b.type), ['quote', 'bulleted', 'numbered', 'todo', 'callout'],
+    '五种多行块回导后仍各是一块，不散架');
+  for (const [i, frag] of [[0, '第二行'], [1, '甲续'], [2, '乙续'], [3, '丙续'], [4, '丁续']]) {
+    assert.ok(back[i].text.includes(frag), `${back[i].type} 丢了续行 ${frag}`);
+  }
+  // 嵌套列表项不被误吞成续行；父项的续行（导出端写在嵌套项之前）照常并回
+  const nested = parseMdBlocks('- 父\n  续行\n  - 子');
+  assert.equal(nested.length, 2);
+  assert.equal(nested[1].indent, 1);
+  assert.ok(nested[0].text.includes('续行'));
+});
+
+test('BOM 与空 frontmatter：Windows 记事本的文件不再丢 tags，空 --- 不变双分隔线', () => {
+  const bom = parseFrontmatter('\uFEFF---\ntags: ["a"]\n---\n正文');
+  assert.deepEqual(bom.tags, ['a']);
+  assert.equal(bom.body.trim(), '正文');
+  const emp = parseFrontmatter('---\n---\n正文');
+  assert.equal(emp.props, null);
+  assert.equal(emp.body.trim(), '正文');
+});

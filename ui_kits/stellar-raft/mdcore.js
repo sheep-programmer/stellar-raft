@@ -77,9 +77,24 @@
      嵌套列表不再被压平；非列表的 4 空格缩进段仍识别为 plaintext 代码块。 */
   const LIST_RE = /^([-*+]|\d+[.)])\s/;
   function parseMdBlocks(text) {
-    const lines = String(text == null ? '' : text).replace(/\r\n?/g, '\n').split('\n');
+    const lines = String(text == null ? '' : text).replace(/\r\n?/g, '\n').replace(/^\uFEFF/, '').split('\n');
     const out = [];
     let i = 0, m;
+    /* 列表项的续行（导出端按标记宽度缩进续行；CommonMark 同样把更深缩进的
+       内容归给列表项）。只并「更深缩进、非空、本身不是新结构」的行，
+       嵌套列表项/围栏/标题/表格照旧各立门户。 */
+    const absorb = (bk, minLead) => {
+      while (i < lines.length) {
+        const raw2 = lines[i];
+        if (!raw2.trim()) break;
+        const lead2 = (raw2.match(/^[ \t]*/)[0] || '').replace(/\t/g, '  ').length;
+        if (lead2 < minLead) break;
+        const t2 = raw2.trim();
+        if (LIST_RE.test(t2) || /^(`{3,}|-{3,}|\*{3,}|#{1,6}(\s|$)|\$\$|\|)/.test(t2)) break;
+        bk.text += '<br>' + mdInline(t2);
+        i++;
+      }
+    };
     while (i < lines.length) {
       const raw = lines[i];
       const l = raw.trim();
@@ -99,11 +114,11 @@
         // m[1] 现在是围栏本身，语言在 m[2]
         if (closed || buf.length) out.push({ id: uid(), type: 'code', lang: (m[2] || 'plaintext').toLowerCase(), code: buf.join('\n') });
       }
-      else if ((m = l.match(/^[-*+]\s+\[( |x|X)\](?:\s+(.*)|$)/))) { out.push({ id: uid(), type: 'todo', checked: m[1].toLowerCase() === 'x', text: mdInline(m[2] || ''), ...ind }); i++; }
+      else if ((m = l.match(/^[-*+]\s+\[( |x|X)\](?:\s+(.*)|$)/))) { const bk = { id: uid(), type: 'todo', checked: m[1].toLowerCase() === 'x', text: mdInline(m[2] || ''), ...ind }; out.push(bk); i++; absorb(bk, lead + 2); }
       else if (/^(-{3,}|\*{3,})$/.test(l)) { out.push({ id: uid(), type: 'divider' }); i++; }
       // 裸标记（`-` / `1.` 无内容）也是合法的空列表项——与导出端的空块互逆
-      else if ((m = l.match(/^[-*+](?:\s+(.*)|$)/))) { out.push({ id: uid(), type: 'bulleted', text: mdInline(m[1] || ''), ...ind }); i++; }
-      else if ((m = l.match(/^(\d+)[.)](?:\s+(.*)|$)/))) { out.push({ id: uid(), type: 'numbered', text: mdInline(m[2] || ''), ...ind, ...(m[1] !== '1' ? { start: parseInt(m[1], 10) } : {}) }); i++; }
+      else if ((m = l.match(/^[-*+](?:\s+(.*)|$)/))) { const bk = { id: uid(), type: 'bulleted', text: mdInline(m[1] || ''), ...ind }; out.push(bk); i++; absorb(bk, lead + 2); }
+      else if ((m = l.match(/^(\d+)[.)](?:\s+(.*)|$)/))) { const bk = { id: uid(), type: 'numbered', text: mdInline(m[2] || ''), ...ind, ...(m[1] !== '1' ? { start: parseInt(m[1], 10) } : {}) }; out.push(bk); i++; absorb(bk, lead + 2); }
       else if (/^(\t| {4,})\S/.test(raw)) {                                // 缩进代码：连续缩进行整体保留为 plaintext 代码块
         const buf = [];
         while (i < lines.length
@@ -135,22 +150,34 @@
       else if ((m = l.match(/^!\[((?:\\[[\]]|[^\]])*)\]\((<[^>\n]+>|[^)\s]+)(?:\s+"[^"]*")?\)$/))) {
         const alt = m[1].replace(/\\([[\]])/g, '$1');
         const src = m[2].replace(/^<|>$/g, '');
-        out.push(safeUrl(src) ? { id: uid(), type: 'image', alt, src } : { id: uid(), type: 'p', text: mdInline(l) });
+        /* data:image/* 单独放行：导出端会把 ≤100KB 的本地图片以 dataURL 内联
+           （blocksToMd 的 image 分支），不收回来就是「导得出、导不回」——图在
+           回导时静默蒸发。只认 base64 图片，data: 的其它形态（HTML/脚本）仍拒。 */
+        const dataImg = /^data:image\/[a-z0-9.+-]+;base64,[a-z0-9+/=]+$/i.test(src);
+        out.push(safeUrl(src) || dataImg ? { id: uid(), type: 'image', alt, src } : { id: uid(), type: 'p', text: mdInline(l) });
         i++;
       }
       // 标题支持到 ######：编辑器块模型只有三级，h4–h6 折入 h3（导出仍是合法 Markdown）。
       // 裸「##」也是合法的空标题（CommonMark）——字面值段落由导出端 escLead 转义护住
       else if ((m = l.match(/^(#{1,6})(?:\s+(.*)|\s*$)/))) { out.push({ id: uid(), type: 'h' + Math.min(3, m[1].length), text: mdInline(m[2] || '') }); i++; }
-      // GFM 提示框 > [!NOTE] / [!TIP]…（Obsidian 同语法）→ 标注块，吸收随后的 > 续行
+      // GFM 提示框 > [!NOTE] / [!TIP]…（Obsidian 同语法）→ 标注块，吸收随后的 > 续行。
+      // 续行按 <br> 并回（导出端对多行标注逐行补 > 前缀）——外来的软换行标注同形，
+      // 保留源文件的换行比塌成一行更忠实
       else if ((m = l.match(/^>\s*\[!(\w+)\]\s*(.*)$/))) {
         const buf = m[2] ? [m[2]] : [];
         i++;
         while (i < lines.length && /^>\s?/.test(lines[i].trim()) && !/^>\s*\[!/.test(lines[i].trim())) {
           const t = lines[i].trim().replace(/^>\s?/, ''); if (t) buf.push(t); i++;
         }
-        out.push({ id: uid(), type: 'callout', tone: m[1].toLowerCase() === 'tip' ? 'gold' : 'blue', text: mdInline(buf.join(' ')) });
+        out.push({ id: uid(), type: 'callout', tone: m[1].toLowerCase() === 'tip' ? 'gold' : 'blue', text: buf.map(x => mdInline(x)).join('<br>') });
       }
-      else if ((m = l.match(/^>\s?(.*)/))) { out.push({ id: uid(), type: 'quote', text: mdInline(m[1]) }); i++; }
+      // 连续的引用行属于同一个引用块（导出端对多行引用逐行补 > 前缀）；
+      // 后随的 > [!…] 是新的提示框，不吞
+      else if ((m = l.match(/^>\s?(.*)/))) {
+        const parts = [m[1]]; i++;
+        while (i < lines.length && /^>\s?/.test(lines[i].trim()) && !/^>\s*\[!/.test(lines[i].trim())) { parts.push(lines[i].trim().replace(/^>\s?/, '')); i++; }
+        out.push({ id: uid(), type: 'quote', text: parts.map(x => mdInline(x)).join('<br>') });
+      }
       // <details><summary>…</summary>…</details> → 折叠块（与导出的 toggle 语法互逆）
       else if (/^<details>/i.test(l)) {
         const buf = [raw];
@@ -181,9 +208,17 @@
     return s.replace(/^["']|["']$/g, '');
   };
   function parseFrontmatter(text) {
-    const src = String(text == null ? '' : text).replace(/\r\n?/g, '\n');
+    /* BOM 先剥：Windows 记事本存的 .md 常带 \uFEFF，不剥的话开头的 ---
+       对不上，整个 frontmatter 退化成正文里的分隔线，tags/props 全丢 */
+    const src = String(text == null ? '' : text).replace(/\r\n?/g, '\n').replace(/^\uFEFF/, '');
     const m = src.match(/^---\n([\s\S]*?)\n---\n?/);
-    if (!m) return { props: null, tags: null, body: src };
+    if (!m) {
+      // 空 frontmatter（---\n---\n）：主正则要求包围体里至少一个换行，
+      // 空的匹配不上会退化成两个分隔线块——单独认下来，按「无属性」处理
+      const empty = src.match(/^---\n---\n?/);
+      if (empty) return { props: null, tags: null, body: src.slice(empty[0].length) };
+      return { props: null, tags: null, body: src };
+    }
     const props = {};
     let tags = null;
     const fmLines = m[1].split('\n');
@@ -271,21 +306,35 @@
         case 'h3': lines.push('### ' + htmlToMd(b.text)); break;
         case 'p': lines.push(escLead(htmlToMd(b.text))); break;
         // 引用/列表文本若以 [ 开头（[!NOTE]、[ ] 之类），转义护住——
-        // 否则导入端会把引用误认成 callout、把列表项误认成 todo
-        case 'quote': lines.push('> ' + htmlToMd(b.text).replace(/^\[!/, '\\[!')); break;
+        // 否则导入端会把引用误认成 callout、把列表项误认成 todo。
+        // 多行内容（块内的 <br>）续行必须同样补结构前缀：只给首行加前缀的话，
+        // 回导时第二行起就掉出结构，变成独立段落——块被静默拆开
+        case 'quote': lines.push(htmlToMd(b.text).replace(/^\[!/, '\\[!').split('\n').map(x => '> ' + x).join('\n')); break;
         // callout 用 GFM 提示框语法（大写才被 GitHub 渲染；Obsidian 大小写皆可）
-        case 'callout': lines.push('> [!' + (b.tone === 'blue' ? 'NOTE' : 'TIP') + ']\n> ' + htmlToMd(b.text).replace(/^\[!/, '\\[!')); break;
-        case 'bulleted': lines.push(pad + '- ' + htmlToMd(b.text).replace(/^\[/, '\\[')); break;
+        case 'callout': lines.push('> [!' + (b.tone === 'blue' ? 'NOTE' : 'TIP') + ']\n' + htmlToMd(b.text).replace(/^\[!/, '\\[!').split('\n').map(x => '> ' + x).join('\n')); break;
+        // 续行缩进到与首行文字对齐（标记宽度），导入端据此并回本项
+        case 'bulleted': {
+          const t = htmlToMd(b.text).replace(/^\[/, '\\[').split('\n');
+          lines.push(pad + '- ' + t[0] + (t.length > 1 ? '\n' + t.slice(1).map(x => pad + '  ' + x).join('\n') : ''));
+          break;
+        }
         case 'numbered': {
           const lvl = b.indent || 0;
           counters = counters.slice(0, lvl + 1);
           if (counters[lvl] == null) counters[lvl] = 0;
           if (counters[lvl] === 0 && b.start) counters[lvl] = b.start - 1;
           counters[lvl] += 1;
-          lines.push(pad + counters[lvl] + '. ' + htmlToMd(b.text).replace(/^\[/, '\\['));
+          const marker = counters[lvl] + '. ';
+          const t = htmlToMd(b.text).replace(/^\[/, '\\[').split('\n');
+          lines.push(pad + marker + t[0] + (t.length > 1 ? '\n' + t.slice(1).map(x => pad + ' '.repeat(marker.length) + x).join('\n') : ''));
           break;
         }
-        case 'todo': lines.push(pad + '- [' + (b.checked ? 'x' : ' ') + '] ' + htmlToMd(b.text)); break;
+        case 'todo': {
+          const marker = '- [' + (b.checked ? 'x' : ' ') + '] ';
+          const t = htmlToMd(b.text).split('\n');
+          lines.push(pad + marker + t[0] + (t.length > 1 ? '\n' + t.slice(1).map(x => pad + ' '.repeat(marker.length) + x).join('\n') : ''));
+          break;
+        }
         // toggle 用标准可折叠 <details>，标注其为折叠块
         case 'toggle': lines.push('<details>\n<summary>' + htmlToMd(b.text) + '</summary>\n\n' + htmlToMd(b.child || '') + '\n</details>'); break;
         case 'math': lines.push('$$\n' + (b.tex || '') + '\n$$'); break;
@@ -309,7 +358,10 @@
         case 'image': {
           const src0 = b.src || '';
           const alt = String(b.alt || '').replace(/\r?\n/g, ' ').replace(/([[\]])/g, '\\$1');
-          if (/^data:/.test(src0) && src0.length >= 100000) { lines.push('![' + (alt || '本地图片') + '](本地图片-过大未内联)'); break; }
+          /* 超限 dataURL 不内联。占位不能写成图片语法——回导会生成一个 src 指向
+             占位文字的 image 块，编辑器里就是一张永久裂图。写成引用行：导入回来
+             是一段能读懂的说明，而不是一块坏图。 */
+          if (/^data:/.test(src0) && src0.length >= 100000) { lines.push('> 📷 本地图片「' + (alt || '未命名') + '」超过 100KB，未内联进这份导出'); break; }
           const src = /[\s()]/.test(src0) ? '<' + src0.replace(/[<>]/g, '') + '>' : src0;
           lines.push('![' + alt + '](' + src + ')');
           break;
@@ -342,6 +394,11 @@
     };
     pushFm('type', p.type); pushFm('status', p.status); pushFm('source', p.source);
     pushFm('alias', p.alias); pushFm('nextReview', p.nextReview);
+    /* id 与 fav 随 frontmatter 走（vault 导出时传入）：导入端靠旧 id 重建
+       正文里 stellar-raft://star/<旧id> 的指向——没有它，回导后这些链接
+       全部指向不存在的星，变成死链。fav 是星上的收藏标记，不该默默丢。 */
+    if (o.id) fm.push('id: ' + String(o.id).replace(/[^\w-]/g, ''));
+    if (o.fav) fm.push('fav: true');
     // tags 恒写 JSON 数组（合法 YAML flow）——「a,b」这样的标签不会被逗号劈成两个
     if (o.tags && o.tags.length) fm.push('tags: ' + JSON.stringify(o.tags.map(String)));
     const front = fm.length ? '---\n' + fm.join('\n') + '\n---\n\n' : '';

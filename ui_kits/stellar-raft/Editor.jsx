@@ -1925,7 +1925,11 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
   const importInputRef = React.useRef(null);
   const importMdText = (name, text) => {
     const fm = (MD && MD.parseFrontmatter) ? MD.parseFrontmatter(text) : { props: null, tags: null, body: text };
-    const nbs = parseMdBlocks(fm.body);
+    let nbs = parseMdBlocks(fm.body);
+    /* 与文件名相同的开头 H1 掐掉（那是导出端写的标题行，vault 导入同款规则）——
+       不掐的话，把刚导出的「星名.md」导回来，正文里每往返一次多一行标题 */
+    if (nbs.length && nbs[0].type === 'h1'
+      && liveText(nbs[0]).trim().toLowerCase() === String(name || '').trim().toLowerCase()) nbs = nbs.slice(1);
     if (!nbs.length && !fm.props) { flash('文件是空的 · 没有可导入的内容'); return; }
     if (fm.props) { star.props = Object.assign(star.props || {}, fm.props); }
     if (fm.tags && fm.tags.length) setTags(ts => { const nt = [...ts, ...fm.tags.filter(t => !ts.includes(t))]; syncTags(nt); return nt; });

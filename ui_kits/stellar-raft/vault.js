@@ -129,6 +129,9 @@
            两者不一致时 H1 掐不掉，每往返一次正文就多出一行标题 */
         title: nameOf[s.id],
         props: s.props, tags: s.tags, summary: stripHtml(s.summary || ''),
+        /* id 与 fav 进 frontmatter：回导时每颗星会拿到全新随机 id，正文里的
+           stellar-raft://star/<旧id> 全靠这个旧 id 重建指向，否则回导后全是死链 */
+        id: s.id, fav: s.fav,
       });
       const text = bodyMd + (related.length ? '\n## 关联\n\n' + related.join('\n') + '\n' : '');
       entries.push({ path: safeName(conName(s.con)) + '/' + nameOf[s.id] + '.md', text });
@@ -225,28 +228,54 @@
       const fm = Md.parseFrontmatter(e.text);
       let blocks = Md.parseMdBlocks(fm.body);
       if (blocks.length && blocks[0].type === 'h1' && norm(stripHtmlText(blocks[0].text)) === norm(fname)) blocks = blocks.slice(1);
-      const relIdx = blocks.findIndex(bk => /^h[23]$/.test(bk.type) && stripHtmlText(bk.text) === '关联');
+      /* 「## 关联」小节只认「文末最后一个、且之后再无其它标题」的那一个——
+         外来仓库若恰好有同名小节，其后的正文小节（甚至整章）会被一起截掉。
+         小节内不像连线条目的块（外来的表格/代码/普通段落）留在正文里，不吞。 */
+      let relIdx = -1;
+      blocks.forEach((bk, ix) => { if (/^h[23]$/.test(bk.type) && stripHtmlText(bk.text) === '关联') relIdx = ix; });
       let bodyBlocks = blocks;
-      if (relIdx >= 0) {
-        bodyBlocks = blocks.slice(0, relIdx);
+      if (relIdx >= 0 && !blocks.slice(relIdx + 1).some(bk => /^h[1-3]$/.test(bk.type))) {
+        const kept = [];
         blocks.slice(relIdx + 1).forEach(bk => {
-          if (bk.type !== 'bulleted' && bk.type !== 'p') return;
-          const t = stripHtmlText(bk.text);
-          const m = t.match(WIKI_RE);
-          if (m) pending.push({ fromName: fname, targetName: m[1].trim(), rel: t.replace(WIKI_RE, '').replace(/^[\s—–-]+/, '').trim() });
+          if (bk.type === 'bulleted' || bk.type === 'p') {
+            const t = stripHtmlText(bk.text);
+            const m = t.match(WIKI_RE);
+            if (m) { pending.push({ fromName: fname, targetName: m[1].trim(), rel: t.replace(WIKI_RE, '').replace(/^[\s—–-]+/, '').trim() }); return; }
+          }
+          kept.push(bk);
         });
+        bodyBlocks = [...blocks.slice(0, relIdx), ...kept];
       }
       if (!consByName.has(folder)) consByName.set(folder, { id: 'c' + Math.random().toString(36).slice(2, 7), name: folder });
       const id = 's' + Math.random().toString(36).slice(2, 8);
       const firstP = bodyBlocks.find(bk => bk.type === 'p' && stripHtmlText(bk.text));
+      /* frontmatter 里的 id/fav 是应用自己的往返字段，不是用户的自定义属性——
+         摘出来用掉，别留在 props 面板上 */
+      const props = { ...(fm.props || {}) };
+      const oldId = props.id ? String(props.id) : null;
+      const fav = String(props.fav) === 'true';
+      delete props.id; delete props.fav;
       stars.push({
         id, con: consByName.get(folder).id, label: fname,
         summary: firstP ? stripHtmlText(firstP.text).slice(0, 160) : '',
-        tags: fm.tags || [], props: fm.props || {},
+        tags: fm.tags || [], props,
         importance: 1, strength: 0.5,
+        ...(fav ? { fav: true } : {}),
+        oldId,
         body: [{ id: id + '-r', type: 'rich' }, ...bodyBlocks, ...(bodyBlocks.length ? [] : [{ id: id + '-p', type: 'p', text: '' }])],
       });
     });
+    /* 正文里的 stellar-raft://star/<旧id> 按 frontmatter 带回的旧 id 重指到新 id——
+       没有这一步，回导后正文里的星链接全部指向不存在的星（老导出文件没有 id
+       字段，映射为空，行为与从前一致：链接可见但点不动） */
+    const idMap = new Map();
+    stars.forEach(s => { if (s.oldId && !idMap.has(s.oldId)) idMap.set(s.oldId, s.id); });
+    if (idMap.size) stars.forEach(s => s.body.forEach(bk => {
+      if (bk && typeof bk.text === 'string' && bk.text.includes('stellar-raft://star/')) {
+        idMap.forEach((nu, old) => { bk.text = bk.text.split('stellar-raft://star/' + old).join('stellar-raft://star/' + nu); });
+      }
+    }));
+    stars.forEach(s => { delete s.oldId; });
     const byName = new Map(stars.map(s => [norm(s.label), s]));
     const connections = [];
     const seen = new Set();
