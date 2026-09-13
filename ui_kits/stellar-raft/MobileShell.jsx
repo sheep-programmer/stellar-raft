@@ -198,10 +198,45 @@ function MobileTabBar({ view, onView, onReview, onMore, dueN, inboxN, drawerOpen
   );
 }
 
+/* ---------- 模态焦点（抽屉与底部弹层共用）----------
+   与 EditorMenus 的 useModalFocus 同一套语义（进场移焦入内、Tab 圈内回绕、
+   退场归还），但这两个组件是「常驻挂载、open 开合」的，钩子得跟着 open 走。
+   不接键盘的触屏用户无感；外接键盘 / 开关控制 / VoiceOver 用户此前打开抽屉后
+   焦点还在背景上，Tab 直接穿过弹层——aria-modal 形同虚设。 */
+function usePanelFocus(open, ref) {
+  React.useEffect(() => {
+    if (!open) return;
+    const prev = document.activeElement;
+    const root = ref.current;
+    if (root && !root.contains(document.activeElement)) {
+      const first = root.querySelector('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])');
+      if (first) first.focus(); else if (root.focus) root.focus();
+    }
+    const onKey = (e) => {
+      if (e.key !== 'Tab') return;
+      const r = ref.current; if (!r) return;
+      const list = Array.from(r.querySelectorAll(
+        'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      )).filter(el => el.offsetWidth || el.offsetHeight || el === document.activeElement);
+      if (!list.length) { e.preventDefault(); return; }
+      const inside = r.contains(document.activeElement);
+      const i = list.indexOf(document.activeElement);
+      if (e.shiftKey && (i <= 0 || !inside)) { e.preventDefault(); list[list.length - 1].focus(); }
+      else if (!e.shiftKey && (i === list.length - 1 || !inside)) { e.preventDefault(); list[0].focus(); }
+    };
+    window.addEventListener('keydown', onKey, true);
+    return () => {
+      window.removeEventListener('keydown', onKey, true);
+      if (prev && prev.focus && document.contains(prev)) prev.focus();
+    };
+  }, [open]);   // eslint-disable-line react-hooks/exhaustive-deps
+}
+
 /* ---------- 抽屉 ----------
    装的就是桌面那套完整侧栏，不做第二份导航——两边永远同步。
    点遮罩 / 按 Esc / 选中任一目的地都关。 */
 function MobileDrawer({ open, onClose, children }) {
+  const panelRef = React.useRef(null);
   React.useEffect(() => { injectMobileCss(); }, []);
   React.useEffect(() => {
     if (!open) return;
@@ -209,11 +244,12 @@ function MobileDrawer({ open, onClose, children }) {
     document.addEventListener('keydown', k);
     return () => document.removeEventListener('keydown', k);
   }, [open, onClose]);
+  usePanelFocus(open, panelRef);
   if (!open) return null;
   return (
     <React.Fragment>
       <div className="sr-m-mask" onClick={onClose} />
-      <div className="sr-m-panel" role="dialog" aria-modal="true" aria-label="导航菜单">
+      <div ref={panelRef} className="sr-m-panel" role="dialog" aria-modal="true" aria-label="导航菜单" tabIndex={-1}>
         {children}
       </div>
     </React.Fragment>
@@ -223,6 +259,7 @@ function MobileDrawer({ open, onClose, children }) {
 /* ---------- 底部弹层 ----------
    手机上代替「浮在鼠标旁的卡片 / 菜单」。title 可省，省了就只有一根抓手。 */
 function MobileSheet({ open, onClose, title, children, footer }) {
+  const sheetRef = React.useRef(null);
   React.useEffect(() => { injectMobileCss(); }, []);
   React.useEffect(() => {
     if (!open) return;
@@ -230,11 +267,12 @@ function MobileSheet({ open, onClose, title, children, footer }) {
     document.addEventListener('keydown', k);
     return () => document.removeEventListener('keydown', k);
   }, [open, onClose]);
+  usePanelFocus(open, sheetRef);
   if (!open) return null;
   return (
     <React.Fragment>
       <div className="sr-m-mask" style={{ zIndex: 129 }} onClick={onClose} onContextMenu={(e) => e.preventDefault()} />
-      <div className="sr-m-sheet" role="dialog" aria-modal="true" aria-label={title || '面板'}>
+      <div ref={sheetRef} className="sr-m-sheet" role="dialog" aria-modal="true" aria-label={title || '面板'} tabIndex={-1}>
         <div className="sr-m-grip" aria-hidden="true" />
         {title && (
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '4px 14px 10px', borderBottom: '1px solid var(--line)', flex: 'none' }}>

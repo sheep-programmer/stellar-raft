@@ -427,6 +427,7 @@ function AIConfig({ onClose }) {
                   value={prov.model}
                   onChange={(e) => setProv({ model: e.target.value })}
                   placeholder={provider.id === 'custom' ? '例如 qwen3-32b / deepseek-v3 / llama4' : '填写模型 ID'}
+                  aria-label="模型 ID"
                   icon="pen-line"
                   size="md"
                   style={{ fontFamily: 'var(--font-mono)' }}

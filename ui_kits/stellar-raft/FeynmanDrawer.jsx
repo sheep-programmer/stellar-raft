@@ -485,9 +485,12 @@ function FeynmanDrawer({ starId, onClose, onOpenAIConfig }) {
             </div>
           )}
 
-          {/* AI student chat — 真实多轮滚动（引导卡在场时先不开讲） */}
+          {/* AI student chat — 真实多轮滚动（引导卡在场时先不开讲）。
+              role=log + aria-live：新消息是这条功能的核心反馈环，不播报的话
+              盲人用户讲完一段话，完全不知道 AI 学生回了什么 */}
           {!aiGate && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+            <div role="log" aria-live="polite" aria-label="与 AI 学生的对话"
+              style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               {messages.map((m, i) => (
                 <Bubble key={i} who={m.who} name={m.name} note={m.note}>{m.text}</Bubble>
               ))}
@@ -510,6 +513,7 @@ function FeynmanDrawer({ starId, onClose, onOpenAIConfig }) {
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={onKeyDown}
                   placeholder={gated ? '先写下这颗星，再来讲给 AI 学生' : aiGate ? '先接入 AI 学生，或选择本地学生' : canIgnite ? '还想补充就继续讲…' : '把你的理解讲给 AI 学生…'}
+                  aria-label="把你的理解讲给 AI 学生"
                   icon="message-circle"
                   size="md"
                   disabled={thinking || gated || aiGate}

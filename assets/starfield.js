@@ -40,12 +40,21 @@
 
   class Starfield extends HTMLElement {
     connectedCallback() {
+      /* 纯装饰背景：对读屏隐藏，否则有的会念出「空白画布/图像」 */
+      this.setAttribute('aria-hidden', 'true');
       this.canvas = document.createElement('canvas');
+      this.canvas.setAttribute('aria-hidden', 'true');
       Object.assign(this.style, { position: this.style.position || 'absolute', inset: '0', display: 'block', pointerEvents: 'none' });
       Object.assign(this.canvas.style, { width: '100%', height: '100%', display: 'block' });
       this.appendChild(this.canvas);
       this.ctx = this.canvas.getContext('2d');
       this.reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      /* 页面开着时切系统设置也要跟：只在挂载时读一次的话，开着页去开「减少动态
+         效果」的人得不到任何变化。reduced 为真时 rAF 循环里 dt=0（画面静止），
+         恢复时无需重建，下一帧自然继续。 */
+      this._mq = matchMedia('(prefers-reduced-motion: reduce)');
+      this._mqChange = (e) => { this.reduced = e.matches; };
+      if (this._mq.addEventListener) this._mq.addEventListener('change', this._mqChange);
       this._resize = this.resize.bind(this);
       window.addEventListener('resize', this._resize);
       this.meteor = null;
@@ -55,6 +64,7 @@
     }
     disconnectedCallback() {
       window.removeEventListener('resize', this._resize);
+      if (this._mq && this._mq.removeEventListener) this._mq.removeEventListener('change', this._mqChange);
       cancelAnimationFrame(this._raf);
     }
     resize() {

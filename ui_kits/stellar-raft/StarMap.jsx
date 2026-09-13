@@ -289,6 +289,7 @@ function PopMenu({ x, y, width = 228, header, footer, items, onClose }) {
   }, [x, y, items.length]);
   return (
     <div ref={ref} role="menu" tabIndex={-1} className="sr-focus-ring" onKeyDown={onKey}
+      aria-activedescendant={active >= 0 && items[active] && !items[active].sep ? 'sr-popmenu-item-' + active : undefined}
       onPointerDown={(e) => e.stopPropagation()} onContextMenu={(e) => e.preventDefault()}
       style={{ position: 'fixed', left: pos ? pos.left : x, top: pos ? pos.top : y,
         visibility: pos ? 'visible' : 'hidden', width, zIndex: 60, outline: 'none' }}>
@@ -299,7 +300,7 @@ function PopMenu({ x, y, width = 228, header, footer, items, onClose }) {
         {items.map((it, i) => it.sep
           ? <div key={'sep' + i} role="separator" style={{ height: 1, background: 'var(--line)', margin: '5px 6px' }} />
           : (
-            <div key={it.label} role="menuitem" aria-disabled={it.disabled || undefined}
+            <div key={it.label} role="menuitem" id={'sr-popmenu-item-' + i} aria-disabled={it.disabled || undefined}
               onMouseEnter={() => { if (!it.disabled) setActive(i); }}
               onMouseLeave={() => setActive(a => (a === i ? -1 : a))}
               onClick={() => pick(it)}

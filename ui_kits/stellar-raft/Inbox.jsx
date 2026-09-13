@@ -508,7 +508,7 @@ function Inbox({ onFocusCon, onOpen }) {
       )}
 
       {toast && (
-        <div style={{ position: 'fixed', bottom: 26, left: '50%', transform: 'translateX(-50%)', zIndex: 95, animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
+        <div role="status" style={{ position: 'fixed', bottom: 26, left: '50%', transform: 'translateX(-50%)', zIndex: 95, animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
           <GlassPanel strong radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '10px 18px' }}>
             <Icon name={toast.tone === 'danger' ? 'circle-alert' : 'check'} size={16} color={toast.tone === 'danger' ? 'var(--danger)' : 'var(--gold)'} /><span style={{ fontSize: 13.5, color: 'var(--text-1)' }}>{toast.msg}</span>
             {toast.con && onFocusCon && (

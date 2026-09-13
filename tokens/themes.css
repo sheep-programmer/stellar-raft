@@ -44,7 +44,7 @@
   /* ---- Ink — deep navy, three clear steps of contrast on the pale field ---- */
   --text-1: rgba(18, 26, 50, 0.95); /* primary */
   --text-2: rgba(28, 39, 70, 0.74); /* secondary */
-  --text-3: rgba(40, 54, 92, 0.58); /* tertiary / meta */
+  --text-3: rgba(40, 54, 92, 0.75); /* tertiary / meta — 0.75 才过 WCAG 4.5:1（0.58 仅 3.1:1） */
   --text-disabled: rgba(40, 54, 92, 0.34);
   --text-on-gold: #fffdf5; /* near-white cream ink on deep-amber buttons */
 

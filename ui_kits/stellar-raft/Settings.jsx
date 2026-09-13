@@ -40,9 +40,12 @@ const SR_SET_NAV = [
 ];
 
 /* 玻璃开关 */
-function SRToggle({ on, onChange, disabled }) {
+function SRToggle({ on, onChange, disabled, label }) {
+  /* role/状态/名称一个不能少：裸 <button> 对读屏来说只是「按钮」——
+     不知道管什么、也不知道当前开还是关（AIConfig 的 Toggle 是对照的样板） */
   return (
-    <button type="button" disabled={disabled} onClick={() => !disabled && onChange(!on)}
+    <button type="button" role="switch" aria-checked={!!on} aria-label={label || '开关'}
+      disabled={disabled} onClick={() => !disabled && onChange(!on)}
       style={{
         width: 42, height: 24, flex: 'none', borderRadius: 'var(--r-pill)', position: 'relative',
         border: '1px solid ' + (on ? 'rgba(255,217,138,0.5)' : 'var(--glass-border-strong)'),
@@ -84,7 +87,7 @@ function SRSegment({ options, value, onChange }) {
       {options.map(o => {
         const on = o.value === value;
         return (
-          <button key={o.value} type="button" onClick={() => onChange(o.value)}
+          <button key={o.value} type="button" aria-pressed={on} onClick={() => onChange(o.value)}
             style={{
               height: 26, padding: '0 14px', borderRadius: 'var(--r-pill)', border: 'none', cursor: 'pointer',
               fontSize: 12.5, fontFamily: 'var(--font-sans)',
@@ -342,10 +345,10 @@ function Settings({ onClose, theme, onToggleTheme, onReplayGuide, onOpenLogin })
                   <div style={{ height: 10 }} />
                   <SRSectionTitle>动效</SRSectionTitle>
                   <SRRow title="界面动效" hint="星辰呼吸、卡片浮起、点亮时的光爆。关闭后界面更安静。">
-                    <SRToggle on={motion} onChange={setMotion} />
+                    <SRToggle on={motion} onChange={setMotion} label="界面动效" />
                   </SRRow>
                   <SRRow title="背景星点闪烁" hint="远景星场的微弱明灭。">
-                    <SRToggle on={twinkle} onChange={setTwinkle} disabled={!motion} />
+                    <SRToggle on={twinkle} onChange={setTwinkle} disabled={!motion} label="背景星点闪烁" />
                   </SRRow>
                   <div style={{ marginTop: 14, display: 'flex', gap: 10, padding: '12px 14px', borderRadius: 'var(--r-md)', background: 'rgba(159,198,255,0.05)', border: '1px solid var(--line)' }}>
                     <Icon name="accessibility" size={16} color="var(--star-blue)" />
@@ -365,7 +368,7 @@ function Settings({ onClose, theme, onToggleTheme, onReplayGuide, onOpenLogin })
                     if (Notification.permission === 'default') return '到点提醒你回来点亮正在变暗的星。开启后浏览器会询问通知权限。';
                     return '到点提醒你回来点亮正在变暗的星。页面开着时按设定时刻通知。';
                   })()}>
-                    <SRToggle on={remind} onChange={(v) => {
+                    <SRToggle on={remind} label="开启复习提醒" onChange={(v) => {
                       setRemind(v);
                       if (v && typeof Notification !== 'undefined' && Notification.permission === 'default') Notification.requestPermission();
                     }} />
@@ -384,7 +387,7 @@ function Settings({ onClose, theme, onToggleTheme, onReplayGuide, onOpenLogin })
                       }} />
                   </SRRow>
                   <SRRow title="星域变暗提醒" hint="当一片星域长期无人问津、整体变暗时，轻轻提醒你。" align="flex-start">
-                    <SRToggle on={dimNudge} onChange={setDimNudge} />
+                    <SRToggle on={dimNudge} onChange={setDimNudge} label="星域变暗提醒" />
                   </SRRow>
                   <div style={{ marginTop: 14, fontSize: 11.5, color: 'var(--text-3)', lineHeight: 1.7 }}>
                     提醒只在你点亮节奏放缓时出现，不会催促。你的星空，由你决定何时回来。

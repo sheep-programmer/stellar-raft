@@ -36,7 +36,7 @@
   /* ---- Text on dark ---- */
   --text-1: rgba(255, 255, 255, 0.93); /* primary */
   --text-2: rgba(208, 220, 255, 0.66); /* secondary */
-  --text-3: rgba(159, 198, 255, 0.40); /* tertiary / meta */
+  --text-3: rgba(159, 198, 255, 0.60); /* tertiary / meta — 0.60 才过 WCAG 4.5:1（0.40 仅 2.6:1，而它不是装饰色：快捷键、时间戳、菜单提示都用它） */
   --text-disabled: rgba(159, 198, 255, 0.22);
   --text-on-gold: #1a1204; /* dark ink on a gold button */
 

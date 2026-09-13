@@ -92,4 +92,14 @@
 
 @media (prefers-reduced-motion: reduce) {
   .sr-breathe { animation: none; }
+  /* 全局兜底：大量动画是内联 style（星图连线的 sr-flow、VisitView 的 sr-ping/
+     beacon/twk、点亮爆发的 sr-flash/sr-ring/sr-particle、各处 sr-cardin），
+     类选择器够不着它们。系统要求减弱动态时全部收敛——设置页那句「会自动
+     收敛所有动画」靠这一条才名副其实。时长压到 0.01ms 而不是 animation:none：
+     依赖 animationend 收尾的逻辑照样触发。 */
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

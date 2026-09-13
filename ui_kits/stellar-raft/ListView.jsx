@@ -460,7 +460,7 @@ function ListView({ onOpen, onOpenCon, onFeynman }) {
 
         {/* table head */}
         <div className="sr-list-head" style={{ display: 'grid', gridTemplateColumns: GRID, gap: 14, padding: '0 16px 10px', fontFamily: 'var(--font-mono)', fontSize: 10, letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase' }}>
-          <Checkbox on={allChecked} dash={!allChecked && someChecked} onClick={selectAll} />
+          <Checkbox on={allChecked} dash={!allChecked && someChecked} onClick={selectAll} label="全选本页" />
           <HeadCell k="title">标题</HeadCell>
           <HeadCell k="strength">记忆强度</HeadCell>
           <span style={{ color: 'var(--text-3)' }}>所属星域</span>
