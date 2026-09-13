@@ -68,6 +68,18 @@ test('设计系统组件源码同样能编译（bundle 之外的第二道保险�
   assert.deepEqual(broken, [], '这些组件编译不过：\n' + broken.join('\n'));
 });
 
+test('磁盘上的每个 .jsx / .js 都被 index.html 登记（新组件不会静默缺席）', () => {
+  // 反向的一条：上一条盯「登记了但文件不在」，这条盯「文件在但没人加载」——
+  // 零构建没有打包器替你发现这件事，漏登记只会表现为「那个组件怎么不见了」
+  const html = readFileSync(join(KIT, 'index.html'), 'utf8');
+  const listed = new Set(
+    [...html.matchAll(/<script[^>]*src="([^"]+)"/g)].map(m => m[1].split('?')[0].replace(/^\.\//, ''))
+  );
+  const onDisk = readdirSync(KIT).filter(f => /\.(jsx|js)$/.test(f)).sort();
+  const orphans = onDisk.filter(f => !listed.has(f));
+  assert.deepEqual(orphans, [], '这些文件在磁盘上却没被 index.html 加载：' + orphans.join(', '));
+});
+
 test('index.html 登记的每个本地脚本都真实存在（版本号不影响解析）', () => {
   const html = readFileSync(join(KIT, 'index.html'), 'utf8');
   const srcs = [...html.matchAll(/<script[^>]*src="([^"]+)"/g)].map(m => m[1])

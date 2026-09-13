@@ -29,14 +29,14 @@ const REGISTRY = [
     dts: '../components/core/Icon.d.ts',
     props: [
       { name: 'name', type: 'string', def: '', desc: 'Lucide 图标名，kebab-case（如 "search"、"satellite"）' },
-      { name: 'size', type: 'number', def: '24', desc: '像素盒：24 画布默认 · 18 行内 · 20 胶囊内' },
+      { name: 'size', type: 'number', def: '20', desc: '像素盒：默认 20；画布常用 24 · 行内 18' },
       { name: 'strokeWidth', type: 'number', def: '1.6', desc: '描边宽度，保持 ~1.6 的品牌线宽' },
-      { name: 'color', type: 'string', def: 'currentColor', desc: '覆盖颜色；默认继承外层（便于容器统一着色）' },
+      { name: 'color', type: 'string', def: '', desc: '覆盖颜色；缺省跟随外层文字色（便于容器统一着色）' },
       { name: 'title', type: 'string', def: '', desc: '无障碍标签；纯装饰图标省略即 aria-hidden' },
     ],
     usage: [
       '颜色经 currentColor 继承，外层容器负责着色：默认星蓝 ~70%，悬停/激活转金（IconButton 已封装）。',
-      '页面需先引入 Lucide CDN：<script src="https://unpkg.com/lucide@latest"></script>。',
+      '页面需先引入 Lucide CDN（钉死版本并带 integrity，见 index.html）：<script src="https://unpkg.com/lucide@1.45.0/dist/umd/lucide.min.js"></script>。',
       '图标名一律用 Lucide 的 kebab-case 名称。',
     ],
     code: '<Icon name="satellite" size={20} />\n<Icon name="zap" size={18} color="var(--gold)" />',
@@ -100,7 +100,7 @@ const REGISTRY = [
     dts: '../components/core/GlassPanel.d.ts',
     props: [
       { name: 'strong', type: 'boolean', def: 'false', desc: '更实的底 + 更强的边——抽屉、遮罩、弹窗用' },
-      { name: 'radius', type: "'sm' | 'md' | 'lg' | 'xl' | 'pill'", def: "'md'", desc: '圆角档位' },
+      { name: 'radius', type: "'sm' | 'md' | 'lg' | 'xl' | 'pill'", def: "'lg'", desc: '圆角档位' },
       { name: 'pad', type: "'none' | 'sm' | 'md' | 'lg'", def: "'md'", desc: '内边距档位' },
       { name: 'glow', type: 'boolean', def: 'false', desc: '外圈加一层极淡光晕' },
       { name: 'style', type: 'CSSProperties', def: '', desc: '透传样式' },
@@ -171,6 +171,7 @@ const REGISTRY = [
       { name: 'kbd', type: 'string', def: '', desc: '尾部键位提示片（如 "⌘K"）' },
       { name: 'type', type: 'string', def: "'text'", desc: '原生 input 类型' },
       { name: 'size', type: "'sm' | 'md' | 'lg'", def: "'md'", desc: '尺寸' },
+      { name: 'inputStyle', type: 'CSSProperties', def: '', desc: '只作用于内部原生 <input>（外壳样式走 style）' },
     ],
     usage: [
       '用于侧边栏全局搜索与编辑器元信息字段。',
@@ -191,7 +192,7 @@ const REGISTRY = [
     cardHeight: 340,
     dts: '../components/knowledge/MemoryBar.d.ts',
     props: [
-      { name: 'value', type: 'number', def: '0', desc: '记忆强度 0..1——驱动填充宽度与温度梯颜色' },
+      { name: 'value', type: 'number', def: '0.5', desc: '记忆强度 0..1——驱动填充宽度与温度梯颜色' },
       { name: 'label', type: 'string', def: '', desc: '轨道上方的说明文字' },
       { name: 'showPct', type: 'boolean', def: 'false', desc: '右侧显示百分比' },
       { name: 'height', type: 'number', def: '6', desc: '轨道厚度 px' },
@@ -213,11 +214,15 @@ const REGISTRY = [
     cardHeight: 340,
     dts: '../components/knowledge/StarNode.d.ts',
     props: [
-      { name: 'strength', type: 'number', def: '0', desc: '记忆强度 0..1——亮度与色温' },
+      { name: 'strength', type: 'number', def: '0.6', desc: '记忆强度 0..1——亮度与色温' },
       { name: 'importance', type: 'number', def: '1', desc: '重要度 0.6..1.6——尺寸乘数' },
       { name: 'label', type: 'string', def: '', desc: '星下方的名字' },
       { name: 'selected', type: 'boolean', def: 'false', desc: '选中光环' },
       { name: 'breathe', type: 'boolean', def: 'true', desc: '细微呼吸脉动（尊重 prefers-reduced-motion）' },
+      { name: 'hit', type: 'number', def: '0', desc: '触摸端热区直径（画布本地 px，按 44/k 传入）；0 = 只有星核可点' },
+      { name: 'onClick', type: '(e) => void', def: '', desc: '点击回调' },
+      { name: 'onMouseEnter', type: '(e) => void', def: '', desc: '悬停进入回调' },
+      { name: 'onMouseLeave', type: '(e) => void', def: '', desc: '悬停离开回调' },
       { name: 'style', type: 'CSSProperties', def: '', desc: '由父画布做绝对定位（left/top）' },
     ],
     usage: [
@@ -237,7 +242,7 @@ const REGISTRY = [
     dts: '../components/knowledge/ConstellationItem.d.ts',
     props: [
       { name: 'name', type: 'string', def: '', desc: '星座名' },
-      { name: 'color', type: 'string', def: '', desc: '代表性记忆色（暖=扎实，冷=变暗）' },
+      { name: 'color', type: 'string', def: "'var(--star-blue)'", desc: '代表性记忆色（暖=扎实，冷=变暗）' },
       { name: 'count', type: 'number', def: '', desc: '右侧星数' },
       { name: 'active', type: 'boolean', def: 'false', desc: '当前选中' },
       { name: 'onClick', type: '(e) => void', def: '', desc: '点击回调' },
@@ -265,7 +270,7 @@ const REGISTRY = [
       { name: 'onClose', type: '() => void', def: '', desc: 'Esc / 遮罩 / 关闭钮触发；同时归还焦点' },
       { name: 'title', type: 'ReactNode', def: '', desc: '标题（经 aria-labelledby 命名对话框）' },
       { name: 'icon', type: 'string', def: '', desc: '标题前置 Lucide 图标，星蓝' },
-      { name: 'width', type: 'number', def: '', desc: '面板宽度 px（钳制在 94vw 内）' },
+      { name: 'width', type: 'number', def: '480', desc: '面板宽度 px（钳制在 94vw 内）' },
       { name: 'footer', type: 'ReactNode', def: '', desc: '固定底栏，右对齐——放 Button' },
       { name: 'closeOnMask', type: 'boolean', def: 'true', desc: '点击遮罩关闭' },
     ],
@@ -288,7 +293,7 @@ const REGISTRY = [
     props: [
       { name: 'message', type: 'ReactNode', def: '', desc: '一句克制的反馈（「点亮 +1 · 融会贯通」）' },
       { name: 'tone', type: "'blue' | 'gold' | 'danger'", def: "'blue'", desc: 'blue=日常 · gold=仅点亮/奖励 · danger=罕见的破坏性结果' },
-      { name: 'icon', type: 'string', def: '', desc: "前置 Lucide 图标；传 '' 省略" },
+      { name: 'icon', type: 'string', def: "'check'", desc: "前置 Lucide 图标；传 '' 省略" },
     ],
     usage: [
       "命令式：toast(message, { tone, icon, duration })，返回可提前消散的函数；已通过命名空间导出（NS.toast）。",
@@ -327,10 +332,10 @@ const REGISTRY = [
     cardHeight: 460,
     dts: '../components/overlay/ContextMenu.d.ts',
     props: [
-      { name: 'items', type: 'ContextMenuItem[]', def: '', desc: "{ id, label, icon, kbd, danger, disabled, onSelect }；{ type: 'separator' } 渲染发丝分隔线" },
+      { name: 'items', type: 'ContextMenuItem[]', def: '[]', desc: "{ id, label, icon, kbd, danger, disabled, onSelect }；{ type: 'separator' } 渲染发丝分隔线" },
       { name: 'onSelect', type: '(item) => void', def: '', desc: '任一项被选后触发（在该项自身 onSelect 之后）' },
       { name: 'disabled', type: 'boolean', def: 'false', desc: '完全关闭右键接管' },
-      { name: 'menuWidth', type: 'number', def: '', desc: '菜单面板宽度 px' },
+      { name: 'menuWidth', type: 'number', def: '200', desc: '菜单面板宽度 px' },
     ],
     usage: [
       '键盘：↑↓/Home/End 移动高亮（跳过 disabled），Enter 选中，Esc 关闭并归还焦点。',
@@ -353,8 +358,8 @@ const REGISTRY = [
     props: [
       { name: 'value', type: 'string | number', def: '', desc: '受控值' },
       { name: 'onChange', type: '(value, option) => void', def: '', desc: '选中回调' },
-      { name: 'options', type: 'SelectOption[]', def: '', desc: '{ value, label, icon, disabled }' },
-      { name: 'placeholder', type: 'string', def: '', desc: '未选时的占位' },
+      { name: 'options', type: 'SelectOption[]', def: '[]', desc: '{ value, label, icon, disabled }' },
+      { name: 'placeholder', type: 'string', def: "'请选择…'", desc: '未选时的占位' },
       { name: 'size', type: "'sm' | 'md' | 'lg'", def: "'md'", desc: '尺寸' },
       { name: 'disabled', type: 'boolean', def: 'false', desc: '禁用' },
     ],
@@ -417,7 +422,7 @@ const REGISTRY = [
     cardHeight: 420,
     dts: '../components/form/Tabs.d.ts',
     props: [
-      { name: 'tabs', type: 'TabItem[]', def: '', desc: '{ id, label, icon, count, panelId, disabled }' },
+      { name: 'tabs', type: 'TabItem[]', def: '[]', desc: '{ id, label, icon, count, panelId, disabled }' },
       { name: 'value', type: 'string', def: '', desc: '选中 tab 的 id' },
       { name: 'onChange', type: '(id, tab) => void', def: '', desc: '切换回调' },
       { name: 'size', type: "'sm' | 'md'", def: "'md'", desc: '尺寸' },

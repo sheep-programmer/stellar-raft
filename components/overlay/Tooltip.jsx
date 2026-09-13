@@ -51,8 +51,7 @@ export function Tooltip({ content, children, side = 'top', delay = 450, style, .
             style={{
               display: 'block',
               background: 'var(--glass-bg-strong)',
-              WebkitBackdropFilter: 'blur(var(--glass-blur)) saturate(1.2)',
-              backdropFilter: 'blur(var(--glass-blur)) saturate(1.2)',
+              WebkitBackdropFilter: 'blur(var(--glass-blur)) saturate(1.2)', backdropFilter: 'blur(var(--glass-blur)) saturate(1.2)',
               border: '1px solid var(--glass-border)',
               borderRadius: 'var(--r-sm)',
               boxShadow: 'var(--shadow-md), var(--inset-edge)',

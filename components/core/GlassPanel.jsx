@@ -20,8 +20,7 @@ export function GlassPanel({
     <div
       style={{
         background: strong ? 'var(--glass-bg-strong)' : 'var(--glass-bg)',
-        WebkitBackdropFilter: 'blur(var(--glass-blur)) saturate(1.2)',
-        backdropFilter: 'blur(var(--glass-blur)) saturate(1.2)',
+        WebkitBackdropFilter: 'blur(var(--glass-blur)) saturate(1.2)', backdropFilter: 'blur(var(--glass-blur)) saturate(1.2)',
         border: '1px solid',
         borderColor: strong ? 'var(--glass-border-strong)' : 'var(--glass-border)',
         borderRadius: radii[radius] || radii.lg,

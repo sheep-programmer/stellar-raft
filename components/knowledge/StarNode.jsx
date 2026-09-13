@@ -20,6 +20,12 @@ export function StarNode({
   label,
   selected = false,
   breathe = true,
+  /* 触摸端的热区直径，单位是「本地 px」（0 = 不加）。
+     星核只有 12×importance，画布又整层 scale(k)，落地取景常在 0.34~0.7——
+     于是屏幕上只剩 4~12px，手指根本按不着一颗星。调用方按 44 / k 传进来，
+     缩放多少都还是屏幕上的 44px。它是一层透明圆：点击冒泡回这个节点，
+     pointerdown / 双击 / 右键继续冒泡给画布，拖动与菜单一件不少。 */
+  hit = 0,
   onClick,
   onMouseEnter,
   onMouseLeave,
@@ -59,6 +65,13 @@ export function StarNode({
         ...style,
       }}
     >
+      {onClick && hit > core && (
+        <span aria-hidden="true" style={{
+          position: 'absolute', top: core / 2, left: '50%',
+          width: hit, height: hit, transform: 'translate(-50%, -50%)',
+          borderRadius: '50%', zIndex: 0,
+        }} />
+      )}
       {selected && (
         <span style={{
           position: 'absolute', top: core / 2, left: '50%',

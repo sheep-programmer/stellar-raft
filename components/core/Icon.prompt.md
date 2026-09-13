@@ -5,4 +5,4 @@ One themed Lucide linear icon — the only icon source in Stellar Raft (no emoji
 <Icon name="zap" size={18} color="var(--gold)" />
 ```
 
-Requires the Lucide CDN script on the page (`<script src="https://unpkg.com/lucide@latest"></script>`). Names are kebab-case Lucide names. Default state should be star-blue ~70%; hover/active gold — handled by `IconButton`.
+Requires the Lucide CDN script on the page, pinned with SRI (`<script src="https://unpkg.com/lucide@1.45.0/dist/umd/lucide.min.js" integrity="…" crossorigin="anonymous"></script>`). Names are kebab-case Lucide names. Default state should be star-blue ~70%; hover/active gold — handled by `IconButton`.

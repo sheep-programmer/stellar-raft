@@ -11,6 +11,8 @@ export interface StarNodeProps {
   selected?: boolean;
   /** Subtle scale breathing (alive). Default true. */
   breathe?: boolean;
+  /** Touch hit-disc diameter in canvas-local px (pass 44 / k); 0 = core only. */
+  hit?: number;
   onClick?: (e: React.MouseEvent) => void;
   onMouseEnter?: (e: React.MouseEvent) => void;
   onMouseLeave?: (e: React.MouseEvent) => void;
