@@ -92,7 +92,7 @@ test('buildVault：正文走 SRMd 口径（frontmatter 敏感值加引号），�
   const star = entries.find(e => e.path === '量子力学/薛定谔方程.md').text;
   assert.ok(star.startsWith('---\n'), '有 frontmatter');
   assert.ok(/source: ".*"/.test(star), 'YAML 敏感值加引号');
-  assert.ok(star.includes('tags: [公式]'));
+  assert.ok(star.includes('tags: ["公式"]'));
   assert.ok(star.includes('# 薛定谔方程'), '标题为星名');
   assert.ok(star.includes('## 定态解'));
   assert.ok(star.includes('## 关联'));
@@ -163,3 +163,71 @@ test('parseVault：非自家仓库也能吃——散档归未分域、块级 tag
   const mech = plan.stars.find(s => s.label === '力学');
   assert.ok(mech.body.some(bk => bk.type === 'h1'), '标题与文件名不同则保留');
 });
+
+/* ---------------- 导入侧的防爆闸 ----------------
+   导入入口是「用户选中一个文件」，但文件本身可能来自任何地方。
+   条目数与解压后总量都必须有界，否则一个 zip 炸弹就能把标签页内存吃光。 */
+
+// 手工拼一条中央目录 + EOCD（count 可伪造），数据段可以不存在——
+// 条目数检查发生在遍历之前
+function zipWithClaimedCount(claimed) {
+  const eocd = new Uint8Array(22);
+  const dv = new DataView(eocd.buffer);
+  dv.setUint32(0, 0x06054b50, true);
+  dv.setUint16(10, claimed, true);   // 目录条目数（伪造）
+  dv.setUint16(12, claimed, true);
+  dv.setUint32(16, 0, true);         // 中央目录偏移
+  return eocd;
+}
+
+test('readZip：条目数超过上限直接拒收（EOCD 声称 20001 条）', async () => {
+  await assert.rejects(() => globalThis.SRVault.readZip(zipWithClaimedCount(20001)),
+    /条目过多/);
+});
+
+// 拼一个 method=8（deflate）的 zip：真压缩、真解压，只是内容体积越线
+async function deflateZip(payloadText) {
+  const enc = new TextEncoder();
+  const raw = enc.encode(payloadText);
+  const cs = new CompressionStream('deflate-raw');
+  const compressed = new Uint8Array(await new Response(
+    new Blob([raw]).stream().pipeThrough(cs)).arrayBuffer());
+  const name = enc.encode('big.md');
+  const u16 = (v) => new Uint8Array([v & 0xff, (v >>> 8) & 0xff]);
+  const u32 = (v) => new Uint8Array([v & 0xff, (v >>> 8) & 0xff, (v >>> 16) & 0xff, (v >>> 24) & 0xff]);
+  const cat = (arrs) => {
+    const out = new Uint8Array(arrs.reduce((a, b) => a + b.length, 0));
+    let p = 0; arrs.forEach(a => { out.set(a, p); p += a.length; });
+    return out;
+  };
+  const local = cat([
+    u32(0x04034b50), u16(20), u16(0x0800), u16(8),
+    u16(0), u16(0), u32(0), u32(compressed.length), u32(raw.length),
+    u16(name.length), u16(0), name, compressed,
+  ]);
+  const central = cat([
+    u32(0x02014b50), u16(20), u16(20), u16(0x0800), u16(8),
+    u16(0), u16(0), u32(0), u32(compressed.length), u32(raw.length),
+    u16(name.length), u16(0), u16(0), u16(0), u16(0), u32(0), u32(0), name,
+  ]);
+  const eocd = cat([
+    u32(0x06054b50), u16(0), u16(0), u16(1), u16(1),
+    u32(central.length), u32(local.length), u16(0),
+  ]);
+  return cat([local, central, eocd]);
+}
+
+test('readZip：deflate 条目正常解压（上限之内）', async () => {
+  const text = '# 标题\n\n' + '内容。'.repeat(1000);
+  const entries = await globalThis.SRVault.readZip(await deflateZip(text));
+  assert.equal(entries.length, 1);
+  assert.equal(entries[0].path, 'big.md');
+  assert.equal(entries[0].text, text);
+});
+
+test('readZip：解压后总量超过 64MB 拒绝（zip 炸弹防爆）', async () => {
+  // 65MB 重复文本压完只有几十 KB——典型的炸弹形态
+  const zip = await deflateZip('炸'.repeat(22 * 1024 * 1024));
+  assert.ok(zip.length < 1024 * 1024, '压缩包本身很小，危险全在解压后');
+  await assert.rejects(() => globalThis.SRVault.readZip(zip), /超过 64MB/);
+}, { timeout: 30000 });

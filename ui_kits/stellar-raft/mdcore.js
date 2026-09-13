@@ -26,6 +26,12 @@
   const mdInline = (s) => {
     const toks = [];
     const src = String(s == null ? '' : s).replace(ESCAPABLE, (mm, c) => { toks.push(c); return '\u0000' + (toks.length - 1) + '\u0000'; });
+    /* 链接正则是这条管线上唯一的回溯风险：「开括号多、闭括号少」的输入
+       （粘进来的日志、代码）会让无界的 [^\]]+ / [^)\s]+ 逐位回溯——实测
+       '['×10万 要 4.2s，×100万 直接冻页。两道闸：没有 ' ](' 的文本根本不
+       可能有链接，整个正则跳过；量词有界（文字 ≤300 / URL ≤2000），每个
+       候选位的失败成本从 O(n) 收成 O(1)。超限链接降级为字面文本。 */
+    const withLinks = src.includes('](');
     return escHtml(src)
       .replace(/\*\*\*([^*]+)\*\*\*/g, '<b><i>$1</i></b>')
       .replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>')
@@ -33,12 +39,13 @@
       .replace(/~~([^~]+)~~/g, '<s>$1</s>')
       .replace(/`([^`]+)`/g, '<code style="' + CODE_SPAN_CSS + '">$1</code>')
       // 链接协议白名单：javascript:/data: 等降级为纯文本（保留可见字样，去掉可点 href）
-      .replace(/\[([^\]]+)\]\(([^)\s]+)(?:\s+&quot;[^&]*&quot;|\s+"[^"]*")?\)/g, (mm, txt, url) => {
+      .replace(withLinks ? /\[([^\]]{1,300})\]\(([^)\s]{1,2000})(?:\s+&quot;[^&]{0,300}&quot;|\s+"[^"]{0,300}")?\)/g : /$a/, (mm, txt, url) => {
         const ok = safeUrl(url);
         return ok ? LINK_A(ok, txt) : txt;
       })
       // 自动链接 <https://…>（escHtml 之后尖括号已成实体）
       .replace(/&lt;(https?:\/\/[^\s&]+)&gt;/g, (mm, url) => safeUrl(url) ? LINK_A(url, url) : url)
+      // oxlint-disable-next-line no-control-regex -- \u0000 是本文件自己埋的占位哨兵，正则必须认得它
       .replace(/\u0000(\d+)\u0000/g, (mm, n) => escHtml(toks[Number(n)]));
   };
 
@@ -80,17 +87,23 @@
       const lead = (raw.match(/^[ \t]*/)[0] || '').replace(/\t/g, '  ').length;
       const indent = Math.min(5, Math.floor(lead / 2));
       const ind = indent ? { indent } : {};
-      if ((m = l.match(/^```(\w*)/))) {                                    // 代码围栏
+      if ((m = l.match(/^(`{3,})([\w+#.-]*)/))) {                         // 代码围栏（长度可变；语言号认 C++ / c# 这类字符）
         const buf = []; i++;
         let closed = false;
-        while (i < lines.length) { if (/^```/.test(lines[i].trim())) { closed = true; i++; break; } buf.push(lines[i]); i++; }
+        /* 收尾的围栏至少要和开头一样长（CommonMark）。只认死三个反引号的话，
+           内容里那行 ``` 会把代码块提前关掉，剩下的代码掉进正文。 */
+        const fenceLen = m[1].length;
+        const closeRe = new RegExp('^`{' + fenceLen + ',}\\s*$');
+        while (i < lines.length) { if (closeRe.test(lines[i].trim())) { closed = true; i++; break; } buf.push(lines[i]); i++; }
         // 只有真正围起了内容才建代码块——文本末尾一个孤零零的 ``` 不再遗留空 code 块
-        if (closed || buf.length) out.push({ id: uid(), type: 'code', lang: (m[1] || 'plaintext').toLowerCase(), code: buf.join('\n') });
+        // m[1] 现在是围栏本身，语言在 m[2]
+        if (closed || buf.length) out.push({ id: uid(), type: 'code', lang: (m[2] || 'plaintext').toLowerCase(), code: buf.join('\n') });
       }
-      else if ((m = l.match(/^[-*+]\s+\[( |x|X)\]\s+(.*)/))) { out.push({ id: uid(), type: 'todo', checked: m[1].toLowerCase() === 'x', text: mdInline(m[2]), ...ind }); i++; }
+      else if ((m = l.match(/^[-*+]\s+\[( |x|X)\](?:\s+(.*)|$)/))) { out.push({ id: uid(), type: 'todo', checked: m[1].toLowerCase() === 'x', text: mdInline(m[2] || ''), ...ind }); i++; }
       else if (/^(-{3,}|\*{3,})$/.test(l)) { out.push({ id: uid(), type: 'divider' }); i++; }
-      else if ((m = l.match(/^[-*+]\s+(.*)/))) { out.push({ id: uid(), type: 'bulleted', text: mdInline(m[1]), ...ind }); i++; }
-      else if ((m = l.match(/^(\d+)[.)]\s+(.*)/))) { out.push({ id: uid(), type: 'numbered', text: mdInline(m[2]), ...ind, ...(m[1] !== '1' ? { start: parseInt(m[1], 10) } : {}) }); i++; }
+      // 裸标记（`-` / `1.` 无内容）也是合法的空列表项——与导出端的空块互逆
+      else if ((m = l.match(/^[-*+](?:\s+(.*)|$)/))) { out.push({ id: uid(), type: 'bulleted', text: mdInline(m[1] || ''), ...ind }); i++; }
+      else if ((m = l.match(/^(\d+)[.)](?:\s+(.*)|$)/))) { out.push({ id: uid(), type: 'numbered', text: mdInline(m[2] || ''), ...ind, ...(m[1] !== '1' ? { start: parseInt(m[1], 10) } : {}) }); i++; }
       else if (/^(\t| {4,})\S/.test(raw)) {                                // 缩进代码：连续缩进行整体保留为 plaintext 代码块
         const buf = [];
         while (i < lines.length
@@ -101,8 +114,10 @@
       } else if (/^\$\$/.test(l)) {                                        // 数学块
         if (l.length > 4 && /\$\$$/.test(l)) { out.push({ id: uid(), type: 'math', tex: l.slice(2, -2).trim() }); i++; }
         else {
+          /* 收尾只认「整行就是 $$」——内容行里含 $$（如 TeX 的 a $$ b）不能当
+             结束符，否则公式被从中间截断、后半截掉进正文，导出再导入即丢内容 */
           const buf = []; i++;
-          while (i < lines.length && !/\$\$/.test(lines[i])) { buf.push(lines[i]); i++; }
+          while (i < lines.length && !/^\$\$\s*$/.test(lines[i].trim())) { buf.push(lines[i]); i++; }
           i++;
           out.push({ id: uid(), type: 'math', tex: buf.join('\n').trim() });
         }
@@ -110,16 +125,22 @@
         const rowsRaw = [];
         while (i < lines.length && /^\|.+\|$/.test(lines[i].trim())) { rowsRaw.push(lines[i].trim()); i++; }
         const cells = (r) => r.slice(1, -1).split(/(?<!\\)\|/).map(c => c.trim().replace(/\\\|/g, '|'));
-        const body = rowsRaw.slice(1).filter(r => !/^\|[\s:\-|]+\|$/.test(r)).map(cells);
+        /* 分隔行只认第二行这个位置——GFM 表格的分隔线本来就必须紧跟表头。
+           之前是「任何全由 -|: 组成的行都过滤」，于是一行 --- 的**数据行**被静默丢掉 */
+        const hasSep = rowsRaw.length > 1 && /^\|[\s:\-|]+\|$/.test(rowsRaw[1]);
+        const body = rowsRaw.slice(hasSep ? 2 : 1).map(cells);
         out.push({ id: uid(), type: 'table', head: cells(rowsRaw[0]), rows: body });
       }
-      // 独占一行的图片 ![alt](url) / ![alt](url "题注") → 图片块；非法协议降级为纯文本段落
-      else if ((m = l.match(/^!\[([^\]]*)\]\(([^)\s]+)(?:\s+"[^"]*")?\)$/))) {
-        out.push(safeUrl(m[2]) ? { id: uid(), type: 'image', alt: m[1], src: m[2] } : { id: uid(), type: 'p', text: mdInline(l) });
+      // 独占一行的图片 ![alt](url) / ![alt](<url 带括号或空格>) / ![alt](url "题注") → 图片块；非法协议降级为纯文本段落
+      else if ((m = l.match(/^!\[((?:\\[[\]]|[^\]])*)\]\((<[^>\n]+>|[^)\s]+)(?:\s+"[^"]*")?\)$/))) {
+        const alt = m[1].replace(/\\([[\]])/g, '$1');
+        const src = m[2].replace(/^<|>$/g, '');
+        out.push(safeUrl(src) ? { id: uid(), type: 'image', alt, src } : { id: uid(), type: 'p', text: mdInline(l) });
         i++;
       }
-      // 标题支持到 ######：编辑器块模型只有三级，h4–h6 折入 h3（导出仍是合法 Markdown）
-      else if ((m = l.match(/^(#{1,6})\s+(.*)/))) { out.push({ id: uid(), type: 'h' + Math.min(3, m[1].length), text: mdInline(m[2]) }); i++; }
+      // 标题支持到 ######：编辑器块模型只有三级，h4–h6 折入 h3（导出仍是合法 Markdown）。
+      // 裸「##」也是合法的空标题（CommonMark）——字面值段落由导出端 escLead 转义护住
+      else if ((m = l.match(/^(#{1,6})(?:\s+(.*)|\s*$)/))) { out.push({ id: uid(), type: 'h' + Math.min(3, m[1].length), text: mdInline(m[2] || '') }); i++; }
       // GFM 提示框 > [!NOTE] / [!TIP]…（Obsidian 同语法）→ 标注块，吸收随后的 > 续行
       else if ((m = l.match(/^>\s*\[!(\w+)\]\s*(.*)$/))) {
         const buf = m[2] ? [m[2]] : [];
@@ -150,6 +171,15 @@
   }
 
   /* ---- YAML frontmatter（--- 包围的 k: v 段）→ { props, tags, body } ---- */
+  /* 值的解引号：导出端用 JSON.stringify 加引（"说\"话"、"a\nb"），
+     这里必须真按 JSON 解——只剥一层引号会把 \" 和 \n 原样留在值里 */
+  const unq = (v) => {
+    const s = String(v == null ? '' : v).trim();
+    if (s.length >= 2 && s[0] === '"' && s[s.length - 1] === '"') {
+      try { return JSON.parse(s); } catch { /* 落回裸剥 */ }
+    }
+    return s.replace(/^["']|["']$/g, '');
+  };
   function parseFrontmatter(text) {
     const src = String(text == null ? '' : text).replace(/\r\n?/g, '\n');
     const m = src.match(/^---\n([\s\S]*?)\n---\n?/);
@@ -161,22 +191,31 @@
       const mm = fmLines[li].match(/^([A-Za-z_一-鿿][\w一-鿿-]*)\s*:\s*(.*)$/);
       if (!mm) continue;
       const k = mm[1];
-      const v = mm[2].trim().replace(/^["']|["']$/g, '');
+      const v = mm[2].trim();
       if (k === 'tags') {
-        if (v) { tags = v.replace(/^\[|\]$/g, '').split(',').map(s => s.trim().replace(/^["']|["']$/g, '')).filter(Boolean); }
+        if (v) {
+          // 导出端写的是 JSON 数组（"b,c" 这样的标签不会被逗号劈开）；
+          // 外来的裸写法 [a, b] 仍按逗号切（YAML flow 的兼容路径）
+          let arr = null;
+          if (/^\[/.test(v)) { try { const j = JSON.parse(v); if (Array.isArray(j)) arr = j.map(String); } catch { } }
+          if (!arr) arr = v.replace(/^\[|\]$/g, '').split(',').map(unq);
+          tags = arr.map(s => String(s).trim()).filter(Boolean);
+          if (!tags.length) tags = null;
+        }
         else {
           // Obsidian 的块级列表写法：tags: 换行后跟若干「  - x」
           tags = [];
           while (li + 1 < fmLines.length && /^\s+-\s+/.test(fmLines[li + 1])) {
             li++;
-            const t = fmLines[li].replace(/^\s+-\s+/, '').trim().replace(/^["']|["']$/g, '');
+            const t = unq(fmLines[li].replace(/^\s+-\s+/, ''));
             if (t) tags.push(t);
           }
           if (!tags.length) tags = null;
         }
         continue;
       }
-      if (v) props[k] = v;
+      const pv = unq(v);
+      if (pv) props[k] = pv;
     }
     return { props: Object.keys(props).length ? props : null, tags, body: src.slice(m[0].length) };
   }
@@ -199,8 +238,14 @@
   // 段落导出的防歧义转义：正文若以 Markdown 结构记号开头（# > - 1. ``` $$ | 或整行 ---），
   // 加反斜杠护住，round-trip 后仍是同一个段落，不会被真实解析器误读成结构
   const escLead = (s) => String(s == null ? '' : s)
-    .replace(/^(#{1,6} |> ?|[-*+] |\d+[.)] |```|\$\$|\|)/, '\\$1')
-    .replace(/^(-{3,}|\*{3,}|={3,})$/, '\\$1');
+    /* 有序列表单独一档：Markdown 的转义位置是分隔符本身（`1\. `），不是数字前面。
+       写成 `\1. ` 既护不住（真实解析器照样当列表），导入时也还原不回来——
+       ESCAPABLE 的字符集里没有数字，那个反斜杠会原样留在正文里。 */
+    .replace(/^(\d{1,9})([.)])(?=\s|$)/, '$1\\$2')
+    .replace(/^(#{1,6} |> ?|[-*+] |```|\$\$|\|)/, '\\$1')
+    .replace(/^(-{3,}|\*{3,}|={3,})$/, '\\$1')
+    // 裸标记也是结构（空标题 `##`、空列表项 `-`）：整行就是标记本身的段落同样护住
+    .replace(/^(#{1,6}|[-*+])$/, '\\$1');
   function blocksToMd(blocks, opts) {
     const o = opts || {};
     const lines = [];
@@ -209,36 +254,64 @@
       if (b.type !== 'numbered') counters = [];
       const pad = '  '.repeat(b.indent || 0);
       switch (b.type) {
-        case 'rich': if (o.summary) lines.push(o.summary); break;
+        case 'rich': {
+          /* 摘要写成正文开头的第一段。导入时 parseVault 会把第一段认成摘要**并保留在正文里**，
+             于是下一次导出就有了两份、再下一次三份——每来回一次多复制一遍。
+             这里在导出端掐断：正文里紧跟着的第一个段落如果就是摘要本身，就不再多写一遍。 */
+          if (!o.summary) break;
+          const firstP = (blocks || []).find(x => x && x.type === 'p' && String(x.text || '').trim());
+          const same = firstP && htmlToMd(firstP.text).trim() === String(o.summary).trim();
+          /* 摘要是纯文本，写进 Markdown 必须逐行过 escLead：一句以 ``` 或 # 开头的
+             摘要会开启围栏/变成标题，把整个文件剩余部分（含「## 关联」与连线）吞掉 */
+          if (!same) lines.push(String(o.summary).split('\n').map(escLead).join('\n'));
+          break;
+        }
         case 'h1': lines.push('# ' + htmlToMd(b.text)); break;
         case 'h2': lines.push('## ' + htmlToMd(b.text)); break;
         case 'h3': lines.push('### ' + htmlToMd(b.text)); break;
         case 'p': lines.push(escLead(htmlToMd(b.text))); break;
-        case 'quote': lines.push('> ' + htmlToMd(b.text)); break;
+        // 引用/列表文本若以 [ 开头（[!NOTE]、[ ] 之类），转义护住——
+        // 否则导入端会把引用误认成 callout、把列表项误认成 todo
+        case 'quote': lines.push('> ' + htmlToMd(b.text).replace(/^\[!/, '\\[!')); break;
         // callout 用 GFM 提示框语法（大写才被 GitHub 渲染；Obsidian 大小写皆可）
-        case 'callout': lines.push('> [!' + (b.tone === 'blue' ? 'NOTE' : 'TIP') + ']\n> ' + htmlToMd(b.text)); break;
-        case 'bulleted': lines.push(pad + '- ' + htmlToMd(b.text)); break;
+        case 'callout': lines.push('> [!' + (b.tone === 'blue' ? 'NOTE' : 'TIP') + ']\n> ' + htmlToMd(b.text).replace(/^\[!/, '\\[!')); break;
+        case 'bulleted': lines.push(pad + '- ' + htmlToMd(b.text).replace(/^\[/, '\\[')); break;
         case 'numbered': {
           const lvl = b.indent || 0;
           counters = counters.slice(0, lvl + 1);
           if (counters[lvl] == null) counters[lvl] = 0;
           if (counters[lvl] === 0 && b.start) counters[lvl] = b.start - 1;
           counters[lvl] += 1;
-          lines.push(pad + counters[lvl] + '. ' + htmlToMd(b.text));
+          lines.push(pad + counters[lvl] + '. ' + htmlToMd(b.text).replace(/^\[/, '\\['));
           break;
         }
         case 'todo': lines.push(pad + '- [' + (b.checked ? 'x' : ' ') + '] ' + htmlToMd(b.text)); break;
         // toggle 用标准可折叠 <details>，标注其为折叠块
         case 'toggle': lines.push('<details>\n<summary>' + htmlToMd(b.text) + '</summary>\n\n' + htmlToMd(b.child || '') + '\n</details>'); break;
         case 'math': lines.push('$$\n' + (b.tex || '') + '\n$$'); break;
-        case 'code': lines.push('```' + (b.lang || '') + '\n' + (b.code || '') + '\n```'); break;
+        case 'code': {
+          /* 围栏要比内容里最长的一串反引号更长（CommonMark 的规矩）。
+             笔记里贴一段 Markdown 示例是常事，而固定三个反引号会被内容里的
+             ``` 提前关掉——导出再导入，这个代码块会被劈成三块、中间的内容丢掉。 */
+          const body = b.code || '';
+          const longest = (body.match(/`+/g) || []).reduce((n, r) => Math.max(n, r.length), 0);
+          const fence = '`'.repeat(Math.max(3, longest + 1));
+          // 语言号收进 [\w+#.-]：C++ / c# 合法；换行/空格会劈开信息行，取首个词再消毒
+          const lang = String(b.lang || '').split(/\s/)[0].replace(/[^\w+#.-]/g, '');
+          lines.push(fence + lang + '\n' + body + '\n' + fence);
+          break;
+        }
         case 'divider': lines.push('---'); break;
         // 图片：本地上传的 dataURL 在 100KB 内直接内联（合法 Markdown，Typora/Obsidian/VS Code
-        // 都能显示）；超限才降级为附件占位（URL 无空格，真实解析器不碎）
+        // 都能显示）；超限才降级为附件占位（URL 无空格，真实解析器不碎）。
+        // alt 里的 ] 与换行、src 里的空格与括号（维基百科式 URL 很常见）按 CommonMark 转义/
+        // <…> 包裹——否则导出的图片行在导入时降级为段落，图丢了
         case 'image': {
-          const src = b.src || '';
-          if (/^data:/.test(src) && src.length >= 100000) { lines.push('![' + (b.alt || '本地图片') + '](本地图片-过大未内联)'); break; }
-          lines.push('![' + (b.alt || '') + '](' + src + ')');
+          const src0 = b.src || '';
+          const alt = String(b.alt || '').replace(/\r?\n/g, ' ').replace(/([[\]])/g, '\\$1');
+          if (/^data:/.test(src0) && src0.length >= 100000) { lines.push('![' + (alt || '本地图片') + '](本地图片-过大未内联)'); break; }
+          const src = /[\s()]/.test(src0) ? '<' + src0.replace(/[<>]/g, '') + '>' : src0;
+          lines.push('![' + alt + '](' + src + ')');
           break;
         }
         case 'table': {
@@ -259,18 +332,21 @@
     // YAML frontmatter：把结构化属性写出，round-trip 后属性不再丢失（对标 Obsidian）
     const p = o.props || {};
     const fm = [];
-    // 值里带冒号 / 井号 / 引号等 YAML 敏感字符时加引号，Obsidian 属性面板读得回来
+    /* 值里带 YAML 敏感字符或**换行**时按 JSON 加引写出（解析端用 JSON.parse 解回）。
+       换行最要命：不加引会把一个值写成两行，导入只读回第一行，后半静默丢 */
     const pushFm = (k, v) => {
       if (v == null) return;
       const s = String(v).trim();
       if (!s || s === '—') return;
-      fm.push(k + ': ' + (/[:#'"[\]{}|>&*!%@`]/.test(s) ? JSON.stringify(s) : s));
+      fm.push(k + ': ' + (/[:#'"[\]{}|>&*!%@`\n\r]/.test(s) ? JSON.stringify(s) : s));
     };
     pushFm('type', p.type); pushFm('status', p.status); pushFm('source', p.source);
     pushFm('alias', p.alias); pushFm('nextReview', p.nextReview);
-    if (o.tags && o.tags.length) fm.push('tags: [' + o.tags.join(', ') + ']');
+    // tags 恒写 JSON 数组（合法 YAML flow）——「a,b」这样的标签不会被逗号劈成两个
+    if (o.tags && o.tags.length) fm.push('tags: ' + JSON.stringify(o.tags.map(String)));
     const front = fm.length ? '---\n' + fm.join('\n') + '\n---\n\n' : '';
-    const title = o.title ? '# ' + o.title + '\n\n' : '';
+    // 标题恒为一行：换行会把后半截劈进正文
+    const title = o.title ? '# ' + String(o.title).replace(/\s*\n\s*/g, ' ').trim() + '\n\n' : '';
     return front + title + lines.filter(l => l != null && l !== '').join('\n\n') + '\n';
   }
 

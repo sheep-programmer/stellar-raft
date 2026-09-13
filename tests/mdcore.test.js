@@ -110,7 +110,7 @@ test('blocksToMd：frontmatter + 各块型序列化', () => {
     { type: 'code', lang: 'go', code: 'x := 1' },
   ], { title: '测试星', props: { type: '定理', status: '—' }, tags: ['a', 'b'] });
   assert.ok(md.startsWith('---\ntype: 定理\n'), 'frontmatter 在最前，— 空值跳过');
-  assert.ok(md.includes('tags: [a, b]'));
+  assert.ok(md.includes('tags: ["a","b"]'));
   assert.ok(md.includes('# 测试星'));
   assert.ok(md.includes('## 小节'));
   assert.ok(md.includes('- [x] 完成'));
@@ -249,4 +249,51 @@ test('frontmatter：值含冒号加引号导出；块级 tags 列表也能读', 
   assert.deepEqual(fm.tags, ['量子', '熵']);
   assert.equal(fm.props.source, 'x: y');
   assert.equal(fm.body.trim(), '正文');
+});
+
+/* ——— 往返的三个破口（都会真的动到用户的内容）——— */
+
+test('代码块里含 ``` ：围栏自动加长，内容不被自己的正文提前关掉', () => {
+  /* 「知识笔记」里贴一段 Markdown 示例是常事。固定三个反引号的话，内容里那行
+     ``` 会把代码块提前关掉，导出再导入就被劈成三块、中间的代码丢掉。 */
+  const code = 'print("a")\n```\nprint("b")';
+  const md = blocksToMd([{ id: 'c', type: 'code', lang: 'python', code }], {});
+  assert.match(md, /^````python\n/, '围栏要比内容里最长的那串反引号更长');
+  const back = parseMdBlocks(md).filter(b => b.type === 'code');
+  assert.equal(back.length, 1, '应当还是一个代码块，而不是被劈开');
+  assert.equal(back[0].code, code, '内容要一字不差地回来');
+  assert.equal(back[0].lang, 'python', '语言别被围栏那一组吃掉');
+
+  // 更长的也要跟着长
+  const deep = '``````\nx';
+  const md2 = blocksToMd([{ id: 'c', type: 'code', lang: '', code: deep }], {});
+  assert.equal(parseMdBlocks(md2).find(b => b.type === 'code').code, deep);
+});
+
+test('数字开头的段落：转义加在分隔符上（1\\. ），往返后一字不多', () => {
+  /* 写成 `\1. ` 既护不住（真实解析器照样当成列表），导入时也还原不回来——
+     ESCAPABLE 的字符集里没有数字，那个反斜杠会原样留在正文里。 */
+  for (const t of ['1. 第一步是先把公式抄下来', '2) 另一种写法', '10. 第十步', '# 这不是标题', '- 这不是列表', '> 这不是引用', '| 这不是表格']) {
+    const md = blocksToMd([{ id: 'p', type: 'p', text: t }], {});
+    const back = parseMdBlocks(md).find(b => b.type === 'p');
+    // 块正文存的是 HTML：字面量的 > < & 会以实体形式落在里面，比对前先还原
+    const got = String((back && back.text) || '').replace(/<[^>]*>/g, '')
+      .replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
+    assert.equal(got, t, `段落往返不等价：${JSON.stringify(t)} -> ${JSON.stringify(got)}`);
+  }
+});
+
+test('摘要不会每来回一次就在正文里多复制一遍', () => {
+  /* 导出把摘要写成正文开头的第一段；导入时 parseVault 会把第一段认成摘要
+     **并保留在正文里**。两边一叠加，每来回一次正文里就多一份摘要，无限增长。
+     导出端认得出「第一段就是摘要本身」，于是不再多写一遍。 */
+  const summary = '定域隐变量理论必须满足的一条上限。';
+  // 真实的星，body 一律以 rich 块开头——摘要正是由它写出去的
+  const body = [{ id: 'r', type: 'rich' }, { id: 'p0', type: 'p', text: summary }, { id: 'h', type: 'h2', text: 'CHSH 形式' }];
+  const once = blocksToMd(body, { summary });
+  assert.equal((once.match(/定域隐变量/g) || []).length, 1, '正文第一段已经是摘要时，不该再写一遍');
+
+  // 第一段不是摘要时，摘要照常写在最前面（导出给别的编辑器看，摘要不能凭空消失）
+  const other = blocksToMd([{ id: 'r', type: 'rich' }, { id: 'h', type: 'h2', text: '小节' }], { summary });
+  assert.match(other, /^定域隐变量/);
 });

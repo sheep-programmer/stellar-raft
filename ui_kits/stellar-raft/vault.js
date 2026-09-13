@@ -124,7 +124,10 @@
         })
         .filter(Boolean);
       const bodyMd = Md.blocksToMd(s.body || [], {
-        title: stripHtml(s.label),
+        /* 标题必须写「落盘的文件名」而不是原始 label：label 经 safeName 消毒/去重后
+           可能与原名不同（`a/b`、超长、重名），导入端按文件名掐掉开头那行 H1——
+           两者不一致时 H1 掐不掉，每往返一次正文就多出一行标题 */
+        title: nameOf[s.id],
         props: s.props, tags: s.tags, summary: stripHtml(s.summary || ''),
       });
       const text = bodyMd + (related.length ? '\n## 关联\n\n' + related.join('\n') + '\n' : '');
@@ -155,7 +158,11 @@
 
   /* ---------------- zip 读取（导入侧） ----------------
      支持 store（我们自己导出的）与 deflate（用户用系统/Obsidian 重新压过的），
-     deflate 走浏览器/Node 原生 DecompressionStream，依旧零依赖。 */
+     deflate 走浏览器/Node 原生 DecompressionStream，依旧零依赖。
+     入口是「用户选中一个文件」，但文件本身可能来自任何地方——必须有界：
+     条目数与解压后的总字节都设上限，否则一个 zip 炸弹就能把标签页内存吃光。 */
+  const MAX_ZIP_ENTRIES = 20000;
+  const MAX_ZIP_BYTES = 64 * 1024 * 1024;   // 解压后总量 64MB——纯文本笔记仓库远到不了这里
   async function readZip(bytes) {
     const b = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes);
     const rd16 = (p) => b[p] | (b[p + 1] << 8);
@@ -164,9 +171,11 @@
     for (let p = b.length - 22; p >= 0; p--) { if (rd32(p) === 0x06054b50) { eocd = p; break; } }
     if (eocd < 0) throw new Error('不是有效的 zip 文件');
     const count = rd16(eocd + 10);
+    if (count > MAX_ZIP_ENTRIES) throw new Error('压缩包条目过多（超过 ' + MAX_ZIP_ENTRIES + '），不像是笔记仓库');
     let p = rd32(eocd + 16);
     const dec = new TextDecoder();
     const out = [];
+    let total = 0;
     for (let n = 0; n < count; n++) {
       if (rd32(p) !== 0x02014b50) throw new Error('zip 目录损坏');
       const method = rd16(p + 10);
@@ -181,6 +190,8 @@
         const resp = new Response(new Blob([data]).stream().pipeThrough(new DecompressionStream('deflate-raw')));
         data = new Uint8Array(await resp.arrayBuffer());
       } else if (method !== 0) throw new Error('不支持的压缩方式（' + method + '）');
+      total += data.length;
+      if (total > MAX_ZIP_BYTES) throw new Error('解压后超过 64MB，不像是笔记仓库');
       if (!name.endsWith('/')) out.push({ path: name, text: dec.decode(data) });
       p += 46 + nameLen + extraLen + cmtLen;
     }

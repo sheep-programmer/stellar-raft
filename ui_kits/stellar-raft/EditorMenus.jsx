@@ -1,6 +1,8 @@
 /* EditorMenus — professional editor overlays: slash menu, selection toolbar,
    and the block right-click context menu with 转换为 / 颜色 / 移动到 submenus.
    The selection toolbar drives real document.execCommand formatting. */
+/* 本文件的私有小组件一律带 EdMenu 前缀：浏览器里所有 .jsx 共享同一个全局作用域，
+   叫 Row / Divider 这种通名必然和别的文件撞车，而且是「后加载者静悄悄覆盖前者」。 */
 const { GlassPanel: SRGlass, Icon: SRIcon, IconButton: SRIconBtn } = window.StellarRaftDesignSystem_2866af;
 
 const BLOCK_TYPES = [
@@ -149,7 +151,7 @@ function Floating({ x, y, width = 240, onClose, children, anchor = 'left', autoF
   );
 }
 
-function Row({ icon, label, hint, chevron, danger, tone, active, onClick, onMouseEnter, onFocus }) {
+function EdMenuRow({ icon, label, hint, chevron, danger, tone, active, onClick, onMouseEnter, onFocus }) {
   const [h, setH] = React.useState(false);
   const on = h || active;
   const color = danger ? 'var(--danger)' : tone === 'gold' ? 'var(--gold)' : on ? 'var(--text-1)' : 'var(--text-2)';
@@ -183,7 +185,7 @@ function MoveRow({ color, name, onClick }) {
 function Label({ children }) {
   return <div style={{ fontSize: 10, letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: 'var(--text-3)', padding: '6px 10px 4px', fontFamily: 'var(--font-mono)' }}>{children}</div>;
 }
-function Divider() { return <div style={{ height: 1, background: 'var(--line)', margin: '5px 6px' }} />; }
+function EdMenuDivider() { return <div style={{ height: 1, background: 'var(--line)', margin: '5px 6px' }} />; }
 
 /* ---- Slash command menu — searchable + keyboard navigable ---- */
 function SlashMenu({ x, y, onPick, onClose }) {
@@ -206,8 +208,45 @@ function SlashMenu({ x, y, onPick, onClose }) {
       <div style={{ maxHeight: 320, overflow: 'auto' }}>
         <Label>基础块</Label>
         {list.length ? list.map((b, i) => (
-          <Row key={b.type} icon={b.icon} label={b.label} hint={b.hint} active={i === ai} onMouseEnter={() => setAi(i)} onClick={() => onPick(b.type)} />
+          <EdMenuRow key={b.type} icon={b.icon} label={b.label} hint={b.hint} active={i === ai} onMouseEnter={() => setAi(i)} onClick={() => onPick(b.type)} />
         )) : <div style={{ padding: '8px 11px', fontSize: 12.5, color: 'var(--text-3)' }}>没有匹配的块类型</div>}
+      </div>
+    </Floating>
+  );
+}
+
+/* ---- StarLinkMenu：正文里打 [[ 唤出的「链到另一颗星」选择器 ----
+   Obsidian 的招牌动作，而这个应用本来就有对应的东西：星与星之间的连线、
+   导出仓库时写成的 [[wikilink]]、以及「复制星链接」给出的 stellar-raft://star/<id>。
+   缺的只是正文里那个入口 —— 以前要引用另一颗星，得先去复制链接再回来 ⌘K。
+
+   只做一件事：列出星、按输入筛、选中后把链接交回去。插入与删掉那两个方括号
+   由编辑器负责（它才知道光标在哪）。 */
+function StarLinkMenu({ x, y, stars, onPick, onClose }) {
+  const [q, setQ] = React.useState('');
+  const [ai, setAi] = React.useState(0);
+  const s = q.trim().toLowerCase();
+  const list = (stars || []).filter(st => !s
+    || String(st.label || '').toLowerCase().includes(s)
+    || String(st.conName || '').toLowerCase().includes(s)
+    || (st.tags || []).some(t => String(t).toLowerCase().includes(s))).slice(0, 40);
+  React.useEffect(() => { setAi(0); }, [q]);
+  const onKey = (e) => {
+    if (e.key === 'ArrowDown') { e.preventDefault(); setAi(i => Math.min(list.length - 1, i + 1)); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); setAi(i => Math.max(0, i - 1)); }
+    else if (e.key === 'Enter') { e.preventDefault(); if (list[ai]) onPick(list[ai]); }
+  };
+  return (
+    <Floating x={x} y={y} width={286} onClose={onClose} title="链到另一颗星">
+      <div style={{ padding: '3px 5px 6px' }}>
+        <input autoFocus value={q} onChange={(e) => setQ(e.target.value)} onKeyDown={onKey} placeholder="搜星名、星域或标签…"
+          style={{ width: '100%', boxSizing: 'border-box', background: 'var(--input-bg, rgba(3,4,12,0.45))', border: '1px solid var(--glass-border-strong)', borderRadius: 'var(--r-sm)', color: 'var(--text-1)', fontSize: 13, padding: '7px 10px', outline: 'none', fontFamily: 'var(--font-sans)' }} />
+      </div>
+      <div style={{ maxHeight: 300, overflow: 'auto' }}>
+        {list.length ? list.map((st, i) => (
+          <EdMenuRow key={st.id} icon="star" label={st.label} hint={st.conName} active={i === ai}
+            onMouseEnter={() => setAi(i)} onClick={() => onPick(st)} />
+        )) : <div style={{ padding: '8px 11px', fontSize: 12.5, color: 'var(--text-3)' }}>没有匹配的星</div>}
       </div>
     </Floating>
   );
@@ -273,7 +312,7 @@ function ColorMenu({ x, y, onClose, onPick, autoFocus = false }) {
     <Floating x={x} y={y} width={200} onClose={onClose} autoFocus={autoFocus} title="块操作">
       <Label>文字颜色</Label>
       {TEXT_COLORS.map(c => swatch(c, 'text'))}
-      <Divider />
+      <EdMenuDivider />
       <Label>背景</Label>
       {BG_COLORS.map(c => swatch(c, 'bg'))}
     </Floating>
@@ -290,15 +329,15 @@ function ContextMenu({ x, y, onClose, onAction, constellations }) {
   return (
     <React.Fragment>
       <Floating x={x} y={y} width={238} onClose={onClose} autoFocus title="这个块">
-        <Row icon="refresh-cw" label="转换为" chevron onMouseEnter={(e) => openSub('turn', e)} onFocus={(e) => openSub('turn', e)} onClick={(e) => openSub('turn', e, true)} />
-        <Row icon="copy" label="复制为副本" onClick={() => onAction('duplicate')} />
-        <Row icon="link" label="复制块链接" onClick={() => onAction('copyLink')} />
-        <Row icon="corner-up-right" label="移动到星域" chevron onMouseEnter={(e) => openSub('move', e)} onFocus={(e) => openSub('move', e)} onClick={(e) => openSub('move', e, true)} />
-        <Divider />
-        <Row icon="palette" label="颜色" chevron onMouseEnter={(e) => openSub('color', e)} onFocus={(e) => openSub('color', e)} onClick={(e) => openSub('color', e, true)} />
-        <Row icon="bookmark" label="加入复习队列" onClick={() => onAction('review')} />
-        <Divider />
-        <Row icon="trash-2" label="删除" danger onClick={() => onAction('delete')} />
+        <EdMenuRow icon="refresh-cw" label="转换为" chevron onMouseEnter={(e) => openSub('turn', e)} onFocus={(e) => openSub('turn', e)} onClick={(e) => openSub('turn', e, true)} />
+        <EdMenuRow icon="copy" label="复制为副本" onClick={() => onAction('duplicate')} />
+        <EdMenuRow icon="link" label="复制块链接" onClick={() => onAction('copyLink')} />
+        <EdMenuRow icon="corner-up-right" label="移动到星域" chevron onMouseEnter={(e) => openSub('move', e)} onFocus={(e) => openSub('move', e)} onClick={(e) => openSub('move', e, true)} />
+        <EdMenuDivider />
+        <EdMenuRow icon="palette" label="颜色" chevron onMouseEnter={(e) => openSub('color', e)} onFocus={(e) => openSub('color', e)} onClick={(e) => openSub('color', e, true)} />
+        <EdMenuRow icon="bookmark" label="加入复习队列" onClick={() => onAction('review')} />
+        <EdMenuDivider />
+        <EdMenuRow icon="trash-2" label="删除" danger onClick={() => onAction('delete')} />
         <div style={{ padding: '7px 11px 4px', borderTop: '1px solid var(--line)', marginTop: 4 }}>
           <div style={{ fontSize: 11, color: 'var(--text-3)' }}>{(window.SR_DATA.account || {}).name || '我'} 编辑</div>
         </div>
@@ -309,7 +348,7 @@ function ContextMenu({ x, y, onClose, onAction, constellations }) {
           <Label>转换为</Label>
           <div style={{ maxHeight: 300, overflow: 'auto' }}>
             {BLOCK_TYPES.filter(b => b.type !== 'divider' && b.type !== 'image').map(b => (
-              <Row key={b.type} icon={b.icon} label={b.label} onClick={() => { onAction('turn', b.type); onClose(); }} />
+              <EdMenuRow key={b.type} icon={b.icon} label={b.label} onClick={() => { onAction('turn', b.type); onClose(); }} />
             ))}
           </div>
         </Floating>
@@ -336,7 +375,7 @@ function ConfirmDialog({ message, confirmLabel, onYes, onClose }) {
   const reduce = typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
   React.useEffect(() => { const k = (e) => { if (e.key === 'Escape') onClose(); else if (e.key === 'Enter') { e.preventDefault(); onYes(); } }; document.addEventListener('keydown', k); return () => document.removeEventListener('keydown', k); }, []);
   return (
-    <div onMouseDown={onClose} onContextMenu={(e) => e.preventDefault()} style={{ position: 'fixed', inset: 0, zIndex: 'var(--z-modal)', background: 'rgba(3,4,12,0.55)', backdropFilter: 'blur(3px)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <div onMouseDown={onClose} onContextMenu={(e) => e.preventDefault()} style={{ position: 'fixed', inset: 0, zIndex: 'var(--z-modal)', background: 'rgba(3,4,12,0.55)', WebkitBackdropFilter: 'blur(3px)', backdropFilter: 'blur(3px)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <div ref={ref} onMouseDown={(e) => e.stopPropagation()} style={{ width: 348, maxWidth: '90vw', animation: reduce ? 'none' : 'sr-cardin var(--dur-fast) var(--ease-flight) both' }}>
         <SRGlass strong radius="lg" pad="md" glow>
           <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12, marginBottom: 18 }}>
@@ -365,14 +404,14 @@ function LinkDialog({ initial, onSubmit, onClose }) {
   React.useEffect(() => { const k = (e) => { if (e.key === 'Escape') onClose(); }; document.addEventListener('keydown', k); return () => document.removeEventListener('keydown', k); }, []);
   const submit = () => { if (!u) { onClose(); return; } if (bad) return; onSubmit(u); };
   return (
-    <div onMouseDown={onClose} onContextMenu={(e) => e.preventDefault()} style={{ position: 'fixed', inset: 0, zIndex: 'var(--z-modal)', background: 'rgba(3,4,12,0.5)', backdropFilter: 'blur(3px)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <div onMouseDown={onClose} onContextMenu={(e) => e.preventDefault()} style={{ position: 'fixed', inset: 0, zIndex: 'var(--z-modal)', background: 'rgba(3,4,12,0.5)', WebkitBackdropFilter: 'blur(3px)', backdropFilter: 'blur(3px)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <div ref={ref} onMouseDown={(e) => e.stopPropagation()} style={{ width: 380, maxWidth: '92vw', animation: reduce ? 'none' : 'sr-cardin var(--dur-fast) var(--ease-flight) both' }}>
         <SRGlass strong radius="lg" pad="md" glow>
           <div style={{ display: 'flex', alignItems: 'center', gap: 9, marginBottom: 12, fontSize: 13.5, color: 'var(--text-1)' }}><SRIcon name="link" size={16} color="var(--star-blue)" />添加链接</div>
           <input autoFocus value={v} onChange={(e) => setV(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); submit(); } }}
             placeholder="https://…"
             style={{ width: '100%', boxSizing: 'border-box', background: 'var(--input-bg, rgba(3,4,12,0.45))', border: '1px solid ' + (bad ? 'color-mix(in srgb, var(--danger) 55%, transparent)' : 'var(--glass-border-strong)'), borderRadius: 'var(--r-sm)', color: 'var(--text-1)', fontSize: 14, padding: '9px 11px', outline: 'none', fontFamily: 'var(--font-sans)' }} />
-          {bad && <div style={{ marginTop: 8, fontSize: 12, color: 'var(--danger)' }}>不支持该协议 · 仅允许 http/https/mailto 或相对链接</div>}
+          {bad && <div role="alert" style={{ marginTop: 8, fontSize: 12, color: 'var(--danger)' }}>不支持该协议 · 仅允许 http/https/mailto 或相对链接</div>}
           <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end', marginTop: 14 }}>
             <button type="button" className="sr-focus-ring" onClick={onClose} style={{ height: 34, padding: '0 16px', borderRadius: 'var(--r-pill)', border: '1px solid var(--glass-border-strong)', background: 'transparent', color: 'var(--text-2)', fontSize: 13, cursor: 'pointer', fontFamily: 'var(--font-sans)' }}>取消</button>
             <button type="button" className="sr-focus-ring" onClick={submit} disabled={bad} style={{ height: 34, padding: '0 16px', borderRadius: 'var(--r-pill)', border: '1px solid var(--glass-border-strong)', background: 'rgba(159,198,255,0.14)', color: 'var(--text-1)', fontSize: 13, cursor: bad ? 'not-allowed' : 'pointer', opacity: bad ? 0.5 : 1, fontFamily: 'var(--font-sans)' }}>添加</button>
@@ -392,16 +431,16 @@ function EditorMoreMenu({ x, y, fav, constellations, onAction, onClose }) {
   return (
     <React.Fragment>
       <Floating x={x} y={y} width={236} anchor="right" onClose={onClose} autoFocus title="这颗星">
-        <Row icon="star" tone={fav ? 'gold' : undefined} active={fav} label={fav ? '取消收藏' : '收藏这颗星'} onClick={() => onAction('fav')} />
-        <Divider />
-        <Row icon="copy" label="创建星的副本" onClick={() => onAction('dup')} />
-        <Row icon="link" label="复制星链接" onClick={() => onAction('copyLink')} />
-        <Row icon="file-down" label="导出 Markdown" onClick={() => onAction('export')} />
-        <Row icon="file-up" label="导入 Markdown" onClick={() => onAction('import')} />
-        <Row icon="corner-up-right" label="移动到星域" chevron onMouseEnter={(e) => openSub('move', e)} onFocus={(e) => openSub('move', e)} onClick={(e) => openSub('move', e, true)} />
-        <Row icon="history" label="查看历史" onClick={() => onAction('history')} />
-        <Divider />
-        <Row icon="trash-2" label="删除这颗星" danger onClick={() => onAction('delete')} />
+        <EdMenuRow icon="star" tone={fav ? 'gold' : undefined} active={fav} label={fav ? '取消收藏' : '收藏这颗星'} onClick={() => onAction('fav')} />
+        <EdMenuDivider />
+        <EdMenuRow icon="copy" label="创建星的副本" onClick={() => onAction('dup')} />
+        <EdMenuRow icon="link" label="复制星链接" onClick={() => onAction('copyLink')} />
+        <EdMenuRow icon="file-down" label="导出 Markdown" onClick={() => onAction('export')} />
+        <EdMenuRow icon="file-up" label="导入 Markdown" onClick={() => onAction('import')} />
+        <EdMenuRow icon="corner-up-right" label="移动到星域" chevron onMouseEnter={(e) => openSub('move', e)} onFocus={(e) => openSub('move', e)} onClick={(e) => openSub('move', e, true)} />
+        <EdMenuRow icon="history" label="查看历史" onClick={() => onAction('history')} />
+        <EdMenuDivider />
+        <EdMenuRow icon="trash-2" label="删除这颗星" danger onClick={() => onAction('delete')} />
       </Floating>
       {sub === 'move' && (
         <Floating x={subPos.x} y={subPos.y} width={190} anchor="right" onClose={() => setSub(null)} autoFocus={subAuto} title="移动到星域">
@@ -429,7 +468,7 @@ function HistoryDialog({ star, onClose, onFlash }) {
     { when: '6 月 18 日', who: '你', note: '创建这颗星', first: true },
   ];
   return (
-    <div onMouseDown={onClose} onContextMenu={(e) => e.preventDefault()} style={{ position: 'fixed', inset: 0, zIndex: 'var(--z-modal)', background: 'rgba(3,4,12,0.55)', backdropFilter: 'blur(3px)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <div onMouseDown={onClose} onContextMenu={(e) => e.preventDefault()} style={{ position: 'fixed', inset: 0, zIndex: 'var(--z-modal)', background: 'rgba(3,4,12,0.55)', WebkitBackdropFilter: 'blur(3px)', backdropFilter: 'blur(3px)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <div ref={ref} onMouseDown={(e) => e.stopPropagation()} style={{ width: 432, maxWidth: '92vw', animation: reduce ? 'none' : 'sr-cardin var(--dur-fast) var(--ease-flight) both' }}>
         <SRGlass strong radius="lg" pad="md" glow>
           <div style={{ display: 'flex', alignItems: 'center', gap: 9, marginBottom: 4 }}>
@@ -469,4 +508,4 @@ function HistoryDialog({ star, onClose, onFlash }) {
   );
 }
 
-window.SRKit = Object.assign(window.SRKit || {}, { SlashMenu, SelectionToolbar, ContextMenu, ColorMenu, ConfirmDialog, LinkDialog, EditorMoreMenu, HistoryDialog, useModalFocus, BLOCK_TYPES, TEXT_COLORS, BG_COLORS });
+window.SRKit = Object.assign(window.SRKit || {}, { SlashMenu, StarLinkMenu, SelectionToolbar, ContextMenu, ColorMenu, ConfirmDialog, LinkDialog, EditorMoreMenu, HistoryDialog, useModalFocus, BLOCK_TYPES, TEXT_COLORS, BG_COLORS });

@@ -12,13 +12,23 @@ const EDITABLE = ['p', 'h1', 'h2', 'h3', 'bulleted', 'numbered', 'todo', 'quote'
 
 // 新建/转换为结构块时初始化真实空结构——否则 CodeBlock/DataTable 会兜底渲染演示
 // 内容（「看到」的不等于「存下」的），导出也把演示表当真数据写出。
+// 互转时把内容一起带过去：代码→正文不该得到空段落，正文→代码也不该把原文藏进
+// 块对象里用户却「看到内容没了」。内容是用户的，转换只是换个容器。
 const typeExtras = (type, existing) => {
   const e = existing || {};
+  // 这块里现存的纯文本（不管它现在住在哪个字段）：text 是 HTML 要先剥标签，
+  // code/tex/child 本来就是纯文本
+  const stripLite = (h) => String(h || '').replace(/<br\s*\/?>/gi, ' ').replace(/<[^>]*>/g, '')
+    .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+  const plain = () => stripLite(e.text) || String(e.code || e.tex || e.child || '');
   const x = {};
-  if (type === 'code' && e.code == null) { x.code = ''; x.lang = e.lang || 'python'; x._new = true; }
+  if (type === 'code' && e.code == null) { x.code = plain(); x.lang = e.lang || 'python'; x._new = true; }
   if (type === 'table' && !e.head) { x.head = ['列 1', '列 2']; x.rows = [['', ''], ['', '']]; }
-  if (type === 'math' && e.tex == null) { x.tex = ''; x._new = true; }
+  if (type === 'math' && e.tex == null) { x.tex = plain(); x._new = true; }
   if (type === 'toggle' && e.child == null) { x.child = ''; x.open = true; }
+  // 转成文本类块（p/h1-h3/quote/callout/bulleted/numbered/todo）而 text 为空时，接住内容
+  const TEXTY = ['p', 'h1', 'h2', 'h3', 'quote', 'callout', 'bulleted', 'numbered', 'todo'];
+  if (TEXTY.includes(type) && (e.text == null || e.text === '')) { const t = plain(); if (t) x.text = escHtml(t); }
   return x;
 };
 
@@ -79,6 +89,12 @@ function CodeBlock({ code: codeProp, lang: langProp, onCommitCode, onCommitLang,
   const sample = (HL && (HL.SAMPLES[lang] || HL.GENERIC)) || '';
   const [code, setCode] = React.useState(codeProp != null ? codeProp : sample);
   const [editingCode, setEditingCode] = React.useState(!!autoEdit);
+  /* 撤销/重做是「改 blocks 再回放」，块的 key 不变，本组件不会重挂载——
+     不跟着 props 同步的话，⌘Z 对代码块完全失效：别的块都退回去了，唯独这里纹丝不动；
+     更糟的是之后一次失焦会把这份陈旧的 code 重新提交，等于把撤销掉的编辑又写了一遍。
+     同文件的 MathBlock 早就是这么同步的，这里是漏写。 */
+  React.useEffect(() => { if (codeProp != null) setCode(codeProp); }, [codeProp]);
+  React.useEffect(() => { if (langProp) setLangState(langProp); }, [langProp]);
   const rows = HL ? HL.tokenize(code, lang) : code.split('\n').map(line => [{ t: line, c: 'plain' }]);
 
   return (
@@ -100,8 +116,8 @@ function CodeBlock({ code: codeProp, lang: langProp, onCommitCode, onCommitLang,
               if (ok) done(); else if (onCopyFail) onCopyFail();
             } catch (e) { if (onCopyFail) onCopyFail(); }
           };
-          if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(code).then(done).catch(fallback);
+          if (window.SRCopy) {
+            window.SRCopy.copy(code).then(ok => (ok ? done() : fallback()));
           } else fallback();
         }}
           title="复制代码"
@@ -136,7 +152,10 @@ function CodeBlock({ code: codeProp, lang: langProp, onCommitCode, onCommitLang,
           }}
           style={{ display: 'block', width: '100%', boxSizing: 'border-box', minHeight: Math.max(80, rows.length * 22 + 24), background: 'transparent', color: P.plain, border: 'none', outline: 'none', resize: 'vertical', fontFamily: 'var(--font-mono)', fontSize: 12.5, lineHeight: 1.85, padding: '12px 14px', tabSize: 4, borderRadius: '0 0 var(--r-md) var(--r-md)' }} />
       ) : (
-        <div onClick={() => setEditingCode(true)} title="点击编辑代码" style={{ padding: '12px 14px', fontFamily: 'var(--font-mono)', fontSize: 12.5, lineHeight: 1.85, color: P.plain, overflowX: 'auto', cursor: 'text', minHeight: 24, borderRadius: '0 0 var(--r-md) var(--r-md)' }}>
+        <div onClick={() => setEditingCode(true)} title="点击编辑代码"
+          role="button" tabIndex={0} className="sr-focus-ring" aria-label="编辑代码"
+          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setEditingCode(true); } }}
+          style={{ padding: '12px 14px', fontFamily: 'var(--font-mono)', fontSize: 12.5, lineHeight: 1.85, color: P.plain, overflowX: 'auto', cursor: 'text', minHeight: 24, borderRadius: '0 0 var(--r-md) var(--r-md)' }}>
           {rows.map((toks, i) => (
             <div key={i} style={{ display: 'flex', gap: 16, whiteSpace: 'pre' }}>
               <span style={{ width: 18, flex: 'none', textAlign: 'right', color: P.ln, userSelect: 'none' }}>{i + 1}</span>
@@ -389,6 +408,8 @@ function MathBlock({ tex, onCommit, autoEdit }) {
   }
   return (
     <div onClick={() => setEditing(true)} title={viewErrs.length ? 'LaTeX 可能有语法错误：' + viewErrs.join('；') + ' · 点击进入源码编辑' : '点击编辑 LaTeX 源码'}
+      role="button" tabIndex={0} className="sr-focus-ring" aria-label="编辑 LaTeX 公式"
+      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setEditing(true); } }}
       style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '16px 14px', borderRadius: 'var(--r-md)', background: 'rgba(159,198,255,0.04)', border: '1px solid ' + (viewErrs.length ? 'color-mix(in srgb, var(--danger) 35%, transparent)' : 'var(--glass-border)'), cursor: 'text', margin: '2px 0' }}>
       <span style={{ fontSize: 19.5, color: tex ? 'var(--text-1)' : 'var(--text-3)', letterSpacing: '0.01em', textAlign: 'center' }}>
         {tex ? viewNode : '点击输入公式（LaTeX 源码）…'}
@@ -398,25 +419,151 @@ function MathBlock({ tex, onCommit, autoEdit }) {
   );
 }
 
+/* ——— 插图的分寸 ———
+   星图的持久化是「整片星空一次整存」：笔记里的图以 dataURL 内联在快照里，跟着每
+   一次保存整体上传。所以一张 12MB 的手机原图不是「这条笔记变大了」，而是整片星空
+   越过服务器 8MB 的请求体上限、也越过 localStorage 的配额——此后每一次保存都失败，
+   用户看到的却只是一句「服务器暂不可达」，两头都存不下，还不知道为什么。
+
+   于是在它进笔记之前先量一量：
+   · 小图原样保留 —— 截图、示意图这类本来就小，重编码只会掉画质；
+   · 大图按长边 1600 缩一次，再逐档降质，直到进得了预算（webp 优先，保住透明通道）；
+   · GIF / SVG 不便重编码（一个会掉动画，一个本就是文本），只判大小、不动内容；
+   · 实在压不下去的明说一声，而不是让它悄悄毁掉整片星空的同步。 */
+const SR_IMG = {
+  keepUnder: 600 * 1024,    // 小于这个就原样收下，不重编码
+  maxEdge: 1600,            // 缩放后的长边（够 2× 视网膜屏铺满正文栏）
+  budget: 700 * 1024,       // 压缩目标
+  hardCap: 2 * 1024 * 1024, // 越过这条线就不收——一片星空塞不下几张这样的图
+};
+const srBytes = (f) => (f && f.size) || 0;
+const srKB = (n) => (n >= 1024 * 1024 ? (n / 1024 / 1024).toFixed(1) + 'MB' : Math.max(1, Math.round(n / 1024)) + 'KB');
+// dataURL 的字符数约等于字节数的 4/3（base64），用它反推「压到多少字节」
+const srDataUrlBytes = (u) => Math.round((String(u).length - (String(u).indexOf(',') + 1)) * 0.75);
+
+function srShrinkImage(file) {
+  return new Promise((resolve, reject) => {
+    const url = URL.createObjectURL(file);
+    const img = new Image();
+    img.onload = () => {
+      URL.revokeObjectURL(url);
+      /* 整段包起来：canvas 分配不出来、toDataURL 被安全策略拒绝，都是在这个
+         回调里同步抛出的——外面的 Promise 接不到，就永远不落定，界面卡在
+         「正在压缩这张图…」再也不动。 */
+      try {
+        const scale = Math.min(1, SR_IMG.maxEdge / Math.max(img.naturalWidth, img.naturalHeight));
+        const cv = document.createElement('canvas');
+        cv.width = Math.max(1, Math.round(img.naturalWidth * scale));
+        cv.height = Math.max(1, Math.round(img.naturalHeight * scale));
+        const ctx = cv.getContext('2d');
+        if (!ctx) throw new Error('这台设备的浏览器没给出画布，压不了这张图');
+        ctx.drawImage(img, 0, 0, cv.width, cv.height);
+        // webp 保得住透明通道；浏览器不认时它会悄悄回吐 png，那就改用 jpeg
+        let type = 'image/webp';
+        let out = cv.toDataURL(type, 0.86);
+        if (!out.startsWith('data:image/webp')) { type = 'image/jpeg'; out = cv.toDataURL(type, 0.86); }
+        for (let q = 0.74; srDataUrlBytes(out) > SR_IMG.budget && q >= 0.4; q -= 0.12) out = cv.toDataURL(type, q);
+        /* 画布太大时某些浏览器不报错，只回一条 'data:,' —— 那不是图片，是一块
+           什么都没有的占位。放它进笔记，用户会得到一个永远加载失败的图块。 */
+        if (!/^data:image\/[a-z+]+;base64,/.test(out) || out.length < 256) {
+          throw new Error('这张图太大，浏览器没能画出来 —— 先自行压缩一下');
+        }
+        resolve(out);
+      } catch (e) { reject(e instanceof Error ? e : new Error('这张图处理不了')); }
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('这个文件不是浏览器认得的图片')); };
+    img.src = url;
+  });
+}
+
+// FileReader 的 Promise 版：小图原样收下时走它
+function srReadDataUrl(file) {
+  return new Promise((resolve, reject) => {
+    const rd = new FileReader();
+    rd.onload = () => resolve(rd.result);
+    rd.onerror = () => reject(new Error('这个文件读不出来'));
+    rd.readAsDataURL(file);
+  });
+}
+
+/* 一个文件 → 可以放进笔记的 dataURL。不合格就抛出一句能直接给人看的话。
+   图片块的「点击上传 / 拖进来」与编辑器整页的拖放都走这里，规则只写一处。
+   返回 { src, note }：note 是压缩后那句「8.4MB → 420KB」，没压过就是空的。 */
+async function srPrepareImage(file) {
+  if (!file) throw new Error('没拿到文件');
+  if (!/^image\//.test(file.type || '')) throw new Error('这不是一张图片');
+  const raw = srBytes(file);
+  // GIF 与 SVG 不重编码：一个会被压成单帧，一个本来就是几 KB 的文本
+  const asIs = /gif|svg/.test(file.type);
+  if (raw <= SR_IMG.keepUnder || asIs) {
+    if (raw > SR_IMG.hardCap) {
+      throw new Error(`这张图 ${srKB(raw)}，太大了 —— ${asIs ? '动图与矢量图不便压缩，' : ''}请先压到 ${srKB(SR_IMG.hardCap)} 以内`);
+    }
+    return { src: await srReadDataUrl(file), note: '' };
+  }
+  const out = await srShrinkImage(file);
+  const got = srDataUrlBytes(out);
+  if (got > SR_IMG.hardCap) throw new Error(`这张图压到 ${srKB(got)} 仍然太大，换一张或先自行压缩`);
+  return { src: out, note: `图片已压缩：${srKB(raw)} → ${srKB(got)}（长边 ${SR_IMG.maxEdge}px）` };
+}
+
 /* 图片块：src 失效（外链挂掉 / 图床死链）时给出可见的失败态占位，
-   而不是一条 0 高度的隐形横线；重新上传即可替换。 */
+   而不是一条 0 高度的隐形横线；重新上传即可替换。
+   两条入口（点击选文件 / 真的拖进来）汇到同一个 accept —— 之前那句
+   「拖入图片」是句空话：<label> 上放开文件并不会触发里面的 input。 */
 function ImageBlock({ b, onSrc }) {
   const [err, setErr] = React.useState(false);
+  const [busy, setBusy] = React.useState(false);
+  const [note, setNote] = React.useState('');
+  const [over, setOver] = React.useState(false);
   React.useEffect(() => { setErr(false); }, [b.src]);
-  const pick = (e) => {
-    const f = e.target.files && e.target.files[0]; if (!f) return;
-    const rd = new FileReader(); rd.onload = () => onSrc(rd.result); rd.readAsDataURL(f);
+
+  const say = (msg) => {
+    const NS = window.StellarRaftDesignSystem_2866af;
+    if (NS && NS.toast) NS.toast(msg, { tone: 'blue', icon: 'image', duration: 4200 });
+    else setNote(msg);
   };
+
+  const accept = async (f) => {
+    if (!f) return;
+    setNote('');            // 上一次的提示不该跟着下一张图
+    setBusy(true);
+    try {
+      const { src, note: n } = await srPrepareImage(f);
+      onSrc(src);
+      if (n) say(n);
+    } catch (e) {
+      say((e && e.message) || '这张图处理不了');
+    } finally { setBusy(false); }
+  };
+
+  const pick = (e) => { accept(e.target.files && e.target.files[0]); e.target.value = ''; };
+  const drop = (e) => {
+    e.preventDefault(); setOver(false);
+    const dt = e.dataTransfer;
+    accept(dt && dt.files && dt.files[0]);
+  };
+
   if (b.src && !err) {
     return <img src={b.src} alt="笔记图片" onError={() => setErr(true)}
       style={{ maxWidth: '100%', borderRadius: 'var(--r-md)', display: 'block', border: '1px solid var(--glass-border)' }} />;
   }
+  const edge = err ? 'color-mix(in srgb, var(--danger) 45%, transparent)'
+    : (over ? 'var(--star-blue)' : 'var(--line-strong)');
   return (
-    <label style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 8, height: 120, borderRadius: 'var(--r-md)', border: '1px dashed ' + (err ? 'color-mix(in srgb, var(--danger) 45%, transparent)' : 'var(--line-strong)'), color: 'var(--text-3)', cursor: 'pointer', background: err ? 'color-mix(in srgb, var(--danger) 5%, transparent)' : 'transparent' }}>
-      <Icon name={err ? 'image-off' : 'image'} size={22} color={err ? 'var(--danger)' : 'currentColor'} />
-      <span style={{ fontSize: 13, color: err ? 'var(--text-2)' : 'inherit' }}>{err ? '图片加载失败 · 原链接已失效' : '拖入图片，或点击上传'}</span>
-      {err && <span style={{ fontSize: 11.5 }}>点击重新上传，替换这张图</span>}
-      <input type="file" accept="image/*" style={{ display: 'none' }} onChange={pick} />
+    <label
+      onDragOver={(e) => { e.preventDefault(); setOver(true); }}
+      onDragLeave={() => setOver(false)}
+      onDrop={drop}
+      style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 8, height: 120, borderRadius: 'var(--r-md)', border: '1px dashed ' + edge, color: 'var(--text-3)', cursor: busy ? 'progress' : 'pointer', background: err ? 'color-mix(in srgb, var(--danger) 5%, transparent)' : (over ? 'rgba(159,198,255,0.06)' : 'transparent'), transition: 'border-color var(--dur-fast), background var(--dur-fast)' }}>
+      <Icon name={busy ? 'loader' : (err ? 'image-off' : 'image')} size={22} color={err ? 'var(--danger)' : (over ? 'var(--star-blue)' : 'currentColor')} />
+      <span style={{ fontSize: 13, color: err ? 'var(--text-2)' : 'inherit' }}>
+        {busy ? '正在压缩这张图…' : (err ? '图片加载失败 · 原链接已失效' : (over ? '放开即插入' : '拖入图片，或点击上传'))}
+      </span>
+      {err && !busy && <span style={{ fontSize: 11.5 }}>点击重新上传，替换这张图</span>}
+      {!err && !busy && !note && <span style={{ fontSize: 11 }}>大图会自动压到长边 {SR_IMG.maxEdge}px —— 整片星空要跟着每次保存一起上传</span>}
+      {note && <span style={{ fontSize: 11.5, color: 'var(--text-2)' }}>{note}</span>}
+      <input type="file" accept="image/*" style={{ display: 'none' }} onChange={pick} disabled={busy} />
     </label>
   );
 }
@@ -470,25 +617,45 @@ function PropPop({ anchorRef, width, height, onClose, children }) {
     </div>, document.body);
 }
 
-/* 「类型」浮层菜单：预设 + 当前自定义值兜底，点选即生效（下拉的正常语义） */
+/* 「类型」浮层菜单：预设 + 当前自定义值兜底，点选即生效（下拉的正常语义）。
+   键盘走 menu 模式：打开落焦当前项，↑↓ 移动，Enter/Space 选定，Esc 收层还焦点 */
 function TypePicker({ value, onPick, onPop }) {
   const [open, setOpenRaw] = React.useState(false);
   const setOpen = (v) => { setOpenRaw(v); onPop && onPop(!!v); };
   const btnRef = React.useRef(null);
+  const listRef = React.useRef(null);
   const opts = PROP_TYPE_PRESETS.includes(value) || !value ? PROP_TYPE_PRESETS : [value, ...PROP_TYPE_PRESETS];
+  React.useEffect(() => {
+    if (!open || !listRef.current) return;
+    const cur = listRef.current.querySelector('[aria-selected="true"]') || listRef.current.querySelector('[data-oid]');
+    if (cur) cur.focus();
+  }, [open]);
+  const onOptKey = (e, i, t) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setOpen(false); if (t !== value) onPick(t); if (btnRef.current) btnRef.current.focus(); }
+    else if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      const next = listRef.current && listRef.current.querySelector(`[data-oid="${e.key === 'ArrowDown' ? i + 1 : i - 1}"]`);
+      if (next) next.focus();
+    } else if (e.key === 'Escape') {
+      e.preventDefault(); e.stopPropagation(); setOpen(false);
+      if (btnRef.current) btnRef.current.focus();
+    }
+  };
   return (
     <>
       <button ref={btnRef} type="button" className="sr-focus-ring" onClick={() => setOpen(!open)} aria-haspopup="listbox" aria-expanded={open}
+        onKeyDown={(e) => { if (!open && (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); setOpen(true); } }}
         style={{ display: 'inline-flex', alignItems: 'center', gap: 6, font: 'inherit', fontSize: 12, padding: '2px 9px', borderRadius: 'var(--r-pill)', border: '1px solid transparent', background: 'rgba(159,198,255,0.12)', color: 'var(--star-blue)', cursor: 'pointer' }}>
         {value || '选择类型…'}
         <Icon name="chevron-down" size={12} color="currentColor" />
       </button>
       {open && (
         <PropPop anchorRef={btnRef} width={172} height={opts.length * 34 + 12} onClose={() => setOpen(false)}>
-          <div role="listbox" style={{ padding: 6 }}>
-            {opts.map(t => (
-              <div key={t} role="option" aria-selected={t === value}
+          <div role="listbox" ref={listRef} style={{ padding: 6 }}>
+            {opts.map((t, i) => (
+              <div key={t} role="option" aria-selected={t === value} tabIndex={-1} data-oid={i}
                 onClick={() => { setOpen(false); if (t !== value) onPick(t); }}
+                onKeyDown={(e) => onOptKey(e, i, t)}
                 onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(159,198,255,0.10)'; }}
                 onMouseLeave={(e) => { e.currentTarget.style.background = t === value ? 'rgba(255,217,138,0.10)' : 'transparent'; }}
                 style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '7px 10px', borderRadius: 'var(--r-sm)', cursor: 'pointer', fontSize: 13, color: t === value ? 'var(--text-1)' : 'var(--text-2)', background: t === value ? 'rgba(255,217,138,0.10)' : 'transparent' }}>
@@ -1092,6 +1259,7 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
   const [focusBlk, setFocusBlk] = React.useState(null); // 光标所在块，给选中态视觉
   const [ctx, setCtx] = React.useState(null);     // {x,y,id}
   const [slash, setSlash] = React.useState(null); // {x,y,id}
+  const [starLink, setStarLink] = React.useState(null); // [[ 唤出的选星器：{x,y,id,at}
   const [sel, setSel] = React.useState(null);     // {x,y}
   const [colorPop, setColorPop] = React.useState(null);
   const [toast, setToast] = React.useState(null);
@@ -1105,6 +1273,12 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
   const [confirm, setConfirm] = React.useState(null);     // {message, confirmLabel, onYes}
   const [linkDialog, setLinkDialog] = React.useState(null); // {range}
   const [more, setMore] = React.useState(null);           // page-level 「更多」 dropdown {x,y}
+  const [railOpen, setRailOpen] = React.useState(false);  // 窄屏：知识栏装成底部弹层
+  /* 窄到右侧知识栏摆不下（≤1180px）。用共享断点而不是自己写 matchMedia：
+     CSS 那边靠 html[data-narrow] 收栏，两边认同一个数才不会出现
+     「栏已经藏了、按钮还没出来」的那段真空。 */
+  const narrow = window.SRKit.useScreen().narrow;
+  const { MobileSheet } = window.SRKit;
   const [history, setHistory] = React.useState(false);    // version-history dialog (mock)
   const [explore, setExplore] = React.useState(null);     // 迷你星图点选的星（待确认「探索星系」）{id,label,con}
   const [con, setCon] = React.useState(star.con);         // constellation, mutable via 「移动到星域」
@@ -1114,7 +1288,7 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
   const [pendingAtomicDel, setPendingAtomicDel] = React.useState(null); // 块首 Backspace 选中的上方原子块，再按一次删除
   const blockTypeName = (type) => { const bt = ((window.SRKit && window.SRKit.BLOCK_TYPES) || []).find(x => x.type === type); return bt ? bt.label : '内容'; };
 
-  const { SlashMenu, SelectionToolbar, ContextMenu, ColorMenu, ConfirmDialog, LinkDialog, EditorMoreMenu, HistoryDialog } = window.SRKit;
+  const { SlashMenu, StarLinkMenu, SelectionToolbar, ContextMenu, ColorMenu, ConfirmDialog, LinkDialog, EditorMoreMenu, HistoryDialog } = window.SRKit;
   const backlinks = D.backlinksOf(star.id);
   const scrollRef = React.useRef(null);
   const stripTags = (h) => (h || '').replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
@@ -1187,6 +1361,25 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
     if (!U || u.typing) return;
     U.noteTyping(u, snapState());
   };
+  // 一次输入突发只属于一个块：焦点换块时给突发封口——否则跨块打字被并成
+  // 同一个突发，一次 ⌘Z 把两个块里刚打的字一起抹掉（undocore 的 typing
+  // 只在 push/undo/redo 时复位）。
+  // 封口必须把 DOM 里的字收进 **blocks state** 而不只是 blocksRef：
+  // 同一个 onFocus 里的 setFocusBlk 立刻触发重渲染，渲染体里
+  // `blocksRef.current = blocks` 会把刚同步的 blocksRef 回填成旧的 state——
+  // 新突发的起点快照就跟着丢了刚打下的字。
+  const lastFocusBlk = React.useRef(null);
+  const sealBurstOnFocus = (id) => {
+    if (lastFocusBlk.current === id) return;
+    lastFocusBlk.current = id;
+    if (undoRef.current && undoRef.current.typing) {
+      const synced = blocksRef.current.map(syncBlock);
+      blocksRef.current = synced;
+      star.body = synced; D.touchNote(star.id);
+      setBlocks(synced.map(cloneBlk));   // __html 与 DOM 相同串不重置，光标在别的块里不受影响
+      undoRef.current.typing = false;
+    }
+  };
   const focusedBlockId = () => {
     const a = document.activeElement;
     const w = a && a.closest && a.closest('[id^="blk-"]');
@@ -1229,7 +1422,16 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
   // 结构变更映射前先把所有块的 DOM 文本同步进 state（否则相邻块正在输入、未落 state
    // 的文字会被这次 setBlocks 覆盖丢失）；withSynced 额外压一份撤销快照。
   const mutateBlocks = (fn) => { prefixConvRef.current = null; setBlocks(bs => fn(bs.map(syncBlock))); };
-  const withSynced = (fn) => { pushHistory(); mutateBlocks(fn); };
+  // 压栈 + 变更，但空操作不压栈（⌥↑ 顶到第一块、拖拽放回原位、提交无变更）：
+  // 没有变化的历史只是噪音——用户按 ⌘Z 却发现「什么都没撤掉」，会以为撤销坏了
+  const withSynced = (fn) => {
+    prefixConvRef.current = null;
+    const before = blocksRef.current.map(syncBlock);
+    const after = fn(before);
+    if (JSON.stringify(after) === JSON.stringify(before)) { setBlocks(after.map(cloneBlk)); return; }
+    pushHistory();
+    setBlocks(after.map(cloneBlk));
+  };
 
   const blocksRef = React.useRef(blocks); blocksRef.current = blocks;
   const [dragBlk, setDragBlk] = React.useState(null);   // 正在拖拽排序的块 id
@@ -1239,7 +1441,9 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
   // 「已自动保存」的实现：正文回写到 star.body。
   // 结构变更（增删/转换/排序）时 blocks 已同步，直接落盘；
   // 纯打字停留在 DOM，由输入防抖与卸载时的 persistBody 收拢。
-  const persistBody = () => { star.body = blocksRef.current.map(syncBlock); D.touchNote(star.id); };
+  // blocksRef 也一并换成 DOM 同步后的数组：撤销栈的突发快照从这里取，
+  // 「打字 → 换块」封口时，新突发的起点快照必须带着刚打下的字。
+  const persistBody = () => { const synced = blocksRef.current.map(syncBlock); blocksRef.current = synced; star.body = synced; D.touchNote(star.id); };
   // 块数组任何变化（结构变更 / 待办勾选 / 折叠开合 / 表格与代码提交）都落盘：
   // 更新 star.body 并 D.touchNote → SRNet.schedule() 防抖保存 + 刷新 SaveStatus。
   // 首帧（打开笔记）不算编辑，跳过，避免把「打开」误记为「刚刚编辑」。
@@ -1362,6 +1566,11 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
     if (e.altKey && (e.key === 'ArrowUp' || e.key === 'ArrowDown')) {
       e.preventDefault();
       const dir = e.key === 'ArrowUp' ? -1 : 1;
+      // 顶到头就什么都不做——也不压撤销栈（空历史会吃掉用户的一次 ⌘Z）
+      const cur0 = blocksRef.current;
+      const i0 = cur0.findIndex(x => x.id === b.id);
+      const j0 = i0 + dir;
+      if (i0 < 0 || j0 < 0 || j0 >= cur0.length) return;
       flushSynced(s => {
         const i = s.findIndex(x => x.id === b.id); const j = i + dir;
         if (i < 0 || j < 0 || j >= s.length) return s;
@@ -1445,7 +1654,17 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
           return;
         }
         el.innerHTML = '';
-        flushSynced(s => s.map(x => x.id === b.id ? toPlainP({ ...x, text: '' }) : x));
+        /* toggle 在块首按 ⌫ 降级为正文时，折叠着的 child 会变成孤儿数据（任何界面
+           都不渲染，却留在 star.body 里持久化）——把它并成紧随其后的正文段落 */
+        flushSynced(s => s.flatMap(x => {
+          if (x.id !== b.id) return [x];
+          const base = toPlainP({ ...x, text: '' });
+          const child = x.type === 'toggle' ? (x.child || '') : '';
+          delete base.child; delete base.open;
+          return stripTags(child).trim()
+            ? [base, { id: uid(), type: 'p', text: child }]
+            : [base];
+        }));
         focusBlock(b.id, 'start');
         return;
       }
@@ -1498,7 +1717,16 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
       if (!prev) return;
       e.preventDefault();
       if (prev.type === 'divider') { flushSynced(s => s.filter(x => x.id !== prev.id)); focusBlock(b.id, 'start'); return; }
-      if (el.innerText.trim() === '') { flushSynced(s => s.filter(x => x.id !== b.id)); focusBlock(prev.id, 'end'); return; }
+      if (el.innerText.trim() === '') {
+        /* 上一块是原子块（code/math/table/image）时没有可聚焦的 ref——焦点会掉进
+           body，键盘输入无声无息。改投「下一个可编辑块」，没有再往回找。 */
+        const nextEd = cur.slice(i + 1).find(x => EDITABLE.includes(x.type));
+        const prevEd = cur.slice(0, i).reverse().find(x => EDITABLE.includes(x.type));
+        flushSynced(s => s.filter(x => x.id !== b.id));
+        const target = EDITABLE.includes(prev.type) ? prev : (nextEd || prevEd);
+        if (target) focusBlock(target.id, nextEd && !EDITABLE.includes(prev.type) ? 'start' : 'end');
+        return;
+      }
       if (EDITABLE.includes(prev.type)) {
         // 接缝处光标：合并后按上一块原可见长度定位，不再往块 text 里塞哨兵 span
         const curHtml = el.innerHTML;
@@ -1568,6 +1796,35 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
     const cd = e.clipboardData; if (!cd) return;
     const text = cd.getData('text/plain') || '';
     const html = cd.getData('text/html') || '';
+
+    /* 剪贴板里是图片（截图工具、右键复制图片）：直接落成图片块。
+       和拖进来走同一条 srPrepareImage —— 大图照样先压，规则只有一处。 */
+    const imgFile = [...(cd.files || [])].find(f => /^image\//.test(f.type || ''))
+      || [...(cd.items || [])].filter(it => it.kind === 'file' && /^image\//.test(it.type || ''))
+        .map(it => it.getAsFile()).find(Boolean);
+    if (imgFile && !text.trim()) {
+      e.preventDefault();
+      dropImage(imgFile);
+      return;
+    }
+
+    /* 选中一段文字再粘一个网址 = 给这段文字加链接。
+       这是 Notion / Obsidian / Typora 都有的动作，手指记得住；没有它就得
+       「复制 → 选中 → ⌘K → 再粘一次」，多绕三步。 */
+    const oneLineUrl = !text.includes('\n') && /^(https?:\/\/|mailto:)\S+$/i.test(text.trim());
+    if (oneLineUrl && EDITABLE.includes(b.type)) {
+      const selNow = window.getSelection();
+      const inBlock = selNow && selNow.rangeCount && refs.current[b.id]
+        && refs.current[b.id].contains(selNow.getRangeAt(0).commonAncestorContainer);
+      if (inBlock && !selNow.isCollapsed && safeUrl(text.trim())) {
+        e.preventDefault();
+        pushExec();   // 可撤销
+        document.execCommand('createLink', false, text.trim());
+        persistBody();
+        flash('已把选中的文字变成链接');
+        return;
+      }
+    }
     const md = /(^|\n)(#{1,3} |[-*] |\d+[.)] |> |```|\$\$|(-{3,}|\*{3,})$|\|.+\|)/.test(text);
     // 多行或含 Markdown → 解析为块
     if (text.includes('\n') || md) {
@@ -1691,15 +1948,56 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
     e.target.value = '';
     if (f) readMdFile(f);
   };
+  /* 正文里的链接得真的点得动。
+     contentEditable 里浏览器不会替你导航（点击只是放光标），而 stellar-raft://
+     这个协议它更是不认识 —— 不接这一下，[[ 插进去的星链接就是一段蓝色的死字。
+     · 星链接 → 就地打开那颗星（与 Obsidian / Notion 的「点击即前往」一致）
+     · http(s) / mailto → 新标签页打开，编辑器留在原地
+     想把光标放进链接文字里改写它，用键盘方向键或选中它再改（同 Obsidian）。 */
+  const onEditorClick = (e) => {
+    const a = e.target && e.target.closest && e.target.closest('a[href]');
+    if (!a) return;
+    const href = a.getAttribute('href') || '';
+    const star2 = href.match(/^stellar-raft:\/\/star\/([^#?]+)/);
+    if (star2) {
+      e.preventDefault();
+      const id = decodeURIComponent(star2[1]);
+      if (!D.byId[id]) { flash('这颗星已经不在星图里了'); return; }
+      if (id === star.id) { flash('就是当前这颗星'); return; }
+      onOpen(id);
+      return;
+    }
+    if (/^(https?:|mailto:)/i.test(href) && safeUrl(href)) {
+      e.preventDefault();
+      try { window.open(href, '_blank', 'noopener,noreferrer'); } catch (_) { /* 被拦就算了 */ }
+    }
+  };
+
   const onEditorDragOver = (e) => {
     if (e.dataTransfer && Array.from(e.dataTransfer.items || []).some(it => it.kind === 'file')) e.preventDefault();
   };
+  // 拖进来的图片：压过之后追加成一个图片块（追加而不是插在落点，是因为落点
+  // 要靠命中测试去猜，猜错比追加更难理解；提示里会说清它去了哪儿）
+  const dropImage = async (f) => {
+    try {
+      const { src, note } = await srPrepareImage(f);
+      const nb = { id: uid(), type: 'image', text: '', src };
+      withSynced(bs => [...bs, nb]);
+      flash(note ? note + ' · 已插到笔记末尾' : '图片已插到笔记末尾');
+    } catch (err) { flash((err && err.message) || '这张图处理不了'); }
+  };
   const onEditorDrop = (e) => {
     const fs = (e.dataTransfer && e.dataTransfer.files) ? Array.from(e.dataTransfer.files) : [];
-    const f = fs.find(x => /\.(md|markdown|txt)$/i.test(x.name) || x.type === 'text/markdown');
-    if (!f) return;
+    if (!fs.length) return;
+    /* 只要落下的是文件就先拦住。默认行为是让浏览器导航到那个文件——整个编辑器
+       连同还没落盘的编辑一起没了，而人只是手一抖没对准。认不出来的类型宁可
+       什么都不做，也不能把人带走。 */
     e.preventDefault(); e.stopPropagation();
-    readMdFile(f);
+    const md = fs.find(x => /\.(md|markdown|txt)$/i.test(x.name) || x.type === 'text/markdown');
+    if (md) { readMdFile(md); return; }
+    const img = fs.find(x => /^image\//.test(x.type || ''));
+    if (img) { dropImage(img); return; }
+    flash('只认得 Markdown 文件与图片');
   };
 
   // ---- 笔记内查找 / 替换（⌘F）----
@@ -1841,7 +2139,12 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
   const pageAction = (action, arg) => {
     if (action === 'fav') { toggleFav(); }
     else if (action === 'dup') {
-      const id2 = 's' + Math.random().toString(36).slice(2, 6);
+      // 先把还停在 DOM 里的字（350ms 防抖窗口内的输入）收进 star.body 再读——
+      // 否则手快的人「打完就复制」，副本缺结尾（exportMd 与「在星图中探索」都先 flush）
+      persistBody();
+      // 与 StarMap 同一口径：8 位 + 查重，4 位的碰撞率在几百颗星时就不可忽略
+      let id2;
+      do { id2 = 's' + Math.random().toString(36).slice(2, 10); } while (D.byId[id2]);
       const src = D.byId[star.id] || star;
       const copy = {
         ...src, id: id2, label: src.label + ' 副本', fav: false,
@@ -1853,7 +2156,12 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
       D.addStar(copy);
       flash('已创建副本 ·「' + copy.label + '」');
     }
-    else if (action === 'copyLink') { try { navigator.clipboard && navigator.clipboard.writeText('stellar-raft://star/' + star.id); } catch (e) { } flash('已复制星链接'); }
+    else if (action === 'copyLink') {
+      // 复制成没成由 SRCopy 说了算：手机上（非安全上下文）剪贴板 API 根本不存在，
+      // 以前这里不管成不成都弹「已复制」
+      window.SRCopy.copy('stellar-raft://star/' + star.id)
+        .then(ok => flash(ok ? '已复制星链接' : '这台设备不允许自动复制，请长按选择'));
+    }
     else if (action === 'export') exportMd();
     else if (action === 'import') { if (importInputRef.current) importInputRef.current.click(); }
     else if (action === 'move') { moveToCon(arg); }
@@ -1868,13 +2176,22 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
     else if (action === 'duplicate') withSynced(s => { const i = s.findIndex(b => b.id === id); return [...s.slice(0, i + 1), { ...s[i], id: uid() }, ...s.slice(i + 1)]; });
     else if (action === 'turn') withSynced(s => s.map(b => b.id === id ? { ...b, type: arg, ...typeExtras(arg, b) } : b));
     else if (action === 'color') withSynced(s => s.map(b => b.id === id ? (arg.kind === 'text' ? { ...b, color: arg.id } : { ...b, bg: arg.id }) : b));
-    else if (action === 'copyLink') { try { navigator.clipboard && navigator.clipboard.writeText('stellar-raft://star/' + star.id + '#' + id); } catch (e) { } flash('已复制块链接'); }
+    else if (action === 'copyLink') {
+      window.SRCopy.copy('stellar-raft://star/' + star.id + '#' + id)
+        .then(ok => flash(ok ? '已复制块链接' : '这台设备不允许自动复制，请长按选择'));
+    }
     else if (action === 'move') { moveToCon(arg); }
     else if (action === 'review') { D.queueReview(star.id, 0); D.pushTimeline('review', star.id, '加入复习队列'); bumpTick(); flash('已加入复习队列 · 下次复习改为今天'); }
     setCtx(null);
   };
 
-  const insertAfter = (id, type = 'p') => withSynced(s => { const i = s.findIndex(b => b.id === id); const nb = { id: uid(), type, text: '', ...typeExtras(type) }; return [...s.slice(0, i + 1), nb, ...s.slice(i + 1)]; });
+  const insertAfter = (id, type = 'p') => {
+    const nb = { id: uid(), type, text: '', ...typeExtras(type) };
+    // 插入即聚焦：与回车分裂、--- 转换的行为一致，不该让用户再点一次。
+    // flushSynced 同步提交，聚焦时 refs 已就位（withSynced 的异步提交会抢跑）
+    flushSynced(s => { const i = s.findIndex(b => b.id === id); return [...s.slice(0, i + 1), nb, ...s.slice(i + 1)]; });
+    if (EDITABLE.includes(type)) focusBlock(nb.id, 'start');
+  };
   // 删光所有块后不再是死局：占位空态点击/回车即插入一个可输入的正文块并聚焦。
   const seedFirstBlock = () => { const nb = { id: uid(), type: 'p', text: '' }; flushSynced(() => [nb]); focusBlock(nb.id, 'start'); };
   // 点击正文末尾的空白区：末块已是空段落则直接聚焦，否则追加一个空段落并聚焦——
@@ -2058,7 +2375,7 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
       if (ReactDOM.flushSync) ReactDOM.flushSync(() => setBlocks(next.map(cloneBlk))); else setBlocks(next.map(cloneBlk));
       focusBlockAt(survivorId, caretOff);
       persistBody();
-      return true;
+      return survivorId;
     };
     const onKey = (e) => {
       if (e.metaKey || e.ctrlKey || e.altKey || e.isComposing) return;
@@ -2107,10 +2424,46 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
       }
       doMerge('', e);
     };
+    /* 跨块选区的粘贴：keydown/copy/cut 都接管了，唯独 paste 漏着——浏览器原生
+       删除跨 contentEditable 选区会把整块 DOM 移除，React reconcile 时
+       NotFoundError；多行粘贴还会「粘了一份、选中的还在」。
+       这里先走 doMerge 把选区收成存活块（同一份撤销快照），再亲手插入。 */
+    const onPaste = (e) => {
+      const sel = window.getSelection();
+      if (!sel || !sel.rangeCount || sel.isCollapsed) return;
+      const r = sel.getRangeAt(0);
+      if (!root.contains(r.commonAncestorContainer)) return;
+      const startId = blockIdOfNode(r.startContainer), endId = blockIdOfNode(r.endContainer);
+      if (!startId || !endId || startId === endId) return;   // 同块交给块级 blockPaste
+      const cd = e.clipboardData;
+      const text = (cd && cd.getData('text/plain')) || '';
+      const html = (cd && cd.getData('text/html')) || '';
+      const sid = doMerge('', e);   // 已 preventDefault + 压栈
+      if (!sid) return;
+      e.stopPropagation();
+      const multi = text.includes('\n') || /(^|\n)(#{1,3} |[-*] |\d+[.)] |> |```|\$\$|(-{3,}|\*{3,})$|\|.+\|)/.test(text);
+      if (multi) {
+        const nbs = parseMdBlocks(text);
+        if (!nbs.length) return;
+        flushSynced(s => {
+          const i = s.findIndex(x => x.id === sid);
+          return i < 0 ? s : [...s.slice(0, i + 1), ...nbs, ...s.slice(i + 1)];
+        });
+        focusBlock(nbs[nbs.length - 1].id, 'end');
+        flash('已粘贴为 ' + nbs.length + ' 个块');
+        return;
+      }
+      const clean = html ? sanHtml(html) : escHtml(text);
+      if (!clean) return;
+      undoRef.current.typing = true;   // 插入与删除共用同一份快照，一次 ⌘Z 撤掉整次粘贴
+      document.execCommand('insertHTML', false, clean);
+      persistBody();
+    };
+    root.addEventListener('paste', onPaste, true);
     root.addEventListener('keydown', onKey, true);
     root.addEventListener('copy', onCopy, true);
     root.addEventListener('cut', onCut, true);
-    return () => { root.removeEventListener('keydown', onKey, true); root.removeEventListener('copy', onCopy, true); root.removeEventListener('cut', onCut, true); };
+    return () => { root.removeEventListener('keydown', onKey, true); root.removeEventListener('copy', onCopy, true); root.removeEventListener('cut', onCut, true); root.removeEventListener('paste', onPaste, true); };
   }, []);
   const applyLink = (url) => {
     const ld = linkDialog;
@@ -2151,7 +2504,32 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
         const t = e.currentTarget.innerText;
         // 斜杠菜单：任意位置输入 /（行首或前一字符为空白）都触发，不再要求块里只有「/」。
         // IME 组合期在上面已挡；行内代码里不触发。
-        const justSlash = e.nativeEvent && (e.nativeEvent.data === '/' || (e.nativeEvent.data == null && t.replace(/\n+$/, '') === '/'));
+        /* [[ 唤出选星器：与「/」同一套做法（看光标前的文本，不看整块内容）。
+           第二个 [ 落下的那一刻触发；IME 组合期在上面已挡，行内代码里不触发。 */
+        if (e.nativeEvent && e.nativeEvent.data === '[' && EDITABLE.includes(b.type)) {
+          const info2 = caretInfo(e.currentTarget);
+          if (info2 && info2.collapsed) {
+            const anchor2 = info2.range.startContainer.nodeType === 1 ? info2.range.startContainer : info2.range.startContainer.parentElement;
+            if (!(anchor2 && anchor2.closest && anchor2.closest('code'))) {
+              const pre2 = info2.range.cloneRange();
+              pre2.selectNodeContents(e.currentTarget);
+              pre2.setEnd(info2.range.startContainer, info2.range.startOffset);
+              const preText2 = pre2.toString().replace(/\u00a0/g, ' ');
+              if (/\[\[$/.test(preText2)) {
+                let rect2;
+                try { const r = window.getSelection().getRangeAt(0).getBoundingClientRect(); if (r && (r.left || r.top)) rect2 = r; } catch (_) { }
+                if (!rect2) rect2 = e.currentTarget.getBoundingClientRect();
+                setStarLink({ x: rect2.left, y: rect2.bottom + 6, id: b.id, at: preText2.length });
+                return;
+              }
+            }
+          }
+        }
+        /* 只在「插入了一个 /」时弹斜杠菜单：退格把「/x」删成「/」时 inputType 是
+           deleteContentBackward——那是删除不是输入（原先只看 data==null 会误弹）。
+           data 为 null 的插入路径（部分输入法/触摸键盘）仍兼容。 */
+        const justSlash = e.nativeEvent && (e.nativeEvent.data === '/'
+          || (e.nativeEvent.data == null && /^insert/.test(e.nativeEvent.inputType || '') && t.replace(/\n+$/, '') === '/'));
         const info = justSlash ? caretInfo(e.currentTarget) : null;
         if (info && info.collapsed) {
           const anchorEl = info.range.startContainer.nodeType === 1 ? info.range.startContainer : info.range.startContainer.parentElement;
@@ -2255,39 +2633,197 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
             {editable(b, 'div', { flex: 1, fontSize: 16.5, lineHeight: 1.7, color: 'var(--text-1)' })}
           </div>
           {b.open && <div contentEditable suppressContentEditableWarning data-ph="折叠内容…"
-            onBlur={(e) => { const h = sanHtml(e.currentTarget.innerHTML); if (h !== (b.child || '')) mutateBlocks(s => s.map(x => x.id === b.id ? { ...x, child: h } : x)); }}
+            onBlur={(e) => { const h = sanHtml(e.currentTarget.innerHTML); if (h !== (b.child || '')) withSynced(s => s.map(x => x.id === b.id ? { ...x, child: h } : x)); }}
             dangerouslySetInnerHTML={{ __html: sanHtml(b.child || '') }}
             style={{ outline: 'none', marginLeft: 24, marginTop: 6, fontSize: 15, lineHeight: 1.7, color: 'var(--text-2)' }} />}
         </div>
       ); }
-      case 'math': return <MathBlock tex={b.tex} autoEdit={b._new} onCommit={(t) => mutateBlocks(s => s.map(x => x.id === b.id ? { ...x, tex: t, _new: false } : x))} />;
+      /* 原子块的提交也进撤销栈（withSynced = 先压快照再改）：否则 ⌘Z 撤不掉
+         表格/代码/公式的修改，更糟的是一次针对打字的撤销会把栈外更晚发生的
+         表格修改连带抹掉——撤销回滚了一个比目标更晚的操作。折叠开合是视图态，
+         不进栈（⌘Z 不该花在开合上）。 */
+      case 'math': return <MathBlock tex={b.tex} autoEdit={b._new} onCommit={(t) => { if (t !== (b.tex || '')) withSynced(s => s.map(x => x.id === b.id ? { ...x, tex: t, _new: false } : x)); }} />;
       case 'code': return <CodeBlock code={b.code} lang={b.lang} autoEdit={b._new}
-        onCommitCode={(c) => mutateBlocks(s => s.map(x => x.id === b.id ? { ...x, code: c, _new: false } : x))}
-        onCommitLang={(lg) => mutateBlocks(s => s.map(x => x.id === b.id ? { ...x, lang: lg } : x))}
+        onCommitCode={(c) => { if (c !== (b.code || '')) withSynced(s => s.map(x => x.id === b.id ? { ...x, code: c, _new: false } : x)); }}
+        onCommitLang={(lg) => { if (lg !== b.lang) withSynced(s => s.map(x => x.id === b.id ? { ...x, lang: lg } : x)); }}
         onCopyFail={() => flash('复制失败 · 请手动选择代码复制')} />;
-      case 'table': return <DataTable head={b.head} rows={b.rows} onCommit={(head, rows) => mutateBlocks(s => s.map(x => x.id === b.id ? { ...x, head, rows } : x))} />;
-      case 'image': return <ImageBlock b={b} onSrc={(src) => mutateBlocks(s => s.map(x => x.id === b.id ? { ...x, src } : x))} />;
+      case 'table': return <DataTable head={b.head} rows={b.rows} onCommit={(head, rows) => {
+        if (JSON.stringify(head) !== JSON.stringify(b.head || []) || JSON.stringify(rows) !== JSON.stringify(b.rows || []))
+          withSynced(s => s.map(x => x.id === b.id ? { ...x, head, rows } : x));
+      }} />;
+      case 'image': return <ImageBlock b={b} onSrc={(src) => withSynced(s => s.map(x => x.id === b.id ? { ...x, src } : x))} />;
       case 'divider': return <div style={{ height: 1, background: 'var(--line-strong)', margin: '6px 0' }} />;
       default: return null;
     }
   };
 
+  /* 知识栏的栏体：宽屏挂在右侧 <aside>，窄屏原样塞进底部弹层。
+     抽成常量而不是复制一份，是因为这六块里有 MiniStarMap、反向链接这类
+     带自己状态的东西——两份 JSX 迟早会长歪，而它们本来就该是同一个东西。 */
+  const railBody = (
+          <div style={{ padding: 20, display: 'flex', flexDirection: 'column', gap: 22 }}>
+            <section>
+              <RailHead icon="list-tree" title="大纲" />
+              <div style={{ marginTop: 10, display: 'flex', flexDirection: 'column', gap: 1 }}>
+                <button type="button" className="sr-focus-ring" onClick={() => scrollRef.current && scrollRef.current.scrollTo({ top: 0, behavior: 'smooth' })}
+                  style={{ display: 'block', width: '100%', textAlign: 'left', font: 'inherit', background: 'transparent', padding: '5px 10px', borderRadius: 'var(--r-sm)', border: 'none', borderLeft: '2px solid var(--gold)', cursor: 'pointer', fontSize: 13, color: 'var(--text-1)' }}>{star.label}</button>
+                {outline.map(o => (
+                  <button type="button" key={o.id} className="sr-focus-ring" onClick={() => scrollToBlock(o.id)}
+                    style={{ display: 'block', width: '100%', textAlign: 'left', font: 'inherit', background: 'transparent', border: 'none', padding: '5px 10px', paddingLeft: o.type === 'h3' ? 30 : 18, borderRadius: 'var(--r-sm)', borderLeft: '2px solid var(--line)', cursor: 'pointer', fontSize: 12.5, color: 'var(--text-2)' }}
+                    onMouseEnter={e => e.currentTarget.style.background = 'rgba(159,198,255,0.06)'} onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>{o.live}</button>
+                ))}
+              </div>
+            </section>
+            <section>
+              <RailHead icon="waypoints" title="连接的星" extra={connected.length} />
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 10 }}>
+                {connected.map((l, i) => (
+                  <div key={l.star.id + i} onMouseEnter={() => setHoverConn(i)} onMouseLeave={() => setHoverConn(null)}
+                    style={{ position: 'relative', padding: '10px 12px', borderRadius: 'var(--r-md)', background: 'rgba(159,198,255,0.04)', border: '1px solid ' + (l.kind === 'cross' ? 'rgba(255,217,138,0.22)' : 'var(--glass-border)') }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+                      <Icon name="link" size={13} color={l.kind === 'cross' ? 'var(--gold)' : 'var(--star-blue)'} /><span style={{ fontSize: 13.5, color: 'var(--text-1)' }}>{l.star.label}</span>
+                      {l.kind === 'cross' && <span style={{ marginLeft: 'auto', fontSize: 10, color: 'var(--gold)' }}>融会贯通</span>}
+                      <button type="button" title="断开连接" className="sr-focus-ring sr-hit40" onClick={() => removeConnection(l)}
+                        onFocus={() => setHoverConn(i)} onBlur={() => setHoverConn(null)}
+                        style={{ marginLeft: l.kind === 'cross' ? 6 : 'auto', flex: 'none', width: 20, height: 20, position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', border: 'none', background: 'transparent', cursor: 'pointer', color: 'var(--text-3)', opacity: hoverConn === i ? 1 : 0, transition: 'opacity var(--dur-fast)' }}>
+                        <Icon name="unlink" size={13} color="currentColor" />
+                      </button>
+                    </div>
+                    <div style={{ fontSize: 11.5, color: 'var(--text-3)', lineHeight: 1.5, paddingLeft: 21 }}>{l.rel}</div>
+                  </div>
+                ))}
+                {linking ? (
+                  <div style={{ borderRadius: 'var(--r-md)', border: '1px solid var(--glass-border-strong)', background: 'var(--input-bg, rgba(3,4,12,0.45))', overflow: 'hidden' }}>
+                    {linkStar ? (
+                      <div style={{ padding: '10px 12px' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 7, marginBottom: 9, fontSize: 12.5, color: 'var(--text-2)' }}>
+                          <span style={{ width: 7, height: 7, borderRadius: '50%', background: D.conColor(linkStar.con), boxShadow: `0 0 6px ${D.conColor(linkStar.con)}` }} />
+                          <span style={{ color: 'var(--text-1)' }}>{linkStar.label}</span>
+                          <span style={{ marginLeft: 'auto', fontSize: 10, color: linkStar.con === con ? 'var(--star-blue)' : 'var(--gold)' }}>{linkStar.con === con ? '同一星域' : '融会贯通'}</span>
+                        </div>
+                        <input autoFocus value={relDraft} onChange={(e) => setRelDraft(e.target.value)}
+                          onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); addConnection(linkStar, relDraft); } if (e.key === 'Escape') resetLinking(); }}
+                          placeholder="写一句关系，例如「是其特例」…"
+                          style={{ width: '100%', boxSizing: 'border-box', background: 'var(--input-bg, rgba(3,4,12,0.45))', border: '1px solid var(--glass-border-strong)', borderRadius: 'var(--r-sm)', color: 'var(--text-1)', fontSize: 12.5, padding: '7px 10px', outline: 'none', fontFamily: 'var(--font-sans)' }} />
+                        <div style={{ display: 'flex', gap: 8, justifyContent: 'flex-end', marginTop: 10 }}>
+                          <button type="button" onClick={resetLinking} style={{ height: 28, padding: '0 13px', borderRadius: 'var(--r-pill)', border: '1px solid var(--glass-border-strong)', background: 'transparent', color: 'var(--text-2)', fontSize: 12, cursor: 'pointer', fontFamily: 'var(--font-sans)' }}>取消</button>
+                          <button type="button" onClick={() => addConnection(linkStar, relDraft)} style={{ height: 28, padding: '0 13px', borderRadius: 'var(--r-pill)', border: '1px solid var(--glass-border-strong)', background: 'rgba(159,198,255,0.14)', color: 'var(--text-1)', fontSize: 12, cursor: 'pointer', fontFamily: 'var(--font-sans)' }}>建立连接</button>
+                        </div>
+                      </div>
+                    ) : (
+                      <React.Fragment>
+                        <div style={{ fontSize: 10, letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: 'var(--text-3)', padding: '8px 12px 4px', fontFamily: 'var(--font-mono)' }}>选择要连接的星</div>
+                        <div style={{ maxHeight: 180, overflow: 'auto' }} onContextMenu={(e) => e.preventDefault()}>
+                          {linkCandidates.length === 0 && <div style={{ padding: '8px 12px', fontSize: 12, color: 'var(--text-3)' }}>没有可连接的星了。</div>}
+                          {linkCandidates.map(s => (
+                            <button type="button" key={s.id} className="sr-focus-ring" onClick={() => { setLinkStar(s); setRelDraft(''); }} style={{ display: 'flex', width: '100%', textAlign: 'left', font: 'inherit', border: 'none', background: 'transparent', alignItems: 'center', gap: 8, padding: '7px 12px', cursor: 'pointer' }}
+                              onMouseEnter={e => e.currentTarget.style.background = 'rgba(159,198,255,0.08)'} onMouseLeave={e => e.currentTarget.style.background = 'transparent'} onFocus={e => e.currentTarget.style.background = 'rgba(159,198,255,0.08)'} onBlur={e => e.currentTarget.style.background = 'transparent'}>
+                              <span style={{ width: 7, height: 7, borderRadius: '50%', background: D.conColor(s.con), boxShadow: `0 0 6px ${D.conColor(s.con)}` }} />
+                              <span style={{ fontSize: 13, color: 'var(--text-2)' }}>{s.label}</span>
+                              <span style={{ marginLeft: 'auto', fontSize: 10.5, color: 'var(--text-3)' }}>{D.conName(s.con)}</span>
+                            </button>
+                          ))}
+                        </div>
+                        <button type="button" className="sr-focus-ring" onClick={resetLinking} style={{ display: 'block', width: '100%', textAlign: 'left', font: 'inherit', background: 'transparent', padding: '7px 12px', fontSize: 12, color: 'var(--text-3)', cursor: 'pointer', border: 'none', borderTop: '1px solid var(--line)' }}>取消</button>
+                      </React.Fragment>
+                    )}
+                  </div>
+                ) : (
+                  <button type="button" onClick={() => { setLinking(true); setLinkStar(null); }} style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '9px 12px', borderRadius: 'var(--r-md)', border: '1px dashed var(--line-strong)', background: 'transparent', color: 'var(--text-3)', fontSize: 12.5, cursor: 'pointer' }}>
+                    <Icon name="plus" size={14} color="currentColor" />新建连接 · 写一句关系
+                  </button>
+                )}
+              </div>
+            </section>
+            {/* AI 助手：能力入口按 AI 配置的三个开关渲染；加标签 / 建连接复用上面既有的数据路径 */}
+            <AIAssist star={star} tags={tags} connected={connected}
+              onAddTag={(t) => { if (!t || tags.includes(t)) return; setTags(ts => { if (ts.includes(t)) return ts; const nt = [...ts, t]; syncTags(nt); return nt; }); flash('已添加标签「' + t + '」'); }}
+              onAddConnection={(s, rel) => { addConnection(s, rel); D.persist(); }}
+              onSummaryDone={() => { bumpTick(); flash('已生成摘要'); }} />
+            <section>
+              <RailHead icon="corner-down-left" title="反向链接" extra={backlinks.length} />
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 10 }}>
+                {backlinks.length === 0 && <div style={{ fontSize: 12, color: 'var(--text-3)' }}>暂无其它星指向这里。</div>}
+                {backlinks.map((b, i) => (
+                  <div key={b.star.id + i} style={{ padding: '10px 12px', borderRadius: 'var(--r-md)', background: 'rgba(159,198,255,0.04)', border: '1px solid var(--glass-border)' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                      <span style={{ width: 7, height: 7, borderRadius: '50%', background: D.conColor(b.star.con), boxShadow: `0 0 7px ${D.conColor(b.star.con)}`, flex: 'none' }} />
+                      <span style={{ fontSize: 13.5, color: 'var(--text-1)' }}>{b.star.label}</span>
+                      <span style={{ fontSize: 11, color: 'var(--text-3)', marginLeft: 'auto' }}>{D.conName(b.star.con)}</span>
+                    </div>
+                    <div style={{ fontSize: 11.5, color: 'var(--text-3)', marginTop: 6, lineHeight: 1.6, paddingLeft: 15 }}>
+                      …{b.rel}，引用了 <span style={{ color: 'var(--star-blue)', background: 'rgba(159,198,255,0.10)', padding: '0 4px', borderRadius: 3 }}>[[{star.label}]]</span>。
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+            <section>
+              <RailHead icon="zap" title="记忆" />
+              {(() => {
+                // 认证态与点亮门槛都从数据层派生（tick / sr-memory 触发重读），不在编辑器另存状态
+                const litSt = !!(D.isLit && D.isLit(star));
+                const emberSt = !!(D.isEmber && D.isEmber(star));
+                const substantial = D.hasSubstance ? D.hasSubstance(star) : true;
+                const sumLen = String(star.summary || '').replace(/\s+/g, '').length;
+                const textyN = (star.body || []).filter(b => b && !['rich', 'divider', 'code'].includes(b.type) && String(b.text || b.tex || '').trim()).length;
+                return (
+                  <div style={{ marginTop: 10, padding: 14, borderRadius: 'var(--r-md)', background: 'rgba(255,217,138,0.05)', border: '1px solid rgba(255,217,138,0.18)' }}>
+                    <MemoryBar value={star.strength} showPct />
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 7, marginTop: 12, fontSize: 12, color: 'var(--text-2)' }}>
+                      <Icon name="calendar-clock" size={14} color="var(--gold)" />遗忘曲线预计 <b style={{ color: 'var(--gold)', fontWeight: 500 }}>{(star.props && star.props.nextReview) || '6 天后'}</b> 复习
+                    </div>
+                    <div style={{ height: 1, background: 'var(--line)', margin: '12px 0' }} />
+                    {/* 点亮状态（认证轴，与亮度四档正交）：已点亮 = 发丝金环 · 待重燃 = 暗金余烬环 */}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 7, fontSize: 12.5, color: litSt ? 'var(--gold)' : emberSt ? 'var(--gold-warm)' : 'var(--text-2)' }}>
+                      <span aria-hidden="true" style={{ flex: 'none', width: 10, height: 10, borderRadius: '50%', boxSizing: 'border-box',
+                        border: litSt ? '1px solid var(--gold)'
+                          : emberSt ? '1px solid color-mix(in srgb, var(--gold-warm) 55%, transparent)'
+                          : '1px solid var(--line-strong)' }} />
+                      {litSt ? `已点亮 · ${D.ago(star.sr && star.sr.lit)}` : emberSt ? '待重燃' : '未点亮'}
+                    </div>
+                    <div style={{ fontSize: 11.5, color: 'var(--text-3)', lineHeight: 1.7, marginTop: 6 }}>
+                      {litSt ? '已点亮 · 讲清楚的东西，暗得更慢。'
+                        : emberSt ? '曾点亮的星暗了下来。再讲透一次，就能重燃。'
+                        : '讲清楚一次，这颗星才会真正点亮——点亮的星记得更久。'}
+                    </div>
+                    {/* 门槛进度：内容门槛（摘要 ≥ 20 字 或 有内容块 ≥ 2）随输入就地更新 */}
+                    {!litSt && (
+                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: 6, fontSize: 11, color: substantial ? 'var(--text-2)' : 'var(--text-3)', lineHeight: 1.6, marginTop: 8 }}>
+                        <Icon name={substantial ? 'check' : 'pen-line'} size={12} color={substantial ? 'var(--gold)' : 'currentColor'} />
+                        <span>
+                          {substantial
+                            ? (emberSt ? '内容已足够 · 讲给 AI 学生，就能重燃' : '内容已足够 · 讲给 AI 学生，就能点亮')
+                            : `点亮门槛：摘要 ${Math.min(sumLen, 20)}/20 字，或有内容的块 ${Math.min(textyN, 2)}/2`}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                );
+              })()}
+            </section>
+            <section>
+              <RailHead icon="crosshair" title="在星图中定位" />
+              <MiniStarMap currentId={star.id} onPick={(s) => setExplore({ id: s.id, label: s.label, con: s.con })} />
+              <div style={{ marginTop: 8, fontSize: 11, color: 'var(--text-3)', lineHeight: 1.6 }}>点击任意星，跃迁到星图中探索它的星系。</div>
+            </section>
+          </div>
+  );
+
   return (
     <div onContextMenu={(e) => e.preventDefault()} style={{ position: 'relative', flex: 1, minWidth: 0, display: 'flex', overflow: 'hidden' }}>
       <style>{`
-        /* 1024–1180px：正文优先——右侧知识栏让位，状态栏铺满 */
-        @media (max-width: 1180px) {
-          .sr-ed-rail { display: none; }
-          .sr-ed-status { right: 0 !important; }
-        }
+        /* 窄到多栏摆不下（data-narrow = SRScreen.BP.narrow，1180px）：
+           正文优先——右侧知识栏让位，状态栏铺满。栏里的六块不是就此消失：
+           头部会多出一枚「知识栏」按钮，把它们原样装进底部弹层。 */
+        html[data-narrow] .sr-ed-rail { display: none; }
+        html[data-narrow] .sr-ed-status { right: 0 !important; }
         /* 小宽度下按优先级收敛状态栏低价值项，别把「UTF-8」硬截成「UTF-」 */
         @media (max-width: 1280px) {
           .sr-ed-status-opt { display: none !important; }
         }
         /* 查找条：右栏让位时跟着贴边 */
-        @media (max-width: 1180px) {
-          .sr-ed-find { right: 24px !important; }
-        }
+        html[data-narrow] .sr-ed-find { right: 24px !important; }
         /* ——— 手机 ———
            正文区的 52px 左右留白在窄屏会把每行挤成七八个字，收到 16px；
            顶部让出刘海，底部留一段余量给系统手势条与输入法。 */
@@ -2299,7 +2835,13 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
           top: calc(var(--sr-safe-top) + 8px) !important;
         }
         /* 状态栏在手机上只留最要紧的一段，其余项本来就归 .sr-ed-status-opt 管 */
-        html[data-screen="phone"] .sr-ed-status { padding-left: 12px !important; padding-right: 12px !important; }
+        /* 状态栏在手机上只留最要紧的一段，其余项本来就归 .sr-ed-status-opt 管。
+           底部还要让开 Home 指示条：它贴着 bottom:0，而那 34px 归系统——
+           字会被那道白条横穿，更糟的是往那儿滑是「回主屏」，不是滑我的笔记。 */
+        html[data-screen="phone"] .sr-ed-status {
+          padding-left: 12px !important; padding-right: 12px !important;
+          padding-bottom: calc(7px + var(--sr-safe-bottom)) !important;
+        }
         /* 块手柄在桌面挂在正文左侧 52px 的留白里；手机上那块留白没了，
            改浮到块的右上角。它们本来就随「聚焦的块」出现，手指点进去即可见——
            触摸端没有 hover，靠的是 focusBlk 这条路。 */
@@ -2321,7 +2863,7 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
       <sr-starfield density="0.4"></sr-starfield>
 
       {/* MIDDLE — editor */}
-      <div ref={scrollRef} onMouseUp={onMouseUp} onDragOver={onEditorDragOver} onDrop={onEditorDrop} style={{ flex: 1, minWidth: 0, overflow: 'auto', position: 'relative', zIndex: 2 }}>
+      <div ref={scrollRef} onMouseUp={onMouseUp} onClick={onEditorClick} onDragOver={onEditorDragOver} onDrop={onEditorDrop} style={{ flex: 1, minWidth: 0, overflow: 'auto', position: 'relative', zIndex: 2 }}>
         <div className="sr-ed-page" style={{ maxWidth: 720, margin: '0 auto', padding: '20px 52px 24px' }}>
           {/* top bar */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 22 }}>
@@ -2331,6 +2873,9 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
               <span style={{ width: 7, height: 7, borderRadius: '50%', background: D.conColor(con), boxShadow: `0 0 7px ${D.conColor(con)}` }} />{D.conName(con)}
             </span>
             <div style={{ flex: 1 }} />
+            {narrow && (
+              <IconButton name="panel-right" title="知识栏 · 大纲 / 连接 / 记忆" onClick={() => setRailOpen(true)} />
+            )}
             <IconButton name="star" active={fav} title={fav ? '已收藏 · 点击取消' : '收藏这颗星'} onClick={toggleFav} />
             <IconButton name="more-horizontal" title="更多" onClick={(e) => { const r = e.currentTarget.getBoundingClientRect(); setMore({ x: r.right, y: r.bottom + 6 }); }} />
           </div>
@@ -2344,7 +2889,9 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
                 placeholder="标签名…"
                 style={{ height: 26, width: 96, boxSizing: 'border-box', background: 'var(--input-bg, rgba(3,4,12,0.45))', border: '1px solid var(--glass-border-strong)', borderRadius: 'var(--r-pill)', color: 'var(--text-1)', fontSize: 12.5, padding: '0 10px', outline: 'none', fontFamily: 'var(--font-sans)' }} />
             ) : (
-              <span onClick={() => { setTagDraft(''); setAddingTag(true); }} style={{ display: 'inline-flex', alignItems: 'center', gap: 5, height: 26, padding: '0 10px', borderRadius: 'var(--r-pill)', border: '1px dashed var(--line-strong)', color: 'var(--text-3)', fontSize: 12.5, cursor: 'pointer' }}><Icon name="plus" size={13} color="currentColor" />标签</span>
+              <span role="button" tabIndex={0} className="sr-focus-ring" onClick={() => { setTagDraft(''); setAddingTag(true); }}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setTagDraft(''); setAddingTag(true); } }}
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 5, height: 26, padding: '0 10px', borderRadius: 'var(--r-pill)', border: '1px dashed var(--line-strong)', color: 'var(--text-3)', fontSize: 12.5, cursor: 'pointer' }}><Icon name="plus" size={13} color="currentColor" />标签</span>
             )}
             <div style={{ flex: 1 }} />
             <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-3)' }}>编辑于 {(() => { const n = D.notes.find(x => x.id === star.id) || {}; return n.editedTs ? D.ago(n.editedTs) : (n.edited || '刚刚'); })()}</span>
@@ -2393,7 +2940,7 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
             )}
             {blocks.map((b, bi) => (
               <div key={b.id} id={'blk-' + b.id} onMouseEnter={() => setHover(b.id)}
-                onFocus={() => setFocusBlk(b.id)}
+                onFocus={() => { setFocusBlk(b.id); sealBurstOnFocus(b.id); }}
                 onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget)) setFocusBlk(f => (f === b.id ? null : f)); }}
                 onContextMenu={(e) => { e.preventDefault(); setCtx({ x: e.clientX, y: e.clientY, id: b.id }); }}
                 style={{ position: 'relative', borderRadius: 'var(--r-sm)', padding: b.bg && b.bg !== 'none' ? '8px 12px' : '2px 8px',
@@ -2430,156 +2977,19 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
         </div>
       </div>
 
-      {/* RIGHT — knowledge rail */}
+      {/* RIGHT — knowledge rail
+          栏里这六块（大纲 / 连接的星 / 反向链接 / 记忆 / 在星图中定位 / AI 助手）
+          原先在 ≤1180px 一句 display:none 就没了——桌面之外整整一段宽度里，
+          它们不是「收起来」，是根本没有入口。现在栏体抽成 railBody：
+          宽屏还是右边那一条，窄屏原样装进底部弹层，一块不少。 */}
       <aside data-tour="editor-rail" className="sr-ed-rail" style={{ width: 312, flex: 'none', borderLeft: '1px solid var(--glass-border)', background: 'var(--glass-bg)', WebkitBackdropFilter: 'blur(var(--glass-blur))', backdropFilter: 'blur(var(--glass-blur))', overflow: 'auto', position: 'relative', zIndex: 2 }}>
-        <div style={{ padding: 20, display: 'flex', flexDirection: 'column', gap: 22 }}>
-          <section>
-            <RailHead icon="list-tree" title="大纲" />
-            <div style={{ marginTop: 10, display: 'flex', flexDirection: 'column', gap: 1 }}>
-              <button type="button" className="sr-focus-ring" onClick={() => scrollRef.current && scrollRef.current.scrollTo({ top: 0, behavior: 'smooth' })}
-                style={{ display: 'block', width: '100%', textAlign: 'left', font: 'inherit', background: 'transparent', padding: '5px 10px', borderRadius: 'var(--r-sm)', border: 'none', borderLeft: '2px solid var(--gold)', cursor: 'pointer', fontSize: 13, color: 'var(--text-1)' }}>{star.label}</button>
-              {outline.map(o => (
-                <button type="button" key={o.id} className="sr-focus-ring" onClick={() => scrollToBlock(o.id)}
-                  style={{ display: 'block', width: '100%', textAlign: 'left', font: 'inherit', background: 'transparent', border: 'none', padding: '5px 10px', paddingLeft: o.type === 'h3' ? 30 : 18, borderRadius: 'var(--r-sm)', borderLeft: '2px solid var(--line)', cursor: 'pointer', fontSize: 12.5, color: 'var(--text-2)' }}
-                  onMouseEnter={e => e.currentTarget.style.background = 'rgba(159,198,255,0.06)'} onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>{o.live}</button>
-              ))}
-            </div>
-          </section>
-          <section>
-            <RailHead icon="waypoints" title="连接的星" extra={connected.length} />
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 10 }}>
-              {connected.map((l, i) => (
-                <div key={l.star.id + i} onMouseEnter={() => setHoverConn(i)} onMouseLeave={() => setHoverConn(null)}
-                  style={{ position: 'relative', padding: '10px 12px', borderRadius: 'var(--r-md)', background: 'rgba(159,198,255,0.04)', border: '1px solid ' + (l.kind === 'cross' ? 'rgba(255,217,138,0.22)' : 'var(--glass-border)') }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
-                    <Icon name="link" size={13} color={l.kind === 'cross' ? 'var(--gold)' : 'var(--star-blue)'} /><span style={{ fontSize: 13.5, color: 'var(--text-1)' }}>{l.star.label}</span>
-                    {l.kind === 'cross' && <span style={{ marginLeft: 'auto', fontSize: 10, color: 'var(--gold)' }}>融会贯通</span>}
-                    <button type="button" title="断开连接" className="sr-focus-ring sr-hit40" onClick={() => removeConnection(l)}
-                      onFocus={() => setHoverConn(i)} onBlur={() => setHoverConn(null)}
-                      style={{ marginLeft: l.kind === 'cross' ? 6 : 'auto', flex: 'none', width: 20, height: 20, position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', border: 'none', background: 'transparent', cursor: 'pointer', color: 'var(--text-3)', opacity: hoverConn === i ? 1 : 0, transition: 'opacity var(--dur-fast)' }}>
-                      <Icon name="unlink" size={13} color="currentColor" />
-                    </button>
-                  </div>
-                  <div style={{ fontSize: 11.5, color: 'var(--text-3)', lineHeight: 1.5, paddingLeft: 21 }}>{l.rel}</div>
-                </div>
-              ))}
-              {linking ? (
-                <div style={{ borderRadius: 'var(--r-md)', border: '1px solid var(--glass-border-strong)', background: 'var(--input-bg, rgba(3,4,12,0.45))', overflow: 'hidden' }}>
-                  {linkStar ? (
-                    <div style={{ padding: '10px 12px' }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: 7, marginBottom: 9, fontSize: 12.5, color: 'var(--text-2)' }}>
-                        <span style={{ width: 7, height: 7, borderRadius: '50%', background: D.conColor(linkStar.con), boxShadow: `0 0 6px ${D.conColor(linkStar.con)}` }} />
-                        <span style={{ color: 'var(--text-1)' }}>{linkStar.label}</span>
-                        <span style={{ marginLeft: 'auto', fontSize: 10, color: linkStar.con === con ? 'var(--star-blue)' : 'var(--gold)' }}>{linkStar.con === con ? '同一星域' : '融会贯通'}</span>
-                      </div>
-                      <input autoFocus value={relDraft} onChange={(e) => setRelDraft(e.target.value)}
-                        onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); addConnection(linkStar, relDraft); } if (e.key === 'Escape') resetLinking(); }}
-                        placeholder="写一句关系，例如「是其特例」…"
-                        style={{ width: '100%', boxSizing: 'border-box', background: 'var(--input-bg, rgba(3,4,12,0.45))', border: '1px solid var(--glass-border-strong)', borderRadius: 'var(--r-sm)', color: 'var(--text-1)', fontSize: 12.5, padding: '7px 10px', outline: 'none', fontFamily: 'var(--font-sans)' }} />
-                      <div style={{ display: 'flex', gap: 8, justifyContent: 'flex-end', marginTop: 10 }}>
-                        <button type="button" onClick={resetLinking} style={{ height: 28, padding: '0 13px', borderRadius: 'var(--r-pill)', border: '1px solid var(--glass-border-strong)', background: 'transparent', color: 'var(--text-2)', fontSize: 12, cursor: 'pointer', fontFamily: 'var(--font-sans)' }}>取消</button>
-                        <button type="button" onClick={() => addConnection(linkStar, relDraft)} style={{ height: 28, padding: '0 13px', borderRadius: 'var(--r-pill)', border: '1px solid var(--glass-border-strong)', background: 'rgba(159,198,255,0.14)', color: 'var(--text-1)', fontSize: 12, cursor: 'pointer', fontFamily: 'var(--font-sans)' }}>建立连接</button>
-                      </div>
-                    </div>
-                  ) : (
-                    <React.Fragment>
-                      <div style={{ fontSize: 10, letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: 'var(--text-3)', padding: '8px 12px 4px', fontFamily: 'var(--font-mono)' }}>选择要连接的星</div>
-                      <div style={{ maxHeight: 180, overflow: 'auto' }} onContextMenu={(e) => e.preventDefault()}>
-                        {linkCandidates.length === 0 && <div style={{ padding: '8px 12px', fontSize: 12, color: 'var(--text-3)' }}>没有可连接的星了。</div>}
-                        {linkCandidates.map(s => (
-                          <button type="button" key={s.id} className="sr-focus-ring" onClick={() => { setLinkStar(s); setRelDraft(''); }} style={{ display: 'flex', width: '100%', textAlign: 'left', font: 'inherit', border: 'none', background: 'transparent', alignItems: 'center', gap: 8, padding: '7px 12px', cursor: 'pointer' }}
-                            onMouseEnter={e => e.currentTarget.style.background = 'rgba(159,198,255,0.08)'} onMouseLeave={e => e.currentTarget.style.background = 'transparent'} onFocus={e => e.currentTarget.style.background = 'rgba(159,198,255,0.08)'} onBlur={e => e.currentTarget.style.background = 'transparent'}>
-                            <span style={{ width: 7, height: 7, borderRadius: '50%', background: D.conColor(s.con), boxShadow: `0 0 6px ${D.conColor(s.con)}` }} />
-                            <span style={{ fontSize: 13, color: 'var(--text-2)' }}>{s.label}</span>
-                            <span style={{ marginLeft: 'auto', fontSize: 10.5, color: 'var(--text-3)' }}>{D.conName(s.con)}</span>
-                          </button>
-                        ))}
-                      </div>
-                      <button type="button" className="sr-focus-ring" onClick={resetLinking} style={{ display: 'block', width: '100%', textAlign: 'left', font: 'inherit', background: 'transparent', padding: '7px 12px', fontSize: 12, color: 'var(--text-3)', cursor: 'pointer', border: 'none', borderTop: '1px solid var(--line)' }}>取消</button>
-                    </React.Fragment>
-                  )}
-                </div>
-              ) : (
-                <button type="button" onClick={() => { setLinking(true); setLinkStar(null); }} style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '9px 12px', borderRadius: 'var(--r-md)', border: '1px dashed var(--line-strong)', background: 'transparent', color: 'var(--text-3)', fontSize: 12.5, cursor: 'pointer' }}>
-                  <Icon name="plus" size={14} color="currentColor" />新建连接 · 写一句关系
-                </button>
-              )}
-            </div>
-          </section>
-          {/* AI 助手：能力入口按 AI 配置的三个开关渲染；加标签 / 建连接复用上面既有的数据路径 */}
-          <AIAssist star={star} tags={tags} connected={connected}
-            onAddTag={(t) => { if (!t || tags.includes(t)) return; setTags(ts => { if (ts.includes(t)) return ts; const nt = [...ts, t]; syncTags(nt); return nt; }); flash('已添加标签「' + t + '」'); }}
-            onAddConnection={(s, rel) => { addConnection(s, rel); D.persist(); }}
-            onSummaryDone={() => { bumpTick(); flash('已生成摘要'); }} />
-          <section>
-            <RailHead icon="corner-down-left" title="反向链接" extra={backlinks.length} />
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 10 }}>
-              {backlinks.length === 0 && <div style={{ fontSize: 12, color: 'var(--text-3)' }}>暂无其它星指向这里。</div>}
-              {backlinks.map((b, i) => (
-                <div key={b.star.id + i} style={{ padding: '10px 12px', borderRadius: 'var(--r-md)', background: 'rgba(159,198,255,0.04)', border: '1px solid var(--glass-border)' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                    <span style={{ width: 7, height: 7, borderRadius: '50%', background: D.conColor(b.star.con), boxShadow: `0 0 7px ${D.conColor(b.star.con)}`, flex: 'none' }} />
-                    <span style={{ fontSize: 13.5, color: 'var(--text-1)' }}>{b.star.label}</span>
-                    <span style={{ fontSize: 11, color: 'var(--text-3)', marginLeft: 'auto' }}>{D.conName(b.star.con)}</span>
-                  </div>
-                  <div style={{ fontSize: 11.5, color: 'var(--text-3)', marginTop: 6, lineHeight: 1.6, paddingLeft: 15 }}>
-                    …{b.rel}，引用了 <span style={{ color: 'var(--star-blue)', background: 'rgba(159,198,255,0.10)', padding: '0 4px', borderRadius: 3 }}>[[{star.label}]]</span>。
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-          <section>
-            <RailHead icon="zap" title="记忆" />
-            {(() => {
-              // 认证态与点亮门槛都从数据层派生（tick / sr-memory 触发重读），不在编辑器另存状态
-              const litSt = !!(D.isLit && D.isLit(star));
-              const emberSt = !!(D.isEmber && D.isEmber(star));
-              const substantial = D.hasSubstance ? D.hasSubstance(star) : true;
-              const sumLen = String(star.summary || '').replace(/\s+/g, '').length;
-              const textyN = (star.body || []).filter(b => b && !['rich', 'divider', 'code'].includes(b.type) && String(b.text || b.tex || '').trim()).length;
-              return (
-                <div style={{ marginTop: 10, padding: 14, borderRadius: 'var(--r-md)', background: 'rgba(255,217,138,0.05)', border: '1px solid rgba(255,217,138,0.18)' }}>
-                  <MemoryBar value={star.strength} showPct />
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 7, marginTop: 12, fontSize: 12, color: 'var(--text-2)' }}>
-                    <Icon name="calendar-clock" size={14} color="var(--gold)" />遗忘曲线预计 <b style={{ color: 'var(--gold)', fontWeight: 500 }}>{(star.props && star.props.nextReview) || '6 天后'}</b> 复习
-                  </div>
-                  <div style={{ height: 1, background: 'var(--line)', margin: '12px 0' }} />
-                  {/* 点亮状态（认证轴，与亮度四档正交）：已点亮 = 发丝金环 · 待重燃 = 暗金余烬环 */}
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 7, fontSize: 12.5, color: litSt ? 'var(--gold)' : emberSt ? 'var(--gold-warm)' : 'var(--text-2)' }}>
-                    <span aria-hidden="true" style={{ flex: 'none', width: 10, height: 10, borderRadius: '50%', boxSizing: 'border-box',
-                      border: litSt ? '1px solid var(--gold)'
-                        : emberSt ? '1px solid color-mix(in srgb, var(--gold-warm) 55%, transparent)'
-                        : '1px solid var(--line-strong)' }} />
-                    {litSt ? `已点亮 · ${D.ago(star.sr && star.sr.lit)}` : emberSt ? '待重燃' : '未点亮'}
-                  </div>
-                  <div style={{ fontSize: 11.5, color: 'var(--text-3)', lineHeight: 1.7, marginTop: 6 }}>
-                    {litSt ? '已点亮 · 讲清楚的东西，暗得更慢。'
-                      : emberSt ? '曾点亮的星暗了下来。再讲透一次，就能重燃。'
-                      : '讲清楚一次，这颗星才会真正点亮——点亮的星记得更久。'}
-                  </div>
-                  {/* 门槛进度：内容门槛（摘要 ≥ 20 字 或 有内容块 ≥ 2）随输入就地更新 */}
-                  {!litSt && (
-                    <div style={{ display: 'flex', alignItems: 'flex-start', gap: 6, fontSize: 11, color: substantial ? 'var(--text-2)' : 'var(--text-3)', lineHeight: 1.6, marginTop: 8 }}>
-                      <Icon name={substantial ? 'check' : 'pen-line'} size={12} color={substantial ? 'var(--gold)' : 'currentColor'} />
-                      <span>
-                        {substantial
-                          ? (emberSt ? '内容已足够 · 讲给 AI 学生，就能重燃' : '内容已足够 · 讲给 AI 学生，就能点亮')
-                          : `点亮门槛：摘要 ${Math.min(sumLen, 20)}/20 字，或有内容的块 ${Math.min(textyN, 2)}/2`}
-                      </span>
-                    </div>
-                  )}
-                </div>
-              );
-            })()}
-          </section>
-          <section>
-            <RailHead icon="crosshair" title="在星图中定位" />
-            <MiniStarMap currentId={star.id} onPick={(s) => setExplore({ id: s.id, label: s.label, con: s.con })} />
-            <div style={{ marginTop: 8, fontSize: 11, color: 'var(--text-3)', lineHeight: 1.6 }}>点击任意星，跃迁到星图中探索它的星系。</div>
-          </section>
-        </div>
+        {railBody}
       </aside>
+      {narrow && railOpen && (
+        <MobileSheet open onClose={() => setRailOpen(false)} title="知识栏">
+          {railBody}
+        </MobileSheet>
+      )}
 
       {/* status bar */}
       <div className="sr-ed-status" style={{ position: 'absolute', bottom: 0, left: 0, right: 312, zIndex: 3, display: 'flex', alignItems: 'center', gap: 18, padding: '7px 24px', borderTop: '1px solid var(--line)', background: 'var(--glass-bg-strong)', WebkitBackdropFilter: 'blur(var(--glass-blur))', backdropFilter: 'blur(var(--glass-blur))', fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-3)', whiteSpace: 'nowrap', overflow: 'hidden' }}>
@@ -2589,12 +2999,45 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
         <div style={{ flex: 1 }} />
         <SaveStatus />
         <span className="sr-ed-status-opt" title={window.SRKeys.combo('F') + ' 在这篇笔记内查找 / 替换'} style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}><Icon name="search" size={12} color="currentColor" />{window.SRKeys.combo('F')} 查找</span>
-        <span title={window.SRKeys.combo('K') + ' 打开命令面板；在编辑器内选中文字时 ' + window.SRKeys.combo('K') + ' 为「添加链接」'} style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}><Icon name="command" size={13} color="currentColor" />{window.SRKeys.combo('K')} 命令 · 选中文字时为链接</span>
+        <span className="sr-kbd-only" title={window.SRKeys.combo('K') + ' 打开命令面板；在编辑器内选中文字时 ' + window.SRKeys.combo('K') + ' 为「添加链接」'} style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}><Icon name="command" size={13} color="currentColor" />{window.SRKeys.combo('K')} 命令 · 选中文字时为链接</span>
         <span className="sr-ed-status-opt">Markdown</span>
       </div>
 
       {/* overlays */}
       {ctx && <ContextMenu x={ctx.x} y={ctx.y} constellations={D.constellations} onClose={() => setCtx(null)} onAction={act(ctx.id)} />}
+      {starLink && (
+        <StarLinkMenu x={starLink.x} y={starLink.y}
+          stars={D.stars.filter(x => x.id !== star.id).map(x => ({ id: x.id, label: x.label, conName: D.conName(x.con), tags: x.tags }))}
+          onClose={() => {
+            // 不选直接关：把那两个方括号留着，光标回到它们后面继续打字
+            const sid = starLink.id, at = starLink.at; setStarLink(null);
+            const a = document.activeElement;
+            if (sid && refs.current[sid] && (!a || a === document.body)) focusBlockAt(sid, at);
+          }}
+          onPick={(picked) => {
+            const sid = starLink.id, at = starLink.at; setStarLink(null);
+            const el = refs.current[sid];
+            if (!el) return;
+            // 先把触发用的那两个 [ 删掉，再插链接——留着它们就成了 [[星名](链接)
+            const s2 = nodeAtOffset(el, at - 2), e2 = nodeAtOffset(el, at);
+            pushHistory();
+            if (s2 && e2) {
+              try {
+                const r = document.createRange();
+                r.setStart(s2.node, s2.off); r.setEnd(e2.node, e2.off);
+                r.deleteContents();
+                const sel2 = window.getSelection(); sel2.removeAllRanges(); sel2.addRange(r);
+              } catch (_) { /* 选区没法定位就退回追加在末尾 */ }
+            }
+            el.focus();
+            const href = 'stellar-raft://star/' + picked.id;
+            document.execCommand('insertHTML', false,
+              '<a href="' + href + '" style="color:var(--star-blue);text-decoration:underline;text-underline-offset:3px;">'
+              + escHtml(picked.label) + '</a>&nbsp;');
+            persistBody();
+            flash('已链到「' + picked.label + '」· 点击即可前往');
+          }} />
+      )}
       {slash && <SlashMenu x={slash.x} y={slash.y}
         onClose={() => {
           const sid = slash.id, at = slash.at; setSlash(null);

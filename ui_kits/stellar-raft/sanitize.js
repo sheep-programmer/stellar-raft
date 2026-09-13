@@ -64,6 +64,7 @@
     const u = String(url).trim();
     if (!u) return null;
     // 浏览器解析 scheme 时忽略控制字符/空白，实体也会先解码——按同样规则嗅探
+    // oxlint-disable-next-line no-control-regex -- 控制字符正是要剥掉的东西：浏览器解析 scheme 时会忽略它们
     const sniff = decodeEntities(u).replace(/[\u0000-\u0020]/g, '').toLowerCase();
     const m = sniff.match(/^([a-z][a-z0-9+.-]*):/);
     if (m) return SAFE_SCHEMES[m[1]] ? u : null;

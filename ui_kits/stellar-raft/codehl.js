@@ -1,9 +1,12 @@
 /* codehl.js — lightweight, language-aware syntax highlighter for the editor's
    code block. window.SR_HL = { DEFS, SAMPLES, GENERIC, LANGS, tokenize }.
    tokenize(code, lang) → array of lines, each an array of {t, c} tokens where
-   c ∈ kw|fn|str|num|com|plain. Unknown language (no DEF) → everything plain. */
+   c ∈ kw|fn|str|num|com|plain. Unknown language (no DEF) → everything plain.
+   纯字符串实现、不碰 DOM，所以也从 globalThis 导出一份（与 mdcore.js 同样的做法），
+   node --test 里可以直接 import 进来验分词。 */
 (function () {
-  if (window.SR_HL) return;
+  const G = typeof globalThis === 'undefined' ? window : globalThis;
+  if (G.SR_HL) return;
 
   const DEFS = {};
   // def(aliases, keywords, lineComment, [blockOpen, blockClose])
@@ -151,5 +154,7 @@
     'assembly', 'vim', 'html', 'css', 'scss', 'xml', 'yaml', 'toml', 'ini', 'json', 'markdown', 'latex',
     'plaintext', 'text', 'txt', 'log', 'diff', 'csv', 'env'];
 
-  window.SR_HL = { DEFS, SAMPLES, GENERIC, LANGS, tokenize };
+  const api = { DEFS, SAMPLES, GENERIC, LANGS, tokenize };
+  if (typeof window !== 'undefined') window.SR_HL = api;
+  G.SR_HL = api;
 })();
