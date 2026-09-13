@@ -59,8 +59,12 @@ function Inbox({ onFocusCon, onOpen }) {
   const capture = () => {
     const text = draft.trim();
     if (!text) return;
-    seq.current += 1;
-    const item = { id: 'cap-' + seq.current, text, captured: '刚刚', suggest: null };
+    /* seq 只是这个组件实例的计数器，而旧草稿随快照持久化——切视图重挂后
+       seq 从 0 重新数，新捕捉会撞上库里已有的 cap-N：同 id 的两条草稿
+       会被 removeItems 一起删掉、被编辑一起改写。跳过已占用的号。 */
+    let id;
+    do { seq.current += 1; id = 'cap-' + seq.current; } while (D.inbox.some(x => x.id === id));
+    const item = { id, text, captured: '刚刚', suggest: null };
     setItems(s => [item, ...s]);
     D.inbox.unshift(item);
     D.persist();

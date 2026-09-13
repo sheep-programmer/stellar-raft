@@ -211,10 +211,10 @@ function Sidebar({ collapsed, onToggle, view, onView, focus, onFocus, theme, onT
         <NavRow h={rowH} icon="activity" label="知识体检报告" badge={todoN || null} collapsed={collapsed} dawn={dawn} active={view === 'checkup'} onClick={onCheckup} dataTour="checkup" />
         <NavRow h={rowH} icon="bot" label="AI 配置" collapsed={collapsed} dawn={dawn} onClick={onAIConfig} />
         {/* 星港管理台：只有服务器确认的管理员看得到这一行（服务端另有守卫，
-            前端这个布尔值被改也拿不到任何数据）；出厂密码未改时挂一个金点提醒 */}
+            前端这个布尔值被改也拿不到任何数据）；出厂凭据未交接时挂一个金点提醒 */}
         {D.account.admin && (
           <NavRow h={rowH} icon="shield" label="星港管理台" badge={D.account.defaultPass ? '!' : null}
-            tip={D.account.defaultPass ? '管理员账号仍在用出厂密码' : '全站用户、分享、会话与系统状态'}
+            tip={D.account.defaultPass ? '管理员账号仍在用出厂的用户名与密码' : '全站用户、分享、会话与系统状态'}
             collapsed={collapsed} dawn={dawn} active={view === 'admin'} onClick={onAdmin} />
         )}
         <UserChip collapsed={collapsed} dawn={dawn} registered={!!D.account.registered} onClick={onOpenSettings} />

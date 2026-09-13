@@ -327,7 +327,8 @@ test('编辑器的浮动菜单在手机上改成底部弹层——不再算坐�
   for (let i = EM.indexOf('<Floating'); i >= 0; i = EM.indexOf('<Floating', i + 1)) {
     tags.push(EM.slice(i, tagEnd(EM, i)));
   }
-  assert.equal(tags.length, 7, '编辑器共有 7 处浮动菜单，实得 ' + tags.length);
+  // 计数只是绊线：数字变了要顺手确认新菜单也给了标题（下一条断言就是干这个的）
+  assert.equal(tags.length, 8, '编辑器共有 8 处浮动菜单，实得 ' + tags.length);
   const untitled = tags.filter(t => !t.includes('title=')).length;
   assert.equal(untitled, 0, `${tags.length} 处菜单里有 ${untitled} 处没给标题`);
   // hook 顺序不能因分支改变：分支只在 return 处发生
@@ -376,8 +377,8 @@ test('列表视图在窄屏改卡片：六列网格拆成三行，表头隐去',
   const LV = read(KIT + 'ListView.jsx');
   // 桌面的六列固定宽在 414px 屏上会把标题列压到 0（标签被逼成一字一行）
   assert.match(LV, /const GRID = '30px 1fr 156px 150px 116px 78px'/);
-  assert.match(LV, /html\[data-screen="phone"\] \.sr-list-head \{ display: none/);
-  assert.match(LV, /html\[data-screen="phone"\] \.sr-list-row \{\s*display: flex !important/);
+  assert.match(LV, /html\[data-narrow\] \.sr-list-head \{ display: none/);
+  assert.match(LV, /html\[data-narrow\] \.sr-list-row \{\s*display: flex !important/);
   // 六个单元格都要有落点，否则 flex 排布会乱序
   for (const c of ['sr-lc-check', 'sr-lc-title', 'sr-lc-mem', 'sr-lc-con', 'sr-lc-review', 'sr-lc-links']) {
     assert.ok(LV.includes('className="' + c + '"'), '缺少 ' + c);
@@ -387,6 +388,110 @@ test('列表视图在窄屏改卡片：六列网格拆成三行，表头隐去',
   assert.match(LV, /\.sr-lc-mem\s*\{ flex: 1 1 100%; \}/);
   // 亮度档胶囊横滑而不是折成两行高的方块
   assert.match(LV, /\.sr-list-bands \{\s*overflow-x: auto/);
+});
+
+/* 这一条是拿算术钉住那个真实的坑，而不是钉住某个选择器。
+   曾经卡片布局只挂在 data-screen="phone"（≤720px），于是 721~1180px
+   之间「标题」那一列的 1fr 被固定列吃干净——量出来 900px 以下**就是 0 宽**，
+   一行里只剩两枚标签竖着排，标题整个不见。而那一段正是 iPad 竖屏 768 / 810、
+   手机横屏 844、半屏窗口，绝不是边角。
+   所以这里自己算一遍：网格换成卡片的那个阈值，必须宽到让标题还剩得下字。 */
+test('卡片布局的阈值宽到标题列还排得下字', () => {
+  const LV = read(KIT + 'ListView.jsx');
+
+  const grid = LV.match(/const GRID = '([^']+)'/)[1].split(/\s+/);
+  const fixed = grid.filter(c => c.endsWith('px')).reduce((a, c) => a + parseFloat(c), 0);
+  const gap = (grid.length - 1) * 14;                 // gridTemplateColumns 的 gap: 14
+  const rowPad = 16 * 2;                              // 行自己的左右内边距
+  assert.equal(grid.filter(c => c === '1fr').length, 1, '标题应当是唯一那根 1fr');
+
+  // 换布局的阈值：JS 与 CSS 认同一个数
+  const bp = Number(RESP.match(/narrow:\s*(\d+)/)[1]);
+  assert.ok(LV.includes('html[data-narrow]'), '列表要挂 data-narrow，别再写死 phone');
+  assert.ok(RESP.includes('el.dataset.narrow'), 'SRScreen 要把 narrow 落成 html 属性');
+
+  /* 阈值那一刻，标题还剩多少？容器宽度 ≈ 视口 − 侧栏 260 − 视图内边距 30×2。
+     留给标题的是：容器 − 固定列 − 间距 − 行内边距。 */
+  const left = bp - 260 - 60 - fixed - gap - rowPad;
+  assert.ok(left >= 120,
+    `阈值 ${bp}px 处标题列只剩 ${Math.round(left)}px（固定列 ${fixed} + 间距 ${gap}）——` +
+    '宽到这里就该换卡片了，否则标题会被挤没');
+});
+
+/* iOS 的规矩：聚焦一个字号 < 16px 的输入框，Safari 会把整页放大去凑那 16px，
+   而且不会自己缩回来——点一下搜索框，整个星图就歪着，得自己双指捏回去。
+   站里的输入框在桌面上是 13/14/14.5px，所以这条不是「顺手加的」，是必须的。 */
+test('触摸端的输入框字号不低于 16px（否则 iOS 聚焦即放大整页）', () => {
+  const m = SHELL.match(/html\[data-pointer="coarse"\] input[^{]*\{([^}]*)\}/);
+  assert.ok(m, '缺少触摸端输入框的字号规则');
+  assert.match(m[1], /font-size:\s*16px\s*!important/);
+  // 复选框 / 单选 / 滑块不该被拉大（它们的尺寸不是字号决定的）
+  const sel = SHELL.match(/(html\[data-pointer="coarse"\] input[^{]*)\{/)[1];
+  for (const t of ['checkbox', 'radio', 'range']) {
+    assert.ok(sel.includes(`:not([type="${t}"])`), `应当排除 type=${t}`);
+  }
+});
+
+/* 星核在世界坐标里只有 12×importance，画布整层还 scale(k)，落地取景常在
+   0.34~0.7——屏幕上只剩 4~12px，手指按不着任何一颗星。
+   热区必须除掉 k 才是「屏幕上的 44px」：写死一个 44 会随缩放一起缩。 */
+test('星与星域主星在触摸端有 44px 的屏幕热区', () => {
+  const SN = read('components/knowledge/StarNode.jsx');
+  const SM = read(KIT + 'StarMap.jsx');
+  assert.match(SN, /hit = 0,/, 'StarNode 要接受 hit');
+  assert.match(SN, /onClick && hit > core/, '热区只在可点且比星核大时才铺');
+  assert.match(SN, /width: hit, height: hit/);
+  // 除以 k：这是这条测试真正要钉的东西
+  assert.match(SM, /44 \/ Math\.max\(0\.2, view\.k\)/, '知识星的热区要除掉缩放');
+  assert.match(SM, /44 \/ Math\.max\(0\.2, k\)/, '星域主星的热区要除掉缩放');
+  assert.match(SM, /scr\.touch \? 44/, '只给触摸端：鼠标点得准，加了反而抢画布的平移');
+  assert.match(SM, /hit=\{touchHit\}/);
+});
+
+/* 知识栏那六块（大纲 / 连接的星 / 反向链接 / 记忆 / 在星图中定位 / AI 助手）
+   原先在 ≤1180px 一句 display:none 就没了——不是收起来，是没有入口。
+   栏体必须是同一份 JSX：复制两份迟早长歪。 */
+test('编辑器的知识栏在窄屏有入口，且与桌面共用同一份栏体', () => {
+  const ED = read(KIT + 'Editor.jsx');
+  assert.match(ED, /const railBody = \(/, '栏体要抽成常量');
+  assert.equal((ED.match(/\{railBody\}/g) || []).length, 2, '桌面 aside 与窄屏弹层各用一次');
+  assert.match(ED, /<MobileSheet open onClose=\{\(\) => setRailOpen\(false\)\}/);
+  assert.match(ED, /narrow && railOpen/);
+  assert.match(ED, /name="panel-right"/, '窄屏头部要有打开知识栏的按钮');
+  assert.match(ED, /html\[data-narrow\] \.sr-ed-rail \{ display: none/);
+  // 按钮的出现条件与 CSS 的收栏条件必须是同一个数，否则中间有一段「栏没了、按钮也没有」
+  assert.match(ED, /window\.SRKit\.useScreen\(\)\.narrow/);
+});
+
+test('编辑器底部状态栏让开 Home 指示条', () => {
+  const ED = read(KIT + 'Editor.jsx');
+  const m = ED.match(/html\[data-screen="phone"\] \.sr-ed-status \{([^}]*)\}/);
+  assert.ok(m, '缺少手机上的状态栏规则');
+  assert.match(m[1], /padding-bottom: calc\(7px \+ var\(--sr-safe-bottom\)\)/);
+  // 那条 ⌘K 提示是纯键盘话术，且在 390px 上会溢出——归 .sr-kbd-only 管
+  assert.match(ED, /className="sr-kbd-only" title=\{window\.SRKeys\.combo\('K'\)/);
+});
+
+/* 这份样式表从前只由三个 phone 断点才挂载的组件在 useEffect 里注入，
+   于是它在别的尺寸上根本不存在，两头都坏：
+     · 桌面少了 `.sr-touch-only { display:none }`，黑洞提示条把两句互斥的话连着印成
+       「滚轮缩放双指捏合缩放」；
+     · iPad 的 pointer:coarse 明明为真，`.sr-hit-pad` 的热区与 `.sr-kbd-only` 却全是空文。
+   表里每条都自带 html[data-screen] / html[data-pointer] 前缀，本来就自己看门。 */
+test('移动端样式表加载即注入，不由「谁挂载了」决定', () => {
+  // 模块层面调用一次：不在任何组件的 useEffect 里
+  assert.match(SHELL, /^injectMobileCss\(\);/m, '应当在模块加载时就注入');
+  // 每条规则都得自带前缀，否则「一律注入」会误伤桌面
+  const css = SHELL.match(/const SR_MOBILE_CSS = `([\s\S]*?)`;/)[1];
+  const rules = css.split('\n').filter(l => /^[.\w[]/.test(l.trim()) && l.includes('{'));
+  for (const r of rules) {
+    const sel = r.split('{')[0].trim();
+    const scoped = /html\[data-(screen|pointer|narrow|short)/.test(sel)
+      || /^\.sr-m-/.test(sel)                       // 外壳自己的类，只有手机才渲染
+      || /^\.sr-touch-only/.test(sel)               // 成对的那一半，默认隐藏即是本意
+      || /^@|^\s*from|^\s*to/.test(sel);
+    assert.ok(scoped, `「${sel}」没有断点前缀，全局注入会误伤桌面`);
+  }
 });
 
 test('体检页写死列数的网格在窄屏收口', () => {
@@ -419,7 +524,8 @@ test('每个有定宽单元格的视图都必须有窄屏落点——不许再�
 test('管理台四张表全部卡片化——不只是「旅客」那一张', () => {
   const ADM = read(KIT + 'AdminConsole.jsx');
   // 旅客 / 分享 / 会话 / 游客 IP / 游客明细，共五处行容器
-  assert.equal((ADM.match(/className="sr-adm-row"/g) || []).length, 5,
+  // 认的是「挂了这个类」，不是「className 里只有这个类」——有的行还并着 .sr-focus-ring
+  assert.equal((ADM.match(/className="[^"]*\bsr-adm-row\b[^"]*"/g) || []).length, 5,
     '五处行容器（旅客·分享·会话·游客IP·游客明细）都要挂 .sr-adm-row');
   // 名字格要允许换行，否则被压窄时中文一个字一行地竖下来
   assert.match(ADM, /\.sr-adm-name > \* \{ white-space: normal !important; \}/);
@@ -437,7 +543,49 @@ test('管理台表格在窄屏改卡片：表头隐去，每格自带标签', ()
   const ADM = read(KIT + 'AdminConsole.jsx');
   assert.match(ADM, /html\[data-screen="phone"\] \.sr-adm-head \{ display: none/);
   assert.match(ADM, /\.sr-adm-cell\[data-k\]::before/);
-  assert.match(ADM, /className="sr-adm-row"/);
+  assert.match(ADM, /className="[^"]*\bsr-adm-row\b[^"]*"/);
   const cells = ADM.match(/className="sr-adm-cell"/g) || [];
   assert.ok(cells.length >= 4, '用户行的各列都该挂 .sr-adm-cell，实得 ' + cells.length);
+});
+
+/* ——— 跨平台：玻璃在旧 iOS Safari 上不能塌掉 ———
+   玻璃拟态是这套设计的地基。`backdrop-filter` 在 Safari 18 之前只认带前缀的
+   `-webkit-backdrop-filter`——少了它，iPhone 上那些玻璃面不是「少个效果」，
+   而是整块变成半透明色块，换了一副面孔。
+   这条把「每一处都成对出现」钉住：新写一处玻璃时忘了前缀，这里当场红。 */
+test('每一处 backdrop-filter 都配了 -webkit- 前缀（旧版 iOS Safari）', () => {
+  const files = [
+    'tokens/effects.css', 'docs/docs.css',
+    ...readdirSync(join(ROOT, 'components')).flatMap(d => {
+      const dir = join(ROOT, 'components', d);
+      try { return readdirSync(dir).filter(f => f.endsWith('.jsx')).map(f => `components/${d}/${f}`); }
+      catch { return []; }
+    }),
+    ...readdirSync(join(ROOT, KIT)).filter(f => /\.(jsx|js)$/.test(f)).map(f => KIT + f),
+  ];
+  const unpaired = [];
+  for (const rel of files) {
+    const src = readFileSync(join(ROOT, rel), 'utf8');
+    // 独立成行的 CSS 声明：上一行必须是前缀版
+    const lines = src.split('\n');
+    lines.forEach((l, i) => {
+      if (/^\s*backdrop-filter:/.test(l) && !/-webkit-backdrop-filter/.test(lines[i - 1] || '')) {
+        unpaired.push(`${rel}:${i + 1}（CSS 声明）`);
+      }
+    });
+    // 同一行里的 CSS 串 / JSX 内联对象：前面不远处必须有前缀版
+    for (const m of src.matchAll(/(?<!-)backdrop-filter:/g)) {
+      if (!src.slice(Math.max(0, m.index - 90), m.index).includes('-webkit-backdrop-filter:')) {
+        if (!/^\s*backdrop-filter:/m.test(src.slice(src.lastIndexOf('\n', m.index) + 1, m.index + 20))) {
+          unpaired.push(`${rel}（CSS 串 @${m.index}）`);
+        }
+      }
+    }
+    for (const m of src.matchAll(/(?<!Webkit)backdropFilter:/g)) {
+      if (!src.slice(Math.max(0, m.index - 90), m.index).includes('WebkitBackdropFilter:')) {
+        unpaired.push(`${rel}（JSX 内联 @${m.index}）`);
+      }
+    }
+  }
+  assert.deepEqual(unpaired, [], '这些地方少了 -webkit- 前缀：\n  ' + unpaired.join('\n  '));
 });

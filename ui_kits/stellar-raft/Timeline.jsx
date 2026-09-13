@@ -17,9 +17,20 @@ const TL_BUCKETS = [
   { id: 'earlier', label: '更早' },
 ];
 
-// 把一条事件归入某个时段：优先用显式 bucket，否则从 when 文案推断。
+// 把一条事件归入某个时段：优先用显式 bucket；真实事件都带着写入时刻的 ts，
+// 按日历日归位（when 恒为「刚刚」，靠文案推断会把所有真实事件都落进「本周」）；
+// 没有 ts 的种子数据再走文案推断。
 function tlBucketOf(ev) {
   if (ev.bucket) return ev.bucket;
+  if (ev.ts) {
+    const midnight = (t) => { const d = new Date(t); d.setHours(0, 0, 0, 0); return d.getTime(); };
+    // 两端都取本地零点再相减：夏令时那天差 23/25 小时，round 归位成天
+    const days = Math.round((midnight(Date.now()) - midnight(ev.ts)) / 86400000);
+    if (days <= 0) return 'today';
+    if (days === 1) return 'yesterday';
+    if (days <= 6) return 'week';
+    return 'earlier';
+  }
   const w = ev.when || '';
   if (w.indexOf('今天') === 0) return 'today';
   if (w.indexOf('昨天') === 0) return 'yesterday';
@@ -29,7 +40,9 @@ function tlBucketOf(ev) {
   return 'week';
 }
 
-const tlIsUp = ev => ev.delta.indexOf('−') !== 0 && ev.delta.indexOf('-') !== 0;
+// 只有真的涨了（+0.xx）才算上行：无 delta 的熄灭事件兜底是 '—'，
+// 它不以 − 开头，若按「非负即上行」判会被染成点亮专属的金色
+const tlIsUp = ev => ev.delta.indexOf('+') === 0;
 const TL_PAGE = 6; // 每次展示/加载的条目数
 
 function Timeline({ onOpen }) {

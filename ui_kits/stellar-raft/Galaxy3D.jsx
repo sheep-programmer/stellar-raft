@@ -275,11 +275,13 @@ function Galaxy3D({ onClose, onOpenStar, onFeynman, dataset }) {
       sysGroup.position.set(cx, cy, cz);
       scene.add(sysGroup);
 
-      // 恒星本体
+      // 恒星本体（reg 入册：几何体与材质随卸载释放——renderer.dispose() 不管场景内对象）
       const sunR = 2.6 + Math.sqrt(c.count || members.length) * 0.72;
-      const sunGeo = new THREE.SphereGeometry(sunR, 40, 40);
-      const sunMat = new THREE.MeshStandardMaterial({ color: 0x2a1606, emissive: new THREE.Color('#ffb060'), emissiveIntensity: 1.5, roughness: 0.5, metalness: 0.0 });
-      const sun = new THREE.Mesh(sunGeo, sunMat);
+      const sun = reg(new THREE.Mesh(
+        new THREE.SphereGeometry(sunR, 40, 40),
+        new THREE.MeshStandardMaterial({ color: 0x2a1606, emissive: new THREE.Color('#ffb060'), emissiveIntensity: 1.5, roughness: 0.5, metalness: 0.0 })
+      ));
+      const sunMat = sun.material;
       sun.userData = { kind: 'sun', con: c, sunR, pos: new THREE.Vector3(cx, cy, cz) };
       sysGroup.add(sun);
       pickable.push(sun);
@@ -700,6 +702,9 @@ function Galaxy3D({ onClose, onOpenStar, onFeynman, dataset }) {
       mats.forEach(m => m.dispose());
       texs.forEach(tx => tx.dispose());
       renderer.dispose();
+      // dispose() 不销毁 WebGL context——浏览器对活动上下文有上限（约 16 个），
+      // 快速反复进出三维星系会撞上 "Too many active WebGL contexts"
+      try { renderer.forceContextLoss(); } catch { /* 已销毁 */ }
       if (selBox.parentNode) selBox.parentNode.removeChild(selBox);
       if (el.parentNode) el.parentNode.removeChild(el);
     };

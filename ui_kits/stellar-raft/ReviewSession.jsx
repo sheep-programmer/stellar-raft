@@ -69,11 +69,14 @@ function RSCertChip({ ember }) {
   );
 }
 
-/* 三档自评在结束页的回看口径：与卡上的按钮同名同色，回看时一眼对得上 */
+/* 三档自评在结束页的回看口径：与卡上的按钮同名同色，回看时一眼对得上。
+   ignite 档：今天经费曼点亮的星同样写 reviewedAt（grade='ignite'），
+   没有它会落进 ok 兜底、被误标成「记得」 */
 const RS_GRADE_META = {
   fail: { label: '忘了', icon: 'cloud-off', color: 'var(--danger)', tint: 'rgba(232,145,122,0.30)' },
   hazy: { label: '模糊', icon: 'haze', color: 'var(--star-blue-dim)', tint: 'rgba(120,150,205,0.34)' },
   ok: { label: '记得', icon: 'check', color: 'var(--star-blue)', tint: 'rgba(159,198,255,0.34)' },
+  ignite: { label: '点亮', icon: 'zap', color: 'var(--gold)', tint: 'rgba(255,217,138,0.30)' },
 };
 
 /* 结束页的回看行：默认只有星名与自评，点开就地摊开摘要与大纲——

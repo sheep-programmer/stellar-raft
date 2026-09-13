@@ -1,7 +1,7 @@
 /* App — orchestrates the Stellar Raft kit as one interactive click-through.
    star map ⇄ list ⇄ editor ⇄ inbox ⇄ timeline, with Feynman drawer, ignite,
    aerial heat map, ⌘K command palette and a 知识体检 report — all via the sidebar. */
-const { Sidebar, StarMap, AerialView, FeynmanDrawer, ListView, Editor, Inbox, Timeline, CommandPalette, Checkup, Galaxy3D, Settings, AIConfig, BlackHole, VisitView, ReviewSession, Onboarding, OnboardingTour, LoginView, KeysHelp, AdminConsole, AnnouncementBanner, MobileTopBar, MobileTabBar, MobileDrawer, useScreen } = window.SRKit;
+const { Sidebar, StarMap, AerialView, FeynmanDrawer, ListView, Editor, Inbox, Timeline, CommandPalette, Checkup, Galaxy3D, Settings, AIConfig, BlackHole, VisitView, ReviewSession, Onboarding, OnboardingTour, LoginView, KeysHelp, AdminConsole, AdminHandover, Boundary, AnnouncementBanner, MobileTopBar, MobileTabBar, MobileDrawer, useScreen } = window.SRKit;
 const { GlassPanel, Icon, IconButton, Button, MemoryBar } = window.StellarRaftDesignSystem_2866af;
 
 function App() {
@@ -26,6 +26,11 @@ function App() {
   const [dataRev, setDataRev] = React.useState(0); // 数据库水合后整体重挂载
   const [banner, setBanner] = React.useState(null);  // 管理员发布的全站公告
   const [blocked, setBlocked] = React.useState(null); // { kind: 'banned' | 'maintenance', message }
+  const [handover, setHandover] = React.useState(false); // 出厂管理员未交接：强制换用户名与密码
+  /* 崩溃兜底卡的重置计数：Boundary 是类组件，错误态只能靠 key 变化重挂载来清。
+     光靠 view 拼 key 不够——最常见的崩溃恰恰是默认视图星图自己崩了，此时
+     backToMap() 不改变 view，key 不变，那颗「回到星图」就是个死键。 */
+  const [boundaryNonce, setBoundaryNonce] = React.useState(0);
   const [drawer, setDrawer] = React.useState(false);   // 手机：侧栏抽屉
   const nonce = React.useRef(0);
 
@@ -88,6 +93,25 @@ function App() {
     return () => window.removeEventListener('sr-blocked', h);
   }, []);
 
+  /* 星港交接：管理员账号还在用出厂凭据（用户名与密码都是公开知识）时，
+     一登录就把交接卡请出来，换完之前不放行。判据由服务器随 /api/hello 下发
+     （site.defaultPass，只发给管理员），交接成功后 AdminHandover 广播 sr-account。 */
+  React.useEffect(() => {
+    const h = () => {
+      const A = window.SR_DATA && window.SR_DATA.account;
+      setHandover(!!(A && A.admin && A.defaultPass));
+    };
+    h();
+    window.addEventListener('sr-site', h);
+    window.addEventListener('sr-account', h);
+    window.addEventListener('sr-hydrated', h);
+    return () => {
+      window.removeEventListener('sr-site', h);
+      window.removeEventListener('sr-account', h);
+      window.removeEventListener('sr-hydrated', h);
+    };
+  }, []);
+
   // 游客撞上功能门禁（SRGate.require）：直接把登录页请出来，人已经在门口了
   React.useEffect(() => {
     const h = () => setLogin(true);
@@ -125,13 +149,13 @@ function App() {
   React.useEffect(() => {
     const h = (e) => {
       if ((e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K')) {
-        if (reviewOpen || onboard || tour || login) return;
+        if (reviewOpen || onboard || tour || login || handover || feynman) return;
         e.preventDefault(); setCmd(c => !c);
       }
     };
     window.addEventListener('keydown', h);
     return () => window.removeEventListener('keydown', h);
-  }, [reviewOpen, onboard, tour, login]);
+  }, [reviewOpen, onboard, tour, login, handover, feynman]);
 
   // ? 打开快捷键速查（Shift+/）——正在输入框 / 可编辑区里打问号不受影响；
   // 已有弹层置顶时不叠开（同 ⌘K 的互斥语义，速查自带 Esc / 点遮罩关闭）
@@ -140,12 +164,12 @@ function App() {
       if (e.key !== '?' || e.metaKey || e.ctrlKey || e.altKey) return;
       const t = e.target;
       if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
-      if (cmd || settingsOpen || aiConfigOpen || reviewOpen || onboard || tour || login || keysHelp) return;
+      if (cmd || settingsOpen || aiConfigOpen || reviewOpen || onboard || tour || login || keysHelp || handover || feynman) return;
       e.preventDefault(); setKeysHelp(true);
     };
     window.addEventListener('keydown', h);
     return () => window.removeEventListener('keydown', h);
-  }, [cmd, settingsOpen, aiConfigOpen, reviewOpen, onboard, tour, login, keysHelp]);
+  }, [cmd, settingsOpen, aiConfigOpen, reviewOpen, onboard, tour, login, keysHelp, handover, feynman]);
 
   // Esc 统一词汇：同一动作（离开当前浮层）在所有屏幕说同一句话。
   // 命令面板 / 设置 / AI 配置 / 复习会话自带 Esc，这里让位；
@@ -155,13 +179,13 @@ function App() {
   React.useEffect(() => {
     const h = (e) => {
       if (e.key !== 'Escape' || e.defaultPrevented) return;
-      if (cmd || settingsOpen || aiConfigOpen || reviewOpen || onboard || tour || login || keysHelp) return;
+      if (cmd || settingsOpen || aiConfigOpen || reviewOpen || onboard || tour || login || keysHelp || handover) return;
       if (feynman) { e.preventDefault(); setFeynman(null); return; }
       if (view === 'checkup' || view === 'admin') { e.preventDefault(); freshen(); setView('map'); setAerial(false); }
     };
     window.addEventListener('keydown', h, true);
     return () => window.removeEventListener('keydown', h, true);
-  }, [cmd, settingsOpen, aiConfigOpen, reviewOpen, onboard, tour, login, keysHelp, feynman, view]);
+  }, [cmd, settingsOpen, aiConfigOpen, reviewOpen, onboard, tour, login, keysHelp, handover, feynman, view]);
 
   // 切换视图前按真实时间重算全部星的 R（衰减模型），新挂载的视图读到的是当下的亮度
   const freshen = () => { const D = window.SR_DATA; if (D && D.refreshMemory) D.refreshMemory(); };
@@ -258,11 +282,21 @@ function App() {
   // 内联箭头 ref 每次渲染都会重跑 enter，任何 setState 都会闪一次入场
   const mainEnter = React.useCallback((el) => { const T = window.srTransition; if (el && T && T.enter) T.enter(el); }, []);
 
-  /* 停用 / 维护：整屏说明页。停用是终局（只能退出登录换个身份），
-     维护是暂时的（留一颗「再试一次」按钮，恢复了就能进来）。
-     两种情况本机星空都完好——离线编辑照常，恢复后自动补写。 */
+  /* 停用 / 维护 / 登录失效：整屏说明页。停用是终局（只能退出登录换个身份），
+     维护是暂时的（留一颗「再试一次」按钮，恢复了就能进来），登录失效则是这台设备
+     的钥匙没了——管理员请你下线、账号被删、或者太久没露面被判过期，重新登录即可。
+     三种情况本机星空都完好——离线编辑照常，恢复后自动补写。 */
   if (blocked) {
     const banned = blocked.kind === 'banned';
+    const expired = blocked.kind === 'expired';
+    const ICON = { banned: 'user-x', expired: 'key-round', maintenance: 'construction' };
+    const TITLE = { banned: '这个账号已被停用', expired: '这台设备的登录已失效', maintenance: '星图正在维护' };
+    const SUB = {
+      banned: '如有疑问，请联系这台服务器的管理员。',
+      expired: '可能是管理员请你重新登录，也可能是这个登录态太久没用过了。重新登录就好。',
+      maintenance: '稍后回来看看。',
+    };
+    const kind = blocked.kind === 'banned' || blocked.kind === 'expired' ? blocked.kind : 'maintenance';
     return (
       <div style={{
         width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24,
@@ -270,20 +304,22 @@ function App() {
       }}>
         <div style={{ width: 420, maxWidth: '94vw', textAlign: 'center' }}>
           <GlassPanel strong radius="lg" glow style={{ padding: '34px 28px 26px' }}>
-            <Icon name={banned ? 'user-x' : 'construction'} size={30} color={banned ? 'var(--danger)' : 'var(--gold)'} />
+            <Icon name={ICON[kind]} size={30} color={banned ? 'var(--danger)' : 'var(--gold)'} />
             <div style={{ fontSize: 19, fontWeight: 300, color: 'var(--text-1)', marginTop: 16 }}>
-              {banned ? '这个账号已被停用' : '星图正在维护'}
+              {TITLE[kind]}
             </div>
             <div style={{ fontSize: 13, color: 'var(--text-2)', marginTop: 12, lineHeight: 1.8 }}>
-              {blocked.message || (banned ? '如有疑问，请联系这台服务器的管理员。' : '稍后回来看看。')}
+              {expired ? SUB.expired : (blocked.message || SUB[kind])}
             </div>
             <div style={{ fontSize: 12, color: 'var(--text-3)', marginTop: 14, lineHeight: 1.7 }}>
               你在本机的星空完好无损，什么都没有丢。
             </div>
             <div style={{ display: 'flex', gap: 10, justifyContent: 'center', marginTop: 22 }}>
-              {!banned && <Button variant="primary" icon="refresh-cw" onClick={() => location.reload()}>再试一次</Button>}
-              <Button variant={banned ? 'primary' : 'ghost'} icon="log-out"
-                onClick={() => window.SRNet.logoutFlow()}>退出登录</Button>
+              {kind === 'maintenance' && <Button variant="primary" icon="refresh-cw" onClick={() => location.reload()}>再试一次</Button>}
+              {/* 登录失效走的也是 logoutFlow：它正好做了该做的三件事——
+                  换回一把全新的匿名令牌、清掉上一个身份的本地痕迹、整页刷新落到登录页 */}
+              <Button variant={kind === 'maintenance' ? 'ghost' : 'primary'} icon={expired ? 'log-in' : 'log-out'}
+                onClick={() => window.SRNet.logoutFlow()}>{expired ? '重新登录' : '退出登录'}</Button>
             </div>
           </GlassPanel>
         </div>
@@ -333,6 +369,10 @@ function App() {
           paddingBottom: phone && view !== 'editor' ? 'calc(var(--sr-tabbar) + var(--sr-safe-bottom))' : 0,
           boxSizing: 'border-box',
         }}>
+        {/* 视图层的崩溃兜底：一个视图崩了，侧栏与其它视图照常可用。
+            key 跟着视图走——换个目的地就重挂载一次，不必手动清掉错误态。 */}
+        <Boundary key={`b|${view}|${aerial ? 'a' : ''}|${boundaryNonce}`} title={`「${viewTitle}」`}
+          onReset={() => { setSelected(null); setEditing(null); backToMap(); setBoundaryNonce(n => n + 1); }}>
         {view === 'map' && !aerial && (
           <StarMap selected={selected} onSelect={setSelected}
             onOpenEditor={openEditor} onFeynman={(id) => setFeynman(id)}
@@ -349,8 +389,15 @@ function App() {
         {view === 'timeline' && <Timeline onOpen={openEditor} />}
         {view === 'checkup' && <Checkup onClose={backToMap} onOpenStar={openEditor} onFocusCon={focusCon} onFeynman={(id) => setFeynman(id)} onReview={openReview} />}
         {view === 'admin' && <AdminConsole onClose={backToMap} />}
+        </Boundary>
 
-        {feynman && <FeynmanDrawer starId={feynman} onClose={() => setFeynman(null)} onOpenAIConfig={() => setAiConfigOpen(true)} />}
+        {/* 抽屉也各自兜底：它盖在视图之上、却不属于任何一个视图，
+            崩了不该把整棵树带走——收起抽屉就该回到原来那个视图 */}
+        {feynman && (
+          <Boundary key={`fey|${feynman}`} title="「费曼讲解」" resetLabel="收起抽屉" onReset={() => setFeynman(null)}>
+            <FeynmanDrawer starId={feynman} onClose={() => setFeynman(null)} onOpenAIConfig={() => setAiConfigOpen(true)} />
+          </Boundary>
+        )}
 
         {/* 手机上的底部标签栏：贴在 main 内部，跟着安全区走 */}
         {phone && view !== 'editor' && (
@@ -377,12 +424,18 @@ function App() {
       {aiConfigOpen && <AIConfig onClose={() => setAiConfigOpen(false)} />}
       {keysHelp && <KeysHelp onClose={() => setKeysHelp(false)} />}
       {/* 登录页与新手引导的焦点圈禁互斥：登录优先，登录页出现时引导整体让位（卸载），避免 Tab 焦点陷阱与 Esc 冲突 */}
-      {onboard && !login && authKnown && <Onboarding onClose={finishOnboard} onSpotlight={startTour} />}
+      {onboard && !login && !handover && authKnown && <Onboarding onClose={finishOnboard} onSpotlight={startTour} />}
       {tour && !login && <OnboardingTour onClose={closeTour} onNavigate={tourNavigate} />}
       {login && <LoginView onClose={closeLogin} />}
+      {/* 星港交接卡：压在所有浮层之上，交接完成前关不掉（唯一出口是退出登录） */}
+      {handover && <AdminHandover onDone={() => setHandover(false)} />}
     </div>
   );
 }
 
-ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+/* 根层的最后一道防线：连侧栏、断点、水合这些外围也崩了的时候，至少还有一张
+   说明卡和一颗刷新键——而不是一整屏无从解释的黑。 */
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <Boundary title="星图"><App /></Boundary>
+);
 if (window.lucide) window.lucide.createIcons();

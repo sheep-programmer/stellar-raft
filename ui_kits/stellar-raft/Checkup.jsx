@@ -600,9 +600,15 @@ function Checkup({ onClose, onOpenStar, onFocusCon, onFeynman, onReview }) {
                       const future = d.getTime() > now;
                       const n = heat[heatDayKey(d)] || 0;
                       const a = heatAlpha(n);
+                      /* 格子只靠金色浓度说话——读屏与触摸用户拿不到逐日数据。
+                         role=img + aria-label 让每格在读屏浏览模式下报得出
+                         「几月几日 · 几次观星」，但不进 Tab 序列（一年三百多个
+                         停靠点是灾难，不是可达性）；摘要文字在图例后补上。 */
+                      const dayLabel = `${d.getMonth() + 1} 月 ${d.getDate()} 日 · ${n} 次观星`;
                       return (
                         <div key={di}
-                          title={future ? undefined : `${d.getMonth() + 1} 月 ${d.getDate()} 日 · ${n} 次观星`}
+                          title={future ? undefined : dayLabel}
+                          {...(future ? { 'aria-hidden': 'true' } : { role: 'img', 'aria-label': dayLabel })}
                           style={{ width: 12, height: 12, borderRadius: 3, background: heatBg(a),
                             boxShadow: a >= 0.6 ? '0 0 5px rgba(255,217,138,0.35)' : 'none',
                             visibility: future ? 'hidden' : 'visible' }} />
@@ -619,6 +625,19 @@ function Checkup({ onClose, onOpenStar, onFocusCon, onFeynman, onReview }) {
               ))}
               <span style={{ fontSize: 10.5, color: 'var(--text-3)', marginLeft: 3 }}>多</span>
             </div>
+            {/* 热力图的非视觉等价物：总数 + 最活跃的一天（格子不逐日进 Tab 序列） */}
+            {(() => {
+              const days = Object.entries(heat);
+              const total = days.reduce((a, [, n]) => a + n, 0);
+              const busiest = days.sort((a, b) => b[1] - a[1])[0];
+              const fmt = (k) => { const [y, m, d] = k.split('-'); return `${y} 年 ${m} 月 ${d} 日`; };
+              const text = total === 0
+                ? '近一年还没有观星记录'
+                : `近一年共 ${total} 次观星` + (busiest ? `，最活跃的一天是 ${fmt(busiest[0])} · ${busiest[1]} 次` : '');
+              return (
+                <div role="status" style={{ position: 'absolute', width: 1, height: 1, overflow: 'hidden', clip: 'rect(0 0 0 0)', clipPath: 'inset(50%)', whiteSpace: 'nowrap' }}>{text}</div>
+              );
+            })()}
           </GlassPanel>
         </div>
 

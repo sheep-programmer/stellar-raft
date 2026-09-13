@@ -6,19 +6,27 @@
      tablet  ≤ 1024px  平板 / 分屏：侧栏可折叠，右侧栏让位
      desktop  >1024px  原本的 1440×900 桌面布局
 
+   还有一个与宽度档次无关、但两处布局都要用的阈值：narrow ≤ 1180px。
+   它是「多栏还摆不摆得下」的那条线——编辑器的知识栏、列表页的六列表格，
+   都在这里让位。它比 tablet 宽：1100px 的窗口不是平板，但那张表已经塌了
+   （标题列被固定列挤成 0 宽，整整一段 721~1180px 的死区）。
+   写成断点而不是各自 matchMedia，是为了 JS 与 CSS 认同一个数：
+   html[data-narrow] 给样式用，state.narrow 给组件用，改一处两边同时动。
+
    另外提供 coarse（粗指针 = 手指）——它与宽度是两件事：外接触摸屏的大屏也是
    coarse，需要更大的点击区，但不需要单列布局。
 
    横屏矮屏（landscape 且 height ≤ 480）单独标出来：手机横过来时高度只剩一点，
    顶部条 + 底部栏会把内容挤没，这种时候两条都收起来。 */
 window.SRScreen = (function () {
-  const BP = { phone: 720, tablet: 1024, shortSide: 480 };
+  const BP = { phone: 720, tablet: 1024, narrow: 1180, shortSide: 480 };
 
   const mq = (q) => (typeof matchMedia === 'function' ? matchMedia(q) : { matches: false, addEventListener() { }, removeEventListener() { } });
 
   const queries = {
     phone: mq(`(max-width: ${BP.phone}px)`),
     tablet: mq(`(max-width: ${BP.tablet}px)`),
+    narrow: mq(`(max-width: ${BP.narrow}px)`),
     coarse: mq('(pointer: coarse)'),
     short: mq(`(max-height: ${BP.shortSide}px) and (orientation: landscape)`),
   };
@@ -26,6 +34,7 @@ window.SRScreen = (function () {
   const read = () => ({
     phone: queries.phone.matches,
     tablet: queries.tablet.matches,        // 注意：phone 也满足 tablet
+    narrow: queries.narrow.matches,        // 多栏摆不下（编辑器知识栏 / 列表六列表格让位）
     desktop: !queries.tablet.matches,
     coarse: queries.coarse.matches,
     short: queries.short.matches,
@@ -55,6 +64,7 @@ window.SRScreen = (function () {
     const el = document.documentElement;
     el.dataset.screen = state.phone ? 'phone' : (state.tablet ? 'tablet' : 'desktop');
     if (state.touch) el.dataset.pointer = 'coarse'; else delete el.dataset.pointer;
+    if (state.narrow) el.dataset.narrow = ''; else delete el.dataset.narrow;
     if (state.short) el.dataset.short = ''; else delete el.dataset.short;
   };
   applyAttrs();
@@ -78,6 +88,7 @@ window.SRScreen = (function () {
     isPhone: () => state.phone,
     isTablet: () => state.tablet,
     isTouch: () => state.touch,
+    isNarrow: () => state.narrow,
   };
 })();
 

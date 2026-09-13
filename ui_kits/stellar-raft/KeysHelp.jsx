@@ -31,6 +31,9 @@ const SR_KEY_GROUPS = [
       { keys: [SRK.mod, 'Z'], label: '撤销 · 加 ' + SRK.shift + ' 为重做' },
       { keys: [SRK.mod, 'B · I · U'], label: '选中文字 · 加粗 / 斜体 / 下划线' },
       { keys: [SRK.mod, 'K'], label: '选中文字 · 添加链接' },
+      { keys: ['[', '['], label: '链到另一颗星（搜星名 / 星域 / 标签）' },
+      { keys: ['点击'], label: '正文里的链接：星链接就地前往，外链新标签页打开' },
+      { keys: ['粘贴'], label: '选中文字时粘网址 = 加链接 · 剪贴板里是图片就直接落成图片块' },
       { keys: ['/'], label: '唤起块菜单，插入或转换块' },
       { keys: [SRK.alt, '↑', '↓'], label: '上下移动当前块' },
       { keys: ['Tab'], label: '列表块缩进 · ' + SRK.shift + 'Tab 反向' },
@@ -104,7 +107,7 @@ function KeysHelp({ onClose }) {
   return (
     <div ref={modalRef} onMouseDown={onClose} onContextMenu={(e) => e.preventDefault()}
       role="dialog" aria-modal="true" aria-label="快捷键"
-      style={{ position: 'fixed', inset: 0, zIndex: 110, background: 'rgba(3,4,12,0.55)', backdropFilter: 'blur(4px)', WebkitBackdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
+      style={{ position: 'fixed', inset: 0, zIndex: 110, background: 'rgba(3,4,12,0.55)', WebkitBackdropFilter: 'blur(4px)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
       <div onMouseDown={(e) => e.stopPropagation()}
         className="sr-modal-panel" style={{ width: 720, maxWidth: '94vw', maxHeight: '88vh', display: 'flex', animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
         <GlassPanel strong radius="lg" pad="none" glow style={{ width: '100%', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>

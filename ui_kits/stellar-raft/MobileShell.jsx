@@ -13,7 +13,7 @@ const SR_MOBILE_CSS = `
   position: absolute; left: 0; right: 0; z-index: 40;
   background: var(--glass-bg-strong);
   -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.2);
-  backdrop-filter: blur(var(--glass-blur)) saturate(1.2);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.2); backdrop-filter: blur(var(--glass-blur)) saturate(1.2);
 }
 .sr-m-top { top: 0; height: calc(var(--sr-topbar) + var(--sr-safe-top)); padding-top: var(--sr-safe-top);
   border-bottom: 1px solid var(--glass-border); display: flex; align-items: center; gap: 6; padding-left: 6px; padding-right: 6px; }
@@ -33,7 +33,7 @@ const SR_MOBILE_CSS = `
 
 /* 抽屉：遮罩淡入 + 面板滑出，跟随 reduced-motion */
 .sr-m-mask { position: fixed; inset: 0; z-index: 120; background: rgba(3,4,12,0.6);
-  -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); animation: sr-m-fade var(--dur-base) ease both; }
+  -webkit-backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); animation: sr-m-fade var(--dur-base) ease both; }
 /* 抽屉宽度：始终给右侧留一条 68px 的活口——那条缝既是「这是一层浮层、点它就关」
    的视觉交代，也让你一眼还看得见自己的星空。窄屏上 282px 会吃掉九成屏幕，
    看起来就像整页跳转，那不是抽屉该有的样子。 */
@@ -52,7 +52,7 @@ const SR_MOBILE_CSS = `
 .sr-m-sheet { position: fixed; left: 0; right: 0; bottom: 0; z-index: 130;
   padding-bottom: var(--sr-safe-bottom); border-radius: var(--r-lg) var(--r-lg) 0 0;
   background: var(--glass-bg-strong); border-top: 1px solid var(--glass-border-strong);
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.2); backdrop-filter: blur(var(--glass-blur)) saturate(1.2);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.2); -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.2); backdrop-filter: blur(var(--glass-blur)) saturate(1.2);
   box-shadow: 0 -18px 48px rgba(0,0,0,0.5); max-height: 78vh; display: flex; flex-direction: column;
   animation: sr-m-up var(--dur-base) var(--ease-flight) both; }
 @keyframes sr-m-up { from { transform: translateY(100%) } to { transform: none } }
@@ -85,7 +85,17 @@ html[data-screen="phone"] .sr-view h1 { font-size: 23px !important; }
 html[data-pointer="coarse"] .sr-hit-pad { position: relative; }
 html[data-pointer="coarse"] .sr-hit-pad::after {
   content: ''; position: absolute; top: 50%; left: 50%;
-  width: 34px; height: 34px; transform: translate(-50%, -50%);
+  width: 44px; height: 44px; transform: translate(-50%, -50%);
+}
+
+/* iOS 的一条硬规矩：聚焦一个字号小于 16px 的输入框，Safari 会把整页放大去凑那 16px，
+   而且**不会自己缩回来**——于是点一下搜索框，整个星图就歪在一边，还得自己双指捏回去。
+   站里的输入框本来是 13/14/14.5px（桌面上刚好），在触摸端一律抬到 16px：
+   这不是为了好看，是为了页面别自己动。行高一并给足，否则 16px 的字会顶到边框。 */
+html[data-pointer="coarse"] input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+html[data-pointer="coarse"] textarea,
+html[data-pointer="coarse"] select {
+  font-size: 16px !important; line-height: 1.45;
 }
 
 /* 键盘提示：手机上没有物理键盘，印一枚「空格 / ⌘K」只会让人去找一个
@@ -105,6 +115,11 @@ html[data-screen="phone"] .sr-modal-panel {
 }
 html[data-screen="phone"] .sr-modal-mask { padding: 0 !important; align-items: stretch !important; }
 
+/* 星际漫游的兑换行：密文输入框与「连接」并排时，前者在 390px 上只剩两百像素，
+   14 个字符的密文本身都排不下。窄屏拆两行，各自占满。 */
+html[data-screen="phone"] .sr-visit-redeem { flex-wrap: wrap; }
+html[data-screen="phone"] .sr-visit-redeem > * { flex: 1 1 100% !important; }
+
 /* 设置页：左侧 168px 的分区导航在手机上横过来，变成顶部一条可横滑的标签行 */
 html[data-screen="phone"] .sr-set-body { flex-direction: column !important; }
 html[data-screen="phone"] .sr-set-nav {
@@ -119,6 +134,14 @@ html[data-screen="phone"] .sr-cmd-panel { width: 100% !important; max-width: 100
 html[data-screen="phone"] .sr-cmd-mask { padding-top: calc(var(--sr-safe-top) + 8px) !important; padding-left: 8px; padding-right: 8px; }
 `;
 
+/* 这份样式表从前只由下面三个组件在 useEffect 里注入——而它们只在 phone 断点挂载。
+   于是整份表在别的尺寸上根本不存在，后果是两头的：
+     · 桌面：`.sr-touch-only { display: none }` 不存在，黑洞的提示条把两句互斥的话
+       一起印了出来——「滚轮缩放双指捏合缩放」，连在一起，谁都读不通；
+     · 平板 / 触摸大屏：`data-pointer="coarse"` 明明是 true，可 `.sr-hit-pad` 的热区、
+       `.sr-kbd-only` 的隐藏、输入框 16px 那条全是空文——iPad 什么触摸照顾都没享受到。
+   表里每一条都自带 html[data-screen] / html[data-pointer] 的前缀，本来就是自己看门的，
+   所以正确的做法是加载即注入，让选择器去决定生效与否，而不是由「谁挂载了」决定。 */
 function injectMobileCss() {
   if (typeof document === 'undefined' || document.getElementById('sr-mobile-css')) return;
   const s = document.createElement('style');
@@ -227,3 +250,4 @@ function MobileSheet({ open, onClose, title, children, footer }) {
 }
 
 window.SRKit = Object.assign(window.SRKit || {}, { MobileTopBar, MobileTabBar, MobileDrawer, MobileSheet, injectMobileCss });
+injectMobileCss();   // 加载即注入：见上，别再让「谁挂载了」决定触摸端有没有样式

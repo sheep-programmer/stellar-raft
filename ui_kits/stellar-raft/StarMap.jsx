@@ -127,8 +127,10 @@ function Connections({ stars, cons, dim, k, vis }) {
 }
 
 /* faint glowing domain halo + clickable name behind each constellation cluster */
-function DomainHalos({ stars, cons, k, onDomainDown, onDomainKey }) {
+function DomainHalos({ stars, cons, k, touch, onDomainDown, onDomainKey }) {
   const nameOpacity = clamp(1.4 - k, 0.25, 1); // semantic zoom: names louder when far
+  // 星域主星 30px，缩放后同样按不着；和知识星用同一个算法撑到屏幕 44px
+  const hit = touch ? Math.max(30, 44 / Math.max(0.2, k)) : 0;
   return (
     <React.Fragment>
       {cons.map(c => {
@@ -151,6 +153,9 @@ function DomainHalos({ stars, cons, k, onDomainDown, onDomainKey }) {
               onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onDomainKey(c); } }}
               title={`星域「${c.name}」· 拖动可整体移动 · 点击新建知识星 · 右键更多`}
               style={{ position: 'absolute', left: cx, top: cy, transform: 'translate(-50%, calc(-50% + 14px))', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 9, cursor: 'grab', zIndex: 3 }}>
+              {hit > 30 && (
+                <span aria-hidden="true" style={{ position: 'absolute', top: 15, left: '50%', width: hit, height: hit, transform: 'translate(-50%, -50%)', borderRadius: '50%', zIndex: 0 }} />
+              )}
               <span className="sr-breathe" style={{
                 width: 30, height: 30, borderRadius: '50%', flex: 'none',
                 background: 'radial-gradient(circle at 38% 34%, #fff6e0 0%, #ffd58a 32%, #ff9d52 64%, #e8623a 100%)',
@@ -313,26 +318,10 @@ function PopMenu({ x, y, width = 228, header, footer, items, onClose }) {
   );
 }
 
-/* in-canvas confirm dialog (no browser confirm/alert) */
-function ConfirmDialog({ message, confirmLabel, onYes, onClose }) {
-  React.useEffect(() => { const k = (e) => { if (e.key === 'Escape' && !e.defaultPrevented) { e.preventDefault(); onClose(); } }; document.addEventListener('keydown', k); return () => document.removeEventListener('keydown', k); }, []);
-  return (
-    <div onPointerDown={onClose} onContextMenu={(e) => e.preventDefault()} style={{ position: 'fixed', inset: 0, zIndex: 120, background: 'rgba(3,4,12,0.55)', backdropFilter: 'blur(3px)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <div onPointerDown={(e) => e.stopPropagation()} style={{ width: 348, maxWidth: '90vw', animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
-        <GlassPanel strong radius="lg" pad="md" glow>
-          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12, marginBottom: 18 }}>
-            <span style={{ flex: 'none', width: 34, height: 34, borderRadius: '50%', background: 'rgba(232,145,122,0.14)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Icon name="alert-triangle" size={18} color="var(--danger)" /></span>
-            <div style={{ fontSize: 14, lineHeight: 1.65, color: 'var(--text-1)', paddingTop: 5 }}>{message}</div>
-          </div>
-          <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end' }}>
-            <Button size="sm" autoFocus onClick={onClose}>取消</Button>
-            <button type="button" className="sr-focus-ring" onClick={onYes} style={{ height: 32, padding: '0 16px', borderRadius: 'var(--r-pill)', border: '1px solid rgba(232,145,122,0.5)', background: 'rgba(232,145,122,0.16)', color: 'var(--danger)', fontSize: 13, cursor: 'pointer', fontFamily: 'var(--font-sans)' }}>{confirmLabel || '删除'}</button>
-          </div>
-        </GlassPanel>
-      </div>
-    </div>
-  );
-}
+/* 确认弹窗用全站共用的那一个（EditorMenus 注册进 SRKit，ListView / BlackHole /
+   设置页同样这么取）。这里原本另写了一份同名的 ConfirmDialog —— 而浏览器里所有
+   .jsx 共享一个全局作用域（Babel standalone 把转译产物塞进普通 <script>），
+   后加载的 EditorMenus 早就把它整个盖掉了，那份副本从来没有生效过。 */
 
 function StarMap({ selected, onSelect, onOpenEditor, onFeynman, onAerial, on3D, igniteId, focusReq }) {
   const D = window.SR_DATA;
@@ -349,7 +338,8 @@ function StarMap({ selected, onSelect, onOpenEditor, onFeynman, onAerial, on3D, 
   const [selScreen, setSelScreen] = React.useState(null);
   const [starMenu, setStarMenu] = React.useState(null); // {x,y,id}
   const [gift, setGift] = React.useState(null);          // {x,y,id,label} 赠星好友选择器
-  const [confirm, setConfirm] = React.useState(null);   // {message, confirmLabel, onYes}
+  const [confirm, setConfirm] = React.useState(null);
+  const SRConfirmDialog = window.SRKit && window.SRKit.ConfirmDialog;   // {message, confirmLabel, onYes}
   // 轻量操作反馈走 DS 的 toast()：自带 role=status/aria-live 栈，读屏也听得到
   const flash = (msg) => toast(msg);
 
@@ -403,8 +393,16 @@ function StarMap({ selected, onSelect, onOpenEditor, onFeynman, onAerial, on3D, 
       const k = clamp(Math.min(w / WORLD.w, h / WORLD.h) * 1.5, 0.34, 0.82);
       return { k, x: w / 2 - WORLD.w / 2 * k, y: h / 2 - WORLD.h / 2 * k };
     }
-    const minX = Math.min(...boxes.map(b => b.x - b.r)), maxX = Math.max(...boxes.map(b => b.x + b.r));
-    const minY = Math.min(...boxes.map(b => b.y - b.r)), maxY = Math.max(...boxes.map(b => b.y + b.r));
+    /* 一趟求包围盒。原来是四次 spread —— Math.min(...arr) 会把整个数组铺成实参，
+       星一多就是「Maximum call stack size exceeded」，而这是落地时必经的一步；
+       顺带省掉四个和星数一样长的中间数组。 */
+    let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+    for (const b of boxes) {
+      if (b.x - b.r < minX) minX = b.x - b.r;
+      if (b.x + b.r > maxX) maxX = b.x + b.r;
+      if (b.y - b.r < minY) minY = b.y - b.r;
+      if (b.y + b.r > maxY) maxY = b.y + b.r;
+    }
     const cx = (minX + maxX) / 2, cy = (minY + maxY) / 2;
     /* 上限刻意不超过从前那个写死的 0.82：取景只该把镜头往后拉，不该往前推。
        星空很小（只有一两颗星）时若按包围盒放大，落地就是一张糊在脸上的近景，
@@ -520,6 +518,10 @@ function StarMap({ selected, onSelect, onOpenEditor, onFeynman, onAerial, on3D, 
 
   React.useEffect(() => {
     const move = (e) => {
+      /* 拖出浏览器窗口再松手：window 收不到那次 pointerup，拖拽会卡死
+         （光标永久 grabbing、回窗后画布跟着光标空跑）。鼠标移动事件带着
+         buttons 状态——拖着的指针一颗键都没按了，就按「已抬起」收尾。 */
+      if (e.pointerType === 'mouse' && e.buttons === 0 && drag.current) { up(e); return; }
       // 先更新这根指针的位置：捏合要靠两根指针的实时间距
       if (touches.current.has(e.pointerId)) touches.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
       const p = pinch.current;
@@ -562,7 +564,13 @@ function StarMap({ selected, onSelect, onOpenEditor, onFeynman, onAerial, on3D, 
     const up = (e) => {
       touches.current.delete(e.pointerId);
       if (touches.current.size < 2) pinch.current = null;   // 松开一根手指，捏合结束
-      const d = drag.current; drag.current = null;
+      /* 只有「发起拖拽的那根指针的左键抬起」才结束拖拽：
+         - 鼠标是单指针：右键/中键的 pointerup（e.button!==0）不该腰斩左键平移；
+         - 触摸是多指针：指 B 点一下 HUD 抬起，不该杀掉指 A 正在拖的星。 */
+      if (e.type === 'pointerup' && e.button !== 0) return;
+      const d = drag.current;
+      if (d && d.pid != null && e.pointerId !== d.pid) return;
+      drag.current = null;
       if (longPress.current) { clearTimeout(longPress.current); longPress.current = null; }
       if (d && d.mode === 'domain' && !d.moved && e.button === 0) { if (pickRef.current) pickRef.current(d.con, e.clientX, e.clientY); }
       else if (d && d.mode === 'pan' && !d.moved && e.button === 0) onSelect(null);
@@ -574,6 +582,10 @@ function StarMap({ selected, onSelect, onOpenEditor, onFeynman, onAerial, on3D, 
     return () => {
       window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', up);
       window.removeEventListener('pointercancel', up);
+      /* 卸载时把全局痕迹收干净：按住画布切走视图（快捷键换视图会卸载本组件），
+         光标不能永远停在 grabbing，长按计时器也不能在卸载后对着虚空触发 */
+      document.body.style.cursor = '';
+      if (longPress.current) { clearTimeout(longPress.current); longPress.current = null; }
     };
   }, [onSelect]);
 
@@ -620,7 +632,7 @@ function StarMap({ selected, onSelect, onOpenEditor, onFeynman, onAerial, on3D, 
         紧接着又会把计时重新装上：双指停顿半秒，「在此创建」菜单就会中途
         弹出来打断缩放。） */
     if (touches.current.size >= 2) { drag.current = null; return; }
-    drag.current = { mode: 'pan', sx: e.clientX, sy: e.clientY, ox: view.x, oy: view.y, moved: false };
+    drag.current = { mode: 'pan', pid: e.pointerId, sx: e.clientX, sy: e.clientY, ox: view.x, oy: view.y, moved: false };
     document.body.style.cursor = 'grabbing';
     armLongPress(e);
   };
@@ -629,13 +641,13 @@ function StarMap({ selected, onSelect, onOpenEditor, onFeynman, onAerial, on3D, 
     if (e.button !== 0) return;
     setMenu(null); setNaming(null); setStarMenu(null);
     const members = stars.filter(s => s.con === con.id).map(s => ({ id: s.id, swx: s.wx, swy: s.wy }));
-    drag.current = { mode: 'domain', con, conId: con.id, members, cwx: con.wx, cwy: con.wy, sx: e.clientX, sy: e.clientY, moved: false };
+    drag.current = { mode: 'domain', pid: e.pointerId, con, conId: con.id, members, cwx: con.wx, cwy: con.wy, sx: e.clientX, sy: e.clientY, moved: false };
     document.body.style.cursor = 'grabbing';
   };
   const starDown = (e, s) => {
     if (e.button !== 0) return; e.stopPropagation();
     onSelect(s.id);
-    drag.current = { mode: 'star', id: s.id, sx: e.clientX, sy: e.clientY, swx: s.wx, swy: s.wy, moved: false };
+    drag.current = { mode: 'star', pid: e.pointerId, id: s.id, sx: e.clientX, sy: e.clientY, swx: s.wx, swy: s.wy, moved: false };
   };
   const onContext = (e) => {
     e.preventDefault(); const w = toWorld(e.clientX, e.clientY);
@@ -658,7 +670,10 @@ function StarMap({ selected, onSelect, onOpenEditor, onFeynman, onAerial, on3D, 
   };
   const startRename = (id, x, y, label) => { setNaming({ kind: 'rename', x, y, id }); setDraftName(label || ''); };
   const doCreateStar = (label, wx, wy, dom) => {
-    const id = 's' + Math.random().toString(36).slice(2, 6);
+    /* 4 位 base36 只有 167 万个值，500 颗星的累计碰撞率就到 7%（生日界）——
+       撞上是静默覆盖。8 位 + 对现有 id 查重，把这件事压到可以忽略。 */
+    let id;
+    do { id = 's' + Math.random().toString(36).slice(2, 10); } while (D.byId[id]);
     const ns = {
       id, con: dom.id, x: wx / WORLD.w * 100, y: wy / WORLD.h * 100, strength: 0.5, importance: 1, label,
       summary: '', tags: ['草稿'],   // 摘要留空：编辑器里是灰色占位符，点击即写，不用先删一句假文字
@@ -692,7 +707,8 @@ function StarMap({ selected, onSelect, onOpenEditor, onFeynman, onAerial, on3D, 
     } else {
       const dn = name || '新星域';
       const color = NEW_COLORS[D.constellations.length % NEW_COLORS.length];
-      const cid = 'c' + Math.random().toString(36).slice(2, 6);
+      let cid;
+      do { cid = 'c' + Math.random().toString(36).slice(2, 10); } while (D.constellations.some(c => c.id === cid));
       D.constellations.push({ id: cid, name: dn, color, health: 0.5, count: 0 });
       setCons(cs => [...cs, { id: cid, name: dn, color, wx: naming.wx, wy: naming.wy }]);
     }
@@ -741,6 +757,10 @@ function StarMap({ selected, onSelect, onOpenEditor, onFeynman, onAerial, on3D, 
   const dense = stars.length > 120;
   const showLabels = !dense || view.k >= 0.9;
   const empty = stars.length === 0 && cons.length === 0;
+  /* 手指的热区：星核在世界坐标里只有 12px，整层还 scale(view.k)，
+     所以要除回去——44 是 Apple 给的下限，除完是「屏幕上的 44px」。
+     只给触摸端：鼠标本来就点得准，给它加一圈反而会抢掉画布的平移。 */
+  const touchHit = scr.touch ? 44 / Math.max(0.2, view.k) : 0;
 
   return (
     <div ref={ref} onPointerDown={(e) => { trackDown(e); bgDown(e); }} onContextMenu={onContext}
@@ -753,7 +773,9 @@ function StarMap({ selected, onSelect, onOpenEditor, onFeynman, onAerial, on3D, 
 
       {/* world layer */}
       <div style={{ position: 'absolute', left: 0, top: 0, transformOrigin: '0 0', transform: `translate(${view.x}px, ${view.y}px) scale(${view.k})`, willChange: 'transform' }}>
-        <DomainHalos stars={stars} cons={cons} k={view.k} onDomainDown={domainDown} onDomainKey={onDomainKey} />
+        {/* 主星的指针也要登记进 touches：第一指按在主星上、第二指落空白处时，
+            不登记的话 touches 只有 1，双指捏合永不启动，还会变成两指各拖各的 */}
+        <DomainHalos stars={stars} cons={cons} k={view.k} touch={scr.touch} onDomainDown={(e, c) => { trackDown(e); domainDown(e, c); }} onDomainKey={onDomainKey} />
         <Connections stars={stars} cons={cons} dim={!!sel} k={view.k} vis={vis} />
         {stars.map(s => {
           if (!vis(s.wx, s.wy) && selected !== s.id) return null; // 视口外剔除
@@ -781,6 +803,7 @@ function StarMap({ selected, onSelect, onOpenEditor, onFeynman, onAerial, on3D, 
                 键盘也能走完「选中星 → 摘要卡 → 费曼点亮」的闭环。 */}
             <StarNode strength={s.id === igniteId ? 0.96 : s.strength} importance={s.importance}
               label={showLabels || selected === s.id ? s.label : undefined}
+              hit={touchHit}
               onClick={() => onSelect(s.id)}
               selected={selected === s.id} style={{ left: 0, top: 0, transform: 'translate(-50%, calc(-50% + 11.5px))', cursor: 'grab', opacity: sel && selected !== s.id ? 0.45 : 1, transition: 'opacity var(--dur-base)' }} />
           </div>
@@ -896,7 +919,7 @@ function StarMap({ selected, onSelect, onOpenEditor, onFeynman, onAerial, on3D, 
         onClose={() => setGift(null)}
         items={friends.map(f => ({ icon: 'user-round', label: f.name, onClick: () => giftStar(f, gift.id) }))} />}
 
-      {confirm && <ConfirmDialog message={confirm.message} confirmLabel={confirm.confirmLabel} onYes={() => { confirm.onYes(); setConfirm(null); }} onClose={() => setConfirm(null)} />}
+      {confirm && SRConfirmDialog && <SRConfirmDialog message={confirm.message} confirmLabel={confirm.confirmLabel} onYes={() => { confirm.onYes(); setConfirm(null); }} onClose={() => setConfirm(null)} />}
 
       {naming && (() => {
         const meta = {
@@ -906,7 +929,7 @@ function StarMap({ selected, onSelect, onOpenEditor, onFeynman, onAerial, on3D, 
           renameDomain: { title: '重命名星域', ph: '输入新名字…', ok: '保存' },
         }[naming.kind || 'domain'];
         return (
-        <div style={{ position: 'fixed', left: Math.min(naming.x, window.innerWidth - 240), top: Math.min(naming.y, window.innerHeight - 130), zIndex: 60, width: 220 }} onPointerDown={(e) => e.stopPropagation()}>
+        <div style={{ position: 'fixed', left: Math.max(8, Math.min(naming.x, window.innerWidth - 240)), top: Math.max(8, Math.min(naming.y, window.innerHeight - 130)), zIndex: 60, width: 220 }} onPointerDown={(e) => e.stopPropagation()}>
           <GlassPanel strong radius="md" pad="sm" glow>
             <div style={{ fontSize: 11, color: 'var(--text-3)', marginBottom: 7 }}>{meta.title}</div>
             <input autoFocus className="sr-focus-ring" value={draftName} onChange={(e) => setDraftName(e.target.value)}

@@ -153,6 +153,8 @@ function ProviderTabs({ value, onChange }) {
 function ModelDropdown({ value, onChange, models }) {
   const [open, setOpen] = React.useState(false);
   const ref = React.useRef(null);
+  const triggerRef = React.useRef(null);
+  const listRef = React.useRef(null);
   const customEntry = { id: '__custom', name: '自定义模型 ID', tier: '自定义', desc: '手动填写任意模型标识（如网关映射的模型名）', speed: '—', cost: '—' };
   const list = [...models, customEntry];
   const isPreset = models.some(m => m.id === value);
@@ -165,10 +167,32 @@ function ModelDropdown({ value, onChange, models }) {
     return () => document.removeEventListener('mousedown', close);
   }, [open]);
 
+  /* 键盘路径（menu 模式）：打开时焦点落到当前选中项；↑↓ 在选项间移动，
+     Enter/Space 选定，Esc 关闭并把焦点还给触发钮。选项 tabIndex=-1——
+     焦点由方向键程序化管理，不给外层焦点圈禁添一串多余 Tab 停靠点。 */
+  React.useEffect(() => {
+    if (!open || !listRef.current) return;
+    const cur2 = listRef.current.querySelector('[aria-selected="true"]') || listRef.current.querySelector('[data-oid]');
+    if (cur2) cur2.focus();
+  }, [open]);
+  const onOptKey = (e, i, id) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onChange(id === '__custom' ? '' : id); setOpen(false); if (triggerRef.current) triggerRef.current.focus(); }
+    else if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      const next = listRef.current && listRef.current.querySelector(`[data-oid="${e.key === 'ArrowDown' ? i + 1 : i - 1}"]`);
+      if (next) next.focus();
+    } else if (e.key === 'Escape') {
+      e.preventDefault(); e.stopPropagation();
+      setOpen(false); if (triggerRef.current) triggerRef.current.focus();
+    }
+  };
+
   return (
     <div ref={ref} style={{ position: 'relative' }}>
       <button
+        ref={triggerRef}
         type="button" onClick={() => setOpen(o => !o)} aria-haspopup="listbox" aria-expanded={open}
+        onKeyDown={(e) => { if (!open && (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); setOpen(true); } }}
         style={{
           width: '100%', textAlign: 'left', cursor: 'pointer',
           display: 'flex', alignItems: 'center', gap: 12, padding: '12px 14px',
@@ -193,12 +217,13 @@ function ModelDropdown({ value, onChange, models }) {
       {open && (
         <div style={{ position: 'absolute', top: 'calc(100% + 6px)', left: 0, right: 0, zIndex: 5, animation: 'sr-cardin var(--dur-fast) var(--ease-flight) both' }}>
           <GlassPanel strong radius="md" pad="none" glow style={{ overflow: 'hidden' }}>
-            <div role="listbox" style={{ padding: 6 }}>
-              {list.map(m => {
+            <div role="listbox" ref={listRef} style={{ padding: 6 }}>
+              {list.map((m, i) => {
                 const on = m.id === '__custom' ? !isPreset : m.id === value;
                 return (
-                  <div key={m.id} role="option" aria-selected={on}
+                  <div key={m.id} role="option" aria-selected={on} tabIndex={-1} data-oid={i}
                     onClick={() => { onChange(m.id === '__custom' ? '' : m.id); setOpen(false); }}
+                    onKeyDown={(e) => onOptKey(e, i, m.id)}
                     onMouseEnter={(e) => { if (!on) e.currentTarget.style.background = 'rgba(159,198,255,0.08)'; }}
                     onMouseLeave={(e) => { if (!on) e.currentTarget.style.background = 'transparent'; }}
                     style={{
@@ -293,7 +318,7 @@ function AIConfig({ onClose }) {
       role="dialog" aria-modal="true" aria-label="AI 配置"
       style={{
         position: 'fixed', inset: 0, zIndex: 100, background: 'rgba(3,4,12,0.58)',
-        backdropFilter: 'blur(3px)', WebkitBackdropFilter: 'blur(3px)',
+        WebkitBackdropFilter: 'blur(3px)', backdropFilter: 'blur(3px)',
         display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: '7vh 20px 5vh',
       }}
     >
@@ -341,6 +366,7 @@ function AIConfig({ onClose }) {
                       placeholder={provider.baseUrl || 'https://your-gateway.example.com/v1'}
                       icon="globe"
                       size="md"
+                      aria-label="Base URL"
                       style={{ flex: 1, fontFamily: 'var(--font-mono)' }}
                     />
                     {baseUrlDirty && (
@@ -359,6 +385,7 @@ function AIConfig({ onClose }) {
                       icon="lock"
                       type={showKey ? 'text' : 'password'}
                       size="md"
+                      aria-label="API Key"
                       style={{ flex: 1 }}
                     />
                     <IconButton name={showKey ? 'eye-off' : 'eye'} title={showKey ? '隐藏密钥' : '显示密钥'} onClick={() => setShowKey(s => !s)} />
@@ -373,17 +400,17 @@ function AIConfig({ onClose }) {
                     {test.state === 'testing' ? '测试中…' : '测试连接'}
                   </Button>
                   {test.state === 'ok' && (
-                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12, color: 'var(--gold)' }}>
+                    <span role="status" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12, color: 'var(--gold)' }}>
                       <Icon name="circle-check" size={14} color="var(--gold)" />{test.msg}
                     </span>
                   )}
                   {test.state === 'err' && (
-                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12, color: 'var(--danger)' }}>
+                    <span role="alert" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12, color: 'var(--danger)' }}>
                       <Icon name="circle-alert" size={14} color="var(--danger)" />{test.msg}
                     </span>
                   )}
                   {saved && test.state === 'idle' && (
-                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12, color: 'var(--gold)' }}>
+                    <span role="status" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12, color: 'var(--gold)' }}>
                       <Icon name="shield-check" size={14} color="var(--gold)" />配置已存于本地浏览器
                     </span>
                   )}
@@ -435,7 +462,9 @@ function AIConfig({ onClose }) {
                 {REVIEW_STRATEGIES.map(s => {
                   const on = s.id === cfg.strategy;
                   return (
-                    <div key={s.id} role="radio" aria-checked={on} onClick={() => set({ strategy: s.id })}
+                    <div key={s.id} role="radio" aria-checked={on} tabIndex={0} className="sr-focus-ring"
+                      onClick={() => set({ strategy: s.id })}
+                      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); set({ strategy: s.id }); } }}
                       style={{
                         display: 'flex', alignItems: 'flex-start', gap: 11, padding: '11px 13px', cursor: 'pointer',
                         borderRadius: 'var(--r-md)', border: '1px solid',

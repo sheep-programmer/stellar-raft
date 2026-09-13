@@ -100,6 +100,8 @@ function SRSegment({ options, value, onChange }) {
 
 function Settings({ onClose, theme, onToggleTheme, onReplayGuide, onOpenLogin }) {
   const dawn = theme === 'dawn';
+  // 危险操作复用 EditorMenus 的 ConfirmDialog（danger 样式）；与 ListView / BlackHole 同一取法
+  const ConfirmDialog = window.SRKit && window.SRKit.ConfirmDialog;
   // 未登录打开设置直接落在「账户」页——那里有醒目的「登录 / 注册」，入口不因胶囊改开设置而变深
   const [tab, setTab] = React.useState(() => (window.SR_DATA.account.registered ? 'profile' : 'account'));
   const [toast, setToast] = React.useState(null);
@@ -147,6 +149,9 @@ function Settings({ onClose, theme, onToggleTheme, onReplayGuide, onOpenLogin })
     try {
       let entries = [];
       for (const f of files) {
+        // 64MB 与 vault.js 解压上限同口径：纯文本笔记仓库远到不了这里，
+        // 超出的东西读进来只会先把标签页内存吃光
+        if (f.size > 64 * 1024 * 1024) { flashToast(`「${f.name}」超过 64MB，不像是笔记仓库`); continue; }
         if (/\.zip$/i.test(f.name)) {
           entries = entries.concat(await window.SRVault.readZip(new Uint8Array(await f.arrayBuffer())));
         } else if (/\.md$/i.test(f.name)) {
@@ -212,7 +217,7 @@ function Settings({ onClose, theme, onToggleTheme, onReplayGuide, onOpenLogin })
       await window.SRNet.auth.changePassword({ old: oldPw, new: newPw });
       setPwOpen(false); setOldPw(''); setNewPw('');
       flashToast('密码已更新');
-      // 管理员刚换掉出厂密码：广播出去，管理台顶部那条警告随即消失
+      // 管理员刚换掉出厂密码：广播出去，管理台顶部那条警告随即消失（交接卡走的是同一个标记）
       const A = window.SR_DATA && window.SR_DATA.account;
       if (A && A.defaultPass) { A.defaultPass = false; window.dispatchEvent(new CustomEvent('sr-account')); }
     } catch (err) {
@@ -244,7 +249,7 @@ function Settings({ onClose, theme, onToggleTheme, onReplayGuide, onOpenLogin })
   return (
     <div ref={modalRef} onMouseDown={onClose} onContextMenu={(e) => e.preventDefault()}
       role="dialog" aria-modal="true" aria-label="设置"
-      style={{ position: 'fixed', inset: 0, zIndex: 110, background: 'rgba(3,4,12,0.55)', backdropFilter: 'blur(4px)', WebkitBackdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
+      style={{ position: 'fixed', inset: 0, zIndex: 110, background: 'rgba(3,4,12,0.55)', WebkitBackdropFilter: 'blur(4px)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
       <div onMouseDown={(e) => e.stopPropagation()}
         className="sr-modal-panel" style={{ width: 760, maxWidth: '94vw', height: 560, maxHeight: '92vh', animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
         <GlassPanel strong radius="lg" pad="none" glow style={{ height: '100%', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
@@ -308,13 +313,13 @@ function Settings({ onClose, theme, onToggleTheme, onReplayGuide, onOpenLogin })
 
                   <div style={{ paddingTop: 16 }}>
                     <SRSectionTitle>昵称</SRSectionTitle>
-                    <Input value={nickname} onChange={(e) => setNickname(e.target.value)} placeholder="你的名字" icon="user" />
+                    <Input value={nickname} onChange={(e) => setNickname(e.target.value)} placeholder="你的名字" icon="user" aria-label="昵称" />
                   </div>
 
                   <div style={{ paddingTop: 16 }}>
                     <SRSectionTitle>个人简介</SRSectionTitle>
                     <textarea value={bio} onChange={(e) => setBio(e.target.value)} rows={3}
-                      placeholder="用一两句话描述你的星空…"
+                      placeholder="用一两句话描述你的星空…" aria-label="个人简介"
                       onContextMenu={(e) => e.stopPropagation()}
                       style={{
                         width: '100%', boxSizing: 'border-box', resize: 'vertical', minHeight: 72,
@@ -370,7 +375,7 @@ function Settings({ onClose, theme, onToggleTheme, onReplayGuide, onOpenLogin })
                       options={[{ value: 'daily', label: '每日' }, { value: 'weekly', label: '每周' }, { value: 'smart', label: '智能' }]} />
                   </SRRow>
                   <SRRow title="提醒时间" hint="安静的时刻，适合回望一天。">
-                    <input type="time" value={remindTime} onChange={(e) => setRemindTime(e.target.value)} disabled={!remind}
+                    <input type="time" value={remindTime} onChange={(e) => setRemindTime(e.target.value)} disabled={!remind} aria-label="提醒时间"
                       style={{
                         height: 30, padding: '0 10px', borderRadius: 'var(--r-sm)', outline: 'none',
                         background: 'var(--input-bg, rgba(3,4,12,0.45))', border: '1px solid var(--glass-border-strong)',
@@ -566,14 +571,14 @@ function Settings({ onClose, theme, onToggleTheme, onReplayGuide, onOpenLogin })
         </GlassPanel>
       </div>
 
-      {confirm && window.SRKit.ConfirmDialog && (
-        <window.SRKit.ConfirmDialog message={confirm.message} confirmLabel={confirm.confirmLabel}
+      {confirm && ConfirmDialog && (
+        <ConfirmDialog message={confirm.message} confirmLabel={confirm.confirmLabel}
           onYes={() => { confirm.onYes(); setConfirm(null); }} onClose={() => setConfirm(null)} />
       )}
 
       {/* toast */}
       {toast && (
-        <div onMouseDown={(e) => e.stopPropagation()}
+        <div role="status" onMouseDown={(e) => e.stopPropagation()}
           style={{ position: 'fixed', bottom: 26, left: '50%', transform: 'translateX(-50%)', zIndex: 130, animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
           <GlassPanel strong radius="pill" pad="sm" glow>
             <div style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '2px 8px' }}>

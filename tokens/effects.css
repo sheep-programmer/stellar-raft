@@ -47,6 +47,8 @@
 
 .sr-glass {
   background: var(--glass-bg);
+  /* 前缀版给旧一点的 iOS Safari（16/17）：没有它，整块玻璃会直接失去模糊，
+     而玻璃拟态正是这套设计的地基——这不是「少个效果」，是换了一副面孔。 */
   -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.2);
   backdrop-filter: blur(var(--glass-blur)) saturate(1.2);
   border: 1px solid var(--glass-border);

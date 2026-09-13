@@ -298,3 +298,76 @@ test('hasSubstance：摘要去空白 ≥20 字 或 带文本的非 rich/divider 
   assert.equal(D.hasSubstance(mk('', [{ id: 'm', type: 'math', tex: 'E=mc^2' }, b('p', '正文一句')])), true);
   assert.equal(D.hasSubstance(null), false);
 });
+
+/* ------------------------------ 星域读数 ------------------------------ */
+
+/* syncCounts 改写过一次：原来是「对每个星域把全部星过一遍」，而且过三遍
+   （filter + reduce + filter）——20 个星域 2000 颗星就是 12 万次比较，还挂在
+   每次切视图与每分钟心跳上。现在对星走一趟按星域累加。
+   这条测试认的是结果，不是写法：三个派生值都必须和逐个数出来的一致。 */
+test('星域读数：成员数 / 健康度 / 点亮占比，与逐个数出来的一致', () => {
+  const D = fresh();
+  // 造一个干净的局面：两个星域，成员数、亮度、点亮状态都不一样
+  D.constellations.length = 0;
+  D.stars.length = 0;
+  Object.keys(D.byId).forEach(k => delete D.byId[k]);
+  D.constellations.push({ id: 'ca', name: '域 A', color: '#9fc6ff' });
+  D.constellations.push({ id: 'cb', name: '域 B', color: '#ffd98a' });
+  D.constellations.push({ id: 'cc', name: '空域', color: '#ffd98a' });   // 一个成员都没有
+
+  makeStar(D, 'a1', { con: 'ca', S: 30, daysAgo: 0, lit: Date.now() });      // 亮且点亮
+  makeStar(D, 'a2', { con: 'ca', S: 30, daysAgo: 1 });                        // 亮但没点亮
+  makeStar(D, 'b1', { con: 'cb', S: 10, daysAgo: 40, lit: Date.now() });      // 久未复习：会熄灭
+  makeStar(D, 'orphan', { con: '不存在的星域', S: 10, daysAgo: 0 });          // 孤儿星：不该算进任何星域
+  D.refreshMemory();
+
+  const byId = Object.fromEntries(D.constellations.map(c => [c.id, c]));
+  const manual = (cid) => {
+    const members = D.stars.filter(s => s.con === cid);
+    return {
+      count: members.length,
+      health: members.length ? members.reduce((a, s) => a + s.strength, 0) / members.length : 0,
+      litRatio: members.length ? members.filter(s => D.isLit(s)).length / members.length : 0,
+    };
+  };
+  for (const cid of ['ca', 'cb', 'cc']) {
+    const m = manual(cid);
+    assert.equal(byId[cid].count, m.count, cid + ' 成员数');
+    close(byId[cid].health, m.health, 1e-9, cid + ' 健康度');
+    close(byId[cid].litRatio, m.litRatio, 1e-9, cid + ' 点亮占比');
+  }
+  assert.equal(byId.cc.count, 0, '没有成员的星域读数归零，而不是 NaN');
+  assert.equal(byId.cc.health, 0);
+  assert.equal(byId.cb.litRatio, 0, '放了 40 天的那颗已经熄灭，不再计入点亮');
+  // 孤儿星既不该让哪个星域凭空多一个成员，也不该让总数对不上
+  assert.equal(D.constellations.reduce((a, c) => a + c.count, 0), 3, '孤儿星不计入任何星域');
+});
+
+/* ——— 两端同参 ———
+   同一颗星，主人看到的亮度与访客看到的亮度必须是同一个数：主人那边由
+   data.js 算，访客那边由 server/core.js 算，两份代码各写各的常数。
+   一旦哪边被人顺手调了一下（比如把熄灭阈值从 0.35 挪到 0.3），就会出现
+   「我这儿还亮着，朋友那儿已经熄了」——而这种偏差不会报错，只会让人觉得
+   哪里不对劲。所以把它钉在这里。 */
+test('记忆模型的常数与公式：客户端与服务端逐项对齐', () => {
+  const CORE = fs.readFileSync(path.join(ROOT, 'server', 'core.js'), 'utf8');
+  const num = (src, re, what) => {
+    const m = src.match(re);
+    assert.ok(m, '没找到' + what);
+    return Number(m[1]);
+  };
+  assert.equal(num(CODE, /rMin:\s*([\d.]+)/, '客户端 rMin'), num(CORE, /rMin:\s*([\d.]+)/, '服务端 rMin'));
+  assert.equal(num(CODE, /rMax:\s*([\d.]+)/, '客户端 rMax'), num(CORE, /rMax:\s*([\d.]+)/, '服务端 rMax'));
+  assert.equal(num(CODE, /emberR:\s*([\d.]+)/, '客户端 emberR'), num(CORE, /emberR:\s*([\d.]+)/, '服务端 emberR'));
+  assert.equal(num(CODE, /const DAY = (\d+)/, '客户端 DAY'), num(CORE, /const DAY = (\d+)/, '服务端 DAY'));
+
+  // 衰减公式：R = exp(−Δt天 / S)，两边都要有同一条式子
+  assert.match(CODE, /Math\.exp\(-Math\.max\(0, \(now \|\| Date\.now\(\)\) - s\.sr\.last\) \/ DAY \/ s\.sr\.S\)/);
+  assert.match(CORE, /Math\.exp\(-Math\.max\(0, now - sr\.last\) \/ DAY \/ sr\.S\)/);
+  // 出库都保留三位小数，免得同一颗星在两端显示成 0.607 和 0.6065
+  assert.match(CORE, /\* 1000\) \/ 1000/);
+  assert.match(CODE, /\* 1000\) \/ 1000/);
+  // 熄灭判定：两端都是「曾点亮 且 R < emberR」
+  assert.match(CODE, /s\.sr\.lit > 0 && s\.strength < MEM\.emberR/);
+  assert.match(CORE, /wasLit && r < MEM\.emberR/);
+});

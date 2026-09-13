@@ -132,7 +132,7 @@
       if (b && !b.hasAttribute('data-done')) {
         var m = document.getElementById('sr-boot-msg');
         if (m) {
-          m.textContent = '网络不可达 — 星图需要联网加载运行时（React / Babel），请检查连接后刷新。';
+          m.textContent = '星图没能启动 — 可能是网络不可达（运行时 React / Babel 从 CDN 加载），也可能是某个源文件坏了。浏览器控制台里有具体原因。';
           m.style.animation = 'none';
           m.style.opacity = '1';
         }
@@ -140,16 +140,29 @@
     }, 8000);
   </script>
 
-  <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
-  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
-  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+  <!-- 运行时从 CDN 加载。三件事是刻意的：
+       · 版本一律钉死（lucide 原来写的是 @latest —— 这一页握着用户的全部笔记，
+         不该由「今天 CDN 上恰好是哪一版」说了算，它既是供应链口子也是随时会碎的地基）；
+       · 每个都带 integrity：CDN 被投毒或中间被改写时脚本直接不执行，而不是带着
+         笔记一起跑；校验失败的失败态就是启动兜底那句话（见上面的 8 秒定时器）；
+       · crossorigin=anonymous 是 integrity 生效的前提，不带它浏览器不做校验。
+       升级任何一个版本时，integrity 必须同时重算，否则页面会整个起不来。 -->
+  <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"
+    integrity="sha384-DGyLxAyjq0f9SPpVevD6IgztCFlnMF6oW/XQGmfe+IsZ8TqEiDrcHkMLKI6fiB/Z" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"
+    integrity="sha384-gTGxhz21lVGYNMcdJOyq01Edg0jhn/c22nsx0kyqP0TxaV5WVdsSH1fSDUf5YJj1" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"
+    integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/lucide@1.45.0/dist/umd/lucide.min.js"
+    integrity="sha384-1K5mjRr9EvBwlp0ALeQf1DEysXoqYs+nRQmDBi/UrEty5RgCjPRph7NJZkRjAFWJ" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"
+    integrity="sha384-qOkzR5Ke/XkQxuGVJ9hpFEpDlcoLtWwVYhnJf06cLIZa2vaIptSqaubivErzmD5O" crossorigin="anonymous"></script>
   <script src="responsive.js?v=1"></script>
   <script src="../../assets/starfield.js?v=6"></script>
   <script src="codehl.js"></script>
+  <script src="clipboard.js?v=1"></script>
   <script src="sanitize.js?v=1"></script>
-  <script src="mdcore.js?v=2"></script>
+  <script src="mdcore.js?v=3"></script>
   <script src="vault.js?v=2"></script>
   <!-- The compiled bundle ships a self-rendering snapshot of this app and mounts it into
        #root before its own design-system namespace is exported, so that built-in copy can
@@ -165,20 +178,21 @@
     })();
   </script>
   <script src="../../_ds_bundle.js"></script>
-  <script src="api.js?v=77"></script>
+  <script src="api.js?v=81"></script>
   <script src="ai.js?v=1"></script>
   <script src="tip.js?v=5"></script>
   <script src="transition.js?v=2"></script>
   <script src="undocore.js?v=1"></script>
-  <script src="data.js?v=83"></script>
+  <script src="data.js?v=84"></script>
+  <script type="text/babel" src="Boundary.jsx?v=1"></script>
   <script type="text/babel" src="MobileShell.jsx?v=6"></script>
   <script type="text/babel" src="Sidebar.jsx?v=81"></script>
-  <script type="text/babel" src="StarMap.jsx?v=77"></script>
-  <script type="text/babel" src="AerialView.jsx?v=78"></script>
-  <script type="text/babel" src="FeynmanDrawer.jsx?v=72"></script>
+  <script type="text/babel" src="StarMap.jsx?v=78"></script>
+  <script type="text/babel" src="AerialView.jsx?v=79"></script>
+  <script type="text/babel" src="FeynmanDrawer.jsx?v=73"></script>
   <script type="text/babel" src="ListView.jsx?v=72"></script>
-  <script type="text/babel" src="EditorMenus.jsx?v=72"></script>
-  <script type="text/babel" src="Editor.jsx?v=89"></script>
+  <script type="text/babel" src="EditorMenus.jsx?v=73"></script>
+  <script type="text/babel" src="Editor.jsx?v=92"></script>
   <script type="text/babel" src="Inbox.jsx?v=73"></script>
   <script type="text/babel" src="BlackHole.jsx?v=72"></script>
   <script type="text/babel" src="VisitView.jsx?v=84"></script>
@@ -191,8 +205,9 @@
   <script type="text/babel" src="LoginView.jsx?v=2"></script>
   <script type="text/babel" src="Onboarding.jsx?v=10"></script>
   <script type="text/babel" src="AIConfig.jsx?v=67"></script>
-  <script type="text/babel" src="KeysHelp.jsx?v=2"></script>
-  <script type="text/babel" src="AdminConsole.jsx?v=8"></script>
-  <script type="text/babel" src="app.jsx?v=90"></script>
+  <script type="text/babel" src="KeysHelp.jsx?v=3"></script>
+  <script type="text/babel" src="AdminConsole.jsx?v=11"></script>
+  <script type="text/babel" src="AdminHandover.jsx?v=1"></script>
+  <script type="text/babel" src="app.jsx?v=94"></script>
 </body>
 </html>

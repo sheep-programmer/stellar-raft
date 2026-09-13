@@ -287,12 +287,13 @@ function BlackHole({ onOpenCon }) {
           align-items: center !important; justify-content: center;
           /* 压在发光的吸积盘上就读不清了：给一层深色底衬把字托住 */
           padding: 6px 12px; border-radius: var(--r-pill);
-          background: rgba(3, 4, 12, 0.62); backdrop-filter: blur(6px);
+          background: rgba(3, 4, 12, 0.62); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
         }
         /* 「彻底销毁前都可随时恢复」下方的说明段落已经讲了一遍，窄屏不必重复占两行 */
         html[data-screen="phone"] .sr-bh-hint-more { display: none; }
-        /* 缩放控件让开，别再压在提示上 */
-        html[data-screen="phone"] .sr-bh-zoom { bottom: 58px !important; }
+        /* 缩放控件让开，别再压在提示上。58 差 2px——提示换成两行后正好顶上来，
+           两枚胶囊的圆角贴在一起像粘住了；给足一指的余地。 */
+        html[data-screen="phone"] .sr-bh-zoom { bottom: 70px !important; }
         html[data-screen="phone"] .sr-bh-stage { flex-direction: column !important; overflow: auto !important; }
         html[data-screen="phone"] .sr-bh-visual { flex: none !important; height: 42vh; min-height: 220px; }
         html[data-screen="phone"] .sr-bh-list {

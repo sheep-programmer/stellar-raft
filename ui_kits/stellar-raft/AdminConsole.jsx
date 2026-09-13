@@ -436,11 +436,10 @@ function UserRow({ u, meId, open, onToggle, onChanged }) {
   const self = u.id === meId;
   return (
     <div style={{ borderBottom: '1px solid var(--line)' }}>
-      <div role="button" tabIndex={0} className="sr-focus-ring"
+      <div role="button" tabIndex={0} className="sr-focus-ring sr-adm-row"
         onClick={onToggle}
         onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onToggle(); } }}
         onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
-        className="sr-adm-row"
         style={{
           display: 'flex', alignItems: 'center', gap: 12, padding: '11px 16px', cursor: 'pointer',
           background: open ? 'rgba(159,198,255,0.06)' : (hover ? 'rgba(159,198,255,0.035)' : 'transparent'),
@@ -842,10 +841,9 @@ function AdminGuests() {
               const full = d.limit > 0 && r.count >= d.limit;
               return (
                 <div key={r.ip} style={{ borderBottom: i === rows.length - 1 ? 'none' : '1px solid var(--line)' }}>
-                  <div role="button" tabIndex={0} className="sr-focus-ring"
+                  <div role="button" tabIndex={0} className="sr-focus-ring sr-adm-row"
                     onClick={() => setOpenIp(open ? null : r.ip)}
                     onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setOpenIp(open ? null : r.ip); } }}
-                    className="sr-adm-row"
                     style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 16px', cursor: 'pointer', background: open ? 'rgba(159,198,255,0.06)' : 'transparent' }}>
                     <span className="sr-adm-cell"><Icon name="network" size={15} color={full ? 'var(--gold)' : 'var(--star-blue)'} /></span>
                     <span className="sr-adm-cell sr-adm-name" style={{ flex: '1 1 140px', minWidth: 0, fontFamily: 'var(--font-mono)', fontSize: 13, color: 'var(--text-1)' }}>{r.ip}</span>
@@ -1214,12 +1212,12 @@ function AdminSystem() {
             <Button variant="secondary" size="sm" icon="minimize-2" disabled={!!busy}
               onClick={() => setConfirmVacuum(true)}>压缩数据库</Button>
             <Button variant="secondary" size="sm" icon="brush-cleaning" disabled={!!busy}
-              onClick={() => run('prune-sessions', (r) => r.removed ? `清掉 ${r.removed} 个过期会话` : '没有过期会话')}>清理过期会话</Button>
+              onClick={() => run('prune-sessions', (r) => r.removed ? `清掉 ${r.removed} 个过期会话` : '没有过期会话')}>扫掉过期会话</Button>
           </div>
           <div style={{ fontSize: 11.5, color: 'var(--text-3)', lineHeight: 1.7, marginTop: 12 }}>
             备份会先把 WAL 收进主库，下载到的是一个可直接替换使用的完整 .db 文件。
             压缩（VACUUM）会重建整个数据库文件回收空洞，期间短暂阻塞写入——建议在没人用的时候做。
-            清理会删掉 90 天没露面的登录会话。
+            90 天没露面的会话在下次被使用时就地失效，这里只是顺手把那些死行从表里扫掉——不点也不影响安全。
           </div>
         </div>
       </section>
@@ -1323,7 +1321,7 @@ function AnnouncementBanner({ announcement, onDismiss, preview }) {
     <div role="status" style={{
       display: 'flex', alignItems: 'center', gap: 10, padding: '9px 14px',
       background: skin.bg, border: '1px solid ' + skin.bd, borderRadius: 'var(--r-sm)',
-      backdropFilter: 'blur(var(--glass-blur))', WebkitBackdropFilter: 'blur(var(--glass-blur))',
+      WebkitBackdropFilter: 'blur(var(--glass-blur))', backdropFilter: 'blur(var(--glass-blur))',
     }}>
       <Icon name={skin.icon} size={15} color={skin.c} />
       <span style={{ flex: 1, minWidth: 0, fontSize: 12.5, color: 'var(--text-1)', lineHeight: 1.6 }}>{announcement.text}</span>
@@ -1410,7 +1408,7 @@ function AdminConsole({ onClose }) {
     if (el && T && T.enter) T.enter(el);
   }, []);
 
-  // 出厂密码警告：改密成功后 Settings 会广播 sr-account，这里跟着摘掉红条
+  // 出厂凭据警告：交接卡（或设置里的改密）成功后广播 sr-account，这里跟着摘掉红条
   React.useEffect(() => {
     const h = () => setDefaultPass(!!(window.SR_DATA.account || {}).defaultPass);
     window.addEventListener('sr-account', h);
@@ -1445,7 +1443,7 @@ function AdminConsole({ onClose }) {
         <Button variant="ghost" size="sm" icon="arrow-left" onClick={onClose}>回到我的星图</Button>
       </div>
 
-      {/* 出厂密码警告：改掉之前一直挂着 */}
+      {/* 出厂凭据警告：正常路径上交接卡会先把人拦住，这条红字是它没能挂上时的兜底 */}
       {defaultPass && (
         <div style={{
           display: 'flex', alignItems: 'center', gap: 10, padding: '11px 15px', marginBottom: 16,
@@ -1453,7 +1451,7 @@ function AdminConsole({ onClose }) {
         }}>
           <Icon name="triangle-alert" size={16} color="var(--danger)" />
           <span style={{ flex: 1, fontSize: 12.5, color: 'var(--text-1)', lineHeight: 1.6 }}>
-            管理员账号还在用出厂密码。部署到公网前，请到「设置 → 账户 → 修改密码」换掉它。
+            管理员账号还在用出厂的用户名与密码 —— 两样都写在 README 和启动日志里。刷新页面会弹出交接卡，把它们一起换掉。
           </span>
         </div>
       )}

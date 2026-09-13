@@ -227,7 +227,10 @@ function SharePanel({ flash, onGoFriends }) {
       .catch(e => flash(e.message, 'danger')).finally(() => setBusy(false));
   };
   const copyCode = () => {
-    try { navigator.clipboard.writeText(share.code); flash('密文已复制 · 发给朋友即可造访你的星系'); } catch (e) { flash('复制失败，请手动选择', 'danger'); }
+    // writeText 返回的是 Promise，被拒时同步 try/catch 接不住；SRCopy 统一给布尔值
+    window.SRCopy.copy(share.code).then(ok => flash(
+      ok ? '密文已复制 · 发给朋友即可造访你的星系' : '这台设备不允许自动复制，请长按选择密文',
+      ok ? undefined : 'danger'));
   };
   const toggleBlock = (v) => {
     N.api('/api/share/block', { method: 'POST', body: { viewerId: v.id, blocked: !v.blocked } })
@@ -284,7 +287,9 @@ function SharePanel({ flash, onGoFriends }) {
                 {VISIBILITY_OPTS.map(o => {
                   const on = share.visibility === o.id;
                   return (
-                    <div key={o.id} role="radio" aria-checked={on} onClick={() => !on && post({ visibility: o.id }, `可见度已改为「${o.label}」`)}
+                    <div key={o.id} role="radio" aria-checked={on} tabIndex={0} className="sr-focus-ring"
+                      onClick={() => !on && post({ visibility: o.id }, `可见度已改为「${o.label}」`)}
+                      onKeyDown={(e) => { if (!on && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); post({ visibility: o.id }, `可见度已改为「${o.label}」`); } }}
                       style={{ display: 'flex', alignItems: 'flex-start', gap: 10, padding: '10px 12px', cursor: 'pointer', borderRadius: 'var(--r-md)', border: '1px solid', borderColor: on ? 'rgba(255,217,138,0.4)' : 'var(--glass-border)', background: on ? 'rgba(255,217,138,0.08)' : 'rgba(159,198,255,0.04)' }}>
                       <span style={{ width: 15, height: 15, borderRadius: '50%', marginTop: 2, flex: 'none', border: '1.5px solid', borderColor: on ? 'var(--gold)' : 'var(--text-3)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>
                         {on && <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--gold)' }} />}
@@ -365,9 +370,12 @@ function SharePanel({ flash, onGoFriends }) {
 /* ---------- 好友星系列表 + 兑换 ---------- */
 function FriendsPanel({ flash, onVisit, launching }) {
   const N = window.SRNet;
+  // 移除好友这类不可逆操作复用 ConfirmDialog（danger 样式）
+  const ConfirmDialog = window.SRKit && window.SRKit.ConfirmDialog;
   const gated = window.SRGate.gated('visit');
   const [friends, setFriends] = React.useState([]);
   const [code, setCode] = React.useState('');
+  const narrow = window.SRKit.useScreen().phone;
   const [busy, setBusy] = React.useState(false);
   const load = () => N.api('/api/friends').then(r => {
     const list = r.friends || [];
@@ -397,6 +405,16 @@ function FriendsPanel({ flash, onVisit, launching }) {
       .then(r => {
         codeMemo.set(r.friend.id, c.toUpperCase()); // 记住密文：造访时「收纳这颗星」要用
         flash(`已连接「${r.friend.name}」的星系`, 'gold'); setCode(''); load();
+        /* 连接成功 = 邀请已兑现：把收件箱里那封来自这个人的造访邀请领掉，
+           否则「未领取」角标永远多一枚，它还占着服务端的去重位。静默降级。 */
+        const D = window.SR_DATA;
+        const mail = (D && D.mail && D.mail.list) || [];
+        const invite = mail.find(m => !m.claimed && m.kind === 'galaxy' && m.from && m.from.id === r.friend.id);
+        if (invite) {
+          if (N.inbox) N.inbox.ack(invite.id, 'claim');
+          invite.claimed = true;
+          window.dispatchEvent(new Event('sr-data'));
+        }
       })
       .catch(e => flash(e.message, 'danger')).finally(() => setBusy(false));
   };
@@ -419,10 +437,16 @@ function FriendsPanel({ flash, onVisit, launching }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
       <GlassPanel radius="lg" pad="md" style={{ maxWidth: 620 }}>
-        <div style={{ fontSize: 12, color: 'var(--text-3)', marginBottom: 8 }}>输入朋友的星系密文，连接一片新的星空</div>
-        <div style={{ display: 'flex', gap: 8 }}>
-          <Input value={code} onChange={(e) => setCode(e.target.value)} placeholder="XING-XXXX-XXXX（试试演示密文 XING-DEMO-2333）"
-            icon="key-round" size="md" style={{ flex: 1, fontFamily: 'var(--font-mono)' }}
+        {/* 那段演示密文是这页唯一的入口示范，可它写在 placeholder 里——
+            手机上输入框只剩两百来像素，它正好被截在「（试试演示密…」，
+            等于把唯一一句有用的话吃掉了。窄屏改成：提示语自己说，输入框只留格式。 */}
+        <div style={{ fontSize: 12, color: 'var(--text-3)', marginBottom: 8 }}>
+          输入朋友的星系密文，连接一片新的星空{narrow ? '（试试演示密文 XING-DEMO-2333）' : ''}
+        </div>
+        <div className="sr-visit-redeem" style={{ display: 'flex', gap: 8 }}>
+          <Input value={code} onChange={(e) => setCode(e.target.value)}
+            placeholder={narrow ? 'XING-XXXX-XXXX' : 'XING-XXXX-XXXX（试试演示密文 XING-DEMO-2333）'}
+            icon="key-round" size="md" style={{ flex: 1, minWidth: 0, fontFamily: 'var(--font-mono)' }}
             onKeyDown={(e) => { if (e.key === 'Enter') redeem(); }} />
           <Button variant="primary" size="md" icon="telescope" glow disabled={busy || !code.trim()} onClick={redeem}>连接</Button>
         </div>
@@ -473,8 +497,8 @@ function FriendsPanel({ flash, onVisit, launching }) {
       {/* 远航坞：飞船在这里待命，点「造访」即点火 */}
       <LaunchBay launching={launching} />
 
-      {confirm && window.SRKit.ConfirmDialog && (
-        <window.SRKit.ConfirmDialog message={confirm.message} confirmLabel={confirm.confirmLabel}
+      {confirm && ConfirmDialog && (
+        <ConfirmDialog message={confirm.message} confirmLabel={confirm.confirmLabel}
           onYes={() => { confirm.onYes(); setConfirm(null); }} onClose={() => setConfirm(null)} />
       )}
     </div>
@@ -795,7 +819,7 @@ function VisitMap({ friend, onBack, onReady, flash }) {
         {!!resonance.length && (
           <button type="button" title="你们俩都拥有的知识" aria-expanded={resOpen}
             onClick={() => { setResOpen(o => !o); setSelected(null); }}
-            style={{ pointerEvents: 'auto', display: 'inline-flex', alignItems: 'center', gap: 7, flex: 'none', whiteSpace: 'nowrap', padding: '8px 15px', font: 'inherit', fontSize: 12.5, cursor: 'pointer', borderRadius: 'var(--r-pill)', color: 'var(--gold-white)', border: '1px solid', borderColor: resOpen ? 'rgba(255,217,138,0.6)' : 'rgba(255,217,138,0.4)', background: resOpen ? 'rgba(255,217,138,0.16)' : 'rgba(255,217,138,0.1)', backdropFilter: 'blur(10px)', boxShadow: '0 0 14px rgba(255,217,138,0.12)' }}>
+            style={{ pointerEvents: 'auto', display: 'inline-flex', alignItems: 'center', gap: 7, flex: 'none', whiteSpace: 'nowrap', padding: '8px 15px', font: 'inherit', fontSize: 12.5, cursor: 'pointer', borderRadius: 'var(--r-pill)', color: 'var(--gold-white)', border: '1px solid', borderColor: resOpen ? 'rgba(255,217,138,0.6)' : 'rgba(255,217,138,0.4)', background: resOpen ? 'rgba(255,217,138,0.16)' : 'rgba(255,217,138,0.1)', WebkitBackdropFilter: 'blur(10px)', backdropFilter: 'blur(10px)', boxShadow: '0 0 14px rgba(255,217,138,0.12)' }}>
             <Icon name="sparkles" size={14} color="var(--gold)" />
             共鸣 <b style={{ fontWeight: 500, color: 'var(--gold)' }}>{resonance.length}</b> 处
           </button>

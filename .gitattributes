@@ -1,0 +1,19 @@
+# 全仓统一 LF。
+#
+# 不是洁癖：scripts/build-bundle.mjs 的 sourceHashes 是对**文件字节**取 sha256，
+# 产物是否「与源码一致」就看这个。Windows 上 core.autocrlf 把 LF 换成 CRLF 之后，
+# 每个源文件的哈希都变了——`npm run build:check` 会报一整片漂移，而源码其实一个字没改。
+# 同理，tests/tokens.test.js、compile.test.js 这类逐行解析源码的测试也会跟着莫名其妙。
+* text=auto eol=lf
+
+# 二进制不要碰
+*.webp binary
+*.png  binary
+*.jpg  binary
+*.ico  binary
+*.woff2 binary
+*.db   binary
+
+# 构建产物：diff 里默认折叠，它由 npm run build 生成，不该手改
+_ds_bundle.js    linguist-generated=true
+_ds_manifest.json linguist-generated=true

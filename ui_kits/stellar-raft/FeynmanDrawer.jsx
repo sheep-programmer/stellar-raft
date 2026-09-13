@@ -228,7 +228,9 @@ function FeynmanDrawer({ starId, onClose, onOpenAIConfig }) {
 
   // 抽屉即模态：移焦入内、Tab 圈禁、关闭还原焦点；Esc 关闭（全站一致）
   const drawerRef = React.useRef(null);
-  (window.SRKit && window.SRKit.useModalFocus ? window.SRKit.useModalFocus : () => { })(drawerRef);
+  // swallowCmdK：抽屉开着时 ⌘K 不该再叠出命令面板 —— 两层焦点圈禁会打架，
+  // 而且此时一次 Esc 会顺着冒泡把面板和抽屉一起关掉（抽屉里没提交的讲解也就没了）
+  (window.SRKit && window.SRKit.useModalFocus ? window.SRKit.useModalFocus : () => { })(drawerRef, { swallowCmdK: true });
   React.useEffect(() => {
     const k = (e) => { if (e.key === 'Escape') { e.stopPropagation(); onClose(); } };
     document.addEventListener('keydown', k);
@@ -384,7 +386,7 @@ function FeynmanDrawer({ starId, onClose, onOpenAIConfig }) {
   return (
     <React.Fragment>
       {igniting && <IgniteBurst />}
-      <div style={{ position: 'absolute', inset: 0, zIndex: 60, background: 'rgba(3,4,12,0.45)', backdropFilter: 'blur(2px)' }} onClick={onClose} aria-hidden="true" />
+      <div style={{ position: 'absolute', inset: 0, zIndex: 60, background: 'rgba(3,4,12,0.45)', WebkitBackdropFilter: 'blur(2px)', backdropFilter: 'blur(2px)' }} onClick={onClose} aria-hidden="true" />
       <div ref={drawerRef} role="dialog" aria-modal="true" aria-label={'费曼内化 · ' + star.label}
         /* 手机上抽屉铺满：392px 在窄屏只剩一条缝，讲解框根本写不下一句话。
            铺满后左边不再需要那条描边，改由遮罩承担边界。 */

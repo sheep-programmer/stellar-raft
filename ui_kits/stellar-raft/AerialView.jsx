@@ -82,13 +82,20 @@ function AerialView({ onClose, onOpenCon, dataset }) {
     return { ...c, cx, cy, r, avg, lit, members: ms.length, col: gold ? '#ffd98a' : c.color };
   }).filter(Boolean);
 
-  // 等比取景：把（含光晕的）整片星空收进一屏，只缩放、不变形
+  // 等比取景：把（含光晕的）整片星空收进一屏，只缩放、不变形。
+  // 包围盒走一趟循环而不是 Math.min(...arr)：spread 会把整个数组铺成实参，
+  // 星一多就是 Maximum call stack size exceeded（与星图 fitView 修过的同款）
   let X = () => 0, Y = () => 0, k = 1;
   if (box && sp.length) {
-    const minX = Math.min(...doms.map(d => d.cx - d.r), ...sp.map(s => s.x));
-    const maxX = Math.max(...doms.map(d => d.cx + d.r), ...sp.map(s => s.x));
-    const minY = Math.min(...doms.map(d => d.cy - d.r), ...sp.map(s => s.y));
-    const maxY = Math.max(...doms.map(d => d.cy + d.r), ...sp.map(s => s.y));
+    let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+    for (const s of sp) {
+      if (s.x < minX) minX = s.x; if (s.x > maxX) maxX = s.x;
+      if (s.y < minY) minY = s.y; if (s.y > maxY) maxY = s.y;
+    }
+    for (const d of doms) {
+      if (d.cx - d.r < minX) minX = d.cx - d.r; if (d.cx + d.r > maxX) maxX = d.cx + d.r;
+      if (d.cy - d.r < minY) minY = d.cy - d.r; if (d.cy + d.r > maxY) maxY = d.cy + d.r;
+    }
     const W = Math.max(1, maxX - minX), H = Math.max(1, maxY - minY);
     const padX = 70, padTop = 92, padBottom = 96;
     k = Math.min((box.w - padX * 2) / W, (box.h - padTop - padBottom) / H);
@@ -121,8 +128,10 @@ function AerialView({ onClose, onOpenCon, dataset }) {
             const hov = hoverCon === g.id;
             return (
               <div key={g.id} onClick={() => onOpenCon && onOpenCon(g.id)}
+                role="button" tabIndex={0} className="sr-focus-ring"
+                onKeyDown={(e) => { if ((e.key === 'Enter' || e.key === ' ') && onOpenCon) { e.preventDefault(); onOpenCon(g.id); } }}
                 onMouseEnter={() => setHoverCon(g.id)} onMouseLeave={() => setHoverCon(null)}
-                title={`飞入「${g.name}」`}
+                title={`飞入「${g.name}」`} aria-label={`飞入星域「${g.name}」`}
                 style={{ position: 'absolute', left: X(g.cx), top: Y(g.cy), width: R * 2, height: R * 2, transform: 'translate(-50%,-50%)', borderRadius: '50%', cursor: 'pointer' }}>
                 {/* 大气光晕：与星图同一语言，只是更远、更弥散。
                     只用平滑衰减的径向渐变——不加描边/环形阴影（大半径下圆缘读成直线），
@@ -195,12 +204,12 @@ function AerialView({ onClose, onOpenCon, dataset }) {
               <Icon name="telescope" size={14} color="var(--gold)" />{dataset.ownerName} · 只读
             </span>
           )}
-          <Sep />
-          <Stat n={D.stars.length} t="知识星" />
-          <Stat n={litCount} t="已点亮" tone="var(--gold)" />
-          {emberCount > 0 && <Stat n={emberCount} t="待重燃" tone="var(--gold-warm)" />}
-          <Stat n={dimming} t="正变暗" tone="var(--star-blue-dim)" />
-          <Sep />
+          <AerialSep />
+          <AerialStat n={D.stars.length} t="知识星" />
+          <AerialStat n={litCount} t="已点亮" tone="var(--gold)" />
+          {emberCount > 0 && <AerialStat n={emberCount} t="待重燃" tone="var(--gold-warm)" />}
+          <AerialStat n={dimming} t="正变暗" tone="var(--star-blue-dim)" />
+          <AerialSep />
           <span style={{ fontSize: 'var(--t-sm)', color: 'var(--text-2)', whiteSpace: 'nowrap', maxWidth: 240, overflow: 'hidden', textOverflow: 'ellipsis' }}>最薄弱星域 <b style={{ color: 'var(--star-blue-dim)', fontWeight: 500 }}>{weakest.name}</b></span>
         </GlassPanel>
       </div>
@@ -252,8 +261,8 @@ function AerialStyle() {
   );
 }
 
-function Sep() { return <span style={{ width: 1, height: 20, background: 'var(--line)' }} />; }
-function Stat({ n, t, tone }) {
+function AerialSep() { return <span style={{ width: 1, height: 20, background: 'var(--line)' }} />; }
+function AerialStat({ n, t, tone }) {
   return (
     <span style={{ display: 'flex', alignItems: 'baseline', gap: 6, whiteSpace: 'nowrap', flex: 'none' }}>
       <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--t-body-lg)', color: tone || 'var(--text-1)' }}>{n}</span>

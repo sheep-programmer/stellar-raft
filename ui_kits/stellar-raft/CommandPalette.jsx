@@ -76,6 +76,8 @@ const VIEW_CMDS = [
   { kind: 'view', id: 'inbox', label: '收件箱', icon: 'inbox', sub: '视图' },
   { kind: 'view', id: 'blackhole', label: '黑洞', icon: 'aperture', sub: '回收站' },
   { kind: 'view', id: 'aerial', label: '亮度鸟瞰', icon: 'satellite', sub: '视图' },
+  { kind: 'view', id: 'checkup', label: '知识体检报告', icon: 'activity', sub: '视图' },
+  { kind: 'view', id: 'galaxy3d', label: '三维星系', icon: 'globe', sub: '视图' },
   { kind: 'view', id: 'visit', label: '星际漫游', icon: 'telescope', sub: '好友星系' },
 ];
 
@@ -172,13 +174,18 @@ function CommandPalette({ onClose, onOpenStar, onOpenView, onFocusCon }) {
   return (
     <div ref={rootRef} onMouseDown={onClose} role="dialog" aria-modal="true" aria-label="全局搜索"
       className="sr-cmd-mask"
-      style={{ position: 'fixed', inset: 0, zIndex: 100, background: 'rgba(3,4,12,0.55)', backdropFilter: 'blur(3px)', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', paddingTop: '13vh' }}>
-      <div onMouseDown={(e) => e.stopPropagation()} className="sr-cmd-panel" style={{ width: 560, maxWidth: '92vw', animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
+      style={{ position: 'fixed', inset: 0, zIndex: 100, background: 'rgba(3,4,12,0.55)', WebkitBackdropFilter: 'blur(3px)', backdropFilter: 'blur(3px)', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', paddingTop: '13vh' }}>
+      {/* preventDefault 与 stopPropagation 都要：点在面板的空白处（结果列表的
+          padding、边缘）时，mousedown 的默认行为会把焦点拽去 body——此后
+          Esc/↑↓/Enter 全部无人接收（它们只挂在 input 上）。preventDefault
+          保住焦点，click 事件不受影响，结果项照常可点。 */}
+      <div onMouseDown={(e) => { e.preventDefault(); e.stopPropagation(); }} className="sr-cmd-panel" style={{ width: 560, maxWidth: '92vw', animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
         <GlassPanel strong radius="lg" pad="none" glow style={{ overflow: 'hidden' }}>
           {/* input */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 11, padding: '15px 18px', borderBottom: '1px solid var(--line)' }}>
             <Icon name="search" size={19} color="var(--star-blue)" />
             <input value={query} onChange={(e) => setQuery(e.target.value)} onKeyDown={onKey}
+              role="combobox" aria-expanded="true" aria-controls="sr-cmd-list" aria-activedescendant={flat.length ? 'sr-cmd-opt-' + active : undefined}
               aria-label="搜索星、星域、视图、笔记正文"
               placeholder="搜索星、星域、视图、笔记正文…"
               style={{ flex: 1, background: 'transparent', border: 'none', outline: 'none', color: 'var(--text-1)', fontSize: 16, fontFamily: 'var(--font-sans)' }} />
@@ -186,9 +193,9 @@ function CommandPalette({ onClose, onOpenStar, onOpenView, onFocusCon }) {
           </div>
 
           {/* results */}
-          <div ref={listRef} style={{ maxHeight: 380, overflow: 'auto', padding: 8 }}>
+          <div ref={listRef} role="listbox" id="sr-cmd-list" style={{ maxHeight: 380, overflow: 'auto', padding: 8 }}>
             {flat.length === 0 && (
-              <div style={{ padding: '32px 0', textAlign: 'center', color: 'var(--text-3)', fontSize: 13.5 }}>没有匹配「{query}」的结果。</div>
+              <div role="status" style={{ padding: '32px 0', textAlign: 'center', color: 'var(--text-3)', fontSize: 13.5 }}>没有匹配「{query}」的结果。</div>
             )}
             {sections.map(sec => (
               <div key={sec.title} style={{ marginBottom: 6 }}>
@@ -196,7 +203,7 @@ function CommandPalette({ onClose, onOpenStar, onOpenView, onFocusCon }) {
                 {sec.items.map(item => {
                   idx += 1; const i = idx; const on = i === active;
                   return (
-                    <div key={item.kind + item.id} data-idx={i} onMouseEnter={() => setActive(i)} onClick={() => exec(item)}
+                    <div key={item.kind + item.id} data-idx={i} id={'sr-cmd-opt-' + i} role="option" aria-selected={on} onMouseEnter={() => setActive(i)} onClick={() => exec(item)}
                       style={{ padding: '9px 11px', borderRadius: 'var(--r-sm)', cursor: 'pointer', background: on ? 'color-mix(in srgb, var(--star-blue) 11%, transparent)' : 'transparent' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 11 }}>
                         {item.color

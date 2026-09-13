@@ -50,7 +50,7 @@ function ActionDialog({ icon, accent, title, children, confirmLabel, confirmDisa
   const tint = accent || 'var(--star-blue)';
   return (
     <div onMouseDown={onClose} onContextMenu={(e) => e.preventDefault()}
-      style={{ position: 'fixed', inset: 0, zIndex: 120, background: 'rgba(3,4,12,0.55)', backdropFilter: 'blur(3px)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      style={{ position: 'fixed', inset: 0, zIndex: 120, background: 'rgba(3,4,12,0.55)', WebkitBackdropFilter: 'blur(3px)', backdropFilter: 'blur(3px)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <div onMouseDown={(e) => e.stopPropagation()} style={{ width: 360, maxWidth: '90vw', animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
         <GlassPanel strong radius="lg" pad="md" glow>
           <div style={{ display: 'flex', alignItems: 'center', gap: 11, marginBottom: 16 }}>
@@ -72,12 +72,24 @@ function ActionDialog({ icon, accent, title, children, confirmLabel, confirmDisa
 }
 
 // A small glass dropdown anchored under its trigger; closes on outside click.
+// 键盘走 menu 模式：打开落焦第一项，↑↓ 移动，Enter/Space 选定，Esc 收层；
+// 关闭时焦点还给打开它的元素（触发钮就是打开那一刻的 activeElement）。
 function Menu({ open, onClose, width, children }) {
+  const listRef = React.useRef(null);
+  const prevRef = React.useRef(null);
+  React.useEffect(() => {
+    if (!open) return;
+    prevRef.current = document.activeElement;
+    const first = listRef.current && listRef.current.querySelector('[role="menuitem"]');
+    if (first) first.focus();
+    return () => { const p = prevRef.current; if (p && p.focus && document.contains(p)) p.focus(); };
+  }, [open]);
   if (!open) return null;
   return (
     <React.Fragment>
       <div onMouseDown={onClose} style={{ position: 'fixed', inset: 0, zIndex: 60 }} />
-      <div onContextMenu={(e) => e.preventDefault()}
+      <div ref={listRef} role="menu" onContextMenu={(e) => e.preventDefault()}
+        onKeyDown={(e) => { if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); onClose(); } }}
         style={{ position: 'absolute', top: 'calc(100% + 7px)', left: 0, zIndex: 61, width: width || 200, animation: 'sr-cardin var(--dur-fast) var(--ease-flight) both' }}>
         <GlassPanel strong radius="md" pad="none" style={{ overflow: 'hidden', padding: 6 }}>{children}</GlassPanel>
       </div>
@@ -86,8 +98,18 @@ function Menu({ open, onClose, width, children }) {
 }
 function MenuRow({ onClick, active, children }) {
   const [h, setH] = React.useState(false);
+  const onKey = (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onClick && onClick(e); }
+    else if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      const rows = Array.from(e.currentTarget.parentElement.querySelectorAll('[role="menuitem"]'));
+      const i = rows.indexOf(e.currentTarget);
+      const next = rows[e.key === 'ArrowDown' ? i + 1 : i - 1];
+      if (next) next.focus();
+    }
+  };
   return (
-    <div onMouseDown={(e) => e.stopPropagation()} onClick={onClick} onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)}
+    <div role="menuitem" tabIndex={-1} onKeyDown={onKey} onMouseDown={(e) => e.stopPropagation()} onClick={onClick} onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)}
       style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '8px 10px', borderRadius: 'var(--r-sm)', cursor: 'pointer', fontSize: 13,
         color: active ? 'var(--gold)' : 'var(--text-2)', background: h ? 'color-mix(in srgb, var(--star-blue) 9%, transparent)' : 'transparent', transition: 'background var(--dur-fast)' }}>
       {children}
@@ -324,25 +346,25 @@ function ListView({ onOpen, onOpenCon, onFeynman }) {
     <div className="sr-view" style={{ position: 'relative', flex: 1, minWidth: 0, overflow: 'auto', padding: '26px 30px 40px' }}
       onContextMenu={(e) => e.preventDefault()}>
       <style>{`
-        /* ——— 手机：表格改卡片 ———
-           桌面这张表有六列固定宽（30+156+150+116+78 = 530px 再加 5 道 14px 间距），
-           在 414px 的屏上「标题」那一列的 1fr 会被压到几乎 0 宽——标签于是被逼成
-           一字一行。窄屏放弃网格，改成每行一张卡：
-             第一行  ☑ 标题（＋点亮/待重燃/待复习徽标、标签）
-             第二行  记忆强度长条
-             第三行  星域 · 下次复习 · 连接数
-           表头随之隐去：没有列，就没有列名。 */
-        html[data-screen="phone"] .sr-list-head { display: none !important; }
-        html[data-screen="phone"] .sr-list-row {
+        /* ——— 窄屏：表格改卡片 ———
+           桌面这张表有六列固定宽（30+156+150+116+78 = 530px 再加 5 道 14px 间距 = 600px），
+           剩下的才归「标题」那一列的 1fr。于是有一段谁都没想到的死区：
+           量出来是 1180px 以下标题只剩 70px、900px 以下**直接是 0**——
+           标题整个消失，一行里只剩两枚标签竖着排。手机（≤720）早就换了卡片所以没事，
+           真正受害的是中间那一段：iPad 竖屏 768 / 810、手机横屏 844、半屏窗口。
+           所以这条不挂 data-screen，改挂 data-narrow——它就是「多栏摆不下」那条线
+           （SRScreen.BP.narrow = 1180），与编辑器知识栏让位用的是同一个数。 */
+        html[data-narrow] .sr-list-head { display: none !important; }
+        html[data-narrow] .sr-list-row {
           display: flex !important; flex-wrap: wrap; align-items: center;
           gap: 8px 10px !important; padding: 12px 13px !important;
         }
-        html[data-screen="phone"] .sr-lc-check { flex: none; }
-        html[data-screen="phone"] .sr-lc-title { flex: 1 1 0; min-width: 0; }
-        html[data-screen="phone"] .sr-lc-mem   { flex: 1 1 100%; }
-        html[data-screen="phone"] .sr-lc-con   { flex: 1 1 auto; }
-        html[data-screen="phone"] .sr-lc-review,
-        html[data-screen="phone"] .sr-lc-links { flex: none; }
+        html[data-narrow] .sr-lc-check { flex: none; }
+        html[data-narrow] .sr-lc-title { flex: 1 1 0; min-width: 0; }
+        html[data-narrow] .sr-lc-mem   { flex: 1 1 100%; }
+        html[data-narrow] .sr-lc-con   { flex: 1 1 auto; }
+        html[data-narrow] .sr-lc-review,
+        html[data-narrow] .sr-lc-links { flex: none; }
         /* 悬浮快捷操作在触摸端没有 hover 可依，卡片本身点开即可——不再叠一层渐变遮罩 */
         html[data-pointer="coarse"] .sr-list-row > div[style*="linear-gradient(90deg"] { display: none !important; }
 
@@ -416,7 +438,9 @@ function ListView({ onOpen, onOpenCon, onFeynman }) {
           <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--text-3)' }}>
             {rows.length}<span style={{ opacity: 0.5 }}> / {total}</span> 颗{sel.length > 0 && <span style={{ color: 'var(--gold)' }}> · 选 {sel.length}</span>}
           </span>
-          {anyFilter && <span onClick={resetFilters} style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: 12, color: 'var(--text-3)', cursor: 'pointer' }}><Icon name="x" size={13} color="currentColor" />清除筛选</span>}
+          {anyFilter && <span role="button" tabIndex={0} className="sr-focus-ring" onClick={resetFilters}
+            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); resetFilters(); } }}
+            style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: 12, color: 'var(--text-3)', cursor: 'pointer' }}><Icon name="x" size={13} color="currentColor" />清除筛选</span>}
         </div>
 
         {/* batch bar */}
@@ -476,12 +500,11 @@ function ListView({ onOpen, onOpenCon, onFeynman }) {
             const hov = hoverId === n.id;
             return (
               <div key={n.id} onClick={() => onOpen(n.id)}
-                role="button" tabIndex={0} className="sr-focus-ring"
+                role="button" tabIndex={0} className="sr-focus-ring sr-list-row"
                 onKeyDown={(e) => { if ((e.key === 'Enter' || e.key === ' ') && e.target === e.currentTarget) { e.preventDefault(); onOpen(n.id); } }}
                 onMouseEnter={() => setHoverId(n.id)} onMouseLeave={() => setHoverId(h => h === n.id ? null : h)}
                 onFocus={() => setHoverId(n.id)}
                 onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget)) setHoverId(h => h === n.id ? null : h); }}
-                className="sr-list-row"
                 style={{ position: 'relative', display: 'grid', gridTemplateColumns: GRID, gap: 14, alignItems: 'center',
                   padding: '13px 16px', borderRadius: 'var(--r-md)', cursor: 'pointer',
                   // 变暗的星降低整行「存在感」而不是叠深色底——黎明主题下深底会把整行糊死
@@ -602,7 +625,7 @@ function ListView({ onOpen, onOpenCon, onFeynman }) {
 
       {/* toast */}
       {toast && (
-        <div style={{ position: 'fixed', bottom: 26, left: '50%', transform: 'translateX(-50%)', zIndex: 130, animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
+        <div role="status" style={{ position: 'fixed', bottom: 26, left: '50%', transform: 'translateX(-50%)', zIndex: 130, animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
           <GlassPanel strong radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '10px 18px' }}>
             <Icon name="check" size={16} color="var(--gold)" /><span style={{ fontSize: 13.5, color: 'var(--text-1)' }}>{toast}</span>
           </GlassPanel>

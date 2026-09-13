@@ -531,7 +531,7 @@ function Onboarding({ onClose, onSpotlight }) {
 
   return (
     <div ref={modalRef} onMouseDown={onClose} role="dialog" aria-modal="true" aria-label="新手引导"
-      style={{ position: 'fixed', inset: 0, zIndex: 120, background: 'rgba(3,4,12,0.55)', backdropFilter: 'blur(4px)', WebkitBackdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
+      style={{ position: 'fixed', inset: 0, zIndex: 120, background: 'rgba(3,4,12,0.55)', WebkitBackdropFilter: 'blur(4px)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
       <div onMouseDown={(e) => e.stopPropagation()}
         className="sr-modal-panel" style={{ width: 560, maxWidth: '94vw', height: 520, maxHeight: '92vh', animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
         <GlassPanel strong radius="lg" pad="none" glow style={{ height: '100%', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
@@ -650,6 +650,19 @@ function OnboardingTour({ onClose, onNavigate }) {
   }, [goTo]);
   React.useEffect(() => () => { seq.current += 1; clearTimer(); }, [clearTimer]);
 
+  // 焦点圈禁与归还（与主引导同一套语义）。autoFocus:false——第一步的光洞还没
+  // 定位到锚点前气泡不渲染，进场移焦由 rect 就位后的那个 effect 完成
+  const bubbleRef = React.useRef(null);
+  (window.SRKit && window.SRKit.useModalFocus ? window.SRKit.useModalFocus : () => { })(bubbleRef, { swallowCmdK: true, autoFocus: false });
+  React.useEffect(() => {
+    if (!rect) return;
+    const b = bubbleRef.current;
+    if (b && !b.contains(document.activeElement)) {
+      const first = b.querySelector('button:not([disabled])');
+      if (first) first.focus();
+    }
+  }, [rect]);
+
   React.useEffect(() => {
     const k = (e) => { if (e.key === 'Escape') { e.stopPropagation(); onClose(); } };
     document.addEventListener('keydown', k);
@@ -689,8 +702,9 @@ function OnboardingTour({ onClose, onNavigate }) {
         borderRadius: 'var(--r-md)', boxShadow: '0 0 0 9999px rgba(3,4,12,0.66), 0 0 22px rgba(159,198,255,0.35)',
         border: '1px solid rgba(159,198,255,0.6)', pointerEvents: 'none',
         transition: reduce ? 'none' : 'left var(--dur-base) var(--ease-flight), top var(--dur-base) var(--ease-flight), width var(--dur-base) var(--ease-flight), height var(--dur-base) var(--ease-flight)' }} />
-      {/* 气泡 */}
-      <div onMouseDown={(e) => e.stopPropagation()}
+      {/* 气泡（焦点圈禁在气泡内：遮罩的任意外点本来就会结束导览，
+          键盘用户拿到的是同一语义——焦点进去、Tab 不跑丢、关闭归还） */}
+      <div ref={bubbleRef} onMouseDown={(e) => e.stopPropagation()}
         style={{ position: 'fixed', left: bubbleLeft, top: bubbleTop, width: 280, animation: reduce ? 'none' : 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
         <GlassPanel strong radius="md" pad="none" glow>
           <div style={{ padding: '14px 16px' }}>
