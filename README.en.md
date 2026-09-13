@@ -9,7 +9,7 @@
 ![Build](https://img.shields.io/badge/build-zero--config-9fc6ff?style=flat-square&labelColor=05060f)
 ![Components](https://img.shields.io/badge/components-18%20primitives-9fc6ff?style=flat-square&labelColor=05060f)
 ![Backend](https://img.shields.io/badge/backend-zero--dependency-ffd98a?style=flat-square&labelColor=05060f)
-![Status](https://img.shields.io/badge/status-private-8a94a8?style=flat-square&labelColor=05060f)
+![License](https://img.shields.io/badge/license-MIT-8fe3c0?style=flat-square&labelColor=05060f)
 
 English · [中文](README.md)
 
@@ -418,7 +418,7 @@ stellar-raft/
 
 ## License
 
-This repository is currently **private and all rights are reserved**; no open-source license is attached yet. To open it up, add a `LICENSE` file at the root.
+**MIT License** — see [LICENSE](LICENSE) at the root. Free to use, modify and redistribute (commercially too); just keep the copyright notice.
 
 <div align="center">
 <br/>

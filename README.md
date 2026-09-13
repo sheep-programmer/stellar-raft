@@ -9,7 +9,7 @@
 ![Build](https://img.shields.io/badge/build-zero--config-9fc6ff?style=flat-square&labelColor=05060f)
 ![Components](https://img.shields.io/badge/components-18%20primitives-9fc6ff?style=flat-square&labelColor=05060f)
 ![Backend](https://img.shields.io/badge/backend-zero--dependency-ffd98a?style=flat-square&labelColor=05060f)
-![Status](https://img.shields.io/badge/status-private-8a94a8?style=flat-square&labelColor=05060f)
+![Status](https://img.shields.io/badge/license-MIT-8fe3c0?style=flat-square&labelColor=05060f)
 
 [English](README.en.md) · 中文
 
@@ -418,7 +418,7 @@ stellar-raft/
 
 ## 许可
 
-本仓库当前为**私有项目，保留所有权利**，尚未附带开源许可证。如需开放，请在根目录添加 `LICENSE` 文件。
+**MIT License** — 见根目录 [LICENSE](LICENSE)。可自由使用、修改与再发布（包括商用），保留版权声明即可。
 
 <div align="center">
 <br/>
