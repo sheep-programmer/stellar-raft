@@ -320,6 +320,7 @@ window.SR_DATA = (function () {
       n.strength = s.strength; n.nextReview = s.props.nextReview;
     });
     syncCounts();
+    syncLinks();                           // 顺带修好历史快照里对不上的反向链接计数
     account.streak = computeStreak(now);   // 跨天 / 取回快照后连续天数保持真实
     return now;
   };
@@ -472,6 +473,7 @@ window.SR_DATA = (function () {
     const entry = { id: trashId(), kind: 'star', deletedAt: '刚刚', ts: Date.now(), payload: { star: s, connections: conns } };
     trash.unshift(entry);
     syncCounts();
+    syncLinks();   // 连线跟着走了，幸存的对端得重新数一遍
     persistRemote();
     return entry;
   };
@@ -492,6 +494,7 @@ window.SR_DATA = (function () {
     const entry = { id: trashId(), kind: 'domain', deletedAt: '刚刚', ts: Date.now(), payload: { con, stars: members, connections: conns } };
     trash.unshift(entry);
     syncCounts();
+    syncLinks();   // 同上：整域带走的连线，对端的计数也要落回来
     persistRemote();
     return entry;
   };
@@ -543,12 +546,17 @@ window.SR_DATA = (function () {
       const exist = constellations.find(c => c.id === con.id);
       if (exist) Object.assign(exist, con);   // 壳已被先恢复的星带回来过
       else constellations.push(con);
+      /* 顺序要紧：先让成员落位、再把连线接回来，最后才建 note。
+         noteFor 里的 links 是当场数 connections 数出来的——先建 note 的话，
+         随星域恢复的成员链接数一律是 0（单星分支本来就是这个顺序，这里漏了）。 */
+      const revived = [];
       t.payload.stars.forEach(s => {
         if (byId[s.id]) return;               // 这颗星先被单独恢复过
         stars.push(s); byId[s.id] = s;
-        notes.unshift(noteFor(s));
+        revived.push(s);
       });
       restoreConnections(t.payload.connections);
+      revived.forEach(s => notes.unshift(noteFor(s)));
     }
     refreshMemory();   // 恢复的星按真实时间重新点算亮度（含 syncCounts）
     persistRemote();
@@ -613,13 +621,23 @@ window.SR_DATA = (function () {
   // 星域的 count / health / litRatio 始终按现存成员实时重算，不留手写快照。
   // health 保持「记忆亮度均值」单一语义不变；点亮维度独立为 litRatio（已点亮成员占比），
   // 星域光环转金判据 = litRatio ≥ 0.5 ∧ health ≥ 0.5。
+  /* 星域的成员数 / 健康度 / 点亮占比。
+     原来是「对每个星域把全部星过一遍」，而且过三遍（filter + reduce + filter）——
+     20 个星域 2000 颗星就是 12 万次比较，还挂在每次切视图与每分钟心跳上。
+     改成对星走一趟、按星域累加，代价回到 O(星)。 */
   const syncCounts = () => {
-    constellations.forEach(c => {
-      const members = stars.filter(s => s.con === c.id);
-      c.count = members.length;
-      c.health = members.length ? members.reduce((a, s) => a + s.strength, 0) / members.length : 0;
-      c.litRatio = members.length ? members.filter(isLit).length / members.length : 0;
-    });
+    const acc = new Map();
+    for (const s of stars) {
+      let a = acc.get(s.con);
+      if (!a) { a = { n: 0, sum: 0, lit: 0 }; acc.set(s.con, a); }
+      a.n++; a.sum += s.strength; if (isLit(s)) a.lit++;
+    }
+    for (const c of constellations) {
+      const a = acc.get(c.id);
+      c.count = a ? a.n : 0;
+      c.health = a && a.n ? a.sum / a.n : 0;
+      c.litRatio = a && a.n ? a.lit / a.n : 0;
+    }
   };
   // 待重燃队列：曾点亮但已熄灭的星（体检「今日待办」第二行），按熄灭先后升序
   const emberStars = () => stars.filter(isEmber).sort((a, b) => (a.sr.ember || 0) - (b.sr.ember || 0));
@@ -638,6 +656,19 @@ window.SR_DATA = (function () {
     const texty = (star.body || []).filter(b =>
       b && !['rich', 'divider', 'code'].includes(b.type) && String(b.text || b.tex || '').trim());
     return texty.length >= 2;
+  };
+  /* 反向链接计数：notes[].links 是 connections 的派生值，可它跟着快照落盘，
+     于是某次增删连线漏同步，错值就一直躺在那儿——心跳只同步亮度，从不碰它。
+     这里对连线走一趟按端点计数，再把 notes 对上；自连只算一次（与 noteFor 同口径）。
+     跟着心跳跑，顺带把老快照里已经错掉的值一并治好。 */
+  const syncLinks = () => {
+    const n = new Map();
+    for (const c of connections) {
+      if (!c) continue;
+      n.set(c.a, (n.get(c.a) || 0) + 1);
+      if (c.b !== c.a) n.set(c.b, (n.get(c.b) || 0) + 1);
+    }
+    for (const note of notes) note.links = n.get(note.id) || 0;
   };
   const noteFor = (s) => ({
     id: s.id, title: s.label, con: s.con, strength: s.strength,
@@ -678,6 +709,10 @@ window.SR_DATA = (function () {
       delta: delta != null ? (delta >= 0 ? '+' : '−') + Math.abs(delta).toFixed(2) : '—',
       kind, note,
     });
+    /* 封顶 2000 条：时间线是 append-only 的，而星空是「整片一次整存」——不封顶的话
+       快照会随岁月单调膨胀，每次防抖落盘的序列化越来越贵，最终撞上 413。
+       2000 条 ≈ 全年每天 5 次学习事件：体检页的一年热力图仍然数得满。 */
+    if (timeline.length > 2000) timeline.length = 2000;
     account.streak = computeStreak();   // 今天的第一条学习记录即续上连续天数
     persistRemote();
   };
@@ -691,9 +726,13 @@ window.SR_DATA = (function () {
   const computeStreak = (now) => {
     now = now || Date.now();
     const days = new Set(timeline.filter(t => t && t.ts && t.kind !== 'dim').map(t => dayKey(t.ts)));
+    /* 按日历日往回退，不是按 86400000 毫秒。
+       进夏令时那天只有 23 小时：在午夜后一小时内计算的话，减掉整整 24 小时会
+       一步跨过一整个日历日，连续天数凭空断档。 */
+    const prevDay = (t) => { const d = new Date(t); d.setDate(d.getDate() - 1); return d.getTime(); };
     let n = 0, cur = now;
-    if (!days.has(dayKey(cur))) cur -= DAY;
-    while (days.has(dayKey(cur))) { n++; cur -= DAY; }
+    if (!days.has(dayKey(cur))) cur = prevDay(cur);
+    while (days.has(dayKey(cur))) { n++; cur = prevDay(cur); }
     return n;
   };
 
@@ -914,7 +953,7 @@ window.SR_DATA = (function () {
           // 每个 /api/admin/* 在服务端另有一道守卫，改这里的布尔值拿不到任何数据
           role: r.account.role || 'user', admin: !!r.account.admin,
         });
-        // 站点状态（全站公告 / 出厂密码提醒）随握手下发，广播给横幅与管理台
+        // 站点状态（全站公告 / 出厂凭据未交接）随握手下发，广播给横幅、交接卡与管理台
         if (r.site) {
           site.announcement = r.site.announcement || null;
           site.registrationOpen = r.site.registrationOpen !== false;
@@ -928,11 +967,33 @@ window.SR_DATA = (function () {
         const d = r && r.data;
         if (r && r.version != null) window.SRNet.setVersion(r.version);   // 乐观锁基准版本
         const remoteOk = looksLikeGalaxy(d);
+        /* 因果比较，不再比客户端时钟：镜像里的 syncVer 是这份内容「基于的服务器版本」，
+           pending 标记「这版内容还没被服务器确认过」。
+           · syncVer 相等 且 pending：别处没人写过，镜像里是没推上去的编辑 → 本地为准并回推；
+           · syncVer 相等 且非 pending：镜像是服务器内容的回声 → 内容一致，无需回推；
+           · syncVer 不等：另一台设备写过 → 服务器为准，镜像跟着对齐。
+           两台设备的系统时钟谁快谁慢，从此不再左右谁赢。
+           旧版镜像没有 syncVer：退回 savedAt 比较（跨设备时钟问题仅存在于旧数据）。 */
+        if (remoteOk && localOk && local.syncVer != null) {
+          if (r.version === local.syncVer) {
+            if (local.pending) {
+              hydrate(local.data);
+              persistRemote();         // 离线攒下的编辑回推给服务器
+            } else {
+              hydrate(d);              // 内容一致： hydrate 哪边都一样，不必回推
+            }
+          } else {
+            hydrate(d);
+            window.SRNet.saveLocal(d, r.version);   // 镜像同步到服务器这一版
+          }
+          return;
+        }
         // 服务器快照时间：优先 data 内嵌的客户端 savedAt，缺失时退回 sqlite 的 updated_at（UTC）
         const remoteTs = (remoteOk && d.savedAt) ||
           (remoteOk && r.updatedAt ? Date.parse(String(r.updatedAt).replace(' ', 'T') + 'Z') || 1 : (remoteOk ? 1 : 0));
         if (remoteOk && (!localOk || remoteTs >= local.savedAt)) {
           hydrate(d);
+          if (r.version != null) window.SRNet.saveLocal(d, r.version);   // 顺手把镜像带进 syncVer 时代
         } else if (localOk) {
           hydrate(local.data);     // 本地较新（或服务器为空）：以本地为准
           persistRemote();         // 并把它回推给服务器
