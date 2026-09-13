@@ -1,4 +1,4 @@
-/* @ds-bundle: {"format":3,"namespace":"StellarRaftDesignSystem_2866af","components":[{"name":"Badge","sourcePath":"components/core/Badge.jsx"},{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"GlassPanel","sourcePath":"components/core/GlassPanel.jsx"},{"name":"Icon","sourcePath":"components/core/Icon.jsx"},{"name":"IconButton","sourcePath":"components/core/IconButton.jsx"},{"name":"Input","sourcePath":"components/core/Input.jsx"},{"name":"Tag","sourcePath":"components/core/Tag.jsx"},{"name":"Checkbox","sourcePath":"components/form/Checkbox.jsx"},{"name":"Select","sourcePath":"components/form/Select.jsx"},{"name":"Switch","sourcePath":"components/form/Switch.jsx"},{"name":"Tabs","sourcePath":"components/form/Tabs.jsx"},{"name":"ConstellationItem","sourcePath":"components/knowledge/ConstellationItem.jsx"},{"name":"MemoryBar","sourcePath":"components/knowledge/MemoryBar.jsx"},{"name":"StarNode","sourcePath":"components/knowledge/StarNode.jsx"},{"name":"ContextMenu","sourcePath":"components/overlay/ContextMenu.jsx"},{"name":"Modal","sourcePath":"components/overlay/Modal.jsx"},{"name":"Toast","sourcePath":"components/overlay/Toast.jsx"},{"name":"Tooltip","sourcePath":"components/overlay/Tooltip.jsx"}],"sourceHashes":{"assets/starfield.js":"d776d2b45dc4","components/core/Badge.jsx":"b0bd9735d638","components/core/Button.jsx":"a1c387a07e86","components/core/GlassPanel.jsx":"bd96f4ac54dd","components/core/Icon.jsx":"7505f83ab03d","components/core/IconButton.jsx":"24052f4eed78","components/core/Input.jsx":"54a6c9af7e3f","components/core/Tag.jsx":"d8513c07ea96","components/form/Checkbox.jsx":"38aa593157dd","components/form/Select.jsx":"8e1bf646cee1","components/form/Switch.jsx":"938c62be0664","components/form/Tabs.jsx":"ede2dbff1963","components/knowledge/ConstellationItem.jsx":"d73e999469b6","components/knowledge/MemoryBar.jsx":"a54c928d5065","components/knowledge/StarNode.jsx":"0dff2f392dd3","components/overlay/ContextMenu.jsx":"e84d3f1048c3","components/overlay/Modal.jsx":"6119273e95da","components/overlay/Toast.jsx":"d22ad40680a6","components/overlay/Tooltip.jsx":"98039e5d50b2","ui_kits/stellar-raft/AIConfig.jsx":"e9267a256811","ui_kits/stellar-raft/AdminConsole.jsx":"abab476c59c3","ui_kits/stellar-raft/AdminHandover.jsx":"4c32a00059bf","ui_kits/stellar-raft/AerialView.jsx":"7d00f8d9029b","ui_kits/stellar-raft/BlackHole.jsx":"f324d5b64e4c","ui_kits/stellar-raft/Boundary.jsx":"790ffda4d159","ui_kits/stellar-raft/Checkup.jsx":"c54c77da001e","ui_kits/stellar-raft/CommandPalette.jsx":"82ea907819de","ui_kits/stellar-raft/Editor.jsx":"48262de656a7","ui_kits/stellar-raft/EditorMenus.jsx":"76441391edba","ui_kits/stellar-raft/FeynmanDrawer.jsx":"e8b94b5b055c","ui_kits/stellar-raft/Galaxy3D.jsx":"e678c2343672","ui_kits/stellar-raft/Inbox.jsx":"ea34b6d490f5","ui_kits/stellar-raft/KeysHelp.jsx":"2373dec4a232","ui_kits/stellar-raft/ListView.jsx":"e685b8c1482f","ui_kits/stellar-raft/LoginView.jsx":"d5ec28487e98","ui_kits/stellar-raft/MobileShell.jsx":"c9e8f872f9c0","ui_kits/stellar-raft/Onboarding.jsx":"49393b450681","ui_kits/stellar-raft/ReviewSession.jsx":"cb3d52a765a1","ui_kits/stellar-raft/Settings.jsx":"8ff063d1c022","ui_kits/stellar-raft/Sidebar.jsx":"e4bf63cdf14e","ui_kits/stellar-raft/StarMap.jsx":"36fbde9556b0","ui_kits/stellar-raft/Timeline.jsx":"601d5fa7c241","ui_kits/stellar-raft/VisitView.jsx":"e06be97cd901","ui_kits/stellar-raft/ai.js":"2f79eb3473c9","ui_kits/stellar-raft/app.jsx":"cfe81477b9d2","ui_kits/stellar-raft/clipboard.js":"c3ebf5f9310c","ui_kits/stellar-raft/codehl.js":"57a79e683031","ui_kits/stellar-raft/data.js":"7fc75044f02e","ui_kits/stellar-raft/mdcore.js":"1bd261d4d0a8","ui_kits/stellar-raft/responsive.js":"664811eedaac","ui_kits/stellar-raft/sanitize.js":"17154d7e6b6d","ui_kits/stellar-raft/transition.js":"3725d8982dc5","ui_kits/stellar-raft/undocore.js":"7f8c94da35f9","ui_kits/stellar-raft/vault.js":"15af4ae0efde"},"inlinedExternals":[],"unexposedExports":[],"exposedHelpers":[{"name":"memoryColor","sourcePath":"components/knowledge/MemoryBar.jsx"},{"name":"toast","sourcePath":"components/overlay/Toast.jsx"}]} */
+/* @ds-bundle: {"format":3,"namespace":"StellarRaftDesignSystem_2866af","components":[{"name":"Badge","sourcePath":"components/core/Badge.jsx"},{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"GlassPanel","sourcePath":"components/core/GlassPanel.jsx"},{"name":"Icon","sourcePath":"components/core/Icon.jsx"},{"name":"IconButton","sourcePath":"components/core/IconButton.jsx"},{"name":"Input","sourcePath":"components/core/Input.jsx"},{"name":"Tag","sourcePath":"components/core/Tag.jsx"},{"name":"Checkbox","sourcePath":"components/form/Checkbox.jsx"},{"name":"Select","sourcePath":"components/form/Select.jsx"},{"name":"Switch","sourcePath":"components/form/Switch.jsx"},{"name":"Tabs","sourcePath":"components/form/Tabs.jsx"},{"name":"ConstellationItem","sourcePath":"components/knowledge/ConstellationItem.jsx"},{"name":"MemoryBar","sourcePath":"components/knowledge/MemoryBar.jsx"},{"name":"StarNode","sourcePath":"components/knowledge/StarNode.jsx"},{"name":"ContextMenu","sourcePath":"components/overlay/ContextMenu.jsx"},{"name":"Modal","sourcePath":"components/overlay/Modal.jsx"},{"name":"Toast","sourcePath":"components/overlay/Toast.jsx"},{"name":"Tooltip","sourcePath":"components/overlay/Tooltip.jsx"}],"sourceHashes":{"assets/starfield.js":"fa5283c0b9e3","components/core/Badge.jsx":"b0bd9735d638","components/core/Button.jsx":"a1c387a07e86","components/core/GlassPanel.jsx":"bd96f4ac54dd","components/core/Icon.jsx":"7505f83ab03d","components/core/IconButton.jsx":"24052f4eed78","components/core/Input.jsx":"54a6c9af7e3f","components/core/Tag.jsx":"d8513c07ea96","components/form/Checkbox.jsx":"38aa593157dd","components/form/Select.jsx":"8e1bf646cee1","components/form/Switch.jsx":"938c62be0664","components/form/Tabs.jsx":"ede2dbff1963","components/knowledge/ConstellationItem.jsx":"d73e999469b6","components/knowledge/MemoryBar.jsx":"a54c928d5065","components/knowledge/StarNode.jsx":"0dff2f392dd3","components/overlay/ContextMenu.jsx":"e84d3f1048c3","components/overlay/Modal.jsx":"6119273e95da","components/overlay/Toast.jsx":"d22ad40680a6","components/overlay/Tooltip.jsx":"98039e5d50b2","ui_kits/stellar-raft/AIConfig.jsx":"9083ce789504","ui_kits/stellar-raft/AdminConsole.jsx":"809fb02b4d6c","ui_kits/stellar-raft/AdminHandover.jsx":"4c32a00059bf","ui_kits/stellar-raft/AerialView.jsx":"7d00f8d9029b","ui_kits/stellar-raft/BlackHole.jsx":"f324d5b64e4c","ui_kits/stellar-raft/Boundary.jsx":"790ffda4d159","ui_kits/stellar-raft/Checkup.jsx":"c54c77da001e","ui_kits/stellar-raft/CommandPalette.jsx":"82ea907819de","ui_kits/stellar-raft/Editor.jsx":"b8a748b1dde0","ui_kits/stellar-raft/EditorMenus.jsx":"76441391edba","ui_kits/stellar-raft/FeynmanDrawer.jsx":"65720ed3d749","ui_kits/stellar-raft/Galaxy3D.jsx":"e678c2343672","ui_kits/stellar-raft/Inbox.jsx":"04f46087c843","ui_kits/stellar-raft/KeysHelp.jsx":"2373dec4a232","ui_kits/stellar-raft/ListView.jsx":"7370dcb344cc","ui_kits/stellar-raft/LoginView.jsx":"d5ec28487e98","ui_kits/stellar-raft/MobileShell.jsx":"3431a66a89bc","ui_kits/stellar-raft/Onboarding.jsx":"49393b450681","ui_kits/stellar-raft/ReviewSession.jsx":"cb3d52a765a1","ui_kits/stellar-raft/Settings.jsx":"97593042dd19","ui_kits/stellar-raft/Sidebar.jsx":"e4bf63cdf14e","ui_kits/stellar-raft/StarMap.jsx":"06b6070c3b96","ui_kits/stellar-raft/Timeline.jsx":"601d5fa7c241","ui_kits/stellar-raft/VisitView.jsx":"b712de5dacf2","ui_kits/stellar-raft/ai.js":"2f79eb3473c9","ui_kits/stellar-raft/app.jsx":"cfe81477b9d2","ui_kits/stellar-raft/clipboard.js":"c3ebf5f9310c","ui_kits/stellar-raft/codehl.js":"57a79e683031","ui_kits/stellar-raft/data.js":"7fc75044f02e","ui_kits/stellar-raft/mdcore.js":"09da458f9f8e","ui_kits/stellar-raft/responsive.js":"664811eedaac","ui_kits/stellar-raft/sanitize.js":"17154d7e6b6d","ui_kits/stellar-raft/transition.js":"3725d8982dc5","ui_kits/stellar-raft/undocore.js":"aa57b71578bb","ui_kits/stellar-raft/vault.js":"39e53e6d84d8"},"inlinedExternals":[],"unexposedExports":[],"exposedHelpers":[{"name":"memoryColor","sourcePath":"components/knowledge/MemoryBar.jsx"},{"name":"toast","sourcePath":"components/overlay/Toast.jsx"}]} */
 
 (() => {
 
@@ -77,7 +77,10 @@ try { (() => {
 
   class Starfield extends HTMLElement {
     connectedCallback() {
+      /* 纯装饰背景：对读屏隐藏，否则有的会念出「空白画布/图像」 */
+      this.setAttribute('aria-hidden', 'true');
       this.canvas = document.createElement('canvas');
+      this.canvas.setAttribute('aria-hidden', 'true');
       Object.assign(this.style, {
         position: this.style.position || 'absolute',
         inset: '0',
@@ -92,6 +95,14 @@ try { (() => {
       this.appendChild(this.canvas);
       this.ctx = this.canvas.getContext('2d');
       this.reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      /* 页面开着时切系统设置也要跟：只在挂载时读一次的话，开着页去开「减少动态
+         效果」的人得不到任何变化。reduced 为真时 rAF 循环里 dt=0（画面静止），
+         恢复时无需重建，下一帧自然继续。 */
+      this._mq = matchMedia('(prefers-reduced-motion: reduce)');
+      this._mqChange = e => {
+        this.reduced = e.matches;
+      };
+      if (this._mq.addEventListener) this._mq.addEventListener('change', this._mqChange);
       this._resize = this.resize.bind(this);
       window.addEventListener('resize', this._resize);
       this.meteor = null;
@@ -101,6 +112,7 @@ try { (() => {
     }
     disconnectedCallback() {
       window.removeEventListener('resize', this._resize);
+      if (this._mq && this._mq.removeEventListener) this._mq.removeEventListener('change', this._mqChange);
       cancelAnimationFrame(this._raf);
     }
     resize() {
@@ -3394,6 +3406,7 @@ function AIConfig({
       model: e.target.value
     }),
     placeholder: provider.id === 'custom' ? '例如 qwen3-32b / deepseek-v3 / llama4' : '填写模型 ID',
+    "aria-label": "\u6A21\u578B ID",
     icon: "pen-line",
     size: "md",
     style: {
@@ -3728,12 +3741,17 @@ function useAdminData(path, deps) {
   const [data, setData] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
   const alive = React.useRef(true);
+  /* seq 防 stale：alive 是共享的，path 一变 cleanup 置 false、新 effect 立刻置回
+     true——旧 path 的在飞请求随后 resolve 时看到的仍是 true，旧数据盖掉新分区。
+     每次取数领一个序号，迟到的回复序号对不上就丢。 */
+  const seq = React.useRef(0);
   const load = React.useCallback(() => {
+    const my = ++seq.current;
     setLoading(true);
     return adminApi(path).then(d => {
-      if (alive.current) setData(d);
+      if (alive.current && seq.current === my) setData(d);
     }).catch(() => {}).finally(() => {
-      if (alive.current) setLoading(false);
+      if (alive.current && seq.current === my) setLoading(false);
     });
   }, [path]);
   React.useEffect(() => {
@@ -15137,7 +15155,10 @@ function Editor({
       tags: null,
       body: text
     };
-    const nbs = parseMdBlocks(fm.body);
+    let nbs = parseMdBlocks(fm.body);
+    /* 与文件名相同的开头 H1 掐掉（那是导出端写的标题行，vault 导入同款规则）——
+       不掐的话，把刚导出的「星名.md」导回来，正文里每往返一次多一行标题 */
+    if (nbs.length && nbs[0].type === 'h1' && liveText(nbs[0]).trim().toLowerCase() === String(name || '').trim().toLowerCase()) nbs = nbs.slice(1);
     if (!nbs.length && !fm.props) {
       flash('文件是空的 · 没有可导入的内容');
       return;
@@ -20191,6 +20212,9 @@ function FeynmanDrawer({
       }
     }, t);
   })), !aiGate && /*#__PURE__*/React.createElement("div", {
+    role: "log",
+    "aria-live": "polite",
+    "aria-label": "\u4E0E AI \u5B66\u751F\u7684\u5BF9\u8BDD",
     style: {
       display: 'flex',
       flexDirection: 'column',
@@ -20233,6 +20257,7 @@ function FeynmanDrawer({
     onChange: e => setInput(e.target.value),
     onKeyDown: onKeyDown,
     placeholder: gated ? '先写下这颗星，再来讲给 AI 学生' : aiGate ? '先接入 AI 学生，或选择本地学生' : canIgnite ? '还想补充就继续讲…' : '把你的理解讲给 AI 学生…',
+    "aria-label": "\u628A\u4F60\u7684\u7406\u89E3\u8BB2\u7ED9 AI \u5B66\u751F",
     icon: "message-circle",
     size: "md",
     disabled: thinking || gated || aiGate
@@ -23006,6 +23031,7 @@ function Inbox({
     },
     onClose: () => setConfirm(null)
   }), toast && /*#__PURE__*/React.createElement("div", {
+    role: "status",
     style: {
       position: 'fixed',
       bottom: 26,
@@ -24571,7 +24597,8 @@ function ListView({
   }, /*#__PURE__*/React.createElement(Checkbox, {
     on: allChecked,
     dash: !allChecked && someChecked,
-    onClick: selectAll
+    onClick: selectAll,
+    label: "\u5168\u9009\u672C\u9875"
   }), /*#__PURE__*/React.createElement(HeadCell, {
     k: "title"
   }, "\u6807\u9898"), /*#__PURE__*/React.createElement(HeadCell, {
@@ -25681,6 +25708,47 @@ function MobileTabBar({
   })))));
 }
 
+/* ---------- 模态焦点（抽屉与底部弹层共用）----------
+   与 EditorMenus 的 useModalFocus 同一套语义（进场移焦入内、Tab 圈内回绕、
+   退场归还），但这两个组件是「常驻挂载、open 开合」的，钩子得跟着 open 走。
+   不接键盘的触屏用户无感；外接键盘 / 开关控制 / VoiceOver 用户此前打开抽屉后
+   焦点还在背景上，Tab 直接穿过弹层——aria-modal 形同虚设。 */
+function usePanelFocus(open, ref) {
+  React.useEffect(() => {
+    if (!open) return;
+    const prev = document.activeElement;
+    const root = ref.current;
+    if (root && !root.contains(document.activeElement)) {
+      const first = root.querySelector('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])');
+      if (first) first.focus();else if (root.focus) root.focus();
+    }
+    const onKey = e => {
+      if (e.key !== 'Tab') return;
+      const r = ref.current;
+      if (!r) return;
+      const list = Array.from(r.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])')).filter(el => el.offsetWidth || el.offsetHeight || el === document.activeElement);
+      if (!list.length) {
+        e.preventDefault();
+        return;
+      }
+      const inside = r.contains(document.activeElement);
+      const i = list.indexOf(document.activeElement);
+      if (e.shiftKey && (i <= 0 || !inside)) {
+        e.preventDefault();
+        list[list.length - 1].focus();
+      } else if (!e.shiftKey && (i === list.length - 1 || !inside)) {
+        e.preventDefault();
+        list[0].focus();
+      }
+    };
+    window.addEventListener('keydown', onKey, true);
+    return () => {
+      window.removeEventListener('keydown', onKey, true);
+      if (prev && prev.focus && document.contains(prev)) prev.focus();
+    };
+  }, [open]); // eslint-disable-line react-hooks/exhaustive-deps
+}
+
 /* ---------- 抽屉 ----------
    装的就是桌面那套完整侧栏，不做第二份导航——两边永远同步。
    点遮罩 / 按 Esc / 选中任一目的地都关。 */
@@ -25689,6 +25757,7 @@ function MobileDrawer({
   onClose,
   children
 }) {
+  const panelRef = React.useRef(null);
   React.useEffect(() => {
     injectMobileCss();
   }, []);
@@ -25703,15 +25772,18 @@ function MobileDrawer({
     document.addEventListener('keydown', k);
     return () => document.removeEventListener('keydown', k);
   }, [open, onClose]);
+  usePanelFocus(open, panelRef);
   if (!open) return null;
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "sr-m-mask",
     onClick: onClose
   }), /*#__PURE__*/React.createElement("div", {
+    ref: panelRef,
     className: "sr-m-panel",
     role: "dialog",
     "aria-modal": "true",
-    "aria-label": "\u5BFC\u822A\u83DC\u5355"
+    "aria-label": "\u5BFC\u822A\u83DC\u5355",
+    tabIndex: -1
   }, children));
 }
 
@@ -25724,6 +25796,7 @@ function MobileSheet({
   children,
   footer
 }) {
+  const sheetRef = React.useRef(null);
   React.useEffect(() => {
     injectMobileCss();
   }, []);
@@ -25738,6 +25811,7 @@ function MobileSheet({
     document.addEventListener('keydown', k);
     return () => document.removeEventListener('keydown', k);
   }, [open, onClose]);
+  usePanelFocus(open, sheetRef);
   if (!open) return null;
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "sr-m-mask",
@@ -25747,10 +25821,12 @@ function MobileSheet({
     onClick: onClose,
     onContextMenu: e => e.preventDefault()
   }), /*#__PURE__*/React.createElement("div", {
+    ref: sheetRef,
     className: "sr-m-sheet",
     role: "dialog",
     "aria-modal": "true",
-    "aria-label": title || '面板'
+    "aria-label": title || '面板',
+    tabIndex: -1
   }, /*#__PURE__*/React.createElement("div", {
     className: "sr-m-grip",
     "aria-hidden": "true"
@@ -28784,10 +28860,16 @@ const SR_SET_NAV = [{
 function SRToggle({
   on,
   onChange,
-  disabled
+  disabled,
+  label
 }) {
+  /* role/状态/名称一个不能少：裸 <button> 对读屏来说只是「按钮」——
+     不知道管什么、也不知道当前开还是关（AIConfig 的 Toggle 是对照的样板） */
   return /*#__PURE__*/React.createElement("button", {
     type: "button",
+    role: "switch",
+    "aria-checked": !!on,
+    "aria-label": label || '开关',
     disabled: disabled,
     onClick: () => !disabled && onChange(!on),
     style: {
@@ -28891,6 +28973,7 @@ function SRSegment({
     return /*#__PURE__*/React.createElement("button", {
       key: o.value,
       type: "button",
+      "aria-pressed": on,
       onClick: () => onChange(o.value),
       style: {
         height: 26,
@@ -29362,14 +29445,16 @@ function Settings({
     hint: "\u661F\u8FB0\u547C\u5438\u3001\u5361\u7247\u6D6E\u8D77\u3001\u70B9\u4EAE\u65F6\u7684\u5149\u7206\u3002\u5173\u95ED\u540E\u754C\u9762\u66F4\u5B89\u9759\u3002"
   }, /*#__PURE__*/React.createElement(SRToggle, {
     on: motion,
-    onChange: setMotion
+    onChange: setMotion,
+    label: "\u754C\u9762\u52A8\u6548"
   })), /*#__PURE__*/React.createElement(SRRow, {
     title: "\u80CC\u666F\u661F\u70B9\u95EA\u70C1",
     hint: "\u8FDC\u666F\u661F\u573A\u7684\u5FAE\u5F31\u660E\u706D\u3002"
   }, /*#__PURE__*/React.createElement(SRToggle, {
     on: twinkle,
     onChange: setTwinkle,
-    disabled: !motion
+    disabled: !motion,
+    label: "\u80CC\u666F\u661F\u70B9\u95EA\u70C1"
   })), /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: 14,
@@ -29400,6 +29485,7 @@ function Settings({
     })()
   }, /*#__PURE__*/React.createElement(SRToggle, {
     on: remind,
+    label: "\u5F00\u542F\u590D\u4E60\u63D0\u9192",
     onChange: v => {
       setRemind(v);
       if (v && typeof Notification !== 'undefined' && Notification.permission === 'default') Notification.requestPermission();
@@ -29447,7 +29533,8 @@ function Settings({
     align: "flex-start"
   }, /*#__PURE__*/React.createElement(SRToggle, {
     on: dimNudge,
-    onChange: setDimNudge
+    onChange: setDimNudge,
+    label: "\u661F\u57DF\u53D8\u6697\u63D0\u9192"
   })), /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: 14,
@@ -31108,6 +31195,7 @@ function PopMenu({
     tabIndex: -1,
     className: "sr-focus-ring",
     onKeyDown: onKey,
+    "aria-activedescendant": active >= 0 && items[active] && !items[active].sep ? 'sr-popmenu-item-' + active : undefined,
     onPointerDown: e => e.stopPropagation(),
     onContextMenu: e => e.preventDefault(),
     style: {
@@ -31150,6 +31238,7 @@ function PopMenu({
   }) : /*#__PURE__*/React.createElement("div", {
     key: it.label,
     role: "menuitem",
+    id: 'sr-popmenu-item-' + i,
     "aria-disabled": it.disabled || undefined,
     onMouseEnter: () => {
       if (!it.disabled) setActive(i);
@@ -34389,18 +34478,26 @@ function VisitMap({
   const readyRef = React.useRef(onReady);
   readyRef.current = onReady;
   React.useEffect(() => {
+    /* 换好友是 props 更新（组件不重挂载）：A 的慢响应晚于 B 到达时，
+       会把 B 的屏幕整片换成 A 的星系。迟到的回复直接丢。 */
+    let alive = true;
     N.api('/api/visit/' + friend.id).then(r => {
+      if (!alive) return;
       setState({
         galaxy: r.galaxy,
         owner: r.owner
       });
       readyRef.current && readyRef.current();
     }).catch(e => {
+      if (!alive) return;
       setState({
         error: e.message
       });
       readyRef.current && readyRef.current();
     });
+    return () => {
+      alive = false;
+    };
   }, [friend.id]);
   const g = state.galaxy;
   // 世界坐标：与 StarMap 相同的百分比 → 像素映射
@@ -38772,10 +38869,25 @@ try { (() => {
      嵌套列表不再被压平；非列表的 4 空格缩进段仍识别为 plaintext 代码块。 */
   const LIST_RE = /^([-*+]|\d+[.)])\s/;
   function parseMdBlocks(text) {
-    const lines = String(text == null ? '' : text).replace(/\r\n?/g, '\n').split('\n');
+    const lines = String(text == null ? '' : text).replace(/\r\n?/g, '\n').replace(/^\uFEFF/, '').split('\n');
     const out = [];
     let i = 0,
       m;
+    /* 列表项的续行（导出端按标记宽度缩进续行；CommonMark 同样把更深缩进的
+       内容归给列表项）。只并「更深缩进、非空、本身不是新结构」的行，
+       嵌套列表项/围栏/标题/表格照旧各立门户。 */
+    const absorb = (bk, minLead) => {
+      while (i < lines.length) {
+        const raw2 = lines[i];
+        if (!raw2.trim()) break;
+        const lead2 = (raw2.match(/^[ \t]*/)[0] || '').replace(/\t/g, '  ').length;
+        if (lead2 < minLead) break;
+        const t2 = raw2.trim();
+        if (LIST_RE.test(t2) || /^(`{3,}|-{3,}|\*{3,}|#{1,6}(\s|$)|\$\$|\|)/.test(t2)) break;
+        bk.text += '<br>' + mdInline(t2);
+        i++;
+      }
+    };
     while (i < lines.length) {
       const raw = lines[i];
       const l = raw.trim();
@@ -38815,14 +38927,16 @@ try { (() => {
           code: buf.join('\n')
         });
       } else if (m = l.match(/^[-*+]\s+\[( |x|X)\](?:\s+(.*)|$)/)) {
-        out.push({
+        const bk = {
           id: uid(),
           type: 'todo',
           checked: m[1].toLowerCase() === 'x',
           text: mdInline(m[2] || ''),
           ...ind
-        });
+        };
+        out.push(bk);
         i++;
+        absorb(bk, lead + 2);
       } else if (/^(-{3,}|\*{3,})$/.test(l)) {
         out.push({
           id: uid(),
@@ -38832,15 +38946,17 @@ try { (() => {
       }
       // 裸标记（`-` / `1.` 无内容）也是合法的空列表项——与导出端的空块互逆
       else if (m = l.match(/^[-*+](?:\s+(.*)|$)/)) {
-        out.push({
+        const bk = {
           id: uid(),
           type: 'bulleted',
           text: mdInline(m[1] || ''),
           ...ind
-        });
+        };
+        out.push(bk);
         i++;
+        absorb(bk, lead + 2);
       } else if (m = l.match(/^(\d+)[.)](?:\s+(.*)|$)/)) {
-        out.push({
+        const bk = {
           id: uid(),
           type: 'numbered',
           text: mdInline(m[2] || ''),
@@ -38848,8 +38964,10 @@ try { (() => {
           ...(m[1] !== '1' ? {
             start: parseInt(m[1], 10)
           } : {})
-        });
+        };
+        out.push(bk);
         i++;
+        absorb(bk, lead + 2);
       } else if (/^(\t| {4,})\S/.test(raw)) {
         // 缩进代码：连续缩进行整体保留为 plaintext 代码块
         const buf = [];
@@ -38912,7 +39030,11 @@ try { (() => {
       else if (m = l.match(/^!\[((?:\\[[\]]|[^\]])*)\]\((<[^>\n]+>|[^)\s]+)(?:\s+"[^"]*")?\)$/)) {
         const alt = m[1].replace(/\\([[\]])/g, '$1');
         const src = m[2].replace(/^<|>$/g, '');
-        out.push(safeUrl(src) ? {
+        /* data:image/* 单独放行：导出端会把 ≤100KB 的本地图片以 dataURL 内联
+           （blocksToMd 的 image 分支），不收回来就是「导得出、导不回」——图在
+           回导时静默蒸发。只认 base64 图片，data: 的其它形态（HTML/脚本）仍拒。 */
+        const dataImg = /^data:image\/[a-z0-9.+-]+;base64,[a-z0-9+/=]+$/i.test(src);
+        out.push(safeUrl(src) || dataImg ? {
           id: uid(),
           type: 'image',
           alt,
@@ -38934,7 +39056,9 @@ try { (() => {
         });
         i++;
       }
-      // GFM 提示框 > [!NOTE] / [!TIP]…（Obsidian 同语法）→ 标注块，吸收随后的 > 续行
+      // GFM 提示框 > [!NOTE] / [!TIP]…（Obsidian 同语法）→ 标注块，吸收随后的 > 续行。
+      // 续行按 <br> 并回（导出端对多行标注逐行补 > 前缀）——外来的软换行标注同形，
+      // 保留源文件的换行比塌成一行更忠实
       else if (m = l.match(/^>\s*\[!(\w+)\]\s*(.*)$/)) {
         const buf = m[2] ? [m[2]] : [];
         i++;
@@ -38947,15 +39071,23 @@ try { (() => {
           id: uid(),
           type: 'callout',
           tone: m[1].toLowerCase() === 'tip' ? 'gold' : 'blue',
-          text: mdInline(buf.join(' '))
+          text: buf.map(x => mdInline(x)).join('<br>')
         });
-      } else if (m = l.match(/^>\s?(.*)/)) {
+      }
+      // 连续的引用行属于同一个引用块（导出端对多行引用逐行补 > 前缀）；
+      // 后随的 > [!…] 是新的提示框，不吞
+      else if (m = l.match(/^>\s?(.*)/)) {
+        const parts = [m[1]];
+        i++;
+        while (i < lines.length && /^>\s?/.test(lines[i].trim()) && !/^>\s*\[!/.test(lines[i].trim())) {
+          parts.push(lines[i].trim().replace(/^>\s?/, ''));
+          i++;
+        }
         out.push({
           id: uid(),
           type: 'quote',
-          text: mdInline(m[1])
+          text: parts.map(x => mdInline(x)).join('<br>')
         });
-        i++;
       }
       // <details><summary>…</summary>…</details> → 折叠块（与导出的 toggle 语法互逆）
       else if (/^<details>/i.test(l)) {
@@ -39014,13 +39146,25 @@ try { (() => {
     return s.replace(/^["']|["']$/g, '');
   };
   function parseFrontmatter(text) {
-    const src = String(text == null ? '' : text).replace(/\r\n?/g, '\n');
+    /* BOM 先剥：Windows 记事本存的 .md 常带 \uFEFF，不剥的话开头的 ---
+       对不上，整个 frontmatter 退化成正文里的分隔线，tags/props 全丢 */
+    const src = String(text == null ? '' : text).replace(/\r\n?/g, '\n').replace(/^\uFEFF/, '');
     const m = src.match(/^---\n([\s\S]*?)\n---\n?/);
-    if (!m) return {
-      props: null,
-      tags: null,
-      body: src
-    };
+    if (!m) {
+      // 空 frontmatter（---\n---\n）：主正则要求包围体里至少一个换行，
+      // 空的匹配不上会退化成两个分隔线块——单独认下来，按「无属性」处理
+      const empty = src.match(/^---\n---\n?/);
+      if (empty) return {
+        props: null,
+        tags: null,
+        body: src.slice(empty[0].length)
+      };
+      return {
+        props: null,
+        tags: null,
+        body: src
+      };
+    }
     const props = {};
     let tags = null;
     const fmLines = m[1].split('\n');
@@ -39117,17 +39261,23 @@ try { (() => {
           lines.push(escLead(htmlToMd(b.text)));
           break;
         // 引用/列表文本若以 [ 开头（[!NOTE]、[ ] 之类），转义护住——
-        // 否则导入端会把引用误认成 callout、把列表项误认成 todo
+        // 否则导入端会把引用误认成 callout、把列表项误认成 todo。
+        // 多行内容（块内的 <br>）续行必须同样补结构前缀：只给首行加前缀的话，
+        // 回导时第二行起就掉出结构，变成独立段落——块被静默拆开
         case 'quote':
-          lines.push('> ' + htmlToMd(b.text).replace(/^\[!/, '\\[!'));
+          lines.push(htmlToMd(b.text).replace(/^\[!/, '\\[!').split('\n').map(x => '> ' + x).join('\n'));
           break;
         // callout 用 GFM 提示框语法（大写才被 GitHub 渲染；Obsidian 大小写皆可）
         case 'callout':
-          lines.push('> [!' + (b.tone === 'blue' ? 'NOTE' : 'TIP') + ']\n> ' + htmlToMd(b.text).replace(/^\[!/, '\\[!'));
+          lines.push('> [!' + (b.tone === 'blue' ? 'NOTE' : 'TIP') + ']\n' + htmlToMd(b.text).replace(/^\[!/, '\\[!').split('\n').map(x => '> ' + x).join('\n'));
           break;
+        // 续行缩进到与首行文字对齐（标记宽度），导入端据此并回本项
         case 'bulleted':
-          lines.push(pad + '- ' + htmlToMd(b.text).replace(/^\[/, '\\['));
-          break;
+          {
+            const t = htmlToMd(b.text).replace(/^\[/, '\\[').split('\n');
+            lines.push(pad + '- ' + t[0] + (t.length > 1 ? '\n' + t.slice(1).map(x => pad + '  ' + x).join('\n') : ''));
+            break;
+          }
         case 'numbered':
           {
             const lvl = b.indent || 0;
@@ -39135,12 +39285,18 @@ try { (() => {
             if (counters[lvl] == null) counters[lvl] = 0;
             if (counters[lvl] === 0 && b.start) counters[lvl] = b.start - 1;
             counters[lvl] += 1;
-            lines.push(pad + counters[lvl] + '. ' + htmlToMd(b.text).replace(/^\[/, '\\['));
+            const marker = counters[lvl] + '. ';
+            const t = htmlToMd(b.text).replace(/^\[/, '\\[').split('\n');
+            lines.push(pad + marker + t[0] + (t.length > 1 ? '\n' + t.slice(1).map(x => pad + ' '.repeat(marker.length) + x).join('\n') : ''));
             break;
           }
         case 'todo':
-          lines.push(pad + '- [' + (b.checked ? 'x' : ' ') + '] ' + htmlToMd(b.text));
-          break;
+          {
+            const marker = '- [' + (b.checked ? 'x' : ' ') + '] ';
+            const t = htmlToMd(b.text).split('\n');
+            lines.push(pad + marker + t[0] + (t.length > 1 ? '\n' + t.slice(1).map(x => pad + ' '.repeat(marker.length) + x).join('\n') : ''));
+            break;
+          }
         // toggle 用标准可折叠 <details>，标注其为折叠块
         case 'toggle':
           lines.push('<details>\n<summary>' + htmlToMd(b.text) + '</summary>\n\n' + htmlToMd(b.child || '') + '\n</details>');
@@ -39172,8 +39328,11 @@ try { (() => {
           {
             const src0 = b.src || '';
             const alt = String(b.alt || '').replace(/\r?\n/g, ' ').replace(/([[\]])/g, '\\$1');
+            /* 超限 dataURL 不内联。占位不能写成图片语法——回导会生成一个 src 指向
+               占位文字的 image 块，编辑器里就是一张永久裂图。写成引用行：导入回来
+               是一段能读懂的说明，而不是一块坏图。 */
             if (/^data:/.test(src0) && src0.length >= 100000) {
-              lines.push('![' + (alt || '本地图片') + '](本地图片-过大未内联)');
+              lines.push('> 📷 本地图片「' + (alt || '未命名') + '」超过 100KB，未内联进这份导出');
               break;
             }
             const src = /[\s()]/.test(src0) ? '<' + src0.replace(/[<>]/g, '') + '>' : src0;
@@ -39213,6 +39372,11 @@ try { (() => {
     pushFm('source', p.source);
     pushFm('alias', p.alias);
     pushFm('nextReview', p.nextReview);
+    /* id 与 fav 随 frontmatter 走（vault 导出时传入）：导入端靠旧 id 重建
+       正文里 stellar-raft://star/<旧id> 的指向——没有它，回导后这些链接
+       全部指向不存在的星，变成死链。fav 是星上的收藏标记，不该默默丢。 */
+    if (o.id) fm.push('id: ' + String(o.id).replace(/[^\w-]/g, ''));
+    if (o.fav) fm.push('fav: true');
     // tags 恒写 JSON 数组（合法 YAML flow）——「a,b」这样的标签不会被逗号劈成两个
     if (o.tags && o.tags.length) fm.push('tags: ' + JSON.stringify(o.tags.map(String)));
     const front = fm.length ? '---\n' + fm.join('\n') + '\n---\n\n' : '';
@@ -39820,6 +39984,9 @@ try { (() => {
   function undo(h, current) {
     if (!h.past.length) return null;
     h.future.push(current);
+    /* future 同样封顶：快照是整篇克隆，cap=120 时 past+future 最坏 240 份——
+       一篇 1MB 的笔记就是 ~240MB。超出丢最旧（离现在最远的那个重做端）。 */
+    if (h.future.length > h.cap) h.future.shift();
     h.typing = false;
     return h.past.pop();
   }
@@ -39828,6 +39995,7 @@ try { (() => {
   function redo(h, current) {
     if (!h.future.length) return null;
     h.past.push(current);
+    if (h.past.length > h.cap) h.past.shift();
     h.typing = false;
     return h.future.pop();
   }
@@ -39972,7 +40140,11 @@ try { (() => {
         title: nameOf[s.id],
         props: s.props,
         tags: s.tags,
-        summary: stripHtml(s.summary || '')
+        summary: stripHtml(s.summary || ''),
+        /* id 与 fav 进 frontmatter：回导时每颗星会拿到全新随机 id，正文里的
+           stellar-raft://star/<旧id> 全靠这个旧 id 重建指向，否则回导后全是死链 */
+        id: s.id,
+        fav: s.fav
       });
       const text = bodyMd + (related.length ? '\n## 关联\n\n' + related.join('\n') + '\n' : '');
       entries.push({
@@ -40084,20 +40256,32 @@ try { (() => {
       const fm = Md.parseFrontmatter(e.text);
       let blocks = Md.parseMdBlocks(fm.body);
       if (blocks.length && blocks[0].type === 'h1' && norm(stripHtmlText(blocks[0].text)) === norm(fname)) blocks = blocks.slice(1);
-      const relIdx = blocks.findIndex(bk => /^h[23]$/.test(bk.type) && stripHtmlText(bk.text) === '关联');
+      /* 「## 关联」小节只认「文末最后一个、且之后再无其它标题」的那一个——
+         外来仓库若恰好有同名小节，其后的正文小节（甚至整章）会被一起截掉。
+         小节内不像连线条目的块（外来的表格/代码/普通段落）留在正文里，不吞。 */
+      let relIdx = -1;
+      blocks.forEach((bk, ix) => {
+        if (/^h[23]$/.test(bk.type) && stripHtmlText(bk.text) === '关联') relIdx = ix;
+      });
       let bodyBlocks = blocks;
-      if (relIdx >= 0) {
-        bodyBlocks = blocks.slice(0, relIdx);
+      if (relIdx >= 0 && !blocks.slice(relIdx + 1).some(bk => /^h[1-3]$/.test(bk.type))) {
+        const kept = [];
         blocks.slice(relIdx + 1).forEach(bk => {
-          if (bk.type !== 'bulleted' && bk.type !== 'p') return;
-          const t = stripHtmlText(bk.text);
-          const m = t.match(WIKI_RE);
-          if (m) pending.push({
-            fromName: fname,
-            targetName: m[1].trim(),
-            rel: t.replace(WIKI_RE, '').replace(/^[\s—–-]+/, '').trim()
-          });
+          if (bk.type === 'bulleted' || bk.type === 'p') {
+            const t = stripHtmlText(bk.text);
+            const m = t.match(WIKI_RE);
+            if (m) {
+              pending.push({
+                fromName: fname,
+                targetName: m[1].trim(),
+                rel: t.replace(WIKI_RE, '').replace(/^[\s—–-]+/, '').trim()
+              });
+              return;
+            }
+          }
+          kept.push(bk);
         });
+        bodyBlocks = [...blocks.slice(0, relIdx), ...kept];
       }
       if (!consByName.has(folder)) consByName.set(folder, {
         id: 'c' + Math.random().toString(36).slice(2, 7),
@@ -40105,15 +40289,28 @@ try { (() => {
       });
       const id = 's' + Math.random().toString(36).slice(2, 8);
       const firstP = bodyBlocks.find(bk => bk.type === 'p' && stripHtmlText(bk.text));
+      /* frontmatter 里的 id/fav 是应用自己的往返字段，不是用户的自定义属性——
+         摘出来用掉，别留在 props 面板上 */
+      const props = {
+        ...(fm.props || {})
+      };
+      const oldId = props.id ? String(props.id) : null;
+      const fav = String(props.fav) === 'true';
+      delete props.id;
+      delete props.fav;
       stars.push({
         id,
         con: consByName.get(folder).id,
         label: fname,
         summary: firstP ? stripHtmlText(firstP.text).slice(0, 160) : '',
         tags: fm.tags || [],
-        props: fm.props || {},
+        props,
         importance: 1,
         strength: 0.5,
+        ...(fav ? {
+          fav: true
+        } : {}),
+        oldId,
         body: [{
           id: id + '-r',
           type: 'rich'
@@ -40123,6 +40320,23 @@ try { (() => {
           text: ''
         }])]
       });
+    });
+    /* 正文里的 stellar-raft://star/<旧id> 按 frontmatter 带回的旧 id 重指到新 id——
+       没有这一步，回导后正文里的星链接全部指向不存在的星（老导出文件没有 id
+       字段，映射为空，行为与从前一致：链接可见但点不动） */
+    const idMap = new Map();
+    stars.forEach(s => {
+      if (s.oldId && !idMap.has(s.oldId)) idMap.set(s.oldId, s.id);
+    });
+    if (idMap.size) stars.forEach(s => s.body.forEach(bk => {
+      if (bk && typeof bk.text === 'string' && bk.text.includes('stellar-raft://star/')) {
+        idMap.forEach((nu, old) => {
+          bk.text = bk.text.split('stellar-raft://star/' + old).join('stellar-raft://star/' + nu);
+        });
+      }
+    }));
+    stars.forEach(s => {
+      delete s.oldId;
     });
     const byName = new Map(stars.map(s => [norm(s.label), s]));
     const connections = [];

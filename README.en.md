@@ -5,7 +5,7 @@
 **Other apps store notes in a warehouse — Stellar Raft grows them in a living deep space of knowledge.**
 
 ![Node](https://img.shields.io/badge/Node-%E2%89%A5%2022.13-9fc6ff?style=flat-square&labelColor=05060f)
-![Tests](https://img.shields.io/badge/tests-349%20passing-ffd98a?style=flat-square&labelColor=05060f)
+![Tests](https://img.shields.io/badge/tests-366%20passing-ffd98a?style=flat-square&labelColor=05060f)
 ![Build](https://img.shields.io/badge/build-zero--config-9fc6ff?style=flat-square&labelColor=05060f)
 ![Components](https://img.shields.io/badge/components-18%20primitives-9fc6ff?style=flat-square&labelColor=05060f)
 ![Backend](https://img.shields.io/badge/backend-zero--dependency-ffd98a?style=flat-square&labelColor=05060f)
@@ -232,7 +232,7 @@ Stellar Raft is a *work of art*, not another white-background office notebook. F
 
 - **The full set of screens** — star map · aerial view · 3D galaxy (Three.js) · Feynman drawer · list management · timeline · review session · inbox · black-hole trash · star roaming · knowledge checkup · pro block editor.
 - **Pro block editor** — headings / todos / lists / quote / code / LaTeX / tables / images, live markdown conversion, ⌘F find-and-replace, backlinks and outline, app-level undo/redo (typing merges per burst, sealed at every block switch). Type `[[` to summon the star picker and insert a star link; select text and paste a URL to make it a link; a screenshot in the clipboard pastes straight into an image block; star links in the body navigate on click, external links open in a new tab.
-- **Knowledge flows both ways** — ⌘K full-text search reaches into note bodies (highlighted snippets); export your galaxy as an Obsidian-style Markdown vault (zip, zero-dependency packaging), and **import one back** — a .zip or a batch of .md files grows into a galaxy (folders→constellations, frontmatter→props, `[[wikilinks]]`→connections, merged incrementally). Import/export round-trips with real GFM, aligned with GitHub · Typora · Obsidian — both directions are fuzz-tested property-style (thousands of random block documents plus adversarial inputs): round-trips lose nothing, and bracket-dense hostile text cannot freeze the page (the link regex is hardened against backtracking).
+- **Knowledge flows both ways** — ⌘K full-text search reaches into note bodies (highlighted snippets); export your galaxy as an Obsidian-style Markdown vault (zip, zero-dependency packaging), and **import one back** — a .zip or a batch of .md files grows into a galaxy (folders→constellations, frontmatter→props, `[[wikilinks]]`→connections, merged incrementally). Import/export round-trips with real GFM, aligned with GitHub · Typora · Obsidian — both directions are fuzz-tested property-style (thousands of random block documents plus adversarial inputs): round-trips lose nothing, and bracket-dense hostile text cannot freeze the page (the link regex is hardened against backtracking). Images up to 100KB travel inside the vault as inline dataURLs and come back intact; in-body star links are re-pointed via the old id stored in frontmatter, so they still work after re-import; favorites ride frontmatter too. **The trash is not part of the Markdown vault** (things in the black hole are meant to vanish) — to back up trash, timeline and AI config as well, use the whole-galaxy JSON export in Settings.
 - **Images know their place** — Stellar Raft stores one galaxy as a single snapshot, so an image inlined in a note travels as a data URL with *every* save. Large images are therefore resized before they enter a note: small ones are kept byte-for-byte, big ones are scaled to a 1600px long edge and stepped down in quality (webp first, so transparency survives), GIF/SVG are size-checked rather than re-encoded, and anything still too large is refused out loud. Without that step one phone photo pushes the whole galaxy past the server's 8MB body limit and the localStorage quota — every save fails from then on, and all the user sees is "server unreachable".
 - **Press `?`** for a full shortcut cheatsheet, anywhere.
 
@@ -318,6 +318,8 @@ Once the handover is done both factory values are dead, the red warning at the t
 | **Sessions** | Every device that has signed in; tokens surface as a fingerprint only — the full token never leaves the database |
 | **Broadcast** | Site-wide announcements (three tones + live preview, shown once per user) · registration switch · maintenance mode |
 | **System** | Database size breakdown · one-click backup download (full `.db`) · WAL checkpoint · VACUUM · expired-session cleanup |
+
+**Restoring from a backup**: the backup is the whole database file (WAL is checkpointed before download). Restore = stop the server → replace `server/stellar.db` (or wherever `SR_DB` points) with the backup file → start again. Remove any leftover `stellar.db-wal` / `stellar.db-shm` siblings so the restored file starts clean.
 | **Audit log** | Every ban, deletion, password change and site change (last 2000 entries) |
 
 Every figure is computed server-side from the database on request — never estimated, never sampled.
@@ -369,7 +371,7 @@ Layered bottom-up: design tokens → component library → app UI kit, with a ze
 | Styling | Native CSS design tokens · glassmorphism · dual `data-theme` themes |
 | Memory | FSRS-lite (`R = exp(−Δt/S)`) |
 | Backend | Node ≥ 22.13 built-in `node:sqlite` (zero third-party deps) |
-| Tests | `node --test` (29 suites, 349 tests) · oxlint |
+| Tests | `node --test` (30 suites, 366 tests) · oxlint |
 
 ---
 
@@ -392,7 +394,7 @@ stellar-raft/
 ├─ docs/                   # zero-build static docs site + screenshots + diagrams
 ├─ guidelines/             # 15 foundation spec cards (color / type / spacing / icons / brand)
 ├─ scripts/                # build · lint (artifacts are generated — never hand-edit _ds_bundle.js)
-└─ tests/                  # node --test: 29 suites (server / auth / admin / responsive / compile / tokens …)
+└─ tests/                  # node --test: 30 suites (server / auth / admin / responsive / compile / tokens …)
 ```
 
 **Design system** — 18 primitives on the `window.StellarRaftDesignSystem_2866af` namespace:
@@ -409,7 +411,7 @@ stellar-raft/
 | Command | What it does |
 | --- | --- |
 | `npm run serve` | Start the local backend + static hosting (`server/server.js`) |
-| `npm test` | Run `node --test` — 29 suites, 349 tests |
+| `npm test` | Run `node --test` — 30 suites, 366 tests |
 | `npm run build` | Rebuild `_ds_bundle.js` + `_ds_manifest.json` from source |
 | `npm run build:check` | Detect drift between artifacts and source (for CI) |
 | `npm run lint` | Run oxlint against the derived rule config (full `correctness` category + `no-undef`, across server / ui_kits / components / tests / docs) |

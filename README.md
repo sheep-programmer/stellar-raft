@@ -5,7 +5,7 @@
 **别人的笔记是仓库，星图是一片活着的「知识深空」。**
 
 ![Node](https://img.shields.io/badge/Node-%E2%89%A5%2022.13-9fc6ff?style=flat-square&labelColor=05060f)
-![Tests](https://img.shields.io/badge/tests-349%20passing-ffd98a?style=flat-square&labelColor=05060f)
+![Tests](https://img.shields.io/badge/tests-366%20passing-ffd98a?style=flat-square&labelColor=05060f)
 ![Build](https://img.shields.io/badge/build-zero--config-9fc6ff?style=flat-square&labelColor=05060f)
 ![Components](https://img.shields.io/badge/components-18%20primitives-9fc6ff?style=flat-square&labelColor=05060f)
 ![Backend](https://img.shields.io/badge/backend-zero--dependency-ffd98a?style=flat-square&labelColor=05060f)
@@ -232,7 +232,7 @@ styles.css  _ds_bundle.js  _ds_manifest.json
 
 - **全套界面** — 星图主界面 · 亮度鸟瞰 · 三维星系（Three.js）· 费曼抽屉 · 列表管理 · 时间轴 · 复习会话 · 收件箱 · 黑洞回收站 · 星际漫游 · 知识体检 · 专业块编辑器。
 - **专业块编辑器** — H1–H3 / 待办 / 列表 / 引用 / 代码 / LaTeX / 表格 / 图片，markdown 即时转换、⌘F 查找替换、反向链接与大纲、应用级撤销/重做（输入按突发合并、换块各自封口）。打 `[[` 唤出选星器插入星链接；选中一段文字粘一个网址即成链接；剪贴板里的截图直接落成图片块；正文里的星链接单击即前往那颗星，外链新标签页打开。
-- **知识可进可出** — ⌘K 全文搜索直达笔记正文（片段高亮）；一键导出 Obsidian 风格 Markdown 仓库（zip，零依赖打包），也能把 .zip / 一批 .md **反向导入**长成星空（文件夹→星域、frontmatter→属性、`[[wikilink]]`→连线，增量并入不覆盖）。导入导出与真实 GFM 完全互逆，对齐 GitHub · Typora · Obsidian——两端都过属性化模糊测试（数千例随机块 + 对抗输入）：往返不丢内容，括号密集的恶意文本也冻不住页面（链接正则做了防回溯）。
+- **知识可进可出** — ⌘K 全文搜索直达笔记正文（片段高亮）；一键导出 Obsidian 风格 Markdown 仓库（zip，零依赖打包），也能把 .zip / 一批 .md **反向导入**长成星空（文件夹→星域、frontmatter→属性、`[[wikilink]]`→连线，增量并入不覆盖）。导入导出与真实 GFM 完全互逆，对齐 GitHub · Typora · Obsidian——两端都过属性化模糊测试（数千例随机块 + 对抗输入）：往返不丢内容，括号密集的恶意文本也冻不住页面（链接正则做了防回溯）。≤100KB 的插图以 dataURL 内联随仓库走、回导原样回来；正文里的星链接靠 frontmatter 里的旧 id 重建指向，回导后仍然点得动；收藏标记随 frontmatter 往返。**回收站不进 Markdown 导出**（黑洞里的东西本就该会消失）——要连回收站、时间线、AI 配置一起备份，用设置里的 JSON 整片导出。
 - **插图有分寸** — 星图是「整片星空一次整存」，笔记里的图以 dataURL 内联在快照里跟着每次保存整体上传。所以大图进笔记之前先压：小图原样保留，大图按长边 1600px 缩一次并逐档降质（webp 优先，保住透明通道），GIF / SVG 不重编码只判大小，实在压不下的明说一声。少了这一步，一张手机原图就能让整片星空越过服务器 8MB 上限与 localStorage 配额，此后每次保存都失败——而用户只会看到一句「服务器暂不可达」。
 - **按 `?`** 随时弹出全站快捷键速查面板。
 
@@ -318,6 +318,8 @@ styles.css  _ds_bundle.js  _ds_manifest.json
 | **会话** | 每台登录过的设备；令牌只出一段指纹，完整令牌永不出库 |
 | **广播** | 全站公告（三档语气 + 实时预览，用户读过一次就不再打扰）· 新账号注册开关 · 维护模式 |
 | **系统** | 数据库体积明细 · 一键备份下载（完整 `.db`）· 收拢 WAL · VACUUM 压缩 · 清理过期会话 |
+
+**从备份恢复**：备份就是整库文件（下载前已收拢 WAL）。恢复 = 停服 → 用它替换 `server/stellar.db`（或 `SR_DB` 指向的位置）→ 重启。删掉同目录可能残留的 `stellar.db-wal` / `stellar.db-shm`，让新库从干净状态起步。
 | **日志** | 每一次停用、删号、改密与站点变更的审计留痕（保留最近 2000 条） |
 
 每个数字都由服务端当场从库里算出，不估算、不抽样。
@@ -369,7 +371,7 @@ styles.css  _ds_bundle.js  _ds_manifest.json
 | 样式 | 原生 CSS 设计令牌 · 玻璃拟态 · `data-theme` 双主题 |
 | 记忆 | FSRS-lite（`R = exp(−Δt/S)`） |
 | 后端 | Node ≥ 22.13 内置 `node:sqlite`（零三方依赖） |
-| 测试 | `node --test`（29 个套件 349 项）· oxlint |
+| 测试 | `node --test`（30 个套件 366 项）· oxlint |
 
 ---
 
@@ -392,7 +394,7 @@ stellar-raft/
 ├─ docs/                   # 零构建静态文档站 + 截图 + 架构图
 ├─ guidelines/             # 15 张基础规范示例卡（颜色 / 字体 / 间距 / 图标 / 品牌）
 ├─ scripts/                # build · lint（产物由源码生成，勿手改 _ds_bundle.js）
-└─ tests/                  # node --test：29 个套件（server / auth / admin / responsive / compile / tokens …）
+└─ tests/                  # node --test：30 个套件（server / auth / admin / responsive / compile / tokens …）
 ```
 
 **组件库** — 18 个原语挂在命名空间 `window.StellarRaftDesignSystem_2866af`：
@@ -409,7 +411,7 @@ stellar-raft/
 | 命令 | 作用 |
 | --- | --- |
 | `npm run serve` | 启动本地后端 + 静态托管（`server/server.js`） |
-| `npm test` | 运行 `node --test`，29 个套件 349 项 |
+| `npm test` | 运行 `node --test`，30 个套件 366 项 |
 | `npm run build` | 从源码重建 `_ds_bundle.js` + `_ds_manifest.json` |
 | `npm run build:check` | 检测产物与源码是否漂移（CI 用） |
 | `npm run lint` | 以派生的规范配置运行 oxlint（correctness 全组 + `no-undef`，覆盖 server / ui_kits / components / tests / docs） |
