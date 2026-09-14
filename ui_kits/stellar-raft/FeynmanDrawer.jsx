@@ -395,7 +395,7 @@ function FeynmanDrawer({ starId, onClose, onOpenAIConfig }) {
         background: 'var(--glass-bg-strong)', WebkitBackdropFilter: 'blur(var(--glass-blur)) saturate(1.2)', backdropFilter: 'blur(var(--glass-blur)) saturate(1.2)', borderLeft: phone ? 'none' : '1px solid var(--glass-border-strong)' }}>
         {/* header */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '18px 20px 12px' }}>
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 12, letterSpacing: '0.06em', color: 'var(--text-3)', textTransform: 'uppercase', fontFamily: 'var(--font-mono)' }}>
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: '0.75rem', letterSpacing: '0.06em', color: 'var(--text-3)', textTransform: 'uppercase', fontFamily: 'var(--font-mono)' }}>
             <Icon name="brain" size={16} color="var(--gold)" />费曼内化
             {/* 学生模式徽章：接入真实 AI 时亮金并标出模型；未接入提示去 AI 配置开通 */}
             {aiMode.on ? (
@@ -410,22 +410,22 @@ function FeynmanDrawer({ starId, onClose, onOpenAIConfig }) {
         <div ref={scrollRef} onContextMenu={(e) => e.preventDefault()}
           style={{ flex: 1, overflow: 'auto', padding: '0 20px 20px', display: 'flex', flexDirection: 'column', gap: 16 }}>
           <div>
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 11, color: 'var(--text-3)', marginBottom: 6 }}>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: '0.6875rem', color: 'var(--text-3)', marginBottom: 6 }}>
               <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
                 <span style={{ width: 7, height: 7, borderRadius: '50%', background: D.conColor(star.con), boxShadow: `0 0 8px ${D.conColor(star.con)}` }} />{D.conName(star.con)}
               </span>
               {certChip && (
-                <span style={{ fontSize: 10, letterSpacing: '0.05em', padding: '2px 8px', borderRadius: 'var(--r-pill)',
+                <span style={{ fontSize: '0.625rem', letterSpacing: '0.05em', padding: '2px 8px', borderRadius: 'var(--r-pill)',
                   border: `1px solid ${certChip.border}`, color: certChip.color, background: certChip.bg }}>{certChip.text}</span>
               )}
             </div>
-            <div style={{ fontSize: 24, fontWeight: 300, color: 'var(--text-1)', textShadow: lit ? 'var(--text-glow-warm)' : 'var(--text-glow-cool)', transition: 'text-shadow var(--dur-slow)' }}>{star.label}</div>
+            <div style={{ fontSize: '1.5rem', fontWeight: 300, color: 'var(--text-1)', textShadow: lit ? 'var(--text-glow-warm)' : 'var(--text-glow-cool)', transition: 'text-shadow var(--dur-slow)' }}>{star.label}</div>
           </div>
 
           <MemoryBar value={strength} label="记忆强度" showPct />
 
           {/* 常驻副标题：随认证态自解释（世界观一句话） */}
-          <div style={{ fontSize: 13.5, lineHeight: 1.75, color: 'var(--text-2)' }}>
+          <div style={{ fontSize: '0.84375rem', lineHeight: 1.75, color: 'var(--text-2)' }}>
             {mode === 'relight'
               ? '曾点亮的星暗了下来。再讲透一次，就能重燃。'
               : mode === 'consolidate'
@@ -437,7 +437,7 @@ function FeynmanDrawer({ starId, onClose, onOpenAIConfig }) {
           {gated && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10, padding: '14px 15px', borderRadius: 'var(--r-md)',
               border: '1px dashed var(--line-strong)', background: 'color-mix(in srgb, var(--star-blue) 4%, transparent)' }}>
-              <div style={{ display: 'flex', gap: 8, fontSize: 12.5, lineHeight: 1.7, color: 'var(--text-2)' }}>
+              <div style={{ display: 'flex', gap: 8, fontSize: '0.78125rem', lineHeight: 1.7, color: 'var(--text-2)' }}>
                 <Icon name="pen-line" size={15} color="var(--star-blue)" style={{ marginTop: 2, flex: 'none' }} />
                 <span>这颗星还没有内容——先写下它，才谈得上点亮。</span>
               </div>
@@ -451,14 +451,14 @@ function FeynmanDrawer({ starId, onClose, onOpenAIConfig }) {
               border: '1px solid rgba(255,217,138,0.28)', background: 'rgba(255,217,138,0.06)' }}>
               <div style={{ display: 'flex', gap: 9, alignItems: 'flex-start' }}>
                 <Icon name="bot" size={17} color="var(--gold)" style={{ marginTop: 2, flex: 'none' }} />
-                <div style={{ fontSize: 12.5, lineHeight: 1.75, color: 'var(--text-2)' }}>
+                <div style={{ fontSize: '0.78125rem', lineHeight: 1.75, color: 'var(--text-2)' }}>
                   费曼内化以真实 AI 学生为主——它会真的听懂你的讲解，在含糊处追问、在讲透处确认。接入一次，费曼学生、编辑器助手、复习出题同时点亮。
                 </div>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                 <Button size="sm" variant="primary" glow icon="plug-zap" onClick={() => { if (onOpenAIConfig) onOpenAIConfig(); }}>接入 AI 学生</Button>
                 <button type="button" className="sr-focus-ring" onClick={chooseLocal}
-                  style={{ font: 'inherit', fontSize: 12, color: 'var(--text-3)', border: 'none', background: 'transparent', cursor: 'pointer', textDecoration: 'underline', textUnderlineOffset: 3 }}>
+                  style={{ font: 'inherit', fontSize: '0.75rem', color: 'var(--text-3)', border: 'none', background: 'transparent', cursor: 'pointer', textDecoration: 'underline', textUnderlineOffset: 3 }}>
                   暂用本地学生讲解
                 </button>
               </div>
@@ -468,12 +468,12 @@ function FeynmanDrawer({ starId, onClose, onOpenAIConfig }) {
           {/* 要点：讲到时点亮成暖金 */}
           {targets.length > 0 && (
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center' }}>
-              <span style={{ fontSize: 10, letterSpacing: '0.08em', color: 'var(--text-3)', textTransform: 'uppercase', fontFamily: 'var(--font-mono)' }}>要点</span>
+              <span style={{ fontSize: '0.625rem', letterSpacing: '0.08em', color: 'var(--text-3)', textTransform: 'uppercase', fontFamily: 'var(--font-mono)' }}>要点</span>
               {targets.map((t) => {
                 const on = covered.has(t);
                 return (
                   <span key={t} style={{
-                    fontSize: 11, padding: '3px 9px', borderRadius: 'var(--r-pill)',
+                    fontSize: '0.6875rem', padding: '3px 9px', borderRadius: 'var(--r-pill)',
                     border: '1px solid', transition: 'all var(--dur-base) var(--ease-flight)',
                     borderColor: on ? 'rgba(255,217,138,0.5)' : 'var(--glass-border)',
                     background: on ? 'rgba(255,217,138,0.12)' : 'transparent',
@@ -524,14 +524,14 @@ function FeynmanDrawer({ starId, onClose, onOpenAIConfig }) {
           )}
 
           {/* 门槛进度：判据就地自解释（有效讲解字数 / 轮次 / 要点） */}
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10, fontSize: 11, color: 'var(--text-3)', fontFamily: 'var(--font-mono)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10, fontSize: '0.6875rem', color: 'var(--text-3)', fontFamily: 'var(--font-mono)' }}>
             <span>有效讲解 {effChars}/{needChars} 字 · {effRounds} 轮{targets.length ? ` · 要点 ${covered.size}/${targets.length}` : ''}</span>
             <span style={{ color: statusColor, textAlign: 'right', flex: 'none' }}>{statusText}</span>
           </div>
 
           {/* sr 增益提示：成功后展示稳定度（点亮 / 重燃走金，巩固走蓝） */}
           {doneFlag && stability > 0 && (
-            <div aria-live="polite" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7, fontSize: 12, color: 'var(--text-2)', fontFamily: 'var(--font-mono)' }}>
+            <div aria-live="polite" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7, fontSize: '0.75rem', color: 'var(--text-2)', fontFamily: 'var(--font-mono)' }}>
               <Icon name="trending-up" size={13} color={lit ? 'var(--gold)' : 'var(--star-blue)'} />
               记忆稳定度升至 {Math.round(stability)} 天 · 复习间隔更长
             </div>
@@ -539,18 +539,18 @@ function FeynmanDrawer({ starId, onClose, onOpenAIConfig }) {
 
           {mode === 'consolidate' ? (
             <Button variant="primary" icon="check" disabled={!canIgnite || consolidated || extinguished} onClick={consolidate}
-              style={{ width: '100%', height: 48, fontSize: 16 }}>
+              style={{ width: '100%', height: 48, fontSize: '1rem' }}>
               {consolidated ? '已巩固 · 记忆更牢' : '巩固这颗星'}
             </Button>
           ) : (
             <Button variant="primary" icon={mode === 'relight' ? 'flame' : 'zap'} glow={canIgnite && !lit && !gated}
-              disabled={!canIgnite || lit || gated} onClick={ignite} style={{ width: '100%', height: 48, fontSize: 16 }}>
+              disabled={!canIgnite || lit || gated} onClick={ignite} style={{ width: '100%', height: 48, fontSize: '1rem' }}>
               {mode === 'relight' ? (lit ? '已重燃 · 星光归位' : '重燃这颗星') : (lit ? '已点亮 · 融会贯通' : '点亮这颗星')}
             </Button>
           )}
           {!doneFlag && (
             deferred ? (
-              <div aria-live="polite" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7, fontSize: 12, color: 'var(--text-3)', padding: '2px 0' }}>
+              <div aria-live="polite" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7, fontSize: '0.75rem', color: 'var(--text-3)', padding: '2px 0' }}>
                 <Icon name={extinguished ? 'cloud-off' : 'rotate-ccw'} size={13} color="var(--star-blue-dim)" />
                 {extinguished ? '已熄灭 · 待重燃——把它讲透，光就会回来' : '这颗星还需要时间 — 已排回复习队列'}
               </div>
@@ -569,7 +569,7 @@ function FeynmanDrawer({ starId, onClose, onOpenAIConfig }) {
 function TypingBubble() {
   return (
     <div style={{ alignSelf: 'flex-start', maxWidth: '88%' }}>
-      <div style={{ fontSize: 10, color: 'var(--text-3)', marginBottom: 4, marginLeft: 2 }}>AI 学生</div>
+      <div style={{ fontSize: '0.625rem', color: 'var(--text-3)', marginBottom: 4, marginLeft: 2 }}>AI 学生</div>
       <div style={{ display: 'inline-flex', alignItems: 'center', gap: 4, padding: '12px 14px', borderRadius: '4px 14px 14px 14px',
         background: 'rgba(159,198,255,0.08)', border: '1px solid var(--glass-border)' }}>
         {[0, 1, 2].map((i) => (
@@ -585,13 +585,13 @@ function Bubble({ who, name, note, children }) {
   const ai = who === 'ai';
   return (
     <div style={{ alignSelf: ai ? 'flex-start' : 'flex-end', maxWidth: '88%', animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
-      {name && <div style={{ fontSize: 10, color: 'var(--text-3)', marginBottom: 4, marginLeft: 2 }}>{name}</div>}
-      <div style={{ fontSize: 13, lineHeight: 1.6, padding: '10px 13px', borderRadius: ai ? '4px 14px 14px 14px' : '14px 4px 14px 14px',
+      {name && <div style={{ fontSize: '0.625rem', color: 'var(--text-3)', marginBottom: 4, marginLeft: 2 }}>{name}</div>}
+      <div style={{ fontSize: '0.8125rem', lineHeight: 1.6, padding: '10px 13px', borderRadius: ai ? '4px 14px 14px 14px' : '14px 4px 14px 14px',
         background: ai ? 'rgba(159,198,255,0.08)' : 'rgba(255,217,138,0.10)',
         border: '1px solid', borderColor: ai ? 'var(--glass-border)' : 'rgba(255,217,138,0.24)',
         color: ai ? 'var(--text-2)' : 'var(--text-1)' }}>{children}</div>
       {/* 回退注脚：AI 请求失败时的原因一行小字，不打断流程 */}
-      {note && <div style={{ fontSize: 11, color: 'var(--text-3)', marginTop: 4, marginLeft: 2 }}>{note}</div>}
+      {note && <div style={{ fontSize: '0.6875rem', color: 'var(--text-3)', marginTop: 4, marginLeft: 2 }}>{note}</div>}
     </div>
   );
 }

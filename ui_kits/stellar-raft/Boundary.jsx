@@ -64,14 +64,14 @@ class Boundary extends React.Component {
         <div style={{ width: 460, maxWidth: '94vw', margin: 'auto' }}>
           <GlassPanel strong radius="lg" glow style={{ padding: '30px 26px 24px', textAlign: 'center' }}>
             <Icon name="triangle-alert" size={28} color="var(--danger)" />
-            <div style={{ fontSize: 18, fontWeight: 300, color: 'var(--text-1)', marginTop: 14 }}>
+            <div style={{ fontSize: '1.125rem', fontWeight: 300, color: 'var(--text-1)', marginTop: 14 }}>
               {this.props.title ? this.props.title + '碎了' : '这一块星图碎了'}
             </div>
 
-            <div style={{ fontSize: 12.5, color: 'var(--text-2)', marginTop: 12, lineHeight: 1.8 }}>
+            <div style={{ fontSize: '0.78125rem', color: 'var(--text-2)', marginTop: 12, lineHeight: 1.8 }}>
               这是星图自己的问题，不是你哪里点错了。
             </div>
-            <div style={{ fontSize: 12, color: 'var(--text-3)', marginTop: 10, lineHeight: 1.75 }}>
+            <div style={{ fontSize: '0.75rem', color: 'var(--text-3)', marginTop: 10, lineHeight: 1.75 }}>
               <b style={{ color: 'var(--star-blue)' }}>你的星空没事</b> —— 每次改动都同时落在本机与服务器上，
               这次崩溃发生在画面这一层，碰不到已经存下的东西。
             </div>
@@ -80,7 +80,7 @@ class Boundary extends React.Component {
             <div style={{
               marginTop: 16, padding: '10px 12px', textAlign: 'left',
               borderRadius: 'var(--r-sm)', border: '1px solid var(--line)', background: 'var(--space-1)',
-              fontFamily: 'var(--font-mono)', fontSize: 11.5, lineHeight: 1.7, color: 'var(--text-2)',
+              fontFamily: 'var(--font-mono)', fontSize: '0.71875rem', lineHeight: 1.7, color: 'var(--text-2)',
               maxHeight: 132, overflow: 'auto', userSelect: 'text', wordBreak: 'break-word',
             }}>{msg}</div>
 
@@ -96,7 +96,7 @@ class Boundary extends React.Component {
               </Button>
             </div>
 
-            <div style={{ fontSize: 11, color: 'var(--text-3)', marginTop: 14, lineHeight: 1.7 }}>
+            <div style={{ fontSize: '0.6875rem', color: 'var(--text-3)', marginTop: 14, lineHeight: 1.7 }}>
               完整堆栈已经打在浏览器控制台里。
             </div>
           </GlassPanel>

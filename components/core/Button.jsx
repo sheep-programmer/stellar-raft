@@ -31,7 +31,7 @@ export function Button({
   const [press, setPress] = React.useState(false);
   const h = { sm: 32, md: 40, lg: 48 }[size] || 40;
   const pad = { sm: '0 14px', md: '0 18px', lg: '0 24px' }[size] || '0 18px';
-  const fs = { sm: 13, md: 15, lg: 16 }[size] || 15;
+  const fs = { sm: '0.8125rem', md: '0.9375rem', lg: '1rem' }[size] || '0.9375rem';
 
   const palettes = {
     primary: disabled ? {

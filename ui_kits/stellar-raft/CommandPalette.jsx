@@ -188,18 +188,18 @@ function CommandPalette({ onClose, onOpenStar, onOpenView, onFocusCon }) {
               role="combobox" aria-expanded="true" aria-controls="sr-cmd-list" aria-activedescendant={flat.length ? 'sr-cmd-opt-' + active : undefined}
               aria-label="搜索星、星域、视图、笔记正文"
               placeholder="搜索星、星域、视图、笔记正文…"
-              style={{ flex: 1, background: 'transparent', border: 'none', outline: 'none', color: 'var(--text-1)', fontSize: 16, fontFamily: 'var(--font-sans)' }} />
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: 10.5, color: 'var(--text-3)', border: '1px solid var(--line-strong)', borderRadius: 6, padding: '2px 7px' }}>ESC</span>
+              style={{ flex: 1, background: 'transparent', border: 'none', outline: 'none', color: 'var(--text-1)', fontSize: '1rem', fontFamily: 'var(--font-sans)' }} />
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65625rem', color: 'var(--text-3)', border: '1px solid var(--line-strong)', borderRadius: 6, padding: '2px 7px' }}>ESC</span>
           </div>
 
           {/* results */}
           <div ref={listRef} role="listbox" id="sr-cmd-list" style={{ maxHeight: 380, overflow: 'auto', padding: 8 }}>
             {flat.length === 0 && (
-              <div role="status" style={{ padding: '32px 0', textAlign: 'center', color: 'var(--text-3)', fontSize: 13.5 }}>没有匹配「{query}」的结果。</div>
+              <div role="status" style={{ padding: '32px 0', textAlign: 'center', color: 'var(--text-3)', fontSize: '0.84375rem' }}>没有匹配「{query}」的结果。</div>
             )}
             {sections.map(sec => (
               <div key={sec.title} style={{ marginBottom: 6 }}>
-                <div style={{ fontSize: 10, letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: 'var(--text-3)', padding: '6px 10px 4px', fontFamily: 'var(--font-mono)' }}>{sec.title}</div>
+                <div style={{ fontSize: '0.625rem', letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: 'var(--text-3)', padding: '6px 10px 4px', fontFamily: 'var(--font-mono)' }}>{sec.title}</div>
                 {sec.items.map(item => {
                   idx += 1; const i = idx; const on = i === active;
                   return (
@@ -209,13 +209,13 @@ function CommandPalette({ onClose, onOpenStar, onOpenView, onFocusCon }) {
                         {item.color
                           ? <span style={{ width: 18, display: 'inline-flex', justifyContent: 'center' }}><span style={{ width: 8, height: 8, borderRadius: '50%', background: item.color, boxShadow: `0 0 7px ${item.color}` }} /></span>
                           : <Icon name={item.icon} size={16} color={on ? 'var(--gold)' : 'var(--text-2)'} />}
-                        <span style={{ flex: 1, fontSize: 13.5, color: on ? 'var(--text-1)' : 'var(--text-2)' }}>{item.label}</span>
-                        {item.note && <Badge tone="fading" style={{ fontSize: 10, height: 16, minWidth: 0 }}>正文</Badge>}
-                        <span style={{ fontSize: 11, color: 'var(--text-3)' }}>{item.sub}</span>
+                        <span style={{ flex: 1, fontSize: '0.84375rem', color: on ? 'var(--text-1)' : 'var(--text-2)' }}>{item.label}</span>
+                        {item.note && <Badge tone="fading" style={{ fontSize: '0.625rem', height: 16, minWidth: 0 }}>正文</Badge>}
+                        <span style={{ fontSize: '0.6875rem', color: 'var(--text-3)' }}>{item.sub}</span>
                         {on && <Icon name="corner-down-left" size={13} color="var(--text-3)" />}
                       </div>
                       {item.snippet && (
-                        <div style={{ margin: '3px 0 0 29px', fontSize: 11.5, lineHeight: 1.5, color: 'var(--text-3)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                        <div style={{ margin: '3px 0 0 29px', fontSize: '0.71875rem', lineHeight: 1.5, color: 'var(--text-3)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                           {item.snippet.map((sg, k) => sg.hit
                             ? <b key={k} style={{ color: 'var(--gold)', fontWeight: 600 }}>{sg.t}</b>
                             : <span key={k}>{sg.t}</span>)}

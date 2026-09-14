@@ -98,7 +98,7 @@ export function StarNode({
       />
       {label && (
         <span title={label} style={{
-          fontSize: 11.5, fontFamily: 'var(--font-sans)',
+          fontSize: '0.71875rem', fontFamily: 'var(--font-sans)',
           // 寻路文字的地板抬到 --text-2：找星时还没 hover，也要能读
           color: hover || selected ? 'var(--text-1)' : 'var(--text-2)',
           whiteSpace: 'nowrap', textShadow: 'var(--star-label-shadow)',

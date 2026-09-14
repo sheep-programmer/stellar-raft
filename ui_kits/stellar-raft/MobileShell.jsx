@@ -22,7 +22,7 @@ const SR_MOBILE_CSS = `
 
 .sr-m-tabbtn { flex: 1; min-width: 0; border: none; background: transparent; cursor: pointer;
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
-  padding: 0; color: rgba(159,198,255,0.66); font-family: var(--font-sans); font-size: 10.5px; position: relative;
+  padding: 0; color: rgba(159,198,255,0.66); font-family: var(--font-sans); font-size: 0.65625rem; position: relative;
   -webkit-tap-highlight-color: transparent; transition: color var(--dur-fast); }
 .sr-m-tabbtn[aria-current="page"] { color: var(--gold); }
 /* 选中态的那一点光：底部一道短横，比整块底色更克制 */
@@ -73,7 +73,7 @@ html[data-screen="phone"] .sr-ck-2col { grid-template-columns: 1fr !important; }
 html[data-screen="phone"] .sr-ck-4col { grid-template-columns: 1fr 1fr !important; }
 
 /* 大标题在 375px 上会占掉两行：整体降一档 */
-html[data-screen="phone"] .sr-view h1 { font-size: 23px !important; }
+html[data-screen="phone"] .sr-view h1 { font-size: 1.4375rem !important; }
 
 /* 触摸端的点击热区：用一层看不见的 ::after 把可点范围撑到 34px，
    元素自己的盒子一点不动。
@@ -95,7 +95,7 @@ html[data-pointer="coarse"] .sr-hit-pad::after {
 html[data-pointer="coarse"] input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
 html[data-pointer="coarse"] textarea,
 html[data-pointer="coarse"] select {
-  font-size: 16px !important; line-height: 1.45;
+  font-size: 1rem !important; line-height: 1.45;
 }
 
 /* 键盘提示：手机上没有物理键盘，印一枚「空格 / ⌘K」只会让人去找一个
@@ -159,8 +159,8 @@ function MobileTopBar({ title, sub, onMenu, onSearch, onBack }) {
         ? <IconButton name="corner-up-left" title="返回" onClick={onBack} />
         : <IconButton name="menu" title="打开菜单" onClick={onMenu} />}
       <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', lineHeight: 1.15, paddingLeft: 2 }}>
-        <span style={{ fontSize: 15, fontWeight: 300, color: 'var(--text-1)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{title}</span>
-        {sub && <span style={{ fontSize: 10.5, color: 'var(--text-3)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{sub}</span>}
+        <span style={{ fontSize: '0.9375rem', fontWeight: 300, color: 'var(--text-1)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{title}</span>
+        {sub && <span style={{ fontSize: '0.65625rem', color: 'var(--text-3)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{sub}</span>}
       </div>
       {onSearch && <IconButton name="search" title="搜索" onClick={onSearch} />}
     </header>
@@ -276,7 +276,7 @@ function MobileSheet({ open, onClose, title, children, footer }) {
         <div className="sr-m-grip" aria-hidden="true" />
         {title && (
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '4px 14px 10px', borderBottom: '1px solid var(--line)', flex: 'none' }}>
-            <span style={{ flex: 1, minWidth: 0, fontSize: 14.5, fontWeight: 300, color: 'var(--text-1)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{title}</span>
+            <span style={{ flex: 1, minWidth: 0, fontSize: '0.90625rem', fontWeight: 300, color: 'var(--text-1)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{title}</span>
             <IconButton name="x" size="sm" title="关闭" onClick={onClose} />
           </div>
         )}

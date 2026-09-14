@@ -41,10 +41,10 @@ export function ConstellationItem({ name, color = 'var(--star-blue)', count, act
       }} />
       <span style={{
         flex: 1, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
-        fontSize: 13.5, color: active ? 'var(--text-1)' : 'var(--text-2)',
+        fontSize: '0.84375rem', color: active ? 'var(--text-1)' : 'var(--text-2)',
       }}>{name}</span>
       {count != null && (
-        <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-3)' }}>{count}</span>
+        <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6875rem', color: 'var(--text-3)' }}>{count}</span>
       )}
     </button>
   );

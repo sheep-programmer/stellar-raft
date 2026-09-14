@@ -61,7 +61,7 @@ const SR_KEY_GROUPS = [
 function SRKeyCap({ children }) {
   return (
     <kbd style={{
-      fontFamily: 'var(--font-mono)', fontSize: 11.5, color: 'var(--text-1)', minWidth: 22, textAlign: 'center',
+      fontFamily: 'var(--font-mono)', fontSize: '0.71875rem', color: 'var(--text-1)', minWidth: 22, textAlign: 'center',
       border: '1px solid var(--line-strong)', borderRadius: 6, padding: '3px 7px', lineHeight: 1.4,
       background: 'var(--input-bg, rgba(3,4,12,0.45))', whiteSpace: 'nowrap',
     }}>{children}</kbd>
@@ -73,11 +73,11 @@ function SRKeyGroup({ group }) {
     <section aria-label={group.title}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 7, marginBottom: 2 }}>
         <Icon name={group.icon} size={13} color="var(--star-blue)" />
-        <span style={{ fontSize: 10, letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: 'var(--text-3)', fontFamily: 'var(--font-mono)' }}>{group.title}</span>
+        <span style={{ fontSize: '0.625rem', letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: 'var(--text-3)', fontFamily: 'var(--font-mono)' }}>{group.title}</span>
       </div>
       {group.items.map((s, i) => (
         <div key={i} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, padding: '10px 0', borderBottom: i === group.items.length - 1 ? 'none' : '1px solid var(--line)' }}>
-          <span style={{ fontSize: 13, color: 'var(--text-2)', lineHeight: 1.5 }}>{s.label}</span>
+          <span style={{ fontSize: '0.8125rem', color: 'var(--text-2)', lineHeight: 1.5 }}>{s.label}</span>
           <span style={{ display: 'flex', gap: 5, flex: 'none' }}>
             {s.keys.map((k, j) => <SRKeyCap key={j}>{k}</SRKeyCap>)}
           </span>
@@ -116,8 +116,8 @@ function KeysHelp({ onClose }) {
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '15px 18px', borderBottom: '1px solid var(--line)', flex: 'none' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
               <Icon name="keyboard" size={18} color="var(--star-blue)" />
-              <span style={{ fontSize: 15, color: 'var(--text-1)', fontWeight: 300, letterSpacing: '0.02em' }}>快捷键</span>
-              <span style={{ fontSize: 12, color: 'var(--text-3)' }}>不离开键盘，走遍整片星空</span>
+              <span style={{ fontSize: '0.9375rem', color: 'var(--text-1)', fontWeight: 300, letterSpacing: '0.02em' }}>快捷键</span>
+              <span style={{ fontSize: '0.75rem', color: 'var(--text-3)' }}>不离开键盘，走遍整片星空</span>
             </div>
             <IconButton name="x" title="关闭" onClick={onClose} />
           </div>
@@ -129,7 +129,7 @@ function KeysHelp({ onClose }) {
           </div>
 
           {/* footer */}
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7, padding: '11px 18px', borderTop: '1px solid var(--line)', flex: 'none', fontSize: 12, color: 'var(--text-3)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7, padding: '11px 18px', borderTop: '1px solid var(--line)', flex: 'none', fontSize: '0.75rem', color: 'var(--text-3)' }}>
             按 <SRKeyCap>?</SRKeyCap> 随时打开
           </div>
         </GlassPanel>

@@ -52,7 +52,7 @@ function HudStat({ label, value, tone }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 2, minWidth: 64, flex: 'none' }}>
       <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--t-xs)', letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: 'var(--text-2)', whiteSpace: 'nowrap' }}>{label}</span>
-      <span style={{ fontFamily: 'var(--font-mono)', fontSize: 18, color: tone || 'var(--text-1)' }}>{value}</span>
+      <span style={{ fontFamily: 'var(--font-mono)', fontSize: '1.125rem', color: tone || 'var(--text-1)' }}>{value}</span>
     </div>
   );
 }
@@ -162,8 +162,8 @@ function DomainHalos({ stars, cons, k, touch, onDomainDown, onDomainKey }) {
                 boxShadow: '0 0 48px 9px rgba(255,128,60,0.5), 0 0 18px 3px rgba(255,196,120,0.85), inset 0 0 9px rgba(255,90,40,0.45)',
               }} />
               <span style={{ display: 'flex', alignItems: 'center', gap: 7, opacity: nameOpacity, transition: 'opacity var(--dur-base)', whiteSpace: 'nowrap' }}>
-                <span style={{ fontSize: 15.5, fontWeight: 400, letterSpacing: '0.06em', color: 'var(--sun-label, #ffe3b0)', textShadow: 'var(--sun-label-glow, 0 0 12px rgba(255,150,70,0.55), 0 1px 8px rgba(0,0,0,0.85))' }}>{c.name}</span>
-                <span title={`已点亮 ${st.lit} / 共 ${count} 颗`} style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--sun-label-dim, rgba(255,200,140,0.62))' }}>{st.lit}/{count}</span>
+                <span style={{ fontSize: '0.96875rem', fontWeight: 400, letterSpacing: '0.06em', color: 'var(--sun-label, #ffe3b0)', textShadow: 'var(--sun-label-glow, 0 0 12px rgba(255,150,70,0.55), 0 1px 8px rgba(0,0,0,0.85))' }}>{c.name}</span>
+                <span title={`已点亮 ${st.lit} / 共 ${count} 颗`} style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6875rem', color: 'var(--sun-label-dim, rgba(255,200,140,0.62))' }}>{st.lit}/{count}</span>
               </span>
             </div>
           </div>
@@ -211,18 +211,18 @@ function SummaryCard({ star, onOpen, onFeynman, onClose, screen }) {
     <div ref={boxRef} onPointerDown={(e) => e.stopPropagation()} style={frame}>
       <GlassPanel strong radius="lg" pad="md" glow>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 4 }}>
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 11, color: 'var(--text-3)' }}>
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: '0.6875rem', color: 'var(--text-3)' }}>
             <span style={{ width: 7, height: 7, borderRadius: '50%', background: D.conColor(star.con), boxShadow: `0 0 8px ${D.conColor(star.con)}` }} />
             {D.conName(star.con)}
           </span>
           <IconButton name="x" size="sm" title="关闭" onClick={onClose} />
         </div>
-        <div style={{ fontSize: 19, fontWeight: 300, color: 'var(--text-1)', marginBottom: 10, textShadow: 'var(--text-glow-cool)' }}>{star.label}</div>
-        <div style={{ fontSize: 12.5, lineHeight: 1.7, color: 'var(--text-2)', marginBottom: 14 }}>
+        <div style={{ fontSize: '1.1875rem', fontWeight: 300, color: 'var(--text-1)', marginBottom: 10, textShadow: 'var(--text-glow-cool)' }}>{star.label}</div>
+        <div style={{ fontSize: '0.78125rem', lineHeight: 1.7, color: 'var(--text-2)', marginBottom: 14 }}>
           {star.summary || '还没有摘要——打开编辑器，写下第一段。'}
         </div>
         <MemoryBar value={star.strength} label="记忆强度" showPct fading={star.strength < 0.4} />
-        <div style={{ display: 'flex', alignItems: 'flex-start', gap: 7, marginTop: 10, fontSize: 11.5, lineHeight: 1.6, color: 'var(--text-3)' }}>
+        <div style={{ display: 'flex', alignItems: 'flex-start', gap: 7, marginTop: 10, fontSize: '0.71875rem', lineHeight: 1.6, color: 'var(--text-3)' }}>
           <span aria-hidden="true" style={{ flex: 'none', width: 9, height: 9, marginTop: 4, borderRadius: '50%', boxSizing: 'border-box',
             border: lit ? '1px solid var(--gold)'
               : ember ? '1px solid color-mix(in srgb, var(--gold-warm) 55%, transparent)'
@@ -295,7 +295,7 @@ function PopMenu({ x, y, width = 228, header, footer, items, onClose }) {
         visibility: pos ? 'visible' : 'hidden', width, zIndex: 60, outline: 'none' }}>
       <GlassPanel strong radius="md" pad="none" glow style={{ padding: 6 }}>
         {header && (
-          <div style={{ fontSize: 10, letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: 'var(--text-3)', padding: '6px 10px 4px', fontFamily: 'var(--font-mono)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{header}</div>
+          <div style={{ fontSize: '0.625rem', letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: 'var(--text-3)', padding: '6px 10px 4px', fontFamily: 'var(--font-mono)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{header}</div>
         )}
         {items.map((it, i) => it.sep
           ? <div key={'sep' + i} role="separator" style={{ height: 1, background: 'var(--line)', margin: '5px 6px' }} />
@@ -307,7 +307,7 @@ function PopMenu({ x, y, width = 228, header, footer, items, onClose }) {
               style={{ display: 'flex', alignItems: 'center', gap: 11, padding: '8px 10px', borderRadius: 'var(--r-sm)', cursor: it.disabled ? 'default' : 'pointer',
                 background: active === i && !it.disabled ? 'rgba(159,198,255,0.08)' : 'transparent', opacity: it.disabled ? 0.5 : 1 }}>
               <Icon name={it.icon} size={16} color={it.tone || (active === i && !it.disabled ? 'var(--gold)' : 'var(--text-2)')} />
-              <span style={{ flex: 1, fontSize: 13, color: it.tone || (active === i && !it.disabled ? 'var(--text-1)' : 'var(--text-2)') }}>{it.label}</span>
+              <span style={{ flex: 1, fontSize: '0.8125rem', color: it.tone || (active === i && !it.disabled ? 'var(--text-1)' : 'var(--text-2)') }}>{it.label}</span>
               {it.hint && <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--t-xs)', color: 'var(--text-3)' }}>{it.hint}</span>}
             </div>
           ))}
@@ -837,8 +837,8 @@ function StarMap({ selected, onSelect, onOpenEditor, onFeynman, onAerial, on3D, 
         {!phone && (
           <GlassPanel radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', rowGap: 4, gap: 10, padding: '8px 18px', pointerEvents: 'auto' }}>
             <Icon name="orbit" size={17} color="var(--gold)" />
-            <span style={{ fontSize: 14, color: 'var(--text-1)', whiteSpace: 'nowrap' }}>我的星空</span>
-            <span style={{ fontSize: 12, color: 'var(--text-3)', whiteSpace: 'nowrap' }}>创作态 · 中景</span>
+            <span style={{ fontSize: '0.875rem', color: 'var(--text-1)', whiteSpace: 'nowrap' }}>我的星空</span>
+            <span style={{ fontSize: '0.75rem', color: 'var(--text-3)', whiteSpace: 'nowrap' }}>创作态 · 中景</span>
           </GlassPanel>
         )}
         <div style={{ flex: 1 }} />
@@ -854,7 +854,7 @@ function StarMap({ selected, onSelect, onOpenEditor, onFeynman, onAerial, on3D, 
       {/* hint——手势说法随输入方式变：手指没有滚轮，也没有右键。
           手机上摘要卡就贴在屏底，两者会叠在一起：卡片一出现，提示就让位。 */}
       {!(phone && sel) && (
-      <div data-tour="hint" style={{ position: 'absolute', bottom: phone ? 20 : 26, left: phone ? 12 : 24, zIndex: 30, display: 'flex', alignItems: 'center', gap: 8, fontSize: 11.5, color: 'var(--text-3)', pointerEvents: 'none', maxWidth: phone ? 'calc(100% - 84px)' : 'calc(100% - 280px)' }}>
+      <div data-tour="hint" style={{ position: 'absolute', bottom: phone ? 20 : 26, left: phone ? 12 : 24, zIndex: 30, display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.71875rem', color: 'var(--text-3)', pointerEvents: 'none', maxWidth: phone ? 'calc(100% - 84px)' : 'calc(100% - 280px)' }}>
         <Icon name="move" size={14} color="currentColor" />
         {/* 窄窗时截断而不折行，避免与右下工具胶囊压叠 */}
         <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
@@ -872,7 +872,7 @@ function StarMap({ selected, onSelect, onOpenEditor, onFeynman, onAerial, on3D, 
       <div data-tour="tools" onPointerDown={(e) => e.stopPropagation()} style={{ position: 'absolute', bottom: phone ? 14 : 26, right: phone ? 12 : 24, zIndex: 30 }}>
         <GlassPanel radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', gap: 2, padding: '6px 8px' }}>
           <IconButton name="minus" size="sm" title="缩小" onClick={() => setView(v => ({ ...v, k: clamp(v.k * 0.85, 0.34, 2.6) }))} />
-          {!phone && <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--text-2)', minWidth: 42, textAlign: 'center' }}>{Math.round(view.k * 100)}%</span>}
+          {!phone && <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--text-2)', minWidth: 42, textAlign: 'center' }}>{Math.round(view.k * 100)}%</span>}
           <IconButton name="plus" size="sm" title="放大" onClick={() => setView(v => ({ ...v, k: clamp(v.k * 1.18, 0.34, 2.6) }))} />
           <span style={{ width: 1, height: 18, background: 'var(--line)' }} />
           {!phone && <IconButton name="box" size="sm" title="三维星系（2D / 3D）" onClick={on3D} />}
@@ -932,12 +932,12 @@ function StarMap({ selected, onSelect, onOpenEditor, onFeynman, onAerial, on3D, 
         return (
         <div style={{ position: 'fixed', left: Math.max(8, Math.min(naming.x, window.innerWidth - 240)), top: Math.max(8, Math.min(naming.y, window.innerHeight - 130)), zIndex: 60, width: 220 }} onPointerDown={(e) => e.stopPropagation()}>
           <GlassPanel strong radius="md" pad="sm" glow>
-            <div style={{ fontSize: 11, color: 'var(--text-3)', marginBottom: 7 }}>{meta.title}</div>
+            <div style={{ fontSize: '0.6875rem', color: 'var(--text-3)', marginBottom: 7 }}>{meta.title}</div>
             <input autoFocus className="sr-focus-ring" value={draftName} onChange={(e) => setDraftName(e.target.value)}
               onFocus={(e) => e.target.select()}
               onKeyDown={(e) => { if (e.key === 'Enter') commitNaming(); if (e.key === 'Escape') { e.preventDefault(); setNaming(null); } }}
               placeholder={meta.ph}
-              style={{ width: '100%', boxSizing: 'border-box', background: 'var(--input-bg, rgba(3,4,12,0.45))', border: '1px solid var(--glass-border-strong)', borderRadius: 'var(--r-sm)', color: 'var(--text-1)', fontSize: 14, padding: '8px 10px', outline: 'none', fontFamily: 'var(--font-sans)' }} />
+              style={{ width: '100%', boxSizing: 'border-box', background: 'var(--input-bg, rgba(3,4,12,0.45))', border: '1px solid var(--glass-border-strong)', borderRadius: 'var(--r-sm)', color: 'var(--text-1)', fontSize: '0.875rem', padding: '8px 10px', outline: 'none', fontFamily: 'var(--font-sans)' }} />
             <div style={{ display: 'flex', gap: 8, marginTop: 10 }}>
               <Button variant="primary" size="sm" glow onClick={commitNaming} style={{ flex: 1 }}>{meta.ok}</Button>
               <Button size="sm" onClick={() => setNaming(null)}>取消</Button>

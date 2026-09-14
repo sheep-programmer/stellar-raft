@@ -56,7 +56,7 @@ export function Tooltip({ content, children, side = 'top', delay = 450, style, .
               borderRadius: 'var(--r-sm)',
               boxShadow: 'var(--shadow-md), var(--inset-edge)',
               padding: '5px 10px',
-              fontSize: 12, fontFamily: 'var(--font-sans)',
+              fontSize: '0.75rem', fontFamily: 'var(--font-sans)',
               color: 'var(--text-1)', whiteSpace: 'nowrap', lineHeight: 1.5,
               animation: reduced ? 'none' : 'sr-cardin var(--dur-fast) var(--ease-flight) both',
             }}

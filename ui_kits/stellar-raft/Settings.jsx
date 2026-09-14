@@ -68,8 +68,8 @@ function SRRow({ title, hint, children, align, noLine }) {
   return (
     <div style={{ display: 'flex', alignItems: align || 'center', justifyContent: 'space-between', gap: 18, padding: '13px 0', borderBottom: noLine ? 'none' : '1px solid var(--line)' }}>
       <div style={{ minWidth: 0 }}>
-        <div style={{ fontSize: 13.5, color: 'var(--text-1)' }}>{title}</div>
-        {hint && <div style={{ fontSize: 11.5, color: 'var(--text-3)', marginTop: 3, lineHeight: 1.55 }}>{hint}</div>}
+        <div style={{ fontSize: '0.84375rem', color: 'var(--text-1)' }}>{title}</div>
+        {hint && <div style={{ fontSize: '0.71875rem', color: 'var(--text-3)', marginTop: 3, lineHeight: 1.55 }}>{hint}</div>}
       </div>
       <div style={{ flex: 'none' }}>{children}</div>
     </div>
@@ -77,7 +77,7 @@ function SRRow({ title, hint, children, align, noLine }) {
 }
 
 function SRSectionTitle({ children }) {
-  return <div style={{ fontSize: 10, letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: 'var(--text-3)', fontFamily: 'var(--font-mono)', marginBottom: 4 }}>{children}</div>;
+  return <div style={{ fontSize: '0.625rem', letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: 'var(--text-3)', fontFamily: 'var(--font-mono)', marginBottom: 4 }}>{children}</div>;
 }
 
 /* 分段选择（如复习频率） */
@@ -90,7 +90,7 @@ function SRSegment({ options, value, onChange }) {
           <button key={o.value} type="button" aria-pressed={on} onClick={() => onChange(o.value)}
             style={{
               height: 26, padding: '0 14px', borderRadius: 'var(--r-pill)', border: 'none', cursor: 'pointer',
-              fontSize: 12.5, fontFamily: 'var(--font-sans)',
+              fontSize: '0.78125rem', fontFamily: 'var(--font-sans)',
               background: on ? 'rgba(159,198,255,0.16)' : 'transparent',
               color: on ? 'var(--text-1)' : 'var(--text-3)',
               transition: 'background var(--dur-fast), color var(--dur-fast)',
@@ -261,7 +261,7 @@ function Settings({ onClose, theme, onToggleTheme, onReplayGuide, onOpenLogin })
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '15px 18px', borderBottom: '1px solid var(--line)', flex: 'none' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
               <Icon name="settings" size={18} color="var(--star-blue)" />
-              <span style={{ fontSize: 15, color: 'var(--text-1)', fontWeight: 300, letterSpacing: '0.02em' }}>设置</span>
+              <span style={{ fontSize: '0.9375rem', color: 'var(--text-1)', fontWeight: 300, letterSpacing: '0.02em' }}>设置</span>
             </div>
             <IconButton name="x" title="关闭" onClick={onClose} />
           </div>
@@ -283,7 +283,7 @@ function Settings({ onClose, theme, onToggleTheme, onReplayGuide, onOpenLogin })
                       transition: 'background var(--dur-fast), color var(--dur-fast)',
                     }}>
                     <Icon name={n.icon} size={17} color="currentColor" />
-                    <span style={{ fontSize: 13, color: on ? 'var(--text-1)' : 'inherit' }}>{n.label}</span>
+                    <span style={{ fontSize: '0.8125rem', color: on ? 'var(--text-1)' : 'inherit' }}>{n.label}</span>
                   </button>
                 );
               })}
@@ -296,7 +296,7 @@ function Settings({ onClose, theme, onToggleTheme, onReplayGuide, onOpenLogin })
                 <div>
                   <SRSectionTitle>头像</SRSectionTitle>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '10px 0 16px', borderBottom: '1px solid var(--line)' }}>
-                    <span style={{ width: 56, height: 56, flex: 'none', borderRadius: '50%', background: avatarGrad, border: '1px solid var(--glass-border-strong)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 22, color: ink, boxShadow: '0 0 18px rgba(159,198,255,0.18)' }}>{avatarLetter}</span>
+                    <span style={{ width: 56, height: 56, flex: 'none', borderRadius: '50%', background: avatarGrad, border: '1px solid var(--glass-border-strong)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.375rem', color: ink, boxShadow: '0 0 18px rgba(159,198,255,0.18)' }}>{avatarLetter}</span>
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: 9 }}>
                       {SR_AVATARS.map(a => {
                         const on = a.id === avatar;
@@ -327,10 +327,10 @@ function Settings({ onClose, theme, onToggleTheme, onReplayGuide, onOpenLogin })
                       style={{
                         width: '100%', boxSizing: 'border-box', resize: 'vertical', minHeight: 72,
                         background: 'var(--input-bg, rgba(3,4,12,0.45))', border: '1px solid var(--glass-border-strong)', borderRadius: 'var(--r-sm)',
-                        color: 'var(--text-1)', fontSize: 13.5, lineHeight: 1.7, padding: '10px 12px', outline: 'none',
+                        color: 'var(--text-1)', fontSize: '0.84375rem', lineHeight: 1.7, padding: '10px 12px', outline: 'none',
                         fontFamily: 'var(--font-sans)',
                       }} />
-                    <div style={{ fontSize: 11, color: 'var(--text-3)', marginTop: 6, textAlign: 'right', fontFamily: 'var(--font-mono)' }}>{bio.length} / 120</div>
+                    <div style={{ fontSize: '0.6875rem', color: 'var(--text-3)', marginTop: 6, textAlign: 'right', fontFamily: 'var(--font-mono)' }}>{bio.length} / 120</div>
                   </div>
                 </div>
               )}
@@ -352,7 +352,7 @@ function Settings({ onClose, theme, onToggleTheme, onReplayGuide, onOpenLogin })
                   </SRRow>
                   <div style={{ marginTop: 14, display: 'flex', gap: 10, padding: '12px 14px', borderRadius: 'var(--r-md)', background: 'rgba(159,198,255,0.05)', border: '1px solid var(--line)' }}>
                     <Icon name="accessibility" size={16} color="var(--star-blue)" />
-                    <div style={{ fontSize: 12, color: 'var(--text-2)', lineHeight: 1.7 }}>
+                    <div style={{ fontSize: '0.75rem', color: 'var(--text-2)', lineHeight: 1.7 }}>
                       若系统已开启「减少动态效果」(prefers-reduced-motion)，星图会自动收敛所有动画；上面的开关保存后立即生效，可随时手动控制。
                     </div>
                   </div>
@@ -382,14 +382,14 @@ function Settings({ onClose, theme, onToggleTheme, onReplayGuide, onOpenLogin })
                       style={{
                         height: 30, padding: '0 10px', borderRadius: 'var(--r-sm)', outline: 'none',
                         background: 'var(--input-bg, rgba(3,4,12,0.45))', border: '1px solid var(--glass-border-strong)',
-                        color: 'var(--text-1)', fontSize: 13, fontFamily: 'var(--font-mono)',
+                        color: 'var(--text-1)', fontSize: '0.8125rem', fontFamily: 'var(--font-mono)',
                         opacity: remind ? 1 : 0.45, colorScheme: 'dark',
                       }} />
                   </SRRow>
                   <SRRow title="星域变暗提醒" hint="当一片星域长期无人问津、整体变暗时，轻轻提醒你。" align="flex-start">
                     <SRToggle on={dimNudge} onChange={setDimNudge} label="星域变暗提醒" />
                   </SRRow>
-                  <div style={{ marginTop: 14, fontSize: 11.5, color: 'var(--text-3)', lineHeight: 1.7 }}>
+                  <div style={{ marginTop: 14, fontSize: '0.71875rem', color: 'var(--text-3)', lineHeight: 1.7 }}>
                     提醒只在你点亮节奏放缓时出现，不会催促。你的星空，由你决定何时回来。
                   </div>
                 </div>
@@ -401,11 +401,11 @@ function Settings({ onClose, theme, onToggleTheme, onReplayGuide, onOpenLogin })
                   <div style={{ marginTop: 8 }}>
                     {SR_SHORTCUTS.map((s, i) => (
                       <div key={i} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, padding: '11px 0', borderBottom: '1px solid var(--line)' }}>
-                        <span style={{ fontSize: 13, color: 'var(--text-2)' }}>{s.label}</span>
+                        <span style={{ fontSize: '0.8125rem', color: 'var(--text-2)' }}>{s.label}</span>
                         <span style={{ display: 'flex', gap: 5, flex: 'none' }}>
                           {s.keys.map((k, j) => (
                             <kbd key={j} style={{
-                              fontFamily: 'var(--font-mono)', fontSize: 11.5, color: 'var(--text-1)', minWidth: 22, textAlign: 'center',
+                              fontFamily: 'var(--font-mono)', fontSize: '0.71875rem', color: 'var(--text-1)', minWidth: 22, textAlign: 'center',
                               border: '1px solid var(--line-strong)', borderRadius: 6, padding: '3px 7px', background: 'var(--input-bg, rgba(3,4,12,0.45))',
                             }}>{k}</kbd>
                           ))}
@@ -419,7 +419,7 @@ function Settings({ onClose, theme, onToggleTheme, onReplayGuide, onOpenLogin })
               {tab === 'guide' && (
                 <div>
                   <SRSectionTitle>上手引导</SRSectionTitle>
-                  <div style={{ padding: '14px 0 4px', fontSize: 13, color: 'var(--text-2)', lineHeight: 1.85 }}>
+                  <div style={{ padding: '14px 0 4px', fontSize: '0.8125rem', color: 'var(--text-2)', lineHeight: 1.85 }}>
                     第一次进来的那本「星图手册」——星图、点亮、复习、收件箱、黑洞、漫游，一页页讲清楚。想重温随时翻开。
                   </div>
                   <div style={{ marginTop: 8 }}>
@@ -435,7 +435,7 @@ function Settings({ onClose, theme, onToggleTheme, onReplayGuide, onOpenLogin })
 
                   {!D.account.registered && (
                     <div style={{ padding: '14px 0 4px' }}>
-                      <div style={{ fontSize: 13, color: 'var(--text-2)', lineHeight: 1.85, marginBottom: 14 }}>
+                      <div style={{ fontSize: '0.8125rem', color: 'var(--text-2)', lineHeight: 1.85, marginBottom: 14 }}>
                         登录后，这片星空会跟着账号走——换台设备也能回来。
                       </div>
                       <Button variant="primary" glow icon="log-in" onClick={() => { if (onOpenLogin) onOpenLogin(); }}>登录 / 注册</Button>
@@ -444,10 +444,10 @@ function Settings({ onClose, theme, onToggleTheme, onReplayGuide, onOpenLogin })
 
                   {D.account.registered && (
                     <div>
-                      <SRRow title="用户名"><span style={{ fontSize: 13, color: 'var(--text-2)', fontFamily: 'var(--font-mono)' }}>{D.account.username}</span></SRRow>
+                      <SRRow title="用户名"><span style={{ fontSize: '0.8125rem', color: 'var(--text-2)', fontFamily: 'var(--font-mono)' }}>{D.account.username}</span></SRRow>
                       <SRRow title="邮箱" noLine={emOpen}>
                         <span style={{ display: 'inline-flex', alignItems: 'center', gap: 10 }}>
-                          <span style={{ fontSize: 13, color: 'var(--text-2)', fontFamily: 'var(--font-mono)' }}>{D.account.email || '未绑定'}</span>
+                          <span style={{ fontSize: '0.8125rem', color: 'var(--text-2)', fontFamily: 'var(--font-mono)' }}>{D.account.email || '未绑定'}</span>
                           {!emOpen && <Button size="sm" variant="ghost" icon="mail" onClick={() => { setEmErr(''); setEmVal(D.account.email || ''); setEmPw(''); setEmOpen(true); }}>{D.account.email ? '修改' : '绑定'}</Button>}
                         </span>
                       </SRRow>
@@ -455,7 +455,7 @@ function Settings({ onClose, theme, onToggleTheme, onReplayGuide, onOpenLogin })
                         <div style={{ padding: '2px 0 14px', display: 'flex', flexDirection: 'column', gap: 9, borderBottom: '1px solid var(--line)' }}>
                           <Input icon="mail" placeholder="新邮箱" autoComplete="email" value={emVal} onChange={(e) => setEmVal(e.target.value)} />
                           <Input type="password" icon="lock" placeholder="账号密码（确认是你本人）" autoComplete="current-password" value={emPw} onChange={(e) => setEmPw(e.target.value)} />
-                          {emErr && <div style={{ fontSize: 12, color: 'var(--danger)', lineHeight: 1.6 }}>{emErr}</div>}
+                          {emErr && <div style={{ fontSize: '0.75rem', color: 'var(--danger)', lineHeight: 1.6 }}>{emErr}</div>}
                           <div style={{ display: 'flex', gap: 8, marginTop: 2 }}>
                             <Button size="sm" variant="primary" glow disabled={emBusy} icon={emBusy ? undefined : 'check'} onClick={async () => {
                               if (emBusy) return;
@@ -471,7 +471,7 @@ function Settings({ onClose, theme, onToggleTheme, onReplayGuide, onOpenLogin })
                           </div>
                         </div>
                       )}
-                      <SRRow title="注册于"><span style={{ fontSize: 13, color: 'var(--text-2)', fontFamily: 'var(--font-mono)' }}>{(D.account.registeredAt || '').slice(0, 10)}</span></SRRow>
+                      <SRRow title="注册于"><span style={{ fontSize: '0.8125rem', color: 'var(--text-2)', fontFamily: 'var(--font-mono)' }}>{(D.account.registeredAt || '').slice(0, 10)}</span></SRRow>
 
                       <SRRow title="修改密码" hint={pwOpen ? undefined : '定期更换密码，让账号更安全。'} align={pwOpen ? 'flex-start' : 'center'} noLine={pwOpen}>
                         {!pwOpen && <Button size="sm" variant="ghost" icon="key-round" onClick={() => { setPwErr(''); setPwOpen(true); }}>修改密码</Button>}
@@ -480,7 +480,7 @@ function Settings({ onClose, theme, onToggleTheme, onReplayGuide, onOpenLogin })
                         <div style={{ padding: '2px 0 14px', display: 'flex', flexDirection: 'column', gap: 9, borderBottom: '1px solid var(--line)' }}>
                           <Input type="password" icon="lock" placeholder="旧密码" autoComplete="current-password" value={oldPw} onChange={(e) => setOldPw(e.target.value)} />
                           <Input type="password" icon="lock" placeholder="新密码" autoComplete="new-password" value={newPw} onChange={(e) => setNewPw(e.target.value)} />
-                          {pwErr && <div style={{ fontSize: 12, color: 'var(--danger)', lineHeight: 1.6 }}>{pwErr}</div>}
+                          {pwErr && <div style={{ fontSize: '0.75rem', color: 'var(--danger)', lineHeight: 1.6 }}>{pwErr}</div>}
                           <div style={{ display: 'flex', gap: 8, marginTop: 2 }}>
                             <Button size="sm" variant="primary" glow disabled={pwBusy} icon={pwBusy ? undefined : 'check'} onClick={submitPwChange}>{pwBusy ? '确认中…' : '确认'}</Button>
                             <Button size="sm" variant="ghost" disabled={pwBusy} onClick={() => { setPwOpen(false); setOldPw(''); setNewPw(''); setPwErr(''); }}>取消</Button>
@@ -490,8 +490,8 @@ function Settings({ onClose, theme, onToggleTheme, onReplayGuide, onOpenLogin })
                     </div>
                   )}
 
-                  <SRRow title="我的星空"><span style={{ fontSize: 13, color: 'var(--text-2)', fontFamily: 'var(--font-mono)' }}>共 {D.stars.length} 颗 · 正发光 {D.stars.filter(s => s.strength >= 0.7).length} · 正变暗 {D.stars.filter(s => s.strength < 0.4).length} · 连接 {D.connections.length}</span></SRRow>
-                  <SRRow title="连续点亮"><span style={{ fontSize: 13, color: 'var(--text-2)', fontFamily: 'var(--font-mono)' }}>{D.account.streak} 天</span></SRRow>
+                  <SRRow title="我的星空"><span style={{ fontSize: '0.8125rem', color: 'var(--text-2)', fontFamily: 'var(--font-mono)' }}>共 {D.stars.length} 颗 · 正发光 {D.stars.filter(s => s.strength >= 0.7).length} · 正变暗 {D.stars.filter(s => s.strength < 0.4).length} · 连接 {D.connections.length}</span></SRRow>
+                  <SRRow title="连续点亮"><span style={{ fontSize: '0.8125rem', color: 'var(--text-2)', fontFamily: 'var(--font-mono)' }}>{D.account.streak} 天</span></SRRow>
                   <div style={{ display: 'flex', gap: 10, marginTop: 18 }}>
                     <Button size="sm" variant="ghost" icon="download" onClick={() => {
                       const snap = window.SRNet && window.SRNet.snapshot();
@@ -586,7 +586,7 @@ function Settings({ onClose, theme, onToggleTheme, onReplayGuide, onOpenLogin })
           <GlassPanel strong radius="pill" pad="sm" glow>
             <div style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '2px 8px' }}>
               <Icon name="check" size={16} color="var(--gold)" />
-              <span style={{ fontSize: 13.5, color: 'var(--text-1)' }}>{toast}</span>
+              <span style={{ fontSize: '0.84375rem', color: 'var(--text-1)' }}>{toast}</span>
             </div>
           </GlassPanel>
         </div>

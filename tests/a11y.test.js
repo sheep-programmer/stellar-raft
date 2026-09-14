@@ -80,3 +80,43 @@ test('--text-3 对比度 ≥ 4.5:1（暗色与黎明主题都查）——它是�
     assert.ok(r >= 4.5, `${c.file} 的 --text-3 对比度 ${r.toFixed(2)}:1，低于 4.5:1`);
   }
 });
+
+test('字号全站用 rem：不再有数字字面量 fontSize（浏览器「仅放大文字」要能生效）', () => {
+  /* px 字号的代价：浏览器「仅放大文字」模式对 px 完全无效（WCAG 1.4.4）。
+     全站 fontSize 已转成 rem（16px 根字号下逐像素等价），这条防止回潮。
+     允许的例外：装饰性动态算式（s * 0.42 的巨大数字）与 SVG 属性。 */
+  const files = [
+    ...fs.readdirSync(path.join(ROOT, 'ui_kits/stellar-raft')).filter(f => f.endsWith('.jsx')).map(f => 'ui_kits/stellar-raft/' + f),
+    ...fs.readdirSync(path.join(ROOT, 'components/core')).map(f => 'components/core/' + f),
+    ...fs.readdirSync(path.join(ROOT, 'components/form')).map(f => 'components/form/' + f),
+    ...fs.readdirSync(path.join(ROOT, 'components/overlay')).map(f => 'components/overlay/' + f),
+    ...fs.readdirSync(path.join(ROOT, 'components/knowledge')).map(f => 'components/knowledge/' + f),
+  ].filter(f => f.endsWith('.jsx'));
+  const offenders = [];
+  for (const f of files) {
+    const s = read(f);
+    for (const m of s.matchAll(/fontSize: (\d+(?:\.\d+)?)(?=\s*[,}])/g)) {
+      offenders.push(`${f}：fontSize: ${m[1]}（React 会按 px 拼上单位）`);
+    }
+    for (const m of s.matchAll(/font-size:\s*\d+(?:\.\d+)?px/g)) offenders.push(`${f}：内嵌 CSS ${m[0]}`);
+  }
+  assert.deepEqual(offenders, [], offenders.join('\n'));
+});
+
+test('rem 换算逐像素等价：站里每个 rem 字号 × 16 都精确落在原 px 上', () => {
+  /* 转换的算术保险：rem 值必须是十六进制友好的（/16 的二进制有限小数），
+     否则 16px 根字号下渲染会和转换前差出亚像素。 */
+  const files = [
+    ...fs.readdirSync(path.join(ROOT, 'ui_kits/stellar-raft')).filter(f => f.endsWith('.jsx')).map(f => 'ui_kits/stellar-raft/' + f),
+    'tokens/typography.css',
+  ];
+  const seen = new Set();
+  for (const f of files) {
+    for (const m of read(f).matchAll(/(?:fontSize:\s*|font-size:\s*|--t-[\w-]+:\s*)'?(\d+(?:\.\d+)?)rem/g)) {
+      const px = parseFloat(m[1]) * 16;
+      if (!seen.add(m[1])) continue;
+      assert.ok(Math.abs(px - Math.round(px * 4) / 4) < 1e-9,
+        `${f} 的 ${m[1]}rem × 16 = ${px}px，不落在 0.25px 网格上——和转换前不等价`);
+    }
+  }
+});

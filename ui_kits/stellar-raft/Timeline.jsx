@@ -86,20 +86,20 @@ function Timeline({ onOpen }) {
         {/* 标题 + 本周小统计 */}
         <div style={{ display: 'flex', alignItems: 'flex-end', gap: 16, flexWrap: 'wrap' }}>
           <div style={{ flex: 1, minWidth: 200 }}>
-            <div style={{ fontSize: 23, fontWeight: 300, color: 'var(--text-1)' }}>时间轴</div>
-            <div style={{ fontSize: 13, color: 'var(--text-3)', marginTop: 4 }}>按时间回溯你点亮、复习与变暗的每一颗星。</div>
+            <div style={{ fontSize: '1.4375rem', fontWeight: 300, color: 'var(--text-1)' }}>时间轴</div>
+            <div style={{ fontSize: '0.8125rem', color: 'var(--text-3)', marginTop: 4 }}>按时间回溯你点亮、复习与变暗的每一颗星。</div>
           </div>
           <GlassPanel radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', gap: 18, padding: '9px 20px' }}>
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: 'var(--text-3)' }}>This Week</span>
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12.5, color: 'var(--text-2)' }}>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontFamily: 'var(--font-mono)', fontSize: '0.6875rem', letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: 'var(--text-3)' }}>This Week</span>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: '0.78125rem', color: 'var(--text-2)' }}>
               <Icon name={TL_KIND.ignite.icon} size={15} color={TL_KIND.ignite.color} />
               <span style={{ fontFamily: 'var(--font-mono)', color: 'var(--gold)' }}>{lit}</span> 点亮
             </span>
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12.5, color: 'var(--text-2)' }}>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: '0.78125rem', color: 'var(--text-2)' }}>
               <Icon name={TL_KIND.review.icon} size={15} color={TL_KIND.review.color} />
               <span style={{ fontFamily: 'var(--font-mono)', color: 'var(--star-blue)' }}>{reviewed}</span> 复习
             </span>
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12.5, color: 'var(--text-3)' }}>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: '0.78125rem', color: 'var(--text-3)' }}>
               <Icon name={TL_KIND.dim.icon} size={15} color={TL_KIND.dim.color} />
               <span style={{ fontFamily: 'var(--font-mono)' }}>{fading}</span> 变暗
             </span>
@@ -113,7 +113,7 @@ function Timeline({ onOpen }) {
             return (
               <Tag key={c.id} active={kind === c.id} icon={c.icon} onClick={() => pickKind(c.id)}>
                 {c.label}
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, opacity: 0.7, marginLeft: 2 }}>{count}</span>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6875rem', opacity: 0.7, marginLeft: 2 }}>{count}</span>
               </Tag>
             );
           })}
@@ -123,8 +123,8 @@ function Timeline({ onOpen }) {
         {visible.length === 0 ? (
           <div style={{ textAlign: 'center', padding: '64px 20px', color: 'var(--text-3)' }}>
             <Icon name="telescope" size={30} color="var(--star-blue-dim)" />
-            <div style={{ fontSize: 14.5, color: 'var(--text-2)', marginTop: 14 }}>这段时间没有这类活动。</div>
-            <div style={{ fontSize: 12.5, marginTop: 6 }}>换个筛选，或回到星空点亮一颗星。</div>
+            <div style={{ fontSize: '0.90625rem', color: 'var(--text-2)', marginTop: 14 }}>这段时间没有这类活动。</div>
+            <div style={{ fontSize: '0.78125rem', marginTop: 6 }}>换个筛选，或回到星空点亮一颗星。</div>
           </div>
         ) : (
           <div data-tour="timeline-flow" style={{ position: 'relative', paddingLeft: 30 }}>
@@ -136,9 +136,9 @@ function Timeline({ onOpen }) {
                 {/* 时段分组标题 */}
                 <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: 10, padding: '14px 0 10px' }}>
                   <span style={{ position: 'absolute', left: -25, top: '50%', width: 7, height: 7, marginTop: -3.5, transform: 'rotate(45deg)', background: 'var(--space-0)', border: '1px solid var(--line-strong)' }} />
-                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: 10.5, letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: 'var(--text-3)' }}>{g.label}</span>
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65625rem', letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: 'var(--text-3)' }}>{g.label}</span>
                   <span style={{ flex: 1, height: 1, background: 'var(--glass-border)' }} />
-                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-3)' }}>{g.items.length}</span>
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6875rem', color: 'var(--text-3)' }}>{g.items.length}</span>
                 </div>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
@@ -169,29 +169,29 @@ function Timeline({ onOpen }) {
                           onMouseEnter={e => { e.currentTarget.style.background = 'color-mix(in srgb, var(--star-blue) 9%, transparent)'; e.currentTarget.style.borderColor = 'var(--line-strong)'; }}
                           onMouseLeave={e => { e.currentTarget.style.background = 'color-mix(in srgb, var(--star-blue) 4%, transparent)'; e.currentTarget.style.borderColor = 'var(--glass-border)'; }}>
                           <div style={{ display: 'flex', alignItems: 'center', gap: 9 }}>
-                            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontFamily: 'var(--font-mono)', fontSize: 10.5, letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: k.color }}>
+                            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontFamily: 'var(--font-mono)', fontSize: '0.65625rem', letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: k.color }}>
                               <Icon name={evIcon} size={14} color={k.color} />{evLabel}
                             </span>
-                            <span style={{ fontSize: 14.5, color: 'var(--text-1)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 240 }}>{star.label}</span>
+                            <span style={{ fontSize: '0.90625rem', color: 'var(--text-1)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 240 }}>{star.label}</span>
                             {litNow && <span title="已点亮 · 讲清楚的东西，暗得更慢。" style={{ flex: 'none', width: 8, height: 8, borderRadius: '50%', boxSizing: 'border-box', border: '1px solid var(--gold)' }} />}
-                            {emberNow && <span title="曾点亮的星暗了下来。再讲透一次，就能重燃。" style={{ flex: 'none', display: 'inline-flex', alignItems: 'center', gap: 3, height: 16, padding: '0 6px', borderRadius: 'var(--r-pill)', background: 'color-mix(in srgb, var(--gold-warm) 10%, transparent)', border: '1px solid color-mix(in srgb, var(--gold-warm) 30%, transparent)', fontSize: 10, color: 'var(--gold-warm)' }}><Icon name="flame" size={10} color="var(--gold-warm)" />待重燃</span>}
-                            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: 11.5, color: 'var(--text-3)', flex: 'none' }}>
+                            {emberNow && <span title="曾点亮的星暗了下来。再讲透一次，就能重燃。" style={{ flex: 'none', display: 'inline-flex', alignItems: 'center', gap: 3, height: 16, padding: '0 6px', borderRadius: 'var(--r-pill)', background: 'color-mix(in srgb, var(--gold-warm) 10%, transparent)', border: '1px solid color-mix(in srgb, var(--gold-warm) 30%, transparent)', fontSize: '0.625rem', color: 'var(--gold-warm)' }}><Icon name="flame" size={10} color="var(--gold-warm)" />待重燃</span>}
+                            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: '0.71875rem', color: 'var(--text-3)', flex: 'none' }}>
                               <span style={{ width: 6, height: 6, borderRadius: '50%', background: D.conColor(conId), boxShadow: `0 0 5px ${D.conColor(conId)}` }} />{D.conName(conId)}
                             </span>
                             <div style={{ flex: 1 }} />
-                            <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12.5, color: up ? 'var(--gold)' : 'var(--star-blue-dim)' }}>{ev.delta}</span>
+                            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.78125rem', color: up ? 'var(--gold)' : 'var(--star-blue-dim)' }}>{ev.delta}</span>
                           </div>
 
                           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 8, paddingLeft: 24 }}>
-                            <span style={{ fontSize: 12.5, color: 'var(--text-2)', minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{ev.note}</span>
+                            <span style={{ fontSize: '0.78125rem', color: 'var(--text-2)', minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{ev.note}</span>
                             <div style={{ flex: 1 }} />
                             {typeof star.strength === 'number' && (
                               <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, flex: 'none' }} title="当前记忆强度">
                                 <span style={{ width: 56 }}><MemoryBar value={star.strength} height={4} fading={star.strength < 0.4} /></span>
-                                <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-3)' }}>{Math.round(star.strength * 100)}%</span>
+                                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6875rem', color: 'var(--text-3)' }}>{Math.round(star.strength * 100)}%</span>
                               </span>
                             )}
-                            <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-3)', flex: 'none' }}>{ev.ts ? D.ago(ev.ts) : ev.when}</span>
+                            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6875rem', color: 'var(--text-3)', flex: 'none' }}>{ev.ts ? D.ago(ev.ts) : ev.when}</span>
                           </div>
                         </div>
                       </div>
@@ -209,7 +209,7 @@ function Timeline({ onOpen }) {
                   加载更早的活动
                 </Button>
               ) : (
-                <span style={{ fontSize: 12, color: 'var(--text-3)' }}>已是星空记忆的尽头</span>
+                <span style={{ fontSize: '0.75rem', color: 'var(--text-3)' }}>已是星空记忆的尽头</span>
               )}
             </div>
           </div>

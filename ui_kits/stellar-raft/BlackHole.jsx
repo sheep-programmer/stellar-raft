@@ -370,7 +370,7 @@ function BlackHole({ onOpenCon }) {
         </div>
 
         {/* 底部提示 */}
-        <div className="sr-bh-hint" style={{ position: 'absolute', bottom: 26, left: '50%', transform: 'translateX(-50%)', display: 'flex', alignItems: 'center', gap: 8, fontSize: 11.5, color: 'var(--text-3)', whiteSpace: 'nowrap' }}>
+        <div className="sr-bh-hint" style={{ position: 'absolute', bottom: 26, left: '50%', transform: 'translateX(-50%)', display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.71875rem', color: 'var(--text-3)', whiteSpace: 'nowrap' }}>
           <Icon name="mouse-pointer-click" size={13} color="currentColor" />
           <span>
             点击绕行的碎屑可直接恢复或销毁 ·{' '}
@@ -385,10 +385,10 @@ function BlackHole({ onOpenCon }) {
           <div role="status" style={{ position: 'absolute', bottom: 64, left: '50%', transform: 'translateX(-50%)', zIndex: 95 }}>
             <div style={{ animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
               <GlassPanel strong radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '10px 18px', whiteSpace: 'nowrap' }}>
-                <Icon name="check" size={16} color="var(--gold)" /><span style={{ fontSize: 13.5, color: 'var(--text-1)' }}>{toast.msg}</span>
+                <Icon name="check" size={16} color="var(--gold)" /><span style={{ fontSize: '0.84375rem', color: 'var(--text-1)' }}>{toast.msg}</span>
                 {toast.con && onOpenCon && (
                   <button type="button" className="sr-focus-ring" onClick={() => onOpenCon(toast.con)}
-                    style={{ background: 'none', border: 'none', padding: 0, fontFamily: 'var(--font-sans)', fontSize: 12.5, color: 'var(--star-blue)', cursor: 'pointer', borderBottom: '1px dashed rgba(159,198,255,0.5)' }}>在星图中查看</button>
+                    style={{ background: 'none', border: 'none', padding: 0, fontFamily: 'var(--font-sans)', fontSize: '0.78125rem', color: 'var(--star-blue)', cursor: 'pointer', borderBottom: '1px dashed rgba(159,198,255,0.5)' }}>在星图中查看</button>
                 )}
               </GlassPanel>
             </div>
@@ -399,7 +399,7 @@ function BlackHole({ onOpenCon }) {
         <div className="sr-bh-zoom" onClick={(e) => e.stopPropagation()} style={{ position: 'absolute', bottom: 22, right: 20 }}>
           <GlassPanel radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', gap: 2, padding: '6px 8px' }}>
             <IconButton name="minus" size="sm" title="缩小" onClick={() => setZoom(z => Math.max(0.55, z * 0.85))} />
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--text-2)', minWidth: 42, textAlign: 'center' }}>{Math.round(zoom * 100)}%</span>
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--text-2)', minWidth: 42, textAlign: 'center' }}>{Math.round(zoom * 100)}%</span>
             <IconButton name="plus" size="sm" title="放大" onClick={() => setZoom(z => Math.min(1.9, z * 1.18))} />
             <span style={{ width: 1, height: 18, background: 'var(--line)' }} />
             <IconButton name="locate-fixed" size="sm" title="复位" onClick={() => setZoom(1)} />
@@ -414,20 +414,20 @@ function BlackHole({ onOpenCon }) {
         <div style={{ padding: 22, display: 'flex', flexDirection: 'column', gap: 14 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
             <Icon name="aperture" size={18} color="var(--gold)" />
-            <span style={{ fontSize: 17, fontWeight: 300, color: 'var(--text-1)' }}>黑洞</span>
+            <span style={{ fontSize: '1.0625rem', fontWeight: 300, color: 'var(--text-1)' }}>黑洞</span>
             <Badge tone="blue">{entries.length}</Badge>
             <div style={{ flex: 1 }} />
             {entries.length > 0 && <Button size="sm" variant="ghost" icon="flame" onClick={purgeAll}>清空</Button>}
           </div>
-          <div style={{ fontSize: 12, lineHeight: 1.7, color: 'var(--text-3)' }}>
+          <div style={{ fontSize: '0.75rem', lineHeight: 1.7, color: 'var(--text-3)' }}>
             被删除的星域与知识星先坠落到这里。<span style={{ color: 'var(--text-2)' }}>恢复</span>会带着位置与连接一起回到星图；<span style={{ color: 'var(--danger)' }}>彻底销毁</span>不可逆。
           </div>
 
           {entries.length === 0 ? (
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12, padding: '46px 0', color: 'var(--text-3)', textAlign: 'center' }}>
               <span style={{ width: 52, height: 52, borderRadius: '50%', background: '#03040c', border: '1px solid rgba(255,200,130,0.25)', boxShadow: '0 0 24px rgba(255,170,90,0.12)' }} />
-              <div style={{ fontSize: 14, color: 'var(--text-2)' }}>黑洞正在沉睡</div>
-              <div style={{ fontSize: 12 }}>没有任何东西被吞噬。</div>
+              <div style={{ fontSize: '0.875rem', color: 'var(--text-2)' }}>黑洞正在沉睡</div>
+              <div style={{ fontSize: '0.75rem' }}>没有任何东西被吞噬。</div>
             </div>
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
@@ -444,19 +444,19 @@ function BlackHole({ onOpenCon }) {
                       </span>
                       <div style={{ flex: 1, minWidth: 0 }}>
                         <div style={{ display: 'flex', alignItems: 'baseline', gap: 8 }}>
-                          <span style={{ fontSize: 14.5, color: 'var(--text-1)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{nameOf(t)}</span>
-                          {t.kind === 'domain' && <span style={{ fontSize: 10.5, color: 'var(--gold)', flex: 'none' }}>整个星域</span>}
+                          <span style={{ fontSize: '0.90625rem', color: 'var(--text-1)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{nameOf(t)}</span>
+                          {t.kind === 'domain' && <span style={{ fontSize: '0.65625rem', color: 'var(--gold)', flex: 'none' }}>整个星域</span>}
                         </div>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 4, fontSize: 11.5, color: 'var(--text-3)' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 4, fontSize: '0.71875rem', color: 'var(--text-3)' }}>
                           {star
                             ? <span>来自 {conName} · 记忆 {Math.round(star.strength * 100)}%</span>
                             : <span>{t.payload.stars.length} 颗知识星 · {t.payload.connections.length} 条连接</span>}
-                          <span style={{ fontFamily: 'var(--font-mono)', fontSize: 10.5 }}>{t.ts ? D.ago(t.ts) : t.deletedAt}坠入</span>
+                          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65625rem' }}>{t.ts ? D.ago(t.ts) : t.deletedAt}坠入</span>
                         </div>
                         <div style={{ display: 'flex', gap: 8, marginTop: 10 }}>
                           <Button size="sm" icon="undo-2" glow onClick={() => restore(t)} style={{ flex: 1 }}>恢复</Button>
                           <button type="button" className="sr-focus-ring" onClick={() => purge(t)}
-                            style={{ flex: 1, height: 30, borderRadius: 'var(--r-pill)', border: '1px solid rgba(232,145,122,0.4)', background: 'rgba(232,145,122,0.10)', color: 'var(--danger)', fontSize: 12.5, cursor: 'pointer', fontFamily: 'var(--font-sans)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
+                            style={{ flex: 1, height: 30, borderRadius: 'var(--r-pill)', border: '1px solid rgba(232,145,122,0.4)', background: 'rgba(232,145,122,0.10)', color: 'var(--danger)', fontSize: '0.78125rem', cursor: 'pointer', fontFamily: 'var(--font-sans)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
                             <Icon name="flame" size={13} color="currentColor" />彻底销毁
                           </button>
                         </div>
@@ -482,16 +482,16 @@ function BlackHole({ onOpenCon }) {
             <GlassPanel strong radius="md" pad="md" glow>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
                 <Icon name={t.kind === 'domain' ? 'orbit' : 'star'} size={14} color={colorOf(t)} />
-                <span style={{ flex: 1, fontSize: 14.5, color: 'var(--text-1)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{nameOf(t)}</span>
+                <span style={{ flex: 1, fontSize: '0.90625rem', color: 'var(--text-1)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{nameOf(t)}</span>
                 <IconButton name="x" size="sm" title="关闭" onClick={() => setPicked(null)} />
               </div>
-              <div style={{ fontSize: 11.5, color: 'var(--text-3)', marginBottom: 12 }}>
+              <div style={{ fontSize: '0.71875rem', color: 'var(--text-3)', marginBottom: 12 }}>
                 {star ? `来自 ${D.conName(star.con) || '已消失的星域'} · 记忆 ${Math.round(star.strength * 100)}%` : `整个星域 · ${t.payload.stars.length} 颗知识星`} · {t.ts ? D.ago(t.ts) : t.deletedAt}坠入
               </div>
               <div style={{ display: 'flex', gap: 8 }}>
                 <Button size="sm" icon="undo-2" glow onClick={() => restore(t)} style={{ flex: 1 }}>恢复</Button>
                 <button type="button" className="sr-focus-ring" onClick={() => purge(t)}
-                  style={{ flex: 1, height: 30, borderRadius: 'var(--r-pill)', border: '1px solid rgba(232,145,122,0.4)', background: 'rgba(232,145,122,0.10)', color: 'var(--danger)', fontSize: 12.5, cursor: 'pointer', fontFamily: 'var(--font-sans)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
+                  style={{ flex: 1, height: 30, borderRadius: 'var(--r-pill)', border: '1px solid rgba(232,145,122,0.4)', background: 'rgba(232,145,122,0.10)', color: 'var(--danger)', fontSize: '0.78125rem', cursor: 'pointer', fontFamily: 'var(--font-sans)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
                   <Icon name="flame" size={13} color="currentColor" />销毁
                 </button>
               </div>
@@ -597,7 +597,7 @@ function BlackHoleStyle() {
     .bh-chip-btn:disabled { pointer-events: none; }
     .bh-chip-name {
       position: absolute; left: 14px; top: 0; transform: translateY(-50%);
-      font-size: 11px; color: var(--text-1); white-space: nowrap;
+      font-size: 0.6875rem; color: var(--text-1); white-space: nowrap;
       text-shadow: var(--star-label-shadow); pointer-events: none;
       transition: opacity var(--dur-base);
     }

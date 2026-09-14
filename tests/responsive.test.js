@@ -424,7 +424,12 @@ test('卡片布局的阈值宽到标题列还排得下字', () => {
 test('触摸端的输入框字号不低于 16px（否则 iOS 聚焦即放大整页）', () => {
   const m = SHELL.match(/html\[data-pointer="coarse"\] input[^{]*\{([^}]*)\}/);
   assert.ok(m, '缺少触摸端输入框的字号规则');
-  assert.match(m[1], /font-size:\s*16px\s*!important/);
+  /* 字号全站用 rem（浏览器「仅放大文字」要生效就得是 rem）。这里钉的是成因：
+     默认 16px 根字号下 ≥16px——px 直接比，rem 换算后比。 */
+  const fs = m[1].match(/font-size:\s*([\d.]+)(px|rem)\s*!important/);
+  assert.ok(fs, '触摸端输入框规则里要有 !important 的字号');
+  const px = fs[2] === 'rem' ? parseFloat(fs[1]) * 16 : parseFloat(fs[1]);
+  assert.ok(px >= 16, `触摸端输入框字号折合 ${px}px，低于 16px`);
   // 复选框 / 单选 / 滑块不该被拉大（它们的尺寸不是字号决定的）
   const sel = SHELL.match(/(html\[data-pointer="coarse"\] input[^{]*)\{/)[1];
   for (const t of ['checkbox', 'radio', 'range']) {

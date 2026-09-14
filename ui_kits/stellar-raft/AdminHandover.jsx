@@ -81,7 +81,7 @@ function AdminHandover({ onDone }) {
     }
   };
 
-  const hint = (t) => <div style={{ fontSize: 11.5, color: 'var(--text-3)', lineHeight: 1.7 }}>{t}</div>;
+  const hint = (t) => <div style={{ fontSize: '0.71875rem', color: 'var(--text-3)', lineHeight: 1.7 }}>{t}</div>;
 
   return (
     <div ref={modalRef} role="dialog" aria-modal="true" aria-label="交接星港管理员凭据"
@@ -98,12 +98,12 @@ function AdminHandover({ onDone }) {
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
             <Icon name="shield-alert" size={20} color="var(--gold)" />
-            <div style={{ fontSize: 19, fontWeight: 300, letterSpacing: '0.02em', color: 'var(--text-1)' }}>
+            <div style={{ fontSize: '1.1875rem', fontWeight: 300, letterSpacing: '0.02em', color: 'var(--text-1)' }}>
               先把星港交到你手上
             </div>
           </div>
 
-          <div style={{ fontSize: 12.5, color: 'var(--text-2)', lineHeight: 1.8, marginBottom: 16 }}>
+          <div style={{ fontSize: '0.78125rem', color: 'var(--text-2)', lineHeight: 1.8, marginBottom: 16 }}>
             这个管理员账号是装机时自动建的，用户名 <b style={{ color: 'var(--gold)' }}>{A.username || 'admin'}</b> 和它的密码
             都写在 README 与启动日志里 —— 拿到这台服务器地址的人都知道。
             现在换成只有你知道的一组，两样一起换：留着出厂用户名，等于把门牌号也留给对方。
@@ -132,7 +132,7 @@ function AdminHandover({ onDone }) {
             }}>
               <Checkbox checked={remembered} onChange={setRemembered}
                 label="我已经把这组用户名和密码记下来了" />
-              <div style={{ fontSize: 11.5, color: 'var(--text-3)', lineHeight: 1.75, marginTop: 8 }}>
+              <div style={{ fontSize: '0.71875rem', color: 'var(--text-3)', lineHeight: 1.75, marginTop: 8 }}>
                 星图不存找回邮箱、也不发重置邮件。这组凭据忘了，只能到服务器上重置数据库里的这一行。
               </div>
               <div style={{ marginTop: 10 }}>
@@ -144,7 +144,7 @@ function AdminHandover({ onDone }) {
             </div>
 
             {error && (
-              <div role="alert" style={{ fontSize: 12.5, color: 'var(--danger)', marginTop: 12, lineHeight: 1.6 }}>{error}</div>
+              <div role="alert" style={{ fontSize: '0.78125rem', color: 'var(--danger)', marginTop: 12, lineHeight: 1.6 }}>{error}</div>
             )}
 
             <Button type="submit" variant="primary" glow disabled={!ready} icon={busy ? undefined : 'shield-check'}
@@ -153,7 +153,7 @@ function AdminHandover({ onDone }) {
             </Button>
           </form>
 
-          <div style={{ fontSize: 11.5, color: 'var(--text-3)', lineHeight: 1.7, marginTop: 14, textAlign: 'center' }}>
+          <div style={{ fontSize: '0.71875rem', color: 'var(--text-3)', lineHeight: 1.7, marginTop: 14, textAlign: 'center' }}>
             交接完成后，别处用出厂凭据登进来的会话会被一起请下去。
           </div>
           <div style={{ textAlign: 'center', marginTop: 6 }}>

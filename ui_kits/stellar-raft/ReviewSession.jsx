@@ -8,7 +8,7 @@
    只提问不给答案，翻面与三档自评仍完全由用户自己完成；未配置则无任何相关 UI。 */
 const { GlassPanel, Icon, IconButton, Button } = window.StellarRaftDesignSystem_2866af;
 
-const RS_HUD = { fontSize: 10, letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: 'var(--text-3)', fontFamily: 'var(--font-mono)' };
+const RS_HUD = { fontSize: '0.625rem', letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: 'var(--text-3)', fontFamily: 'var(--font-mono)' };
 
 // 直接落在深色遮罩上的文字（HUD / 键位提示）：遮罩两个主题下都是深色，
 // 墨水必须用固定亮色，不能跟随主题（黎明的深藏青压在遮罩上约 1.26:1，不可读）。
@@ -49,7 +49,7 @@ const RS_QUIZ_SYSTEM = '你是复习教练，根据资料出一道简短的回�
 function RSKbd({ children, onScrim }) {
   return (
     <span className="sr-kbd-only" style={{
-      fontFamily: 'var(--font-mono)', fontSize: 10, lineHeight: 1,
+      fontFamily: 'var(--font-mono)', fontSize: '0.625rem', lineHeight: 1,
       color: onScrim ? RS_SCRIM_INK_DIM : 'var(--text-3)',
       border: '1px solid ' + (onScrim ? 'rgba(208,220,255,0.28)' : 'var(--glass-border)'),
       borderRadius: 5, padding: '2px 5px', flex: 'none',
@@ -61,7 +61,7 @@ function RSKbd({ children, onScrim }) {
 function RSCertChip({ ember }) {
   return (
     <span style={{
-      fontSize: 10, letterSpacing: '0.05em', padding: '2px 8px', borderRadius: 'var(--r-pill)',
+      fontSize: '0.625rem', letterSpacing: '0.05em', padding: '2px 8px', borderRadius: 'var(--r-pill)',
       border: '1px solid ' + (ember ? 'color-mix(in srgb, var(--gold) 30%, transparent)' : 'color-mix(in srgb, var(--gold) 45%, transparent)'),
       color: ember ? 'color-mix(in srgb, var(--gold) 72%, var(--text-3))' : 'var(--gold)',
       background: ember ? 'color-mix(in srgb, var(--gold) 6%, transparent)' : 'color-mix(in srgb, var(--gold) 8%, transparent)',
@@ -100,8 +100,8 @@ function RSRecapRow({ star, grade, open, onToggle, onOpenStar }) {
           background: 'transparent', border: 'none', cursor: 'pointer', textAlign: 'left', borderRadius: 'var(--r-md)',
         }}>
         <span style={{ width: 7, height: 7, borderRadius: '50%', flex: 'none', background: D.conColor(star.con), boxShadow: `0 0 6px ${D.conColor(star.con)}` }} aria-hidden="true" />
-        <span style={{ fontSize: 13, color: 'var(--text-1)', flex: 1, minWidth: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{star.label}</span>
-        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, flex: 'none', fontSize: 11, color: g.color }}>
+        <span style={{ fontSize: '0.8125rem', color: 'var(--text-1)', flex: 1, minWidth: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{star.label}</span>
+        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, flex: 'none', fontSize: '0.6875rem', color: g.color }}>
           <Icon name={g.icon} size={12} color={g.color} />{g.label}
         </span>
         <Icon name={open ? 'chevron-up' : 'chevron-down'} size={14} color="var(--text-3)" />
@@ -109,7 +109,7 @@ function RSRecapRow({ star, grade, open, onToggle, onOpenStar }) {
       {open && (
         <div id={panelId} style={{ padding: '0 12px 12px 27px', display: 'flex', flexDirection: 'column', gap: 9 }}>
           <div style={{ height: 1, background: 'var(--line)' }} aria-hidden="true" />
-          <div style={{ fontSize: 12.5, lineHeight: 1.75, color: star.summary ? 'var(--text-2)' : 'var(--text-3)' }}>
+          <div style={{ fontSize: '0.78125rem', lineHeight: 1.75, color: star.summary ? 'var(--text-2)' : 'var(--text-3)' }}>
             {star.summary || '这颗星还没有摘要。'}
           </div>
           {outline.length > 0 && (
@@ -118,7 +118,7 @@ function RSRecapRow({ star, grade, open, onToggle, onOpenStar }) {
               {outline.map(b => (
                 <div key={b.id} style={{ display: 'flex', alignItems: 'baseline', gap: 9 }}>
                   <span style={{ width: 4, height: 4, borderRadius: '50%', flex: 'none', background: 'var(--star-blue)', opacity: 0.55, transform: 'translateY(-2px)' }} aria-hidden="true" />
-                  <span style={{ fontSize: 12, color: ['h2', 'h3'].includes(b.type) ? 'var(--text-1)' : 'var(--text-3)', lineHeight: 1.6, minWidth: 0 }}>{b.text}</span>
+                  <span style={{ fontSize: '0.75rem', color: ['h2', 'h3'].includes(b.type) ? 'var(--text-1)' : 'var(--text-3)', lineHeight: 1.6, minWidth: 0 }}>{b.text}</span>
                 </div>
               ))}
             </div>
@@ -143,7 +143,7 @@ function RSRecapPanel({ stars, open, onToggle, openId, onOpenRow, onOpenStar }) 
         aria-expanded={open} aria-controls="sr-recap-list"
         style={{ width: '100%', display: 'flex', alignItems: 'center', gap: 7, padding: '4px 2px',
           background: 'transparent', border: 'none', cursor: 'pointer', textAlign: 'left',
-          fontSize: 12.5, color: 'var(--text-2)', fontFamily: 'inherit' }}>
+          fontSize: '0.78125rem', color: 'var(--text-2)', fontFamily: 'inherit' }}>
         <Icon name="list" size={14} color="var(--star-blue)" />
         <span style={{ flex: 1, minWidth: 0 }}>今天复习过的 {stars.length} 颗星</span>
         <Icon name={open ? 'chevron-up' : 'chevron-down'} size={14} color="var(--text-3)" />
@@ -179,8 +179,8 @@ function RSGrade({ label, hint, kbd, keys, icon, color, border, onClick }) {
         transform: hover ? 'translateY(-1px)' : 'none',
       }}>
       <Icon name={icon} size={18} color={color} />
-      <span style={{ fontSize: 13.5, color: 'var(--text-1)' }}>{label}</span>
-      <span style={{ fontSize: 10.5, color: 'var(--text-3)', lineHeight: 1.4 }}>{hint}</span>
+      <span style={{ fontSize: '0.84375rem', color: 'var(--text-1)' }}>{label}</span>
+      <span style={{ fontSize: '0.65625rem', color: 'var(--text-3)', lineHeight: 1.4 }}>{hint}</span>
       <RSKbd>{kbd}</RSKbd>
     </button>
   );
@@ -378,10 +378,10 @@ function ReviewSession({ onClose, onOpenStar }) {
         {total === 0 && (
           <GlassPanel strong radius="lg" pad="none" style={{ padding: '46px 40px', textAlign: 'center', animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }} className="sr-review-card">
             <Icon name="sparkles" size={22} color="var(--star-blue)" />
-            <div style={{ fontSize: 19, fontWeight: 300, color: 'var(--text-1)', marginTop: 14 }}>
+            <div style={{ fontSize: '1.1875rem', fontWeight: 300, color: 'var(--text-1)', marginTop: 14 }}>
               {recap.length ? '今天的复习已经做完' : '没有到期的星'}
             </div>
-            <div style={{ fontSize: 13, color: 'var(--text-3)', marginTop: 8, lineHeight: 1.7 }}>
+            <div style={{ fontSize: '0.8125rem', color: 'var(--text-3)', marginTop: 8, lineHeight: 1.7 }}>
               {recap.length ? '这些星今天都回望过了，明天它们会再暗一点点。' : '星空明亮，此刻无需复习。保持节奏，改天再来。'}
             </div>
             {recapPanel}
@@ -396,19 +396,19 @@ function ReviewSession({ onClose, onOpenStar }) {
           <GlassPanel strong radius="lg" pad="none" className="sr-review-card"
             style={{ padding: '42px 40px', textAlign: 'center', animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
             <Icon name="check" size={22} color="var(--star-blue)" />
-            <div style={{ fontSize: 21, fontWeight: 300, color: 'var(--text-1)', marginTop: 14, textShadow: 'var(--text-glow-cool)' }}>本轮复习结束</div>
+            <div style={{ fontSize: '1.3125rem', fontWeight: 300, color: 'var(--text-1)', marginTop: 14, textShadow: 'var(--text-glow-cool)' }}>本轮复习结束</div>
             {/* 「点亮」是奖励保留动词：复习只回亮度，这里说「记得」 */}
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: 13.5, color: 'var(--text-2)', marginTop: 12 }}>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.84375rem', color: 'var(--text-2)', marginTop: 12 }}>
               复习 {reviewed} 颗 · 记得 {stats.ok} 颗{stats.hazy > 0 ? ` · ${stats.hazy} 颗还有些模糊` : ''}{stats.fail > 0 ? ` · ${stats.fail} 颗还需回来` : ''}
             </div>
-            <div style={{ fontSize: 12.5, color: 'var(--text-3)', marginTop: 10, lineHeight: 1.7 }}>
+            <div style={{ fontSize: '0.78125rem', color: 'var(--text-3)', marginTop: 10, lineHeight: 1.7 }}>
               {stats.fail > 0 ? '暗下去的星已排回队列，它们会在合适的时候等你。' : '星光已经归位。'}
             </div>
             {recapPanel}
             {/* 本轮的熄灭 / 待重燃：逐颗给出「去重燃」出口（费曼快速通道，就地打开） */}
             {emberLeft.length > 0 && (
               <div style={{ marginTop: 18, paddingTop: 16, borderTop: '1px solid var(--line)', textAlign: 'left' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 7, fontSize: 12.5, lineHeight: 1.7, color: 'var(--text-2)', marginBottom: 10 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 7, fontSize: '0.78125rem', lineHeight: 1.7, color: 'var(--text-2)', marginBottom: 10 }}>
                   <Icon name="flame" size={14} color="color-mix(in srgb, var(--gold) 60%, var(--text-3))" />
                   本轮有 {emberLeft.length} 颗星熄灭待重燃——把它讲透，光就会回来。
                 </div>
@@ -417,7 +417,7 @@ function ReviewSession({ onClose, onOpenStar }) {
                     <div key={s.id} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '7px 10px', borderRadius: 'var(--r-md)',
                       border: '1px solid color-mix(in srgb, var(--gold) 16%, transparent)', background: 'color-mix(in srgb, var(--gold) 4%, transparent)' }}>
                       <span style={{ width: 7, height: 7, borderRadius: '50%', flex: 'none', background: D.conColor(s.con), boxShadow: `0 0 6px ${D.conColor(s.con)}` }} aria-hidden="true" />
-                      <span style={{ fontSize: 13, color: 'var(--text-1)', flex: 1, minWidth: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{s.label}</span>
+                      <span style={{ fontSize: '0.8125rem', color: 'var(--text-1)', flex: 1, minWidth: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{s.label}</span>
                       <Button size="sm" icon="flame" onClick={() => setRelight(s.id)}>去重燃</Button>
                     </div>
                   ))}
@@ -439,18 +439,18 @@ function ReviewSession({ onClose, onOpenStar }) {
             }}>
             {/* 回忆阶段：只有星名 + 星座 */}
             <div style={{ textAlign: 'center', padding: revealed ? '4px 0 0' : '26px 0 8px', transition: 'padding var(--dur-base) var(--ease-flight)' }}>
-              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 11.5, color: 'var(--text-3)' }}>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: '0.71875rem', color: 'var(--text-3)' }}>
                 <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7 }}>
                   <span style={{ width: 7, height: 7, borderRadius: '50%', background: D.conColor(star.con), boxShadow: `0 0 8px ${D.conColor(star.con)}` }} aria-hidden="true" />
                   {D.conName(star.con)}
                 </span>
                 {(starLit || starEmber) && <RSCertChip ember={starEmber} />}
               </div>
-              <div style={{ fontSize: revealed ? 24 : 30, fontWeight: 300, color: 'var(--text-1)', textShadow: 'var(--text-glow-cool)', marginTop: 8, transition: 'font-size var(--dur-base) var(--ease-flight)' }}>
+              <div style={{ fontSize: revealed ? '1.5rem' : '1.875rem', fontWeight: 300, color: 'var(--text-1)', textShadow: 'var(--text-glow-cool)', marginTop: 8, transition: 'font-size var(--dur-base) var(--ease-flight)' }}>
                 {star.label}
               </div>
               {!revealed && (
-                <div style={{ fontSize: 13, color: 'var(--text-3)', marginTop: 14, lineHeight: 1.7 }}>
+                <div style={{ fontSize: '0.8125rem', color: 'var(--text-3)', marginTop: 14, lineHeight: 1.7 }}>
                   先在心里回忆：这颗星讲了什么？
                 </div>
               )}
@@ -465,7 +465,7 @@ function ReviewSession({ onClose, onOpenStar }) {
                     border: '1px solid color-mix(in srgb, var(--gold) 28%, transparent)',
                     background: 'color-mix(in srgb, var(--gold) 5%, transparent)' }}>
                     <Icon name="sparkles" size={13} color="var(--gold)" style={{ flex: 'none', transform: 'translateY(1px)' }} />
-                    <span style={{ fontSize: 13, lineHeight: 1.7, color: 'var(--text-1)', minWidth: 0 }}>{quiz.text}</span>
+                    <span style={{ fontSize: '0.8125rem', lineHeight: 1.7, color: 'var(--text-1)', minWidth: 0 }}>{quiz.text}</span>
                   </div>
                 )}
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, maxWidth: '100%' }}>
@@ -479,7 +479,7 @@ function ReviewSession({ onClose, onOpenStar }) {
                     {quiz.phase === 'busy' ? '正在出题…' : quiz.text ? '换一题' : 'AI 考一考'}
                   </Button>
                   {quiz.phase === 'err' && quiz.err && (
-                    <span role="status" style={{ fontSize: 11.5, color: 'var(--text-3)', lineHeight: 1.5, minWidth: 0 }}>{quiz.err}</span>
+                    <span role="status" style={{ fontSize: '0.71875rem', color: 'var(--text-3)', lineHeight: 1.5, minWidth: 0 }}>{quiz.err}</span>
                   )}
                 </div>
               </div>
@@ -497,21 +497,21 @@ function ReviewSession({ onClose, onOpenStar }) {
             {revealed && (
               <React.Fragment>
                 <div style={{ height: 1, background: 'var(--line)' }} aria-hidden="true" />
-                <div style={{ fontSize: 13.5, lineHeight: 1.8, color: 'var(--text-2)' }}>{star.summary}</div>
+                <div style={{ fontSize: '0.84375rem', lineHeight: 1.8, color: 'var(--text-2)' }}>{star.summary}</div>
                 {rsOutline(star).length > 0 && (
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
                     <span style={RS_HUD}>大纲</span>
                     {rsOutline(star).map(b => (
                       <div key={b.id} style={{ display: 'flex', alignItems: 'baseline', gap: 9 }}>
                         <span style={{ width: 4, height: 4, borderRadius: '50%', flex: 'none', background: 'var(--star-blue)', opacity: 0.55, transform: 'translateY(-2px)' }} aria-hidden="true" />
-                        <span style={{ fontSize: 12.5, color: ['h2', 'h3'].includes(b.type) ? 'var(--text-1)' : 'var(--text-3)', lineHeight: 1.6, minWidth: 0 }}>{b.text}</span>
+                        <span style={{ fontSize: '0.78125rem', color: ['h2', 'h3'].includes(b.type) ? 'var(--text-1)' : 'var(--text-3)', lineHeight: 1.6, minWidth: 0 }}>{b.text}</span>
                       </div>
                     ))}
                   </div>
                 )}
                 {/* 待重燃星翻开后的口径句：复习保温，重燃走费曼 */}
                 {starEmber && (
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 7, fontSize: 12, lineHeight: 1.6, color: 'var(--text-3)' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 7, fontSize: '0.75rem', lineHeight: 1.6, color: 'var(--text-3)' }}>
                     <Icon name="flame" size={13} color="color-mix(in srgb, var(--gold) 60%, var(--text-3))" />
                     复习能让它保温——重新点亮，要再讲透一次。
                   </div>

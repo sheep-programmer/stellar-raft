@@ -32,7 +32,7 @@ function LoginTabs({ tab, onChange }) {
           <button key={t.id} type="button" onClick={() => onChange(t.id)}
             style={{
               flex: 1, height: 34, border: 'none', cursor: 'pointer', borderRadius: 'var(--r-pill)',
-              fontSize: 13.5, fontFamily: 'var(--font-sans)',
+              fontSize: '0.84375rem', fontFamily: 'var(--font-sans)',
               background: on ? 'rgba(255,217,138,0.16)' : 'transparent',
               color: on ? 'var(--gold)' : 'var(--text-3)',
               transition: 'background var(--dur-fast), color var(--dur-fast)',
@@ -116,17 +116,17 @@ function LoginView({ onClose }) {
 
           <div style={{ textAlign: 'center', marginBottom: 22 }}>
             <div style={{
-              fontSize: 30, fontWeight: 300, letterSpacing: '0.08em', color: 'var(--text-1)',
+              fontSize: '1.875rem', fontWeight: 300, letterSpacing: '0.08em', color: 'var(--text-1)',
               textShadow: '0 0 16px rgba(159,198,255,0.22)',
             }}>星图</div>
-            <div style={{ fontSize: 13, color: 'var(--text-3)', marginTop: 8 }}>登录你的星空</div>
+            <div style={{ fontSize: '0.8125rem', color: 'var(--text-3)', marginTop: 8 }}>登录你的星空</div>
           </div>
 
           <LoginTabs tab={tab} onChange={switchTab} />
 
           <form onSubmit={submit} style={{ marginTop: 20 }}>
             {tab === 'register' && (
-              <div style={{ fontSize: 12, color: 'var(--text-2)', lineHeight: 1.7, marginBottom: 16 }}>
+              <div style={{ fontSize: '0.75rem', color: 'var(--text-2)', lineHeight: 1.7, marginBottom: 16 }}>
                 注册会把当前这片星空收进账号里，换台设备也能回来。
               </div>
             )}
@@ -154,7 +154,7 @@ function LoginView({ onClose }) {
             )}
 
             {error && (
-              <div style={{ fontSize: 12.5, color: 'var(--danger)', marginTop: 12, lineHeight: 1.6 }}>{error}</div>
+              <div style={{ fontSize: '0.78125rem', color: 'var(--danger)', marginTop: 12, lineHeight: 1.6 }}>{error}</div>
             )}
 
             <Button type="submit" variant="primary" glow disabled={busy} icon={busy ? undefined : 'sparkles'}

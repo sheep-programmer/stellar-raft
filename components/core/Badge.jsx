@@ -33,7 +33,7 @@ export function Badge({ children, tone = 'blue', dot = false, soft = true, style
         display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
         minWidth: 18, height: 18, padding: '0 6px',
         borderRadius: 'var(--r-pill)',
-        fontFamily: 'var(--font-mono)', fontSize: 11, lineHeight: 1, fontWeight: 500,
+        fontFamily: 'var(--font-mono)', fontSize: '0.6875rem', lineHeight: 1, fontWeight: 500,
         color: t.fg,
         background: soft ? t.bg : 'transparent',
         border: soft ? '1px solid ' + t.bd : 'none',

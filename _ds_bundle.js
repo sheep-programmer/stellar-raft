@@ -1,4 +1,4 @@
-/* @ds-bundle: {"format":3,"namespace":"StellarRaftDesignSystem_2866af","components":[{"name":"Badge","sourcePath":"components/core/Badge.jsx"},{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"GlassPanel","sourcePath":"components/core/GlassPanel.jsx"},{"name":"Icon","sourcePath":"components/core/Icon.jsx"},{"name":"IconButton","sourcePath":"components/core/IconButton.jsx"},{"name":"Input","sourcePath":"components/core/Input.jsx"},{"name":"Tag","sourcePath":"components/core/Tag.jsx"},{"name":"Checkbox","sourcePath":"components/form/Checkbox.jsx"},{"name":"Select","sourcePath":"components/form/Select.jsx"},{"name":"Switch","sourcePath":"components/form/Switch.jsx"},{"name":"Tabs","sourcePath":"components/form/Tabs.jsx"},{"name":"ConstellationItem","sourcePath":"components/knowledge/ConstellationItem.jsx"},{"name":"MemoryBar","sourcePath":"components/knowledge/MemoryBar.jsx"},{"name":"StarNode","sourcePath":"components/knowledge/StarNode.jsx"},{"name":"ContextMenu","sourcePath":"components/overlay/ContextMenu.jsx"},{"name":"Modal","sourcePath":"components/overlay/Modal.jsx"},{"name":"Toast","sourcePath":"components/overlay/Toast.jsx"},{"name":"Tooltip","sourcePath":"components/overlay/Tooltip.jsx"}],"sourceHashes":{"assets/starfield.js":"fa5283c0b9e3","components/core/Badge.jsx":"b0bd9735d638","components/core/Button.jsx":"a1c387a07e86","components/core/GlassPanel.jsx":"bd96f4ac54dd","components/core/Icon.jsx":"7505f83ab03d","components/core/IconButton.jsx":"24052f4eed78","components/core/Input.jsx":"54a6c9af7e3f","components/core/Tag.jsx":"d8513c07ea96","components/form/Checkbox.jsx":"38aa593157dd","components/form/Select.jsx":"8e1bf646cee1","components/form/Switch.jsx":"938c62be0664","components/form/Tabs.jsx":"ede2dbff1963","components/knowledge/ConstellationItem.jsx":"d73e999469b6","components/knowledge/MemoryBar.jsx":"a54c928d5065","components/knowledge/StarNode.jsx":"0dff2f392dd3","components/overlay/ContextMenu.jsx":"e84d3f1048c3","components/overlay/Modal.jsx":"6119273e95da","components/overlay/Toast.jsx":"d22ad40680a6","components/overlay/Tooltip.jsx":"98039e5d50b2","ui_kits/stellar-raft/AIConfig.jsx":"9083ce789504","ui_kits/stellar-raft/AdminConsole.jsx":"809fb02b4d6c","ui_kits/stellar-raft/AdminHandover.jsx":"4c32a00059bf","ui_kits/stellar-raft/AerialView.jsx":"7d00f8d9029b","ui_kits/stellar-raft/BlackHole.jsx":"f324d5b64e4c","ui_kits/stellar-raft/Boundary.jsx":"790ffda4d159","ui_kits/stellar-raft/Checkup.jsx":"c54c77da001e","ui_kits/stellar-raft/CommandPalette.jsx":"82ea907819de","ui_kits/stellar-raft/Editor.jsx":"b8a748b1dde0","ui_kits/stellar-raft/EditorMenus.jsx":"76441391edba","ui_kits/stellar-raft/FeynmanDrawer.jsx":"65720ed3d749","ui_kits/stellar-raft/Galaxy3D.jsx":"e678c2343672","ui_kits/stellar-raft/Inbox.jsx":"04f46087c843","ui_kits/stellar-raft/KeysHelp.jsx":"2373dec4a232","ui_kits/stellar-raft/ListView.jsx":"7370dcb344cc","ui_kits/stellar-raft/LoginView.jsx":"d5ec28487e98","ui_kits/stellar-raft/MobileShell.jsx":"3431a66a89bc","ui_kits/stellar-raft/Onboarding.jsx":"49393b450681","ui_kits/stellar-raft/ReviewSession.jsx":"cb3d52a765a1","ui_kits/stellar-raft/Settings.jsx":"97593042dd19","ui_kits/stellar-raft/Sidebar.jsx":"e4bf63cdf14e","ui_kits/stellar-raft/StarMap.jsx":"06b6070c3b96","ui_kits/stellar-raft/Timeline.jsx":"601d5fa7c241","ui_kits/stellar-raft/VisitView.jsx":"b712de5dacf2","ui_kits/stellar-raft/ai.js":"2f79eb3473c9","ui_kits/stellar-raft/app.jsx":"cfe81477b9d2","ui_kits/stellar-raft/clipboard.js":"c3ebf5f9310c","ui_kits/stellar-raft/codehl.js":"57a79e683031","ui_kits/stellar-raft/data.js":"7fc75044f02e","ui_kits/stellar-raft/mdcore.js":"09da458f9f8e","ui_kits/stellar-raft/responsive.js":"664811eedaac","ui_kits/stellar-raft/sanitize.js":"17154d7e6b6d","ui_kits/stellar-raft/transition.js":"3725d8982dc5","ui_kits/stellar-raft/undocore.js":"aa57b71578bb","ui_kits/stellar-raft/vault.js":"39e53e6d84d8"},"inlinedExternals":[],"unexposedExports":[],"exposedHelpers":[{"name":"memoryColor","sourcePath":"components/knowledge/MemoryBar.jsx"},{"name":"toast","sourcePath":"components/overlay/Toast.jsx"}]} */
+/* @ds-bundle: {"format":3,"namespace":"StellarRaftDesignSystem_2866af","components":[{"name":"Badge","sourcePath":"components/core/Badge.jsx"},{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"GlassPanel","sourcePath":"components/core/GlassPanel.jsx"},{"name":"Icon","sourcePath":"components/core/Icon.jsx"},{"name":"IconButton","sourcePath":"components/core/IconButton.jsx"},{"name":"Input","sourcePath":"components/core/Input.jsx"},{"name":"Tag","sourcePath":"components/core/Tag.jsx"},{"name":"Checkbox","sourcePath":"components/form/Checkbox.jsx"},{"name":"Select","sourcePath":"components/form/Select.jsx"},{"name":"Switch","sourcePath":"components/form/Switch.jsx"},{"name":"Tabs","sourcePath":"components/form/Tabs.jsx"},{"name":"ConstellationItem","sourcePath":"components/knowledge/ConstellationItem.jsx"},{"name":"MemoryBar","sourcePath":"components/knowledge/MemoryBar.jsx"},{"name":"StarNode","sourcePath":"components/knowledge/StarNode.jsx"},{"name":"ContextMenu","sourcePath":"components/overlay/ContextMenu.jsx"},{"name":"Modal","sourcePath":"components/overlay/Modal.jsx"},{"name":"Toast","sourcePath":"components/overlay/Toast.jsx"},{"name":"Tooltip","sourcePath":"components/overlay/Tooltip.jsx"}],"sourceHashes":{"assets/starfield.js":"fa5283c0b9e3","components/core/Badge.jsx":"f68c8c3228a1","components/core/Button.jsx":"92f7e0a06dd0","components/core/GlassPanel.jsx":"bd96f4ac54dd","components/core/Icon.jsx":"7505f83ab03d","components/core/IconButton.jsx":"24052f4eed78","components/core/Input.jsx":"a436b3ce3677","components/core/Tag.jsx":"ab7adcc20f4f","components/form/Checkbox.jsx":"56defd3f13d1","components/form/Select.jsx":"c4cec7af733e","components/form/Switch.jsx":"c86ae7e94e7f","components/form/Tabs.jsx":"3086c1a7e7d1","components/knowledge/ConstellationItem.jsx":"35c74a316ec5","components/knowledge/MemoryBar.jsx":"fceaf17128e6","components/knowledge/StarNode.jsx":"123465aa834c","components/overlay/ContextMenu.jsx":"5d378e7c39b8","components/overlay/Modal.jsx":"263a256c4035","components/overlay/Toast.jsx":"eea6f81312f3","components/overlay/Tooltip.jsx":"f8cfd1206b6b","ui_kits/stellar-raft/AIConfig.jsx":"7f533ff552dc","ui_kits/stellar-raft/AdminConsole.jsx":"9872ac0c2e80","ui_kits/stellar-raft/AdminHandover.jsx":"6b214d2ee51a","ui_kits/stellar-raft/AerialView.jsx":"455905b6f0b2","ui_kits/stellar-raft/BlackHole.jsx":"4299f29cfe91","ui_kits/stellar-raft/Boundary.jsx":"13bd34846c5a","ui_kits/stellar-raft/Checkup.jsx":"c4ba385a9c6a","ui_kits/stellar-raft/CommandPalette.jsx":"b52878c5b035","ui_kits/stellar-raft/Editor.jsx":"8320e658584f","ui_kits/stellar-raft/EditorMenus.jsx":"87d7a0260230","ui_kits/stellar-raft/FeynmanDrawer.jsx":"780555ca363e","ui_kits/stellar-raft/Galaxy3D.jsx":"f957fd4f3e74","ui_kits/stellar-raft/Inbox.jsx":"63094b020ede","ui_kits/stellar-raft/KeysHelp.jsx":"9911681be334","ui_kits/stellar-raft/ListView.jsx":"1449ad83e3f2","ui_kits/stellar-raft/LoginView.jsx":"a84b8e044e7b","ui_kits/stellar-raft/MobileShell.jsx":"8ad95c9129c2","ui_kits/stellar-raft/Onboarding.jsx":"a5b278140453","ui_kits/stellar-raft/ReviewSession.jsx":"bf8d6c54c7a6","ui_kits/stellar-raft/Settings.jsx":"825731e8425b","ui_kits/stellar-raft/Sidebar.jsx":"9b2590d2db33","ui_kits/stellar-raft/StarMap.jsx":"f94fd127bdaf","ui_kits/stellar-raft/Timeline.jsx":"1aa7f06140fb","ui_kits/stellar-raft/VisitView.jsx":"3f8ec1ffd01e","ui_kits/stellar-raft/ai.js":"2f79eb3473c9","ui_kits/stellar-raft/app.jsx":"78e0e5c465e5","ui_kits/stellar-raft/clipboard.js":"c3ebf5f9310c","ui_kits/stellar-raft/codehl.js":"57a79e683031","ui_kits/stellar-raft/data.js":"7fc75044f02e","ui_kits/stellar-raft/mdcore.js":"09da458f9f8e","ui_kits/stellar-raft/responsive.js":"664811eedaac","ui_kits/stellar-raft/sanitize.js":"17154d7e6b6d","ui_kits/stellar-raft/transition.js":"3725d8982dc5","ui_kits/stellar-raft/undocore.js":"d4143947b52b","ui_kits/stellar-raft/vault.js":"39e53e6d84d8"},"inlinedExternals":[],"unexposedExports":[],"exposedHelpers":[{"name":"memoryColor","sourcePath":"components/knowledge/MemoryBar.jsx"},{"name":"toast","sourcePath":"components/overlay/Toast.jsx"}]} */
 
 (() => {
 
@@ -407,7 +407,7 @@ function Badge({
       padding: '0 6px',
       borderRadius: 'var(--r-pill)',
       fontFamily: 'var(--font-mono)',
-      fontSize: 11,
+      fontSize: '0.6875rem',
       lineHeight: 1,
       fontWeight: 500,
       color: t.fg,
@@ -565,10 +565,10 @@ function Button({
     lg: '0 24px'
   }[size] || '0 18px';
   const fs = {
-    sm: 13,
-    md: 15,
-    lg: 16
-  }[size] || 15;
+    sm: '0.8125rem',
+    md: '0.9375rem',
+    lg: '1rem'
+  }[size] || '0.9375rem';
   const palettes = {
     primary: disabled ? {
       // 不可点就不发光：收掉金色渐变与辉光，退成玻璃面 + 失效墨色
@@ -799,17 +799,17 @@ function Input({
       color: 'var(--text-1)',
       fontFamily: 'var(--font-sans)',
       fontSize: {
-        sm: 13,
-        md: 14.5,
-        lg: 16
-      }[size] || 14.5,
+        sm: '0.8125rem',
+        md: '0.90625rem',
+        lg: '1rem'
+      }[size] || '0.90625rem',
       ...inputStyle
     }
   }, rest)), kbd && /*#__PURE__*/React.createElement("span", {
     "aria-hidden": "true",
     style: {
       fontFamily: 'var(--font-mono)',
-      fontSize: 11,
+      fontSize: '0.6875rem',
       color: 'var(--text-3)',
       border: '1px solid var(--line)',
       borderRadius: 6,
@@ -905,7 +905,7 @@ function Tag({
       padding: '0 10px',
       borderRadius: 'var(--r-pill)',
       fontFamily: 'var(--font-sans)',
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: active ? 'var(--gold)' : 'var(--text-2)',
       background: active ? 'rgba(255,217,138,0.10)' : hover ? 'rgba(159,198,255,0.10)' : 'rgba(159,198,255,0.05)',
       border: '1px solid',
@@ -1040,7 +1040,7 @@ function Checkbox({
     }
   }))), text != null && /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 13.5,
+      fontSize: '0.84375rem',
       color: checked ? 'var(--text-1)' : 'var(--text-2)',
       transition: 'color var(--dur-fast)'
     }
@@ -1088,10 +1088,10 @@ function Select({
     lg: 46
   }[size] || 40;
   const fs = {
-    sm: 13,
-    md: 14.5,
-    lg: 16
-  }[size] || 14.5;
+    sm: '0.8125rem',
+    md: '0.90625rem',
+    lg: '1rem'
+  }[size] || '0.90625rem';
   const selIdx = options.findIndex(o => o.value === value);
   const selected = selIdx >= 0 ? options[selIdx] : null;
   const enabledIdx = options.map((o, i) => o.disabled ? -1 : i).filter(i => i >= 0);
@@ -1265,7 +1265,7 @@ function Select({
         height: 34,
         padding: '0 10px',
         borderRadius: 'var(--r-sm)',
-        fontSize: 13.5,
+        fontSize: '0.84375rem',
         fontFamily: 'var(--font-sans)',
         color: o.disabled ? 'var(--text-disabled)' : isSel || isAct ? 'var(--text-1)' : 'var(--text-2)',
         background: isAct && !o.disabled ? 'rgba(159,198,255,0.10)' : 'transparent',
@@ -1375,7 +1375,7 @@ function Switch({
     }
   })), label && /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 13.5,
+      fontSize: '0.84375rem',
       color: checked ? 'var(--text-1)' : 'var(--text-2)',
       transition: 'color var(--dur-fast)'
     }
@@ -1429,7 +1429,7 @@ function TabButton({
       background: 'none',
       border: 'none',
       fontFamily: 'var(--font-sans)',
-      fontSize: size === 'sm' ? 13 : 13.5,
+      fontSize: size === 'sm' ? '0.8125rem' : '0.84375rem',
       letterSpacing: '0.01em',
       color: tab.disabled ? 'var(--text-disabled)' : selected ? 'var(--text-1)' : hover ? 'var(--text-1)' : 'var(--text-2)',
       cursor: tab.disabled ? 'not-allowed' : 'pointer',
@@ -1443,7 +1443,7 @@ function TabButton({
   }), tab.label, tab.count != null && /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: 'var(--font-mono)',
-      fontSize: 11,
+      fontSize: '0.6875rem',
       color: 'var(--text-3)'
     }
   }, tab.count));
@@ -1619,13 +1619,13 @@ function ConstellationItem({
       overflow: 'hidden',
       textOverflow: 'ellipsis',
       whiteSpace: 'nowrap',
-      fontSize: 13.5,
+      fontSize: '0.84375rem',
       color: active ? 'var(--text-1)' : 'var(--text-2)'
     }
   }, name), count != null && /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: 'var(--font-mono)',
-      fontSize: 11,
+      fontSize: '0.6875rem',
       color: 'var(--text-3)'
     }
   }, count));
@@ -1705,13 +1705,13 @@ function MemoryBar({
     }
   }, label && /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-2)'
     }
   }, label), showPct && /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: 'var(--font-mono)',
-      fontSize: 11,
+      fontSize: '0.6875rem',
       color: warm ? 'var(--gold)' : 'var(--star-blue)'
     }
   }, Math.round(v * 100), "%")), /*#__PURE__*/React.createElement("div", {
@@ -1851,7 +1851,7 @@ function StarNode({
   }), label && /*#__PURE__*/React.createElement("span", {
     title: label,
     style: {
-      fontSize: 11.5,
+      fontSize: '0.71875rem',
       fontFamily: 'var(--font-sans)',
       // 寻路文字的地板抬到 --text-2：找星时还没 hover，也要能读
       color: hover || selected ? 'var(--text-1)' : 'var(--text-2)',
@@ -1901,7 +1901,7 @@ function MenuRow({
       height: 32,
       padding: '0 10px',
       borderRadius: 'var(--r-sm)',
-      fontSize: 13,
+      fontSize: '0.8125rem',
       fontFamily: 'var(--font-sans)',
       color: disabled ? 'var(--text-disabled)' : item.danger ? 'var(--danger)' : active ? 'var(--text-1)' : 'var(--text-2)',
       background: active && !disabled
@@ -1926,7 +1926,7 @@ function MenuRow({
     "aria-hidden": "true",
     style: {
       fontFamily: 'var(--font-mono)',
-      fontSize: 10.5,
+      fontSize: '0.65625rem',
       color: 'var(--text-3)',
       marginLeft: 12
     }
@@ -2231,7 +2231,7 @@ function Modal({
   }), title && /*#__PURE__*/React.createElement("span", {
     id: titleId,
     style: {
-      fontSize: 15,
+      fontSize: '0.9375rem',
       color: 'var(--text-1)',
       fontWeight: 300,
       letterSpacing: '0.02em',
@@ -2311,7 +2311,7 @@ function Toast({
     color: SR_TOAST_TONES[tone] || SR_TOAST_TONES.blue
   }), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 13.5,
+      fontSize: '0.84375rem',
       fontFamily: 'var(--font-sans)',
       color: 'var(--text-1)',
       whiteSpace: 'nowrap'
@@ -2367,7 +2367,7 @@ function toast(message, opts = {}) {
     borderRadius: 'var(--r-pill)',
     color: 'var(--text-1)',
     fontFamily: 'var(--font-sans)',
-    fontSize: '13.5px',
+    fontSize: '0.84375rem',
     whiteSpace: 'nowrap',
     animation: reduced ? 'none' : 'sr-cardin var(--dur-base) var(--ease-flight) both'
   });
@@ -2521,7 +2521,7 @@ function Tooltip({
       borderRadius: 'var(--r-sm)',
       boxShadow: 'var(--shadow-md), var(--inset-edge)',
       padding: '5px 10px',
-      fontSize: 12,
+      fontSize: '0.75rem',
       fontFamily: 'var(--font-sans)',
       color: 'var(--text-1)',
       whiteSpace: 'nowrap',
@@ -2718,7 +2718,7 @@ function Slider({
       display: 'flex',
       justifyContent: 'space-between',
       marginTop: 4,
-      fontSize: 11,
+      fontSize: '0.6875rem',
       color: 'var(--text-3)'
     }
   }, /*#__PURE__*/React.createElement("span", null, leftHint), /*#__PURE__*/React.createElement("span", null, rightHint)));
@@ -2742,7 +2742,7 @@ function Section({
       display: 'inline-flex',
       alignItems: 'center',
       gap: 8,
-      fontSize: 12,
+      fontSize: '0.75rem',
       letterSpacing: 'var(--ls-hud)',
       textTransform: 'uppercase',
       color: 'var(--text-3)',
@@ -2754,7 +2754,7 @@ function Section({
     color: "var(--star-blue)"
   }), title), hint && /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       lineHeight: 1.6,
       color: 'var(--text-3)',
       marginTop: 6,
@@ -2804,7 +2804,7 @@ function ProviderTabs({
         borderColor: on ? 'rgba(255,217,138,0.4)' : 'transparent',
         borderRadius: 'var(--r-sm)',
         font: 'inherit',
-        fontSize: 13,
+        fontSize: '0.8125rem',
         color: on ? 'var(--text-1)' : 'var(--text-3)',
         background: on ? 'rgba(255,217,138,0.10)' : 'transparent',
         transition: 'background var(--dur-fast), color var(--dur-fast), border-color var(--dur-fast)'
@@ -2917,7 +2917,7 @@ function ModelDropdown({
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 14.5,
+      fontSize: '0.90625rem',
       color: 'var(--text-1)',
       fontFamily: isPreset ? 'inherit' : 'var(--font-mono)'
     }
@@ -2926,7 +2926,7 @@ function ModelDropdown({
   }, cur.tier)), /*#__PURE__*/React.createElement("span", {
     style: {
       display: 'block',
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-3)',
       marginTop: 3
     }
@@ -3004,14 +3004,14 @@ function ModelDropdown({
       }
     }, /*#__PURE__*/React.createElement("span", {
       style: {
-        fontSize: 13.5,
+        fontSize: '0.84375rem',
         color: on ? 'var(--text-1)' : 'var(--text-2)'
       }
     }, m.name), /*#__PURE__*/React.createElement(Badge, {
       tone: on ? 'gold' : 'neutral'
     }, m.tier)), /*#__PURE__*/React.createElement("div", {
       style: {
-        fontSize: 11.5,
+        fontSize: '0.71875rem',
         color: 'var(--text-3)',
         marginTop: 3
       }
@@ -3020,7 +3020,7 @@ function ModelDropdown({
         display: 'flex',
         gap: 14,
         marginTop: 5,
-        fontSize: 10.5,
+        fontSize: '0.65625rem',
         color: 'var(--text-3)',
         fontFamily: 'var(--font-mono)'
       }
@@ -3230,13 +3230,13 @@ function AIConfig({
     color: "var(--gold)"
   })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 17,
+      fontSize: '1.0625rem',
       fontWeight: 400,
       color: 'var(--text-1)'
     }
   }, "AI \u914D\u7F6E"), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-3)',
       marginTop: 2
     }
@@ -3262,7 +3262,7 @@ function AIConfig({
     onChange: switchProvider
   }), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-3)',
       margin: '-4px 2px 0'
     }
@@ -3274,7 +3274,7 @@ function AIConfig({
     }
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: 'var(--text-2)',
       marginBottom: 6
     }
@@ -3305,7 +3305,7 @@ function AIConfig({
     })
   }))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: 'var(--text-2)',
       marginBottom: 6
     }
@@ -3357,7 +3357,7 @@ function AIConfig({
       display: 'inline-flex',
       alignItems: 'center',
       gap: 6,
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--gold)'
     }
   }, /*#__PURE__*/React.createElement(Icon, {
@@ -3370,7 +3370,7 @@ function AIConfig({
       display: 'inline-flex',
       alignItems: 'center',
       gap: 6,
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--danger)'
     }
   }, /*#__PURE__*/React.createElement(Icon, {
@@ -3383,7 +3383,7 @@ function AIConfig({
       display: 'inline-flex',
       alignItems: 'center',
       gap: 6,
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--gold)'
     }
   }, /*#__PURE__*/React.createElement(Icon, {
@@ -3432,12 +3432,12 @@ function AIConfig({
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 13,
+      fontSize: '0.8125rem',
       color: 'var(--text-2)'
     }
   }, "\u6027\u683C"), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--gold)',
       fontFamily: 'var(--font-mono)'
     }
@@ -3458,12 +3458,12 @@ function AIConfig({
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 13,
+      fontSize: '0.8125rem',
       color: 'var(--text-2)'
     }
   }, "\u4E25\u683C\u5EA6"), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--gold)',
       fontFamily: 'var(--font-mono)'
     }
@@ -3539,12 +3539,12 @@ function AIConfig({
       }
     })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
       style: {
-        fontSize: 13.5,
+        fontSize: '0.84375rem',
         color: on ? 'var(--text-1)' : 'var(--text-2)'
       }
     }, s.label), /*#__PURE__*/React.createElement("div", {
       style: {
-        fontSize: 12,
+        fontSize: '0.75rem',
         color: 'var(--text-3)',
         marginTop: 2
       }
@@ -3591,7 +3591,7 @@ function AIConfig({
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 11.5,
+      fontSize: '0.71875rem',
       color: 'var(--text-3)',
       display: 'inline-flex',
       alignItems: 'center',
@@ -3600,7 +3600,7 @@ function AIConfig({
   }, /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: 'var(--font-mono)',
-      fontSize: 10.5,
+      fontSize: '0.65625rem',
       color: 'var(--text-3)',
       border: '1px solid var(--line-strong)',
       borderRadius: 6,
@@ -3642,12 +3642,12 @@ function ToggleRow({
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 13.5,
+      fontSize: '0.84375rem',
       color: 'var(--text-1)'
     }
   }, title), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-3)',
       marginTop: 3,
       lineHeight: 1.55
@@ -3772,7 +3772,7 @@ const panel = {
   background: 'var(--glass-bg-faint)'
 };
 const hud = {
-  fontSize: 10,
+  fontSize: '0.625rem',
   letterSpacing: 'var(--ls-hud)',
   textTransform: 'uppercase',
   color: 'var(--text-3)',
@@ -3821,7 +3821,7 @@ function StatCard({
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 27,
+      fontSize: '1.6875rem',
       fontWeight: 300,
       color,
       textShadow: glow,
@@ -3830,12 +3830,12 @@ function StatCard({
     }
   }, value), unit && /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-3)'
     }
   }, unit)), sub && /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 11.5,
+      fontSize: '0.71875rem',
       color: 'var(--text-2)',
       marginTop: 7,
       lineHeight: 1.5
@@ -3863,13 +3863,13 @@ function SectionHead({
     color: "var(--star-blue)"
   }), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 14.5,
+      fontSize: '0.90625rem',
       color: 'var(--text-1)',
       fontWeight: 300
     }
   }, title), note && /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-3)'
     }
   }, note), /*#__PURE__*/React.createElement("div", {
@@ -3941,7 +3941,7 @@ function Empty({
     color: "var(--text-disabled)"
   }), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 13,
+      fontSize: '0.8125rem',
       marginTop: 12,
       lineHeight: 1.6
     }
@@ -3955,7 +3955,7 @@ function Loading({
       padding: '46px 20px',
       textAlign: 'center',
       color: 'var(--text-3)',
-      fontSize: 13
+      fontSize: '0.8125rem'
     }
   }, /*#__PURE__*/React.createElement("span", {
     className: "sr-admin-pulse"
@@ -3980,13 +3980,13 @@ function Row({
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: 'var(--text-3)',
       flex: 'none'
     }
   }, k), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: tone === 'danger' ? 'var(--danger)' : tone === 'gold' ? 'var(--gold)' : 'var(--text-1)',
       fontFamily: mono ? 'var(--font-mono)' : 'var(--font-sans)',
       textAlign: 'right',
@@ -4029,7 +4029,7 @@ function SplitBar({
       display: 'inline-flex',
       alignItems: 'center',
       gap: 5,
-      fontSize: 11.5,
+      fontSize: '0.71875rem',
       color: 'var(--text-2)'
     }
   }, /*#__PURE__*/React.createElement("span", {
@@ -4075,7 +4075,7 @@ function TrendBars({
     style: hud
   }, label), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-2)',
       fontFamily: 'var(--font-mono)'
     }
@@ -4111,7 +4111,7 @@ function TrendBars({
       display: 'flex',
       justifyContent: 'space-between',
       marginTop: 6,
-      fontSize: 10,
+      fontSize: '0.625rem',
       color: 'var(--text-3)',
       fontFamily: 'var(--font-mono)'
     }
@@ -4151,7 +4151,7 @@ function AdmPager({
     onClick: () => onGo(page - 1)
   }), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: 'var(--text-2)',
       fontFamily: 'var(--font-mono)',
       minWidth: 92,
@@ -4684,7 +4684,7 @@ function UserRow({
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 13.5,
+      fontSize: '0.84375rem',
       color: 'var(--text-1)',
       overflow: 'hidden',
       textOverflow: 'ellipsis',
@@ -4696,7 +4696,7 @@ function UserRow({
     tone: "blue"
   }, "\u4F60")), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 11.5,
+      fontSize: '0.71875rem',
       color: 'var(--text-3)',
       marginTop: 2,
       overflow: 'hidden',
@@ -4712,14 +4712,14 @@ function UserRow({
     }
   }, u.stars ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: 'var(--text-1)',
       fontFamily: 'var(--font-mono)'
     }
   }, u.stars, " ", /*#__PURE__*/React.createElement("span", {
     style: {
       color: 'var(--text-3)',
-      fontSize: 11
+      fontSize: '0.6875rem'
     }
   }, "\u9897"), !!u.lit && /*#__PURE__*/React.createElement("span", {
     style: {
@@ -4728,13 +4728,13 @@ function UserRow({
     }
   }, u.lit, " \u4EAE")), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 11,
+      fontSize: '0.6875rem',
       color: 'var(--text-3)',
       marginTop: 2
     }
   }, u.constellations, " \u4E2A\u661F\u57DF")) : /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-disabled)'
     }
   }, "\u7A7A")), /*#__PURE__*/React.createElement("div", {
@@ -4747,7 +4747,7 @@ function UserRow({
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 11.5,
+      fontSize: '0.71875rem',
       fontFamily: 'var(--font-mono)',
       color: u.lastIp ? 'var(--text-2)' : 'var(--text-disabled)',
       overflow: 'hidden',
@@ -4755,7 +4755,7 @@ function UserRow({
     }
   }, u.lastIp || '—'), u.ip && u.lastIp && u.ip !== u.lastIp && /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 10.5,
+      fontSize: '0.65625rem',
       fontFamily: 'var(--font-mono)',
       color: 'var(--text-3)',
       marginTop: 2,
@@ -4768,7 +4768,7 @@ function UserRow({
     style: {
       width: 92,
       flex: 'none',
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-2)'
     }
   }, ago(u.lastSeen)), /*#__PURE__*/React.createElement("div", {
@@ -4778,7 +4778,7 @@ function UserRow({
       width: 62,
       flex: 'none',
       textAlign: 'right',
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: u.sessions ? 'var(--star-blue)' : 'var(--text-disabled)',
       fontFamily: 'var(--font-mono)'
     }
@@ -4921,7 +4921,7 @@ function UserDetail({
     v: `${ago(d.galaxy.updatedAt)} · v${d.galaxy.version}`
   })) : /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: 'var(--text-3)',
       padding: '6px 0 14px'
     }
@@ -5060,7 +5060,7 @@ function UserDetail({
     onClick: () => setDialog('delete')
   }, "\u5220\u9664\u8D26\u53F7")), self && /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 11.5,
+      fontSize: '0.71875rem',
       color: 'var(--text-3)',
       lineHeight: 1.6,
       marginTop: 4
@@ -5109,7 +5109,7 @@ function UserDetail({
     placeholder: "\u7528\u6237\u540D"
   }), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 11.5,
+      fontSize: '0.71875rem',
       color: 'var(--text-3)',
       marginTop: 6,
       lineHeight: 1.6
@@ -5132,7 +5132,7 @@ function UserDetail({
     }, "\u91CD\u7F6E"))
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: 'var(--text-2)',
       lineHeight: 1.7,
       marginBottom: 12
@@ -5164,7 +5164,7 @@ function UserDetail({
     }, "\u65AD\u5F00\u5168\u90E8\u4F1A\u8BDD"))
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: 'var(--text-2)',
       lineHeight: 1.7
     }
@@ -5190,7 +5190,7 @@ function UserDetail({
     }, "\u786E\u8BA4"))
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: 'var(--text-2)',
       lineHeight: 1.7
     }
@@ -5221,7 +5221,7 @@ function UserDetail({
     }, "\u505C\u7528"))
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: 'var(--text-2)',
       lineHeight: 1.7,
       marginBottom: 12
@@ -5253,7 +5253,7 @@ function UserDetail({
     }, "\u89E3\u9664"))
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: 'var(--text-2)',
       lineHeight: 1.7
     }
@@ -5279,14 +5279,14 @@ function UserDetail({
     }, "\u6C38\u4E45\u5220\u9664"))
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: 'var(--danger)',
       lineHeight: 1.7,
       marginBottom: 6
     }
   }, "\u8FD9\u4E00\u6B65\u4E0D\u53EF\u64A4\u9500\uFF0C\u661F\u56FE\u7684\u9ED1\u6D1E\u4E5F\u635E\u4E0D\u56DE\u6765\u3002"), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: 'var(--text-2)',
       lineHeight: 1.7,
       marginBottom: 12
@@ -5324,13 +5324,13 @@ function MiniStat({
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 14,
+      fontSize: '0.875rem',
       fontFamily: 'var(--font-mono)',
       color: tone === 'gold' ? 'var(--gold)' : 'var(--text-1)'
     }
   }, value), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 11,
+      fontSize: '0.6875rem',
       color: 'var(--text-3)'
     }
   }, label));
@@ -5452,7 +5452,7 @@ function AdminGuests() {
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: 'var(--text-2)',
       lineHeight: 1.75,
       marginBottom: 14
@@ -5501,7 +5501,7 @@ function AdminGuests() {
     }, Number(perIp) > 0 ? `每 IP 最多 ${Number(perIp)} 个游客` : '已取消游客限额')
   }, "\u4FDD\u5B58"), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 11.5,
+      fontSize: '0.71875rem',
       color: 'var(--text-3)'
     }
   }, site ? site.guestPerIp > 0 ? `当前：每 IP ${site.guestPerIp} 个` : '当前：不限' : '')))), /*#__PURE__*/React.createElement("section", null, /*#__PURE__*/React.createElement(SectionHead, {
@@ -5533,12 +5533,12 @@ function AdminGuests() {
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 13.5,
+      fontSize: '0.84375rem',
       color: 'var(--text-1)'
     }
   }, g.label), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 11.5,
+      fontSize: '0.71875rem',
       color: 'var(--text-3)',
       marginTop: 3,
       lineHeight: 1.55
@@ -5613,7 +5613,7 @@ function AdminGuests() {
         flex: '1 1 140px',
         minWidth: 0,
         fontFamily: 'var(--font-mono)',
-        fontSize: 13,
+        fontSize: '0.8125rem',
         color: 'var(--text-1)'
       }
     }, r.ip), /*#__PURE__*/React.createElement("span", {
@@ -5621,7 +5621,7 @@ function AdminGuests() {
       style: {
         width: 92,
         flex: 'none',
-        fontSize: 12,
+        fontSize: '0.75rem',
         color: 'var(--text-2)'
       }
     }, r.count, " \u4E2A\u6E38\u5BA2", full && /*#__PURE__*/React.createElement("span", {
@@ -5633,7 +5633,7 @@ function AdminGuests() {
       style: {
         width: 76,
         flex: 'none',
-        fontSize: 12,
+        fontSize: '0.75rem',
         color: r.stars ? 'var(--text-2)' : 'var(--text-disabled)'
       }
     }, r.stars, " \u9897\u661F"), /*#__PURE__*/React.createElement("span", {
@@ -5641,7 +5641,7 @@ function AdminGuests() {
       style: {
         width: 84,
         flex: 'none',
-        fontSize: 12,
+        fontSize: '0.75rem',
         color: r.zombies ? 'var(--gold)' : 'var(--text-disabled)'
       }
     }, r.zombies ? r.zombies + ' 个空' : '—'), /*#__PURE__*/React.createElement("span", {
@@ -5649,7 +5649,7 @@ function AdminGuests() {
       style: {
         width: 96,
         flex: 'none',
-        fontSize: 12,
+        fontSize: '0.75rem',
         color: 'var(--text-3)',
         textAlign: 'right'
       }
@@ -5690,7 +5690,7 @@ function AdminGuests() {
       style: {
         flex: 1,
         minWidth: 0,
-        fontSize: 12.5,
+        fontSize: '0.78125rem',
         color: 'var(--text-1)'
       }
     }, g.name, " ", /*#__PURE__*/React.createElement("span", {
@@ -5710,7 +5710,7 @@ function AdminGuests() {
       style: {
         width: 70,
         flex: 'none',
-        fontSize: 12,
+        fontSize: '0.75rem',
         color: g.stars ? 'var(--text-2)' : 'var(--text-disabled)'
       }
     }, g.stars, " \u9897\u661F"), /*#__PURE__*/React.createElement("span", {
@@ -5718,7 +5718,7 @@ function AdminGuests() {
       style: {
         width: 92,
         flex: 'none',
-        fontSize: 12,
+        fontSize: '0.75rem',
         color: 'var(--text-3)',
         textAlign: 'right'
       }
@@ -5739,7 +5739,7 @@ function AdminGuests() {
       })
     }, r.zombies ? `清理这个 IP 的 ${r.zombies} 个空游客` : '没有可清理的空账号'), /*#__PURE__*/React.createElement("span", {
       style: {
-        fontSize: 11.5,
+        fontSize: '0.71875rem',
         color: 'var(--text-3)'
       }
     }, "\u5B58\u8FC7\u661F\u7A7A\u7684\u8D26\u53F7\u4E0D\u5728\u6E05\u7406\u8303\u56F4\u5185"))));
@@ -5759,7 +5759,7 @@ function AdminGuests() {
     }, "\u6E05\u7406"))
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: 'var(--text-2)',
       lineHeight: 1.75
     }
@@ -5811,7 +5811,7 @@ function AdminShares() {
     })
   }), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-3)',
       lineHeight: 1.7,
       marginBottom: 14
@@ -5846,7 +5846,7 @@ function AdminShares() {
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 13.5,
+      fontSize: '0.84375rem',
       color: 'var(--text-1)',
       overflow: 'hidden',
       textOverflow: 'ellipsis',
@@ -5854,7 +5854,7 @@ function AdminShares() {
     }
   }, r.username || r.name), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 11.5,
+      fontSize: '0.71875rem',
       color: 'var(--text-3)',
       marginTop: 2
     }
@@ -5863,7 +5863,7 @@ function AdminShares() {
     "data-k": "\u5BC6\u6587",
     style: {
       fontFamily: 'var(--font-mono)',
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: r.enabled ? 'var(--gold)' : 'var(--text-disabled)',
       flex: 'none'
     }
@@ -5873,7 +5873,7 @@ function AdminShares() {
       width: 76,
       flex: 'none',
       textAlign: 'right',
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-2)'
     }
   }, r.visitors, " \u4F4D\u8BBF\u5BA2"), /*#__PURE__*/React.createElement("span", {
@@ -5911,7 +5911,7 @@ function AdminShares() {
     }, "\u5173\u95ED\u5206\u4EAB"))
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: 'var(--text-2)',
       lineHeight: 1.7
     }
@@ -5939,7 +5939,7 @@ function AdminSessions() {
     })
   }), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-3)',
       lineHeight: 1.7,
       marginBottom: 14
@@ -5982,7 +5982,7 @@ function AdminSessions() {
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 13,
+      fontSize: '0.8125rem',
       color: 'var(--text-1)'
     }
   }, s.username || s.name), s.role === 'admin' && /*#__PURE__*/React.createElement(Badge, {
@@ -5991,7 +5991,7 @@ function AdminSessions() {
     tone: "blue"
   }, "\u5F53\u524D\u8BBE\u5907")), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 11.5,
+      fontSize: '0.71875rem',
       color: 'var(--text-3)',
       marginTop: 2,
       fontFamily: 'var(--font-mono)'
@@ -6001,7 +6001,7 @@ function AdminSessions() {
     style: {
       width: 120,
       flex: 'none',
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-2)'
     }
   }, "\u6D3B\u8DC3\u4E8E ", ago(s.lastSeen)), /*#__PURE__*/React.createElement("span", {
@@ -6009,7 +6009,7 @@ function AdminSessions() {
     style: {
       width: 130,
       flex: 'none',
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-3)',
       textAlign: 'right'
     }
@@ -6142,7 +6142,7 @@ function AdminBroadcast() {
     preview: true
   }) : /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-disabled)',
       padding: '10px 0'
     }
@@ -6181,7 +6181,7 @@ function AdminBroadcast() {
     }
   }, "\u64A4\u4E0B"), d && d.announcement.updatedAt && /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 11.5,
+      fontSize: '0.71875rem',
       color: 'var(--text-3)',
       alignSelf: 'center'
     }
@@ -6200,7 +6200,7 @@ function AdminBroadcast() {
   }, /*#__PURE__*/React.createElement("div", {
     style: {
       flex: '1 1 260px',
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: 'var(--text-2)',
       lineHeight: 1.7
     }
@@ -6232,7 +6232,7 @@ function AdminBroadcast() {
   }, /*#__PURE__*/React.createElement("div", {
     style: {
       flex: '1 1 260px',
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: 'var(--text-2)',
       lineHeight: 1.7
     }
@@ -6299,7 +6299,7 @@ function AdminBroadcast() {
     }, "\u5F00\u542F"))
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: 'var(--text-2)',
       lineHeight: 1.7
     }
@@ -6476,7 +6476,7 @@ function AdminSystem() {
     onClick: () => run('prune-sessions', r => r.removed ? `清掉 ${r.removed} 个过期会话` : '没有过期会话')
   }, "\u626B\u6389\u8FC7\u671F\u4F1A\u8BDD")), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 11.5,
+      fontSize: '0.71875rem',
       color: 'var(--text-3)',
       lineHeight: 1.7,
       marginTop: 12
@@ -6597,7 +6597,7 @@ function AdminAudit() {
     }))
   }), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-3)',
       lineHeight: 1.7,
       marginBottom: 14
@@ -6640,7 +6640,7 @@ function AdminAudit() {
       }
     }, /*#__PURE__*/React.createElement("div", {
       style: {
-        fontSize: 13,
+        fontSize: '0.8125rem',
         color: 'var(--text-1)',
         lineHeight: 1.5
       }
@@ -6663,7 +6663,7 @@ function AdminAudit() {
       }
     }, " \xB7 ", e.detail)), /*#__PURE__*/React.createElement("div", {
       style: {
-        fontSize: 11.5,
+        fontSize: '0.71875rem',
         color: 'var(--text-3)',
         marginTop: 3
       }
@@ -6687,7 +6687,7 @@ function AdminAudit() {
     }, "\u6E05\u7A7A"))
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 13,
+      fontSize: '0.8125rem',
       lineHeight: 1.8,
       color: 'var(--text-2)'
     }
@@ -6749,7 +6749,7 @@ function AnnouncementBanner({
     style: {
       flex: 1,
       minWidth: 0,
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: 'var(--text-1)',
       lineHeight: 1.6
     }
@@ -6810,7 +6810,7 @@ html[data-screen="phone"] .sr-adm-row { flex-wrap: wrap !important; row-gap: 8px
 html[data-screen="phone"] .sr-adm-cell { width: auto !important; flex: 0 0 auto !important; text-align: left !important; }
 /* 每格前缀一个小标签，替代被隐去的表头 */
 html[data-screen="phone"] .sr-adm-cell[data-k]::before {
-  content: attr(data-k) ' '; font-family: var(--font-mono); font-size: 10px;
+  content: attr(data-k) ' '; font-family: var(--font-mono); font-size: 0.625rem;
   letter-spacing: var(--ls-hud); text-transform: uppercase; color: var(--text-3); margin-right: 4px;
 }
 /* 标签是内联的，可格子里的值有的是纯文本（活跃 / 会话）、有的是块级 <div>（星空 / IP）。
@@ -6828,7 +6828,7 @@ html[data-screen="phone"] .sr-adm-caret { margin-left: auto; }
 html[data-screen="phone"] .sr-adm-name > * { white-space: normal !important; }
 /* 页头：标题与「回到我的星图」在窄屏上下叠，别互相挤 */
 html[data-screen="phone"] .sr-adm-head-bar { flex-direction: column !important; align-items: stretch !important; gap: 10px !important; }
-html[data-screen="phone"] .sr-adm-head-bar h1 { font-size: 20px !important; }
+html[data-screen="phone"] .sr-adm-head-bar h1 { font-size: 1.25rem !important; }
 /* 分区切换在窄屏横向滚动，不折成三行 */
 html[data-screen="phone"] .sr-admin-tabs {
   flex-wrap: nowrap !important; overflow-x: auto; padding-bottom: 10px !important; margin-bottom: 12px !important;
@@ -6838,7 +6838,7 @@ html[data-screen="phone"] .sr-admin-tab { flex: none; }
 html[data-screen="phone"] .sr-adm-detail { flex-direction: column !important; }
 .sr-admin-tab { display: flex; align-items: center; gap: 7px; height: 32px; padding: 0 13px; cursor: pointer;
   border-radius: var(--r-pill); border: 1px solid transparent; background: transparent; color: var(--text-2);
-  font-size: 13px; font-family: var(--font-sans); white-space: nowrap;
+  font-size: 0.8125rem; font-family: var(--font-sans); white-space: nowrap;
   transition: background var(--dur-fast), color var(--dur-fast), border-color var(--dur-fast); }
 .sr-admin-tab:hover { background: rgba(159,198,255,0.06); color: var(--text-1); }
 .sr-admin-tab[aria-selected="true"] { background: rgba(255,217,138,0.13); border-color: rgba(255,217,138,0.28); color: var(--gold); }
@@ -6923,7 +6923,7 @@ function AdminConsole({
   }), /*#__PURE__*/React.createElement("h1", {
     style: {
       margin: 0,
-      fontSize: 22,
+      fontSize: '1.375rem',
       fontWeight: 300,
       letterSpacing: '0.02em',
       color: 'var(--text-1)'
@@ -6932,7 +6932,7 @@ function AdminConsole({
     tone: "gold"
   }, A.username || A.name)), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: 'var(--text-3)',
       marginTop: 7,
       lineHeight: 1.6
@@ -6960,7 +6960,7 @@ function AdminConsole({
   }), /*#__PURE__*/React.createElement("span", {
     style: {
       flex: 1,
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: 'var(--text-1)',
       lineHeight: 1.6
     }
@@ -7115,7 +7115,7 @@ function AdminHandover({
   };
   const hint = t => /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 11.5,
+      fontSize: '0.71875rem',
       color: 'var(--text-3)',
       lineHeight: 1.7
     }
@@ -7166,14 +7166,14 @@ function AdminHandover({
     color: "var(--gold)"
   }), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 19,
+      fontSize: '1.1875rem',
       fontWeight: 300,
       letterSpacing: '0.02em',
       color: 'var(--text-1)'
     }
   }, "\u5148\u628A\u661F\u6E2F\u4EA4\u5230\u4F60\u624B\u4E0A")), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: 'var(--text-2)',
       lineHeight: 1.8,
       marginBottom: 16
@@ -7237,7 +7237,7 @@ function AdminHandover({
     label: "\u6211\u5DF2\u7ECF\u628A\u8FD9\u7EC4\u7528\u6237\u540D\u548C\u5BC6\u7801\u8BB0\u4E0B\u6765\u4E86"
   }), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 11.5,
+      fontSize: '0.71875rem',
       color: 'var(--text-3)',
       lineHeight: 1.75,
       marginTop: 8
@@ -7255,7 +7255,7 @@ function AdminHandover({
   }, copied ? '已复制到剪贴板' : '复制这组凭据'))), error && /*#__PURE__*/React.createElement("div", {
     role: "alert",
     style: {
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: 'var(--danger)',
       marginTop: 12,
       lineHeight: 1.6
@@ -7272,7 +7272,7 @@ function AdminHandover({
     }
   }, busy ? '正在交接…' : '完成交接')), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 11.5,
+      fontSize: '0.71875rem',
       color: 'var(--text-3)',
       lineHeight: 1.7,
       marginTop: 14,
@@ -7582,7 +7582,7 @@ function AerialView({
   }, /*#__PURE__*/React.createElement("span", {
     style: {
       display: 'block',
-      fontSize: 15,
+      fontSize: '0.9375rem',
       fontWeight: 300,
       color: 'var(--text-1)',
       letterSpacing: '0.05em',
@@ -7617,7 +7617,7 @@ function AerialView({
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 14,
+      fontSize: '0.875rem',
       color: 'var(--text-2)'
     }
   }, "\u4F60\u7684\u661F\u7A7A\u8FD8\u5F88\u6697\u3002\u5199\u4E0B\u7B2C\u4E00\u9897\u661F\uFF0C\u8BA9\u5B83\u53D1\u5149\u3002")), /*#__PURE__*/React.createElement("div", {
@@ -8358,7 +8358,7 @@ function BlackHole({
       display: 'flex',
       alignItems: 'center',
       gap: 8,
-      fontSize: 11.5,
+      fontSize: '0.71875rem',
       color: 'var(--text-3)',
       whiteSpace: 'nowrap'
     }
@@ -8406,7 +8406,7 @@ function BlackHole({
     color: "var(--gold)"
   }), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 13.5,
+      fontSize: '0.84375rem',
       color: 'var(--text-1)'
     }
   }, toast.msg), toast.con && onOpenCon && /*#__PURE__*/React.createElement("button", {
@@ -8418,7 +8418,7 @@ function BlackHole({
       border: 'none',
       padding: 0,
       fontFamily: 'var(--font-sans)',
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: 'var(--star-blue)',
       cursor: 'pointer',
       borderBottom: '1px dashed rgba(159,198,255,0.5)'
@@ -8448,7 +8448,7 @@ function BlackHole({
   }), /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: 'var(--font-mono)',
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-2)',
       minWidth: 42,
       textAlign: 'center'
@@ -8501,7 +8501,7 @@ function BlackHole({
     color: "var(--gold)"
   }), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 17,
+      fontSize: '1.0625rem',
       fontWeight: 300,
       color: 'var(--text-1)'
     }
@@ -8518,7 +8518,7 @@ function BlackHole({
     onClick: purgeAll
   }, "\u6E05\u7A7A")), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12,
+      fontSize: '0.75rem',
       lineHeight: 1.7,
       color: 'var(--text-3)'
     }
@@ -8551,12 +8551,12 @@ function BlackHole({
     }
   }), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 14,
+      fontSize: '0.875rem',
       color: 'var(--text-2)'
     }
   }, "\u9ED1\u6D1E\u6B63\u5728\u6C89\u7761"), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12
+      fontSize: '0.75rem'
     }
   }, "\u6CA1\u6709\u4EFB\u4F55\u4E1C\u897F\u88AB\u541E\u566C\u3002")) : /*#__PURE__*/React.createElement("div", {
     style: {
@@ -8613,7 +8613,7 @@ function BlackHole({
       }
     }, /*#__PURE__*/React.createElement("span", {
       style: {
-        fontSize: 14.5,
+        fontSize: '0.90625rem',
         color: 'var(--text-1)',
         overflow: 'hidden',
         textOverflow: 'ellipsis',
@@ -8621,7 +8621,7 @@ function BlackHole({
       }
     }, nameOf(t)), t.kind === 'domain' && /*#__PURE__*/React.createElement("span", {
       style: {
-        fontSize: 10.5,
+        fontSize: '0.65625rem',
         color: 'var(--gold)',
         flex: 'none'
       }
@@ -8631,13 +8631,13 @@ function BlackHole({
         alignItems: 'center',
         gap: 10,
         marginTop: 4,
-        fontSize: 11.5,
+        fontSize: '0.71875rem',
         color: 'var(--text-3)'
       }
     }, star ? /*#__PURE__*/React.createElement("span", null, "\u6765\u81EA ", conName, " \xB7 \u8BB0\u5FC6 ", Math.round(star.strength * 100), "%") : /*#__PURE__*/React.createElement("span", null, t.payload.stars.length, " \u9897\u77E5\u8BC6\u661F \xB7 ", t.payload.connections.length, " \u6761\u8FDE\u63A5"), /*#__PURE__*/React.createElement("span", {
       style: {
         fontFamily: 'var(--font-mono)',
-        fontSize: 10.5
+        fontSize: '0.65625rem'
       }
     }, t.ts ? D.ago(t.ts) : t.deletedAt, "\u5760\u5165")), /*#__PURE__*/React.createElement("div", {
       style: {
@@ -8664,7 +8664,7 @@ function BlackHole({
         border: '1px solid rgba(232,145,122,0.4)',
         background: 'rgba(232,145,122,0.10)',
         color: 'var(--danger)',
-        fontSize: 12.5,
+        fontSize: '0.78125rem',
         cursor: 'pointer',
         fontFamily: 'var(--font-sans)',
         display: 'inline-flex',
@@ -8712,7 +8712,7 @@ function BlackHole({
     }), /*#__PURE__*/React.createElement("span", {
       style: {
         flex: 1,
-        fontSize: 14.5,
+        fontSize: '0.90625rem',
         color: 'var(--text-1)',
         overflow: 'hidden',
         textOverflow: 'ellipsis',
@@ -8725,7 +8725,7 @@ function BlackHole({
       onClick: () => setPicked(null)
     })), /*#__PURE__*/React.createElement("div", {
       style: {
-        fontSize: 11.5,
+        fontSize: '0.71875rem',
         color: 'var(--text-3)',
         marginBottom: 12
       }
@@ -8753,7 +8753,7 @@ function BlackHole({
         border: '1px solid rgba(232,145,122,0.4)',
         background: 'rgba(232,145,122,0.10)',
         color: 'var(--danger)',
-        fontSize: 12.5,
+        fontSize: '0.78125rem',
         cursor: 'pointer',
         fontFamily: 'var(--font-sans)',
         display: 'inline-flex',
@@ -8861,7 +8861,7 @@ function BlackHoleStyle() {
     .bh-chip-btn:disabled { pointer-events: none; }
     .bh-chip-name {
       position: absolute; left: 14px; top: 0; transform: translateY(-50%);
-      font-size: 11px; color: var(--text-1); white-space: nowrap;
+      font-size: 0.6875rem; color: var(--text-1); white-space: nowrap;
       text-shadow: var(--star-label-shadow); pointer-events: none;
       transition: opacity var(--dur-base);
     }
@@ -8971,21 +8971,21 @@ class Boundary extends React.Component {
       color: "var(--danger)"
     }), /*#__PURE__*/React.createElement("div", {
       style: {
-        fontSize: 18,
+        fontSize: '1.125rem',
         fontWeight: 300,
         color: 'var(--text-1)',
         marginTop: 14
       }
     }, this.props.title ? this.props.title + '碎了' : '这一块星图碎了'), /*#__PURE__*/React.createElement("div", {
       style: {
-        fontSize: 12.5,
+        fontSize: '0.78125rem',
         color: 'var(--text-2)',
         marginTop: 12,
         lineHeight: 1.8
       }
     }, "\u8FD9\u662F\u661F\u56FE\u81EA\u5DF1\u7684\u95EE\u9898\uFF0C\u4E0D\u662F\u4F60\u54EA\u91CC\u70B9\u9519\u4E86\u3002"), /*#__PURE__*/React.createElement("div", {
       style: {
-        fontSize: 12,
+        fontSize: '0.75rem',
         color: 'var(--text-3)',
         marginTop: 10,
         lineHeight: 1.75
@@ -9003,7 +9003,7 @@ class Boundary extends React.Component {
         border: '1px solid var(--line)',
         background: 'var(--space-1)',
         fontFamily: 'var(--font-mono)',
-        fontSize: 11.5,
+        fontSize: '0.71875rem',
         lineHeight: 1.7,
         color: 'var(--text-2)',
         maxHeight: 132,
@@ -9033,7 +9033,7 @@ class Boundary extends React.Component {
       onClick: () => this.copy()
     }, this.state.copied ? '已复制' : '复制诊断信息')), /*#__PURE__*/React.createElement("div", {
       style: {
-        fontSize: 11,
+        fontSize: '0.6875rem',
         color: 'var(--text-3)',
         marginTop: 14,
         lineHeight: 1.7
@@ -9437,7 +9437,7 @@ function shareWeeklyCard(D) {
   }, 'image/png');
 }
 const HUD = {
-  fontSize: 10,
+  fontSize: '0.625rem',
   letterSpacing: 'var(--ls-hud)',
   textTransform: 'uppercase',
   color: 'var(--text-3)',
@@ -9464,7 +9464,7 @@ function SectionTitle({
     style: HUD
   }, children), hint && /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 11.5,
+      fontSize: '0.71875rem',
       color: 'var(--text-3)',
       marginLeft: 'auto'
     }
@@ -9526,18 +9526,18 @@ function TodoRow({
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 13.5,
+      fontSize: '0.84375rem',
       color: 'var(--text-1)'
     }
   }, title), /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: 'var(--font-mono)',
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: ember ? 'color-mix(in srgb, var(--gold) 72%, var(--text-3))' : 'var(--star-blue)'
     }
   }, count)), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 11.5,
+      fontSize: '0.71875rem',
       color: 'var(--text-3)',
       marginTop: 3,
       lineHeight: 1.6
@@ -9755,13 +9755,13 @@ function Checkup({
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 25,
+      fontSize: '1.5625rem',
       fontWeight: 300,
       color: 'var(--text-1)'
     }
   }, "\u77E5\u8BC6\u4F53\u68C0\u62A5\u544A"), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 13,
+      fontSize: '0.8125rem',
       color: 'var(--text-3)',
       marginTop: 4
     }
@@ -9784,7 +9784,7 @@ function Checkup({
       gap: 9,
       padding: '10px 4px 4px',
       color: 'var(--text-3)',
-      fontSize: 13
+      fontSize: '0.8125rem'
     }
   }, /*#__PURE__*/React.createElement(Icon, {
     name: "sparkles",
@@ -9863,7 +9863,7 @@ function Checkup({
   }, /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: 'var(--font-mono)',
-      fontSize: 64,
+      fontSize: '4rem',
       fontWeight: 200,
       lineHeight: 1,
       color: overallCol,
@@ -9872,7 +9872,7 @@ function Checkup({
   }, overall), /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: 'var(--font-mono)',
-      fontSize: 22,
+      fontSize: '1.375rem',
       fontWeight: 200,
       color: 'var(--text-3)'
     }
@@ -9885,7 +9885,7 @@ function Checkup({
     height: 6
   })), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: 'var(--text-2)',
       lineHeight: 1.7,
       marginTop: 14
@@ -9958,13 +9958,13 @@ function Checkup({
     }
   }), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-2)'
     }
   }, b.t)), /*#__PURE__*/React.createElement("div", {
     style: {
       fontFamily: 'var(--font-mono)',
-      fontSize: 28,
+      fontSize: '1.75rem',
       fontWeight: 200,
       color: 'var(--text-1)',
       lineHeight: 1.1,
@@ -9972,7 +9972,7 @@ function Checkup({
     }
   }, b.n), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 10.5,
+      fontSize: '0.65625rem',
       color: 'var(--text-3)',
       marginTop: 4,
       lineHeight: 1.5
@@ -10000,11 +10000,11 @@ function Checkup({
       padding: '24px 0',
       textAlign: 'center',
       color: 'var(--text-3)',
-      fontSize: 13
+      fontSize: '0.8125rem'
     }
   }, "\u672A\u6765 7 \u5929\u4F60\u7684\u661F\u7A7A\u5B89\u7136\u65E0\u6059 \u2726"), fRows.length > 0 && /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-2)',
       lineHeight: 1.65,
       marginBottom: 10
@@ -10062,7 +10062,7 @@ function Checkup({
       }
     }, /*#__PURE__*/React.createElement("div", {
       style: {
-        fontSize: 13,
+        fontSize: '0.8125rem',
         color: 'var(--text-1)',
         whiteSpace: 'nowrap',
         overflow: 'hidden',
@@ -10077,12 +10077,12 @@ function Checkup({
       }
     }, /*#__PURE__*/React.createElement("span", {
       style: {
-        fontSize: 11,
+        fontSize: '0.6875rem',
         color: 'var(--text-3)'
       }
     }, D.conName(s.con) || '—'), /*#__PURE__*/React.createElement("span", {
       style: {
-        fontSize: 11,
+        fontSize: '0.6875rem',
         color: col
       }
     }, "\xB7 ", days, " \u5929\u540E", kind === 'ember' ? '熄灭' : '到期'))), /*#__PURE__*/React.createElement("div", {
@@ -10101,7 +10101,7 @@ function Checkup({
         gap: 5,
         flex: 'none',
         fontFamily: 'var(--font-mono)',
-        fontSize: 11,
+        fontSize: '0.6875rem',
         color: 'var(--gold)'
       }
     }, /*#__PURE__*/React.createElement(Icon, {
@@ -10157,7 +10157,7 @@ function Checkup({
       width: 12,
       height: 12,
       lineHeight: '12px',
-      fontSize: 9,
+      fontSize: '0.5625rem',
       textAlign: 'center',
       color: 'var(--text-3)',
       fontFamily: 'var(--font-mono)'
@@ -10213,7 +10213,7 @@ function Checkup({
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 10.5,
+      fontSize: '0.65625rem',
       color: 'var(--text-3)',
       marginRight: 3
     }
@@ -10227,7 +10227,7 @@ function Checkup({
     }
   })), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 10.5,
+      fontSize: '0.65625rem',
       color: 'var(--text-3)',
       marginLeft: 3
     }
@@ -10273,7 +10273,7 @@ function Checkup({
       padding: '24px 8px',
       textAlign: 'center',
       color: 'var(--text-3)',
-      fontSize: 13,
+      fontSize: '0.8125rem',
       lineHeight: 1.8
     }
   }, "\u8FD8\u6CA1\u6709\u661F\u57DF\u3002\u5199\u4E0B\u7B2C\u4E00\u9897\u661F\uFF0C\u4F53\u68C0\u624D\u6709\u5BF9\u8C61\u3002"), /*#__PURE__*/React.createElement("div", {
@@ -10317,7 +10317,7 @@ function Checkup({
       gap: 7,
       width: 92,
       flex: 'none',
-      fontSize: 13,
+      fontSize: '0.8125rem',
       color: 'var(--text-2)'
     }
   }, /*#__PURE__*/React.createElement("span", {
@@ -10339,7 +10339,7 @@ function Checkup({
   })), /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: 'var(--font-mono)',
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: c.avg < 0.4 ? 'var(--star-blue-dim)' : 'var(--text-2)',
       width: 34,
       textAlign: 'right'
@@ -10378,7 +10378,7 @@ function Checkup({
       padding: '24px 0',
       textAlign: 'center',
       color: 'var(--text-3)',
-      fontSize: 13
+      fontSize: '0.8125rem'
     }
   }, total === 0 ? '还没有星。回到星图写下第一颗，它会在需要时来这里等你。' : '没有到期的星，状态很好。'), urgent.map(s => {
     // 待重燃覆盖亮度四档的状态文字（与 props.status 同一口径），用暗金余烬色
@@ -10435,7 +10435,7 @@ function Checkup({
       }
     }, /*#__PURE__*/React.createElement("div", {
       style: {
-        fontSize: 13.5,
+        fontSize: '0.84375rem',
         color: 'var(--text-1)',
         whiteSpace: 'nowrap',
         overflow: 'hidden',
@@ -10457,25 +10457,25 @@ function Checkup({
       }
     }), /*#__PURE__*/React.createElement("span", {
       style: {
-        fontSize: 11,
+        fontSize: '0.6875rem',
         color: 'var(--text-3)'
       }
     }, D.conName(s.con)), /*#__PURE__*/React.createElement("span", {
       style: {
-        fontSize: 11,
+        fontSize: '0.6875rem',
         color: b.c
       }
     }, "\xB7 ", b.t))), /*#__PURE__*/React.createElement("span", {
       style: {
         fontFamily: 'var(--font-mono)',
-        fontSize: 11,
+        fontSize: '0.6875rem',
         color: overdue ? 'var(--danger)' : 'var(--text-3)',
         flex: 'none'
       }
     }, s.props && s.props.nextReview || '—'), /*#__PURE__*/React.createElement("span", {
       style: {
         fontFamily: 'var(--font-mono)',
-        fontSize: 12.5,
+        fontSize: '0.78125rem',
         color: b.c,
         width: 34,
         textAlign: 'right',
@@ -10496,7 +10496,7 @@ function Checkup({
       padding: '24px 0',
       textAlign: 'center',
       color: 'var(--text-3)',
-      fontSize: 13
+      fontSize: '0.8125rem'
     }
   }, "\u8FD8\u6CA1\u6709\u70B9\u4EAE\u8BB0\u5F55\u3002\u7B2C\u4E00\u6B21\u300C\u878D\u4F1A\u8D2F\u901A\u300D\u4E4B\u540E\uFF0C\u8FD9\u91CC\u4F1A\u4EAE\u8D77\u6765\u3002"), series.length > 0 && /*#__PURE__*/React.createElement("div", {
     style: {
@@ -10563,7 +10563,7 @@ function Checkup({
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     style: {
       fontFamily: 'var(--font-mono)',
-      fontSize: 22,
+      fontSize: '1.375rem',
       fontWeight: 200,
       color: netDelta >= 0 ? 'var(--gold)' : 'var(--star-blue-dim)',
       lineHeight: 1
@@ -10578,7 +10578,7 @@ function Checkup({
       display: 'flex',
       flexDirection: 'column',
       gap: 5,
-      fontSize: 11.5,
+      fontSize: '0.71875rem',
       color: 'var(--text-2)'
     }
   }, /*#__PURE__*/React.createElement("span", {
@@ -10634,7 +10634,7 @@ function Checkup({
       padding: '24px 0',
       textAlign: 'center',
       color: 'var(--text-3)',
-      fontSize: 13
+      fontSize: '0.8125rem'
     }
   }, cons.length === 0 ? '有了星域之后，这里会提醒你哪一片正在变暗。' : '各星域都还明亮，无需特别关注。'), /*#__PURE__*/React.createElement("div", {
     style: {
@@ -10666,13 +10666,13 @@ function Checkup({
     }
   }), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 14,
+      fontSize: '0.875rem',
       color: 'var(--text-1)'
     }
   }, c.name), /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: 'var(--font-mono)',
-      fontSize: 11.5,
+      fontSize: '0.71875rem',
       color: 'var(--star-blue-dim)'
     }
   }, Math.round(c.avg * 100), "%"), /*#__PURE__*/React.createElement("div", {
@@ -10686,7 +10686,7 @@ function Checkup({
     onClick: () => onFocusCon && onFocusCon(c.id)
   }, "\u524D\u5F80")), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-2)',
       lineHeight: 1.65,
       marginTop: 8
@@ -11149,13 +11149,13 @@ function CommandPalette({
       border: 'none',
       outline: 'none',
       color: 'var(--text-1)',
-      fontSize: 16,
+      fontSize: '1rem',
       fontFamily: 'var(--font-sans)'
     }
   }), /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: 'var(--font-mono)',
-      fontSize: 10.5,
+      fontSize: '0.65625rem',
       color: 'var(--text-3)',
       border: '1px solid var(--line-strong)',
       borderRadius: 6,
@@ -11176,7 +11176,7 @@ function CommandPalette({
       padding: '32px 0',
       textAlign: 'center',
       color: 'var(--text-3)',
-      fontSize: 13.5
+      fontSize: '0.84375rem'
     }
   }, "\u6CA1\u6709\u5339\u914D\u300C", query, "\u300D\u7684\u7ED3\u679C\u3002"), sections.map(sec => /*#__PURE__*/React.createElement("div", {
     key: sec.title,
@@ -11185,7 +11185,7 @@ function CommandPalette({
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 10,
+      fontSize: '0.625rem',
       letterSpacing: 'var(--ls-hud)',
       textTransform: 'uppercase',
       color: 'var(--text-3)',
@@ -11237,19 +11237,19 @@ function CommandPalette({
     }), /*#__PURE__*/React.createElement("span", {
       style: {
         flex: 1,
-        fontSize: 13.5,
+        fontSize: '0.84375rem',
         color: on ? 'var(--text-1)' : 'var(--text-2)'
       }
     }, item.label), item.note && /*#__PURE__*/React.createElement(Badge, {
       tone: "fading",
       style: {
-        fontSize: 10,
+        fontSize: '0.625rem',
         height: 16,
         minWidth: 0
       }
     }, "\u6B63\u6587"), /*#__PURE__*/React.createElement("span", {
       style: {
-        fontSize: 11,
+        fontSize: '0.6875rem',
         color: 'var(--text-3)'
       }
     }, item.sub), on && /*#__PURE__*/React.createElement(Icon, {
@@ -11259,7 +11259,7 @@ function CommandPalette({
     })), item.snippet && /*#__PURE__*/React.createElement("div", {
       style: {
         margin: '3px 0 0 29px',
-        fontSize: 11.5,
+        fontSize: '0.71875rem',
         lineHeight: 1.5,
         color: 'var(--text-3)',
         whiteSpace: 'nowrap',
@@ -11563,7 +11563,7 @@ function CodeBlock({
       border: 'none',
       cursor: 'pointer',
       color: copied ? dawn ? '#b8801a' : '#ffd98a' : P.meta,
-      fontSize: 11.5,
+      fontSize: '0.71875rem',
       fontFamily: 'var(--font-mono)'
     }
   }, /*#__PURE__*/React.createElement(Icon, {
@@ -11618,7 +11618,7 @@ function CodeBlock({
       outline: 'none',
       resize: 'vertical',
       fontFamily: 'var(--font-mono)',
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       lineHeight: 1.85,
       padding: '12px 14px',
       tabSize: 4,
@@ -11640,7 +11640,7 @@ function CodeBlock({
     style: {
       padding: '12px 14px',
       fontFamily: 'var(--font-mono)',
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       lineHeight: 1.85,
       color: P.plain,
       overflowX: 'auto',
@@ -11719,7 +11719,7 @@ function DataTable({
       padding: '9px 13px',
       borderRight: '1px solid var(--line)',
       borderBottom: '1px solid var(--line)',
-      fontSize: 13.5,
+      fontSize: '0.84375rem',
       color: isHead ? 'var(--text-1)' : 'var(--text-2)',
       fontWeight: isHead ? 500 : 400,
       background: isHead ? 'color-mix(in srgb, var(--star-blue) 5%, transparent)' : 'transparent'
@@ -12372,7 +12372,7 @@ function MathBlock({
     }), /*#__PURE__*/React.createElement("span", {
       style: {
         fontFamily: 'var(--font-mono)',
-        fontSize: 10.5,
+        fontSize: '0.65625rem',
         letterSpacing: 'var(--ls-hud)',
         textTransform: 'uppercase'
       }
@@ -12383,7 +12383,7 @@ function MathBlock({
     }), /*#__PURE__*/React.createElement("span", {
       style: {
         fontFamily: 'var(--font-mono)',
-        fontSize: 10.5
+        fontSize: '0.65625rem'
       }
     }, "Enter \u6E32\u67D3 \xB7 Shift+Enter \u6362\u884C \xB7 Esc \u53D6\u6D88")), /*#__PURE__*/React.createElement("textarea", {
       ref: taRef,
@@ -12416,7 +12416,7 @@ function MathBlock({
         outline: 'none',
         resize: 'none',
         fontFamily: 'var(--font-mono)',
-        fontSize: 13.5,
+        fontSize: '0.84375rem',
         lineHeight: 1.7,
         padding: '11px 14px',
         tabSize: 2
@@ -12433,7 +12433,7 @@ function MathBlock({
       }
     }, /*#__PURE__*/React.createElement("span", {
       style: {
-        fontSize: 19,
+        fontSize: '1.1875rem',
         color: v.trim() ? 'var(--text-1)' : 'var(--text-3)',
         letterSpacing: '0.01em'
       }
@@ -12467,7 +12467,7 @@ function MathBlock({
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 19.5,
+      fontSize: '1.21875rem',
       color: tex ? 'var(--text-1)' : 'var(--text-3)',
       letterSpacing: '0.01em',
       textAlign: 'center'
@@ -12672,20 +12672,20 @@ function ImageBlock({
     color: err ? 'var(--danger)' : over ? 'var(--star-blue)' : 'currentColor'
   }), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 13,
+      fontSize: '0.8125rem',
       color: err ? 'var(--text-2)' : 'inherit'
     }
   }, busy ? '正在压缩这张图…' : err ? '图片加载失败 · 原链接已失效' : over ? '放开即插入' : '拖入图片，或点击上传'), err && !busy && /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 11.5
+      fontSize: '0.71875rem'
     }
   }, "\u70B9\u51FB\u91CD\u65B0\u4E0A\u4F20\uFF0C\u66FF\u6362\u8FD9\u5F20\u56FE"), !err && !busy && !note && /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 11
+      fontSize: '0.6875rem'
     }
   }, "\u5927\u56FE\u4F1A\u81EA\u52A8\u538B\u5230\u957F\u8FB9 ", SR_IMG.maxEdge, "px \u2014\u2014 \u6574\u7247\u661F\u7A7A\u8981\u8DDF\u7740\u6BCF\u6B21\u4FDD\u5B58\u4E00\u8D77\u4E0A\u4F20"), note && /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 11.5,
+      fontSize: '0.71875rem',
       color: 'var(--text-2)'
     }
   }, note), /*#__PURE__*/React.createElement("input", {
@@ -12887,7 +12887,7 @@ function TypePicker({
       alignItems: 'center',
       gap: 6,
       font: 'inherit',
-      fontSize: 12,
+      fontSize: '0.75rem',
       padding: '2px 9px',
       borderRadius: 'var(--r-pill)',
       border: '1px solid transparent',
@@ -12934,7 +12934,7 @@ function TypePicker({
       padding: '7px 10px',
       borderRadius: 'var(--r-sm)',
       cursor: 'pointer',
-      fontSize: 13,
+      fontSize: '0.8125rem',
       color: t === value ? 'var(--text-1)' : 'var(--text-2)',
       background: t === value ? 'rgba(255,217,138,0.10)' : 'transparent'
     }
@@ -12999,7 +12999,7 @@ function ReviewPicker({
       alignItems: 'center',
       gap: 7,
       font: 'inherit',
-      fontSize: 13,
+      fontSize: '0.8125rem',
       color: 'var(--text-1)',
       border: 'none',
       background: 'transparent',
@@ -13038,7 +13038,7 @@ function ReviewPicker({
     onClick: () => setMode(md => md === 'days' ? 'months' : md === 'months' ? 'years' : 'years'),
     style: {
       font: 'inherit',
-      fontSize: 13,
+      fontSize: '0.8125rem',
       color: 'var(--text-1)',
       fontFamily: 'var(--font-mono)',
       border: 'none',
@@ -13069,7 +13069,7 @@ function ReviewPicker({
     key: w,
     style: {
       textAlign: 'center',
-      fontSize: 10.5,
+      fontSize: '0.65625rem',
       color: 'var(--text-3)',
       fontFamily: 'var(--font-mono)',
       padding: '2px 0'
@@ -13095,7 +13095,7 @@ function ReviewPicker({
       style: {
         height: 30,
         font: 'inherit',
-        fontSize: 12.5,
+        fontSize: '0.78125rem',
         borderRadius: 'var(--r-sm)',
         cursor: past ? 'default' : 'pointer',
         border: '1px solid ' + (isSel ? 'rgba(255,217,138,0.55)' : isToday ? 'var(--glass-border-strong)' : 'transparent'),
@@ -13129,7 +13129,7 @@ function ReviewPicker({
       style: {
         height: 40,
         font: 'inherit',
-        fontSize: 12.5,
+        fontSize: '0.78125rem',
         borderRadius: 'var(--r-sm)',
         cursor: pastM ? 'default' : 'pointer',
         border: '1px solid ' + (isCur ? 'rgba(255,217,138,0.55)' : isNowM ? 'var(--glass-border-strong)' : 'transparent'),
@@ -13162,7 +13162,7 @@ function ReviewPicker({
       style: {
         height: 40,
         font: 'inherit',
-        fontSize: 12.5,
+        fontSize: '0.78125rem',
         fontFamily: 'var(--font-mono)',
         borderRadius: 'var(--r-sm)',
         cursor: pastY ? 'default' : 'pointer',
@@ -13182,7 +13182,7 @@ function ReviewPicker({
   }, /*#__PURE__*/React.createElement("span", {
     style: {
       flex: 1,
-      fontSize: 11,
+      fontSize: '0.6875rem',
       color: 'var(--text-3)'
     }
   }, sel ? '排到 ' + sel.replace(/-/g, '/') : '点一天，再按确认'), /*#__PURE__*/React.createElement(Button, {
@@ -13327,7 +13327,7 @@ function Properties({
     }
   }), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 11,
+      fontSize: '0.6875rem',
       letterSpacing: 'var(--ls-hud)',
       textTransform: 'uppercase',
       fontFamily: 'var(--font-mono)'
@@ -13339,7 +13339,7 @@ function Properties({
   }), /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: 'var(--font-mono)',
-      fontSize: 11
+      fontSize: '0.6875rem'
     }
   }, rows.length)), open && /*#__PURE__*/React.createElement("div", {
     style: {
@@ -13375,7 +13375,7 @@ function Properties({
       width: 96,
       flex: 'none',
       color: 'var(--text-3)',
-      fontSize: 12.5
+      fontSize: '0.78125rem'
     }
   }, /*#__PURE__*/React.createElement(Icon, {
     name: r.icon,
@@ -13419,7 +13419,7 @@ function Properties({
       display: 'inline-flex',
       alignItems: 'center',
       gap: 6,
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: 'var(--text-1)',
       cursor: 'default'
     }
@@ -13454,7 +13454,7 @@ function Properties({
     style: {
       outline: 'none',
       cursor: 'text',
-      fontSize: 13,
+      fontSize: '0.8125rem',
       color: 'var(--text-1)',
       borderRadius: 4,
       padding: '0 2px',
@@ -13499,7 +13499,7 @@ function Properties({
       gap: 7,
       padding: '8px 0 2px',
       color: 'var(--text-3)',
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       cursor: 'pointer'
     }
   }, /*#__PURE__*/React.createElement(Icon, {
@@ -14043,7 +14043,7 @@ function AIAssist({
   const note = (msg, danger) => /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: 6,
-      fontSize: 11.5,
+      fontSize: '0.71875rem',
       color: danger ? 'var(--danger)' : 'var(--text-3)',
       lineHeight: 1.6
     }
@@ -14066,7 +14066,7 @@ function AIAssist({
       border: '1px dashed var(--line-strong)',
       background: 'transparent',
       color: busy ? 'var(--text-3)' : 'var(--text-2)',
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       cursor: busy ? 'wait' : 'pointer'
     }
   }, /*#__PURE__*/React.createElement("span", {
@@ -14087,14 +14087,14 @@ function AIAssist({
   }), !ai.ok ? /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: 10,
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-3)',
       lineHeight: 1.7
     }
   }, "\u5728 AI \u914D\u7F6E\u4E2D\u63A5\u5165\u670D\u52A1\u5546\u540E\u53EF\u7528\u3002") : !(ai.cfg.autoSummary || ai.cfg.tagSuggest || ai.cfg.linkSuggest) ? /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: 10,
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-3)',
       lineHeight: 1.7
     }
@@ -14128,7 +14128,7 @@ function AIAssist({
       border: '1px dashed rgba(159,198,255,0.45)',
       background: 'rgba(159,198,255,0.07)',
       color: 'var(--star-blue)',
-      fontSize: 12,
+      fontSize: '0.75rem',
       cursor: 'pointer',
       fontFamily: 'var(--font-sans)'
     }
@@ -14168,7 +14168,7 @@ function AIAssist({
     }
   }), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 13,
+      fontSize: '0.8125rem',
       color: 'var(--text-1)',
       minWidth: 0,
       overflow: 'hidden',
@@ -14188,13 +14188,13 @@ function AIAssist({
       border: '1px solid var(--glass-border-strong)',
       background: 'rgba(159,198,255,0.14)',
       color: 'var(--text-1)',
-      fontSize: 11.5,
+      fontSize: '0.71875rem',
       cursor: 'pointer',
       fontFamily: 'var(--font-sans)'
     }
   }, "\u8FDE\u4E0A")), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 11.5,
+      fontSize: '0.71875rem',
       color: 'var(--text-3)',
       lineHeight: 1.5,
       marginTop: 4,
@@ -14210,6 +14210,58 @@ function Editor({
 }) {
   const D = window.SR_DATA;
   const star = D.byId[starId] || D.stars[0];
+  /* 空星空兜底：星被删光（或 409 收敛后一颗不剩）时以前直接 star.body 崩给
+     错误边界——一张全屏红卡换一句「什么都没了」未免太重。给一张平静的空态。
+     空态必须早于任何 hook 返回，所以包一层：有星才进 EditorBody。 */
+  if (!star) {
+    return /*#__PURE__*/React.createElement("section", {
+      style: {
+        flex: 1,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'column',
+        gap: 14,
+        color: 'var(--text-2)'
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "star",
+      size: 30,
+      color: "var(--text-3)"
+    }), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: '0.875rem'
+      }
+    }, "\u8FD9\u7247\u661F\u7A7A\u6682\u65F6\u6CA1\u6709\u661F"), /*#__PURE__*/React.createElement("button", {
+      type: "button",
+      onClick: onBack,
+      className: "sr-focus-ring",
+      style: {
+        fontSize: '0.8125rem',
+        color: 'var(--star-blue)',
+        background: 'none',
+        border: 'none',
+        cursor: 'pointer',
+        borderBottom: '1px dashed rgba(159,198,255,0.5)',
+        padding: 0
+      }
+    }, "\u56DE\u5230\u661F\u56FE"));
+  }
+  return /*#__PURE__*/React.createElement(EditorBody, {
+    star: star,
+    starId: starId,
+    onBack: onBack,
+    onOpen: onOpen,
+    onExplore: onExplore
+  });
+}
+function EditorBody({
+  star,
+  onBack,
+  onOpen,
+  onExplore
+}) {
+  const D = window.SR_DATA;
   const refs = React.useRef({});
   const [blocks, setBlocks] = React.useState(() => (star.body || []).map(b => ({
     ...b
@@ -14356,12 +14408,18 @@ function Editor({
     rows: b.rows && b.rows.map(r => r.slice())
   });
   const undoRef = React.useRef(null);
-  if (!undoRef.current) undoRef.current = U ? U.create(120) : {
-    past: [],
-    future: [],
-    cap: 120,
-    typing: false
-  };
+  if (!undoRef.current) {
+    /* 容量随笔记体量降档（undocore.capForBytes）：快照是整篇克隆，
+       一篇 1MB 的笔记按 120 步最坏 ~240MB，降档后 ~30MB。 */
+    const approxBytes = (star.body || []).reduce((n, b) => n + String(b.text || b.code || '').length, 0) * 2;
+    const cap = U && U.capForBytes ? U.capForBytes(approxBytes) : 120;
+    undoRef.current = U ? U.create(cap) : {
+      past: [],
+      future: [],
+      cap,
+      typing: false
+    };
+  }
   const snapNow = () => ({
     blocks: blocksRef.current.map(syncBlock).map(cloneBlk),
     con: star.con
@@ -16134,7 +16192,7 @@ function Editor({
           },
           style: {
             outline: 'none',
-            fontSize: 16.5,
+            fontSize: '1.03125rem',
             lineHeight: 1.85,
             color: 'var(--text-2)'
           }
@@ -16142,7 +16200,7 @@ function Editor({
       // 标题上下留白：上方多、下方少（块间距 8px 统一兜底），阅读节奏对标 Notion/Typora
       case 'h1':
         return editable(b, 'div', {
-          fontSize: 28,
+          fontSize: '1.75rem',
           fontWeight: 300,
           lineHeight: 1.35,
           marginTop: 18,
@@ -16150,7 +16208,7 @@ function Editor({
         });
       case 'h2':
         return editable(b, 'div', {
-          fontSize: 21,
+          fontSize: '1.3125rem',
           fontWeight: 300,
           lineHeight: 1.45,
           marginTop: 14,
@@ -16158,7 +16216,7 @@ function Editor({
         });
       case 'h3':
         return editable(b, 'div', {
-          fontSize: 17.5,
+          fontSize: '1.09375rem',
           fontWeight: 500,
           lineHeight: 1.5,
           marginTop: 10,
@@ -16166,7 +16224,7 @@ function Editor({
         });
       case 'p':
         return editable(b, 'div', {
-          fontSize: 16.5,
+          fontSize: '1.03125rem',
           lineHeight: 1.85,
           color: 'var(--text-2)',
           minHeight: 26
@@ -16185,7 +16243,7 @@ function Editor({
             flex: 'none'
           }
         }), editable(b, 'div', {
-          fontSize: 16,
+          fontSize: '1rem',
           lineHeight: 1.75,
           color: 'var(--text-2)',
           fontStyle: 'italic'
@@ -16209,7 +16267,7 @@ function Editor({
           }
         }), editable(b, 'div', {
           flex: 1,
-          fontSize: 15,
+          fontSize: '0.9375rem',
           lineHeight: 1.7,
           color: 'var(--text-1)'
         }));
@@ -16232,7 +16290,7 @@ function Editor({
           }
         }), editable(b, 'div', {
           flex: 1,
-          fontSize: 16.5,
+          fontSize: '1.03125rem',
           lineHeight: 1.7,
           color: 'var(--text-2)'
         }));
@@ -16254,13 +16312,13 @@ function Editor({
             style: {
               color: 'var(--star-blue)',
               fontFamily: 'var(--font-mono)',
-              fontSize: 14,
+              fontSize: '0.875rem',
               marginTop: 2,
               minWidth: 16
             }
           }, n, "."), editable(b, 'div', {
             flex: 1,
-            fontSize: 16.5,
+            fontSize: '1.03125rem',
             lineHeight: 1.7,
             color: 'var(--text-2)'
           }));
@@ -16312,7 +16370,7 @@ function Editor({
             color: "var(--text-on-gold)"
           })), editable(b, 'div', {
             flex: 1,
-            fontSize: 16,
+            fontSize: '1rem',
             lineHeight: 1.7,
             color: b.checked ? 'var(--text-3)' : 'var(--text-2)',
             textDecoration: b.checked ? 'line-through' : 'none'
@@ -16358,7 +16416,7 @@ function Editor({
             color: "currentColor"
           })), editable(b, 'div', {
             flex: 1,
-            fontSize: 16.5,
+            fontSize: '1.03125rem',
             lineHeight: 1.7,
             color: 'var(--text-1)'
           })), b.open && /*#__PURE__*/React.createElement("div", {
@@ -16379,7 +16437,7 @@ function Editor({
               outline: 'none',
               marginLeft: 24,
               marginTop: 6,
-              fontSize: 15,
+              fontSize: '0.9375rem',
               lineHeight: 1.7,
               color: 'var(--text-2)'
             }
@@ -16492,7 +16550,7 @@ function Editor({
       border: 'none',
       borderLeft: '2px solid var(--gold)',
       cursor: 'pointer',
-      fontSize: 13,
+      fontSize: '0.8125rem',
       color: 'var(--text-1)'
     }
   }, star.label), outline.map(o => /*#__PURE__*/React.createElement("button", {
@@ -16512,7 +16570,7 @@ function Editor({
       borderRadius: 'var(--r-sm)',
       borderLeft: '2px solid var(--line)',
       cursor: 'pointer',
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: 'var(--text-2)'
     },
     onMouseEnter: e => e.currentTarget.style.background = 'rgba(159,198,255,0.06)',
@@ -16552,13 +16610,13 @@ function Editor({
     color: l.kind === 'cross' ? 'var(--gold)' : 'var(--star-blue)'
   }), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 13.5,
+      fontSize: '0.84375rem',
       color: 'var(--text-1)'
     }
   }, l.star.label), l.kind === 'cross' && /*#__PURE__*/React.createElement("span", {
     style: {
       marginLeft: 'auto',
-      fontSize: 10,
+      fontSize: '0.625rem',
       color: 'var(--gold)'
     }
   }, "\u878D\u4F1A\u8D2F\u901A"), /*#__PURE__*/React.createElement("button", {
@@ -16590,7 +16648,7 @@ function Editor({
     color: "currentColor"
   }))), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 11.5,
+      fontSize: '0.71875rem',
       color: 'var(--text-3)',
       lineHeight: 1.5,
       paddingLeft: 21
@@ -16612,7 +16670,7 @@ function Editor({
       alignItems: 'center',
       gap: 7,
       marginBottom: 9,
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: 'var(--text-2)'
     }
   }, /*#__PURE__*/React.createElement("span", {
@@ -16630,7 +16688,7 @@ function Editor({
   }, linkStar.label), /*#__PURE__*/React.createElement("span", {
     style: {
       marginLeft: 'auto',
-      fontSize: 10,
+      fontSize: '0.625rem',
       color: linkStar.con === con ? 'var(--star-blue)' : 'var(--gold)'
     }
   }, linkStar.con === con ? '同一星域' : '融会贯通')), /*#__PURE__*/React.createElement("input", {
@@ -16652,7 +16710,7 @@ function Editor({
       border: '1px solid var(--glass-border-strong)',
       borderRadius: 'var(--r-sm)',
       color: 'var(--text-1)',
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       padding: '7px 10px',
       outline: 'none',
       fontFamily: 'var(--font-sans)'
@@ -16674,7 +16732,7 @@ function Editor({
       border: '1px solid var(--glass-border-strong)',
       background: 'transparent',
       color: 'var(--text-2)',
-      fontSize: 12,
+      fontSize: '0.75rem',
       cursor: 'pointer',
       fontFamily: 'var(--font-sans)'
     }
@@ -16688,13 +16746,13 @@ function Editor({
       border: '1px solid var(--glass-border-strong)',
       background: 'rgba(159,198,255,0.14)',
       color: 'var(--text-1)',
-      fontSize: 12,
+      fontSize: '0.75rem',
       cursor: 'pointer',
       fontFamily: 'var(--font-sans)'
     }
   }, "\u5EFA\u7ACB\u8FDE\u63A5"))) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 10,
+      fontSize: '0.625rem',
       letterSpacing: 'var(--ls-hud)',
       textTransform: 'uppercase',
       color: 'var(--text-3)',
@@ -16710,7 +16768,7 @@ function Editor({
   }, linkCandidates.length === 0 && /*#__PURE__*/React.createElement("div", {
     style: {
       padding: '8px 12px',
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-3)'
     }
   }, "\u6CA1\u6709\u53EF\u8FDE\u63A5\u7684\u661F\u4E86\u3002"), linkCandidates.map(s => /*#__PURE__*/React.createElement("button", {
@@ -16747,13 +16805,13 @@ function Editor({
     }
   }), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 13,
+      fontSize: '0.8125rem',
       color: 'var(--text-2)'
     }
   }, s.label), /*#__PURE__*/React.createElement("span", {
     style: {
       marginLeft: 'auto',
-      fontSize: 10.5,
+      fontSize: '0.65625rem',
       color: 'var(--text-3)'
     }
   }, D.conName(s.con))))), /*#__PURE__*/React.createElement("button", {
@@ -16767,7 +16825,7 @@ function Editor({
       font: 'inherit',
       background: 'transparent',
       padding: '7px 12px',
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-3)',
       cursor: 'pointer',
       border: 'none',
@@ -16788,7 +16846,7 @@ function Editor({
       border: '1px dashed var(--line-strong)',
       background: 'transparent',
       color: 'var(--text-3)',
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       cursor: 'pointer'
     }
   }, /*#__PURE__*/React.createElement(Icon, {
@@ -16830,7 +16888,7 @@ function Editor({
     }
   }, backlinks.length === 0 && /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-3)'
     }
   }, "\u6682\u65E0\u5176\u5B83\u661F\u6307\u5411\u8FD9\u91CC\u3002"), backlinks.map((b, i) => /*#__PURE__*/React.createElement("div", {
@@ -16858,18 +16916,18 @@ function Editor({
     }
   }), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 13.5,
+      fontSize: '0.84375rem',
       color: 'var(--text-1)'
     }
   }, b.star.label), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 11,
+      fontSize: '0.6875rem',
       color: 'var(--text-3)',
       marginLeft: 'auto'
     }
   }, D.conName(b.star.con))), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 11.5,
+      fontSize: '0.71875rem',
       color: 'var(--text-3)',
       marginTop: 6,
       lineHeight: 1.6,
@@ -16909,7 +16967,7 @@ function Editor({
         alignItems: 'center',
         gap: 7,
         marginTop: 12,
-        fontSize: 12,
+        fontSize: '0.75rem',
         color: 'var(--text-2)'
       }
     }, /*#__PURE__*/React.createElement(Icon, {
@@ -16932,7 +16990,7 @@ function Editor({
         display: 'flex',
         alignItems: 'center',
         gap: 7,
-        fontSize: 12.5,
+        fontSize: '0.78125rem',
         color: litSt ? 'var(--gold)' : emberSt ? 'var(--gold-warm)' : 'var(--text-2)'
       }
     }, /*#__PURE__*/React.createElement("span", {
@@ -16947,7 +17005,7 @@ function Editor({
       }
     }), litSt ? `已点亮 · ${D.ago(star.sr && star.sr.lit)}` : emberSt ? '待重燃' : '未点亮'), /*#__PURE__*/React.createElement("div", {
       style: {
-        fontSize: 11.5,
+        fontSize: '0.71875rem',
         color: 'var(--text-3)',
         lineHeight: 1.7,
         marginTop: 6
@@ -16957,7 +17015,7 @@ function Editor({
         display: 'flex',
         alignItems: 'flex-start',
         gap: 6,
-        fontSize: 11,
+        fontSize: '0.6875rem',
         color: substantial ? 'var(--text-2)' : 'var(--text-3)',
         lineHeight: 1.6,
         marginTop: 8
@@ -16980,7 +17038,7 @@ function Editor({
   }), /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: 8,
-      fontSize: 11,
+      fontSize: '0.6875rem',
       color: 'var(--text-3)',
       lineHeight: 1.6
     }
@@ -17084,7 +17142,7 @@ function Editor({
       display: 'inline-flex',
       alignItems: 'center',
       gap: 6,
-      fontSize: 13,
+      fontSize: '0.8125rem',
       color: 'var(--text-2)',
       whiteSpace: 'nowrap',
       flex: 'none'
@@ -17153,7 +17211,7 @@ function Editor({
       border: '1px solid var(--glass-border-strong)',
       borderRadius: 'var(--r-pill)',
       color: 'var(--text-1)',
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       padding: '0 10px',
       outline: 'none',
       fontFamily: 'var(--font-sans)'
@@ -17182,7 +17240,7 @@ function Editor({
       borderRadius: 'var(--r-pill)',
       border: '1px dashed var(--line-strong)',
       color: 'var(--text-3)',
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       cursor: 'pointer'
     }
   }, /*#__PURE__*/React.createElement(Icon, {
@@ -17196,7 +17254,7 @@ function Editor({
   }), /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: 'var(--font-mono)',
-      fontSize: 11,
+      fontSize: '0.6875rem',
       color: 'var(--text-3)'
     }
   }, "\u7F16\u8F91\u4E8E ", (() => {
@@ -17224,7 +17282,7 @@ function Editor({
     },
     style: {
       outline: 'none',
-      fontSize: 32,
+      fontSize: '2rem',
       fontWeight: 200,
       color: 'var(--text-1)',
       letterSpacing: '-0.01em',
@@ -17280,7 +17338,7 @@ function Editor({
       borderRadius: 'var(--r-sm)',
       color: 'var(--text-3)',
       cursor: 'text',
-      fontSize: 16.5,
+      fontSize: '1.03125rem',
       lineHeight: 1.85
     }
   }, "\u5199\u4E0B\u7B2C\u4E00\u884C\uFF0C\u6216\u6309 / \u9009\u62E9\u5757\u7C7B\u578B\u2026"), blocks.map((b, bi) => /*#__PURE__*/React.createElement("div", {
@@ -17384,7 +17442,7 @@ function Editor({
       WebkitBackdropFilter: 'blur(var(--glass-blur))',
       backdropFilter: 'blur(var(--glass-blur))',
       fontFamily: 'var(--font-mono)',
-      fontSize: 11,
+      fontSize: '0.6875rem',
       color: 'var(--text-3)',
       whiteSpace: 'nowrap',
       overflow: 'hidden'
@@ -17608,7 +17666,7 @@ function Editor({
     color: "var(--gold)"
   }), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 13.5,
+      fontSize: '0.84375rem',
       color: 'var(--text-1)'
     }
   }, toast))), confirm && /*#__PURE__*/React.createElement(ConfirmDialog, {
@@ -17655,7 +17713,7 @@ function Editor({
       }, "\u542F\u7A0B"))
     }, /*#__PURE__*/React.createElement("div", {
       style: {
-        fontSize: 13.5,
+        fontSize: '0.84375rem',
         lineHeight: 1.8,
         color: 'var(--text-2)'
       }
@@ -17684,7 +17742,7 @@ function Editor({
       border: '1px solid var(--glass-border-strong)',
       borderRadius: 'var(--r-sm)',
       color: 'var(--text-1)',
-      fontSize: 13,
+      fontSize: '0.8125rem',
       padding: '6px 9px',
       outline: 'none',
       fontFamily: 'var(--font-sans)'
@@ -17698,7 +17756,7 @@ function Editor({
       border: '1px solid var(--glass-border-strong)',
       background: 'color-mix(in srgb, var(--star-blue) 12%, transparent)',
       color: 'var(--text-1)',
-      fontSize: 12,
+      fontSize: '0.75rem',
       cursor: off ? 'not-allowed' : 'pointer',
       opacity: off ? 0.5 : 1,
       fontFamily: 'var(--font-sans)'
@@ -17761,7 +17819,7 @@ function Editor({
       "aria-live": "polite",
       style: {
         fontFamily: 'var(--font-mono)',
-        fontSize: 11,
+        fontSize: '0.6875rem',
         color: find.q ? findMatches.length ? 'var(--text-2)' : 'var(--danger)' : 'var(--text-3)',
         flex: 'none',
         minWidth: 46,
@@ -17859,7 +17917,7 @@ function SaveStatus() {
     display: 'inline-flex',
     alignItems: 'center',
     gap: 6,
-    fontSize: 12,
+    fontSize: '0.75rem',
     whiteSpace: 'nowrap',
     flex: 'none'
   };
@@ -17933,7 +17991,7 @@ function RailHead({
     color: "var(--gold)"
   }), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       letterSpacing: '0.04em',
       color: 'var(--text-2)',
       fontWeight: 500,
@@ -18308,13 +18366,13 @@ function EdMenuRow({
   }), /*#__PURE__*/React.createElement("span", {
     style: {
       flex: 1,
-      fontSize: 13,
+      fontSize: '0.8125rem',
       color: danger ? 'var(--danger)' : on ? 'var(--text-1)' : 'var(--text-2)'
     }
   }, label), hint && /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: 'var(--font-mono)',
-      fontSize: 11,
+      fontSize: '0.6875rem',
       color: 'var(--text-3)'
     }
   }, hint), chevron && /*#__PURE__*/React.createElement(SRIcon, {
@@ -18366,7 +18424,7 @@ function MoveRow({
     }
   }), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 13,
+      fontSize: '0.8125rem',
       color: 'var(--text-2)'
     }
   }, name));
@@ -18376,7 +18434,7 @@ function Label({
 }) {
   return /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 10,
+      fontSize: '0.625rem',
       letterSpacing: 'var(--ls-hud)',
       textTransform: 'uppercase',
       color: 'var(--text-3)',
@@ -18444,7 +18502,7 @@ function SlashMenu({
       border: '1px solid var(--glass-border-strong)',
       borderRadius: 'var(--r-sm)',
       color: 'var(--text-1)',
-      fontSize: 13,
+      fontSize: '0.8125rem',
       padding: '7px 10px',
       outline: 'none',
       fontFamily: 'var(--font-sans)'
@@ -18465,7 +18523,7 @@ function SlashMenu({
   })) : /*#__PURE__*/React.createElement("div", {
     style: {
       padding: '8px 11px',
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: 'var(--text-3)'
     }
   }, "\u6CA1\u6709\u5339\u914D\u7684\u5757\u7C7B\u578B")));
@@ -18527,7 +18585,7 @@ function StarLinkMenu({
       border: '1px solid var(--glass-border-strong)',
       borderRadius: 'var(--r-sm)',
       color: 'var(--text-1)',
-      fontSize: 13,
+      fontSize: '0.8125rem',
       padding: '7px 10px',
       outline: 'none',
       fontFamily: 'var(--font-sans)'
@@ -18548,7 +18606,7 @@ function StarLinkMenu({
   })) : /*#__PURE__*/React.createElement("div", {
     style: {
       padding: '8px 11px',
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: 'var(--text-3)'
     }
   }, "\u6CA1\u6709\u5339\u914D\u7684\u661F")));
@@ -18640,7 +18698,7 @@ function SelectionToolbar({
       height: 30,
       cursor: 'pointer',
       color: 'var(--text-2)',
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       background: 'transparent',
       border: 'none',
       borderRadius: 'var(--r-sm)',
@@ -18717,7 +18775,7 @@ function ColorMenu({
       alignItems: 'center',
       justifyContent: 'center',
       color: c.c,
-      fontSize: 12,
+      fontSize: '0.75rem',
       fontWeight: 600
     }
   }, "A") : /*#__PURE__*/React.createElement("span", {
@@ -18730,7 +18788,7 @@ function ColorMenu({
     }
   }), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 13,
+      fontSize: '0.8125rem',
       color: 'var(--text-2)'
     }
   }, c.label));
@@ -18820,7 +18878,7 @@ function ContextMenu({
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 11,
+      fontSize: '0.6875rem',
       color: 'var(--text-3)'
     }
   }, (window.SR_DATA.account || {}).name || '我', " \u7F16\u8F91"))), sub === 'turn' && /*#__PURE__*/React.createElement(Floating, {
@@ -18943,7 +19001,7 @@ function ConfirmDialog({
     color: "var(--danger)"
   })), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 14,
+      fontSize: '0.875rem',
       lineHeight: 1.65,
       color: 'var(--text-1)',
       paddingTop: 5
@@ -18965,7 +19023,7 @@ function ConfirmDialog({
       border: '1px solid var(--glass-border-strong)',
       background: 'transparent',
       color: 'var(--text-2)',
-      fontSize: 13,
+      fontSize: '0.8125rem',
       cursor: 'pointer',
       fontFamily: 'var(--font-sans)'
     }
@@ -18980,7 +19038,7 @@ function ConfirmDialog({
       border: '1px solid color-mix(in srgb, var(--danger) 50%, transparent)',
       background: 'color-mix(in srgb, var(--danger) 16%, transparent)',
       color: 'var(--danger)',
-      fontSize: 13,
+      fontSize: '0.8125rem',
       cursor: 'pointer',
       fontFamily: 'var(--font-sans)'
     }
@@ -19050,7 +19108,7 @@ function LinkDialog({
       alignItems: 'center',
       gap: 9,
       marginBottom: 12,
-      fontSize: 13.5,
+      fontSize: '0.84375rem',
       color: 'var(--text-1)'
     }
   }, /*#__PURE__*/React.createElement(SRIcon, {
@@ -19075,7 +19133,7 @@ function LinkDialog({
       border: '1px solid ' + (bad ? 'color-mix(in srgb, var(--danger) 55%, transparent)' : 'var(--glass-border-strong)'),
       borderRadius: 'var(--r-sm)',
       color: 'var(--text-1)',
-      fontSize: 14,
+      fontSize: '0.875rem',
       padding: '9px 11px',
       outline: 'none',
       fontFamily: 'var(--font-sans)'
@@ -19084,7 +19142,7 @@ function LinkDialog({
     role: "alert",
     style: {
       marginTop: 8,
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--danger)'
     }
   }, "\u4E0D\u652F\u6301\u8BE5\u534F\u8BAE \xB7 \u4EC5\u5141\u8BB8 http/https/mailto \u6216\u76F8\u5BF9\u94FE\u63A5"), /*#__PURE__*/React.createElement("div", {
@@ -19105,7 +19163,7 @@ function LinkDialog({
       border: '1px solid var(--glass-border-strong)',
       background: 'transparent',
       color: 'var(--text-2)',
-      fontSize: 13,
+      fontSize: '0.8125rem',
       cursor: 'pointer',
       fontFamily: 'var(--font-sans)'
     }
@@ -19121,7 +19179,7 @@ function LinkDialog({
       border: '1px solid var(--glass-border-strong)',
       background: 'rgba(159,198,255,0.14)',
       color: 'var(--text-1)',
-      fontSize: 13,
+      fontSize: '0.8125rem',
       cursor: bad ? 'not-allowed' : 'pointer',
       opacity: bad ? 0.5 : 1,
       fontFamily: 'var(--font-sans)'
@@ -19299,12 +19357,12 @@ function HistoryDialog({
     color: "var(--star-blue)"
   }), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 14.5,
+      fontSize: '0.90625rem',
       color: 'var(--text-1)'
     }
   }, "\u7248\u672C\u5386\u53F2"), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 11.5,
+      fontSize: '0.71875rem',
       color: 'var(--text-3)'
     }
   }, "\xB7 ", star.label), /*#__PURE__*/React.createElement("span", {
@@ -19333,7 +19391,7 @@ function HistoryDialog({
     color: "currentColor"
   }))), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 11,
+      fontSize: '0.6875rem',
       color: 'var(--text-3)',
       marginBottom: 12,
       fontFamily: 'var(--font-mono)'
@@ -19390,12 +19448,12 @@ function HistoryDialog({
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 13,
+      fontSize: '0.8125rem',
       color: 'var(--text-1)'
     }
   }, v.note), v.cur && /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 10,
+      fontSize: '0.625rem',
       color: 'var(--gold)',
       border: '1px solid rgba(255,217,138,0.4)',
       borderRadius: 'var(--r-pill)',
@@ -19403,7 +19461,7 @@ function HistoryDialog({
     }
   }, "\u5F53\u524D"), v.first && /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 10,
+      fontSize: '0.625rem',
       color: 'var(--text-3)',
       border: '1px solid var(--line-strong)',
       borderRadius: 'var(--r-pill)',
@@ -19411,7 +19469,7 @@ function HistoryDialog({
     }
   }, "\u521B\u5EFA")), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 11.5,
+      fontSize: '0.71875rem',
       color: 'var(--text-3)',
       marginTop: 3,
       fontFamily: 'var(--font-mono)'
@@ -19431,7 +19489,7 @@ function HistoryDialog({
       border: '1px solid var(--glass-border-strong)',
       background: 'transparent',
       color: 'var(--text-2)',
-      fontSize: 12,
+      fontSize: '0.75rem',
       cursor: 'pointer',
       fontFamily: 'var(--font-sans)'
     },
@@ -20001,7 +20059,7 @@ function FeynmanDrawer({
       display: 'inline-flex',
       alignItems: 'center',
       gap: 8,
-      fontSize: 12,
+      fontSize: '0.75rem',
       letterSpacing: '0.06em',
       color: 'var(--text-3)',
       textTransform: 'uppercase',
@@ -20043,7 +20101,7 @@ function FeynmanDrawer({
       display: 'inline-flex',
       alignItems: 'center',
       gap: 8,
-      fontSize: 11,
+      fontSize: '0.6875rem',
       color: 'var(--text-3)',
       marginBottom: 6
     }
@@ -20063,7 +20121,7 @@ function FeynmanDrawer({
     }
   }), D.conName(star.con)), certChip && /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 10,
+      fontSize: '0.625rem',
       letterSpacing: '0.05em',
       padding: '2px 8px',
       borderRadius: 'var(--r-pill)',
@@ -20073,7 +20131,7 @@ function FeynmanDrawer({
     }
   }, certChip.text)), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 24,
+      fontSize: '1.5rem',
       fontWeight: 300,
       color: 'var(--text-1)',
       textShadow: lit ? 'var(--text-glow-warm)' : 'var(--text-glow-cool)',
@@ -20085,7 +20143,7 @@ function FeynmanDrawer({
     showPct: true
   }), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 13.5,
+      fontSize: '0.84375rem',
       lineHeight: 1.75,
       color: 'var(--text-2)'
     }
@@ -20103,7 +20161,7 @@ function FeynmanDrawer({
     style: {
       display: 'flex',
       gap: 8,
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       lineHeight: 1.7,
       color: 'var(--text-2)'
     }
@@ -20148,7 +20206,7 @@ function FeynmanDrawer({
     }
   }), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       lineHeight: 1.75,
       color: 'var(--text-2)'
     }
@@ -20172,7 +20230,7 @@ function FeynmanDrawer({
     onClick: chooseLocal,
     style: {
       font: 'inherit',
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-3)',
       border: 'none',
       background: 'transparent',
@@ -20189,7 +20247,7 @@ function FeynmanDrawer({
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 10,
+      fontSize: '0.625rem',
       letterSpacing: '0.08em',
       color: 'var(--text-3)',
       textTransform: 'uppercase',
@@ -20200,7 +20258,7 @@ function FeynmanDrawer({
     return /*#__PURE__*/React.createElement("span", {
       key: t,
       style: {
-        fontSize: 11,
+        fontSize: '0.6875rem',
         padding: '3px 9px',
         borderRadius: 'var(--r-pill)',
         border: '1px solid',
@@ -20272,7 +20330,7 @@ function FeynmanDrawer({
       alignItems: 'center',
       justifyContent: 'space-between',
       gap: 10,
-      fontSize: 11,
+      fontSize: '0.6875rem',
       color: 'var(--text-3)',
       fontFamily: 'var(--font-mono)'
     }
@@ -20289,7 +20347,7 @@ function FeynmanDrawer({
       alignItems: 'center',
       justifyContent: 'center',
       gap: 7,
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-2)',
       fontFamily: 'var(--font-mono)'
     }
@@ -20305,7 +20363,7 @@ function FeynmanDrawer({
     style: {
       width: '100%',
       height: 48,
-      fontSize: 16
+      fontSize: '1rem'
     }
   }, consolidated ? '已巩固 · 记忆更牢' : '巩固这颗星') : /*#__PURE__*/React.createElement(Button, {
     variant: "primary",
@@ -20316,7 +20374,7 @@ function FeynmanDrawer({
     style: {
       width: '100%',
       height: 48,
-      fontSize: 16
+      fontSize: '1rem'
     }
   }, mode === 'relight' ? lit ? '已重燃 · 星光归位' : '重燃这颗星' : lit ? '已点亮 · 融会贯通' : '点亮这颗星'), !doneFlag && (deferred ? /*#__PURE__*/React.createElement("div", {
     "aria-live": "polite",
@@ -20325,7 +20383,7 @@ function FeynmanDrawer({
       alignItems: 'center',
       justifyContent: 'center',
       gap: 7,
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-3)',
       padding: '2px 0'
     }
@@ -20352,7 +20410,7 @@ function TypingBubble() {
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 10,
+      fontSize: '0.625rem',
       color: 'var(--text-3)',
       marginBottom: 4,
       marginLeft: 2
@@ -20395,14 +20453,14 @@ function Bubble({
     }
   }, name && /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 10,
+      fontSize: '0.625rem',
       color: 'var(--text-3)',
       marginBottom: 4,
       marginLeft: 2
     }
   }, name), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 13,
+      fontSize: '0.8125rem',
       lineHeight: 1.6,
       padding: '10px 13px',
       borderRadius: ai ? '4px 14px 14px 14px' : '14px 4px 14px 14px',
@@ -20413,7 +20471,7 @@ function Bubble({
     }
   }, children), note && /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 11,
+      fontSize: '0.6875rem',
       color: 'var(--text-3)',
       marginTop: 4,
       marginLeft: 2
@@ -21440,7 +21498,7 @@ function Galaxy3D({
   }, /*#__PURE__*/React.createElement("span", {
     style: {
       color: 'var(--text-2)',
-      fontSize: 13
+      fontSize: '0.8125rem'
     }
   }, "\u5F53\u524D\u73AF\u5883\u4E0D\u652F\u6301 WebGL\uFF0C\u65E0\u6CD5\u6E32\u67D3\u4E09\u7EF4\u661F\u7CFB\u3002"))), !noWebGL && totalStars === 0 && /*#__PURE__*/React.createElement("div", {
     style: {
@@ -21457,7 +21515,7 @@ function Galaxy3D({
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 14,
+      fontSize: '0.875rem',
       color: 'var(--text-2)'
     }
   }, "\u4F60\u7684\u661F\u7A7A\u8FD8\u5F88\u6697\u3002\u5199\u4E0B\u7B2C\u4E00\u9897\u661F\uFF0C\u8BA9\u5B83\u53D1\u5149\u3002"), /*#__PURE__*/React.createElement("span", {
@@ -21492,7 +21550,7 @@ function Galaxy3D({
       display: 'inline-flex',
       alignItems: 'center',
       gap: 8,
-      fontSize: 13,
+      fontSize: '0.8125rem',
       color: 'var(--text-2)',
       whiteSpace: 'nowrap'
     }
@@ -21505,7 +21563,7 @@ function Galaxy3D({
       display: 'inline-flex',
       alignItems: 'center',
       gap: 7,
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: 'var(--gold)',
       whiteSpace: 'nowrap',
       maxWidth: 180,
@@ -21536,7 +21594,7 @@ function Galaxy3D({
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 10.5,
+      fontSize: '0.65625rem',
       color: 'var(--text-3)'
     }
   }, "\u6B63\u53D8\u6697"), /*#__PURE__*/React.createElement("span", {
@@ -21548,7 +21606,7 @@ function Galaxy3D({
     }
   }), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 10.5,
+      fontSize: '0.65625rem',
       color: 'var(--gold)'
     }
   }, "\u5DF2\u638C\u63E1")), /*#__PURE__*/React.createElement("span", {
@@ -21569,7 +21627,7 @@ function Galaxy3D({
     }
   }), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 10.5,
+      fontSize: '0.65625rem',
       color: 'var(--text-3)'
     }
   }, "\u878D\u4F1A\u8D2F\u901A")))), /*#__PURE__*/React.createElement("div", {
@@ -21581,7 +21639,7 @@ function Galaxy3D({
       display: 'flex',
       alignItems: 'center',
       gap: 8,
-      fontSize: 11.5,
+      fontSize: '0.71875rem',
       color: 'var(--text-3)',
       pointerEvents: 'none',
       maxWidth: 'calc(100% - 320px)'
@@ -21683,7 +21741,7 @@ function Galaxy3D({
       display: 'inline-flex',
       alignItems: 'center',
       gap: 6,
-      fontSize: 11,
+      fontSize: '0.6875rem',
       color: 'var(--text-3)'
     }
   }, /*#__PURE__*/React.createElement("span", {
@@ -21701,7 +21759,7 @@ function Galaxy3D({
     onClick: () => setSelected(null)
   })), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 19,
+      fontSize: '1.1875rem',
       fontWeight: 300,
       color: 'var(--text-1)',
       marginBottom: 10,
@@ -21709,7 +21767,7 @@ function Galaxy3D({
     }
   }, selected.label), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       lineHeight: 1.7,
       color: 'var(--text-2)',
       marginBottom: 14
@@ -21728,7 +21786,7 @@ function Galaxy3D({
         alignItems: 'flex-start',
         gap: 7,
         marginTop: 10,
-        fontSize: 11.5,
+        fontSize: '0.71875rem',
         lineHeight: 1.6,
         color: 'var(--text-3)'
       }
@@ -21793,12 +21851,12 @@ function Stat({
   }, /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: 'var(--font-mono)',
-      fontSize: 17,
+      fontSize: '1.0625rem',
       color: tone || 'var(--text-1)'
     }
   }, n), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 11.5,
+      fontSize: '0.71875rem',
       color: 'var(--text-3)'
     }
   }, t));
@@ -22113,7 +22171,7 @@ function Inbox({
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 11.5,
+      fontSize: '0.71875rem',
       color: 'var(--text-3)',
       marginBottom: 9
     }
@@ -22141,7 +22199,7 @@ function Inbox({
       border: '1px solid',
       borderColor: c.id === suggest ? 'rgba(255,217,138,0.45)' : 'var(--glass-border)',
       background: c.id === suggest ? 'rgba(255,217,138,0.08)' : 'color-mix(in srgb, var(--star-blue) 5%, transparent)',
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: 'var(--text-2)'
     },
     onMouseEnter: e => {
@@ -22163,7 +22221,7 @@ function Inbox({
   }), c.name, /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: 'var(--font-mono)',
-      fontSize: 10,
+      fontSize: '0.625rem',
       opacity: 0.7
     }
   }, D.stars.filter(s => s.con === c.id).length))), /*#__PURE__*/React.createElement("button", {
@@ -22177,7 +22235,7 @@ function Inbox({
       padding: '0 11px',
       borderRadius: 'var(--r-pill)',
       cursor: 'pointer',
-      fontSize: 12,
+      fontSize: '0.75rem',
       font: 'inherit',
       color: 'var(--text-3)',
       background: 'transparent',
@@ -22212,7 +22270,7 @@ function Inbox({
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 23,
+      fontSize: '1.4375rem',
       fontWeight: 300,
       color: 'var(--text-1)'
     }
@@ -22222,7 +22280,7 @@ function Inbox({
     }
   }), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 13,
+      fontSize: '0.8125rem',
       fontFamily: 'var(--font-mono)',
       color: 'var(--text-3)'
     }
@@ -22275,18 +22333,18 @@ function Inbox({
     }
   }), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 13,
+      fontSize: '0.8125rem',
       color: 'var(--text-1)'
     }
   }, "\u661F\u9645\u6765\u4FE1"), /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: 'var(--font-mono)',
-      fontSize: 11,
+      fontSize: '0.6875rem',
       color: 'var(--text-3)'
     }
   }, mail.filter(m => !m.claimed).length, " \u5C01\u672A\u9886\u53D6")), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 11.5,
+      fontSize: '0.71875rem',
       lineHeight: 1.7,
       color: 'var(--text-3)',
       margin: '0 2px 10px'
@@ -22329,7 +22387,7 @@ function Inbox({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        fontSize: 13,
+        fontSize: '0.8125rem',
         color: 'var(--text-1)'
       }
     }, from.avatar || '星'), /*#__PURE__*/React.createElement("div", {
@@ -22346,7 +22404,7 @@ function Inbox({
       }
     }, /*#__PURE__*/React.createElement("span", {
       style: {
-        fontSize: 13.5,
+        fontSize: '0.84375rem',
         color: 'var(--text-1)'
       }
     }, from.name || '星际旅人'), /*#__PURE__*/React.createElement("span", {
@@ -22354,7 +22412,7 @@ function Inbox({
         display: 'inline-flex',
         alignItems: 'center',
         gap: 5,
-        fontSize: 11,
+        fontSize: '0.6875rem',
         color: 'var(--star-blue)',
         border: '1px solid rgba(159,198,255,0.28)',
         borderRadius: 'var(--r-pill)',
@@ -22376,7 +22434,7 @@ function Inbox({
         alignItems: 'center',
         gap: 5,
         fontFamily: 'var(--font-mono)',
-        fontSize: 11,
+        fontSize: '0.6875rem',
         color: 'var(--text-3)'
       }
     }, /*#__PURE__*/React.createElement(Icon, {
@@ -22402,7 +22460,7 @@ function Inbox({
       }
     }), /*#__PURE__*/React.createElement("div", {
       style: {
-        fontSize: 14.5,
+        fontSize: '0.90625rem',
         lineHeight: 1.8,
         color: 'var(--text-1)',
         fontStyle: 'italic',
@@ -22411,7 +22469,7 @@ function Inbox({
       }
     }, p.text || '…')) : galaxy ? /*#__PURE__*/React.createElement("div", {
       style: {
-        fontSize: 13.5,
+        fontSize: '0.84375rem',
         lineHeight: 1.7,
         color: 'var(--text-2)',
         marginTop: 7
@@ -22425,7 +22483,7 @@ function Inbox({
         display: 'block',
         marginTop: 5,
         fontFamily: 'var(--font-mono)',
-        fontSize: 11.5,
+        fontSize: '0.71875rem',
         letterSpacing: '0.08em',
         color: 'var(--text-3)'
       }
@@ -22435,12 +22493,12 @@ function Inbox({
       }
     }, /*#__PURE__*/React.createElement("div", {
       style: {
-        fontSize: 14.5,
+        fontSize: '0.90625rem',
         color: 'var(--text-1)'
       }
     }, p.label || '一颗知识星'), p.summary && /*#__PURE__*/React.createElement("div", {
       style: {
-        fontSize: 12.5,
+        fontSize: '0.78125rem',
         lineHeight: 1.65,
         color: 'var(--text-3)',
         marginTop: 5,
@@ -22459,7 +22517,7 @@ function Inbox({
     }, p.keyPoints.slice(0, 4).map((k, i) => /*#__PURE__*/React.createElement("div", {
       key: i,
       style: {
-        fontSize: 12,
+        fontSize: '0.75rem',
         lineHeight: 1.55,
         color: 'var(--text-2)',
         borderLeft: '2px solid var(--line)',
@@ -22468,7 +22526,7 @@ function Inbox({
       }
     }, k)), p.keyPoints.length > 4 && /*#__PURE__*/React.createElement("div", {
       style: {
-        fontSize: 11,
+        fontSize: '0.6875rem',
         color: 'var(--text-3)',
         marginLeft: 13
       }
@@ -22563,7 +22621,7 @@ function Inbox({
         border: 'none',
         outline: 'none',
         color: 'var(--text-1)',
-        fontSize: 13.5,
+        fontSize: '0.84375rem',
         lineHeight: 1.7,
         fontFamily: 'var(--font-sans)',
         padding: '2px 0'
@@ -22577,7 +22635,7 @@ function Inbox({
       }
     }, /*#__PURE__*/React.createElement("span", {
       style: {
-        fontSize: 11,
+        fontSize: '0.6875rem',
         fontFamily: 'var(--font-mono)',
         color: 'var(--text-3)'
       }
@@ -22609,7 +22667,7 @@ function Inbox({
         marginTop: 12,
         paddingTop: 12,
         borderTop: '1px solid var(--line)',
-        fontSize: 12,
+        fontSize: '0.75rem',
         lineHeight: 1.6,
         color: 'var(--text-3)'
       }
@@ -22655,7 +22713,7 @@ function Inbox({
       border: 'none',
       outline: 'none',
       color: 'var(--text-1)',
-      fontSize: 14,
+      fontSize: '0.875rem',
       lineHeight: 1.7,
       fontFamily: 'var(--font-sans)',
       padding: '3px 0'
@@ -22672,7 +22730,7 @@ function Inbox({
   }, /*#__PURE__*/React.createElement("span", {
     className: "sr-kbd-only",
     style: {
-      fontSize: 11,
+      fontSize: '0.6875rem',
       fontFamily: 'var(--font-mono)',
       color: 'var(--text-3)'
     }
@@ -22692,7 +22750,7 @@ function Inbox({
       alignItems: 'center',
       gap: 8,
       margin: '0 2px 12px',
-      fontSize: 12,
+      fontSize: '0.75rem',
       lineHeight: 1.6,
       color: 'var(--text-3)'
     }
@@ -22735,7 +22793,7 @@ function Inbox({
   }, f.label, /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: 'var(--font-mono)',
-      fontSize: 10.5,
+      fontSize: '0.65625rem',
       opacity: 0.8,
       marginLeft: 4
     }
@@ -22769,7 +22827,7 @@ function Inbox({
       border: '1px solid var(--glass-border)',
       borderRadius: 'var(--r-pill)',
       color: 'var(--text-1)',
-      fontSize: 12,
+      fontSize: '0.75rem',
       padding: '0 10px 0 27px',
       outline: 'none',
       fontFamily: 'var(--font-sans)'
@@ -22784,7 +22842,7 @@ function Inbox({
       display: 'inline-flex',
       alignItems: 'center',
       gap: 6,
-      fontSize: 12,
+      fontSize: '0.75rem',
       font: 'inherit',
       color: 'var(--text-3)',
       cursor: 'pointer',
@@ -22808,7 +22866,7 @@ function Inbox({
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: 'var(--text-1)'
     }
   }, "\u5DF2\u9009 ", /*#__PURE__*/React.createElement("b", {
@@ -22878,12 +22936,12 @@ function Inbox({
     color: "var(--star-blue)"
   })), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 15,
+      fontSize: '0.9375rem',
       color: 'var(--text-2)'
     }
   }, items.length ? '没有匹配的草稿' : '收件箱已清空'), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       lineHeight: 1.7,
       maxWidth: 320
     }
@@ -22953,7 +23011,7 @@ function Inbox({
         flash('已更新捕获');
       },
       style: {
-        fontSize: 14,
+        fontSize: '0.875rem',
         lineHeight: 1.7,
         color: 'var(--text-1)',
         outline: 'none',
@@ -22974,7 +23032,7 @@ function Inbox({
         alignItems: 'center',
         gap: 5,
         fontFamily: 'var(--font-mono)',
-        fontSize: 11,
+        fontSize: '0.6875rem',
         color: 'var(--text-3)'
       }
     }, /*#__PURE__*/React.createElement(Icon, {
@@ -22986,7 +23044,7 @@ function Inbox({
         display: 'inline-flex',
         alignItems: 'center',
         gap: 5,
-        fontSize: 11.5,
+        fontSize: '0.71875rem',
         color: 'var(--text-3)'
       }
     }, "\u5EFA\u8BAE ", /*#__PURE__*/React.createElement("span", {
@@ -23056,7 +23114,7 @@ function Inbox({
     color: toast.tone === 'danger' ? 'var(--danger)' : 'var(--gold)'
   }), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 13.5,
+      fontSize: '0.84375rem',
       color: 'var(--text-1)'
     }
   }, toast.msg), toast.con && onFocusCon && /*#__PURE__*/React.createElement("button", {
@@ -23064,7 +23122,7 @@ function Inbox({
     onClick: () => onFocusCon(toast.con),
     className: "sr-focus-ring",
     style: {
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       font: 'inherit',
       color: 'var(--star-blue)',
       cursor: 'pointer',
@@ -23112,12 +23170,12 @@ function FavList({
       color: "var(--gold)"
     })), /*#__PURE__*/React.createElement("div", {
       style: {
-        fontSize: 15,
+        fontSize: '0.9375rem',
         color: 'var(--text-2)'
       }
     }, "\u8FD8\u6CA1\u6709\u6536\u85CF"), /*#__PURE__*/React.createElement("div", {
       style: {
-        fontSize: 12.5,
+        fontSize: '0.78125rem',
         lineHeight: 1.7,
         maxWidth: 320
       }
@@ -23172,7 +23230,7 @@ function FavList({
   }, /*#__PURE__*/React.createElement("span", {
     onClick: () => onOpen && onOpen(s.id),
     style: {
-      fontSize: 15.5,
+      fontSize: '0.96875rem',
       color: 'var(--text-1)',
       cursor: 'pointer'
     }
@@ -23181,7 +23239,7 @@ function FavList({
       display: 'inline-flex',
       alignItems: 'center',
       gap: 5,
-      fontSize: 11.5,
+      fontSize: '0.71875rem',
       color: 'var(--text-3)'
     }
   }, /*#__PURE__*/React.createElement("span", {
@@ -23195,12 +23253,12 @@ function FavList({
   }), D.conName(s.con)), /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: 'var(--font-mono)',
-      fontSize: 11,
+      fontSize: '0.6875rem',
       color: s.strength >= 0.7 ? 'var(--gold)' : 'var(--star-blue-dim)'
     }
   }, "\u8BB0\u5FC6 ", Math.round(s.strength * 100), "%")), s.summary && /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       lineHeight: 1.65,
       color: 'var(--text-3)',
       marginTop: 6,
@@ -23379,7 +23437,7 @@ function SRKeyCap({
   return /*#__PURE__*/React.createElement("kbd", {
     style: {
       fontFamily: 'var(--font-mono)',
-      fontSize: 11.5,
+      fontSize: '0.71875rem',
       color: 'var(--text-1)',
       minWidth: 22,
       textAlign: 'center',
@@ -23410,7 +23468,7 @@ function SRKeyGroup({
     color: "var(--star-blue)"
   }), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 10,
+      fontSize: '0.625rem',
       letterSpacing: 'var(--ls-hud)',
       textTransform: 'uppercase',
       color: 'var(--text-3)',
@@ -23428,7 +23486,7 @@ function SRKeyGroup({
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 13,
+      fontSize: '0.8125rem',
       color: 'var(--text-2)',
       lineHeight: 1.5
     }
@@ -23533,14 +23591,14 @@ function KeysHelp({
     color: "var(--star-blue)"
   }), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 15,
+      fontSize: '0.9375rem',
       color: 'var(--text-1)',
       fontWeight: 300,
       letterSpacing: '0.02em'
     }
   }, "\u5FEB\u6377\u952E"), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-3)'
     }
   }, "\u4E0D\u79BB\u5F00\u952E\u76D8\uFF0C\u8D70\u904D\u6574\u7247\u661F\u7A7A")), /*#__PURE__*/React.createElement(IconButton, {
@@ -23577,7 +23635,7 @@ function KeysHelp({
       padding: '11px 18px',
       borderTop: '1px solid var(--line)',
       flex: 'none',
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-3)'
     }
   }, "\u6309 ", /*#__PURE__*/React.createElement(SRKeyCap, null, "?"), " \u968F\u65F6\u6253\u5F00"))));
@@ -23731,7 +23789,7 @@ function ActionDialog({
     color: tint
   })), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 14.5,
+      fontSize: '0.90625rem',
       color: 'var(--text-1)'
     }
   }, title)), /*#__PURE__*/React.createElement("div", {
@@ -23754,7 +23812,7 @@ function ActionDialog({
       border: '1px solid var(--glass-border-strong)',
       background: 'transparent',
       color: 'var(--text-2)',
-      fontSize: 13,
+      fontSize: '0.8125rem',
       cursor: 'pointer',
       fontFamily: 'var(--font-sans)'
     }
@@ -23769,7 +23827,7 @@ function ActionDialog({
       border: '1px solid rgba(255,217,138,0.5)',
       background: confirmDisabled ? 'rgba(159,198,255,0.06)' : 'rgba(255,217,138,0.16)',
       color: confirmDisabled ? 'var(--text-3)' : 'var(--gold)',
-      fontSize: 13,
+      fontSize: '0.8125rem',
       cursor: confirmDisabled ? 'not-allowed' : 'pointer',
       fontFamily: 'var(--font-sans)'
     }
@@ -23867,7 +23925,7 @@ function MenuRow({
       padding: '8px 10px',
       borderRadius: 'var(--r-sm)',
       cursor: 'pointer',
-      fontSize: 13,
+      fontSize: '0.8125rem',
       color: active ? 'var(--gold)' : 'var(--text-2)',
       background: h ? 'color-mix(in srgb, var(--star-blue) 9%, transparent)' : 'transparent',
       transition: 'background var(--dur-fast)'
@@ -24286,7 +24344,7 @@ function ListView({
       background: 'none',
       border: 'none',
       font: 'inherit',
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-3)',
       cursor: 'pointer',
       padding: '6px 4px'
@@ -24360,13 +24418,13 @@ function ListView({
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 23,
+      fontSize: '1.4375rem',
       fontWeight: 300,
       color: 'var(--text-1)'
     }
   }, "\u7B14\u8BB0\u7BA1\u7406"), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 13,
+      fontSize: '0.8125rem',
       color: 'var(--text-3)',
       marginTop: 2
     }
@@ -24388,7 +24446,7 @@ function ListView({
       display: 'inline-flex',
       alignItems: 'center',
       gap: 7,
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: 'var(--text-2)'
     }
   }, /*#__PURE__*/React.createElement(Icon, {
@@ -24398,7 +24456,7 @@ function ListView({
   }), "\u77E5\u8BC6\u4F53\u68C0"), /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: 'var(--font-mono)',
-      fontSize: 13,
+      fontSize: '0.8125rem',
       color: health >= 60 ? 'var(--gold)' : 'var(--star-blue-dim)'
     }
   }, "\u5065\u5EB7\u5EA6 ", health, "%"))), /*#__PURE__*/React.createElement("div", {
@@ -24502,7 +24560,7 @@ function ListView({
   }), /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: 'var(--font-mono)',
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-3)'
     }
   }, rows.length, /*#__PURE__*/React.createElement("span", {
@@ -24528,7 +24586,7 @@ function ListView({
       display: 'inline-flex',
       alignItems: 'center',
       gap: 4,
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-3)',
       cursor: 'pointer'
     }
@@ -24549,7 +24607,7 @@ function ListView({
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 13,
+      fontSize: '0.8125rem',
       color: 'var(--text-1)'
     }
   }, "\u5DF2\u9009 ", sel.length, " \u9897"), /*#__PURE__*/React.createElement(TextAction, {
@@ -24590,7 +24648,7 @@ function ListView({
       gap: 14,
       padding: '0 16px 10px',
       fontFamily: 'var(--font-mono)',
-      fontSize: 10,
+      fontSize: '0.625rem',
       letterSpacing: 'var(--ls-hud)',
       textTransform: 'uppercase'
     }
@@ -24641,7 +24699,7 @@ function ListView({
   })), total === 0 ? /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     style: {
       color: 'var(--text-2)',
-      fontSize: 14
+      fontSize: '0.875rem'
     }
   }, "\u4F60\u7684\u661F\u7A7A\u8FD8\u5F88\u6697\u3002", /*#__PURE__*/React.createElement("span", {
     style: {
@@ -24672,7 +24730,7 @@ function ListView({
   }, "\u8F7D\u5165\u793A\u4F8B\u661F\u7CFB"))) : /*#__PURE__*/React.createElement("div", {
     style: {
       color: 'var(--text-2)',
-      fontSize: 14
+      fontSize: '0.875rem'
     }
   }, "\u6CA1\u6709\u5339\u914D\u7684\u661F\u3002", /*#__PURE__*/React.createElement("span", {
     style: {
@@ -24775,7 +24833,7 @@ function ListView({
         border: '1px solid var(--glass-border-strong)',
         borderRadius: 'var(--r-sm)',
         color: 'var(--text-1)',
-        fontSize: 13.5,
+        fontSize: '0.84375rem',
         padding: '0 8px',
         outline: 'none',
         fontFamily: 'var(--font-sans)'
@@ -24787,7 +24845,7 @@ function ListView({
       },
       title: "\u53CC\u51FB\u91CD\u547D\u540D",
       style: {
-        fontSize: 14.5,
+        fontSize: '0.90625rem',
         color: dim ? 'var(--text-2)' : 'var(--text-1)',
         whiteSpace: 'nowrap',
         overflow: 'hidden',
@@ -24815,7 +24873,7 @@ function ListView({
         borderRadius: 'var(--r-pill)',
         background: 'color-mix(in srgb, var(--gold-warm) 10%, transparent)',
         border: '1px solid color-mix(in srgb, var(--gold-warm) 30%, transparent)',
-        fontSize: 10,
+        fontSize: '0.625rem',
         color: 'var(--gold-warm)'
       }
     }, /*#__PURE__*/React.createElement(Icon, {
@@ -24834,7 +24892,7 @@ function ListView({
         borderRadius: 'var(--r-pill)',
         background: 'rgba(255,217,138,0.12)',
         border: '1px solid rgba(255,217,138,0.28)',
-        fontSize: 10,
+        fontSize: '0.625rem',
         color: 'var(--gold)'
       }
     }, /*#__PURE__*/React.createElement(Icon, {
@@ -24850,7 +24908,7 @@ function ListView({
     }, (n.tags || []).map(t => /*#__PURE__*/React.createElement("span", {
       key: t,
       style: {
-        fontSize: 10.5,
+        fontSize: '0.65625rem',
         color: 'var(--text-3)'
       }
     }, "#", t)))), /*#__PURE__*/React.createElement("div", {
@@ -24870,7 +24928,7 @@ function ListView({
       fading: dim
     })), /*#__PURE__*/React.createElement("span", {
       style: {
-        fontSize: 11,
+        fontSize: '0.6875rem',
         color: sl.c,
         width: 38
       }
@@ -24885,7 +24943,7 @@ function ListView({
         display: 'inline-flex',
         alignItems: 'center',
         gap: 7,
-        fontSize: 12.5,
+        fontSize: '0.78125rem',
         color: 'var(--text-2)',
         minWidth: 0
       }
@@ -24908,7 +24966,7 @@ function ListView({
       className: "sr-lc-review",
       style: {
         fontFamily: 'var(--font-mono)',
-        fontSize: 12,
+        fontSize: '0.75rem',
         color: reviewColor(n.nextReview)
       }
     }, n.nextReview), /*#__PURE__*/React.createElement("span", {
@@ -24918,7 +24976,7 @@ function ListView({
         alignItems: 'center',
         gap: 5,
         fontFamily: 'var(--font-mono)',
-        fontSize: 12,
+        fontSize: '0.75rem',
         color: 'var(--text-3)'
       }
     }, /*#__PURE__*/React.createElement(Icon, {
@@ -24978,7 +25036,7 @@ function ListView({
     onYes: () => dialog.onYes(dialog.body === 'tag' ? tagDraft : dialog.body === 'pickCon' ? moveTarget : undefined)
   }, dialog.body === 'review' && /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 13.5,
+      fontSize: '0.84375rem',
       lineHeight: 1.7,
       color: 'var(--text-2)'
     }
@@ -24988,7 +25046,7 @@ function ListView({
     }
   }, dialog.ids.length), " \u9897\u661F\u52A0\u5165\u590D\u4E60\u961F\u5217\uFF0C\u4E0B\u6B21\u590D\u4E60\u5C06\u63D0\u524D\u5230\u300C\u660E\u5929\u300D\u3002"), dialog.body === 'tag' && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 13,
+      fontSize: '0.8125rem',
       color: 'var(--text-2)',
       marginBottom: 10
     }
@@ -25010,7 +25068,7 @@ function ListView({
     onClick: () => setTagDraft(t)
   }, "#", t)))), dialog.body === 'pickCon' && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 13,
+      fontSize: '0.8125rem',
       color: 'var(--text-2)',
       marginBottom: 10
     }
@@ -25050,7 +25108,7 @@ function ListView({
     onYes: createFirstStar
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 13,
+      fontSize: '0.8125rem',
       color: 'var(--text-2)',
       marginBottom: 10
     }
@@ -25098,7 +25156,7 @@ function ListView({
     color: "var(--gold)"
   }), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 13.5,
+      fontSize: '0.84375rem',
       color: 'var(--text-1)'
     }
   }, toast))));
@@ -25202,7 +25260,7 @@ function LoginTabs({
         border: 'none',
         cursor: 'pointer',
         borderRadius: 'var(--r-pill)',
-        fontSize: 13.5,
+        fontSize: '0.84375rem',
         fontFamily: 'var(--font-sans)',
         background: on ? 'rgba(255,217,138,0.16)' : 'transparent',
         color: on ? 'var(--gold)' : 'var(--text-3)',
@@ -25321,7 +25379,7 @@ function LoginView({
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 30,
+      fontSize: '1.875rem',
       fontWeight: 300,
       letterSpacing: '0.08em',
       color: 'var(--text-1)',
@@ -25329,7 +25387,7 @@ function LoginView({
     }
   }, "\u661F\u56FE"), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 13,
+      fontSize: '0.8125rem',
       color: 'var(--text-3)',
       marginTop: 8
     }
@@ -25343,7 +25401,7 @@ function LoginView({
     }
   }, tab === 'register' && /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-2)',
       lineHeight: 1.7,
       marginBottom: 16
@@ -25407,7 +25465,7 @@ function LoginView({
     onChange: e => setRegConfirm(e.target.value)
   })), error && /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: 'var(--danger)',
       marginTop: 12,
       lineHeight: 1.6
@@ -25467,7 +25525,7 @@ const SR_MOBILE_CSS = `
 
 .sr-m-tabbtn { flex: 1; min-width: 0; border: none; background: transparent; cursor: pointer;
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
-  padding: 0; color: rgba(159,198,255,0.66); font-family: var(--font-sans); font-size: 10.5px; position: relative;
+  padding: 0; color: rgba(159,198,255,0.66); font-family: var(--font-sans); font-size: 0.65625rem; position: relative;
   -webkit-tap-highlight-color: transparent; transition: color var(--dur-fast); }
 .sr-m-tabbtn[aria-current="page"] { color: var(--gold); }
 /* 选中态的那一点光：底部一道短横，比整块底色更克制 */
@@ -25518,7 +25576,7 @@ html[data-screen="phone"] .sr-ck-2col { grid-template-columns: 1fr !important; }
 html[data-screen="phone"] .sr-ck-4col { grid-template-columns: 1fr 1fr !important; }
 
 /* 大标题在 375px 上会占掉两行：整体降一档 */
-html[data-screen="phone"] .sr-view h1 { font-size: 23px !important; }
+html[data-screen="phone"] .sr-view h1 { font-size: 1.4375rem !important; }
 
 /* 触摸端的点击热区：用一层看不见的 ::after 把可点范围撑到 34px，
    元素自己的盒子一点不动。
@@ -25540,7 +25598,7 @@ html[data-pointer="coarse"] .sr-hit-pad::after {
 html[data-pointer="coarse"] input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
 html[data-pointer="coarse"] textarea,
 html[data-pointer="coarse"] select {
-  font-size: 16px !important; line-height: 1.45;
+  font-size: 1rem !important; line-height: 1.45;
 }
 
 /* 键盘提示：手机上没有物理键盘，印一枚「空格 / ⌘K」只会让人去找一个
@@ -25627,7 +25685,7 @@ function MobileTopBar({
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 15,
+      fontSize: '0.9375rem',
       fontWeight: 300,
       color: 'var(--text-1)',
       overflow: 'hidden',
@@ -25636,7 +25694,7 @@ function MobileTopBar({
     }
   }, title), sub && /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 10.5,
+      fontSize: '0.65625rem',
       color: 'var(--text-3)',
       overflow: 'hidden',
       textOverflow: 'ellipsis',
@@ -25843,7 +25901,7 @@ function MobileSheet({
     style: {
       flex: 1,
       minWidth: 0,
-      fontSize: 14.5,
+      fontSize: '0.90625rem',
       fontWeight: 300,
       color: 'var(--text-1)',
       overflow: 'hidden',
@@ -26089,7 +26147,7 @@ const SR_DEMO_CSS = `
 @keyframes ed-wrap{0%{opacity:0}4%{opacity:1}93%{opacity:1}99%,100%{opacity:0}}
 @keyframes ed-t1{0%,6%{clip-path:inset(0 100% 0 0)}24%,100%{clip-path:inset(0 -8% 0 0)}}
 @keyframes ed-hash{0%,5%{opacity:0;width:0}7%,28%{opacity:1;width:15px}33%,100%{opacity:0;width:0}}
-@keyframes ed-size{0%,28%{font-size:12px;color:#8a94a8}36%,100%{font-size:19px;color:#e8eefc}}
+@keyframes ed-size{0%,28%{font-size:0.75rem;color:#8a94a8}36%,100%{font-size:1.1875rem;color:#e8eefc}}
 @keyframes ed-l2{0%,42%{opacity:0}46%,100%{opacity:1}}
 @keyframes ed-t2{0%,46%{clip-path:inset(0 100% 0 0)}64%,100%{clip-path:inset(0 -8% 0 0)}}
 @keyframes ed-br{0%,44%{opacity:0;width:0}46%,62%{opacity:1;width:18px}67%,100%{opacity:0;width:0}}
@@ -26329,7 +26387,7 @@ function GuideDemo({
         left: 100,
         top: 92,
         transform: 'translateX(-50%)',
-        fontSize: 9,
+        fontSize: '0.5625rem',
         color: 'rgba(255,217,138,.75)',
         letterSpacing: '.12em'
       }
@@ -26379,14 +26437,14 @@ function GuideDemo({
     }, /*#__PURE__*/React.createElement("div", {
       style: {
         padding: '5px 9px 3px',
-        fontSize: 8,
+        fontSize: '0.5rem',
         letterSpacing: '.14em',
         color: '#8a94a8'
       }
     }, "\u5728\u6B64\u521B\u5EFA"), /*#__PURE__*/React.createElement("div", {
       style: {
         padding: '5px 9px',
-        fontSize: 10.5,
+        fontSize: '0.65625rem',
         color: '#c9d6f0',
         display: 'flex',
         alignItems: 'center',
@@ -26402,7 +26460,7 @@ function GuideDemo({
     }), "\u65B0\u5EFA\u661F\u57DF"), /*#__PURE__*/React.createElement("div", {
       style: {
         padding: '5px 9px 7px',
-        fontSize: 10.5,
+        fontSize: '0.65625rem',
         display: 'flex',
         alignItems: 'center',
         gap: 6,
@@ -26511,7 +26569,7 @@ function GuideDemo({
       }
     }, /*#__PURE__*/React.createElement("div", {
       style: {
-        fontSize: 8,
+        fontSize: '0.5rem',
         letterSpacing: '.16em',
         color: '#8a94a8',
         marginBottom: 9
@@ -26588,13 +26646,13 @@ function GuideDemo({
       }
     }, /*#__PURE__*/React.createElement("div", {
       style: {
-        fontSize: 8.5,
+        fontSize: '0.53125rem',
         letterSpacing: '.18em',
         color: '#8a94a8'
       }
     }, "\u91CF\u5B50\u529B\u5B66 \xB7 \u5230\u671F"), /*#__PURE__*/React.createElement("div", {
       style: {
-        fontSize: 14,
+        fontSize: '0.875rem',
         color: '#e8eefc',
         marginTop: 6,
         fontWeight: 300
@@ -26606,7 +26664,7 @@ function GuideDemo({
         left: b[1],
         top: 108,
         padding: '5px 12px',
-        fontSize: 10.5,
+        fontSize: '0.65625rem',
         border: '1px solid rgba(159,198,255,.18)',
         background: 'rgba(159,198,255,.08)',
         color: '#8a94a8',
@@ -26665,7 +26723,7 @@ function GuideDemo({
         left: 232,
         top: 34,
         padding: '7px 10px',
-        fontSize: 10.5,
+        fontSize: '0.65625rem',
         borderRadius: 8,
         border: '1px solid rgba(159,198,255,.25)',
         ...kf('ib-key', '5.5s')
@@ -26696,7 +26754,7 @@ function GuideDemo({
         alignItems: 'center',
         justifyContent: 'center',
         gap: 7,
-        fontSize: 10,
+        fontSize: '0.625rem',
         color: '#8a94a8',
         fontFamily: 'var(--font-mono)',
         ...kf('ib-tray', '5.5s')
@@ -26709,7 +26767,7 @@ function GuideDemo({
         borderRadius: '50%',
         background: 'rgba(255,217,138,.16)',
         border: '1px solid rgba(255,217,138,.45)',
-        fontSize: 9,
+        fontSize: '0.5625rem',
         color: '#ffd98a'
       }
     }, /*#__PURE__*/React.createElement("span", {
@@ -26781,7 +26839,7 @@ function GuideDemo({
         display: 'inline-block',
         overflow: 'hidden',
         color: '#8a94a8',
-        fontSize: 12,
+        fontSize: '0.75rem',
         fontFamily: 'var(--font-mono)',
         ...kf('ed-br', '5.5s')
       }
@@ -26818,7 +26876,7 @@ function GuideDemo({
       style: {
         display: 'inline-block',
         whiteSpace: 'nowrap',
-        fontSize: 12.5,
+        fontSize: '0.78125rem',
         color: '#c9d6f0',
         ...kf('ed-t2', '5.5s'),
         animationTimingFunction: 'steps(8)'
@@ -26912,7 +26970,7 @@ function GuideDemo({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        fontSize: 10,
+        fontSize: '0.625rem',
         ...kf('vw-lab1', '6s')
       }
     }, "\u661F\u56FE"), /*#__PURE__*/React.createElement("span", {
@@ -26925,7 +26983,7 @@ function GuideDemo({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        fontSize: 10,
+        fontSize: '0.625rem',
         ...kf('vw-lab2', '6s')
       }
     }, "\u9E1F\u77B0")), /*#__PURE__*/React.createElement(Pulse, {
@@ -27115,7 +27173,7 @@ function GuideDemo({
         alignItems: 'center',
         justifyContent: 'center',
         fontFamily: 'var(--font-mono)',
-        fontSize: 12,
+        fontSize: '0.75rem',
         border: '1px solid rgba(159,198,255,.22)',
         animation: `sc-key 4.8s ${EO} ${k[2]}s infinite`
       }
@@ -27213,7 +27271,7 @@ function Onboarding({
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 10,
+      fontSize: '0.625rem',
       letterSpacing: 'var(--ls-hud)',
       textTransform: 'uppercase',
       color: 'var(--text-3)',
@@ -27249,7 +27307,7 @@ function Onboarding({
       background: 'none',
       border: 'none',
       cursor: 'pointer',
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: 'var(--text-3)',
       fontFamily: 'var(--font-sans)'
     }
@@ -27270,7 +27328,7 @@ function Onboarding({
     id: p.id
   }), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 22,
+      fontSize: '1.375rem',
       fontWeight: 300,
       color: 'var(--text-1)',
       marginTop: 20,
@@ -27279,7 +27337,7 @@ function Onboarding({
     }
   }, p.title), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 14,
+      fontSize: '0.875rem',
       color: 'var(--text-2)',
       lineHeight: 1.85,
       marginTop: 12,
@@ -27578,13 +27636,13 @@ function OnboardingTour({
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 14.5,
+      fontSize: '0.90625rem',
       color: 'var(--text-1)',
       fontWeight: 300
     }
   }, step.title), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: 'var(--text-2)',
       lineHeight: 1.75,
       marginTop: 8
@@ -27599,7 +27657,7 @@ function OnboardingTour({
   }, /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: 'var(--font-mono)',
-      fontSize: 11,
+      fontSize: '0.6875rem',
       color: 'var(--text-3)'
     }
   }, i + 1, " / ", SR_TOUR_STEPS.length), /*#__PURE__*/React.createElement("div", {
@@ -27642,7 +27700,7 @@ const {
   Button
 } = window.StellarRaftDesignSystem_2866af;
 const RS_HUD = {
-  fontSize: 10,
+  fontSize: '0.625rem',
   letterSpacing: 'var(--ls-hud)',
   textTransform: 'uppercase',
   color: 'var(--text-3)',
@@ -27685,7 +27743,7 @@ function RSKbd({
     className: "sr-kbd-only",
     style: {
       fontFamily: 'var(--font-mono)',
-      fontSize: 10,
+      fontSize: '0.625rem',
       lineHeight: 1,
       color: onScrim ? RS_SCRIM_INK_DIM : 'var(--text-3)',
       border: '1px solid ' + (onScrim ? 'rgba(208,220,255,0.28)' : 'var(--glass-border)'),
@@ -27702,7 +27760,7 @@ function RSCertChip({
 }) {
   return /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 10,
+      fontSize: '0.625rem',
       letterSpacing: '0.05em',
       padding: '2px 8px',
       borderRadius: 'var(--r-pill)',
@@ -27794,7 +27852,7 @@ function RSRecapRow({
     "aria-hidden": "true"
   }), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 13,
+      fontSize: '0.8125rem',
       color: 'var(--text-1)',
       flex: 1,
       minWidth: 0,
@@ -27808,7 +27866,7 @@ function RSRecapRow({
       alignItems: 'center',
       gap: 5,
       flex: 'none',
-      fontSize: 11,
+      fontSize: '0.6875rem',
       color: g.color
     }
   }, /*#__PURE__*/React.createElement(Icon, {
@@ -27835,7 +27893,7 @@ function RSRecapRow({
     "aria-hidden": "true"
   }), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       lineHeight: 1.75,
       color: star.summary ? 'var(--text-2)' : 'var(--text-3)'
     }
@@ -27867,7 +27925,7 @@ function RSRecapRow({
     "aria-hidden": "true"
   }), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: ['h2', 'h3'].includes(b.type) ? 'var(--text-1)' : 'var(--text-3)',
       lineHeight: 1.6,
       minWidth: 0
@@ -27919,7 +27977,7 @@ function RSRecapPanel({
       border: 'none',
       cursor: 'pointer',
       textAlign: 'left',
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: 'var(--text-2)',
       fontFamily: 'inherit'
     }
@@ -28000,12 +28058,12 @@ function RSGrade({
     color: color
   }), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 13.5,
+      fontSize: '0.84375rem',
       color: 'var(--text-1)'
     }
   }, label), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 10.5,
+      fontSize: '0.65625rem',
       color: 'var(--text-3)',
       lineHeight: 1.4
     }
@@ -28350,14 +28408,14 @@ function ReviewSession({
     color: "var(--star-blue)"
   }), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 19,
+      fontSize: '1.1875rem',
       fontWeight: 300,
       color: 'var(--text-1)',
       marginTop: 14
     }
   }, recap.length ? '今天的复习已经做完' : '没有到期的星'), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 13,
+      fontSize: '0.8125rem',
       color: 'var(--text-3)',
       marginTop: 8,
       lineHeight: 1.7
@@ -28387,7 +28445,7 @@ function ReviewSession({
     color: "var(--star-blue)"
   }), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 21,
+      fontSize: '1.3125rem',
       fontWeight: 300,
       color: 'var(--text-1)',
       marginTop: 14,
@@ -28396,13 +28454,13 @@ function ReviewSession({
   }, "\u672C\u8F6E\u590D\u4E60\u7ED3\u675F"), /*#__PURE__*/React.createElement("div", {
     style: {
       fontFamily: 'var(--font-mono)',
-      fontSize: 13.5,
+      fontSize: '0.84375rem',
       color: 'var(--text-2)',
       marginTop: 12
     }
   }, "\u590D\u4E60 ", reviewed, " \u9897 \xB7 \u8BB0\u5F97 ", stats.ok, " \u9897", stats.hazy > 0 ? ` · ${stats.hazy} 颗还有些模糊` : '', stats.fail > 0 ? ` · ${stats.fail} 颗还需回来` : ''), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: 'var(--text-3)',
       marginTop: 10,
       lineHeight: 1.7
@@ -28419,7 +28477,7 @@ function ReviewSession({
       display: 'flex',
       alignItems: 'center',
       gap: 7,
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       lineHeight: 1.7,
       color: 'var(--text-2)',
       marginBottom: 10
@@ -28457,7 +28515,7 @@ function ReviewSession({
     "aria-hidden": "true"
   }), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 13,
+      fontSize: '0.8125rem',
       color: 'var(--text-1)',
       flex: 1,
       minWidth: 0,
@@ -28505,7 +28563,7 @@ function ReviewSession({
       display: 'inline-flex',
       alignItems: 'center',
       gap: 8,
-      fontSize: 11.5,
+      fontSize: '0.71875rem',
       color: 'var(--text-3)'
     }
   }, /*#__PURE__*/React.createElement("span", {
@@ -28527,7 +28585,7 @@ function ReviewSession({
     ember: starEmber
   })), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: revealed ? 24 : 30,
+      fontSize: revealed ? '1.5rem' : '1.875rem',
       fontWeight: 300,
       color: 'var(--text-1)',
       textShadow: 'var(--text-glow-cool)',
@@ -28536,7 +28594,7 @@ function ReviewSession({
     }
   }, star.label), !revealed && /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 13,
+      fontSize: '0.8125rem',
       color: 'var(--text-3)',
       marginTop: 14,
       lineHeight: 1.7
@@ -28571,7 +28629,7 @@ function ReviewSession({
     }
   }), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 13,
+      fontSize: '0.8125rem',
       lineHeight: 1.7,
       color: 'var(--text-1)',
       minWidth: 0
@@ -28603,7 +28661,7 @@ function ReviewSession({
   })), quiz.phase === 'busy' ? '正在出题…' : quiz.text ? '换一题' : 'AI 考一考'), quiz.phase === 'err' && quiz.err && /*#__PURE__*/React.createElement("span", {
     role: "status",
     style: {
-      fontSize: 11.5,
+      fontSize: '0.71875rem',
       color: 'var(--text-3)',
       lineHeight: 1.5,
       minWidth: 0
@@ -28628,7 +28686,7 @@ function ReviewSession({
     "aria-hidden": "true"
   }), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 13.5,
+      fontSize: '0.84375rem',
       lineHeight: 1.8,
       color: 'var(--text-2)'
     }
@@ -28660,7 +28718,7 @@ function ReviewSession({
     "aria-hidden": "true"
   }), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: ['h2', 'h3'].includes(b.type) ? 'var(--text-1)' : 'var(--text-3)',
       lineHeight: 1.6,
       minWidth: 0
@@ -28670,7 +28728,7 @@ function ReviewSession({
       display: 'flex',
       alignItems: 'center',
       gap: 7,
-      fontSize: 12,
+      fontSize: '0.75rem',
       lineHeight: 1.6,
       color: 'var(--text-3)'
     }
@@ -28923,12 +28981,12 @@ function SRRow({
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 13.5,
+      fontSize: '0.84375rem',
       color: 'var(--text-1)'
     }
   }, title), hint && /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 11.5,
+      fontSize: '0.71875rem',
       color: 'var(--text-3)',
       marginTop: 3,
       lineHeight: 1.55
@@ -28944,7 +29002,7 @@ function SRSectionTitle({
 }) {
   return /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 10,
+      fontSize: '0.625rem',
       letterSpacing: 'var(--ls-hud)',
       textTransform: 'uppercase',
       color: 'var(--text-3)',
@@ -28981,7 +29039,7 @@ function SRSegment({
         borderRadius: 'var(--r-pill)',
         border: 'none',
         cursor: 'pointer',
-        fontSize: 12.5,
+        fontSize: '0.78125rem',
         fontFamily: 'var(--font-sans)',
         background: on ? 'rgba(159,198,255,0.16)' : 'transparent',
         color: on ? 'var(--text-1)' : 'var(--text-3)',
@@ -29263,7 +29321,7 @@ function Settings({
     color: "var(--star-blue)"
   }), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 15,
+      fontSize: '0.9375rem',
       color: 'var(--text-1)',
       fontWeight: 300,
       letterSpacing: '0.02em'
@@ -29318,7 +29376,7 @@ function Settings({
       color: "currentColor"
     }), /*#__PURE__*/React.createElement("span", {
       style: {
-        fontSize: 13,
+        fontSize: '0.8125rem',
         color: on ? 'var(--text-1)' : 'inherit'
       }
     }, n.label));
@@ -29348,7 +29406,7 @@ function Settings({
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      fontSize: 22,
+      fontSize: '1.375rem',
       color: ink,
       boxShadow: '0 0 18px rgba(159,198,255,0.18)'
     }
@@ -29407,7 +29465,7 @@ function Settings({
       border: '1px solid var(--glass-border-strong)',
       borderRadius: 'var(--r-sm)',
       color: 'var(--text-1)',
-      fontSize: 13.5,
+      fontSize: '0.84375rem',
       lineHeight: 1.7,
       padding: '10px 12px',
       outline: 'none',
@@ -29415,7 +29473,7 @@ function Settings({
     }
   }), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 11,
+      fontSize: '0.6875rem',
       color: 'var(--text-3)',
       marginTop: 6,
       textAlign: 'right',
@@ -29471,7 +29529,7 @@ function Settings({
     color: "var(--star-blue)"
   }), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-2)',
       lineHeight: 1.7
     }
@@ -29522,7 +29580,7 @@ function Settings({
       background: 'var(--input-bg, rgba(3,4,12,0.45))',
       border: '1px solid var(--glass-border-strong)',
       color: 'var(--text-1)',
-      fontSize: 13,
+      fontSize: '0.8125rem',
       fontFamily: 'var(--font-mono)',
       opacity: remind ? 1 : 0.45,
       colorScheme: 'dark'
@@ -29538,7 +29596,7 @@ function Settings({
   })), /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: 14,
-      fontSize: 11.5,
+      fontSize: '0.71875rem',
       color: 'var(--text-3)',
       lineHeight: 1.7
     }
@@ -29558,7 +29616,7 @@ function Settings({
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 13,
+      fontSize: '0.8125rem',
       color: 'var(--text-2)'
     }
   }, s.label), /*#__PURE__*/React.createElement("span", {
@@ -29571,7 +29629,7 @@ function Settings({
     key: j,
     style: {
       fontFamily: 'var(--font-mono)',
-      fontSize: 11.5,
+      fontSize: '0.71875rem',
       color: 'var(--text-1)',
       minWidth: 22,
       textAlign: 'center',
@@ -29583,7 +29641,7 @@ function Settings({
   }, k))))))), tab === 'guide' && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(SRSectionTitle, null, "\u4E0A\u624B\u5F15\u5BFC"), /*#__PURE__*/React.createElement("div", {
     style: {
       padding: '14px 0 4px',
-      fontSize: 13,
+      fontSize: '0.8125rem',
       color: 'var(--text-2)',
       lineHeight: 1.85
     }
@@ -29605,7 +29663,7 @@ function Settings({
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 13,
+      fontSize: '0.8125rem',
       color: 'var(--text-2)',
       lineHeight: 1.85,
       marginBottom: 14
@@ -29621,7 +29679,7 @@ function Settings({
     title: "\u7528\u6237\u540D"
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 13,
+      fontSize: '0.8125rem',
       color: 'var(--text-2)',
       fontFamily: 'var(--font-mono)'
     }
@@ -29636,7 +29694,7 @@ function Settings({
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 13,
+      fontSize: '0.8125rem',
       color: 'var(--text-2)',
       fontFamily: 'var(--font-mono)'
     }
@@ -29673,7 +29731,7 @@ function Settings({
     onChange: e => setEmPw(e.target.value)
   }), emErr && /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--danger)',
       lineHeight: 1.6
     }
@@ -29720,7 +29778,7 @@ function Settings({
     title: "\u6CE8\u518C\u4E8E"
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 13,
+      fontSize: '0.8125rem',
       color: 'var(--text-2)',
       fontFamily: 'var(--font-mono)'
     }
@@ -29761,7 +29819,7 @@ function Settings({
     onChange: e => setNewPw(e.target.value)
   }), pwErr && /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--danger)',
       lineHeight: 1.6
     }
@@ -29792,7 +29850,7 @@ function Settings({
     title: "\u6211\u7684\u661F\u7A7A"
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 13,
+      fontSize: '0.8125rem',
       color: 'var(--text-2)',
       fontFamily: 'var(--font-mono)'
     }
@@ -29800,7 +29858,7 @@ function Settings({
     title: "\u8FDE\u7EED\u70B9\u4EAE"
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 13,
+      fontSize: '0.8125rem',
       color: 'var(--text-2)',
       fontFamily: 'var(--font-mono)'
     }
@@ -29996,7 +30054,7 @@ function Settings({
     color: "var(--gold)"
   }), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 13.5,
+      fontSize: '0.84375rem',
       color: 'var(--text-1)'
     }
   }, toast)))));
@@ -30092,12 +30150,12 @@ function SRLogo({
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: dawn ? {
-      fontSize: 19,
+      fontSize: '1.1875rem',
       fontWeight: 400,
       letterSpacing: '0.06em',
       color: '#b3781a'
     } : {
-      fontSize: 19,
+      fontSize: '1.1875rem',
       fontWeight: 300,
       letterSpacing: '0.06em',
       background: 'linear-gradient(176deg, #fff3da 0%, #ffffff 30%, #e9f0ff 62%, #b6cbf2 100%)',
@@ -30108,7 +30166,7 @@ function SRLogo({
     }
   }, "\u661F\u56FE"), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 8.5,
+      fontSize: '0.53125rem',
       letterSpacing: '0.24em',
       textTransform: 'uppercase',
       color: 'var(--text-3)'
@@ -30164,7 +30222,7 @@ function NavRow({
     style: {
       flex: 1,
       textAlign: 'left',
-      fontSize: 13.5,
+      fontSize: '0.84375rem',
       color: lit && !active ? 'var(--text-1)' : 'inherit'
     }
   }, label), !collapsed && badge != null && /*#__PURE__*/React.createElement(Badge, {
@@ -30228,7 +30286,7 @@ function UserChip({
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: dawn ? '#1a2238' : 'var(--text-1)'
     }
   }, avatarLetter), !collapsed && /*#__PURE__*/React.createElement("div", {
@@ -30241,12 +30299,12 @@ function UserChip({
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 13,
+      fontSize: '0.8125rem',
       color: 'var(--text-1)'
     }
   }, primary), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 11,
+      fontSize: '0.6875rem',
       color: 'var(--text-3)'
     }
   }, secondary)), !collapsed && /*#__PURE__*/React.createElement("div", {
@@ -30495,7 +30553,7 @@ function Sidebar({
       }
     }, /*#__PURE__*/React.createElement("div", {
       style: {
-        fontSize: 10,
+        fontSize: '0.625rem',
         letterSpacing: 'var(--ls-hud)',
         textTransform: 'uppercase',
         color: 'var(--text-3)',
@@ -30684,7 +30742,7 @@ function HudStat({
   }, label), /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: 'var(--font-mono)',
-      fontSize: 18,
+      fontSize: '1.125rem',
       color: tone || 'var(--text-1)'
     }
   }, value));
@@ -30928,7 +30986,7 @@ function DomainHalos({
       }
     }, /*#__PURE__*/React.createElement("span", {
       style: {
-        fontSize: 15.5,
+        fontSize: '0.96875rem',
         fontWeight: 400,
         letterSpacing: '0.06em',
         color: 'var(--sun-label, #ffe3b0)',
@@ -30938,7 +30996,7 @@ function DomainHalos({
       title: `已点亮 ${st.lit} / 共 ${count} 颗`,
       style: {
         fontFamily: 'var(--font-mono)',
-        fontSize: 11,
+        fontSize: '0.6875rem',
         color: 'var(--sun-label-dim, rgba(255,200,140,0.62))'
       }
     }, st.lit, "/", count))));
@@ -31019,7 +31077,7 @@ function SummaryCard({
       display: 'inline-flex',
       alignItems: 'center',
       gap: 6,
-      fontSize: 11,
+      fontSize: '0.6875rem',
       color: 'var(--text-3)'
     }
   }, /*#__PURE__*/React.createElement("span", {
@@ -31037,7 +31095,7 @@ function SummaryCard({
     onClick: onClose
   })), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 19,
+      fontSize: '1.1875rem',
       fontWeight: 300,
       color: 'var(--text-1)',
       marginBottom: 10,
@@ -31045,7 +31103,7 @@ function SummaryCard({
     }
   }, star.label), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       lineHeight: 1.7,
       color: 'var(--text-2)',
       marginBottom: 14
@@ -31061,7 +31119,7 @@ function SummaryCard({
       alignItems: 'flex-start',
       gap: 7,
       marginTop: 10,
-      fontSize: 11.5,
+      fontSize: '0.71875rem',
       lineHeight: 1.6,
       color: 'var(--text-3)'
     }
@@ -31217,7 +31275,7 @@ function PopMenu({
     }
   }, header && /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 10,
+      fontSize: '0.625rem',
       letterSpacing: 'var(--ls-hud)',
       textTransform: 'uppercase',
       color: 'var(--text-3)',
@@ -31262,7 +31320,7 @@ function PopMenu({
   }), /*#__PURE__*/React.createElement("span", {
     style: {
       flex: 1,
-      fontSize: 13,
+      fontSize: '0.8125rem',
       color: it.tone || (active === i && !it.disabled ? 'var(--text-1)' : 'var(--text-2)')
     }
   }, it.label), it.hint && /*#__PURE__*/React.createElement("span", {
@@ -32250,13 +32308,13 @@ function StarMap({
     color: "var(--gold)"
   }), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 14,
+      fontSize: '0.875rem',
       color: 'var(--text-1)',
       whiteSpace: 'nowrap'
     }
   }, "\u6211\u7684\u661F\u7A7A"), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-3)',
       whiteSpace: 'nowrap'
     }
@@ -32305,7 +32363,7 @@ function StarMap({
       display: 'flex',
       alignItems: 'center',
       gap: 8,
-      fontSize: 11.5,
+      fontSize: '0.71875rem',
       color: 'var(--text-3)',
       pointerEvents: 'none',
       maxWidth: phone ? 'calc(100% - 84px)' : 'calc(100% - 280px)'
@@ -32349,7 +32407,7 @@ function StarMap({
   }), !phone && /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: 'var(--font-mono)',
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-2)',
       minWidth: 42,
       textAlign: 'center'
@@ -32545,7 +32603,7 @@ function StarMap({
       glow: true
     }, /*#__PURE__*/React.createElement("div", {
       style: {
-        fontSize: 11,
+        fontSize: '0.6875rem',
         color: 'var(--text-3)',
         marginBottom: 7
       }
@@ -32570,7 +32628,7 @@ function StarMap({
         border: '1px solid var(--glass-border-strong)',
         borderRadius: 'var(--r-sm)',
         color: 'var(--text-1)',
-        fontSize: 14,
+        fontSize: '0.875rem',
         padding: '8px 10px',
         outline: 'none',
         fontFamily: 'var(--font-sans)'
@@ -32760,13 +32818,13 @@ function Timeline({
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 23,
+      fontSize: '1.4375rem',
       fontWeight: 300,
       color: 'var(--text-1)'
     }
   }, "\u65F6\u95F4\u8F74"), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 13,
+      fontSize: '0.8125rem',
       color: 'var(--text-3)',
       marginTop: 4
     }
@@ -32785,7 +32843,7 @@ function Timeline({
       alignItems: 'center',
       gap: 6,
       fontFamily: 'var(--font-mono)',
-      fontSize: 11,
+      fontSize: '0.6875rem',
       letterSpacing: 'var(--ls-hud)',
       textTransform: 'uppercase',
       color: 'var(--text-3)'
@@ -32795,7 +32853,7 @@ function Timeline({
       display: 'inline-flex',
       alignItems: 'center',
       gap: 6,
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: 'var(--text-2)'
     }
   }, /*#__PURE__*/React.createElement(Icon, {
@@ -32812,7 +32870,7 @@ function Timeline({
       display: 'inline-flex',
       alignItems: 'center',
       gap: 6,
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: 'var(--text-2)'
     }
   }, /*#__PURE__*/React.createElement(Icon, {
@@ -32829,7 +32887,7 @@ function Timeline({
       display: 'inline-flex',
       alignItems: 'center',
       gap: 6,
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: 'var(--text-3)'
     }
   }, /*#__PURE__*/React.createElement(Icon, {
@@ -32857,7 +32915,7 @@ function Timeline({
     }, c.label, /*#__PURE__*/React.createElement("span", {
       style: {
         fontFamily: 'var(--font-mono)',
-        fontSize: 11,
+        fontSize: '0.6875rem',
         opacity: 0.7,
         marginLeft: 2
       }
@@ -32874,13 +32932,13 @@ function Timeline({
     color: "var(--star-blue-dim)"
   }), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 14.5,
+      fontSize: '0.90625rem',
       color: 'var(--text-2)',
       marginTop: 14
     }
   }, "\u8FD9\u6BB5\u65F6\u95F4\u6CA1\u6709\u8FD9\u7C7B\u6D3B\u52A8\u3002"), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       marginTop: 6
     }
   }, "\u6362\u4E2A\u7B5B\u9009\uFF0C\u6216\u56DE\u5230\u661F\u7A7A\u70B9\u4EAE\u4E00\u9897\u661F\u3002")) : /*#__PURE__*/React.createElement("div", {
@@ -32926,7 +32984,7 @@ function Timeline({
   }), /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: 'var(--font-mono)',
-      fontSize: 10.5,
+      fontSize: '0.65625rem',
       letterSpacing: 'var(--ls-hud)',
       textTransform: 'uppercase',
       color: 'var(--text-3)'
@@ -32940,7 +32998,7 @@ function Timeline({
   }), /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: 'var(--font-mono)',
-      fontSize: 11,
+      fontSize: '0.6875rem',
       color: 'var(--text-3)'
     }
   }, g.items.length)), /*#__PURE__*/React.createElement("div", {
@@ -33021,7 +33079,7 @@ function Timeline({
         alignItems: 'center',
         gap: 5,
         fontFamily: 'var(--font-mono)',
-        fontSize: 10.5,
+        fontSize: '0.65625rem',
         letterSpacing: 'var(--ls-hud)',
         textTransform: 'uppercase',
         color: k.color
@@ -33032,7 +33090,7 @@ function Timeline({
       color: k.color
     }), evLabel), /*#__PURE__*/React.createElement("span", {
       style: {
-        fontSize: 14.5,
+        fontSize: '0.90625rem',
         color: 'var(--text-1)',
         whiteSpace: 'nowrap',
         overflow: 'hidden',
@@ -33061,7 +33119,7 @@ function Timeline({
         borderRadius: 'var(--r-pill)',
         background: 'color-mix(in srgb, var(--gold-warm) 10%, transparent)',
         border: '1px solid color-mix(in srgb, var(--gold-warm) 30%, transparent)',
-        fontSize: 10,
+        fontSize: '0.625rem',
         color: 'var(--gold-warm)'
       }
     }, /*#__PURE__*/React.createElement(Icon, {
@@ -33073,7 +33131,7 @@ function Timeline({
         display: 'inline-flex',
         alignItems: 'center',
         gap: 5,
-        fontSize: 11.5,
+        fontSize: '0.71875rem',
         color: 'var(--text-3)',
         flex: 'none'
       }
@@ -33092,7 +33150,7 @@ function Timeline({
     }), /*#__PURE__*/React.createElement("span", {
       style: {
         fontFamily: 'var(--font-mono)',
-        fontSize: 12.5,
+        fontSize: '0.78125rem',
         color: up ? 'var(--gold)' : 'var(--star-blue-dim)'
       }
     }, ev.delta)), /*#__PURE__*/React.createElement("div", {
@@ -33105,7 +33163,7 @@ function Timeline({
       }
     }, /*#__PURE__*/React.createElement("span", {
       style: {
-        fontSize: 12.5,
+        fontSize: '0.78125rem',
         color: 'var(--text-2)',
         minWidth: 0,
         overflow: 'hidden',
@@ -33135,13 +33193,13 @@ function Timeline({
     })), /*#__PURE__*/React.createElement("span", {
       style: {
         fontFamily: 'var(--font-mono)',
-        fontSize: 11,
+        fontSize: '0.6875rem',
         color: 'var(--text-3)'
       }
     }, Math.round(star.strength * 100), "%")), /*#__PURE__*/React.createElement("span", {
       style: {
         fontFamily: 'var(--font-mono)',
-        fontSize: 11,
+        fontSize: '0.6875rem',
         color: 'var(--text-3)',
         flex: 'none'
       }
@@ -33169,7 +33227,7 @@ function Timeline({
     onClick: () => setShown(s => s + TL_PAGE)
   }, "\u52A0\u8F7D\u66F4\u65E9\u7684\u6D3B\u52A8") : /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-3)'
     }
   }, "\u5DF2\u662F\u661F\u7A7A\u8BB0\u5FC6\u7684\u5C3D\u5934")))));
@@ -33511,7 +33569,7 @@ function LaunchBay({
       bottom: 0,
       textAlign: 'center',
       fontFamily: 'var(--font-mono)',
-      fontSize: 10.5,
+      fontSize: '0.65625rem',
       letterSpacing: '0.28em',
       textTransform: 'uppercase',
       color: launching ? 'var(--gold)' : 'var(--text-3)'
@@ -33568,13 +33626,13 @@ function GateNotice({
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 15,
+      fontSize: '0.9375rem',
       color: 'var(--text-1)',
       fontWeight: 300
     }
   }, title), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: 'var(--text-2)',
       lineHeight: 1.75,
       marginTop: 8
@@ -33662,7 +33720,7 @@ function SharePanel({
     style: {
       padding: 40,
       color: 'var(--text-3)',
-      fontSize: 13
+      fontSize: '0.8125rem'
     }
   }, "\u6B63\u5728\u8FDE\u63A5\u661F\u9645\u7F51\u7EDC\u2026\uFF08\u540E\u7AEF\u672A\u8FD0\u884C\u65F6\u6B64\u9875\u4E0D\u53EF\u7528\uFF09");
   return /*#__PURE__*/React.createElement("div", {
@@ -33723,12 +33781,12 @@ function SharePanel({
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 15,
+      fontSize: '0.9375rem',
       color: 'var(--text-1)'
     }
   }, "\u661F\u7CFB\u8BBF\u95EE"), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-3)',
       marginTop: 2
     }
@@ -33749,7 +33807,7 @@ function SharePanel({
     }
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-3)',
       marginBottom: 7
     }
@@ -33763,7 +33821,7 @@ function SharePanel({
     style: {
       flex: 1,
       fontFamily: 'var(--font-mono)',
-      fontSize: 17,
+      fontSize: '1.0625rem',
       letterSpacing: '0.12em',
       color: 'var(--gold-white)',
       padding: '10px 14px',
@@ -33784,7 +33842,7 @@ function SharePanel({
     }, '密文已重置 · 旧密文全部失效')
   }))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-3)',
       marginBottom: 7
     }
@@ -33846,12 +33904,12 @@ function SharePanel({
       }
     })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
       style: {
-        fontSize: 13,
+        fontSize: '0.8125rem',
         color: on ? 'var(--text-1)' : 'var(--text-2)'
       }
     }, o.label), /*#__PURE__*/React.createElement("div", {
       style: {
-        fontSize: 11.5,
+        fontSize: '0.71875rem',
         color: 'var(--text-3)',
         marginTop: 2
       }
@@ -33872,12 +33930,12 @@ function SharePanel({
     color: "var(--star-blue)"
   }), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 14,
+      fontSize: '0.875rem',
       color: 'var(--text-1)'
     }
   }, "\u628A\u661F\u7CFB\u5206\u4EAB\u7ED9\u597D\u53CB")), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-3)',
       marginBottom: 12
     }
@@ -33898,7 +33956,7 @@ function SharePanel({
   }), /*#__PURE__*/React.createElement("span", {
     style: {
       flex: 1,
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: 'var(--text-2)'
     }
   }, "\u661F\u7CFB\u8BBF\u95EE\u8FD8\u6CA1\u5F00\u542F\u2014\u2014\u5148\u5F00\u653E\u661F\u7CFB\uFF0C\u9080\u8BF7\u624D\u6709\u5904\u53EF\u53BB\u3002"), /*#__PURE__*/React.createElement(Button, {
@@ -33911,7 +33969,7 @@ function SharePanel({
     }, '星系已开放 · 现在可以寄出邀请了')
   }, "\u5F00\u653E\u661F\u7CFB")) : friends === null ? /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: 'var(--text-3)'
     }
   }, "\u6B63\u5728\u547C\u53EB\u597D\u53CB\u540D\u5355\u2026") : !friends.length ? /*#__PURE__*/React.createElement("div", {
@@ -33931,7 +33989,7 @@ function SharePanel({
   }), /*#__PURE__*/React.createElement("span", {
     style: {
       flex: 1,
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: 'var(--text-2)'
     }
   }, "\u8FD8\u6CA1\u6709\u661F\u9645\u597D\u53CB\u2014\u2014\u5148\u4EA4\u6362\u5BC6\u6587\u6210\u4E3A\u597D\u53CB\u3002"), /*#__PURE__*/React.createElement(Button, {
@@ -33963,13 +34021,13 @@ function SharePanel({
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-1)'
     }
   }, f.avatar), /*#__PURE__*/React.createElement("span", {
     style: {
       flex: 1,
-      fontSize: 13.5,
+      fontSize: '0.84375rem',
       color: 'var(--text-1)',
       whiteSpace: 'nowrap',
       overflow: 'hidden',
@@ -33986,7 +34044,7 @@ function SharePanel({
     pad: "md"
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12,
+      fontSize: '0.75rem',
       letterSpacing: 'var(--ls-hud)',
       textTransform: 'uppercase',
       color: 'var(--text-3)',
@@ -33995,7 +34053,7 @@ function SharePanel({
     }
   }, "\u8BBF\u5BA2 \xB7 ", (share.visitors || []).length), !(share.visitors || []).length && /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: 'var(--text-3)'
     }
   }, "\u8FD8\u6CA1\u6709\u4EBA\u9020\u8BBF\u8FC7\u4F60\u7684\u661F\u7CFB\u3002\u628A\u5BC6\u6587\u53D1\u7ED9\u670B\u53CB\u8BD5\u8BD5\u3002"), (share.visitors || []).map(v => /*#__PURE__*/React.createElement("div", {
@@ -34016,7 +34074,7 @@ function SharePanel({
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-1)',
       opacity: v.blocked ? 0.45 : 1
     }
@@ -34027,7 +34085,7 @@ function SharePanel({
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 13.5,
+      fontSize: '0.84375rem',
       color: v.blocked ? 'var(--text-3)' : 'var(--text-1)'
     }
   }, v.name), v.blocked && /*#__PURE__*/React.createElement(Badge, {
@@ -34041,7 +34099,7 @@ function SharePanel({
       alignItems: 'center',
       gap: 5,
       marginTop: 3,
-      fontSize: 11,
+      fontSize: '0.6875rem',
       color: 'var(--text-3)',
       opacity: v.lastVisit ? 1 : 0.7
     }
@@ -34164,7 +34222,7 @@ function FriendsPanel({
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-3)',
       marginBottom: 8
     }
@@ -34197,7 +34255,7 @@ function FriendsPanel({
     onClick: redeem
   }, "\u8FDE\u63A5"))), !friends.length && /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       color: 'var(--text-3)',
       padding: '0 4px'
     }
@@ -34254,7 +34312,7 @@ function FriendsPanel({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        fontSize: 17,
+        fontSize: '1.0625rem',
         color: 'var(--text-1)'
       }
     }, f.avatar), /*#__PURE__*/React.createElement("div", {
@@ -34264,7 +34322,7 @@ function FriendsPanel({
       }
     }, /*#__PURE__*/React.createElement("div", {
       style: {
-        fontSize: 15,
+        fontSize: '0.9375rem',
         color: 'var(--text-1)',
         whiteSpace: 'nowrap',
         overflow: 'hidden',
@@ -34275,7 +34333,7 @@ function FriendsPanel({
         display: 'flex',
         alignItems: 'center',
         gap: 6,
-        fontSize: 11.5,
+        fontSize: '0.71875rem',
         color: 'var(--text-3)',
         marginTop: 3
       }
@@ -34409,7 +34467,7 @@ function WarpOverlay({
     style: {
       display: 'inline-block',
       fontFamily: 'var(--font-mono)',
-      fontSize: 12,
+      fontSize: '0.75rem',
       letterSpacing: '0.3em',
       textTransform: 'uppercase',
       color: 'var(--text-on-scrim-dim, rgba(214,225,255,0.86))'
@@ -34417,7 +34475,7 @@ function WarpOverlay({
   }, "WARP"), /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: 10,
-      fontSize: 17,
+      fontSize: '1.0625rem',
       fontWeight: 300,
       color: 'var(--text-on-scrim, rgba(255,255,255,0.92))',
       letterSpacing: '0.04em'
@@ -34658,7 +34716,7 @@ function VisitMap({
       padding: 60,
       textAlign: 'center',
       color: 'var(--text-3)',
-      fontSize: 13
+      fontSize: '0.8125rem'
     }
   }, "\u6B63\u5728\u98DE\u5F80\u300C", friend.name, "\u300D\u7684\u661F\u7CFB\u2026");
   if (state.error) return /*#__PURE__*/React.createElement("div", {
@@ -34673,7 +34731,7 @@ function VisitMap({
     color: "var(--star-blue-dim)"
   }), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 14,
+      fontSize: '0.875rem',
       color: 'var(--text-2)',
       marginTop: 14
     }
@@ -34804,7 +34862,7 @@ function VisitMap({
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 15.5,
+      fontSize: '0.96875rem',
       fontWeight: 400,
       letterSpacing: '0.06em',
       color: 'var(--sun-label, #ffe3b0)',
@@ -34813,7 +34871,7 @@ function VisitMap({
   }, con.name), /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: 'var(--font-mono)',
-      fontSize: 11,
+      fontSize: '0.6875rem',
       color: 'var(--sun-label-dim, rgba(255,200,140,0.62))'
     }
   }, count))))), /*#__PURE__*/React.createElement("svg", {
@@ -34920,7 +34978,7 @@ function VisitMap({
     color: "var(--gold)"
   }), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 14,
+      fontSize: '0.875rem',
       color: 'var(--text-1)',
       whiteSpace: 'nowrap',
       maxWidth: 220,
@@ -34931,7 +34989,7 @@ function VisitMap({
     tone: "gold"
   }, outlineMode ? '可见大纲' : '仅星名'), state.owner && state.owner.bio && /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-3)',
       maxWidth: 320,
       overflow: 'hidden',
@@ -34960,7 +35018,7 @@ function VisitMap({
       whiteSpace: 'nowrap',
       padding: '8px 15px',
       font: 'inherit',
-      fontSize: 12.5,
+      fontSize: '0.78125rem',
       cursor: 'pointer',
       borderRadius: 'var(--r-pill)',
       color: 'var(--gold-white)',
@@ -34995,7 +35053,7 @@ function VisitMap({
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-3)',
       whiteSpace: 'nowrap'
     }
@@ -35006,7 +35064,7 @@ function VisitMap({
     }
   }, stars.length)), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-3)',
       whiteSpace: 'nowrap'
     }
@@ -35017,7 +35075,7 @@ function VisitMap({
     }
   }, geoms.length)), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-3)',
       whiteSpace: 'nowrap'
     }
@@ -35035,7 +35093,7 @@ function VisitMap({
       display: 'flex',
       alignItems: 'center',
       gap: 8,
-      fontSize: 11.5,
+      fontSize: '0.71875rem',
       color: 'var(--text-3)',
       pointerEvents: 'none',
       maxWidth: 'calc(100% - 240px)'
@@ -35091,7 +35149,7 @@ function VisitMap({
   }), /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: 'var(--font-mono)',
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-2)',
       minWidth: 42,
       textAlign: 'center'
@@ -35146,7 +35204,7 @@ function VisitMap({
   }), /*#__PURE__*/React.createElement("span", {
     style: {
       flex: 1,
-      fontSize: 14,
+      fontSize: '0.875rem',
       color: 'var(--text-1)'
     }
   }, "\u77E5\u8BC6\u5171\u9E23"), /*#__PURE__*/React.createElement(Badge, {
@@ -35158,7 +35216,7 @@ function VisitMap({
     onClick: () => setResOpen(false)
   })), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 11.5,
+      fontSize: '0.71875rem',
       lineHeight: 1.6,
       color: 'var(--text-3)',
       margin: '7px 0 10px'
@@ -35204,7 +35262,7 @@ function VisitMap({
   }), /*#__PURE__*/React.createElement("span", {
     style: {
       flex: 1,
-      fontSize: 13,
+      fontSize: '0.8125rem',
       color: 'var(--text-1)',
       whiteSpace: 'nowrap',
       overflow: 'hidden',
@@ -35216,7 +35274,7 @@ function VisitMap({
     style: {
       marginTop: 4,
       paddingLeft: 19,
-      fontSize: 11.5,
+      fontSize: '0.71875rem',
       lineHeight: 1.6,
       color: 'var(--text-3)'
     }
@@ -35250,7 +35308,7 @@ function VisitMap({
   }), /*#__PURE__*/React.createElement("span", {
     style: {
       flex: 1,
-      fontSize: 14,
+      fontSize: '0.875rem',
       color: 'var(--text-1)'
     }
   }, "\u7559\u4E0B\u661F\u8BED"), /*#__PURE__*/React.createElement(IconButton, {
@@ -35260,7 +35318,7 @@ function VisitMap({
     onClick: () => setNoteOpen(false)
   })), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 11.5,
+      fontSize: '0.71875rem',
       lineHeight: 1.6,
       color: 'var(--text-3)',
       marginBottom: 10
@@ -35287,7 +35345,7 @@ function VisitMap({
     style: {
       flex: 1,
       fontFamily: 'var(--font-mono)',
-      fontSize: 11,
+      fontSize: '0.6875rem',
       color: 'var(--text-3)'
     }
   }, noteText.length, " / 160"), /*#__PURE__*/React.createElement(Button, {
@@ -35325,7 +35383,7 @@ function VisitMap({
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 10,
+      fontSize: '0.625rem',
       letterSpacing: '0.2em',
       textTransform: 'uppercase',
       color: 'var(--gold)',
@@ -35333,7 +35391,7 @@ function VisitMap({
     }
   }, (g.constellations.find(c => c.id === sel.con) || {}).name), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 18,
+      fontSize: '1.125rem',
       fontWeight: 400,
       color: 'var(--text-1)',
       marginTop: 4
@@ -35372,7 +35430,7 @@ function VisitMap({
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 10,
+      fontSize: '0.625rem',
       letterSpacing: '0.2em',
       textTransform: 'uppercase',
       color: 'var(--text-3)',
@@ -35391,7 +35449,7 @@ function VisitMap({
     }
   }, o.text))) : /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-3)'
     }
   }, "\u8FD9\u9897\u661F\u8FD8\u6CA1\u6709\u5927\u7EB2\u3002") : /*#__PURE__*/React.createElement("div", {
@@ -35399,7 +35457,7 @@ function VisitMap({
       display: 'flex',
       alignItems: 'center',
       gap: 7,
-      fontSize: 12,
+      fontSize: '0.75rem',
       color: 'var(--text-3)'
     }
   }, /*#__PURE__*/React.createElement(Icon, {
@@ -35421,7 +35479,7 @@ function VisitMap({
   }, collecting ? '收纳中…' : '收纳这颗星'), /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: 7,
-      fontSize: 11,
+      fontSize: '0.6875rem',
       lineHeight: 1.6,
       color: 'var(--text-3)'
     }
@@ -35519,7 +35577,7 @@ function VisitView() {
       color: "var(--gold)"
     }), /*#__PURE__*/React.createElement("h1", {
       style: {
-        fontSize: 30,
+        fontSize: '1.875rem',
         fontWeight: 200,
         letterSpacing: '0.04em',
         background: 'linear-gradient(100deg, var(--gold), var(--gold-white) 45%, var(--star-blue))',
@@ -35529,7 +35587,7 @@ function VisitView() {
       }
     }, "\u661F\u9645\u6F2B\u6E38")), /*#__PURE__*/React.createElement("div", {
       style: {
-        fontSize: 13,
+        fontSize: '0.8125rem',
         color: 'var(--text-3)',
         marginBottom: 22,
         fontWeight: 300
@@ -35565,7 +35623,7 @@ function VisitView() {
           background: on ? 'rgba(255,217,138,0.1)' : 'transparent',
           color: on ? 'var(--text-1)' : 'var(--text-3)',
           font: 'inherit',
-          fontSize: 13,
+          fontSize: '0.8125rem',
           cursor: 'pointer'
         }
       }, /*#__PURE__*/React.createElement(Icon, {
@@ -35608,7 +35666,7 @@ function VisitView() {
       color: toast.tone === 'danger' ? 'var(--danger)' : toast.tone === 'gold' ? 'var(--gold)' : 'var(--star-blue)'
     }), /*#__PURE__*/React.createElement("span", {
       style: {
-        fontSize: 13.5,
+        fontSize: '0.84375rem',
         color: 'var(--text-1)'
       }
     }, toast.msg))))
@@ -35923,10 +35981,14 @@ function App() {
     setLogin(false);
   };
   React.useEffect(() => {
+    /* 正在编辑的那颗星在水合后还活着，就别把人弹出编辑器——409 收敛也走这条路：
+       另一台设备保存的瞬间本端在打字，以前直接 editing=null，人被扔到 stars[0]
+       （星空为空时甚至崩给 Boundary）。内容按服务器真相刷新（toast 已告知），
+       但「我在哪篇笔记」不该被没收。星真的没了（对端删了它）才放手。 */
     const h = () => {
       setDataRev(r => r + 1);
       setSelected(null);
-      setEditing(null);
+      setEditing(id => id && window.SR_DATA && window.SR_DATA.stars.some(s => s.id === id) ? id : null);
     };
     window.addEventListener('sr-hydrated', h);
     return () => window.removeEventListener('sr-hydrated', h);
@@ -36327,21 +36389,21 @@ function App() {
       color: banned ? 'var(--danger)' : 'var(--gold)'
     }), /*#__PURE__*/React.createElement("div", {
       style: {
-        fontSize: 19,
+        fontSize: '1.1875rem',
         fontWeight: 300,
         color: 'var(--text-1)',
         marginTop: 16
       }
     }, TITLE[kind]), /*#__PURE__*/React.createElement("div", {
       style: {
-        fontSize: 13,
+        fontSize: '0.8125rem',
         color: 'var(--text-2)',
         marginTop: 12,
         lineHeight: 1.8
       }
     }, expired ? SUB.expired : blocked.message || SUB[kind]), /*#__PURE__*/React.createElement("div", {
       style: {
-        fontSize: 12,
+        fontSize: '0.75rem',
         color: 'var(--text-3)',
         marginTop: 14,
         lineHeight: 1.7
@@ -40006,7 +40068,11 @@ try { (() => {
     undo,
     redo,
     canUndo: h => h.past.length > 0,
-    canRedo: h => h.future.length > 0
+    canRedo: h => h.future.length > 0,
+    /* 巨型笔记的内存护栏：快照是整篇克隆，两个栈最坏 2 × cap 份正文。
+       普通笔记（几 KB）120 步毫无压力；1MB 的书摘按 120 步就是 ~240MB。
+       按体量降档（字节按 UTF-16 估算：length × 2）。 */
+    capForBytes: bytes => bytes > 512 * 1024 ? 15 : bytes > 128 * 1024 ? 40 : 120
   };
   g.SRUndoCore = api;
 })(typeof globalThis !== 'undefined' ? globalThis : window);

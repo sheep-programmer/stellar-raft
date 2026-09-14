@@ -271,14 +271,14 @@ function shareWeeklyCard(D) {
   }, 'image/png');
 }
 
-const HUD = { fontSize: 10, letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: 'var(--text-3)', fontFamily: 'var(--font-mono)' };
+const HUD = { fontSize: '0.625rem', letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: 'var(--text-3)', fontFamily: 'var(--font-mono)' };
 
 function SectionTitle({ icon, children, hint, action }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 14 }}>
       {icon && <Icon name={icon} size={14} color="var(--star-blue)" />}
       <span style={HUD}>{children}</span>
-      {hint && <span style={{ fontSize: 11.5, color: 'var(--text-3)', marginLeft: 'auto' }}>{hint}</span>}
+      {hint && <span style={{ fontSize: '0.71875rem', color: 'var(--text-3)', marginLeft: 'auto' }}>{hint}</span>}
       {action && <span style={{ flex: 'none', marginLeft: hint ? 0 : 'auto' }}>{action}</span>}
     </div>
   );
@@ -302,10 +302,10 @@ function TodoRow({ icon, iconColor, title, count, desc, action, ember }) {
       <Icon name={icon} size={16} color={iconColor} style={{ flex: 'none' }} />
       <div className="sr-ck-todo-text" style={{ flex: 1, minWidth: 0 }}>
         <div style={{ display: 'flex', alignItems: 'baseline', gap: 8 }}>
-          <span style={{ fontSize: 13.5, color: 'var(--text-1)' }}>{title}</span>
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: ember ? 'color-mix(in srgb, var(--gold) 72%, var(--text-3))' : 'var(--star-blue)' }}>{count}</span>
+          <span style={{ fontSize: '0.84375rem', color: 'var(--text-1)' }}>{title}</span>
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: ember ? 'color-mix(in srgb, var(--gold) 72%, var(--text-3))' : 'var(--star-blue)' }}>{count}</span>
         </div>
-        <div style={{ fontSize: 11.5, color: 'var(--text-3)', marginTop: 3, lineHeight: 1.6 }}>{desc}</div>
+        <div style={{ fontSize: '0.71875rem', color: 'var(--text-3)', marginTop: 3, lineHeight: 1.6 }}>{desc}</div>
       </div>
       {action && <div className="sr-ck-todo-action" style={{ flex: 'none' }}>{action}</div>}
     </div>
@@ -437,8 +437,8 @@ function Checkup({ onClose, onOpenStar, onFocusCon, onFeynman, onReview }) {
         </div>
 
         <div style={{ marginBottom: 22 }}>
-          <div style={{ fontSize: 25, fontWeight: 300, color: 'var(--text-1)' }}>知识体检报告</div>
-          <div style={{ fontSize: 13, color: 'var(--text-3)', marginTop: 4 }}>
+          <div style={{ fontSize: '1.5625rem', fontWeight: 300, color: 'var(--text-1)' }}>知识体检报告</div>
+          <div style={{ fontSize: '0.8125rem', color: 'var(--text-3)', marginTop: 4 }}>
             为你的整片星空做一次记忆体检 —— 哪些星在发光，哪些正在变暗，哪些该回来看看。
           </div>
         </div>
@@ -448,7 +448,7 @@ function Checkup({ onClose, onOpenStar, onFocusCon, onFeynman, onReview }) {
         <GlassPanel strong radius="lg" pad="none" glow style={{ padding: 18, marginBottom: 16 }}>
           <SectionTitle icon="list-todo" hint={todoEmpty ? undefined : '到期与待重燃可能重叠'}>今日待办</SectionTitle>
           {todoEmpty && (
-            <div style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '10px 4px 4px', color: 'var(--text-3)', fontSize: 13 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '10px 4px 4px', color: 'var(--text-3)', fontSize: '0.8125rem' }}>
               <Icon name="sparkles" size={15} color="var(--star-blue)" />
               星空明亮，观测台今夜无事。
             </div>
@@ -484,13 +484,13 @@ function Checkup({ onClose, onOpenStar, onFocusCon, onFeynman, onReview }) {
           <GlassPanel strong radius="lg" pad="none" glow style={{ padding: 22, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
             <div style={HUD}>整体记忆健康度</div>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: 6, margin: '10px 0 2px' }}>
-              <span style={{ fontFamily: 'var(--font-mono)', fontSize: 64, fontWeight: 200, lineHeight: 1, color: overallCol, textShadow: overall >= 70 ? 'var(--text-glow-warm)' : 'var(--text-glow-cool)' }}>{overall}</span>
-              <span style={{ fontFamily: 'var(--font-mono)', fontSize: 22, fontWeight: 200, color: 'var(--text-3)' }}>%</span>
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '4rem', fontWeight: 200, lineHeight: 1, color: overallCol, textShadow: overall >= 70 ? 'var(--text-glow-warm)' : 'var(--text-glow-cool)' }}>{overall}</span>
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '1.375rem', fontWeight: 200, color: 'var(--text-3)' }}>%</span>
             </div>
             <div style={{ marginTop: 14 }}>
               <MemoryBar value={overall / 100} height={6} />
             </div>
-            <div style={{ fontSize: 12.5, color: 'var(--text-2)', lineHeight: 1.7, marginTop: 14 }}>
+            <div style={{ fontSize: '0.78125rem', color: 'var(--text-2)', lineHeight: 1.7, marginTop: 14 }}>
               {total === 0
                 ? <span>你的星空还很暗。写下第一颗星，让它发光。</span>
                 : <span>
@@ -515,10 +515,10 @@ function Checkup({ onClose, onOpenStar, onFocusCon, onFeynman, onReview }) {
                 <div key={b.key} style={{ borderRadius: 'var(--r-md)', border: '1px solid var(--glass-border)', background: 'rgba(159,198,255,0.03)', padding: '12px 13px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                     <span style={{ width: 7, height: 7, borderRadius: '50%', background: b.c, boxShadow: `0 0 6px ${b.c}` }} />
-                    <span style={{ fontSize: 12, color: 'var(--text-2)' }}>{b.t}</span>
+                    <span style={{ fontSize: '0.75rem', color: 'var(--text-2)' }}>{b.t}</span>
                   </div>
-                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: 28, fontWeight: 200, color: 'var(--text-1)', lineHeight: 1.1, marginTop: 8 }}>{b.n}</div>
-                  <div style={{ fontSize: 10.5, color: 'var(--text-3)', marginTop: 4, lineHeight: 1.5 }}>{b.desc}</div>
+                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.75rem', fontWeight: 200, color: 'var(--text-1)', lineHeight: 1.1, marginTop: 8 }}>{b.n}</div>
+                  <div style={{ fontSize: '0.65625rem', color: 'var(--text-3)', marginTop: 4, lineHeight: 1.5 }}>{b.desc}</div>
                 </div>
               ))}
             </div>
@@ -532,12 +532,12 @@ function Checkup({ onClose, onOpenStar, onFocusCon, onFeynman, onReview }) {
           <GlassPanel data-tour="checkup-window" radius="lg" pad="none" style={{ padding: 18 }}>
             <SectionTitle icon="calendar-clock" hint={fRows.length ? '按剩余天数升序' : undefined}>时间之窗 · 未来 7 天</SectionTitle>
             {fRows.length === 0 && (
-              <div style={{ padding: '24px 0', textAlign: 'center', color: 'var(--text-3)', fontSize: 13 }}>
+              <div style={{ padding: '24px 0', textAlign: 'center', color: 'var(--text-3)', fontSize: '0.8125rem' }}>
                 未来 7 天你的星空安然无恙 ✦
               </div>
             )}
             {fRows.length > 0 && (
-              <div style={{ fontSize: 12, color: 'var(--text-2)', lineHeight: 1.65, marginBottom: 10 }}>
+              <div style={{ fontSize: '0.75rem', color: 'var(--text-2)', lineHeight: 1.65, marginBottom: 10 }}>
                 若这 7 天不回望，将有
                 {fEmberN > 0 && <> <b style={{ fontFamily: 'var(--font-mono)', color: 'var(--gold)', fontWeight: 500 }}>{fEmberN}</b> 颗星熄灭</>}
                 {fEmberN > 0 && fDueN > 0 && '、'}
@@ -556,15 +556,15 @@ function Checkup({ onClose, onOpenStar, onFocusCon, onFeynman, onReview }) {
                     background: kind === 'ember' ? 'color-mix(in srgb, var(--gold) 4%, transparent)' : 'rgba(120,150,205,0.05)' }}>
                     <span style={{ width: 8, height: 8, borderRadius: '50%', flex: 'none', background: col, boxShadow: `0 0 7px ${col}` }} />
                     <div style={{ minWidth: 0, flex: 1 }}>
-                      <div style={{ fontSize: 13, color: 'var(--text-1)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{s.label}</div>
+                      <div style={{ fontSize: '0.8125rem', color: 'var(--text-1)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{s.label}</div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 3 }}>
-                        <span style={{ fontSize: 11, color: 'var(--text-3)' }}>{D.conName(s.con) || '—'}</span>
-                        <span style={{ fontSize: 11, color: col }}>· {days} 天后{kind === 'ember' ? '熄灭' : '到期'}</span>
+                        <span style={{ fontSize: '0.6875rem', color: 'var(--text-3)' }}>{D.conName(s.con) || '—'}</span>
+                        <span style={{ fontSize: '0.6875rem', color: col }}>· {days} 天后{kind === 'ember' ? '熄灭' : '到期'}</span>
                       </div>
                     </div>
                     <div style={{ width: 52, flex: 'none' }}><MemoryBar value={s.strength} height={4} fading={s.strength < 0.4} /></div>
                     {queued
-                      ? <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, flex: 'none', fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--gold)' }}>
+                      ? <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, flex: 'none', fontFamily: 'var(--font-mono)', fontSize: '0.6875rem', color: 'var(--gold)' }}>
                           <Icon name="check" size={12} color="var(--gold)" />已排入今日
                         </span>
                       : <Button size="sm" icon="repeat" onClick={() => queueToday(s.id)} style={{ flex: 'none' }}>排入复习</Button>}
@@ -590,7 +590,7 @@ function Checkup({ onClose, onOpenStar, onFocusCon, onFeynman, onReview }) {
               {/* 周标尺：周一为首行 */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: 3, flex: 'none' }}>
                 {['一', '', '三', '', '五', '', '日'].map((t, i) => (
-                  <span key={i} style={{ width: 12, height: 12, lineHeight: '12px', fontSize: 9, textAlign: 'center', color: 'var(--text-3)', fontFamily: 'var(--font-mono)' }}>{t}</span>
+                  <span key={i} style={{ width: 12, height: 12, lineHeight: '12px', fontSize: '0.5625rem', textAlign: 'center', color: 'var(--text-3)', fontFamily: 'var(--font-mono)' }}>{t}</span>
                 ))}
               </div>
               <div style={{ display: 'flex', gap: 3, minWidth: 0, overflowX: 'auto', paddingBottom: 2 }}>
@@ -619,11 +619,11 @@ function Checkup({ onClose, onOpenStar, onFocusCon, onFeynman, onReview }) {
               </div>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginTop: 12 }}>
-              <span style={{ fontSize: 10.5, color: 'var(--text-3)', marginRight: 3 }}>少</span>
+              <span style={{ fontSize: '0.65625rem', color: 'var(--text-3)', marginRight: 3 }}>少</span>
               {HEAT_ALPHA.map((a, i) => (
                 <span key={i} style={{ width: 10, height: 10, borderRadius: 2.5, background: heatBg(a) }} />
               ))}
-              <span style={{ fontSize: 10.5, color: 'var(--text-3)', marginLeft: 3 }}>多</span>
+              <span style={{ fontSize: '0.65625rem', color: 'var(--text-3)', marginLeft: 3 }}>多</span>
             </div>
             {/* 热力图的非视觉等价物：总数 + 最活跃的一天（格子不逐日进 Tab 序列） */}
             {(() => {
@@ -648,7 +648,7 @@ function Checkup({ onClose, onOpenStar, onFocusCon, onFeynman, onReview }) {
           <GlassPanel radius="lg" pad="none" style={{ padding: 18 }}>
             <SectionTitle icon="orbit" hint={cons.length ? '点击飞入该星域' : undefined}>各星域健康度</SectionTitle>
             {cons.length === 0 && (
-              <div style={{ padding: '24px 8px', textAlign: 'center', color: 'var(--text-3)', fontSize: 13, lineHeight: 1.8 }}>
+              <div style={{ padding: '24px 8px', textAlign: 'center', color: 'var(--text-3)', fontSize: '0.8125rem', lineHeight: 1.8 }}>
                 还没有星域。写下第一颗星，体检才有对象。
               </div>
             )}
@@ -660,11 +660,11 @@ function Checkup({ onClose, onOpenStar, onFocusCon, onFeynman, onReview }) {
                   style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '9px 10px', borderRadius: 'var(--r-md)', cursor: 'pointer', transition: 'background var(--dur-fast)' }}
                   onMouseEnter={e => { e.currentTarget.style.background = 'color-mix(in srgb, var(--star-blue) 8%, transparent)'; }}
                   onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; }}>
-                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, width: 92, flex: 'none', fontSize: 13, color: 'var(--text-2)' }}>
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, width: 92, flex: 'none', fontSize: '0.8125rem', color: 'var(--text-2)' }}>
                     <span style={{ width: 7, height: 7, borderRadius: '50%', background: c.color, boxShadow: `0 0 6px ${c.color}` }} />{c.name}
                   </span>
                   <div style={{ flex: 1 }}><MemoryBar value={c.avg} height={6} fading={c.avg < 0.4} /></div>
-                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12.5, color: c.avg < 0.4 ? 'var(--star-blue-dim)' : 'var(--text-2)', width: 34, textAlign: 'right' }}>{Math.round(c.avg * 100)}%</span>
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.78125rem', color: c.avg < 0.4 ? 'var(--star-blue-dim)' : 'var(--text-2)', width: 34, textAlign: 'right' }}>{Math.round(c.avg * 100)}%</span>
                   <Icon name="chevron-right" size={15} color="var(--text-3)" />
                 </div>
               ))}
@@ -683,7 +683,7 @@ function Checkup({ onClose, onOpenStar, onFocusCon, onFeynman, onReview }) {
             )}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
               {urgent.length === 0 && (
-                <div style={{ padding: '24px 0', textAlign: 'center', color: 'var(--text-3)', fontSize: 13 }}>
+                <div style={{ padding: '24px 0', textAlign: 'center', color: 'var(--text-3)', fontSize: '0.8125rem' }}>
                   {total === 0 ? '还没有星。回到星图写下第一颗，它会在需要时来这里等你。' : '没有到期的星，状态很好。'}
                 </div>
               )}
@@ -701,17 +701,17 @@ function Checkup({ onClose, onOpenStar, onFocusCon, onFeynman, onReview }) {
                     onMouseLeave={e => { e.currentTarget.style.background = 'rgba(120,150,205,0.05)'; }}>
                     <span style={{ width: 8, height: 8, borderRadius: '50%', flex: 'none', background: b.c, boxShadow: `0 0 7px ${b.c}` }} />
                     <div style={{ minWidth: 0, flex: 1 }}>
-                      <div style={{ fontSize: 13.5, color: 'var(--text-1)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{s.label}</div>
+                      <div style={{ fontSize: '0.84375rem', color: 'var(--text-1)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{s.label}</div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 3 }}>
                         <span style={{ width: 5, height: 5, borderRadius: '50%', background: D.conColor(s.con) }} />
-                        <span style={{ fontSize: 11, color: 'var(--text-3)' }}>{D.conName(s.con)}</span>
-                        <span style={{ fontSize: 11, color: b.c }}>· {b.t}</span>
+                        <span style={{ fontSize: '0.6875rem', color: 'var(--text-3)' }}>{D.conName(s.con)}</span>
+                        <span style={{ fontSize: '0.6875rem', color: b.c }}>· {b.t}</span>
                       </div>
                     </div>
-                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: overdue ? 'var(--danger)' : 'var(--text-3)', flex: 'none' }}>
+                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6875rem', color: overdue ? 'var(--danger)' : 'var(--text-3)', flex: 'none' }}>
                       {(s.props && s.props.nextReview) || '—'}
                     </span>
-                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12.5, color: b.c, width: 34, textAlign: 'right', flex: 'none' }}>{Math.round(s.strength * 100)}%</span>
+                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.78125rem', color: b.c, width: 34, textAlign: 'right', flex: 'none' }}>{Math.round(s.strength * 100)}%</span>
                   </div>
                 );
               })}
@@ -722,7 +722,7 @@ function Checkup({ onClose, onOpenStar, onFocusCon, onFeynman, onReview }) {
           <GlassPanel radius="lg" pad="none" style={{ padding: 18 }}>
             <SectionTitle icon="sparkles" hint={series.length ? '本周点亮 / 复习 / 变暗' : undefined}>近期点亮趋势</SectionTitle>
             {series.length === 0 && (
-              <div style={{ padding: '24px 0', textAlign: 'center', color: 'var(--text-3)', fontSize: 13 }}>
+              <div style={{ padding: '24px 0', textAlign: 'center', color: 'var(--text-3)', fontSize: '0.8125rem' }}>
                 还没有点亮记录。第一次「融会贯通」之后，这里会亮起来。
               </div>
             )}
@@ -746,12 +746,12 @@ function Checkup({ onClose, onOpenStar, onFocusCon, onFeynman, onReview }) {
               </svg>
               <div style={{ flex: 'none', width: 86, display: 'flex', flexDirection: 'column', gap: 10 }}>
                 <div>
-                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: 22, fontWeight: 200, color: netDelta >= 0 ? 'var(--gold)' : 'var(--star-blue-dim)', lineHeight: 1 }}>
+                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.375rem', fontWeight: 200, color: netDelta >= 0 ? 'var(--gold)' : 'var(--star-blue-dim)', lineHeight: 1 }}>
                     {netDelta >= 0 ? '+' : '−'}{Math.abs(netDelta).toFixed(2)}
                   </div>
                   <div style={{ ...HUD, marginTop: 4 }}>净光度</div>
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 5, fontSize: 11.5, color: 'var(--text-2)' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 5, fontSize: '0.71875rem', color: 'var(--text-2)' }}>
                   <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}><span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--gold)' }} />点亮 {igniteN}</span>
                   <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}><span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--star-blue)' }} />复习 {reviewN}</span>
                   <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}><span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--star-blue-dim)' }} />变暗 {dimN}</span>
@@ -765,7 +765,7 @@ function Checkup({ onClose, onOpenStar, onFocusCon, onFeynman, onReview }) {
           <GlassPanel radius="lg" pad="none" style={{ padding: 18 }}>
             <SectionTitle icon="compass" hint={weakCons.length ? '点击前往' : undefined}>薄弱星域建议</SectionTitle>
             {weakCons.length === 0 && (
-              <div style={{ padding: '24px 0', textAlign: 'center', color: 'var(--text-3)', fontSize: 13 }}>
+              <div style={{ padding: '24px 0', textAlign: 'center', color: 'var(--text-3)', fontSize: '0.8125rem' }}>
                 {cons.length === 0 ? '有了星域之后，这里会提醒你哪一片正在变暗。' : '各星域都还明亮，无需特别关注。'}
               </div>
             )}
@@ -774,12 +774,12 @@ function Checkup({ onClose, onOpenStar, onFocusCon, onFeynman, onReview }) {
                 <div key={c.id} style={{ borderRadius: 'var(--r-md)', border: '1px solid var(--glass-border)', background: 'rgba(120,150,205,0.05)', padding: '13px 14px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                     <span style={{ width: 8, height: 8, borderRadius: '50%', background: c.color, boxShadow: `0 0 7px ${c.color}` }} />
-                    <span style={{ fontSize: 14, color: 'var(--text-1)' }}>{c.name}</span>
-                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11.5, color: 'var(--star-blue-dim)' }}>{Math.round(c.avg * 100)}%</span>
+                    <span style={{ fontSize: '0.875rem', color: 'var(--text-1)' }}>{c.name}</span>
+                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.71875rem', color: 'var(--star-blue-dim)' }}>{Math.round(c.avg * 100)}%</span>
                     <div style={{ flex: 1 }} />
                     <Button variant="ghost" size="sm" icon="arrow-right" onClick={() => onFocusCon && onFocusCon(c.id)}>前往</Button>
                   </div>
-                  <div style={{ fontSize: 12, color: 'var(--text-2)', lineHeight: 1.65, marginTop: 8 }}>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--text-2)', lineHeight: 1.65, marginTop: 8 }}>
                     {c.dim} 颗星正在变暗{c.weakStar ? <>，最暗的是「<span onClick={() => onOpenStar && onOpenStar(c.weakStar.id)} role="button" tabIndex={0} className="sr-focus-ring" onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onOpenStar && onOpenStar(c.weakStar.id); } }} style={{ color: 'var(--star-blue)', cursor: 'pointer' }}>{c.weakStar.label}</span>」</> : null}。
                     建议优先回看这片星域，把光度找回来。
                   </div>

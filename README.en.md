@@ -5,7 +5,7 @@
 **Other apps store notes in a warehouse — Stellar Raft grows them in a living deep space of knowledge.**
 
 ![Node](https://img.shields.io/badge/Node-%E2%89%A5%2022.13-9fc6ff?style=flat-square&labelColor=05060f)
-![Tests](https://img.shields.io/badge/tests-366%20passing-ffd98a?style=flat-square&labelColor=05060f)
+![Tests](https://img.shields.io/badge/tests-370%20passing-ffd98a?style=flat-square&labelColor=05060f)
 ![Build](https://img.shields.io/badge/build-zero--config-9fc6ff?style=flat-square&labelColor=05060f)
 ![Components](https://img.shields.io/badge/components-18%20primitives-9fc6ff?style=flat-square&labelColor=05060f)
 ![Backend](https://img.shields.io/badge/backend-zero--dependency-ffd98a?style=flat-square&labelColor=05060f)
@@ -371,7 +371,7 @@ Layered bottom-up: design tokens → component library → app UI kit, with a ze
 | Styling | Native CSS design tokens · glassmorphism · dual `data-theme` themes |
 | Memory | FSRS-lite (`R = exp(−Δt/S)`) |
 | Backend | Node ≥ 22.13 built-in `node:sqlite` (zero third-party deps) |
-| Tests | `node --test` (30 suites, 366 tests) · oxlint |
+| Tests | `node --test` (30 suites, 370 tests) · oxlint |
 
 ---
 
@@ -411,7 +411,7 @@ stellar-raft/
 | Command | What it does |
 | --- | --- |
 | `npm run serve` | Start the local backend + static hosting (`server/server.js`) |
-| `npm test` | Run `node --test` — 30 suites, 366 tests |
+| `npm test` | Run `node --test` — 30 suites, 370 tests |
 | `npm run build` | Rebuild `_ds_bundle.js` + `_ds_manifest.json` from source |
 | `npm run build:check` | Detect drift between artifacts and source (for CI) |
 | `npm run lint` | Run oxlint against the derived rule config (full `correctness` category + `no-undef`, across server / ui_kits / components / tests / docs) |

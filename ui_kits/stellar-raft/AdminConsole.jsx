@@ -78,7 +78,7 @@ function useAdminData(path, deps) {
 /* ============================ 通用零件 ============================ */
 
 const panel = { borderRadius: 'var(--r-lg)', border: '1px solid var(--glass-border)', background: 'var(--glass-bg-faint)' };
-const hud = { fontSize: 10, letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: 'var(--text-3)', fontFamily: 'var(--font-mono)' };
+const hud = { fontSize: '0.625rem', letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: 'var(--text-3)', fontFamily: 'var(--font-mono)' };
 
 /* 统计卡：一个大数字 + 一行注解。tone 决定数字的色温——
    gold 用于「有分量的成果」（点亮的星、管理员），blue 是常规读数，
@@ -93,10 +93,10 @@ function StatCard({ icon, label, value, unit, sub, tone, wide }) {
         <span style={hud}>{label}</span>
       </div>
       <div style={{ display: 'flex', alignItems: 'baseline', gap: 5 }}>
-        <span style={{ fontSize: 27, fontWeight: 300, color, textShadow: glow, fontFamily: 'var(--font-sans)', lineHeight: 1.1 }}>{value}</span>
-        {unit && <span style={{ fontSize: 12, color: 'var(--text-3)' }}>{unit}</span>}
+        <span style={{ fontSize: '1.6875rem', fontWeight: 300, color, textShadow: glow, fontFamily: 'var(--font-sans)', lineHeight: 1.1 }}>{value}</span>
+        {unit && <span style={{ fontSize: '0.75rem', color: 'var(--text-3)' }}>{unit}</span>}
       </div>
-      {sub && <div style={{ fontSize: 11.5, color: 'var(--text-2)', marginTop: 7, lineHeight: 1.5 }}>{sub}</div>}
+      {sub && <div style={{ fontSize: '0.71875rem', color: 'var(--text-2)', marginTop: 7, lineHeight: 1.5 }}>{sub}</div>}
     </div>
   );
 }
@@ -106,8 +106,8 @@ function SectionHead({ icon, title, note, right }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 13 }}>
       <Icon name={icon} size={15} color="var(--star-blue)" />
-      <span style={{ fontSize: 14.5, color: 'var(--text-1)', fontWeight: 300 }}>{title}</span>
-      {note && <span style={{ fontSize: 12, color: 'var(--text-3)' }}>{note}</span>}
+      <span style={{ fontSize: '0.90625rem', color: 'var(--text-1)', fontWeight: 300 }}>{title}</span>
+      {note && <span style={{ fontSize: '0.75rem', color: 'var(--text-3)' }}>{note}</span>}
       <div style={{ flex: 1 }} />
       {right}
     </div>
@@ -146,14 +146,14 @@ function Empty({ icon, text }) {
   return (
     <div style={{ padding: '46px 20px', textAlign: 'center', color: 'var(--text-3)' }}>
       <Icon name={icon || 'telescope'} size={26} color="var(--text-disabled)" />
-      <div style={{ fontSize: 13, marginTop: 12, lineHeight: 1.6 }}>{text}</div>
+      <div style={{ fontSize: '0.8125rem', marginTop: 12, lineHeight: 1.6 }}>{text}</div>
     </div>
   );
 }
 
 function Loading({ text }) {
   return (
-    <div style={{ padding: '46px 20px', textAlign: 'center', color: 'var(--text-3)', fontSize: 13 }}>
+    <div style={{ padding: '46px 20px', textAlign: 'center', color: 'var(--text-3)', fontSize: '0.8125rem' }}>
       <span className="sr-admin-pulse">{text || '正在读取星港状态…'}</span>
     </div>
   );
@@ -163,9 +163,9 @@ function Loading({ text }) {
 function Row({ k, v, mono, tone }) {
   return (
     <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: 14, padding: '7px 0', borderBottom: '1px solid var(--line)' }}>
-      <span style={{ fontSize: 12.5, color: 'var(--text-3)', flex: 'none' }}>{k}</span>
+      <span style={{ fontSize: '0.78125rem', color: 'var(--text-3)', flex: 'none' }}>{k}</span>
       <span style={{
-        fontSize: 12.5, color: tone === 'danger' ? 'var(--danger)' : tone === 'gold' ? 'var(--gold)' : 'var(--text-1)',
+        fontSize: '0.78125rem', color: tone === 'danger' ? 'var(--danger)' : tone === 'gold' ? 'var(--gold)' : 'var(--text-1)',
         fontFamily: mono ? 'var(--font-mono)' : 'var(--font-sans)', textAlign: 'right', wordBreak: 'break-all',
       }}>{v}</span>
     </div>
@@ -185,7 +185,7 @@ function SplitBar({ parts }) {
       </div>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px 14px', marginTop: 9 }}>
         {parts.map((p, i) => (
-          <span key={i} style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: 11.5, color: 'var(--text-2)' }}>
+          <span key={i} style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: '0.71875rem', color: 'var(--text-2)' }}>
             <span style={{ width: 6, height: 6, borderRadius: '50%', background: p.color, flex: 'none' }} />
             {p.label} <span style={{ color: 'var(--text-1)', fontFamily: 'var(--font-mono)' }}>{num(p.value)}</span>
           </span>
@@ -205,7 +205,7 @@ function TrendBars({ buckets, field, color, label }) {
     <div style={{ flex: '1 1 220px', minWidth: 0 }}>
       <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 9 }}>
         <span style={hud}>{label}</span>
-        <span style={{ fontSize: 12, color: 'var(--text-2)', fontFamily: 'var(--font-mono)' }}>
+        <span style={{ fontSize: '0.75rem', color: 'var(--text-2)', fontFamily: 'var(--font-mono)' }}>
           {num(total)} <span style={{ color: 'var(--text-3)' }}>· 峰值 {peak}</span>
         </span>
       </div>
@@ -224,7 +224,7 @@ function TrendBars({ buckets, field, color, label }) {
           );
         })}
       </div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 6, fontSize: 10, color: 'var(--text-3)', fontFamily: 'var(--font-mono)' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 6, fontSize: '0.625rem', color: 'var(--text-3)', fontFamily: 'var(--font-mono)' }}>
         <span>{buckets[0] && buckets[0].day.slice(5)}</span>
         <span>今天</span>
       </div>
@@ -243,7 +243,7 @@ function AdmPager({ d, page, onGo, unit = '条' }) {
     <div className="sr-adm-pager" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginTop: 16 }}>
       <IconButton name="chevrons-left" title="第一页" disabled={page <= 1} onClick={() => onGo(1)} />
       <IconButton name="chevron-left" title="上一页" disabled={page <= 1} onClick={() => onGo(page - 1)} />
-      <span style={{ fontSize: 12.5, color: 'var(--text-2)', fontFamily: 'var(--font-mono)', minWidth: 92, textAlign: 'center' }}>
+      <span style={{ fontSize: '0.78125rem', color: 'var(--text-2)', fontFamily: 'var(--font-mono)', minWidth: 92, textAlign: 'center' }}>
         {page} / {d.pages}
         <span style={{ color: 'var(--text-3)' }}> · {d.total} {unit}</span>
       </span>
@@ -454,13 +454,13 @@ function UserRow({ u, meId, open, onToggle, onChanged }) {
           <Avatar user={u} />
           <div style={{ minWidth: 0 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 7, minWidth: 0 }}>
-              <span style={{ fontSize: 13.5, color: 'var(--text-1)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+              <span style={{ fontSize: '0.84375rem', color: 'var(--text-1)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                 {u.username || u.name}
               </span>
               <UserBadges u={u} />
               {self && <Badge tone="blue">你</Badge>}
             </div>
-            <div style={{ fontSize: 11.5, color: 'var(--text-3)', marginTop: 2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+            <div style={{ fontSize: '0.71875rem', color: 'var(--text-3)', marginTop: 2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
               {u.username ? u.name : '未注册'}{u.email ? ' · ' + u.email : ''} · #{u.id}
             </div>
           </div>
@@ -469,28 +469,28 @@ function UserRow({ u, meId, open, onToggle, onChanged }) {
         <div className="sr-adm-cell" data-k="星空" style={{ width: 118, flex: 'none' }}>
           {u.stars ? (
             <>
-              <div style={{ fontSize: 12.5, color: 'var(--text-1)', fontFamily: 'var(--font-mono)' }}>
-                {u.stars} <span style={{ color: 'var(--text-3)', fontSize: 11 }}>颗</span>
+              <div style={{ fontSize: '0.78125rem', color: 'var(--text-1)', fontFamily: 'var(--font-mono)' }}>
+                {u.stars} <span style={{ color: 'var(--text-3)', fontSize: '0.6875rem' }}>颗</span>
                 {!!u.lit && <span style={{ color: 'var(--gold)', marginLeft: 6 }}>{u.lit} 亮</span>}
               </div>
-              <div style={{ fontSize: 11, color: 'var(--text-3)', marginTop: 2 }}>{u.constellations} 个星域</div>
+              <div style={{ fontSize: '0.6875rem', color: 'var(--text-3)', marginTop: 2 }}>{u.constellations} 个星域</div>
             </>
-          ) : <span style={{ fontSize: 12, color: 'var(--text-disabled)' }}>空</span>}
+          ) : <span style={{ fontSize: '0.75rem', color: 'var(--text-disabled)' }}>空</span>}
         </div>
 
         {/* 来源 IP：最近一次请求的地址，与建档地址不同时把原始地址也带出来 */}
         <div className="sr-adm-cell" data-k="IP" style={{ width: 112, flex: 'none', minWidth: 0 }}>
-          <div style={{ fontSize: 11.5, fontFamily: 'var(--font-mono)', color: u.lastIp ? 'var(--text-2)' : 'var(--text-disabled)', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+          <div style={{ fontSize: '0.71875rem', fontFamily: 'var(--font-mono)', color: u.lastIp ? 'var(--text-2)' : 'var(--text-disabled)', overflow: 'hidden', textOverflow: 'ellipsis' }}>
             {u.lastIp || '—'}
           </div>
           {u.ip && u.lastIp && u.ip !== u.lastIp && (
-            <div style={{ fontSize: 10.5, fontFamily: 'var(--font-mono)', color: 'var(--text-3)', marginTop: 2, overflow: 'hidden', textOverflow: 'ellipsis' }}>建档 {u.ip}</div>
+            <div style={{ fontSize: '0.65625rem', fontFamily: 'var(--font-mono)', color: 'var(--text-3)', marginTop: 2, overflow: 'hidden', textOverflow: 'ellipsis' }}>建档 {u.ip}</div>
           )}
         </div>
 
-        <div className="sr-adm-cell" data-k="活跃" style={{ width: 92, flex: 'none', fontSize: 12, color: 'var(--text-2)' }}>{ago(u.lastSeen)}</div>
+        <div className="sr-adm-cell" data-k="活跃" style={{ width: 92, flex: 'none', fontSize: '0.75rem', color: 'var(--text-2)' }}>{ago(u.lastSeen)}</div>
 
-        <div className="sr-adm-cell" data-k="会话" style={{ width: 62, flex: 'none', textAlign: 'right', fontSize: 12, color: u.sessions ? 'var(--star-blue)' : 'var(--text-disabled)', fontFamily: 'var(--font-mono)' }}>
+        <div className="sr-adm-cell" data-k="会话" style={{ width: 62, flex: 'none', textAlign: 'right', fontSize: '0.75rem', color: u.sessions ? 'var(--star-blue)' : 'var(--text-disabled)', fontFamily: 'var(--font-mono)' }}>
           {u.sessions || '—'}
         </div>
 
@@ -565,7 +565,7 @@ function UserDetail({ user, meId, onChanged }) {
                 <Row k="快照体积" v={bytes(d.galaxy.snapshotBytes)} mono />
                 <Row k="最后同步" v={`${ago(d.galaxy.updatedAt)} · v${d.galaxy.version}`} />
               </>
-            ) : <div style={{ fontSize: 12.5, color: 'var(--text-3)', padding: '6px 0 14px' }}>还没有存过任何星空。</div>}
+            ) : <div style={{ fontSize: '0.78125rem', color: 'var(--text-3)', padding: '6px 0 14px' }}>还没有存过任何星空。</div>}
 
             <div style={{ ...hud, margin: '16px 0 8px' }}>账号</div>
             <Row k="加入时间" v={fullTime(d.user.createdAt)} />
@@ -616,7 +616,7 @@ function UserDetail({ user, meId, onChanged }) {
                     onClick={() => setDialog('delete')}>删除账号</Button>
                 </>
               )}
-              {self && <div style={{ fontSize: 11.5, color: 'var(--text-3)', lineHeight: 1.6, marginTop: 4 }}>这是你自己的账号——停用、删除与角色变更都不对自己开放。</div>}
+              {self && <div style={{ fontSize: '0.71875rem', color: 'var(--text-3)', lineHeight: 1.6, marginTop: 4 }}>这是你自己的账号——停用、删除与角色变更都不对自己开放。</div>}
             </div>
           </div>
         </div>
@@ -636,7 +636,7 @@ function UserDetail({ user, meId, onChanged }) {
             <div>
               <div style={{ ...hud, marginBottom: 6 }}>用户名（登录用）</div>
               <Input value={username} onChange={(e) => setUsername(e.target.value)} placeholder="用户名" />
-              <div style={{ fontSize: 11.5, color: 'var(--text-3)', marginTop: 6, lineHeight: 1.6 }}>改动用户名后，对方要用新的用户名登录。</div>
+              <div style={{ fontSize: '0.71875rem', color: 'var(--text-3)', marginTop: 6, lineHeight: 1.6 }}>改动用户名后，对方要用新的用户名登录。</div>
             </div>
           )}
         </div>
@@ -645,7 +645,7 @@ function UserDetail({ user, meId, onChanged }) {
       <Modal open={dialog === 'password'} onClose={close} title="重置密码" icon="key-round" width={420}
         footer={<><Button variant="ghost" onClick={close}>取消</Button>
           <Button variant="primary" disabled={busy || pw.length < 6} onClick={() => act('password', { password: pw }, '密码已重置，该账号全部会话已断开')}>重置</Button></>}>
-        <div style={{ fontSize: 12.5, color: 'var(--text-2)', lineHeight: 1.7, marginBottom: 12 }}>
+        <div style={{ fontSize: '0.78125rem', color: 'var(--text-2)', lineHeight: 1.7, marginBottom: 12 }}>
           给 <b style={{ color: 'var(--text-1)' }}>{user.username || user.name}</b> 设一个新密码。旧的登录会话会全部断开，需要用新密码重新登录。
         </div>
         <Input type="password" icon="lock" value={pw} onChange={(e) => setPw(e.target.value)} placeholder="新密码（至少 6 位）" autoFocus />
@@ -654,7 +654,7 @@ function UserDetail({ user, meId, onChanged }) {
       <Modal open={dialog === 'revoke'} onClose={close} title="强制下线" icon="log-out" width={400}
         footer={<><Button variant="ghost" onClick={close}>取消</Button>
           <Button variant="primary" disabled={busy} onClick={() => act('revoke', {}, '已断开该账号的全部登录')}>断开全部会话</Button></>}>
-        <div style={{ fontSize: 12.5, color: 'var(--text-2)', lineHeight: 1.7 }}>
+        <div style={{ fontSize: '0.78125rem', color: 'var(--text-2)', lineHeight: 1.7 }}>
           断开 <b style={{ color: 'var(--text-1)' }}>{user.username || user.name}</b> 在所有设备上的登录。
           对方下次操作时会被要求重新登录，星空数据不受影响。
         </div>
@@ -664,7 +664,7 @@ function UserDetail({ user, meId, onChanged }) {
         footer={<><Button variant="ghost" onClick={close}>取消</Button>
           <Button variant="primary" disabled={busy}
             onClick={() => act('role', { role: user.role === 'admin' ? 'user' : 'admin' }, user.role === 'admin' ? '已撤销管理员' : '已任命为管理员')}>确认</Button></>}>
-        <div style={{ fontSize: 12.5, color: 'var(--text-2)', lineHeight: 1.7 }}>
+        <div style={{ fontSize: '0.78125rem', color: 'var(--text-2)', lineHeight: 1.7 }}>
           {user.role === 'admin'
             ? <>撤销后 <b style={{ color: 'var(--text-1)' }}>{user.username}</b> 将失去管理台的全部权限，账号与星空保持原样。</>
             : <><b style={{ color: 'var(--text-1)' }}>{user.username}</b> 将能进入星港管理台，看到全站数据，并能停用或删除其他账号——这份权柄只交给你信得过的人。</>}
@@ -674,7 +674,7 @@ function UserDetail({ user, meId, onChanged }) {
       <Modal open={dialog === 'ban'} onClose={close} title="停用账号" icon="user-x" width={430}
         footer={<><Button variant="ghost" onClick={close}>取消</Button>
           <Button variant="primary" disabled={busy} onClick={() => act('ban', { banned: true, reason }, '账号已停用')}>停用</Button></>}>
-        <div style={{ fontSize: 12.5, color: 'var(--text-2)', lineHeight: 1.7, marginBottom: 12 }}>
+        <div style={{ fontSize: '0.78125rem', color: 'var(--text-2)', lineHeight: 1.7, marginBottom: 12 }}>
           停用后 <b style={{ color: 'var(--text-1)' }}>{user.username || user.name}</b> 立刻被踢下线且无法再登录，会看到你写的这句理由。
           星空数据完整保留，随时可以解除。
         </div>
@@ -684,7 +684,7 @@ function UserDetail({ user, meId, onChanged }) {
       <Modal open={dialog === 'unban'} onClose={close} title="解除停用" icon="user-check" width={400}
         footer={<><Button variant="ghost" onClick={close}>取消</Button>
           <Button variant="primary" disabled={busy} onClick={() => act('ban', { banned: false }, '已解除停用')}>解除</Button></>}>
-        <div style={{ fontSize: 12.5, color: 'var(--text-2)', lineHeight: 1.7 }}>
+        <div style={{ fontSize: '0.78125rem', color: 'var(--text-2)', lineHeight: 1.7 }}>
           恢复 <b style={{ color: 'var(--text-1)' }}>{user.username || user.name}</b> 的登录。对方需要重新登录一次。
         </div>
       </Modal>
@@ -693,10 +693,10 @@ function UserDetail({ user, meId, onChanged }) {
         footer={<><Button variant="ghost" onClick={close}>取消</Button>
           <Button variant="primary" disabled={busy || confirmText !== (user.username || user.name)}
             onClick={() => act('delete', { confirm: confirmText }, '账号与其全部数据已删除', true)}>永久删除</Button></>}>
-        <div style={{ fontSize: 12.5, color: 'var(--danger)', lineHeight: 1.7, marginBottom: 6 }}>
+        <div style={{ fontSize: '0.78125rem', color: 'var(--danger)', lineHeight: 1.7, marginBottom: 6 }}>
           这一步不可撤销，星图的黑洞也捞不回来。
         </div>
-        <div style={{ fontSize: 12.5, color: 'var(--text-2)', lineHeight: 1.7, marginBottom: 12 }}>
+        <div style={{ fontSize: '0.78125rem', color: 'var(--text-2)', lineHeight: 1.7, marginBottom: 12 }}>
           将连同这个账号的星系快照、分享密文、全部访问关系与星际来信一并抹除
           {user.stars ? <>——那是 <b style={{ color: 'var(--text-1)' }}>{user.stars} 颗星</b>。</> : '。'}
           若只是想让对方进不来，用「停用账号」，数据会留着。
@@ -714,8 +714,8 @@ function MiniStat({ label, value, tone }) {
       display: 'inline-flex', alignItems: 'baseline', gap: 5, padding: '5px 10px', borderRadius: 'var(--r-pill)',
       border: '1px solid var(--line-strong)', background: 'var(--input-bg, rgba(3,4,12,0.45))',
     }}>
-      <span style={{ fontSize: 14, fontFamily: 'var(--font-mono)', color: tone === 'gold' ? 'var(--gold)' : 'var(--text-1)' }}>{value}</span>
-      <span style={{ fontSize: 11, color: 'var(--text-3)' }}>{label}</span>
+      <span style={{ fontSize: '0.875rem', fontFamily: 'var(--font-mono)', color: tone === 'gold' ? 'var(--gold)' : 'var(--text-1)' }}>{value}</span>
+      <span style={{ fontSize: '0.6875rem', color: 'var(--text-3)' }}>{label}</span>
     </span>
   );
 }
@@ -779,7 +779,7 @@ function AdminGuests() {
       <section>
         <SectionHead icon="shield-alert" title="每个 IP 允许几个游客" />
         <div style={{ ...panel, padding: 17 }}>
-          <div style={{ fontSize: 12.5, color: 'var(--text-2)', lineHeight: 1.75, marginBottom: 14 }}>
+          <div style={{ fontSize: '0.78125rem', color: 'var(--text-2)', lineHeight: 1.75, marginBottom: 14 }}>
             超出限额的新访客会被挡在门外，并被请去登录或注册——注册之后账号不再算游客，
             这个 IP 的名额立刻释放。填 <b style={{ color: 'var(--text-1)' }}>0</b> 表示不限。
             {d && !d.trustProxy && (
@@ -801,7 +801,7 @@ function AdminGuests() {
               onClick={() => saveSite({ guestPerIp: Number(perIp) || 0 }, Number(perIp) > 0 ? `每 IP 最多 ${Number(perIp)} 个游客` : '已取消游客限额')}>
               保存
             </Button>
-            <span style={{ fontSize: 11.5, color: 'var(--text-3)' }}>
+            <span style={{ fontSize: '0.71875rem', color: 'var(--text-3)' }}>
               {site ? (site.guestPerIp > 0 ? `当前：每 IP ${site.guestPerIp} 个` : '当前：不限') : ''}
             </span>
           </div>
@@ -816,8 +816,8 @@ function AdminGuests() {
             <div key={g.id} style={{ display: 'flex', alignItems: 'center', gap: 14, padding: '13px 0', borderBottom: i === GATE_ITEMS.length - 1 ? 'none' : '1px solid var(--line)' }}>
               <Icon name={g.icon} size={15} color={site && site.guestGates[g.id] ? 'var(--gold)' : 'var(--text-3)'} />
               <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ fontSize: 13.5, color: 'var(--text-1)' }}>{g.label}</div>
-                <div style={{ fontSize: 11.5, color: 'var(--text-3)', marginTop: 3, lineHeight: 1.55 }}>{g.note}</div>
+                <div style={{ fontSize: '0.84375rem', color: 'var(--text-1)' }}>{g.label}</div>
+                <div style={{ fontSize: '0.71875rem', color: 'var(--text-3)', marginTop: 3, lineHeight: 1.55 }}>{g.note}</div>
               </div>
               <Switch checked={!!(site && site.guestGates[g.id])} disabled={busy || !site}
                 onChange={(v) => saveSite({ guestGates: { [g.id]: v } }, v ? `「${g.label}」现在需要账号` : `「${g.label}」已对游客开放`)}
@@ -851,15 +851,15 @@ function AdminGuests() {
                     onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setOpenIp(open ? null : r.ip); } }}
                     style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 16px', cursor: 'pointer', background: open ? 'rgba(159,198,255,0.06)' : 'transparent' }}>
                     <span className="sr-adm-cell"><Icon name="network" size={15} color={full ? 'var(--gold)' : 'var(--star-blue)'} /></span>
-                    <span className="sr-adm-cell sr-adm-name" style={{ flex: '1 1 140px', minWidth: 0, fontFamily: 'var(--font-mono)', fontSize: 13, color: 'var(--text-1)' }}>{r.ip}</span>
-                    <span className="sr-adm-cell" style={{ width: 92, flex: 'none', fontSize: 12, color: 'var(--text-2)' }}>
+                    <span className="sr-adm-cell sr-adm-name" style={{ flex: '1 1 140px', minWidth: 0, fontFamily: 'var(--font-mono)', fontSize: '0.8125rem', color: 'var(--text-1)' }}>{r.ip}</span>
+                    <span className="sr-adm-cell" style={{ width: 92, flex: 'none', fontSize: '0.75rem', color: 'var(--text-2)' }}>
                       {r.count} 个游客{full && <span style={{ color: 'var(--gold)' }}> · 满</span>}
                     </span>
-                    <span className="sr-adm-cell" style={{ width: 76, flex: 'none', fontSize: 12, color: r.stars ? 'var(--text-2)' : 'var(--text-disabled)' }}>{r.stars} 颗星</span>
-                    <span className="sr-adm-cell" style={{ width: 84, flex: 'none', fontSize: 12, color: r.zombies ? 'var(--gold)' : 'var(--text-disabled)' }}>
+                    <span className="sr-adm-cell" style={{ width: 76, flex: 'none', fontSize: '0.75rem', color: r.stars ? 'var(--text-2)' : 'var(--text-disabled)' }}>{r.stars} 颗星</span>
+                    <span className="sr-adm-cell" style={{ width: 84, flex: 'none', fontSize: '0.75rem', color: r.zombies ? 'var(--gold)' : 'var(--text-disabled)' }}>
                       {r.zombies ? r.zombies + ' 个空' : '—'}
                     </span>
-                    <span className="sr-adm-cell" style={{ width: 96, flex: 'none', fontSize: 12, color: 'var(--text-3)', textAlign: 'right' }}>{ago(r.lastSeen)}</span>
+                    <span className="sr-adm-cell" style={{ width: 96, flex: 'none', fontSize: '0.75rem', color: 'var(--text-3)', textAlign: 'right' }}>{ago(r.lastSeen)}</span>
                     <span className="sr-adm-cell" style={{ width: 26, flex: 'none', display: 'flex', justifyContent: 'flex-end' }}>
                       <Icon name={open ? 'chevron-up' : 'chevron-down'} size={15} color="var(--text-3)" />
                     </span>
@@ -870,13 +870,13 @@ function AdminGuests() {
                       {r.guests.map(g => (
                         <div key={g.id} className="sr-adm-row" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '9px 0', borderBottom: '1px solid var(--line)' }}>
                           <span className="sr-adm-cell"><Avatar user={g} size={24} /></span>
-                          <span className="sr-adm-cell sr-adm-name" style={{ flex: 1, minWidth: 0, fontSize: 12.5, color: 'var(--text-1)' }}>
+                          <span className="sr-adm-cell sr-adm-name" style={{ flex: 1, minWidth: 0, fontSize: '0.78125rem', color: 'var(--text-1)' }}>
                             {g.name} <span style={{ color: 'var(--text-3)' }}>#{g.id}</span>
                             {g.zombie && <span style={{ color: 'var(--text-3)' }}> · 空账号</span>}
                             {g.banned && <span style={{ color: 'var(--danger)' }}> · 已停用</span>}
                           </span>
-                          <span className="sr-adm-cell" style={{ width: 70, flex: 'none', fontSize: 12, color: g.stars ? 'var(--text-2)' : 'var(--text-disabled)' }}>{g.stars} 颗星</span>
-                          <span className="sr-adm-cell" style={{ width: 92, flex: 'none', fontSize: 12, color: 'var(--text-3)', textAlign: 'right' }}>{ago(g.lastSeen || g.createdAt)}</span>
+                          <span className="sr-adm-cell" style={{ width: 70, flex: 'none', fontSize: '0.75rem', color: g.stars ? 'var(--text-2)' : 'var(--text-disabled)' }}>{g.stars} 颗星</span>
+                          <span className="sr-adm-cell" style={{ width: 92, flex: 'none', fontSize: '0.75rem', color: 'var(--text-3)', textAlign: 'right' }}>{ago(g.lastSeen || g.createdAt)}</span>
                         </div>
                       ))}
                       <div style={{ display: 'flex', gap: 9, marginTop: 12, alignItems: 'center' }}>
@@ -884,7 +884,7 @@ function AdminGuests() {
                           onClick={() => setPurge({ ip: r.ip })}>
                           {r.zombies ? `清理这个 IP 的 ${r.zombies} 个空游客` : '没有可清理的空账号'}
                         </Button>
-                        <span style={{ fontSize: 11.5, color: 'var(--text-3)' }}>存过星空的账号不在清理范围内</span>
+                        <span style={{ fontSize: '0.71875rem', color: 'var(--text-3)' }}>存过星空的账号不在清理范围内</span>
                       </div>
                     </div>
                   )}
@@ -898,7 +898,7 @@ function AdminGuests() {
       <Modal open={!!purge} onClose={() => setPurge(null)} title="清理空游客" icon="brush-cleaning" width={430}
         footer={<><Button variant="ghost" onClick={() => setPurge(null)}>取消</Button>
           <Button variant="primary" disabled={busy} onClick={runPurge}>清理</Button></>}>
-        <div style={{ fontSize: 12.5, color: 'var(--text-2)', lineHeight: 1.75 }}>
+        <div style={{ fontSize: '0.78125rem', color: 'var(--text-2)', lineHeight: 1.75 }}>
           将删除{purge && purge.ip ? <> <b style={{ color: 'var(--text-1)' }}>{purge.ip}</b> 下</> : '全站'}
           <b style={{ color: 'var(--text-1)' }}>从没存过任何星系、且 7 天没有露面</b>的匿名账号。
           <br />存过星空的游客一个都不会动——哪怕只有一颗星。
@@ -931,7 +931,7 @@ function AdminShares() {
     <div>
       <SectionHead icon="share-2" title="星系分享" note={d ? `${open.length} 片星系正对外开放` : undefined}
         right={<IconButton name="refresh-cw" title="刷新" onClick={reload} />} />
-      <div style={{ fontSize: 12, color: 'var(--text-3)', lineHeight: 1.7, marginBottom: 14 }}>
+      <div style={{ fontSize: '0.75rem', color: 'var(--text-3)', lineHeight: 1.7, marginBottom: 14 }}>
         分享由星系主人自己开启。这里能看到谁开着、开到什么程度，必要时可以强制关闭——
         密文会保留，主人随时能自己再打开。
       </div>
@@ -945,13 +945,13 @@ function AdminShares() {
             <div key={r.userId} className="sr-adm-row" style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 16px', borderBottom: i === rows.length - 1 ? 'none' : '1px solid var(--line)' }}>
               <span className="sr-adm-cell"><Avatar user={r} /></span>
               <div className="sr-adm-cell sr-adm-name" style={{ flex: '1 1 160px', minWidth: 0 }}>
-                <div style={{ fontSize: 13.5, color: 'var(--text-1)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{r.username || r.name}</div>
-                <div style={{ fontSize: 11.5, color: 'var(--text-3)', marginTop: 2 }}>
+                <div style={{ fontSize: '0.84375rem', color: 'var(--text-1)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{r.username || r.name}</div>
+                <div style={{ fontSize: '0.71875rem', color: 'var(--text-3)', marginTop: 2 }}>
                   {r.enabled ? (r.visibility === 'outline' ? '星名 + 标签 + 大纲' : '仅星名与星域') : '已关闭'}
                 </div>
               </div>
-              <span className="sr-adm-cell" data-k="密文" style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: r.enabled ? 'var(--gold)' : 'var(--text-disabled)', flex: 'none' }}>{r.code}</span>
-              <span className="sr-adm-cell" style={{ width: 76, flex: 'none', textAlign: 'right', fontSize: 12, color: 'var(--text-2)' }}>{r.visitors} 位访客</span>
+              <span className="sr-adm-cell" data-k="密文" style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: r.enabled ? 'var(--gold)' : 'var(--text-disabled)', flex: 'none' }}>{r.code}</span>
+              <span className="sr-adm-cell" style={{ width: 76, flex: 'none', textAlign: 'right', fontSize: '0.75rem', color: 'var(--text-2)' }}>{r.visitors} 位访客</span>
               <span className="sr-adm-cell" style={{ width: 92, flex: 'none', display: 'flex', justifyContent: 'flex-end' }}>
                 {r.enabled
                   ? <Button variant="ghost" size="sm" icon="eye-off" onClick={() => setClosing(r)}>关闭</Button>
@@ -968,7 +968,7 @@ function AdminShares() {
       <Modal open={!!closing} onClose={() => setClosing(null)} title="强制关闭分享" icon="eye-off" width={420}
         footer={<><Button variant="ghost" onClick={() => setClosing(null)}>取消</Button>
           <Button variant="primary" onClick={() => close(closing)}>关闭分享</Button></>}>
-        <div style={{ fontSize: 12.5, color: 'var(--text-2)', lineHeight: 1.7 }}>
+        <div style={{ fontSize: '0.78125rem', color: 'var(--text-2)', lineHeight: 1.7 }}>
           关闭后，持有密文的访客将无法再造访 <b style={{ color: 'var(--text-1)' }}>{closing && (closing.username || closing.name)}</b> 的星系。
           密文本身保留，主人可以在自己的设置里重新开启。
         </div>
@@ -987,7 +987,7 @@ function AdminSessions() {
     <div>
       <SectionHead icon="monitor-smartphone" title="登录会话" note={d ? `${d.total} 个活跃会话` : undefined}
         right={<IconButton name="refresh-cw" title="刷新" onClick={reload} />} />
-      <div style={{ fontSize: 12, color: 'var(--text-3)', lineHeight: 1.7, marginBottom: 14 }}>
+      <div style={{ fontSize: '0.75rem', color: 'var(--text-3)', lineHeight: 1.7, marginBottom: 14 }}>
         每一行是一台登录过的设备。令牌只显示一小段指纹（完整令牌永不出库）；
         要断开某个人的登录，去「旅客」里对他用「强制下线」。
       </div>
@@ -1006,16 +1006,16 @@ function AdminSessions() {
               <span className="sr-adm-cell"><Avatar user={s} size={26} /></span>
               <div className="sr-adm-cell sr-adm-name" style={{ flex: '1 1 160px', minWidth: 0 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
-                  <span style={{ fontSize: 13, color: 'var(--text-1)' }}>{s.username || s.name}</span>
+                  <span style={{ fontSize: '0.8125rem', color: 'var(--text-1)' }}>{s.username || s.name}</span>
                   {s.role === 'admin' && <Badge tone="gold">管理员</Badge>}
                   {s.current && <Badge tone="blue">当前设备</Badge>}
                 </div>
-                <div style={{ fontSize: 11.5, color: 'var(--text-3)', marginTop: 2, fontFamily: 'var(--font-mono)' }}>
+                <div style={{ fontSize: '0.71875rem', color: 'var(--text-3)', marginTop: 2, fontFamily: 'var(--font-mono)' }}>
                   {s.fingerprint}{s.ip ? ' · ' + s.ip : ''}
                 </div>
               </div>
-              <span className="sr-adm-cell" style={{ width: 120, flex: 'none', fontSize: 12, color: 'var(--text-2)' }}>活跃于 {ago(s.lastSeen)}</span>
-              <span className="sr-adm-cell" style={{ width: 130, flex: 'none', fontSize: 12, color: 'var(--text-3)', textAlign: 'right' }}>登录于 {ago(s.createdAt)}</span>
+              <span className="sr-adm-cell" style={{ width: 120, flex: 'none', fontSize: '0.75rem', color: 'var(--text-2)' }}>活跃于 {ago(s.lastSeen)}</span>
+              <span className="sr-adm-cell" style={{ width: 130, flex: 'none', fontSize: '0.75rem', color: 'var(--text-3)', textAlign: 'right' }}>登录于 {ago(s.createdAt)}</span>
             </div>
           ))}
         </div>
@@ -1088,7 +1088,7 @@ function AdminBroadcast() {
           <div style={{ ...hud, margin: '18px 0 8px' }}>预览</div>
           {text.trim()
             ? <AnnouncementBanner announcement={{ text: text.trim(), tone }} preview />
-            : <div style={{ fontSize: 12, color: 'var(--text-disabled)', padding: '10px 0' }}>写点什么，这里会显示用户看到的样子。</div>}
+            : <div style={{ fontSize: '0.75rem', color: 'var(--text-disabled)', padding: '10px 0' }}>写点什么，这里会显示用户看到的样子。</div>}
 
           <div style={{ display: 'flex', gap: 10, marginTop: 16 }}>
             <Button variant="primary" size="sm" icon="send" disabled={busy}
@@ -1100,7 +1100,7 @@ function AdminBroadcast() {
                 onClick={() => { setEnabled(false); save({ announcement: { text, tone, enabled: false } }, '公告已撤下'); }}>撤下</Button>
             )}
             {d && d.announcement.updatedAt && (
-              <span style={{ fontSize: 11.5, color: 'var(--text-3)', alignSelf: 'center' }}>
+              <span style={{ fontSize: '0.71875rem', color: 'var(--text-3)', alignSelf: 'center' }}>
                 上次更新 {ago(d.announcement.updatedAt.replace('T', ' ').slice(0, 19))}
               </span>
             )}
@@ -1112,7 +1112,7 @@ function AdminBroadcast() {
       <section>
         <SectionHead icon="user-plus" title="新账号注册" />
         <div style={{ ...panel, padding: 17, display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
-          <div style={{ flex: '1 1 260px', fontSize: 12.5, color: 'var(--text-2)', lineHeight: 1.7 }}>
+          <div style={{ flex: '1 1 260px', fontSize: '0.78125rem', color: 'var(--text-2)', lineHeight: 1.7 }}>
             关闭后，新访客仍可以匿名试用星图，但无法注册成账号。已有账号不受影响。
           </div>
           <Switch checked={regOpen} onChange={(v) => { setRegOpen(v); save({ registrationOpen: v }, v ? '已开放注册' : '已关闭注册'); }}
@@ -1125,7 +1125,7 @@ function AdminBroadcast() {
         <SectionHead icon="construction" title="维护模式" />
         <div style={{ ...panel, padding: 17, border: maint ? '1px solid rgba(232,145,122,0.34)' : undefined }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
-            <div style={{ flex: '1 1 260px', fontSize: 12.5, color: 'var(--text-2)', lineHeight: 1.7 }}>
+            <div style={{ flex: '1 1 260px', fontSize: '0.78125rem', color: 'var(--text-2)', lineHeight: 1.7 }}>
               开启后，除管理员外所有人的请求都会被挡下并看到下面这句话。
               本地已经打开的星图仍能离线编辑，恢复后自动补写——不会丢数据。
             </div>
@@ -1142,7 +1142,7 @@ function AdminBroadcast() {
       <Modal open={confirmMaint} onClose={() => setConfirmMaint(false)} title="开启维护模式" icon="construction" width={430}
         footer={<><Button variant="ghost" onClick={() => setConfirmMaint(false)}>取消</Button>
           <Button variant="primary" onClick={() => { setMaint(true); setConfirmMaint(false); save({ maintenance: { enabled: true, message: maintMsg } }, '维护模式已开启'); }}>开启</Button></>}>
-        <div style={{ fontSize: 12.5, color: 'var(--text-2)', lineHeight: 1.7 }}>
+        <div style={{ fontSize: '0.78125rem', color: 'var(--text-2)', lineHeight: 1.7 }}>
           开启后，<b style={{ color: 'var(--text-1)' }}>除管理员外的所有人</b>都会被挡在门外，正在使用的人下一次同步就会看到维护提示。
           记得办完事回来关掉它。
         </div>
@@ -1219,7 +1219,7 @@ function AdminSystem() {
             <Button variant="secondary" size="sm" icon="brush-cleaning" disabled={!!busy}
               onClick={() => run('prune-sessions', (r) => r.removed ? `清掉 ${r.removed} 个过期会话` : '没有过期会话')}>扫掉过期会话</Button>
           </div>
-          <div style={{ fontSize: 11.5, color: 'var(--text-3)', lineHeight: 1.7, marginTop: 12 }}>
+          <div style={{ fontSize: '0.71875rem', color: 'var(--text-3)', lineHeight: 1.7, marginTop: 12 }}>
             备份会先把 WAL 收进主库，下载到的是一个可直接替换使用的完整 .db 文件。
             压缩（VACUUM）会重建整个数据库文件回收空洞，期间短暂阻塞写入——建议在没人用的时候做。
             90 天没露面的会话在下次被使用时就地失效，这里只是顺手把那些死行从表里扫掉——不点也不影响安全。
@@ -1268,7 +1268,7 @@ function AdminAudit() {
           <IconButton name="refresh-cw" title="刷新" onClick={reload} />
           <IconButton name="trash-2" title="清空日志" disabled={!d || !d.total} onClick={() => setClearing(true)} />
         </span>} />
-      <div style={{ fontSize: 12, color: 'var(--text-3)', lineHeight: 1.7, marginBottom: 14 }}>
+      <div style={{ fontSize: '0.75rem', color: 'var(--text-3)', lineHeight: 1.7, marginBottom: 14 }}>
         每一次停用、删号、改密与站点变更都留在这里，服务器只保留最近 2000 条。
       </div>
 
@@ -1283,13 +1283,13 @@ function AdminAudit() {
               <div key={e.id} style={{ display: 'flex', gap: 12, padding: '11px 0', borderBottom: i === rows.length - 1 ? 'none' : '1px solid var(--line)' }}>
                 <span style={{ flex: 'none', paddingTop: 1 }}><Icon name={a.i} size={14} color={a.c} /></span>
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontSize: 13, color: 'var(--text-1)', lineHeight: 1.5 }}>
+                  <div style={{ fontSize: '0.8125rem', color: 'var(--text-1)', lineHeight: 1.5 }}>
                     <b style={{ fontWeight: 400, color: 'var(--gold)' }}>{e.actor}</b>
                     <span style={{ color: 'var(--text-2)' }}> {a.t} </span>
                     {e.target && <b style={{ fontWeight: 400 }}>{e.target}</b>}
                     {e.detail && <span style={{ color: 'var(--text-3)' }}> · {e.detail}</span>}
                   </div>
-                  <div style={{ fontSize: 11.5, color: 'var(--text-3)', marginTop: 3 }}>{ago(e.at)} · {fullTime(e.at)}</div>
+                  <div style={{ fontSize: '0.71875rem', color: 'var(--text-3)', marginTop: 3 }}>{ago(e.at)} · {fullTime(e.at)}</div>
                 </div>
               </div>
             );
@@ -1302,7 +1302,7 @@ function AdminAudit() {
       <Modal open={clearing} onClose={() => setClearing(false)} title="清空操作日志" width={440}
         footer={<><Button variant="ghost" onClick={() => setClearing(false)}>取消</Button>
           <Button variant="danger" onClick={clearAll}>清空</Button></>}>
-        <div style={{ fontSize: 13, lineHeight: 1.8, color: 'var(--text-2)' }}>
+        <div style={{ fontSize: '0.8125rem', lineHeight: 1.8, color: 'var(--text-2)' }}>
           将删除全部 <b style={{ color: 'var(--text-1)' }}>{d ? d.total : 0}</b> 条留痕，不可撤销。
           <br />清空这件事本身会作为一条新日志记下来——审计日志不该被无声抹掉。
         </div>
@@ -1329,7 +1329,7 @@ function AnnouncementBanner({ announcement, onDismiss, preview }) {
       WebkitBackdropFilter: 'blur(var(--glass-blur))', backdropFilter: 'blur(var(--glass-blur))',
     }}>
       <Icon name={skin.icon} size={15} color={skin.c} />
-      <span style={{ flex: 1, minWidth: 0, fontSize: 12.5, color: 'var(--text-1)', lineHeight: 1.6 }}>{announcement.text}</span>
+      <span style={{ flex: 1, minWidth: 0, fontSize: '0.78125rem', color: 'var(--text-1)', lineHeight: 1.6 }}>{announcement.text}</span>
       {preview && <Badge tone="neutral">预览</Badge>}
       {onDismiss && <IconButton name="x" size="sm" title="知道了" onClick={onDismiss} />}
     </div>
@@ -1361,7 +1361,7 @@ html[data-screen="phone"] .sr-adm-row { flex-wrap: wrap !important; row-gap: 8px
 html[data-screen="phone"] .sr-adm-cell { width: auto !important; flex: 0 0 auto !important; text-align: left !important; }
 /* 每格前缀一个小标签，替代被隐去的表头 */
 html[data-screen="phone"] .sr-adm-cell[data-k]::before {
-  content: attr(data-k) ' '; font-family: var(--font-mono); font-size: 10px;
+  content: attr(data-k) ' '; font-family: var(--font-mono); font-size: 0.625rem;
   letter-spacing: var(--ls-hud); text-transform: uppercase; color: var(--text-3); margin-right: 4px;
 }
 /* 标签是内联的，可格子里的值有的是纯文本（活跃 / 会话）、有的是块级 <div>（星空 / IP）。
@@ -1379,7 +1379,7 @@ html[data-screen="phone"] .sr-adm-caret { margin-left: auto; }
 html[data-screen="phone"] .sr-adm-name > * { white-space: normal !important; }
 /* 页头：标题与「回到我的星图」在窄屏上下叠，别互相挤 */
 html[data-screen="phone"] .sr-adm-head-bar { flex-direction: column !important; align-items: stretch !important; gap: 10px !important; }
-html[data-screen="phone"] .sr-adm-head-bar h1 { font-size: 20px !important; }
+html[data-screen="phone"] .sr-adm-head-bar h1 { font-size: 1.25rem !important; }
 /* 分区切换在窄屏横向滚动，不折成三行 */
 html[data-screen="phone"] .sr-admin-tabs {
   flex-wrap: nowrap !important; overflow-x: auto; padding-bottom: 10px !important; margin-bottom: 12px !important;
@@ -1389,7 +1389,7 @@ html[data-screen="phone"] .sr-admin-tab { flex: none; }
 html[data-screen="phone"] .sr-adm-detail { flex-direction: column !important; }
 .sr-admin-tab { display: flex; align-items: center; gap: 7px; height: 32px; padding: 0 13px; cursor: pointer;
   border-radius: var(--r-pill); border: 1px solid transparent; background: transparent; color: var(--text-2);
-  font-size: 13px; font-family: var(--font-sans); white-space: nowrap;
+  font-size: 0.8125rem; font-family: var(--font-sans); white-space: nowrap;
   transition: background var(--dur-fast), color var(--dur-fast), border-color var(--dur-fast); }
 .sr-admin-tab:hover { background: rgba(159,198,255,0.06); color: var(--text-1); }
 .sr-admin-tab[aria-selected="true"] { background: rgba(255,217,138,0.13); border-color: rgba(255,217,138,0.28); color: var(--gold); }
@@ -1438,10 +1438,10 @@ function AdminConsole({ onClose }) {
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
             <Icon name="shield" size={19} color="var(--gold)" />
-            <h1 style={{ margin: 0, fontSize: 22, fontWeight: 300, letterSpacing: '0.02em', color: 'var(--text-1)' }}>星港管理台</h1>
+            <h1 style={{ margin: 0, fontSize: '1.375rem', fontWeight: 300, letterSpacing: '0.02em', color: 'var(--text-1)' }}>星港管理台</h1>
             <Badge tone="gold">{A.username || A.name}</Badge>
           </div>
-          <div style={{ fontSize: 12.5, color: 'var(--text-3)', marginTop: 7, lineHeight: 1.6 }}>
+          <div style={{ fontSize: '0.78125rem', color: 'var(--text-3)', marginTop: 7, lineHeight: 1.6 }}>
             这台服务器上的每一片星空、每一次登录、每一条来信——都在这里。
           </div>
         </div>
@@ -1455,7 +1455,7 @@ function AdminConsole({ onClose }) {
           borderRadius: 'var(--r-sm)', border: '1px solid rgba(232,145,122,0.34)', background: 'rgba(232,145,122,0.10)',
         }}>
           <Icon name="triangle-alert" size={16} color="var(--danger)" />
-          <span style={{ flex: 1, fontSize: 12.5, color: 'var(--text-1)', lineHeight: 1.6 }}>
+          <span style={{ flex: 1, fontSize: '0.78125rem', color: 'var(--text-1)', lineHeight: 1.6 }}>
             管理员账号还在用出厂的用户名与密码 —— 两样都写在 README 和启动日志里。刷新页面会弹出交接卡，把它们一起换掉。
           </span>
         </div>

@@ -161,7 +161,7 @@ function LaunchBay({ launching }) {
       ))}
 
       {/* 台侧播报 */}
-      <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, textAlign: 'center', fontFamily: 'var(--font-mono)', fontSize: 10.5, letterSpacing: '0.28em', textTransform: 'uppercase', color: launching ? 'var(--gold)' : 'var(--text-3)' }}>
+      <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, textAlign: 'center', fontFamily: 'var(--font-mono)', fontSize: '0.65625rem', letterSpacing: '0.28em', textTransform: 'uppercase', color: launching ? 'var(--gold)' : 'var(--text-3)' }}>
         {launching ? `IGNITION · ${launching.name}` : 'DOCK · READY'}
       </div>
     </div>
@@ -183,8 +183,8 @@ function GateNotice({ icon, title, body }) {
           <Icon name={icon || 'user-plus'} size={19} color="var(--gold)" />
         </span>
         <div style={{ minWidth: 0 }}>
-          <div style={{ fontSize: 15, color: 'var(--text-1)', fontWeight: 300 }}>{title}</div>
-          <div style={{ fontSize: 12.5, color: 'var(--text-2)', lineHeight: 1.75, marginTop: 8 }}>{body}</div>
+          <div style={{ fontSize: '0.9375rem', color: 'var(--text-1)', fontWeight: 300 }}>{title}</div>
+          <div style={{ fontSize: '0.78125rem', color: 'var(--text-2)', lineHeight: 1.75, marginTop: 8 }}>{body}</div>
           <div style={{ marginTop: 14 }}>
             <Button size="sm" variant="primary" icon="sparkles"
               onClick={() => window.dispatchEvent(new CustomEvent('sr-need-login'))}>登录 / 注册</Button>
@@ -245,7 +245,7 @@ function SharePanel({ flash, onGoFriends }) {
       body="密文一旦发出去，别人就能循着它找到这片星空——所以它得先有个主人。注册会把你现在的星空原地收进账号，一颗星都不会丢。" />;
   }
 
-  if (!share) return <div style={{ padding: 40, color: 'var(--text-3)', fontSize: 13 }}>正在连接星际网络…（后端未运行时此页不可用）</div>;
+  if (!share) return <div style={{ padding: 40, color: 'var(--text-3)', fontSize: '0.8125rem' }}>正在连接星际网络…（后端未运行时此页不可用）</div>;
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 18, maxWidth: 620 }}>
@@ -261,8 +261,8 @@ function SharePanel({ flash, onGoFriends }) {
             )}
           </span>
           <div style={{ flex: 1 }}>
-            <div style={{ fontSize: 15, color: 'var(--text-1)' }}>星系访问</div>
-            <div style={{ fontSize: 12, color: 'var(--text-3)', marginTop: 2 }}>{share.enabled ? '你的星空正在对持有密文的人开放' : '已关闭 · 任何人都无法造访'}</div>
+            <div style={{ fontSize: '0.9375rem', color: 'var(--text-1)' }}>星系访问</div>
+            <div style={{ fontSize: '0.75rem', color: 'var(--text-3)', marginTop: 2 }}>{share.enabled ? '你的星空正在对持有密文的人开放' : '已关闭 · 任何人都无法造访'}</div>
           </div>
           <Button variant={share.enabled ? 'secondary' : 'primary'} size="sm" glow={!share.enabled} disabled={busy}
             onClick={() => post({ enabled: !share.enabled }, share.enabled ? '星系已关闭访问' : '星系已开放 · 把密文分享给朋友吧')}>
@@ -273,16 +273,16 @@ function SharePanel({ flash, onGoFriends }) {
         {share.enabled && (
           <div style={{ marginTop: 18, display: 'flex', flexDirection: 'column', gap: 14 }}>
             <div>
-              <div style={{ fontSize: 12, color: 'var(--text-3)', marginBottom: 7 }}>星系密文 · 持有它的人才能造访</div>
+              <div style={{ fontSize: '0.75rem', color: 'var(--text-3)', marginBottom: 7 }}>星系密文 · 持有它的人才能造访</div>
               <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-                <span style={{ flex: 1, fontFamily: 'var(--font-mono)', fontSize: 17, letterSpacing: '0.12em', color: 'var(--gold-white)', padding: '10px 14px', borderRadius: 'var(--r-md)', background: 'rgba(3,4,12,0.5)', border: '1px solid var(--glass-border-strong)', textShadow: 'var(--text-glow-warm)' }}>{share.code}</span>
+                <span style={{ flex: 1, fontFamily: 'var(--font-mono)', fontSize: '1.0625rem', letterSpacing: '0.12em', color: 'var(--gold-white)', padding: '10px 14px', borderRadius: 'var(--r-md)', background: 'rgba(3,4,12,0.5)', border: '1px solid var(--glass-border-strong)', textShadow: 'var(--text-glow-warm)' }}>{share.code}</span>
                 <IconButton name="copy" title="复制密文" onClick={copyCode} />
                 <IconButton name="refresh-cw" title="重置密文（旧密文立即失效）" onClick={() => post({ reset: true }, '密文已重置 · 旧密文全部失效')} />
               </div>
             </div>
 
             <div>
-              <div style={{ fontSize: 12, color: 'var(--text-3)', marginBottom: 7 }}>访客可见度</div>
+              <div style={{ fontSize: '0.75rem', color: 'var(--text-3)', marginBottom: 7 }}>访客可见度</div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
                 {VISIBILITY_OPTS.map(o => {
                   const on = share.visibility === o.id;
@@ -295,8 +295,8 @@ function SharePanel({ flash, onGoFriends }) {
                         {on && <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--gold)' }} />}
                       </span>
                       <div>
-                        <div style={{ fontSize: 13, color: on ? 'var(--text-1)' : 'var(--text-2)' }}>{o.label}</div>
-                        <div style={{ fontSize: 11.5, color: 'var(--text-3)', marginTop: 2 }}>{o.desc}</div>
+                        <div style={{ fontSize: '0.8125rem', color: on ? 'var(--text-1)' : 'var(--text-2)' }}>{o.label}</div>
+                        <div style={{ fontSize: '0.71875rem', color: 'var(--text-3)', marginTop: 2 }}>{o.desc}</div>
                       </div>
                     </div>
                   );
@@ -311,29 +311,29 @@ function SharePanel({ flash, onGoFriends }) {
       <GlassPanel radius="lg" pad="md">
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
           <Icon name="send" size={15} color="var(--star-blue)" />
-          <span style={{ fontSize: 14, color: 'var(--text-1)' }}>把星系分享给好友</span>
+          <span style={{ fontSize: '0.875rem', color: 'var(--text-1)' }}>把星系分享给好友</span>
         </div>
-        <div style={{ fontSize: 12, color: 'var(--text-3)', marginBottom: 12 }}>造访邀请会带上你的星系密文，寄进对方的收件箱，领取即可造访。</div>
+        <div style={{ fontSize: '0.75rem', color: 'var(--text-3)', marginBottom: 12 }}>造访邀请会带上你的星系密文，寄进对方的收件箱，领取即可造访。</div>
         {!share.enabled ? (
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '10px 12px', borderRadius: 'var(--r-md)', border: '1px solid var(--glass-border)', background: 'rgba(159,198,255,0.04)' }}>
             <Icon name="radio-tower" size={16} color="var(--text-3)" />
-            <span style={{ flex: 1, fontSize: 12.5, color: 'var(--text-2)' }}>星系访问还没开启——先开放星系，邀请才有处可去。</span>
+            <span style={{ flex: 1, fontSize: '0.78125rem', color: 'var(--text-2)' }}>星系访问还没开启——先开放星系，邀请才有处可去。</span>
             <Button size="sm" variant="primary" glow disabled={busy} onClick={() => post({ enabled: true }, '星系已开放 · 现在可以寄出邀请了')}>开放星系</Button>
           </div>
         ) : friends === null ? (
-          <div style={{ fontSize: 12.5, color: 'var(--text-3)' }}>正在呼叫好友名单…</div>
+          <div style={{ fontSize: '0.78125rem', color: 'var(--text-3)' }}>正在呼叫好友名单…</div>
         ) : !friends.length ? (
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '10px 12px', borderRadius: 'var(--r-md)', border: '1px solid var(--glass-border)', background: 'rgba(159,198,255,0.04)' }}>
             <Icon name="user-plus" size={16} color="var(--text-3)" />
-            <span style={{ flex: 1, fontSize: 12.5, color: 'var(--text-2)' }}>还没有星际好友——先交换密文成为好友。</span>
+            <span style={{ flex: 1, fontSize: '0.78125rem', color: 'var(--text-2)' }}>还没有星际好友——先交换密文成为好友。</span>
             <Button size="sm" variant="ghost" icon="key-round" onClick={onGoFriends}>去连接好友星系</Button>
           </div>
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             {friends.map(f => (
               <div key={f.id} style={{ display: 'flex', alignItems: 'center', gap: 11, padding: '8px 2px' }}>
-                <span style={{ width: 28, height: 28, flex: 'none', borderRadius: '50%', background: 'linear-gradient(140deg, #2a3566, #56689c)', border: '1px solid var(--glass-border-strong)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, color: 'var(--text-1)' }}>{f.avatar}</span>
-                <span style={{ flex: 1, fontSize: 13.5, color: 'var(--text-1)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{f.name}</span>
+                <span style={{ width: 28, height: 28, flex: 'none', borderRadius: '50%', background: 'linear-gradient(140deg, #2a3566, #56689c)', border: '1px solid var(--glass-border-strong)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.75rem', color: 'var(--text-1)' }}>{f.avatar}</span>
+                <span style={{ flex: 1, fontSize: '0.84375rem', color: 'var(--text-1)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{f.name}</span>
                 <Button size="sm" variant="ghost" icon="send" disabled={inviting === f.id} onClick={() => invite(f)}>
                   {inviting === f.id ? '寄出中…' : '寄出邀请'}
                 </Button>
@@ -344,16 +344,16 @@ function SharePanel({ flash, onGoFriends }) {
       </GlassPanel>
 
       <GlassPanel radius="lg" pad="md">
-        <div style={{ fontSize: 12, letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: 'var(--text-3)', fontFamily: 'var(--font-mono)', marginBottom: 12 }}>访客 · {((share.visitors || []).length)}</div>
-        {!(share.visitors || []).length && <div style={{ fontSize: 12.5, color: 'var(--text-3)' }}>还没有人造访过你的星系。把密文发给朋友试试。</div>}
+        <div style={{ fontSize: '0.75rem', letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: 'var(--text-3)', fontFamily: 'var(--font-mono)', marginBottom: 12 }}>访客 · {((share.visitors || []).length)}</div>
+        {!(share.visitors || []).length && <div style={{ fontSize: '0.78125rem', color: 'var(--text-3)' }}>还没有人造访过你的星系。把密文发给朋友试试。</div>}
         {(share.visitors || []).map(v => (
           <div key={v.id} style={{ display: 'flex', alignItems: 'center', gap: 11, padding: '9px 2px' }}>
-            <span style={{ width: 28, height: 28, borderRadius: '50%', background: 'linear-gradient(140deg, #2a3566, #56689c)', border: '1px solid var(--glass-border-strong)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, color: 'var(--text-1)', opacity: v.blocked ? 0.45 : 1 }}>{v.avatar}</span>
+            <span style={{ width: 28, height: 28, borderRadius: '50%', background: 'linear-gradient(140deg, #2a3566, #56689c)', border: '1px solid var(--glass-border-strong)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.75rem', color: 'var(--text-1)', opacity: v.blocked ? 0.45 : 1 }}>{v.avatar}</span>
             <div style={{ flex: 1, minWidth: 0 }}>
-              <span style={{ fontSize: 13.5, color: v.blocked ? 'var(--text-3)' : 'var(--text-1)' }}>{v.name}</span>
+              <span style={{ fontSize: '0.84375rem', color: v.blocked ? 'var(--text-3)' : 'var(--text-1)' }}>{v.name}</span>
               {v.blocked && <Badge tone="neutral" style={{ marginLeft: 8 }}>已隐身</Badge>}
               {/* 访客足迹：lastVisit 由 /api/visit 落笔，主人在这里看到「谁刚来过」 */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: 5, marginTop: 3, fontSize: 11, color: 'var(--text-3)', opacity: v.lastVisit ? 1 : 0.7 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 5, marginTop: 3, fontSize: '0.6875rem', color: 'var(--text-3)', opacity: v.lastVisit ? 1 : 0.7 }}>
                 <Icon name="footprints" size={11} color="currentColor" />{visitAgo(v.lastVisit)}
               </div>
             </div>
@@ -440,7 +440,7 @@ function FriendsPanel({ flash, onVisit, launching }) {
         {/* 那段演示密文是这页唯一的入口示范，可它写在 placeholder 里——
             手机上输入框只剩两百来像素，它正好被截在「（试试演示密…」，
             等于把唯一一句有用的话吃掉了。窄屏改成：提示语自己说，输入框只留格式。 */}
-        <div style={{ fontSize: 12, color: 'var(--text-3)', marginBottom: 8 }}>
+        <div style={{ fontSize: '0.75rem', color: 'var(--text-3)', marginBottom: 8 }}>
           输入朋友的星系密文，连接一片新的星空{narrow ? '（试试演示密文 XING-DEMO-2333）' : ''}
         </div>
         <div className="sr-visit-redeem" style={{ display: 'flex', gap: 8 }}>
@@ -453,7 +453,7 @@ function FriendsPanel({ flash, onVisit, launching }) {
       </GlassPanel>
 
       {!friends.length && (
-        <div style={{ fontSize: 12.5, color: 'var(--text-3)', padding: '0 4px' }}>
+        <div style={{ fontSize: '0.78125rem', color: 'var(--text-3)', padding: '0 4px' }}>
           远航坞的飞船在待命——向朋友要一段密文，为它设定第一个目的地。
         </div>
       )}
@@ -470,10 +470,10 @@ function FriendsPanel({ flash, onVisit, launching }) {
                   <span key={i} style={{ position: 'absolute', left: (14 + s * 0.72) + '%', top: (10 + ((s * 7 + i * 31) % 46)) + '%', width: 3, height: 3, borderRadius: '50%', background: i === 1 ? 'var(--gold)' : 'var(--star-blue)', boxShadow: `0 0 6px ${i === 1 ? 'var(--gold)' : 'var(--star-blue)'}`, animation: `sr-twk ${2.6 + i}s ease-in-out ${i * 0.7}s infinite`, pointerEvents: 'none' }} />
                 ))}
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                  <span style={{ width: 44, height: 44, flex: 'none', borderRadius: '50%', background: 'linear-gradient(140deg, #2a3566, #56689c)', border: '1px solid var(--glass-border-strong)', boxShadow: reachable ? 'var(--glow-faint)' : 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 17, color: 'var(--text-1)' }}>{f.avatar}</span>
+                  <span style={{ width: 44, height: 44, flex: 'none', borderRadius: '50%', background: 'linear-gradient(140deg, #2a3566, #56689c)', border: '1px solid var(--glass-border-strong)', boxShadow: reachable ? 'var(--glow-faint)' : 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.0625rem', color: 'var(--text-1)' }}>{f.avatar}</span>
                   <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{ fontSize: 15, color: 'var(--text-1)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{f.name} 的星系</div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 11.5, color: 'var(--text-3)', marginTop: 3 }}>
+                    <div style={{ fontSize: '0.9375rem', color: 'var(--text-1)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{f.name} 的星系</div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: '0.71875rem', color: 'var(--text-3)', marginTop: 3 }}>
                       {f.enabled
                         ? (f.blocked ? <span>对方暂时对你隐身</span> : <React.Fragment><Icon name="sparkles" size={11} color="var(--gold)" /><span>{f.starCount} 颗星</span><span>·</span><span>{f.visibility === 'outline' ? '可见大纲' : '仅星名'}</span></React.Fragment>)
                         : <span>对方已关闭访问</span>}
@@ -565,8 +565,8 @@ function WarpOverlay({ name, ready, onFinish }) {
 
       {/* 目的地播报——背景固定是深空黑，墨水必须用固定亮色，不随主题（黎明深字压黑幕不可读） */}
       <div style={{ position: 'absolute', left: 0, right: 0, bottom: '18%', textAlign: 'center', pointerEvents: 'none' }}>
-        <div className="sr-warp-eta" style={{ display: 'inline-block', fontFamily: 'var(--font-mono)', fontSize: 12, letterSpacing: '0.3em', textTransform: 'uppercase', color: 'var(--text-on-scrim-dim, rgba(214,225,255,0.86))' }}>WARP</div>
-        <div style={{ marginTop: 10, fontSize: 17, fontWeight: 300, color: 'var(--text-on-scrim, rgba(255,255,255,0.92))', letterSpacing: '0.04em' }}>
+        <div className="sr-warp-eta" style={{ display: 'inline-block', fontFamily: 'var(--font-mono)', fontSize: '0.75rem', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'var(--text-on-scrim-dim, rgba(214,225,255,0.86))' }}>WARP</div>
+        <div style={{ marginTop: 10, fontSize: '1.0625rem', fontWeight: 300, color: 'var(--text-on-scrim, rgba(255,255,255,0.92))', letterSpacing: '0.04em' }}>
           正在跃迁 · 目的地 <span style={{ color: '#fff4d6', textShadow: '0 0 18px rgba(255,217,138,0.45)' }}>{name}</span> 的星系
         </div>
       </div>
@@ -706,11 +706,11 @@ function VisitMap({ friend, onBack, onReady, flash }) {
     }).finally(() => setSendingNote(false));
   };
 
-  if (state.loading) return <div style={{ flex: 1, padding: 60, textAlign: 'center', color: 'var(--text-3)', fontSize: 13 }}>正在飞往「{friend.name}」的星系…</div>;
+  if (state.loading) return <div style={{ flex: 1, padding: 60, textAlign: 'center', color: 'var(--text-3)', fontSize: '0.8125rem' }}>正在飞往「{friend.name}」的星系…</div>;
   if (state.error) return (
     <div style={{ flex: 1, padding: 60, textAlign: 'center' }}>
       <Icon name="cloud-off" size={30} color="var(--star-blue-dim)" />
-      <div style={{ fontSize: 14, color: 'var(--text-2)', marginTop: 14 }}>{state.error}</div>
+      <div style={{ fontSize: '0.875rem', color: 'var(--text-2)', marginTop: 14 }}>{state.error}</div>
       <Button size="sm" variant="ghost" icon="corner-up-left" style={{ marginTop: 18 }} onClick={onBack}>返回</Button>
     </div>
   );
@@ -762,8 +762,8 @@ function VisitMap({ friend, onBack, onReady, flash }) {
                 boxShadow: '0 0 48px 9px rgba(255,128,60,0.5), 0 0 18px 3px rgba(255,196,120,0.85), inset 0 0 9px rgba(255,90,40,0.45)',
               }} />
               <span style={{ display: 'flex', alignItems: 'center', gap: 7, opacity: nameOpacity, transition: 'opacity var(--dur-base)', whiteSpace: 'nowrap' }}>
-                <span style={{ fontSize: 15.5, fontWeight: 400, letterSpacing: '0.06em', color: 'var(--sun-label, #ffe3b0)', textShadow: 'var(--sun-label-glow, 0 0 12px rgba(255,150,70,0.55), 0 1px 8px rgba(0,0,0,0.85))' }}>{con.name}</span>
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--sun-label-dim, rgba(255,200,140,0.62))' }}>{count}</span>
+                <span style={{ fontSize: '0.96875rem', fontWeight: 400, letterSpacing: '0.06em', color: 'var(--sun-label, #ffe3b0)', textShadow: 'var(--sun-label-glow, 0 0 12px rgba(255,150,70,0.55), 0 1px 8px rgba(0,0,0,0.85))' }}>{con.name}</span>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6875rem', color: 'var(--sun-label-dim, rgba(255,200,140,0.62))' }}>{count}</span>
               </span>
             </div>
           </div>
@@ -809,11 +809,11 @@ function VisitMap({ friend, onBack, onReady, flash }) {
         <GlassPanel radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', rowGap: 4, gap: 10, padding: '8px 16px', pointerEvents: 'auto' }}>
           <IconButton name="corner-up-left" size="sm" title="返回好友列表" onClick={onBack} />
           <Icon name="telescope" size={16} color="var(--gold)" />
-          <span style={{ fontSize: 14, color: 'var(--text-1)', whiteSpace: 'nowrap', maxWidth: 220, overflow: 'hidden', textOverflow: 'ellipsis' }}>{(state.owner && state.owner.name) || friend.name} 的星系</span>
+          <span style={{ fontSize: '0.875rem', color: 'var(--text-1)', whiteSpace: 'nowrap', maxWidth: 220, overflow: 'hidden', textOverflow: 'ellipsis' }}>{(state.owner && state.owner.name) || friend.name} 的星系</span>
           <Badge tone="gold">{outlineMode ? '可见大纲' : '仅星名'}</Badge>
           {/* 主人的星空简介（设置 → 个人简介），服务端已剥 HTML 钳长度 */}
           {state.owner && state.owner.bio && (
-            <span style={{ fontSize: 12, color: 'var(--text-3)', maxWidth: 320, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={state.owner.bio}>
+            <span style={{ fontSize: '0.75rem', color: 'var(--text-3)', maxWidth: 320, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={state.owner.bio}>
               「{state.owner.bio}」
             </span>
           )}
@@ -823,20 +823,20 @@ function VisitMap({ friend, onBack, onReady, flash }) {
         {!!resonance.length && (
           <button type="button" title="你们俩都拥有的知识" aria-expanded={resOpen}
             onClick={() => { setResOpen(o => !o); setSelected(null); }}
-            style={{ pointerEvents: 'auto', display: 'inline-flex', alignItems: 'center', gap: 7, flex: 'none', whiteSpace: 'nowrap', padding: '8px 15px', font: 'inherit', fontSize: 12.5, cursor: 'pointer', borderRadius: 'var(--r-pill)', color: 'var(--gold-white)', border: '1px solid', borderColor: resOpen ? 'rgba(255,217,138,0.6)' : 'rgba(255,217,138,0.4)', background: resOpen ? 'rgba(255,217,138,0.16)' : 'rgba(255,217,138,0.1)', WebkitBackdropFilter: 'blur(10px)', backdropFilter: 'blur(10px)', boxShadow: '0 0 14px rgba(255,217,138,0.12)' }}>
+            style={{ pointerEvents: 'auto', display: 'inline-flex', alignItems: 'center', gap: 7, flex: 'none', whiteSpace: 'nowrap', padding: '8px 15px', font: 'inherit', fontSize: '0.78125rem', cursor: 'pointer', borderRadius: 'var(--r-pill)', color: 'var(--gold-white)', border: '1px solid', borderColor: resOpen ? 'rgba(255,217,138,0.6)' : 'rgba(255,217,138,0.4)', background: resOpen ? 'rgba(255,217,138,0.16)' : 'rgba(255,217,138,0.1)', WebkitBackdropFilter: 'blur(10px)', backdropFilter: 'blur(10px)', boxShadow: '0 0 14px rgba(255,217,138,0.12)' }}>
             <Icon name="sparkles" size={14} color="var(--gold)" />
             共鸣 <b style={{ fontWeight: 500, color: 'var(--gold)' }}>{resonance.length}</b> 处
           </button>
         )}
         <GlassPanel radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'flex-end', rowGap: 4, gap: 18, padding: '8px 18px', pointerEvents: 'auto' }}>
-          <span style={{ fontSize: 12, color: 'var(--text-3)', whiteSpace: 'nowrap' }}>知识星 <b style={{ color: 'var(--text-1)', fontWeight: 500 }}>{stars.length}</b></span>
-          <span style={{ fontSize: 12, color: 'var(--text-3)', whiteSpace: 'nowrap' }}>星域 <b style={{ color: 'var(--star-blue)', fontWeight: 500 }}>{geoms.length}</b></span>
-          <span style={{ fontSize: 12, color: 'var(--text-3)', whiteSpace: 'nowrap' }}>连接 <b style={{ color: 'var(--gold)', fontWeight: 500 }}>{g.connections.length}</b></span>
+          <span style={{ fontSize: '0.75rem', color: 'var(--text-3)', whiteSpace: 'nowrap' }}>知识星 <b style={{ color: 'var(--text-1)', fontWeight: 500 }}>{stars.length}</b></span>
+          <span style={{ fontSize: '0.75rem', color: 'var(--text-3)', whiteSpace: 'nowrap' }}>星域 <b style={{ color: 'var(--star-blue)', fontWeight: 500 }}>{geoms.length}</b></span>
+          <span style={{ fontSize: '0.75rem', color: 'var(--text-3)', whiteSpace: 'nowrap' }}>连接 <b style={{ color: 'var(--gold)', fontWeight: 500 }}>{g.connections.length}</b></span>
         </GlassPanel>
       </div>
 
       {/* 提示 + 缩放控件 */}
-      <div style={{ position: 'absolute', bottom: 26, left: 24, zIndex: 30, display: 'flex', alignItems: 'center', gap: 8, fontSize: 11.5, color: 'var(--text-3)', pointerEvents: 'none', maxWidth: 'calc(100% - 240px)' }}>
+      <div style={{ position: 'absolute', bottom: 26, left: 24, zIndex: 30, display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.71875rem', color: 'var(--text-3)', pointerEvents: 'none', maxWidth: 'calc(100% - 240px)' }}>
         <Icon name="move" size={14} color="currentColor" />
         {/* 窄窗时截断而不折行，避免与右下缩放/星语胶囊压叠 */}
         <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>拖拽平移 · 滚轮缩放 · 点星看大纲 · 只读造访，笔记正文不会离开对方的数据库</span>
@@ -848,7 +848,7 @@ function VisitMap({ friend, onBack, onReady, flash }) {
         </GlassPanel>
         <GlassPanel radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', gap: 2, padding: '6px 8px' }}>
           <IconButton name="minus" size="sm" title="缩小" onClick={() => zoomBy(0.85)} />
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--text-2)', minWidth: 42, textAlign: 'center' }}>{Math.round(view.k * 100)}%</span>
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--text-2)', minWidth: 42, textAlign: 'center' }}>{Math.round(view.k * 100)}%</span>
           <IconButton name="plus" size="sm" title="放大" onClick={() => zoomBy(1.18)} />
           <span style={{ width: 1, height: 18, background: 'var(--line)' }} />
           <IconButton name="box" size="sm" title="三维星系" onClick={() => setMode('3d')} />
@@ -862,11 +862,11 @@ function VisitMap({ friend, onBack, onReady, flash }) {
           <GlassPanel strong radius="lg" pad="md" glow>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
               <Icon name="sparkles" size={15} color="var(--gold)" />
-              <span style={{ flex: 1, fontSize: 14, color: 'var(--text-1)' }}>知识共鸣</span>
+              <span style={{ flex: 1, fontSize: '0.875rem', color: 'var(--text-1)' }}>知识共鸣</span>
               <Badge tone="gold">{resonance.length} 处</Badge>
               <IconButton name="x" size="sm" title="关闭" onClick={() => setResOpen(false)} />
             </div>
-            <div style={{ fontSize: 11.5, lineHeight: 1.6, color: 'var(--text-3)', margin: '7px 0 10px' }}>
+            <div style={{ fontSize: '0.71875rem', lineHeight: 1.6, color: 'var(--text-3)', margin: '7px 0 10px' }}>
               这些知识你们俩都拥有——点一条，飞过去看看。
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 7, maxHeight: 336, overflowY: 'auto', paddingRight: 2 }}>
@@ -877,10 +877,10 @@ function VisitMap({ friend, onBack, onReady, flash }) {
                   style={{ padding: '9px 11px', borderRadius: 'var(--r-md)', cursor: 'pointer', border: '1px solid var(--glass-border)', background: 'rgba(255,217,138,0.04)' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
                     <Icon name={r.kind === 'strong' ? 'star' : 'hash'} size={12} color="var(--gold)" />
-                    <span style={{ flex: 1, fontSize: 13, color: 'var(--text-1)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{r.theirLabel}</span>
+                    <span style={{ flex: 1, fontSize: '0.8125rem', color: 'var(--text-1)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{r.theirLabel}</span>
                     {r.bothLit && <Badge tone="gold">你们都点亮了它</Badge>}
                   </div>
-                  <div style={{ marginTop: 4, paddingLeft: 19, fontSize: 11.5, lineHeight: 1.6, color: 'var(--text-3)' }}>
+                  <div style={{ marginTop: 4, paddingLeft: 19, fontSize: '0.71875rem', lineHeight: 1.6, color: 'var(--text-3)' }}>
                     {r.kind === 'strong'
                       ? <span>与你的「{r.mineLabel}」同名</span>
                       : <span>共同标签 {r.tags.join(' · ')} ↔ 你的「{r.mineLabels.join('」「')}」</span>}
@@ -898,17 +898,17 @@ function VisitMap({ friend, onBack, onReady, flash }) {
           <GlassPanel strong radius="lg" pad="md" glow>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 7 }}>
               <Icon name="feather" size={15} color="var(--gold)" />
-              <span style={{ flex: 1, fontSize: 14, color: 'var(--text-1)' }}>留下星语</span>
+              <span style={{ flex: 1, fontSize: '0.875rem', color: 'var(--text-1)' }}>留下星语</span>
               <IconButton name="x" size="sm" title="收起" onClick={() => setNoteOpen(false)} />
             </div>
-            <div style={{ fontSize: 11.5, lineHeight: 1.6, color: 'var(--text-3)', marginBottom: 10 }}>
+            <div style={{ fontSize: '0.71875rem', lineHeight: 1.6, color: 'var(--text-3)', marginBottom: 10 }}>
               给 {(state.owner && state.owner.name) || friend.name} 留一句话，会寄进 TA 的收件箱。
             </div>
             <Input value={noteText} onChange={(e) => setNoteText(e.target.value.slice(0, 160))}
               placeholder="一句星语…" icon="message-circle" size="md" autoFocus maxLength={160}
               onKeyDown={(e) => { if (e.key === 'Enter') sendNote(); else if (e.key === 'Escape') setNoteOpen(false); }} />
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 10 }}>
-              <span style={{ flex: 1, fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-3)' }}>{noteText.length} / 160</span>
+              <span style={{ flex: 1, fontFamily: 'var(--font-mono)', fontSize: '0.6875rem', color: 'var(--text-3)' }}>{noteText.length} / 160</span>
               <Button size="sm" variant="primary" icon="send" glow disabled={sendingNote || !noteText.trim()} onClick={sendNote}>
                 {sendingNote ? '寄出中…' : '寄出'}
               </Button>
@@ -923,8 +923,8 @@ function VisitMap({ friend, onBack, onReady, flash }) {
           <GlassPanel strong radius="lg" pad="md" glow>
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
               <div style={{ flex: 1 }}>
-                <div style={{ fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--gold)', opacity: 0.8 }}>{(g.constellations.find(c => c.id === sel.con) || {}).name}</div>
-                <div style={{ fontSize: 18, fontWeight: 400, color: 'var(--text-1)', marginTop: 4 }}>{sel.label}</div>
+                <div style={{ fontSize: '0.625rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--gold)', opacity: 0.8 }}>{(g.constellations.find(c => c.id === sel.con) || {}).name}</div>
+                <div style={{ fontSize: '1.125rem', fontWeight: 400, color: 'var(--text-1)', marginTop: 4 }}>{sel.label}</div>
               </div>
               <IconButton name="x" size="sm" title="关闭" onClick={() => setSelected(null)} />
             </div>
@@ -938,14 +938,14 @@ function VisitMap({ friend, onBack, onReady, flash }) {
               {outlineMode ? (
                 (sel.outline || []).length ? (
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-                    <div style={{ fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--text-3)', fontFamily: 'var(--font-mono)', marginBottom: 3 }}>大纲</div>
+                    <div style={{ fontSize: '0.625rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--text-3)', fontFamily: 'var(--font-mono)', marginBottom: 3 }}>大纲</div>
                     {sel.outline.map((o, i) => (
                       <div key={i} style={{ fontSize: o.type === 'h1' ? 13.5 : 12.5, color: 'var(--text-2)', borderLeft: '2px solid var(--line)', padding: '2px 2px 2px ' + (o.type === 'h3' ? 16 : o.type === 'h2' ? 10 : 6) + 'px', marginLeft: 2, lineHeight: 1.5 }}>{o.text}</div>
                     ))}
                   </div>
-                ) : <div style={{ fontSize: 12, color: 'var(--text-3)' }}>这颗星还没有大纲。</div>
+                ) : <div style={{ fontSize: '0.75rem', color: 'var(--text-3)' }}>这颗星还没有大纲。</div>
               ) : (
-                <div style={{ display: 'flex', alignItems: 'center', gap: 7, fontSize: 12, color: 'var(--text-3)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 7, fontSize: '0.75rem', color: 'var(--text-3)' }}>
                   <Icon name="lock" size={13} color="currentColor" />对方只开放了星名
                 </div>
               )}
@@ -955,7 +955,7 @@ function VisitMap({ friend, onBack, onReady, flash }) {
               <Button size="sm" icon="inbox" disabled={collecting} onClick={() => collectStar(sel)} style={{ width: '100%' }}>
                 {collecting ? '收纳中…' : '收纳这颗星'}
               </Button>
-              <div style={{ marginTop: 7, fontSize: 11, lineHeight: 1.6, color: 'var(--text-3)' }}>
+              <div style={{ marginTop: 7, fontSize: '0.6875rem', lineHeight: 1.6, color: 'var(--text-3)' }}>
                 {outlineMode ? '星名与大纲要点会寄进你的收件箱，正文不会离开对方的数据库。' : '对方只开放了星名——只能收纳星名。'}
               </div>
             </div>
@@ -1007,16 +1007,16 @@ function VisitView() {
           <div className="sr-view" style={{ position: 'relative', zIndex: 1, maxWidth: 960, margin: '0 auto', padding: '34px 32px 24px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 13, marginBottom: 8 }}>
               <Icon name="telescope" size={26} color="var(--gold)" />
-              <h1 style={{ fontSize: 30, fontWeight: 200, letterSpacing: '0.04em', background: 'linear-gradient(100deg, var(--gold), var(--gold-white) 45%, var(--star-blue))', WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent' }}>星际漫游</h1>
+              <h1 style={{ fontSize: '1.875rem', fontWeight: 200, letterSpacing: '0.04em', background: 'linear-gradient(100deg, var(--gold), var(--gold-white) 45%, var(--star-blue))', WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent' }}>星际漫游</h1>
             </div>
-            <div style={{ fontSize: 13, color: 'var(--text-3)', marginBottom: 22, fontWeight: 300 }}>用密文连接彼此的星空——看得见星与星域的形状，看不见笔记的内容。</div>
+            <div style={{ fontSize: '0.8125rem', color: 'var(--text-3)', marginBottom: 22, fontWeight: 300 }}>用密文连接彼此的星空——看得见星与星域的形状，看不见笔记的内容。</div>
 
             <div style={{ display: 'flex', gap: 4, marginBottom: 20 }}>
               {[{ id: 'friends', icon: 'rocket', label: '好友星系' }, { id: 'share', icon: 'radio-tower', label: '我的分享' }].map(t => {
                 const on = tab === t.id;
                 return (
                   <button key={t.id} type="button" onClick={() => setTab(t.id)}
-                    style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '8px 16px', border: '1px solid', borderColor: on ? 'rgba(255,217,138,0.4)' : 'transparent', borderRadius: 'var(--r-pill)', background: on ? 'rgba(255,217,138,0.1)' : 'transparent', color: on ? 'var(--text-1)' : 'var(--text-3)', font: 'inherit', fontSize: 13, cursor: 'pointer' }}>
+                    style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '8px 16px', border: '1px solid', borderColor: on ? 'rgba(255,217,138,0.4)' : 'transparent', borderRadius: 'var(--r-pill)', background: on ? 'rgba(255,217,138,0.1)' : 'transparent', color: on ? 'var(--text-1)' : 'var(--text-3)', font: 'inherit', fontSize: '0.8125rem', cursor: 'pointer' }}>
                     <Icon name={t.icon} size={15} color={on ? 'var(--gold)' : 'var(--text-3)'} />{t.label}
                   </button>
                 );
@@ -1033,7 +1033,7 @@ function VisitView() {
           <GlassPanel strong radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '10px 18px' }}>
             <Icon name={toast.tone === 'danger' ? 'circle-alert' : 'check'} size={16}
               color={toast.tone === 'danger' ? 'var(--danger)' : toast.tone === 'gold' ? 'var(--gold)' : 'var(--star-blue)'} />
-            <span style={{ fontSize: 13.5, color: 'var(--text-1)' }}>{toast.msg}</span>
+            <span style={{ fontSize: '0.84375rem', color: 'var(--text-1)' }}>{toast.msg}</span>
           </GlassPanel>
         </div>
       )}

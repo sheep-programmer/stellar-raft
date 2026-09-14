@@ -103,7 +103,7 @@ export function Modal({
                 {icon && <Icon name={icon} size={17} color="var(--star-blue)" />}
                 {title && (
                   <span id={titleId} style={{
-                    fontSize: 15, color: 'var(--text-1)', fontWeight: 300, letterSpacing: '0.02em',
+                    fontSize: '0.9375rem', color: 'var(--text-1)', fontWeight: 300, letterSpacing: '0.02em',
                     overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
                   }}>{title}</span>
                 )}

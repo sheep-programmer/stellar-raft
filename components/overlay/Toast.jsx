@@ -33,7 +33,7 @@ export function Toast({ message, children, tone = 'blue', icon = 'check', style,
       {...rest}
     >
       {icon && <Icon name={icon} size={15} strokeWidth={1.8} color={SR_TOAST_TONES[tone] || SR_TOAST_TONES.blue} />}
-      <span style={{ fontSize: 13.5, fontFamily: 'var(--font-sans)', color: 'var(--text-1)', whiteSpace: 'nowrap' }}>
+      <span style={{ fontSize: '0.84375rem', fontFamily: 'var(--font-sans)', color: 'var(--text-1)', whiteSpace: 'nowrap' }}>
         {message != null ? message : children}
       </span>
     </GlassPanel>
@@ -75,7 +75,7 @@ export function toast(message, opts = {}) {
   Object.assign(pill.style, {
     display: 'flex', alignItems: 'center', gap: '9px', padding: '10px 18px',
     borderRadius: 'var(--r-pill)', color: 'var(--text-1)',
-    fontFamily: 'var(--font-sans)', fontSize: '13.5px', whiteSpace: 'nowrap',
+    fontFamily: 'var(--font-sans)', fontSize: '0.84375rem', whiteSpace: 'nowrap',
     animation: reduced ? 'none' : 'sr-cardin var(--dur-base) var(--ease-flight) both',
   });
   if (tone === 'gold') {

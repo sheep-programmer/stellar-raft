@@ -61,7 +61,7 @@ export function Tag({ children, icon, dot, active = false, removable = false, on
         display: 'inline-flex', alignItems: 'center', gap: 6,
         height: 26, padding: '0 10px',
         borderRadius: 'var(--r-pill)',
-        fontFamily: 'var(--font-sans)', fontSize: 12.5,
+        fontFamily: 'var(--font-sans)', fontSize: '0.78125rem',
         color: active ? 'var(--gold)' : 'var(--text-2)',
         background: active ? 'rgba(255,217,138,0.10)' : (hover ? 'rgba(159,198,255,0.10)' : 'rgba(159,198,255,0.05)'),
         border: '1px solid',

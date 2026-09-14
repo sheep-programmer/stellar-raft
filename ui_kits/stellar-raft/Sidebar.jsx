@@ -20,14 +20,14 @@ function SRLogo({ collapsed, theme }) {
       {!collapsed && (
         <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.1 }}>
           <span style={dawn
-            ? { fontSize: 19, fontWeight: 400, letterSpacing: '0.06em', color: '#b3781a' }
+            ? { fontSize: '1.1875rem', fontWeight: 400, letterSpacing: '0.06em', color: '#b3781a' }
             : {
-                fontSize: 19, fontWeight: 300, letterSpacing: '0.06em',
+                fontSize: '1.1875rem', fontWeight: 300, letterSpacing: '0.06em',
                 background: 'linear-gradient(176deg, #fff3da 0%, #ffffff 30%, #e9f0ff 62%, #b6cbf2 100%)',
                 WebkitBackgroundClip: 'text', backgroundClip: 'text', WebkitTextFillColor: 'transparent',
                 filter: 'drop-shadow(0 0 10px rgba(159,198,255,0.2))',
               }}>星图</span>
-          <span style={{ fontSize: 8.5, letterSpacing: '0.24em', textTransform: 'uppercase', color: 'var(--text-3)' }}>Stellar Raft</span>
+          <span style={{ fontSize: '0.53125rem', letterSpacing: '0.24em', textTransform: 'uppercase', color: 'var(--text-3)' }}>Stellar Raft</span>
         </div>
       )}
     </div>
@@ -52,7 +52,7 @@ function NavRow({ icon, label, active, badge, collapsed, onClick, dawn, tip, dat
         transition: 'background var(--dur-fast), color var(--dur-fast), border-color var(--dur-fast)',
       }}>
       <Icon name={icon} size={19} color="currentColor" />
-      {!collapsed && <span style={{ flex: 1, textAlign: 'left', fontSize: 13.5, color: lit && !active ? 'var(--text-1)' : 'inherit' }}>{label}</span>}
+      {!collapsed && <span style={{ flex: 1, textAlign: 'left', fontSize: '0.84375rem', color: lit && !active ? 'var(--text-1)' : 'inherit' }}>{label}</span>}
       {!collapsed && badge != null && <Badge tone={active ? 'gold' : 'blue'}>{badge}</Badge>}
       {collapsed && badge != null && <span style={{ position: 'absolute', top: 5, right: 9 }}><Badge dot tone="gold" /></span>}
     </button>
@@ -79,11 +79,11 @@ function UserChip({ collapsed, dawn, registered, onClick }) {
         background: hover ? 'rgba(159,198,255,0.05)' : 'transparent',
         transition: 'background var(--dur-fast), border-color var(--dur-fast)',
       }}>
-      <span style={{ width: 28, height: 28, flex: 'none', borderRadius: '50%', background: dawn ? 'linear-gradient(140deg, #8ea2cc, #b6c3dc)' : 'linear-gradient(140deg, #2a3566, #56689c)', border: '1px solid var(--glass-border-strong)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, color: dawn ? '#1a2238' : 'var(--text-1)' }}>{avatarLetter}</span>
+      <span style={{ width: 28, height: 28, flex: 'none', borderRadius: '50%', background: dawn ? 'linear-gradient(140deg, #8ea2cc, #b6c3dc)' : 'linear-gradient(140deg, #2a3566, #56689c)', border: '1px solid var(--glass-border-strong)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.75rem', color: dawn ? '#1a2238' : 'var(--text-1)' }}>{avatarLetter}</span>
       {!collapsed && (
         <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.2, minWidth: 0, textAlign: 'left' }}>
-          <span style={{ fontSize: 13, color: 'var(--text-1)' }}>{primary}</span>
-          <span style={{ fontSize: 11, color: 'var(--text-3)' }}>{secondary}</span>
+          <span style={{ fontSize: '0.8125rem', color: 'var(--text-1)' }}>{primary}</span>
+          <span style={{ fontSize: '0.6875rem', color: 'var(--text-3)' }}>{secondary}</span>
         </div>
       )}
       {!collapsed && <div style={{ flex: 1 }} />}
@@ -194,7 +194,7 @@ function Sidebar({ collapsed, onToggle, view, onView, focus, onFocus, theme, onT
       {/* constellations */}
       {!collapsed && (
         <div style={{ flex: mobile ? 'none' : 1, minHeight: 0, overflow: mobile ? 'visible' : 'auto', padding: '10px 12px 0' }}>
-          <div style={{ fontSize: 10, letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: 'var(--text-3)', padding: '0 6px 8px', fontFamily: 'var(--font-mono)' }}>我的星域</div>
+          <div style={{ fontSize: '0.625rem', letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: 'var(--text-3)', padding: '0 6px 8px', fontFamily: 'var(--font-mono)' }}>我的星域</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
             {D.constellations.map(c => (
               <ConstellationItem key={c.id} name={c.name} color={c.color} count={c.count}

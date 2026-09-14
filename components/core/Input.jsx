@@ -46,14 +46,14 @@ export function Input({
           flex: 1, minWidth: 0, height: '100%',
           background: 'transparent', border: 'none', outline: 'none',
           color: 'var(--text-1)', fontFamily: 'var(--font-sans)',
-          fontSize: { sm: 13, md: 14.5, lg: 16 }[size] || 14.5,
+          fontSize: { sm: '0.8125rem', md: '0.90625rem', lg: '1rem' }[size] || '0.90625rem',
           ...inputStyle,
         }}
         {...rest}
       />
       {kbd && (
         <span aria-hidden="true" style={{
-          fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-3)',
+          fontFamily: 'var(--font-mono)', fontSize: '0.6875rem', color: 'var(--text-3)',
           border: '1px solid var(--line)', borderRadius: 6, padding: '2px 6px', lineHeight: 1,
         }}>{kbd}</span>
       )}

@@ -43,8 +43,8 @@ export function MemoryBar({ value = 0.5, label, showPct = false, height = 6, fad
     <div style={{ display: 'flex', flexDirection: 'column', gap: 6, ...style }}>
       {(label || showPct) && (
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-          {label && <span style={{ fontSize: 12, color: 'var(--text-2)' }}>{label}</span>}
-          {showPct && <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: warm ? 'var(--gold)' : 'var(--star-blue)' }}>{Math.round(v * 100)}%</span>}
+          {label && <span style={{ fontSize: '0.75rem', color: 'var(--text-2)' }}>{label}</span>}
+          {showPct && <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6875rem', color: warm ? 'var(--gold)' : 'var(--star-blue)' }}>{Math.round(v * 100)}%</span>}
         </div>
       )}
       <div

@@ -20,7 +20,7 @@ function MenuRow({ id, item, active, onHover, onPick }) {
       style={{
         display: 'flex', alignItems: 'center', gap: 9,
         height: 32, padding: '0 10px', borderRadius: 'var(--r-sm)',
-        fontSize: 13, fontFamily: 'var(--font-sans)',
+        fontSize: '0.8125rem', fontFamily: 'var(--font-sans)',
         color: disabled
           ? 'var(--text-disabled)'
           : item.danger ? 'var(--danger)' : (active ? 'var(--text-1)' : 'var(--text-2)'),
@@ -36,7 +36,7 @@ function MenuRow({ id, item, active, onHover, onPick }) {
       {item.icon && <Icon name={item.icon} size={15} color="currentColor" />}
       <span style={{ flex: 1, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis' }}>{item.label}</span>
       {item.kbd && (
-        <span aria-hidden="true" style={{ fontFamily: 'var(--font-mono)', fontSize: 10.5, color: 'var(--text-3)', marginLeft: 12 }}>
+        <span aria-hidden="true" style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65625rem', color: 'var(--text-3)', marginLeft: 12 }}>
           {item.kbd}
         </span>
       )}

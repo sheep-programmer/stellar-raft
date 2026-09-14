@@ -57,13 +57,13 @@ function ActionDialog({ icon, accent, title, children, confirmLabel, confirmDisa
             <span style={{ flex: 'none', width: 34, height: 34, borderRadius: '50%', background: 'rgba(159,198,255,0.10)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <Icon name={icon} size={17} color={tint} />
             </span>
-            <div style={{ fontSize: 14.5, color: 'var(--text-1)' }}>{title}</div>
+            <div style={{ fontSize: '0.90625rem', color: 'var(--text-1)' }}>{title}</div>
           </div>
           <div style={{ marginBottom: 18 }}>{children}</div>
           <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end' }}>
-            <button type="button" onClick={onClose} style={{ height: 32, padding: '0 16px', borderRadius: 'var(--r-pill)', border: '1px solid var(--glass-border-strong)', background: 'transparent', color: 'var(--text-2)', fontSize: 13, cursor: 'pointer', fontFamily: 'var(--font-sans)' }}>取消</button>
+            <button type="button" onClick={onClose} style={{ height: 32, padding: '0 16px', borderRadius: 'var(--r-pill)', border: '1px solid var(--glass-border-strong)', background: 'transparent', color: 'var(--text-2)', fontSize: '0.8125rem', cursor: 'pointer', fontFamily: 'var(--font-sans)' }}>取消</button>
             <button type="button" onClick={confirmDisabled ? undefined : onYes} disabled={confirmDisabled}
-              style={{ height: 32, padding: '0 16px', borderRadius: 'var(--r-pill)', border: '1px solid rgba(255,217,138,0.5)', background: confirmDisabled ? 'rgba(159,198,255,0.06)' : 'rgba(255,217,138,0.16)', color: confirmDisabled ? 'var(--text-3)' : 'var(--gold)', fontSize: 13, cursor: confirmDisabled ? 'not-allowed' : 'pointer', fontFamily: 'var(--font-sans)' }}>{confirmLabel}</button>
+              style={{ height: 32, padding: '0 16px', borderRadius: 'var(--r-pill)', border: '1px solid rgba(255,217,138,0.5)', background: confirmDisabled ? 'rgba(159,198,255,0.06)' : 'rgba(255,217,138,0.16)', color: confirmDisabled ? 'var(--text-3)' : 'var(--gold)', fontSize: '0.8125rem', cursor: confirmDisabled ? 'not-allowed' : 'pointer', fontFamily: 'var(--font-sans)' }}>{confirmLabel}</button>
           </div>
         </GlassPanel>
       </div>
@@ -110,7 +110,7 @@ function MenuRow({ onClick, active, children }) {
   };
   return (
     <div role="menuitem" tabIndex={-1} onKeyDown={onKey} onMouseDown={(e) => e.stopPropagation()} onClick={onClick} onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)}
-      style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '8px 10px', borderRadius: 'var(--r-sm)', cursor: 'pointer', fontSize: 13,
+      style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '8px 10px', borderRadius: 'var(--r-sm)', cursor: 'pointer', fontSize: '0.8125rem',
         color: active ? 'var(--gold)' : 'var(--text-2)', background: h ? 'color-mix(in srgb, var(--star-blue) 9%, transparent)' : 'transparent', transition: 'background var(--dur-fast)' }}>
       {children}
     </div>
@@ -337,7 +337,7 @@ function ListView({ onOpen, onOpenCon, onFeynman }) {
   // 批量条上的文字动作：真按钮，可聚焦、可回车
   const TextAction = ({ onClick, children }) => (
     <button type="button" onClick={onClick} className="sr-focus-ring"
-      style={{ background: 'none', border: 'none', font: 'inherit', fontSize: 12, color: 'var(--text-3)', cursor: 'pointer', padding: '6px 4px' }}>
+      style={{ background: 'none', border: 'none', font: 'inherit', fontSize: '0.75rem', color: 'var(--text-3)', cursor: 'pointer', padding: '6px 4px' }}>
       {children}
     </button>
   );
@@ -387,12 +387,12 @@ function ListView({ onOpen, onOpenCon, onFeynman }) {
         {/* health summary */}
         <div className="sr-list-summary" style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 18 }}>
           <div style={{ flex: 1 }}>
-            <div style={{ fontSize: 23, fontWeight: 300, color: 'var(--text-1)' }}>笔记管理</div>
-            <div style={{ fontSize: 13, color: 'var(--text-3)', marginTop: 2 }}>{total} 颗星 · <span style={{ color: litTotal ? 'var(--gold)' : 'inherit' }}>{litTotal} 已点亮</span> · {dimming} 颗偏暗</div>
+            <div style={{ fontSize: '1.4375rem', fontWeight: 300, color: 'var(--text-1)' }}>笔记管理</div>
+            <div style={{ fontSize: '0.8125rem', color: 'var(--text-3)', marginTop: 2 }}>{total} 颗星 · <span style={{ color: litTotal ? 'var(--gold)' : 'inherit' }}>{litTotal} 已点亮</span> · {dimming} 颗偏暗</div>
           </div>
           <GlassPanel radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', gap: 18, padding: '9px 20px' }}>
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, fontSize: 12.5, color: 'var(--text-2)' }}><Icon name="activity" size={16} color="var(--gold)" />知识体检</span>
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: 13, color: health >= 60 ? 'var(--gold)' : 'var(--star-blue-dim)' }}>健康度 {health}%</span>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, fontSize: '0.78125rem', color: 'var(--text-2)' }}><Icon name="activity" size={16} color="var(--gold)" />知识体检</span>
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8125rem', color: health >= 60 ? 'var(--gold)' : 'var(--star-blue-dim)' }}>健康度 {health}%</span>
           </GlassPanel>
         </div>
 
@@ -435,18 +435,18 @@ function ListView({ onOpen, onOpenCon, onFeynman }) {
           <Tag icon="alarm-clock" active={overdueOnly} onClick={() => setOverdueOnly(v => !v)}>逾期</Tag>
 
           <div style={{ flex: 1 }} />
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--text-3)' }}>
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--text-3)' }}>
             {rows.length}<span style={{ opacity: 0.5 }}> / {total}</span> 颗{sel.length > 0 && <span style={{ color: 'var(--gold)' }}> · 选 {sel.length}</span>}
           </span>
           {anyFilter && <span role="button" tabIndex={0} className="sr-focus-ring" onClick={resetFilters}
             onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); resetFilters(); } }}
-            style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: 12, color: 'var(--text-3)', cursor: 'pointer' }}><Icon name="x" size={13} color="currentColor" />清除筛选</span>}
+            style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: '0.75rem', color: 'var(--text-3)', cursor: 'pointer' }}><Icon name="x" size={13} color="currentColor" />清除筛选</span>}
         </div>
 
         {/* batch bar */}
         {sel.length > 0 && (
           <GlassPanel radius="md" pad="none" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 16px', marginBottom: 12, flexWrap: 'wrap' }}>
-            <span style={{ fontSize: 13, color: 'var(--text-1)' }}>已选 {sel.length} 颗</span>
+            <span style={{ fontSize: '0.8125rem', color: 'var(--text-1)' }}>已选 {sel.length} 颗</span>
             <TextAction onClick={selectAll}>{allChecked ? '全不选' : '全选'}</TextAction>
             <TextAction onClick={invert}>反选</TextAction>
             <TextAction onClick={() => setSel([])}>取消</TextAction>
@@ -459,7 +459,7 @@ function ListView({ onOpen, onOpenCon, onFeynman }) {
         )}
 
         {/* table head */}
-        <div className="sr-list-head" style={{ display: 'grid', gridTemplateColumns: GRID, gap: 14, padding: '0 16px 10px', fontFamily: 'var(--font-mono)', fontSize: 10, letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase' }}>
+        <div className="sr-list-head" style={{ display: 'grid', gridTemplateColumns: GRID, gap: 14, padding: '0 16px 10px', fontFamily: 'var(--font-mono)', fontSize: '0.625rem', letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase' }}>
           <Checkbox on={allChecked} dash={!allChecked && someChecked} onClick={selectAll} label="全选本页" />
           <HeadCell k="title">标题</HeadCell>
           <HeadCell k="strength">记忆强度</HeadCell>
@@ -478,14 +478,14 @@ function ListView({ onOpen, onOpenCon, onFeynman }) {
               {total === 0
                 ? (
                   <div>
-                    <div style={{ color: 'var(--text-2)', fontSize: 14 }}>你的星空还很暗。<span style={{ color: 'var(--text-3)' }}>写下第一颗星，让它发光。</span></div>
+                    <div style={{ color: 'var(--text-2)', fontSize: '0.875rem' }}>你的星空还很暗。<span style={{ color: 'var(--text-3)' }}>写下第一颗星，让它发光。</span></div>
                     <div style={{ display: 'flex', justifyContent: 'center', gap: 10, marginTop: 18 }}>
                       <Button size="sm" variant="primary" icon="plus" glow onClick={() => { setNewStarDraft(''); setNewStarOpen(true); }}>写下第一颗星</Button>
                       {D.loadDemo && <Button size="sm" variant="ghost" icon="telescope" title="载入一片可随时清空的演示星空" onClick={() => D.loadDemo()}>载入示例星系</Button>}
                     </div>
                   </div>
                 )
-                : <div style={{ color: 'var(--text-2)', fontSize: 14 }}>没有匹配的星。<span style={{ color: 'var(--text-3)' }}>换个关键词，或</span><button type="button" onClick={resetFilters} className="sr-focus-ring" style={{ background: 'none', border: 'none', padding: 0, font: 'inherit', color: 'var(--gold)', cursor: 'pointer' }}>清除筛选</button>。</div>}
+                : <div style={{ color: 'var(--text-2)', fontSize: '0.875rem' }}>没有匹配的星。<span style={{ color: 'var(--text-3)' }}>换个关键词，或</span><button type="button" onClick={resetFilters} className="sr-focus-ring" style={{ background: 'none', border: 'none', padding: 0, font: 'inherit', color: 'var(--gold)', cursor: 'pointer' }}>清除筛选</button>。</div>}
             </div>
           )}
 
@@ -524,32 +524,32 @@ function ListView({ onOpen, onOpenCon, onFeynman }) {
                         onChange={(e) => setRenameDraft(e.target.value)}
                         onBlur={commitRename}
                         onKeyDown={(e) => { if (e.key === 'Enter') commitRename(); if (e.key === 'Escape') setRenameId(null); }}
-                        style={{ height: 24, minWidth: 0, flex: 1, boxSizing: 'border-box', background: 'var(--input-bg, rgba(3,4,12,0.45))', border: '1px solid var(--glass-border-strong)', borderRadius: 'var(--r-sm)', color: 'var(--text-1)', fontSize: 13.5, padding: '0 8px', outline: 'none', fontFamily: 'var(--font-sans)' }} />
+                        style={{ height: 24, minWidth: 0, flex: 1, boxSizing: 'border-box', background: 'var(--input-bg, rgba(3,4,12,0.45))', border: '1px solid var(--glass-border-strong)', borderRadius: 'var(--r-sm)', color: 'var(--text-1)', fontSize: '0.84375rem', padding: '0 8px', outline: 'none', fontFamily: 'var(--font-sans)' }} />
                     ) : (
                       <span onDoubleClick={(e) => { e.stopPropagation(); startRename(n); }} title="双击重命名"
-                        style={{ fontSize: 14.5, color: dim ? 'var(--text-2)' : 'var(--text-1)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{n.title}</span>
+                        style={{ fontSize: '0.90625rem', color: dim ? 'var(--text-2)' : 'var(--text-1)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{n.title}</span>
                     )}
                     {litRow && <span title="已点亮 · 讲清楚的东西，暗得更慢。" style={{ flex: 'none', width: 9, height: 9, borderRadius: '50%', boxSizing: 'border-box', border: '1px solid var(--gold)' }} />}
-                    {emberRow && <span title="曾点亮的星暗了下来。再讲透一次，就能重燃。" style={{ flex: 'none', display: 'inline-flex', alignItems: 'center', gap: 3, height: 17, padding: '0 7px', borderRadius: 'var(--r-pill)', background: 'color-mix(in srgb, var(--gold-warm) 10%, transparent)', border: '1px solid color-mix(in srgb, var(--gold-warm) 30%, transparent)', fontSize: 10, color: 'var(--gold-warm)' }}><Icon name="flame" size={10} color="var(--gold-warm)" />待重燃</span>}
-                    {queued && <span title="已加入复习队列" style={{ flex: 'none', display: 'inline-flex', alignItems: 'center', gap: 3, height: 17, padding: '0 7px', borderRadius: 'var(--r-pill)', background: 'rgba(255,217,138,0.12)', border: '1px solid rgba(255,217,138,0.28)', fontSize: 10, color: 'var(--gold)' }}><Icon name="repeat" size={10} color="var(--gold)" />待复习</span>}
+                    {emberRow && <span title="曾点亮的星暗了下来。再讲透一次，就能重燃。" style={{ flex: 'none', display: 'inline-flex', alignItems: 'center', gap: 3, height: 17, padding: '0 7px', borderRadius: 'var(--r-pill)', background: 'color-mix(in srgb, var(--gold-warm) 10%, transparent)', border: '1px solid color-mix(in srgb, var(--gold-warm) 30%, transparent)', fontSize: '0.625rem', color: 'var(--gold-warm)' }}><Icon name="flame" size={10} color="var(--gold-warm)" />待重燃</span>}
+                    {queued && <span title="已加入复习队列" style={{ flex: 'none', display: 'inline-flex', alignItems: 'center', gap: 3, height: 17, padding: '0 7px', borderRadius: 'var(--r-pill)', background: 'rgba(255,217,138,0.12)', border: '1px solid rgba(255,217,138,0.28)', fontSize: '0.625rem', color: 'var(--gold)' }}><Icon name="repeat" size={10} color="var(--gold)" />待复习</span>}
                   </div>
-                  <div style={{ display: 'flex', gap: 5, marginTop: 4 }}>{(n.tags || []).map(t => <span key={t} style={{ fontSize: 10.5, color: 'var(--text-3)' }}>#{t}</span>)}</div>
+                  <div style={{ display: 'flex', gap: 5, marginTop: 4 }}>{(n.tags || []).map(t => <span key={t} style={{ fontSize: '0.65625rem', color: 'var(--text-3)' }}>#{t}</span>)}</div>
                 </div>
 
                 <div className="sr-lc-mem" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                   <div style={{ flex: 1 }}><MemoryBar value={n.strength} height={5} fading={dim} /></div>
-                  <span style={{ fontSize: 11, color: sl.c, width: 38 }}>{sl.t}</span>
+                  <span style={{ fontSize: '0.6875rem', color: sl.c, width: 38 }}>{sl.t}</span>
                 </div>
 
                 <span className="sr-lc-con" onClick={(e) => { e.stopPropagation(); onOpenCon && onOpenCon(n.con); }} title="在星图中聚焦该星域"
-                  style={{ display: 'inline-flex', alignItems: 'center', gap: 7, fontSize: 12.5, color: 'var(--text-2)', minWidth: 0 }}>
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: 7, fontSize: '0.78125rem', color: 'var(--text-2)', minWidth: 0 }}>
                   <span style={{ flex: 'none', width: 7, height: 7, borderRadius: '50%', background: D.conColor(n.con), boxShadow: `0 0 6px ${D.conColor(n.con)}` }} />
                   <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{D.conName(n.con)}</span>
                 </span>
 
-                <span className="sr-lc-review" style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: reviewColor(n.nextReview) }}>{n.nextReview}</span>
+                <span className="sr-lc-review" style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: reviewColor(n.nextReview) }}>{n.nextReview}</span>
 
-                <span className="sr-lc-links" style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--text-3)' }}><Icon name="link" size={13} color="currentColor" />{n.links}</span>
+                <span className="sr-lc-links" style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--text-3)' }}><Icon name="link" size={13} color="currentColor" />{n.links}</span>
 
                 {/* hover quick actions */}
                 {hov && (
@@ -577,11 +577,11 @@ function ListView({ onOpen, onOpenCon, onFeynman }) {
           onClose={() => { setDialog(null); setMoveTarget(null); }}
           onYes={() => dialog.onYes(dialog.body === 'tag' ? tagDraft : dialog.body === 'pickCon' ? moveTarget : undefined)}>
           {dialog.body === 'review' && (
-            <div style={{ fontSize: 13.5, lineHeight: 1.7, color: 'var(--text-2)' }}>把已选的 <span style={{ color: 'var(--gold)' }}>{dialog.ids.length}</span> 颗星加入复习队列，下次复习将提前到「明天」。</div>
+            <div style={{ fontSize: '0.84375rem', lineHeight: 1.7, color: 'var(--text-2)' }}>把已选的 <span style={{ color: 'var(--gold)' }}>{dialog.ids.length}</span> 颗星加入复习队列，下次复习将提前到「明天」。</div>
           )}
           {dialog.body === 'tag' && (
             <div>
-              <div style={{ fontSize: 13, color: 'var(--text-2)', marginBottom: 10 }}>为已选的 {dialog.ids.length} 颗星添加一个标签：</div>
+              <div style={{ fontSize: '0.8125rem', color: 'var(--text-2)', marginBottom: 10 }}>为已选的 {dialog.ids.length} 颗星添加一个标签：</div>
               <Input icon="hash" placeholder="输入标签名…" size="sm" value={tagDraft} onChange={(e) => setTagDraft(e && e.target ? e.target.value : (e || ''))} />
               {allTags.length > 0 && (
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 10 }}>
@@ -592,7 +592,7 @@ function ListView({ onOpen, onOpenCon, onFeynman }) {
           )}
           {dialog.body === 'pickCon' && (
             <div>
-              <div style={{ fontSize: 13, color: 'var(--text-2)', marginBottom: 10 }}>把已选的 {dialog.ids.length} 颗星移动到：</div>
+              <div style={{ fontSize: '0.8125rem', color: 'var(--text-2)', marginBottom: 10 }}>把已选的 {dialog.ids.length} 颗星移动到：</div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
                 {D.constellations.map(c => (
                   <MenuRow key={c.id} active={moveTarget === c.id} onClick={() => setMoveTarget(c.id)}>
@@ -611,7 +611,7 @@ function ListView({ onOpen, onOpenCon, onFeynman }) {
         <ActionDialog icon="sparkles" accent="var(--gold)" title="写下第一颗星" confirmLabel="点亮"
           confirmDisabled={!newStarDraft.trim()}
           onClose={() => setNewStarOpen(false)} onYes={createFirstStar}>
-          <div style={{ fontSize: 13, color: 'var(--text-2)', marginBottom: 10 }}>给它一个名字——一个概念、一条公式、一个此刻想留住的念头。</div>
+          <div style={{ fontSize: '0.8125rem', color: 'var(--text-2)', marginBottom: 10 }}>给它一个名字——一个概念、一条公式、一个此刻想留住的念头。</div>
           <Input icon="sparkles" placeholder="例如「傅里叶变换」…" size="sm" autoFocus value={newStarDraft}
             onChange={(e) => setNewStarDraft(e && e.target ? e.target.value : (e || ''))}
             onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); createFirstStar(); } }} />
@@ -627,7 +627,7 @@ function ListView({ onOpen, onOpenCon, onFeynman }) {
       {toast && (
         <div role="status" style={{ position: 'fixed', bottom: 26, left: '50%', transform: 'translateX(-50%)', zIndex: 130, animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
           <GlassPanel strong radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '10px 18px' }}>
-            <Icon name="check" size={16} color="var(--gold)" /><span style={{ fontSize: 13.5, color: 'var(--text-1)' }}>{toast}</span>
+            <Icon name="check" size={16} color="var(--gold)" /><span style={{ fontSize: '0.84375rem', color: 'var(--text-1)' }}>{toast}</span>
           </GlassPanel>
         </div>
       )}

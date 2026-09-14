@@ -93,7 +93,7 @@ function Slider({ value, onChange, min = 0, max = 100, label, leftHint, rightHin
         className="sr-aicfg-range"
       />
       {(leftHint || rightHint) && (
-        <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 4, fontSize: 11, color: 'var(--text-3)' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 4, fontSize: '0.6875rem', color: 'var(--text-3)' }}>
           <span>{leftHint}</span><span>{rightHint}</span>
         </div>
       )}
@@ -106,10 +106,10 @@ function Section({ icon, title, hint, children }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
       <div>
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 12, letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: 'var(--text-3)', fontFamily: 'var(--font-mono)' }}>
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: '0.75rem', letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: 'var(--text-3)', fontFamily: 'var(--font-mono)' }}>
           {icon && <Icon name={icon} size={15} color="var(--star-blue)" />}{title}
         </div>
-        {hint && <div style={{ fontSize: 12.5, lineHeight: 1.6, color: 'var(--text-3)', marginTop: 6, maxWidth: 460 }}>{hint}</div>}
+        {hint && <div style={{ fontSize: '0.78125rem', lineHeight: 1.6, color: 'var(--text-3)', marginTop: 6, maxWidth: 460 }}>{hint}</div>}
       </div>
       {children}
     </div>
@@ -136,7 +136,7 @@ function ProviderTabs({ value, onChange }) {
               flex: 1, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 7,
               padding: '9px 10px', cursor: 'pointer', border: '1px solid',
               borderColor: on ? 'rgba(255,217,138,0.4)' : 'transparent',
-              borderRadius: 'var(--r-sm)', font: 'inherit', fontSize: 13,
+              borderRadius: 'var(--r-sm)', font: 'inherit', fontSize: '0.8125rem',
               color: on ? 'var(--text-1)' : 'var(--text-3)',
               background: on ? 'rgba(255,217,138,0.10)' : 'transparent',
               transition: 'background var(--dur-fast), color var(--dur-fast), border-color var(--dur-fast)',
@@ -204,12 +204,12 @@ function ModelDropdown({ value, onChange, models }) {
         <Icon name="sparkles" size={18} color="var(--gold)" />
         <span style={{ flex: 1 }}>
           <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <span style={{ fontSize: 14.5, color: 'var(--text-1)', fontFamily: isPreset ? 'inherit' : 'var(--font-mono)' }}>
+            <span style={{ fontSize: '0.90625rem', color: 'var(--text-1)', fontFamily: isPreset ? 'inherit' : 'var(--font-mono)' }}>
               {isPreset ? cur.name : (value || '自定义模型 ID')}
             </span>
             <Badge tone="gold">{cur.tier}</Badge>
           </span>
-          <span style={{ display: 'block', fontSize: 12, color: 'var(--text-3)', marginTop: 3 }}>{cur.desc}</span>
+          <span style={{ display: 'block', fontSize: '0.75rem', color: 'var(--text-3)', marginTop: 3 }}>{cur.desc}</span>
         </span>
         <Icon name={open ? 'chevron-up' : 'chevron-down'} size={16} color="var(--text-3)" />
       </button>
@@ -234,12 +234,12 @@ function ModelDropdown({ value, onChange, models }) {
                     <Icon name={m.id === '__custom' ? 'pen-line' : 'sparkles'} size={16} color={on ? 'var(--gold)' : 'var(--text-3)'} style={{ marginTop: 2 }} />
                     <div style={{ flex: 1 }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                        <span style={{ fontSize: 13.5, color: on ? 'var(--text-1)' : 'var(--text-2)' }}>{m.name}</span>
+                        <span style={{ fontSize: '0.84375rem', color: on ? 'var(--text-1)' : 'var(--text-2)' }}>{m.name}</span>
                         <Badge tone={on ? 'gold' : 'neutral'}>{m.tier}</Badge>
                       </div>
-                      <div style={{ fontSize: 11.5, color: 'var(--text-3)', marginTop: 3 }}>{m.desc}</div>
+                      <div style={{ fontSize: '0.71875rem', color: 'var(--text-3)', marginTop: 3 }}>{m.desc}</div>
                       {m.id !== '__custom' && (
-                        <div style={{ display: 'flex', gap: 14, marginTop: 5, fontSize: 10.5, color: 'var(--text-3)', fontFamily: 'var(--font-mono)' }}>
+                        <div style={{ display: 'flex', gap: 14, marginTop: 5, fontSize: '0.65625rem', color: 'var(--text-3)', fontFamily: 'var(--font-mono)' }}>
                           <span>响应 · {m.speed}</span><span>消耗 · {m.cost}</span>
                         </div>
                       )}
@@ -342,8 +342,8 @@ function AIConfig({ onClose }) {
                 <Icon name="bot" size={20} color="var(--gold)" />
               </span>
               <div>
-                <div style={{ fontSize: 17, fontWeight: 400, color: 'var(--text-1)' }}>AI 配置</div>
-                <div style={{ fontSize: 12, color: 'var(--text-3)', marginTop: 2 }}>设定那位陪你点亮星空的智能助手</div>
+                <div style={{ fontSize: '1.0625rem', fontWeight: 400, color: 'var(--text-1)' }}>AI 配置</div>
+                <div style={{ fontSize: '0.75rem', color: 'var(--text-3)', marginTop: 2 }}>设定那位陪你点亮星空的智能助手</div>
               </div>
             </div>
             <IconButton name="x" title="关闭" onClick={onClose} />
@@ -354,11 +354,11 @@ function AIConfig({ onClose }) {
 
             <Section icon="plug-zap" title="服务商与接入" hint="默认使用 OpenAI 接口规范。Base URL 与 API Key 只保存在本机浏览器，也只会发往你配置的地址。">
               <ProviderTabs value={provider.id} onChange={switchProvider} />
-              <div style={{ fontSize: 12, color: 'var(--text-3)', margin: '-4px 2px 0' }}>{provider.desc}</div>
+              <div style={{ fontSize: '0.75rem', color: 'var(--text-3)', margin: '-4px 2px 0' }}>{provider.desc}</div>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                 <div>
-                  <div style={{ fontSize: 12.5, color: 'var(--text-2)', marginBottom: 6 }}>Base URL</div>
+                  <div style={{ fontSize: '0.78125rem', color: 'var(--text-2)', marginBottom: 6 }}>Base URL</div>
                   <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
                     <Input
                       value={prov.baseUrl}
@@ -376,7 +376,7 @@ function AIConfig({ onClose }) {
                 </div>
 
                 <div>
-                  <div style={{ fontSize: 12.5, color: 'var(--text-2)', marginBottom: 6 }}>API Key</div>
+                  <div style={{ fontSize: '0.78125rem', color: 'var(--text-2)', marginBottom: 6 }}>API Key</div>
                   <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
                     <Input
                       value={prov.key}
@@ -400,17 +400,17 @@ function AIConfig({ onClose }) {
                     {test.state === 'testing' ? '测试中…' : '测试连接'}
                   </Button>
                   {test.state === 'ok' && (
-                    <span role="status" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12, color: 'var(--gold)' }}>
+                    <span role="status" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: '0.75rem', color: 'var(--gold)' }}>
                       <Icon name="circle-check" size={14} color="var(--gold)" />{test.msg}
                     </span>
                   )}
                   {test.state === 'err' && (
-                    <span role="alert" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12, color: 'var(--danger)' }}>
+                    <span role="alert" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: '0.75rem', color: 'var(--danger)' }}>
                       <Icon name="circle-alert" size={14} color="var(--danger)" />{test.msg}
                     </span>
                   )}
                   {saved && test.state === 'idle' && (
-                    <span role="status" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12, color: 'var(--gold)' }}>
+                    <span role="status" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: '0.75rem', color: 'var(--gold)' }}>
                       <Icon name="shield-check" size={14} color="var(--gold)" />配置已存于本地浏览器
                     </span>
                   )}
@@ -441,15 +441,15 @@ function AIConfig({ onClose }) {
               <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: '4px 2px' }}>
                 <div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 8 }}>
-                    <span style={{ fontSize: 13, color: 'var(--text-2)' }}>性格</span>
-                    <span style={{ fontSize: 12, color: 'var(--gold)', fontFamily: 'var(--font-mono)' }}>{personaWord}</span>
+                    <span style={{ fontSize: '0.8125rem', color: 'var(--text-2)' }}>性格</span>
+                    <span style={{ fontSize: '0.75rem', color: 'var(--gold)', fontFamily: 'var(--font-mono)' }}>{personaWord}</span>
                   </div>
                   <Slider value={cfg.persona} onChange={(v) => set({ persona: v })} label="学生性格" leftHint="温和鼓励" rightHint="刨根问底" />
                 </div>
                 <div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 8 }}>
-                    <span style={{ fontSize: 13, color: 'var(--text-2)' }}>严格度</span>
-                    <span style={{ fontSize: 12, color: 'var(--gold)', fontFamily: 'var(--font-mono)' }}>{strictWord}</span>
+                    <span style={{ fontSize: '0.8125rem', color: 'var(--text-2)' }}>严格度</span>
+                    <span style={{ fontSize: '0.75rem', color: 'var(--gold)', fontFamily: 'var(--font-mono)' }}>{strictWord}</span>
                   </div>
                   <Slider value={cfg.strictness} onChange={(v) => set({ strictness: v })} label="学生严格度" leftHint="听懂即过" rightHint="必须讲透" />
                 </div>
@@ -481,8 +481,8 @@ function AIConfig({ onClose }) {
                         {on && <span style={{ width: 7, height: 7, borderRadius: '50%', background: 'var(--gold)', boxShadow: '0 0 6px var(--gold)' }} />}
                       </span>
                       <div>
-                        <div style={{ fontSize: 13.5, color: on ? 'var(--text-1)' : 'var(--text-2)' }}>{s.label}</div>
-                        <div style={{ fontSize: 12, color: 'var(--text-3)', marginTop: 2 }}>{s.desc}</div>
+                        <div style={{ fontSize: '0.84375rem', color: on ? 'var(--text-1)' : 'var(--text-2)' }}>{s.label}</div>
+                        <div style={{ fontSize: '0.75rem', color: 'var(--text-3)', marginTop: 2 }}>{s.desc}</div>
                       </div>
                     </div>
                   );
@@ -506,8 +506,8 @@ function AIConfig({ onClose }) {
 
           {/* footer */}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, padding: '14px 22px', borderTop: '1px solid var(--line)' }}>
-            <span style={{ fontSize: 11.5, color: 'var(--text-3)', display: 'inline-flex', alignItems: 'center', gap: 6 }}>
-              <span style={{ fontFamily: 'var(--font-mono)', fontSize: 10.5, color: 'var(--text-3)', border: '1px solid var(--line-strong)', borderRadius: 6, padding: '2px 6px' }}>ESC</span>
+            <span style={{ fontSize: '0.71875rem', color: 'var(--text-3)', display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65625rem', color: 'var(--text-3)', border: '1px solid var(--line-strong)', borderRadius: 6, padding: '2px 6px' }}>ESC</span>
               关闭
             </span>
             <div style={{ display: 'flex', gap: 10 }}>
@@ -525,8 +525,8 @@ function ToggleRow({ on, onChange, title, desc }) {
   return (
     <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12, padding: '11px 2px' }}>
       <div style={{ flex: 1 }}>
-        <div style={{ fontSize: 13.5, color: 'var(--text-1)' }}>{title}</div>
-        <div style={{ fontSize: 12, color: 'var(--text-3)', marginTop: 3, lineHeight: 1.55 }}>{desc}</div>
+        <div style={{ fontSize: '0.84375rem', color: 'var(--text-1)' }}>{title}</div>
+        <div style={{ fontSize: '0.75rem', color: 'var(--text-3)', marginTop: 3, lineHeight: 1.55 }}>{desc}</div>
       </div>
       <div style={{ marginTop: 2 }}><Toggle on={on} onChange={onChange} label={title} /></div>
     </div>

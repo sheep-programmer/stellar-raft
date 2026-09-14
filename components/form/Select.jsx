@@ -33,7 +33,7 @@ export function Select({
   const reduced = typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const h = { sm: 34, md: 40, lg: 46 }[size] || 40;
-  const fs = { sm: 13, md: 14.5, lg: 16 }[size] || 14.5;
+  const fs = { sm: '0.8125rem', md: '0.90625rem', lg: '1rem' }[size] || '0.90625rem';
   const selIdx = options.findIndex((o) => o.value === value);
   const selected = selIdx >= 0 ? options[selIdx] : null;
   const enabledIdx = options.map((o, i) => (o.disabled ? -1 : i)).filter((i) => i >= 0);
@@ -172,7 +172,7 @@ export function Select({
                 style={{
                   display: 'flex', alignItems: 'center', gap: 8,
                   height: 34, padding: '0 10px', borderRadius: 'var(--r-sm)',
-                  fontSize: 13.5, fontFamily: 'var(--font-sans)',
+                  fontSize: '0.84375rem', fontFamily: 'var(--font-sans)',
                   color: o.disabled ? 'var(--text-disabled)' : (isSel || isAct ? 'var(--text-1)' : 'var(--text-2)'),
                   background: isAct && !o.disabled ? 'rgba(159,198,255,0.10)' : 'transparent',
                   cursor: o.disabled ? 'not-allowed' : 'pointer',

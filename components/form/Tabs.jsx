@@ -31,7 +31,7 @@ function TabButton({ tab, selected, tabId, onPick, refFn, size }) {
         height: h, padding: '0 14px',
         background: 'none', border: 'none',
         fontFamily: 'var(--font-sans)',
-        fontSize: size === 'sm' ? 13 : 13.5,
+        fontSize: size === 'sm' ? '0.8125rem' : '0.84375rem',
         letterSpacing: '0.01em',
         color: tab.disabled
           ? 'var(--text-disabled)'
@@ -44,7 +44,7 @@ function TabButton({ tab, selected, tabId, onPick, refFn, size }) {
       {tab.icon && <Icon name={tab.icon} size={15} color={selected ? 'var(--star-blue)' : 'currentColor'} />}
       {tab.label}
       {tab.count != null && (
-        <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-3)' }}>{tab.count}</span>
+        <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6875rem', color: 'var(--text-3)' }}>{tab.count}</span>
       )}
     </button>
   );

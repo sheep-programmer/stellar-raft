@@ -204,7 +204,7 @@ function Inbox({ onFocusCon, onOpen }) {
 
   const ConPicker = ({ suggest, onPick, onCancel }) => (
     <div style={{ marginTop: 12, paddingTop: 12, borderTop: '1px solid var(--line)' }}>
-      <div style={{ fontSize: 11.5, color: 'var(--text-3)', marginBottom: 9 }}>归入哪个星域？点击即成星</div>
+      <div style={{ fontSize: '0.71875rem', color: 'var(--text-3)', marginBottom: 9 }}>归入哪个星域？点击即成星</div>
       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
         {D.constellations.map(c => (
           <button type="button" key={c.id} onClick={() => onPick(c.id)} className="sr-focus-ring"
@@ -212,14 +212,14 @@ function Inbox({ onFocusCon, onOpen }) {
               transition: 'all var(--dur-fast) var(--ease-flight)', font: 'inherit',
               border: '1px solid', borderColor: c.id === suggest ? 'rgba(255,217,138,0.45)' : 'var(--glass-border)',
               background: c.id === suggest ? 'rgba(255,217,138,0.08)' : 'color-mix(in srgb, var(--star-blue) 5%, transparent)',
-              fontSize: 12.5, color: 'var(--text-2)' }}
+              fontSize: '0.78125rem', color: 'var(--text-2)' }}
             onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(255,217,138,0.55)'; e.currentTarget.style.color = 'var(--gold)'; }}
             onMouseLeave={e => { e.currentTarget.style.borderColor = c.id === suggest ? 'rgba(255,217,138,0.45)' : 'var(--glass-border)'; e.currentTarget.style.color = 'var(--text-2)'; }}>
             <span style={{ width: 7, height: 7, borderRadius: '50%', background: c.color, boxShadow: `0 0 6px ${c.color}` }} />{c.name}
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: 10, opacity: 0.7 }}>{D.stars.filter(s => s.con === c.id).length}</span>
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.625rem', opacity: 0.7 }}>{D.stars.filter(s => s.con === c.id).length}</span>
           </button>
         ))}
-        <button type="button" onClick={onCancel} className="sr-focus-ring" style={{ display: 'inline-flex', alignItems: 'center', height: 28, padding: '0 11px', borderRadius: 'var(--r-pill)', cursor: 'pointer', fontSize: 12, font: 'inherit', color: 'var(--text-3)', background: 'transparent', border: '1px dashed var(--line-strong)' }}>取消</button>
+        <button type="button" onClick={onCancel} className="sr-focus-ring" style={{ display: 'inline-flex', alignItems: 'center', height: 28, padding: '0 11px', borderRadius: 'var(--r-pill)', cursor: 'pointer', fontSize: '0.75rem', font: 'inherit', color: 'var(--text-3)', background: 'transparent', border: '1px dashed var(--line-strong)' }}>取消</button>
       </div>
     </div>
   );
@@ -229,9 +229,9 @@ function Inbox({ onFocusCon, onOpen }) {
       <sr-starfield density="0.6"></sr-starfield>
       <div style={{ position: 'relative', zIndex: 2, maxWidth: 760, margin: '0 auto' }}>
         <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, marginBottom: 14 }}>
-          <div style={{ fontSize: 23, fontWeight: 300, color: 'var(--text-1)' }}>收件箱</div>
+          <div style={{ fontSize: '1.4375rem', fontWeight: 300, color: 'var(--text-1)' }}>收件箱</div>
           <div style={{ flex: 1 }} />
-          <span style={{ fontSize: 13, fontFamily: 'var(--font-mono)', color: 'var(--text-3)' }}>
+          <span style={{ fontSize: '0.8125rem', fontFamily: 'var(--font-mono)', color: 'var(--text-3)' }}>
             {tab === 'triage' ? `${items.length} 条待整理` : `${D.stars.filter(s => s.fav).length} 颗收藏`}
           </span>
         </div>
@@ -251,10 +251,10 @@ function Inbox({ onFocusCon, onOpen }) {
           <div style={{ marginBottom: 20 }}>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, margin: '0 2px 3px' }}>
               <Icon name="mail" size={14} color="var(--star-blue)" style={{ alignSelf: 'center', flex: 'none' }} />
-              <span style={{ fontSize: 13, color: 'var(--text-1)' }}>星际来信</span>
-              <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-3)' }}>{mail.filter(m => !m.claimed).length} 封未领取</span>
+              <span style={{ fontSize: '0.8125rem', color: 'var(--text-1)' }}>星际来信</span>
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6875rem', color: 'var(--text-3)' }}>{mail.filter(m => !m.claimed).length} 封未领取</span>
             </div>
-            <div style={{ fontSize: 11.5, lineHeight: 1.7, color: 'var(--text-3)', margin: '0 2px 10px' }}>
+            <div style={{ fontSize: '0.71875rem', lineHeight: 1.7, color: 'var(--text-3)', margin: '0 2px 10px' }}>
               来自星际的知识与心意——赠星收纳后从未点亮起步，讲透它，才是你的星。
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
@@ -269,43 +269,43 @@ function Inbox({ onFocusCon, onOpen }) {
                   <GlassPanel key={'mail-' + m.id} radius="md" pad="none" style={{ padding: '13px 15px', opacity: m.claimed ? 0.62 : 1 }}>
                     <div style={{ display: 'flex', gap: 11 }}>
                       {/* 发件人头像（装饰，名字在旁边） */}
-                      <span aria-hidden="true" style={{ width: 32, height: 32, flex: 'none', borderRadius: '50%', background: 'linear-gradient(140deg, #2a3566, #56689c)', border: '1px solid var(--glass-border-strong)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, color: 'var(--text-1)' }}>{from.avatar || '星'}</span>
+                      <span aria-hidden="true" style={{ width: 32, height: 32, flex: 'none', borderRadius: '50%', background: 'linear-gradient(140deg, #2a3566, #56689c)', border: '1px solid var(--glass-border-strong)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8125rem', color: 'var(--text-1)' }}>{from.avatar || '星'}</span>
                       <div style={{ flex: 1, minWidth: 0 }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 9, flexWrap: 'wrap' }}>
-                          <span style={{ fontSize: 13.5, color: 'var(--text-1)' }}>{from.name || '星际旅人'}</span>
+                          <span style={{ fontSize: '0.84375rem', color: 'var(--text-1)' }}>{from.name || '星际旅人'}</span>
                           {/* 类型徽标：星系邀请 / 星语 / 知识星（Lucide，星蓝——金色只留给点亮） */}
-                          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: 11, color: 'var(--star-blue)', border: '1px solid rgba(159,198,255,0.28)', borderRadius: 'var(--r-pill)', padding: '2.5px 9px' }}>
+                          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: '0.6875rem', color: 'var(--star-blue)', border: '1px solid rgba(159,198,255,0.28)', borderRadius: 'var(--r-pill)', padding: '2.5px 9px' }}>
                             <Icon name={galaxy ? 'radio-tower' : note ? 'quote' : 'star'} size={11} color="currentColor" />{galaxy ? '星系邀请' : note ? '星语' : '知识星'}
                           </span>
                           {m.claimed && <Badge tone="gold">{note ? '已收下' : '已收纳'}</Badge>}
                           <div style={{ flex: 1 }} />
-                          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-3)' }}><Icon name="clock" size={12} color="currentColor" />{mailAgo(m.at)}</span>
+                          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontFamily: 'var(--font-mono)', fontSize: '0.6875rem', color: 'var(--text-3)' }}><Icon name="clock" size={12} color="currentColor" />{mailAgo(m.at)}</span>
                         </div>
 
                         {note ? (
                           /* 星语正文：引文样式——金色细竖线 + 楷斜体，一句话的仪式感 */
                           <div style={{ display: 'flex', gap: 10, marginTop: 8 }}>
                             <span aria-hidden="true" style={{ flex: 'none', width: 2, borderRadius: 1, background: 'linear-gradient(180deg, rgba(255,217,138,0.55), rgba(255,217,138,0.12))' }} />
-                            <div style={{ fontSize: 14.5, lineHeight: 1.8, color: 'var(--text-1)', fontStyle: 'italic', letterSpacing: '0.015em', overflowWrap: 'anywhere' }}>
+                            <div style={{ fontSize: '0.90625rem', lineHeight: 1.8, color: 'var(--text-1)', fontStyle: 'italic', letterSpacing: '0.015em', overflowWrap: 'anywhere' }}>
                               {p.text || '…'}
                             </div>
                           </div>
                         ) : galaxy ? (
-                          <div style={{ fontSize: 13.5, lineHeight: 1.7, color: 'var(--text-2)', marginTop: 7 }}>
+                          <div style={{ fontSize: '0.84375rem', lineHeight: 1.7, color: 'var(--text-2)', marginTop: 7 }}>
                             邀请你造访「{p.galaxyName || '一片新的星空'}」
                             {p.starCount != null && <span style={{ color: 'var(--text-3)' }}> · {p.starCount} 颗星</span>}
-                            {p.code && <span style={{ display: 'block', marginTop: 5, fontFamily: 'var(--font-mono)', fontSize: 11.5, letterSpacing: '0.08em', color: 'var(--text-3)' }}>密文 {p.code}</span>}
+                            {p.code && <span style={{ display: 'block', marginTop: 5, fontFamily: 'var(--font-mono)', fontSize: '0.71875rem', letterSpacing: '0.08em', color: 'var(--text-3)' }}>密文 {p.code}</span>}
                           </div>
                         ) : (
                           <div style={{ marginTop: 7 }}>
-                            <div style={{ fontSize: 14.5, color: 'var(--text-1)' }}>{p.label || '一颗知识星'}</div>
-                            {p.summary && <div style={{ fontSize: 12.5, lineHeight: 1.65, color: 'var(--text-3)', marginTop: 5, overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>{p.summary}</div>}
+                            <div style={{ fontSize: '0.90625rem', color: 'var(--text-1)' }}>{p.label || '一颗知识星'}</div>
+                            {p.summary && <div style={{ fontSize: '0.78125rem', lineHeight: 1.65, color: 'var(--text-3)', marginTop: 5, overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>{p.summary}</div>}
                             {!!(p.keyPoints || []).length && (
                               <div style={{ marginTop: 7, display: 'flex', flexDirection: 'column', gap: 3 }}>
                                 {p.keyPoints.slice(0, 4).map((k, i) => (
-                                  <div key={i} style={{ fontSize: 12, lineHeight: 1.55, color: 'var(--text-2)', borderLeft: '2px solid var(--line)', padding: '1px 2px 1px 9px', marginLeft: 2 }}>{k}</div>
+                                  <div key={i} style={{ fontSize: '0.75rem', lineHeight: 1.55, color: 'var(--text-2)', borderLeft: '2px solid var(--line)', padding: '1px 2px 1px 9px', marginLeft: 2 }}>{k}</div>
                                 ))}
-                                {p.keyPoints.length > 4 && <div style={{ fontSize: 11, color: 'var(--text-3)', marginLeft: 13 }}>… 共 {p.keyPoints.length} 条要点，收纳后可见全部</div>}
+                                {p.keyPoints.length > 4 && <div style={{ fontSize: '0.6875rem', color: 'var(--text-3)', marginLeft: 13 }}>… 共 {p.keyPoints.length} 条要点，收纳后可见全部</div>}
                               </div>
                             )}
                           </div>
@@ -338,10 +338,10 @@ function Inbox({ onFocusCon, onOpen }) {
                                 aria-label="回一句星语"
                                 rows={2}
                                 style={{ flex: 1, minWidth: 0, resize: 'none', background: 'transparent', border: 'none', outline: 'none',
-                                  color: 'var(--text-1)', fontSize: 13.5, lineHeight: 1.7, fontFamily: 'var(--font-sans)', padding: '2px 0' }} />
+                                  color: 'var(--text-1)', fontSize: '0.84375rem', lineHeight: 1.7, fontFamily: 'var(--font-sans)', padding: '2px 0' }} />
                             </div>
                             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 7 }}>
-                              <span style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-3)' }}>
+                              <span style={{ fontSize: '0.6875rem', fontFamily: 'var(--font-mono)', color: 'var(--text-3)' }}>
                                 <span className="sr-kbd-only">{window.SRKeys.combo('Enter')} 寄出 · </span>还可写 <span style={{ color: noteReply.text.length >= 150 ? 'var(--gold)' : 'inherit' }}>{160 - noteReply.text.length}</span> 字
                               </span>
                               <div style={{ flex: 1 }} />
@@ -353,7 +353,7 @@ function Inbox({ onFocusCon, onOpen }) {
                         {open && !m.claimed && !galaxy && !note && (D.constellations.length
                           ? <ConPicker onPick={(conId) => adoptMail(m, conId)} onCancel={() => setMailPicker(null)} />
                           : (
-                            <div style={{ marginTop: 12, paddingTop: 12, borderTop: '1px solid var(--line)', fontSize: 12, lineHeight: 1.6, color: 'var(--text-3)' }}>
+                            <div style={{ marginTop: 12, paddingTop: 12, borderTop: '1px solid var(--line)', fontSize: '0.75rem', lineHeight: 1.6, color: 'var(--text-3)' }}>
                               还没有星域可以安放它——先回星图创建一个星域，再来收纳这颗星。
                             </div>
                           ))}
@@ -378,10 +378,10 @@ function Inbox({ onFocusCon, onOpen }) {
               aria-label="快速捕捉"
               rows={2}
               style={{ flex: 1, minWidth: 0, resize: 'none', background: 'transparent', border: 'none', outline: 'none',
-                color: 'var(--text-1)', fontSize: 14, lineHeight: 1.7, fontFamily: 'var(--font-sans)', padding: '3px 0' }} />
+                color: 'var(--text-1)', fontSize: '0.875rem', lineHeight: 1.7, fontFamily: 'var(--font-sans)', padding: '3px 0' }} />
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 8, paddingTop: 10, borderTop: '1px solid var(--line)' }}>
-            <span className="sr-kbd-only" style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-3)' }}>{window.SRKeys.combo('Enter') + ' 捕捉'}</span>
+            <span className="sr-kbd-only" style={{ fontSize: '0.6875rem', fontFamily: 'var(--font-mono)', color: 'var(--text-3)' }}>{window.SRKeys.combo('Enter') + ' 捕捉'}</span>
             <div style={{ flex: 1 }} />
             <Button size="sm" icon="plus" glow disabled={!draft.trim()} onClick={capture}>捕捉</Button>
           </div>
@@ -389,7 +389,7 @@ function Inbox({ onFocusCon, onOpen }) {
 
         {/* 积压提示：捕捉不会自己变成星——与体检「今日待办」的收件箱一栏同一口径 */}
         {items.length > 0 && (
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, margin: '0 2px 12px', fontSize: 12, lineHeight: 1.6, color: 'var(--text-3)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, margin: '0 2px 12px', fontSize: '0.75rem', lineHeight: 1.6, color: 'var(--text-3)' }}>
             <Icon name="info" size={13} color="var(--star-blue-dim)" style={{ flex: 'none' }} />
             <span>
               <span style={{ fontFamily: 'var(--font-mono)', color: 'var(--text-2)' }}>{items.length}</span> 条捕捉还没归入星域——归入并写下内容，它们才会成为星。
@@ -406,18 +406,18 @@ function Inbox({ onFocusCon, onOpen }) {
               { id: 'none', label: '无建议', n: items.filter(i => !i.suggest).length },
             ].map(f => (
               <Tag key={f.id} active={filter === f.id} onClick={() => setFilter(f.id)}>
-                {f.label}<span style={{ fontFamily: 'var(--font-mono)', fontSize: 10.5, opacity: 0.8, marginLeft: 4 }}>{f.n}</span>
+                {f.label}<span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65625rem', opacity: 0.8, marginLeft: 4 }}>{f.n}</span>
               </Tag>
             ))}
             <div style={{ flex: 1 }} />
             <div style={{ position: 'relative' }}>
               <Icon name="search" size={13} color="var(--text-3)" style={{ position: 'absolute', left: 9, top: 7 }} />
               <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="搜索草稿…" aria-label="搜索草稿"
-                style={{ height: 27, width: 150, boxSizing: 'border-box', background: 'var(--input-bg, rgba(3,4,12,0.45))', border: '1px solid var(--glass-border)', borderRadius: 'var(--r-pill)', color: 'var(--text-1)', fontSize: 12, padding: '0 10px 0 27px', outline: 'none', fontFamily: 'var(--font-sans)' }} />
+                style={{ height: 27, width: 150, boxSizing: 'border-box', background: 'var(--input-bg, rgba(3,4,12,0.45))', border: '1px solid var(--glass-border)', borderRadius: 'var(--r-pill)', color: 'var(--text-1)', fontSize: '0.75rem', padding: '0 10px 0 27px', outline: 'none', fontFamily: 'var(--font-sans)' }} />
             </div>
             <button type="button" onClick={toggleAll} title={allChecked ? '取消全选' : '全选当前列表'} className="sr-focus-ring"
               aria-pressed={allChecked}
-              style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12, font: 'inherit', color: 'var(--text-3)', cursor: 'pointer', background: 'none', border: 'none', padding: '4px 2px' }}>
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: '0.75rem', font: 'inherit', color: 'var(--text-3)', cursor: 'pointer', background: 'none', border: 'none', padding: '4px 2px' }}>
               <CheckBox checked={allChecked} />全选
             </button>
           </div>
@@ -426,7 +426,7 @@ function Inbox({ onFocusCon, onOpen }) {
         {/* 批量操作条 */}
         {sel.length > 0 && (
           <GlassPanel strong radius="md" pad="none" glow style={{ padding: '9px 14px', marginBottom: 12, display: 'flex', alignItems: 'center', gap: 10 }}>
-            <span style={{ fontSize: 12.5, color: 'var(--text-1)' }}>已选 <b style={{ color: 'var(--gold)', fontWeight: 500, fontFamily: 'var(--font-mono)' }}>{sel.length}</b> 条</span>
+            <span style={{ fontSize: '0.78125rem', color: 'var(--text-1)' }}>已选 <b style={{ color: 'var(--gold)', fontWeight: 500, fontFamily: 'var(--font-mono)' }}>{sel.length}</b> 条</span>
             <div style={{ flex: 1 }} />
             {selSuggested.length > 0 && (
               <Button size="sm" icon="sparkles" glow onClick={() => fileBySuggest(sel)}>按建议归入 {selSuggested.length} 条</Button>
@@ -447,8 +447,8 @@ function Inbox({ onFocusCon, onOpen }) {
             <span style={{ width: 56, height: 56, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(159,198,255,0.06)', boxShadow: '0 0 22px rgba(159,198,255,0.10) inset' }}>
               <Icon name="inbox" size={26} color="var(--star-blue)" />
             </span>
-            <div style={{ fontSize: 15, color: 'var(--text-2)' }}>{items.length ? '没有匹配的草稿' : '收件箱已清空'}</div>
-            <div style={{ fontSize: 12.5, lineHeight: 1.7, maxWidth: 320 }}>
+            <div style={{ fontSize: '0.9375rem', color: 'var(--text-2)' }}>{items.length ? '没有匹配的草稿' : '收件箱已清空'}</div>
+            <div style={{ fontSize: '0.78125rem', lineHeight: 1.7, maxWidth: 320 }}>
               {items.length ? '换个关键词或切换过滤条件试试。' : <span>所有捕获都已整理入星域。<br />有了新念头，就在上面随手记下一颗星。</span>}
             </div>
           </div>
@@ -475,11 +475,11 @@ function Inbox({ onFocusCon, onOpen }) {
                           D.persist();
                           flash('已更新捕获');
                         }}
-                        style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--text-1)', outline: 'none', cursor: 'text', caretColor: 'var(--gold)' }}>{it.text}</div>
+                        style={{ fontSize: '0.875rem', lineHeight: 1.7, color: 'var(--text-1)', outline: 'none', cursor: 'text', caretColor: 'var(--gold)' }}>{it.text}</div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginTop: 10, flexWrap: 'wrap' }}>
-                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-3)' }}><Icon name="clock" size={12} color="currentColor" />{it.captured}</span>
+                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontFamily: 'var(--font-mono)', fontSize: '0.6875rem', color: 'var(--text-3)' }}><Icon name="clock" size={12} color="currentColor" />{it.captured}</span>
                         {it.suggest && (
-                          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: 11.5, color: 'var(--text-3)' }}>
+                          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: '0.71875rem', color: 'var(--text-3)' }}>
                             建议 <span style={{ width: 7, height: 7, borderRadius: '50%', background: D.conColor(it.suggest), boxShadow: `0 0 6px ${D.conColor(it.suggest)}` }} />{D.conName(it.suggest)}
                           </span>
                         )}
@@ -510,10 +510,10 @@ function Inbox({ onFocusCon, onOpen }) {
       {toast && (
         <div role="status" style={{ position: 'fixed', bottom: 26, left: '50%', transform: 'translateX(-50%)', zIndex: 95, animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
           <GlassPanel strong radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '10px 18px' }}>
-            <Icon name={toast.tone === 'danger' ? 'circle-alert' : 'check'} size={16} color={toast.tone === 'danger' ? 'var(--danger)' : 'var(--gold)'} /><span style={{ fontSize: 13.5, color: 'var(--text-1)' }}>{toast.msg}</span>
+            <Icon name={toast.tone === 'danger' ? 'circle-alert' : 'check'} size={16} color={toast.tone === 'danger' ? 'var(--danger)' : 'var(--gold)'} /><span style={{ fontSize: '0.84375rem', color: 'var(--text-1)' }}>{toast.msg}</span>
             {toast.con && onFocusCon && (
               <button type="button" onClick={() => onFocusCon(toast.con)} className="sr-focus-ring"
-                style={{ fontSize: 12.5, font: 'inherit', color: 'var(--star-blue)', cursor: 'pointer', background: 'none', border: 'none', padding: 0, borderBottom: '1px dashed rgba(159,198,255,0.5)' }}>在星图中查看</button>
+                style={{ fontSize: '0.78125rem', font: 'inherit', color: 'var(--star-blue)', cursor: 'pointer', background: 'none', border: 'none', padding: 0, borderBottom: '1px dashed rgba(159,198,255,0.5)' }}>在星图中查看</button>
             )}
           </GlassPanel>
         </div>
@@ -531,8 +531,8 @@ function FavList({ D, onOpen, onFocusCon, onUnfav }) {
         <span style={{ width: 56, height: 56, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(255,217,138,0.06)', boxShadow: '0 0 22px rgba(255,217,138,0.10) inset' }}>
           <Icon name="star" size={26} color="var(--gold)" />
         </span>
-        <div style={{ fontSize: 15, color: 'var(--text-2)' }}>还没有收藏</div>
-        <div style={{ fontSize: 12.5, lineHeight: 1.7, maxWidth: 320 }}>打开任何一颗星，点右上角的星形按钮，<br />它就会出现在这里，随手可达。</div>
+        <div style={{ fontSize: '0.9375rem', color: 'var(--text-2)' }}>还没有收藏</div>
+        <div style={{ fontSize: '0.78125rem', lineHeight: 1.7, maxWidth: 320 }}>打开任何一颗星，点右上角的星形按钮，<br />它就会出现在这里，随手可达。</div>
       </div>
     );
   }
@@ -546,13 +546,13 @@ function FavList({ D, onOpen, onFocusCon, onUnfav }) {
             </span>
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
-                <span onClick={() => onOpen && onOpen(s.id)} style={{ fontSize: 15.5, color: 'var(--text-1)', cursor: 'pointer' }}>{s.label}</span>
-                <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: 11.5, color: 'var(--text-3)' }}>
+                <span onClick={() => onOpen && onOpen(s.id)} style={{ fontSize: '0.96875rem', color: 'var(--text-1)', cursor: 'pointer' }}>{s.label}</span>
+                <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: '0.71875rem', color: 'var(--text-3)' }}>
                   <span style={{ width: 7, height: 7, borderRadius: '50%', background: D.conColor(s.con), boxShadow: `0 0 6px ${D.conColor(s.con)}` }} />{D.conName(s.con)}
                 </span>
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: s.strength >= 0.7 ? 'var(--gold)' : 'var(--star-blue-dim)' }}>记忆 {Math.round(s.strength * 100)}%</span>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6875rem', color: s.strength >= 0.7 ? 'var(--gold)' : 'var(--star-blue-dim)' }}>记忆 {Math.round(s.strength * 100)}%</span>
               </div>
-              {s.summary && <div style={{ fontSize: 12.5, lineHeight: 1.65, color: 'var(--text-3)', marginTop: 6, overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>{s.summary}</div>}
+              {s.summary && <div style={{ fontSize: '0.78125rem', lineHeight: 1.65, color: 'var(--text-3)', marginTop: 6, overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>{s.summary}</div>}
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 11 }}>
                 <Button size="sm" icon="maximize-2" onClick={() => onOpen && onOpen(s.id)}>打开笔记</Button>
                 <Button size="sm" variant="ghost" icon="crosshair" onClick={() => onFocusCon && onFocusCon(s.con)}>在星图中定位</Button>

@@ -68,7 +68,7 @@ export function Checkbox({
         </svg>
       </span>
       {text != null && (
-        <span style={{ fontSize: 13.5, color: checked ? 'var(--text-1)' : 'var(--text-2)', transition: 'color var(--dur-fast)' }}>
+        <span style={{ fontSize: '0.84375rem', color: checked ? 'var(--text-1)' : 'var(--text-2)', transition: 'color var(--dur-fast)' }}>
           {text}
         </span>
       )}

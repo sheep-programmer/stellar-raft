@@ -5,7 +5,7 @@
 **别人的笔记是仓库，星图是一片活着的「知识深空」。**
 
 ![Node](https://img.shields.io/badge/Node-%E2%89%A5%2022.13-9fc6ff?style=flat-square&labelColor=05060f)
-![Tests](https://img.shields.io/badge/tests-366%20passing-ffd98a?style=flat-square&labelColor=05060f)
+![Tests](https://img.shields.io/badge/tests-370%20passing-ffd98a?style=flat-square&labelColor=05060f)
 ![Build](https://img.shields.io/badge/build-zero--config-9fc6ff?style=flat-square&labelColor=05060f)
 ![Components](https://img.shields.io/badge/components-18%20primitives-9fc6ff?style=flat-square&labelColor=05060f)
 ![Backend](https://img.shields.io/badge/backend-zero--dependency-ffd98a?style=flat-square&labelColor=05060f)
@@ -371,7 +371,7 @@ styles.css  _ds_bundle.js  _ds_manifest.json
 | 样式 | 原生 CSS 设计令牌 · 玻璃拟态 · `data-theme` 双主题 |
 | 记忆 | FSRS-lite（`R = exp(−Δt/S)`） |
 | 后端 | Node ≥ 22.13 内置 `node:sqlite`（零三方依赖） |
-| 测试 | `node --test`（30 个套件 366 项）· oxlint |
+| 测试 | `node --test`（30 个套件 370 项）· oxlint |
 
 ---
 
@@ -411,7 +411,7 @@ stellar-raft/
 | 命令 | 作用 |
 | --- | --- |
 | `npm run serve` | 启动本地后端 + 静态托管（`server/server.js`） |
-| `npm test` | 运行 `node --test`，30 个套件 366 项 |
+| `npm test` | 运行 `node --test`，30 个套件 370 项 |
 | `npm run build` | 从源码重建 `_ds_bundle.js` + `_ds_manifest.json` |
 | `npm run build:check` | 检测产物与源码是否漂移（CI 用） |
 | `npm run lint` | 以派生的规范配置运行 oxlint（correctness 全组 + `no-undef`，覆盖 server / ui_kits / components / tests / docs） |

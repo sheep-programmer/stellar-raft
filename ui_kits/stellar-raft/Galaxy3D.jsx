@@ -751,14 +751,14 @@ function Galaxy3D({ onClose, onOpenStar, onFeynman, dataset }) {
 
       {noWebGL && (
         <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 40 }}>
-          <GlassPanel strong radius="lg" pad="md"><span style={{ color: 'var(--text-2)', fontSize: 13 }}>当前环境不支持 WebGL，无法渲染三维星系。</span></GlassPanel>
+          <GlassPanel strong radius="lg" pad="md"><span style={{ color: 'var(--text-2)', fontSize: '0.8125rem' }}>当前环境不支持 WebGL，无法渲染三维星系。</span></GlassPanel>
         </div>
       )}
 
       {/* 教学空态：与鸟瞰同一句话、同一视觉词汇——不让 0 星的三维是一整屏虚空 */}
       {!noWebGL && totalStars === 0 && (
         <div style={{ position: 'absolute', inset: 0, zIndex: 35, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 'var(--s-4)', textAlign: 'center', pointerEvents: 'none' }}>
-          <span style={{ fontSize: 14, color: 'var(--text-2)' }}>你的星空还很暗。写下第一颗星，让它发光。</span>
+          <span style={{ fontSize: '0.875rem', color: 'var(--text-2)' }}>你的星空还很暗。写下第一颗星，让它发光。</span>
           <span style={{ pointerEvents: 'auto' }}>
             <SRButton icon="corner-up-left" onClick={onClose}>返回星图创建</SRButton>
           </span>
@@ -768,11 +768,11 @@ function Galaxy3D({ onClose, onOpenStar, onFeynman, dataset }) {
       {/* 顶部 HUD——窄窗防线：条目一律不折字，放不下时整组换行，不让中文被 flex 压成竖排 */}
       <div data-tour="g3d-hud" style={{ position: 'absolute', top: 18, left: 24, zIndex: 30, maxWidth: 'calc(100% - 48px)' }}>
         <GlassPanel radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', rowGap: 4, gap: 22, padding: '10px 24px' }}>
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 13, color: 'var(--text-2)', whiteSpace: 'nowrap' }}>
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: '0.8125rem', color: 'var(--text-2)', whiteSpace: 'nowrap' }}>
             <Icon name="orbit" size={17} color="var(--gold)" />三维星系
           </span>
           {dataset && dataset.ownerName && (
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, fontSize: 12.5, color: 'var(--gold)', whiteSpace: 'nowrap', maxWidth: 180, overflow: 'hidden', textOverflow: 'ellipsis' }}>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, fontSize: '0.78125rem', color: 'var(--gold)', whiteSpace: 'nowrap', maxWidth: 180, overflow: 'hidden', textOverflow: 'ellipsis' }}>
               <Icon name="telescope" size={14} color="var(--gold)" />{dataset.ownerName} · 只读
             </span>
           )}
@@ -782,19 +782,19 @@ function Galaxy3D({ onClose, onOpenStar, onFeynman, dataset }) {
           <Stat n={lit} t="已点亮" tone="var(--gold)" />
           <Sep />
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, flex: 'none', whiteSpace: 'nowrap' }}>
-            <span style={{ fontSize: 10.5, color: 'var(--text-3)' }}>正变暗</span>
+            <span style={{ fontSize: '0.65625rem', color: 'var(--text-3)' }}>正变暗</span>
             <span style={{ width: 74, height: 5, borderRadius: 3, background: 'linear-gradient(90deg, var(--mem-dead), var(--mem-low), var(--mem-mid), var(--mem-high), var(--mem-full))' }} />
-            <span style={{ fontSize: 10.5, color: 'var(--gold)' }}>已掌握</span>
+            <span style={{ fontSize: '0.65625rem', color: 'var(--gold)' }}>已掌握</span>
           </span>
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, flex: 'none', whiteSpace: 'nowrap' }}>
             <span style={{ width: 20, height: 0, borderTop: '2px solid var(--gold)', opacity: 0.8, borderRadius: 2 }} />
-            <span style={{ fontSize: 10.5, color: 'var(--text-3)' }}>融会贯通</span>
+            <span style={{ fontSize: '0.65625rem', color: 'var(--text-3)' }}>融会贯通</span>
           </span>
         </GlassPanel>
       </div>
 
       {/* 操作提示 */}
-      <div style={{ position: 'absolute', bottom: 26, left: 24, zIndex: 30, display: 'flex', alignItems: 'center', gap: 8, fontSize: 11.5, color: 'var(--text-3)', pointerEvents: 'none', maxWidth: 'calc(100% - 320px)' }}>
+      <div style={{ position: 'absolute', bottom: 26, left: 24, zIndex: 30, display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.71875rem', color: 'var(--text-3)', pointerEvents: 'none', maxWidth: 'calc(100% - 320px)' }}>
         <Icon name="move-3d" size={14} color="currentColor" />
         {/* 窄窗时截断而不折行，避免与右下控制条压叠 */}
         <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>拖拽旋转 · 滚轮缩放 · 点击恒星飞近 · 点击行星查看 · 金弧 = 两端已点亮的融会贯通</span>
@@ -824,14 +824,14 @@ function Galaxy3D({ onClose, onOpenStar, onFeynman, dataset }) {
         <div onPointerDown={(e) => e.stopPropagation()} style={{ position: 'absolute', top: '50%', right: 24, transform: 'translateY(-50%)', width: 286, zIndex: 32, animation: 'g3d-cardin 320ms var(--ease-flight, ease) both' }}>
           <GlassPanel strong radius="lg" pad="md" glow>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 4 }}>
-              <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 11, color: 'var(--text-3)' }}>
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: '0.6875rem', color: 'var(--text-3)' }}>
                 <span style={{ width: 7, height: 7, borderRadius: '50%', background: D.conColor(selected.con), boxShadow: `0 0 8px ${D.conColor(selected.con)}` }} />
                 {D.conName(selected.con)}
               </span>
               <IconButton name="x" size="sm" title="关闭" onClick={() => setSelected(null)} />
             </div>
-            <div style={{ fontSize: 19, fontWeight: 300, color: 'var(--text-1)', marginBottom: 10, textShadow: 'var(--text-glow-cool)' }}>{selected.label}</div>
-            <div style={{ fontSize: 12.5, lineHeight: 1.7, color: 'var(--text-2)', marginBottom: 14 }}>
+            <div style={{ fontSize: '1.1875rem', fontWeight: 300, color: 'var(--text-1)', marginBottom: 10, textShadow: 'var(--text-glow-cool)' }}>{selected.label}</div>
+            <div style={{ fontSize: '0.78125rem', lineHeight: 1.7, color: 'var(--text-2)', marginBottom: 14 }}>
               {selected.summary || (dataset ? '对方未开放摘要。' : '还没有摘要——打开编辑器，写下第一段。')}
             </div>
             <MemoryBar value={selected.strength} label="记忆强度" showPct fading={selected.strength < 0.4} />
@@ -839,7 +839,7 @@ function Galaxy3D({ onClose, onOpenStar, onFeynman, dataset }) {
               const selLit = litOf(D.byId[selected.id] || selected), selEmber = emberOf(D.byId[selected.id] || selected);
               return (
                 <React.Fragment>
-                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: 7, marginTop: 10, fontSize: 11.5, lineHeight: 1.6, color: 'var(--text-3)' }}>
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: 7, marginTop: 10, fontSize: '0.71875rem', lineHeight: 1.6, color: 'var(--text-3)' }}>
                     <span aria-hidden="true" style={{ flex: 'none', width: 9, height: 9, marginTop: 4, borderRadius: '50%', boxSizing: 'border-box',
                       border: selLit ? '1px solid var(--gold)'
                         : selEmber ? '1px solid color-mix(in srgb, var(--gold-warm) 55%, transparent)'
@@ -870,8 +870,8 @@ function Sep() { return <span style={{ width: 1, height: 20, background: 'var(--
 function Stat({ n, t, tone }) {
   return (
     <span style={{ display: 'flex', alignItems: 'baseline', gap: 6, whiteSpace: 'nowrap', flex: 'none' }}>
-      <span style={{ fontFamily: 'var(--font-mono)', fontSize: 17, color: tone || 'var(--text-1)' }}>{n}</span>
-      <span style={{ fontSize: 11.5, color: 'var(--text-3)' }}>{t}</span>
+      <span style={{ fontFamily: 'var(--font-mono)', fontSize: '1.0625rem', color: tone || 'var(--text-1)' }}>{n}</span>
+      <span style={{ fontSize: '0.71875rem', color: 'var(--text-3)' }}>{t}</span>
     </span>
   );
 }

@@ -163,8 +163,8 @@ function EdMenuRow({ icon, label, hint, chevron, danger, tone, active, onClick, 
         minHeight: (window.SRScreen && window.SRScreen.isTouch()) ? 46 : 40, boxSizing: 'border-box', borderRadius: 'var(--r-sm)', cursor: 'pointer', border: 'none',
         background: on ? (danger ? 'color-mix(in srgb, var(--danger) 12%, transparent)' : 'color-mix(in srgb, var(--star-blue) 9%, transparent)') : 'transparent', color }}>
       {icon && <SRIcon name={icon} size={16} color="currentColor" />}
-      <span style={{ flex: 1, fontSize: 13, color: danger ? 'var(--danger)' : on ? 'var(--text-1)' : 'var(--text-2)' }}>{label}</span>
-      {hint && <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-3)' }}>{hint}</span>}
+      <span style={{ flex: 1, fontSize: '0.8125rem', color: danger ? 'var(--danger)' : on ? 'var(--text-1)' : 'var(--text-2)' }}>{label}</span>
+      {hint && <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6875rem', color: 'var(--text-3)' }}>{hint}</span>}
       {chevron && <SRIcon name="chevron-right" size={14} color="var(--text-3)" />}
     </button>
   );
@@ -178,12 +178,12 @@ function MoveRow({ color, name, onClick }) {
       style={{ width: '100%', textAlign: 'left', font: 'inherit', display: 'flex', alignItems: 'center', gap: 10, padding: '9px 9px', minHeight: 40, boxSizing: 'border-box', borderRadius: 'var(--r-sm)', cursor: 'pointer', border: 'none',
         background: h ? 'color-mix(in srgb, var(--star-blue) 9%, transparent)' : 'transparent' }}>
       <span style={{ width: 8, height: 8, borderRadius: '50%', flex: 'none', background: color, boxShadow: `0 0 7px ${color}` }} />
-      <span style={{ fontSize: 13, color: 'var(--text-2)' }}>{name}</span>
+      <span style={{ fontSize: '0.8125rem', color: 'var(--text-2)' }}>{name}</span>
     </button>
   );
 }
 function Label({ children }) {
-  return <div style={{ fontSize: 10, letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: 'var(--text-3)', padding: '6px 10px 4px', fontFamily: 'var(--font-mono)' }}>{children}</div>;
+  return <div style={{ fontSize: '0.625rem', letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: 'var(--text-3)', padding: '6px 10px 4px', fontFamily: 'var(--font-mono)' }}>{children}</div>;
 }
 function EdMenuDivider() { return <div style={{ height: 1, background: 'var(--line)', margin: '5px 6px' }} />; }
 
@@ -203,13 +203,13 @@ function SlashMenu({ x, y, onPick, onClose }) {
     <Floating x={x} y={y} width={252} onClose={onClose} title="插入块">
       <div style={{ padding: '3px 5px 6px' }}>
         <input autoFocus value={q} onChange={(e) => setQ(e.target.value)} onKeyDown={onKey} placeholder="筛选块类型…"
-          style={{ width: '100%', boxSizing: 'border-box', background: 'var(--input-bg, rgba(3,4,12,0.45))', border: '1px solid var(--glass-border-strong)', borderRadius: 'var(--r-sm)', color: 'var(--text-1)', fontSize: 13, padding: '7px 10px', outline: 'none', fontFamily: 'var(--font-sans)' }} />
+          style={{ width: '100%', boxSizing: 'border-box', background: 'var(--input-bg, rgba(3,4,12,0.45))', border: '1px solid var(--glass-border-strong)', borderRadius: 'var(--r-sm)', color: 'var(--text-1)', fontSize: '0.8125rem', padding: '7px 10px', outline: 'none', fontFamily: 'var(--font-sans)' }} />
       </div>
       <div style={{ maxHeight: 320, overflow: 'auto' }}>
         <Label>基础块</Label>
         {list.length ? list.map((b, i) => (
           <EdMenuRow key={b.type} icon={b.icon} label={b.label} hint={b.hint} active={i === ai} onMouseEnter={() => setAi(i)} onClick={() => onPick(b.type)} />
-        )) : <div style={{ padding: '8px 11px', fontSize: 12.5, color: 'var(--text-3)' }}>没有匹配的块类型</div>}
+        )) : <div style={{ padding: '8px 11px', fontSize: '0.78125rem', color: 'var(--text-3)' }}>没有匹配的块类型</div>}
       </div>
     </Floating>
   );
@@ -240,13 +240,13 @@ function StarLinkMenu({ x, y, stars, onPick, onClose }) {
     <Floating x={x} y={y} width={286} onClose={onClose} title="链到另一颗星">
       <div style={{ padding: '3px 5px 6px' }}>
         <input autoFocus value={q} onChange={(e) => setQ(e.target.value)} onKeyDown={onKey} placeholder="搜星名、星域或标签…"
-          style={{ width: '100%', boxSizing: 'border-box', background: 'var(--input-bg, rgba(3,4,12,0.45))', border: '1px solid var(--glass-border-strong)', borderRadius: 'var(--r-sm)', color: 'var(--text-1)', fontSize: 13, padding: '7px 10px', outline: 'none', fontFamily: 'var(--font-sans)' }} />
+          style={{ width: '100%', boxSizing: 'border-box', background: 'var(--input-bg, rgba(3,4,12,0.45))', border: '1px solid var(--glass-border-strong)', borderRadius: 'var(--r-sm)', color: 'var(--text-1)', fontSize: '0.8125rem', padding: '7px 10px', outline: 'none', fontFamily: 'var(--font-sans)' }} />
       </div>
       <div style={{ maxHeight: 300, overflow: 'auto' }}>
         {list.length ? list.map((st, i) => (
           <EdMenuRow key={st.id} icon="star" label={st.label} hint={st.conName} active={i === ai}
             onMouseEnter={() => setAi(i)} onClick={() => onPick(st)} />
-        )) : <div style={{ padding: '8px 11px', fontSize: 12.5, color: 'var(--text-3)' }}>没有匹配的星</div>}
+        )) : <div style={{ padding: '8px 11px', fontSize: '0.78125rem', color: 'var(--text-3)' }}>没有匹配的星</div>}
       </div>
     </Floating>
   );
@@ -281,7 +281,7 @@ function SelectionToolbar({ x, y, onFormat, onLink, onColor }) {
       {/* 开合动画与菜单同一口径：--ease-flight · 控件级 160ms（reduced-motion 直达） */}
       <SRGlass strong radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', gap: 1, padding: '5px 7px', animation: reduce ? 'none' : 'sr-cardin var(--dur-fast) var(--ease-flight) both' }}>
         <button type="button" className="sr-focus-ring sr-hit40" onClick={onColor} title="文字颜色"
-          style={{ display: 'flex', alignItems: 'center', gap: 4, padding: '0 8px', height: 30, cursor: 'pointer', color: 'var(--text-2)', fontSize: 12.5, background: 'transparent', border: 'none', borderRadius: 'var(--r-sm)', position: 'relative' }}>
+          style={{ display: 'flex', alignItems: 'center', gap: 4, padding: '0 8px', height: 30, cursor: 'pointer', color: 'var(--text-2)', fontSize: '0.78125rem', background: 'transparent', border: 'none', borderRadius: 'var(--r-sm)', position: 'relative' }}>
           A<SRIcon name="chevron-down" size={13} color="var(--text-3)" />
         </button>
         <span style={{ width: 1, height: 18, background: 'var(--line)' }} />
@@ -303,9 +303,9 @@ function ColorMenu({ x, y, onClose, onPick, autoFocus = false }) {
       onMouseEnter={e => e.currentTarget.style.background = 'color-mix(in srgb, var(--star-blue) 9%, transparent)'} onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
       onFocus={e => e.currentTarget.style.background = 'color-mix(in srgb, var(--star-blue) 9%, transparent)'} onBlur={e => e.currentTarget.style.background = 'transparent'}>
       {kind === 'text'
-        ? <span style={{ width: 18, height: 18, borderRadius: 5, border: '1px solid var(--line-strong)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: c.c, fontSize: 12, fontWeight: 600 }}>A</span>
+        ? <span style={{ width: 18, height: 18, borderRadius: 5, border: '1px solid var(--line-strong)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: c.c, fontSize: '0.75rem', fontWeight: 600 }}>A</span>
         : <span style={{ width: 18, height: 18, borderRadius: 5, background: c.c, border: '1px solid ' + (c.ring || 'var(--line)') }} />}
-      <span style={{ fontSize: 13, color: 'var(--text-2)' }}>{c.label}</span>
+      <span style={{ fontSize: '0.8125rem', color: 'var(--text-2)' }}>{c.label}</span>
     </button>
   );
   return (
@@ -339,7 +339,7 @@ function ContextMenu({ x, y, onClose, onAction, constellations }) {
         <EdMenuDivider />
         <EdMenuRow icon="trash-2" label="删除" danger onClick={() => onAction('delete')} />
         <div style={{ padding: '7px 11px 4px', borderTop: '1px solid var(--line)', marginTop: 4 }}>
-          <div style={{ fontSize: 11, color: 'var(--text-3)' }}>{(window.SR_DATA.account || {}).name || '我'} 编辑</div>
+          <div style={{ fontSize: '0.6875rem', color: 'var(--text-3)' }}>{(window.SR_DATA.account || {}).name || '我'} 编辑</div>
         </div>
       </Floating>
 
@@ -380,11 +380,11 @@ function ConfirmDialog({ message, confirmLabel, onYes, onClose }) {
         <SRGlass strong radius="lg" pad="md" glow>
           <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12, marginBottom: 18 }}>
             <span style={{ flex: 'none', width: 34, height: 34, borderRadius: '50%', background: 'color-mix(in srgb, var(--danger) 14%, transparent)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><SRIcon name="alert-triangle" size={18} color="var(--danger)" /></span>
-            <div style={{ fontSize: 14, lineHeight: 1.65, color: 'var(--text-1)', paddingTop: 5 }}>{message}</div>
+            <div style={{ fontSize: '0.875rem', lineHeight: 1.65, color: 'var(--text-1)', paddingTop: 5 }}>{message}</div>
           </div>
           <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end' }}>
-            <button type="button" className="sr-focus-ring" onClick={onClose} style={{ height: 34, padding: '0 16px', borderRadius: 'var(--r-pill)', border: '1px solid var(--glass-border-strong)', background: 'transparent', color: 'var(--text-2)', fontSize: 13, cursor: 'pointer', fontFamily: 'var(--font-sans)' }}>取消</button>
-            <button type="button" className="sr-focus-ring" onClick={onYes} style={{ height: 34, padding: '0 16px', borderRadius: 'var(--r-pill)', border: '1px solid color-mix(in srgb, var(--danger) 50%, transparent)', background: 'color-mix(in srgb, var(--danger) 16%, transparent)', color: 'var(--danger)', fontSize: 13, cursor: 'pointer', fontFamily: 'var(--font-sans)' }}>{confirmLabel || '删除'}</button>
+            <button type="button" className="sr-focus-ring" onClick={onClose} style={{ height: 34, padding: '0 16px', borderRadius: 'var(--r-pill)', border: '1px solid var(--glass-border-strong)', background: 'transparent', color: 'var(--text-2)', fontSize: '0.8125rem', cursor: 'pointer', fontFamily: 'var(--font-sans)' }}>取消</button>
+            <button type="button" className="sr-focus-ring" onClick={onYes} style={{ height: 34, padding: '0 16px', borderRadius: 'var(--r-pill)', border: '1px solid color-mix(in srgb, var(--danger) 50%, transparent)', background: 'color-mix(in srgb, var(--danger) 16%, transparent)', color: 'var(--danger)', fontSize: '0.8125rem', cursor: 'pointer', fontFamily: 'var(--font-sans)' }}>{confirmLabel || '删除'}</button>
           </div>
         </SRGlass>
       </div>
@@ -407,14 +407,14 @@ function LinkDialog({ initial, onSubmit, onClose }) {
     <div onMouseDown={onClose} onContextMenu={(e) => e.preventDefault()} style={{ position: 'fixed', inset: 0, zIndex: 'var(--z-modal)', background: 'rgba(3,4,12,0.5)', WebkitBackdropFilter: 'blur(3px)', backdropFilter: 'blur(3px)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <div ref={ref} onMouseDown={(e) => e.stopPropagation()} style={{ width: 380, maxWidth: '92vw', animation: reduce ? 'none' : 'sr-cardin var(--dur-fast) var(--ease-flight) both' }}>
         <SRGlass strong radius="lg" pad="md" glow>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 9, marginBottom: 12, fontSize: 13.5, color: 'var(--text-1)' }}><SRIcon name="link" size={16} color="var(--star-blue)" />添加链接</div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 9, marginBottom: 12, fontSize: '0.84375rem', color: 'var(--text-1)' }}><SRIcon name="link" size={16} color="var(--star-blue)" />添加链接</div>
           <input autoFocus value={v} onChange={(e) => setV(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); submit(); } }}
             placeholder="https://…"
-            style={{ width: '100%', boxSizing: 'border-box', background: 'var(--input-bg, rgba(3,4,12,0.45))', border: '1px solid ' + (bad ? 'color-mix(in srgb, var(--danger) 55%, transparent)' : 'var(--glass-border-strong)'), borderRadius: 'var(--r-sm)', color: 'var(--text-1)', fontSize: 14, padding: '9px 11px', outline: 'none', fontFamily: 'var(--font-sans)' }} />
-          {bad && <div role="alert" style={{ marginTop: 8, fontSize: 12, color: 'var(--danger)' }}>不支持该协议 · 仅允许 http/https/mailto 或相对链接</div>}
+            style={{ width: '100%', boxSizing: 'border-box', background: 'var(--input-bg, rgba(3,4,12,0.45))', border: '1px solid ' + (bad ? 'color-mix(in srgb, var(--danger) 55%, transparent)' : 'var(--glass-border-strong)'), borderRadius: 'var(--r-sm)', color: 'var(--text-1)', fontSize: '0.875rem', padding: '9px 11px', outline: 'none', fontFamily: 'var(--font-sans)' }} />
+          {bad && <div role="alert" style={{ marginTop: 8, fontSize: '0.75rem', color: 'var(--danger)' }}>不支持该协议 · 仅允许 http/https/mailto 或相对链接</div>}
           <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end', marginTop: 14 }}>
-            <button type="button" className="sr-focus-ring" onClick={onClose} style={{ height: 34, padding: '0 16px', borderRadius: 'var(--r-pill)', border: '1px solid var(--glass-border-strong)', background: 'transparent', color: 'var(--text-2)', fontSize: 13, cursor: 'pointer', fontFamily: 'var(--font-sans)' }}>取消</button>
-            <button type="button" className="sr-focus-ring" onClick={submit} disabled={bad} style={{ height: 34, padding: '0 16px', borderRadius: 'var(--r-pill)', border: '1px solid var(--glass-border-strong)', background: 'rgba(159,198,255,0.14)', color: 'var(--text-1)', fontSize: 13, cursor: bad ? 'not-allowed' : 'pointer', opacity: bad ? 0.5 : 1, fontFamily: 'var(--font-sans)' }}>添加</button>
+            <button type="button" className="sr-focus-ring" onClick={onClose} style={{ height: 34, padding: '0 16px', borderRadius: 'var(--r-pill)', border: '1px solid var(--glass-border-strong)', background: 'transparent', color: 'var(--text-2)', fontSize: '0.8125rem', cursor: 'pointer', fontFamily: 'var(--font-sans)' }}>取消</button>
+            <button type="button" className="sr-focus-ring" onClick={submit} disabled={bad} style={{ height: 34, padding: '0 16px', borderRadius: 'var(--r-pill)', border: '1px solid var(--glass-border-strong)', background: 'rgba(159,198,255,0.14)', color: 'var(--text-1)', fontSize: '0.8125rem', cursor: bad ? 'not-allowed' : 'pointer', opacity: bad ? 0.5 : 1, fontFamily: 'var(--font-sans)' }}>添加</button>
           </div>
         </SRGlass>
       </div>
@@ -473,12 +473,12 @@ function HistoryDialog({ star, onClose, onFlash }) {
         <SRGlass strong radius="lg" pad="md" glow>
           <div style={{ display: 'flex', alignItems: 'center', gap: 9, marginBottom: 4 }}>
             <SRIcon name="history" size={17} color="var(--star-blue)" />
-            <span style={{ fontSize: 14.5, color: 'var(--text-1)' }}>版本历史</span>
-            <span style={{ fontSize: 11.5, color: 'var(--text-3)' }}>· {star.label}</span>
+            <span style={{ fontSize: '0.90625rem', color: 'var(--text-1)' }}>版本历史</span>
+            <span style={{ fontSize: '0.71875rem', color: 'var(--text-3)' }}>· {star.label}</span>
             <span style={{ flex: 1 }} />
             <button type="button" className="sr-focus-ring sr-hit40" onClick={onClose} style={{ width: 26, height: 26, position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', border: 'none', background: 'transparent', cursor: 'pointer', color: 'var(--text-3)' }}><SRIcon name="x" size={16} color="currentColor" /></button>
           </div>
-          <div style={{ fontSize: 11, color: 'var(--text-3)', marginBottom: 12, fontFamily: 'var(--font-mono)' }}>记录最近的编辑快照</div>
+          <div style={{ fontSize: '0.6875rem', color: 'var(--text-3)', marginBottom: 12, fontFamily: 'var(--font-mono)' }}>记录最近的编辑快照</div>
           <div style={{ maxHeight: 320, overflow: 'auto', display: 'flex', flexDirection: 'column' }}>
             {versions.map((v, i) => (
               <div key={i} style={{ display: 'flex', gap: 12, padding: '10px 4px', borderTop: i === 0 ? 'none' : '1px solid var(--line)' }}>
@@ -488,15 +488,15 @@ function HistoryDialog({ star, onClose, onFlash }) {
                 </div>
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                    <span style={{ fontSize: 13, color: 'var(--text-1)' }}>{v.note}</span>
-                    {v.cur && <span style={{ fontSize: 10, color: 'var(--gold)', border: '1px solid rgba(255,217,138,0.4)', borderRadius: 'var(--r-pill)', padding: '1px 7px' }}>当前</span>}
-                    {v.first && <span style={{ fontSize: 10, color: 'var(--text-3)', border: '1px solid var(--line-strong)', borderRadius: 'var(--r-pill)', padding: '1px 7px' }}>创建</span>}
+                    <span style={{ fontSize: '0.8125rem', color: 'var(--text-1)' }}>{v.note}</span>
+                    {v.cur && <span style={{ fontSize: '0.625rem', color: 'var(--gold)', border: '1px solid rgba(255,217,138,0.4)', borderRadius: 'var(--r-pill)', padding: '1px 7px' }}>当前</span>}
+                    {v.first && <span style={{ fontSize: '0.625rem', color: 'var(--text-3)', border: '1px solid var(--line-strong)', borderRadius: 'var(--r-pill)', padding: '1px 7px' }}>创建</span>}
                   </div>
-                  <div style={{ fontSize: 11.5, color: 'var(--text-3)', marginTop: 3, fontFamily: 'var(--font-mono)' }}>{v.who} · {v.when}</div>
+                  <div style={{ fontSize: '0.71875rem', color: 'var(--text-3)', marginTop: 3, fontFamily: 'var(--font-mono)' }}>{v.who} · {v.when}</div>
                 </div>
                 {!v.cur && (
                   <button type="button" onClick={() => { onFlash && onFlash('已恢复到该版本'); onClose(); }}
-                    style={{ flex: 'none', alignSelf: 'center', height: 26, padding: '0 12px', borderRadius: 'var(--r-pill)', border: '1px solid var(--glass-border-strong)', background: 'transparent', color: 'var(--text-2)', fontSize: 12, cursor: 'pointer', fontFamily: 'var(--font-sans)' }}
+                    style={{ flex: 'none', alignSelf: 'center', height: 26, padding: '0 12px', borderRadius: 'var(--r-pill)', border: '1px solid var(--glass-border-strong)', background: 'transparent', color: 'var(--text-2)', fontSize: '0.75rem', cursor: 'pointer', fontFamily: 'var(--font-sans)' }}
                     onMouseEnter={e => e.currentTarget.style.background = 'color-mix(in srgb, var(--star-blue) 9%, transparent)'} onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>恢复</button>
                 )}
               </div>

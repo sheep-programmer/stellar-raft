@@ -19,14 +19,14 @@
   --w-semi:    600; /* @kind font */
 
   /* ---- Type scale (desktop, 1440 canvas) ---- */
-  --t-display:  44px; /* hero / light-up moment */
-  --t-h1:       30px; /* editor big title */
-  --t-h2:       23px; /* section / constellation name */
-  --t-h3:       18px;
-  --t-body-lg:  17px; /* editor reading body */
-  --t-body:     15px; /* UI default */
-  --t-sm:       13px; /* meta, captions */
-  --t-xs:       11px; /* HUD labels, badges */
+  --t-display:  2.75rem;   /* hero / light-up moment */
+  --t-h1:       1.875rem;  /* editor big title */
+  --t-h2:       1.4375rem; /* section / constellation name */
+  --t-h3:       1.125rem;
+  --t-body-lg:  1.0625rem; /* editor reading body */
+  --t-body:     0.9375rem; /* UI default */
+  --t-sm:       0.8125rem; /* meta, captions */
+  --t-xs:       0.6875rem; /* HUD labels, badges */
 
   /* ---- Line heights ---- */
   --lh-tight:  1.15; /* @kind font */

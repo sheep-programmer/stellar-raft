@@ -174,7 +174,7 @@ function AerialView({ onClose, onOpenCon, dataset }) {
                 background: 'radial-gradient(circle at 38% 34%, #fff6e0 0%, #ffd58a 32%, #ff9d52 64%, #e8623a 100%)',
                 boxShadow: '0 0 26px 5px rgba(255,128,60,0.5), 0 0 10px 2px rgba(255,196,120,0.85)' }} />
               <span style={{ textAlign: 'center', whiteSpace: 'nowrap' }}>
-                <span style={{ display: 'block', fontSize: 15, fontWeight: 300, color: 'var(--text-1)', letterSpacing: '0.05em', textShadow: 'var(--star-label-shadow)' }}>{g.name}</span>
+                <span style={{ display: 'block', fontSize: '0.9375rem', fontWeight: 300, color: 'var(--text-1)', letterSpacing: '0.05em', textShadow: 'var(--star-label-shadow)' }}>{g.name}</span>
                 <span title={`健康度 ${Math.round(g.avg * 100)}% · 已点亮 ${g.lit} / 共 ${g.members} 颗`}
                   style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--t-xs)', color: g.avg > 0.6 ? 'var(--gold)' : 'var(--star-blue-dim)' }}>
                   {Math.round(g.avg * 100)}% · 已点亮 {g.lit}/{g.members}
@@ -188,7 +188,7 @@ function AerialView({ onClose, onOpenCon, dataset }) {
 
       {!sp.length && (
         <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 5 }}>
-          <span style={{ fontSize: 14, color: 'var(--text-2)' }}>你的星空还很暗。写下第一颗星，让它发光。</span>
+          <span style={{ fontSize: '0.875rem', color: 'var(--text-2)' }}>你的星空还很暗。写下第一颗星，让它发光。</span>
         </div>
       )}
 

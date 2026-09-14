@@ -147,7 +147,7 @@ const SR_DEMO_CSS = `
 @keyframes ed-wrap{0%{opacity:0}4%{opacity:1}93%{opacity:1}99%,100%{opacity:0}}
 @keyframes ed-t1{0%,6%{clip-path:inset(0 100% 0 0)}24%,100%{clip-path:inset(0 -8% 0 0)}}
 @keyframes ed-hash{0%,5%{opacity:0;width:0}7%,28%{opacity:1;width:15px}33%,100%{opacity:0;width:0}}
-@keyframes ed-size{0%,28%{font-size:12px;color:#8a94a8}36%,100%{font-size:19px;color:#e8eefc}}
+@keyframes ed-size{0%,28%{font-size:0.75rem;color:#8a94a8}36%,100%{font-size:1.1875rem;color:#e8eefc}}
 @keyframes ed-l2{0%,42%{opacity:0}46%,100%{opacity:1}}
 @keyframes ed-t2{0%,46%{clip-path:inset(0 100% 0 0)}64%,100%{clip-path:inset(0 -8% 0 0)}}
 @keyframes ed-br{0%,44%{opacity:0;width:0}46%,62%{opacity:1;width:18px}67%,100%{opacity:0;width:0}}
@@ -273,7 +273,7 @@ function GuideDemo({ id }) {
             <path d="M100 74 Q 130 56 150 44" fill="none" stroke="rgba(159,198,255,.3)" strokeWidth="1" />
           </svg>
           <span className="sr-star" style={dot(100, 74, 13, '#ffd98a', '0 0 14px rgba(255,217,138,.7)')} />
-          <span style={{ position: 'absolute', left: 100, top: 92, transform: 'translateX(-50%)', fontSize: 9, color: 'rgba(255,217,138,.75)', letterSpacing: '.12em' }}>量子力学</span>
+          <span style={{ position: 'absolute', left: 100, top: 92, transform: 'translateX(-50%)', fontSize: '0.5625rem', color: 'rgba(255,217,138,.75)', letterSpacing: '.12em' }}>量子力学</span>
           <span className="sr-star" style={dot(64, 50, 6, '#9fc6ff', '0 0 7px rgba(159,198,255,.6)')} />
           <span className="sr-star" style={dot(136, 100, 7, '#c7dcff', '0 0 7px rgba(199,220,255,.55)')} />
           <span className="sr-star" style={dot(150, 44, 5, '#bcd0ff')} />
@@ -286,11 +286,11 @@ function GuideDemo({ id }) {
         <div style={{ position: 'absolute', left: 248, top: 60, width: 100, borderRadius: 10, overflow: 'hidden',
           background: 'rgba(12,17,38,.96)', border: '1px solid rgba(159,198,255,.28)', boxShadow: '0 10px 26px rgba(0,0,0,.5)',
           ...kf('mp-menu', '7s') }}>
-          <div style={{ padding: '5px 9px 3px', fontSize: 8, letterSpacing: '.14em', color: '#8a94a8' }}>在此创建</div>
-          <div style={{ padding: '5px 9px', fontSize: 10.5, color: '#c9d6f0', display: 'flex', alignItems: 'center', gap: 6 }}>
+          <div style={{ padding: '5px 9px 3px', fontSize: '0.5rem', letterSpacing: '.14em', color: '#8a94a8' }}>在此创建</div>
+          <div style={{ padding: '5px 9px', fontSize: '0.65625rem', color: '#c9d6f0', display: 'flex', alignItems: 'center', gap: 6 }}>
             <span style={{ width: 5, height: 5, borderRadius: '50%', background: '#9fc6ff' }} />新建星域
           </div>
-          <div style={{ padding: '5px 9px 7px', fontSize: 10.5, display: 'flex', alignItems: 'center', gap: 6, ...kf('mp-row', '7s') }}>
+          <div style={{ padding: '5px 9px 7px', fontSize: '0.65625rem', display: 'flex', alignItems: 'center', gap: 6, ...kf('mp-row', '7s') }}>
             <span style={{ width: 5, height: 5, borderRadius: '50%', background: '#ffd98a' }} />新建知识星
           </div>
         </div>
@@ -325,7 +325,7 @@ function GuideDemo({ id }) {
         <div style={{ ...kf('ig-wrap', '5.5s') }}>
           <div style={{ position: 'absolute', left: 22, top: 24, width: 150, height: 102, borderRadius: 12,
             background: 'rgba(12,17,38,.85)', border: '1px solid rgba(159,198,255,.22)', padding: '12px 13px' }}>
-            <div style={{ fontSize: 8, letterSpacing: '.16em', color: '#8a94a8', marginBottom: 9 }}>费曼内化 · 讲给自己听</div>
+            <div style={{ fontSize: '0.5rem', letterSpacing: '.16em', color: '#8a94a8', marginBottom: 9 }}>费曼内化 · 讲给自己听</div>
             {[[118, 'ig-l1'], [96, 'ig-l2'], [110, 'ig-l3']].map((l, i) => (
               <span key={i} style={{ display: 'block', width: l[0], height: 5, borderRadius: 3, marginBottom: 9,
                 background: 'rgba(159,198,255,.4)', transformOrigin: 'left center', ...kf(l[1], '5.5s') }} />
@@ -351,13 +351,13 @@ function GuideDemo({ id }) {
             background: 'rgba(12,17,38,.94)', border: '1px solid rgba(159,198,255,.28)', boxShadow: '0 8px 22px rgba(0,0,0,.45)',
             willChange: 'transform', ...kf(a, '5s') }}>
             <div style={{ padding: '11px 14px' }}>
-              <div style={{ fontSize: 8.5, letterSpacing: '.18em', color: '#8a94a8' }}>量子力学 · 到期</div>
-              <div style={{ fontSize: 14, color: '#e8eefc', marginTop: 6, fontWeight: 300 }}>{i === 0 ? '贝尔不等式' : '纠缠态'}</div>
+              <div style={{ fontSize: '0.53125rem', letterSpacing: '.18em', color: '#8a94a8' }}>量子力学 · 到期</div>
+              <div style={{ fontSize: '0.875rem', color: '#e8eefc', marginTop: 6, fontWeight: 300 }}>{i === 0 ? '贝尔不等式' : '纠缠态'}</div>
             </div>
           </div>
         ))}
         {[['忘了', 100], ['模糊', 168], ['记得', 236]].map((b, i) => (
-          <span key={i} className="sr-tag" style={{ left: b[1], top: 108, padding: '5px 12px', fontSize: 10.5,
+          <span key={i} className="sr-tag" style={{ left: b[1], top: 108, padding: '5px 12px', fontSize: '0.65625rem',
             border: '1px solid rgba(159,198,255,.18)', background: 'rgba(159,198,255,.08)', color: '#8a94a8',
             ...(i === 2 ? kf('rv-btn', '5s') : {}) }}>{b[0]}</span>
         ))}
@@ -374,16 +374,16 @@ function GuideDemo({ id }) {
           background: 'rgba(12,17,38,.9)', border: '1px solid rgba(159,198,255,.25)', display: 'flex', alignItems: 'center', padding: '0 12px' }}>
           <span style={{ height: 6, borderRadius: 3, background: 'rgba(159,198,255,.6)', animation: `ib-type 5.5s steps(14) infinite` }} />
         </div>
-        <span className="sr-tag" style={{ left: 232, top: 34, padding: '7px 10px', fontSize: 10.5, borderRadius: 8,
+        <span className="sr-tag" style={{ left: 232, top: 34, padding: '7px 10px', fontSize: '0.65625rem', borderRadius: 8,
           border: '1px solid rgba(159,198,255,.25)', ...kf('ib-key', '5.5s') }}>{SRK.mac ? '⌘ Enter' : 'Ctrl+Enter'}</span>
         <span style={{ position: 'absolute', left: 70, top: 36, width: 96, height: 20, borderRadius: 7,
           background: 'rgba(159,198,255,.16)', border: '1px solid rgba(159,198,255,.4)', willChange: 'transform', ...kf('ib-chip', '5.5s') }} />
         <div style={{ position: 'absolute', left: 125, top: 106, width: 110, height: 30, borderRadius: 9,
           border: '1px dashed rgba(159,198,255,.35)', display: 'flex', alignItems: 'center', justifyContent: 'center',
-          gap: 7, fontSize: 10, color: '#8a94a8', fontFamily: 'var(--font-mono)', ...kf('ib-tray', '5.5s') }}>
+          gap: 7, fontSize: '0.625rem', color: '#8a94a8', fontFamily: 'var(--font-mono)', ...kf('ib-tray', '5.5s') }}>
           收件箱
           <span style={{ position: 'relative', width: 16, height: 16, borderRadius: '50%', background: 'rgba(255,217,138,.16)',
-            border: '1px solid rgba(255,217,138,.45)', fontSize: 9, color: '#ffd98a' }}>
+            border: '1px solid rgba(255,217,138,.45)', fontSize: '0.5625rem', color: '#ffd98a' }}>
             <span style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', ...kf('ib-n3', '5.5s') }}>3</span>
             <span style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', ...kf('ib-n4', '5.5s') }}>4</span>
           </span>
@@ -400,14 +400,14 @@ function GuideDemo({ id }) {
             <span style={{ display: 'inline-block', whiteSpace: 'nowrap', ...kf('ed-t1', '5.5s'), animationTimingFunction: 'steps(6)' }}>贝尔不等式</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 18, ...kf('ed-l2', '5.5s') }}>
-            <span style={{ display: 'inline-block', overflow: 'hidden', color: '#8a94a8', fontSize: 12, fontFamily: 'var(--font-mono)', ...kf('ed-br', '5.5s') }}>[]&nbsp;</span>
+            <span style={{ display: 'inline-block', overflow: 'hidden', color: '#8a94a8', fontSize: '0.75rem', fontFamily: 'var(--font-mono)', ...kf('ed-br', '5.5s') }}>[]&nbsp;</span>
             <span style={{ position: 'relative', width: 14, height: 14, borderRadius: 4, border: '1.5px solid rgba(159,198,255,.5)', flex: 'none', ...kf('ed-box', '5.5s'), animationName: 'ed-box, ed-fill' }}>
               <svg width="10" height="10" viewBox="0 0 12 12" style={{ position: 'absolute', left: 1, top: 1 }}>
                 <path d="M2 6 L5 9 L10 3" fill="none" stroke="#0a0e20" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
                   strokeDasharray="14" style={kf('ed-check', '5.5s')} />
               </svg>
             </span>
-            <span style={{ display: 'inline-block', whiteSpace: 'nowrap', fontSize: 12.5, color: '#c9d6f0', ...kf('ed-t2', '5.5s'), animationTimingFunction: 'steps(8)' }}>复现 CHSH 推导</span>
+            <span style={{ display: 'inline-block', whiteSpace: 'nowrap', fontSize: '0.78125rem', color: '#c9d6f0', ...kf('ed-t2', '5.5s'), animationTimingFunction: 'steps(8)' }}>复现 CHSH 推导</span>
             <span style={{ width: 2, height: 14, background: '#ffd98a', ...kf('ed-blink', '1s'), animationTimingFunction: 'step-end' }} />
           </div>
         </div>
@@ -435,8 +435,8 @@ function GuideDemo({ id }) {
           background: 'rgba(12,17,38,.92)', border: '1px solid rgba(159,198,255,.28)' }}>
           <span style={{ position: 'absolute', left: 3, top: 3, width: 44, height: 18, borderRadius: 999,
             background: 'rgba(159,198,255,.16)', ...kf('vw-thumb', '6s') }} />
-          <span style={{ position: 'absolute', left: 0, top: 0, width: 50, height: 26, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, ...kf('vw-lab1', '6s') }}>星图</span>
-          <span style={{ position: 'absolute', right: 0, top: 0, width: 50, height: 26, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, ...kf('vw-lab2', '6s') }}>鸟瞰</span>
+          <span style={{ position: 'absolute', left: 0, top: 0, width: 50, height: 26, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.625rem', ...kf('vw-lab1', '6s') }}>星图</span>
+          <span style={{ position: 'absolute', right: 0, top: 0, width: 50, height: 26, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.625rem', ...kf('vw-lab2', '6s') }}>鸟瞰</span>
         </div>
         <Pulse x={319} y={27} anim="vw-pulse1" dur="6s" />
         <Pulse x={273} y={27} anim="vw-pulse2" dur="6s" />
@@ -495,7 +495,7 @@ function GuideDemo({ id }) {
         {[[SRK.combo('K'), 46, 0], [SRK.combo('F'), 124, 0.95], ['/', 202, 1.9], ['Esc', 258, 2.85]].map((k, i) => (
           <span key={i} style={{ position: 'absolute', left: k[1], top: 62, minWidth: 40, height: 32, padding: '0 11px',
             borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontFamily: 'var(--font-mono)', fontSize: 12, border: '1px solid rgba(159,198,255,.22)',
+            fontFamily: 'var(--font-mono)', fontSize: '0.75rem', border: '1px solid rgba(159,198,255,.22)',
             animation: `sc-key 4.8s ${EO} ${k[2]}s infinite` }}>{k[0]}</span>
         ))}
         <span className="sr-tag" style={{ left: 46, top: 116, background: 'transparent', color: 'var(--text-3)', padding: 0 }}>跳转 · 查找 · 块菜单 · 收起</span>
@@ -538,7 +538,7 @@ function Onboarding({ onClose, onSpotlight }) {
 
           {/* header: kicker + 进度点 + 跳过 */}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '14px 18px', flex: 'none' }}>
-            <span style={{ fontSize: 10, letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: 'var(--text-3)', fontFamily: 'var(--font-mono)' }}>{p.kicker}</span>
+            <span style={{ fontSize: '0.625rem', letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: 'var(--text-3)', fontFamily: 'var(--font-mono)' }}>{p.kicker}</span>
             <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
               {SR_GUIDE_PAGES.map((_, i) => (
                 <button key={i} type="button" onClick={() => setPage(i)} aria-label={'第 ' + (i + 1) + ' 页'}
@@ -549,14 +549,14 @@ function Onboarding({ onClose, onSpotlight }) {
               ))}
             </div>
             <button type="button" onClick={onClose}
-              style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: 12.5, color: 'var(--text-3)', fontFamily: 'var(--font-sans)' }}>跳过</button>
+              style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '0.78125rem', color: 'var(--text-3)', fontFamily: 'var(--font-sans)' }}>跳过</button>
           </div>
 
           {/* body: 操作动画演示 + 标题 + 短文 */}
           <div key={page} style={{ flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '8px 40px 20px', animation: 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
             <GuideDemo id={p.id} />
-            <div style={{ fontSize: 22, fontWeight: 300, color: 'var(--text-1)', marginTop: 20, letterSpacing: '0.02em', textShadow: '0 0 16px rgba(159,198,255,0.18)' }}>{p.title}</div>
-            <div style={{ fontSize: 14, color: 'var(--text-2)', lineHeight: 1.85, marginTop: 12, maxWidth: 430 }}>{p.body}</div>
+            <div style={{ fontSize: '1.375rem', fontWeight: 300, color: 'var(--text-1)', marginTop: 20, letterSpacing: '0.02em', textShadow: '0 0 16px rgba(159,198,255,0.18)' }}>{p.title}</div>
+            <div style={{ fontSize: '0.875rem', color: 'var(--text-2)', lineHeight: 1.85, marginTop: 12, maxWidth: 430 }}>{p.body}</div>
           </div>
 
           {/* footer: 上一页 / 下一页；末页换 实地看看 + 开始使用 */}
@@ -708,10 +708,10 @@ function OnboardingTour({ onClose, onNavigate }) {
         style={{ position: 'fixed', left: bubbleLeft, top: bubbleTop, width: 280, animation: reduce ? 'none' : 'sr-cardin var(--dur-base) var(--ease-flight) both' }}>
         <GlassPanel strong radius="md" pad="none" glow>
           <div style={{ padding: '14px 16px' }}>
-            <div style={{ fontSize: 14.5, color: 'var(--text-1)', fontWeight: 300 }}>{step.title}</div>
-            <div style={{ fontSize: 12.5, color: 'var(--text-2)', lineHeight: 1.75, marginTop: 8 }}>{step.body}</div>
+            <div style={{ fontSize: '0.90625rem', color: 'var(--text-1)', fontWeight: 300 }}>{step.title}</div>
+            <div style={{ fontSize: '0.78125rem', color: 'var(--text-2)', lineHeight: 1.75, marginTop: 8 }}>{step.body}</div>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 14 }}>
-              <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-3)' }}>{(i + 1)} / {SR_TOUR_STEPS.length}</span>
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6875rem', color: 'var(--text-3)' }}>{(i + 1)} / {SR_TOUR_STEPS.length}</span>
               <div style={{ display: 'flex', gap: 8 }}>
                 <Button size="sm" variant="ghost" onClick={onClose}>结束</Button>
                 <Button size="sm" variant="primary" glow icon={last ? 'check' : 'chevron-right'} onClick={next}>{last ? '完成' : '下一步'}</Button>
