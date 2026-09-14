@@ -121,7 +121,7 @@ function CodeBlock({ code: codeProp, lang: langProp, onCommitCode, onCommitLang,
           } else fallback();
         }}
           title="复制代码"
-          style={{ display: 'inline-flex', alignItems: 'center', gap: 5, background: 'transparent', border: 'none', cursor: 'pointer', color: copied ? (dawn ? '#b8801a' : '#ffd98a') : P.meta, fontSize: 11.5, fontFamily: 'var(--font-mono)' }}>
+          style={{ display: 'inline-flex', alignItems: 'center', gap: 5, background: 'transparent', border: 'none', cursor: 'pointer', color: copied ? (dawn ? '#b8801a' : '#ffd98a') : P.meta, fontSize: '0.71875rem', fontFamily: 'var(--font-mono)' }}>
           <Icon name={copied ? 'check' : 'copy'} size={13} color="currentColor" />{copied ? '已复制' : '复制'}
         </button>
       </div>
@@ -150,12 +150,12 @@ function CodeBlock({ code: codeProp, lang: langProp, onCommitCode, onCommitLang,
               }
             }
           }}
-          style={{ display: 'block', width: '100%', boxSizing: 'border-box', minHeight: Math.max(80, rows.length * 22 + 24), background: 'transparent', color: P.plain, border: 'none', outline: 'none', resize: 'vertical', fontFamily: 'var(--font-mono)', fontSize: 12.5, lineHeight: 1.85, padding: '12px 14px', tabSize: 4, borderRadius: '0 0 var(--r-md) var(--r-md)' }} />
+          style={{ display: 'block', width: '100%', boxSizing: 'border-box', minHeight: Math.max(80, rows.length * 22 + 24), background: 'transparent', color: P.plain, border: 'none', outline: 'none', resize: 'vertical', fontFamily: 'var(--font-mono)', fontSize: '0.78125rem', lineHeight: 1.85, padding: '12px 14px', tabSize: 4, borderRadius: '0 0 var(--r-md) var(--r-md)' }} />
       ) : (
         <div onClick={() => setEditingCode(true)} title="点击编辑代码"
           role="button" tabIndex={0} className="sr-focus-ring" aria-label="编辑代码"
           onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setEditingCode(true); } }}
-          style={{ padding: '12px 14px', fontFamily: 'var(--font-mono)', fontSize: 12.5, lineHeight: 1.85, color: P.plain, overflowX: 'auto', cursor: 'text', minHeight: 24, borderRadius: '0 0 var(--r-md) var(--r-md)' }}>
+          style={{ padding: '12px 14px', fontFamily: 'var(--font-mono)', fontSize: '0.78125rem', lineHeight: 1.85, color: P.plain, overflowX: 'auto', cursor: 'text', minHeight: 24, borderRadius: '0 0 var(--r-md) var(--r-md)' }}>
           {rows.map((toks, i) => (
             <div key={i} style={{ display: 'flex', gap: 16, whiteSpace: 'pre' }}>
               <span style={{ width: 18, flex: 'none', textAlign: 'right', color: P.ln, userSelect: 'none' }}>{i + 1}</span>
@@ -184,7 +184,7 @@ function DataTable({ head: headProp, rows: rowsProp, onCommit }) {
     <td contentEditable suppressContentEditableWarning onBlur={(e) => onWrite(e.currentTarget.textContent)}
       onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); e.currentTarget.blur(); } }}
       style={{ outline: 'none', padding: '9px 13px', borderRight: '1px solid var(--line)', borderBottom: '1px solid var(--line)',
-      fontSize: 13.5, color: isHead ? 'var(--text-1)' : 'var(--text-2)', fontWeight: isHead ? 500 : 400, background: isHead ? 'color-mix(in srgb, var(--star-blue) 5%, transparent)' : 'transparent' }}>{txt}</td>
+      fontSize: '0.84375rem', color: isHead ? 'var(--text-1)' : 'var(--text-2)', fontWeight: isHead ? 500 : 400, background: isHead ? 'color-mix(in srgb, var(--star-blue) 5%, transparent)' : 'transparent' }}>{txt}</td>
   );
   const ctrlBtn = (icon, title, onClick) => (
     <button type="button" className="sr-focus-ring sr-hit40" title={title} onMouseDown={(e) => e.preventDefault()} onClick={onClick}
@@ -389,18 +389,18 @@ function MathBlock({ tex, onCommit, autoEdit }) {
       <div style={{ borderRadius: 'var(--r-md)', background: 'var(--input-bg, rgba(3,4,12,0.45))', border: '1px solid var(--glass-border-strong)', overflow: 'hidden', margin: '2px 0' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '7px 12px', borderBottom: '1px solid var(--line)', color: 'var(--text-3)' }}>
           <Icon name="sigma" size={13} color="var(--gold)" />
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: 10.5, letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase' }}>LaTeX 源码</span>
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65625rem', letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase' }}>LaTeX 源码</span>
           <span style={{ flex: 1 }} />
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: 10.5 }}>Enter 渲染 · Shift+Enter 换行 · Esc 取消</span>
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65625rem' }}>Enter 渲染 · Shift+Enter 换行 · Esc 取消</span>
         </div>
         <textarea ref={taRef} value={v} spellCheck={false}
           onChange={(e) => { setV(e.target.value); autoH(e.target); }}
           onBlur={commit}
           onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); commit(); } if (e.key === 'Escape') { e.preventDefault(); cancel(); } }}
           placeholder="输入 LaTeX 源码，例如  |\Phi^+\rangle = \frac{|00\rangle + |11\rangle}{\sqrt 2}"
-          style={{ display: 'block', width: '100%', boxSizing: 'border-box', minHeight: 54, background: 'transparent', color: 'var(--text-1)', border: 'none', outline: 'none', resize: 'none', fontFamily: 'var(--font-mono)', fontSize: 13.5, lineHeight: 1.7, padding: '11px 14px', tabSize: 2 }} />
+          style={{ display: 'block', width: '100%', boxSizing: 'border-box', minHeight: 54, background: 'transparent', color: 'var(--text-1)', border: 'none', outline: 'none', resize: 'none', fontFamily: 'var(--font-mono)', fontSize: '0.84375rem', lineHeight: 1.7, padding: '11px 14px', tabSize: 2 }} />
         <div style={{ borderTop: '1px solid var(--line)', padding: '12px 14px', display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 30, background: 'rgba(159,198,255,0.04)' }}>
-          <span style={{ fontSize: 19, color: v.trim() ? 'var(--text-1)' : 'var(--text-3)', letterSpacing: '0.01em' }}>{v.trim() ? previewNode : '预览'}</span>
+          <span style={{ fontSize: '1.1875rem', color: v.trim() ? 'var(--text-1)' : 'var(--text-3)', letterSpacing: '0.01em' }}>{v.trim() ? previewNode : '预览'}</span>
           <TexErrMark errs={previewErrs} />
         </div>
       </div>
@@ -411,7 +411,7 @@ function MathBlock({ tex, onCommit, autoEdit }) {
       role="button" tabIndex={0} className="sr-focus-ring" aria-label="编辑 LaTeX 公式"
       onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setEditing(true); } }}
       style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '16px 14px', borderRadius: 'var(--r-md)', background: 'rgba(159,198,255,0.04)', border: '1px solid ' + (viewErrs.length ? 'color-mix(in srgb, var(--danger) 35%, transparent)' : 'var(--glass-border)'), cursor: 'text', margin: '2px 0' }}>
-      <span style={{ fontSize: 19.5, color: tex ? 'var(--text-1)' : 'var(--text-3)', letterSpacing: '0.01em', textAlign: 'center' }}>
+      <span style={{ fontSize: '1.21875rem', color: tex ? 'var(--text-1)' : 'var(--text-3)', letterSpacing: '0.01em', textAlign: 'center' }}>
         {tex ? viewNode : '点击输入公式（LaTeX 源码）…'}
       </span>
       <TexErrMark errs={viewErrs} />
@@ -557,12 +557,12 @@ function ImageBlock({ b, onSrc }) {
       onDrop={drop}
       style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 8, height: 120, borderRadius: 'var(--r-md)', border: '1px dashed ' + edge, color: 'var(--text-3)', cursor: busy ? 'progress' : 'pointer', background: err ? 'color-mix(in srgb, var(--danger) 5%, transparent)' : (over ? 'rgba(159,198,255,0.06)' : 'transparent'), transition: 'border-color var(--dur-fast), background var(--dur-fast)' }}>
       <Icon name={busy ? 'loader' : (err ? 'image-off' : 'image')} size={22} color={err ? 'var(--danger)' : (over ? 'var(--star-blue)' : 'currentColor')} />
-      <span style={{ fontSize: 13, color: err ? 'var(--text-2)' : 'inherit' }}>
+      <span style={{ fontSize: '0.8125rem', color: err ? 'var(--text-2)' : 'inherit' }}>
         {busy ? '正在压缩这张图…' : (err ? '图片加载失败 · 原链接已失效' : (over ? '放开即插入' : '拖入图片，或点击上传'))}
       </span>
-      {err && !busy && <span style={{ fontSize: 11.5 }}>点击重新上传，替换这张图</span>}
-      {!err && !busy && !note && <span style={{ fontSize: 11 }}>大图会自动压到长边 {SR_IMG.maxEdge}px —— 整片星空要跟着每次保存一起上传</span>}
-      {note && <span style={{ fontSize: 11.5, color: 'var(--text-2)' }}>{note}</span>}
+      {err && !busy && <span style={{ fontSize: '0.71875rem' }}>点击重新上传，替换这张图</span>}
+      {!err && !busy && !note && <span style={{ fontSize: '0.6875rem' }}>大图会自动压到长边 {SR_IMG.maxEdge}px —— 整片星空要跟着每次保存一起上传</span>}
+      {note && <span style={{ fontSize: '0.71875rem', color: 'var(--text-2)' }}>{note}</span>}
       <input type="file" accept="image/*" style={{ display: 'none' }} onChange={pick} disabled={busy} />
     </label>
   );
@@ -645,7 +645,7 @@ function TypePicker({ value, onPick, onPop }) {
     <>
       <button ref={btnRef} type="button" className="sr-focus-ring" onClick={() => setOpen(!open)} aria-haspopup="listbox" aria-expanded={open}
         onKeyDown={(e) => { if (!open && (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); setOpen(true); } }}
-        style={{ display: 'inline-flex', alignItems: 'center', gap: 6, font: 'inherit', fontSize: 12, padding: '2px 9px', borderRadius: 'var(--r-pill)', border: '1px solid transparent', background: 'rgba(159,198,255,0.12)', color: 'var(--star-blue)', cursor: 'pointer' }}>
+        style={{ display: 'inline-flex', alignItems: 'center', gap: 6, font: 'inherit', fontSize: '0.75rem', padding: '2px 9px', borderRadius: 'var(--r-pill)', border: '1px solid transparent', background: 'rgba(159,198,255,0.12)', color: 'var(--star-blue)', cursor: 'pointer' }}>
         {value || '选择类型…'}
         <Icon name="chevron-down" size={12} color="currentColor" />
       </button>
@@ -658,7 +658,7 @@ function TypePicker({ value, onPick, onPop }) {
                 onKeyDown={(e) => onOptKey(e, i, t)}
                 onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(159,198,255,0.10)'; }}
                 onMouseLeave={(e) => { e.currentTarget.style.background = t === value ? 'rgba(255,217,138,0.10)' : 'transparent'; }}
-                style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '7px 10px', borderRadius: 'var(--r-sm)', cursor: 'pointer', fontSize: 13, color: t === value ? 'var(--text-1)' : 'var(--text-2)', background: t === value ? 'rgba(255,217,138,0.10)' : 'transparent' }}>
+                style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '7px 10px', borderRadius: 'var(--r-sm)', cursor: 'pointer', fontSize: '0.8125rem', color: t === value ? 'var(--text-1)' : 'var(--text-2)', background: t === value ? 'rgba(255,217,138,0.10)' : 'transparent' }}>
                 <span style={{ flex: 1 }}>{t}</span>
                 {t === value && <Icon name="check" size={14} color="var(--gold)" />}
               </div>
@@ -695,7 +695,7 @@ function ReviewPicker({ label, iso, onPick, onPop }) {
     <>
       <button ref={btnRef} type="button" className="sr-focus-ring" onClick={openPop}
         title="选择日期，把这颗星的下次复习定在那天（星的亮度仍随时间自然变暗）"
-        style={{ display: 'inline-flex', alignItems: 'center', gap: 7, font: 'inherit', fontSize: 13, color: 'var(--text-1)', border: 'none', background: 'transparent', cursor: 'pointer', padding: '0 2px' }}>
+        style={{ display: 'inline-flex', alignItems: 'center', gap: 7, font: 'inherit', fontSize: '0.8125rem', color: 'var(--text-1)', border: 'none', background: 'transparent', cursor: 'pointer', padding: '0 2px' }}>
         {label}
         <Icon name="calendar-days" size={13} color="var(--text-3)" />
       </button>
@@ -710,7 +710,7 @@ function ReviewPicker({ label, iso, onPick, onPop }) {
               <button type="button" className="sr-focus-ring"
                 title={mode === 'days' ? '点击快速选择月份' : mode === 'months' ? '点击快速选择年份' : ''}
                 onClick={() => setMode(md => md === 'days' ? 'months' : md === 'months' ? 'years' : 'years')}
-                style={{ font: 'inherit', fontSize: 13, color: 'var(--text-1)', fontFamily: 'var(--font-mono)', border: 'none', background: 'transparent', cursor: mode === 'years' ? 'default' : 'pointer', padding: '3px 10px', borderRadius: 'var(--r-sm)' }}
+                style={{ font: 'inherit', fontSize: '0.8125rem', color: 'var(--text-1)', fontFamily: 'var(--font-mono)', border: 'none', background: 'transparent', cursor: mode === 'years' ? 'default' : 'pointer', padding: '3px 10px', borderRadius: 'var(--r-sm)' }}
                 onMouseEnter={(e) => { if (mode !== 'years') e.currentTarget.style.background = 'rgba(159,198,255,0.08)'; }}
                 onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; }}>
                 {mode === 'days' ? `${y} 年 ${m + 1} 月` : mode === 'months' ? `${y} 年` : `${y - (y % 12)} – ${y - (y % 12) + 11}`}
@@ -723,7 +723,7 @@ function ReviewPicker({ label, iso, onPick, onPop }) {
               <>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: 2, marginBottom: 4 }}>
                   {['一', '二', '三', '四', '五', '六', '日'].map(w => (
-                    <span key={w} style={{ textAlign: 'center', fontSize: 10.5, color: 'var(--text-3)', fontFamily: 'var(--font-mono)', padding: '2px 0' }}>{w}</span>
+                    <span key={w} style={{ textAlign: 'center', fontSize: '0.65625rem', color: 'var(--text-3)', fontFamily: 'var(--font-mono)', padding: '2px 0' }}>{w}</span>
                   ))}
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: 2 }}>
@@ -735,7 +735,7 @@ function ReviewPicker({ label, iso, onPick, onPop }) {
                     return (
                       <button key={day} type="button" disabled={past} onClick={() => setSel(isoOf(day))}
                         style={{
-                          height: 30, font: 'inherit', fontSize: 12.5, borderRadius: 'var(--r-sm)', cursor: past ? 'default' : 'pointer',
+                          height: 30, font: 'inherit', fontSize: '0.78125rem', borderRadius: 'var(--r-sm)', cursor: past ? 'default' : 'pointer',
                           border: '1px solid ' + (isSel ? 'rgba(255,217,138,0.55)' : isToday ? 'var(--glass-border-strong)' : 'transparent'),
                           background: isSel ? 'rgba(255,217,138,0.16)' : 'transparent',
                           color: past ? 'var(--text-3)' : isSel ? 'var(--gold)' : 'var(--text-1)',
@@ -757,7 +757,7 @@ function ReviewPicker({ label, iso, onPick, onPop }) {
                     <button key={mi} type="button" disabled={pastM}
                       onClick={() => { setYm([y, mi]); setMode('days'); }}
                       style={{
-                        height: 40, font: 'inherit', fontSize: 12.5, borderRadius: 'var(--r-sm)', cursor: pastM ? 'default' : 'pointer',
+                        height: 40, font: 'inherit', fontSize: '0.78125rem', borderRadius: 'var(--r-sm)', cursor: pastM ? 'default' : 'pointer',
                         border: '1px solid ' + (isCur ? 'rgba(255,217,138,0.55)' : isNowM ? 'var(--glass-border-strong)' : 'transparent'),
                         background: isCur ? 'rgba(255,217,138,0.16)' : 'transparent',
                         color: pastM ? 'var(--text-3)' : isCur ? 'var(--gold)' : 'var(--text-1)',
@@ -777,7 +777,7 @@ function ReviewPicker({ label, iso, onPick, onPop }) {
                     <button key={yy} type="button" disabled={pastY}
                       onClick={() => { setYm([yy, yy === now.getFullYear() && m < now.getMonth() ? now.getMonth() : m]); setMode('months'); }}
                       style={{
-                        height: 40, font: 'inherit', fontSize: 12.5, fontFamily: 'var(--font-mono)', borderRadius: 'var(--r-sm)', cursor: pastY ? 'default' : 'pointer',
+                        height: 40, font: 'inherit', fontSize: '0.78125rem', fontFamily: 'var(--font-mono)', borderRadius: 'var(--r-sm)', cursor: pastY ? 'default' : 'pointer',
                         border: '1px solid ' + (isCur ? 'rgba(255,217,138,0.55)' : isNowY ? 'var(--glass-border-strong)' : 'transparent'),
                         background: isCur ? 'rgba(255,217,138,0.16)' : 'transparent',
                         color: pastY ? 'var(--text-3)' : isCur ? 'var(--gold)' : 'var(--text-1)',
@@ -788,7 +788,7 @@ function ReviewPicker({ label, iso, onPick, onPop }) {
               </div>
             )}
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 12 }}>
-              <span style={{ flex: 1, fontSize: 11, color: 'var(--text-3)' }}>{sel ? '排到 ' + sel.replace(/-/g, '/') : '点一天，再按确认'}</span>
+              <span style={{ flex: 1, fontSize: '0.6875rem', color: 'var(--text-3)' }}>{sel ? '排到 ' + sel.replace(/-/g, '/') : '点一天，再按确认'}</span>
               <Button size="sm" variant="ghost" onClick={() => setOpen(false)}>取消</Button>
               <Button size="sm" variant="primary" glow icon="check" disabled={!sel}
                 onClick={() => { setOpen(false); if (sel) onPick && onPick(sel); }}>确认</Button>
@@ -848,9 +848,9 @@ function Properties({ props, onFlash, onConfirm, onCommit, reviewISO, onPickRevi
     <div style={{ marginBottom: 22, border: '1px solid var(--glass-border)', borderRadius: 'var(--r-md)', background: 'rgba(159,198,255,0.03)', overflow: 'hidden' }}>
       <button type="button" className="sr-focus-ring" aria-expanded={open} onClick={() => setOpen(o => !o)} style={{ display: 'flex', width: '100%', font: 'inherit', border: 'none', background: 'transparent', textAlign: 'left', alignItems: 'center', gap: 8, padding: '9px 14px', cursor: 'pointer', color: 'var(--text-3)' }}>
         <Icon name="chevron-right" size={14} color="currentColor" style={{ transform: open ? 'rotate(90deg)' : 'none', transition: 'transform var(--dur-fast)' }} />
-        <span style={{ fontSize: 11, letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', fontFamily: 'var(--font-mono)' }}>属性 Properties</span>
+        <span style={{ fontSize: '0.6875rem', letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', fontFamily: 'var(--font-mono)' }}>属性 Properties</span>
         <span style={{ flex: 1 }} />
-        <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11 }}>{rows.length}</span>
+        <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6875rem' }}>{rows.length}</span>
       </button>
       {open && (
         <div style={{ padding: '2px 14px 12px' }}>
@@ -863,7 +863,7 @@ function Properties({ props, onFlash, onConfirm, onCommit, reviewISO, onPickRevi
                 background: (focusKey === r.key || popKey === r.key) ? 'rgba(159,198,255,0.07)' : (hoverKey === r.key ? 'rgba(159,198,255,0.03)' : 'transparent'),
                 boxShadow: (focusKey === r.key || popKey === r.key) ? '0 0 0 1.5px var(--focus)' : 'none',
                 transition: 'background var(--dur-fast), box-shadow var(--dur-fast)' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 7, width: 96, flex: 'none', color: 'var(--text-3)', fontSize: 12.5 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 7, width: 96, flex: 'none', color: 'var(--text-3)', fontSize: '0.78125rem' }}>
                 <Icon name={r.icon} size={13} color="currentColor" />
                 {r.key[0] === 'x'
                   ? <span id={'prop-k-' + r.key} contentEditable suppressContentEditableWarning data-ph="属性名"
@@ -878,7 +878,7 @@ function Properties({ props, onFlash, onConfirm, onCommit, reviewISO, onPickRevi
               <div style={{ flex: 1, minWidth: 0 }}>
                 {r.kind === 'status'
                   /* 状态是记忆模型的派生值（心跳会覆写），只读展示、按态着色 */
-                  ? <span title="由记忆模型实时派生，随复习与时间自动变化" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12.5, color: 'var(--text-1)', cursor: 'default' }}>
+                  ? <span title="由记忆模型实时派生，随复习与时间自动变化" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: '0.78125rem', color: 'var(--text-1)', cursor: 'default' }}>
                       <span style={{ width: 7, height: 7, borderRadius: '50%', background: PROP_STATUS_TONE[r.v] || 'var(--star-blue)', boxShadow: (r.v === '牢固' || r.v === '待重燃') ? 'var(--glow-gold-soft)' : 'none' }} />
                       {r.v}
                     </span>
@@ -889,7 +889,7 @@ function Properties({ props, onFlash, onConfirm, onCommit, reviewISO, onPickRevi
                       ? <ReviewPicker label={r.v} iso={reviewISO} onPop={popToggle(r.key)} onPick={onPickReview} />
                       : <span contentEditable suppressContentEditableWarning title="点击编辑" data-ph="点击填写"
                           onBlur={commitVal(r)}
-                          style={{ outline: 'none', cursor: 'text', fontSize: 13, color: 'var(--text-1)', borderRadius: 4, padding: '0 2px', display: 'inline-block', minWidth: 42 }}>{r.v}</span>}
+                          style={{ outline: 'none', cursor: 'text', fontSize: '0.8125rem', color: 'var(--text-1)', borderRadius: 4, padding: '0 2px', display: 'inline-block', minWidth: 42 }}>{r.v}</span>}
               </div>
               <button type="button" title="删除此属性" className="sr-focus-ring sr-hit40" onMouseDown={(e) => e.preventDefault()} onClick={() => delRow(r)}
                 style={{ flex: 'none', width: 22, height: 22, position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', border: 'none', background: 'transparent', cursor: 'pointer', color: 'var(--text-3)', opacity: (hoverKey === r.key || focusKey === r.key) ? 1 : 0, transition: 'opacity var(--dur-fast)' }}>
@@ -897,7 +897,7 @@ function Properties({ props, onFlash, onConfirm, onCommit, reviewISO, onPickRevi
               </button>
             </div>
           ))}
-          <button type="button" className="sr-focus-ring" onClick={addRow} style={{ display: 'flex', font: 'inherit', border: 'none', background: 'transparent', alignItems: 'center', gap: 7, padding: '8px 0 2px', color: 'var(--text-3)', fontSize: 12.5, cursor: 'pointer' }}>
+          <button type="button" className="sr-focus-ring" onClick={addRow} style={{ display: 'flex', font: 'inherit', border: 'none', background: 'transparent', alignItems: 'center', gap: 7, padding: '8px 0 2px', color: 'var(--text-3)', fontSize: '0.78125rem', cursor: 'pointer' }}>
             <Icon name="plus" size={13} color="currentColor" />添加属性
           </button>
         </div>
@@ -1177,12 +1177,12 @@ function AIAssist({ star, tags, connected, onAddTag, onAddConnection, onSummaryD
   const lnkList = lnk.list ? lnk.list.filter(it => !connected.some(c => c.star.id === it.star.id)) : null;
 
   const note = (msg, danger) => (
-    <div style={{ marginTop: 6, fontSize: 11.5, color: danger ? 'var(--danger)' : 'var(--text-3)', lineHeight: 1.6 }}>{msg}</div>
+    <div style={{ marginTop: 6, fontSize: '0.71875rem', color: danger ? 'var(--danger)' : 'var(--text-3)', lineHeight: 1.6 }}>{msg}</div>
   );
   // 能力入口按钮：与右栏「新建连接」同一虚线语言；生成期间转等待态
   const entryBtn = (icon, label, busy, onClick) => (
     <button type="button" className="sr-focus-ring" disabled={busy} onClick={onClick}
-      style={{ display: 'flex', alignItems: 'center', gap: 7, width: '100%', font: 'inherit', textAlign: 'left', padding: '9px 12px', borderRadius: 'var(--r-md)', border: '1px dashed var(--line-strong)', background: 'transparent', color: busy ? 'var(--text-3)' : 'var(--text-2)', fontSize: 12.5, cursor: busy ? 'wait' : 'pointer' }}>
+      style={{ display: 'flex', alignItems: 'center', gap: 7, width: '100%', font: 'inherit', textAlign: 'left', padding: '9px 12px', borderRadius: 'var(--r-md)', border: '1px dashed var(--line-strong)', background: 'transparent', color: busy ? 'var(--text-3)' : 'var(--text-2)', fontSize: '0.78125rem', cursor: busy ? 'wait' : 'pointer' }}>
       <span aria-hidden="true" className={busy ? 'sr-ed-spin' : ''} style={{ display: 'inline-flex', animation: busy ? 'sr-ed-spin 1.2s linear infinite' : 'none' }}>
         <Icon name={busy ? 'loader' : icon} size={14} color="currentColor" />
       </span>
@@ -1194,9 +1194,9 @@ function AIAssist({ star, tags, connected, onAddTag, onAddConnection, onSummaryD
     <section>
       <RailHead icon="sparkles" title="AI 助手" />
       {!ai.ok ? (
-        <div style={{ marginTop: 10, fontSize: 12, color: 'var(--text-3)', lineHeight: 1.7 }}>在 AI 配置中接入服务商后可用。</div>
+        <div style={{ marginTop: 10, fontSize: '0.75rem', color: 'var(--text-3)', lineHeight: 1.7 }}>在 AI 配置中接入服务商后可用。</div>
       ) : !(ai.cfg.autoSummary || ai.cfg.tagSuggest || ai.cfg.linkSuggest) ? (
-        <div style={{ marginTop: 10, fontSize: 12, color: 'var(--text-3)', lineHeight: 1.7 }}>三项助手能力都关着 · 可在 AI 配置中开启。</div>
+        <div style={{ marginTop: 10, fontSize: '0.75rem', color: 'var(--text-3)', lineHeight: 1.7 }}>三项助手能力都关着 · 可在 AI 配置中开启。</div>
       ) : (
         <div style={{ marginTop: 10, display: 'flex', flexDirection: 'column', gap: 12 }}>
           {ai.cfg.autoSummary && (
@@ -1214,7 +1214,7 @@ function AIAssist({ star, tags, connected, onAddTag, onAddConnection, onSummaryD
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 8 }}>
                   {tagList.map(t => (
                     <button type="button" key={t} className="sr-focus-ring" title={'添加标签「' + t + '」'} onClick={() => onAddTag(t)}
-                      style={{ display: 'inline-flex', alignItems: 'center', gap: 4, height: 24, padding: '0 10px', borderRadius: 'var(--r-pill)', border: '1px dashed rgba(159,198,255,0.45)', background: 'rgba(159,198,255,0.07)', color: 'var(--star-blue)', fontSize: 12, cursor: 'pointer', fontFamily: 'var(--font-sans)' }}>
+                      style={{ display: 'inline-flex', alignItems: 'center', gap: 4, height: 24, padding: '0 10px', borderRadius: 'var(--r-pill)', border: '1px dashed rgba(159,198,255,0.45)', background: 'rgba(159,198,255,0.07)', color: 'var(--star-blue)', fontSize: '0.75rem', cursor: 'pointer', fontFamily: 'var(--font-sans)' }}>
                       <Icon name="plus" size={11} color="currentColor" />{t}
                     </button>
                   ))}
@@ -1232,11 +1232,11 @@ function AIAssist({ star, tags, connected, onAddTag, onAddConnection, onSummaryD
                     <div key={it.star.id} style={{ padding: '9px 11px', borderRadius: 'var(--r-md)', background: 'rgba(159,198,255,0.04)', border: '1px solid var(--glass-border)' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
                         <span style={{ width: 7, height: 7, borderRadius: '50%', flex: 'none', background: D.conColor(it.star.con), boxShadow: `0 0 6px ${D.conColor(it.star.con)}` }} />
-                        <span style={{ fontSize: 13, color: 'var(--text-1)', minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{it.star.label}</span>
+                        <span style={{ fontSize: '0.8125rem', color: 'var(--text-1)', minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{it.star.label}</span>
                         <button type="button" className="sr-focus-ring" onClick={() => onAddConnection(it.star, it.rel)}
-                          style={{ marginLeft: 'auto', flex: 'none', height: 24, padding: '0 11px', borderRadius: 'var(--r-pill)', border: '1px solid var(--glass-border-strong)', background: 'rgba(159,198,255,0.14)', color: 'var(--text-1)', fontSize: 11.5, cursor: 'pointer', fontFamily: 'var(--font-sans)' }}>连上</button>
+                          style={{ marginLeft: 'auto', flex: 'none', height: 24, padding: '0 11px', borderRadius: 'var(--r-pill)', border: '1px solid var(--glass-border-strong)', background: 'rgba(159,198,255,0.14)', color: 'var(--text-1)', fontSize: '0.71875rem', cursor: 'pointer', fontFamily: 'var(--font-sans)' }}>连上</button>
                       </div>
-                      <div style={{ fontSize: 11.5, color: 'var(--text-3)', lineHeight: 1.5, marginTop: 4, paddingLeft: 14 }}>{it.rel}</div>
+                      <div style={{ fontSize: '0.71875rem', color: 'var(--text-3)', lineHeight: 1.5, marginTop: 4, paddingLeft: 14 }}>{it.rel}</div>
                     </div>
                   ))}
                 </div>
@@ -1253,6 +1253,26 @@ function AIAssist({ star, tags, connected, onAddTag, onAddConnection, onSummaryD
 function Editor({ starId, onBack, onOpen, onExplore }) {
   const D = window.SR_DATA;
   const star = D.byId[starId] || D.stars[0];
+  /* 空星空兜底：星被删光（或 409 收敛后一颗不剩）时以前直接 star.body 崩给
+     错误边界——一张全屏红卡换一句「什么都没了」未免太重。给一张平静的空态。
+     空态必须早于任何 hook 返回，所以包一层：有星才进 EditorBody。 */
+  if (!star) {
+    return (
+      <section style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 14, color: 'var(--text-2)' }}>
+        <Icon name="star" size={30} color="var(--text-3)" />
+        <div style={{ fontSize: '0.875rem' }}>这片星空暂时没有星</div>
+        <button type="button" onClick={onBack} className="sr-focus-ring"
+          style={{ fontSize: '0.8125rem', color: 'var(--star-blue)', background: 'none', border: 'none', cursor: 'pointer', borderBottom: '1px dashed rgba(159,198,255,0.5)', padding: 0 }}>
+          回到星图
+        </button>
+      </section>
+    );
+  }
+  return <EditorBody star={star} starId={starId} onBack={onBack} onOpen={onOpen} onExplore={onExplore} />;
+}
+
+function EditorBody({ star, onBack, onOpen, onExplore }) {
+  const D = window.SR_DATA;
   const refs = React.useRef({});
   const [blocks, setBlocks] = React.useState(() => (star.body || []).map(b => ({ ...b })));
   const [hover, setHover] = React.useState(null);
@@ -1349,7 +1369,13 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
   const U = window.SRUndoCore;
   const cloneBlk = (b) => ({ ...b, head: b.head && b.head.slice(), rows: b.rows && b.rows.map(r => r.slice()) });
   const undoRef = React.useRef(null);
-  if (!undoRef.current) undoRef.current = U ? U.create(120) : { past: [], future: [], cap: 120, typing: false };
+  if (!undoRef.current) {
+    /* 容量随笔记体量降档（undocore.capForBytes）：快照是整篇克隆，
+       一篇 1MB 的笔记按 120 步最坏 ~240MB，降档后 ~30MB。 */
+    const approxBytes = (star.body || []).reduce((n, b) => n + String(b.text || b.code || '').length, 0) * 2;
+    const cap = U && U.capForBytes ? U.capForBytes(approxBytes) : 120;
+    undoRef.current = U ? U.create(cap) : { past: [], future: [], cap, typing: false };
+  }
   const snapNow = () => ({ blocks: blocksRef.current.map(syncBlock).map(cloneBlk), con: star.con });
   const snapState = () => ({ blocks: blocksRef.current.map(cloneBlk), con: star.con });
   const pushHistory = () => { if (U) U.push(undoRef.current, snapNow()); };
@@ -2576,16 +2602,16 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
       case 'rich': return <div contentEditable suppressContentEditableWarning data-ph="一句话摘要：这颗星在悬停时如何介绍自己…"
         onInput={scheduleTick}
         onBlur={(e) => { const t = e.currentTarget.innerText.trim(); if (t !== (star.summary || '')) { star.summary = t; D.touchNote(star.id); } }}
-        style={{ outline: 'none', fontSize: 16.5, lineHeight: 1.85, color: 'var(--text-2)' }}>{star.summary}</div>;
+        style={{ outline: 'none', fontSize: '1.03125rem', lineHeight: 1.85, color: 'var(--text-2)' }}>{star.summary}</div>;
       // 标题上下留白：上方多、下方少（块间距 8px 统一兜底），阅读节奏对标 Notion/Typora
-      case 'h1': return editable(b, 'div', { fontSize: 28, fontWeight: 300, lineHeight: 1.35, marginTop: 18, marginBottom: 2 });
-      case 'h2': return editable(b, 'div', { fontSize: 21, fontWeight: 300, lineHeight: 1.45, marginTop: 14, marginBottom: 1 });
-      case 'h3': return editable(b, 'div', { fontSize: 17.5, fontWeight: 500, lineHeight: 1.5, marginTop: 10, color: 'var(--text-1)' });
-      case 'p': return editable(b, 'div', { fontSize: 16.5, lineHeight: 1.85, color: 'var(--text-2)', minHeight: 26 });
+      case 'h1': return editable(b, 'div', { fontSize: '1.75rem', fontWeight: 300, lineHeight: 1.35, marginTop: 18, marginBottom: 2 });
+      case 'h2': return editable(b, 'div', { fontSize: '1.3125rem', fontWeight: 300, lineHeight: 1.45, marginTop: 14, marginBottom: 1 });
+      case 'h3': return editable(b, 'div', { fontSize: '1.09375rem', fontWeight: 500, lineHeight: 1.5, marginTop: 10, color: 'var(--text-1)' });
+      case 'p': return editable(b, 'div', { fontSize: '1.03125rem', lineHeight: 1.85, color: 'var(--text-2)', minHeight: 26 });
       case 'quote': return (
         <div style={{ display: 'flex', gap: 14 }}>
           <span style={{ width: 3, borderRadius: 2, background: 'linear-gradient(var(--gold), var(--star-blue))', flex: 'none' }} />
-          {editable(b, 'div', { fontSize: 16, lineHeight: 1.75, color: 'var(--text-2)', fontStyle: 'italic' })}
+          {editable(b, 'div', { fontSize: '1rem', lineHeight: 1.75, color: 'var(--text-2)', fontStyle: 'italic' })}
         </div>
       );
       case 'callout': return (
@@ -2593,13 +2619,13 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
           background: b.tone === 'blue' ? 'rgba(159,198,255,0.06)' : 'rgba(255,217,138,0.06)',
           border: '1px solid ' + (b.tone === 'blue' ? 'rgba(159,198,255,0.20)' : 'rgba(255,217,138,0.20)') }}>
           <Icon name={b.tone === 'blue' ? 'info' : 'lightbulb'} size={18} color={b.tone === 'blue' ? 'var(--star-blue)' : 'var(--gold)'} style={{ marginTop: 2 }} />
-          {editable(b, 'div', { flex: 1, fontSize: 15, lineHeight: 1.7, color: 'var(--text-1)' })}
+          {editable(b, 'div', { flex: 1, fontSize: '0.9375rem', lineHeight: 1.7, color: 'var(--text-1)' })}
         </div>
       );
       case 'bulleted': return (
         <div style={{ display: 'flex', gap: 12, marginLeft: (b.indent || 0) * 24 }}>
           <span style={{ color: 'var(--star-blue)', marginTop: 11, width: 5, height: 5, borderRadius: (b.indent || 0) % 2 ? 1 : '50%', background: 'var(--star-blue)', flex: 'none' }} />
-          {editable(b, 'div', { flex: 1, fontSize: 16.5, lineHeight: 1.7, color: 'var(--text-2)' })}
+          {editable(b, 'div', { flex: 1, fontSize: '1.03125rem', lineHeight: 1.7, color: 'var(--text-2)' })}
         </div>
       );
       case 'numbered': {
@@ -2611,8 +2637,8 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
         const n = numCounters[lvl];
         return (
         <div style={{ display: 'flex', gap: 12, marginLeft: lvl * 24 }}>
-          <span style={{ color: 'var(--star-blue)', fontFamily: 'var(--font-mono)', fontSize: 14, marginTop: 2, minWidth: 16 }}>{n}.</span>
-          {editable(b, 'div', { flex: 1, fontSize: 16.5, lineHeight: 1.7, color: 'var(--text-2)' })}
+          <span style={{ color: 'var(--star-blue)', fontFamily: 'var(--font-mono)', fontSize: '0.875rem', marginTop: 2, minWidth: 16 }}>{n}.</span>
+          {editable(b, 'div', { flex: 1, fontSize: '1.03125rem', lineHeight: 1.7, color: 'var(--text-2)' })}
         </div>
       ); }
       case 'todo': { const toggleTodo = () => withSynced(s => s.map(x => x.id === b.id ? { ...x, checked: !x.checked } : x)); return (
@@ -2623,7 +2649,7 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
               border: '1px solid', borderColor: b.checked ? 'var(--gold)' : 'var(--line-strong)', background: b.checked ? 'var(--gold)' : 'transparent' }}>
             {b.checked && <Icon name="check" size={12} color="var(--text-on-gold)" />}
           </span>
-          {editable(b, 'div', { flex: 1, fontSize: 16, lineHeight: 1.7, color: b.checked ? 'var(--text-3)' : 'var(--text-2)', textDecoration: b.checked ? 'line-through' : 'none' })}
+          {editable(b, 'div', { flex: 1, fontSize: '1rem', lineHeight: 1.7, color: b.checked ? 'var(--text-3)' : 'var(--text-2)', textDecoration: b.checked ? 'line-through' : 'none' })}
         </div>
       ); }
       case 'toggle': { const toggleOpen = () => mutateBlocks(s => s.map(x => x.id === b.id ? { ...x, open: !x.open } : x)); return (
@@ -2634,12 +2660,12 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
               style={{ marginTop: 4, cursor: 'pointer', display: 'inline-flex', position: 'relative', transform: b.open ? 'rotate(90deg)' : 'none', transition: 'transform var(--dur-fast)', color: 'var(--text-3)' }}>
               <Icon name="chevron-right" size={16} color="currentColor" />
             </span>
-            {editable(b, 'div', { flex: 1, fontSize: 16.5, lineHeight: 1.7, color: 'var(--text-1)' })}
+            {editable(b, 'div', { flex: 1, fontSize: '1.03125rem', lineHeight: 1.7, color: 'var(--text-1)' })}
           </div>
           {b.open && <div contentEditable suppressContentEditableWarning data-ph="折叠内容…"
             onBlur={(e) => { const h = sanHtml(e.currentTarget.innerHTML); if (h !== (b.child || '')) withSynced(s => s.map(x => x.id === b.id ? { ...x, child: h } : x)); }}
             dangerouslySetInnerHTML={{ __html: sanHtml(b.child || '') }}
-            style={{ outline: 'none', marginLeft: 24, marginTop: 6, fontSize: 15, lineHeight: 1.7, color: 'var(--text-2)' }} />}
+            style={{ outline: 'none', marginLeft: 24, marginTop: 6, fontSize: '0.9375rem', lineHeight: 1.7, color: 'var(--text-2)' }} />}
         </div>
       ); }
       /* 原子块的提交也进撤销栈（withSynced = 先压快照再改）：否则 ⌘Z 撤不掉
@@ -2670,10 +2696,10 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
               <RailHead icon="list-tree" title="大纲" />
               <div style={{ marginTop: 10, display: 'flex', flexDirection: 'column', gap: 1 }}>
                 <button type="button" className="sr-focus-ring" onClick={() => scrollRef.current && scrollRef.current.scrollTo({ top: 0, behavior: 'smooth' })}
-                  style={{ display: 'block', width: '100%', textAlign: 'left', font: 'inherit', background: 'transparent', padding: '5px 10px', borderRadius: 'var(--r-sm)', border: 'none', borderLeft: '2px solid var(--gold)', cursor: 'pointer', fontSize: 13, color: 'var(--text-1)' }}>{star.label}</button>
+                  style={{ display: 'block', width: '100%', textAlign: 'left', font: 'inherit', background: 'transparent', padding: '5px 10px', borderRadius: 'var(--r-sm)', border: 'none', borderLeft: '2px solid var(--gold)', cursor: 'pointer', fontSize: '0.8125rem', color: 'var(--text-1)' }}>{star.label}</button>
                 {outline.map(o => (
                   <button type="button" key={o.id} className="sr-focus-ring" onClick={() => scrollToBlock(o.id)}
-                    style={{ display: 'block', width: '100%', textAlign: 'left', font: 'inherit', background: 'transparent', border: 'none', padding: '5px 10px', paddingLeft: o.type === 'h3' ? 30 : 18, borderRadius: 'var(--r-sm)', borderLeft: '2px solid var(--line)', cursor: 'pointer', fontSize: 12.5, color: 'var(--text-2)' }}
+                    style={{ display: 'block', width: '100%', textAlign: 'left', font: 'inherit', background: 'transparent', border: 'none', padding: '5px 10px', paddingLeft: o.type === 'h3' ? 30 : 18, borderRadius: 'var(--r-sm)', borderLeft: '2px solid var(--line)', cursor: 'pointer', fontSize: '0.78125rem', color: 'var(--text-2)' }}
                     onMouseEnter={e => e.currentTarget.style.background = 'rgba(159,198,255,0.06)'} onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>{o.live}</button>
                 ))}
               </div>
@@ -2685,55 +2711,55 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
                   <div key={l.star.id + i} onMouseEnter={() => setHoverConn(i)} onMouseLeave={() => setHoverConn(null)}
                     style={{ position: 'relative', padding: '10px 12px', borderRadius: 'var(--r-md)', background: 'rgba(159,198,255,0.04)', border: '1px solid ' + (l.kind === 'cross' ? 'rgba(255,217,138,0.22)' : 'var(--glass-border)') }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
-                      <Icon name="link" size={13} color={l.kind === 'cross' ? 'var(--gold)' : 'var(--star-blue)'} /><span style={{ fontSize: 13.5, color: 'var(--text-1)' }}>{l.star.label}</span>
-                      {l.kind === 'cross' && <span style={{ marginLeft: 'auto', fontSize: 10, color: 'var(--gold)' }}>融会贯通</span>}
+                      <Icon name="link" size={13} color={l.kind === 'cross' ? 'var(--gold)' : 'var(--star-blue)'} /><span style={{ fontSize: '0.84375rem', color: 'var(--text-1)' }}>{l.star.label}</span>
+                      {l.kind === 'cross' && <span style={{ marginLeft: 'auto', fontSize: '0.625rem', color: 'var(--gold)' }}>融会贯通</span>}
                       <button type="button" title="断开连接" className="sr-focus-ring sr-hit40" onClick={() => removeConnection(l)}
                         onFocus={() => setHoverConn(i)} onBlur={() => setHoverConn(null)}
                         style={{ marginLeft: l.kind === 'cross' ? 6 : 'auto', flex: 'none', width: 20, height: 20, position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', border: 'none', background: 'transparent', cursor: 'pointer', color: 'var(--text-3)', opacity: hoverConn === i ? 1 : 0, transition: 'opacity var(--dur-fast)' }}>
                         <Icon name="unlink" size={13} color="currentColor" />
                       </button>
                     </div>
-                    <div style={{ fontSize: 11.5, color: 'var(--text-3)', lineHeight: 1.5, paddingLeft: 21 }}>{l.rel}</div>
+                    <div style={{ fontSize: '0.71875rem', color: 'var(--text-3)', lineHeight: 1.5, paddingLeft: 21 }}>{l.rel}</div>
                   </div>
                 ))}
                 {linking ? (
                   <div style={{ borderRadius: 'var(--r-md)', border: '1px solid var(--glass-border-strong)', background: 'var(--input-bg, rgba(3,4,12,0.45))', overflow: 'hidden' }}>
                     {linkStar ? (
                       <div style={{ padding: '10px 12px' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 7, marginBottom: 9, fontSize: 12.5, color: 'var(--text-2)' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 7, marginBottom: 9, fontSize: '0.78125rem', color: 'var(--text-2)' }}>
                           <span style={{ width: 7, height: 7, borderRadius: '50%', background: D.conColor(linkStar.con), boxShadow: `0 0 6px ${D.conColor(linkStar.con)}` }} />
                           <span style={{ color: 'var(--text-1)' }}>{linkStar.label}</span>
-                          <span style={{ marginLeft: 'auto', fontSize: 10, color: linkStar.con === con ? 'var(--star-blue)' : 'var(--gold)' }}>{linkStar.con === con ? '同一星域' : '融会贯通'}</span>
+                          <span style={{ marginLeft: 'auto', fontSize: '0.625rem', color: linkStar.con === con ? 'var(--star-blue)' : 'var(--gold)' }}>{linkStar.con === con ? '同一星域' : '融会贯通'}</span>
                         </div>
                         <input autoFocus value={relDraft} onChange={(e) => setRelDraft(e.target.value)}
                           onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); addConnection(linkStar, relDraft); } if (e.key === 'Escape') resetLinking(); }}
                           placeholder="写一句关系，例如「是其特例」…"
-                          style={{ width: '100%', boxSizing: 'border-box', background: 'var(--input-bg, rgba(3,4,12,0.45))', border: '1px solid var(--glass-border-strong)', borderRadius: 'var(--r-sm)', color: 'var(--text-1)', fontSize: 12.5, padding: '7px 10px', outline: 'none', fontFamily: 'var(--font-sans)' }} />
+                          style={{ width: '100%', boxSizing: 'border-box', background: 'var(--input-bg, rgba(3,4,12,0.45))', border: '1px solid var(--glass-border-strong)', borderRadius: 'var(--r-sm)', color: 'var(--text-1)', fontSize: '0.78125rem', padding: '7px 10px', outline: 'none', fontFamily: 'var(--font-sans)' }} />
                         <div style={{ display: 'flex', gap: 8, justifyContent: 'flex-end', marginTop: 10 }}>
-                          <button type="button" onClick={resetLinking} style={{ height: 28, padding: '0 13px', borderRadius: 'var(--r-pill)', border: '1px solid var(--glass-border-strong)', background: 'transparent', color: 'var(--text-2)', fontSize: 12, cursor: 'pointer', fontFamily: 'var(--font-sans)' }}>取消</button>
-                          <button type="button" onClick={() => addConnection(linkStar, relDraft)} style={{ height: 28, padding: '0 13px', borderRadius: 'var(--r-pill)', border: '1px solid var(--glass-border-strong)', background: 'rgba(159,198,255,0.14)', color: 'var(--text-1)', fontSize: 12, cursor: 'pointer', fontFamily: 'var(--font-sans)' }}>建立连接</button>
+                          <button type="button" onClick={resetLinking} style={{ height: 28, padding: '0 13px', borderRadius: 'var(--r-pill)', border: '1px solid var(--glass-border-strong)', background: 'transparent', color: 'var(--text-2)', fontSize: '0.75rem', cursor: 'pointer', fontFamily: 'var(--font-sans)' }}>取消</button>
+                          <button type="button" onClick={() => addConnection(linkStar, relDraft)} style={{ height: 28, padding: '0 13px', borderRadius: 'var(--r-pill)', border: '1px solid var(--glass-border-strong)', background: 'rgba(159,198,255,0.14)', color: 'var(--text-1)', fontSize: '0.75rem', cursor: 'pointer', fontFamily: 'var(--font-sans)' }}>建立连接</button>
                         </div>
                       </div>
                     ) : (
                       <React.Fragment>
-                        <div style={{ fontSize: 10, letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: 'var(--text-3)', padding: '8px 12px 4px', fontFamily: 'var(--font-mono)' }}>选择要连接的星</div>
+                        <div style={{ fontSize: '0.625rem', letterSpacing: 'var(--ls-hud)', textTransform: 'uppercase', color: 'var(--text-3)', padding: '8px 12px 4px', fontFamily: 'var(--font-mono)' }}>选择要连接的星</div>
                         <div style={{ maxHeight: 180, overflow: 'auto' }} onContextMenu={(e) => e.preventDefault()}>
-                          {linkCandidates.length === 0 && <div style={{ padding: '8px 12px', fontSize: 12, color: 'var(--text-3)' }}>没有可连接的星了。</div>}
+                          {linkCandidates.length === 0 && <div style={{ padding: '8px 12px', fontSize: '0.75rem', color: 'var(--text-3)' }}>没有可连接的星了。</div>}
                           {linkCandidates.map(s => (
                             <button type="button" key={s.id} className="sr-focus-ring" onClick={() => { setLinkStar(s); setRelDraft(''); }} style={{ display: 'flex', width: '100%', textAlign: 'left', font: 'inherit', border: 'none', background: 'transparent', alignItems: 'center', gap: 8, padding: '7px 12px', cursor: 'pointer' }}
                               onMouseEnter={e => e.currentTarget.style.background = 'rgba(159,198,255,0.08)'} onMouseLeave={e => e.currentTarget.style.background = 'transparent'} onFocus={e => e.currentTarget.style.background = 'rgba(159,198,255,0.08)'} onBlur={e => e.currentTarget.style.background = 'transparent'}>
                               <span style={{ width: 7, height: 7, borderRadius: '50%', background: D.conColor(s.con), boxShadow: `0 0 6px ${D.conColor(s.con)}` }} />
-                              <span style={{ fontSize: 13, color: 'var(--text-2)' }}>{s.label}</span>
-                              <span style={{ marginLeft: 'auto', fontSize: 10.5, color: 'var(--text-3)' }}>{D.conName(s.con)}</span>
+                              <span style={{ fontSize: '0.8125rem', color: 'var(--text-2)' }}>{s.label}</span>
+                              <span style={{ marginLeft: 'auto', fontSize: '0.65625rem', color: 'var(--text-3)' }}>{D.conName(s.con)}</span>
                             </button>
                           ))}
                         </div>
-                        <button type="button" className="sr-focus-ring" onClick={resetLinking} style={{ display: 'block', width: '100%', textAlign: 'left', font: 'inherit', background: 'transparent', padding: '7px 12px', fontSize: 12, color: 'var(--text-3)', cursor: 'pointer', border: 'none', borderTop: '1px solid var(--line)' }}>取消</button>
+                        <button type="button" className="sr-focus-ring" onClick={resetLinking} style={{ display: 'block', width: '100%', textAlign: 'left', font: 'inherit', background: 'transparent', padding: '7px 12px', fontSize: '0.75rem', color: 'var(--text-3)', cursor: 'pointer', border: 'none', borderTop: '1px solid var(--line)' }}>取消</button>
                       </React.Fragment>
                     )}
                   </div>
                 ) : (
-                  <button type="button" onClick={() => { setLinking(true); setLinkStar(null); }} style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '9px 12px', borderRadius: 'var(--r-md)', border: '1px dashed var(--line-strong)', background: 'transparent', color: 'var(--text-3)', fontSize: 12.5, cursor: 'pointer' }}>
+                  <button type="button" onClick={() => { setLinking(true); setLinkStar(null); }} style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '9px 12px', borderRadius: 'var(--r-md)', border: '1px dashed var(--line-strong)', background: 'transparent', color: 'var(--text-3)', fontSize: '0.78125rem', cursor: 'pointer' }}>
                     <Icon name="plus" size={14} color="currentColor" />新建连接 · 写一句关系
                   </button>
                 )}
@@ -2747,15 +2773,15 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
             <section>
               <RailHead icon="corner-down-left" title="反向链接" extra={backlinks.length} />
               <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 10 }}>
-                {backlinks.length === 0 && <div style={{ fontSize: 12, color: 'var(--text-3)' }}>暂无其它星指向这里。</div>}
+                {backlinks.length === 0 && <div style={{ fontSize: '0.75rem', color: 'var(--text-3)' }}>暂无其它星指向这里。</div>}
                 {backlinks.map((b, i) => (
                   <div key={b.star.id + i} style={{ padding: '10px 12px', borderRadius: 'var(--r-md)', background: 'rgba(159,198,255,0.04)', border: '1px solid var(--glass-border)' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                       <span style={{ width: 7, height: 7, borderRadius: '50%', background: D.conColor(b.star.con), boxShadow: `0 0 7px ${D.conColor(b.star.con)}`, flex: 'none' }} />
-                      <span style={{ fontSize: 13.5, color: 'var(--text-1)' }}>{b.star.label}</span>
-                      <span style={{ fontSize: 11, color: 'var(--text-3)', marginLeft: 'auto' }}>{D.conName(b.star.con)}</span>
+                      <span style={{ fontSize: '0.84375rem', color: 'var(--text-1)' }}>{b.star.label}</span>
+                      <span style={{ fontSize: '0.6875rem', color: 'var(--text-3)', marginLeft: 'auto' }}>{D.conName(b.star.con)}</span>
                     </div>
-                    <div style={{ fontSize: 11.5, color: 'var(--text-3)', marginTop: 6, lineHeight: 1.6, paddingLeft: 15 }}>
+                    <div style={{ fontSize: '0.71875rem', color: 'var(--text-3)', marginTop: 6, lineHeight: 1.6, paddingLeft: 15 }}>
                       …{b.rel}，引用了 <span style={{ color: 'var(--star-blue)', background: 'rgba(159,198,255,0.10)', padding: '0 4px', borderRadius: 3 }}>[[{star.label}]]</span>。
                     </div>
                   </div>
@@ -2774,26 +2800,26 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
                 return (
                   <div style={{ marginTop: 10, padding: 14, borderRadius: 'var(--r-md)', background: 'rgba(255,217,138,0.05)', border: '1px solid rgba(255,217,138,0.18)' }}>
                     <MemoryBar value={star.strength} showPct />
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 7, marginTop: 12, fontSize: 12, color: 'var(--text-2)' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 7, marginTop: 12, fontSize: '0.75rem', color: 'var(--text-2)' }}>
                       <Icon name="calendar-clock" size={14} color="var(--gold)" />遗忘曲线预计 <b style={{ color: 'var(--gold)', fontWeight: 500 }}>{(star.props && star.props.nextReview) || '6 天后'}</b> 复习
                     </div>
                     <div style={{ height: 1, background: 'var(--line)', margin: '12px 0' }} />
                     {/* 点亮状态（认证轴，与亮度四档正交）：已点亮 = 发丝金环 · 待重燃 = 暗金余烬环 */}
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 7, fontSize: 12.5, color: litSt ? 'var(--gold)' : emberSt ? 'var(--gold-warm)' : 'var(--text-2)' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 7, fontSize: '0.78125rem', color: litSt ? 'var(--gold)' : emberSt ? 'var(--gold-warm)' : 'var(--text-2)' }}>
                       <span aria-hidden="true" style={{ flex: 'none', width: 10, height: 10, borderRadius: '50%', boxSizing: 'border-box',
                         border: litSt ? '1px solid var(--gold)'
                           : emberSt ? '1px solid color-mix(in srgb, var(--gold-warm) 55%, transparent)'
                           : '1px solid var(--line-strong)' }} />
                       {litSt ? `已点亮 · ${D.ago(star.sr && star.sr.lit)}` : emberSt ? '待重燃' : '未点亮'}
                     </div>
-                    <div style={{ fontSize: 11.5, color: 'var(--text-3)', lineHeight: 1.7, marginTop: 6 }}>
+                    <div style={{ fontSize: '0.71875rem', color: 'var(--text-3)', lineHeight: 1.7, marginTop: 6 }}>
                       {litSt ? '已点亮 · 讲清楚的东西，暗得更慢。'
                         : emberSt ? '曾点亮的星暗了下来。再讲透一次，就能重燃。'
                         : '讲清楚一次，这颗星才会真正点亮——点亮的星记得更久。'}
                     </div>
                     {/* 门槛进度：内容门槛（摘要 ≥ 20 字 或 有内容块 ≥ 2）随输入就地更新 */}
                     {!litSt && (
-                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: 6, fontSize: 11, color: substantial ? 'var(--text-2)' : 'var(--text-3)', lineHeight: 1.6, marginTop: 8 }}>
+                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: 6, fontSize: '0.6875rem', color: substantial ? 'var(--text-2)' : 'var(--text-3)', lineHeight: 1.6, marginTop: 8 }}>
                         <Icon name={substantial ? 'check' : 'pen-line'} size={12} color={substantial ? 'var(--gold)' : 'currentColor'} />
                         <span>
                           {substantial
@@ -2809,7 +2835,7 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
             <section>
               <RailHead icon="crosshair" title="在星图中定位" />
               <MiniStarMap currentId={star.id} onPick={(s) => setExplore({ id: s.id, label: s.label, con: s.con })} />
-              <div style={{ marginTop: 8, fontSize: 11, color: 'var(--text-3)', lineHeight: 1.6 }}>点击任意星，跃迁到星图中探索它的星系。</div>
+              <div style={{ marginTop: 8, fontSize: '0.6875rem', color: 'var(--text-3)', lineHeight: 1.6 }}>点击任意星，跃迁到星图中探索它的星系。</div>
             </section>
           </div>
   );
@@ -2873,7 +2899,7 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 22 }}>
             <Button variant="ghost" size="sm" icon="corner-up-left" onClick={onBack}>星图</Button>
             <span style={{ color: 'var(--text-3)' }}>/</span>
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, color: 'var(--text-2)', whiteSpace: 'nowrap', flex: 'none' }}>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: '0.8125rem', color: 'var(--text-2)', whiteSpace: 'nowrap', flex: 'none' }}>
               <span style={{ width: 7, height: 7, borderRadius: '50%', background: D.conColor(con), boxShadow: `0 0 7px ${D.conColor(con)}` }} />{D.conName(con)}
             </span>
             <div style={{ flex: 1 }} />
@@ -2891,14 +2917,14 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
               <input autoFocus value={tagDraft} onChange={(e) => setTagDraft(e.target.value)}
                 onBlur={commitTag} onKeyDown={(e) => { if (e.key === 'Enter') commitTag(); if (e.key === 'Escape') { setTagDraft(''); setAddingTag(false); } }}
                 placeholder="标签名…"
-                style={{ height: 26, width: 96, boxSizing: 'border-box', background: 'var(--input-bg, rgba(3,4,12,0.45))', border: '1px solid var(--glass-border-strong)', borderRadius: 'var(--r-pill)', color: 'var(--text-1)', fontSize: 12.5, padding: '0 10px', outline: 'none', fontFamily: 'var(--font-sans)' }} />
+                style={{ height: 26, width: 96, boxSizing: 'border-box', background: 'var(--input-bg, rgba(3,4,12,0.45))', border: '1px solid var(--glass-border-strong)', borderRadius: 'var(--r-pill)', color: 'var(--text-1)', fontSize: '0.78125rem', padding: '0 10px', outline: 'none', fontFamily: 'var(--font-sans)' }} />
             ) : (
               <span role="button" tabIndex={0} className="sr-focus-ring" onClick={() => { setTagDraft(''); setAddingTag(true); }}
                 onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setTagDraft(''); setAddingTag(true); } }}
-                style={{ display: 'inline-flex', alignItems: 'center', gap: 5, height: 26, padding: '0 10px', borderRadius: 'var(--r-pill)', border: '1px dashed var(--line-strong)', color: 'var(--text-3)', fontSize: 12.5, cursor: 'pointer' }}><Icon name="plus" size={13} color="currentColor" />标签</span>
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 5, height: 26, padding: '0 10px', borderRadius: 'var(--r-pill)', border: '1px dashed var(--line-strong)', color: 'var(--text-3)', fontSize: '0.78125rem', cursor: 'pointer' }}><Icon name="plus" size={13} color="currentColor" />标签</span>
             )}
             <div style={{ flex: 1 }} />
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-3)' }}>编辑于 {(() => { const n = D.notes.find(x => x.id === star.id) || {}; return n.editedTs ? D.ago(n.editedTs) : (n.edited || '刚刚'); })()}</span>
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6875rem', color: 'var(--text-3)' }}>编辑于 {(() => { const n = D.notes.find(x => x.id === star.id) || {}; return n.editedTs ? D.ago(n.editedTs) : (n.edited || '刚刚'); })()}</span>
           </div>
 
           {/* title：快速新建的默认名（新的知识星）聚焦即全选——打字直接替换，不用先删 */}
@@ -2913,7 +2939,7 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
               if (t && t !== star.label) { D.renameStar(star.id, t); bumpTick(); flash('已重命名'); }
               else if (!t) e.currentTarget.textContent = star.label;
             }}
-            style={{ outline: 'none', fontSize: 32, fontWeight: 200, color: 'var(--text-1)', letterSpacing: '-0.01em', textShadow: 'var(--text-glow-cool)', marginBottom: 20, lineHeight: 1.2 }}>{star.label}</div>
+            style={{ outline: 'none', fontSize: '2rem', fontWeight: 200, color: 'var(--text-1)', letterSpacing: '-0.01em', textShadow: 'var(--text-glow-cool)', marginBottom: 20, lineHeight: 1.2 }}>{star.label}</div>
 
           {/* properties (frontmatter) */}
           <Properties props={star.props = star.props || {}} onFlash={flash} onConfirm={setConfirm} onCommit={() => { D.touchNote(star.id); bumpTick(); }}
@@ -2938,7 +2964,7 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
             {blocks.length === 0 && (
               <div role="button" tabIndex={0} className="sr-focus-ring" onClick={seedFirstBlock}
                 onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ' || e.key === '/') { e.preventDefault(); seedFirstBlock(); } }}
-                style={{ padding: '14px 8px', margin: '0 -8px', borderRadius: 'var(--r-sm)', color: 'var(--text-3)', cursor: 'text', fontSize: 16.5, lineHeight: 1.85 }}>
+                style={{ padding: '14px 8px', margin: '0 -8px', borderRadius: 'var(--r-sm)', color: 'var(--text-3)', cursor: 'text', fontSize: '1.03125rem', lineHeight: 1.85 }}>
                 写下第一行，或按 / 选择块类型…
               </div>
             )}
@@ -2996,7 +3022,7 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
       )}
 
       {/* status bar */}
-      <div className="sr-ed-status" style={{ position: 'absolute', bottom: 0, left: 0, right: 312, zIndex: 3, display: 'flex', alignItems: 'center', gap: 18, padding: '7px 24px', borderTop: '1px solid var(--line)', background: 'var(--glass-bg-strong)', WebkitBackdropFilter: 'blur(var(--glass-blur))', backdropFilter: 'blur(var(--glass-blur))', fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-3)', whiteSpace: 'nowrap', overflow: 'hidden' }}>
+      <div className="sr-ed-status" style={{ position: 'absolute', bottom: 0, left: 0, right: 312, zIndex: 3, display: 'flex', alignItems: 'center', gap: 18, padding: '7px 24px', borderTop: '1px solid var(--line)', background: 'var(--glass-bg-strong)', WebkitBackdropFilter: 'blur(var(--glass-blur))', backdropFilter: 'blur(var(--glass-blur))', fontFamily: 'var(--font-mono)', fontSize: '0.6875rem', color: 'var(--text-3)', whiteSpace: 'nowrap', overflow: 'hidden' }}>
         <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}><Icon name="layout-list" size={13} color="currentColor" />{blocks.length} 块</span>
         <span title="中文按字、西文按词分别统计（含表格 / 公式 / 折叠内容）">{cjkCount} 字{wordCount > 0 ? ' · ' + wordCount + ' 词' : ''}</span>
         <span title={'正文与代码分别折算' + (codeLines ? '（含 ' + codeLines + ' 行代码）' : '')} style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}><Icon name="clock" size={13} color="currentColor" />约 {readMin} 分钟阅读</span>
@@ -3081,7 +3107,7 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
       {toast && (
         <div role="status" aria-live="polite" style={{ position: 'fixed', bottom: 26, left: '50%', transform: 'translateX(-50%)', zIndex: 'var(--z-toast)', animation: 'sr-cardin var(--dur-fast) var(--ease-flight) both' }}>
           <GlassPanel strong radius="pill" pad="none" style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '10px 18px' }}>
-            <Icon name="check" size={16} color="var(--gold)" /><span style={{ fontSize: 13.5, color: 'var(--text-1)' }}>{toast}</span>
+            <Icon name="check" size={16} color="var(--gold)" /><span style={{ fontSize: '0.84375rem', color: 'var(--text-1)' }}>{toast}</span>
           </GlassPanel>
         </div>
       )}
@@ -3108,7 +3134,7 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
                 <Button variant="primary" size="sm" icon="rocket" glow autoFocus onClick={goExplore}>启程</Button>
               </React.Fragment>
             }>
-            <div style={{ fontSize: 13.5, lineHeight: 1.8, color: 'var(--text-2)' }}>
+            <div style={{ fontSize: '0.84375rem', lineHeight: 1.8, color: 'var(--text-2)' }}>
               将离开编辑器，跃迁回星图——镜头会飞向「{conNm}」星域，为你照亮
               <span style={{ color: 'var(--text-1)' }}>「{explore.label}」</span>所在的位置。这里的更改已自动保存。
             </div>
@@ -3122,8 +3148,8 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
 
       {/* 笔记内查找 / 替换条（⌘F）——非模态浮条，Esc 关闭并把焦点还给正文 */}
       {find && (() => {
-        const inputCss = { flex: 1, minWidth: 0, boxSizing: 'border-box', background: 'var(--input-bg, rgba(3,4,12,0.45))', border: '1px solid var(--glass-border-strong)', borderRadius: 'var(--r-sm)', color: 'var(--text-1)', fontSize: 13, padding: '6px 9px', outline: 'none', fontFamily: 'var(--font-sans)' };
-        const btnCss = (off) => ({ flex: 'none', position: 'relative', height: 30, padding: '0 11px', borderRadius: 'var(--r-pill)', border: '1px solid var(--glass-border-strong)', background: 'color-mix(in srgb, var(--star-blue) 12%, transparent)', color: 'var(--text-1)', fontSize: 12, cursor: off ? 'not-allowed' : 'pointer', opacity: off ? 0.5 : 1, fontFamily: 'var(--font-sans)' });
+        const inputCss = { flex: 1, minWidth: 0, boxSizing: 'border-box', background: 'var(--input-bg, rgba(3,4,12,0.45))', border: '1px solid var(--glass-border-strong)', borderRadius: 'var(--r-sm)', color: 'var(--text-1)', fontSize: '0.8125rem', padding: '6px 9px', outline: 'none', fontFamily: 'var(--font-sans)' };
+        const btnCss = (off) => ({ flex: 'none', position: 'relative', height: 30, padding: '0 11px', borderRadius: 'var(--r-pill)', border: '1px solid var(--glass-border-strong)', background: 'color-mix(in srgb, var(--star-blue) 12%, transparent)', color: 'var(--text-1)', fontSize: '0.75rem', cursor: off ? 'not-allowed' : 'pointer', opacity: off ? 0.5 : 1, fontFamily: 'var(--font-sans)' });
         return (
           <div className="sr-ed-find" role="search" aria-label="笔记内查找"
             style={{ position: 'absolute', top: 10, right: 336, zIndex: 'var(--z-menu)' }}>
@@ -3134,7 +3160,7 @@ function Editor({ starId, onBack, onOpen, onExplore }) {
                   onChange={(e) => { const v = e.target.value; setFindIdx(0); setFind(f => ({ ...f, q: v })); }}
                   onKeyDown={(e) => { if (e.key === 'Enter' && !e.nativeEvent.isComposing) { e.preventDefault(); gotoMatch(findIdx + (e.shiftKey ? -1 : 1)); } }}
                   style={inputCss} />
-                <span aria-live="polite" style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: find.q ? (findMatches.length ? 'var(--text-2)' : 'var(--danger)') : 'var(--text-3)', flex: 'none', minWidth: 46, textAlign: 'center' }}>
+                <span aria-live="polite" style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6875rem', color: find.q ? (findMatches.length ? 'var(--text-2)' : 'var(--danger)') : 'var(--text-3)', flex: 'none', minWidth: 46, textAlign: 'center' }}>
                   {find.q ? (findMatches.length ? (findIdx + 1) + ' / ' + findMatches.length : '无结果') : ''}
                 </span>
                 <IconButton name="chevron-up" size="sm" title="上一处 · ⇧Enter" onClick={() => gotoMatch(findIdx - 1)} />
@@ -3173,7 +3199,7 @@ function SaveStatus() {
   }, []);
   const D = window.SR_DATA;
   const syncTip = st.lastSync ? '上次同步 ' + D.ago(st.lastSync) : '尚未与服务器同步';
-  const base = { display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12, whiteSpace: 'nowrap', flex: 'none' };
+  const base = { display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: '0.75rem', whiteSpace: 'nowrap', flex: 'none' };
   if (st.status === 'saving') {
     return (
       <span style={{ ...base, color: 'var(--text-3)' }} title={syncTip}>
@@ -3199,7 +3225,7 @@ function RailHead({ icon, title, extra }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
       <Icon name={icon} size={15} color="var(--gold)" />
-      <span style={{ fontSize: 12.5, letterSpacing: '0.04em', color: 'var(--text-2)', fontWeight: 500, whiteSpace: 'nowrap' }}>{title}</span>
+      <span style={{ fontSize: '0.78125rem', letterSpacing: '0.04em', color: 'var(--text-2)', fontWeight: 500, whiteSpace: 'nowrap' }}>{title}</span>
       {extra != null && <Badge tone="blue">{extra}</Badge>}
     </div>
   );

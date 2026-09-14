@@ -58,6 +58,10 @@
     redo,
     canUndo: (h) => h.past.length > 0,
     canRedo: (h) => h.future.length > 0,
+    /* 巨型笔记的内存护栏：快照是整篇克隆，两个栈最坏 2 × cap 份正文。
+       普通笔记（几 KB）120 步毫无压力；1MB 的书摘按 120 步就是 ~240MB。
+       按体量降档（字节按 UTF-16 估算：length × 2）。 */
+    capForBytes: (bytes) => (bytes > 512 * 1024 ? 15 : bytes > 128 * 1024 ? 40 : 120),
   };
 
   g.SRUndoCore = api;

@@ -70,3 +70,23 @@ test('不变量：future 栈永不超过 cap（撤销只能消耗 past，而 pas
   while ((s = U.redo(h, cur)) !== null) { assert.ok(h.past.length <= 3); cur = s; }
   assert.ok(h.future.length <= 3 && h.past.length <= 3);
 });
+
+test('capForBytes：容量随笔记体量降档，普通笔记不受影响', () => {
+  /* 快照是整篇克隆，两个栈最坏 2 × cap 份正文。1MB 的书摘按 120 步
+     最坏 ~240MB——按体量降档后 ~30MB；几 KB 的普通笔记仍是 120 步。 */
+  assert.equal(U.capForBytes(4 * 1024), 120);
+  assert.equal(U.capForBytes(128 * 1024), 120);
+  assert.equal(U.capForBytes(128 * 1024 + 1), 40);
+  assert.equal(U.capForBytes(512 * 1024), 40);
+  assert.equal(U.capForBytes(512 * 1024 + 1), 15);
+  assert.equal(U.capForBytes(2 * 1024 * 1024), 15);
+});
+
+test('降档后的栈行为不变：push/undo/redo 语义与小容量一致', () => {
+  const h = U.create(U.capForBytes(1024 * 1024));
+  assert.equal(h.cap, 15);
+  ['a', 'b', 'c'].forEach(s => U.push(h, s));
+  assert.equal(U.undo(h, 'now'), 'c');
+  assert.equal(U.redo(h, 'c'), 'now');
+  assert.equal(U.canRedo(h), false);
+});

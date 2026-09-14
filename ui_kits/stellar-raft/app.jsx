@@ -45,7 +45,15 @@ function App() {
   const closeLogin = () => { try { localStorage.setItem('sr.login.skipped', '1'); } catch (e) {} setLogin(false); };
 
   React.useEffect(() => {
-    const h = () => { setDataRev(r => r + 1); setSelected(null); setEditing(null); };
+    /* 正在编辑的那颗星在水合后还活着，就别把人弹出编辑器——409 收敛也走这条路：
+       另一台设备保存的瞬间本端在打字，以前直接 editing=null，人被扔到 stars[0]
+       （星空为空时甚至崩给 Boundary）。内容按服务器真相刷新（toast 已告知），
+       但「我在哪篇笔记」不该被没收。星真的没了（对端删了它）才放手。 */
+    const h = () => {
+      setDataRev(r => r + 1);
+      setSelected(null);
+      setEditing(id => (id && window.SR_DATA && window.SR_DATA.stars.some(s => s.id === id)) ? id : null);
+    };
     window.addEventListener('sr-hydrated', h);
     return () => window.removeEventListener('sr-hydrated', h);
   }, []);
@@ -305,13 +313,13 @@ function App() {
         <div style={{ width: 420, maxWidth: '94vw', textAlign: 'center' }}>
           <GlassPanel strong radius="lg" glow style={{ padding: '34px 28px 26px' }}>
             <Icon name={ICON[kind]} size={30} color={banned ? 'var(--danger)' : 'var(--gold)'} />
-            <div style={{ fontSize: 19, fontWeight: 300, color: 'var(--text-1)', marginTop: 16 }}>
+            <div style={{ fontSize: '1.1875rem', fontWeight: 300, color: 'var(--text-1)', marginTop: 16 }}>
               {TITLE[kind]}
             </div>
-            <div style={{ fontSize: 13, color: 'var(--text-2)', marginTop: 12, lineHeight: 1.8 }}>
+            <div style={{ fontSize: '0.8125rem', color: 'var(--text-2)', marginTop: 12, lineHeight: 1.8 }}>
               {expired ? SUB.expired : (blocked.message || SUB[kind])}
             </div>
-            <div style={{ fontSize: 12, color: 'var(--text-3)', marginTop: 14, lineHeight: 1.7 }}>
+            <div style={{ fontSize: '0.75rem', color: 'var(--text-3)', marginTop: 14, lineHeight: 1.7 }}>
               你在本机的星空完好无损，什么都没有丢。
             </div>
             <div style={{ display: 'flex', gap: 10, justifyContent: 'center', marginTop: 22 }}>
